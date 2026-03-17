@@ -182,16 +182,18 @@ See **[sgds-components-setup](../sgds-components-setup/SKILL.md)** for installat
 
 ## Slots
 
-| Component | Slot | Purpose |
-|-----------|------|---------|
-| `sgds-sidebar` | *(default)* | `sgds-sidebar-item`, `sgds-sidebar-group`, `sgds-sidebar-section` — top-level items outside sections are valid |
-| `sgds-sidebar` | `brandName` | Any HTML — brand name, logo image, or custom element |
-| `sgds-sidebar-item` | `leadingIcon` | Icon before the label (typically `<sgds-icon>`) |
-| `sgds-sidebar-item` | `trailingIcon` | Any HTML after the label — icon or custom badge |
-| `sgds-sidebar-group` | `leadingIcon` | Icon before the group label |
-| `sgds-sidebar-group` | `trailingIcon` | Any HTML after the group label (a chevron is always auto-appended after this) |
-| `sgds-sidebar-group` | *(default)* | Nested `sgds-sidebar-item` or `sgds-sidebar-group` children |
-| `sgds-sidebar-section` | *(default)* | `sgds-sidebar-item` and `sgds-sidebar-group` elements |
+| Component | Slot | Required? | Purpose |
+|-----------|------|-----------|--------|
+| `sgds-sidebar` | *(default)* | — | `sgds-sidebar-item`, `sgds-sidebar-group`, `sgds-sidebar-section` — top-level items outside sections are valid |
+| `sgds-sidebar` | `brandName` | — | Any HTML — brand name, logo image, or custom element |
+| `sgds-sidebar-item` | `leadingIcon` | **Required at levels 1 & 2** | Icon before the label (typically `<sgds-icon>`) |
+| `sgds-sidebar-item` | `trailingIcon` | — | Any HTML after the label — icon or custom badge |
+| `sgds-sidebar-group` | `leadingIcon` | **Required at levels 1 & 2** | Icon before the group label |
+| `sgds-sidebar-group` | `trailingIcon` | — | Any HTML after the group label (a chevron is always auto-appended after this) |
+| `sgds-sidebar-group` | *(default)* | — | Nested `sgds-sidebar-item` or `sgds-sidebar-group` children |
+| `sgds-sidebar-section` | *(default)* | — | `sgds-sidebar-item` and `sgds-sidebar-group` elements |
+
+> **`leadingIcon` is compulsory on every `sgds-sidebar-item` and `sgds-sidebar-group` at level 1 (direct children of `sgds-sidebar` or `sgds-sidebar-section`) and level 2 (children of a root group). This applies regardless of whether the component is `sgds-sidebar-group` or `sgds-sidebar-item`. Omitting it at these levels breaks the icon-only collapse mode and the sidebar's visual consistency.**
 
 ## Events
 
@@ -260,4 +262,4 @@ See **[sgds-pattern-layout](../sgds-pattern-layout/SKILL.md)** for the complete 
 
 ---
 
-**For AI agents**: Always include the CDN `<script>` tag — `sgds-sidebar` is not bundled in the stable npm package. Use `name` on every `sgds-sidebar-item` and `sgds-sidebar-group` — without it, `active` tracking will not work. `sgds-sidebar-section` accepts `name` for identification but its `name` does NOT participate in `active` tracking — only items and groups do. Top-level `sgds-sidebar-item` elements placed directly inside `sgds-sidebar` (outside any section) are valid. The `brandName` slot and `trailingIcon` slot accept any HTML — not just `sgds-icon`. At level 0, `sgds-sidebar-group` opens a drawer overlay (items slide in from the side); at level 1+, it toggles an inline submenu. Use `collapsible` (boolean attribute) on `sgds-sidebar-section` to let users collapse the section.
+**For AI agents**: Always include the CDN `<script>` tag — `sgds-sidebar` is not bundled in the stable npm package. Use `name` on every `sgds-sidebar-item` and `sgds-sidebar-group` — without it, `active` tracking will not work. `sgds-sidebar-section` accepts `name` for identification but its `name` does NOT participate in `active` tracking — only items and groups do. Top-level `sgds-sidebar-item` elements placed directly inside `sgds-sidebar` (outside any section) are valid. The `brandName` slot and `trailingIcon` slot accept any HTML — not just `sgds-icon`. At level 0, `sgds-sidebar-group` opens a drawer overlay (items slide in from the side); at level 1+, it toggles an inline submenu. Use `collapsible` (boolean attribute) on `sgds-sidebar-section` to let users collapse the section. **`leadingIcon` is compulsory on every `sgds-sidebar-item` and `sgds-sidebar-group` at level 1 and level 2 — this rule applies to both component types equally. Never omit it at these levels, even for groups that only serve as structural containers.**

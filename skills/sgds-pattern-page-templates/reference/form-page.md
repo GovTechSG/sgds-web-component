@@ -73,7 +73,7 @@ Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/
 
       <!-- Section 1 -->
       <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
-        <div class="sgds-grid sgds:gap-layout-sm">
+        <div class="sgds-grid sgds:gap-layout-md">
 
           <!-- Section description (left third) -->
           <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
@@ -128,7 +128,7 @@ Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/
 
       <!-- Section 2 -->
       <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
-        <div class="sgds-grid sgds:gap-layout-sm">
+        <div class="sgds-grid sgds:gap-layout-md">
 
           <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
             <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default">Role &amp; access</h2>
@@ -164,7 +164,7 @@ Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/
 
       <!-- Section 3: long-form text -->
       <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
-        <div class="sgds-grid sgds:gap-layout-sm">
+        <div class="sgds-grid sgds:gap-layout-md">
 
           <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
             <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default">Notes</h2>

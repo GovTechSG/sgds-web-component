@@ -108,11 +108,11 @@ Use native `<h1>`–`<h4>` elements — `reboot.css` font sizes for these match 
 | Token | Classes |
 |-------|---------|
 | `sgds-body-lg-semibold` | `sgds:text-body-lg sgds:font-semibold sgds:leading-md sgds:tracking-normal` |
-| `sgds-body-lg-regular` | `sgds:text-body-lg sgds:font-normal sgds:leading-md sgds:tracking-normal` |
+| `sgds-body-lg-regular` | `sgds:text-body-lg sgds:leading-md sgds:tracking-normal` |
 | `sgds-body-md-semibold` | `sgds:text-body-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal` |
-| `sgds-body-md-regular` *(default)* | `sgds:text-body-md sgds:font-normal sgds:leading-xs sgds:tracking-normal` |
+| `sgds-body-md-regular` *(default)* | `sgds:text-body-md sgds:leading-xs sgds:tracking-normal` |
 | `sgds-body-sm-semibold` | `sgds:text-body-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal` |
-| `sgds-body-sm-regular` | `sgds:text-body-sm sgds:font-normal sgds:leading-2-xs sgds:tracking-normal` |
+| `sgds-body-sm-regular` | `sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal` |
 
 All body tokens include `sgds-paragraph-spacing-xl` — apply `sgds:mb-xl` between consecutive paragraphs. Use `<div role="paragraph">` rather than `<p>` to avoid any margin resets that `reboot.css` may apply to paragraph elements.
 
@@ -121,14 +121,14 @@ All body tokens include `sgds-paragraph-spacing-xl` — apply `sgds:mb-xl` betwe
 | Token | Use case | Classes |
 |-------|----------|---------|
 | `sgds-label-lg-semibold` | Large button | `sgds:text-label-lg sgds:font-semibold sgds:leading-md sgds:tracking-normal` |
-| `sgds-label-lg-regular` | Labels in components | `sgds:text-label-lg sgds:font-normal sgds:leading-md sgds:tracking-normal` |
+| `sgds-label-lg-regular` | Labels in components | `sgds:text-label-lg sgds:leading-md sgds:tracking-normal` |
 | `sgds-label-md-semibold` | Medium button | `sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal` |
-| `sgds-label-md-regular` *(default)* | Labels in components | `sgds:text-label-md sgds:font-normal sgds:leading-xs sgds:tracking-normal` |
+| `sgds-label-md-regular` *(default)* | Labels in components | `sgds:text-label-md sgds:leading-xs sgds:tracking-normal` |
 | `sgds-label-md-light` | Placeholder text | `sgds:text-label-md sgds:font-light sgds:leading-xs sgds:tracking-normal` |
 | `sgds-label-sm-semibold` | Small button | `sgds:text-label-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal` |
-| `sgds-label-sm-regular` | Timestamp / tag label | `sgds:text-label-sm sgds:font-normal sgds:leading-2-xs sgds:tracking-normal` |
+| `sgds-label-sm-regular` | Timestamp / tag label | `sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal` |
 | `sgds-label-xs-semibold` | Timestamp / tag label | `sgds:text-label-xs sgds:font-semibold sgds:leading-3-xs sgds:tracking-normal` |
-| `sgds-label-xs-regular` | Timestamp / tag label | `sgds:text-label-xs sgds:font-normal sgds:leading-3-xs sgds:tracking-normal` |
+| `sgds-label-xs-regular` | Timestamp / tag label | `sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal` |
 
 In form context: use the component's built-in label attribute first. Only use a `<label>` element if the SGDS component has no built-in label support. Outside form context: use `<div>`.
 
@@ -137,7 +137,7 @@ In form context: use the component's built-in label attribute first. Only use a 
 | Token | Classes |
 |-------|---------|
 | `sgds-overline-semibold` | `sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase` |
-| `sgds-overline-regular` *(default)* | `sgds:text-overline-md sgds:font-normal sgds:leading-2-xs sgds:tracking-wide sgds:uppercase` |
+| `sgds-overline-regular` *(default)* | `sgds:text-overline-md sgds:leading-2-xs sgds:tracking-wide sgds:uppercase` |
 
 Always use `<div>` and always apply `sgds:uppercase`. Use for key-value labels and data table header labels.
 
@@ -146,7 +146,7 @@ Always use `<div>` and always apply `sgds:uppercase`. Use for key-value labels a
 | Token | Classes |
 |-------|---------|
 | `sgds-caption-semibold` | `sgds:text-caption-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal` |
-| `sgds-caption-regular` *(default)* | `sgds:text-caption-md sgds:font-normal sgds:leading-2-xs sgds:tracking-normal` |
+| `sgds-caption-regular` *(default)* | `sgds:text-caption-md sgds:leading-2-xs sgds:tracking-normal` |
 
 Both caption tokens include `sgds-paragraph-spacing-md` — apply `sgds:mb-md` between consecutive captions. Use `<div role="caption">` — the native `<caption>` HTML element is scoped to `<table>` and causes layout issues outside tables.
 
@@ -154,10 +154,10 @@ Both caption tokens include `sgds-paragraph-spacing-md` — apply `sgds:mb-md` b
 
 | Token | Classes |
 |-------|---------|
-| `sgds-link-lg-regular` | `sgds:text-link-lg sgds:font-normal sgds:leading-md sgds:tracking-normal sgds:underline` |
-| `sgds-link-md-regular` *(default)* | `sgds:text-link-md sgds:font-normal sgds:leading-xs sgds:tracking-normal sgds:underline` |
-| `sgds-link-sm-regular` | `sgds:text-link-sm sgds:font-normal sgds:leading-2-xs sgds:tracking-normal sgds:underline` |
-| `sgds-link-xs-regular` | `sgds:text-link-xs sgds:font-normal sgds:leading-3-xs sgds:tracking-normal sgds:underline` |
+| `sgds-link-lg-regular` | `sgds:text-link-lg sgds:leading-md sgds:tracking-normal sgds:underline` |
+| `sgds-link-md-regular` *(default)* | `sgds:text-link-md sgds:leading-xs sgds:tracking-normal sgds:underline` |
+| `sgds-link-sm-regular` | `sgds:text-link-sm sgds:leading-2-xs sgds:tracking-normal sgds:underline` |
+| `sgds-link-xs-regular` | `sgds:text-link-xs sgds:leading-3-xs sgds:tracking-normal sgds:underline` |
 
 Always use `<a>` with an `href`. All link tokens are always underlined.
 

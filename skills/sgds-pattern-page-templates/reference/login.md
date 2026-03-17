@@ -39,7 +39,7 @@ Full-height centered layout — card sits in the middle of the viewport on deskt
 ```html
 <sgds-masthead></sgds-masthead>
 
-<div class="sgds:min-h-screen sgds:flex sgds:items-center sgds:justify-center sgds:bg-surface-default sgds:p-layout-sm">
+<div class="sgds:min-h-screen sgds:flex sgds:items-center sgds:justify-center sgds:bg-surface-default sgds:p-layout-md">
   <div class="sgds:w-full sgds:max-w-sm">
 
     <!-- App branding -->

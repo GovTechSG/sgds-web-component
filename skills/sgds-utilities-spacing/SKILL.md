@@ -190,4 +190,20 @@ Only use raw multiplier-based utilities when no semantic token above fits the us
 
 ---
 
-**For AI Agents**: Always prefer semantic spacing utilities over raw numeric ones. **Default tokens to reach for first**: component padding → `sgds:p-component-xs` (`--sgds-component-padding-xs`); component gap → `sgds:gap-component-sm` (`--sgds-component-gap-sm`); layout gap → `sgds:gap-layout-sm` (`--sgds-layout-gap-sm`). Scale up or down from these defaults only when the design explicitly requires it. Decision guide: text between text elements → `sgds:gap-text-*`; spacing between layout sections or grid areas → `sgds:gap-layout-*` (default `sm`); padding on page/section areas → `sgds:p-layout-*` / `sgds:px-layout-*` / `sgds:py-layout-*`; building a custom component (gap inside) → `sgds:gap-component-*` (default `sm`); building a custom component (padding inside) → `sgds:p-component-*` / `sgds:px-component-*` / `sgds:py-component-*` (default `xs`); responsive container width → `sgds:w-container`. Only use raw numeric utilities (`sgds:p-4`, `sgds:gap-6`, `sgds:mb-3`, etc.) when no semantic token fits the context. All semantic tokens are responsive — they adapt across mobile, tablet, and desktop breakpoints.
+## Spacing Defaults
+
+When building any UI — pages, sections, or custom components — always apply whitespace between blocks, sections, and elements. Never render content without spacing.
+
+| Context | Default class |
+|---|---|
+| Gap between page sections / layout areas | `sgds:gap-layout-md` |
+| Padding on page / section containers | `sgds:p-layout-md` |
+| Gap inside a custom component | `sgds:gap-component-sm` |
+| Padding inside a custom component | `sgds:p-component-xs` |
+| Gap between text / content elements | `sgds:gap-text-md` |
+
+Scale up (`-lg`, `-xl`) for more breathing room, scale down (`-sm`, `-xs`) for denser UIs. **Never omit spacing entirely.**
+
+---
+
+**For AI Agents**: Always prefer semantic spacing utilities over raw numeric ones. **Always add whitespace between sections and elements — never render blocks without spacing.** **Default tokens to reach for first**: component padding → `sgds:p-component-xs` (`--sgds-component-padding-xs`); component gap → `sgds:gap-component-sm` (`--sgds-component-gap-sm`); layout gap → `sgds:gap-layout-md` (`--sgds-layout-gap-md`); layout padding → `sgds:p-layout-md` (`--sgds-layout-padding-md`). Scale up or down from these defaults only when the design explicitly requires it. Decision guide: text between text elements → `sgds:gap-text-*`; spacing between layout sections or grid areas → `sgds:gap-layout-*` (default `md`); padding on page/section areas → `sgds:p-layout-*` / `sgds:px-layout-*` / `sgds:py-layout-*`; building a custom component (gap inside) → `sgds:gap-component-*` (default `sm`); building a custom component (padding inside) → `sgds:p-component-*` / `sgds:px-component-*` / `sgds:py-component-*` (default `xs`); responsive container width → `sgds:w-container`. Only use raw numeric utilities (`sgds:p-4`, `sgds:gap-6`, `sgds:mb-3`, etc.) when no semantic token fits the context. All semantic tokens are responsive — they adapt across mobile, tablet, and desktop breakpoints.

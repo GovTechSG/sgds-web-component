@@ -126,7 +126,7 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 </div>
 
 <!-- sgds-body-lg-regular -->
-<div role="paragraph" class="sgds:text-body-lg sgds:font-normal sgds:leading-md sgds:tracking-normal sgds:mb-xl">
+<div role="paragraph" class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:mb-xl">
   Body large regular.
 </div>
 
@@ -136,7 +136,7 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 </div>
 
 <!-- sgds-body-md-regular (Default) -->
-<div role="paragraph" class="sgds:text-body-md sgds:font-normal sgds:leading-xs sgds:tracking-normal sgds:mb-xl">
+<div role="paragraph" class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:mb-xl">
   Body medium regular.
 </div>
 
@@ -146,7 +146,7 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 </div>
 
 <!-- sgds-body-sm-regular -->
-<div role="paragraph" class="sgds:text-body-sm sgds:font-normal sgds:leading-2-xs sgds:tracking-normal sgds:mb-xl">
+<div role="paragraph" class="sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal sgds:mb-xl">
   Body small regular.
 </div>
 ```
@@ -164,13 +164,13 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 <div class="sgds:text-label-lg sgds:font-semibold sgds:leading-md sgds:tracking-normal">Label Large Semibold</div>
 
 <!-- sgds-label-lg-regular — labels in components -->
-<div class="sgds:text-label-lg sgds:font-normal sgds:leading-md sgds:tracking-normal">Label Large Regular</div>
+<div class="sgds:text-label-lg sgds:leading-md sgds:tracking-normal">Label Large Regular</div>
 
 <!-- sgds-label-md-semibold — medium button -->
 <div class="sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal">Label Medium Semibold</div>
 
 <!-- sgds-label-md-regular (Default) — labels in components -->
-<div class="sgds:text-label-md sgds:font-normal sgds:leading-xs sgds:tracking-normal">Label Medium Regular</div>
+<div class="sgds:text-label-md sgds:leading-xs sgds:tracking-normal">Label Medium Regular</div>
 
 <!-- sgds-label-md-light — placeholder text -->
 <div class="sgds:text-label-md sgds:font-light sgds:leading-xs sgds:tracking-normal">Label Medium Light</div>
@@ -179,13 +179,13 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 <div class="sgds:text-label-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal">Label Small Semibold</div>
 
 <!-- sgds-label-sm-regular — timestamp / tag label -->
-<div class="sgds:text-label-sm sgds:font-normal sgds:leading-2-xs sgds:tracking-normal">Label Small Regular</div>
+<div class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">Label Small Regular</div>
 
 <!-- sgds-label-xs-semibold — timestamp / tag label -->
 <div class="sgds:text-label-xs sgds:font-semibold sgds:leading-3-xs sgds:tracking-normal">Label XS Semibold</div>
 
 <!-- sgds-label-xs-regular — timestamp / tag label -->
-<div class="sgds:text-label-xs sgds:font-normal sgds:leading-3-xs sgds:tracking-normal">Label XS Regular</div>
+<div class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal">Label XS Regular</div>
 ```
 
 ```html
@@ -209,7 +209,7 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 </div>
 
 <!-- sgds-caption-regular (Default) -->
-<div role="caption" class="sgds:text-caption-md sgds:font-normal sgds:leading-2-xs sgds:tracking-normal sgds:mb-md">
+<div role="caption" class="sgds:text-caption-md sgds:leading-2-xs sgds:tracking-normal sgds:mb-md">
   Caption regular
 </div>
 ```
@@ -224,22 +224,22 @@ Always use `<a>` with an `href`. All link tokens include underline.
 
 ```html
 <!-- sgds-link-lg-regular -->
-<a href="#" class="sgds:text-link-lg sgds:font-normal sgds:leading-md sgds:tracking-normal sgds:underline">
+<a href="#" class="sgds:text-link-lg sgds:leading-md sgds:tracking-normal sgds:underline">
   Link large
 </a>
 
 <!-- sgds-link-md-regular (Default) -->
-<a href="#" class="sgds:text-link-md sgds:font-normal sgds:leading-xs sgds:tracking-normal sgds:underline">
+<a href="#" class="sgds:text-link-md sgds:leading-xs sgds:tracking-normal sgds:underline">
   Link medium
 </a>
 
 <!-- sgds-link-sm-regular -->
-<a href="#" class="sgds:text-link-sm sgds:font-normal sgds:leading-2-xs sgds:tracking-normal sgds:underline">
+<a href="#" class="sgds:text-link-sm sgds:leading-2-xs sgds:tracking-normal sgds:underline">
   Link small
 </a>
 
 <!-- sgds-link-xs-regular -->
-<a href="#" class="sgds:text-link-xs sgds:font-normal sgds:leading-3-xs sgds:tracking-normal sgds:underline">
+<a href="#" class="sgds:text-link-xs sgds:leading-3-xs sgds:tracking-normal sgds:underline">
   Link XS
 </a>
 ```
@@ -275,7 +275,7 @@ Always use `<div>` and `sgds:uppercase`. Use for key-value labels and data table
 </div>
 
 <!-- sgds-overline-regular (Default) -->
-<div class="sgds:text-overline-md sgds:font-normal sgds:leading-2-xs sgds:tracking-wide sgds:uppercase">
+<div class="sgds:text-overline-md sgds:leading-2-xs sgds:tracking-wide sgds:uppercase">
   Overline Regular
 </div>
 ```

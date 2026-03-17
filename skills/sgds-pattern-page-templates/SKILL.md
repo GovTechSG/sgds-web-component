@@ -61,10 +61,10 @@ These are the rules that make SGDS UIs look polished — the same principles sha
 - Nested content areas: `sgds:bg-surface-overlay` sparingly
 
 **2. Use semantic spacing, not raw numbers**
-Prefer `sgds:p-layout-md`, `sgds:gap-layout-sm`, `sgds:p-component-md` over `sgds:p-4`. Semantic tokens are responsive and encode intent.
+Prefer `sgds:p-layout-md`, `sgds:gap-layout-md`, `sgds:p-component-md` over `sgds:p-4`. Semantic tokens are responsive and encode intent. **Always apply whitespace between sections and elements — never render blocks without spacing.** See **sgds-utilities-spacing** for the full defaults table.
 
 **3. Consistent card anatomy**
-Every card: padding inside (`sgds:p-component-lg`), gap between card rows (`sgds:gap-layout-sm`), border-radius (`sgds:rounded-lg`), subtle shadow (`sgds:shadow-card`).
+Every card: padding inside (`sgds:p-component-lg`), gap between card rows (`sgds:gap-layout-md`), border-radius (`sgds:rounded-lg`), subtle shadow (`sgds:shadow-card`).
 
 **4. Action hierarchy in forms**
 Primary action → `<sgds-button variant="primary">`. Secondary / cancel → `<sgds-button variant="outline">`. Destructive → `<sgds-button variant="ghost" tone="danger">`.
