@@ -13,7 +13,7 @@ import {
   SidebarDrawerOpen
 } from "./sidebar-context";
 import { watch } from "../../utils/watch";
-import { SidebarElement } from "../../base/sidebar-element";
+import { SidebarElement } from "./sidebar-element";
 import SgdsSidebarGroup from "./sgds-sidebar-group";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import { SM_BREAKPOINT } from "../../utils/breakpoints";
@@ -389,12 +389,7 @@ export class SgdsSidebar extends SgdsElement {
               ></sgds-icon-button>
             </div>
 
-            <nav
-              class="sidebar-content"
-              role="navigation"
-              aria-label="Main navigation"
-              aria-activedescendant=${this._sidebarActiveItem?.name || ""}
-            >
+            <nav class="sidebar-content" aria-activedescendant=${this._sidebarActiveItem?.name || ""}>
               <slot></slot>
             </nav>
 

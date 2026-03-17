@@ -1,7 +1,7 @@
 import { property, queryAssignedElements, state } from "lit/decorators.js";
-import { DropdownElement } from "./dropdown-element";
+import { DropdownElement } from "../../base/dropdown-element";
 import { PropertyValueMap } from "lit";
-import SgdsElement from "./sgds-element";
+import SgdsElement from "../../base/sgds-element";
 import { consume } from "@lit/context";
 import {
   SidebarActiveGroup,
@@ -9,7 +9,7 @@ import {
   SidebarCollapsed,
   SidebarDrawerItems,
   SidebarDrawerOpen
-} from "../components/Sidebar/sidebar-context";
+} from "./sidebar-context";
 
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
@@ -121,8 +121,7 @@ export class SidebarElement extends SgdsElement {
   connectedCallback() {
     super.connectedCallback();
     this.getChildLevel();
-    this.setAttribute("role", "option");
-    this.setAttribute("aria-label", this.title || this.name);
+    this.setAttribute("role", "navigation");
     this.addEventListener("keydown", this._handleKeyDown);
   }
 

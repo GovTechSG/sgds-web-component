@@ -1,5 +1,5 @@
 import { createContext } from "@lit/context";
-import { SidebarElement } from "../../base/sidebar-element";
+import { SidebarElement } from "./sidebar-element";
 
 /**
  * Context providing the currently active sidebar group (parent with nested children).

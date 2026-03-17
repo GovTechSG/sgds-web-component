@@ -6,7 +6,7 @@ import sidebarOptionStyle from "./sidebar-item.css";
 
 import SgdsIcon from "../Icon/sgds-icon";
 
-import { SidebarElement } from "../../base/sidebar-element";
+import { SidebarElement } from "./sidebar-element";
 
 /**
  * @summary Sidebar item is a selectable navigation item within the sidebar component.

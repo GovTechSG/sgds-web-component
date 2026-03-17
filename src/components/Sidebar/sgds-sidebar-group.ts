@@ -5,7 +5,7 @@ import SgdsElement from "../../base/sgds-element";
 import sidebarOptionStyle from "./sidebar-item.css";
 import SgdsIcon from "../Icon/sgds-icon";
 
-import { SidebarElement } from "../../base/sidebar-element";
+import { SidebarElement } from "./sidebar-element";
 
 /**
  * @summary Sidebar group represents a navigable parent item within the sidebar that can have nested children.
@@ -67,7 +67,7 @@ export class SgdsSidebarGroup extends SidebarElement {
    * @private
    * @returns {string} The icon name to display (e.g., 'chevron-right', 'chevron-down')
    */
-  private getIcon() {
+  private _getIcon() {
     if (this._childLevel === 0) {
       return "chevron-right";
     } else {
@@ -86,7 +86,6 @@ export class SgdsSidebarGroup extends SidebarElement {
         @click=${() => this._handleClick()}
         aria-level=${this._childLevel}
         .aria-expanded=${this._showMenu}
-        aria-label=${this.title || this.name}
         tabindex=${this._childLevel > 1 && !this._showMenu ? -1 : 0}
       >
         <div class="sidebar-item-label-wrapper">
@@ -97,7 +96,7 @@ export class SgdsSidebarGroup extends SidebarElement {
 
           <span class="sidebar-item-trailingIcon">
             <slot name="trailingIcon"></slot>
-            <sgds-icon name=${this.getIcon()} size="sm"></sgds-icon>
+            <sgds-icon aria-label=${this.title || this.name} name=${this._getIcon()} size="sm"></sgds-icon>
           </span>
         </div>
       </div>
