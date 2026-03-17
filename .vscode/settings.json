@@ -18,5 +18,6 @@
       "foreground": "white",
       "background": "red"
     }
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

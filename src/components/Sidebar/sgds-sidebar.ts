@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, LitElement, PropertyValues } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -13,7 +13,7 @@ import {
   SidebarDrawerOpen
 } from "./sidebar-context";
 import { watch } from "../../utils/watch";
-import { SidebarElement } from "../../base/sidebar-element";
+import { SidebarElement } from "./sidebar-element";
 import SgdsSidebarGroup from "./sgds-sidebar-group";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import { SM_BREAKPOINT } from "../../utils/breakpoints";
@@ -108,27 +108,39 @@ export class SgdsSidebar extends SgdsElement {
   @state()
   private _isMobile = false;
 
+  /** @internal Bound resize handler for proper event listener removal */
+  private _boundHandleResize = this._handleResize.bind(this);
+
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "navigation");
     this.setAttribute("aria-label", "Main navigation");
 
     this.updateComplete.then(() => {
-      this.addItemListeners();
       this._handleActive();
-      document.addEventListener("click", this._handleClickOutOfElement);
     });
 
-    window.addEventListener("resize", this._handleResize.bind(this));
+    window?.addEventListener("resize", this._boundHandleResize);
     this._handleResize();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    document.removeEventListener("click", this._handleClickOutOfElement);
-    window.removeEventListener("resize", this._handleResize.bind(this));
+    document?.removeEventListener("click", this._handleClickOutOfElement);
+    window?.removeEventListener("resize", this._boundHandleResize);
   }
 
+  firstUpdated() {
+    document?.addEventListener("click", this._handleClickOutOfElement);
+  }
+
+  updated() {
+    this._handleActive();
+  }
+
+  private _handleSlotChange = () => {
+    this.addItemListeners();
+  };
   /**
    * Watch handler for the collapsed property.
    * Syncs the internal collapsed state with the property value.
@@ -156,7 +168,7 @@ export class SgdsSidebar extends SgdsElement {
     const childLevel = this._sidebarActiveItem._childLevel;
     this._sidebarActiveItem._selected = true;
 
-    if (childLevel === 0) {
+    if (childLevel === 1) {
       // First level of navigation, check if need to open drawer or not.
       if (this._sidebarActiveItem._childElements.length > 0) {
         this._setNodesToDrawer(this._sidebarActiveItem as SgdsSidebarGroup);
@@ -167,9 +179,9 @@ export class SgdsSidebar extends SgdsElement {
       // when nested, we will find the top level of parent
       let parentEle = this._sidebarActiveItem.parentElement as SgdsSidebarGroup;
 
-      while (parentEle._childLevel >= 0 && parentEle.tagName.toLowerCase() === SGDS_SIDEBAR_GROUP) {
+      while (parentEle._childLevel >= 1 && parentEle.tagName.toLowerCase() === SGDS_SIDEBAR_GROUP) {
         if (parentEle.tagName.toLowerCase() === SGDS_SIDEBAR_GROUP) {
-          if (parentEle._childLevel === 0) {
+          if (parentEle._childLevel === 1) {
             // when active item not in drawer, set nodes into drawer.
             if (!parentEle.classList.contains("sidebar-nested-overlay")) {
               this._setNodesToDrawer(parentEle);
@@ -178,7 +190,7 @@ export class SgdsSidebar extends SgdsElement {
 
           parentEle._selected = true;
 
-          parentEle._showMenu = parentEle._childLevel > 0; //setting this to true as the child is active
+          parentEle._showMenu = parentEle._childLevel > 1; // setting this to true as the child is active
           parentEle = parentEle.parentElement as SgdsSidebarGroup;
         }
       }
@@ -389,13 +401,8 @@ export class SgdsSidebar extends SgdsElement {
               ></sgds-icon-button>
             </div>
 
-            <nav
-              class="sidebar-content"
-              role="navigation"
-              aria-label="Main navigation"
-              aria-activedescendant=${this._sidebarActiveItem?.name || ""}
-            >
-              <slot></slot>
+            <nav class="sidebar-content" aria-activedescendant=${this._sidebarActiveItem?.name || ""}>
+              <slot @slotchange=${this._handleSlotChange}></slot>
             </nav>
 
             <slot name="bottom"></slot>

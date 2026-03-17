@@ -31,6 +31,12 @@
   /* Font Size - Overline */
   --sgds-font-size-overline-md: var(--sgds-font-size-14);
 
+  /* Font Size - Link */
+  --sgds-font-size-link-xs: var(--sgds-font-size-12);
+  --sgds-font-size-link-sm: var(--sgds-font-size-14);
+  --sgds-font-size-link-md: var(--sgds-font-size-16);
+  --sgds-font-size-link-lg: var(--sgds-font-size-18);
+
   /* Line Height */
   --sgds-line-height-3-xs: var(--sgds-line-height-16);
   --sgds-line-height-2-xs: var(--sgds-line-height-20);
@@ -117,6 +123,12 @@
 
     /* Font Size - Overline */
     --sgds-font-size-overline-md: var(--sgds-font-size-14);
+
+    /* Font Size - Link */
+    --sgds-font-size-link-xs: var(--sgds-font-size-12);
+    --sgds-font-size-link-sm: var(--sgds-font-size-14);
+    --sgds-font-size-link-md: var(--sgds-font-size-16);
+    --sgds-font-size-link-lg: var(--sgds-font-size-20);
 
     /* Line Height */
     --sgds-line-height-3-xs: var(--sgds-line-height-16);
@@ -205,6 +217,12 @@
 
     /* Font Size - Overline */
     --sgds-font-size-overline-md: var(--sgds-font-size-14);
+
+    /* Font Size - Link */
+    --sgds-font-size-link-xs: var(--sgds-font-size-12);
+    --sgds-font-size-link-sm: var(--sgds-font-size-14);
+    --sgds-font-size-link-md: var(--sgds-font-size-16);
+    --sgds-font-size-link-lg: var(--sgds-font-size-20);
 
     /* Line Height */
     --sgds-line-height-3-xs: var(--sgds-line-height-16);

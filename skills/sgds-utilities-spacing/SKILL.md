@@ -123,7 +123,7 @@ Only use raw multiplier-based utilities when no semantic token above fits the us
 <!-- Responsive container with layout-appropriate padding -->
 <div class="sgds:mx-auto sgds:w-container sgds:px-layout-md">
   <!-- Sections separated by layout gap -->
-  <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+  <div class="sgds:flex sgds:flex-col sgds:gap-layout-sm">
     <section>
       <h2>Section Title</h2>
       <!-- Text elements separated by text gap -->
@@ -142,7 +142,7 @@ Only use raw multiplier-based utilities when no semantic token above fits the us
 ### Custom Card Component (component gap + component padding)
 
 ```html
-<div class="sgds:bg-surface-raised sgds:p-component-md sgds:rounded-md">
+<div class="sgds:bg-surface-raised sgds:p-component-xs sgds:rounded-md">
   <div class="sgds:flex sgds:flex-col sgds:gap-component-sm">
     <h3>Card Title</h3>
     <p>Card description text</p>
@@ -154,7 +154,7 @@ Only use raw multiplier-based utilities when no semantic token above fits the us
 ### Custom Form Component (component gap + component padding)
 
 ```html
-<form class="sgds:flex sgds:flex-col sgds:gap-component-md">
+<form class="sgds:flex sgds:flex-col sgds:gap-component-sm">
   <div class="sgds:flex sgds:flex-col sgds:gap-text-xs">
     <label>Name</label>
     <input class="sgds:p-component-xs">
@@ -170,10 +170,10 @@ Only use raw multiplier-based utilities when no semantic token above fits the us
 ### Grid Layout (layout gap)
 
 ```html
-<div class="sgds:grid sgds:grid-cols-3 sgds:gap-layout-md sgds:p-layout-md">
-  <div class="sgds:p-component-sm">Item 1</div>
-  <div class="sgds:p-component-sm">Item 2</div>
-  <div class="sgds:p-component-sm">Item 3</div>
+<div class="sgds:grid sgds:grid-cols-3 sgds:gap-layout-sm sgds:p-layout-md">
+  <div class="sgds:p-component-xs">Item 1</div>
+  <div class="sgds:p-component-xs">Item 2</div>
+  <div class="sgds:p-component-xs">Item 3</div>
 </div>
 ```
 
@@ -190,4 +190,4 @@ Only use raw multiplier-based utilities when no semantic token above fits the us
 
 ---
 
-**For AI Agents**: Always prefer semantic spacing utilities over raw numeric ones. Decision guide: text between text elements → `sgds:gap-text-*`; spacing between layout sections or grid areas → `sgds:gap-layout-*`; padding on page/section areas → `sgds:p-layout-*` / `sgds:px-layout-*` / `sgds:py-layout-*`; building a custom component (gap inside) → `sgds:gap-component-*`; building a custom component (padding inside) → `sgds:p-component-*` / `sgds:px-component-*` / `sgds:py-component-*`; responsive container width → `sgds:w-container`. Only use raw numeric utilities (`sgds:p-4`, `sgds:gap-6`, `sgds:mb-3`, etc.) when no semantic token fits the context. All semantic tokens are responsive — they adapt across mobile, tablet, and desktop breakpoints.
+**For AI Agents**: Always prefer semantic spacing utilities over raw numeric ones. **Default tokens to reach for first**: component padding → `sgds:p-component-xs` (`--sgds-component-padding-xs`); component gap → `sgds:gap-component-sm` (`--sgds-component-gap-sm`); layout gap → `sgds:gap-layout-sm` (`--sgds-layout-gap-sm`). Scale up or down from these defaults only when the design explicitly requires it. Decision guide: text between text elements → `sgds:gap-text-*`; spacing between layout sections or grid areas → `sgds:gap-layout-*` (default `sm`); padding on page/section areas → `sgds:p-layout-*` / `sgds:px-layout-*` / `sgds:py-layout-*`; building a custom component (gap inside) → `sgds:gap-component-*` (default `sm`); building a custom component (padding inside) → `sgds:p-component-*` / `sgds:px-component-*` / `sgds:py-component-*` (default `xs`); responsive container width → `sgds:w-container`. Only use raw numeric utilities (`sgds:p-4`, `sgds:gap-6`, `sgds:mb-3`, etc.) when no semantic token fits the context. All semantic tokens are responsive — they adapt across mobile, tablet, and desktop breakpoints.

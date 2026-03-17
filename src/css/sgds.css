@@ -1,2 +1,2 @@
-@import "./reboot.css";
-@import "./grid.css";
+@import "./reboot.css" layer(base);
+@import "./grid.css"

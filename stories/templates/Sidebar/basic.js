@@ -32,6 +32,8 @@ export const Template = args => html`
 
         <sgds-sidebar-group title="Reports" name="reports">
           <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+          <sgds-icon name="placeholder" slot="trailingIcon"></sgds-icon>
+
           <sgds-sidebar-item title="Yearly" name="yearly">
             <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
           </sgds-sidebar-item>

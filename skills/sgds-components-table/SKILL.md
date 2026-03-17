@@ -1,6 +1,6 @@
 ---
 name: "sgds-components-table"
-description: "Use sgds-table to display structured tabular data with configurable headers, orientation, borders, and responsive behaviour. Apply this skill whenever a user asks about tables, data tables, HTML tables, grid data display, tabular layout, or row/column headers in SGDS."
+description: "Use sgds-table to display structured tabular data. Always use the slot-based sub-component approach with sgds-table-row, sgds-table-head, and sgds-table-cell — this is the preferred method for full structural control. The array-based tableData / columnHeader / rowHeader properties are legacy and should not be used. Apply this skill whenever a user asks about tables, data tables, HTML tables, grid data display, tabular layout, or row/column headers in SGDS."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -10,7 +10,7 @@ metadata:
 
 # SGDS Table Component Skill
 
-`<sgds-table>` renders a structured data table from arrays. Headers and data are passed as JavaScript property arrays — not as HTML slot content. Use `headerPosition` to control whether headers appear on rows, columns, or both.
+`<sgds-table>` renders structured tabular data. **Always use the slot-based sub-components** — `<sgds-table-row>`, `<sgds-table-head>`, and `<sgds-table-cell>` — for full structural control. The legacy array-based properties (`tableData`, `columnHeader`, `rowHeader`) exist but must not be used.
 
 ## Prerequisites
 
@@ -18,71 +18,93 @@ See **[sgds-components-setup](../sgds-components-setup/SKILL.md)** for installat
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
-## Quick Decision Guide
+## Sub-components
 
-**Column headers on top (most common)?** → `headerPosition="horizontal"` (default); set `columnHeader`
+| Tag | Role |
+|-----|---------|
+| `<sgds-table>` | Container. Accepts `tableBorder` and `headerBackground` boolean attributes. |
+| `<sgds-table-row>` | A row. Place inside `<sgds-table>`. First row typically contains `<sgds-table-head>` cells. |
+| `<sgds-table-head>` | A header cell. Inherits `headerBackground` styling from the parent `<sgds-table>`. |
+| `<sgds-table-cell>` | A data cell. Can contain any HTML — text, badges, buttons, links. |
 
-**Row headers on the left?** → `headerPosition="vertical"`; set `rowHeader`
-
-**Both row and column headers?** → `headerPosition="both"`; set both `rowHeader` and `columnHeader`
-
-**Horizontal scrolling for wide tables?** → `responsive="always"` or a breakpoint like `responsive="sm"`
-
-**Striped header row/column?** → `headerBackground`
-
-**Bordered cells?** → `tableBorder`
+## Basic Usage
 
 ```html
-<!-- Table with column headers (default horizontal header) -->
-<sgds-table id="my-table"></sgds-table>
+<sgds-table>
+  <sgds-table-row>
+    <sgds-table-head>Name</sgds-table-head>
+    <sgds-table-head>Department</sgds-table-head>
+    <sgds-table-head>Status</sgds-table-head>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>Alice Tan</sgds-table-cell>
+    <sgds-table-cell>Engineering</sgds-table-cell>
+    <sgds-table-cell><sgds-badge variant="success">Active</sgds-badge></sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>Bob Lee</sgds-table-cell>
+    <sgds-table-cell>Design</sgds-table-cell>
+    <sgds-table-cell><sgds-badge variant="warning">Pending</sgds-badge></sgds-table-cell>
+  </sgds-table-row>
+</sgds-table>
+```
 
-<script>
-  const table = document.getElementById("my-table");
+## With borders and header background
 
-  table.columnHeader = ["Name", "Department", "Role", "Status"];
-  table.tableData = [
-    ["Alice Tan", "Engineering", "Senior Engineer", "Active"],
-    ["Bob Lee", "Design", "UX Designer", "Active"],
-    ["Carol Ng", "Product", "Product Manager", "On Leave"]
-  ];
-</script>
+```html
+<sgds-table tableBorder headerBackground>
+  <sgds-table-row>
+    <sgds-table-head>Reference</sgds-table-head>
+    <sgds-table-head>Applicant</sgds-table-head>
+    <sgds-table-head>Submitted</sgds-table-head>
+    <sgds-table-head>Amount</sgds-table-head>
+    <sgds-table-head>Status</sgds-table-head>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>REF-00412</sgds-table-cell>
+    <sgds-table-cell>Lim Ah Kow</sgds-table-cell>
+    <sgds-table-cell>01 Jan 2025</sgds-table-cell>
+    <sgds-table-cell>$1,200</sgds-table-cell>
+    <sgds-table-cell><sgds-badge variant="success">Active</sgds-badge></sgds-table-cell>
+  </sgds-table-row>
+</sgds-table>
+```
 
-<!-- With both headers, border, and background -->
-<sgds-table
-  id="both-headers-table"
-  headerPosition="both"
-  tableBorder
-  headerBackground
-></sgds-table>
-<script>
-  const t = document.getElementById("both-headers-table");
-  t.rowHeader = ["Q1", "Q2", "Q3", "Q4"];
-  t.columnHeader = ["Revenue", "Costs", "Profit"];
-  t.tableData = [
-    ["$1.2M", "$0.8M", "$0.4M"],
-    ["$1.5M", "$0.9M", "$0.6M"],
-    ["$1.8M", "$1.1M", "$0.7M"],
-    ["$2.0M", "$1.2M", "$0.8M"]
-  ];
-</script>
+## Rich cell content (actions, links, badges)
 
-<!-- Responsive with horizontal scroll below md breakpoint -->
-<sgds-table id="responsive-table" responsive="md"></sgds-table>
+`<sgds-table-cell>` slots accept any HTML — use this for interactive content:
+
+```html
+<sgds-table-row>
+  <sgds-table-cell>REF-00398</sgds-table-cell>
+  <sgds-table-cell>Tan Bee Choo</sgds-table-cell>
+  <sgds-table-cell><sgds-badge variant="warning">Pending</sgds-badge></sgds-table-cell>
+  <sgds-table-cell>
+    <sgds-button variant="ghost" size="sm">View</sgds-button>
+    <sgds-button variant="ghost" size="sm">Edit</sgds-button>
+  </sgds-table-cell>
+</sgds-table-row>
+```
+
+## Responsive horizontal scroll
+
+```html
+<sgds-table responsive="md">
+  <!-- rows and cells -->
+</sgds-table>
 ```
 
 ## API Summary
 
-### `<sgds-table>`
+### `<sgds-table>` attributes
 
-| Property | Type | Default | Purpose |
+| Attribute | Type | Default | Purpose |
 |---|---|---|---|
-| `columnHeader` | `string[]` | `[]` | Column header labels (used when `headerPosition` is `horizontal` or `both`) |
-| `rowHeader` | `string[]` | `[]` | Row header labels (used when `headerPosition` is `vertical` or `both`) |
-| `tableData` | `(string \| number)[][]` | `[]` | 2D array of row data |
-| `headerPosition` | `horizontal \| vertical \| both` | `horizontal` | Where headers are rendered |
-| `responsive` | `sm \| md \| lg \| xl \| always` | — | Adds horizontal scroll below the specified breakpoint |
-| `headerBackground` | boolean | `false` | Applies a background shade to header cells |
-| `tableBorder` | boolean | `false` | Applies borders to all cells |
+| `headerBackground` | boolean | `false` | Applies background shade to all `<sgds-table-head>` cells |
+| `tableBorder` | boolean | `false` | Renders borders on all cells |
+| `responsive` | `sm \| md \| lg \| xl \| always` | — | Enables horizontal scroll below the breakpoint |
+
+`<sgds-table-row>`, `<sgds-table-head>`, and `<sgds-table-cell>` have no attributes — all content goes in their default slot.
 
 ## Events
 
@@ -91,9 +113,8 @@ None.
 ---
 
 **For AI agents**:
-1. All data properties (`columnHeader`, `rowHeader`, `tableData`) must be set as **JavaScript properties**, not HTML attributes — they are arrays.
-2. `tableData` is a 2D array: each inner array is a row. Columns must align with `columnHeader` count (for horizontal or both) and rows with `rowHeader` count (for vertical or both).
-3. For `headerPosition="horizontal"`, only `columnHeader` is needed.
-4. For `headerPosition="vertical"`, only `rowHeader` is needed.
-5. For `headerPosition="both"`, provide both `rowHeader` and `columnHeader`; `tableData[i][j]` is the cell at row `i`, column `j`.
-6. There are no custom events or public methods on this component.
+1. **Always use slots** — `<sgds-table-row>`, `<sgds-table-head>`, `<sgds-table-cell>` are the correct approach. Never use `tableData`, `columnHeader`, or `rowHeader` array properties.
+2. The first `<sgds-table-row>` should contain `<sgds-table-head>` cells; subsequent rows use `<sgds-table-cell>`.
+3. `<sgds-table-cell>` accepts rich HTML — badges, buttons, links are fine inside cells.
+4. `headerBackground` and `tableBorder` are boolean attributes on `<sgds-table>` only — they cascade down to sub-components automatically.
+5. There are no custom events or public methods on this component.

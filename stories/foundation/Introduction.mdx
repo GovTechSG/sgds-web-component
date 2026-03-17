@@ -1,54 +1,9 @@
 import { Meta, Markdown, Canvas, Story } from "@storybook/blocks";
 import FoundationIntroduction from "../../docs/FoundationIntroduction.md?raw";
-import * as IntroductionStories from "./introduction.stories.js";
 
-<Meta of={IntroductionStories} />
+<Meta title="Foundation/Introduction" />
 
 <Markdown>{FoundationIntroduction}</Markdown>
-
-## Headings
-
-<Canvas of={IntroductionStories.Headings}>
-  <Story of={IntroductionStories.Headings} />
-</Canvas>
-
-## Paragraph
-
-<Canvas of={IntroductionStories.Paragraph}>
-  <Story of={IntroductionStories.Paragraph} />
-</Canvas>
-
-## Anchor
-
-<Canvas of={IntroductionStories.Anchor}>
-  <Story of={IntroductionStories.Anchor} />
-</Canvas>
-
-## Caption
-
-<Canvas of={IntroductionStories.Caption}>
-  <Story of={IntroductionStories.Caption} />
-</Canvas>
-
-## Label
-
-<Canvas of={IntroductionStories.Label}>
-  <Story of={IntroductionStories.Label} />
-</Canvas>
-
-## List
-
-### Unordered
-
-<Canvas of={IntroductionStories.ULists}>
-  <Story of={IntroductionStories.ULists} />
-</Canvas>
-
-### Ordered
-
-<Canvas of={IntroductionStories.OLists}>
-  <Story of={IntroductionStories.OLists} />
-</Canvas>
 
 ## Source files
 
