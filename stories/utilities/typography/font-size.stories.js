@@ -140,6 +140,32 @@ const RESPONSIVE_FONT_SIZES = {
       variable: "--sgds-font-size-overline-md",
       responsive: "14px / 14px / 14px"
     }
+  ],
+  link: [
+    {
+      name: "Link XS",
+      class: "sgds:text-link-xs",
+      variable: "--sgds-font-size-link-xs",
+      responsive: "12px / 12px / 12px"
+    },
+    {
+      name: "Link SM",
+      class: "sgds:text-link-sm",
+      variable: "--sgds-font-size-link-sm",
+      responsive: "14px / 14px / 14px"
+    },
+    {
+      name: "Link MD",
+      class: "sgds:text-link-md",
+      variable: "--sgds-font-size-link-md",
+      responsive: "16px / 16px / 16px"
+    },
+    {
+      name: "Link LG",
+      class: "sgds:text-link-lg",
+      variable: "--sgds-font-size-link-lg",
+      responsive: "18px / 20px / 20px"
+    }
   ]
 };
 
@@ -306,6 +332,20 @@ export const OverlineSizes = () => html`
     </sgds-table-row>
     ${RESPONSIVE_FONT_SIZES.overline.map(item =>
       ResponsiveFontSizeTableRow(item, item => html`<div class="${item.class} sgds:uppercase">${item.name}</div>`)
+    )}
+  </sgds-table>
+`;
+
+export const LinkSizes = () => html`
+  <sgds-table>
+    <sgds-table-row>
+      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+      <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Sizes (Mobile / Tablet / Desktop)</sgds-table-head>
+      <sgds-table-head>Preview</sgds-table-head>
+    </sgds-table-row>
+    ${RESPONSIVE_FONT_SIZES.link.map(item =>
+      ResponsiveFontSizeTableRow(item, item => html`<a href="#" class="${item.class} sgds:underline">${item.name}</a>`)
     )}
   </sgds-table>
 `;
