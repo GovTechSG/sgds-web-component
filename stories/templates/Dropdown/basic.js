@@ -1,5 +1,6 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { userEvent } from "@storybook/test";
 
 export const Template = ({
   noFlip,
@@ -22,7 +23,7 @@ export const Template = ({
       floatingOpts=${ifDefined(floatingOpts)}
       variant=${ifDefined(variant)}
       close=${ifDefined(close)}
-      menuIsOpen="true"
+      ?menuIsOpen=${menuIsOpen}
       ?disabled=${disabled}
     >
       <sgds-button slot="toggler" role="button">
@@ -48,10 +49,13 @@ export const Template = ({
 
 export const args = {
   variant: "secondary",
-  href: "#",
-  menuIsOpen: true
+  href: "#"
 };
 
 export const parameters = {};
 
-export const play = undefined;
+export const play = async ({ canvasElement }) => {
+  const toggler = canvasElement.querySelector("sgds-button");
+  const trigger = toggler.shadowRoot.querySelector("button");
+  await userEvent.click(trigger);
+};

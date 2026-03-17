@@ -1,5 +1,6 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { userEvent } from "@storybook/test";
 
 export const Template = args =>
   html`
@@ -26,7 +27,6 @@ export const args = {
   hintText: "Select an option",
   placeholder: "Select an option",
   label: "Select label",
-  menuIsOpen: true,
   menuList: [
     { label: "Afghanistan", value: "1" },
     { label: "Albania", value: "2" },
@@ -238,4 +238,8 @@ export const args = {
 
 export const parameters = {};
 
-export const play = undefined;
+export const play = async ({ canvasElement }) => {
+  const toggler = canvasElement.querySelector("sgds-select");
+  const trigger = toggler.shadowRoot.querySelector(".form-control-group");
+  await userEvent.click(trigger);
+};

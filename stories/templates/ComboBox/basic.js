@@ -1,5 +1,6 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { userEvent } from "@storybook/test";
 
 export const Template = ({
   label,
@@ -255,10 +256,13 @@ export const args = {
     { label: "Zambia", value: "204" },
     { label: "Zimbabwe", value: "205" }
   ],
-  id: "combobox-example",
-  menuIsOpen: true
+  id: "combobox-example"
 };
 
 export const parameters = {};
 
-export const play = undefined;
+export const play = async ({ canvasElement }) => {
+  const toggler = canvasElement.querySelector("sgds-combo-box");
+  const trigger = toggler.shadowRoot.querySelector(".form-control-group");
+  await userEvent.click(trigger);
+};
