@@ -1,0 +1,101 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Layout Padding</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <p class="sgds:mb-2-xl sgds:text-subtle">Layout padding tokens control inset spacing for major layout regions (page sections, containers, panels). Values scale up across breakpoints: mobile / tablet (≥ 1024px) / desktop (≥ 1440px).</p>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Layout Padding</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Mobile / Tablet / Desktop</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:p-layout-xs</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-padding-xs</code></sgds-table-cell>
+        <sgds-table-cell>16px / 20px / 24px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-warning-surface-muted sgds:border sgds:border-warning-default sgds:rounded-sm sgds:inline-block">
+            <div class="sgds:p-layout-xs sgds:bg-warning-default sgds:text-fixed-dark sgds:rounded-sm sgds:text-label-sm">Content</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:p-layout-sm</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-padding-sm</code></sgds-table-cell>
+        <sgds-table-cell>20px / 24px / 32px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-warning-surface-muted sgds:border sgds:border-warning-default sgds:rounded-sm sgds:inline-block">
+            <div class="sgds:p-layout-sm sgds:bg-warning-default sgds:text-fixed-dark sgds:rounded-sm sgds:text-label-sm">Content</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:p-layout-md</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-padding-md</code></sgds-table-cell>
+        <sgds-table-cell>24px / 32px / 48px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-warning-surface-muted sgds:border sgds:border-warning-default sgds:rounded-sm sgds:inline-block">
+            <div class="sgds:p-layout-md sgds:bg-warning-default sgds:text-fixed-dark sgds:rounded-sm sgds:text-label-sm">Content</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:p-layout-lg</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-padding-lg</code></sgds-table-cell>
+        <sgds-table-cell>32px / 48px / 64px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-warning-surface-muted sgds:border sgds:border-warning-default sgds:rounded-sm sgds:inline-block">
+            <div class="sgds:p-layout-lg sgds:bg-warning-default sgds:text-fixed-dark sgds:rounded-sm sgds:text-label-sm">Content</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:p-layout-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-padding-xl</code></sgds-table-cell>
+        <sgds-table-cell>48px / 64px / 96px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-warning-surface-muted sgds:border sgds:border-warning-default sgds:rounded-sm sgds:inline-block">
+            <div class="sgds:p-layout-xl sgds:bg-warning-default sgds:text-fixed-dark sgds:rounded-sm sgds:text-label-sm">Content</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Example: Hero Section</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Using <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:px-layout-md sgds:py-layout-lg</code> to pad a hero banner.</p>
+    <div class="sgds:bg-primary-default sgds:px-layout-md sgds:py-layout-lg sgds:rounded-md">
+      <h2 class="sgds:text-display-sm sgds:text-fixed-light sgds:mb-sm">Welcome to SGDS</h2>
+      <p class="sgds:text-body-lg sgds:text-fixed-light">Building Singapore's digital future, together.</p>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

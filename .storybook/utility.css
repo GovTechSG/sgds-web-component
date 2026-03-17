@@ -100,7 +100,7 @@
     --sgds-text-color-danger-fixed-dark: var(--sgds-danger-color-fixed-dark);
     --sgds-border-color-danger-default: var(--sgds-danger-border-color-default);
     --sgds-border-color-danger-emphasis: var(--sgds-danger-border-color-emphasis);
-    --sgds-border-color-danger-subtle: var(--sgds-danger-border-color-subtle);
+    --sgds-border-color-danger-muted: var(--sgds-danger-border-color-muted);
     --sgds-background-color-warning-default: var(--sgds-warning-bg-default);
     --sgds-background-color-warning-muted: var(--sgds-warning-bg-muted);
     --sgds-background-color-warning-surface-default: var(--sgds-warning-surface-default);
@@ -112,7 +112,7 @@
     --sgds-text-color-warning-fixed-dark: var(--sgds-warning-color-fixed-dark);
     --sgds-border-color-warning-default: var(--sgds-warning-border-color-default);
     --sgds-border-color-warning-emphasis: var(--sgds-warning-border-color-emphasis);
-    --sgds-border-color-warning-subtle: var(--sgds-warning-border-color-subtle);
+    --sgds-border-color-warning-muted: var(--sgds-warning-border-color-muted);
     --sgds-background-color-purple-default: var(--sgds-purple-bg-default);
     --sgds-background-color-purple-muted: var(--sgds-purple-bg-muted);
     --sgds-background-color-purple-surface-default: var(--sgds-purple-surface-default);
@@ -234,12 +234,25 @@
     --sgds-leading-16: var(--sgds-line-height-16);
     --sgds-leading-20: var(--sgds-line-height-20);
     --sgds-leading-24: var(--sgds-line-height-24);
+    --sgds-leading-28: var(--sgds-line-height-28);
     --sgds-leading-32: var(--sgds-line-height-32);
     --sgds-leading-36: var(--sgds-line-height-36);
     --sgds-leading-40: var(--sgds-line-height-40);
+    --sgds-leading-44: var(--sgds-line-height-44);
     --sgds-leading-48: var(--sgds-line-height-48);
+    --sgds-leading-52: var(--sgds-line-height-52);
     --sgds-leading-56: var(--sgds-line-height-56);
+    --sgds-leading-60: var(--sgds-line-height-60);
     --sgds-leading-64: var(--sgds-line-height-64);
+    --sgds-leading-3-xs: var(--sgds-line-height-3-xs);
+    --sgds-leading-2-xs: var(--sgds-line-height-2-xs);
+    --sgds-leading-xs: var(--sgds-line-height-xs);
+    --sgds-leading-sm: var(--sgds-line-height-sm);
+    --sgds-leading-md: var(--sgds-line-height-md);
+    --sgds-leading-lg: var(--sgds-line-height-lg);
+    --sgds-leading-xl: var(--sgds-line-height-xl);
+    --sgds-leading-2-xl: var(--sgds-line-height-2-xl);
+    --sgds-leading-3-xl: var(--sgds-line-height-3-xl);
     --sgds-opacity-0: var(--sgds-opacity-0);
     --sgds-opacity-3: var(--sgds-opacity-3);
     --sgds-opacity-5: var(--sgds-opacity-5);
@@ -267,6 +280,35 @@
     --sgds-gap-form-lg: var(--sgds-form-gap-lg);
     --sgds-gap-form-xl: var(--sgds-form-gap-xl);
     --sgds-gap-form-2-xl: var(--sgds-form-gap-2-xl);
+    --sgds-gap-text-2-xs: var(--sgds-text-gap-2-xs);
+    --sgds-gap-text-xs: var(--sgds-text-gap-xs);
+    --sgds-gap-text-sm: var(--sgds-text-gap-sm);
+    --sgds-gap-text-md: var(--sgds-text-gap-md);
+    --sgds-gap-text-lg: var(--sgds-text-gap-lg);
+    --sgds-gap-text-xl: var(--sgds-text-gap-xl);
+    --sgds-gap-text-2-xl: var(--sgds-text-gap-2-xl);
+    --sgds-gap-layout-2-xs: var(--sgds-layout-gap-2-xs);
+    --sgds-gap-layout-xs: var(--sgds-layout-gap-xs);
+    --sgds-gap-layout-sm: var(--sgds-layout-gap-sm);
+    --sgds-gap-layout-md: var(--sgds-layout-gap-md);
+    --sgds-gap-layout-lg: var(--sgds-layout-gap-lg);
+    --sgds-gap-layout-xl: var(--sgds-layout-gap-xl);
+    --sgds-padding-layout-xs: var(--sgds-layout-padding-xs);
+    --sgds-padding-layout-sm: var(--sgds-layout-padding-sm);
+    --sgds-padding-layout-md: var(--sgds-layout-padding-md);
+    --sgds-padding-layout-lg: var(--sgds-layout-padding-lg);
+    --sgds-padding-layout-xl: var(--sgds-layout-padding-xl);
+    --sgds-gap-component-xs: var(--sgds-component-gap-xs);
+    --sgds-gap-component-sm: var(--sgds-component-gap-sm);
+    --sgds-gap-component-md: var(--sgds-component-gap-md);
+    --sgds-gap-component-lg: var(--sgds-component-gap-lg);
+    --sgds-gap-component-xl: var(--sgds-component-gap-xl);
+    --sgds-padding-component-xs: var(--sgds-component-padding-xs);
+    --sgds-padding-component-sm: var(--sgds-component-padding-sm);
+    --sgds-padding-component-md: var(--sgds-component-padding-md);
+    --sgds-padding-component-lg: var(--sgds-component-padding-lg);
+    --sgds-padding-component-xl: var(--sgds-component-padding-xl);
+    --sgds-width-container: var(--sgds-container-width);
     --sgds-radius-none: var(--sgds-border-radius-none);
     --sgds-radius-xs: var(--sgds-border-radius-xs);
     --sgds-radius-sm: var(--sgds-border-radius-sm);
@@ -274,6 +316,7 @@
     --sgds-radius-lg: var(--sgds-border-radius-lg);
     --sgds-radius-xl: var(--sgds-border-radius-xl);
     --sgds-radius-2-xl: var(--sgds-border-radius-2-xl);
+    --sgds-radius-3-xl: var(--sgds-border-radius-3-xl);
     --sgds-radius-full: var(--sgds-border-radius-full);
     --sgds-radius-form-none: var(--sgds-form-border-radius-none);
     --sgds-radius-form-xs: var(--sgds-form-border-radius-xs);
@@ -290,6 +333,9 @@
 @layer utilities {
   .sgds\:absolute {
     position: absolute;
+  }
+  .sgds\:fixed {
+    position: fixed;
   }
   .sgds\:relative {
     position: relative;
@@ -351,9 +397,6 @@
   .sgds\:m-12 {
     margin: calc(var(--sgds-spacing) * 12);
   }
-  .sgds\:m-13 {
-    margin: calc(var(--sgds-spacing) * 13);
-  }
   .sgds\:m-16 {
     margin: calc(var(--sgds-spacing) * 16);
   }
@@ -393,6 +436,9 @@
   .sgds\:mx-12 {
     margin-inline: calc(var(--sgds-spacing) * 12);
   }
+  .sgds\:mx-auto {
+    margin-inline: auto;
+  }
   .sgds\:my-3 {
     margin-block: calc(var(--sgds-spacing) * 3);
   }
@@ -405,8 +451,20 @@
   .sgds\:my-md {
     margin-block: var(--sgds-spacing-md);
   }
+  .sgds\:mt-1 {
+    margin-top: calc(var(--sgds-spacing) * 1);
+  }
+  .sgds\:mt-2 {
+    margin-top: calc(var(--sgds-spacing) * 2);
+  }
+  .sgds\:mt-2-xl {
+    margin-top: var(--sgds-spacing-2-xl);
+  }
   .sgds\:mt-3 {
     margin-top: calc(var(--sgds-spacing) * 3);
+  }
+  .sgds\:mt-4 {
+    margin-top: calc(var(--sgds-spacing) * 4);
   }
   .sgds\:mt-lg {
     margin-top: var(--sgds-spacing-lg);
@@ -417,14 +475,32 @@
   .sgds\:mt-sm {
     margin-top: var(--sgds-spacing-sm);
   }
+  .sgds\:mb-1 {
+    margin-bottom: calc(var(--sgds-spacing) * 1);
+  }
+  .sgds\:mb-2 {
+    margin-bottom: calc(var(--sgds-spacing) * 2);
+  }
   .sgds\:mb-2-xl {
     margin-bottom: var(--sgds-spacing-2-xl);
   }
   .sgds\:mb-2-xs {
     margin-bottom: var(--sgds-spacing-2-xs);
   }
+  .sgds\:mb-3 {
+    margin-bottom: calc(var(--sgds-spacing) * 3);
+  }
   .sgds\:mb-4 {
     margin-bottom: calc(var(--sgds-spacing) * 4);
+  }
+  .sgds\:mb-6 {
+    margin-bottom: calc(var(--sgds-spacing) * 6);
+  }
+  .sgds\:mb-8 {
+    margin-bottom: calc(var(--sgds-spacing) * 8);
+  }
+  .sgds\:mb-12 {
+    margin-bottom: calc(var(--sgds-spacing) * 12);
   }
   .sgds\:mb-lg {
     margin-bottom: var(--sgds-spacing-lg);
@@ -447,11 +523,17 @@
   .sgds\:box-border {
     box-sizing: border-box;
   }
+  .sgds\:block {
+    display: block;
+  }
   .sgds\:flex {
     display: flex;
   }
   .sgds\:grid {
     display: grid;
+  }
+  .sgds\:inline-block {
+    display: inline-block;
   }
   .sgds\:h-2-xl {
     height: var(--sgds-spacing-2-xl);
@@ -513,11 +595,29 @@
   .sgds\:w-40 {
     width: calc(var(--sgds-spacing) * 40);
   }
+  .sgds\:w-48 {
+    width: calc(var(--sgds-spacing) * 48);
+  }
+  .sgds\:w-68 {
+    width: calc(var(--sgds-spacing) * 68);
+  }
+  .sgds\:w-container {
+    width: var(--sgds-width-container);
+  }
+  .sgds\:w-fit {
+    width: fit-content;
+  }
   .sgds\:w-full {
     width: 100%;
   }
+  .sgds\:max-w-lg {
+    max-width: var(--sgds-spacing-lg);
+  }
   .sgds\:max-w-md {
     max-width: var(--sgds-spacing-md);
+  }
+  .sgds\:flex-1 {
+    flex: 1;
   }
   .sgds\:shrink-0 {
     flex-shrink: 0;
@@ -546,11 +646,20 @@
   .sgds\:items-center {
     align-items: center;
   }
+  .sgds\:items-end {
+    align-items: flex-end;
+  }
   .sgds\:justify-between {
     justify-content: space-between;
   }
   .sgds\:justify-center {
     justify-content: center;
+  }
+  .sgds\:justify-end {
+    justify-content: flex-end;
+  }
+  .sgds\:gap-2 {
+    gap: calc(var(--sgds-spacing) * 2);
   }
   .sgds\:gap-2-xl {
     gap: var(--sgds-gap-2-xl);
@@ -567,6 +676,21 @@
   .sgds\:gap-6 {
     gap: calc(var(--sgds-spacing) * 6);
   }
+  .sgds\:gap-component-lg {
+    gap: var(--sgds-gap-component-lg);
+  }
+  .sgds\:gap-component-md {
+    gap: var(--sgds-gap-component-md);
+  }
+  .sgds\:gap-component-sm {
+    gap: var(--sgds-gap-component-sm);
+  }
+  .sgds\:gap-component-xl {
+    gap: var(--sgds-gap-component-xl);
+  }
+  .sgds\:gap-component-xs {
+    gap: var(--sgds-gap-component-xs);
+  }
   .sgds\:gap-form-2-xl {
     gap: var(--sgds-gap-form-2-xl);
   }
@@ -582,6 +706,24 @@
   .sgds\:gap-form-xl {
     gap: var(--sgds-gap-form-xl);
   }
+  .sgds\:gap-layout-2-xs {
+    gap: var(--sgds-gap-layout-2-xs);
+  }
+  .sgds\:gap-layout-lg {
+    gap: var(--sgds-gap-layout-lg);
+  }
+  .sgds\:gap-layout-md {
+    gap: var(--sgds-gap-layout-md);
+  }
+  .sgds\:gap-layout-sm {
+    gap: var(--sgds-gap-layout-sm);
+  }
+  .sgds\:gap-layout-xl {
+    gap: var(--sgds-gap-layout-xl);
+  }
+  .sgds\:gap-layout-xs {
+    gap: var(--sgds-gap-layout-xs);
+  }
   .sgds\:gap-lg {
     gap: var(--sgds-gap-lg);
   }
@@ -593,6 +735,27 @@
   }
   .sgds\:gap-sm {
     gap: var(--sgds-gap-sm);
+  }
+  .sgds\:gap-text-2-xl {
+    gap: var(--sgds-gap-text-2-xl);
+  }
+  .sgds\:gap-text-2-xs {
+    gap: var(--sgds-gap-text-2-xs);
+  }
+  .sgds\:gap-text-lg {
+    gap: var(--sgds-gap-text-lg);
+  }
+  .sgds\:gap-text-md {
+    gap: var(--sgds-gap-text-md);
+  }
+  .sgds\:gap-text-sm {
+    gap: var(--sgds-gap-text-sm);
+  }
+  .sgds\:gap-text-xl {
+    gap: var(--sgds-gap-text-xl);
+  }
+  .sgds\:gap-text-xs {
+    gap: var(--sgds-gap-text-xs);
   }
   .sgds\:gap-xl {
     gap: var(--sgds-gap-xl);
@@ -648,6 +811,9 @@
   .sgds\:rounded-2-xl {
     border-radius: var(--sgds-radius-2-xl);
   }
+  .sgds\:rounded-3-xl {
+    border-radius: var(--sgds-radius-3-xl);
+  }
   .sgds\:rounded-form-full {
     border-radius: var(--sgds-radius-form-full);
   }
@@ -684,6 +850,34 @@
   .sgds\:rounded-xs {
     border-radius: var(--sgds-radius-xs);
   }
+  .sgds\:rounded-t-lg {
+    border-top-left-radius: var(--sgds-radius-lg);
+    border-top-right-radius: var(--sgds-radius-lg);
+  }
+  .sgds\:rounded-l-lg {
+    border-top-left-radius: var(--sgds-radius-lg);
+    border-bottom-left-radius: var(--sgds-radius-lg);
+  }
+  .sgds\:rounded-tl-lg {
+    border-top-left-radius: var(--sgds-radius-lg);
+  }
+  .sgds\:rounded-r-lg {
+    border-top-right-radius: var(--sgds-radius-lg);
+    border-bottom-right-radius: var(--sgds-radius-lg);
+  }
+  .sgds\:rounded-tr-lg {
+    border-top-right-radius: var(--sgds-radius-lg);
+  }
+  .sgds\:rounded-b-lg {
+    border-bottom-right-radius: var(--sgds-radius-lg);
+    border-bottom-left-radius: var(--sgds-radius-lg);
+  }
+  .sgds\:rounded-br-lg {
+    border-bottom-right-radius: var(--sgds-radius-lg);
+  }
+  .sgds\:rounded-bl-lg {
+    border-bottom-left-radius: var(--sgds-radius-lg);
+  }
   .sgds\:border {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -708,6 +902,10 @@
     border-style: var(--tw-border-style);
     border-width: var(--sgds-border-width-4);
   }
+  .sgds\:border-8 {
+    border-style: var(--tw-border-style);
+    border-width: 8px;
+  }
   .sgds\:border-form-default {
     border-style: var(--tw-border-style);
     border-width: var(--sgds-border-width-form-default);
@@ -715,6 +913,58 @@
   .sgds\:border-form-thick {
     border-style: var(--tw-border-style);
     border-width: var(--sgds-border-width-form-thick);
+  }
+  .sgds\:border-x {
+    border-inline-style: var(--tw-border-style);
+    border-inline-width: 1px;
+  }
+  .sgds\:border-x-2 {
+    border-inline-style: var(--tw-border-style);
+    border-inline-width: var(--sgds-border-width-2);
+  }
+  .sgds\:border-y {
+    border-block-style: var(--tw-border-style);
+    border-block-width: 1px;
+  }
+  .sgds\:border-y-4 {
+    border-block-style: var(--tw-border-style);
+    border-block-width: var(--sgds-border-width-4);
+  }
+  .sgds\:border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+  .sgds\:border-t-2 {
+    border-top-style: var(--tw-border-style);
+    border-top-width: var(--sgds-border-width-2);
+  }
+  .sgds\:border-r {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 1px;
+  }
+  .sgds\:border-r-4 {
+    border-right-style: var(--tw-border-style);
+    border-right-width: var(--sgds-border-width-4);
+  }
+  .sgds\:border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
+  .sgds\:border-b-0 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: var(--sgds-border-width-0);
+  }
+  .sgds\:border-b-2 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: var(--sgds-border-width-2);
+  }
+  .sgds\:border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
+  }
+  .sgds\:border-l-4 {
+    border-left-style: var(--tw-border-style);
+    border-left-width: var(--sgds-border-width-4);
   }
   .sgds\:border-none {
     --tw-border-style: none;
@@ -748,8 +998,8 @@
   .sgds\:border-danger-emphasis {
     border-color: var(--sgds-border-color-danger-emphasis);
   }
-  .sgds\:border-danger-subtle {
-    border-color: var(--sgds-border-color-danger-subtle);
+  .sgds\:border-danger-muted {
+    border-color: var(--sgds-border-color-danger-muted);
   }
   .sgds\:border-default {
     border-color: var(--sgds-border-color-default);
@@ -820,8 +1070,8 @@
   .sgds\:border-warning-emphasis {
     border-color: var(--sgds-border-color-warning-emphasis);
   }
-  .sgds\:border-warning-subtle {
-    border-color: var(--sgds-border-color-warning-subtle);
+  .sgds\:border-warning-muted {
+    border-color: var(--sgds-border-color-warning-muted);
   }
   .sgds\:bg-accent-default {
     background-color: var(--sgds-background-color-accent-default);
@@ -1039,6 +1289,9 @@
   .sgds\:p-0 {
     padding: calc(var(--sgds-spacing) * 0);
   }
+  .sgds\:p-2 {
+    padding: calc(var(--sgds-spacing) * 2);
+  }
   .sgds\:p-2-xl {
     padding: var(--sgds-spacing-2-xl);
   }
@@ -1063,6 +1316,36 @@
   .sgds\:p-6 {
     padding: calc(var(--sgds-spacing) * 6);
   }
+  .sgds\:p-component-lg {
+    padding: var(--sgds-padding-component-lg);
+  }
+  .sgds\:p-component-md {
+    padding: var(--sgds-padding-component-md);
+  }
+  .sgds\:p-component-sm {
+    padding: var(--sgds-padding-component-sm);
+  }
+  .sgds\:p-component-xl {
+    padding: var(--sgds-padding-component-xl);
+  }
+  .sgds\:p-component-xs {
+    padding: var(--sgds-padding-component-xs);
+  }
+  .sgds\:p-layout-lg {
+    padding: var(--sgds-padding-layout-lg);
+  }
+  .sgds\:p-layout-md {
+    padding: var(--sgds-padding-layout-md);
+  }
+  .sgds\:p-layout-sm {
+    padding: var(--sgds-padding-layout-sm);
+  }
+  .sgds\:p-layout-xl {
+    padding: var(--sgds-padding-layout-xl);
+  }
+  .sgds\:p-layout-xs {
+    padding: var(--sgds-padding-layout-xs);
+  }
   .sgds\:p-lg {
     padding: var(--sgds-spacing-lg);
   }
@@ -1081,8 +1364,29 @@
   .sgds\:p-xs {
     padding: var(--sgds-spacing-xs);
   }
+  .sgds\:px-1 {
+    padding-inline: calc(var(--sgds-spacing) * 1);
+  }
   .sgds\:px-2 {
     padding-inline: calc(var(--sgds-spacing) * 2);
+  }
+  .sgds\:px-4 {
+    padding-inline: calc(var(--sgds-spacing) * 4);
+  }
+  .sgds\:px-6 {
+    padding-inline: calc(var(--sgds-spacing) * 6);
+  }
+  .sgds\:px-component-sm {
+    padding-inline: var(--sgds-padding-component-sm);
+  }
+  .sgds\:px-layout-md {
+    padding-inline: var(--sgds-padding-layout-md);
+  }
+  .sgds\:px-layout-sm {
+    padding-inline: var(--sgds-padding-layout-sm);
+  }
+  .sgds\:px-layout-xs {
+    padding-inline: var(--sgds-padding-layout-xs);
   }
   .sgds\:px-lg {
     padding-inline: var(--sgds-spacing-lg);
@@ -1090,11 +1394,20 @@
   .sgds\:px-md {
     padding-inline: var(--sgds-spacing-md);
   }
+  .sgds\:px-sm {
+    padding-inline: var(--sgds-spacing-sm);
+  }
   .sgds\:px-xs {
     padding-inline: var(--sgds-spacing-xs);
   }
+  .sgds\:py-2 {
+    padding-block: calc(var(--sgds-spacing) * 2);
+  }
   .sgds\:py-2-xl {
     padding-block: var(--sgds-spacing-2-xl);
+  }
+  .sgds\:py-2-xs {
+    padding-block: var(--sgds-spacing-2-xs);
   }
   .sgds\:py-3 {
     padding-block: calc(var(--sgds-spacing) * 3);
@@ -1102,8 +1415,26 @@
   .sgds\:py-3-xs {
     padding-block: var(--sgds-spacing-3-xs);
   }
+  .sgds\:py-12 {
+    padding-block: calc(var(--sgds-spacing) * 12);
+  }
+  .sgds\:py-component-md {
+    padding-block: var(--sgds-padding-component-md);
+  }
+  .sgds\:py-component-sm {
+    padding-block: var(--sgds-padding-component-sm);
+  }
+  .sgds\:py-component-xs {
+    padding-block: var(--sgds-padding-component-xs);
+  }
+  .sgds\:py-layout-lg {
+    padding-block: var(--sgds-padding-layout-lg);
+  }
   .sgds\:py-sm {
     padding-block: var(--sgds-spacing-sm);
+  }
+  .sgds\:pl-6 {
+    padding-left: calc(var(--sgds-spacing) * 6);
   }
   .sgds\:text-center {
     text-align: center;
@@ -1195,6 +1526,22 @@
   .sgds\:text-subtitle-sm {
     font-size: var(--sgds-text-subtitle-sm);
   }
+  .sgds\:leading-2-xl {
+    --tw-leading: var(--sgds-leading-2-xl);
+    line-height: var(--sgds-leading-2-xl);
+  }
+  .sgds\:leading-2-xs {
+    --tw-leading: var(--sgds-leading-2-xs);
+    line-height: var(--sgds-leading-2-xs);
+  }
+  .sgds\:leading-3-xl {
+    --tw-leading: var(--sgds-leading-3-xl);
+    line-height: var(--sgds-leading-3-xl);
+  }
+  .sgds\:leading-3-xs {
+    --tw-leading: var(--sgds-leading-3-xs);
+    line-height: var(--sgds-leading-3-xs);
+  }
   .sgds\:leading-16 {
     --tw-leading: var(--sgds-leading-16);
     line-height: var(--sgds-leading-16);
@@ -1208,8 +1555,8 @@
     line-height: var(--sgds-leading-24);
   }
   .sgds\:leading-28 {
-    --tw-leading: calc(var(--sgds-spacing) * 28);
-    line-height: calc(var(--sgds-spacing) * 28);
+    --tw-leading: var(--sgds-leading-28);
+    line-height: var(--sgds-leading-28);
   }
   .sgds\:leading-32 {
     --tw-leading: var(--sgds-leading-32);
@@ -1223,17 +1570,53 @@
     --tw-leading: var(--sgds-leading-40);
     line-height: var(--sgds-leading-40);
   }
+  .sgds\:leading-44 {
+    --tw-leading: var(--sgds-leading-44);
+    line-height: var(--sgds-leading-44);
+  }
   .sgds\:leading-48 {
     --tw-leading: var(--sgds-leading-48);
     line-height: var(--sgds-leading-48);
+  }
+  .sgds\:leading-52 {
+    --tw-leading: var(--sgds-leading-52);
+    line-height: var(--sgds-leading-52);
   }
   .sgds\:leading-56 {
     --tw-leading: var(--sgds-leading-56);
     line-height: var(--sgds-leading-56);
   }
+  .sgds\:leading-60 {
+    --tw-leading: var(--sgds-leading-60);
+    line-height: var(--sgds-leading-60);
+  }
   .sgds\:leading-64 {
     --tw-leading: var(--sgds-leading-64);
     line-height: var(--sgds-leading-64);
+  }
+  .sgds\:leading-lg {
+    --tw-leading: var(--sgds-leading-lg);
+    line-height: var(--sgds-leading-lg);
+  }
+  .sgds\:leading-md {
+    --tw-leading: var(--sgds-leading-md);
+    line-height: var(--sgds-leading-md);
+  }
+  .sgds\:leading-none {
+    --tw-leading: var(--sgds-spacing-none);
+    line-height: var(--sgds-spacing-none);
+  }
+  .sgds\:leading-sm {
+    --tw-leading: var(--sgds-leading-sm);
+    line-height: var(--sgds-leading-sm);
+  }
+  .sgds\:leading-xl {
+    --tw-leading: var(--sgds-leading-xl);
+    line-height: var(--sgds-leading-xl);
+  }
+  .sgds\:leading-xs {
+    --tw-leading: var(--sgds-leading-xs);
+    line-height: var(--sgds-leading-xs);
   }
   .sgds\:font-bold {
     --tw-font-weight: var(--sgds-font-weight-bold);
@@ -1448,6 +1831,12 @@
   .sgds\:uppercase {
     text-transform: uppercase;
   }
+  .sgds\:italic {
+    font-style: italic;
+  }
+  .sgds\:underline {
+    text-decoration-line: underline;
+  }
   .sgds\:opacity-0 {
     opacity: var(--sgds-opacity-0);
   }
@@ -1462,6 +1851,9 @@
   }
   .sgds\:opacity-20 {
     opacity: var(--sgds-opacity-20);
+  }
+  .sgds\:opacity-25 {
+    opacity: 25%;
   }
   .sgds\:opacity-30 {
     opacity: var(--sgds-opacity-30);
@@ -1478,11 +1870,17 @@
   .sgds\:opacity-70 {
     opacity: var(--sgds-opacity-70);
   }
+  .sgds\:opacity-75 {
+    opacity: 75%;
+  }
   .sgds\:opacity-80 {
     opacity: var(--sgds-opacity-80);
   }
   .sgds\:opacity-90 {
     opacity: var(--sgds-opacity-90);
+  }
+  .sgds\:opacity-95 {
+    opacity: 95%;
   }
   .sgds\:opacity-100 {
     opacity: var(--sgds-opacity-100);

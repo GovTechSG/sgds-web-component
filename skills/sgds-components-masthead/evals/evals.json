@@ -1,0 +1,42 @@
+{
+  "skill_name": "sgds-components-masthead",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm building a Next.js 15 app (React 19) for our agency's portal. I've got @govtechsg/sgds-web-component installed. How do I put the sgds-masthead in my root layout?",
+      "expected_output": "Sets up a SgdsLibraryLoader 'use client' component that dynamically imports @govtechsg/sgds-web-component via useEffect, places it in <head> of root layout, and puts <sgds-masthead suppressHydrationWarning> as the first child of <body>.",
+      "files": [],
+      "expectations": [
+        "Response creates or references a SgdsLibraryLoader 'use client' component that uses useEffect + dynamic import() to load the library",
+        "Response places SgdsLibraryLoader inside <head> of root layout",
+        "Response places <sgds-masthead> as the first child of <body>, before {children}",
+        "Response uses suppressHydrationWarning on the <sgds-masthead> element",
+        "Response does NOT use a top-level static import of @govtechsg/sgds-web-component as the primary loading strategy for Next.js"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Do I need to include the sgds-masthead on every page of my site, or just the homepage?",
+      "expected_output": "Clearly states that the masthead is mandatory on every page of a .gov.sg digital service, not just the homepage, as required by the Singapore Government Design System guidelines.",
+      "files": [],
+      "expectations": [
+        "Response states the masthead is mandatory on every page, not optional",
+        "Response references .gov.sg digital services or the Singapore Government Design System requirement",
+        "Response does NOT frame it as a recommendation or best practice",
+        "Response does NOT say it is the developer's choice"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "We're using Vue 3 for our government service. I need to drop the masthead in but it's not rendering — I think it's a config issue. How do I get sgds-masthead working in Vue?",
+      "expected_output": "Explains the Vue 3 config required (resolveCompilerOptions to treat sgds-* as custom elements) plus the import of the component, with a working template example.",
+      "files": [],
+      "expectations": [
+        "Shows the import of @govtechsg/sgds-web-component in the Vue setup",
+        "Mentions configuring Vue to recognise sgds-* custom elements (compilerOptions.isCustomElement)",
+        "Shows a working <template> with <sgds-masthead>",
+        "Does not suggest wrong import paths or missing config steps"
+      ]
+    }
+  ]
+}
