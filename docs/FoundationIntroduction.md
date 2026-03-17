@@ -49,26 +49,3 @@ The colors assigned to elements and class selectors will switch depending on day
 /* import foundational styles and grid system */
 @import "@govtechsg/sgds-web-component/css/sgds.css";
 ```
-
-<!-- ### Cherry pick the styles
-
-`css/sgds.css` contains all the stylings found in the folder `css`. You can also choose to cherry pick the styles you required. For example, `label.css`
-
-<strong>JS imports</strong>
-
-```js
-import "@govtechsg/sgds-web-component/themes/day.css"
-//optional: if you are doing night mode
-import "@govtechsg/sgds-web-component/themes/night.css"
-import "@govtechsg/sgds-web-component/css/label.css" -->
-
-<!-- ```
-
-<strong>CSS imports</strong>
-
-```css
-@import "@govtechsg/sgds-web-component/themes/day.css";
-/** optional: if you are doing night mode */
-@import "@govtechsg/sgds-web-component/themes/night.css";
-@import "@govtechsg/sgds-web-component/css/label.css";
-``` -->
