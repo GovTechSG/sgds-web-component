@@ -90,7 +90,7 @@ export class SidebarElement extends SgdsElement {
   _showDrawer = false;
 
   /** @internal */
-  @state() _childLevel = 0;
+  @state() _childLevel = 1;
 
   /**
    * Indicates whether this element is currently selected/active.
@@ -136,7 +136,7 @@ export class SidebarElement extends SgdsElement {
   }
 
   updated() {
-    if (this._childLevel === 1) {
+    if (this._childLevel === 2) {
       this._hidden = !this.closest(".sidebar-nested-overlay");
     }
   }
@@ -157,7 +157,7 @@ export class SidebarElement extends SgdsElement {
    * @param {SidebarElement} [element] - Optional element parameter (for keyboard compatibility)
    * @returns {void}
    */
-  _handleClick() {
+  protected _handleClick() {
     this.emit("i-sgds-click", { detail: { element: this, level: this._childLevel } });
   }
 
@@ -222,7 +222,7 @@ export class SidebarElement extends SgdsElement {
         } else {
           // check if we are on the drawer, if so move back to parent
           const childLevel = (target as SidebarElement)._childLevel;
-          if (childLevel >= 1 && this._sidebarActiveGroup?.shadowRoot) {
+          if (childLevel >= 2 && this._sidebarActiveGroup?.shadowRoot) {
             const focusTarget = this._sidebarActiveGroup.shadowRoot.querySelector("[tabindex]") as HTMLElement | null;
             focusTarget?.focus();
           }
@@ -247,7 +247,7 @@ export class SidebarElement extends SgdsElement {
             }
           }
         } else {
-          if (this._childLevel === 0 && this._childElements.length > 0) {
+          if (this._childLevel === 1 && this._childElements.length > 0) {
             // when there is nested, we trigger click to show drawer
             this._handleClick();
           }
@@ -260,14 +260,14 @@ export class SidebarElement extends SgdsElement {
 
   /**
    * Calculates the nesting level by counting parent sgds-sidebar-group ancestors.
-   * Level 0 = top-level element, Level 1+ = nested within another group.
+   * Level 1 = top-level element, Level 2+ = nested within another group.
    * Updates the _childLevel state property.
    * @internal
    * @returns {void}
    */
   private getChildLevel() {
     let currentEle = this.parentElement;
-    let level = 0;
+    let level = 1;
 
     while (currentEle.tagName.toLowerCase() === "sgds-sidebar-group") {
       level += 1;

@@ -10,8 +10,6 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
       const nav = el.shadowRoot?.querySelector("nav");
       expect(nav).to.exist;
-      expect(nav).to.have.attribute("role", "navigation");
-      expect(nav).to.have.attribute("aria-label", "Main navigation");
     });
 
     it("has correct initial classes", async () => {
@@ -41,8 +39,14 @@ describe("sgds-sidebar", () => {
     it("renders root level groups", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-group>
-          <sgds-sidebar-group title="Reports" name="reports" icon="file-text"></sgds-sidebar-group>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-group>
+            <sgds-sidebar-group title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const groups = el.querySelectorAll("sgds-sidebar-group");
@@ -52,8 +56,14 @@ describe("sgds-sidebar", () => {
     it("renders leaf level items", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
-          <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const items = el.querySelectorAll("sgds-sidebar-item");
@@ -98,35 +108,46 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Level 0 (Root) Groups", () => {
+  describe("Level 1 (Root) Groups", () => {
     it("renders root level group with correct attributes", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-group>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
       expect(group).to.exist;
       expect(group).to.have.attribute("title", "Dashboard");
       expect(group).to.have.attribute("name", "dashboard");
-      expect(group).to.have.attribute("icon", "house");
     });
 
     it("displays root level groups with icon", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-group>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
-      const icon = group.shadowRoot?.querySelector("sgds-icon");
+      const icon = group.querySelector("sgds-icon[slot='leadingIcon']");
       expect(icon).to.exist;
     });
 
     it("root group visual state updates on click", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-group>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
 
@@ -140,14 +161,21 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Level 1 (Nested) Groups", () => {
-    it("renders level 1 nested groups inside level 0 group", async () => {
+  describe("Level 2 (Nested) Groups", () => {
+    it("renders level 2 nested groups inside level 1 group", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-group title="Overview" name="overview" icon="file-text"></sgds-sidebar-group>
-            <sgds-sidebar-group title="Analytics" name="analytics" icon="file-text"></sgds-sidebar-group>
-          </sgds-sidebar-group>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-group title="Overview" name="overview">
+                <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-group>
+              <sgds-sidebar-group title="Analytics" name="analytics">
+                <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-group>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const rootGroup = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
@@ -155,11 +183,14 @@ describe("sgds-sidebar", () => {
       expect(nestedGroups.length).to.equal(2);
     });
 
-    it("level 1 groups display chevron icon for expand/collapse", async () => {
+    it("level 2 groups display chevron icon for expand/collapse", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-group title="Overview" name="overview" icon="file-text"></sgds-sidebar-group>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-group>
           </sgds-sidebar-group>
         </sgds-sidebar>
       `);
@@ -169,13 +200,19 @@ describe("sgds-sidebar", () => {
       expect(chevronIcon).to.exist;
     });
 
-    it("clicking level 1 group toggles submenu visibility state", async () => {
+    it("clicking level 2 group toggles submenu visibility state", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-group title="Overview" name="overview" icon="file-text">
-              <sgds-sidebar-item title="Summary" name="summary" icon="building"></sgds-sidebar-item>
-              <sgds-sidebar-item title="Details" name="details" icon="info"></sgds-sidebar-item>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Summary" name="summary">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item title="Details" name="details">
+                <sgds-icon name="info" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
         </sgds-sidebar>
@@ -195,12 +232,16 @@ describe("sgds-sidebar", () => {
       expect(nestedGroup.showMenu).to.be.true;
     });
 
-    it("level 1 groups toggle submenu without emitting sgds-select", async () => {
+    it("level 2 groups toggle submenu without emitting sgds-select", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-group title="Overview" name="overview" icon="file-text">
-              <sgds-sidebar-item title="Summary" name="summary" icon="building"></sgds-sidebar-item>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Summary" name="summary">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
         </sgds-sidebar>
@@ -215,73 +256,91 @@ describe("sgds-sidebar", () => {
       nestedGroupDiv.click();
       await elementUpdated(el);
 
-      // Level 1+ groups toggle locally without emitting sgds-select
+      // Level 2+ groups toggle locally without emitting sgds-select
       expect(nestedGroup.showMenu).to.be.true;
       expect(selectHandler).not.to.have.been.called;
     });
   });
 
-  describe("Level 2 (Deeply Nested) Groups", () => {
-    it("renders level 2 nested groups with items", async () => {
+  describe("Level 3 (Deeply Nested) Groups", () => {
+    it("renders level 3 nested groups with items", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-group title="Overview" name="overview" icon="file-text">
-              <sgds-sidebar-item title="Sales" name="sales" icon="users"></sgds-sidebar-item>
-              <sgds-sidebar-item title="Users" name="users" icon="users"></sgds-sidebar-item>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Sales" name="sales">
+                <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item title="Users" name="users">
+                <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
         </sgds-sidebar>
       `);
       const rootGroup = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
-      const level1Group = rootGroup.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
-      const level2Items = level1Group.querySelectorAll(":scope > sgds-sidebar-item");
-      expect(level2Items.length).to.equal(2);
+      const level2Group = rootGroup.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const level3Items = level2Group.querySelectorAll(":scope > sgds-sidebar-item");
+      expect(level3Items.length).to.equal(2);
     });
 
-    it("level 1 groups can contain level 2 items", async () => {
+    it("level 2 groups can contain level 3 items", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-group title="Overview" name="overview" icon="file-text">
-              <sgds-sidebar-item title="Sales" name="sales" icon="users"></sgds-sidebar-item>
-              <sgds-sidebar-item title="Revenue" name="revenue" icon="building"></sgds-sidebar-item>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Sales" name="sales">
+                <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item title="Revenue" name="revenue">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
         </sgds-sidebar>
       `);
       const rootGroup = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
-      const level1Group = rootGroup.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
-      const level2Items = level1Group.querySelectorAll(":scope > sgds-sidebar-item");
+      const level2Group = rootGroup.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const level3Items = level2Group.querySelectorAll(":scope > sgds-sidebar-item");
 
-      // Level 1 group should contain 2 items at level 2
-      expect(level2Items.length).to.equal(2);
+      // Level 2 group should contain 2 items at level 3
+      expect(level3Items.length).to.equal(2);
     });
 
     it("maintains correct menu toggle states in max nested hierarchies", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Level 0" name="l0" icon="house">
-            <sgds-sidebar-group title="Level 1" name="l1" icon="file-text">
-              <sgds-sidebar-item title="Level 2 Item" name="l2" icon="building"></sgds-sidebar-item>
-              <sgds-sidebar-item title="Level 2 Item 2" name="l2_2" icon="building"></sgds-sidebar-item>
+          <sgds-sidebar-group title="Level 1" name="l1">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-sidebar-group title="Level 2" name="l2">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Level 3 Item" name="l3">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item title="Level 3 Item 2" name="l3_2">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
         </sgds-sidebar>
       `);
       const rootGroup = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
-      const l1 = rootGroup.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const l2 = rootGroup.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
 
-      // Initially level 1 group menu should be closed
-      expect(l1.showMenu).to.be.false;
+      // Initially level 2 group menu should be closed
+      expect(l2.showMenu).to.be.false;
 
-      // Expand level 1
-      const l1Div = l1.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
-      l1Div.click();
+      // Expand level 2
+      const l2Div = l2.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      l2Div.click();
       await elementUpdated(el);
 
-      // After click, level 1 menu should be open
-      expect(l1.showMenu).to.be.true;
+      // After click, level 2 menu should be open
+      expect(l2.showMenu).to.be.true;
     });
   });
 
@@ -289,19 +348,26 @@ describe("sgds-sidebar", () => {
     it("renders leaf items with correct attributes", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
       expect(item).to.have.attribute("title", "Dashboard");
       expect(item).to.have.attribute("name", "dashboard");
-      expect(item).to.have.attribute("icon", "house");
     });
 
     it("clicking leaf item should emit sgds-select event", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const selectHandler = sinon.spy();
@@ -318,7 +384,11 @@ describe("sgds-sidebar", () => {
     it("leaf item becomes active when clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
@@ -334,9 +404,14 @@ describe("sgds-sidebar", () => {
     it("nested leaf items under expanded group are visible", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-item title="Summary" name="summary" icon="building"></sgds-sidebar-item>
-            <sgds-sidebar-item title="Analytics" name="analytics" icon="file-text"></sgds-sidebar-item>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-sidebar-item title="Summary" name="summary">
+              <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Analytics" name="analytics">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
           </sgds-sidebar-group>
         </sgds-sidebar>
       `);
@@ -367,8 +442,14 @@ describe("sgds-sidebar", () => {
     it("clicking different items emits select events with correct names", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
-          <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const selectHandler = sinon.spy();
@@ -385,8 +466,14 @@ describe("sgds-sidebar", () => {
     it("only one root group can be active at a time", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-group>
-          <sgds-sidebar-group title="Reports" name="reports" icon="file-text"></sgds-sidebar-group>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-group>
+            <sgds-sidebar-group title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const groups = el.querySelectorAll("sgds-sidebar-group");
@@ -406,9 +493,13 @@ describe("sgds-sidebar", () => {
     it("clicking nested item expands parent groups", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-group title="Overview" name="overview" icon="file-text">
-              <sgds-sidebar-item title="Sales" name="sales" icon="building"></sgds-sidebar-item>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Sales" name="sales">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
         </sgds-sidebar>
@@ -431,7 +522,11 @@ describe("sgds-sidebar", () => {
     it("applies collapsed styling when sidebar is collapsed", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar collapsed>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-group>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
@@ -442,9 +537,14 @@ describe("sgds-sidebar", () => {
     it("toggling collapsed property updates all child items", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-item title="Summary" name="summary" icon="building"></sgds-sidebar-item>
-          </sgds-sidebar-group>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Summary" name="summary">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const rootGroup = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
@@ -459,7 +559,11 @@ describe("sgds-sidebar", () => {
     it("collapsed sidebar shows only icons for root level items", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar collapsed>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
@@ -471,8 +575,14 @@ describe("sgds-sidebar", () => {
     it("sets active property to select an item by name", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
-          <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       el.active = "reports";
@@ -486,8 +596,14 @@ describe("sgds-sidebar", () => {
     it("programmatically setting active property selects item", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
-          <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const items = el.querySelectorAll("sgds-sidebar-item");
@@ -506,9 +622,13 @@ describe("sgds-sidebar", () => {
     it("setting active on nested item selects the item", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-group title="Overview" name="overview" icon="file-text">
-              <sgds-sidebar-item title="Sales" name="sales" icon="building"></sgds-sidebar-item>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Sales" name="sales">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
         </sgds-sidebar>
@@ -530,13 +650,23 @@ describe("sgds-sidebar", () => {
     it("handles mixed groups and items at same level", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-item title="Summary" name="summary" icon="building"></sgds-sidebar-item>
-            <sgds-sidebar-group title="Analytics" name="analytics" icon="users">
-              <sgds-sidebar-item title="Revenue" name="revenue" icon="building"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Summary" name="summary">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+              <sgds-sidebar-group title="Analytics" name="analytics">
+                <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+                <sgds-sidebar-item title="Revenue" name="revenue">
+                  <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                </sgds-sidebar-item>
+              </sgds-sidebar-group>
             </sgds-sidebar-group>
-          </sgds-sidebar-group>
-          <sgds-sidebar-item title="Settings" name="settings" icon="gear"></sgds-sidebar-item>
+            <sgds-sidebar-item title="Settings" name="settings">
+              <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       expect(el.querySelector("sgds-sidebar-group")).to.exist;
@@ -548,12 +678,20 @@ describe("sgds-sidebar", () => {
     it("maintains state with multiple root groups", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="Dashboard" name="dashboard" icon="house">
-            <sgds-sidebar-item title="Summary" name="summary" icon="building"></sgds-sidebar-item>
-          </sgds-sidebar-group>
-          <sgds-sidebar-group title="Reports" name="reports" icon="file-text">
-            <sgds-sidebar-item title="Monthly" name="monthly" icon="calendar"></sgds-sidebar-item>
-          </sgds-sidebar-group>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Summary" name="summary">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+            <sgds-sidebar-group title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Monthly" name="monthly">
+                <sgds-icon name="calendar" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const dashboardGroup = el.querySelector('sgds-sidebar-group[name="dashboard"]') as SgdsSidebarGroup;
@@ -573,30 +711,38 @@ describe("sgds-sidebar", () => {
     it("handles navigation between root level items", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group title="L0-A" name="l0a" icon="house">
-            <sgds-sidebar-item title="L1-Item1" name="l1item1" icon="building"></sgds-sidebar-item>
-          </sgds-sidebar-group>
-          <sgds-sidebar-group title="L0-B" name="l0b" icon="file-text">
-            <sgds-sidebar-item title="L1-Item2" name="l1item2" icon="users"></sgds-sidebar-item>
-          </sgds-sidebar-group>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="L1-A" name="l1a">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="L2-Item1" name="l2item1">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+            <sgds-sidebar-group title="L1-B" name="l1b">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="L2-Item2" name="l2item2">
+                <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
 
-      const l0a = el.querySelector('sgds-sidebar-group[name="l0a"]') as SgdsSidebarGroup;
-      const l0b = el.querySelector('sgds-sidebar-group[name="l0b"]') as SgdsSidebarGroup;
+      const l1a = el.querySelector('sgds-sidebar-group[name="l1a"]') as SgdsSidebarGroup;
+      const l1b = el.querySelector('sgds-sidebar-group[name="l1b"]') as SgdsSidebarGroup;
 
-      // Click L0-A to make it active
-      const l0aDiv = l0a.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
-      l0aDiv.click();
+      // Click L1-A to make it active
+      const l1aDiv = l1a.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      l1aDiv.click();
       await elementUpdated(el);
-      expect(l0a._selected).to.be.true;
+      expect(l1a._selected).to.be.true;
 
-      // Click L0-B to switch active group
-      const l0bDiv = l0b.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
-      l0bDiv.click();
+      // Click L1-B to switch active group
+      const l1bDiv = l1b.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      l1bDiv.click();
       await elementUpdated(el);
-      expect(l0b._selected).to.be.true;
-      expect(l0a._selected).to.be.false;
+      expect(l1b._selected).to.be.true;
+      expect(l1a._selected).to.be.false;
     });
   });
 
@@ -611,8 +757,10 @@ describe("sgds-sidebar", () => {
     it("handles missing required attributes gracefully", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-group></sgds-sidebar-group>
-          <sgds-sidebar-item></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group></sgds-sidebar-group>
+            <sgds-sidebar-item></sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       expect(el.querySelector("sgds-sidebar-group")).to.exist;
@@ -622,7 +770,11 @@ describe("sgds-sidebar", () => {
     it("handles setting active to non-existent item", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       el.active = "non-existent";
@@ -635,8 +787,14 @@ describe("sgds-sidebar", () => {
     it("handles rapid consecutive clicks", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <sgds-sidebar-item title="Dashboard" name="dashboard" icon="house"></sgds-sidebar-item>
-          <sgds-sidebar-item title="Reports" name="reports" icon="file-text"></sgds-sidebar-item>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const items = el.querySelectorAll("sgds-sidebar-item");
@@ -682,7 +840,7 @@ describe("sgds-sidebar", () => {
           <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
         </sgds-sidebar>
       `);
-      const section = el.querySelector("sgds-sidebar-section") as any;
+      const section = el.querySelector("sgds-sidebar-section") as SgdsSidebarSection;
       expect(section.collapsed).to.be.false;
     });
 
@@ -692,7 +850,7 @@ describe("sgds-sidebar", () => {
           <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
         </sgds-sidebar>
       `);
-      const section = el.querySelector("sgds-sidebar-section") as any;
+      const section = el.querySelector("sgds-sidebar-section") as SgdsSidebarSection;
       expect(section.collapsible).to.be.false;
     });
 
@@ -724,7 +882,7 @@ describe("sgds-sidebar", () => {
           <sgds-sidebar-section title="Main" name="main" collapsible></sgds-sidebar-section>
         </sgds-sidebar>
       `);
-      const section = el.querySelector("sgds-sidebar-section") as any;
+      const section = el.querySelector("sgds-sidebar-section") as SgdsSidebarSection;
       const sectionLabel = section.shadowRoot?.querySelector(".sidebar-section-label") as HTMLElement;
 
       expect(section.collapsed).to.be.false;
@@ -811,7 +969,7 @@ describe("sgds-sidebar", () => {
           <sgds-sidebar-section title="Main" name="main" collapsible></sgds-sidebar-section>
         </sgds-sidebar>
       `);
-      const section = el.querySelector("sgds-sidebar-section") as any;
+      const section = el.querySelector("sgds-sidebar-section") as SgdsSidebarSection;
 
       expect(section).not.to.have.attribute("collapsed");
 

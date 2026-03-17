@@ -1,30 +1,36 @@
-## Level 0 only
+## Level 1 only
 
-SidebarItem is used as a standalone top-level navigation item. Level 0 items are shown directly in the sidebar and do not have nested children. They can be terminal leaf nodes in your navigation structure.
+SidebarItem is used as a standalone top-level navigation item. Level 1 items are shown directly in the sidebar and do not have nested children. They can be terminal leaf nodes in your navigation structure.
 
-<Canvas of={SidebarStories.Level0Only}>
-  <Story of={SidebarStories.Level0Only} />
+**Requirement:** Level 1 items must have a leading icon in the `leadingIcon` slot. Trailing icon is optional.
+
+<Canvas of={SidebarStories.Level1Only}>
+  <Story of={SidebarStories.Level1Only} />
 </Canvas>
 
-## With nested items (Level 1)
+## With nested items (Level 2)
 
-SidebarGroup is used for parent navigation items that contain nested children. Level 1 groups display their items in a drawer overlay when the parent group is clicked, allowing for expandable menu hierarchies.
+SidebarGroup is used for parent navigation items that contain nested children. Level 2 groups display their items in a drawer overlay when the parent group is clicked, allowing for expandable menu hierarchies.
 
-<Canvas of={SidebarStories.Level0Level1}>
-  <Story of={SidebarStories.Level0Level1} />
+**Requirement:** Level 1 and 2 items/groups must have leading icons in the `leadingIcon` slot. Trailing icon is optional for all levels.
+
+<Canvas of={SidebarStories.Level1Level2}>
+  <Story of={SidebarStories.Level1Level2} />
 </Canvas>
 
-## Double nested structure (Level 2)
+## Double nested structure (Level 3)
 
-SidebarGroup supports up to two levels of nesting, creating three-level navigation hierarchies. Nested groups show their items in a drawer when Level 0 groups open, making complex navigation structures manageable.
+SidebarGroup supports up to two levels of nesting, creating three-level navigation hierarchies. Nested groups show their items in a drawer when Level 1 groups open, making complex navigation structures manageable.
 
-<Canvas of={SidebarStories.Level0Level1Level2}>
-  <Story of={SidebarStories.Level0Level1Level2} />
+**Requirement:** For Level 3, leading icon is optional. Trailing icon is optional for all levels.
+
+<Canvas of={SidebarStories.Level1Level2Level3}>
+  <Story of={SidebarStories.Level1Level2Level3} />
 </Canvas>
 
 ## Collapsed state
 
-The sidebar can be collapsed by setting the `collapsed` property to `true`. When collapsed, only icons are visible for Level 0 options. Nested options are still accessible via the drawer overlay.
+The sidebar can be collapsed by setting the `collapsed` property to `true`. When collapsed, only icons are visible for Level 1 options. Nested options are still accessible via the drawer overlay.
 
 <Canvas of={SidebarStories.CollapsedState}>
   <Story of={SidebarStories.CollapsedState} />

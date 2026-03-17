@@ -84,6 +84,10 @@
   left: var(--sgds-dimension-72);
 }
 
+.sidebar-nested-overlay sgds-icon-button {
+  display: none;
+}
+
 /* Scrollbar styling for better UX */
 .sidebar::-webkit-scrollbar {
   width: var(--sgds-dimension-2);
@@ -102,7 +106,26 @@
   background: var(--sgds-color-subtle);
 }
 
-@media only screen and (max-width: 511px) {
+@media screen and (max-width: 767px) {
+  .sidebar-nested-overlay sgds-icon-button {
+    display: block;
+  }
+
+  .sidebar--expanded {
+    width: var(--sgds-dimension-256);
+  }
+
+  .sidebar-nested-overlay {
+    width: var(--sgds-dimension-256);
+    left: var(--sgds-dimension-256);
+  }
+
+  .sidebar-nested-overlay.show {
+    left: var(--sgds-dimension-256);
+  }
+}
+
+@media screen and (max-width: 511px) {
   .sidebar--expanded {
     width: 100dvw;
     position: absolute;
@@ -120,20 +143,5 @@
 
   .sidebar--collapsed .sidebar-nested-overlay.show {
     left: 0;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .sidebar--expanded {
-    width: var(--sgds-dimension-256);
-  }
-
-  .sidebar-nested-overlay {
-    width: var(--sgds-dimension-256);
-    left: var(--sgds-dimension-256);
-  }
-
-  .sidebar-nested-overlay.show {
-    left: var(--sgds-dimension-256);
   }
 }
