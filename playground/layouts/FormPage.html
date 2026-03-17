@@ -1,10 +1,10 @@
-import { html } from "lit";
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
 
-export default {
-  title: "Templates/Form page"
-};
-
-const Template = () => html`
+<body>
   <div>
     <sgds-masthead fluid></sgds-masthead>
     <sgds-mainnav fluid>
@@ -32,7 +32,7 @@ const Template = () => html`
       <form id="profile-form">
         <!-- Section 1: Personal information -->
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
-          <div class="sgds-grid sgds:gap-layout-sm">
+          <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
               <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default">Personal information</h2>
               <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1">
@@ -78,9 +78,9 @@ const Template = () => html`
 
         <!-- Section 2: Role & access -->
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
-          <div class="sgds-grid sgds:gap-layout-sm">
+          <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-              <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default">Role & access</h2>
+              <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default">Role &amp; access</h2>
               <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1">
                 Your position and assigned permissions within the system.
               </p>
@@ -105,7 +105,7 @@ const Template = () => html`
 
         <!-- Section 3: Notes -->
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
-          <div class="sgds-grid sgds:gap-layout-sm">
+          <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
               <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default">Notes</h2>
               <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1">
@@ -134,12 +134,4 @@ const Template = () => html`
       </form>
     </div>
   </div>
-`;
-
-export const FormPageTemplate = {
-  render: Template.bind({}),
-  name: "Form page",
-  args: {},
-  parameters: { layout: "fullscreen" },
-  tags: ["!autodocs"]
-};
+</body>
