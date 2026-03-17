@@ -7,7 +7,7 @@
 
 .sidebar-item.active,
 .sidebar-item:hover {
-  background-color: var(--sgds-surface-raised);
+  background-color: var(--sgds-bg-translucent-subtle);
 }
 
 .sidebar-item:focus,

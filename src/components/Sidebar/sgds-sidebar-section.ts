@@ -1,10 +1,12 @@
 import { html, nothing } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarSectionStyle from "./sidebar-section.css";
 
 import { SidebarElement } from "../../base/sidebar-element";
+import SgdsIcon from "../Icon/sgds-icon";
+import SgdsDivider from "../Divider/sgds-divider";
 
 /**
  * @summary Sidebar section is a container component that groups related sidebar items into organized sections.
@@ -15,6 +17,12 @@ import { SidebarElement } from "../../base/sidebar-element";
  */
 export class SgdsSidebarSection extends SidebarElement {
   static styles = [...SgdsElement.styles, sidebarSectionStyle];
+
+  /** @internal */
+  static dependencies = {
+    "sgds-icon": SgdsIcon,
+    "sgds-divider": SgdsDivider
+  };
 
   /**
    * The display title/label for the sidebar section header.
@@ -44,19 +52,11 @@ export class SgdsSidebarSection extends SidebarElement {
    * @default false
    */
   @property({ type: Boolean, reflect: true }) collapsible = false;
-
-  /**
-   * Tracks whether this section is the last child of its parent.
-   * Used to remove bottom border from the last section.
-   * @type {boolean}
-   * @internal
-   */
-  @state() private _isLastChild = false;
+  @property({ type: Boolean, reflect: true }) seperator = false;
 
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "region");
-    this._isLastChild = this.parentElement?.lastElementChild === this;
     this._childLevel = null;
   }
 
@@ -76,33 +76,37 @@ export class SgdsSidebarSection extends SidebarElement {
       <div
         class=${classMap({
           "sidebar-section": true,
-          "no-border": this._isLastChild,
           "sidebar-section--collapsed": this._sidebarCollapsed
         })}
       >
-        <div
-          class="sidebar-section-label"
-          @click=${this._handleClick}
-          aria-expanded=${!this.collapsed}
-          aria-disabled=${!this.collapsible}
-          tabindex="0"
-        >
-          <span>${this.title}</span>
-          ${this.collapsible
-            ? html`<sgds-icon name=${this.collapsed ? "chevron-down" : "chevron-up"} size="sm"></sgds-icon>`
-            : nothing}
-        </div>
+        ${this.title !== ""
+          ? html`<div
+              class="sidebar-section-label"
+              @click=${this._handleClick}
+              aria-expanded=${!this.collapsed}
+              aria-disabled=${!this.collapsible}
+              tabindex="0"
+            >
+              <span>${this.title}</span>
+              ${this.collapsible
+                ? html`<sgds-icon name=${this.collapsed ? "chevron-down" : "chevron-up"} size="sm"></sgds-icon>`
+                : nothing}
+            </div>`
+          : nothing}
 
         <div
           class=${classMap({
             "sidebar-section-content": true,
-            "sidebar-section-content--collapsed": this.collapsed && this.collapsible
+            "sidebar-section-content--collapsed": this.collapsed && this.collapsible,
+            "sidebar-section-seperator": this.seperator
           })}
         >
           <div>
             <slot @slotchange=${this._handleSlotChange}></slot>
           </div>
         </div>
+
+        ${this.seperator ? html`<sgds-divider></sgds-divider>` : nothing}
       </div>
     `;
   }

@@ -17,7 +17,7 @@ const Template = () => {
       <div class="sgds:sticky sgds:h-[calc(100vh-108px)] sgds:top-27 sgds:shrink-0">
         <div id="sidebar-component" class="sgds:w-full sgds:h-full">
           <sgds-sidebar active="team-management">
-            <div slot="brandName">SGDS Sidebar</div>
+            <div slot="top">SGDS Sidebar</div>
             <!-- Main Navigation Section -->
             <sgds-sidebar-section title="Main" name="main" collapsible>
               <sgds-sidebar-group title="Dashboard" name="dashboard">

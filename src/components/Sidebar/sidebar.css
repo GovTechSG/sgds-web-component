@@ -15,38 +15,46 @@
   width: var(--sgds-dimension-72);
 }
 
-.sidebar-header {
+.sidebar-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--sgds-padding-xs);
-}
-
-.sidebar .sidebar-brand-name {
-  padding-left: var(--sgds-padding-xs);
+  gap: var(--sgds-gap-md);
+  padding: 0 var(--sgds-padding-xs);
 }
 
 .sidebar--collapsed .sidebar-brand-name {
   display: none;
 }
 
-.sidebar--collapsed .sidebar-header {
+.sidebar--collapsed .sidebar-top {
   justify-content: center;
 }
-.sidebar-wrapper {
+
+.sidebar-main {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   height: 100%;
+  padding: var(--sgds-padding-lg) 0;
   background-color: var(--sgds-bg-default);
   border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   overflow-x: hidden;
   overflow-y: auto;
 }
 
+.sidebar-wrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .sidebar-content {
   flex: 1;
   overflow-y: auto;
-  padding: 0 var(--sgds-padding-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-gap-md);
 }
 
 .sidebar-nested-overlay {
@@ -54,7 +62,7 @@
   position: absolute;
   width: var(--sgds-dimension-288);
   padding: var(--sgds-padding-md) var(--sgds-padding-xs);
-  background-color: var(--sgds-bg-default);
+  background-color: var(--sgds-surface-raised);
   opacity: 0;
   top: 0;
   left: 0;
@@ -92,4 +100,40 @@
 
 .sidebar::-webkit-scrollbar-thumb:hover {
   background: var(--sgds-color-subtle);
+}
+
+@media only screen and (max-width: 511px) {
+  .sidebar--expanded {
+    width: 100dvw;
+    position: absolute;
+  }
+
+  .sidebar-nested-overlay {
+    width: 100dvw;
+    z-index: 2;
+    left: -100dvw;
+  }
+
+  .sidebar-nested-overlay.show {
+    left: 0;
+  }
+
+  .sidebar--collapsed .sidebar-nested-overlay.show {
+    left: 0;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .sidebar--expanded {
+    width: var(--sgds-dimension-256);
+  }
+
+  .sidebar-nested-overlay {
+    width: var(--sgds-dimension-256);
+    left: var(--sgds-dimension-256);
+  }
+
+  .sidebar-nested-overlay.show {
+    left: var(--sgds-dimension-256);
+  }
 }
