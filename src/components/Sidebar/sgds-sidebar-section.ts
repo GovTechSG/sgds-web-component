@@ -4,7 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarSectionStyle from "./sidebar-section.css";
 
-import { SidebarElement } from "../../base/sidebar-element";
+import { SidebarElement } from "./sidebar-element";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsDivider from "../Divider/sgds-divider";
 

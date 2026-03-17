@@ -5,7 +5,7 @@ import SgdsElement from "../../base/sgds-element";
 import sidebarOptionStyle from "./sidebar-item.css";
 import SgdsIcon from "../Icon/sgds-icon";
 
-import { SidebarElement } from "../../base/sidebar-element";
+import { SidebarElement } from "./sidebar-element";
 
 /**
  * @summary Sidebar group represents a navigable parent item within the sidebar that can have nested children.
@@ -13,8 +13,8 @@ import { SidebarElement } from "../../base/sidebar-element";
  * Groups can be used to organize related sidebar items into expanding/collapsing sections.
  *
  * Behavior varies by nesting level:
- * - Level 0 (root): Clicking opens drawer overlay showing all nested children. Keyboard: ArrowRight opens drawer.
- * - Level 1+ (nested): Clicking toggles submenu visibility. Keyboard: ArrowRight toggles submenu.
+ * - Level 1 (root): Clicking opens drawer overlay showing all nested children. Keyboard: ArrowRight opens drawer.
+ * - Level 2+ (nested): Clicking toggles submenu visibility. Keyboard: ArrowRight toggles submenu.
  *
  * @slot default - Insert sgds-sidebar-group or sgds-sidebar-item elements as nested children
  * @slot trailingIcon - Icon to display after the label text. A chevron is auto-appended.
@@ -32,7 +32,7 @@ export class SgdsSidebarGroup extends SidebarElement {
    * Manages submenu visibility state for nested groups.
    * When true, the submenu is displayed showing nested children.
    * When false, the submenu is hidden.
-   * Only used for nested groups (level 1+). Root-level groups use drawer overlay instead.
+   * Only used for nested groups (level 2+). Root-level groups use drawer overlay instead.
    * @internal
    */
   @state() _showMenu = false;
@@ -40,7 +40,7 @@ export class SgdsSidebarGroup extends SidebarElement {
   /**
    * Reports the visibility state of the submenu for nested groups.
    * Returns true when the submenu is displayed showing child items, false when hidden.
-   * Only applicable for nested groups (level 1+). Root-level groups use drawer overlay instead.
+   * Only applicable for nested groups (level 2+). Root-level groups use drawer overlay instead.
    * @readonly
    * @type {boolean}
    */
@@ -49,8 +49,8 @@ export class SgdsSidebarGroup extends SidebarElement {
   }
 
   /** @internal */
-  _handleClick(): void {
-    if (this._childLevel !== 0) {
+  protected override _handleClick(): void {
+    if (this._childLevel !== 1) {
       this._showMenu = !this._showMenu;
       this._childElements.forEach(v => {
         v._hidden = !this._showMenu;
@@ -62,13 +62,13 @@ export class SgdsSidebarGroup extends SidebarElement {
   /**
    * Determines the appropriate chevron icon based on nesting level and menu visibility.
    * Icon changes provide visual feedback on expandable/collapsible state:
-   * - Level 0: chevron-right (closed drawer) or chevron-right (no change - drawer controlled by parent)
-   * - Level 1+: chevron-down (submenu open) or chevron-up (submenu closed)
+   * - Level 1: chevron-right (closed drawer) or chevron-right (no change - drawer controlled by parent)
+   * - Level 2+: chevron-down (submenu open) or chevron-up (submenu closed)
    * @private
    * @returns {string} The icon name to display (e.g., 'chevron-right', 'chevron-down')
    */
-  private getIcon() {
-    if (this._childLevel === 0) {
+  private _getIcon() {
+    if (this._childLevel === 1) {
       return "chevron-right";
     } else {
       return this._showMenu ? "chevron-down" : "chevron-up";
@@ -80,14 +80,13 @@ export class SgdsSidebarGroup extends SidebarElement {
       <div
         class=${classMap({
           "sidebar-item": true,
-          "sidebar-item--collapsed": this._sidebarCollapsed && this._childLevel === 0,
+          "sidebar-item--collapsed": this._sidebarCollapsed && this._childLevel === 1,
           active: this._selected
         })}
         @click=${() => this._handleClick()}
         aria-level=${this._childLevel}
         .aria-expanded=${this._showMenu}
-        aria-label=${this.title || this.name}
-        tabindex=${this._childLevel > 1 && !this._showMenu ? -1 : 0}
+        tabindex=${this._childLevel > 2 && !this._showMenu ? -1 : 0}
       >
         <div class="sidebar-item-label-wrapper">
           <div>
@@ -97,7 +96,7 @@ export class SgdsSidebarGroup extends SidebarElement {
 
           <span class="sidebar-item-trailingIcon">
             <slot name="trailingIcon"></slot>
-            <sgds-icon name=${this.getIcon()} size="sm"></sgds-icon>
+            <sgds-icon aria-label=${this.title || this.name} name=${this._getIcon()} size="sm"></sgds-icon>
           </span>
         </div>
       </div>
@@ -105,7 +104,7 @@ export class SgdsSidebarGroup extends SidebarElement {
       <div
         class=${classMap({
           "sidebar-submenu": true,
-          "sidebar-submenu--collapsed": this._sidebarCollapsed && this._childLevel == 0,
+          "sidebar-submenu--collapsed": this._sidebarCollapsed && this._childLevel == 1,
           show: this._showMenu
         })}
       >

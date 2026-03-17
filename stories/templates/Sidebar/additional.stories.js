@@ -1,10 +1,11 @@
 import { html } from "lit";
 
-const Level0OnlyTemplate = args => html`
+const Level1OnlyTemplate = args => html`
   <sgds-sidebar>
     <sgds-sidebar-section>
       <sgds-sidebar-item title="Dashboard" name="dashboard">
         <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+        <sgds-icon name="placeholder" slot="trailingIcon"></sgds-icon>
       </sgds-sidebar-item>
       <sgds-sidebar-item title="Analytics" name="analytics">
         <sgds-icon name="speedometer" slot="leadingIcon"></sgds-icon>
@@ -19,7 +20,7 @@ const Level0OnlyTemplate = args => html`
   </sgds-sidebar>
 `;
 
-const Level0Level1Template = args => html`
+const Level1Level2Template = args => html`
   <sgds-sidebar>
     <sgds-sidebar-section>
       <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -48,7 +49,7 @@ const Level0Level1Template = args => html`
   </sgds-sidebar>
 `;
 
-const Level0Level1Level2Template = args => html`
+const Level1Level2Level3Template = args => html`
   <sgds-sidebar>
     <sgds-sidebar-section>
       <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -175,9 +176,9 @@ const LinkNavigationTemplate = args => html`
   </sgds-sidebar>
 `;
 
-export const Level0Only = {
-  render: Level0OnlyTemplate.bind({}),
-  name: "Level 0 - Top level items only",
+export const Level1Only = {
+  render: Level1OnlyTemplate.bind({}),
+  name: "Level 1 - Top level items only",
   args: {},
   parameters: {
     layout: "fullscreen"
@@ -185,9 +186,9 @@ export const Level0Only = {
   tags: ["!dev"]
 };
 
-export const Level0Level1 = {
-  render: Level0Level1Template.bind({}),
-  name: "Level 0 to Level 1 - With nested groups",
+export const Level1Level2 = {
+  render: Level1Level2Template.bind({}),
+  name: "Level 1 to Level 2 - With nested groups",
   args: {},
   parameters: {
     layout: "fullscreen"
@@ -195,9 +196,9 @@ export const Level0Level1 = {
   tags: ["!dev"]
 };
 
-export const Level0Level1Level2 = {
-  render: Level0Level1Level2Template.bind({}),
-  name: "Level 0 to Level 2 - Double nested structure",
+export const Level1Level2Level3 = {
+  render: Level1Level2Level3Template.bind({}),
+  name: "Level 1 to Level 3 - Double nested structure",
   args: {},
   parameters: {
     layout: "fullscreen"
