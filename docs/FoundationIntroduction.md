@@ -8,15 +8,15 @@ However, do note that the CSS styles the light dom and may causes clash of style
 
 Foundation aspects of SGDS includes:
 
-- typography,
+- [typography](?path=/docs/foundation-typography-introduction--docs)
 - body `<body>`
-- paragraphs `<p>`
-- labels `<label>`
-- anchor `<a>`
-- captions `<caption>`
-- headers `<h1>, <h2>, <h3>, <h4>, <h5>, <h6>`
-- list `<ol>, <ul>, <li>`
-- [grid system](?path=/docs/style-grid-system--docs)
+- [paragraphs `<p>`](?path=/docs/foundation-typography-paragraph-body--docs)
+- [labels `<label>`](?path=/docs/foundation-typography-labels--docs)
+- [anchor `<a>`](?path=/docs/foundation-typography-links--docs)
+- [captions `<caption>`](?path=/docs/foundation-typography-captions--docs)
+- [headers `<h1>, <h2>, <h3>, <h4>, <h5>, <h6>`](?path=/docs/foundation-typography-headings--docs)
+- [list `<ol>, <ul>, <li>`](?path=/docs/foundation-typography-lists--docs)
+- [grid system](?path=/docs/foundation-grid-system--docs)
 
 ## Font Import
 
@@ -40,43 +40,12 @@ Add this in the `<head>` section of your HTML document before importing SGDS sty
 The CSS styles are dependent on the css variable tokens. Import the `themes/day.css` file first before importing the css files. If you required night mode, import `themes/night.css` as well.
 The colors assigned to elements and class selectors will switch depending on day or night mode.
 
-<strong>JS imports</strong>
-
-```js
-import "@govtechsg/sgds-web-component/themes/day.css";
-//optional: if you are doing night mode
-import "@govtechsg/sgds-web-component/themes/night.css";
-import "@govtechsg/sgds-web-component/css/sgds.css";
-```
-
 <strong>CSS imports</strong>
 
 ```css
 @import "@govtechsg/sgds-web-component/themes/day.css";
-/** optional: if you are doing night mode */
+/* optional: if you are doing night mode */
 @import "@govtechsg/sgds-web-component/themes/night.css";
+/* import foundational styles and grid system */
 @import "@govtechsg/sgds-web-component/css/sgds.css";
 ```
-
-<!-- ### Cherry pick the styles
-
-`css/sgds.css` contains all the stylings found in the folder `css`. You can also choose to cherry pick the styles you required. For example, `label.css`
-
-<strong>JS imports</strong>
-
-```js
-import "@govtechsg/sgds-web-component/themes/day.css"
-//optional: if you are doing night mode
-import "@govtechsg/sgds-web-component/themes/night.css"
-import "@govtechsg/sgds-web-component/css/label.css" -->
-
-<!-- ```
-
-<strong>CSS imports</strong>
-
-```css
-@import "@govtechsg/sgds-web-component/themes/day.css";
-/** optional: if you are doing night mode */
-@import "@govtechsg/sgds-web-component/themes/night.css";
-@import "@govtechsg/sgds-web-component/css/label.css";
-``` -->
