@@ -80,7 +80,15 @@
   top: 0;
   bottom: 0;
   left: 0;
+  opacity: 0;
+  pointer-events: none;
   background-color: var(--sgds-bg-overlay);
+  transition: all var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
+}
+
+.sidebar--overlay.show {
+  pointer-events: unset;
+  opacity: 1;
 }
 
 .sidebar-nested-overlay.show {

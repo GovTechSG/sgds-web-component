@@ -384,7 +384,12 @@ export class SgdsSidebar extends SgdsElement {
           "sidebar--collapsed": this._sidebarCollapsed
         })}
       >
-        <div class=${classMap({ "sidebar--overlay": this._showDrawer })}></div>
+        <div
+          class=${classMap({
+            "sidebar--overlay": true,
+            show: this._showDrawer
+          })}
+        ></div>
 
         <div class="sidebar-main">
           <div class="sidebar-wrapper">
