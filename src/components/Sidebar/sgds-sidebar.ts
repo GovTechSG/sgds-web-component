@@ -369,7 +369,8 @@ export class SgdsSidebar extends SgdsElement {
   private _handleClickOutOfElement = (e: MouseEvent) => {
     if (!this._sidebarActiveGroup) return;
 
-    if (!e.composedPath().includes(this)) {
+    const overlay = e.composedPath().find(e => (e as HTMLElement)?.classList?.contains("sidebar--overlay"));
+    if (overlay || !e.composedPath().includes(this)) {
       this._showDrawer = false;
     }
   };
@@ -383,6 +384,13 @@ export class SgdsSidebar extends SgdsElement {
           "sidebar--collapsed": this._sidebarCollapsed
         })}
       >
+        <div
+          class=${classMap({
+            "sidebar--overlay": true,
+            show: this._showDrawer
+          })}
+        ></div>
+
         <div class="sidebar-main">
           <div class="sidebar-wrapper">
             <div class="sidebar-top">

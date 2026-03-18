@@ -96,5 +96,4 @@ export const parameters = {
   layout: "fullscreen"
 };
 
-
 export const play = undefined;
