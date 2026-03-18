@@ -407,6 +407,13 @@
   /* Container Width */
   --width-container: var(--sgds-container-width);
 
+  /* Container Max Width */
+  --max-width-container-md: var(--sgds-container-max-width-md);
+  --max-width-container-lg: var(--sgds-container-max-width-lg);
+  --max-width-container-xl: var(--sgds-container-max-width-xl);
+  --max-width-container-2-xl: var(--sgds-container-max-width-2-xl);
+  --max-width-container-3-xl: var(--sgds-container-max-width-3-xl);
+
   /* Border Radius */
   --radius-none: var(--sgds-border-radius-none);
   --radius-xs: var(--sgds-border-radius-xs);
