@@ -313,6 +313,11 @@
     --sgds-padding-component-lg: var(--sgds-component-padding-lg);
     --sgds-padding-component-xl: var(--sgds-component-padding-xl);
     --sgds-width-container: var(--sgds-container-width);
+    --sgds-max-width-container-md: var(--sgds-container-max-width-md);
+    --sgds-max-width-container-lg: var(--sgds-container-max-width-lg);
+    --sgds-max-width-container-xl: var(--sgds-container-max-width-xl);
+    --sgds-max-width-container-2-xl: var(--sgds-container-max-width-2-xl);
+    --sgds-max-width-container-3-xl: var(--sgds-container-max-width-3-xl);
     --sgds-radius-none: var(--sgds-border-radius-none);
     --sgds-radius-xs: var(--sgds-border-radius-xs);
     --sgds-radius-sm: var(--sgds-border-radius-sm);
@@ -460,9 +465,6 @@
   }
   .sgds\:mt-2 {
     margin-top: calc(var(--sgds-spacing) * 2);
-  }
-  .sgds\:mt-2-xl {
-    margin-top: var(--sgds-spacing-2-xl);
   }
   .sgds\:mt-3 {
     margin-top: calc(var(--sgds-spacing) * 3);
@@ -616,6 +618,21 @@
   }
   .sgds\:w-full {
     width: 100%;
+  }
+  .sgds\:max-w-container-2-xl {
+    max-width: var(--sgds-max-width-container-2-xl);
+  }
+  .sgds\:max-w-container-3-xl {
+    max-width: var(--sgds-max-width-container-3-xl);
+  }
+  .sgds\:max-w-container-lg {
+    max-width: var(--sgds-max-width-container-lg);
+  }
+  .sgds\:max-w-container-md {
+    max-width: var(--sgds-max-width-container-md);
+  }
+  .sgds\:max-w-container-xl {
+    max-width: var(--sgds-max-width-container-xl);
   }
   .sgds\:max-w-lg {
     max-width: var(--sgds-spacing-lg);
