@@ -22,3 +22,5 @@ export const args = {
 };
 
 export const parameters = {};
+
+export const play = undefined;

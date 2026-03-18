@@ -11,7 +11,7 @@
   font-size: var(--sgds-font-size-14);
 }
 
-:host([menuisopen]) .dropdown-menu {
+:host([menuisopen]:not([disabled]):not([readonly])) .dropdown-menu {
   background-color: var(--sgds-form-surface-default);
   padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
   display: flex;
