@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { allModes } from "../../../.storybook/modes";
+import { userEvent } from "@storybook/test";
 
 export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen, close, target, fluid }) => {
   return html`
@@ -47,4 +48,10 @@ export const parameters = {
       desktop: allModes["lg"]
     }
   }
+};
+
+export const play = async ({ canvasElement }) => {
+  const dropdown = canvasElement.querySelector("sgds-mainnav-dropdown");
+  const trigger = dropdown.shadowRoot.querySelector(".nav-link");
+  await userEvent.click(trigger);
 };

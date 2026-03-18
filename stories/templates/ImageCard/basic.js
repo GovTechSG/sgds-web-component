@@ -47,3 +47,5 @@ export const Template = args =>
 export const args = { orientation: "vertical", imagePosition: "before", imageAdjustment: "default" };
 
 export const parameters = {};
+
+export const play = undefined;

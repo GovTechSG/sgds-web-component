@@ -31,3 +31,5 @@ export const args = {
 export const parameters = {
   layout: "centered"
 };
+
+export const play = undefined;

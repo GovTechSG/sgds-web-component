@@ -16,3 +16,5 @@ export const Template = ({ dataLength, currentPage, itemsPerPage, variant, size,
 
 export const args = { dataLength: "50" };
 export const parameters = {};
+
+export const play = undefined;

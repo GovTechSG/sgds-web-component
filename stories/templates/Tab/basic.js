@@ -28,3 +28,5 @@ export const args = {
 export const parameters = {
   // controls: { exclude: ["name", "panel", "active", "variant"] }
 };
+
+export const play = undefined;

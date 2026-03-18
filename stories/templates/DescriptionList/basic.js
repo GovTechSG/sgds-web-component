@@ -26,3 +26,5 @@ export const Template = args => html`
 export const args = {};
 
 export const parameters = {};
+
+export const play = undefined;
