@@ -5,22 +5,22 @@
 <link href="../css/utility.css" rel="stylesheet" type="text/css" />
 
 <body>
-  <!-- ============================
-       Variant 1: Login (centered card)
-       ============================ -->
-  <section>
-    <sgds-masthead></sgds-masthead>
+  <sgds-masthead></sgds-masthead>
 
-    <div
-      class="sgds:min-h-screen sgds:flex sgds:items-center sgds:justify-center sgds:bg-surface-default sgds:p-layout-md"
-    >
-      <div class="sgds:w-full sgds:max-w-sm">
+  <sgds-mainnav>
+    <strong slot="brand">My Application</strong>
+  </sgds-mainnav>
+
+  <div
+    class="sgds:flex sgds:items-center sgds:justify-center sgds:bg-surface-default sgds:p-layout-md sgds:py-layout-xl"
+  >
+      <div class="sgds:max-w-container-md sgds:w-full">
         <!-- App branding -->
         <div class="sgds:text-center sgds:mb-layout-sm">
           <div
             class="sgds:w-12 sgds:h-12 sgds:rounded-xl sgds:bg-primary-default sgds:flex sgds:items-center sgds:justify-center sgds:mx-auto sgds:mb-3"
           >
-            <sgds-icon name="shield-fill" size="24" style="color: white;"></sgds-icon>
+            <sgds-icon name="shield-tick" size="xl" class="sgds:text-white"></sgds-icon>
           </div>
           <h1 class="sgds:text-xl sgds:font-semibold sgds:text-color-default">My Application</h1>
           <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1">Singapore Government Digital Services</p>
@@ -46,7 +46,7 @@
             <div>
               <sgds-input label="Password" type="password" name="password" required hasFeedback></sgds-input>
               <div class="sgds:flex sgds:justify-end sgds:mt-1">
-                <a href="#" class="sgds:text-sm sgds:text-primary-default hover:sgds:underline">Forgot password?</a>
+                <sgds-link size="sm"><a href="#">Forgot password?</a></sgds-link>
               </div>
             </div>
 
@@ -61,77 +61,18 @@
           </div>
 
           <sgds-button variant="outline" fullWidth>
-            <sgds-icon slot="leftIcon" name="person-badge-fill"></sgds-icon>
+            <sgds-icon slot="leftIcon" name="user-circle"></sgds-icon>
             Singpass
           </sgds-button>
 
           <p class="sgds:text-sm sgds:text-center sgds:text-color-muted sgds:mt-layout-xs">
             Don't have an account?
-            <a href="#" class="sgds:text-primary-default hover:sgds:underline">Sign up</a>
+            <a href="#">Sign up</a>
           </p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============================
-       Variant 2: Login — two-column with brand panel
-       ============================ -->
-  <section>
-    <div class="sgds:min-h-screen sgds:flex sgds:flex-col lg:sgds:flex-row sgds:bg-surface-default">
-      <!-- Left: brand panel (visible only on large screens) -->
-      <div
-        class="sgds:hidden lg:sgds:flex lg:sgds:w-1/2 sgds:flex-col sgds:justify-between sgds:bg-primary-default sgds:p-layout-lg"
-      >
-        <div>
-          <div class="sgds:flex sgds:items-center sgds:gap-2">
-            <sgds-icon name="shield-fill" size="24" style="color: white;"></sgds-icon>
-            <span class="sgds:text-white sgds:font-semibold sgds:text-lg">My Application</span>
-          </div>
-        </div>
-        <blockquote class="sgds:text-white">
-          <p class="sgds:text-xl sgds:font-medium sgds:leading-relaxed">"Serving citizens with speed and integrity."</p>
-          <footer class="sgds:mt-4 sgds:text-sm sgds:opacity-75">— Your Agency Name</footer>
-        </blockquote>
-      </div>
-
-      <!-- Right: form panel -->
-      <div class="sgds:flex sgds:flex-col sgds:w-full lg:sgds:w-1/2">
-        <sgds-masthead></sgds-masthead>
-        <div class="sgds:flex sgds:flex-1 sgds:items-center sgds:justify-center sgds:p-layout-md">
-          <div class="sgds:w-full sgds:max-w-sm">
-            <div class="sgds:mb-layout-sm">
-              <h2 class="sgds:text-xl sgds:font-semibold sgds:text-color-default">Sign in</h2>
-              <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1">Enter your credentials to access the portal</p>
-            </div>
-            <form class="sgds:flex sgds:flex-col sgds:gap-component-sm">
-              <sgds-input
-                label="Email"
-                type="email"
-                name="email"
-                placeholder="you@agency.gov.sg"
-                required
-                hasFeedback
-              ></sgds-input>
-              <div>
-                <sgds-input label="Password" type="password" name="password" required hasFeedback></sgds-input>
-                <div class="sgds:flex sgds:justify-end sgds:mt-1">
-                  <a href="#" class="sgds:text-sm sgds:text-primary-default hover:sgds:underline">Forgot password?</a>
-                </div>
-              </div>
-              <sgds-button type="submit" variant="primary" fullWidth>Sign in</sgds-button>
-              <sgds-button variant="outline" fullWidth>
-                <sgds-icon slot="leftIcon" name="person-badge-fill"></sgds-icon>
-                Singpass
-              </sgds-button>
-            </form>
-            <p class="sgds:text-sm sgds:text-center sgds:text-color-muted sgds:mt-layout-xs">
-              Don't have an account?
-              <a href="#" class="sgds:text-primary-default hover:sgds:underline">Sign up</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <sgds-footer></sgds-footer>
 </body>

@@ -229,3 +229,5 @@ Navigate into `components/{ComponentName}/` to find the same `.js` and `.d.ts` f
 - **Vue / Angular**: standard web component integration; SGDS-specific detail for Vue is `tag.startsWith("sgds-")` to suppress unknown element warnings
 
 When a user reports unexpected component behaviour (wrong event, property not reflecting, slot not rendering), direct them to read the compiled source before trying anything else — see the **Troubleshooting Component Behaviour** section above.
+
+**Global rule — never set explicit widths on SGDS components.** Do not add `width`, `style="width: ..."`, or fixed-width utility classes (e.g. `sgds:w-40`) directly on any `<sgds-*>` element. Width is controlled by the parent layout — use flex, grid, or wrapper divs to constrain it. The only exception is when a user explicitly requests a fixed width.

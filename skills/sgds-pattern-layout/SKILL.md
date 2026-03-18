@@ -24,6 +24,20 @@ import "@govtechsg/sgds-web-component/css/utility.css";    // sgds: utility clas
 
 See **[sgds-components-setup](../sgds-components-setup/SKILL.md)** for full installation.
 
+## Mandatory Page Chrome
+
+Every SGDS page — regardless of layout type — **must** include all three of these components:
+
+| Component | Role | Required |
+|---|---|---|
+| `<sgds-masthead>` | Singapore Government identity bar | ✅ Always |
+| `<sgds-mainnav>` | Application navigation header | ✅ Always |
+| `<sgds-footer>` | Singapore Government footer | ✅ Always |
+
+Never ship a page without all three. The masthead is a Singapore Government digital standards requirement. The footer closes the page and provides mandatory legal links.
+
+---
+
 ## Quick Decision Guide
 
 **Public-facing website, informational or transactional pages?** → [Simple App Layout](#simple-app-layout)
@@ -135,9 +149,10 @@ Both classes are provided by `@govtechsg/sgds-web-component/css/sgds.css`.
 
 ## For AI agents
 
-1. Always wrap the masthead + mainnav pair in a single `<div>` when making the header sticky — do not apply `sgds:sticky` individually to each component.
-2. For simple apps, use `.sgds-container` to centre and constrain page content. Do not use `sgds:max-w-*` utilities to replicate this — `.sgds-container` has the correct responsive breakpoints built in.
-3. For sidebar apps, use `.sgds-container-sidebar` (not `.sgds-container`) inside the main content column — it uses narrower max-widths appropriate for the two-column layout.
-4. The sidebar column must have `sgds:sticky`, `sgds:top-27`, and `sgds:h-[calc(100vh-108px)]` together to remain fixed while the main content scrolls. Missing any of these breaks the sticky behaviour.
-5. Place `<sgds-footer>` inside the main content column (not outside the two-column wrapper) so it sits below the content and does not span the sidebar.
-6. Sidebar app is the recommended layout for internal tools, dashboards, and transactional apps. Simple app is the recommended layout for public-facing digital services.
+1. **Every page must include `<sgds-masthead>`, `<sgds-mainnav>`, and `<sgds-footer>` — these are mandatory. Never generate a page without all three.**
+2. Always wrap the masthead + mainnav pair in a single `<div>` when making the header sticky — do not apply `sgds:sticky` individually to each component.
+3. For simple apps, use `.sgds-container` to centre and constrain page content. Do not use `sgds:max-w-*` utilities to replicate this — `.sgds-container` has the correct responsive breakpoints built in.
+4. For sidebar apps, use `.sgds-container-sidebar` (not `.sgds-container`) inside the main content column — it uses narrower max-widths appropriate for the two-column layout.
+5. The sidebar column must have `sgds:sticky`, `sgds:top-27`, and `sgds:h-[calc(100vh-108px)]` together to remain fixed while the main content scrolls. Missing any of these breaks the sticky behaviour.
+6. Place `<sgds-footer>` inside the main content column (not outside the two-column wrapper) so it sits below the content and does not span the sidebar.
+7. Sidebar app is the recommended layout for internal tools, dashboards, and transactional apps. Simple app is the recommended layout for public-facing digital services.

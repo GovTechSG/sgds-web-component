@@ -21,10 +21,10 @@
   <!-- Two-column body -->
   <div class="sgds:flex sgds:flex-row sgds:bg-surface-default">
     <!-- Sticky sidebar (sgds-sidebar is RC — loaded via CDN above) -->
-    <sgds-sidebar
-      active="dashboard"
-      class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)]"
-    >
+    <div class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)]">
+      <sgds-sidebar
+        active="dashboard"
+      >
         <div slot="brandName">My App</div>
 
         <sgds-sidebar-section title="Analytics" name="analytics">
@@ -61,6 +61,7 @@
           </sgds-sidebar-item>
         </sgds-sidebar-section>
     </sgds-sidebar>
+    </div>
 
     <!-- Main content -->
     <div class="sgds:flex sgds:flex-col sgds:w-full">
@@ -68,19 +69,8 @@
         <!-- Page header -->
         <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mb-layout-sm">
           <div>
-            <div
-              role="heading"
-              aria-level="1"
-              class="sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-color-default"
-            >
-              Dashboard
-            </div>
-            <div
-              role="paragraph"
-              class="sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-color-muted sgds:mt-1"
-            >
-              Overview of your application metrics
-            </div>
+            <h1 class="sgds:text-2xl sgds:font-semibold sgds:text-color-default">Dashboard</h1>
+            <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1">Overview of your application metrics</p>
           </div>
           <sgds-button variant="primary" size="sm">
             <sgds-icon name="download" slot="leftIcon"></sgds-icon>
@@ -93,65 +83,41 @@
           <div
             class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card"
           >
-            <div class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-color-muted sgds:mb-1">
-              Total Users
-            </div>
-            <div
-              class="sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-color-default sgds:tabular-nums"
-            >
-              12,486
-            </div>
+            <p class="sgds:text-sm sgds:text-color-muted sgds:mb-1">Total Users</p>
+            <p class="sgds:text-2xl sgds:font-semibold sgds:text-color-default sgds:tabular-nums">12,486</p>
             <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
               <sgds-icon name="arrow-up" class="sgds:text-success-default" size="sm"></sgds-icon>
-              <span class="sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-success-default">+8.2%</span>
-              <span class="sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-color-muted">vs last month</span>
+              <span class="sgds:text-sm sgds:text-success-default">+8.2%</span>
+              <span class="sgds:text-sm sgds:text-color-muted">vs last month</span>
             </div>
           </div>
           <div
             class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card"
           >
-            <div class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-color-muted sgds:mb-1">
-              Active Sessions
-            </div>
-            <div
-              class="sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-color-default sgds:tabular-nums"
-            >
-              3,241
-            </div>
+            <p class="sgds:text-sm sgds:text-color-muted sgds:mb-1">Active Sessions</p>
+            <p class="sgds:text-2xl sgds:font-semibold sgds:text-color-default sgds:tabular-nums">3,241</p>
             <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
               <sgds-icon name="arrow-up" class="sgds:text-success-default" size="sm"></sgds-icon>
-              <span class="sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-success-default">+4.1%</span>
-              <span class="sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-color-muted">vs last month</span>
+              <span class="sgds:text-sm sgds:text-success-default">+4.1%</span>
+              <span class="sgds:text-sm sgds:text-color-muted">vs last month</span>
             </div>
           </div>
           <div
             class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card"
           >
-            <div class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-color-muted sgds:mb-1">
-              Submissions
-            </div>
-            <div
-              class="sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-color-default sgds:tabular-nums"
-            >
-              847
-            </div>
+            <p class="sgds:text-sm sgds:text-color-muted sgds:mb-1">Submissions</p>
+            <p class="sgds:text-2xl sgds:font-semibold sgds:text-color-default sgds:tabular-nums">847</p>
             <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
               <sgds-icon name="arrow-down" class="sgds:text-danger-default" size="sm"></sgds-icon>
-              <span class="sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-danger-default">-2.4%</span>
-              <span class="sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-color-muted">vs last month</span>
+              <span class="sgds:text-sm sgds:text-danger-default">-2.4%</span>
+              <span class="sgds:text-sm sgds:text-color-muted">vs last month</span>
             </div>
           </div>
           <div
             class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card"
           >
-            <div class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-color-muted sgds:mb-1">
-              Pending Reviews
-            </div>
-            <div
-              class="sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-color-default sgds:tabular-nums"
-            >
-              23
-            </div>
+            <p class="sgds:text-sm sgds:text-color-muted sgds:mb-1">Pending Reviews</p>
+            <p class="sgds:text-2xl sgds:font-semibold sgds:text-color-default sgds:tabular-nums">23</p>
             <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
               <sgds-badge variant="warning">Action needed</sgds-badge>
             </div>
@@ -161,42 +127,24 @@
           <div
             class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs"
           >
-            <div
-              role="heading"
-              aria-level="2"
-              class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-color-default sgds:mb-component-sm"
-            >
-              Submission trend
-            </div>
-            <div id="chart-trend" style="height:260px;width:100%"></div>
+            <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default sgds:mb-component-sm">Submission trend</h2>
+            <div id="chart-trend" class="sgds:h-[260px] sgds:w-full"></div>
           </div>
 
           <!-- Donut chart: 4/12 -->
           <div
             class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs"
           >
-            <div
-              role="heading"
-              aria-level="2"
-              class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-color-default sgds:mb-component-sm"
-            >
-              Status breakdown
-            </div>
-            <div id="chart-donut" style="height:260px;width:100%;overflow:visible"></div>
+            <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default sgds:mb-component-sm">Status breakdown</h2>
+            <div id="chart-donut" class="sgds:h-[260px] sgds:w-full sgds:overflow-visible"></div>
           </div>
 
           <!-- Bar chart: 12/12 -->
           <div
             class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-12 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs"
           >
-            <div
-              role="heading"
-              aria-level="2"
-              class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-color-default sgds:mb-component-sm"
-            >
-              Submissions by department
-            </div>
-            <div id="chart-bar" style="height:240px;width:100%"></div>
+            <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default sgds:mb-component-sm">Submissions by department</h2>
+            <div id="chart-bar" class="sgds:h-[240px] sgds:w-full"></div>
           </div>
 
           <!-- Table: 12/12 -->
@@ -206,13 +154,7 @@
             <div
               class="sgds:flex sgds:items-center sgds:justify-between sgds:p-component-xs sgds:border-b sgds:border-muted"
             >
-              <div
-                role="heading"
-                aria-level="2"
-                class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-color-default"
-              >
-                Recent submissions
-              </div>
+              <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default">Recent submissions</h2>
               <div class="sgds:flex sgds:gap-component-sm">
                 <sgds-input placeholder="Search..." size="sm">
                   <sgds-icon name="search" slot="prefix"></sgds-icon>

@@ -14,6 +14,8 @@ Ready-to-use full-page templates using SGDS components and utilities — adapted
 
 ## Prerequisites
 
+**Read [sgds-pattern-layout](../sgds-pattern-layout/SKILL.md) first.** All templates follow the layout rules defined there — mandatory `<sgds-masthead>`, `<sgds-mainnav>`, and `<sgds-footer>` on every page, plus container and sticky-header conventions.
+
 ```javascript
 import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component/css/sgds.css";
@@ -21,6 +23,8 @@ import "@govtechsg/sgds-web-component/css/utility.css";
 ```
 
 See **[sgds-getting-started](../sgds-getting-started/SKILL.md)** and **[sgds-components-setup](../sgds-components-setup/SKILL.md)** for full installation.
+
+For container width and max-width utilities used in these templates, see **[sgds-utilities-dimension](../sgds-utilities-dimension/SKILL.md)**.
 
 ---
 

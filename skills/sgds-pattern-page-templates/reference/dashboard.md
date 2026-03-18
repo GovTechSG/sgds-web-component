@@ -57,7 +57,8 @@ Uses the **Sidebar App Layout** from `sgds-pattern-layout`. The sidebar is stick
 <div class="sgds:flex sgds:flex-row sgds:bg-surface-default">
 
   <!-- Sticky sidebar -->
-  <sgds-sidebar active="dashboard" class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)]">
+  <div class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)]">
+    <sgds-sidebar active="dashboard">
     <div slot="brandName">My App</div>
 
     <sgds-sidebar-section title="Analytics" name="analytics">
@@ -95,6 +96,7 @@ Uses the **Sidebar App Layout** from `sgds-pattern-layout`. The sidebar is stick
       </sgds-sidebar-item>
     </sgds-sidebar-section>
   </sgds-sidebar>
+  </div>
 
   <!-- Main content -->
   <div class="sgds:flex sgds:flex-col sgds:w-full">
@@ -157,17 +159,17 @@ Uses the **Sidebar App Layout** from `sgds-pattern-layout`. The sidebar is stick
         <!-- Charts: trend 8/12, donut 4/12, bar 12/12 — CSS Grid auto-wraps into rows -->
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs">
           <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default sgds:mb-component-sm">Submission trend</h2>
-          <div id="chart-trend" style="height:260px;width:100%"></div>
+          <div id="chart-trend" class="sgds:h-[260px] sgds:w-full"></div>
         </div>
 
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs">
           <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default sgds:mb-component-sm">Status breakdown</h2>
-          <div id="chart-donut" style="height:260px;width:100%;overflow:visible"></div>
+          <div id="chart-donut" class="sgds:h-[260px] sgds:w-full sgds:overflow-visible"></div>
         </div>
 
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-12 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs">
           <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default sgds:mb-component-sm">Submissions by department</h2>
-          <div id="chart-bar" style="height:240px;width:100%"></div>
+          <div id="chart-bar" class="sgds:h-[240px] sgds:w-full"></div>
         </div>
 
         <!-- Table: full width 12/12 -->

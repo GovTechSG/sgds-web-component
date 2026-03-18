@@ -39,8 +39,12 @@ Full-height centered layout — card sits in the middle of the viewport on deskt
 ```html
 <sgds-masthead></sgds-masthead>
 
-<div class="sgds:min-h-screen sgds:flex sgds:items-center sgds:justify-center sgds:bg-surface-default sgds:p-layout-md">
-  <div class="sgds:w-full sgds:max-w-sm">
+<sgds-mainnav>
+  <strong slot="brand">My Application</strong>
+</sgds-mainnav>
+
+<div class="sgds:flex sgds:items-center sgds:justify-center sgds:bg-surface-default sgds:p-layout-md sgds:py-layout-xl">
+  <div class="sgds:max-w-container-md sgds:w-full">
 
     <!-- App branding -->
     <div class="sgds:text-center sgds:mb-layout-sm">
@@ -78,9 +82,7 @@ Full-height centered layout — card sits in the middle of the viewport on deskt
             hasFeedback
           ></sgds-input>
           <div class="sgds:flex sgds:justify-end sgds:mt-1">
-            <a href="/forgot-password" class="sgds:text-sm sgds:text-primary-default hover:sgds:underline">
-              Forgot password?
-            </a>
+            <sgds-link size="sm"><a href="/forgot-password">Forgot password?</a></sgds-link>
           </div>
         </div>
 
@@ -99,20 +101,22 @@ Full-height centered layout — card sits in the middle of the viewport on deskt
 
       <!-- SSO option -->
       <sgds-button variant="outline" fullWidth>
-        <svg slot="leftIcon" viewBox="0 0 24 24" class="sgds:w-4 sgds:h-4"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg>
+        <sgds-icon slot="leftIcon" name="user-circle"></sgds-icon>
         Singpass
       </sgds-button>
 
       <!-- Footer link -->
       <p class="sgds:text-sm sgds:text-center sgds:text-color-muted sgds:mt-layout-xs">
         Don't have an account?
-        <a href="/register" class="sgds:text-primary-default hover:sgds:underline">Sign up</a>
+        <a href="/register">Sign up</a>
       </p>
 
     </div>
 
   </div>
 </div>
+
+<sgds-footer></sgds-footer>
 ```
 
 ---
@@ -122,7 +126,13 @@ Full-height centered layout — card sits in the middle of the viewport on deskt
 For more visual impact — left panel with brand message, right panel with form.
 
 ```html
-<div class="sgds:min-h-screen sgds:flex sgds:flex-col lg:sgds:flex-row sgds:bg-surface-default">
+<sgds-masthead></sgds-masthead>
+
+<sgds-mainnav>
+  <strong slot="brand">My Application</strong>
+</sgds-mainnav>
+
+<div class="sgds:flex sgds:flex-col lg:sgds:flex-row sgds:bg-surface-default">
 
   <!-- Left: brand panel (hidden on mobile) -->
   <div class="sgds:hidden lg:sgds:flex lg:sgds:w-1/2 sgds:flex-col sgds:justify-between sgds:bg-primary-default sgds:p-layout-lg">
@@ -139,7 +149,7 @@ For more visual impact — left panel with brand message, right panel with form.
 
   <!-- Right: form panel -->
   <div class="sgds:flex sgds:w-full lg:sgds:w-1/2 sgds:items-center sgds:justify-center sgds:p-layout-md">
-    <div class="sgds:w-full sgds:max-w-sm">
+    <div class="sgds:max-w-container-md sgds:w-full">
       <div class="sgds:mb-layout-sm">
         <h2 class="sgds:text-xl sgds:font-semibold sgds:text-color-default">Sign in</h2>
         <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1">Enter your credentials to access the portal</p>
@@ -153,6 +163,8 @@ For more visual impact — left panel with brand message, right panel with form.
   </div>
 
 </div>
+
+<sgds-footer></sgds-footer>
 ```
 
 ---

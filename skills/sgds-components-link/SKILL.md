@@ -20,6 +20,18 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Quick Decision Guide
 
+**`<sgds-link>` vs plain `<a>`**
+- **Standalone link** (not inside a sentence) → always use `<sgds-link>`. Examples: CTAs, "Back" links, nav links, action links below a card.
+- **Inline text link** (embedded mid-sentence or mid-paragraph) → use a plain `<a>` tag. `sgds.css` applies default anchor styling automatically — no component needed.
+
+```html
+<!-- Standalone link → sgds-link -->
+<sgds-link><a href="/details">View details</a></sgds-link>
+
+<!-- Inline text link → plain anchor -->
+<p>Read the <a href="/docs">full documentation</a> for more details.</p>
+```
+
 **Always pass a single `<a>` tag in the default slot** — never put text directly inside `<sgds-link>`.
 
 **Which `tone`?**
@@ -114,9 +126,10 @@ None.
 ---
 
 **For AI agents**:
-1. Always pass a single `<a>` tag inside `<sgds-link>` — never put text directly as `<sgds-link>text</sgds-link>`.
-2. `variant` is deprecated since 3.6.0 — always use `tone`. Never suggest `variant="light"` or `variant="dark"`.
-3. `disabled` is applied to the wrapper; it automatically sets `href="javascript:void(0)"` and `tabindex="-1"` on the slotted anchor — do not add these manually.
-4. `tone="fixed-light"` is for dark backgrounds; `tone="fixed-dark"` is for light backgrounds when overriding theme behaviour.
-5. Icon sizing within `<sgds-link>` is automatic — do not set `size` on `<sgds-icon>` children.
-6. There are no custom events on this component.
+1. **Use `<sgds-link>` for standalone links; use a plain `<a>` for inline text links.** `sgds.css` provides default anchor styling for inline anchors — wrapping them in `<sgds-link>` is unnecessary and incorrect.
+2. Always pass a single `<a>` tag inside `<sgds-link>` — never put text directly as `<sgds-link>text</sgds-link>`.
+3. `variant` is deprecated since 3.6.0 — always use `tone`. Never suggest `variant="light"` or `variant="dark"`.
+4. `disabled` is applied to the wrapper; it automatically sets `href="javascript:void(0)"` and `tabindex="-1"` on the slotted anchor — do not add these manually.
+5. `tone="fixed-light"` is for dark backgrounds; `tone="fixed-dark"` is for light backgrounds when overriding theme behaviour.
+6. Icon sizing within `<sgds-link>` is automatic — do not set `size` on `<sgds-icon>` children.
+7. There are no custom events on this component.

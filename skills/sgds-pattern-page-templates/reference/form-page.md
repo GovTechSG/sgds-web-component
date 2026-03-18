@@ -52,7 +52,7 @@ Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/
 </sgds-mainnav>
 
 <div class="sgds:bg-surface-default sgds:min-h-screen">
-  <div class="sgds-container sgds:py-layout-md">
+  <div class="sgds:w-container sgds:mx-auto sgds:py-layout-md">
 
     <!-- Page header with actions -->
     <div class="sgds:flex sgds:items-start sgds:justify-between sgds:mb-layout-md">
@@ -197,6 +197,8 @@ Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/
 
   </div>
 </div>
+
+<sgds-footer></sgds-footer>
 ```
 
 ---

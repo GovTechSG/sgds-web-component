@@ -49,7 +49,7 @@ Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/
 </sgds-mainnav>
 
 <div class="sgds:bg-surface-default sgds:min-h-screen">
-  <div class="sgds-container sgds:py-layout-md">
+  <div class="sgds:w-container sgds:mx-auto sgds:py-layout-md">
 
     <!-- Page header -->
     <div class="sgds:flex sgds:items-start sgds:justify-between sgds:mb-layout-md">
@@ -60,54 +60,111 @@ Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/
         </p>
       </div>
       <sgds-button variant="primary">
-        <sgds-icon slot="leftIcon" name="plus-lg"></sgds-icon>
+        <sgds-icon slot="leftIcon" name="plus"></sgds-icon>
         New record
       </sgds-button>
     </div>
 
     <!-- Search & filter bar -->
     <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:mb-component-md">
-      <sgds-input
-        placeholder="Search by name or ID…"
-        id="search-input"
-        class="sgds:flex-1 sgds:min-w-48"
-        style="--input-min-width: 0"
-      >
-        <sgds-icon slot="prefix" name="search"></sgds-icon>
-      </sgds-input>
+      <div class="sgds:flex-1 sgds:min-w-48">
+        <sgds-input
+          placeholder="Search by name or ID…"
+          id="search-input"
+        >
+          <sgds-icon slot="prefix" name="search"></sgds-icon>
+        </sgds-input>
+      </div>
 
-      <sgds-select id="status-filter" placeholder="All statuses" style="width: 160px">
-        <sgds-select-option value="">All statuses</sgds-select-option>
-        <sgds-select-option value="active">Active</sgds-select-option>
-        <sgds-select-option value="inactive">Inactive</sgds-select-option>
-        <sgds-select-option value="pending">Pending</sgds-select-option>
-      </sgds-select>
+        <sgds-select id="status-filter" placeholder="All statuses">
+          <sgds-select-option value="">All statuses</sgds-select-option>
+          <sgds-select-option value="active">Active</sgds-select-option>
+          <sgds-select-option value="inactive">Inactive</sgds-select-option>
+          <sgds-select-option value="pending">Pending</sgds-select-option>
+        </sgds-select>
 
-      <sgds-select id="type-filter" placeholder="All types" style="width: 160px">
-        <sgds-select-option value="">All types</sgds-select-option>
-        <sgds-select-option value="typeA">Type A</sgds-select-option>
-        <sgds-select-option value="typeB">Type B</sgds-select-option>
-      </sgds-select>
+        <sgds-select id="type-filter" placeholder="All types">
+          <sgds-select-option value="">All types</sgds-select-option>
+          <sgds-select-option value="typeA">Type A</sgds-select-option>
+          <sgds-select-option value="typeB">Type B</sgds-select-option>
+        </sgds-select>
     </div>
 
     <!-- Data table -->
     <div class="sgds:rounded-lg sgds:border sgds:border-muted sgds:overflow-hidden">
-      <sgds-table
-        id="records-table"
-        responsive
-        .headers=${[
-          { key: "name",    title: "Name" },
-          { key: "status",  title: "Status" },
-          { key: "date",    title: "Date" },
-          { key: "actions", title: "" }
-        ]}
-        .rows=${records}
-      ></sgds-table>
+      <sgds-table headerBackground responsive="md">
+        <sgds-table-row>
+          <sgds-table-head>Name</sgds-table-head>
+          <sgds-table-head>Status</sgds-table-head>
+          <sgds-table-head>Date</sgds-table-head>
+          <sgds-table-head></sgds-table-head>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Lim Ah Kow</sgds-table-cell>
+          <sgds-table-cell><sgds-badge variant="success">Active</sgds-badge></sgds-table-cell>
+          <sgds-table-cell>01 Jan 2025</sgds-table-cell>
+          <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Tan Bee Choo</sgds-table-cell>
+          <sgds-table-cell><sgds-badge variant="warning">Pending</sgds-badge></sgds-table-cell>
+          <sgds-table-cell>05 Feb 2025</sgds-table-cell>
+          <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Mohamed Razif</sgds-table-cell>
+          <sgds-table-cell><sgds-badge variant="neutral">Inactive</sgds-badge></sgds-table-cell>
+          <sgds-table-cell>12 Mar 2025</sgds-table-cell>
+          <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Priya Nair</sgds-table-cell>
+          <sgds-table-cell><sgds-badge variant="success">Active</sgds-badge></sgds-table-cell>
+          <sgds-table-cell>20 Mar 2025</sgds-table-cell>
+          <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Chen Wei Ling</sgds-table-cell>
+          <sgds-table-cell><sgds-badge variant="success">Active</sgds-badge></sgds-table-cell>
+          <sgds-table-cell>25 Mar 2025</sgds-table-cell>
+          <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Ravi Shankar</sgds-table-cell>
+          <sgds-table-cell><sgds-badge variant="neutral">Inactive</sgds-badge></sgds-table-cell>
+          <sgds-table-cell>28 Mar 2025</sgds-table-cell>
+          <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Nur Aisyah</sgds-table-cell>
+          <sgds-table-cell><sgds-badge variant="warning">Pending</sgds-badge></sgds-table-cell>
+          <sgds-table-cell>30 Mar 2025</sgds-table-cell>
+          <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>David Chua</sgds-table-cell>
+          <sgds-table-cell><sgds-badge variant="danger">Rejected</sgds-badge></sgds-table-cell>
+          <sgds-table-cell>02 Apr 2025</sgds-table-cell>
+          <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Siti Rahmah</sgds-table-cell>
+          <sgds-table-cell><sgds-badge variant="success">Active</sgds-badge></sgds-table-cell>
+          <sgds-table-cell>08 Apr 2025</sgds-table-cell>
+          <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Kevin Ong</sgds-table-cell>
+          <sgds-table-cell><sgds-badge variant="warning">Pending</sgds-badge></sgds-table-cell>
+          <sgds-table-cell>10 Apr 2025</sgds-table-cell>
+          <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+        </sgds-table-row>
+      </sgds-table>
     </div>
 
     <!-- Empty state (show instead of table when no results) -->
     <div id="empty-state" class="sgds:hidden sgds:py-layout-xl sgds:text-center">
-      <sgds-icon name="inbox" size="48" class="sgds:text-color-muted sgds:mx-auto sgds:mb-3"></sgds-icon>
+      <sgds-icon name="in-box" size="3-xl" class="sgds:text-color-muted sgds:mx-auto sgds:mb-3"></sgds-icon>
       <h3 class="sgds:text-base sgds:font-semibold sgds:text-color-default">No records found</h3>
       <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1 sgds:mb-layout-sm">
         Try changing your search or filter, or add a new record.
@@ -117,20 +174,14 @@ Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/
 
     <!-- Pagination footer -->
     <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mt-component-lg">
-      <p class="sgds:text-sm sgds:text-color-muted">
-        Showing <span id="page-range">1–10</span> of <span id="total-count">42</span>
-      </p>
-      <sgds-pagination
-        id="table-pagination"
-        dataLength="42"
-        itemsPerPage="10"
-        currentPage="1"
-        limit="5"
-      ></sgds-pagination>
+      <p class="sgds:text-sm sgds:text-color-muted">Showing 1–10 of 10</p>
+      <sgds-pagination dataLength="10" itemsPerPage="10" currentPage="1" limit="5"></sgds-pagination>
     </div>
 
   </div>
 </div>
+
+<sgds-footer></sgds-footer>
 ```
 
 ---
