@@ -25,9 +25,9 @@ Helps developers constrain content area widths using SGDS container dimension to
 
 ---
 
-## `sgds:w-container` — Responsive first-level container
+## `sgds:w-container` — Responsive container
 
-**Always use this for the top-level content wrapper on a page.** It is a responsive width token — the max-width value changes automatically across breakpoints.
+It is a responsive width token — the max-width value changes automatically across breakpoints.
 
 | Breakpoint | Width |
 |------------|-------|
@@ -47,8 +47,6 @@ Always pair with `sgds:mx-auto` to centre the container horizontally.
 ---
 
 ## `sgds:max-w-container-*` — Static max-width for nested containers
-
-Use these when the container is **not** the first-level page wrapper — e.g. an inner section, a card body, a form panel, or a modal content area. These are **static** — they do not respond to breakpoints.
 
 | Class | CSS Variable | Value |
 |-------|-------------|-------|
@@ -103,7 +101,6 @@ Use these when the container is **not** the first-level page wrapper — e.g. an
 
 ## Rules
 
-1. **`sgds:w-container` is for the first-level content wrapper only.** Never use it for inner sections.
-2. **`sgds:max-w-container-*` is for nested containers.** The default size is `md` (768px).
-3. Always pair container width classes with `sgds:mx-auto` to centre them.
-4. Do not mix `sgds:w-container` and `sgds:max-w-container-*` on the same element — they serve different purposes and different nesting levels.
+1. **`sgds:max-w-container-*` default is `md` (768px)** unless the design calls for a wider inner area.
+2. Pair both with `sgds:mx-auto` if needed to centre them.
+3. Do not apply both on the same element.
