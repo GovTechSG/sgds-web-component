@@ -97,7 +97,7 @@ export class SgdsBadge extends SgdsElement {
   }
 
   /**@internal */
-  @watch("text")
+  @watch("text", { waitUntilFirstUpdate: true })
   _handleTruncation() {
     // checking of text height if its exceeding parent, it needs to be truncated
     const badge = this.shadowRoot.querySelector(".badge");

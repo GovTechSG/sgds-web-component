@@ -36,6 +36,7 @@ For container width and max-width utilities used in these templates, see **[sgds
 | Login / sign-in page | [Login](#→-read-referenceloginmd) |
 | Multi-field settings or data-entry form | [Form Page](#→-read-referenceform-pagemd) |
 | Data list with search, filters, pagination | [List Page](#→-read-referencelist-pagemd) |
+| Company/agency profile, team intro, achievements | [About Us](#→-read-referenceabout-usmd) |
 
 ---
 
@@ -52,6 +53,9 @@ Two-column settings layout with labelled form sections. Use for settings pages, 
 
 ## → Read [reference/list-page.md](reference/list-page.md)
 Search + filter bar + table + pagination. Use for record lists, search results, data management pages.
+
+## → Read [reference/about-us.md](reference/about-us.md)
+Two-column headline + image grid + logo strip + achievements stats panel. Use for agency profiles, product about pages, team introductions.
 
 ---
 

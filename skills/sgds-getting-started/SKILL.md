@@ -124,6 +124,8 @@ Every SGDS application should be structured using one of the two recommended lay
 
 ## For AI agents
 
+**Component-first rule**: Before building any UI element with plain HTML and utility classes, always check whether an SGDS web component already covers the need. Consult the `components-*` skills first. Only fall back to custom markup when no SGDS component exists for the use case.
+
 1. Always complete all four steps before generating any component or page code for a new SGDS project.
 2. The font `<link>` tags must go in the HTML `<head>` — not in CSS or JS imports. For font customisation or theming, refer to **[sgds-theming](../sgds-theming/SKILL.md)**.
 3. CSS import order matters: `themes/day.css` → `css/sgds.css` → `css/utility.css`. The theme file must come first so CSS variable tokens are available when foundation and utility styles are processed.
