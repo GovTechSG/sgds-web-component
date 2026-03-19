@@ -240,6 +240,43 @@ describe("sgds-mainnav", () => {
     expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("name", "sgds-mainnav-item");
     expect(el.querySelector("sgds-button")).to.have.attribute("name", "sgds-button");
   });
+
+  it("slotchange on default slot sets expand attribute on slotted items using component expand value", async () => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav expand="md">
+        <sgds-mainnav-item></sgds-mainnav-item>
+        <sgds-mainnav-dropdown><span slot="toggler">Menu</span></sgds-mainnav-dropdown>
+      </sgds-mainnav>`
+    );
+    await el.updateComplete;
+    expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("expand", "md");
+    expect(el.querySelector("sgds-mainnav-dropdown")).to.have.attribute("expand", "md");
+  });
+
+  it("slotchange on end slot sets both expand and name attributes on slotted items", async () => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav expand="xl">
+        <sgds-mainnav-item slot="end"></sgds-mainnav-item>
+        <sgds-mainnav-dropdown slot="end"><span slot="toggler">Menu</span></sgds-mainnav-dropdown>
+      </sgds-mainnav>`
+    );
+    await el.updateComplete;
+    expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("expand", "xl");
+    expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("name", "sgds-mainnav-item");
+    expect(el.querySelector("sgds-mainnav-dropdown")).to.have.attribute("expand", "xl");
+    expect(el.querySelector("sgds-mainnav-dropdown")).to.have.attribute("name", "sgds-mainnav-dropdown");
+  });
+
+  it("default slot items do not receive name attribute", async () => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav expand="lg">
+        <sgds-mainnav-item></sgds-mainnav-item>
+      </sgds-mainnav>`
+    );
+    await el.updateComplete;
+    expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("expand", "lg");
+    expect(el.querySelector("sgds-mainnav-item")).not.to.have.attribute("name");
+  });
 });
 
 describe("sgds-mainnav-item", () => {

@@ -1,4 +1,4 @@
-import { html, PropertyValueMap } from "lit";
+import { html } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
@@ -37,8 +37,7 @@ export class SgdsAccordion extends SgdsElement {
     ) as SgdsAccordionItem[];
   }
 
-  firstUpdated(changedProperties: PropertyValueMap<this>) {
-    super.firstUpdated(changedProperties);
+  private _handleSlotChange() {
     const items = [...this.items] as SgdsAccordionItem[];
     items.forEach((item, index) => {
       if (items.length > 1) {
@@ -88,7 +87,7 @@ export class SgdsAccordion extends SgdsElement {
   render() {
     return html`
       <div class="accordion">
-        <slot @click=${this._onToggle} @keydown=${this._onKeyboardToggle}></slot>
+        <slot @slotchange=${this._handleSlotChange} @click=${this._onToggle} @keydown=${this._onKeyboardToggle}></slot>
       </div>
     `;
   }
