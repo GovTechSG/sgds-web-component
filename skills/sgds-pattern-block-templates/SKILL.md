@@ -41,14 +41,29 @@ See **[sgds-components](../sgds-components/SKILL.md)** for full installation det
 | What you need | Block to use |
 |---|---|
 | Mandatory page chrome (masthead, mainnav, footer, container) for any SGDS page | [Application Shell](#→-read-referenceapplication-shellmd) |
+| Page-level header with breadcrumb, icon + title, description, and primary CTA | [Page Header](#→-read-referencepage-headermd) |
+| Read-only entity summary card with key-value fields and an edit action | [Basic Details Card](#→-read-referencebasic-detailsmd) |
 | Sidebar panel that filters content by category using checkboxes | [Filter Sidebar — Checkbox](#→-read-referencefilter-sidebar-checkboxmd) |
 | Full detail view of a single event session: time, title, speaker, badges, description, profile | [Session Detail](#→-read-referencesession-detailmd) |
+| Search input + filter button + results count + data table for list and admin pages | [Table Filter](#→-read-referencetable-filtermd) |
 
 ---
 
 ## → Read [reference/application-shell.md](reference/application-shell.md)
 
 **Required for every page.** The application shell wraps all page content with the mandatory Singapore Government chrome: `<sgds-masthead>`, `<sgds-mainnav>`, and `<sgds-footer>`. Provides two layout variants — Simple App (`.sgds-container`, public-facing) and Sidebar App (`.sgds-container-sidebar`, dashboards and internal tools) — with full breakpoint tables and sticky-header patterns.
+
+---
+
+## → Read [reference/page-header.md](reference/page-header.md)
+
+Breadcrumb trail + icon-tinted container + h1 heading + description + primary CTA button. Use at the top of any content page to orient the user and surface the primary action.
+
+---
+
+## → Read [reference/basic-details.md](reference/basic-details.md)
+
+Bordered card with a subtitle heading, stacked key-value field pairs, and an optional edit button. Use to display read-only entity metadata (IDs, names, descriptions, contact info) on detail or profile pages.
 
 ---
 
@@ -61,6 +76,12 @@ Vertical filter panel with grouped `sgds-checkbox-group` sections and a "Clear a
 ## → Read [reference/session-detail.md](reference/session-detail.md)
 
 Full session detail block for event and conference websites. Shows time slot, session title with expand/collapse, speaker attribution, outlined classification badges, description, circular speaker photo with name and role, and a divider. Repeat for each session in a programme listing.
+
+---
+
+## → Read [reference/table-filter.md](reference/table-filter.md)
+
+Page header + search input + outline filter button + results count + data table. Use on list and admin pages where users search or filter tabular records. Table cells support `sgds-link`, `sgds-badge`, and `sgds-button` for rich row content.
 
 ---
 

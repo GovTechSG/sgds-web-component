@@ -18,64 +18,64 @@ All semantic tokens are **responsive** — their values change at mobile, tablet
 
 Use for gaps between paragraphs, headings, and inline text groups.
 
-| Class | Tokens |
-|-------|--------|
-| `sgds:gap-text-2-xs` | `--sgds-text-gap-2-xs` |
-| `sgds:gap-text-xs` | `--sgds-text-gap-xs` |
-| `sgds:gap-text-sm` | `--sgds-text-gap-sm` |
-| `sgds:gap-text-md` | `--sgds-text-gap-md` |
-| `sgds:gap-text-lg` | `--sgds-text-gap-lg` |
-| `sgds:gap-text-xl` | `--sgds-text-gap-xl` |
-| `sgds:gap-text-2-xl` | `--sgds-text-gap-2-xl` |
+| Class | Token | Mobile / Tablet / Desktop |
+|-------|--------|--------------------------|
+| `sgds:gap-text-2-xs` | `--sgds-text-gap-2-xs` | 4px / 4px / 4px |
+| `sgds:gap-text-xs` | `--sgds-text-gap-xs` | 8px / 8px / 8px |
+| `sgds:gap-text-sm` | `--sgds-text-gap-sm` | 8px / 12px / 12px |
+| `sgds:gap-text-md` | `--sgds-text-gap-md` | 12px / 16px / 16px |
+| `sgds:gap-text-lg` | `--sgds-text-gap-lg` | 16px / 20px / 20px |
+| `sgds:gap-text-xl` | `--sgds-text-gap-xl` | 20px / 24px / 24px |
+| `sgds:gap-text-2-xl` | `--sgds-text-gap-2-xl` | 24px / 32px / 32px |
 
 ### Layout Gap — spacing between layout sections
 
 Use for gaps between page sections, grid columns, and layout areas.
 
-| Class | Token |
-|-------|-------|
-| `sgds:gap-layout-2-xs` | `--sgds-layout-gap-2-xs` |
-| `sgds:gap-layout-xs` | `--sgds-layout-gap-xs` |
-| `sgds:gap-layout-sm` | `--sgds-layout-gap-sm` |
-| `sgds:gap-layout-md` | `--sgds-layout-gap-md` |
-| `sgds:gap-layout-lg` | `--sgds-layout-gap-lg` |
-| `sgds:gap-layout-xl` | `--sgds-layout-gap-xl` |
+| Class | Token | Mobile / Tablet / Desktop |
+|-------|-------|--------------------------|
+| `sgds:gap-layout-2-xs` | `--sgds-layout-gap-2-xs` | 4px / 12px / 16px |
+| `sgds:gap-layout-xs` | `--sgds-layout-gap-xs` | 8px / 16px / 20px |
+| `sgds:gap-layout-sm` | `--sgds-layout-gap-sm` | 12px / 20px / 24px |
+| `sgds:gap-layout-md` | `--sgds-layout-gap-md` | 16px / 24px / 32px |
+| `sgds:gap-layout-lg` | `--sgds-layout-gap-lg` | 20px / 32px / 48px |
+| `sgds:gap-layout-xl` | `--sgds-layout-gap-xl` | 24px / 48px / 64px |
 
 ### Layout Padding — padding for layout/page areas
 
 Use for section padding, page padding, and container insets. Supports `sgds:p-layout-*`, `sgds:px-layout-*`, and `sgds:py-layout-*`.
 
-| Class | Token |
-|-------|-------|
-| `sgds:p-layout-xs` | `--sgds-layout-padding-xs` |
-| `sgds:p-layout-sm` | `--sgds-layout-padding-sm` |
-| `sgds:p-layout-md` | `--sgds-layout-padding-md` |
-| `sgds:p-layout-lg` | `--sgds-layout-padding-lg` |
-| `sgds:p-layout-xl` | `--sgds-layout-padding-xl` |
+| Class | Token | Mobile / Tablet / Desktop |
+|-------|-------|--------------------------|
+| `sgds:p-layout-xs` | `--sgds-layout-padding-xs` | 16px / 20px / 24px |
+| `sgds:p-layout-sm` | `--sgds-layout-padding-sm` | 20px / 24px / 32px |
+| `sgds:p-layout-md` | `--sgds-layout-padding-md` | 24px / 32px / 48px |
+| `sgds:p-layout-lg` | `--sgds-layout-padding-lg` | 32px / 48px / 64px |
+| `sgds:p-layout-xl` | `--sgds-layout-padding-xl` | 48px / 64px / 96px |
 
 ### Component Gap — spacing inside custom components
 
 Use for gaps between internal elements when building a custom component.
 
-| Class | Token |
-|-------|-------|
-| `sgds:gap-component-xs` | `--sgds-component-gap-xs` |
-| `sgds:gap-component-sm` | `--sgds-component-gap-sm` |
-| `sgds:gap-component-md` | `--sgds-component-gap-md` |
-| `sgds:gap-component-lg` | `--sgds-component-gap-lg` |
-| `sgds:gap-component-xl` | `--sgds-component-gap-xl` |
+| Class | Token | Mobile / Tablet / Desktop |
+|-------|-------|--------------------------|
+| `sgds:gap-component-xs` | `--sgds-component-gap-xs` | 8px / 16px / 20px |
+| `sgds:gap-component-sm` | `--sgds-component-gap-sm` | 12px / 20px / 24px |
+| `sgds:gap-component-md` | `--sgds-component-gap-md` | 16px / 24px / 32px |
+| `sgds:gap-component-lg` | `--sgds-component-gap-lg` | 20px / 32px / 48px |
+| `sgds:gap-component-xl` | `--sgds-component-gap-xl` | 24px / 48px / 64px |
 
 ### Component Padding — padding inside custom components
 
 Use for internal padding when building a custom component. Supports `sgds:p-component-*`, `sgds:px-component-*`, and `sgds:py-component-*`.
 
-| Class | Token |
-|-------|-------|
-| `sgds:p-component-xs` | `--sgds-component-padding-xs` |
-| `sgds:p-component-sm` | `--sgds-component-padding-sm` |
-| `sgds:p-component-md` | `--sgds-component-padding-md` |
-| `sgds:p-component-lg` | `--sgds-component-padding-lg` |
-| `sgds:p-component-xl` | `--sgds-component-padding-xl` |
+| Class | Token | Mobile / Tablet / Desktop |
+|-------|-------|--------------------------|
+| `sgds:p-component-xs` | `--sgds-component-padding-xs` | 16px / 20px / 24px |
+| `sgds:p-component-sm` | `--sgds-component-padding-sm` | 20px / 24px / 32px |
+| `sgds:p-component-md` | `--sgds-component-padding-md` | 24px / 32px / 48px |
+| `sgds:p-component-lg` | `--sgds-component-padding-lg` | 32px / 48px / 64px |
+| `sgds:p-component-xl` | `--sgds-component-padding-xl` | 48px / 64px / 96px |
 
 ### Container Width
 

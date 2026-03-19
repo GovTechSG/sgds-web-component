@@ -12,6 +12,8 @@
 **Which `tone`?**
 - Standard brand color → `brand` (default)
 - Destructive / irreversible action → `danger`
+- Neutral / no brand color → `neutral`
+- Fixed light (dark backgrounds) → `fixed-light`
 
 **Which `size`?**
 - Default → `md`
@@ -27,7 +29,7 @@
 | Attribute | Type | Default | Purpose |
 |---|---|---|---|
 | `variant` | `primary \| outline \| ghost \| danger` | `primary` | Visual style |
-| `tone` | `brand \| danger` | `brand` | Semantic tone |
+| `tone` | `brand \| danger \| neutral \| fixed-light` | `brand` | Semantic tone |
 | `size` | `xs \| sm \| md \| lg` | `md` | Size |
 | `type` | `button \| submit \| reset` | `button` | Form behaviour |
 | `disabled` | boolean | `false` | Disables interaction |
@@ -97,6 +99,8 @@ Controls the semantic color palette applied across all variants.
 
 - `brand` (default) — uses the SGDS primary brand color
 - `danger` — uses red across all variants; suitable for irreversible actions like delete or remove
+- `neutral` — no brand color; use for secondary actions where brand emphasis is unwanted (e.g. toolbar filter buttons)
+- `fixed-light` — fixed light palette; use on dark backgrounds where theme-awareness should not apply
 
 ## `size`
 
