@@ -1,5 +1,6 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { userEvent } from "@storybook/test";
 
 export const Template = ({
   noFlip,
@@ -52,3 +53,9 @@ export const args = {
 };
 
 export const parameters = {};
+
+export const play = async ({ canvasElement }) => {
+  const toggler = canvasElement.querySelector("sgds-button");
+  const trigger = toggler.shadowRoot.querySelector("button");
+  await userEvent.click(trigger);
+};

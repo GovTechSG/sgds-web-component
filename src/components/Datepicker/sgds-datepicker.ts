@@ -200,7 +200,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     super.firstUpdated(changedProperties);
     if (this.menuIsOpen) {
       const input = await this.datepickerInputAsync;
-      this.showMenu();
+      await this.updateFloatingPosition();
       const cal = await this.calendar;
       cal.focusOnCalendar(input);
     }

@@ -46,3 +46,5 @@ export const Template = ({ active, activeSNL, activeSNIAsLink, disabledSNL, disa
 export const args = {};
 
 export const parameters = {};
+
+export const play = undefined;

@@ -9,3 +9,5 @@ export const Template = args => html` <sgds-divider
 export const args = {};
 
 export const parameters = {};
+
+export const play = undefined;

@@ -30,3 +30,5 @@ export const args = {
 export const parameters = {
   docs: {}
 };
+
+export const play = undefined;

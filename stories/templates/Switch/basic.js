@@ -12,3 +12,5 @@ export const Template = args => html` <sgds-switch
 export const args = {};
 
 export const parameters = {};
+
+export const play = undefined;
