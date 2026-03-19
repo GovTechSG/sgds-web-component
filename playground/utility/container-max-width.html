@@ -1,0 +1,81 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Container Max Width</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <p class="sgds:mb-2-xl sgds:text-subtle">Fixed maximum width tokens for constraining content areas. Unlike the responsive <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:w-container</code>, these tokens apply a single static max-width at the named size.</p>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Container Max Width Tokens</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Value</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:max-w-container-md</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-container-max-width-md</code></sgds-table-cell>
+        <sgds-table-cell>768px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:max-w-container-lg</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-container-max-width-lg</code></sgds-table-cell>
+        <sgds-table-cell>888px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:max-w-container-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-container-max-width-xl</code></sgds-table-cell>
+        <sgds-table-cell>1168px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:max-w-container-2-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-container-max-width-2-xl</code></sgds-table-cell>
+        <sgds-table-cell>1312px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:max-w-container-3-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-container-max-width-3-xl</code></sgds-table-cell>
+        <sgds-table-cell>1440px</sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Preview</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Each bar below is constrained to its respective max-width token with <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:mx-auto</code>.</p>
+    <div class="sgds:flex sgds:flex-col sgds:gap-sm">
+      <div class="sgds:max-w-container-md sgds:mx-auto sgds:w-full sgds:bg-primary-surface-muted sgds:p-md sgds:rounded-md">
+        <p class="sgds:text-label-sm sgds:text-subtle">max-w-container-md  768px</p>
+      </div>
+      <div class="sgds:max-w-container-lg sgds:mx-auto sgds:w-full sgds:bg-success-surface-muted sgds:p-md sgds:rounded-md">
+        <p class="sgds:text-label-sm sgds:text-subtle">max-w-container-lg  888px</p>
+      </div>
+      <div class="sgds:max-w-container-xl sgds:mx-auto sgds:w-full sgds:bg-accent-surface-muted sgds:p-md sgds:rounded-md">
+        <p class="sgds:text-label-sm sgds:text-subtle">max-w-container-xl  1168px</p>
+      </div>
+      <div class="sgds:max-w-container-2-xl sgds:mx-auto sgds:w-full sgds:bg-warning-surface-muted sgds:p-md sgds:rounded-md">
+        <p class="sgds:text-label-sm sgds:text-subtle">max-w-container-2-xl  1312px</p>
+      </div>
+      <div class="sgds:max-w-container-3-xl sgds:mx-auto sgds:w-full sgds:bg-danger-surface-muted sgds:p-md sgds:rounded-md">
+        <p class="sgds:text-label-sm sgds:text-subtle">max-w-container-3-xl  1440px</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById("night-theme").addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+    });
+  </script>
+</body>

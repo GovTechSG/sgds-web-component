@@ -88,6 +88,7 @@ These skills cover two domains. Each domain uses a folder naming prefix so agent
 - [utilities-overview](../skills/sgds-utilities-overview/SKILL.md) - Overview of all SGDS foundational style utilities and the Utilities API
 - [utilities-setup](../skills/sgds-utilities-setup/SKILL.md) - Setup and prerequisites for using SGDS utilities
 - [utilities-grid](../skills/sgds-utilities-grid/SKILL.md) - **First-priority layout system**: `.sgds-container`, `.sgds-grid`, `.sgds-col-*` — SGDS-native responsive grid with correct breakpoints, gutters, and column counts. Always prefer over generic Tailwind grid utilities.
+- [utilities-dimension](../skills/sgds-utilities-dimension/SKILL.md) - Container width tokens: `sgds:w-container` (responsive, first-level page wrapper) and `sgds:max-w-container-*` (static, nested containers). Use when constraining content area width.
 - [utilities-spacing](../skills/sgds-utilities-spacing/SKILL.md) - Margin, padding, gap utilities with 4px scale system
 - [utilities-color-semantics](../skills/sgds-utilities-color-semantics/SKILL.md) - Shared definitions for color token suffix modifiers (default, emphasis, muted, fixed-light, fixed-dark, inverse, surface, etc.) reused across all color skills
 - [utilities-background-color](../skills/sgds-utilities-background-color/SKILL.md) - Theme-aware background color utilities with semantic tokens
