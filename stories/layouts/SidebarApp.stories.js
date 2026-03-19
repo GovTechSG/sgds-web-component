@@ -20,7 +20,7 @@ const Template = () => {
         <div id="sidebar-component" class="sgds:h-500 sgds:w-full">Place SideBar here</div>
       </div>
       <div class="sgds:flex sgds:flex-col sgds:w-full ">
-        <div class="sgds-container-sidebar sgds:py-2-xl">
+        <div class="sgds-container-sidebar sgds:py-layout-md">
           <div id="content" class="sgds:h-250 sgds:w-full">Place content here</div>
         </div>
         <sgds-footer></sgds-footer>

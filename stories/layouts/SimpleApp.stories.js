@@ -14,7 +14,7 @@ const Template = () => {
       </sgds-mainnav>
     </div>
     <div class="sgds:flex sgds:flex-col sgds:w-full">
-      <div class="sgds-container sgds:py-2-xl">
+      <div class="sgds-container sgds:py-layout-md">
         <div id="content" class="sgds:h-250 sgds:w-full">Place content here</div>
       </div>
       <sgds-footer></sgds-footer>
