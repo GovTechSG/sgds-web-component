@@ -10,6 +10,8 @@ metadata:
 
 # Getting Started with SGDS
 
+> **New to SGDS?** See **[sgds-workflow](../sgds-workflow/SKILL.md)** for the full skill map and reading order before continuing.
+
 When building any application with the SGDS web component library, complete these four steps in order before writing any component or page code.
 
 ---
@@ -52,7 +54,7 @@ Import these files in your project's main CSS entry point (the file processed by
 
 `utility.css` contains Tailwind v4 directives and **must be processed by your Tailwind pipeline** — it cannot be imported as a plain JS import.
 
-> For full details on utility class setup, see **[sgds-utilities-setup](../sgds-utilities-setup/SKILL.md)**.
+> For full details on utility class setup, see **[sgds-utilities](../sgds-utilities/SKILL.md)**.
 
 ---
 
@@ -66,7 +68,7 @@ import "@govtechsg/sgds-web-component";
 
 This registers all `<sgds-*>` custom elements globally.
 
-> For React, Vue, Angular, and Next.js-specific integration details, see **[sgds-components-setup](../sgds-components-setup/SKILL.md)**.
+> For React, Vue, Angular, and Next.js-specific integration details, see **[sgds-components](../sgds-components/SKILL.md)**.
 
 ---
 
@@ -118,7 +120,7 @@ Every SGDS application should be structured using one of the two recommended lay
 </div>
 ```
 
-> For full layout details and responsive container breakpoints, see **[sgds-pattern-layout](../sgds-pattern-layout/SKILL.md)**.
+> For full layout details and responsive container breakpoints, see **[Application Shell](../sgds-pattern-block-templates/reference/application-shell.md)**.
 
 ---
 

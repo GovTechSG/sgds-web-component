@@ -8,7 +8,7 @@ Use for: agency homepages, product about pages, government ministry profile page
 
 ## Layout Structure
 
-Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/SKILL.md).
+Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block-templates/reference/application-shell.md).
 
 ```
 ┌──────────────────────────────────────────────────────┐

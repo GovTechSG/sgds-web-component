@@ -14,7 +14,7 @@ npm install echarts
 
 ## Layout Structure
 
-Uses the **Sidebar App Layout** from `sgds-pattern-layout`. The sidebar is sticky; the main content scrolls independently.
+Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-block-templates/reference/application-shell.md). The sidebar is sticky; the main content scrolls independently.
 
 ```
 ┌─────────────────────────────────────────────────────┐

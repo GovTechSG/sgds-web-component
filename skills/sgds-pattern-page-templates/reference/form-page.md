@@ -8,7 +8,7 @@ Use for: entity creation/editing, profile settings, multi-section configuration 
 
 ## Layout Structure
 
-Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/SKILL.md). No sidebar. Form content is the full focus.
+Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block-templates/reference/application-shell.md). No sidebar. Form content is the full focus.
 
 ```
 ┌──────────────────────────────────────────────────────┐

@@ -8,7 +8,7 @@ Use for: entity index pages, record management, admin lists, approval queues.
 
 ## Layout Structure
 
-Uses the Simple App Layout from [sgds-pattern-layout](../../sgds-pattern-layout/SKILL.md).
+Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block-templates/reference/application-shell.md).
 
 ```
 ┌──────────────────────────────────────────────────────┐

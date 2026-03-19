@@ -14,7 +14,7 @@ Ready-to-use full-page templates using SGDS components and utilities — adapted
 
 ## Prerequisites
 
-**Read [sgds-pattern-layout](../sgds-pattern-layout/SKILL.md) first.** All templates follow the layout rules defined there — mandatory `<sgds-masthead>`, `<sgds-mainnav>`, and `<sgds-footer>` on every page, plus container and sticky-header conventions.
+> **Every page must include the Application Shell.** Read **[sgds-pattern-block-templates → reference/application-shell.md](../sgds-pattern-block-templates/reference/application-shell.md)** before generating any page. The shell provides mandatory `<sgds-masthead>`, `<sgds-mainnav>`, and `<sgds-footer>` on every page, plus container class selection (`.sgds-container` vs `.sgds-container-sidebar`) and sticky-header conventions. Never generate a page template without all three shell components.
 
 ```javascript
 import "@govtechsg/sgds-web-component/themes/day.css";
@@ -22,9 +22,9 @@ import "@govtechsg/sgds-web-component/css/sgds.css";
 import "@govtechsg/sgds-web-component/css/utility.css";
 ```
 
-See **[sgds-getting-started](../sgds-getting-started/SKILL.md)** and **[sgds-components-setup](../sgds-components-setup/SKILL.md)** for full installation.
+See **[sgds-getting-started](../sgds-getting-started/SKILL.md)** and **[sgds-components](../sgds-components/SKILL.md)** for full installation.
 
-For container width and max-width utilities used in these templates, see **[sgds-utilities-dimension](../sgds-utilities-dimension/SKILL.md)**.
+For container width and max-width utilities used in these templates, see **[sgds-utilities](../sgds-utilities/reference/dimension.md)**.
 
 ---
 
@@ -43,7 +43,7 @@ For container width and max-width utilities used in these templates, see **[sgds
 ## → Read [reference/dashboard.md](reference/dashboard.md)
 Sidebar navigation + stat cards row + data table. Use for dashboards, admin portals, internal tools.
 
-> **Note**: The dashboard template uses `sgds-sidebar` (RC component). Load the CDN script before other SGDS imports — see **[sgds-components-sidebar](../sgds-components-sidebar/SKILL.md)** for the CDN tag and framework setup.
+> **Note**: The dashboard template uses `sgds-sidebar` (RC component). Load the CDN script before other SGDS imports — see **[sgds-components sidebar reference](../sgds-components/reference/sidebar.md)** for the CDN tag and framework setup.
 
 ## → Read [reference/login.md](reference/login.md)
 Centered card with email/password form. Use for authentication, sign-in, sign-up pages.
