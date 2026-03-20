@@ -34,3 +34,5 @@ export const args = {};
 export const parameters = {
   controls: { exclude: ["slots"] }
 };
+
+export const play = undefined;

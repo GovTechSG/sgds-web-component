@@ -1,3 +1,43 @@
+## v3.15.0 (2026-03-20)
+
+### Feat
+
+- **Skills**: block level [skip-cd] (#574)
+- **Skills**: apex patterns from petrine
+- **Skills**: add about us templates
+- **Skill**: refine skills for templating
+- **Skills**: skill refinement for layouts tempaltes
+- **Utilties**: change to spacing to apply responsive spacers to padding and margin
+- **Skills**: new pattern level skills
+- **Utility**: container max width tokens added [run-chromatic][skip-cd] (#573)
+- **Skills**: add dimension skills
+- **Utility**: container max width tokens added
+- **Utilities, Skills, Foundation**: new skills and storybook documentations [run-chromatic] (#571)
+- **Skills**: reduce bloat
+- **Skills**: data-visualation, app setup, theme
+- **Skills**: add remaining component skilsl
+- **Skill**: masthead skill
+- **Skills**: button and setup:
+- **Skills**: use anthropic skill evaluation to adjust
+- **Utility**: added new primitive line heights
+- **Skills**: foundation wip
+- **skills**: background colors
+
+### Fix
+
+- **Dropdown**: menu position to target properly when open on initial …[run-chromatic] (#569)
+- **Accordion, Mainnav**: slot modifications should happen at slotchange [skip-cd] (#572)
+- **Accordion, Mainnav**: slot modifications happens at slotchange
+- **Dropdown**: menu position to target properly when open on initial load
+
+### Refactor
+
+- **Skills**: rearrange the file structures
+- **Skill**: grid, spacing and table skills
+- *****: use play over menuIsOpen to test the menu UI
+- **Skill**: grid, spacing and table skills
+- **Skills**: refine setup skills
+
 ## v3.14.0 (2026-03-11)
 
 ### Feat

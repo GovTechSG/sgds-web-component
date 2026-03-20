@@ -43,3 +43,5 @@ export const Template = args =>
 export const args = { orientation: "vertical" };
 
 export const parameters = {};
+
+export const play = undefined;

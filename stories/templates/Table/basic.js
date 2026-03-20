@@ -47,3 +47,5 @@ export const Template = args => {
 export const args = { headerPosition: "horizontal", headerBackground: false, tableBorder: true };
 
 export const parameters = {};
+
+export const play = undefined;

@@ -72,7 +72,7 @@ export class SgdsDropdown extends DropdownListElement {
   async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
     if (this.menuIsOpen) {
-      await this.showMenu();
+      await this.updateFloatingPosition();
     }
     this._handleDisabled();
   }

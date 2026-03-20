@@ -1,5 +1,6 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { userEvent } from "@storybook/test";
 
 export const Template = ({
   noFlip,
@@ -17,7 +18,8 @@ export const Template = ({
   drop,
   displayDate,
   value,
-  readOnly
+  readOnly,
+  menuIsOpen
 }) =>
   html`
     <sgds-datepicker
@@ -37,6 +39,7 @@ export const Template = ({
       drop=${ifDefined(drop)}
       displayDate=${ifDefined(displayDate)}
       ?readonly=${readOnly}
+      ?menuIsOpen=${menuIsOpen}
     >
     </sgds-datepicker>
   `;
@@ -49,3 +52,9 @@ export const args = {
   hintText: "Born after 1920"
 };
 export const parameters = {};
+
+export const play = async ({ canvasElement }) => {
+  const toggler = canvasElement.querySelector("sgds-datepicker");
+  const trigger = toggler.shadowRoot.querySelector("sgds-icon-button");
+  await userEvent.click(trigger);
+};

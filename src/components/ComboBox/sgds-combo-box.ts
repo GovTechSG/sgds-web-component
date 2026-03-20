@@ -124,9 +124,8 @@ export class SgdsComboBox extends SelectElement {
       this.appendChild(comboBoxOption);
     });
     this._setupValidation(this.menuList);
-
-    if (this.menuIsOpen && !this.readonly) {
-      this.showMenu();
+    if (this.menuIsOpen) {
+      await this.updateFloatingPosition();
     }
   }
 

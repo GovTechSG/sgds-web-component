@@ -383,12 +383,12 @@
   --gap-layout-lg: var(--sgds-layout-gap-lg);
   --gap-layout-xl: var(--sgds-layout-gap-xl);
 
-  /* Layout Padding */
-  --padding-layout-xs: var(--sgds-layout-padding-xs);
-  --padding-layout-sm: var(--sgds-layout-padding-sm);
-  --padding-layout-md: var(--sgds-layout-padding-md);
-  --padding-layout-lg: var(--sgds-layout-padding-lg);
-  --padding-layout-xl: var(--sgds-layout-padding-xl);
+  /* Layout Padding and Margin */
+  --spacing-layout-xs: var(--sgds-layout-padding-xs);
+  --spacing-layout-sm: var(--sgds-layout-padding-sm);
+  --spacing-layout-md: var(--sgds-layout-padding-md);
+  --spacing-layout-lg: var(--sgds-layout-padding-lg);
+  --spacing-layout-xl: var(--sgds-layout-padding-xl);
 
   /* Component Gap */
   --gap-component-xs: var(--sgds-component-gap-xs);
@@ -397,15 +397,22 @@
   --gap-component-lg: var(--sgds-component-gap-lg);
   --gap-component-xl: var(--sgds-component-gap-xl);
 
-  /* Component Padding */
-  --padding-component-xs: var(--sgds-component-padding-xs);
-  --padding-component-sm: var(--sgds-component-padding-sm);
-  --padding-component-md: var(--sgds-component-padding-md);
-  --padding-component-lg: var(--sgds-component-padding-lg);
-  --padding-component-xl: var(--sgds-component-padding-xl);
+  /* Component Padding and Margin */
+  --spacing-component-xs: var(--sgds-component-padding-xs);
+  --spacing-component-sm: var(--sgds-component-padding-sm);
+  --spacing-component-md: var(--sgds-component-padding-md);
+  --spacing-component-lg: var(--sgds-component-padding-lg);
+  --spacing-component-xl: var(--sgds-component-padding-xl);
 
   /* Container Width */
   --width-container: var(--sgds-container-width);
+
+  /* Container Max Width */
+  --max-width-container-md: var(--sgds-container-max-width-md);
+  --max-width-container-lg: var(--sgds-container-max-width-lg);
+  --max-width-container-xl: var(--sgds-container-max-width-xl);
+  --max-width-container-2-xl: var(--sgds-container-max-width-2-xl);
+  --max-width-container-3-xl: var(--sgds-container-max-width-3-xl);
 
   /* Border Radius */
   --radius-none: var(--sgds-border-radius-none);
@@ -425,11 +432,11 @@
   --radius-form-md: var(--sgds-form-border-radius-md);
   --radius-form-full: var(--sgds-form-border-radius-full);
 
-  /* Paragraph Spacing */
-  --space-paragraph-none: var(--sgds-paragraph-spacing-none);
-  --space-paragraph-sm: var(--sgds-paragraph-spacing-sm);
-  --space-paragraph-md: var(--sgds-paragraph-spacing-md);
-  --space-paragraph-lg: var(--sgds-paragraph-spacing-lg);
-  --space-paragraph-xl: var(--sgds-paragraph-spacing-xl);
+  /* Paragraph Margins */
+  --margin-paragraph-none: var(--sgds-paragraph-spacing-none);
+  --margin-paragraph-sm: var(--sgds-paragraph-spacing-sm);
+  --margin-paragraph-md: var(--sgds-paragraph-spacing-md);
+  --margin-paragraph-lg: var(--sgds-paragraph-spacing-lg);
+  --margin-paragraph-xl: var(--sgds-paragraph-spacing-xl);
 
 }
