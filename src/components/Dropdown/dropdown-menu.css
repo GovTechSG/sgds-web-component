@@ -1,4 +1,4 @@
-:host([menuisopen]) .dropdown-menu {
+:host([menuisopen]:not([disabled]):not([readonly])) .dropdown-menu {
   display: block;
 }
 

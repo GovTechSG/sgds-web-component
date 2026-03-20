@@ -83,9 +83,11 @@ export class DropdownElement extends SgdsElement {
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
-    // Optionally open menu on first load
     if (this.menuIsOpen) {
-      this.updateFloatingPosition();
+      requestAnimationFrame(async () => {
+        await this.updateFloatingPosition();
+        this._startAutoUpdate();
+      });
     }
   }
 
@@ -96,7 +98,11 @@ export class DropdownElement extends SgdsElement {
     this.emit("sgds-show");
     await this.updateFloatingPosition();
     this.emit("sgds-after-show");
+    this._startAutoUpdate();
+  }
 
+  /** Starts Floating UI's autoUpdate loop, recomputing menu position on scroll, resize, or ancestor layout changes. Stores the cleanup function to stop tracking when the menu closes. */
+  private _startAutoUpdate() {
     if (this.myDropdown.value && this.menuRef.value) {
       this._cleanupAutoUpdate = autoUpdate(this.myDropdown.value, this.menuRef.value, () =>
         this.updateFloatingPosition()

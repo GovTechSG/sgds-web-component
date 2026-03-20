@@ -15,13 +15,13 @@ Standards and patterns for authoring AI agent skills in this repository.
 
 | Location | Purpose | Audience |
 |----------|---------|---------|
-| `skills/utilities-*/` | Teach external developers how to use SGDS foundational style utilities (the Utilities API) | `external` |
-| `skills/components-*/` | Teach external developers how to use SGDS web components | `external` |
+| `skills/sgds-utilities/` | All SGDS utility classes in one consolidated skill with a reference file per utility category | `external` |
+| `skills/sgds-components/` | All 46 SGDS web components in one consolidated skill with a reference file per component | `external` |
 | `.github/skills/` | Internal tools for SGDS maintainers | `internal` (no `audience` field) |
 
 **Folder naming convention**: All `skills/` folders use a domain prefix so agents and users can discover them by category:
-- `utilities-{name}` — foundational styles exposed via the `sgds:` Tailwind prefix
-- `components-{name}` — usage guidance for SGDS web components (`<sgds-*>`)
+- `sgds-utilities` — consolidated skill for all SGDS utility classes (`sgds:` Tailwind prefix); reference files in `sgds-utilities/reference/`
+- `sgds-components` — consolidated skill for all SGDS web components (`<sgds-*>`); reference files in `sgds-components/reference/`
 
 ## SKILL.md Frontmatter
 
@@ -64,14 +64,37 @@ skills/utilities-{name}/
     └── ...
 ```
 
+**Consolidated skill** (many related items grouped into one skill with a reference file per item):
+```
+skills/sgds-components/
+├── SKILL.md          ← setup content + component index table with links to reference/
+└── reference/
+    ├── accordion.md
+    ├── alert.md
+    ├── button.md
+    └── ...            ← one file per component, no frontmatter, no Prerequisites section
+```
+
+Use the consolidated pattern when a domain has many parallel items (e.g., all SGDS web components) that would otherwise create dozens of top-level skill folders. The consolidated SKILL.md acts as both the setup guide and the navigation index.
+
 ## When to Extract Reference Files
 
 Split into `reference/` when **any** of these are true:
 - SKILL.md would exceed ~500 lines with all token documentation included
 - The skill covers multiple semantic categories (primary, danger, success, etc.) that each have enough depth for their own file
 - Different categories have meaningfully different design semantics worth documenting separately
+- The domain has many parallel items that are better served by a consolidated skill (use the consolidated pattern above)
 
 Do **not** extract if the skill is a single focused topic (e.g., spacing utilities, opacity).
+
+## Consolidated Skill Reference Files
+
+Reference files in a consolidated skill differ from standalone SKILL.md files:
+
+- **No YAML frontmatter** — reference files start directly with the `#` heading
+- **No Prerequisites section** — setup instructions live only in the parent SKILL.md; reference files do not duplicate them
+- **Cross-references** — links to the parent SKILL.md use `../SKILL.md`; links to sibling reference files use `./other.md` or just `other.md`
+- **Content** — everything else from the original SKILL.md (Quick Decision Guide, API Summary, Slots, Events, For AI agents) is preserved verbatim
 
 ## Utility Skill Structure (with references)
 
@@ -102,7 +125,7 @@ One-line description of what it helps with.
 
 ## Component Skill Structure
 
-Model: see `skills/components-button/SKILL.md`.
+Model: see `skills/sgds-components/reference/button.md`.
 
 Component skills document an `<sgds-*>` element's usage. Their SKILL.md structure differs from utility skills:
 
@@ -247,20 +270,22 @@ This keeps generated eval artefacts (iteration dirs, benchmark.json, grading fil
 
 ### Utilities skills
 
-1. Add an entry in `skills/utilities-overview/SKILL.md` under Utility Categories.
-2. Add the skill name to the `description` field of `skills/utilities-overview/SKILL.md`.
-3. Add a line to `.github/copilot-instructions.md` under **Utilities Skills**:
-   ```markdown
-   - [utilities-{name}](../skills/utilities-{name}/SKILL.md) - One-line description
-   ```
+All SGDS utility categories live in the consolidated `skills/sgds-utilities/` skill. To add a new utility category reference:
+
+1. Create `skills/sgds-utilities/reference/{category-name}.md` — no frontmatter, no Prerequisites section.
+   - If the category has multiple sub-topics, create a hub file `reference/{category-name}.md` + a subfolder `reference/{category-name}/` with individual topic files.
+2. Add a row for the category in the `## Available Utilities` table in `skills/sgds-utilities/SKILL.md`.
+3. Update the `description` frontmatter of `skills/sgds-utilities/SKILL.md` to include the new category.
+4. Update `CLAUDE.md` if the description blurb for `sgds-utilities` needs updating.
 
 ### Component skills
 
-1. Add a line to `.github/copilot-instructions.md` under **Component Skills**:
-   ```markdown
-   - [components-{name}](../skills/components-{name}/SKILL.md) - One-line description
-   ```
-2. Once 3+ component skills exist, create `skills/components-overview/SKILL.md` as a navigation hub (same pattern as `utilities-overview`). Until then, `copilot-instructions.md` is the only registry.
+All SGDS web components live in the consolidated `skills/sgds-components/` skill. To add a new component reference:
+
+1. Create `skills/sgds-components/reference/{component-name}.md` — no frontmatter, no Prerequisites section.
+2. Add a row for the component in the `## Available Components` table in `skills/sgds-components/SKILL.md`.
+3. Update the `description` frontmatter of `skills/sgds-components/SKILL.md` to include the new component name.
+4. Update `CLAUDE.md` if the description blurb for `sgds-components` needs updating.
 
 ## Checklist for New Skills
 
@@ -277,9 +302,9 @@ Before considering a skill complete:
 **Utilities skills only**
 - [ ] All HTML examples contain only the token(s) for that file's category
 - [ ] Every Common Patterns section has a library-first note
-- [ ] Shared modifier definitions link to a shared skill, not duplicated
-- [ ] Registered in `skills/utilities-overview/SKILL.md`
-- [ ] Skill name added to `utilities-overview` frontmatter `description`
+- [ ] Shared modifier definitions link to `color-semantics.md`, not duplicated
+- [ ] Row added to `## Available Utilities` table in `skills/sgds-utilities/SKILL.md`
+- [ ] Category name added to `sgds-utilities` frontmatter `description`
 
 **Component skills only**
 - [ ] First code example in hub is raw `<sgds-*>` HTML

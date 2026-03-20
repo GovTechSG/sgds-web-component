@@ -44,8 +44,8 @@ export class SgdsSelect extends SelectElement {
     this._updateDisplayValue();
     this.input = await this._input;
     this._mixinValidate(this.input);
-    if (this.menuIsOpen && !this.readonly) {
-      this.showMenu();
+    if (this.menuIsOpen) {
+      await this.updateFloatingPosition();
     }
   }
 
