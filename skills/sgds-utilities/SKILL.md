@@ -186,3 +186,4 @@ Not listed? See the full list at https://tailwindcss.com/docs/installation/frame
 5. Prefer semantic spacing utilities (`sgds:gap-layout-*`, `sgds:p-component-*`) over raw numeric utilities (`sgds:p-4`, `sgds:gap-6`) — they are responsive and encode design intent.
 6. Prefer semantic font-size utilities (`sgds:text-display-*`, `sgds:text-heading-*`, `sgds:text-body-*`) over raw scale utilities — they are responsive.
 7. Color suffix modifiers (`default`, `emphasis`, `muted`, `surface`, `fixed-light`, `fixed-dark`, `inverse`) are shared across all color utilities — see `reference/color-semantics.md`.
+8. **Never use inline `style` attributes.** If a layout or visual property is needed, find the equivalent `sgds:` utility class. If no utility class exists for the exact value, prefer the closest semantic utility. Only resort to a CSS custom property override as a last option, and never via a `style` attribute.
