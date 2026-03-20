@@ -1,0 +1,111 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Layout Margin</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <p class="sgds:mb-2-xl sgds:text-subtle">Layout margin tokens control the outer spacing around major layout sections. Values scale up across breakpoints: mobile / tablet (≥ 1024px) / desktop (≥ 1440px).</p>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Layout Margin</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Mobile / Tablet / Desktop</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:m-layout-xs</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-padding-xs</code></sgds-table-cell>
+        <sgds-table-cell>16px / 20px / 24px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-primary-default sgds:w-40 sgds:h-40" style="position: relative;">
+            <div class="sgds:bg-surface-raised sgds:w-12 sgds:h-12 sgds:m-layout-xs" style="position: absolute; top: 0; left: 0;"></div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:m-layout-sm</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-padding-sm</code></sgds-table-cell>
+        <sgds-table-cell>20px / 24px / 32px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-primary-default sgds:w-40 sgds:h-40" style="position: relative;">
+            <div class="sgds:bg-surface-raised sgds:w-12 sgds:h-12 sgds:m-layout-sm" style="position: absolute; top: 0; left: 0;"></div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:m-layout-md</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-padding-md</code></sgds-table-cell>
+        <sgds-table-cell>24px / 32px / 48px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-primary-default sgds:w-40 sgds:h-40" style="position: relative;">
+            <div class="sgds:bg-surface-raised sgds:w-12 sgds:h-12 sgds:m-layout-md" style="position: absolute; top: 0; left: 0;"></div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:m-layout-lg</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-padding-lg</code></sgds-table-cell>
+        <sgds-table-cell>32px / 48px / 64px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-primary-default sgds:w-40 sgds:h-40" style="position: relative;">
+            <div class="sgds:bg-surface-raised sgds:w-12 sgds:h-12 sgds:m-layout-lg" style="position: absolute; top: 0; left: 0;"></div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:m-layout-xl</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-layout-padding-xl</code></sgds-table-cell>
+        <sgds-table-cell>48px / 64px / 96px</sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:bg-primary-default sgds:w-48 sgds:h-48" style="position: relative;">
+            <div class="sgds:bg-surface-raised sgds:w-12 sgds:h-12 sgds:m-layout-xl" style="position: absolute; top: 0; left: 0;"></div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Example: Stacked Page Sections</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Using <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:m-layout-md</code> to separate distinct page sections.</p>
+    <div class="sgds:bg-surface-default sgds:border sgds:border-muted sgds:rounded-md sgds:p-layout-md">
+      <section class="sgds:bg-primary-surface-muted sgds:rounded-md sgds:p-layout-sm sgds:m-layout-md">
+        <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:text-color-default">Hero</h3>
+        <p class="sgds:text-body-sm sgds:text-color-muted">Page introduction content.</p>
+      </section>
+      <section class="sgds:bg-surface-raised sgds:rounded-md sgds:p-layout-sm sgds:m-layout-md">
+        <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:text-color-default">Features</h3>
+        <p class="sgds:text-body-sm sgds:text-color-muted">Feature highlights content.</p>
+      </section>
+      <section class="sgds:bg-surface-raised sgds:rounded-md sgds:p-layout-sm sgds:m-layout-md">
+        <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:text-color-default">Footer</h3>
+        <p class="sgds:text-body-sm sgds:text-color-muted">Footer content.</p>
+      </section>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>
