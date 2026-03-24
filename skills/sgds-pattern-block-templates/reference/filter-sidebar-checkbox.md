@@ -28,13 +28,13 @@ Filter sidebar
 
   <!-- Filter header -->
   <div class="sgds:flex sgds:gap-4 sgds:items-center">
-    <span class="sgds:text-xl sgds:font-semibold sgds:text-color-default">Filter by</span>
+    <span class="sgds:text-xl sgds:font-semibold sgds:text-default">Filter by</span>
     <sgds-link><a href="#">Clear all</a></sgds-link>
   </div>
 
   <!-- Category 1 -->
   <div class="sgds:flex sgds:flex-col sgds:gap-xs">
-    <div class="sgds:text-base sgds:font-semibold sgds:text-color-default">Programme type</div>
+    <div class="sgds:text-base sgds:font-semibold sgds:text-default">Programme type</div>
     <sgds-checkbox-group>
       <sgds-checkbox value="opening-address">Opening Address (1)</sgds-checkbox>
       <sgds-checkbox value="keynote">Keynote (4)</sgds-checkbox>
@@ -45,7 +45,7 @@ Filter sidebar
 
   <!-- Category 2 -->
   <div class="sgds:flex sgds:flex-col sgds:gap-xs">
-    <div class="sgds:text-base sgds:font-semibold sgds:text-color-default">Sessions</div>
+    <div class="sgds:text-base sgds:font-semibold sgds:text-default">Sessions</div>
     <sgds-checkbox-group>
       <sgds-checkbox value="morning">Morning (12)</sgds-checkbox>
       <sgds-checkbox value="afternoon">Afternoon (16)</sgds-checkbox>
@@ -54,7 +54,7 @@ Filter sidebar
 
   <!-- Category 3 -->
   <div class="sgds:flex sgds:flex-col sgds:gap-xs">
-    <div class="sgds:text-base sgds:font-semibold sgds:text-color-default">Track</div>
+    <div class="sgds:text-base sgds:font-semibold sgds:text-default">Track</div>
     <sgds-checkbox-group>
       <sgds-checkbox value="ai-cybersecurity">AI x Cybersecurity (4)</sgds-checkbox>
       <sgds-checkbox value="resilient-cloud">Resilient and Secure Cloud (6)</sgds-checkbox>
@@ -64,7 +64,7 @@ Filter sidebar
 
   <!-- Category 4 -->
   <div class="sgds:flex sgds:flex-col sgds:gap-xs">
-    <div class="sgds:text-base sgds:font-semibold sgds:text-color-default">Event hall</div>
+    <div class="sgds:text-base sgds:font-semibold sgds:text-default">Event hall</div>
     <sgds-checkbox-group>
       <sgds-checkbox value="hall-a">Hall A</sgds-checkbox>
       <sgds-checkbox value="hall-b">Hall B</sgds-checkbox>
@@ -99,7 +99,7 @@ When placed beside a content area, constrain the sidebar width and let the conte
 
 ## Key visual rules
 
-- **Category label**: `<div>` with `sgds:text-base sgds:font-semibold sgds:text-color-default` — not a `<p>` or heading tag, as it's a UI label not document structure
+- **Category label**: `<div>` with `sgds:text-base sgds:font-semibold sgds:text-default` — not a `<p>` or heading tag, as it's a UI label not document structure
 - **Group gap**: `sgds:gap-2-xl` between filter sections — generous spacing prevents the panel feeling cramped
 - **Item count in label**: append `(n)` to each checkbox label to show how many results match — helps users decide which filters are worth applying
 - **Clear all**: use `<sgds-link>` (not a button) — it's a navigational reset action, not a form submission

@@ -6,6 +6,8 @@ SGDS text color utilities use the `sgds:text-{token}` pattern. All colors are th
 
 All SGDS text utilities follow the `sgds:text-{variant}-{modifier}` pattern with the `sgds:` prefix.
 
+> **Common mistake**: The word "color" never appears in the class name. Do NOT write `sgds:text-color-muted`, `sgds:text-color-default`, etc. The correct classes are `sgds:text-muted`, `sgds:text-default`, etc.
+
 For definitions of suffix modifiers (`default`, `emphasis`, `muted`, `fixed-light`, `fixed-dark`, `inverse`, `surface`), see **[color-semantics](color-semantics.md)**.
 
 ## Quick Decision Guide
