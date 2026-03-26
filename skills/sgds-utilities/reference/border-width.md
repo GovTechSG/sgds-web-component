@@ -76,3 +76,7 @@ Border width utilities control thickness and which sides have borders. They are 
 
 - **[border-color](border-color.md)** — Semantic and theme-aware border colors
 - **[border-radius](border-radius.md)** — Rounded corner utilities
+
+---
+
+**For AI agents**: Border width utilities are for adding borders to elements (cards, inputs, containers). They are **not** for creating separator or divider lines between sections. If you need a visual separator between content, use **`<sgds-divider>`** from the components skill — do not simulate it with `sgds:border-b`, `sgds:border-t`, or `sgds:border-y`.
