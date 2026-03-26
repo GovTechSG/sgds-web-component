@@ -49,7 +49,7 @@ Full-height centered layout — card sits in the middle of the viewport on deskt
     <!-- App branding -->
     <div class="sgds:text-center sgds:mb-layout-sm">
       <img src="/logo.svg" alt="App logo" class="sgds:h-10 sgds:mx-auto sgds:mb-3" />
-      <h1 class="sgds:text-xl sgds:font-semibold sgds:text-color-default">My Application</h1>
+      <h1 class="sgds:text-xl sgds:font-semibold sgds:text-default">My Application</h1>
     </div>
 
     <!-- Auth card -->
@@ -57,8 +57,8 @@ Full-height centered layout — card sits in the middle of the viewport on deskt
 
       <!-- Card header -->
       <div class="sgds:mb-layout-sm">
-        <h2 class="sgds:text-lg sgds:font-semibold sgds:text-color-default">Welcome back</h2>
-        <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1">Sign in to your account to continue</p>
+        <h2 class="sgds:text-lg sgds:font-semibold sgds:text-default">Welcome back</h2>
+        <p class="sgds:text-sm sgds:text-muted sgds:mt-1">Sign in to your account to continue</p>
       </div>
 
       <!-- Login form -->
@@ -95,7 +95,7 @@ Full-height centered layout — card sits in the middle of the viewport on deskt
       <!-- Divider -->
       <div class="sgds:flex sgds:items-center sgds:gap-3 sgds:my-component-lg">
         <sgds-divider></sgds-divider>
-        <span class="sgds:text-xs sgds:text-color-muted sgds:whitespace-nowrap">or sign in with</span>
+        <span class="sgds:text-xs sgds:text-muted sgds:whitespace-nowrap">or sign in with</span>
         <sgds-divider></sgds-divider>
       </div>
 
@@ -106,7 +106,7 @@ Full-height centered layout — card sits in the middle of the viewport on deskt
       </sgds-button>
 
       <!-- Footer link -->
-      <p class="sgds:text-sm sgds:text-center sgds:text-color-muted sgds:mt-layout-xs">
+      <p class="sgds:text-sm sgds:text-center sgds:text-muted sgds:mt-layout-xs">
         Don't have an account?
         <a href="/register">Sign up</a>
       </p>
@@ -151,8 +151,8 @@ For more visual impact — left panel with brand message, right panel with form.
   <div class="sgds:flex sgds:w-full lg:sgds:w-1/2 sgds:items-center sgds:justify-center sgds:p-layout-md">
     <div class="sgds:max-w-container-md sgds:w-full">
       <div class="sgds:mb-layout-sm">
-        <h2 class="sgds:text-xl sgds:font-semibold sgds:text-color-default">Sign in</h2>
-        <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1">Enter your credentials to access the portal</p>
+        <h2 class="sgds:text-xl sgds:font-semibold sgds:text-default">Sign in</h2>
+        <p class="sgds:text-sm sgds:text-muted sgds:mt-1">Enter your credentials to access the portal</p>
       </div>
       <form class="sgds:flex sgds:flex-col sgds:gap-component-sm">
         <sgds-input label="Email" type="email" name="email" required hasFeedback></sgds-input>

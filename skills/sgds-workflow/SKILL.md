@@ -103,3 +103,4 @@ If setup is confirmed correct, navigate using the table below.
 6. **sgds-data-visualisation** is only needed when charts or graphs are explicitly requested.
 7. For existing apps, use the Skill Map table to navigate directly. Do not re-read **sgds-getting-started** unless there is a setup problem.
 8. If a user's request does not clearly match any skill, read this workflow skill first to orient, then navigate to the appropriate skill.
+9. **Never use `style` attributes or inline CSS.** All styling must be applied via `class` attributes using `sgds:` utility classes from **sgds-utilities**. Writing `style="margin-top: 16px"` when `sgds:mt-4` exists is a violation.

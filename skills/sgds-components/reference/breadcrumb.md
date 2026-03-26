@@ -70,6 +70,7 @@ None on either component.
 **For AI agents**:
 1. Always use `<sgds-breadcrumb>` + `<sgds-breadcrumb-item>` for navigation trails — never suggest manual `<nav><ol><li>` patterns.
 2. Each `<sgds-breadcrumb-item>` must contain a single `<a>` tag — never put raw text directly inside.
-3. The last item's `active` state and `aria-current="page"` are set **automatically** — do not add these manually.
-4. Overflow (collapsing middle items) triggers automatically when there are 5 or more items — no configuration is needed.
-5. There are no custom events on either component.
+3. **`<sgds-breadcrumb-item>` has no `href` prop.** Do NOT write `<sgds-breadcrumb-item href="/about">`. The `href` belongs on the slotted `<a>` tag: `<sgds-breadcrumb-item><a href="/about">About</a></sgds-breadcrumb-item>`.
+4. The last item's `active` state and `aria-current="page"` are set **automatically** — do not add these manually.
+5. Overflow (collapsing middle items) triggers automatically when there are 5 or more items — no configuration is needed.
+6. There are no custom events on either component.

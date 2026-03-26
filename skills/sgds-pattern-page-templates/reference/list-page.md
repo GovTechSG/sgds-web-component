@@ -54,8 +54,8 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
     <!-- Page header -->
     <div class="sgds:flex sgds:items-start sgds:justify-between sgds:mb-layout-md">
       <div>
-        <h1 class="sgds:text-2xl sgds:font-semibold sgds:text-color-default">Records</h1>
-        <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1" id="record-count">
+        <h1 class="sgds:text-2xl sgds:font-semibold sgds:text-default">Records</h1>
+        <p class="sgds:text-sm sgds:text-muted sgds:mt-1" id="record-count">
           Showing 42 records
         </p>
       </div>
@@ -164,9 +164,9 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
 
     <!-- Empty state (show instead of table when no results) -->
     <div id="empty-state" class="sgds:hidden sgds:py-layout-xl sgds:text-center">
-      <sgds-icon name="in-box" size="3-xl" class="sgds:text-color-muted sgds:mx-auto sgds:mb-3"></sgds-icon>
-      <h3 class="sgds:text-base sgds:font-semibold sgds:text-color-default">No records found</h3>
-      <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1 sgds:mb-layout-sm">
+      <sgds-icon name="in-box" size="3-xl" class="sgds:text-muted sgds:mx-auto sgds:mb-3"></sgds-icon>
+      <h3 class="sgds:text-base sgds:font-semibold sgds:text-default">No records found</h3>
+      <p class="sgds:text-sm sgds:text-muted sgds:mt-1 sgds:mb-layout-sm">
         Try changing your search or filter, or add a new record.
       </p>
       <sgds-button variant="outline">Clear filters</sgds-button>
@@ -174,7 +174,7 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
 
     <!-- Pagination footer -->
     <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mt-component-lg">
-      <p class="sgds:text-sm sgds:text-color-muted">Showing 1–10 of 10</p>
+      <p class="sgds:text-sm sgds:text-muted">Showing 1–10 of 10</p>
       <sgds-pagination dataLength="10" itemsPerPage="10" currentPage="1" limit="5"></sgds-pagination>
     </div>
 

@@ -8,6 +8,8 @@ Helps developers apply theme-aware semantic border colors to components and cont
 
 All SGDS border color utilities use the `sgds:border-{semantic}-{modifier}` pattern with the `sgds:` prefix.
 
+> **Common mistake**: The word "color" never appears in the class name. Do NOT write `sgds:border-color-default`, `sgds:border-color-primary`, etc. The correct classes are `sgds:border-default`, `sgds:border-primary-default`, etc.
+
 **Border colors are theme-aware** — they automatically adapt when toggling between day/night themes (unless using `fixed` variants).
 
 **Border colors are component and container level only** — unlike background tokens, there is no page-level distinction.

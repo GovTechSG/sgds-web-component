@@ -32,11 +32,11 @@ For container width and max-width utilities used in these templates, see **[sgds
 
 | What you're building | Template to use |
 |---|---|
-| Internal tool, admin portal, dashboard | [Dashboard](#→-read-referencedashboardmd) |
-| Login / sign-in page | [Login](#→-read-referenceloginmd) |
-| Multi-field settings or data-entry form | [Form Page](#→-read-referenceform-pagemd) |
-| Data list with search, filters, pagination | [List Page](#→-read-referencelist-pagemd) |
-| Company/agency profile, team intro, achievements | [About Us](#→-read-referenceabout-usmd) |
+| Internal tool, admin portal, dashboard | [Dashboard](reference/dashboard.md) |
+| Login / sign-in page | [Login](reference/login.md) |
+| Multi-field settings or data-entry form | [Form Page](reference/form-page.md) |
+| Data list with search, filters, pagination | [List Page](reference/list-page.md) |
+| Company/agency profile, team intro, achievements | [About Us](reference/about-us.md) |
 
 ---
 
@@ -78,4 +78,4 @@ Every card: padding inside (`sgds:p-component-lg`), gap between card rows (`sgds
 Primary action → `<sgds-button variant="primary">`. Secondary / cancel → `<sgds-button variant="outline">`. Destructive → `<sgds-button variant="ghost" tone="danger">`.
 
 **5. Muted labels, prominent values**
-In stat cards and description lists: label in `sgds:text-color-muted sgds:text-sm`, value in `sgds:text-color-default sgds:text-2xl sgds:font-semibold`.
+In stat cards and description lists: label in `sgds:text-muted sgds:text-sm`, value in `sgds:text-default sgds:text-2xl sgds:font-semibold`.
