@@ -159,6 +159,7 @@ Not listed? See the full list at https://tailwindcss.com/docs/installation/frame
 | **Border** | Border radius (`sgds:rounded-*`, `sgds:rounded-form-*`) | No | [→ reference/border-radius.md](reference/border-radius.md) |
 | **Typography** | Font size, weight, line height, letter spacing, font family | No | [→ reference/typography.md](reference/typography.md) |
 | **Visual** | Opacity (`sgds:opacity-*`) | No | [→ reference/opacity.md](reference/opacity.md) |
+| **Visual** | Elevation / box shadows (`sgds:shadow-*`, `sgds:shadow-edge-*`) | No | [→ reference/elevation.md](reference/elevation.md) |
 | **Patterns** | Cross-category component patterns (card, alert, form, modal) | — | [→ reference/overview-patterns.md](reference/overview-patterns.md) |
 
 ---
@@ -174,6 +175,7 @@ Not listed? See the full list at https://tailwindcss.com/docs/installation/frame
 **Borders and rounded corners** → [reference/border-color.md](reference/border-color.md), [reference/border-width.md](reference/border-width.md), [reference/border-radius.md](reference/border-radius.md)
 **Headings, body text, font sizes** → [reference/typography.md](reference/typography.md)
 **Transparent overlays, disabled states** → [reference/opacity.md](reference/opacity.md)
+**Card shadows, modal depth, sticky header/footer edges** → [reference/elevation.md](reference/elevation.md)
 **Multi-category component examples** → [reference/overview-patterns.md](reference/overview-patterns.md)
 
 ---
