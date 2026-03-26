@@ -11,6 +11,7 @@ module.exports = {
     "../stories/form-validation/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/troubleshoot/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/layouts/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/agent-skills/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/*.mdx"
   ],
   addons: [
