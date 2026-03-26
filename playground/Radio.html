@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Radio Group</h2>
+        <sgds-radio-group label="Choose a fruit" name="fruit">
+          <sgds-radio value="apple">Apple</sgds-radio>
+          <sgds-radio value="banana">Banana</sgds-radio>
+          <sgds-radio value="cherry">Cherry</sgds-radio>
+        </sgds-radio-group>
+      </div>
+
+      <div>
+        <h2>Pre-selected</h2>
+        <sgds-radio-group label="Size" name="size" value="medium">
+          <sgds-radio value="small">Small</sgds-radio>
+          <sgds-radio value="medium">Medium</sgds-radio>
+          <sgds-radio value="large">Large</sgds-radio>
+        </sgds-radio-group>
+      </div>
+
+      <div>
+        <h2>With Disabled Option</h2>
+        <sgds-radio-group label="Plan" name="plan">
+          <sgds-radio value="free">Free</sgds-radio>
+          <sgds-radio value="pro">Pro</sgds-radio>
+          <sgds-radio value="enterprise" disabled>Enterprise (Coming soon)</sgds-radio>
+        </sgds-radio-group>
+      </div>
+
+      <div>
+        <h2>Required Validation</h2>
+        <form>
+          <sgds-radio-group label="Agreement" name="agreement" required hasFeedback>
+            <sgds-radio value="yes">I agree</sgds-radio>
+            <sgds-radio value="no">I disagree</sgds-radio>
+          </sgds-radio-group>
+          <br />
+          <sgds-button type="submit">Submit</sgds-button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

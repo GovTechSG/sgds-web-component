@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc/components/Sidebar/index.umd.min.js"></script>
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+      .sidebar-demo {
+        height: 400px;
+        position: relative;
+        border: 1px solid #ccc;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Basic Flat Navigation</h2>
+        <div class="sidebar-demo">
+          <sgds-sidebar active="dashboard">
+            <sgds-sidebar-item name="dashboard" title="Dashboard">
+              <sgds-icon name="grid-fill" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item name="records" title="Records">
+              <sgds-icon name="people-fill" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item name="settings" title="Settings">
+              <sgds-icon name="gear-fill" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar>
+        </div>
+      </div>
+
+      <div>
+        <h2>Sections and Groups</h2>
+        <div class="sidebar-demo">
+          <sgds-sidebar active="meetings">
+            <div slot="brandName">My App</div>
+
+            <sgds-sidebar-section title="Main" name="main">
+              <sgds-sidebar-group title="Dashboard" name="dashboard">
+                <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+                <sgds-sidebar-item title="Overview" name="overview">
+                  <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                </sgds-sidebar-item>
+                <sgds-sidebar-item title="Stats" name="stats">
+                  <sgds-icon name="bar-chart-fill" slot="leadingIcon"></sgds-icon>
+                </sgds-sidebar-item>
+              </sgds-sidebar-group>
+            </sgds-sidebar-section>
+
+            <sgds-sidebar-section title="Collaboration" name="collaboration" collapsible>
+              <sgds-sidebar-item title="Meetings" name="meetings">
+                <sgds-icon name="calendar-fill" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item title="Messages" name="messages">
+                <sgds-icon name="chat-fill" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-section>
+          </sgds-sidebar>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

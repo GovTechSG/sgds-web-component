@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Default</h2>
+        <sgds-overflow-menu>
+          <sgds-dropdown-item>View</sgds-dropdown-item>
+          <sgds-dropdown-item>Edit</sgds-dropdown-item>
+          <sgds-dropdown-item>Delete</sgds-dropdown-item>
+        </sgds-overflow-menu>
+      </div>
+
+      <div>
+        <h2>Small Size</h2>
+        <sgds-overflow-menu size="sm">
+          <sgds-dropdown-item>View</sgds-dropdown-item>
+          <sgds-dropdown-item>Edit</sgds-dropdown-item>
+          <sgds-dropdown-item disabled>Archive</sgds-dropdown-item>
+        </sgds-overflow-menu>
+      </div>
+
+      <div>
+        <h2>In a Table Row</h2>
+        <table style="width: 100%; border-collapse: collapse">
+          <thead>
+            <tr>
+              <th style="text-align: left; padding: 8px; border-bottom: 1px solid #ccc">Name</th>
+              <th style="text-align: left; padding: 8px; border-bottom: 1px solid #ccc">Status</th>
+              <th style="text-align: right; padding: 8px; border-bottom: 1px solid #ccc">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 8px">Item One</td>
+              <td style="padding: 8px">Active</td>
+              <td style="padding: 8px; text-align: right">
+                <sgds-overflow-menu size="sm">
+                  <sgds-dropdown-item>Edit</sgds-dropdown-item>
+                  <sgds-dropdown-item>Delete</sgds-dropdown-item>
+                </sgds-overflow-menu>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 8px">Item Two</td>
+              <td style="padding: 8px">Inactive</td>
+              <td style="padding: 8px; text-align: right">
+                <sgds-overflow-menu size="sm">
+                  <sgds-dropdown-item>Edit</sgds-dropdown-item>
+                  <sgds-dropdown-item>Delete</sgds-dropdown-item>
+                </sgds-overflow-menu>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

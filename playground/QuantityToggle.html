@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Default</h2>
+        <sgds-quantity-toggle label="Quantity"></sgds-quantity-toggle>
+      </div>
+
+      <div>
+        <h2>With Step</h2>
+        <sgds-quantity-toggle label="Quantity (step 5)" step="5" value="10"></sgds-quantity-toggle>
+      </div>
+
+      <div>
+        <h2>With Min and Max</h2>
+        <sgds-quantity-toggle label="Quantity (1–10)" min="1" max="10" value="5"></sgds-quantity-toggle>
+      </div>
+
+      <div>
+        <h2>Readonly</h2>
+        <sgds-quantity-toggle label="Readonly" value="3" readonly></sgds-quantity-toggle>
+      </div>
+
+      <div>
+        <h2>Disabled</h2>
+        <sgds-quantity-toggle label="Disabled" value="2" disabled></sgds-quantity-toggle>
+      </div>
+
+      <div>
+        <h2>With Validation</h2>
+        <form>
+          <sgds-quantity-toggle label="Required quantity" required hasFeedback></sgds-quantity-toggle>
+          <br />
+          <sgds-button type="submit">Submit</sgds-button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
