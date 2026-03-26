@@ -1,4 +1,4 @@
-import { html, PropertyValueMap } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -63,6 +63,9 @@ export class SgdsModal extends SgdsElement {
 
   /** Used only for SSR to indicate the presence of the `footer` slot. */
   @property({ type: Boolean }) hasFooterSlot = false;
+
+  /** Removes the close button in the modal header. */
+  @property({ type: Boolean, reflect: true }) noCloseButton = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -285,11 +288,13 @@ export class SgdsModal extends SgdsElement {
           tabindex="-1"
         >
           <div class="modal-content">
-                   <sgds-close-button
-                class="modal-header__close"
-                @click="${() => this.requestClose("close-button")}"
-                aria-label="close modal"
-              ></sgds-close-button>
+              ${!this.noCloseButton
+                ? html`<sgds-close-button
+                    class="modal-header__close"
+                    @click="${() => this.requestClose("close-button")}"
+                    aria-label="close modal"
+                  ></sgds-close-button>`
+                : nothing}
             <div class="modal-header">
               <div class="modal-header__title-description">
                 <slot class="modal-title" id="title" name="title"></slot>
