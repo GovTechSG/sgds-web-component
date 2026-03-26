@@ -9,7 +9,7 @@
 }
 
 .table-head {
-  font-weight: bold;
+  font-weight: var(--sgds-font-weight-semibold);
   display: flex;
   align-items: center;
   padding: var(--sgds-padding-sm) var(--sgds-padding-md);
