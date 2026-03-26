@@ -439,4 +439,18 @@
   --margin-paragraph-lg: var(--sgds-paragraph-spacing-lg);
   --margin-paragraph-xl: var(--sgds-paragraph-spacing-xl);
 
+  /* Z-Index - Primitive */
+  --z-0: var(--sgds-z-index-0);
+  --z-100: var(--sgds-z-index-100);
+  --z-200: var(--sgds-z-index-200);
+  --z-400: var(--sgds-z-index-400);
+  --z-800: var(--sgds-z-index-800);
+
+  /* Z-Index - Semantic */
+  --z-base: var(--sgds-z-index-base);
+  --z-raised: var(--sgds-z-index-raised);
+  --z-floating: var(--sgds-z-index-floating);
+  --z-overlay: var(--sgds-z-index-overlay);
+  --z-modal: var(--sgds-z-index-modal);
+
 }
