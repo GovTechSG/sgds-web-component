@@ -174,9 +174,29 @@ describe("<sgds-modal>", () => {
     expect(el.open).to.be.false;
   });
 
-  it("noCloseButton prop removes button from modal", async () => {
+  it("should render close button by default", async () => {
+    const el = await fixture<SgdsModal>(html`<sgds-modal></sgds-modal>`);
+    const closeBtn = el.shadowRoot?.querySelector("sgds-close-button");
+    expect(closeBtn).to.not.be.null;
+  });
+
+  it("should not render close button when noCloseButton is set", async () => {
     const el = await fixture<SgdsModal>(html`<sgds-modal noCloseButton></sgds-modal>`);
-    expect(el.shadowRoot?.querySelector("button.btn-close")).to.be.null;
+    const closeBtn = el.shadowRoot?.querySelector("sgds-close-button");
+    expect(closeBtn).to.be.null;
+  });
+
+  it("should toggle close button when noCloseButton changes dynamically", async () => {
+    const el = await fixture<SgdsModal>(html`<sgds-modal></sgds-modal>`);
+    expect(el.shadowRoot?.querySelector("sgds-close-button")).to.not.be.null;
+
+    el.noCloseButton = true;
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("sgds-close-button")).to.be.null;
+
+    el.noCloseButton = false;
+    await el.updateComplete;
+    expect(el.shadowRoot?.querySelector("sgds-close-button")).to.not.be.null;
   });
 
   it("should lock or unlock scrolling on body when modal opens or closes respectively", async () => {

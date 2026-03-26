@@ -18,7 +18,7 @@ export const Template = args => {
         gravida, congue sapien eu, rhoncus ante. Quisque velit est, sodales vitae turpis vitae, hendrerit facilisis
         nulla. Suspendisse potenti. Nulla hendrerit enim sed leo rutrum auctor. Praesent volutpat rutrum purus in
       </p>
-      <sgds-button @click=${closeModal} slot="footer" variant="link" class="close-modal">Close</sgds-button>
+      <sgds-button @click=${closeModal} slot="footer" class="close-modal">Close</sgds-button>
       <sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
     </sgds-modal>
   `;
