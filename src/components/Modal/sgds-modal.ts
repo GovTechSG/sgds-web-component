@@ -288,13 +288,15 @@ export class SgdsModal extends SgdsElement {
           tabindex="-1"
         >
           <div class="modal-content">
-              ${!this.noCloseButton
-                ? html`<sgds-close-button
-                    class="modal-header__close"
-                    @click="${() => this.requestClose("close-button")}"
-                    aria-label="close modal"
-                  ></sgds-close-button>`
-                : nothing}
+              ${
+                !this.noCloseButton
+                  ? html`<sgds-close-button
+                      class="modal-header__close"
+                      @click="${() => this.requestClose("close-button")}"
+                      aria-label="close modal"
+                    ></sgds-close-button>`
+                  : nothing
+              }
             <div class="modal-header">
               <div class="modal-header__title-description">
                 <slot class="modal-title" id="title" name="title"></slot>
