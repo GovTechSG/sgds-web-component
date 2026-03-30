@@ -25,6 +25,46 @@ import "@govtechsg/sgds-web-component/themes/day.css";
 import "./yourCustomCss.css"
 ```
 
+### GovTech Brand Colours
+
+GovTech products should use one of the pre-approved colour palettes shipped with SGDS instead of defining custom hex values. Each product must pick **exactly one** colour — do not import multiple GT palettes.
+
+The available palettes are:
+
+| Import path | Colour |
+|-------------|--------|
+| `@govtechsg/sgds-web-component/themes/gt/blue.css` | Blue |
+| `@govtechsg/sgds-web-component/themes/gt/cyan.css` | Cyan |
+| `@govtechsg/sgds-web-component/themes/gt/magenta.css` | Magenta |
+| `@govtechsg/sgds-web-component/themes/gt/pink.css` | Pink |
+| `@govtechsg/sgds-web-component/themes/gt/purple.css` | Purple |
+| `@govtechsg/sgds-web-component/themes/gt/red.css` | Red |
+
+Each GT file defines `--gt-color-100` through `--gt-color-900`. Map these onto the SGDS product primary scale in your custom CSS:
+
+```css
+/* yourCustomCss.css */
+:root {
+  --sgds-product-primary-100: var(--gt-color-100);
+  --sgds-product-primary-200: var(--gt-color-200);
+  --sgds-product-primary-300: var(--gt-color-300);
+  --sgds-product-primary-400: var(--gt-color-400);
+  --sgds-product-primary-500: var(--gt-color-500);
+  --sgds-product-primary-600: var(--gt-color-600);
+  --sgds-product-primary-700: var(--gt-color-700);
+  --sgds-product-primary-800: var(--gt-color-800);
+  --sgds-product-primary-900: var(--gt-color-900);
+}
+```
+
+Import order matters — the GT palette file must come after `themes/day.css` and before your custom mapping CSS:
+
+```css
+@import "@govtechsg/sgds-web-component/themes/day.css";
+@import "@govtechsg/sgds-web-component/themes/gt/blue.css"; /* pick one colour only */
+@import "./yourCustomCss.css";
+```
+
 ### root.css
 
 Primitives and semantic values are defined here. These tokens can also be found in `@govtechsg/sgds-web-component/themes` folder.
