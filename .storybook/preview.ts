@@ -88,7 +88,7 @@ export const parameters = {
         ["Introduction"],
         "Troubleshoot",
         "Patterns"
-      ] 
+      ]
     }
   }
 };
