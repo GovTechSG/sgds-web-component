@@ -1,6 +1,6 @@
 import { html } from "lit";
 
-export const SizeTemplate = args => {
+const SizeTemplate = args => {
   return html`
     <sgds-modal open=${true} size=${args.size} @sgds-close=${e => e.preventDefault()}>
       <h2 slot="title">Modal title</h2>
@@ -16,7 +16,7 @@ export const SizeTemplate = args => {
   `;
 };
 
-export const LongContentTemplate = args => {
+const LongContentTemplate = args => {
   return html`
     <sgds-modal open=${true} @sgds-close=${e => e.preventDefault()}>
       <h2 slot="title">Modal title</h2>
@@ -47,7 +47,7 @@ export const LongContentTemplate = args => {
     </sgds-modal>
   `;
 };
-export const noAnimationTemplate = args => {
+const noAnimationTemplate = args => {
   return html`
     <sgds-button @click=${showModal} style="margin:30px;">Open Modal</sgds-button>
     <sgds-modal id="no-animation-modal" noAnimation>
@@ -74,7 +74,7 @@ const closeModal = () => {
   modal.hide();
 };
 
-export const PreventCloseTemplate = args => {
+const PreventCloseTemplate = args => {
   return html`
     <sgds-modal id="prevent-close-modal" open=${true}>
       <h2 slot="title">Prevent Close Example</h2>
