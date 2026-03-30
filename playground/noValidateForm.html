@@ -1,151 +1,178 @@
-<script type="module" src="../src/index.ts"></script>
-<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
 
-<h2>noValidate - Component Level</h2>
-<p>Use <code>noValidate</code> prop on individual components to disable built-in validation and implement custom validation logic.</p>
-<form id="custom-validation-form">
-  <sgds-input
-    noValidate
-    name="username"
-    label="Username"
-    hintText="Must start with a letter (no special characters)"
-    hasFeedback="both"
-    placeholder="Enter username"
-    id="custom-username-input"
-  ></sgds-input>
-  
-  <sgds-input
-    noValidate
-    name="age"
-    type="number"
-    label="Age"
-    hintText="Must be between 18 and 100"
-    hasFeedback="both"
-    placeholder="Enter age"
-    id="custom-age-input"
-  ></sgds-input>
-  
-  <sgds-textarea
-    noValidate
-    name="bio"
-    label="Bio"
-    hintText="Must be at least 10 characters long"
-    hasFeedback
-    placeholder="Enter bio"
-    id="custom-bio-textarea"
-  ></sgds-textarea>
-  
-  <sgds-button type="submit">Submit</sgds-button>
-  <sgds-button type="reset" variant="ghost">Reset</sgds-button>
-</form>
+  <body>
+    <h2>noValidate - Component Level</h2>
+    <p>
+      Use <code>noValidate</code> prop on individual components to disable built-in validation and implement custom
+      validation logic.
+    </p>
+    <form id="custom-validation-form">
+      <sgds-input
+        noValidate
+        name="username"
+        label="Username"
+        hintText="Must start with a letter (no special characters)"
+        hasFeedback="both"
+        placeholder="Enter username"
+        id="custom-username-input"
+      ></sgds-input>
 
-<h2>novalidate - Form Level</h2>
-<p>Use <code>novalidate</code> attribute on the form to disable all validation for child components.</p>
-<form id="no-validation-form" novalidate>
-  <sgds-input
-    name="email"
-    required
-    label="Email"
-    hintText="This required field will not show validation errors"
-    hasFeedback="both"
-    placeholder="Enter email"
-  ></sgds-input>
-  
-  <sgds-input
-    name="phone"
-    pattern="[0-9]{8}"
-    label="Phone"
-    hintText="This pattern validation is disabled"
-    hasFeedback="both"
-    placeholder="Enter phone"
-  ></sgds-input>
-  
-  <sgds-textarea
-    name="notes"
-    required
-    minlength="5"
-    label="Notes"
-    hintText="This required and minlength validation is disabled"
-    hasFeedback
-    placeholder="Enter notes"
-  ></sgds-textarea>
-  
-  <sgds-button type="submit">Submit (No Validation)</sgds-button>
-</form>
+      <sgds-input
+        noValidate
+        name="age"
+        type="number"
+        label="Age"
+        hintText="Must be between 18 and 100"
+        hasFeedback="both"
+        placeholder="Enter age"
+        id="custom-age-input"
+      ></sgds-input>
 
-<script>
-  // Custom validation example for component-level noValidate
-  const usernameInput = document.getElementById('custom-username-input');
-  const ageInput = document.getElementById('custom-age-input');
-  const bioTextarea = document.getElementById('custom-bio-textarea');
-  
-  usernameInput.addEventListener('sgds-input', (e) => {
-    const value = e.target.value;
-    // Username must start with a letter
-    if (!value || /^[a-zA-Z]/.test(value)) {
-      e.target.setInvalid(false);
-    } else {
-      e.target.setInvalid(true);
-      e.target.invalidFeedback = 'Username must start with a letter';
-    }
-  });
-  
-  ageInput.addEventListener('sgds-input', (e) => {
-    const value = parseInt(e.target.value);
-    // Age must be between 18 and 100
-    if (!e.target.value || (value >= 18 && value <= 100)) {
-      e.target.setInvalid(false);
-    } else {
-      e.target.setInvalid(true);
-      e.target.invalidFeedback = 'Age must be between 18 and 100';
-    }
-  });
-  
-  bioTextarea.addEventListener('sgds-input', (e) => {
-    const value = e.target.value;
-    // Bio must be at least 10 characters
-    if (!value || value.length >= 10) {
-      e.target.setInvalid(false);
-    } else {
-      e.target.setInvalid(true);
-      e.target.invalidFeedback = 'Bio must be at least 10 characters long';
-    }
-  });
-  
-  document.getElementById('custom-validation-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const formDataObj = Object.fromEntries(formData);
-    console.log('Custom validation form submitted');
-    console.log('FormData entries:', formDataObj);
-    console.log('Username value:', usernameInput.value);
-    console.log('Age value:', ageInput.value);
-    console.log('Bio value:', bioTextarea.value);
-    alert(`Form submitted!\nUsername: ${formDataObj.username || 'empty'}\nAge: ${formDataObj.age || 'empty'}\nBio: ${formDataObj.bio || 'empty'}\nCheck console for details.`);
-  });
-  
-  document.getElementById('no-validation-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const formDataObj = Object.fromEntries(formData);
-    console.log('No validation form submitted');
-    console.log('FormData entries:', formDataObj);
-    alert(`Form submitted without validation!\nEmail: ${formDataObj.email || 'empty'}\nPhone: ${formDataObj.phone || 'empty'}\nNotes: ${formDataObj.notes || 'empty'}\nCheck console for details.`);
-  });
-  
-  // Debug: Log when inputs change
-  usernameInput.addEventListener('sgds-change', (e) => {
-    console.log('Username changed:', e.target.value);
-  });
-  
-  ageInput.addEventListener('sgds-change', (e) => {
-    console.log('Age changed:', e.target.value);
-  });
-  
-  bioTextarea.addEventListener('sgds-change', (e) => {
-    console.log('Bio changed:', e.target.value);
-  });
+      <sgds-textarea
+        noValidate
+        name="bio"
+        label="Bio"
+        hintText="Must be at least 10 characters long"
+        hasFeedback
+        placeholder="Enter bio"
+        id="custom-bio-textarea"
+      ></sgds-textarea>
 
-</script>
+      <sgds-button type="submit">Submit</sgds-button>
+      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+    </form>
+
+    <h2>novalidate - Form Level</h2>
+    <p>Use <code>novalidate</code> attribute on the form to disable all validation for child components.</p>
+    <form id="no-validation-form" novalidate>
+      <sgds-input
+        name="email"
+        required
+        label="Email"
+        hintText="This required field will not show validation errors"
+        hasFeedback="both"
+        placeholder="Enter email"
+      ></sgds-input>
+
+      <sgds-input
+        name="phone"
+        pattern="[0-9]{8}"
+        label="Phone"
+        hintText="This pattern validation is disabled"
+        hasFeedback="both"
+        placeholder="Enter phone"
+      ></sgds-input>
+
+      <sgds-textarea
+        name="notes"
+        required
+        minlength="5"
+        label="Notes"
+        hintText="This required and minlength validation is disabled"
+        hasFeedback
+        placeholder="Enter notes"
+      ></sgds-textarea>
+
+      <sgds-button type="submit">Submit (No Validation)</sgds-button>
+    </form>
+
+    <script>
+      // Custom validation example for component-level noValidate
+      const usernameInput = document.getElementById("custom-username-input");
+      const ageInput = document.getElementById("custom-age-input");
+      const bioTextarea = document.getElementById("custom-bio-textarea");
+
+      usernameInput.addEventListener("sgds-input", e => {
+        const value = e.target.value;
+        // Username must start with a letter
+        if (!value || /^[a-zA-Z]/.test(value)) {
+          e.target.setInvalid(false);
+        } else {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Username must start with a letter";
+        }
+      });
+
+      ageInput.addEventListener("sgds-input", e => {
+        const value = parseInt(e.target.value);
+        // Age must be between 18 and 100
+        if (!e.target.value || (value >= 18 && value <= 100)) {
+          e.target.setInvalid(false);
+        } else {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Age must be between 18 and 100";
+        }
+      });
+
+      bioTextarea.addEventListener("sgds-input", e => {
+        const value = e.target.value;
+        // Bio must be at least 10 characters
+        if (!value || value.length >= 10) {
+          e.target.setInvalid(false);
+        } else {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Bio must be at least 10 characters long";
+        }
+      });
+
+      document.getElementById("custom-validation-form").addEventListener("submit", e => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const formDataObj = Object.fromEntries(formData);
+        console.log("Custom validation form submitted");
+        console.log("FormData entries:", formDataObj);
+        console.log("Username value:", usernameInput.value);
+        console.log("Age value:", ageInput.value);
+        console.log("Bio value:", bioTextarea.value);
+        alert(
+          `Form submitted!\nUsername: ${formDataObj.username || "empty"}\nAge: ${formDataObj.age || "empty"}\nBio: ${
+            formDataObj.bio || "empty"
+          }\nCheck console for details.`
+        );
+      });
+
+      document.getElementById("no-validation-form").addEventListener("submit", e => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const formDataObj = Object.fromEntries(formData);
+        console.log("No validation form submitted");
+        console.log("FormData entries:", formDataObj);
+        alert(
+          `Form submitted without validation!\nEmail: ${formDataObj.email || "empty"}\nPhone: ${
+            formDataObj.phone || "empty"
+          }\nNotes: ${formDataObj.notes || "empty"}\nCheck console for details.`
+        );
+      });
+
+      // Debug: Log when inputs change
+      usernameInput.addEventListener("sgds-change", e => {
+        console.log("Username changed:", e.target.value);
+      });
+
+      ageInput.addEventListener("sgds-change", e => {
+        console.log("Age changed:", e.target.value);
+      });
+
+      bioTextarea.addEventListener("sgds-change", e => {
+        console.log("Bio changed:", e.target.value);
+      });
+    </script>
+  </body>
+</html>

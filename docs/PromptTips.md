@@ -34,4 +34,4 @@ Example prompt:
 
 ---
 
-For more details, see the [Agent Skills documentation](./AgentSkills.md).
+For more details, see the [Agent Skills documentation](?path=/docs/agent-skills-introduction--docs).

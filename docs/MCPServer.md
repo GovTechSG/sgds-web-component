@@ -52,4 +52,4 @@ The agent will:
 - Keep your Figma frames clean and well-structured for the best results.
 - Name your Figma layers descriptively — the agent uses layer names to infer intent.
 - If the output is not accurate, refine your prompt by specifying which section or component to focus on.
-- Combine this workflow with the [Prompt Tips](./PromptTips.md) for more effective results.
+- Combine this workflow with the [Prompt Tips](?path=/docs/agent-skills-prompt-tips--docs) for more effective results.

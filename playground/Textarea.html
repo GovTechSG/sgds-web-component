@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Default</h2>
+        <sgds-textarea label="Message" placeholder="Type your message..."></sgds-textarea>
+      </div>
+
+      <div>
+        <h2>With Character Limit</h2>
+        <sgds-textarea label="Bio" maxlength="200" placeholder="Tell us about yourself..."></sgds-textarea>
+      </div>
+
+      <div>
+        <h2>Auto Resize</h2>
+        <sgds-textarea label="Comments" resize="auto" placeholder="This textarea grows as you type..."></sgds-textarea>
+      </div>
+
+      <div>
+        <h2>Rows</h2>
+        <sgds-textarea label="Description" rows="6" placeholder="A taller textarea..."></sgds-textarea>
+      </div>
+
+      <div>
+        <h2>Disabled</h2>
+        <sgds-textarea label="Disabled" disabled value="This textarea is disabled."></sgds-textarea>
+      </div>
+
+      <div>
+        <h2>Validation</h2>
+        <form>
+          <sgds-textarea label="Feedback" required hasFeedback placeholder="Required field..."></sgds-textarea>
+          <br />
+          <sgds-button type="submit">Submit</sgds-button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
