@@ -39,7 +39,6 @@ export class SgdsAccordionItem extends SgdsElement {
   /** Controls the density of the individual accordion item. This value is controlled by sgds-accordion */
   @property({ type: String, reflect: true }) density: AccordionDensity = "default";
 
-
   private handleSummaryClick() {
     if (this.open) {
       this.hide();
