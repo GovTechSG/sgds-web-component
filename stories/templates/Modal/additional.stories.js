@@ -1,6 +1,6 @@
 import { html } from "lit";
 
-export const SizeTemplate = args => {
+const SizeTemplate = args => {
   return html`
     <sgds-modal open=${true} size=${args.size} @sgds-close=${e => e.preventDefault()}>
       <h2 slot="title">Modal title</h2>
@@ -16,7 +16,7 @@ export const SizeTemplate = args => {
   `;
 };
 
-export const LongContentTemplate = args => {
+const LongContentTemplate = args => {
   return html`
     <sgds-modal open=${true} @sgds-close=${e => e.preventDefault()}>
       <h2 slot="title">Modal title</h2>
@@ -47,7 +47,7 @@ export const LongContentTemplate = args => {
     </sgds-modal>
   `;
 };
-export const noAnimationTemplate = args => {
+const noAnimationTemplate = args => {
   return html`
     <sgds-button @click=${showModal} style="margin:30px;">Open Modal</sgds-button>
     <sgds-modal id="no-animation-modal" noAnimation>
@@ -59,7 +59,7 @@ export const noAnimationTemplate = args => {
         gravida, congue sapien eu, rhoncus ante. Quisque velit est, sodales vitae turpis vitae, hendrerit facilisis
         nulla. Suspendisse potenti. Nulla hendrerit enim sed leo rutrum auctor. Praesent volutpat rutrum purus in
       </p>
-      <sgds-button @click=${closeModal} slot="footer" variant="link" class="close-modal">Close</sgds-button>
+      <sgds-button @click=${closeModal} slot="footer" class="close-modal">Close</sgds-button>
       <sgds-button slot="footer" variant="primary" type="submit" form="formA">Submit</sgds-button>
     </sgds-modal>
   `;
@@ -74,7 +74,7 @@ const closeModal = () => {
   modal.hide();
 };
 
-export const PreventCloseTemplate = args => {
+const PreventCloseTemplate = args => {
   return html`
     <sgds-modal id="prevent-close-modal" open=${true}>
       <h2 slot="title">Prevent Close Example</h2>
@@ -202,6 +202,34 @@ export const PreventClose = {
   args: {},
   parameters: {
     chromatic: { disableSnapshot: true },
+    layout: "fullscreen",
+    docs: {
+      story: {
+        height: "700px"
+      }
+    }
+  }
+};
+
+const NoCloseButtonTemplate = args => {
+  return html`
+    <sgds-modal open=${true} noCloseButton>
+      <h2 slot="title">No Close Button</h2>
+      <p slot="description">This modal has no close button in the header</p>
+      <p>
+        Set the <code>noCloseButton</code> attribute to hide the close button. Users can still close the modal
+        programmatically or via the overlay and keyboard.
+      </p>
+      <sgds-button slot="footer" variant="primary">Confirm</sgds-button>
+    </sgds-modal>
+  `;
+};
+
+export const NoCloseButton = {
+  render: NoCloseButtonTemplate.bind({}),
+  name: "No close button",
+  args: {},
+  parameters: {
     layout: "fullscreen",
     docs: {
       story: {
