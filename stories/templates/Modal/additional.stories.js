@@ -211,7 +211,7 @@ export const PreventClose = {
   }
 };
 
-export const NoCloseButtonTemplate = args => {
+const NoCloseButtonTemplate = args => {
   return html`
     <sgds-modal open=${true} noCloseButton>
       <h2 slot="title">No Close Button</h2>

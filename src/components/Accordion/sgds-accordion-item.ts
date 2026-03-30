@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, query } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
@@ -7,6 +7,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import accordionItemStyle from "./accordion-item.css";
+import { AccordionDensity } from "./sgds-accordion";
 
 /**
  *
@@ -34,6 +35,9 @@ export class SgdsAccordionItem extends SgdsElement {
 
   /** Disables the accordion item */
   @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /** Controls the density of the individual accordion item. This value is controlled by sgds-accordion */
+  @property({ type: String, reflect: true }) density: AccordionDensity = "default";
 
   private handleSummaryClick() {
     if (this.open) {
@@ -146,7 +150,7 @@ export class SgdsAccordionItem extends SgdsElement {
         >
           <slot name="header"></slot>
           <slot name="caret">
-            <sgds-icon name="chevron-down" size=${this.getAttribute("density") === "compact" ? "md" : "lg"}></sgds-icon>
+            <sgds-icon name="chevron-down" size=${this.density === "compact" ? "md" : "lg"}></sgds-icon>
           </slot>
         </button>
         <div

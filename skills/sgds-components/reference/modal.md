@@ -12,6 +12,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 **Prevent closing on overlay/Esc?** → Listen for `sgds-close` and call `event.preventDefault()`
 
+**Hide the close button?** → Add `noCloseButton`
+
 **Disable open/close animation?** → Add `noAnimation`
 
 **Open/close programmatically?** → Use the `show()` and `hide()` methods
@@ -66,6 +68,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | `open` | boolean | `false` | Controls modal visibility; reflects when using `show()`/`hide()` |
 | `size` | `sm \| md \| lg \| xl \| fullscreen` | `md` | Size of the modal dialog |
 | `noAnimation` | boolean | `false` | Disables open/close animations |
+| `noCloseButton` | boolean | `false` | Hides the close button in the modal header |
 
 ## Slots
 
@@ -99,5 +102,5 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 1. Use `show()` / `hide()` methods to open/close programmatically; the `open` attribute reflects the current state.
 2. `sgds-close` is cancelable — call `event.preventDefault()` to prevent closing. Check `event.detail.source` for `'close-button'`, `'overlay'`, or `'keyboard'` to apply conditional logic.
 3. Place action buttons in the `footer` slot — typically a cancel/link button and a primary action button.
-4. Modal always renders with a built-in close button in the header unless controlled via the `sgds-close` event.
+4. Modal renders a built-in close button by default. Set `noCloseButton` to hide it — useful for mandatory confirmations where only footer buttons should dismiss the modal.
 5. Footer buttons that close the modal must call `modal.hide()` explicitly — they do not auto-close the modal.
