@@ -83,7 +83,7 @@ export const Elevation = () => html`
       <sgds-table-row>
         <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
         <sgds-table-head>CSS Variable</sgds-table-head>
-        <sgds-table-head>Description</sgds-table-head>
+        <sgds-table-head>Value</sgds-table-head>
         <sgds-table-head>Preview</sgds-table-head>
       </sgds-table-row>
       ${createShadowRow(
