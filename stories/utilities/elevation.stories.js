@@ -35,7 +35,9 @@ const createShadowRow = (tokenName, cssVariable, value, shadowClass) => html`
       <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">${value}</code>
     </sgds-table-cell>
     <sgds-table-cell>
-      <div class="sgds:bg-surface-raised sgds:${shadowClass} sgds:p-md sgds:rounded-sm">${value}</div>
+      <div class="sgds:bg-surface-raised sgds:${shadowClass} sgds:p-xl sgds:rounded-sm sgds:text-center sgds:min-w-100">
+        Sample Div
+      </div>
     </sgds-table-cell>
   </sgds-table-row>
 `;
