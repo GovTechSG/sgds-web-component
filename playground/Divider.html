@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Default Horizontal</h2>
+        <p>Content above</p>
+        <sgds-divider></sgds-divider>
+        <p>Content below</p>
+      </div>
+
+      <div>
+        <h2>Thick</h2>
+        <p>Content above</p>
+        <sgds-divider thickness="thick"></sgds-divider>
+        <p>Content below</p>
+      </div>
+
+      <div>
+        <h2>Thicker</h2>
+        <p>Content above</p>
+        <sgds-divider thickness="thicker"></sgds-divider>
+        <p>Content below</p>
+      </div>
+
+      <div>
+        <h2>Vertical</h2>
+        <div style="display: flex; height: 100px; align-items: center; gap: 16px">
+          <span>Left</span>
+          <sgds-divider orientation="vertical"></sgds-divider>
+          <span>Right</span>
+        </div>
+      </div>
+
+      <div>
+        <h2>Vertical Thick</h2>
+        <div style="display: flex; height: 100px; align-items: center; gap: 16px">
+          <span>Left</span>
+          <sgds-divider orientation="vertical" thickness="thick"></sgds-divider>
+          <span>Right</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

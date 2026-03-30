@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Basic with Header</h2>
+        <sgds-subnav>
+          <span slot="header">Section Title</span>
+          <sgds-subnav-item href="#">Overview</sgds-subnav-item>
+          <sgds-subnav-item href="#" active>Details</sgds-subnav-item>
+          <sgds-subnav-item href="#">History</sgds-subnav-item>
+        </sgds-subnav>
+      </div>
+
+      <div>
+        <h2>With Action Buttons</h2>
+        <sgds-subnav>
+          <span slot="header">Reports</span>
+          <sgds-subnav-item href="#">Monthly</sgds-subnav-item>
+          <sgds-subnav-item href="#">Yearly</sgds-subnav-item>
+          <sgds-button slot="action" size="sm">Export</sgds-button>
+        </sgds-subnav>
+      </div>
+
+      <div>
+        <h2>With Disabled Item</h2>
+        <sgds-subnav>
+          <span slot="header">Settings</span>
+          <sgds-subnav-item href="#">General</sgds-subnav-item>
+          <sgds-subnav-item href="#" disabled>Advanced</sgds-subnav-item>
+          <sgds-subnav-item href="#">Security</sgds-subnav-item>
+        </sgds-subnav>
+      </div>
+    </div>
+  </body>
+</html>
