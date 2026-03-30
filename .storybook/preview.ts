@@ -65,6 +65,7 @@ export const parameters = {
       order: [
         "Getting Started",
         ["Introduction", "Installation", "Imports"],
+        "Agent Skills",
         "Migration",
         "Usage",
         "Frameworks",

@@ -105,8 +105,8 @@ Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-
       <!-- Page header -->
       <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mb-layout-sm">
         <div>
-          <h1 class="sgds:text-2xl sgds:font-semibold sgds:text-color-default">Dashboard</h1>
-          <p class="sgds:text-sm sgds:text-color-muted sgds:mt-1">Overview of your application metrics</p>
+          <h1 class="sgds:text-2xl sgds:font-semibold sgds:text-default">Dashboard</h1>
+          <p class="sgds:text-sm sgds:text-muted sgds:mt-1">Overview of your application metrics</p>
         </div>
         <sgds-button variant="primary" size="sm">
           <sgds-icon name="download" slot="leftIcon"></sgds-icon>
@@ -119,38 +119,38 @@ Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-
 
         <!-- Stat cards: 4 × 3/12 cols -->
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
-          <p class="sgds:text-sm sgds:text-color-muted sgds:mb-1">Total Users</p>
-          <p class="sgds:text-2xl sgds:font-semibold sgds:text-color-default">12,486</p>
+          <p class="sgds:text-sm sgds:text-muted sgds:mb-1">Total Users</p>
+          <p class="sgds:text-2xl sgds:font-semibold sgds:text-default">12,486</p>
           <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
             <sgds-icon name="arrow-up" class="sgds:text-success-default" size="sm"></sgds-icon>
             <span class="sgds:text-sm sgds:text-success-default">+8.2%</span>
-            <span class="sgds:text-sm sgds:text-color-muted">vs last month</span>
+            <span class="sgds:text-sm sgds:text-muted">vs last month</span>
           </div>
         </div>
 
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
-          <p class="sgds:text-sm sgds:text-color-muted sgds:mb-1">Active Sessions</p>
-          <p class="sgds:text-2xl sgds:font-semibold sgds:text-color-default">3,241</p>
+          <p class="sgds:text-sm sgds:text-muted sgds:mb-1">Active Sessions</p>
+          <p class="sgds:text-2xl sgds:font-semibold sgds:text-default">3,241</p>
           <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
             <sgds-icon name="arrow-up" class="sgds:text-success-default" size="sm"></sgds-icon>
             <span class="sgds:text-sm sgds:text-success-default">+4.1%</span>
-            <span class="sgds:text-sm sgds:text-color-muted">vs last month</span>
+            <span class="sgds:text-sm sgds:text-muted">vs last month</span>
           </div>
         </div>
 
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
-          <p class="sgds:text-sm sgds:text-color-muted sgds:mb-1">Submissions</p>
-          <p class="sgds:text-2xl sgds:font-semibold sgds:text-color-default">847</p>
+          <p class="sgds:text-sm sgds:text-muted sgds:mb-1">Submissions</p>
+          <p class="sgds:text-2xl sgds:font-semibold sgds:text-default">847</p>
           <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
             <sgds-icon name="arrow-down" class="sgds:text-danger-default" size="sm"></sgds-icon>
             <span class="sgds:text-sm sgds:text-danger-default">-2.4%</span>
-            <span class="sgds:text-sm sgds:text-color-muted">vs last month</span>
+            <span class="sgds:text-sm sgds:text-muted">vs last month</span>
           </div>
         </div>
 
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
-          <p class="sgds:text-sm sgds:text-color-muted sgds:mb-1">Pending Reviews</p>
-          <p class="sgds:text-2xl sgds:font-semibold sgds:text-color-default">23</p>
+          <p class="sgds:text-sm sgds:text-muted sgds:mb-1">Pending Reviews</p>
+          <p class="sgds:text-2xl sgds:font-semibold sgds:text-default">23</p>
           <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
             <sgds-badge variant="warning">Action needed</sgds-badge>
           </div>
@@ -158,17 +158,17 @@ Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-
 
         <!-- Charts: trend 8/12, donut 4/12, bar 12/12 — CSS Grid auto-wraps into rows -->
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs">
-          <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default sgds:mb-component-sm">Submission trend</h2>
+          <h2 class="sgds:text-base sgds:font-semibold sgds:text-default sgds:mb-component-sm">Submission trend</h2>
           <div id="chart-trend" class="sgds:h-[260px] sgds:w-full"></div>
         </div>
 
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs">
-          <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default sgds:mb-component-sm">Status breakdown</h2>
+          <h2 class="sgds:text-base sgds:font-semibold sgds:text-default sgds:mb-component-sm">Status breakdown</h2>
           <div id="chart-donut" class="sgds:h-[260px] sgds:w-full sgds:overflow-visible"></div>
         </div>
 
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-12 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs">
-          <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default sgds:mb-component-sm">Submissions by department</h2>
+          <h2 class="sgds:text-base sgds:font-semibold sgds:text-default sgds:mb-component-sm">Submissions by department</h2>
           <div id="chart-bar" class="sgds:h-[240px] sgds:w-full"></div>
         </div>
 
@@ -176,7 +176,7 @@ Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-12 sgds:bg-surface-raised sgds:rounded-lg sgds:shadow-card">
 
           <div class="sgds:flex sgds:items-center sgds:justify-between sgds:p-component-xs sgds:border-b sgds:border-muted">
-            <h2 class="sgds:text-base sgds:font-semibold sgds:text-color-default">Recent Submissions</h2>
+            <h2 class="sgds:text-base sgds:font-semibold sgds:text-default">Recent Submissions</h2>
             <div class="sgds:flex sgds:gap-component-sm">
               <sgds-input placeholder="Search..." size="sm">
                 <sgds-icon name="search" slot="prefix"></sgds-icon>

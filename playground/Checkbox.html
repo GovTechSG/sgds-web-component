@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Checkbox Group</h2>
+        <sgds-checkbox-group label="Dietary Requirements" hintText="Check all that apply">
+          <sgds-checkbox value="vegetarian">Vegetarian</sgds-checkbox>
+          <sgds-checkbox value="halal">Halal</sgds-checkbox>
+          <sgds-checkbox value="vegan">Vegan</sgds-checkbox>
+          <sgds-checkbox value="gluten-free">Gluten-free</sgds-checkbox>
+        </sgds-checkbox-group>
+      </div>
+
+      <div>
+        <h2>Standalone Checkbox</h2>
+        <sgds-checkbox name="agree" value="yes" required>I agree to the Terms and Conditions</sgds-checkbox>
+      </div>
+
+      <div>
+        <h2>Pre-checked</h2>
+        <sgds-checkbox name="newsletter" value="yes" checked>Subscribe to newsletter</sgds-checkbox>
+      </div>
+
+      <div>
+        <h2>Indeterminate</h2>
+        <sgds-checkbox indeterminate>Select All</sgds-checkbox>
+      </div>
+
+      <div>
+        <h2>Disabled</h2>
+        <sgds-checkbox disabled>Disabled checkbox</sgds-checkbox>
+        <sgds-checkbox disabled checked>Disabled checked</sgds-checkbox>
+      </div>
+
+      <div>
+        <h2>Group with Validation</h2>
+        <sgds-checkbox-group
+          label="Required Group"
+          required
+          hasFeedback
+          invalidFeedback="Please select at least one option"
+        >
+          <sgds-checkbox value="a">Option A</sgds-checkbox>
+          <sgds-checkbox value="b">Option B</sgds-checkbox>
+          <sgds-checkbox value="c">Option C</sgds-checkbox>
+        </sgds-checkbox-group>
+      </div>
+    </div>
+  </body>
+</html>

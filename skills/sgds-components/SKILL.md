@@ -177,6 +177,70 @@ export default function MyInput() {
 }
 ```
 
+**Organise into reusable React components** — do not inline `useEffect` / `addEventListener` alongside business logic. Wrap each SGDS element in a dedicated client component that exposes typed props and forwards events via callbacks:
+
+```tsx
+// components/sgds/SgdsInput.tsx
+'use client';
+import { useEffect, useRef, useCallback } from 'react';
+
+interface SgdsInputProps {
+  label?: string;
+  placeholder?: string;
+  value?: string;
+  onSgdsInput?: (value: string) => void;
+  onSgdsChange?: (value: string) => void;
+}
+
+export default function SgdsInput({ label, placeholder, value, onSgdsInput, onSgdsChange }: SgdsInputProps) {
+  const ref = useRef<any>(null);
+  const onSgdsInputRef = useRef(onSgdsInput);
+  const onSgdsChangeRef = useRef(onSgdsChange);
+  onSgdsInputRef.current = onSgdsInput;
+  onSgdsChangeRef.current = onSgdsChange;
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const handleInput = (e: Event) => onSgdsInputRef.current?.((e.target as any).value);
+    const handleChange = (e: Event) => onSgdsChangeRef.current?.((e.target as any).value);
+
+    el.addEventListener('sgds-input', handleInput);
+    el.addEventListener('sgds-change', handleChange);
+    return () => {
+      el.removeEventListener('sgds-input', handleInput);
+      el.removeEventListener('sgds-change', handleChange);
+    };
+  }, []);
+
+  return (
+    <sgds-input
+      ref={ref}
+      label={label}
+      placeholder={placeholder}
+      value={value}
+      suppressHydrationWarning
+    />
+  );
+}
+```
+
+Then consume it like any React component — no event wiring in the page:
+
+```tsx
+// app/contact/page.tsx
+'use client';
+import SgdsInput from '@/components/sgds/SgdsInput';
+
+export default function ContactPage() {
+  const [name, setName] = useState('');
+  return <SgdsInput label="Name" placeholder="Enter name" onSgdsInput={setName} />;
+}
+```
+
+Place all SGDS wrappers under a shared directory (e.g. `components/sgds/`) so they are discoverable and reusable across pages.
+
 See the [official Next.js integration docs](https://webcomponent.designsystem.tech.gov.sg/?path=/docs/frameworks-react--docs) for more detail.
 
 ---

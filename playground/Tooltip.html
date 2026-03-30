@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+      .tooltip-row {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Placements</h2>
+        <div class="tooltip-row">
+          <sgds-tooltip content="Top tooltip" placement="top">
+            <sgds-button>Top</sgds-button>
+          </sgds-tooltip>
+
+          <sgds-tooltip content="Bottom tooltip" placement="bottom">
+            <sgds-button>Bottom</sgds-button>
+          </sgds-tooltip>
+
+          <sgds-tooltip content="Left tooltip" placement="left">
+            <sgds-button>Left</sgds-button>
+          </sgds-tooltip>
+
+          <sgds-tooltip content="Right tooltip" placement="right">
+            <sgds-button>Right</sgds-button>
+          </sgds-tooltip>
+        </div>
+      </div>
+
+      <div>
+        <h2>Hover Trigger (default)</h2>
+        <sgds-tooltip content="Hover to see this" trigger="hover">
+          <sgds-button>Hover me</sgds-button>
+        </sgds-tooltip>
+      </div>
+
+      <div>
+        <h2>Click Trigger</h2>
+        <sgds-tooltip content="Clicked!" trigger="click">
+          <sgds-button>Click me</sgds-button>
+        </sgds-tooltip>
+      </div>
+
+      <div>
+        <h2>Focus Trigger</h2>
+        <sgds-tooltip content="Focused!" trigger="focus">
+          <sgds-button>Focus me</sgds-button>
+        </sgds-tooltip>
+      </div>
+    </div>
+  </body>
+</html>

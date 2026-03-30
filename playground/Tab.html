@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Underlined (default)</h2>
+        <sgds-tab-group>
+          <sgds-tab slot="nav" panel="tab1">Tab 1</sgds-tab>
+          <sgds-tab slot="nav" panel="tab2">Tab 2</sgds-tab>
+          <sgds-tab slot="nav" panel="tab3">Tab 3</sgds-tab>
+          <sgds-tab-panel name="tab1">Content for Tab 1</sgds-tab-panel>
+          <sgds-tab-panel name="tab2">Content for Tab 2</sgds-tab-panel>
+          <sgds-tab-panel name="tab3">Content for Tab 3</sgds-tab-panel>
+        </sgds-tab-group>
+      </div>
+
+      <div>
+        <h2>Solid Variant</h2>
+        <sgds-tab-group variant="solid">
+          <sgds-tab slot="nav" panel="solid1">Overview</sgds-tab>
+          <sgds-tab slot="nav" panel="solid2">Details</sgds-tab>
+          <sgds-tab slot="nav" panel="solid3">Settings</sgds-tab>
+          <sgds-tab-panel name="solid1">Overview content</sgds-tab-panel>
+          <sgds-tab-panel name="solid2">Details content</sgds-tab-panel>
+          <sgds-tab-panel name="solid3">Settings content</sgds-tab-panel>
+        </sgds-tab-group>
+      </div>
+
+      <div>
+        <h2>Vertical</h2>
+        <sgds-tab-group orientation="vertical">
+          <sgds-tab slot="nav" panel="v1">First</sgds-tab>
+          <sgds-tab slot="nav" panel="v2">Second</sgds-tab>
+          <sgds-tab slot="nav" panel="v3">Third</sgds-tab>
+          <sgds-tab-panel name="v1">First panel content</sgds-tab-panel>
+          <sgds-tab-panel name="v2">Second panel content</sgds-tab-panel>
+          <sgds-tab-panel name="v3">Third panel content</sgds-tab-panel>
+        </sgds-tab-group>
+      </div>
+
+      <div>
+        <h2>Compact</h2>
+        <sgds-tab-group density="compact">
+          <sgds-tab slot="nav" panel="c1">Alpha</sgds-tab>
+          <sgds-tab slot="nav" panel="c2">Beta</sgds-tab>
+          <sgds-tab slot="nav" panel="c3">Gamma</sgds-tab>
+          <sgds-tab-panel name="c1">Alpha content</sgds-tab-panel>
+          <sgds-tab-panel name="c2">Beta content</sgds-tab-panel>
+          <sgds-tab-panel name="c3">Gamma content</sgds-tab-panel>
+        </sgds-tab-group>
+      </div>
+
+      <div>
+        <h2>Disabled Tab</h2>
+        <sgds-tab-group>
+          <sgds-tab slot="nav" panel="d1">Active</sgds-tab>
+          <sgds-tab slot="nav" panel="d2" disabled>Disabled</sgds-tab>
+          <sgds-tab slot="nav" panel="d3">Another</sgds-tab>
+          <sgds-tab-panel name="d1">Active panel</sgds-tab-panel>
+          <sgds-tab-panel name="d2">Disabled panel</sgds-tab-panel>
+          <sgds-tab-panel name="d3">Another panel</sgds-tab-panel>
+        </sgds-tab-group>
+      </div>
+    </div>
+  </body>
+</html>

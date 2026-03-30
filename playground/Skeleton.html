@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Rectangle (default)</h2>
+        <sgds-skeleton effect="sheen"></sgds-skeleton>
+      </div>
+
+      <div>
+        <h2>Rounded</h2>
+        <sgds-skeleton variant="rounded" effect="sheen"></sgds-skeleton>
+      </div>
+
+      <div>
+        <h2>Circle</h2>
+        <sgds-skeleton variant="circle" effect="sheen"></sgds-skeleton>
+      </div>
+
+      <div>
+        <h2>Rows</h2>
+        <sgds-skeleton rows="4" effect="sheen"></sgds-skeleton>
+      </div>
+
+      <div>
+        <h2>Without Sheen</h2>
+        <sgds-skeleton></sgds-skeleton>
+      </div>
+    </div>
+  </body>
+</html>
