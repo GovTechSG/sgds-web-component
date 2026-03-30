@@ -143,7 +143,10 @@ const GtPalettesTemplate = () => html`
             ${palette.shades.map(
               (s, i) => html`
                 <div
-                  class="sgds:relative sgds:w-30 sgds:h-30 sgds:shrink-0 sgds:rounded-md sgds:shadow-2 sgds:p-2 sgds:flex sgds:flex-col sgds:justify-end sgds:font-mono sgds:text-label-xs sgds:leading-2-xs${i > 0 ? " sgds:-ml-12" : ""}"
+                  class="sgds:relative sgds:w-30 sgds:h-30 sgds:shrink-0 sgds:rounded-md sgds:shadow-2 sgds:p-2 sgds:flex sgds:flex-col sgds:justify-end sgds:font-mono sgds:text-label-xs sgds:leading-2-xs${i >
+                  0
+                    ? " sgds:-ml-12"
+                    : ""}"
                   style="background-color: ${s.hex}; color: ${s.shade >= 500 ? "#ffffff" : "#111111"};"
                 >
                   <span class="sgds:font-bold">${s.shade}</span>
