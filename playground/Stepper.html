@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Horizontal (default)</h2>
+        <sgds-stepper activeStep="1">
+          <sgds-stepper-item>Step 1</sgds-stepper-item>
+          <sgds-stepper-item>Step 2</sgds-stepper-item>
+          <sgds-stepper-item>Step 3</sgds-stepper-item>
+        </sgds-stepper>
+      </div>
+
+      <div>
+        <h2>Vertical</h2>
+        <sgds-stepper orientation="vertical" activeStep="1">
+          <sgds-stepper-item>Step 1</sgds-stepper-item>
+          <sgds-stepper-item>Step 2</sgds-stepper-item>
+          <sgds-stepper-item>Step 3</sgds-stepper-item>
+        </sgds-stepper>
+      </div>
+
+      <div>
+        <h2>Clickable Steps</h2>
+        <sgds-stepper activeStep="0" clickable>
+          <sgds-stepper-item>Account</sgds-stepper-item>
+          <sgds-stepper-item>Profile</sgds-stepper-item>
+          <sgds-stepper-item>Review</sgds-stepper-item>
+          <sgds-stepper-item>Submit</sgds-stepper-item>
+        </sgds-stepper>
+      </div>
+
+      <div>
+        <h2>With Navigation Buttons</h2>
+        <sgds-stepper id="nav-stepper" activeStep="0">
+          <sgds-stepper-item>Details</sgds-stepper-item>
+          <sgds-stepper-item>Verification</sgds-stepper-item>
+          <sgds-stepper-item>Confirmation</sgds-stepper-item>
+        </sgds-stepper>
+        <div style="display: flex; gap: 8px; margin-top: 16px">
+          <sgds-button id="prev-btn" variant="outlined" disabled>Previous</sgds-button>
+          <sgds-button id="next-btn">Next</sgds-button>
+        </div>
+        <script>
+          const stepper = document.getElementById("nav-stepper");
+          const prevBtn = document.getElementById("prev-btn");
+          const nextBtn = document.getElementById("next-btn");
+          const totalSteps = 3;
+
+          function updateButtons() {
+            const current = parseInt(stepper.getAttribute("activeStep"));
+            prevBtn.disabled = current === 0;
+            nextBtn.disabled = current === totalSteps - 1;
+          }
+
+          prevBtn.addEventListener("click", () => {
+            const current = parseInt(stepper.getAttribute("activeStep"));
+            if (current > 0) {
+              stepper.setAttribute("activeStep", current - 1);
+              updateButtons();
+            }
+          });
+
+          nextBtn.addEventListener("click", () => {
+            const current = parseInt(stepper.getAttribute("activeStep"));
+            if (current < totalSteps - 1) {
+              stepper.setAttribute("activeStep", current + 1);
+              updateButtons();
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
