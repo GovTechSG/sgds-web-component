@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Single File Upload</h2>
+        <sgds-file-upload label="Upload Document" hintText="PDF only, max 10MB" name="document" accept=".pdf">
+          Choose File
+        </sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>Multiple Files (Images)</h2>
+        <sgds-file-upload
+          label="Upload Images"
+          hintText="JPEG or PNG"
+          name="photos"
+          accept="image/jpeg,image/png"
+          multiple
+        >
+          Choose Files
+        </sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>With Validation</h2>
+        <sgds-file-upload
+          label="Proof of Identity"
+          name="id"
+          accept=".pdf,.jpg,.png"
+          required
+          hasFeedback
+          invalidFeedback="Please upload a valid document"
+        >
+          Upload Document
+        </sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>Disabled</h2>
+        <sgds-file-upload label="Disabled Upload" name="disabled" disabled> Choose File </sgds-file-upload>
+      </div>
+    </div>
+  </body>
+</html>

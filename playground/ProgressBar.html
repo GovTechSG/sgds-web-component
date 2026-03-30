@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Primary (default)</h2>
+        <sgds-progress-bar label="Loading" now="60"></sgds-progress-bar>
+      </div>
+
+      <div>
+        <h2>Neutral Variant</h2>
+        <sgds-progress-bar variant="neutral" label="Upload progress" now="45"></sgds-progress-bar>
+      </div>
+
+      <div>
+        <h2>Without Label</h2>
+        <sgds-progress-bar now="30"></sgds-progress-bar>
+      </div>
+
+      <div>
+        <h2>Full Progress</h2>
+        <sgds-progress-bar label="Complete" now="100"></sgds-progress-bar>
+      </div>
+
+      <div>
+        <h2>Zero Progress</h2>
+        <sgds-progress-bar label="Not started" now="0"></sgds-progress-bar>
+      </div>
+    </div>
+  </body>
+</html>

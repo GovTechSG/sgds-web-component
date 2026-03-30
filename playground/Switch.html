@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Default</h2>
+        <sgds-switch>Enable notifications</sgds-switch>
+      </div>
+
+      <div>
+        <h2>Checked</h2>
+        <sgds-switch checked>Dark mode</sgds-switch>
+      </div>
+
+      <div>
+        <h2>With Icon</h2>
+        <sgds-switch icon>Sound</sgds-switch>
+      </div>
+
+      <div>
+        <h2>Left Label</h2>
+        <sgds-switch labelPosition="left">Left label</sgds-switch>
+      </div>
+
+      <div>
+        <h2>Disabled</h2>
+        <sgds-switch disabled>Disabled off</sgds-switch>
+        <br />
+        <sgds-switch disabled checked>Disabled on</sgds-switch>
+      </div>
+
+      <div>
+        <h2>Small</h2>
+        <sgds-switch size="sm">Small switch</sgds-switch>
+      </div>
+    </div>
+  </body>
+</html>

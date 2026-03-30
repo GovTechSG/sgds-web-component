@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+      .icon-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        align-items: center;
+      }
+      .icon-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        min-width: 80px;
+      }
+      .icon-item span {
+        font-size: 12px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h2>Sizes</h2>
+        <div class="icon-grid">
+          <div class="icon-item">
+            <sgds-icon name="announcement" size="xs"></sgds-icon>
+            <span>xs</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="announcement" size="sm"></sgds-icon>
+            <span>sm</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="announcement" size="md"></sgds-icon>
+            <span>md</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="announcement" size="lg"></sgds-icon>
+            <span>lg</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="announcement" size="xl"></sgds-icon>
+            <span>xl</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="announcement" size="2-xl"></sgds-icon>
+            <span>2-xl</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="announcement" size="3-xl"></sgds-icon>
+            <span>3-xl</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2>Sample Icons</h2>
+        <div class="icon-grid">
+          <div class="icon-item">
+            <sgds-icon name="arrow-right" size="lg"></sgds-icon>
+            <span>arrow-right</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="check-circle" size="lg"></sgds-icon>
+            <span>check-circle</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="exclamation-triangle" size="lg"></sgds-icon>
+            <span>exclamation-triangle</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="gear" size="lg"></sgds-icon>
+            <span>gear</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="search" size="lg"></sgds-icon>
+            <span>search</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="star" size="lg"></sgds-icon>
+            <span>star</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="download" size="lg"></sgds-icon>
+            <span>download</span>
+          </div>
+          <div class="icon-item">
+            <sgds-icon name="person" size="lg"></sgds-icon>
+            <span>person</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
