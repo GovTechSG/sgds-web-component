@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Z-Index Stacking Playground</title>
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--sgds-body-font-family, sans-serif);
+        background-color: var(--sgds-bg-default);
+        color: var(--sgds-color-default);
+      }
+
+      .page-content {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 32px 24px 80px;
+      }
+
+      h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0 0 8px;
+      }
+
+      .subtitle {
+        color: var(--sgds-color-subtle);
+        margin: 0 0 40px;
+        font-size: 15px;
+      }
+
+      /* Legend */
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 40px;
+        padding: 20px;
+        background: var(--sgds-surface-raised);
+        border-radius: var(--sgds-border-radius-md);
+        border: 1px solid var(--sgds-border-color-muted);
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+      }
+
+      .z-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: monospace;
+        white-space: nowrap;
+      }
+
+      .z-200 { background: #dbeafe; color: #1d4ed8; }
+      .z-400 { background: #fef9c3; color: #92400e; }
+      .z-800 { background: #fce7f3; color: #9d174d; }
+
+      /* Section */
+      .section {
+        margin-bottom: 48px;
+      }
+
+      .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .description {
+        font-size: 14px;
+        color: var(--sgds-color-subtle);
+        margin: 0 0 20px;
+      }
+
+      .demo-area {
+        padding: 28px;
+        border: 1px solid var(--sgds-border-color-muted);
+        border-radius: var(--sgds-border-radius-md);
+        background: var(--sgds-surface-default);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: flex-start;
+        min-height: 120px;
+        position: relative;
+        overflow: visible;
+      }
+
+      .trigger-label {
+        font-size: 12px;
+        color: var(--sgds-color-subtle);
+        margin-bottom: 6px;
+      }
+
+      .trigger-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Combined scenario */
+      .combined-area {
+        padding: 28px;
+        border: 2px dashed var(--sgds-border-color-muted);
+        border-radius: var(--sgds-border-radius-md);
+        background: var(--sgds-surface-raised);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: flex-start;
+        min-height: 120px;
+        position: relative;
+        overflow: visible;
+      }
+
+      .scenario-note {
+        font-size: 13px;
+        color: var(--sgds-color-muted);
+        font-style: italic;
+        padding: 12px 16px;
+        background: var(--sgds-surface-raised);
+        border-left: 3px solid var(--sgds-border-color-muted);
+        border-radius: 0 4px 4px 0;
+        margin-bottom: 16px;
+      }
+
+      /* sgds-subnav{
+        position:sticky;
+        top:0;
+      } */
+    </style>
+  </head>
+  <body>
+    <sgds-mainnav>
+      <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
+      <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
+      <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
+      <sgds-mainnav-dropdown>
+        <span slot="toggler">Services</span>
+        <sgds-dropdown-item><a href="#">Option 1</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Option 2</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Option 3</a></sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+      <sgds-button slot="end" variant="ghost" size="sm">Login</sgds-button>
+    </sgds-mainnav>
+
+    <sgds-subnav>
+      <h5 slot="header">Section Title</h5>
+      <sgds-subnav-item active><sgds-link size="sm"><a href="#">Overview</a></sgds-link></sgds-subnav-item>
+      <sgds-subnav-item><sgds-link size="sm"><a href="#">Details</a></sgds-link></sgds-subnav-item>
+      <sgds-subnav-item><sgds-link size="sm"><a href="#">Settings</a></sgds-link></sgds-subnav-item>
+      <sgds-button slot="actions" size="sm">Action</sgds-button>
+    </sgds-subnav>
+
+    <div class="page-content">
+      <h1>Z-Index Stacking Playground</h1>
+      <p class="subtitle">All overlaying components on one page — verify stacking order at a glance.</p>
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item">
+          <span class="z-badge z-200">z-index: 200</span>
+          <span>floating — Mainnav, Subnav, Dropdown</span>
+        </div>
+        <div class="legend-item">
+          <span class="z-badge z-400">z-index: 400</span>
+          <span>overlay — Tooltip, Toast</span>
+        </div>
+        <div class="legend-item">
+          <span class="z-badge z-800">z-index: 800</span>
+          <span>modal — Modal, Drawer</span>
+        </div>
+      </div>
+
+      <!-- Dropdown -->
+      <div class="section">
+        <div class="section-title">
+          Dropdown
+          <span class="z-badge z-200">--sgds-z-index-floating (200)</span>
+        </div>
+        <p class="description">Opens below the trigger. Should sit above static content but below tooltips and toasts.</p>
+        <div class="demo-area">
+          <div class="trigger-group">
+            <div class="trigger-label">Click to open</div>
+            <sgds-dropdown id="demo-dropdown">
+              <sgds-button slot="toggler">
+                Dropdown Menu
+                <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+              </sgds-button>
+              <sgds-dropdown-item><a href="#">Option A</a></sgds-dropdown-item>
+              <sgds-dropdown-item><a href="#">Option B</a></sgds-dropdown-item>
+              <sgds-dropdown-item><a href="#">Option C</a></sgds-dropdown-item>
+              <sgds-dropdown-item><a href="#">Option D</a></sgds-dropdown-item>
+              <sgds-dropdown-item><a href="#">Option E</a></sgds-dropdown-item>
+            </sgds-dropdown>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast -->
+      <div class="section">
+        <div class="section-title">
+          Toast
+          <span class="z-badge z-400">--sgds-z-index-overlay (400)</span>
+        </div>
+        <p class="description">
+          Fixed position, top-right. Should appear above dropdowns and tooltips (both 400, DOM order wins),
+          but be hidden behind modal and drawer (800).
+        </p>
+        <div class="demo-area">
+          <div class="trigger-group">
+            <div class="trigger-label">Click to show / dismiss</div>
+            <sgds-button id="btn-toast-info">Show Info Toast</sgds-button>
+          </div>
+          <div class="trigger-group">
+            <div class="trigger-label">Warning variant</div>
+            <sgds-button id="btn-toast-warning" variant="outline">Show Warning Toast</sgds-button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tooltip -->
+      <div class="section">
+        <div class="section-title">
+          Tooltip
+          <span class="z-badge z-400">--sgds-z-index-overlay (400)</span>
+        </div>
+        <p class="description">Appears on hover. Should sit above dropdowns (200) but below modal and drawer (800).</p>
+        <div class="demo-area">
+          <div class="trigger-group">
+            <div class="trigger-label">Hover to show</div>
+            <sgds-tooltip content="I am a tooltip at z-index 400" placement="top">
+              <sgds-button variant="outline">Hover for Tooltip</sgds-button>
+            </sgds-tooltip>
+          </div>
+          <div class="trigger-group">
+            <div class="trigger-label">Hover — right placement</div>
+            <sgds-tooltip content="Tooltip appears to the right" placement="right">
+              <sgds-button variant="outline">Hover me</sgds-button>
+            </sgds-tooltip>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drawer -->
+      <div class="section">
+        <div class="section-title">
+          Drawer
+          <span class="z-badge z-800">--sgds-z-index-modal (800)</span>
+        </div>
+        <p class="description">Slides in from the side. Covers toast, tooltip, and dropdown. Shares z-index with Modal — the one opened later wins.</p>
+        <div class="demo-area">
+          <div class="trigger-group">
+            <div class="trigger-label">End (right)</div>
+            <sgds-button id="btn-drawer-end">Open Drawer</sgds-button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="section">
+        <div class="section-title">
+          Modal
+          <span class="z-badge z-800">--sgds-z-index-modal (800)</span>
+        </div>
+        <p class="description">Full-screen overlay. Covers toast, tooltip, and dropdown. Shares z-index with Drawer — DOM order determines which is on top when both are open.</p>
+        <div class="demo-area">
+          <div class="trigger-group">
+            <div class="trigger-label">Default size</div>
+            <sgds-button id="btn-modal">Open Modal</sgds-button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combined scenario -->
+      <div class="section">
+        <div class="section-title">Combined Scenario</div>
+        <p class="description">Open everything at once to verify the full stacking hierarchy.</p>
+        <div class="scenario-note">
+          Expected order (top to bottom): Modal / Drawer (800) → Toast (400) → Tooltip (400) → Dropdown (200) → Mainnav / Subnav (200)
+        </div>
+        <div class="combined-area">
+          <div class="trigger-group">
+            <div class="trigger-label">Step 1 — open dropdown</div>
+            <sgds-dropdown id="combined-dropdown">
+              <sgds-button slot="toggler" variant="outline">
+                Dropdown
+                <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+              </sgds-button>
+              <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+              <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+              <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
+            </sgds-dropdown>
+          </div>
+          <div class="trigger-group">
+            <div class="trigger-label">Step 2 — hover for tooltip</div>
+            <sgds-tooltip content="Tooltip (400) sits above the dropdown (200)" placement="top">
+              <sgds-button variant="outline">Hover for Tooltip</sgds-button>
+            </sgds-tooltip>
+          </div>
+          <div class="trigger-group">
+            <div class="trigger-label">Step 3 — show toast</div>
+            <sgds-button id="btn-combined-toast" variant="outline">Show Toast</sgds-button>
+          </div>
+          <div class="trigger-group">
+            <div class="trigger-label">Step 4 — open drawer (hides toast)</div>
+            <sgds-button id="btn-combined-drawer" variant="outline">Open Drawer</sgds-button>
+          </div>
+          <div class="trigger-group">
+            <div class="trigger-label">Step 5 — open modal (hides toast)</div>
+            <sgds-button id="btn-combined-modal">Open Modal</sgds-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast containers -->
+    <sgds-toast-container position="top-end">
+      <sgds-toast id="toast-info" dismissible>
+        <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+        Toast at z-index 400 — hidden behind modal and drawer (800)
+      </sgds-toast>
+    </sgds-toast-container>
+
+    <sgds-toast-container position="top-end">
+      <sgds-toast id="toast-warning" dismissible variant="warning">
+        <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
+        Warning toast — also z-index 400
+      </sgds-toast>
+    </sgds-toast-container>
+
+    <sgds-toast-container position="top-end">
+      <sgds-toast id="toast-combined" dismissible>
+        <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+        Combined scenario toast (400) — open a modal or drawer to hide me
+      </sgds-toast>
+    </sgds-toast-container>
+
+    <!-- Drawer -->
+    <sgds-drawer id="drawer-end" placement="end">
+      <h2 slot="title">Drawer</h2>
+      <p slot="description">z-index: --sgds-z-index-modal (800)</p>
+      <p>This drawer covers toast, tooltip, and dropdowns. It shares z-index 800 with the modal — if both are open, DOM order decides which is on top.</p>
+      <p style="margin-top: 16px;">Try opening the modal while this drawer is open to see them at the same level.</p>
+      <div slot="footer" style="display:flex; gap: 8px; justify-content: flex-end;">
+        <sgds-button id="btn-modal-from-drawer">Also open Modal</sgds-button>
+        <sgds-button variant="outline" id="btn-close-drawer">Close Drawer</sgds-button>
+      </div>
+    </sgds-drawer>
+
+    <!-- Combined drawer -->
+    <sgds-drawer id="drawer-combined" placement="end">
+      <h2 slot="title">Drawer (Combined)</h2>
+      <p slot="description">z-index: 800</p>
+      <p>The toast (z=400) is now hidden behind this drawer (z=800).</p>
+      <div slot="footer" style="display:flex; gap: 8px; justify-content: flex-end;">
+        <sgds-button variant="outline" id="btn-close-drawer-combined">Close</sgds-button>
+      </div>
+    </sgds-drawer>
+
+    <!-- Modal -->
+    <sgds-modal id="modal-main">
+      <h2 slot="title">Modal</h2>
+      <p slot="description">z-index: --sgds-z-index-modal (800)</p>
+      <p>This modal shares z-index 800 with the drawer. Both cover everything at 400 and below. When both modal and drawer are open, the one that appears later in the DOM (or is opened later) is on top.</p>
+      <div slot="footer">
+        <sgds-button id="btn-close-modal">Close Modal</sgds-button>
+      </div>
+    </sgds-modal>
+
+    <!-- Combined modal -->
+    <sgds-modal id="modal-combined">
+      <h2 slot="title">Modal (Combined Scenario)</h2>
+      <p slot="description">z-index: 800</p>
+      <p>The toast (z=400) is hidden behind this modal (z=800). The dropdown and tooltip are also hidden. The mainnav and subnav (z=200) are also covered.</p>
+      <div slot="footer">
+        <sgds-button id="btn-close-modal-combined">Close Modal</sgds-button>
+      </div>
+    </sgds-modal>
+
+    <script>
+      // Toast — info
+      document.getElementById('btn-toast-info').addEventListener('click', () => {
+        document.getElementById('toast-info').showToast();
+      });
+
+      // Toast — warning
+      document.getElementById('btn-toast-warning').addEventListener('click', () => {
+        document.getElementById('toast-warning').showToast();
+      });
+
+      // Drawer
+      const drawerEnd = document.getElementById('drawer-end');
+      document.getElementById('btn-drawer-end').addEventListener('click', () => drawerEnd.show());
+      document.getElementById('btn-close-drawer').addEventListener('click', () => drawerEnd.hide());
+
+      // Modal
+      const modalMain = document.getElementById('modal-main');
+      document.getElementById('btn-modal').addEventListener('click', () => modalMain.show());
+      document.getElementById('btn-close-modal').addEventListener('click', () => modalMain.hide());
+
+      // Modal from inside drawer
+      const modalFromDrawer = document.getElementById('modal-main');
+      document.getElementById('btn-modal-from-drawer').addEventListener('click', () => modalFromDrawer.show());
+
+      // Combined scenario
+      document.getElementById('btn-combined-toast').addEventListener('click', () => {
+        document.getElementById('toast-combined').showToast();
+      });
+
+      const drawerCombined = document.getElementById('drawer-combined');
+      document.getElementById('btn-combined-drawer').addEventListener('click', () => drawerCombined.show());
+      document.getElementById('btn-close-drawer-combined').addEventListener('click', () => drawerCombined.hide());
+
+      const modalCombined = document.getElementById('modal-combined');
+      document.getElementById('btn-combined-modal').addEventListener('click', () => modalCombined.show());
+      document.getElementById('btn-close-modal-combined').addEventListener('click', () => modalCombined.hide());
+    </script>
+  </body>
+</html>
