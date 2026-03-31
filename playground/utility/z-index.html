@@ -1,0 +1,162 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Z-Index</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Z-Index Primitive</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Value</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:z-0</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-z-index-0</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:relative" style="width:80px;height:48px;">
+            <div class="sgds:absolute sgds:bg-neutral-surface-default sgds:rounded-sm" style="top:8px;left:8px;width:56px;height:32px;"></div>
+            <div class="sgds:absolute sgds:bg-primary-default sgds:rounded-sm sgds:flex sgds:items-center sgds:justify-center sgds:text-fixed-light sgds:z-0" style="top:0;left:0;width:56px;height:32px;">z: 0</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:z-100</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-z-index-100</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">100</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:relative" style="width:80px;height:48px;">
+            <div class="sgds:absolute sgds:bg-neutral-surface-default sgds:rounded-sm" style="top:8px;left:8px;width:56px;height:32px;"></div>
+            <div class="sgds:absolute sgds:bg-primary-default sgds:rounded-sm sgds:flex sgds:items-center sgds:justify-center sgds:text-fixed-light sgds:z-100" style="top:0;left:0;width:56px;height:32px;">z: 100</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:z-200</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-z-index-200</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">200</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:relative" style="width:80px;height:48px;">
+            <div class="sgds:absolute sgds:bg-neutral-surface-default sgds:rounded-sm" style="top:8px;left:8px;width:56px;height:32px;"></div>
+            <div class="sgds:absolute sgds:bg-primary-default sgds:rounded-sm sgds:flex sgds:items-center sgds:justify-center sgds:text-fixed-light sgds:z-200" style="top:0;left:0;width:56px;height:32px;">z: 200</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:z-400</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-z-index-400</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">400</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:relative" style="width:80px;height:48px;">
+            <div class="sgds:absolute sgds:bg-neutral-surface-default sgds:rounded-sm" style="top:8px;left:8px;width:56px;height:32px;"></div>
+            <div class="sgds:absolute sgds:bg-primary-default sgds:rounded-sm sgds:flex sgds:items-center sgds:justify-center sgds:text-fixed-light sgds:z-400" style="top:0;left:0;width:56px;height:32px;">z: 400</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:z-800</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-z-index-800</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">800</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:relative" style="width:80px;height:48px;">
+            <div class="sgds:absolute sgds:bg-neutral-surface-default sgds:rounded-sm" style="top:8px;left:8px;width:56px;height:32px;"></div>
+            <div class="sgds:absolute sgds:bg-primary-default sgds:rounded-sm sgds:flex sgds:items-center sgds:justify-center sgds:text-fixed-light sgds:z-800" style="top:0;left:0;width:56px;height:32px;">z: 800</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Z-Index Semantic</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Value</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:z-base</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-z-index-base</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">0</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:relative" style="width:80px;height:48px;">
+            <div class="sgds:absolute sgds:bg-neutral-surface-default sgds:rounded-sm" style="top:8px;left:8px;width:56px;height:32px;"></div>
+            <div class="sgds:absolute sgds:bg-primary-default sgds:rounded-sm sgds:flex sgds:items-center sgds:justify-center sgds:text-fixed-light sgds:z-base" style="top:0;left:0;width:56px;height:32px;">base</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:z-raised</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-z-index-raised</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">100</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:relative" style="width:80px;height:48px;">
+            <div class="sgds:absolute sgds:bg-neutral-surface-default sgds:rounded-sm" style="top:8px;left:8px;width:56px;height:32px;"></div>
+            <div class="sgds:absolute sgds:bg-primary-default sgds:rounded-sm sgds:flex sgds:items-center sgds:justify-center sgds:text-fixed-light sgds:z-raised" style="top:0;left:0;width:56px;height:32px;">raised</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:z-floating</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-z-index-floating</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">200</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:relative" style="width:80px;height:48px;">
+            <div class="sgds:absolute sgds:bg-neutral-surface-default sgds:rounded-sm" style="top:8px;left:8px;width:56px;height:32px;"></div>
+            <div class="sgds:absolute sgds:bg-primary-default sgds:rounded-sm sgds:flex sgds:items-center sgds:justify-center sgds:text-fixed-light sgds:z-floating" style="top:0;left:0;width:56px;height:32px;">floating</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:z-overlay</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-z-index-overlay</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">400</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:relative" style="width:80px;height:48px;">
+            <div class="sgds:absolute sgds:bg-neutral-surface-default sgds:rounded-sm" style="top:8px;left:8px;width:56px;height:32px;"></div>
+            <div class="sgds:absolute sgds:bg-primary-default sgds:rounded-sm sgds:flex sgds:items-center sgds:justify-center sgds:text-fixed-light sgds:z-overlay" style="top:0;left:0;width:56px;height:32px;">overlay</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:z-modal</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-z-index-modal</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">800</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:relative" style="width:80px;height:48px;">
+            <div class="sgds:absolute sgds:bg-neutral-surface-default sgds:rounded-sm" style="top:8px;left:8px;width:56px;height:32px;"></div>
+            <div class="sgds:absolute sgds:bg-primary-default sgds:rounded-sm sgds:flex sgds:items-center sgds:justify-center sgds:text-fixed-light sgds:z-modal" style="top:0;left:0;width:56px;height:32px;">modal</div>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <script>
+    const themeButton = document.getElementById("night-theme");
+    const body = document.querySelector("body");
+
+    themeButton.addEventListener("click", () => {
+      if (body.getAttribute("data-theme") === "night") {
+        body.removeAttribute("data-theme");
+      } else {
+        body.setAttribute("data-theme", "night");
+      }
+    });
+  </script>
+</body>
