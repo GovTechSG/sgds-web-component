@@ -8,6 +8,7 @@ tr {
 }
 
 th {
+  font-weight: var(--sgds-font-weight-semibold);
   text-align: -webkit-match-parent;
 }
 

@@ -34,7 +34,7 @@ All SGDS utility classes use the `sgds:` prefix (Tailwind v4 @theme syntax):
 
 ```css
 /* e.g. globals.css, index.css, main.css */
-@import '@govtechsg/sgds-web-component/css/utility.css';
+@import "@govtechsg/sgds-web-component/css/utility.css";
 ```
 
 Tailwind will resolve and process the nested imports at build time, generating all `sgds:` utility classes.
@@ -47,13 +47,14 @@ For theme-aware utilities that adapt to light/dark mode (background colors, text
 
 ```css
 /* e.g. globals.css, index.css, main.css */
-@import '@govtechsg/sgds-web-component/themes/day.css';
-@import '@govtechsg/sgds-web-component/themes/night.css';
+@import "@govtechsg/sgds-web-component/themes/day.css";
+@import "@govtechsg/sgds-web-component/themes/night.css";
 ```
 
 ### When Theme Setup is Required
 
 Import theme files when using:
+
 - **Background colors**: `sgds:bg-surface-default`, `sgds:bg-primary-default`, etc.
 - **Text colors**: `sgds:text-default`, `sgds:text-primary-default`, etc.
 - **Border colors**: `sgds:border-default`, `sgds:border-primary-default`, etc.
@@ -61,6 +62,7 @@ Import theme files when using:
 ### When Theme Setup is Optional
 
 Theme files are NOT required for:
+
 - **Spacing**: `sgds:p-4`, `sgds:m-2`, `sgds:gap-6`
 - **Typography sizing**: `sgds:text-xl`, `sgds:font-bold`
 - **Border radius**: `sgds:rounded-lg`
@@ -75,9 +77,9 @@ To toggle between light and dark themes programmatically:
 <button id="theme-toggle">Toggle Theme</button>
 
 <script>
-  const toggleButton = document.getElementById('theme-toggle');
-  toggleButton.addEventListener('click', () => {
-    document.documentElement.classList.toggle('sgds-theme-night');
+  const toggleButton = document.getElementById("theme-toggle");
+  toggleButton.addEventListener("click", () => {
+    document.documentElement.classList.toggle("sgds-theme-night");
   });
 </script>
 ```
@@ -91,25 +93,21 @@ Test that setup is complete:
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <!-- processed by your Tailwind build -->
-</head>
-<body class="sgds:bg-default sgds:p-6">
-  <div class="sgds:bg-surface-raised sgds:p-4 sgds:rounded-lg">
-    <h1 class="sgds:text-heading-default sgds:text-2-xl sgds:font-bold sgds:mb-4">
-      Setup Test
-    </h1>
-    <p class="sgds:text-body-default sgds:mb-4">
-      If this text is styled correctly, your setup is complete.
-    </p>
-    <button
-      class="sgds:bg-primary-default sgds:text-white sgds:px-4 sgds:py-2 sgds:rounded"
-      onclick="document.documentElement.classList.toggle('sgds-theme-night')"
-    >
-      Toggle Theme
-    </button>
-  </div>
-</body>
+  <head>
+    <!-- processed by your Tailwind build -->
+  </head>
+  <body class="sgds:bg-default sgds:p-6">
+    <div class="sgds:bg-surface-raised sgds:p-4 sgds:rounded-lg">
+      <h1 class="sgds:text-heading-default sgds:text-2-xl sgds:font-bold sgds:mb-4">Setup Test</h1>
+      <p class="sgds:text-body-default sgds:mb-4">If this text is styled correctly, your setup is complete.</p>
+      <button
+        class="sgds:bg-primary-default sgds:text-white sgds:px-4 sgds:py-2 sgds:rounded"
+        onclick="document.documentElement.classList.toggle('sgds-theme-night')"
+      >
+        Toggle Theme
+      </button>
+    </div>
+  </body>
 </html>
 ```
 
@@ -119,47 +117,48 @@ Since SGDS utilities are built on Tailwind v4, you must first set up Tailwind CS
 
 **Step 1**: Follow the Tailwind CSS guide for your framework:
 
-| Framework | Guide |
-|-----------|-------|
-| Next.js | https://tailwindcss.com/docs/installation/framework-guides/nextjs |
-| Nuxt (Vue) | https://tailwindcss.com/docs/installation/framework-guides/nuxt |
-| Angular | https://tailwindcss.com/docs/installation/framework-guides/angular |
-| SvelteKit | https://tailwindcss.com/docs/installation/framework-guides/sveltekit |
-| Astro | https://tailwindcss.com/docs/installation/framework-guides/astro |
-| Gatsby | https://tailwindcss.com/docs/installation/framework-guides/gatsby |
-| React Router | https://tailwindcss.com/docs/installation/framework-guides/react-router |
-| Vite (generic) | https://tailwindcss.com/docs/installation/using-vite |
+| Framework      | Guide                                                                   |
+| -------------- | ----------------------------------------------------------------------- |
+| Next.js        | https://tailwindcss.com/docs/installation/framework-guides/nextjs       |
+| Nuxt (Vue)     | https://tailwindcss.com/docs/installation/framework-guides/nuxt         |
+| Angular        | https://tailwindcss.com/docs/installation/framework-guides/angular      |
+| SvelteKit      | https://tailwindcss.com/docs/installation/framework-guides/sveltekit    |
+| Astro          | https://tailwindcss.com/docs/installation/framework-guides/astro        |
+| Gatsby         | https://tailwindcss.com/docs/installation/framework-guides/gatsby       |
+| React Router   | https://tailwindcss.com/docs/installation/framework-guides/react-router |
+| Vite (generic) | https://tailwindcss.com/docs/installation/using-vite                    |
 
 Not listed? See the full list at https://tailwindcss.com/docs/installation/framework-guides.
 
 **Step 2**: After Tailwind is set up, add the SGDS `@import` to the same CSS file that Tailwind processes (usually `globals.css`, `main.css`, or `index.css`):
 
 ```css
-@import '@govtechsg/sgds-web-component/css/utility.css';
+@import "@govtechsg/sgds-web-component/css/utility.css";
 
 /* Optional: theme-aware color tokens */
-@import '@govtechsg/sgds-web-component/themes/day.css';
-@import '@govtechsg/sgds-web-component/themes/night.css';
+@import "@govtechsg/sgds-web-component/themes/day.css";
+@import "@govtechsg/sgds-web-component/themes/night.css";
 ```
 
 ---
 
 ## Available Utilities
 
-| Category | Utility | Theme files required | Reference |
-|---|---|---|---|
-| **Layout** | Grid system (`.sgds-container`, `.sgds-grid`, `.sgds-col-*`) | No | [→ reference/grid.md](reference/grid.md) |
-| **Layout** | Container dimensions (`sgds:w-container`, `sgds:max-w-container-*`) | No | [→ reference/dimension.md](reference/dimension.md) |
-| **Spacing** | Margin, padding, gap (`sgds:p-*`, `sgds:m-*`, `sgds:gap-*`, semantic tokens) | No | [→ reference/spacing.md](reference/spacing.md) |
-| **Color** | Color token suffix semantics (default, emphasis, muted, fixed, etc.) | — | [→ reference/color-semantics.md](reference/color-semantics.md) |
-| **Color** | Background colors (`sgds:bg-*`) | Yes | [→ reference/background-color.md](reference/background-color.md) |
-| **Color** | Text colors (`sgds:text-*`) | Yes | [→ reference/text-color.md](reference/text-color.md) |
-| **Color** | Border colors (`sgds:border-*` color) | Yes | [→ reference/border-color.md](reference/border-color.md) |
-| **Border** | Border width and sides (`sgds:border`, `sgds:border-2`, `sgds:border-l-4`, etc.) | No | [→ reference/border-width.md](reference/border-width.md) |
-| **Border** | Border radius (`sgds:rounded-*`, `sgds:rounded-form-*`) | No | [→ reference/border-radius.md](reference/border-radius.md) |
-| **Typography** | Font size, weight, line height, letter spacing, font family | No | [→ reference/typography.md](reference/typography.md) |
-| **Visual** | Opacity (`sgds:opacity-*`) | No | [→ reference/opacity.md](reference/opacity.md) |
-| **Patterns** | Cross-category component patterns (card, alert, form, modal) | — | [→ reference/overview-patterns.md](reference/overview-patterns.md) |
+| Category       | Utility                                                                          | Theme files required | Reference                                                          |
+| -------------- | -------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------ |
+| **Layout**     | Grid system (`.sgds-container`, `.sgds-grid`, `.sgds-col-*`)                     | No                   | [→ reference/grid.md](reference/grid.md)                           |
+| **Layout**     | Container dimensions (`sgds:w-container`, `sgds:max-w-container-*`)              | No                   | [→ reference/dimension.md](reference/dimension.md)                 |
+| **Spacing**    | Margin, padding, gap (`sgds:p-*`, `sgds:m-*`, `sgds:gap-*`, semantic tokens)     | No                   | [→ reference/spacing.md](reference/spacing.md)                     |
+| **Color**      | Color token suffix semantics (default, emphasis, muted, fixed, etc.)             | —                    | [→ reference/color-semantics.md](reference/color-semantics.md)     |
+| **Color**      | Background colors (`sgds:bg-*`)                                                  | Yes                  | [→ reference/background-color.md](reference/background-color.md)   |
+| **Color**      | Text colors (`sgds:text-*`)                                                      | Yes                  | [→ reference/text-color.md](reference/text-color.md)               |
+| **Color**      | Border colors (`sgds:border-*` color)                                            | Yes                  | [→ reference/border-color.md](reference/border-color.md)           |
+| **Border**     | Border width and sides (`sgds:border`, `sgds:border-2`, `sgds:border-l-4`, etc.) | No                   | [→ reference/border-width.md](reference/border-width.md)           |
+| **Border**     | Border radius (`sgds:rounded-*`, `sgds:rounded-form-*`)                          | No                   | [→ reference/border-radius.md](reference/border-radius.md)         |
+| **Typography** | Font size, weight, line height, letter spacing, font family                      | No                   | [→ reference/typography.md](reference/typography.md)               |
+| **Visual**     | Opacity (`sgds:opacity-*`)                                                       | No                   | [→ reference/opacity.md](reference/opacity.md)                     |
+| **Visual**     | Elevation / box shadows (`sgds:shadow-*`, `sgds:shadow-edge-*`)                  | No                   | [→ reference/elevation.md](reference/elevation.md)                 |
+| **Patterns**   | Cross-category component patterns (card, alert, form, modal)                     | —                    | [→ reference/overview-patterns.md](reference/overview-patterns.md) |
 
 ---
 
@@ -174,11 +173,13 @@ Not listed? See the full list at https://tailwindcss.com/docs/installation/frame
 **Borders and rounded corners** → [reference/border-color.md](reference/border-color.md), [reference/border-width.md](reference/border-width.md), [reference/border-radius.md](reference/border-radius.md)
 **Headings, body text, font sizes** → [reference/typography.md](reference/typography.md)
 **Transparent overlays, disabled states** → [reference/opacity.md](reference/opacity.md)
+**Card shadows, modal depth, sticky header/footer edges** → [reference/elevation.md](reference/elevation.md)
 **Multi-category component examples** → [reference/overview-patterns.md](reference/overview-patterns.md)
 
 ---
 
 **For AI Agents**:
+
 1. Always verify users have completed setup (utility CSS import) before suggesting utility classes.
 2. Theme files (`day.css`, `night.css`) are only needed for color utilities (background, text, border colors) — not for spacing, typography, border radius, or opacity.
 3. When users ask about a specific utility category, read the corresponding reference file before generating output.

@@ -5,7 +5,7 @@
 @theme {
   --*: initial;
   --spacing: 4px;
-  
+
   /* Breakpoints (raw values required) */
   --breakpoint-xs: 320px;
   --breakpoint-sm: 512px;
@@ -13,7 +13,7 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2-xl: 1440px;
-  
+
   /* Margin and Padding */
   --spacing-none: var(--sgds-spacer-0);
   --spacing-3-xs: var(--sgds-spacer-1);
@@ -27,7 +27,7 @@
   --spacing-3-xl: var(--sgds-spacer-9);
   --spacing-4-xl: var(--sgds-spacer-10);
   --spacing-5-xl: var(--sgds-spacer-11);
- 
+
   /* Semantic background colors */
   --background-color-default: var(--sgds-bg-default);
   --background-color-alternate: var(--sgds-bg-alternate);
@@ -63,7 +63,7 @@
   --border-color-fixed-dark: var(--sgds-border-color-fixed-dark);
   --border-color-translucent: var(--sgds-border-color-translucent);
   --border-color-transparent: var(--sgds-border-color-transparent);
-  
+
   /* Semantic - Primary Colors */
   --background-color-primary-default: var(--sgds-primary-bg-default);
   --background-color-primary-muted: var(--sgds-primary-bg-muted);
@@ -453,4 +453,12 @@
   --z-overlay: var(--sgds-z-index-overlay);
   --z-modal: var(--sgds-z-index-modal);
 
+  /* Elevation - Box Shadows */
+  --shadow-1: var(--sgds-elevation-surface-1);
+  --shadow-2: var(--sgds-elevation-surface-2);
+  --shadow-3: var(--sgds-elevation-surface-3);
+  --shadow-4: var(--sgds-elevation-surface-4);
+  --shadow-5: var(--sgds-elevation-surface-5);
+  --shadow-edge-top: var(--sgds-elevation-edge-top);
+  --shadow-edge-bottom: var(--sgds-elevation-edge-bottom);
 }
