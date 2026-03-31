@@ -24,7 +24,7 @@
   pointer-events: none;
   position: fixed;
   width: max-content;
-  z-index: 1200;
+  z-index: var(--sgds-z-index-overlay);
   /* Height of masthead + mainnav  */
   --toast-container-top: calc(28px + 80px + var(--sgds-spacer-8));
   --toast-container-right: var(--sgds-spacer-8);
@@ -62,8 +62,15 @@
 
 slot {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--sgds-layout-gap-md);
 }
+
+:host([position^="top"]) slot {
+ flex-direction: column-reverse;
+}
+:host([position^="bottom"]) slot {
+ flex-direction: column;
+}
+
 
 

@@ -412,6 +412,19 @@
   --sgds-motion-duration-slow: 400ms;
   --sgds-motion-duration-slower: 500ms;
 
+  /* Foundation - Z-Index Primitive */
+  --sgds-z-index-0: 0;
+  --sgds-z-index-100: 100;
+  --sgds-z-index-200: 200;
+  --sgds-z-index-400: 400;
+  --sgds-z-index-800: 800;
+
+  /* Semantic - Z-Index */
+  --sgds-z-index-base: var(--sgds-z-index-0);
+  --sgds-z-index-raised: var(--sgds-z-index-100);
+  --sgds-z-index-floating: var(--sgds-z-index-200);
+  --sgds-z-index-overlay: var(--sgds-z-index-400);
+  --sgds-z-index-modal: var(--sgds-z-index-800);
   /* Elevation */
   --sgds-elevation-surface-1: 0 0 2px 0 rgba(14, 14, 14, 0.16);
   --sgds-elevation-surface-2: 0 0 2px 0 rgba(14, 14, 14, 0.16), 0 2px 4px 0 rgba(14, 14, 14, 0.08);

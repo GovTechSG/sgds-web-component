@@ -1,7 +1,3 @@
-:host {
-  display: contents;
-}
-
 :host([size="md"]) .drawer-end .drawer-panel,
 :host([size="md"]) .drawer-start .drawer-panel {
   max-width: var(--sgds-dimension-768);
@@ -33,7 +29,7 @@
 
 .drawer-fixed {
   position: fixed;
-  z-index: 1100;
+  z-index: var(--sgds-z-index-modal);
 }
 .drawer-panel {
   display: flex;
