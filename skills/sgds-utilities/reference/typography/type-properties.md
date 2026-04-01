@@ -94,7 +94,7 @@ Apply with `sgds:text-{size}` where the number is the pixel value:
 | `sgds:text-14` | 14px | Secondary labels, helper text, code |
 | `sgds:text-16` | 16px | Default body text |
 | `sgds:text-18` | 18px | Lead paragraphs |
-| `sgds:text-20` | 20px | Intro text |
+| `sgds:text-20` | 20px | Intro text, subtitles |
 | `sgds:text-22` | 22px | Minor subtitles |
 | `sgds:text-24` | 24px | H4 / card headings |
 | `sgds:text-26` | 26px | H4 variants |
