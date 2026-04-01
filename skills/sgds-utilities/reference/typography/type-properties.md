@@ -149,40 +149,50 @@ Two ratios determine line height, calculated then rounded to the nearest 4-point
 
 ### Font-Size-to-Leading Pairing
 
+**Base scale:**
+
 | Font size | Role | Ratio | Calculated | Leading token |
 |-----------|------|-------|------------|--------------|
-| `sgds:text-12` | Caption, badge label | 1.5× | 18 → 20 | `sgds:leading-20` |
-| `sgds:text-14` | Label, helper text | 1.5× | 21 → 20 | `sgds:leading-20` |
+| `sgds:text-12` | Label | 1.2× | 14.4 → 16 | `sgds:leading-16` |
+| `sgds:text-14` | Caption, overline | 1.5× | 21 → 20 | `sgds:leading-20` |
 | `sgds:text-16` | Body | 1.5× | 24 | `sgds:leading-24` |
-| `sgds:text-18` *(responsive)* | Body | 1.5× | 27 → 28 | `sgds:leading-28` |
+| `sgds:text-16` | Label, subtitle | 1.2× | 19.2 → 20 | `sgds:leading-20` |
 | `sgds:text-20` | Lead body | 1.5× | 30 → 32 | `sgds:leading-32` |
 | `sgds:text-20` | Subtitle | 1.2× | 24 | `sgds:leading-24` |
-| `sgds:text-22` *(responsive)* | Subtitle | 1.2× | 26.4 → 28 | `sgds:leading-28` |
-| `sgds:text-24` | H4, card heading | 1.2× | 28.8 → 28 | `sgds:leading-28` |
-| `sgds:text-26` *(responsive)* | Heading | 1.2× | 31.2 → 32 | `sgds:leading-32` |
+| `sgds:text-24` | H4 | 1.2× | 28.8 → 28 | `sgds:leading-28` |
 | `sgds:text-28` | H3 | 1.2× | 33.6 → 32 | `sgds:leading-32` |
-| `sgds:text-30` *(responsive)* | Heading | 1.2× | 36 | `sgds:leading-36` |
 | `sgds:text-32` | H2 | 1.2× | 38.4 → 40 | `sgds:leading-40` |
-| `sgds:text-36` *(responsive)* | Heading | 1.2× | 43.2 → 44 | `sgds:leading-44` |
 | `sgds:text-40` | H1, Display | 1.2× | 48 | `sgds:leading-48` |
-| `sgds:text-44` *(responsive)* | Display | 1.2× | 52.8 → 52 | `sgds:leading-52` |
 | `sgds:text-48` | Display | 1.2× | 57.6 → 56 | `sgds:leading-56` |
-| `sgds:text-52` *(responsive)* | Display | 1.2× | 62.4 → 64 | `sgds:leading-64` |
 | `sgds:text-56` | Display | 1.2× | 67.2 → 64 | `sgds:leading-64` |
+
+**Responsive sizes (use in media query breakpoints only):**
+
+| Font size | Role | Ratio | Calculated | Leading token |
+|-----------|------|-------|------------|--------------|
+| `sgds:text-18` | Body | 1.5× | 27 → 28 | `sgds:leading-28` |
+| `sgds:text-22` | Subtitle | 1.2× | 26.4 → 28 | `sgds:leading-28` |
+| `sgds:text-26` | Heading | 1.2× | 31.2 → 32 | `sgds:leading-32` |
+| `sgds:text-30` | Heading | 1.2× | 36 | `sgds:leading-36` |
+| `sgds:text-36` | Heading | 1.2× | 43.2 → 44 | `sgds:leading-44` |
+| `sgds:text-44` | Display | 1.2× | 52.8 → 52 | `sgds:leading-52` |
+| `sgds:text-52` | Display | 1.2× | 62.4 → 64 | `sgds:leading-64` |
 
 ### Roles & Usage
 
+- For `sgds:text-16`, choose based on role: `sgds:leading-24` for body, `sgds:leading-20` for label or subtitle.
 - For `sgds:text-20`, choose based on role: `sgds:leading-32` for lead body, `sgds:leading-24` for subtitle.
 - Do not mix line heights within a single heading element.
 
 ```html
-<!-- Body and label — 1.5× ratio -->
-<p class="sgds:text-12 sgds:leading-20">Caption or fine print</p>
-<p class="sgds:text-14 sgds:leading-20">Helper or secondary text</p>
+<!-- Body and caption — 1.5× ratio -->
+<p class="sgds:text-14 sgds:leading-20">Caption or overline text</p>
 <p class="sgds:text-16 sgds:leading-24">Standard body text</p>
 <p class="sgds:text-20 sgds:leading-32">Lead paragraph</p>
 
-<!-- Headings — 1.2× ratio -->
+<!-- Labels, headings and display — 1.2× ratio -->
+<span class="sgds:text-12 sgds:leading-16">Compact label</span>
+<span class="sgds:text-16 sgds:font-semibold sgds:leading-20">Label or subtitle</span>
 <h3 class="sgds:text-20 sgds:font-semibold sgds:leading-24">Subtitle</h3>
 <h3 class="sgds:text-24 sgds:font-semibold sgds:leading-28">H4</h3>
 <h2 class="sgds:text-32 sgds:font-bold sgds:leading-40">H2</h2>
@@ -370,7 +380,7 @@ Apply with the transform class directly:
   <h1 class="sgds:text-48 sgds:font-bold sgds:leading-56 sgds:tracking-tight sgds:mb-paragraph-sm">
     Design System
   </h1>
-  <p class="sgds:text-18 sgds:font-regular sgds:leading-24 sgds:text-body-subtle">
+  <p class="sgds:text-18 sgds:font-regular sgds:leading-28 sgds:text-body-subtle">
     Build consistent, accessible Singapore Government digital services.
   </p>
 </div>
