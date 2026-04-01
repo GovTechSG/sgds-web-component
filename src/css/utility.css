@@ -267,16 +267,23 @@
   --font-weight-bold: var(--sgds-font-weight-bold);
 
   /* Font Size - Primitive */
-  --text-0: var(--sgds-font-size-0);
-  --text-1: var(--sgds-font-size-1);
-  --text-2: var(--sgds-font-size-2);
-  --text-3: var(--sgds-font-size-3);
-  --text-4: var(--sgds-font-size-4);
-  --text-5: var(--sgds-font-size-5);
-  --text-6: var(--sgds-font-size-6);
-  --text-7: var(--sgds-font-size-7);
-  --text-8: var(--sgds-font-size-8);
-  --text-9: var(--sgds-font-size-9);
+  --text-12: var(--sgds-font-size-12);
+  --text-14: var(--sgds-font-size-14);
+  --text-16: var(--sgds-font-size-16);
+  --text-18: var(--sgds-font-size-18);
+  --text-20: var(--sgds-font-size-20);
+  --text-22: var(--sgds-font-size-22);
+  --text-24: var(--sgds-font-size-24);
+  --text-26: var(--sgds-font-size-26);
+  --text-28: var(--sgds-font-size-28);
+  --text-30: var(--sgds-font-size-30);
+  --text-32: var(--sgds-font-size-32);
+  --text-36: var(--sgds-font-size-36);
+  --text-40: var(--sgds-font-size-40);
+  --text-44: var(--sgds-font-size-44);
+  --text-48: var(--sgds-font-size-48);
+  --text-52: var(--sgds-font-size-52);
+  --text-56: var(--sgds-font-size-56);
 
   /* Font Size - Semantic Responsive */
   --text-display-sm: var(--sgds-font-size-display-sm);
