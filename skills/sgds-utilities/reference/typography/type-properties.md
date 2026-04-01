@@ -154,9 +154,9 @@ Two ratios determine line height, calculated then rounded to the nearest 4-point
 | Font size | Role | Ratio | Calculated | Leading token |
 |-----------|------|-------|------------|--------------|
 | `sgds:text-12` | Label | 1.2× | 14.4 → 16 | `sgds:leading-16` |
-| `sgds:text-14` | Caption, overline | 1.5× | 21 → 20 | `sgds:leading-20` |
+| `sgds:text-14` | Footnote, Caption, overline | 1.5× | 21 → 20 | `sgds:leading-20` |
 | `sgds:text-16` | Body | 1.5× | 24 | `sgds:leading-24` |
-| `sgds:text-16` | Label, subtitle | 1.2× | 19.2 → 20 | `sgds:leading-20` |
+| `sgds:text-16` | Subtitle | 1.2× | 19.2 → 20 | `sgds:leading-20` |
 | `sgds:text-20` | Lead body | 1.5× | 30 → 32 | `sgds:leading-32` |
 | `sgds:text-20` | Subtitle | 1.2× | 24 | `sgds:leading-24` |
 | `sgds:text-24` | H4 | 1.2× | 28.8 → 28 | `sgds:leading-28` |
