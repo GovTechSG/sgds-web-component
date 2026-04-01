@@ -44,7 +44,7 @@ Apply with `sgds:font-{family}`:
 
 <!-- Always set mono on code -->
 <code class="sgds:font-mono sgds:text-14">const value = 42;</code>
-<pre class="sgds:font-mono sgds:text-14 sgds:leading-normal">
+<pre class="sgds:font-mono sgds:text-14 sgds:leading-20">
   function hello() {
     return 'world';
   }
@@ -92,21 +92,16 @@ Apply with `sgds:text-{size}` where the number is the pixel value:
 |-------|-------------|-------------|
 | `sgds:text-12` | 12px | Fine print, captions, badge labels |
 | `sgds:text-14` | 14px | Secondary labels, helper text, code |
-| `sgds:text-16` | 16px | Default body text |
-| `sgds:text-18` | 18px | Lead paragraphs |
-| `sgds:text-20` | 20px | Intro text, subtitles |
-| `sgds:text-22` | 22px | Minor subtitles |
+| `sgds:text-16` | 16px | Default body text, subtiles |
+| `sgds:text-20` | 20px | Lead paragraphs, intro text, body large, subtiles |
 | `sgds:text-24` | 24px | H4 / card headings |
-| `sgds:text-26` | 26px | H4 variants |
 | `sgds:text-28` | 28px | H3 |
-| `sgds:text-30` | 30px | H3 / section headings |
-| `sgds:text-32` | 32px | H2 variants |
-| `sgds:text-36` | 36px | H2 |
-| `sgds:text-40` | 40px | H1 variants |
-| `sgds:text-44` | 44px | H1 |
-| `sgds:text-48` | 48px | H1 / page titles |
-| `sgds:text-52` | 52px | Large display |
-| `sgds:text-56` | 56px | Hero display |
+| `sgds:text-32` | 32px | H2 |
+| `sgds:text-40` | 40px | Display, H1 |
+| `sgds:text-48` | 48px | Display |
+| `sgds:text-56` | 56px | Display |
+
+Sizes outside this base scale (18, 22, 26, 30, 36, 44, 52) are available for responsive use only.
 
 ### Roles & Usage
 
@@ -117,37 +112,81 @@ Apply with `sgds:text-{size}` where the number is the pixel value:
 ```html
 <p class="sgds:text-12">Fine print or legal text</p>
 <p class="sgds:text-16">Standard body text</p>
-<h3 class="sgds:text-30 sgds:font-semibold sgds:leading-tight">Section heading</h3>
-<h1 class="sgds:text-48 sgds:font-bold sgds:leading-tight">Page title</h1>
+<h3 class="sgds:text-28 sgds:font-semibold sgds:leading-32">Section heading</h3>
+<h1 class="sgds:text-48 sgds:font-bold sgds:leading-56">Page title</h1>
 ```
 
 ---
 
 ## 4. Line Height
 
-Apply with `sgds:leading-{scale}`:
+Apply with `sgds:leading-{size}` where the number is the pixel value:
 
 ### Scale / Values
 
-| Token | Value | Typical use |
-|-------|-------|-------------|
-| `sgds:leading-normal` | 1.5 | Default — all body text |
-| `sgds:leading-tight` | 1.2 | Display text, headings, subtitles |
+| Token | Pixel value |
+|-------|-------------|
+| `sgds:leading-16` | 16px |
+| `sgds:leading-20` | 20px |
+| `sgds:leading-24` | 24px |
+| `sgds:leading-28` | 28px |
+| `sgds:leading-32` | 32px |
+| `sgds:leading-36` | 36px |
+| `sgds:leading-40` | 40px |
+| `sgds:leading-44` | 44px |
+| `sgds:leading-48` | 48px |
+| `sgds:leading-52` | 52px |
+| `sgds:leading-56` | 56px |
+| `sgds:leading-60` | 60px |
+| `sgds:leading-64` | 64px |
+
+### Ratio Rule
+
+Two ratios determine line height, calculated then rounded to the nearest 4-point grid token:
+
+- **1.5×** — body text, labels, captions
+- **1.2×** — headings, subtitles, display
+
+### Font-Size-to-Leading Pairing
+
+| Font size | Role | Ratio | Calculated | Leading token |
+|-----------|------|-------|------------|--------------|
+| `sgds:text-12` | Caption, badge label | 1.5× | 18 → 20 | `sgds:leading-20` |
+| `sgds:text-14` | Label, helper text | 1.5× | 21 → 20 | `sgds:leading-20` |
+| `sgds:text-16` | Body | 1.5× | 24 | `sgds:leading-24` |
+| `sgds:text-18` *(responsive)* | Body | 1.5× | 27 → 28 | `sgds:leading-28` |
+| `sgds:text-20` | Lead body | 1.5× | 30 → 32 | `sgds:leading-32` |
+| `sgds:text-20` | Subtitle | 1.2× | 24 | `sgds:leading-24` |
+| `sgds:text-22` *(responsive)* | Subtitle | 1.2× | 26.4 → 28 | `sgds:leading-28` |
+| `sgds:text-24` | H4, card heading | 1.2× | 28.8 → 28 | `sgds:leading-28` |
+| `sgds:text-26` *(responsive)* | Heading | 1.2× | 31.2 → 32 | `sgds:leading-32` |
+| `sgds:text-28` | H3 | 1.2× | 33.6 → 32 | `sgds:leading-32` |
+| `sgds:text-30` *(responsive)* | Heading | 1.2× | 36 | `sgds:leading-36` |
+| `sgds:text-32` | H2 | 1.2× | 38.4 → 40 | `sgds:leading-40` |
+| `sgds:text-36` *(responsive)* | Heading | 1.2× | 43.2 → 44 | `sgds:leading-44` |
+| `sgds:text-40` | H1, Display | 1.2× | 48 | `sgds:leading-48` |
+| `sgds:text-44` *(responsive)* | Display | 1.2× | 52.8 → 52 | `sgds:leading-52` |
+| `sgds:text-48` | Display | 1.2× | 57.6 → 56 | `sgds:leading-56` |
+| `sgds:text-52` *(responsive)* | Display | 1.2× | 62.4 → 64 | `sgds:leading-64` |
+| `sgds:text-56` | Display | 1.2× | 67.2 → 64 | `sgds:leading-64` |
 
 ### Roles & Usage
 
-- **Body text** — reboot applies `leading-normal` (1.5) globally; no class needed for body.
-- **All headings and display text** → always apply `sgds:leading-tight` (1.2).
+- For `sgds:text-20`, choose based on role: `sgds:leading-32` for lead body, `sgds:leading-24` for subtitle.
 - Do not mix line heights within a single heading element.
 
 ```html
-<!-- Body — no class needed -->
-<p>Regular paragraph text with comfortable spacing.</p>
+<!-- Body and label — 1.5× ratio -->
+<p class="sgds:text-12 sgds:leading-20">Caption or fine print</p>
+<p class="sgds:text-14 sgds:leading-20">Helper or secondary text</p>
+<p class="sgds:text-16 sgds:leading-24">Standard body text</p>
+<p class="sgds:text-20 sgds:leading-32">Lead paragraph</p>
 
-<!-- All headings use tight -->
-<h1 class="sgds:text-48 sgds:font-bold sgds:leading-tight">Page title</h1>
-<h2 class="sgds:text-36 sgds:font-bold sgds:leading-tight">Section heading</h2>
-<h3 class="sgds:text-24 sgds:font-semibold sgds:leading-tight">Subtitle</h3>
+<!-- Headings — 1.2× ratio -->
+<h3 class="sgds:text-20 sgds:font-semibold sgds:leading-24">Subtitle</h3>
+<h3 class="sgds:text-24 sgds:font-semibold sgds:leading-28">H4</h3>
+<h2 class="sgds:text-32 sgds:font-bold sgds:leading-40">H2</h2>
+<h1 class="sgds:text-48 sgds:font-bold sgds:leading-56">Page title</h1>
 ```
 
 ---
@@ -174,10 +213,10 @@ Apply with `sgds:tracking-{size}`:
 - Never apply wide tracking to large text — it reduces readability.
 
 ```html
-<h1 class="sgds:text-56 sgds:font-bold sgds:leading-tight sgds:tracking-tighter">
+<h1 class="sgds:text-56 sgds:font-bold sgds:leading-64 sgds:tracking-tighter">
   Hero heading
 </h1>
-<h2 class="sgds:text-48 sgds:font-bold sgds:leading-tight sgds:tracking-tight">
+<h2 class="sgds:text-48 sgds:font-bold sgds:leading-56 sgds:tracking-tight">
   Page title
 </h2>
 <p class="sgds:text-16">Body text — tracking-normal is the default, no class needed</p>
@@ -305,8 +344,8 @@ Apply with the transform class directly:
 - ❌ Do not use large sizes for body text or small sizes for headings
 
 **Line height**
-- ✅ Apply `sgds:leading-tight` on all headings; let body text use the default
-- ❌ Do not apply `sgds:leading-normal` to headings — multi-line headings become too loose
+- ✅ Pair heading line height with the token closest to 1.2× the font size; `sgds:leading-24` for 16px body
+- ❌ Do not use too large a leading on headings — multi-line headings become too loose
 
 **Letter spacing**
 - ✅ Tighten tracking on large text; widen for small uppercase labels
@@ -328,10 +367,10 @@ Apply with the transform class directly:
 
 ```html
 <div class="sgds:mb-paragraph-xl">
-  <h1 class="sgds:text-48 sgds:font-bold sgds:leading-tight sgds:tracking-tight sgds:mb-paragraph-sm">
+  <h1 class="sgds:text-48 sgds:font-bold sgds:leading-56 sgds:tracking-tight sgds:mb-paragraph-sm">
     Design System
   </h1>
-  <p class="sgds:text-18 sgds:font-regular sgds:leading-normal sgds:text-body-subtle">
+  <p class="sgds:text-18 sgds:font-regular sgds:leading-24 sgds:text-body-subtle">
     Build consistent, accessible Singapore Government digital services.
   </p>
 </div>
@@ -341,13 +380,13 @@ Apply with the transform class directly:
 
 ```html
 <article>
-  <h2 class="sgds:text-36 sgds:font-bold sgds:leading-tight sgds:mb-paragraph-md">
+  <h2 class="sgds:text-36 sgds:font-bold sgds:leading-44 sgds:mb-paragraph-md">
     Section Title
   </h2>
-  <p class="sgds:text-16 sgds:leading-normal sgds:mb-paragraph-lg">
+  <p class="sgds:text-16 sgds:leading-24 sgds:mb-paragraph-lg">
     First paragraph of the section. Standard body size with comfortable line height.
   </p>
-  <p class="sgds:text-16 sgds:leading-normal sgds:mb-paragraph-lg">
+  <p class="sgds:text-16 sgds:leading-24 sgds:mb-paragraph-lg">
     Second paragraph follows with the same spacing for a consistent reading rhythm.
   </p>
 </article>
@@ -368,7 +407,7 @@ Apply with the transform class directly:
 ### Code block
 
 ```html
-<pre class="sgds:font-mono sgds:text-14 sgds:leading-normal sgds:bg-surface-raised sgds:p-md sgds:rounded">
+<pre class="sgds:font-mono sgds:text-14 sgds:leading-20 sgds:bg-surface-raised sgds:p-md sgds:rounded">
   const greeting = 'hello';
   console.log(greeting);
 </pre>
@@ -391,7 +430,7 @@ When generating typography markup with SGDS utilities:
 - **Font family**: No class needed for prose; always add `sgds:font-mono` to `<code>` and `<pre>`.
 - **Font weight**: `sgds:font-semibold` for subtitles and labels; `sgds:font-bold` for H1–H2; `sgds:font-regular` for body (default, no class needed).
 - **Font size**: Use numeric token matching the pixel size — `sgds:text-16` for body, `sgds:text-30` for H3, `sgds:text-48` for H1.
-- **Line height**: `sgds:leading-tight` on all headings and display text; body inherits `leading-normal` from reboot (no class needed).
+- **Line height**: Use the font-size-to-leading pairing table in Section 4. Body/label/caption uses 1.5× ratio; headings/subtitles/display uses 1.2×. Both are rounded to the nearest 4-point grid token (e.g. `sgds:text-16` → `sgds:leading-24`, `sgds:text-48` → `sgds:leading-56`).
 - **Letter spacing**: `sgds:tracking-tight` for 48px+ headings; `sgds:tracking-wider` for small uppercase labels; no class for body.
 - **Paragraph spacing**: `sgds:mb-paragraph-md` for standard content; `sgds:mb-paragraph-lg` for long-form reading.
 - **Text decoration**: `sgds:underline` on links; `sgds:line-through` for deleted/struck content; `sgds:no-underline` when colour conveys link state.
