@@ -154,27 +154,27 @@ Apply with `sgds:leading-{size}` where the number is the pixel value:
 
 Two ratios determine line height, calculated then rounded to the nearest 4-point grid token:
 
-- **1.5×** — body text, labels, captions
-- **1.2×** — headings, subtitles, display
+**1.5× ratio — body text, labels, captions:**
 
-### Font-Size-to-Leading Pairing
+| Font size | Role | Calculated | Leading token |
+|-----------|------|------------|--------------|
+| `sgds:text-14` | Caption, overline | 21 → 20 | `sgds:leading-20` |
+| `sgds:text-16` | Body | 24 | `sgds:leading-24` |
+| `sgds:text-20` | Lead body | 30 → 32 | `sgds:leading-32` |
 
-**Base scale:**
+**1.2× ratio — headings, subtitles, display:**
 
-| Font size | Role | Ratio | Calculated | Leading token |
-|-----------|------|-------|------------|--------------|
-| `sgds:text-12` | Label | 1.2× | 14.4 → 16 | `sgds:leading-16` |
-| `sgds:text-14` | Footnote, Caption, overline | 1.5× | 21 → 20 | `sgds:leading-20` |
-| `sgds:text-16` | Body | 1.5× | 24 | `sgds:leading-24` |
-| `sgds:text-16` | Subtitle | 1.2× | 19.2 → 20 | `sgds:leading-20` |
-| `sgds:text-20` | Lead body | 1.5× | 30 → 32 | `sgds:leading-32` |
-| `sgds:text-20` | Subtitle | 1.2× | 24 | `sgds:leading-24` |
-| `sgds:text-24` | H4 | 1.2× | 28.8 → 28 | `sgds:leading-28` |
-| `sgds:text-28` | H3 | 1.2× | 33.6 → 32 | `sgds:leading-32` |
-| `sgds:text-32` | H2 | 1.2× | 38.4 → 40 | `sgds:leading-40` |
-| `sgds:text-40` | H1, Display | 1.2× | 48 | `sgds:leading-48` |
-| `sgds:text-48` | Display | 1.2× | 57.6 → 56 | `sgds:leading-56` |
-| `sgds:text-56` | Display | 1.2× | 67.2 → 64 | `sgds:leading-64` |
+| Font size | Role | Calculated | Leading token |
+|-----------|------|------------|--------------|
+| `sgds:text-12` | Label | 14.4 → 16 | `sgds:leading-16` |
+| `sgds:text-16` | Label, subtitle | 19.2 → 20 | `sgds:leading-20` |
+| `sgds:text-20` | Subtitle | 24 | `sgds:leading-24` |
+| `sgds:text-24` | H4 | 28.8 → 28 | `sgds:leading-28` |
+| `sgds:text-28` | H3 | 33.6 → 32 | `sgds:leading-32` |
+| `sgds:text-32` | H2 | 38.4 → 40 | `sgds:leading-40` |
+| `sgds:text-40` | H1, Display | 48 | `sgds:leading-48` |
+| `sgds:text-48` | Display | 57.6 → 56 | `sgds:leading-56` |
+| `sgds:text-56` | Display | 67.2 → 64 | `sgds:leading-64` |
 
 ### Roles & Usage
 
