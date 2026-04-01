@@ -1,1 +1,1 @@
-export type ISgdsFileUploadFilesSelectedEventDetail = File[];
+export type ISgdsFileUploadFilesSelectedEventDetail = FileList;

@@ -43,7 +43,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
 
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
-    this.emit("sgds-change", { detail: { value: this.value } });
+    this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
     this._updateCheckedRadio();
   }
   @watch("invalid", { waitUntilFirstUpdate: true })

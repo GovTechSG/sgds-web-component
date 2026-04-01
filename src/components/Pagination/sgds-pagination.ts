@@ -53,7 +53,7 @@ export class SgdsPagination extends SgdsElement {
   /**@internal */
   @watch("currentPage", { waitUntilFirstUpdate: false })
   _handleValueChange() {
-    this.emit("sgds-page-change", { detail: { currentPage: this.currentPage } });
+    this.emit<ISgdsPaginationPageChangeEventDetail>("sgds-page-change", { detail: { currentPage: this.currentPage } });
     /**
      * Always showing 7 li at a time.
      * The case when both ellipsis is not needed

@@ -73,7 +73,7 @@ export class SgdsSwitch extends SgdsElement {
 
   private _handleChange() {
     this.checked = !this.checked;
-    this.emit("sgds-change", { detail: { checked: this.checked } });
+    this.emit<ISgdsSwitchChangeEventDetail>("sgds-change", { detail: { checked: this.checked } });
   }
 
   private _handleKeyDown(event: KeyboardEvent) {

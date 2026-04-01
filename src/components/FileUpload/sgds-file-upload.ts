@@ -81,7 +81,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   }
 
   private _setFileList(files: FileList) {
-    this.emit("sgds-files-selected", { detail: files });
+    this.emit<ISgdsFileUploadFilesSelectedEventDetail>("sgds-files-selected", { detail: files });
   }
 
   private inputRef = createRef<HTMLInputElement>();
