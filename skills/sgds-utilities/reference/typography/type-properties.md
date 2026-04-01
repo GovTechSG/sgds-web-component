@@ -101,7 +101,17 @@ Apply with `sgds:text-{size}` where the number is the pixel value:
 | `sgds:text-48` | 48px | Display |
 | `sgds:text-56` | 56px | Display |
 
-Sizes outside this base scale (18, 22, 26, 30, 36, 44, 52) are available for responsive use only.
+**Responsive sizes** (use in media query breakpoints only — not for base styles):
+
+| Token | Pixel value |
+|-------|-------------|
+| `sgds:text-18` | 18px |
+| `sgds:text-22` | 22px |
+| `sgds:text-26` | 26px |
+| `sgds:text-30` | 30px |
+| `sgds:text-36` | 36px |
+| `sgds:text-44` | 44px |
+| `sgds:text-52` | 52px |
 
 ### Roles & Usage
 
