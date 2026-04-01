@@ -3,7 +3,7 @@ import {
   componentNameFromPath,
   toPropsInterface,
   toReactEventPropKey,
-  shouldIncludeMember,
+  shouldIncludeMember
 } from "../generateSgdsTypes.helpers.mjs";
 
 // ---------------------------------------------------------------------------
@@ -88,14 +88,10 @@ describe("shouldIncludeMember()", () => {
   });
 
   it("excludes fields inherited from an external package", () => {
-    expect(
-      shouldIncludeMember({ ...base, inheritedFrom: { package: "lit", name: "SomeBase" } })
-    ).to.be.false;
+    expect(shouldIncludeMember({ ...base, inheritedFrom: { package: "lit", name: "SomeBase" } })).to.be.false;
   });
 
   it("includes fields inherited from within the project (no package key)", () => {
-    expect(
-      shouldIncludeMember({ ...base, inheritedFrom: { name: "SgdsElement" } })
-    ).to.be.true;
+    expect(shouldIncludeMember({ ...base, inheritedFrom: { name: "SgdsElement" } })).to.be.true;
   });
 });

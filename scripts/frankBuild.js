@@ -27,7 +27,7 @@ async function createPackageFile() {
       "./utils/*": null,
       "./types/react": "./types/react.d.ts"
     },
-    customElements : "./custom-elements.json",
+    customElements: "./custom-elements.json"
   };
 
   const targetPath = resolve(distPath, "./package.json");
