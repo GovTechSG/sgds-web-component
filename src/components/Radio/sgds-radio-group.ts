@@ -7,6 +7,8 @@ import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";
+import type { ISgdsRadioGroupChangeEventDetail } from "./types";
+export type { ISgdsRadioGroupChangeEventDetail };
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.
@@ -15,6 +17,7 @@ import SgdsRadio from "./sgds-radio";
  * @slot invalidIcon - The slot for invalid icon
  *
  * @event sgds-change - Emitted when the radio group's selected value changes.
+ * @eventDetail {ISgdsRadioGroupChangeEventDetail} sgds-change
  *
  */
 export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {

@@ -154,7 +154,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 <sgds-masthead suppressHydrationWarning></sgds-masthead>
 ```
 
-**Step 4 — TypeScript support** — add a `types.d.ts` at the project root declaring each `sgds-*` tag in `JSX.IntrinsicElements` as `React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>`.
+**Step 4 — TypeScript support** — add a `types.d.ts` at the project root and reference the SGDS React type definitions. This gives full IntelliSense for props and typed `CustomEvent` detail payloads on all `sgds-*` elements:
+
+Use an ES import in any `.d.ts` file included by your `tsconfig`:
+
+```ts
+import "@govtechsg/sgds-web-component/types/react";
+```
 
 **Events in Next.js** — due to hydration timing, wire custom events via `useEffect` + `addEventListener` rather than declarative React props:
 

@@ -24,8 +24,10 @@ async function createPackageFile() {
       "./react": "./react/index.js",
       "./react/*": "./react/*",
       "./base/*": null,
-      "./utils/*": null
-    }
+      "./utils/*": null,
+      "./types/react": "./types/react.d.ts"
+    },
+    customElements : "./custom-elements.json",
   };
 
   const targetPath = resolve(distPath, "./package.json");
@@ -52,6 +54,7 @@ async function run() {
   try {
     await createPackageFile();
     await includeFileInBuild("./README.md");
+    await includeFileInBuild("./custom-elements.json");
     // await copy(resolve(packagePath, "./src/themes"), distPath)
     await copyMastheadCdnToRoot();
     // await includeFileInBuild('../../LICENSE');
