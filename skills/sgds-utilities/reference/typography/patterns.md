@@ -281,5 +281,3 @@ Always use `<div>` and `sgds:uppercase`. Use for key-value labels and data table
 ## See Also
 
 - **[type-properties.md](type-properties.md)** — Full scale tables for all token values
-
----
