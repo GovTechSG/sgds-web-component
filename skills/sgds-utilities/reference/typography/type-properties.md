@@ -167,8 +167,8 @@ Two ratios determine line height, calculated then rounded to the nearest 4-point
 | Font size | Role | Calculated | Leading token |
 |-----------|------|------------|--------------|
 | `sgds:text-12` | Label | 14.4 → 16 | `sgds:leading-16` |
-| `sgds:text-16` | Subtitle | 19.2 → 20 | `sgds:leading-20` |
-| `sgds:text-20` | Subtitle | 24 | `sgds:leading-24` |
+| `sgds:text-16` | H6, Subtitle | 19.2 → 20 | `sgds:leading-20` |
+| `sgds:text-20` | H5, Subtitle | 24 | `sgds:leading-24` |
 | `sgds:text-24` | H4 | 28.8 → 28 | `sgds:leading-28` |
 | `sgds:text-28` | H3 | 33.6 → 32 | `sgds:leading-32` |
 | `sgds:text-32` | H2 | 38.4 → 40 | `sgds:leading-40` |
