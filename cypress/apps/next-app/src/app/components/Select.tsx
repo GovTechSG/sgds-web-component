@@ -24,7 +24,7 @@ export const Select = () => {
         name="combobox" 
         placeholder="ComboBox" 
         value="1"
-        multiselect
+        multiSelect
         >
             <sgds-combo-box-option value="1">One</sgds-combo-box-option>
             <sgds-combo-box-option value="2">Two</sgds-combo-box-option>

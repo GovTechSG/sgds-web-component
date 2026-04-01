@@ -9,6 +9,8 @@ import FormControlElement from "../../base/form-control-element";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import SgdsIcon from "../Icon/sgds-icon";
+import type { ISgdsFileUploadFilesSelectedEventDetail } from "./types";
+export type { ISgdsFileUploadFilesSelectedEventDetail };
 
 /**
  * @summary Allows users to upload files of various sizes and formats

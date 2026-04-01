@@ -6,6 +6,8 @@ import SgdsButton from "../Button/sgds-button";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import paginationStyle from "./pagination.css";
+import type { ISgdsPaginationPageChangeEventDetail } from "./types";
+export type { ISgdsPaginationPageChangeEventDetail };
 
 export type Navigation = "button" | "icon-button";
 

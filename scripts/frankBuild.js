@@ -24,7 +24,8 @@ async function createPackageFile() {
       "./react": "./react/index.js",
       "./react/*": "./react/*",
       "./base/*": null,
-      "./utils/*": null
+      "./utils/*": null,
+      "./sgds-types": "./sgds-types.d.ts"
     }
   };
 
@@ -52,6 +53,7 @@ async function run() {
   try {
     await createPackageFile();
     await includeFileInBuild("./README.md");
+    await includeFileInBuild("./sgds-types.d.ts");
     // await copy(resolve(packagePath, "./src/themes"), distPath)
     await copyMastheadCdnToRoot();
     // await includeFileInBuild('../../LICENSE');

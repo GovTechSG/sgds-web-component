@@ -7,6 +7,8 @@ import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import radioGroupStyles from "./radio-group.css";
 import SgdsRadio from "./sgds-radio";
+import type { ISgdsRadioGroupChangeEventDetail } from "./types";
+export type { ISgdsRadioGroupChangeEventDetail };
 
 /**
  * @summary RadioGroup group multiple radios so they function as a single form control.

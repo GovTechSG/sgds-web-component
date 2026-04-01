@@ -1,0 +1,319 @@
+/**
+ * generateSgdsTypes.mjs
+ *
+ * Auto-generates sgds-types.d.ts from custom-elements.json and per-component
+ * lib/components/<Name>/types.d.ts files. Run after Rollup, before frankBuild.js.
+ */
+
+import fs from "fs";
+import path from "path";
+import { getAllComponents, getSgdsComponents } from "./shared.mjs";
+
+const ROOT = process.cwd();
+const CEM_PATH = path.join(ROOT, "custom-elements.json");
+const LIB_DIR = path.join(ROOT, "lib");
+const OUT_PATH = path.join(ROOT, "sgds-types.d.ts");
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+/** Extract component folder name from a module path like "src/components/ComboBox/sgds-combo-box.ts" */
+function componentNameFromPath(modulePath) {
+  const parts = modulePath.split("/");
+  // src / components / <Name> / file.ts
+  if (parts[0] === "src" && parts[1] === "components") {
+    return parts[2];
+  }
+  return null;
+}
+
+/**
+ * Convert a class name like "SgdsComboBox" to "SgdsComboBoxProps"
+ */
+function toPropsInterface(className) {
+  return `${className}Props`;
+}
+
+/**
+ * Convert an event name like "sgds-input" to a JSX prop key like "onsgds-input"
+ */
+function toEventPropKey(eventName) {
+  return `"on${eventName}"`;
+}
+
+/**
+ * Given a component name (e.g. "ComboBox") and an event slug (e.g. "sgds-input"),
+ * derive the expected event detail interface name.
+ *
+ * Convention:
+ *   className "SgdsComboBox" + event "sgds-input"
+ *   → strip "sgds-" prefix → "input"
+ *   → PascalCase → "Input"
+ *   → "ISgdsComboBoxInputEventDetail"
+ *
+ * Special case for Stepper's IStepMetaData (prop type, not event detail) —
+ * handled separately, not via this function.
+ */
+function toEventDetailInterfaceName(className, eventName) {
+  // Strip "sgds-" prefix from event name
+  const slug = eventName.startsWith("sgds-") ? eventName.slice(5) : eventName;
+  // PascalCase: split on "-" and capitalise each word
+  const pascal = slug
+    .split("-")
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join("");
+  return `ISgds${className.replace(/^Sgds/, "")}${pascal}EventDetail`;
+}
+
+/**
+ * Read lib/components/<Name>/types.d.ts and return all exported interface/type
+ * declarations as a string (with "export " stripped so they are module-internal
+ * in the generated file).
+ *
+ * Returns null if the file doesn't exist.
+ */
+function readComponentTypesDecl(componentName) {
+  const typesPath = path.join(LIB_DIR, "components", componentName, "types.d.ts");
+  if (!fs.existsSync(typesPath)) return null;
+  const src = fs.readFileSync(typesPath, "utf8");
+  // Strip "export " prefixes from declarations so they're ambient in the output
+  return src.replace(/^export (interface|type) /gm, "$1 ").trim();
+}
+
+// ---------------------------------------------------------------------------
+// Member filtering
+// ---------------------------------------------------------------------------
+
+function shouldIncludeMember(member) {
+  if (member.kind !== "field") return false;
+  if (member.static) return false;
+  const privacy = member.privacy ?? "public";
+  if (privacy === "private" || privacy === "protected") return false;
+  if (member.name.startsWith("_")) return false;
+  const desc = member.description ?? "";
+  if (desc.includes("@internal")) return false;
+  // Skip members inherited from external packages (e.g. lit, @lit/reactive-element)
+  if (member.inheritedFrom?.package) return false;
+  return true;
+}
+
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
+
+const metadata = JSON.parse(fs.readFileSync(CEM_PATH, "utf8"));
+const allComponents = getAllComponents(metadata);
+const sgdsComponents = getSgdsComponents(allComponents);
+
+// Collect all event-detail interface blocks from lib/components/*/types.d.ts
+// Map: interfaceName → true (for lookup)
+const knownDetailInterfaces = new Set();
+// Map: componentName → stripped types.d.ts text
+const componentTypesBlocks = new Map();
+
+for (const comp of sgdsComponents) {
+  const compName = componentNameFromPath(comp.modulePath);
+  if (!compName) continue;
+  const block = readComponentTypesDecl(compName);
+  if (block) {
+    componentTypesBlocks.set(compName, block);
+    // Extract interface/type names from the block
+    for (const match of block.matchAll(/^(?:interface|type)\s+(\w+)/gm)) {
+      knownDetailInterfaces.add(match[1]);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Build the output file
+// ---------------------------------------------------------------------------
+
+const lines = [];
+
+// --- Static preamble -------------------------------------------------------
+
+lines.push(`/**
+ * SGDS Web Components – TypeScript Type Definitions
+ *
+ * Auto-generated by scripts/generateSgdsTypes.mjs — do not edit by hand.
+ *
+ * Provides typed JSX intrinsic elements for all \`sgds-*\` custom elements so
+ * that React and Next.js TypeScript projects get IntelliSense and type-safety
+ * without importing the full library at runtime.
+ *
+ * Usage – add ONE of the following to your project's \`types.d.ts\`:
+ *
+ *   // Triple-slash reference (works in any tsconfig):
+ *   /// <reference path="node_modules/@govtechsg/sgds-web-component/sgds-types.d.ts" />
+ *
+ *   // ES import (tsconfig must include this file via \`include\` or \`typeRoots\`):
+ *   import "@govtechsg/sgds-web-component/sgds-types";
+ *
+ * Custom event handlers in JSX:
+ *   Use the lowercase kebab-case \`onsgds-*\` form — React 19 maps these directly
+ *   to native addEventListener calls on the custom element:
+ *     <sgds-input onsgds-change={handler} />
+ *     // equivalent to: el.addEventListener("sgds-change", handler)
+ */`);
+lines.push("");
+// Make this file a module so \`declare module "react"\` is a proper augmentation
+lines.push("export {};");
+lines.push("");
+lines.push("// ---------------------------------------------------------------------------");
+lines.push("// Helpers");
+lines.push("// ---------------------------------------------------------------------------");
+lines.push("");
+lines.push("type SgdsEventHandler = (event: CustomEvent) => void;");
+lines.push("");
+lines.push("/** Common props shared by every SGDS element */");
+lines.push("interface SgdsBaseProps extends React.HTMLAttributes<HTMLElement> {");
+lines.push('  /** Override the CSS `class` attribute (use `className` in JSX for React) */');
+lines.push("  class?: string;");
+lines.push("}");
+
+// --- Event detail interfaces from per-component types.d.ts -----------------
+
+// Sort component names for deterministic output
+const sortedCompNames = [...componentTypesBlocks.keys()].sort();
+
+if (sortedCompNames.length > 0) {
+  lines.push("");
+  lines.push("// ---------------------------------------------------------------------------");
+  lines.push("// Event detail interfaces (from per-component types.d.ts)");
+  lines.push("// ---------------------------------------------------------------------------");
+  for (const compName of sortedCompNames) {
+    lines.push("");
+    lines.push(`// ── ${compName} ─────────────────────────────────────────────────────────────`);
+    lines.push("");
+    lines.push(componentTypesBlocks.get(compName));
+  }
+}
+
+// --- Per-component prop interfaces -----------------------------------------
+
+lines.push("");
+lines.push("// ---------------------------------------------------------------------------");
+lines.push("// Component prop interfaces");
+lines.push("// ---------------------------------------------------------------------------");
+
+// Group by tag name to process in declaration order
+// We want to process each component only once
+const processed = new Set();
+
+for (const comp of sgdsComponents) {
+  const { name: className, tagName, members = [], events = [], modulePath } = comp;
+  if (!tagName || !tagName.startsWith("sgds-")) continue;
+  // Skip non-component paths (base classes)
+  if (!modulePath.startsWith("src/components/")) continue;
+  if (processed.has(className)) continue;
+  processed.add(className);
+
+  const propsName = toPropsInterface(className);
+  const compName = componentNameFromPath(modulePath);
+
+  // De-duplicate members by name (own members take precedence)
+  const memberMap = new Map();
+  for (const m of members) {
+    if (!shouldIncludeMember(m)) continue;
+    if (!memberMap.has(m.name)) {
+      memberMap.set(m.name, m);
+    }
+  }
+
+  // Build the interface body
+  const propLines = [];
+
+  for (const [, m] of memberMap) {
+    const typeText = m.type?.text ?? "unknown";
+    const desc = m.description ?? "";
+    if (desc) {
+      propLines.push(`  /** ${desc.trim()} */`);
+    }
+    propLines.push(`  ${m.name}?: ${typeText};`);
+  }
+
+  // Event handler props
+  for (const ev of events) {
+    const eventName = ev.name;
+    if (!eventName) continue;
+    const propKey = toEventPropKey(eventName);
+    const detailIfaceName = toEventDetailInterfaceName(className, eventName);
+    if (knownDetailInterfaces.has(detailIfaceName)) {
+      propLines.push(`  ${propKey}?: (event: CustomEvent<${detailIfaceName}>) => void;`);
+    } else {
+      propLines.push(`  ${propKey}?: SgdsEventHandler;`);
+    }
+  }
+
+  // Determine parent interface
+  // For simplicity we extend SgdsBaseProps for all (matches current behaviour)
+  const commentTag = tagName;
+
+  lines.push("");
+  lines.push(`// ── ${className.replace(/^Sgds/, "")} ─────────────────────────────────────────────────────────────`);
+  lines.push("");
+  lines.push(`interface ${propsName} extends SgdsBaseProps {`);
+  if (propLines.length > 0) {
+    lines.push(...propLines);
+  }
+  lines.push(`}`);
+}
+
+// --- React JSX intrinsic elements ------------------------------------------
+
+lines.push("");
+lines.push("// ---------------------------------------------------------------------------");
+lines.push('// React JSX intrinsic element registrations');
+lines.push("// ---------------------------------------------------------------------------");
+lines.push("");
+lines.push('declare module "react" {');
+lines.push("  namespace JSX {");
+lines.push("    interface IntrinsicElements {");
+
+const processedForJSX = new Set();
+for (const comp of sgdsComponents) {
+  const { name: className, tagName, modulePath } = comp;
+  if (!tagName || !tagName.startsWith("sgds-")) continue;
+  if (!modulePath.startsWith("src/components/")) continue;
+  if (processedForJSX.has(tagName)) continue;
+  processedForJSX.add(tagName);
+  const propsName = toPropsInterface(className);
+  lines.push(`      "${tagName}": ${propsName};`);
+}
+
+lines.push("    }");
+lines.push("  }");
+lines.push("}");
+
+// --- HTMLElementTagNameMap --------------------------------------------------
+
+lines.push("");
+lines.push("// ---------------------------------------------------------------------------");
+lines.push("// Global HTMLElementTagNameMap augmentation (vanilla TypeScript / non-React)");
+lines.push("// ---------------------------------------------------------------------------");
+lines.push("");
+lines.push("declare global {");
+lines.push("  interface HTMLElementTagNameMap {");
+
+const processedForMap = new Set();
+for (const comp of sgdsComponents) {
+  const { tagName, modulePath } = comp;
+  if (!tagName || !tagName.startsWith("sgds-")) continue;
+  if (!modulePath.startsWith("src/components/")) continue;
+  if (processedForMap.has(tagName)) continue;
+  processedForMap.add(tagName);
+  lines.push(`    "${tagName}": HTMLElement;`);
+}
+
+lines.push("  }");
+lines.push("}");
+lines.push("");
+
+// ---------------------------------------------------------------------------
+// Write output
+// ---------------------------------------------------------------------------
+
+const output = lines.join("\n");
+fs.writeFileSync(OUT_PATH, output, "utf8");
+console.log(`Generated sgds-types.d.ts (${output.length} chars) at ${OUT_PATH}`);

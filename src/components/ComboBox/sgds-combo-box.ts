@@ -15,6 +15,7 @@ import { SgdsComboBoxOption } from "./sgds-combo-box-option";
 
 import { repeat } from "lit/directives/repeat.js";
 import SgdsSpinner from "../Spinner/sgds-spinner";
+import { ISgdsComboBoxInputEventDetail } from "./types";
 
 /**
  * Each item in the ComboBox has a label to display
@@ -22,9 +23,7 @@ import SgdsSpinner from "../Spinner/sgds-spinner";
  */
 type SgdsComboBoxOptionData = SgdsOptionData;
 
-export interface ISgdsComboBoxInputEventDetail {
-  displayValue: string;
-}
+export type { ISgdsComboBoxInputEventDetail };
 
 /**
  * @summary ComboBox component is used for users to make one or more selections from a list through user input, keyboard or mouse actions
