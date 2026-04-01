@@ -183,12 +183,12 @@ SGDS provides **semantic line-height utilities** named by size scale. **Always u
 | `sgds:leading-3-xs` | `--sgds-line-height-16` |
 | `sgds:leading-2-xs` | `--sgds-line-height-20` |
 | `sgds:leading-xs` | `--sgds-line-height-24` |
-| `sgds:leading-sm` | `--sgds-line-height-24` |
-| `sgds:leading-md` | `--sgds-line-height-28` |
-| `sgds:leading-lg` | `--sgds-line-height-32` |
-| `sgds:leading-xl` | `--sgds-line-height-40` |
-| `sgds:leading-2-xl` | `--sgds-line-height-44` |
-| `sgds:leading-3-xl` | `--sgds-line-height-48` |
+| `sgds:leading-sm` | `--sgds-line-height-28` |
+| `sgds:leading-md` | `--sgds-line-height-32` |
+| `sgds:leading-lg` | `--sgds-line-height-40` |
+| `sgds:leading-xl` | `--sgds-line-height-48` |
+| `sgds:leading-2-xl` | `--sgds-line-height-56` |
+| `sgds:leading-3-xl` | `--sgds-line-height-64` |
 
 Only fall back to raw pixel utilities (`sgds:leading-16` … `sgds:leading-64`) when you need a fixed line height that must never adapt.
 
