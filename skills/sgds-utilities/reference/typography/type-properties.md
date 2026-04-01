@@ -158,16 +158,16 @@ Two ratios determine line height, calculated then rounded to the nearest 4-point
 
 | Font size | Role | Calculated | Leading token |
 |-----------|------|------------|--------------|
-| `sgds:text-14` | Caption, overline | 21 → 20 | `sgds:leading-20` |
-| `sgds:text-16` | Body | 24 | `sgds:leading-24` |
-| `sgds:text-20` | Lead body | 30 → 32 | `sgds:leading-32` |
+| `sgds:text-14` | Body, Label, Caption, Overline | 21 → 20 | `sgds:leading-20` |
+| `sgds:text-16` | Body, Label | 24 | `sgds:leading-24` |
+| `sgds:text-20` | Lead body, Label | 30 → 32 | `sgds:leading-32` |
 
 **1.2× ratio — headings, subtitles, display:**
 
 | Font size | Role | Calculated | Leading token |
 |-----------|------|------------|--------------|
 | `sgds:text-12` | Label | 14.4 → 16 | `sgds:leading-16` |
-| `sgds:text-16` | Label, subtitle | 19.2 → 20 | `sgds:leading-20` |
+| `sgds:text-16` | Subtitle | 19.2 → 20 | `sgds:leading-20` |
 | `sgds:text-20` | Subtitle | 24 | `sgds:leading-24` |
 | `sgds:text-24` | H4 | 28.8 → 28 | `sgds:leading-28` |
 | `sgds:text-28` | H3 | 33.6 → 32 | `sgds:leading-32` |
