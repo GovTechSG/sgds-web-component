@@ -6,6 +6,8 @@ import SgdsButton from "../Button/sgds-button";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import paginationStyle from "./pagination.css";
+import type { ISgdsPaginationPageChangeEventDetail } from "./types";
+export type { ISgdsPaginationPageChangeEventDetail };
 
 export type Navigation = "button" | "icon-button";
 
@@ -13,6 +15,7 @@ export type Navigation = "button" | "icon-button";
  * @summary The Pagination component enables the user to select a specific page from a range of pages
  *
  * @event sgds-page-change - Event is emitted when `handleNextButton`, `handlePrevButton`, `handleNextEllipsisButton` and `handlePrevEllipsisButton` was called.
+ * @eventDetail {ISgdsPaginationPageChangeEventDetail} sgds-page-change
  *
  **/
 export class SgdsPagination extends SgdsElement {
@@ -50,7 +53,7 @@ export class SgdsPagination extends SgdsElement {
   /**@internal */
   @watch("currentPage", { waitUntilFirstUpdate: false })
   _handleValueChange() {
-    this.emit("sgds-page-change", { detail: { currentPage: this.currentPage } });
+    this.emit<ISgdsPaginationPageChangeEventDetail>("sgds-page-change", { detail: { currentPage: this.currentPage } });
     /**
      * Always showing 7 li at a time.
      * The case when both ellipsis is not needed
