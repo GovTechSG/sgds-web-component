@@ -121,32 +121,32 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 
 ```html
 <!-- Body Large Semibold -->
-<p class="sgds:text-20 sgds:font-semibold sgds:leading-32 sgds:mb-paragraph-md">
+<p class="sgds:text-20 sgds:font-semibold sgds:leading-32 sgds:mb-paragraph-xl">
   Body large semibold.
 </p>
 
 <!-- Body Large Regular -->
-<p class="sgds:text-20 sgds:leading-32 sgds:mb-paragraph-md">
+<p class="sgds:text-20 sgds:leading-32 sgds:mb-paragraph-xl">
   Body large regular.
 </p>
 
 <!-- Body Medium Semibold -->
-<p class="sgds:text-16 sgds:font-semibold sgds:leading-24 sgds:mb-paragraph-md">
+<p class="sgds:text-16 sgds:font-semibold sgds:leading-24 sgds:mb-paragraph-lg">
   Body medium semibold.
 </p>
 
 <!-- Body Medium Regular (Default) -->
-<p class="sgds:text-16 sgds:leading-24 sgds:mb-paragraph-md">
+<p class="sgds:text-16 sgds:leading-24 sgds:mb-paragraph-lg">
   Body medium regular.
 </p>
 
 <!-- Body Small Semibold -->
-<p class="sgds:text-14 sgds:font-semibold sgds:leading-20 sgds:mb-paragraph-md">
+<p class="sgds:text-14 sgds:font-semibold sgds:leading-20 sgds:mb-paragraph-lg">
   Body small semibold.
 </p>
 
 <!-- Body Small Regular -->
-<p class="sgds:text-14 sgds:leading-20 sgds:mb-paragraph-md">
+<p class="sgds:text-14 sgds:leading-20 sgds:mb-paragraph-lg">
   Body small regular.
 </p>
 ```
@@ -161,16 +161,31 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 <!-- Non-form context: use <div> -->
 
 <!-- Label Large Semibold -->
-<div class="sgds:text-16 sgds:font-semibold sgds:leading-20">Label Large Semibold</div>
+<div class="sgds:text-20 sgds:font-semibold sgds:leading-32">Label Large Semibold</div>
 
 <!-- Label Large Regular -->
-<div class="sgds:text-16 sgds:leading-20">Label Large Regular</div>
+<div class="sgds:text-20 sgds:leading-32">Label Large Regular</div>
+
+<!-- Label Medium Semibold -->
+<div class="sgds:text-16 sgds:font-semibold sgds:leading-24">Label Medium Semibold</div>
+
+<!-- Label Medium Regular -->
+<div class="sgds:text-16 sgds:leading-24">Label Medium Regular</div>
+
+<!-- Label Medium light -->
+<div class="sgds:text-16 sgds:font-light sgds:leading-24">Label Medium Light</div>
 
 <!-- Label Small Semibold -->
-<div class="sgds:text-12 sgds:font-semibold sgds:leading-16">Label Small Semibold</div>
+<div class="sgds:text-14 sgds:font-semibold sgds:leading-20">Label Small Semibold</div>
 
 <!-- Label Small Regular -->
-<div class="sgds:text-12 sgds:leading-16">Label Small Regular</div>
+<div class="sgds:text-14 sgds:leading-20">Label Small Regular</div>
+
+<!-- Label Extra Small Semibold -->
+<div class="sgds:text-12 sgds:font-semibold sgds:leading-16">Label Extra Small Semibold</div>
+
+<!-- Label Extra Small Regular -->
+<div class="sgds:text-12 sgds:leading-16">Label Extra Small Regular</div>
 ```
 
 ```html
@@ -189,12 +204,12 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 
 ```html
 <!-- Caption Semibold -->
-<div class="sgds:text-14 sgds:font-semibold sgds:leading-20 sgds:mb-paragraph-sm">
+<div class="sgds:text-14 sgds:font-semibold sgds:leading-20 sgds:mb-paragraph-md">
   Caption semibold
 </div>
 
 <!-- Caption Regular (Default) -->
-<div class="sgds:text-14 sgds:leading-20 sgds:mb-paragraph-sm">
+<div class="sgds:text-14 sgds:leading-20 sgds:mb-paragraph-md">
   Caption regular
 </div>
 ```
