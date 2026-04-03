@@ -152,6 +152,12 @@ Examples:
 
 **Form element looks out of place**: If the border-radius on a form control doesn't match surrounding inputs, confirm you're using `sgds:rounded-form-*` instead of the general `sgds:rounded-*` scale.
 
+---
+
+**For AI Agents**: When applying border radius — default to `sgds:rounded-md`; adjust based on component size and density; use `sgds:rounded-full` only for pills, avatars, or circular UI; use form tokens (`sgds:rounded-form-*`) for native inputs only; do not introduce values outside the defined scale; align radius usage with the product's brand tone.
+
+---
+
 ## See Also
 
 - **[border-color](border-color.md)** — Semantic and theme-aware border colors
