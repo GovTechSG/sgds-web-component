@@ -184,7 +184,7 @@ Two ratios determine line height, calculated then rounded to the nearest 4-point
 ### Roles & Usage
 
 - For `sgds:text-16`, choose based on role: `sgds:leading-24` for body or label, `sgds:leading-20` for subtitle.
-- For `sgds:text-20`, choose based on role: `sgds:leading-32` for lead body, `sgds:leading-24` for subtitle.
+- For `sgds:text-20`, choose based on role: `sgds:leading-32` for lead body or label, `sgds:leading-24` for subtitle.
 - Do not mix line heights within a single heading element.
 
 ```html
@@ -193,9 +193,11 @@ Two ratios determine line height, calculated then rounded to the nearest 4-point
 <p class="sgds:text-16 sgds:leading-24">Standard body text</p>
 <p class="sgds:text-20 sgds:leading-32">Lead paragraph</p>
 
-<!-- Labels, headings and display — 1.2× ratio -->
-<span class="sgds:text-12 sgds:leading-16">Compact label</span>
-<span class="sgds:text-16 sgds:font-semibold sgds:leading-24">Label</span>
+<!-- Label — 1.2× for text-12 (smallest size); 1.5× for text-16+ -->
+<span class="sgds:text-12 sgds:leading-16">Compact label (1.2×)</span>
+<span class="sgds:text-16 sgds:font-semibold sgds:leading-24">Label (1.5×)</span>
+
+<!-- Headings and display — 1.2× ratio -->
 <span class="sgds:text-16 sgds:font-semibold sgds:leading-20">Subtitle</span>
 <h3 class="sgds:text-20 sgds:font-semibold sgds:leading-24">Subtitle</h3>
 <h3 class="sgds:text-24 sgds:font-semibold sgds:leading-28">H4</h3>
