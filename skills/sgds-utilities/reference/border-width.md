@@ -64,6 +64,36 @@ Border width utilities control thickness and which sides have borders. They are 
 | `sgds:border-x-{n}` | n pixels left + right |
 | `sgds:border-y-{n}` | n pixels top + bottom |
 
+## Usage Guidelines
+
+**1. Default Usage**
+- Use `sgds:border` (1px) for most UI boundaries.
+- Avoid unnecessary borders if layout or background already defines structure.
+
+**2. Interaction & State**
+- Use `sgds:border-2` (2px) for hover, focus, and error states.
+- Use `sgds:border-4` (4px) sparingly for strong emphasis — active, selected, or critical states.
+
+**3. Visual Hierarchy**
+- Thicker borders signal stronger emphasis.
+- Keep border width consistent within a component.
+
+---
+
+## Do & Don't
+
+**Do**
+- Use consistent border width within a component
+- Combine border width with colour for visibility
+- Use thicker borders intentionally for interaction and emphasis
+
+**Don't**
+- Use a border alone as a separator between sections — use `<sgds-divider>` instead
+- Mix too many border widths within the same component
+- Overuse thick borders for non-critical elements
+
+---
+
 ## Troubleshooting
 
 **Border not visible**: Add a color class — width alone doesn't produce a visible border. You need both `sgds:border` and `sgds:border-{color}`.
