@@ -193,7 +193,7 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 <sgds-input label="Field label"></sgds-input>
 
 <!-- Form context fallback: use <label> only if component has no built-in label support -->
-<label class="sgds:text-16 sgds:font-semibold sgds:leading-20">
+<label class="sgds:text-16 sgds:font-semibold sgds:leading-24">
   Field Label
 </label>
 ```
@@ -276,8 +276,8 @@ Always use `<div>` and `sgds:uppercase`. Use for key-value labels and data table
 | H2 | `sgds:text-32` | `sgds:leading-40` |
 | H3 | `sgds:text-28` | `sgds:leading-32` |
 | H4 | `sgds:text-24` | `sgds:leading-28` |
-| Subtitle | `sgds:text-20` | `sgds:leading-24` (heading) or `sgds:leading-32` (body) |
-| Body / Label | `sgds:text-16` | `sgds:leading-24` (body) or `sgds:leading-20` (label) |
+| Subtitle | `sgds:text-20` | `sgds:leading-24` (subtitle) or `sgds:leading-32` (lead body/label) |
+| Body / Label | `sgds:text-16` | `sgds:leading-24` |
 | Caption / Body SM | `sgds:text-14` | `sgds:leading-20` |
 | Label XS | `sgds:text-12` | `sgds:leading-16` |
 
