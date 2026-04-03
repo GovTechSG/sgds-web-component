@@ -92,9 +92,9 @@ Apply with `sgds:text-{size}` where the number is the pixel value:
 |-------|-------------|-------------|
 | `sgds:text-12` | 12px | Fine print, captions, badge labels |
 | `sgds:text-14` | 14px | Secondary labels, helper text, code |
-| `sgds:text-16` | 16px | Default body text, subtiles |
-| `sgds:text-20` | 20px | Lead paragraphs, intro text, body large, subtiles |
-| `sgds:text-24` | 24px | H4 / card headings |
+| `sgds:text-16` | 16px | Default body text, subtitles |
+| `sgds:text-20` | 20px | Lead paragraphs, intro text, body large, subtitles |
+| `sgds:text-24` | 24px | H4 |
 | `sgds:text-28` | 28px | H3 |
 | `sgds:text-32` | 32px | H2 |
 | `sgds:text-40` | 40px | Display, H1 |
@@ -154,21 +154,26 @@ Apply with `sgds:leading-{size}` where the number is the pixel value:
 
 Two ratios determine line height, calculated then rounded to the nearest 4-point grid token:
 
+- **1.5×** — body text, labels, captions
+- **1.2×** — headings, subtitles, display
+
+### Font-Size-to-Leading Pairing
+
 **1.5× ratio — body text, labels, captions:**
 
 | Font size | Role | Calculated | Leading token |
 |-----------|------|------------|--------------|
-| `sgds:text-14` | Body, Label, Caption, Overline | 21 → 20 | `sgds:leading-20` |
-| `sgds:text-16` | Body, Label | 24 | `sgds:leading-24` |
-| `sgds:text-20` | Lead body, Label | 30 → 32 | `sgds:leading-32` |
+| `sgds:text-14` | Caption, overline | 21 → 20 | `sgds:leading-20` |
+| `sgds:text-16` | Body, label | 24 | `sgds:leading-24` |
+| `sgds:text-20` | Lead body, label | 30 → 32 | `sgds:leading-32` |
 
 **1.2× ratio — headings, subtitles, display:**
 
 | Font size | Role | Calculated | Leading token |
 |-----------|------|------------|--------------|
 | `sgds:text-12` | Label | 14.4 → 16 | `sgds:leading-16` |
-| `sgds:text-16` | H6, Subtitle | 19.2 → 20 | `sgds:leading-20` |
-| `sgds:text-20` | H5, Subtitle | 24 | `sgds:leading-24` |
+| `sgds:text-16` | Subtitle | 19.2 → 20 | `sgds:leading-20` |
+| `sgds:text-20` | Subtitle | 24 | `sgds:leading-24` |
 | `sgds:text-24` | H4 | 28.8 → 28 | `sgds:leading-28` |
 | `sgds:text-28` | H3 | 33.6 → 32 | `sgds:leading-32` |
 | `sgds:text-32` | H2 | 38.4 → 40 | `sgds:leading-40` |
@@ -178,7 +183,7 @@ Two ratios determine line height, calculated then rounded to the nearest 4-point
 
 ### Roles & Usage
 
-- For `sgds:text-16`, choose based on role: `sgds:leading-24` for body, `sgds:leading-20` for label or subtitle.
+- For `sgds:text-16`, choose based on role: `sgds:leading-24` for body or label, `sgds:leading-20` for subtitle.
 - For `sgds:text-20`, choose based on role: `sgds:leading-32` for lead body, `sgds:leading-24` for subtitle.
 - Do not mix line heights within a single heading element.
 
@@ -190,7 +195,8 @@ Two ratios determine line height, calculated then rounded to the nearest 4-point
 
 <!-- Labels, headings and display — 1.2× ratio -->
 <span class="sgds:text-12 sgds:leading-16">Compact label</span>
-<span class="sgds:text-16 sgds:font-semibold sgds:leading-20">Label or subtitle</span>
+<span class="sgds:text-16 sgds:font-semibold sgds:leading-24">Label</span>
+<span class="sgds:text-16 sgds:font-semibold sgds:leading-20">Subtitle</span>
 <h3 class="sgds:text-20 sgds:font-semibold sgds:leading-24">Subtitle</h3>
 <h3 class="sgds:text-24 sgds:font-semibold sgds:leading-28">H4</h3>
 <h2 class="sgds:text-32 sgds:font-bold sgds:leading-40">H2</h2>
