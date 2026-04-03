@@ -51,6 +51,18 @@ Border width utilities control thickness and which sides have borders. They are 
 <div class="sgds:border-y-4">Top + bottom (4px each)</div>
 ```
 
+## Border Width Scale
+
+| Token | Class | Pixel | Use for |
+|-------|-------|-------|---------|
+| `border-width-0` | `sgds:border-0` | 0px | No border — when layout, background, or elevation defines structure instead |
+| `border-width-1` | `sgds:border` | 1px | Default — most component boundaries (inputs, cards, containers) |
+| `border-width-2` | `sgds:border-2` | 2px | Interactive states — hover, focus, error |
+| `border-width-3` | `sgds:border-3` | 3px | Highlighted or active elements |
+| `border-width-4` | `sgds:border-4` | 4px | Maximum emphasis or critical states |
+
+---
+
 ## Class Reference
 
 | Class | Applies |
