@@ -4,14 +4,19 @@ Helps developers apply rounded corners to components, containers, and form eleme
 
 ## Core Concept
 
-SGDS provides two separate radius token scales:
+Border radius defines the curvature of UI elements and contributes to both:
+
+- **Usability** — clarity, grouping, affordance
+- **Visual tone** — structured ↔ friendly
+
+SGDS provides two radius scales:
 
 | Scale | Classes | Use on |
 |-------|---------|--------|
-| **General** | `sgds:rounded-{size}` | Divs, containers, buttons, badges, avatars — any non-form element |
-| **Form** | `sgds:rounded-form-{size}` | Native HTML form elements: `<input>`, `<select>`, `<textarea>`, `<form>` |
+| **General** | `sgds:rounded-{size}` | Containers, buttons, cards, badges, avatars |
+| **Form** | `sgds:rounded-form-{size}` | Native form elements (`<input>`, `<select>`, `<textarea>`) |
 
-Use **general** tokens by default. Switch to **form** tokens only when the element being styled is a native form control.
+Use general tokens by default. Use form tokens only for native form controls.
 
 ## General Border Radius
 
@@ -49,17 +54,17 @@ Use **general** tokens by default. Switch to **form** tokens only when the eleme
 
 ### Size Reference
 
-| Class | Value | Typical use |
-|-------|-------|-------------|
-| `sgds:rounded-none` | 0px | Sharp corners, table cells |
-| `sgds:rounded-sm` | 2px | Tags, very subtle rounding |
-| `sgds:rounded` | 4px | Standard buttons, small components |
-| `sgds:rounded-md` | 6px | Cards, panels |
-| `sgds:rounded-lg` | 8px | Larger cards, modals |
-| `sgds:rounded-xl` | 12px | Featured cards |
-| `sgds:rounded-2-xl` | 16px | Large containers |
-| `sgds:rounded-3-xl` | 24px | Hero / feature sections |
-| `sgds:rounded-full` | 9999px | Badges, avatars, pill buttons |
+| Class | Value | Usage |
+|-------|-------|-------|
+| `sgds:rounded-none` | 0px | Sharp, structured UI — tables, dense layouts |
+| `sgds:rounded-sm` | 2px | Minimal rounding to reduce harsh edges |
+| `sgds:rounded` | 4px | Small components — badges, tags |
+| `sgds:rounded-md` | 6px | Default for components — buttons, inputs, cards |
+| `sgds:rounded-lg` | 8px | Larger containers — cards, modals |
+| `sgds:rounded-xl` | 12px | Feature elements |
+| `sgds:rounded-2-xl` | 16px | Panels, grouped sections |
+| `sgds:rounded-3-xl` | 24px | Hero / highlight sections |
+| `sgds:rounded-full` | 9999px | Circle / pill — avatars, chips, filters |
 
 ## Form Border Radius
 
@@ -102,6 +107,42 @@ Apply to native HTML form elements only: `<input>`, `<select>`, `<textarea>`, `<
 ```html
 <input class="sgds:rounded-form-none" type="text" placeholder="No rounding" />
 ```
+
+## Usage Patterns
+
+**Default components** — use `sgds:rounded-md` as the baseline. Increase for larger surfaces; decrease for compact UI.
+
+---
+
+## Design Decision Principles
+
+**1. Size → Radius** — match visual weight:
+- Small element → smaller radius
+- Large element → larger radius
+
+**2. Density → Radius** — reflect UI complexity:
+- Dense / data-heavy → sharper (`none` – `sm`)
+- Spacious / marketing → softer (`lg` – `xl+`)
+
+**3. Consistency** — avoid mixing too many radius values in one view. Keep radius consistent within a component group.
+
+---
+
+## Brand Expression
+
+Border radius is a branding lever, not just a utility.
+
+| Brand tone | Recommended radius |
+|------------|-------------------|
+| Structured / Government / Enterprise | `none` – `md` |
+| Balanced / Modern | `md` – `lg` |
+| Friendly / Consumer | `lg` – `full` |
+
+Examples:
+- Government system → `sgds:rounded-md`
+- Consumer product → `sgds:rounded-full` buttons
+
+---
 
 ## Troubleshooting
 
