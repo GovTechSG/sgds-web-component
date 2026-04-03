@@ -46,6 +46,30 @@ Classes are mobile-first additive — define the XS span first, then override at
 
 ---
 
+## Layout Guidelines
+
+### Content Width Rules
+
+- Default content should not exceed 8 columns.
+- Use the full 12 columns only for:
+  - Data tables
+  - Dense card layouts (e.g. dashboards)
+
+### Column Behaviour
+
+| Grid | Layout type |
+|------|-------------|
+| 4-column (XS) | Flexible — fluid layout |
+| 8-column (SM/MD) | Flexible — fluid layout |
+| 12-column (LG+) | Fixed — structured layout |
+
+### Responsive Behaviour
+
+- Mobile layouts should stack by default (single column).
+- Exception: a 2 + 2 split is allowed for small, repeatable content (e.g. cards).
+
+---
+
 ## Containers
 
 ### `.sgds-container` — standard full-page layout
@@ -71,6 +95,16 @@ Use when content sits alongside a sticky sidebar (i.e. the Sidebar App Layout fr
 | LG (1024px+) | 840px |
 | XL (1280px+) | 888px |
 | 2-XL (1440px+) | 1024px |
+
+### Sidebar Behaviour
+
+The sidebar pushes the main content area by offsetting it horizontally. XS and SM screens are unaffected — the sidebar is not shown at those sizes.
+
+| Sidebar state | Offset applied |
+|---------------|----------------|
+| Collapsed | 72px |
+| Expanded | 288px |
+| XS / SM screens | No offset (sidebar hidden) |
 
 ---
 
@@ -111,6 +145,21 @@ Use when content sits alongside a sticky sidebar (i.e. the Sidebar App Layout fr
 ```
 .sgds-col-2-xl-1 through .sgds-col-2-xl-12
 ```
+
+---
+
+## Column Combinations (12-column grid)
+
+Use only structured, predictable splits. Avoid irregular or uneven layouts unless necessary.
+
+| Split | Typical use |
+|-------|-------------|
+| 3 + 9 / 9 + 3 | Narrow sidebar + wide content |
+| 4 + 8 / 8 + 4 | Standard sidebar + content |
+| 6 + 6 | Equal halves |
+| 4 + 4 + 4 | Three equal thirds |
+| 3 + 3 + 3 + 3 | Four equal quarters |
+| 2 + 2 + 2 + 2 + 2 + 2 | Six equal sixths |
 
 ---
 
