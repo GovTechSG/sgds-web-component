@@ -16,7 +16,7 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
 
 **Avoid Accordion when:**
 - All content is critical and must always be visible
-- Users need to compare multiple sections simultaneously
+- Users need all sections visible at once without any expand/collapse interaction (use a flat layout instead)
 - There are fewer than 2 sections — use simple content instead
 
 ## Quick Decision Guide
@@ -118,7 +118,7 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
 5. Default to the first item open (`open` on first `<sgds-accordion-item>`) only when that section contains key information users need immediately.
 6. Use `allowMultiple` when users need to compare sections; use single-expand for guided or sequential reading.
 7. Never nest accordions more than one level deep.
-8. Do not hide errors or critical alerts inside accordion items — auto-expand the relevant item if an error occurs inside one.
+8. If a form section inside an accordion item has validation errors, auto-expand that item so the user can see and fix the error.
 9. There are no events or public methods on the `<sgds-accordion>` parent element.
 
 ## Content Guidelines
