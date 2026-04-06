@@ -1,10 +1,14 @@
+'use client';
+
+import { SgdsIconButton } from "@govtechsg/sgds-web-component/react";
+
 export const IconButton = () => {
   return (
     <>
-      <sgds-icon-button name="placeholder" suppressHydrationWarning></sgds-icon-button>
-      <sgds-icon-button variant="ghost" name="placeholder" suppressHydrationWarning></sgds-icon-button>
-      <sgds-icon-button variant="outline" name="placeholder" suppressHydrationWarning></sgds-icon-button>
-      <sgds-icon-button variant="danger" name="placeholder" suppressHydrationWarning></sgds-icon-button>
+      <SgdsIconButton name="placeholder"></SgdsIconButton>
+      <SgdsIconButton variant="ghost" name="placeholder"></SgdsIconButton>
+      <SgdsIconButton variant="outline" name="placeholder"></SgdsIconButton>
+      <SgdsIconButton variant="danger" name="placeholder"></SgdsIconButton>
     </>
   );
 };

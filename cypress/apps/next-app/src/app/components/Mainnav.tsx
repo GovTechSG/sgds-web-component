@@ -1,29 +1,33 @@
+'use client';
+
+import { SgdsMainnav, SgdsMainnavItem, SgdsMainnavDropdown, SgdsDropdownItem, SgdsButton } from "@govtechsg/sgds-web-component/react";
+
 export const Mainnav = () => {
   return (
-    <sgds-mainnav suppressHydrationWarning>
+    <SgdsMainnav>
       <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
-      <sgds-mainnav-item suppressHydrationWarning>
+      <SgdsMainnavItem>
         <a href="#">ArgsTable Controlled</a>
-      </sgds-mainnav-item>
-      <sgds-mainnav-dropdown close="default" suppressHydrationWarning>
+      </SgdsMainnavItem>
+      <SgdsMainnavDropdown close="default">
         <span slot="toggler">Dropdown</span>
-        <sgds-dropdown-item disabled suppressHydrationWarning>
+        <SgdsDropdownItem disabled>
           <a href="https://google.com">Item 1</a>
-        </sgds-dropdown-item>
-        <sgds-dropdown-item suppressHydrationWarning>
+        </SgdsDropdownItem>
+        <SgdsDropdownItem>
           <a href="#">Item 2</a>
-        </sgds-dropdown-item>
-        <sgds-dropdown-item suppressHydrationWarning>
+        </SgdsDropdownItem>
+        <SgdsDropdownItem>
           <a href="#">Item 3</a>
-        </sgds-dropdown-item>
-      </sgds-mainnav-dropdown>
-      <sgds-mainnav-item suppressHydrationWarning>
+        </SgdsDropdownItem>
+      </SgdsMainnavDropdown>
+      <SgdsMainnavItem>
         <a href="#">About</a>
-      </sgds-mainnav-item>
-      <sgds-mainnav-item slot="end" suppressHydrationWarning>
+      </SgdsMainnavItem>
+      <SgdsMainnavItem slot="end">
         <a href="#">Contact Us</a>
-      </sgds-mainnav-item>
-      <sgds-button slot="end" suppressHydrationWarning>Login</sgds-button>
-    </sgds-mainnav>
+      </SgdsMainnavItem>
+      <SgdsButton slot="end">Login</SgdsButton>
+    </SgdsMainnav>
   );
 };

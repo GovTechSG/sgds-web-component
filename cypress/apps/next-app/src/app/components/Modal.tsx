@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
 import { useState } from "react";
+import { SgdsButton, SgdsModal } from "@govtechsg/sgds-web-component/react";
 
 export const Modal = () => {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <sgds-button onClick={() => setOpen(true)} suppressHydrationWarning>Open Modal</sgds-button>
-      <sgds-modal open={open ? "" : undefined} suppressHydrationWarning>
+      <SgdsButton onClick={() => setOpen(true)}>Open Modal</SgdsButton>
+      <SgdsModal open={open ? "" : undefined}>
         <h2 slot="title">Modal title</h2>
         <p slot="description">Modal description</p>
         <p>
@@ -17,13 +18,13 @@ export const Modal = () => {
           commodo velit, pretium dictum quam nibh et ex. Suspendisse eu dignissim libero. Donec aliquam, lacus eu
           pellentesque interdum, arcu nisl blandit turpis, at tincidunt purus orci ut dolor.
         </p>
-        <sgds-button slot="footer" variant="link" className="close-modal" onClick={() => setOpen(false)} suppressHydrationWarning>
+        <SgdsButton slot="footer" variant="link" className="close-modal" onClick={() => setOpen(false)}>
           Close
-        </sgds-button>
-        <sgds-button slot="footer" variant="primary" type="submit" form="formA" suppressHydrationWarning>
+        </SgdsButton>
+        <SgdsButton slot="footer" variant="primary" type="submit" form="formA">
           Submit
-        </sgds-button>
-      </sgds-modal>
+        </SgdsButton>
+      </SgdsModal>
     </>
   );
 };

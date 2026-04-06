@@ -1,11 +1,14 @@
+'use client';
+
+import { SgdsProgressBar } from "@govtechsg/sgds-web-component/react";
+
 export const ProgressBar = () => {
   return (
-    <sgds-progress-bar
+    <SgdsProgressBar
       label="50%"
       variant="secondary"
       value="50"
       aria-label="Loading in progress"
-      suppressHydrationWarning
-    ></sgds-progress-bar>
+    ></SgdsProgressBar>
   );
 };

@@ -1,9 +1,13 @@
+'use client';
+
+import { SgdsLink, SgdsIcon } from "@govtechsg/sgds-web-component/react";
+
 export const Link = () => {
   return (
-    <sgds-link suppressHydrationWarning>
+    <SgdsLink>
       <a href="#">
-        <sgds-icon name="placeholder" suppressHydrationWarning></sgds-icon> light dom anchor
+        <SgdsIcon name="placeholder"></SgdsIcon> light dom anchor
       </a>
-    </sgds-link>
+    </SgdsLink>
   );
 };

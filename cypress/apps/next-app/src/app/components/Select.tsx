@@ -1,11 +1,15 @@
+'use client';
+
+import { SgdsSelect, SgdsSelectOption } from "@govtechsg/sgds-web-component/react";
+
 export const Select = () => {
   return (
     <div>
-      <sgds-select label="Fruits" hintText="single select" name="select" placeholder="Select a fruit" value="1" suppressHydrationWarning>
-        <sgds-select-option value="1" suppressHydrationWarning>One</sgds-select-option>
-        <sgds-select-option value="2" suppressHydrationWarning>Two</sgds-select-option>
-        <sgds-select-option value="3" suppressHydrationWarning>Three</sgds-select-option>
-      </sgds-select>
+      <SgdsSelect label="Fruits" hintText="single select" name="select" placeholder="Select a fruit" value="1">
+        <SgdsSelectOption value="1">One</SgdsSelectOption>
+        <SgdsSelectOption value="2">Two</SgdsSelectOption>
+        <SgdsSelectOption value="3">Three</SgdsSelectOption>
+      </SgdsSelect>
     </div>
   );
 };

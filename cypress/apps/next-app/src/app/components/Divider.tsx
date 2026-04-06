@@ -1,9 +1,13 @@
+'use client';
+
+import { SgdsDivider } from "@govtechsg/sgds-web-component/react";
+
 export const Divider = () => {
   return (
     <>
-      <sgds-divider suppressHydrationWarning></sgds-divider>
-      <sgds-divider thickness="thick" suppressHydrationWarning></sgds-divider>
-      <sgds-divider thickness="thicker" suppressHydrationWarning></sgds-divider>
+      <SgdsDivider></SgdsDivider>
+      <SgdsDivider thickness="thick"></SgdsDivider>
+      <SgdsDivider thickness="thicker"></SgdsDivider>
     </>
   );
 };
