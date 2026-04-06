@@ -192,3 +192,10 @@ Equal importance, no differentiation. Use for tags, badges, and components where
 <span class="sgds:border sgds:border-neutral-default">Tag 2</span>
 <span class="sgds:border sgds:border-neutral-default">Tag 3</span>
 ```
+
+## See Also
+
+- **[base.md](base.md)** — Base border color tokens (default, inverse, transparent, fixed)
+- **[form.md](form.md)** — Form input border tokens
+- **[border-width](../border-width.md)** — Border thickness utilities
+- **[color-semantics](../color-semantics.md)** — Modifier definitions (default, emphasis, muted)
