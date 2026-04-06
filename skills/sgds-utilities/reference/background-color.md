@@ -31,6 +31,9 @@ All tokens follow: `sgds:bg-{semantic}-{level}-{emphasis}`
 **Component Level:**
 - `surface-default` - Default component background (first choice)
 - `surface-raised` - Differentiate from surface-default (badges on cards)
+- `surface-emphasis` - Highlighted or active component state
+- `surface-subtle` - De-emphasised component background
+- `surface-muted` - Muted background (read-only, disabled)
 - `surface-inverse` - Opposite theme color (dark in light theme)
 - `surface-fixed-light/dark` - Never changes with theme (image overlays)
 
@@ -55,7 +58,7 @@ Each semantic color has these variants (background-specific):
 - `{color}-surface-emphasis` — Component level, strong
 - `{color}-surface-muted` — Component level, subtle
 
-See **[`primary.md`](background-color/primary.md)**, **[`accent.md`](background-color/accent.md)**, **[`success.md`](background-color/success.md)**, **[`danger.md`](background-color/danger.md)**, **[`warning.md`](background-color/warning.md)**, **[`purple.md`](background-color/purple.md)**, **[`cyan.md`](background-color/cyan.md)**, **[`neutral.md`](background-color/neutral.md)** for detailed usage.
+See **[`semantic.md`](background-color/semantic.md)** for all eight color variants with detailed examples.
 
 ### Form Backgrounds
 
@@ -117,41 +120,9 @@ Use for: Page backgrounds, sections, modal backdrops, translucent overlays
 
 ### Brand & Informational Colors
 
-**[`primary.md`](background-color/primary.md)** - Brand color backgrounds
-Covers: `primary-default/muted`, `primary-surface-default/emphasis/muted`
-Use for: Hero sections, CTAs, brand emphasis, primary actions
-
-**[`accent.md`](background-color/accent.md)** - Informational backgrounds
-Covers: `accent-default/muted`, `accent-surface-default/emphasis/muted`
-Use for: Informational content, links, info banners, non-urgent notices
-
-### State & Feedback Colors
-
-**[`success.md`](background-color/success.md)** - Positive feedback backgrounds
-Covers: `success-default/muted`, `success-surface-default/emphasis/muted`
-Use for: Success messages, form validation, completion states, positive badges
-
-**[`danger.md`](background-color/danger.md)** - Error/negative feedback backgrounds
-Covers: `danger-default/muted`, `danger-surface-default/emphasis/muted`
-Use for: Error alerts, failed states, destructive actions, critical warnings
-
-**[`warning.md`](background-color/warning.md)** - Caution backgrounds
-Covers: `warning-default/muted`, `warning-surface-default/emphasis/muted`
-Use for: Warning messages, caution notices, actions requiring review
-
-### Additional Colors
-
-**[`purple.md`](background-color/purple.md)** - Visual variety color (no semantic meaning)
-Covers: `purple-default/muted`, `purple-surface-default/emphasis/muted`
-Use for: Non-semantic tags, visual differentiation, decorative accents
-
-**[`cyan.md`](background-color/cyan.md)** - Visual variety color (no semantic meaning)
-Covers: `cyan-default/muted`, `cyan-surface-default/emphasis/muted`
-Use for: Non-semantic tags, visual differentiation, alternating with purple
-
-**[`neutral.md`](background-color/neutral.md)** - Equal importance backgrounds
-Covers: `neutral-surface-default/emphasis/muted`
-Use for: Tags with equal importance, non-semantic categorization, uniform appearance
+**[`semantic.md`](background-color/semantic.md)** — All semantic color backgrounds in one file
+Covers: `primary`, `accent`, `success`, `danger`, `warning`, `purple`, `cyan`, `neutral` — each with page-level and component-level (`surface`) variants
+Use for: Any page section or component needing brand, state, or feedback color as background
 
 ### Form Specific
 

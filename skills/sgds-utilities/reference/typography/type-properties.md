@@ -6,9 +6,9 @@ Full reference for all SGDS typography utility classes — scale tables, usage r
 
 ## Overview
 
-SGDS typography utilities control eight visual properties of text. Each property is applied via a dedicated `sgds:` Tailwind utility class. All classes are available after importing `utility.css` — no additional setup is needed beyond the standard SGDS utility setup.
+SGDS typography utilities control six visual properties of text. Each property is applied via a dedicated `sgds:` Tailwind utility class. All classes are available after importing `utility.css` — no additional setup is needed beyond the standard SGDS utility setup.
 
-The eight properties are: **font family**, **font weight**, **font size**, **line height**, **letter spacing**, **paragraph spacing**, **text decoration**, and **text transform**.
+The six properties are: **font family**, **font weight**, **letter spacing**, **paragraph spacing**, **text decoration**, and **text transform**.
 
 ---
 
@@ -16,7 +16,7 @@ The eight properties are: **font family**, **font weight**, **font size**, **lin
 
 - **Use the scale, not arbitrary values.** Every property has a defined SGDS scale. Apply scale tokens rather than inline styles or custom values.
 - **Defaults require no class.** The reboot sets body-safe defaults (sans-serif, regular weight, 16px, 1.5 line height). Only add a class when deviating from the default.
-- **Combine properties intentionally.** Font size, line height, and letter spacing work together. Large text needs tighter leading and tracking; small text needs looser.
+- **Combine properties intentionally.** Letter spacing, weight, and transform work together. Large text needs tighter tracking; small uppercase text needs wider tracking and a small size.
 - **Monospace for code, always.** Apply `sgds:font-mono` on every `<code>` and `<pre>` element without exception.
 
 ---
@@ -44,7 +44,7 @@ Apply with `sgds:font-{family}`:
 
 <!-- Always set mono on code -->
 <code class="sgds:font-mono sgds:text-14">const value = 42;</code>
-<pre class="sgds:font-mono sgds:text-14 sgds:leading-normal">
+<pre class="sgds:font-mono sgds:text-14 sgds:leading-20">
   function hello() {
     return 'world';
   }
@@ -82,77 +82,7 @@ Apply with `sgds:font-{weight}`:
 
 ---
 
-## 3. Font Size
-
-Apply with `sgds:text-{size}` where the number is the pixel value:
-
-### Scale / Values
-
-| Token | Pixel value | Typical use |
-|-------|-------------|-------------|
-| `sgds:text-12` | 12px | Fine print, captions, badge labels |
-| `sgds:text-14` | 14px | Secondary labels, helper text, code |
-| `sgds:text-16` | 16px | Default body text |
-| `sgds:text-18` | 18px | Lead paragraphs |
-| `sgds:text-20` | 20px | Intro text |
-| `sgds:text-22` | 22px | Minor subtitles |
-| `sgds:text-24` | 24px | H4 / card headings |
-| `sgds:text-26` | 26px | H4 variants |
-| `sgds:text-28` | 28px | H3 |
-| `sgds:text-30` | 30px | H3 / section headings |
-| `sgds:text-32` | 32px | H2 variants |
-| `sgds:text-36` | 36px | H2 |
-| `sgds:text-40` | 40px | H1 variants |
-| `sgds:text-44` | 44px | H1 |
-| `sgds:text-48` | 48px | H1 / page titles |
-| `sgds:text-52` | 52px | Large display |
-| `sgds:text-56` | 56px | Hero display |
-
-### Roles & Usage
-
-- Match font size to content role: larger for headings, `sgds:text-16` for standard body.
-- Pair each font size with the appropriate line height (see Line Height section).
-- Avoid skipping more than two steps in heading hierarchies.
-
-```html
-<p class="sgds:text-12">Fine print or legal text</p>
-<p class="sgds:text-16">Standard body text</p>
-<h3 class="sgds:text-30 sgds:font-semibold sgds:leading-tight">Section heading</h3>
-<h1 class="sgds:text-48 sgds:font-bold sgds:leading-tight">Page title</h1>
-```
-
----
-
-## 4. Line Height
-
-Apply with `sgds:leading-{scale}`:
-
-### Scale / Values
-
-| Token | Value | Typical use |
-|-------|-------|-------------|
-| `sgds:leading-normal` | 1.5 | Default — all body text |
-| `sgds:leading-tight` | 1.2 | Display text, headings, subtitles |
-
-### Roles & Usage
-
-- **Body text** — reboot applies `leading-normal` (1.5) globally; no class needed for body.
-- **All headings and display text** → always apply `sgds:leading-tight` (1.2).
-- Do not mix line heights within a single heading element.
-
-```html
-<!-- Body — no class needed -->
-<p>Regular paragraph text with comfortable spacing.</p>
-
-<!-- All headings use tight -->
-<h1 class="sgds:text-48 sgds:font-bold sgds:leading-tight">Page title</h1>
-<h2 class="sgds:text-36 sgds:font-bold sgds:leading-tight">Section heading</h2>
-<h3 class="sgds:text-24 sgds:font-semibold sgds:leading-tight">Subtitle</h3>
-```
-
----
-
-## 5. Letter Spacing
+## 3. Letter Spacing
 
 Apply with `sgds:tracking-{size}`:
 
@@ -174,10 +104,10 @@ Apply with `sgds:tracking-{size}`:
 - Never apply wide tracking to large text — it reduces readability.
 
 ```html
-<h1 class="sgds:text-56 sgds:font-bold sgds:leading-tight sgds:tracking-tighter">
+<h1 class="sgds:text-56 sgds:font-bold sgds:leading-64 sgds:tracking-tighter">
   Hero heading
 </h1>
-<h2 class="sgds:text-48 sgds:font-bold sgds:leading-tight sgds:tracking-tight">
+<h2 class="sgds:text-48 sgds:font-bold sgds:leading-56 sgds:tracking-tight">
   Page title
 </h2>
 <p class="sgds:text-16">Body text — tracking-normal is the default, no class needed</p>
@@ -188,7 +118,7 @@ Apply with `sgds:tracking-{size}`:
 
 ---
 
-## 6. Paragraph Spacing
+## 4. Paragraph Spacing
 
 Apply with `sgds:mb-paragraph-{size}` on the paragraph element:
 
@@ -220,7 +150,7 @@ Apply with `sgds:mb-paragraph-{size}` on the paragraph element:
 
 ---
 
-## 7. Text Decoration
+## 5. Text Decoration
 
 Apply with the decoration class directly:
 
@@ -255,7 +185,7 @@ Apply with the decoration class directly:
 
 ---
 
-## 8. Text Transform
+## 6. Text Transform
 
 Apply with the transform class directly:
 
@@ -300,14 +230,6 @@ Apply with the transform class directly:
 - ✅ Use `sgds:font-semibold` for labels and subtitles, `sgds:font-bold` for headings
 - ❌ Do not apply `sgds:font-bold` to every element — it destroys visual hierarchy
 
-**Font size**
-- ✅ Match size to content role: `sgds:text-16` for body, `sgds:text-30`+ for headings
-- ❌ Do not use large sizes for body text or small sizes for headings
-
-**Line height**
-- ✅ Apply `sgds:leading-tight` on all headings; let body text use the default
-- ❌ Do not apply `sgds:leading-normal` to headings — multi-line headings become too loose
-
 **Letter spacing**
 - ✅ Tighten tracking on large text; widen for small uppercase labels
 - ❌ Do not apply `sgds:tracking-wider` to large text — it reduces legibility severely
@@ -328,10 +250,10 @@ Apply with the transform class directly:
 
 ```html
 <div class="sgds:mb-paragraph-xl">
-  <h1 class="sgds:text-48 sgds:font-bold sgds:leading-tight sgds:tracking-tight sgds:mb-paragraph-sm">
+  <h1 class="sgds:text-48 sgds:font-bold sgds:leading-56 sgds:tracking-tight sgds:mb-paragraph-sm">
     Design System
   </h1>
-  <p class="sgds:text-18 sgds:font-regular sgds:leading-normal sgds:text-body-subtle">
+  <p class="sgds:text-18 sgds:font-regular sgds:leading-28 sgds:text-body-subtle">
     Build consistent, accessible Singapore Government digital services.
   </p>
 </div>
@@ -341,13 +263,13 @@ Apply with the transform class directly:
 
 ```html
 <article>
-  <h2 class="sgds:text-36 sgds:font-bold sgds:leading-tight sgds:mb-paragraph-md">
+  <h2 class="sgds:text-36 sgds:font-bold sgds:leading-44 sgds:mb-paragraph-md">
     Section Title
   </h2>
-  <p class="sgds:text-16 sgds:leading-normal sgds:mb-paragraph-lg">
+  <p class="sgds:text-16 sgds:leading-24 sgds:mb-paragraph-lg">
     First paragraph of the section. Standard body size with comfortable line height.
   </p>
-  <p class="sgds:text-16 sgds:leading-normal sgds:mb-paragraph-lg">
+  <p class="sgds:text-16 sgds:leading-24 sgds:mb-paragraph-lg">
     Second paragraph follows with the same spacing for a consistent reading rhythm.
   </p>
 </article>
@@ -368,7 +290,7 @@ Apply with the transform class directly:
 ### Code block
 
 ```html
-<pre class="sgds:font-mono sgds:text-14 sgds:leading-normal sgds:bg-surface-raised sgds:p-md sgds:rounded">
+<pre class="sgds:font-mono sgds:text-14 sgds:leading-20 sgds:bg-surface-raised sgds:p-md sgds:rounded">
   const greeting = 'hello';
   console.log(greeting);
 </pre>
@@ -390,8 +312,6 @@ When generating typography markup with SGDS utilities:
 
 - **Font family**: No class needed for prose; always add `sgds:font-mono` to `<code>` and `<pre>`.
 - **Font weight**: `sgds:font-semibold` for subtitles and labels; `sgds:font-bold` for H1–H2; `sgds:font-regular` for body (default, no class needed).
-- **Font size**: Use numeric token matching the pixel size — `sgds:text-16` for body, `sgds:text-30` for H3, `sgds:text-48` for H1.
-- **Line height**: `sgds:leading-tight` on all headings and display text; body inherits `leading-normal` from reboot (no class needed).
 - **Letter spacing**: `sgds:tracking-tight` for 48px+ headings; `sgds:tracking-wider` for small uppercase labels; no class for body.
 - **Paragraph spacing**: `sgds:mb-paragraph-md` for standard content; `sgds:mb-paragraph-lg` for long-form reading.
 - **Text decoration**: `sgds:underline` on links; `sgds:line-through` for deleted/struck content; `sgds:no-underline` when colour conveys link state.
