@@ -53,9 +53,7 @@ export const Paragraph = () => html`
       ({ suffix, value }) => html`
         <sgds-table-row>
           ${renderTokenCell(`sgds:mb-paragraph-${suffix}`)}
-          <sgds-table-cell
-            ><code class="${CODE_CLASSES}">--sgds-paragraph-spacing-${suffix}</code></sgds-table-cell
-          >
+          <sgds-table-cell><code class="${CODE_CLASSES}">--sgds-paragraph-spacing-${suffix}</code></sgds-table-cell>
           <sgds-table-cell><code class="${CODE_CLASSES}">${value}</code></sgds-table-cell>
           <sgds-table-cell>
             <div>
