@@ -6,7 +6,7 @@ Full reference for all SGDS typography utility classes — scale tables, usage r
 
 ## Overview
 
-SGDS typography utilities control eight visual properties of text. Each property is applied via a dedicated `sgds:` Tailwind utility class. All classes are available after importing `utility.css` — no additional setup is needed beyond the standard SGDS utility setup.
+SGDS typography utilities control six visual properties of text. Each property is applied via a dedicated `sgds:` Tailwind utility class. All classes are available after importing `utility.css` — no additional setup is needed beyond the standard SGDS utility setup.
 
 The six properties are: **font family**, **font weight**, **letter spacing**, **paragraph spacing**, **text decoration**, and **text transform**.
 
@@ -16,7 +16,7 @@ The six properties are: **font family**, **font weight**, **letter spacing**, **
 
 - **Use the scale, not arbitrary values.** Every property has a defined SGDS scale. Apply scale tokens rather than inline styles or custom values.
 - **Defaults require no class.** The reboot sets body-safe defaults (sans-serif, regular weight, 16px, 1.5 line height). Only add a class when deviating from the default.
-- **Combine properties intentionally.** Font size, line height, and letter spacing work together. Large text needs tighter leading and tracking; small text needs looser.
+- **Combine properties intentionally.** Letter spacing, weight, and transform work together. Large text needs tighter tracking; small uppercase text needs wider tracking and a small size.
 - **Monospace for code, always.** Apply `sgds:font-mono` on every `<code>` and `<pre>` element without exception.
 
 ---
