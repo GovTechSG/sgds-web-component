@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Spacing/Margin",
+  title: "Utilities/Spacing/Margin/Static",
   tags: ["!autodocs"]
 };
 
@@ -62,7 +62,7 @@ const MarginTableRow = item => {
   `;
 };
 
-export const Margin = () => html`
+export const Static = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
