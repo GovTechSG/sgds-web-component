@@ -3,197 +3,150 @@
 **Level**: Component level
 **Usage**: Input fields, textareas, select backgrounds
 
-Form elements use the `sgds:bg-surface-{modifier}` pattern.
-
-## Token Pattern
-
-```
-sgds:bg-surface-{modifier}
-```
-
 ## Available Tokens
 
-| Class | Use for |
-|-------|---------|
-| `sgds:bg-surface-default` | Default input background |
-| `sgds:bg-surface-raised` | Elevated input, floating label background |
-| `sgds:bg-surface-emphasis` | Highlighted or active input state |
-| `sgds:bg-surface-subtle` | Subtle input background |
-| `sgds:bg-surface-muted` | Muted / read-only input background |
-| `sgds:bg-surface-inverse` | Inverted background (dark on light, light on dark) |
-| `sgds:bg-surface-fixed-light` | Always light — never changes with theme |
-| `sgds:bg-surface-fixed-dark` | Always dark — never changes with theme |
+### `sgds:bg-surface-default`
+**Default form input background.**
 
-## Common Patterns
-
-> **Note**: Use library components like `<sgds-input>`, `<sgds-select>`, `<sgds-textarea>` when available. Form background tokens are for creating custom form elements when library components don't meet your needs.
-
-### Text Input
+**When to use:**
+- Text inputs
+- Textareas
+- Select dropdowns
+- Any standard editable form field
 
 ```html
 <input class="sgds:bg-surface-default" type="text" placeholder="Enter your name" />
 ```
 
-### Textarea
+---
+
+### `sgds:bg-surface-raised`
+**Elevated input background.**
+
+**When to use:**
+- Floating label inputs
+- Inputs that sit above a surface
+- Form fields that need visual lift
 
 ```html
-<textarea class="sgds:bg-surface-default" placeholder="Enter your message"></textarea>
+<input class="sgds:bg-surface-raised" type="text" placeholder="Floating label input" />
 ```
 
-### Select Dropdown
+---
+
+### `sgds:bg-surface-emphasis`
+**Highlighted or active input state.**
+
+**When to use:**
+- Active or focused form field
+- Selected state within a form group
 
 ```html
-<select class="sgds:bg-surface-default">
-  <option>Singapore</option>
-  <option>Malaysia</option>
-</select>
+<input class="sgds:bg-surface-emphasis" type="text" placeholder="Active input" />
 ```
 
-### Read-only Input
+---
+
+### `sgds:bg-surface-subtle`
+**Subtle input background.**
+
+**When to use:**
+- De-emphasised form fields
+- Secondary inputs in a form group
 
 ```html
-<input class="sgds:bg-surface-muted" type="text" value="Read only value" readonly />
+<input class="sgds:bg-surface-subtle" type="text" placeholder="Subtle input" />
 ```
 
-### Inverted Form Field
+---
+
+### `sgds:bg-surface-muted`
+**Muted background for read-only inputs.**
+
+**When to use:**
+- Read-only fields
+- Pre-filled fields the user cannot edit
+- Visually distinguish from editable inputs
+
+```html
+<input class="sgds:bg-surface-muted" type="text" value="Read-only value" readonly />
+```
+
+---
+
+### `sgds:bg-surface-inverse`
+**Inverted background — adapts to theme.**
+
+**When to use:**
+- Form fields placed on a dark surface in day mode
+- Form fields placed on a light surface in night mode
 
 ```html
 <input class="sgds:bg-surface-inverse" type="text" placeholder="Inverted input" />
 ```
-```
 
-### Input with Validation States
+---
+
+### `sgds:bg-surface-fixed-light` / `sgds:bg-surface-fixed-dark`
+**Never changes with theme mode.**
+
+**When to use:**
+- Form fields on branded or image backgrounds
+- Guaranteed contrast regardless of theme
 
 ```html
-<!-- Success State -->
+<input class="sgds:bg-surface-fixed-light" type="text" placeholder="Always light input" />
+<input class="sgds:bg-surface-fixed-dark" type="text" placeholder="Always dark input" />
+```
+
+---
+
+## Common Patterns
+
+> **Note**: Use library components like `<sgds-input>`, `<sgds-select>`, `<sgds-textarea>` when available. Form background tokens are for custom form elements when library components don't meet your needs.
+
+### Standard Form
+
+```html
+<form>
+  <div>
+    <label>First Name</label>
+    <input class="sgds:bg-surface-default" type="text" />
+  </div>
+  <div>
+    <label>Last Name</label>
+    <input class="sgds:bg-surface-default" type="text" />
+  </div>
+  <div>
+    <label>Email</label>
+    <input class="sgds:bg-surface-default" type="email" />
+  </div>
+</form>
+```
+
+### Read-only Field alongside Editable Field
+
+```html
 <div>
-  <label>Email (Valid)</label>
-  <input
-    class="sgds:bg-form-default"
-    type="email"
-    value="user@example.com"
-  />
-  <p>✓ Valid email</p>
+  <label>Username (locked)</label>
+  <input class="sgds:bg-surface-muted" type="text" value="john.doe" readonly />
 </div>
-
-<!-- Error State -->
 <div>
-  <label>Email (Invalid)</label>
-  <input
-    class="sgds:bg-form-default"
-    type="email"
-    value="invalid-email"
-  />
-  <p>✗ Invalid email format</p>
+  <label>Display Name</label>
+  <input class="sgds:bg-surface-default" type="text" placeholder="Enter display name" />
 </div>
 ```
 
-## Best Practices
-
-### ✅ DO: Use for All Form Inputs
+### Form on Dark Background
 
 ```html
-<!-- ✅ Good - consistent form backgrounds -->
-<input class="sgds:bg-form-default" type="text" />
-<textarea class="sgds:bg-form-default"></textarea>
-<select class="sgds:bg-form-default"></select>
-```
-
-### ✅ DO: Combine with Border States
-
-```html
-<!-- ✅ Good - clear focus state -->
-<input
-  class="sgds:bg-form-default"
-  type="text"
-/>
-```
-
-### ✅ DO: Use with Validation Colors
-
-```html
-<!-- ✅ Good - form background + validation border -->
-<input
-  class="sgds:bg-form-default"
-  type="text"
-/>
-```
-
-### ❌ DON'T: Use for Non-Input Elements
-
-```html
-<!-- ❌ Avoid - form background for regular divs -->
-<div class="sgds:bg-form-default">
-  Regular content (not a form field)
-</div>
-
-<!-- ✅ Better - surface for regular content -->
-<div class="sgds:bg-surface-default">
-  Regular content
-</div>
-```
-
-### ❌ DON'T: Mix with Other Surface Backgrounds in Forms
-
-```html
-<!-- ❌ Avoid - inconsistent input backgrounds -->
-<input class="sgds:bg-surface-default" type="text" />
-<input class="sgds:bg-form-default" type="email" />
-
-<!-- ✅ Better - consistent form backgrounds -->
-<input class="sgds:bg-form-default" type="text" />
-<input class="sgds:bg-form-default" type="email" />
-```
-
-## Theme Adaptation
-
-Form backgrounds automatically adapt to the active theme:
-
-- **Day Theme**: Lighter background for contrast on light pages
-- **Night Theme**: Adjusted background for contrast on dark pages
-
-This ensures form inputs are always visible and accessible regardless of theme.
-
-## Additional Considerations
-
-### Focus States
-
-Always include focus states for accessibility:
-
-```html
-<input
-  class="sgds:bg-form-default"
-  type="text"
-/>
-```
-
-### Disabled States
-
-Use opacity to indicate disabled fields:
-
-```html
-<input
-  class="sgds:bg-form-default"
-  type="text"
-  disabled
-/>
-```
-
-### Readonly States
-
-Differentiate readonly from disabled:
-
-```html
-<input
-  class="sgds:bg-form-default"
-  type="text"
-  value="Read-only value"
-  readonly
-/>
+<section class="sgds:bg-fixed-dark">
+  <input class="sgds:bg-surface-fixed-light" type="text" placeholder="Input on dark section" />
+</section>
 ```
 
 ## See Also
 
-- **success.md** - Success validation states
-- **danger.md** - Error validation states
-- **warning.md** - Warning validation states
+- **[base.md](base.md)** — Page-level background tokens
+- **[surface.md](surface.md)** — Component surface tokens
+- **[border-color](../border-color.md)** — Border colors for form validation states
