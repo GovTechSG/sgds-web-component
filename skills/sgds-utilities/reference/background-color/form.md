@@ -5,7 +5,7 @@
 
 ## Available Tokens
 
-### `sgds:bg-surface-default`
+### `sgds:bg-form-surface-default`
 **Default form input background.**
 
 **When to use:**
@@ -15,12 +15,12 @@
 - Any standard editable form field
 
 ```html
-<input class="sgds:bg-surface-default" type="text" placeholder="Enter your name" />
+<input class="sgds:bg-form-surface-default" type="text" placeholder="Enter your name" />
 ```
 
 ---
 
-### `sgds:bg-surface-raised`
+### `sgds:bg-form-surface-raised`
 **Elevated input background.**
 
 **When to use:**
@@ -29,12 +29,12 @@
 - Form fields that need visual lift
 
 ```html
-<input class="sgds:bg-surface-raised" type="text" placeholder="Floating label input" />
+<input class="sgds:bg-form-surface-raised" type="text" placeholder="Floating label input" />
 ```
 
 ---
 
-### `sgds:bg-surface-emphasis`
+### `sgds:bg-form-surface-emphasis`
 **Highlighted or active input state.**
 
 **When to use:**
@@ -42,12 +42,12 @@
 - Selected state within a form group
 
 ```html
-<input class="sgds:bg-surface-emphasis" type="text" placeholder="Active input" />
+<input class="sgds:bg-form-surface-emphasis" type="text" placeholder="Active input" />
 ```
 
 ---
 
-### `sgds:bg-surface-subtle`
+### `sgds:bg-form-surface-subtle`
 **Subtle input background.**
 
 **When to use:**
@@ -55,12 +55,12 @@
 - Secondary inputs in a form group
 
 ```html
-<input class="sgds:bg-surface-subtle" type="text" placeholder="Subtle input" />
+<input class="sgds:bg-form-surface-subtle" type="text" placeholder="Subtle input" />
 ```
 
 ---
 
-### `sgds:bg-surface-muted`
+### `sgds:bg-form-surface-muted`
 **Muted background for read-only inputs.**
 
 **When to use:**
@@ -69,12 +69,12 @@
 - Visually distinguish from editable inputs
 
 ```html
-<input class="sgds:bg-surface-muted" type="text" value="Read-only value" readonly />
+<input class="sgds:bg-form-surface-muted" type="text" value="Read-only value" readonly />
 ```
 
 ---
 
-### `sgds:bg-surface-inverse`
+### `sgds:bg-form-surface-inverse`
 **Inverted background — adapts to theme.**
 
 **When to use:**
@@ -82,12 +82,12 @@
 - Form fields placed on a light surface in night mode
 
 ```html
-<input class="sgds:bg-surface-inverse" type="text" placeholder="Inverted input" />
+<input class="sgds:bg-form-surface-inverse" type="text" placeholder="Inverted input" />
 ```
 
 ---
 
-### `sgds:bg-surface-fixed-light` / `sgds:bg-surface-fixed-dark`
+### `sgds:bg-form-surface-fixed-light` / `sgds:bg-form-surface-fixed-dark`
 **Never changes with theme mode.**
 
 **When to use:**
@@ -95,8 +95,8 @@
 - Guaranteed contrast regardless of theme
 
 ```html
-<input class="sgds:bg-surface-fixed-light" type="text" placeholder="Always light input" />
-<input class="sgds:bg-surface-fixed-dark" type="text" placeholder="Always dark input" />
+<input class="sgds:bg-form-surface-fixed-light" type="text" placeholder="Always light input" />
+<input class="sgds:bg-form-surface-fixed-dark" type="text" placeholder="Always dark input" />
 ```
 
 ---
@@ -111,15 +111,15 @@
 <form>
   <div>
     <label>First Name</label>
-    <input class="sgds:bg-surface-default" type="text" />
+    <input class="sgds:bg-form-surface-default" type="text" />
   </div>
   <div>
     <label>Last Name</label>
-    <input class="sgds:bg-surface-default" type="text" />
+    <input class="sgds:bg-form-surface-default" type="text" />
   </div>
   <div>
     <label>Email</label>
-    <input class="sgds:bg-surface-default" type="email" />
+    <input class="sgds:bg-form-surface-default" type="email" />
   </div>
 </form>
 ```
@@ -129,11 +129,11 @@
 ```html
 <div>
   <label>Username (locked)</label>
-  <input class="sgds:bg-surface-muted" type="text" value="john.doe" readonly />
+  <input class="sgds:bg-form-surface-muted" type="text" value="john.doe" readonly />
 </div>
 <div>
   <label>Display Name</label>
-  <input class="sgds:bg-surface-default" type="text" placeholder="Enter display name" />
+  <input class="sgds:bg-form-surface-default" type="text" placeholder="Enter display name" />
 </div>
 ```
 
@@ -141,7 +141,7 @@
 
 ```html
 <section class="sgds:bg-fixed-dark">
-  <input class="sgds:bg-surface-fixed-light" type="text" placeholder="Input on dark section" />
+  <input class="sgds:bg-form-surface-fixed-light" type="text" placeholder="Input on dark section" />
 </section>
 ```
 
