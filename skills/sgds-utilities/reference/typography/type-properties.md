@@ -8,7 +8,7 @@ Full reference for all SGDS typography utility classes — scale tables, usage r
 
 SGDS typography utilities control eight visual properties of text. Each property is applied via a dedicated `sgds:` Tailwind utility class. All classes are available after importing `utility.css` — no additional setup is needed beyond the standard SGDS utility setup.
 
-The eight properties are: **font family**, **font weight**, **font size**, **line height**, **letter spacing**, **paragraph spacing**, **text decoration**, and **text transform**.
+The six properties are: **font family**, **font weight**, **letter spacing**, **paragraph spacing**, **text decoration**, and **text transform**.
 
 ---
 
@@ -82,132 +82,7 @@ Apply with `sgds:font-{weight}`:
 
 ---
 
-## 3. Font Size
-
-Apply with `sgds:text-{size}` where the number is the pixel value:
-
-### Scale / Values
-
-| Token | Pixel value | Typical use |
-|-------|-------------|-------------|
-| `sgds:text-12` | 12px | Fine print, captions, badge labels |
-| `sgds:text-14` | 14px | Secondary labels, helper text, code |
-| `sgds:text-16` | 16px | Default body text, subtitles |
-| `sgds:text-20` | 20px | Lead paragraphs, intro text, body large, subtitles |
-| `sgds:text-24` | 24px | H4 |
-| `sgds:text-28` | 28px | H3 |
-| `sgds:text-32` | 32px | H2 |
-| `sgds:text-40` | 40px | Display, H1 |
-| `sgds:text-48` | 48px | Display |
-| `sgds:text-56` | 56px | Display |
-
-**Responsive sizes** (use in media query breakpoints only — not for base styles):
-
-| Token | Pixel value |
-|-------|-------------|
-| `sgds:text-18` | 18px |
-| `sgds:text-22` | 22px |
-| `sgds:text-26` | 26px |
-| `sgds:text-30` | 30px |
-| `sgds:text-36` | 36px |
-| `sgds:text-44` | 44px |
-| `sgds:text-52` | 52px |
-
-### Roles & Usage
-
-- Match font size to content role: larger for headings, `sgds:text-16` for standard body.
-- Pair each font size with the appropriate line height (see Line Height section).
-- Avoid skipping more than two steps in heading hierarchies.
-
-```html
-<p class="sgds:text-12">Fine print or legal text</p>
-<p class="sgds:text-16">Standard body text</p>
-<h3 class="sgds:text-28 sgds:font-semibold sgds:leading-32">Section heading</h3>
-<h1 class="sgds:text-48 sgds:font-bold sgds:leading-56">Page title</h1>
-```
-
----
-
-## 4. Line Height
-
-Apply with `sgds:leading-{size}` where the number is the pixel value:
-
-### Scale / Values
-
-| Token | Pixel value |
-|-------|-------------|
-| `sgds:leading-16` | 16px |
-| `sgds:leading-20` | 20px |
-| `sgds:leading-24` | 24px |
-| `sgds:leading-28` | 28px |
-| `sgds:leading-32` | 32px |
-| `sgds:leading-36` | 36px |
-| `sgds:leading-40` | 40px |
-| `sgds:leading-44` | 44px |
-| `sgds:leading-48` | 48px |
-| `sgds:leading-52` | 52px |
-| `sgds:leading-56` | 56px |
-| `sgds:leading-60` | 60px |
-| `sgds:leading-64` | 64px |
-
-### Ratio Rule
-
-Two ratios determine line height, calculated then rounded to the nearest 4-point grid token:
-
-- **1.5×** — body text, labels, captions
-- **1.2×** — headings, subtitles, display
-
-### Font-Size-to-Leading Pairing
-
-**1.5× ratio — body text, labels, captions:**
-
-| Font size | Role | Calculated | Leading token |
-|-----------|------|------------|--------------|
-| `sgds:text-14` | Caption, overline | 21 → 20 | `sgds:leading-20` |
-| `sgds:text-16` | Body, label | 24 | `sgds:leading-24` |
-| `sgds:text-20` | Lead body, label | 30 → 32 | `sgds:leading-32` |
-
-**1.2× ratio — headings, subtitles, display:**
-
-| Font size | Role | Calculated | Leading token |
-|-----------|------|------------|--------------|
-| `sgds:text-12` | Label | 14.4 → 16 | `sgds:leading-16` |
-| `sgds:text-16` | Subtitle | 19.2 → 20 | `sgds:leading-20` |
-| `sgds:text-20` | Subtitle | 24 | `sgds:leading-24` |
-| `sgds:text-24` | H4 | 28.8 → 28 | `sgds:leading-28` |
-| `sgds:text-28` | H3 | 33.6 → 32 | `sgds:leading-32` |
-| `sgds:text-32` | H2 | 38.4 → 40 | `sgds:leading-40` |
-| `sgds:text-40` | H1, Display | 48 | `sgds:leading-48` |
-| `sgds:text-48` | Display | 57.6 → 56 | `sgds:leading-56` |
-| `sgds:text-56` | Display | 67.2 → 64 | `sgds:leading-64` |
-
-### Roles & Usage
-
-- For `sgds:text-16`, choose based on role: `sgds:leading-24` for body or label, `sgds:leading-20` for subtitle.
-- For `sgds:text-20`, choose based on role: `sgds:leading-32` for lead body or label, `sgds:leading-24` for subtitle.
-- Do not mix line heights within a single heading element.
-
-```html
-<!-- Body and caption — 1.5× ratio -->
-<p class="sgds:text-14 sgds:leading-20">Caption or overline text</p>
-<p class="sgds:text-16 sgds:leading-24">Standard body text</p>
-<p class="sgds:text-20 sgds:leading-32">Lead paragraph</p>
-
-<!-- Label — 1.2× for text-12 (smallest size); 1.5× for text-16+ -->
-<span class="sgds:text-12 sgds:leading-16">Compact label (1.2×)</span>
-<span class="sgds:text-16 sgds:font-semibold sgds:leading-24">Label (1.5×)</span>
-
-<!-- Headings and display — 1.2× ratio -->
-<span class="sgds:text-16 sgds:font-semibold sgds:leading-20">Subtitle</span>
-<h3 class="sgds:text-20 sgds:font-semibold sgds:leading-24">Subtitle</h3>
-<h3 class="sgds:text-24 sgds:font-semibold sgds:leading-28">H4</h3>
-<h2 class="sgds:text-32 sgds:font-bold sgds:leading-40">H2</h2>
-<h1 class="sgds:text-48 sgds:font-bold sgds:leading-56">Page title</h1>
-```
-
----
-
-## 5. Letter Spacing
+## 3. Letter Spacing
 
 Apply with `sgds:tracking-{size}`:
 
@@ -243,7 +118,7 @@ Apply with `sgds:tracking-{size}`:
 
 ---
 
-## 6. Paragraph Spacing
+## 4. Paragraph Spacing
 
 Apply with `sgds:mb-paragraph-{size}` on the paragraph element:
 
@@ -275,7 +150,7 @@ Apply with `sgds:mb-paragraph-{size}` on the paragraph element:
 
 ---
 
-## 7. Text Decoration
+## 5. Text Decoration
 
 Apply with the decoration class directly:
 
@@ -310,7 +185,7 @@ Apply with the decoration class directly:
 
 ---
 
-## 8. Text Transform
+## 6. Text Transform
 
 Apply with the transform class directly:
 
@@ -354,14 +229,6 @@ Apply with the transform class directly:
 **Font weight**
 - ✅ Use `sgds:font-semibold` for labels and subtitles, `sgds:font-bold` for headings
 - ❌ Do not apply `sgds:font-bold` to every element — it destroys visual hierarchy
-
-**Font size**
-- ✅ Match size to content role: `sgds:text-16` for body, `sgds:text-30`+ for headings
-- ❌ Do not use large sizes for body text or small sizes for headings
-
-**Line height**
-- ✅ Pair heading line height with the token closest to 1.2× the font size; `sgds:leading-24` for 16px body
-- ❌ Do not use too large a leading on headings — multi-line headings become too loose
 
 **Letter spacing**
 - ✅ Tighten tracking on large text; widen for small uppercase labels
@@ -445,8 +312,6 @@ When generating typography markup with SGDS utilities:
 
 - **Font family**: No class needed for prose; always add `sgds:font-mono` to `<code>` and `<pre>`.
 - **Font weight**: `sgds:font-semibold` for subtitles and labels; `sgds:font-bold` for H1–H2; `sgds:font-regular` for body (default, no class needed).
-- **Font size**: Use numeric token matching the pixel size — `sgds:text-16` for body, `sgds:text-30` for H3, `sgds:text-48` for H1.
-- **Line height**: Use the font-size-to-leading pairing table in Section 4. Body/label/caption uses 1.5× ratio; headings/subtitles/display uses 1.2×. Both are rounded to the nearest 4-point grid token (e.g. `sgds:text-16` → `sgds:leading-24`, `sgds:text-48` → `sgds:leading-56`).
 - **Letter spacing**: `sgds:tracking-tight` for 48px+ headings; `sgds:tracking-wider` for small uppercase labels; no class for body.
 - **Paragraph spacing**: `sgds:mb-paragraph-md` for standard content; `sgds:mb-paragraph-lg` for long-form reading.
 - **Text decoration**: `sgds:underline` on links; `sgds:line-through` for deleted/struck content; `sgds:no-underline` when colour conveys link state.
