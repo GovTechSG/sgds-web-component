@@ -2,6 +2,109 @@
 
 `<sgds-button>` is the standard action element for forms, dialogs, and navigation. Use it instead of a native `<button>` whenever SGDS styling and behaviour are needed.
 
+## Component Definition
+
+A button is an interactive UI element that allows users to trigger an action, such as submitting a form, confirming a choice, or initiating a process. Buttons are typically styled to indicate importance, hierarchy, and interactivity, and can include text, icons, or both.
+
+## Purpose
+
+- Provide a clear and actionable control that enables users to perform tasks efficiently
+- Guide users toward primary actions while supporting secondary and tertiary actions within an interface
+
+## Usage Guideline
+
+**When to use:**
+- To trigger an action (e.g. submit, save, confirm)
+- To initiate workflows (e.g. next step, continue)
+- To present clear calls-to-action (CTA)
+- When user interaction is required to proceed
+
+**When NOT to use:**
+- For navigation between pages — use links instead
+- For inline text actions within paragraphs — use inline links
+- When no action is required — avoid decorative buttons
+- For passive information display
+
+## Behaviour
+
+- Buttons trigger actions immediately upon activation (click or keyboard)
+- Supports states: default, hover, active/pressed, focus, disabled, and loading (for async actions)
+- Hierarchy levels via `variant`: `primary` (main action), `outline` (secondary alternative), `ghost` (tertiary/low emphasis)
+- Semantic tone via `tone`: `brand` (default), `danger` (destructive actions), `neutral` (no brand emphasis), `fixed-light` (dark backgrounds)
+- Can include leading icons (for clarity) or trailing icons (for direction/continuation)
+- Supports full-width or inline layout depending on context
+
+## Content Guidelines
+
+- Use clear, concise, and action-oriented labels
+- Use verbs to describe the action — "Submit", "Save changes", "Continue"
+- Keep labels short (1–3 words preferred)
+- Use sentence case for readability
+- Ensure the label reflects the outcome of the action
+- Avoid ambiguous wording like "Click here" or "Button"
+
+## Interaction Guidelines
+
+- Must be accessible via keyboard (`Tab`, `Enter`, `Space`)
+- Focus state must be visible and clear
+- Disabled buttons: should not be interactive and must clearly communicate unavailable state
+- Loading state: prevent multiple submissions and provide visual feedback (spinner or progress)
+- Icon-only buttons: must include accessible labels (`aria-label`)
+- Ensure sufficient touch target size (minimum ~44px)
+
+## Best Practices
+
+**Do**
+- Use one primary button per section or screen
+- Maintain clear hierarchy between actions
+- Place buttons where users expect them (e.g. bottom-right for forms)
+- Use consistent styling across products
+- Provide feedback after interaction (e.g. loading, success state)
+
+**Don't**
+- Use multiple primary buttons in the same context
+- Overload the UI with too many buttons
+- Use vague or unclear labels
+- Disable buttons without explanation when possible
+- Use buttons for navigation when a link is more appropriate
+
+## Common Use Cases
+
+- **Form submission** — Submit, Save, Cancel
+- **Confirmation actions** — Confirm, Delete
+- **Navigation within flows** — Next, Back, Continue
+- **Triggering modals or dialogs**
+- **Inline actions** — Add item, Remove
+
+## Advanced Considerations
+
+**Hierarchy strategy** — define clear rules for when to use `primary` vs `outline` vs `ghost` buttons across the system
+
+**Tone strategy** — use `tone="danger"` for destructive/irreversible actions across any variant; `tone="neutral"` for utility buttons without brand emphasis; `tone="fixed-light"` on dark or coloured backgrounds
+
+**Responsive behaviour** — full-width buttons on mobile; inline/grouped buttons on desktop
+
+**Icon usage** — avoid overuse of icons; ensure icons add meaning, not decoration
+
+**Accessibility** — ensure sufficient contrast ratios and provide screen reader support
+
+**Internationalisation** — account for longer text in other languages when sizing buttons
+
+**Destructive actions** — require confirmation or use danger styling
+
+**Button grouping** — maintain spacing and hierarchy within button groups
+
+## Edge Cases
+
+- **Long labels** — may wrap or truncate; ensure layout can handle it
+- **Multiple actions in tight spaces** — consider dropdown or overflow menu instead
+- **Disabled vs hidden** — decide when to disable vs remove actions entirely
+- **Loading delays** — show loading state if action exceeds ~300ms
+- **Icon-only buttons** — risk of ambiguity without proper labelling
+- **High-frequency actions** — ensure no accidental double submission
+- **Mobile constraints** — avoid placing buttons too close together
+- **Conflicting actions** — clearly separate destructive vs safe actions (e.g. Delete vs Cancel)
+
 ## Quick Decision Guide
 
 **Which `variant`?**
