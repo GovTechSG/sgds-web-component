@@ -112,13 +112,13 @@ Alert is a non-blocking, inline feedback component used to communicate important
 - Outlined → lower emphasis, supportive messaging
 - Neutral → use when semantic meaning is not required
 
-**Alert vs Toast vs Banner**
+**Alert vs Toast vs System Banner**
 
 | Component | Usage |
 |---|---|
 | Alert | Inline, persistent, contextual |
 | Toast | Temporary, overlay, passive |
-| Banner | Global, page-level messaging |
+| System Banner | Global, page-level messaging |
 
 **Placement Strategy**
 - Place close to triggering action or relevant content
