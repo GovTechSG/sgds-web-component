@@ -2,6 +2,103 @@
 
 `<sgds-datepicker>` combines a text input with a calendar dropdown. Users can type a date directly or pick one from the calendar. `mode="range"` enables two-date selection.
 
+## Component Definition
+
+A datepicker is an input control that allows users to select a date (or date range) through a calendar interface, optionally combined with manual text input.
+
+## Purpose
+
+- Select valid dates efficiently
+- Reduce input errors from manual typing
+- Visualise dates within a calendar context
+- Handle structured date inputs (single date or range)
+
+## Usage Guideline
+
+**When to use:**
+- When users need to select a specific date or date range
+- When date accuracy is important (e.g. bookings, deadlines)
+- When providing a calendar view improves usability
+- For inputs with format constraints (e.g. DD/MM/YYYY)
+
+**When NOT to use:**
+- For simple or approximate inputs (e.g. "Next week")
+- When users need to input only month or year → consider dropdowns
+- For very long date ranges (years/decades) → consider alternative inputs
+- When speed is critical and typing is faster (e.g. expert/internal tools)
+
+## Behaviour
+
+**Input**
+- Supports both manual text entry and calendar selection
+- Validates format and rejects invalid dates (e.g. 31 Feb)
+
+**Calendar**
+- Opens on input focus or icon click
+- Displays current month by default with month/year navigation
+- Highlights selected date, today's date, and disabled/unavailable dates
+
+**Range selection**
+- First click sets the start date; second click sets the end date
+- Visual range highlight shown between selected dates
+
+## Content Guidelines
+
+- Use clear labels: "Start date", "End date", "Date of birth"
+- Always show the format hint (e.g. "DD/MM/YYYY") — do not rely on placeholder text alone
+- Use helper text when constraints apply (e.g. "Select a date within the next 30 days")
+- Follow the Singapore locale standard: DD/MM/YYYY
+
+## Interaction Guidelines
+
+- Click the input or calendar icon to open the calendar
+- Click a date to select; click outside to close
+- Focus moves into the calendar when opened and returns to the input when closed
+- Immediate visual update on selection
+- Clear error feedback for invalid input
+
+## Best Practices
+
+**Do**
+- Use datepicker for structured, important date input
+- Provide both typing and calendar selection options
+- Disable invalid dates (e.g. past dates, unavailable slots)
+- Use range mode for start/end relationships
+- Highlight today's date for reference
+- Ensure accessibility (keyboard + screen reader support)
+
+**Don't**
+- Force users to scroll excessively for distant dates
+- Allow ambiguous date formats
+- Rely only on calendar without typing support for power users
+- Auto-submit on date selection unless explicitly expected
+
+## Common Use Cases
+
+- **Booking systems** — appointments, reservations
+- **Forms** — date of birth, application deadlines
+- **Filters** — date range filtering (e.g. reports, transactions)
+- **Scheduling** — event planning, availability selection
+
+## Advanced Considerations
+
+**Accessibility** — ensure proper label association; announce selected date, focused date, and disabled dates; use `role="grid"` for the calendar; provide meaningful keyboard navigation
+
+**Date constraints** — support `minDate` / `maxDate`, disabled ranges, and business rules (e.g. weekdays only)
+
+**Localisation** — adapt date format (DD/MM/YYYY), first day of week, and month/day names; ensure consistency across the system
+
+## Edge Cases
+
+- **Invalid manual input** — handle gracefully with validation and formatting correction
+- **Leap years** — ensure 29 Feb is correctly handled
+- **Timezone differences** — be explicit if the date is local or system-based
+- **Range errors** — if end date is before start date, auto-correct or prompt an error
+- **Clearing values** — provide a clear reset/clear option
+- **Pre-filled values** — ensure correct formatting and visibility on initial render
+- **Very long ranges** — provide faster navigation (year dropdown or jump controls)
+- **Partial input** — avoid aggressive auto-correction that may confuse users
+
 ## Quick Decision Guide
 
 **Single date?** → `mode="single"` (default)
