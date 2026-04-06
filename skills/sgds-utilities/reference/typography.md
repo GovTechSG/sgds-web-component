@@ -6,48 +6,9 @@ Helps developers apply consistent text sizing, weights, line heights, letter spa
 
 All SGDS typography utilities use the `sgds:` prefix. The main properties:
 
-- **Font size** — `sgds:text-{size}` where size is the pixel value (e.g. `sgds:text-16`)
 - **Font weight** — `sgds:font-{weight}` (light / regular / semibold / bold)
-- **Line height** — `sgds:leading-{size}` where size is the pixel value (e.g. `sgds:leading-24`)
 - **Letter spacing** — `sgds:tracking-{size}` (tighter / tight / normal / wide / wider)
 - **Font family** — `sgds:font-sans` / `sgds:font-mono`
-
-## Font Size Scale
-
-| Token | Pixel value | Typical use |
-|-------|-------------|-------------|
-| `sgds:text-12` | 12px | Fine print, captions, badge labels |
-| `sgds:text-14` | 14px | Secondary labels, helper text, code |
-| `sgds:text-16` | 16px | Default body text, subtitles |
-| `sgds:text-20` | 20px | Lead paragraphs, intro text, body large, subtitles |
-| `sgds:text-24` | 24px | H4 |
-| `sgds:text-28` | 28px | H3 |
-| `sgds:text-32` | 32px | H2 |
-| `sgds:text-40` | 40px | Display, H1 |
-| `sgds:text-48` | 48px | Display |
-| `sgds:text-56` | 56px | Display |
-
-**Responsive sizes** (use in media query breakpoints only — not for base styles):
-
-| Token | Pixel value |
-|-------|-------------|
-| `sgds:text-18` | 18px |
-| `sgds:text-22` | 22px |
-| `sgds:text-26` | 26px |
-| `sgds:text-30` | 30px |
-| `sgds:text-36` | 36px |
-| `sgds:text-44` | 44px |
-| `sgds:text-52` | 52px |
-
-## Line Height — Ratio Rule
-
-Line height is calculated from the font size and rounded to the nearest 4-point grid token:
-
-- **1.5×** — body text, captions (e.g. `sgds:text-16` → `sgds:leading-24`)
-- **1.2×** — headings, subtitles, display (e.g. `sgds:text-48` → `sgds:leading-56`)
-
-For `sgds:text-16`: use `sgds:leading-24` for body or label, `sgds:leading-20` for subtitle.
-For `sgds:text-20`: use `sgds:leading-32` for lead body, `sgds:leading-24` for subtitle.
 
 ## Letter Spacing by Role
 
@@ -162,10 +123,10 @@ Always apply `sgds:font-mono` to `<code>` and `<pre>`.
 
 | File | Covers |
 |------|--------|
-| [`type-properties.md`](typography/type-properties.md) | Full scale tables for all eight type properties, ratio rules, and pairing guide |
+| [`type-properties.md`](typography/type-properties.md) | Full scale tables for all six type properties and usage rules |
 | [`patterns.md`](typography/patterns.md) | HTML patterns for all content types |
 
 ---
 
-**For AI Agents**: Use numeric pixel tokens — `sgds:text-{px}` for font size and `sgds:leading-{px}` for line height. Apply the 1.5× ratio (body/caption) or 1.2× ratio (heading/display) rounded to the nearest 4-point grid token. Apply tracking by role: display → `tracking-tighter`, headings → `tracking-tight`, subtitles → `tracking-normal`, overlines → `tracking-wide`. See reference files for full pairing tables.
+**For AI Agents**: Apply tracking by role: display → `tracking-tighter`, headings → `tracking-tight`, subtitles → `tracking-normal`, overlines → `tracking-wide`. Always apply `sgds:font-mono` to `<code>` and `<pre>`. See reference files for full property tables.
 
