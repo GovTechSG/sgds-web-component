@@ -115,7 +115,7 @@
 
 ---
 
-### `sgds:bg-subtle`
+### `sgds:bg-translucent-subtle`
 **Lighter color grade** than translucent.
 
 **When to use:**
@@ -124,7 +124,7 @@
 - Gentle background tint
 
 ```html
-<div class="sgds:bg-subtle">
+<div class="sgds:bg-translucent-subtle">
   Subtle background tint
 </div>
 ```
@@ -207,7 +207,7 @@
 ### Hover Effect Button
 
 ```html
-<button class="sgds:bg-transparent hover:sgds:bg-translucent active:sgds:bg-subtle">
+<button class="sgds:bg-transparent hover:sgds:bg-translucent active:sgds:bg-translucent-subtle">
   Hover and Click Me
 </button>
 ```
