@@ -27,6 +27,89 @@ The Accordion is a vertically stacked interactive component that allows users to
 - Content is short or minimal — fewer than 2 sections
 - Used as a primary navigation pattern
 
+## Behaviour
+
+Accordion items support two expand modes:
+- **Single-expand (default)** — only one item open at a time; opening another closes the previous
+- **Multi-expand** — multiple sections can be open simultaneously; set `allowMultiple` on `<sgds-accordion>`
+
+**Default state:** All items collapsed, or optionally the first item expanded (context-dependent).
+
+**System behaviour:**
+- Preserve expanded state where possible — avoid unexpected auto-collapse after user interaction
+- Clicking the header toggles visibility; expanded state is indicated via chevron rotation
+
+## Content Guidelines
+
+**Header labels:**
+- Keep concise and scannable (1–2 lines max)
+- Use sentence case
+- Reflect the content inside accurately
+
+✅ Good: "Eligibility criteria", "Payment details"
+
+❌ Avoid: Vague labels like "More info", long descriptive sentences
+
+**Content panels:**
+- Structure content using lists, subheadings, and short paragraphs
+- Break long content into multiple items instead of one overloaded section
+- Maintain consistent formatting across all items
+
+## Interaction Guidelines
+
+- Entire header area must be clickable — not just the label text
+- Provide strong visual affordance: chevron rotation, visible hover and focus states
+- Animate expand/collapse smoothly — avoid abrupt layout shifts; keep motion subtle
+- Maintain the user's reading position when expanding — avoid unexpected scroll jumps
+- Ensure a minimum 44px tap target height for touch accessibility
+
+## Best Practices
+
+**Do**
+- Use for progressive disclosure of logically grouped content
+- Group related content logically and keep structure consistent across items
+- Lazy load heavy content inside panels if needed
+
+**Don't**
+- Nest more than one level of accordions
+- Use as primary navigation
+- Hide critical information that users must not miss
+- Mix unrelated content in one accordion group
+- Use inconsistent interaction patterns within the same accordion
+
+## Common Use Cases
+
+- **FAQ list** — multiple questions with expandable answers
+- **Form sections** — personal details, address, payment
+- **Settings panels** — grouped configurations
+- **Policy / legal content** — terms, disclaimers, guidelines
+- **Step-based disclosure** — progressive reveal of instructions
+
+## Accessibility
+
+- Header elements use `<button>` role with `aria-expanded` indicating open/closed state
+- Panel uses `aria-controls` linking to the header button
+- Keyboard support: `Tab` to navigate, `Enter` / `Space` to toggle
+- Ensure visible focus states on all interactive header elements
+
+## Component Composition
+
+**Accordion items can contain:**
+- Form fields
+- Lists
+- Alerts (for contextual information)
+- Cards (use sparingly)
+
+**Avoid placing inside accordion items:**
+- Heavy nested interactive components that compete for attention
+
+## Edge Cases
+
+- **Very long content** — consider a "View more" pattern instead of a single massive accordion item
+- **Dynamic content** — ensure layout stability when content loads asynchronously
+- **Error states inside accordion** — auto-expand the affected item so users are not confused
+- **Nested interactive elements** — avoid interaction conflicts with components inside accordion panels
+
 ## Quick Decision Guide
 
 **Multiple items open at once?** → Add `allowMultiple` on `<sgds-accordion>`
@@ -128,86 +211,3 @@ The Accordion is a vertically stacked interactive component that allows users to
 7. Never nest accordions more than one level deep.
 8. If a form section inside an accordion item has validation errors, auto-expand that item so the user can see and fix the error.
 9. There are no events or public methods on the `<sgds-accordion>` parent element.
-
-## Behaviour
-
-Accordion items support two expand modes:
-- **Single-expand (default)** — only one item open at a time; opening another closes the previous
-- **Multi-expand** — multiple sections can be open simultaneously; set `allowMultiple` on `<sgds-accordion>`
-
-**Default state:** All items collapsed, or optionally the first item expanded (context-dependent).
-
-**System behaviour:**
-- Preserve expanded state where possible — avoid unexpected auto-collapse after user interaction
-- Clicking the header toggles visibility; expanded state is indicated via chevron rotation
-
-## Content Guidelines
-
-**Header labels:**
-- Keep concise and scannable (1–2 lines max)
-- Use sentence case
-- Reflect the content inside accurately
-
-✅ Good: "Eligibility criteria", "Payment details"
-
-❌ Avoid: Vague labels like "More info", long descriptive sentences
-
-**Content panels:**
-- Structure content using lists, subheadings, and short paragraphs
-- Break long content into multiple items instead of one overloaded section
-- Maintain consistent formatting across all items
-
-## Interaction Guidelines
-
-- Entire header area must be clickable — not just the label text
-- Provide strong visual affordance: chevron rotation, visible hover and focus states
-- Animate expand/collapse smoothly — avoid abrupt layout shifts; keep motion subtle
-- Maintain the user's reading position when expanding — avoid unexpected scroll jumps
-- Ensure a minimum 44px tap target height for touch accessibility
-
-## Best Practices
-
-**Do**
-- Use for progressive disclosure of logically grouped content
-- Group related content logically and keep structure consistent across items
-- Lazy load heavy content inside panels if needed
-
-**Don't**
-- Nest more than one level of accordions
-- Use as primary navigation
-- Hide critical information that users must not miss
-- Mix unrelated content in one accordion group
-- Use inconsistent interaction patterns within the same accordion
-
-## Common Use Cases
-
-- **FAQ list** — multiple questions with expandable answers
-- **Form sections** — personal details, address, payment
-- **Settings panels** — grouped configurations
-- **Policy / legal content** — terms, disclaimers, guidelines
-- **Step-based disclosure** — progressive reveal of instructions
-
-## Accessibility
-
-- Header elements use `<button>` role with `aria-expanded` indicating open/closed state
-- Panel uses `aria-controls` linking to the header button
-- Keyboard support: `Tab` to navigate, `Enter` / `Space` to toggle
-- Ensure visible focus states on all interactive header elements
-
-## Component Composition
-
-**Accordion items can contain:**
-- Form fields
-- Lists
-- Alerts (for contextual information)
-- Cards (use sparingly)
-
-**Avoid placing inside accordion items:**
-- Heavy nested interactive components that compete for attention
-
-## Edge Cases
-
-- **Very long content** — consider a "View more" pattern instead of a single massive accordion item
-- **Dynamic content** — ensure layout stability when content loads asynchronously
-- **Error states inside accordion** — auto-expand the affected item so users are not confused
-- **Nested interactive elements** — avoid interaction conflicts with components inside accordion panels
