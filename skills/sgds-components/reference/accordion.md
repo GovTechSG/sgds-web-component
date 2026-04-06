@@ -2,6 +2,23 @@
 
 `<sgds-accordion>` is a container for one or more `<sgds-accordion-item>` elements. Items can be opened and closed individually; setting `allowMultiple` lets multiple items stay open at once.
 
+## Overview
+
+The Accordion is a vertically stacked set of interactive headers that reveal or hide associated content. Use it to organise dense information into digestible sections, reduce cognitive load through progressive disclosure, and improve scannability.
+
+## When to Use
+
+**Use Accordion when:**
+- Content can be logically grouped into sections
+- Users do not need to view all content at once
+- Space is limited (especially on mobile)
+- Supporting secondary or optional information
+
+**Avoid Accordion when:**
+- All content is critical and must always be visible
+- Users need to compare multiple sections simultaneously
+- There are fewer than 2 sections — use simple content instead
+
 ## Quick Decision Guide
 
 **Multiple items open at once?** → Add `allowMultiple` on `<sgds-accordion>`
@@ -98,4 +115,65 @@
 2. `sgds-show` and `sgds-hide` are cancelable on `<sgds-accordion-item>` — call `event.preventDefault()` to stop the transition.
 3. To start an item expanded on load, add the `open` attribute to `<sgds-accordion-item>`.
 4. Without `allowMultiple`, opening one item automatically closes others.
+5. Default to the first item open (`open` on first `<sgds-accordion-item>`) only when that section contains key information users need immediately.
+6. Use `allowMultiple` when users need to compare sections; use single-expand for guided or sequential reading.
+7. Never nest accordions more than one level deep.
+8. Do not hide errors or critical alerts inside accordion items — auto-expand the relevant item if an error occurs inside one.
+
+## Content Guidelines
+
+**Header labels:**
+- Keep concise and scannable (1–2 lines max)
+- Use sentence case
+- Clearly describe the content inside
+
+✅ Good: "Eligibility criteria", "Payment details"
+❌ Avoid: Vague labels like "More info", long paragraphs as headers
+
+**Content panels:**
+- Use structured content (lists, paragraphs, subheadings)
+- Avoid overly long sections — break into multiple items instead
+- Maintain consistent formatting across all items
+
+## Do & Don't
+
+**Do**
+- Use for progressive disclosure of logically grouped content
+- Keep labels clear, structured, and specific
+- Use `allowMultiple` when users need to compare sections
+- Auto-expand the relevant item when it contains a validation error
+- Lazy load heavy content inside panels if needed
+
+**Don't**
+- Nest more than one level of accordions
+- Overload a single item with excessive content
+- Use as primary navigation
+- Hide critical information that users must not miss
+- Mix unrelated content in one accordion group
+
+## Common Use Cases
+
+- FAQs
+- Form sections (e.g., personal info, payment, shipping)
+- Policy or legal content
+- Settings panels
+- Step-based or sequential disclosures
+
+## Component Composition
+
+**Accordion items can contain:**
+- Form fields
+- Lists
+- Alerts (for contextual information)
+- Cards (use sparingly)
+
+**Avoid placing inside accordion items:**
+- Heavy nested interactive components that compete for attention
+- Deep nested accordions
+
+## Edge Cases
+
+- **Very long content** — consider a "View more" pattern instead of a single massive accordion item
+- **Dynamic content** — ensure layout stability when content loads asynchronously
+- **Error states inside accordion** — auto-expand the affected item so users are not confused
 5. There are no events or public methods on the `<sgds-accordion>` parent element.
