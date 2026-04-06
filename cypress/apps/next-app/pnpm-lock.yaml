@@ -9,8 +9,11 @@ importers:
   .:
     dependencies:
       '@govtechsg/sgds-web-component':
-        specifier: latest
+        specifier: 3.16.0
         version: 3.16.0(@types/react@19.1.13)
+      '@webcomponents/scoped-custom-element-registry':
+        specifier: ^0.0.10
+        version: 0.0.10
       next:
         specifier: '>=15.5.7'
         version: 16.2.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -583,6 +586,9 @@ packages:
 
   '@webassemblyjs/wast-printer@1.14.1':
     resolution: {integrity: sha512-kPSSXE6De1XOR820C90RIo2ogvZG+c3KiHzqUoO/F34Y2shGzesfqv7o57xrxovZJH/MetF5UjroJ/R/3isoiw==}
+
+  '@webcomponents/scoped-custom-element-registry@0.0.10':
+    resolution: {integrity: sha512-wP4LF28aysE2Pq3NQRNQxko7Q0vOOwcoOSMg8FFI4S6z76UuXkYIc5ndC31dJMwso1/vSteL75LW2CEKedAJbA==}
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -2450,6 +2456,8 @@ snapshots:
     dependencies:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
+
+  '@webcomponents/scoped-custom-element-registry@0.0.10': {}
 
   '@xtuc/ieee754@1.2.0': {}
 
