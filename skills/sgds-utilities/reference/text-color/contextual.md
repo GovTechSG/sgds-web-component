@@ -1,4 +1,4 @@
-# Text Color — Contextual Colors Reference
+# Text Color — Semantic Colors Reference
 
 Contextual text color tokens carry semantic meaning (brand, status, feedback). Use them when color communicates a specific intent, not just for aesthetic variation.
 
