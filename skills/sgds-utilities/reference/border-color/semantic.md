@@ -12,7 +12,7 @@ sgds:border-{variant}-{modifier}
 
 **Variants:** `primary`, `accent`, `success`, `danger`, `warning`, `purple`, `cyan`, `neutral`
 
-**Modifiers:** `default`, `emphasis`, `muted` (or `subtle` for `danger`/`warning`)
+**Modifiers:** `default`, `emphasis`, `muted`
 
 For modifier definitions see **[`color-semantics`](../color-semantics.md)**.
 
@@ -23,13 +23,11 @@ For modifier definitions see **[`color-semantics`](../color-semantics.md)**.
 | `primary` | Brand color | `border-primary-default/emphasis/muted` |
 | `accent` | Informational, no urgency | `border-accent-default/emphasis/muted` |
 | `success` | Positive feedback | `border-success-default/emphasis/muted` |
-| `danger` | Error / destructive | `border-danger-default/emphasis/subtle` |
-| `warning` | Caution | `border-warning-default/emphasis/subtle` |
+| `danger` | Error / destructive | `border-danger-default/emphasis/muted` |
+| `warning` | Caution | `border-warning-default/emphasis/muted` |
 | `purple` | Visual variety (no semantic meaning) | `border-purple-default/emphasis/muted` |
 | `cyan` | Visual variety (no semantic meaning) | `border-cyan-default/emphasis/muted` |
 | `neutral` | Equal importance, no differentiation | `border-neutral-default/emphasis/muted` |
-
-> **Note**: `danger` and `warning` use `subtle` (not `muted`) as their third modifier — a softer presence that doesn't alarm.
 
 ---
 
@@ -103,12 +101,10 @@ Positive feedback. Use for success alerts, valid input states, and completion in
 ### `danger`
 Error or destructive state. Use for error alerts, invalid input states, and destructive action borders.
 
-> Third modifier is `subtle` (not `muted`) — a softer error presence that doesn't alarm the user.
-
 ```html
 <div class="sgds:border sgds:border-danger-default">Error state container</div>
 <div class="sgds:border-2 sgds:border-danger-emphasis">Critical error container</div>
-<div class="sgds:border sgds:border-danger-subtle">Soft danger border</div>
+<div class="sgds:border sgds:border-danger-muted">Soft danger border</div>
 ```
 
 **Common patterns:**
@@ -125,12 +121,10 @@ Error or destructive state. Use for error alerts, invalid input states, and dest
 ### `warning`
 Caution or attention needed. Use for warning alerts, fields requiring review, and non-critical issue indicators.
 
-> Third modifier is `subtle` (not `muted`) — a softer caution presence.
-
 ```html
 <div class="sgds:border sgds:border-warning-default">Caution state container</div>
 <div class="sgds:border-2 sgds:border-warning-emphasis">Prominent warning container</div>
-<div class="sgds:border sgds:border-warning-subtle">Soft warning border</div>
+<div class="sgds:border sgds:border-warning-muted">Soft warning border</div>
 ```
 
 **Common patterns:**
