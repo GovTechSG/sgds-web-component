@@ -19,7 +19,8 @@ const external = [
   /lit\/.*/,
   "imask",
   "date-fns",
-  "@floating-ui/dom"
+  "@floating-ui/dom",
+  "react"
 ];
 
 const copyPlugin = copy({
@@ -93,7 +94,7 @@ const buildSgdsPackage = () => {
   const esmModules = [
     //generate subpath entry points for individual components side effects ce file
     {
-      input: ["src/index.ts", "src/components/index.ts"],
+      input: ["src/index.ts", "src/components/index.ts", "src/helpers/sgds-hydration-polyfill/index.ts"],
       output: {
         entryFileNames: "[name].js",
         dir: "lib",
