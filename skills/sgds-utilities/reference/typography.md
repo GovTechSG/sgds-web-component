@@ -120,8 +120,8 @@ Always use `<a href="...">`. All link patterns include underline.
 Always apply `sgds:font-mono` to `<code>` and `<pre>`.
 
 ```html
-<code class="sgds:font-mono sgds:text-14">inline code</code>
-<pre class="sgds:font-mono sgds:text-14 sgds:leading-20">block code</pre>
+<code class="sgds:font-mono sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">inline code</code>
+<pre class="sgds:font-mono sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">block code</pre>
 ```
 
 ## Reference Documentation
