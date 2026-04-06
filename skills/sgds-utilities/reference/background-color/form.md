@@ -101,6 +101,45 @@
 
 ---
 
+### `sgds:bg-form-primary-default` / `sgds:bg-form-primary-emphasis`
+**Brand-colored form input background.**
+
+**When to use:**
+- Inputs with brand-level emphasis
+- Active or selected form field in a primary context
+- `emphasis` for stronger brand presence
+
+```html
+<input class="sgds:bg-form-primary-default" type="text" placeholder="Brand input" />
+<input class="sgds:bg-form-primary-emphasis" type="text" placeholder="Strong brand input" />
+```
+
+---
+
+### `sgds:bg-form-success-default`
+**Success state input background.**
+
+**When to use:**
+- Valid input field after successful validation
+
+```html
+<input class="sgds:bg-form-success-default" type="text" value="Valid value" />
+```
+
+---
+
+### `sgds:bg-form-danger-default`
+**Error state input background.**
+
+**When to use:**
+- Invalid input field after failed validation
+
+```html
+<input class="sgds:bg-form-danger-default" type="text" value="Invalid value" />
+```
+
+---
+
 ## Common Patterns
 
 > **Note**: Use library components like `<sgds-input>`, `<sgds-select>`, `<sgds-textarea>` when available. Form background tokens are for custom form elements when library components don't meet your needs.
