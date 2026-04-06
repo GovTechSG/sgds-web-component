@@ -154,3 +154,10 @@ Non-semantic grey used for tags, badges, and disabled states.
 - On colored or fixed-image backgrounds, use `text-fixed-light` or `text-fixed-dark` to guarantee contrast.
 - Do not use contextual colors purely for visual variety — each variant carries semantic meaning for assistive technology and users.
 - SGDS component library (`<sgds-*>`) handles validation colors internally; apply contextual tokens only when building custom components.
+
+## See Also
+
+- **[base.md](base.md)** — Base text color tokens (default, muted, inverse, fixed)
+- **[typography-roles.md](typography-roles.md)** — Role-based text tokens (heading, body, label, link)
+- **[color-semantics](../color-semantics.md)** — Modifier definitions (default, emphasis, muted)
+- **[background-color/semantic.md](../background-color/semantic.md)** — Matching semantic background tokens
