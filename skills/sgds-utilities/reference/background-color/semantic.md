@@ -260,3 +260,10 @@ Equal importance, no differentiation. Component level only — no page-level tok
 <span class="sgds:bg-neutral-surface-default">Full-time</span>
 <span class="sgds:bg-neutral-surface-default">Remote</span>
 ```
+
+## See Also
+
+- **[base.md](base.md)** — Page-level background tokens (default, alternate, overlay, translucent)
+- **[surface.md](surface.md)** — Component surface tokens (surface-default, surface-raised, surface-inverse)
+- **[form.md](form.md)** — Form input background tokens
+- **[color-semantics](../color-semantics.md)** — Modifier definitions (default, emphasis, muted, translucent)
