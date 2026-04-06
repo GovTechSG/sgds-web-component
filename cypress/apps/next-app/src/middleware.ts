@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
-    "frame-ancestors 'none'",
+    "frame-ancestors 'none'"
   ].join("; ");
 
   const requestHeaders = new Headers(request.headers);
@@ -20,7 +20,7 @@ export function middleware(request: NextRequest) {
   requestHeaders.set("Content-Security-Policy", cspHeader);
 
   const response = NextResponse.next({
-    request: { headers: requestHeaders },
+    request: { headers: requestHeaders }
   });
   response.headers.set("Content-Security-Policy", cspHeader);
 
@@ -28,5 +28,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"]
 };

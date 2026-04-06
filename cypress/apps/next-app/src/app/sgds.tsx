@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-const SgdsLibraryLoader = () => {
+const SgdsLibraryLoader = ({ nonce }: { nonce?: string }) => {
   useEffect(() => {
     (async () => {
       await import('@govtechsg/sgds-web-component');
