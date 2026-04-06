@@ -1,40 +1,29 @@
-"use client"
-import SgdsButton from "@govtechsg/sgds-web-component/react/button/index.js";
-import SgdsMainnavItem from "@govtechsg/sgds-web-component/react/mainnav-item/index.js";
-import SgdsDropdownItem from "@govtechsg/sgds-web-component/react/dropdown-item/index.js";
-import SgdsMainnav from "@govtechsg/sgds-web-component/react/mainnav/index.js";
-import dynamic from "next/dynamic";
-
-const SgdsMainnavDropdown = dynamic(() => import("@govtechsg/sgds-web-component/react/mainnav-dropdown/index.js"), {
-  ssr: false
-});
-
 export const Mainnav = () => {
   return (
-    <SgdsMainnav>
+    <sgds-mainnav suppressHydrationWarning>
       <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
-      <SgdsMainnavItem>
+      <sgds-mainnav-item suppressHydrationWarning>
         <a href="#">ArgsTable Controlled</a>
-      </SgdsMainnavItem>
-      <SgdsMainnavDropdown close="default">
+      </sgds-mainnav-item>
+      <sgds-mainnav-dropdown close="default" suppressHydrationWarning>
         <span slot="toggler">Dropdown</span>
-        <SgdsDropdownItem disabled>
+        <sgds-dropdown-item disabled suppressHydrationWarning>
           <a href="https://google.com">Item 1</a>
-        </SgdsDropdownItem>
-        <SgdsDropdownItem>
+        </sgds-dropdown-item>
+        <sgds-dropdown-item suppressHydrationWarning>
           <a href="#">Item 2</a>
-        </SgdsDropdownItem>
-        <SgdsDropdownItem>
+        </sgds-dropdown-item>
+        <sgds-dropdown-item suppressHydrationWarning>
           <a href="#">Item 3</a>
-        </SgdsDropdownItem>
-      </SgdsMainnavDropdown>
-      <SgdsMainnavItem>
+        </sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+      <sgds-mainnav-item suppressHydrationWarning>
         <a href="#">About</a>
-      </SgdsMainnavItem>
-      <SgdsMainnavItem slot="end">
+      </sgds-mainnav-item>
+      <sgds-mainnav-item slot="end" suppressHydrationWarning>
         <a href="#">Contact Us</a>
-      </SgdsMainnavItem>
-      <SgdsButton slot="end">Login</SgdsButton>
-    </SgdsMainnav>
+      </sgds-mainnav-item>
+      <sgds-button slot="end" suppressHydrationWarning>Login</sgds-button>
+    </sgds-mainnav>
   );
 };

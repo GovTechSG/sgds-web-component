@@ -1,16 +1,13 @@
-import SgdsTextarea from "@govtechsg/sgds-web-component/react/textarea/index.js";
-
 export const Textarea = () => {
   return (
-    <SgdsTextarea
+    <sgds-textarea
       label="Label"
       name="textarea"
-      rows={4}
-      invalidFeedback=""
+      rows="4"
       placeholder="Placeholder"
-      maxlength={100}
+      maxlength="100"
       resize="vertical"
-      defaultValue=""
-    />
+      suppressHydrationWarning
+    ></sgds-textarea>
   );
 };

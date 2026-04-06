@@ -1,14 +1,11 @@
-import SgdsProgressBar from "@govtechsg/sgds-web-component/react/progress-bar/index.js";
-
 export const ProgressBar = () => {
   return (
-    <SgdsProgressBar
+    <sgds-progress-bar
       label="50%"
       variant="secondary"
-      value={50}
-      ariamin={0}
-      ariamax={100}
+      value="50"
       aria-label="Loading in progress"
-    ></SgdsProgressBar>
+      suppressHydrationWarning
+    ></sgds-progress-bar>
   );
 };

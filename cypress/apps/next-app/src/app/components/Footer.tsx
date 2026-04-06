@@ -1,24 +1,21 @@
-import SgdsFooter from "@govtechsg/sgds-web-component/react/footer/index.js";
-import SgdsIcon from "@govtechsg/sgds-web-component/react/icon/index.js";
-
 export const Footer = () => {
   return (
-    <SgdsFooter>
+    <sgds-footer suppressHydrationWarning>
       <a slot="social-media" href="https://www.facebook.com">
-        <SgdsIcon name="facebook"></SgdsIcon>
+        <sgds-icon name="facebook" suppressHydrationWarning></sgds-icon>
       </a>
       <a slot="social-media" href="https://www.instagram.com">
-        <SgdsIcon name="instagram"></SgdsIcon>
+        <sgds-icon name="instagram" suppressHydrationWarning></sgds-icon>
       </a>
       <a slot="social-media" href="https://www.linkedin.com">
-        <SgdsIcon name="linkedin"></SgdsIcon>
+        <sgds-icon name="linkedin" suppressHydrationWarning></sgds-icon>
       </a>
       <a slot="social-media" href="https://www.x.com">
-        <SgdsIcon name="twitter-x"></SgdsIcon>
+        <sgds-icon name="twitter-x" suppressHydrationWarning></sgds-icon>
       </a>
       <a slot="social-media" href="https://www.youtube.com">
-        <SgdsIcon name="youtube"></SgdsIcon>
+        <sgds-icon name="youtube" suppressHydrationWarning></sgds-icon>
       </a>
-    </SgdsFooter>
+    </sgds-footer>
   );
 };

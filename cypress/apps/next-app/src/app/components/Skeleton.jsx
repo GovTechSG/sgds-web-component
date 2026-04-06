@@ -1,5 +1,5 @@
-import SgdsSkeleton from "@govtechsg/sgds-web-component/react/skeleton";
-
 export const Skeleton = () => {
-    return <SgdsSkeleton width="128px" height="64px" borderRadius="4px"/>
-}
+  return (
+    <sgds-skeleton width="128px" height="64px" borderradius="4px" suppressHydrationWarning></sgds-skeleton>
+  );
+};
