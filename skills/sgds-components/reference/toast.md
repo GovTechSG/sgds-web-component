@@ -4,6 +4,88 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
+## Component Definition
+
+A Toast is a transient, non-disruptive notification that appears temporarily to provide brief feedback or status updates to the user, usually at the top or bottom of the interface.
+
+## Purpose
+
+- Communicate success, warning, error, or informational messages
+- Provide feedback without interrupting the user's workflow
+- Enhance user confidence and clarity in the interface
+
+## Usage Guideline
+
+**When to use:**
+- To confirm user actions (e.g. "Settings saved successfully")
+- To alert the user about temporary errors or warnings (e.g. "Failed to upload file")
+- To provide status updates for background processes (e.g. "Syncing your data")
+
+**When NOT to use:**
+- For critical messages that require immediate action — use modal or alert instead
+- For persistent information that should be part of the page layout
+- When information is complex or requires user interaction
+
+## Behaviour
+
+- Appears temporarily and automatically dismisses after a set duration
+- Can optionally be dismissible by the user
+- Only one toast per type or context should be displayed at a time to avoid clutter
+- Stacking is allowed but limit to 3–4 to maintain clarity
+
+## Content Guidelines
+
+- Keep messages short and concise (ideally 1–2 lines)
+- Use plain language and an actionable tone if relevant
+- Avoid complex links or detailed instructions — use modals or inline messages instead
+- Include status icons to indicate type (success, error, warning, info)
+
+## Interaction Guidelines
+
+- Toasts appear and disappear smoothly without interrupting other content
+- If dismissible, include a clear close icon with hover/focus states
+- Support keyboard accessibility (e.g. `Esc` key to dismiss)
+- Screen reader friendly: announce toast type and message when it appears
+
+## Best Practices
+
+**Do**
+- Use for brief confirmations or alerts
+- Keep text concise and scannable
+- Ensure consistent positioning and timing
+- Provide visual differentiation for types via color and iconography
+
+**Don't**
+- Overload users with multiple simultaneous toasts
+- Place critical information only in a toast
+- Use for persistent content that requires user interaction
+
+## Common Use Cases
+
+- **Success** — "Profile updated successfully"
+- **Error** — "Failed to save changes. Please try again"
+- **Warning** — "Your session is about to expire"
+- **Informational** — "New version available"
+
+## Advanced Considerations
+
+**Custom duration** — errors may warrant a longer display duration than success messages
+
+**Animation** — fade or slide patterns; keep motion subtle and consistent
+
+**Theming** — support dark/light mode with accessible contrast ratios
+
+**Localisation** — account for longer translated messages that may exceed recommended line length
+
+**System integration** — consider queueing or throttling when multiple rapid actions trigger many toasts
+
+## Edge Cases
+
+- **Multiple rapid toasts** — implement queueing or throttling to avoid flooding the UI
+- **Very long messages** — truncate with ellipsis or provide a link to more detail
+- **Small screens** — adjust positioning and size to avoid obscuring content
+- **Z-index conflicts** — ensure toasts appear above modals, banners, and other overlays
+
 ## Quick Decision Guide
 
 **Variant?**
