@@ -101,7 +101,7 @@
 
 ---
 
-### `sgds:bg-form-primary-surface-default` / `sgds:bg-form-primary-surface-emphasis`
+### `sgds:bg-form-surface-primary-default` / `sgds:bg-form-surface-primary-emphasis`
 **Brand-colored form input background.**
 
 **When to use:**
@@ -110,32 +110,32 @@
 - `emphasis` for stronger brand presence
 
 ```html
-<input class="sgds:bg-form-primary-surface-default" type="text" placeholder="Brand input" />
-<input class="sgds:bg-form-primary-surface-emphasis" type="text" placeholder="Strong brand input" />
+<input class="sgds:bg-form-surface-primary-default" type="text" placeholder="Brand input" />
+<input class="sgds:bg-form-surface-primary-emphasis" type="text" placeholder="Strong brand input" />
 ```
 
 ---
 
-### `sgds:bg-form-success-surface-default`
+### `sgds:bg-form-surface-success-default`
 **Success state input background.**
 
 **When to use:**
 - Valid input field after successful validation
 
 ```html
-<input class="sgds:bg-form-success-surface-default" type="text" value="Valid value" />
+<input class="sgds:bg-form-surface-success-default" type="text" value="Valid value" />
 ```
 
 ---
 
-### `sgds:bg-form-danger-surface-default`
+### `sgds:bg-form-surface-danger-default`
 **Error state input background.**
 
 **When to use:**
 - Invalid input field after failed validation
 
 ```html
-<input class="sgds:bg-form-danger-surface-default" type="text" value="Invalid value" />
+<input class="sgds:bg-form-surface-danger-default" type="text" value="Invalid value" />
 ```
 
 ---
