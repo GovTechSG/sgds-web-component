@@ -24,47 +24,47 @@ Use general tokens by default. Use form tokens only for native form controls.
 
 ```html
 <div class="sgds:rounded-none">0px — square corners</div>
-<div class="sgds:rounded-sm">2px</div>
-<div class="sgds:rounded">4px (default)</div>
-<div class="sgds:rounded-md">6px</div>
-<div class="sgds:rounded-lg">8px</div>
-<div class="sgds:rounded-xl">12px</div>
-<div class="sgds:rounded-2-xl">16px</div>
-<div class="sgds:rounded-3-xl">24px</div>
+<div class="sgds:rounded-xs">2px</div>
+<div class="sgds:rounded-sm">4px</div>
+<div class="sgds:rounded-md">8px (default)</div>
+<div class="sgds:rounded-lg">12px</div>
+<div class="sgds:rounded-xl">16px</div>
+<div class="sgds:rounded-2-xl">24px</div>
+<div class="sgds:rounded-3-xl">32px</div>
 <div class="sgds:rounded-full">9999px — pill / circle</div>
 ```
 
 ### Specific Sides
 
 ```html
-<div class="sgds:rounded-t-lg">Top corners (top-left + top-right)</div>
-<div class="sgds:rounded-b-lg">Bottom corners</div>
-<div class="sgds:rounded-l-lg">Left corners</div>
-<div class="sgds:rounded-r-lg">Right corners</div>
+<div class="sgds:rounded-t-md">Top corners (top-left + top-right)</div>
+<div class="sgds:rounded-b-md">Bottom corners</div>
+<div class="sgds:rounded-l-md">Left corners</div>
+<div class="sgds:rounded-r-md">Right corners</div>
 ```
 
 ### Individual Corners
 
 ```html
-<div class="sgds:rounded-tl-lg">Top-left only</div>
-<div class="sgds:rounded-tr-lg">Top-right only</div>
-<div class="sgds:rounded-br-lg">Bottom-right only</div>
-<div class="sgds:rounded-bl-lg">Bottom-left only</div>
+<div class="sgds:rounded-tl-md">Top-left only</div>
+<div class="sgds:rounded-tr-md">Top-right only</div>
+<div class="sgds:rounded-br-md">Bottom-right only</div>
+<div class="sgds:rounded-bl-md">Bottom-left only</div>
 ```
 
 ### Size Reference
 
-| Class | Value | Usage |
-|-------|-------|-------|
-| `sgds:rounded-none` | 0px | Sharp, structured UI — tables, dense layouts |
-| `sgds:rounded-sm` | 2px | Minimal rounding to reduce harsh edges |
-| `sgds:rounded` | 4px | Small components — badges, tags |
-| `sgds:rounded-md` | 6px | Default for components — buttons, inputs, cards |
-| `sgds:rounded-lg` | 8px | Larger containers — cards, modals |
-| `sgds:rounded-xl` | 12px | Feature elements |
-| `sgds:rounded-2-xl` | 16px | Panels, grouped sections |
-| `sgds:rounded-3-xl` | 24px | Hero / highlight sections |
-| `sgds:rounded-full` | 9999px | Circle / pill — avatars, chips, filters |
+| Class | Value | Typical use |
+|-------|-------|-------------|
+| `sgds:rounded-none` | 0px | Sharp corners, table cells |
+| `sgds:rounded-xs` | 2px | Very subtle rounding |
+| `sgds:rounded-sm` | 4px | Badge, small components |
+| `sgds:rounded-md` | 8px | Buttons, Cards, panels, form input, modals as default |
+| `sgds:rounded-lg` | 12px | Larger cards |
+| `sgds:rounded-xl` | 16px | Featured cards |
+| `sgds:rounded-2-xl` | 24px | Large containers like panel |
+| `sgds:rounded-3-xl` | 32px | Huge radius Hero / feature sections |
+| `sgds:rounded-full` | 9999px | Full radius like circle, Avatars, Radio |
 
 ## Form Border Radius
 
@@ -78,13 +78,13 @@ Apply to native HTML form elements only: `<input>`, `<select>`, `<textarea>`, `<
 
 ### Form Size Reference
 
-| Class | Typical use |
-|-------|-------------|
-| `sgds:rounded-form-none` | Square form controls |
-| `sgds:rounded-form-xs` | Very compact inputs |
-| `sgds:rounded-form-sm` | Small inputs |
-| `sgds:rounded-form-md` | Standard inputs — default choice |
-| `sgds:rounded-form-full` | Pill-shaped search / filter inputs |
+| Class | Value | Typical use |
+|-------|-------|-------------|
+| `sgds:rounded-form-none` | 0px | Sharp corners, table cells |
+| `sgds:rounded-form-xs` | 2px | Very subtle rounding for small size input |
+| `sgds:rounded-form-sm` | 4px | Standard buttons, small components |
+| `sgds:rounded-form-md` | 8px | Cards, panels |
+| `sgds:rounded-form-full` | 9999px | Badges, avatars, pill buttons |
 
 ## Form Patterns
 
