@@ -8,16 +8,16 @@ Border width utilities control thickness and which sides have borders. They are 
 
 ```html
 <!-- Width alone: reserves space but invisible -->
-<div class="sgds:border">...</div>
+<div class="sgds:border-1">...</div>
 
 <!-- Width + color: visible border -->
-<div class="sgds:border sgds:border-default">...</div>
+<div class="sgds:border-1 sgds:border-default">...</div>
 ```
 
 ## All Sides
 
 ```html
-<div class="sgds:border">1px all sides</div>
+<div class="sgds:border-1">1px all sides</div>
 <div class="sgds:border-0">No border</div>
 <div class="sgds:border-2">2px all sides</div>
 <div class="sgds:border-4">4px all sides</div>
@@ -56,7 +56,7 @@ Border width utilities control thickness and which sides have borders. They are 
 | Token | Class | Pixel | Use for |
 |-------|-------|-------|---------|
 | `border-width-0` | `sgds:border-0` | 0px | No border — when layout, background, or elevation defines structure instead |
-| `border-width-1` | `sgds:border` | 1px | Default — most component boundaries (inputs, cards, containers) |
+| `border-width-1` | `sgds:border-1` | 1px | Default — most component boundaries (inputs, cards, containers) |
 | `border-width-2` | `sgds:border-2` | 2px | Interactive states — hover, focus, error |
 | `border-width-3` | `sgds:border-3` | 3px | Highlighted or active elements |
 | `border-width-4` | `sgds:border-4` | 4px | Maximum emphasis or critical states |
@@ -67,7 +67,7 @@ Border width utilities control thickness and which sides have borders. They are 
 
 | Class | Applies |
 |-------|---------|
-| `sgds:border` | 1px all sides |
+| `sgds:border-1` | 1px all sides |
 | `sgds:border-{n}` | n pixels all sides (n = 0, 2, 4, 8) |
 | `sgds:border-{side}` | 1px one side (t, r, b, l) |
 | `sgds:border-{side}-{n}` | n pixels one side |
@@ -79,7 +79,7 @@ Border width utilities control thickness and which sides have borders. They are 
 ## Usage Guidelines
 
 **1. Default Usage**
-- Use `sgds:border` (1px) for most UI boundaries.
+- Use `sgds:border-1` (1px) for most UI boundaries.
 - Avoid unnecessary borders if layout or background already defines structure.
 
 **2. Interaction & State**
@@ -108,9 +108,9 @@ Border width utilities control thickness and which sides have borders. They are 
 
 ## Troubleshooting
 
-**Border not visible**: Add a color class — width alone doesn't produce a visible border. You need both `sgds:border` and `sgds:border-{color}`.
+**Border not visible**: Add a color class — width alone doesn't produce a visible border. You need both `sgds:border-1` and `sgds:border-{color}`.
 
-**Default `sgds:border` is 1px** — use `sgds:border-2` or `sgds:border-4` if it's too thin to see.
+**Default `sgds:border-1` is 1px** — use `sgds:border-2` or `sgds:border-4` if it's too thin to see.
 
 **Box-sizing conflicts**: If border width changes element size unexpectedly, check for conflicting `box-sizing` styles.
 
