@@ -15,7 +15,7 @@ sgds:bg-{variant}-surface-{modifier}   ← component level
 
 **Page modifiers:** `default`, `muted`, `translucent` (primary only)
 
-**Component modifiers:** `surface-default`, `surface-emphasis`, `surface-muted`
+**Component modifiers:** `surface-default`, `surface-emphasis`, `surface-muted`, `surface-translucent` (primary and danger only)
 
 > **Note**: `neutral` has no page-level tokens — component level only.
 
@@ -23,10 +23,10 @@ sgds:bg-{variant}-surface-{modifier}   ← component level
 
 | Variant | Meaning | Page tokens | Component tokens |
 |---------|---------|-------------|-----------------|
-| `primary` | Brand color | `bg-primary-default/muted/translucent` | `bg-primary-surface-default/emphasis/muted` |
+| `primary` | Brand color | `bg-primary-default/muted/translucent` | `bg-primary-surface-default/emphasis/muted/translucent` |
 | `accent` | Informational, no urgency | `bg-accent-default/muted` | `bg-accent-surface-default/emphasis/muted` |
 | `success` | Positive feedback | `bg-success-default/muted` | `bg-success-surface-default/emphasis/muted` |
-| `danger` | Error / destructive | `bg-danger-default/muted` | `bg-danger-surface-default/emphasis/muted` |
+| `danger` | Error / destructive | `bg-danger-default/muted` | `bg-danger-surface-default/emphasis/muted/translucent` |
 | `warning` | Caution | `bg-warning-default/muted` | `bg-warning-surface-default/emphasis/muted` |
 | `purple` | Visual variety (no semantic meaning) | `bg-purple-default/muted` | `bg-purple-surface-default/emphasis/muted` |
 | `cyan` | Visual variety (no semantic meaning) | `bg-cyan-default/muted` | `bg-cyan-surface-default/emphasis/muted` |
@@ -61,6 +61,7 @@ Brand color. Use for hero sections, CTAs, and brand-emphasis components.
 <div class="sgds:bg-primary-surface-default">Standard primary component</div>
 <div class="sgds:bg-primary-surface-emphasis">Strong primary emphasis</div>
 <div class="sgds:bg-primary-surface-muted">Subtle primary component</div>
+<div class="sgds:bg-primary-surface-translucent">Translucent primary component</div>
 ```
 
 ---
@@ -138,6 +139,7 @@ Error or destructive state. Use for error alerts, invalid input states, and dest
 <div class="sgds:bg-danger-surface-default">Error alert container</div>
 <div class="sgds:bg-danger-surface-emphasis">Critical error — immediate attention</div>
 <span class="sgds:bg-danger-surface-muted">Failed</span>
+<div class="sgds:bg-danger-surface-translucent">Translucent danger overlay</div>
 ```
 
 **Common patterns:**
