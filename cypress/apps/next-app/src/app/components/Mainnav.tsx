@@ -5,7 +5,6 @@ import { SgdsMainnav, SgdsMainnavItem, SgdsMainnavDropdown, SgdsDropdownItem, Sg
 export const Mainnav = () => {
   return (
     <SgdsMainnav>
-      <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
       <SgdsMainnavItem>
         <a href="#">ArgsTable Controlled</a>
       </SgdsMainnavItem>
