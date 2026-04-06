@@ -17,8 +17,8 @@ Border width utilities control thickness and which sides have borders. They are 
 ## All Sides
 
 ```html
-<div class="sgds:border-1">1px all sides</div>
 <div class="sgds:border-0">No border</div>
+<div class="sgds:border-1">1px all sides</div>
 <div class="sgds:border-2">2px all sides</div>
 <div class="sgds:border-4">4px all sides</div>
 <div class="sgds:border-8">8px all sides</div>
@@ -27,10 +27,10 @@ Border width utilities control thickness and which sides have borders. They are 
 ## Individual Sides
 
 ```html
-<div class="sgds:border-t">Top only (1px)</div>
-<div class="sgds:border-r">Right only (1px)</div>
-<div class="sgds:border-b">Bottom only (1px)</div>
-<div class="sgds:border-l">Left only (1px)</div>
+<div class="sgds:border-t-1">Top only (1px)</div>
+<div class="sgds:border-r-1">Right only (1px)</div>
+<div class="sgds:border-b-1">Bottom only (1px)</div>
+<div class="sgds:border-l-1">Left only (1px)</div>
 ```
 
 ## Specific Width Per Side
@@ -45,8 +45,8 @@ Border width utilities control thickness and which sides have borders. They are 
 ## Axis Shortcuts
 
 ```html
-<div class="sgds:border-x">Left + right (1px each)</div>
-<div class="sgds:border-y">Top + bottom (1px each)</div>
+<div class="sgds:border-x-1">Left + right (1px each)</div>
+<div class="sgds:border-y-1">Top + bottom (1px each)</div>
 <div class="sgds:border-x-2">Left + right (2px each)</div>
 <div class="sgds:border-y-4">Top + bottom (4px each)</div>
 ```
@@ -71,8 +71,8 @@ Border width utilities control thickness and which sides have borders. They are 
 | `sgds:border-{n}` | n pixels all sides (n = 0, 2, 4, 8) |
 | `sgds:border-{side}` | 1px one side (t, r, b, l) |
 | `sgds:border-{side}-{n}` | n pixels one side |
-| `sgds:border-x` | 1px left + right |
-| `sgds:border-y` | 1px top + bottom |
+| `sgds:border-x-1` | 1px left + right |
+| `sgds:border-y-1` | 1px top + bottom |
 | `sgds:border-x-{n}` | n pixels left + right |
 | `sgds:border-y-{n}` | n pixels top + bottom |
 
