@@ -2,6 +2,104 @@
 
 `<sgds-badge>` is the standard label and status indicator element. Use it to highlight categories, states, or short descriptive text alongside other content.
 
+## Component Definition
+
+A badge is a small visual indicator used to highlight status, category, or metadata. It is typically compact, non-intrusive, and displayed alongside other UI elements such as text, icons, or components.
+
+## Purpose
+
+- Provide quick visual cues (e.g. status, count, label)
+- Enhance scannability of information
+- Support categorisation and tagging
+- Communicate lightweight, secondary information without disrupting layout
+
+## Usage Guideline
+
+**When to use:**
+- To display status (e.g. success, warning, neutral)
+- To show counts or indicators (e.g. notifications, items)
+- To label categories or metadata
+- When space is limited and a compact indicator is needed
+- Alongside other components (e.g. cards, list items, tables)
+
+**When NOT to use:**
+- For long or detailed content
+- As a primary method of communication
+- When the meaning relies only on color without text/icon support
+- For critical alerts or important messages — use alert instead
+- As a replacement for buttons or interactive elements
+
+## Behaviour
+
+- Badges are non-interactive by default
+- Content inside badges should be short and concise
+- Badge size adapts to content but maintains consistent height
+- Supports different variants (e.g. neutral, success, warning, danger)
+- Can include: text only, icon + text, or numeric values
+- May support dismissible behaviour (use cautiously)
+
+## Content Guidelines
+
+- Keep content short (1–2 words or short numbers)
+- Use clear and commonly understood labels
+- Avoid abbreviations unless widely recognised
+- Use sentence case or uppercase consistently
+- Ensure meaning is not dependent on color alone
+
+✅ "New", "Active", "3"
+
+❌ "This is a very long badge label"
+
+## Interaction Guidelines
+
+- Default badge has no interaction
+- If interactive (rare case): must have clear affordance (e.g. removable "×"), with appropriate hover, focus, and active states
+- Ensure accessible focus states and sufficient touch target if clickable
+- Avoid mixing informational badges with interactive behaviour
+
+## Best Practices
+
+**Do**
+- Use badges to support, not dominate UI
+- Keep styling subtle and consistent
+- Pair with other UI elements for context
+- Use semantic color tokens correctly
+- Maintain visual hierarchy — badge should not overpower primary content
+
+**Don't**
+- Overuse badges in a single view
+- Use badges as the only indicator of important information
+- Include long text or complex content
+- Make badges interactive without clear intent
+- Use inconsistent variants for similar meanings
+
+## Common Use Cases
+
+- **Status indicators** — Active, Pending, Error
+- **Notification counts** — unread items, alerts
+- **Tags or categories** — labels in tables or lists
+- **Highlighting new or updated items**
+
+## Advanced Considerations
+
+**Semantic consistency** — ensure badge variants align with system-wide meaning (e.g. success ≠ completed unless defined)
+
+**Scalability** — badge should work across different components (cards, tables, lists)
+
+**Accessibility** — ensure sufficient color contrast, provide text alternatives for icons, avoid relying solely on color
+
+**Density & layout** — maintain spacing consistency when used in groups; avoid clutter in high-density UI (e.g. tables)
+
+**Tokenisation** — use design tokens for color, spacing, typography, and border radius; ensure alignment with system roles (e.g. surface, text, border)
+
+## Edge Cases
+
+- **Large numbers** — use truncation (e.g. "99+") instead of long values
+- **Dynamic content** — ensure layout does not break with changing values
+- **Localisation** — handle longer translated text gracefully
+- **Icon-only badges** — must include accessible labels (ARIA)
+- **Multiple badges together** — avoid visual overload; maintain consistent spacing and hierarchy
+
 ## Quick Decision Guide
 
 **Which `variant`?**
