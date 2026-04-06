@@ -149,6 +149,7 @@ Accordion items support two expand modes:
 - Reflect the content inside accurately
 
 ✅ Good: "Eligibility criteria", "Payment details"
+
 ❌ Avoid: Vague labels like "More info", long descriptive sentences
 
 **Content panels:**
