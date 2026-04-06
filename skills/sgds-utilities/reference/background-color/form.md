@@ -1,34 +1,28 @@
 # Form Background Colors Reference
 
-**Meaning**: Form-specific component backgrounds
+**Level**: Component level
 **Usage**: Input fields, textareas, select backgrounds
 
-## Design Semantics
+Form elements use the `sgds:bg-surface-{modifier}` pattern.
 
-- **Form = Input Components**
-- Specific to form input backgrounds
-- Provides contrast for form fields
-- Adapts to theme (day/night)
+## Token Pattern
+
+```
+sgds:bg-surface-{modifier}
+```
 
 ## Available Tokens
 
-### `sgds:bg-form-default`
-**Default form input backgrounds.**
-
-**When to use:**
-- Text inputs
-- Textareas
-- Select dropdowns
-- Searchboxes
-- Any editable form field
-
-```html
-<input
-  class="sgds:bg-form-default"
-  type="text"
-  placeholder="Enter your name"
-/>
-```
+| Class | Use for |
+|-------|---------|
+| `sgds:bg-surface-default` | Default input background |
+| `sgds:bg-surface-raised` | Elevated input, floating label background |
+| `sgds:bg-surface-emphasis` | Highlighted or active input state |
+| `sgds:bg-surface-subtle` | Subtle input background |
+| `sgds:bg-surface-muted` | Muted / read-only input background |
+| `sgds:bg-surface-inverse` | Inverted background (dark on light, light on dark) |
+| `sgds:bg-surface-fixed-light` | Always light — never changes with theme |
+| `sgds:bg-surface-fixed-dark` | Always dark — never changes with theme |
 
 ## Common Patterns
 
@@ -37,117 +31,35 @@
 ### Text Input
 
 ```html
-<div>
-  <label for="email">Email</label>
-  <input
-    class="sgds:bg-form-default"
-    type="email"
-    id="email"
-    placeholder="you@example.com"
-  />
-</div>
+<input class="sgds:bg-surface-default" type="text" placeholder="Enter your name" />
 ```
 
 ### Textarea
 
 ```html
-<div>
-  <label for="message">Message</label>
-  <textarea
-    class="sgds:bg-form-default"
-    id="message"
-    placeholder="Enter your message"
-  ></textarea>
-</div>
+<textarea class="sgds:bg-surface-default" placeholder="Enter your message"></textarea>
 ```
 
 ### Select Dropdown
 
 ```html
-<div>
-  <label for="country">Country</label>
-  <select
-    class="sgds:bg-form-default"
-    id="country"
-  >
-    <option>Singapore</option>
-    <option>Malaysia</option>
-    <option>Indonesia</option>
-  </select>
-</div>
+<select class="sgds:bg-surface-default">
+  <option>Singapore</option>
+  <option>Malaysia</option>
+</select>
 ```
 
-### Search Input
+### Read-only Input
 
 ```html
-<div>
-  <input
-    class="sgds:bg-form-default"
-    type="search"
-    placeholder="Search..."
-  />
-  <svg>
-    <!-- search icon -->
-  </svg>
-</div>
+<input class="sgds:bg-surface-muted" type="text" value="Read only value" readonly />
 ```
 
-### Disabled Input
+### Inverted Form Field
 
 ```html
-<input
-  class="sgds:bg-form-default"
-  type="text"
-  placeholder="Disabled field"
-  disabled
-/>
+<input class="sgds:bg-surface-inverse" type="text" placeholder="Inverted input" />
 ```
-
-### Input with Icon
-
-```html
-<div>
-  <label>Password</label>
-  <input
-    class="sgds:bg-form-default"
-    type="password"
-    placeholder="Enter password"
-  />
-  <button>
-    <svg><!-- eye icon --></svg>
-  </button>
-</div>
-```
-
-### Form with Multiple Inputs
-
-```html
-<form>
-  <div>
-    <label>First Name</label>
-    <input
-      class="sgds:bg-form-default"
-      type="text"
-    />
-  </div>
-  <div>
-    <label>Last Name</label>
-    <input
-      class="sgds:bg-form-default"
-      type="text"
-    />
-  </div>
-  <div>
-    <label>Email</label>
-    <input
-      class="sgds:bg-form-default"
-      type="email"
-    />
-  </div>
-  <button>
-    Submit
-  </button>
-</form>
 ```
 
 ### Input with Validation States
