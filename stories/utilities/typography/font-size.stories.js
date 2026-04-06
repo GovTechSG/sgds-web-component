@@ -6,16 +6,16 @@ export default {
 };
 
 const FONT_SIZE_SCALE = [
-  { name: "0", class: "sgds:text-0", variable: "--sgds-font-size-0", value: "12px (0.75rem)" },
-  { name: "1", class: "sgds:text-1", variable: "--sgds-font-size-1", value: "14px (0.875rem)" },
-  { name: "2", class: "sgds:text-2", variable: "--sgds-font-size-2", value: "16px (1rem)" },
-  { name: "3", class: "sgds:text-3", variable: "--sgds-font-size-3", value: "20px (1.25rem)" },
-  { name: "4", class: "sgds:text-4", variable: "--sgds-font-size-4", value: "24px (1.5rem)" },
-  { name: "5", class: "sgds:text-5", variable: "--sgds-font-size-5", value: "28px (1.75rem)" },
-  { name: "6", class: "sgds:text-6", variable: "--sgds-font-size-6", value: "32px (2rem)" },
-  { name: "7", class: "sgds:text-7", variable: "--sgds-font-size-7", value: "40px (2.5rem)" },
-  { name: "8", class: "sgds:text-8", variable: "--sgds-font-size-8", value: "48px (3rem)" },
-  { name: "9", class: "sgds:text-9", variable: "--sgds-font-size-9", value: "56px (3.5rem)" }
+  { name: "12", class: "sgds:text-12", variable: "--sgds-font-size-12", value: "12px (0.75rem)" },
+  { name: "14", class: "sgds:text-14", variable: "--sgds-font-size-14", value: "14px (0.875rem)" },
+  { name: "16", class: "sgds:text-16", variable: "--sgds-font-size-16", value: "16px (1rem)" },
+  { name: "20", class: "sgds:text-20", variable: "--sgds-font-size-20", value: "20px (1.25rem)" },
+  { name: "24", class: "sgds:text-24", variable: "--sgds-font-size-24", value: "24px (1.5rem)" },
+  { name: "28", class: "sgds:text-28", variable: "--sgds-font-size-28", value: "28px (1.75rem)" },
+  { name: "32", class: "sgds:text-32", variable: "--sgds-font-size-32", value: "32px (2rem)" },
+  { name: "40", class: "sgds:text-40", variable: "--sgds-font-size-40", value: "40px (2.5rem)" },
+  { name: "48", class: "sgds:text-48", variable: "--sgds-font-size-48", value: "48px (3rem)" },
+  { name: "56", class: "sgds:text-56", variable: "--sgds-font-size-56", value: "56px (3.5rem)" }
 ];
 
 const RESPONSIVE_FONT_SIZES = {
