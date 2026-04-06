@@ -2,25 +2,26 @@
 
 `<sgds-accordion>` is a container for one or more `<sgds-accordion-item>` elements. Items can be opened and closed individually; setting `allowMultiple` lets multiple items stay open at once.
 
-## Overview
+## Component Definition
 
 The Accordion is a vertically stacked interactive component that allows users to expand and collapse sections of content. Each section consists of a header (trigger) and a content panel (expandable region).
 
-**Purpose:**
+## Purpose
+
 - Enable progressive disclosure of information
 - Reduce cognitive load by hiding non-essential content
 - Improve scannability for long or structured content
 - Optimise space usage, especially on smaller screens
 
-## When to Use
+## Usage Guideline
 
-**Use Accordion when:**
+**When to use:**
 - Content can be grouped into clear, independent sections
 - Users do not need to see all content at once
 - Supporting secondary or optional information
 - Space is constrained (e.g. mobile, side panels)
 
-**Avoid Accordion when:**
+**When NOT to use:**
 - All content is critical and must be visible
 - Users need to compare multiple sections simultaneously without any expand/collapse interaction
 - Content is short or minimal — fewer than 2 sections
@@ -134,19 +135,11 @@ Accordion items support two expand modes:
 - **Single-expand (default)** — only one item open at a time; opening another closes the previous
 - **Multi-expand** — multiple sections can be open simultaneously; set `allowMultiple` on `<sgds-accordion>`
 
-**Default state:** All items collapsed, or optionally the first item expanded (context-dependent). Add `open` on `<sgds-accordion-item>` to start expanded.
+**Default state:** All items collapsed, or optionally the first item expanded (context-dependent).
 
 **System behaviour:**
 - Preserve expanded state where possible — avoid unexpected auto-collapse after user interaction
 - Clicking the header toggles visibility; expanded state is indicated via chevron rotation
-
-## Interaction Guidelines
-
-- Entire header area must be clickable — not just the label text
-- Provide strong visual affordance: chevron rotation, visible hover and focus states
-- Animate expand/collapse smoothly — avoid abrupt layout shifts; keep motion subtle
-- Maintain the user's reading position when expanding — avoid unexpected scroll jumps
-- Ensure a minimum 44px tap target height for touch accessibility
 
 ## Content Guidelines
 
@@ -163,18 +156,23 @@ Accordion items support two expand modes:
 - Break long content into multiple items instead of one overloaded section
 - Maintain consistent formatting across all items
 
-## Do & Don't
+## Interaction Guidelines
+
+- Entire header area must be clickable — not just the label text
+- Provide strong visual affordance: chevron rotation, visible hover and focus states
+- Animate expand/collapse smoothly — avoid abrupt layout shifts; keep motion subtle
+- Maintain the user's reading position when expanding — avoid unexpected scroll jumps
+- Ensure a minimum 44px tap target height for touch accessibility
+
+## Best Practices
 
 **Do**
 - Use for progressive disclosure of logically grouped content
 - Group related content logically and keep structure consistent across items
-- Use single-expand for guided or sequential reading
-- Use `allowMultiple` when users need to compare sections
 - Lazy load heavy content inside panels if needed
 
 **Don't**
 - Nest more than one level of accordions
-- Overload a single item with excessive content
 - Use as primary navigation
 - Hide critical information that users must not miss
 - Mix unrelated content in one accordion group
