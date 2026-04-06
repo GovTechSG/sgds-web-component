@@ -4,7 +4,7 @@ FROM gdssingapore/airbase:node-22-builder AS builder
 WORKDIR /app
 
 # Enable pnpm via corepack
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@10 --activate
 
 # Install dependencies
 COPY --chown=app:app package.json pnpm-lock.yaml ./
