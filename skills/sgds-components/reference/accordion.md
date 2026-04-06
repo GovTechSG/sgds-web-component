@@ -119,6 +119,7 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
 6. Use `allowMultiple` when users need to compare sections; use single-expand for guided or sequential reading.
 7. Never nest accordions more than one level deep.
 8. Do not hide errors or critical alerts inside accordion items — auto-expand the relevant item if an error occurs inside one.
+9. There are no events or public methods on the `<sgds-accordion>` parent element.
 
 ## Content Guidelines
 
@@ -176,4 +177,3 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
 - **Very long content** — consider a "View more" pattern instead of a single massive accordion item
 - **Dynamic content** — ensure layout stability when content loads asynchronously
 - **Error states inside accordion** — auto-expand the affected item so users are not confused
-5. There are no events or public methods on the `<sgds-accordion>` parent element.
