@@ -141,12 +141,9 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
 **Do**
 - Use for progressive disclosure of logically grouped content
 - Keep labels clear, structured, and specific
-- Use `allowMultiple` when users need to compare sections
-- Auto-expand the relevant item when it contains a validation error
 - Lazy load heavy content inside panels if needed
 
 **Don't**
-- Nest more than one level of accordions
 - Overload a single item with excessive content
 - Use as primary navigation
 - Hide critical information that users must not miss
@@ -170,7 +167,6 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
 
 **Avoid placing inside accordion items:**
 - Heavy nested interactive components that compete for attention
-- Deep nested accordions
 
 ## Edge Cases
 
