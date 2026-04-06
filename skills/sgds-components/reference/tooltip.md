@@ -4,6 +4,102 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
+## Component Definition
+
+A tooltip is a contextual, non-persistent overlay that appears when a user hovers, focuses, or taps on an element, providing additional descriptive information without disrupting the user's flow.
+
+## Purpose
+
+- Clarify meaning of icons, labels, or controls
+- Provide short, supplementary information
+- Reduce visual clutter by hiding secondary details until needed
+
+## Usage Guideline
+
+**When to use:**
+- When UI elements (e.g. icons, abbreviations) need clarification
+- When additional context is helpful but not critical
+- To support accessibility (e.g. describing icon-only buttons)
+- When space is limited and inline text would create clutter
+
+**When NOT to use:**
+- For critical information users must see
+- For long or complex content
+- As a replacement for proper labels
+- On touch-only experiences where hover is not available (without fallback)
+- To display actionable content (e.g. links, buttons)
+
+## Behaviour
+
+- Appears on hover (desktop) and focus (keyboard navigation)
+- May appear on tap (mobile) with appropriate fallback
+- Displays after a short delay (e.g. 300–500ms)
+- Disappears when the pointer leaves the trigger, focus is lost, or user taps elsewhere
+- Positioned relative to the trigger (top, bottom, left, right); auto-repositions to avoid viewport overflow
+- Only one tooltip should be visible at a time
+
+## Content Guidelines
+
+- Keep content short and concise (1 line preferred, max ~2 lines)
+- Use sentence case, not title case
+- Avoid punctuation unless necessary
+- Do not repeat visible labels
+
+✅ "Download file", "Enter your NRIC without dashes"
+
+❌ "Click here to download the file now", redundant text like "Button to download"
+
+## Interaction Guidelines
+
+- Trigger element must be focusable for keyboard users
+- Tooltip must be announced by screen readers via `aria-describedby`
+- Maintain sufficient delay to prevent accidental triggering
+- Avoid flickering when cursor moves between trigger and tooltip
+- Tooltip should not capture focus or block interaction
+
+## Best Practices
+
+**Do**
+- Use tooltips to support, not replace, UI clarity
+- Ensure accessible implementation (keyboard + screen reader)
+- Keep timing consistent across the system
+- Position tooltips where they do not obscure important content
+- Use for icon-only or ambiguous elements
+
+**Don't**
+- Overload tooltips with too much information
+- Rely on tooltips as the only way to convey meaning
+- Use tooltips for critical instructions or errors
+- Place tooltips on disabled elements (no interaction trigger)
+- Make tooltips interactive
+
+## Common Use Cases
+
+- **Icon buttons** — download, info, settings
+- **Form inputs** — requiring extra clarification
+- **Truncated text** — ellipsis overflow
+- **Data tables** — abbreviated column headers
+- **Status indicators** — additional explanation
+
+## Advanced Considerations
+
+**Accessibility** — must support keyboard trigger (focus); use `aria-describedby` to associate tooltip with trigger; avoid relying on hover-only interactions
+
+**Responsive behaviour** — on mobile, replace with tap-triggered tooltip or consider alternative patterns (e.g. inline hint text, bottom sheet)
+
+**Positioning logic** — use smart positioning to prevent clipping; support flipping (top → bottom, left → right); maintain consistent spacing from trigger
+
+**Timing control** — introduce delay to avoid accidental triggers; allow immediate dismissal to reduce friction
+
+## Edge Cases
+
+- **Disabled elements** — tooltips won't trigger; wrap with a non-disabled container if needed
+- **Dense UI (tables, toolbars)** — risk of multiple triggers; ensure only one tooltip is visible
+- **Viewport boundaries** — tooltip may overflow; must reposition dynamically
+- **Touch devices** — no hover; provide alternative interaction or avoid tooltip
+- **Long content** — should not wrap excessively; consider alternative components (e.g. popover)
+- **Scrolling containers** — tooltip positioning may break; use a portal/layering strategy
+
 ## Quick Decision Guide
 
 **Placement?**
