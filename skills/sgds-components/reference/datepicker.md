@@ -46,7 +46,7 @@ A datepicker is an input control that allows users to select a date (or date ran
 
 - Use clear labels: "Start date", "End date", "Date of birth"
 - Always show the format hint (e.g. "DD/MM/YYYY") — do not rely on placeholder text alone
-- Use helper text when constraints apply (e.g. "Select a date within the next 30 days")
+- Use `hintText` when constraints apply (e.g. "Select a date within the next 30 days")
 - Follow the Singapore locale standard: DD/MM/YYYY
 
 ## Interaction Guidelines
