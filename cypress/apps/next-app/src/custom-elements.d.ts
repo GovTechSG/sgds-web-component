@@ -1,6 +1,6 @@
-declare module '@webcomponents/scoped-custom-element-registry';
+declare module "@webcomponents/scoped-custom-element-registry";
 
-declare module 'react' {
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
       [key: `sgds-${string}`]: { [key: string]: any };
