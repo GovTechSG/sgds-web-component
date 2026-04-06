@@ -1,10 +1,8 @@
 'use client';
 
-import { SgdsFileUpload } from "@govtechsg/sgds-web-component/react";
-
 export const FileUpload = () => {
   return (
-    <SgdsFileUpload>
+    <sgds-file-upload suppressHydrationWarning>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -17,6 +15,6 @@ export const FileUpload = () => {
         <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"></path>
       </svg>
       Choose a File
-    </SgdsFileUpload>
+    </sgds-file-upload>
   );
 };

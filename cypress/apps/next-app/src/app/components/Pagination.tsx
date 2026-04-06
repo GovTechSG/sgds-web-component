@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useEffect } from "react";
-import { SgdsPagination } from "@govtechsg/sgds-web-component/react";
 
 export const Pagination = () => {
   const ref = useRef<any>(null);
@@ -18,5 +17,5 @@ export const Pagination = () => {
     }
   }, []);
 
-  return <SgdsPagination ref={ref}></SgdsPagination>;
+  return <sgds-pagination ref={ref} suppressHydrationWarning></sgds-pagination>;
 };

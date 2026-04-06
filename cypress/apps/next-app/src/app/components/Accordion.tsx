@@ -1,44 +1,42 @@
 'use client';
 
-import { SgdsAccordion, SgdsAccordionItem } from "@govtechsg/sgds-web-component/react";
-
 export const Accordion = () => {
   return (
     <>
-      <SgdsAccordion>
-        <SgdsAccordionItem>
+      <sgds-accordion suppressHydrationWarning>
+        <sgds-accordion-item suppressHydrationWarning>
           <div className="m-0" slot="header">This is a solo accordion</div>
           <span slot="content">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
           </span>
-        </SgdsAccordionItem>
-      </SgdsAccordion>
-      <SgdsAccordion>
-        <SgdsAccordionItem>
+        </sgds-accordion-item>
+      </sgds-accordion>
+      <sgds-accordion suppressHydrationWarning>
+        <sgds-accordion-item suppressHydrationWarning>
           <div className="m-0" slot="header">This is an accordion</div>
           <span slot="content">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
           </span>
-        </SgdsAccordionItem>
-        <SgdsAccordionItem>
+        </sgds-accordion-item>
+        <sgds-accordion-item suppressHydrationWarning>
           <div className="m-0" slot="header">Accordion 1</div>
           <span slot="content">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
           </span>
-        </SgdsAccordionItem>
-        <SgdsAccordionItem open>
+        </sgds-accordion-item>
+        <sgds-accordion-item open suppressHydrationWarning>
           <div className="m-0" slot="header">Accordion 2</div>
           <span slot="content">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
           </span>
-        </SgdsAccordionItem>
-        <SgdsAccordionItem>
+        </sgds-accordion-item>
+        <sgds-accordion-item suppressHydrationWarning>
           <div className="m-0" slot="header">Accordion 3</div>
           <span slot="content">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
           </span>
-        </SgdsAccordionItem>
-      </SgdsAccordion>
+        </sgds-accordion-item>
+      </sgds-accordion>
     </>
   );
 };

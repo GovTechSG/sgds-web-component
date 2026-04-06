@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useEffect } from "react";
-import { SgdsTable } from "@govtechsg/sgds-web-component/react";
 
 export const Table = () => {
   const rowHeaderRef = useRef<any>(null);
@@ -29,8 +28,8 @@ export const Table = () => {
 
   return (
     <>
-      <SgdsTable ref={rowHeaderRef}></SgdsTable>
-      <SgdsTable ref={colHeaderRef}></SgdsTable>
+      <sgds-table ref={rowHeaderRef} suppressHydrationWarning></sgds-table>
+      <sgds-table ref={colHeaderRef} suppressHydrationWarning></sgds-table>
     </>
   );
 };

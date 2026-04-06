@@ -1,11 +1,9 @@
 'use client';
 
-import { SgdsAlert, SgdsAlertLink } from "@govtechsg/sgds-web-component/react";
-
 export const Alert = () => {
   return (
     <>
-      <SgdsAlert variant="primary" show>
+      <sgds-alert variant="primary" show suppressHydrationWarning>
         <span slot="icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-exclamation-circle" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
@@ -13,8 +11,8 @@ export const Alert = () => {
           </svg>
         </span>
         This is an Alert component. You may add the dismissible option
-      </SgdsAlert>
-      <SgdsAlert variant="success" show>
+      </sgds-alert>
+      <sgds-alert variant="success" show suppressHydrationWarning>
         <span slot="icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-info-circle" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
@@ -24,13 +22,13 @@ export const Alert = () => {
         <div>
           <p>
             Aww yeah, you successfully read this important{" "}
-            <SgdsAlertLink href="#">alert message</SgdsAlertLink>.
+            <sgds-alert-link href="#" suppressHydrationWarning>alert message</sgds-alert-link>.
             This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.
           </p>
           <hr />
           <p>Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
         </div>
-      </SgdsAlert>
+      </sgds-alert>
     </>
   );
 };

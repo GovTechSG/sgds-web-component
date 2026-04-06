@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 import "@govtechsg/sgds-web-component/themes/day.css";
+import SgdsLibraryLoader from "./sgds";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <SgdsLibraryLoader nonce={nonce} />
+      </head>
       <body className={inter.className}>
         {children}
       </body>

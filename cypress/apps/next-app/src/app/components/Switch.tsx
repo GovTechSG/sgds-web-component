@@ -1,20 +1,18 @@
 'use client';
 
-import { SgdsSwitch } from "@govtechsg/sgds-web-component/react";
-
 export const Switch = () => {
   return (
     <>
-      <SgdsSwitch>Switch</SgdsSwitch>
-      <SgdsSwitch icon>Switch with icon</SgdsSwitch>
-      <SgdsSwitch icon size="sm">Switch with icon</SgdsSwitch>
-      <SgdsSwitch icon size="lg">Switch with icon</SgdsSwitch>
-      <SgdsSwitch disabled>Switch</SgdsSwitch>
-      <SgdsSwitch size="sm">Switch</SgdsSwitch>
-      <SgdsSwitch size="lg">Switch</SgdsSwitch>
-      <SgdsSwitch size="lg">
+      <sgds-switch suppressHydrationWarning>Switch</sgds-switch>
+      <sgds-switch icon suppressHydrationWarning>Switch with icon</sgds-switch>
+      <sgds-switch icon size="sm" suppressHydrationWarning>Switch with icon</sgds-switch>
+      <sgds-switch icon size="lg" suppressHydrationWarning>Switch with icon</sgds-switch>
+      <sgds-switch disabled suppressHydrationWarning>Switch</sgds-switch>
+      <sgds-switch size="sm" suppressHydrationWarning>Switch</sgds-switch>
+      <sgds-switch size="lg" suppressHydrationWarning>Switch</sgds-switch>
+      <sgds-switch size="lg" suppressHydrationWarning>
         <span slot="leftLabel">Switch</span>
-      </SgdsSwitch>
+      </sgds-switch>
     </>
   );
 };

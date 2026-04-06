@@ -1,50 +1,48 @@
 'use client';
 
-import { SgdsSidenav, SgdsSidenavItem, SgdsSidenavLink, SgdsIcon } from "@govtechsg/sgds-web-component/react";
-
 export const Sidenav = () => {
   return (
-    <SgdsSidenav className="mt-3" id="test-id">
-      <SgdsSidenavItem>
-        <SgdsIcon name="placeholder" slot="icon"></SgdsIcon>
+    <sgds-sidenav className="mt-3" id="test-id" suppressHydrationWarning>
+      <sgds-sidenav-item suppressHydrationWarning>
+        <sgds-icon name="placeholder" slot="icon" suppressHydrationWarning></sgds-icon>
         <span slot="title">Title</span>
-        <SgdsSidenavLink disabled>
+        <sgds-sidenav-link disabled suppressHydrationWarning>
           <a href="#"> disabled-test</a>
-        </SgdsSidenavLink>
-        <SgdsSidenavLink active>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link active suppressHydrationWarning>
           <a href="#"> first-test</a>
-        </SgdsSidenavLink>
-        <SgdsSidenavItem>
+        </sgds-sidenav-link>
+        <sgds-sidenav-item suppressHydrationWarning>
           <span slot="title">Title level 2 very long so just wrap</span>
-          <SgdsSidenavLink>
+          <sgds-sidenav-link suppressHydrationWarning>
             <a href="#"> first-test</a>
-          </SgdsSidenavLink>
-          <SgdsSidenavLink>
+          </sgds-sidenav-link>
+          <sgds-sidenav-link suppressHydrationWarning>
             <a href="#"> first-test</a>
-          </SgdsSidenavLink>
-        </SgdsSidenavItem>
-      </SgdsSidenavItem>
-      <SgdsSidenavItem disabled>
-        <SgdsIcon slot="icon" name="placeholder"></SgdsIcon>
+          </sgds-sidenav-link>
+        </sgds-sidenav-item>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item disabled suppressHydrationWarning>
+        <sgds-icon slot="icon" name="placeholder" suppressHydrationWarning></sgds-icon>
         <span slot="title">Title</span>
-        <SgdsSidenavLink>
+        <sgds-sidenav-link suppressHydrationWarning>
           <a href="#"> first-test</a>
-        </SgdsSidenavLink>
-        <SgdsSidenavLink>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link suppressHydrationWarning>
           <a href="#"> first-test</a>
-        </SgdsSidenavLink>
-      </SgdsSidenavItem>
-      <SgdsSidenavItem active>
+        </sgds-sidenav-link>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item active suppressHydrationWarning>
         <a href="#">
           {" "}
-          <SgdsIcon slot="icon" name="placeholder"></SgdsIcon>anchor
+          <sgds-icon slot="icon" name="placeholder" suppressHydrationWarning></sgds-icon>anchor
         </a>
-      </SgdsSidenavItem>
-      <SgdsSidenavItem>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item suppressHydrationWarning>
         <a href="https://www.google.com">
-          <SgdsIcon slot="icon" name="placeholder"></SgdsIcon> Google
+          <sgds-icon slot="icon" name="placeholder" suppressHydrationWarning></sgds-icon> Google
         </a>
-      </SgdsSidenavItem>
-    </SgdsSidenav>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
   );
 };

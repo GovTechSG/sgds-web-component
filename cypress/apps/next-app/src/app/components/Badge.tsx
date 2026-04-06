@@ -1,19 +1,17 @@
 'use client';
 
-import { SgdsBadge } from "@govtechsg/sgds-web-component/react";
-
 export const Badge = () => {
   return (
     <>
-      <SgdsBadge>primary</SgdsBadge>
-      <SgdsBadge>
+      <sgds-badge suppressHydrationWarning>primary</sgds-badge>
+      <sgds-badge suppressHydrationWarning>
         <i slot="leftIcon" className="bi bi-credit-card-fill"></i>
         leftIcon slot
-      </SgdsBadge>
-      <SgdsBadge>
+      </sgds-badge>
+      <sgds-badge suppressHydrationWarning>
         <i slot="rightIcon" className="bi bi-credit-card-fill"></i>
         rightIcon slot
-      </SgdsBadge>
+      </sgds-badge>
     </>
   );
 };

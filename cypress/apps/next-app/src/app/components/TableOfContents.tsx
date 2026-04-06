@@ -1,23 +1,21 @@
 'use client';
 
-import { SgdsTableOfContents, SgdsLink } from "@govtechsg/sgds-web-component/react";
-
 export const TableOfContents = () => {
   return (
-    <SgdsTableOfContents>
+    <sgds-table-of-contents suppressHydrationWarning>
       <h2>Header</h2>
       <li slot="contents">
-        <SgdsLink><a href="#">Link</a></SgdsLink>
+        <sgds-link suppressHydrationWarning><a href="#">Link</a></sgds-link>
       </li>
       <li slot="contents">
-        <SgdsLink><a href="#">Link</a></SgdsLink>
+        <sgds-link suppressHydrationWarning><a href="#">Link</a></sgds-link>
       </li>
       <li slot="contents">
-        <SgdsLink><a href="#">Link</a></SgdsLink>
+        <sgds-link suppressHydrationWarning><a href="#">Link</a></sgds-link>
       </li>
       <li slot="contents">
-        <SgdsLink><a href="#">Link</a></SgdsLink>
+        <sgds-link suppressHydrationWarning><a href="#">Link</a></sgds-link>
       </li>
-    </SgdsTableOfContents>
+    </sgds-table-of-contents>
   );
 };

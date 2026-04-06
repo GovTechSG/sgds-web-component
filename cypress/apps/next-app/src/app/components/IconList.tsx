@@ -1,19 +1,17 @@
 'use client';
 
-import { SgdsIconList, SgdsIcon } from "@govtechsg/sgds-web-component/react";
-
 export const IconList = () => {
   return (
-    <SgdsIconList size="sm">
+    <sgds-icon-list size="sm" suppressHydrationWarning>
       <div role="listitem">
-        <SgdsIcon size="sm" name="placeholder"></SgdsIcon>item one
+        <sgds-icon size="sm" name="placeholder" suppressHydrationWarning></sgds-icon>item one
       </div>
       <div role="listitem">
-        <SgdsIcon name="placeholder" size="sm"></SgdsIcon>item one
+        <sgds-icon name="placeholder" size="sm" suppressHydrationWarning></sgds-icon>item one
       </div>
       <div role="listitem">
-        <SgdsIcon name="placeholder" size="sm"></SgdsIcon>item one
+        <sgds-icon name="placeholder" size="sm" suppressHydrationWarning></sgds-icon>item one
       </div>
-    </SgdsIconList>
+    </sgds-icon-list>
   );
 };

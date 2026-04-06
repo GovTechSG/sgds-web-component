@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef, useEffect, useMemo } from "react";
-import { SgdsStepper } from "@govtechsg/sgds-web-component/react";
 
 export const Stepper = () => {
   const ref = useRef<any>(null);
@@ -22,5 +21,5 @@ export const Stepper = () => {
     }
   }, [steps]);
 
-  return <SgdsStepper ref={ref}></SgdsStepper>;
+  return <sgds-stepper ref={ref} suppressHydrationWarning></sgds-stepper>;
 };
