@@ -2,6 +2,8 @@
 
 `<sgds-description-list>` renders a single label–value row. `<sgds-description-list-group>` wraps multiple rows with an optional group title and description. Use this instead of raw `<dl>/<dt>/<dd>` elements for consistent SGDS styling.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
 ### When to use
@@ -32,7 +34,6 @@
 - **Bordered propagation**: same as `stacked` — always control via the group.
 - **Responsive layout**: use `stacked` for compact or mobile-first layouts; switch to side-by-side (default) for wider containers.
 - **Rich value content**: the `data` slot accepts any inline HTML — `<sgds-badge>`, `<a>`, `<strong>`, and spans are all valid; avoid block-level elements.
-- **No CSS parts**: custom properties and CSS parts are not exposed — styling is fixed by the design system.
 
 ## Edge Cases
 
