@@ -2,9 +2,18 @@
 
 `<sgds-datepicker>` combines a text input with a calendar dropdown. Users can type a date directly or pick one from the calendar. `mode="range"` enables two-date selection.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
-**When NOT to use:**
+### When to use
+
+- When users need to select a specific calendar date (e.g. appointment, event date, date of birth).
+- For date range selection where a start and end date are both required — use `mode="range"`.
+- When both typed entry and a visual calendar picker are acceptable input methods.
+- When date constraints apply (e.g. minimum or maximum selectable dates, blocked-out dates).
+
+### When NOT to use
 - For simple or approximate inputs (e.g. "Next week")
 - When users need to input only month or year → consider dropdowns
 - For very long date ranges (years/decades) → consider alternative inputs
