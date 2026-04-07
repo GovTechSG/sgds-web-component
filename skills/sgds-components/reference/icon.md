@@ -2,6 +2,45 @@
 
 `<sgds-icon>` renders SVG icons from the SGDS built-in registry. Use it instead of `<img>` tags or external icon libraries when building with SGDS components.
 
+## Usage Guideline
+
+### When to use
+
+- To add an icon from the SGDS registry alongside text, inside buttons, links, or as standalone decorative elements.
+- Inside `<sgds-button>`, `<sgds-link>`, `<sgds-icon-list>`, and other SGDS components that have dedicated icon slots.
+- For feature or status icons in cards, alerts, badges, and banners.
+
+### When NOT to use
+
+- For icons not in the SGDS registry — source them via a custom SVG or an alternative icon library instead.
+- As a substitute for text labels where context is ambiguous — always pair icons with visible labels or `aria-label` when meaning is not self-evident.
+- Inside `<sgds-link>` with a manually set `size` — icon sizing is managed automatically by the link component; do not override it.
+- As interactive elements — `<sgds-icon>` is non-interactive; use `<sgds-icon-button>` for clickable icons.
+
+## Behaviour
+
+- Renders as an inline SVG from the built-in registry matching the `name` attribute.
+- `size` controls the rendered dimensions: `xs`, `sm`, `md`, `lg` (default), `xl`, `2-xl`, `3-xl`.
+- If `name` is not found in the registry, a console warning is logged and nothing is rendered.
+- The component has no slots, events, or public methods — it is purely presentational.
+- When used inside `<sgds-link>`, icon size is managed automatically by the parent — do not set `size` manually.
+
+## Advanced Considerations
+
+- **Registry validation**: icon names are validated at render time against the built-in registry — typos silently render nothing; always test with the exact name from the registry list.
+- **Size scale**: `xs` through `3-xl` maps to fixed pixel dimensions defined by the design system — do not attempt to override size via CSS unless the design system explicitly supports it.
+- **Inside `<sgds-link>`**: `<sgds-link>` sets icon size based on its own `size` attribute — adding a `size` on the icon will be overridden; omit it entirely.
+- **Inside `<sgds-icon-list>`**: icon size must be set explicitly to match the list `size` (see icon-list skill) — this is the exception where manual sizing is required.
+- **No CSS parts or custom properties**: styling is fixed by the design system.
+
+## Edge Cases
+
+- **Unknown `name`**: logs a console warning and renders an empty element — always verify names against the registry.
+- **Missing `name`**: same as unknown — the icon is silently absent in the rendered output.
+- **`size` inside `<sgds-link>`**: is overridden by the parent link — omit to avoid confusion.
+- **`size` inside `<sgds-icon-list>`**: must be set manually (the list does not auto-propagate size to icons) — always align to the list size mapping.
+- **Icon in a flex/grid parent**: renders inline-block by default; may need `display: block` or `align-items: center` on the parent for correct vertical alignment.
+
 ## Quick Decision Guide
 
 **Always provide `name`** — it is required. The icon renders from the internal SVG registry. If the name is not found in the registry, a console warning is logged and nothing is rendered.
