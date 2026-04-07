@@ -4,24 +4,7 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
-## Component Definition
-
-The Spinner component is an animated loading indicator used to communicate that content is loading or an asynchronous action is in progress. It is a non-interactive, presentational element that can be accompanied by an optional text label.
-
-## Purpose
-
-- Inform users that the system is working and they should wait.
-- Prevent user uncertainty during loading or async operations.
-- Provide a consistent, accessible loading indicator across all SGDS interfaces.
-
 ## Usage Guideline
-
-### When to use
-
-- When content is loading and the wait time is indeterminate.
-- When an async action (e.g. form submission, data fetch) is in progress and the UI is temporarily unresponsive.
-- Inline within buttons, inputs, or selects during loading states — use the `loading` attribute on those components rather than inserting a standalone spinner.
-- When a full-page or section-level loading state is needed.
 
 ### When NOT to use
 
@@ -38,41 +21,6 @@ The Spinner component is an animated loading indicator used to communicate that 
 - `label` adds a visible text label; `orientation` controls whether it appears below (`vertical`, default) or beside (`horizontal`) the spinner.
 - The component has no slots, events, or public methods.
 - `variant` is deprecated — always use `tone`.
-
-## Content Guideline
-
-- Use a `label` to communicate what is loading when the context is not obvious (e.g. "Loading results…", "Submitting…").
-- Labels should be brief and in the present continuous tense (e.g. "Loading…", not "Load" or "Loaded").
-- Omit the label when the spinner's context makes the loading state self-evident (e.g. inside a button).
-- Use `orientation="horizontal"` when the spinner sits inline with surrounding text or UI elements.
-
-## Interaction Guideline
-
-- The spinner is non-interactive and non-focusable — it carries no user action.
-- Screen readers will announce the `label` text if set; without a label, the spinner is invisible to assistive technology. Provide a label or an `aria-label` on the containing element for meaningful loading announcements.
-- Remove the spinner as soon as the loading state ends to avoid user confusion.
-
-## Best Practices
-
-**Do**
-- Use `tone` to match the spinner to its background context.
-- Provide a `label` for standalone spinners where the loading context is not clear from surrounding UI.
-- Use `orientation="horizontal"` for inline loading states alongside text.
-- Use the built-in `loading` attribute on `<sgds-button>`, `<sgds-input>`, and `<sgds-select>` rather than composing a standalone spinner inside them.
-- Remove or hide the spinner promptly when the operation completes.
-
-**Don't**
-- Use the deprecated `variant` attribute — always use `tone`.
-- Leave a spinner visible indefinitely without a timeout or error state fallback.
-- Use `tone="inverse"` or `tone="fixed-light"` on light backgrounds — they are intended for dark background contexts.
-- Use the spinner as a decorative or purely aesthetic animation.
-
-## Common Use Cases
-
-- Full-page or overlay loading state while initial data is fetched.
-- Section-level loading within a card or panel while async content loads.
-- Inline loading indicator next to a status message (e.g. "Checking availability…").
-- Custom loading overlays in modals or drawers.
 
 ## Advanced Considerations
 
