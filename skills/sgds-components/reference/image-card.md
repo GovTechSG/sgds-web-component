@@ -31,6 +31,30 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - `noPadding`, `disabled`, `hideBorder`, and `tinted` control padding, interactivity, border, and background.
 - No custom events or public methods.
 
+## Component Composition
+
+**`image` slot** — required; pass a single `<img>` with descriptive `alt` text and explicit `width`/`height`. This is the primary visual — always provide one.
+
+**`image-badge` slot** — `<sgds-badge>` overlaid at the top-left of the image for status or category labels (e.g. "LIVE", "SOLD OUT"). Only use when the `image` slot is populated.
+
+**`image-action` slot** — `<sgds-icon-button>` overlaid at the top-right of the image for quick actions (e.g. save, bookmark). Only use when the `image` slot is populated.
+
+**`subtitle` slot** — short category or type label in uppercase.
+
+**`title` slot** — concise card heading (1–6 words). Use plain text or `<span>`.
+
+**Default slot** — metadata between the title and description; `<sgds-icon-list>` is the standard pattern.
+
+**`description` slot** — 1–3 sentences of supporting text.
+
+**`lower` slot** — `<sgds-badge>` elements for tags below the description.
+
+**`footer` slot** — the card CTA; use `<sgds-link><a href="...">Label</a></sgds-link>`. The `link` slot is deprecated since v3.3.2.
+
+**Avoid placing inside an image card:**
+- Multiple images in the `image` slot — only a single element is supported
+- Overlay slots (`image-badge`, `image-action`) without a populated `image` slot
+
 ## Advanced Considerations
 
 - **`image-badge` and `image-action` are unique to `<sgds-image-card>`**: these overlay slots are not available on `<sgds-card>`, `<sgds-icon-card>`, or `<sgds-thumbnail-card>` — this component is the correct choice whenever image overlays are required.
