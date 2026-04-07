@@ -16,9 +16,11 @@ import { AccordionDensity } from "./sgds-accordion";
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
  *
+ * @slot leadingIcon - An icon placed before the header text, typically used to provide visual context for the accordion item.
  * @slot header - The accordion-item button header slot.
+ * @slot badge - A badge placed after the header text, aligned to the right via auto left margin.
  * @slot content - The accordion-item content slot.
- * @slot caret - The caret icon of accordion-item.
+ * @slot caret - The caret icon of accordion-item. Defaults to a chevron-down icon.
  *
  */
 export class SgdsAccordionItem extends SgdsElement {
@@ -148,10 +150,14 @@ export class SgdsAccordionItem extends SgdsElement {
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
+          <slot name="leadingIcon"></slot>
           <slot name="header"></slot>
+          <div class="accordion-header__trailing">
+          <slot name="badge"></slot>
           <slot name="caret">
             <sgds-icon name="chevron-down" size=${this.density === "compact" ? "md" : "lg"}></sgds-icon>
           </slot>
+          </div>
         </button>
         <div
           class=${classMap({

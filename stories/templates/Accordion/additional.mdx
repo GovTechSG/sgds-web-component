@@ -6,12 +6,18 @@ The default variant for accordion has no border. To enable bordered accordions, 
   <Story of={AccordionStories.BorderVariant} />
 </Canvas>
 
-## Density 
+## Density
 
 To enable compact density, set `density="compact"` on `<sgds-accordion>`
 
 <Canvas of={AccordionStories.DensityVariant}>
   <Story of={AccordionStories.DensityVariant} />
+</Canvas>
+
+To enable spacious density, set `density="spacious"` on `<sgds-accordion>`
+
+<Canvas of={AccordionStories.SpaciousDensity}>
+  <Story of={AccordionStories.SpaciousDensity} />
 </Canvas>
 
 ## Allow multiple accordion to open together
@@ -29,4 +35,20 @@ To disable individual accordion items, add `disabled` prop to the targeted `<sgd
 
 <Canvas of={AccordionStories.Disabled}>
   <Story of={AccordionStories.Disabled} />
-</Canvas>  
+</Canvas>
+
+## Trailing icon slot
+
+Use the `trailingIcon` slot to place an icon before the header text. Match the `size` of `<sgds-icon>` to the accordion `density`: `lg` for `default`, `md` for `compact`. Toggle the `density` control to see the icon resize accordingly.
+
+<Canvas of={AccordionStories.TrailingIconSlot}>
+  <Story of={AccordionStories.TrailingIconSlot} />
+</Canvas>
+
+## Badge slot
+
+Use the `badge` slot to display a `<sgds-badge>` after the header text. The badge is automatically right-aligned via `margin-left: auto`.
+
+<Canvas of={AccordionStories.BadgeSlot}>
+  <Story of={AccordionStories.BadgeSlot} />
+</Canvas>

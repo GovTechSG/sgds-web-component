@@ -7,9 +7,17 @@
   font-size: var(--sgds-font-size-16);
   line-height: var(--sgds-line-height-20);
 }
+:host([density="spacious"]) .accordion-btn {
+  padding: var(--sgds-padding-xl) var(--sgds-padding-xl);
+  font-size: var(--sgds-font-size-24);
+  line-height: var(--sgds-line-height-28);
+}
 
 :host([density="compact"]) .content {
   padding: var(--sgds-padding-xs) var(--sgds-padding-sm) var(--sgds-padding-sm);
+}
+:host([density="spacious"]) .content {
+  padding: var(--sgds-padding-xs) var(--sgds-padding-xl) var(--sgds-padding-xl);
 }
 
 .accordion-item {
@@ -20,7 +28,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: var(--sgds-gap-sm);
+  gap: var(--sgds-gap-md);
   padding: var(--sgds-padding-lg) var(--sgds-padding-lg);
   background-color: var(--sgds-bg-transparent);
   text-align: left;
@@ -68,9 +76,17 @@
   cursor: not-allowed;
 }
 
+slot[name="badge"]::slotted(*) {
+  margin-left: auto;
+}
+
+.accordion-header__trailing{
+  margin-left:auto;
+  display:flex;
+  gap: var(--sgds-gap-md);
+}
 slot[name="caret"]::slotted(*),
 slot[name="caret"] sgds-icon {
-  margin-left: auto;
   transition: transform 0.2s ease-in-out;
   color: var(--sgds-color-subtle);
 }
