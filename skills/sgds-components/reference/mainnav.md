@@ -1,6 +1,6 @@
-# SGDS Tab Component Skill
+# SGDS Table of Contents Component Skill
 
-`<sgds-tab-group>` coordinates `<sgds-tab>` and `<sgds-tab-panel>` elements. Each tab's `panel` attribute must match a tab panel's `name` attribute — this is how the tab and its content are linked.
+`<sgds-table-of-contents>` renders a list of anchor links for in-page navigation. Provide a heading via the default slot and a list of `<li>` items containing `<sgds-link>` elements via the `contents` slot.
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
@@ -8,156 +8,98 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ### When to use
 
-- When content can be split into distinct, mutually exclusive sections and users need to switch between them without leaving the page.
-- For categorised content where only one section needs to be visible at a time (e.g. product details, settings categories, filtered views).
-- When vertical navigation between content sections is preferred — use `orientation="vertical"`.
+- When a page has multiple distinct sections and users benefit from knowing the page structure upfront.
+- For long-form content pages (documentation, articles, guides) where users may want to jump to a specific section.
+- When the page is long enough that scrolling past all sections to find one would be disorienting.
 
 ### When NOT to use
 
-- When users need to compare content across sections simultaneously — consider showing all sections instead.
-- For sequential steps where order matters — use `<sgds-stepper>` instead.
-- For primary page navigation — use `<sgds-mainnav>` or `<sgds-sidenav>`.
-- When there are fewer than 2 tabs — a single tab provides no value; show the content directly.
-- When there are more tabs than can reasonably fit in the tab list — consider grouping or a different navigation pattern.
+- On short pages where all content is visible without scrolling — the component adds navigation overhead without benefit.
+- For site-level or multi-page navigation — use `<sgds-mainnav>` or `<sgds-sidenav>` instead.
+- When sections do not have unique `id` attributes on the page — anchor links will not function.
+- For dynamic or programmatically generated content trees — build a custom navigation component instead.
 
 ## Behaviour
 
-- `<sgds-tab>` elements must be placed in the `nav` slot of `<sgds-tab-group>`; `<sgds-tab-panel>` elements go in the default slot.
-- Each `<sgds-tab panel="x">` is linked to a `<sgds-tab-panel name="x">` by matching `panel` and `name` values — mismatches result in no panel being shown.
-- The first non-disabled tab is active by default; add `active` to a specific `<sgds-tab>` to override the initial selection.
-- `disabled` on a `<sgds-tab>` prevents selection and skips the tab during keyboard navigation.
-- `variant` controls visual style: `underlined` (default) or `solid`. Set on `<sgds-tab-group>` — propagates to all child tabs.
-- `orientation` controls layout: `horizontal` (default) or `vertical`. Set on `<sgds-tab-group>`.
-- `density` controls spacing: `default` or `compact`. Set on `<sgds-tab-group>`.
-- Fires `sgds-tab-show` (with `event.detail.name`) when a tab is activated and `sgds-tab-hide` when it is deactivated.
-- No public methods on `<sgds-tab-group>`.
+- Renders a labelled list of anchor links for navigating within the current page.
+- The default slot accepts a heading element (e.g. `<h3>`) to label the table of contents.
+- The `contents` slot accepts `<li>` elements, each containing a `<sgds-link>` wrapping an `<a href="#section-id">`.
+- Clicking a link scrolls the page to the matching `id` on the target section.
+- The component has no attributes, events, or public methods — it is purely presentational and structural.
 
 ## Advanced Considerations
 
-- **`panel`/`name` matching**: the link between a tab and its panel is entirely string-based — a typo in either attribute results in a broken tab with no panel displayed. Always verify both values match exactly.
-- **`active` attribute**: sets the initially active tab at render time only; once the tab group is interactive, active state is managed internally and the `active` attribute is not reactively updated.
-- **`variant` and `density` propagation**: these are set on `<sgds-tab-group>` and automatically propagate to all child `<sgds-tab>` elements — do not set them on individual tabs.
-- **`sgds-tab-show` / `sgds-tab-hide`**: both events fire with `event.detail.name` (the panel name string) — use to lazy-load content, track analytics, or sync URL state with the active tab.
-- **No public methods**: programmatic tab activation is not supported via methods — manage active state by adding/removing the `active` attribute on a `<sgds-tab>` directly if needed.
+- **Heading level**: choose a heading level for the default slot that fits the surrounding document hierarchy — typically `<h3>` or `<h4>` depending on page structure.
+- **Anchor accuracy**: each `<a href="#id">` must exactly match the `id` of a section on the page — a mismatch produces a broken link that scrolls to the top of the page.
+- **No active state tracking**: `<sgds-table-of-contents>` does not highlight the currently visible section as the user scrolls — implement scroll-spy behaviour manually if needed.
+- **Ordering**: list items appear in the order they are added to the `contents` slot — match the visual order of sections on the page for consistency.
 
 ## Edge Cases
 
-- **Mismatched `panel` / `name`**: the tab renders but clicking it shows no content — always keep `panel` and `name` in sync.
-- **All tabs disabled**: the tab group renders with no selectable tab — ensure at least one tab is enabled.
-- **No `active` tab set**: the first non-disabled tab is selected automatically; this is correct behaviour, not a bug.
-- **Dynamically added tabs**: tabs added after initial render may not be registered — initialise the full tab list before mounting the component where possible.
-- **Long tab labels**: may overflow the tab bar on narrow viewports — keep labels concise (1–3 words) or use `orientation="vertical"` for longer labels.
+- **No heading provided**: the default slot is empty — the table of contents renders without a label; always provide a heading for accessibility.
+- **Broken anchor links**: `href="#id"` with no matching `id` attribute on the page scrolls to the top — verify all IDs match.
+- **Single entry**: technically valid, but a single-item table of contents provides no navigation value; only render the component when there are two or more sections.
+- **Duplicate section IDs**: the browser navigates to the first matching `id` — ensure all section IDs on the page are unique.
 
 ## Quick Decision Guide
 
-**Visual style?**
-- Underline tabs → `variant="underlined"` (default)
-- Solid/pill tabs → `variant="solid"`
+**Standard table of contents for a content page?** → Use `<sgds-table-of-contents>` with a heading in the default slot and `<li>` items in the `contents` slot
 
-**Orientation?**
-- Horizontal tabs → `orientation="horizontal"` (default)
-- Vertical side tabs → `orientation="vertical"`
-
-**Compact spacing?** → `density="compact"` on `<sgds-tab-group>`
-
-**Set initial active tab?** → Add `active` to the specific `<sgds-tab>`
-
-**Set initial active tab (first loaded tab)?** → The first non-disabled tab is active by default
+**Each entry links to a page section?** → Use `<sgds-link>` with `<a href="#section-id">` inside each `<li>`
 
 ```html
-<!-- Basic tab group -->
-<sgds-tab-group>
-  <sgds-tab slot="nav" panel="home">Home</sgds-tab>
-  <sgds-tab slot="nav" panel="profile">Profile</sgds-tab>
-  <sgds-tab slot="nav" panel="settings" disabled>Settings</sgds-tab>
+<!-- Basic table of contents -->
+<sgds-table-of-contents>
+  <h3>Contents</h3>
+  <li slot="contents">
+    <sgds-link><a href="#overview">Overview</a></sgds-link>
+  </li>
+  <li slot="contents">
+    <sgds-link><a href="#installation">Installation</a></sgds-link>
+  </li>
+  <li slot="contents">
+    <sgds-link><a href="#usage">Usage</a></sgds-link>
+  </li>
+  <li slot="contents">
+    <sgds-link><a href="#api">API Reference</a></sgds-link>
+  </li>
+  <li slot="contents">
+    <sgds-link><a href="#changelog">Changelog</a></sgds-link>
+  </li>
+</sgds-table-of-contents>
 
-  <sgds-tab-panel name="home">
-    <p>Welcome to the home tab content.</p>
-  </sgds-tab-panel>
-  <sgds-tab-panel name="profile">
-    <p>Profile information goes here.</p>
-  </sgds-tab-panel>
-  <sgds-tab-panel name="settings">
-    <p>Settings are not available.</p>
-  </sgds-tab-panel>
-</sgds-tab-group>
-
-<!-- Solid variant, compact density -->
-<sgds-tab-group variant="solid" density="compact">
-  <sgds-tab slot="nav" panel="tab1">Tab One</sgds-tab>
-  <sgds-tab slot="nav" panel="tab2" active>Tab Two (starts active)</sgds-tab>
-  <sgds-tab-panel name="tab1">Content for tab one.</sgds-tab-panel>
-  <sgds-tab-panel name="tab2">Content for tab two.</sgds-tab-panel>
-</sgds-tab-group>
-
-<!-- Vertical orientation -->
-<sgds-tab-group orientation="vertical">
-  <sgds-tab slot="nav" panel="section1">Section 1</sgds-tab>
-  <sgds-tab slot="nav" panel="section2">Section 2</sgds-tab>
-  <sgds-tab-panel name="section1">Section 1 content.</sgds-tab-panel>
-  <sgds-tab-panel name="section2">Section 2 content.</sgds-tab-panel>
-</sgds-tab-group>
-
-<!-- Listen to tab change -->
-<sgds-tab-group id="my-tabs">
-  <sgds-tab slot="nav" panel="a">Tab A</sgds-tab>
-  <sgds-tab slot="nav" panel="b">Tab B</sgds-tab>
-  <sgds-tab-panel name="a">Content A</sgds-tab-panel>
-  <sgds-tab-panel name="b">Content B</sgds-tab-panel>
-</sgds-tab-group>
-
-<script>
-  document.getElementById("my-tabs").addEventListener("sgds-tab-show", e => {
-    console.log("Active tab:", e.detail.name);
-  });
-</script>
+<!-- Corresponding page sections -->
+<section id="overview">
+  <h2>Overview</h2>
+  ...
+</section>
+<section id="installation">
+  <h2>Installation</h2>
+  ...
+</section>
 ```
 
 ## API Summary
 
-### `<sgds-tab-group>`
+### `<sgds-table-of-contents>`
 
-| Attribute | Type | Default | Purpose |
-|---|---|---|---|
-| `variant` | `underlined \| solid` | `underlined` | Visual style of the tab list |
-| `orientation` | `horizontal \| vertical` | `horizontal` | Layout direction of the tabs |
-| `density` | `default \| compact` | `default` | Spacing of the tab items |
-
-### `<sgds-tab>`
-
-| Attribute | Type | Default | Purpose |
-|---|---|---|---|
-| `panel` | string | `""` | **Required** — must match the `name` of a `<sgds-tab-panel>` |
-| `active` | boolean | `false` | Sets this tab as active on initial load |
-| `disabled` | boolean | `false` | Prevents the tab from being selected |
-
-### `<sgds-tab-panel>`
-
-| Attribute | Type | Default | Purpose |
-|---|---|---|---|
-| `name` | string | — | **Required** — must match the `panel` of a `<sgds-tab>` |
+No attributes.
 
 ## Slots
 
-| Component | Slot | Purpose |
-|---|---|---|
-| `<sgds-tab-group>` | `nav` | `<sgds-tab>` elements go here |
-| `<sgds-tab-group>` | *(default)* | `<sgds-tab-panel>` elements go here |
-| `<sgds-tab>` | *(default)* | Tab label text |
-| `<sgds-tab-panel>` | *(default)* | Tab panel content |
+| Slot | Purpose |
+|---|---|
+| *(default)* | Heading element for the table of contents (e.g. `<h3>Contents</h3>`) |
+| `contents` | `<li>` elements, each containing a `<sgds-link>` with an anchor `<a href="#">` |
 
-## Events (`<sgds-tab-group>`)
+## Events
 
-| Event | Cancelable | Detail | When |
-|---|---|---|---|
-| `sgds-tab-show` | No | `{ name: string }` | A tab and its panel are shown |
-| `sgds-tab-hide` | No | `{ name: string }` | A tab and its panel are hidden |
+None.
 
 ---
 
 **For AI agents**:
-1. `<sgds-tab>` must have `slot="nav"` and its `panel` must exactly match a `<sgds-tab-panel>`'s `name`.
-2. `variant`, `orientation`, and `density` are set on `<sgds-tab-group>` — they propagate automatically to all child `<sgds-tab>` elements.
-3. `sgds-tab-show` and `sgds-tab-hide` both carry `event.detail.name` which is the panel name string.
-4. To set the initially active tab, add `active` to one `<sgds-tab>` — if none are active, the first non-disabled tab is selected.
-5. There are no public methods on the tab group.
+1. The *(default)* slot takes the heading — use a semantic heading element like `<h3>`.
+2. Each `contents` slot item is a `<li>` element containing `<sgds-link><a href="#section-id">Label</a></sgds-link>`.
+3. Anchor `href` values should match `id` attributes on the target page sections.
+4. There are no attributes, custom events, or public methods on this component.
