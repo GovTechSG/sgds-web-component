@@ -2,6 +2,8 @@
 
 `<sgds-icon-button>` is an icon-only interactive button from the SGDS icon registry. Prefer it over `<sgds-button>` with a slotted icon when no visible text label is needed — it provides correct semantics and enforces accessible labelling via `ariaLabel`.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
 ### When to use
