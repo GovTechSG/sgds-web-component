@@ -6,6 +6,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Usage Guideline
 
+### When to use
+
+- For indeterminate loading states where the duration is unknown (e.g. waiting for an API response, processing a file).
+- When loading content is not associated with a specific layout region — a floating or centered spinner indicates general system activity.
+- For inline loading indicators within custom components that do not have a built-in `loading` attribute.
+
 ### When NOT to use
 
 - When the loading duration is known — use a progress bar instead.
