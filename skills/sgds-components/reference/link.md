@@ -6,6 +6,13 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Usage Guideline
 
+### When to use
+
+- For text-based navigation between pages, sections, or external resources.
+- When the action is navigational and not an operation — always use `<sgds-link>` for links, not `<sgds-button>`.
+- When inline contextual navigation is needed within body text or a description.
+- When `tone` variants (danger, neutral, fixed-light, fixed-dark) are needed to communicate link context or to suit the background colour.
+
 ### When NOT to use
 
 - For primary or high-emphasis actions → use `<sgds-button>` instead.
