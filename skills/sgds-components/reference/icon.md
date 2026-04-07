@@ -2,6 +2,8 @@
 
 `<sgds-icon>` renders SVG icons from the SGDS built-in registry. Use it instead of `<img>` tags or external icon libraries when building with SGDS components.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
 ### When to use
@@ -31,7 +33,6 @@
 - **Size scale**: `xs` through `3-xl` maps to fixed pixel dimensions defined by the design system — do not attempt to override size via CSS unless the design system explicitly supports it.
 - **Inside `<sgds-link>`**: `<sgds-link>` sets icon size based on its own `size` attribute — adding a `size` on the icon will be overridden; omit it entirely.
 - **Inside `<sgds-icon-list>`**: icon size must be set explicitly to match the list `size` (see icon-list skill) — this is the exception where manual sizing is required.
-- **No CSS parts or custom properties**: styling is fixed by the design system.
 
 ## Edge Cases
 
