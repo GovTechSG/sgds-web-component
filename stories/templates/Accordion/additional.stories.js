@@ -40,33 +40,30 @@ export const Disabled = {
   tags: ["!dev"]
 };
 
-
 const LeadingIconTemplate = iconSize => html`
-<sgds-accordion >
-  <sgds-accordion-item open density="compact">
-    <sgds-icon slot="icon" name="info-circle" size="md"></sgds-icon>
-    <div slot="header">Accordion density compact</div>
-    <div slot="content">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
-    </div>
-  </sgds-accordion-item>
+  <sgds-accordion>
+    <sgds-accordion-item open density="compact">
+      <sgds-icon slot="icon" name="info-circle" size="md"></sgds-icon>
+      <div slot="header">Accordion density compact</div>
+      <div slot="content">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
+      </div>
+    </sgds-accordion-item>
     <sgds-accordion-item density="default">
-    <sgds-icon slot="icon" name="info-circle" size="lg"></sgds-icon>
-    <div slot="header">Accordion density default</div>
-    <div slot="content">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
-    </div>
-  </sgds-accordion-item>
+      <sgds-icon slot="icon" name="info-circle" size="lg"></sgds-icon>
+      <div slot="header">Accordion density default</div>
+      <div slot="content">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
+      </div>
+    </sgds-accordion-item>
     <sgds-accordion-item density="spacious">
-    <sgds-icon slot="icon" name="info-circle" size="xl"></sgds-icon>
-    <div slot="header">Accordion density spacious</div>
-    <div slot="content">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
-    </div>
-  </sgds-accordion-item>
+      <sgds-icon slot="icon" name="info-circle" size="xl"></sgds-icon>
+      <div slot="header">Accordion density spacious</div>
+      <div slot="content">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
+      </div>
+    </sgds-accordion-item>
   </sgds-accordion>
-
-
 `;
 
 export const LeadingIconSlot = {
@@ -78,11 +75,7 @@ export const LeadingIconSlot = {
 };
 
 const BadgeTemplate = args => html`
-  <sgds-accordion
-    ?allowMultiple=${args.allowMultiple}
-    variant=${args.variant}
-    density=${args.density}
-  >
+  <sgds-accordion ?allowMultiple=${args.allowMultiple} variant=${args.variant} density=${args.density}>
     <sgds-accordion-item ?open=${args.open} ?disabled=${args.disabled}>
       <div slot="header">Accordion title #1</div>
       <sgds-badge slot="badge" variant="primary">New</sgds-badge>
