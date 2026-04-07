@@ -2,6 +2,8 @@
 
 `<sgds-icon-card>` is a card variant where a large icon is the primary visual element. Use it for feature showcases, service listings, or any content where an icon leads the hierarchy.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
 ### When to use
@@ -28,6 +30,28 @@
 - `tinted` applies a tinted background; `hideBorder` removes the card border.
 - No custom events or public methods.
 
+## Component Composition
+
+**`icon` slot** — required; use `<sgds-icon size="3-xl">` for the standard icon card hierarchy. This is the primary visual anchor — always provide one.
+
+**`upper` slot** — `<sgds-badge>` for a status or category label above the subtitle (e.g. "NEW", "FEATURED").
+
+**`subtitle` slot** — short category or type label in uppercase.
+
+**`title` slot** — concise card heading (1–6 words). Use plain text or `<span>`.
+
+**Default slot** — metadata between the title and description; `<sgds-icon-list>` is the standard pattern for date, location, or type metadata.
+
+**`description` slot** — 1–3 sentences of supporting text.
+
+**`lower` slot** — `<sgds-badge>` elements for category or status tags below the description.
+
+**`footer` slot** — the card CTA; use `<sgds-link><a href="...">Label</a></sgds-link>`. The `link` slot is deprecated since v3.3.2.
+
+**Avoid placing inside an icon card:**
+- Photographs or images in the `icon` slot — use `<sgds-image-card>` instead
+- Multiple CTAs — cards should have a single navigation target
+
 ## Advanced Considerations
 
 - **Icon sizing**: always use `size="3-xl"` on `<sgds-icon>` in the `icon` slot for the standard icon card appearance — other sizes may visually break the card hierarchy.
@@ -47,7 +71,7 @@
 ## Quick Decision Guide
 
 **Which card type?**
-- Large prominant icon leads the card → `<sgds-icon-card>` (this component)
+- Large prominent icon leads the card → `<sgds-icon-card>` (this component)
 - Photograph or image leads the card → `<sgds-image-card>`
 - Small thumbnail beside content → `<sgds-thumbnail-card>`
 - General mixed content → `<sgds-card>`
