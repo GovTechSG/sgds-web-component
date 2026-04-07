@@ -6,6 +6,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Usage Guideline
 
+### When to use
+
+- For binary settings that take effect immediately without requiring a form submission (e.g. enabling notifications, toggling dark mode, activating a feature).
+- When the on/off metaphor clearly communicates the effect of the action to users.
+- When a single toggle represents a persistent preference or system setting.
+
 ### When NOT to use
 
 - When the action requires confirmation before taking effect — use a checkbox with a submit button instead.
