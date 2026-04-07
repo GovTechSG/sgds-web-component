@@ -2,6 +2,8 @@
 
 `<sgds-dropdown>` is a toggleable overlay menu. It requires a `toggler` slot element (typically `<sgds-button>`) and `<sgds-dropdown-item>` children for list items. For an icon-only three-dot menu, use `<sgds-overflow-menu>` instead.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
 ### When to use
@@ -29,6 +31,20 @@
 - `disabled` on `<sgds-dropdown-item>` prevents selection and `sgds-select` does not fire for that item.
 - `active` on `<sgds-dropdown-item>` marks it as the current selection visually.
 - Fires `sgds-select` on the dropdown element with `event.detail.item` as the clicked `<sgds-dropdown-item>`.
+
+## Component Composition
+
+**`toggler` slot (`<sgds-dropdown>`)** — the element that opens the menu. Standard pattern: `<sgds-button slot="toggler" role="button">` with a label and `<sgds-icon name="chevron-down" slot="rightIcon">`. Always provide toggler content — without it, the dropdown has no visible trigger.
+
+**Default slot (`<sgds-dropdown>`)** — only `<sgds-dropdown-item>` elements. Do not place raw `<a>` or `<li>` tags directly.
+
+**`<sgds-dropdown-item>` default slot** — two patterns:
+- **Navigation item**: slot a single `<a href="...">` tag inside the item.
+- **Action item (no URL)**: slot plain text directly inside the item; handle `sgds-select` on the parent dropdown.
+
+**Avoid placing inside a dropdown:**
+- Form inputs, checkboxes, or complex interactive components — use a `<sgds-drawer>` for richer interactions
+- More than ~8 items — long menus become hard to scan; consider grouping or a different pattern
 
 ## Advanced Considerations
 
