@@ -4,23 +4,7 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
-## Component Definition
-
-The Select component allows users to choose a single option from a list. It displays a collapsed view by default and expands to show available options when interacted with.
-
-## Purpose
-
-- Facilitate selection from a predefined list of options.
-- Reduce the need for typing by providing users with choices.
-- Support single-select scenarios with clear visual feedback.
-
 ## Usage Guideline
-
-### When to use
-
-- When there are multiple predefined options to choose from.
-- When the number of options is manageable (not overwhelming).
-- When form consistency and space-saving UI is required.
 
 ### When NOT to use
 
@@ -37,39 +21,6 @@ The Select component allows users to choose a single option from a list. It disp
 - Closes the dropdown on outside click or pressing `Esc`.
 - Updates the value immediately upon selection.
 - Shows a loading spinner when `loading` is set.
-
-## Content Guideline
-
-- Use concise, descriptive option labels.
-- Avoid abbreviations unless commonly understood.
-- Placeholder text should describe what the user is selecting (e.g. "Select a country").
-- Group related options if necessary, using visual separators or headings.
-
-## Interaction Guideline
-
-- Clicking the select box opens the list; clicking outside closes it.
-- Hover or focus highlights options.
-- A scrollbar appears if options exceed the visible space.
-- Disabled options are not interactive and should communicate why they are unavailable.
-
-## Best Practices
-
-**Do**
-- Provide clear placeholder text.
-- Support keyboard navigation and accessibility standards.
-- Limit options to a manageable number; implement `<sgds-combo-box>` with search/filter for large lists.
-- Group related options logically if the list is long.
-
-**Don't**
-- Overload with too many options without a search mechanism.
-- Use vague or unclear option labels.
-- Use option labels that are vague or indistinguishable from one another.
-
-## Common Use Cases
-
-- Selecting a country, city, or region in a form.
-- Choosing a department, role, or category.
-- Picking a status or predefined range in a scheduling or admin context.
 
 ## Advanced Considerations
 
