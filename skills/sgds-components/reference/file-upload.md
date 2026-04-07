@@ -2,7 +2,16 @@
 
 `<sgds-file-upload>` renders a styled file upload button. Selected files appear as a list with dismiss (remove) buttons. Use `accept` to restrict file types and `multiple` to allow many files.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
+
+### When to use
+
+- When users need to attach one or more files as part of a form submission (e.g. uploading supporting documents, photos, or attachments).
+- When the form is the primary method of collecting the file and the upload happens on form submit, not instantly on selection.
+- When file type restrictions are needed — use `accept` to limit to specific MIME types or extensions.
+- When multiple files need to be selected and reviewed before submission — use `multiple`.
 
 ### When NOT to use
 
