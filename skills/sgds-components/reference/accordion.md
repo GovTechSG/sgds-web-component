@@ -2,24 +2,7 @@
 
 `<sgds-accordion>` is a container for one or more `<sgds-accordion-item>` elements. Items can be opened and closed individually; setting `allowMultiple` lets multiple items stay open at once.
 
-## Component Definition
-
-The Accordion is a vertically stacked interactive component that allows users to expand and collapse sections of content. Each section consists of a header (trigger) and a content panel (expandable region).
-
-## Purpose
-
-- Enable progressive disclosure of information
-- Reduce cognitive load by hiding non-essential content
-- Improve scannability for long or structured content
-- Optimise space usage, especially on smaller screens
-
 ## Usage Guideline
-
-**When to use:**
-- Content can be grouped into clear, independent sections
-- Users do not need to see all content at once
-- Supporting secondary or optional information
-- Space is constrained (e.g. mobile, side panels)
 
 **When NOT to use:**
 - All content is critical and must be visible
@@ -38,52 +21,6 @@ Accordion items support two expand modes:
 **System behaviour:**
 - Preserve expanded state where possible — avoid unexpected auto-collapse after user interaction
 - Clicking the header toggles visibility; expanded state is indicated via chevron rotation
-
-## Content Guidelines
-
-**Header labels:**
-- Keep concise and scannable (1–2 lines max)
-- Use sentence case
-- Reflect the content inside accurately
-
-✅ Good: "Eligibility criteria", "Payment details"
-
-❌ Avoid: Vague labels like "More info", long descriptive sentences
-
-**Content panels:**
-- Structure content using lists, subheadings, and short paragraphs
-- Break long content into multiple items instead of one overloaded section
-- Maintain consistent formatting across all items
-
-## Interaction Guidelines
-
-- Entire header area must be clickable — not just the label text
-- Provide strong visual affordance: chevron rotation, visible hover and focus states
-- Animate expand/collapse smoothly — avoid abrupt layout shifts; keep motion subtle
-- Maintain the user's reading position when expanding — avoid unexpected scroll jumps
-- Ensure a minimum 44px tap target height for touch accessibility
-
-## Best Practices
-
-**Do**
-- Use for progressive disclosure of logically grouped content
-- Group related content logically and keep structure consistent across items
-- Lazy load heavy content inside panels if needed
-
-**Don't**
-- Nest more than one level of accordions
-- Use as primary navigation
-- Hide critical information that users must not miss
-- Mix unrelated content in one accordion group
-- Use inconsistent interaction patterns within the same accordion
-
-## Common Use Cases
-
-- **FAQ list** — multiple questions with expandable answers
-- **Form sections** — personal details, address, payment
-- **Settings panels** — grouped configurations
-- **Policy / legal content** — terms, disclaimers, guidelines
-- **Step-based disclosure** — progressive reveal of instructions
 
 ## Accessibility
 
