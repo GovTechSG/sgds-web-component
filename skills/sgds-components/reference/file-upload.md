@@ -2,24 +2,7 @@
 
 `<sgds-file-upload>` renders a styled file upload button. Selected files appear as a list with dismiss (remove) buttons. Use `accept` to restrict file types and `multiple` to allow many files.
 
-## Component Definition
-
-The File Upload component provides a styled button that opens the browser's native file picker. Once files are selected, they are listed below the button with individual dismiss buttons allowing users to remove them before submission.
-
-## Purpose
-
-- Enable users to attach files to a form or submission.
-- Restrict acceptable file types to reduce invalid uploads.
-- Support single or multiple file selection with clear visual feedback.
-
 ## Usage Guideline
-
-### When to use
-
-- When a form requires one or more file attachments (e.g. identity documents, images, reports).
-- When file type restrictions are necessary — use `accept` to limit valid formats.
-- When users may need to select and review multiple files before submitting — add `multiple`.
-- When validation feedback is needed to guide users on file requirements.
 
 ### When NOT to use
 
@@ -38,44 +21,6 @@ The File Upload component provides a styled button that opens the browser's nati
 - `hasFeedback` enables validation feedback UI; pair with `invalidFeedback` to show an error message.
 - `invalid` manually sets the invalid state without relying on browser constraint validation.
 - Fires `sgds-files-selected` with a `FileList` as `event.detail` when files are selected.
-
-## Content Guideline
-
-- Use the default slot to set the button label (e.g. "Choose File", "Upload Document").
-- Use `label` to describe what the user is uploading (e.g. "Proof of Identity").
-- Use `hintText` to communicate format and size requirements upfront (e.g. "PDF only, max 10MB").
-- `invalidFeedback` should be specific and actionable (e.g. "Please upload a valid document in PDF or JPG format").
-- Avoid vague button labels like "Browse" — prefer "Choose File" or "Upload [document type]".
-
-## Interaction Guideline
-
-- Clicking the button triggers the native file picker — no drag-and-drop interaction.
-- After selection, filenames appear in a list with dismiss buttons; users can remove files individually before submitting.
-- The `sgds-files-selected` event fires each time the file picker closes with a new selection — listen to it to process or validate selected files.
-- Validate file size, count, or other constraints in the `sgds-files-selected` handler and set `invalid` manually if needed.
-- Keyboard: the button is focusable and activatable via `Space` or `Enter`.
-
-## Best Practices
-
-**Do**
-- Always set `label` and `hintText` to communicate what files are expected and any format constraints.
-- Use `accept` to restrict file types and reduce invalid submissions.
-- Provide a clear `invalidFeedback` message alongside `hasFeedback`.
-- Validate file size and count in the `sgds-files-selected` event handler — the component does not enforce these automatically.
-- Use descriptive button slot text that reflects the expected file type.
-
-**Don't**
-- Rely on `accept` alone for security — always validate file types server-side.
-- Use the component for immediate (non-form) file uploads without a clear submission flow.
-- Omit `hintText` when file type or size restrictions apply — users need this information before selecting.
-- Set `invalid` without also setting `invalidFeedback` — the error state without a message provides no guidance.
-
-## Common Use Cases
-
-- Uploading identity or supporting documents in government or financial forms.
-- Attaching images (profile photo, proof of address).
-- Submitting reports or data files (PDF, CSV, DOCX).
-- Uploading multiple assets in a content management workflow.
 
 ## Advanced Considerations
 
