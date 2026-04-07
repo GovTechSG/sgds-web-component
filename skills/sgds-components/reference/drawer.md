@@ -2,6 +2,8 @@
 
 `<sgds-drawer>` is a panel that slides in from a screen edge and overlays the page content. Use it for secondary navigation, filters, or any contextual content that shouldn't interrupt the main layout.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
 ### When to use
@@ -29,6 +31,21 @@
 - `contained` scopes the drawer within its nearest positioned ancestor instead of the viewport; the parent must have `position: relative` and an explicit height.
 - `sgds-initial-focus` fires when the drawer opens — call `event.preventDefault()` to manually control which element receives focus.
 - Open/close programmatically via `show()` and `hide()` methods.
+
+## Component Composition
+
+**`title` slot** — concise heading (e.g. `<h4>`) describing the drawer's purpose (e.g. "Filter Results", "Edit Record").
+
+**`description` slot** — one-line context below the title; omit if the title is self-explanatory.
+
+**Body slot (`default`)** — filter forms, edit-record forms, settings panels, detail views, or navigation link lists. The drawer body scrolls, so longer content is acceptable here compared to a modal.
+
+**`footer` slot** — action buttons: a primary save/apply action (`<sgds-button variant="primary">`) and a cancel action (`<sgds-button variant="link">`). Both must call `hide()` explicitly.
+
+**Avoid placing inside a drawer:**
+- Nested drawers — not a supported pattern
+- Content that users need to compare simultaneously with the page behind the overlay
+- Full data tables with horizontal scroll — creates a poor double-scroll UX inside the panel
 
 ## Advanced Considerations
 
