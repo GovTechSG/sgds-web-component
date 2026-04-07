@@ -4,24 +4,7 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
-## Component Definition
-
-The Skeleton component renders a placeholder shape in place of content that has not yet loaded. It mimics the approximate size and shape of the real content to reduce perceived load time and prevent layout shift.
-
-## Purpose
-
-- Communicate that content is loading without using a spinner or blocking the full page.
-- Reduce perceived loading time by giving users a structural preview of the incoming content.
-- Prevent layout shift by reserving space that matches the real content dimensions.
-
 ## Usage Guideline
-
-### When to use
-
-- When content is being fetched asynchronously and the layout structure is known in advance.
-- When the loading experience benefits from continuity — showing the page structure before data arrives.
-- For text blocks, images, avatars, cards, and other identifiable UI regions.
-- When load times are typically short but non-trivial (300ms–3s) — skeletons are most effective in this range.
 
 ### When NOT to use
 
@@ -37,43 +20,6 @@ The Skeleton component renders a placeholder shape in place of content that has 
 - `rows` renders multiple stacked skeleton lines within the total `height` — useful for representing a paragraph or list of text lines.
 - `sheen` adds an animated horizontal shimmer effect to suggest active loading; omit for a static placeholder.
 - The component has no slots, events, or public methods — it is purely presentational.
-
-## Content Guideline
-
-- No text content is placed inside `<sgds-skeleton>` — it has no slots.
-- Dimensions (`width`, `height`) must include CSS units (e.g. `"200px"`, `"100%"`, `"1.5rem"`) — bare numbers are invalid.
-- Match skeleton dimensions as closely as possible to the real content to prevent layout shift when content loads.
-- Use `rows` to represent multi-line text blocks; pair with a `height` that spans all rows proportionally.
-
-## Interaction Guideline
-
-- The skeleton is non-interactive and non-focusable — it carries no user action.
-- There is no built-in accessible announcement for skeleton screens; if an accessible loading announcement is needed, add an `aria-live` region on the containing element that updates when content is ready.
-- Replace the skeleton with real content as soon as data is available — do not leave skeletons visible after loading completes.
-
-## Best Practices
-
-**Do**
-- Match `width` and `height` to the dimensions of the real content being replaced.
-- Use `borderRadius="50%"` with equal dimensions for avatar or icon placeholders.
-- Use `rows` for text block placeholders to avoid stacking many individual skeleton elements.
-- Add `sheen` for animated loading feedback; omit it for subtle or non-distracting placeholders.
-- Always include CSS units in `width`, `height`, and `borderRadius` values.
-
-**Don't**
-- Leave skeletons visible after content has loaded.
-- Use skeletons for content whose shape is completely unknown.
-- Use bare numeric values for `width`, `height`, or `borderRadius` — always include units.
-- Stack more individual `<sgds-skeleton>` elements than necessary — use `rows` for text lines.
-- Use skeletons inside components that already have a built-in `loading` state.
-
-## Common Use Cases
-
-- Text line placeholders while article or description content loads.
-- Avatar or profile image placeholders (circle shape with `borderRadius="50%"`).
-- Card or image placeholder while media loads.
-- Table row placeholders while data is fetched.
-- Dashboard widget or chart area placeholders during data load.
 
 ## Advanced Considerations
 
