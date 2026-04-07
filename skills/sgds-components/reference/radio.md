@@ -4,6 +4,94 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
+## Component Definition
+
+Radio buttons allow users to select one option from a mutually exclusive set of predefined choices. Selecting one option automatically deselects the others within the same group.
+
+## Purpose
+
+- Enable single selection from a list of options.
+- Present clear, comparable choices upfront.
+- Support structured decision-making where all options are visible.
+
+## Usage Guideline
+
+### When to use
+
+- When users must select only one option from a list.
+- When all options should be visible at once.
+- When there are 2–7 options for easy scanning.
+- For important decisions where visibility matters (e.g. payment method, delivery option).
+
+### When NOT to use
+
+- When multiple selections are allowed → use `<sgds-checkbox>`.
+- When there are too many options (>7) → use `<sgds-select>`.
+- When options require complex descriptions or comparison tables.
+- For binary choices → consider a toggle or switch if the effect is immediate.
+
+## Behaviour
+
+- No option is selected by default unless a sensible default is required.
+- Selecting one option automatically deselects others in the same group.
+- Supported states: default, hover, focus, selected, disabled, and error (validation failure).
+- If `required` and no option is selected, an error state is shown when `hasFeedback` is set.
+- Radios must always be grouped with a shared `name` attribute via `<sgds-radio-group>`.
+
+## Content Guideline
+
+- Use clear, concise labels that are mutually exclusive and unambiguous.
+- Keep wording parallel (same grammatical structure across all options).
+- Use hint text for clarification when needed; keep descriptions short.
+- Avoid overly long sentences, overlapping meanings, or vague labels (e.g. "Option 1").
+
+**Good examples**: Credit card / Debit card / PayNow
+
+## Interaction Guideline
+
+- The entire label and radio control should be clickable.
+- Keyboard: `Tab` moves focus into the group; `Arrow` keys navigate options; `Space` selects.
+- Provide a clear visible focus indicator.
+- The group must have a label or legend so screen readers announce it correctly.
+- Each option must be announced clearly; ensure sufficient touch target size for accessibility.
+
+## Best Practices
+
+**Do**
+- Use radios for single, visible choices.
+- Provide a default selection when there is a clear recommended option.
+- Keep option labels short and scannable.
+- Align options vertically for readability.
+
+**Don't**
+- Use for multiple selections.
+- Use when there are more than 7 options — use `<sgds-select>` instead.
+- Preselect an option if it may bias the user unnecessarily.
+- Use inconsistent or unclear labels.
+
+## Common Use Cases
+
+- Selecting a payment method or delivery option.
+- Choosing user preferences (e.g. notification type).
+- Survey or form questions with a single answer.
+- Selecting a plan or tier (basic, standard, premium).
+
+## Advanced Considerations
+
+- **Default selection**: Use a preselected value when there is a recommended or most common option; avoid when neutrality is required — leave `value` unset.
+- **Layout**: Vertical alignment is the default and most accessible; horizontal layout is only appropriate for very short labels with few options.
+- **Conditional reveal**: Selecting an option may reveal additional inputs — ensure clear visual relationships between the radio and revealed content.
+- **Accessibility**: `<sgds-radio-group>` provides semantic grouping. If building a custom implementation, use `fieldset`/`legend` and appropriate ARIA roles.
+
+## Edge Cases
+
+- **No selection**: If the field is optional, allow all radios to remain unselected; do not force a default.
+- **Dynamic options**: Maintain the current selection state if the option list updates programmatically.
+- **Disabled options**: Clearly indicate why an option is disabled with optional helper text.
+- **Long labels**: Text wraps within the label; keep labels concise since no CSS parts are exposed to customise layout.
+- **Error handling**: Show a clear message via `invalidFeedback` when a required selection is missing.
+- **Mobile layout**: Ensure spacing and tap targets remain usable on small screens.
+
 ## Quick Decision Guide
 
 **Ensure only one option is selected?** → Always wrap in `<sgds-radio-group>`
@@ -100,3 +188,4 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 2. Set `name` on the group — it propagates to all child radios.
 3. Listen to `sgds-change` on the group (not on individual radios) to get the selected value via `event.detail.value`.
 4. `hasFeedback` and `invalidFeedback` are set on the group, not on individual radios.
+5. To pre-select an option, prefer setting `value` on `<sgds-radio-group>`. The `checked` attribute on `<sgds-radio>` also pre-checks that radio on render, but avoid using both simultaneously — `value` on the group takes precedence and may conflict with `checked` on a child.
