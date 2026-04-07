@@ -2,9 +2,17 @@
 
 `<sgds-breadcrumb>` renders a navigational trail showing the user's location within a page hierarchy. Each step is a `<sgds-breadcrumb-item>` wrapping a standard `<a>` tag.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
-**When NOT to use:**
+### When to use
+
+- On pages within a multi-level hierarchy (2 or more levels deep) to show the user's current location and provide quick navigation back to parent pages.
+- For content-heavy sites (documentation, product catalogues, portals) where users frequently navigate laterally or upward through the structure.
+- When users may arrive at a deep page directly (e.g. from search) and need wayfinding context.
+
+### When NOT to use
 - For flat structures with minimal hierarchy
 - As a primary navigation replacement
 - When the hierarchy is unclear, dynamic, or non-linear
