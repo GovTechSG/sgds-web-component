@@ -4,7 +4,14 @@
 
 ## Usage Guideline
 
-**When NOT to use:**
+### When to use
+
+- When content can be logically split into distinct sections and users benefit from reading only the sections relevant to them.
+- When vertical space is limited and progressive disclosure helps reduce cognitive load.
+- For FAQs, settings panels, or content-heavy pages with multiple independent topics.
+- When showing all content simultaneously would overwhelm users — accordion hides non-essential sections by default.
+
+### When NOT to use
 - All content is critical and must be visible
 - Users need to compare multiple sections simultaneously without any expand/collapse interaction
 - Content is short or minimal — fewer than 2 sections
