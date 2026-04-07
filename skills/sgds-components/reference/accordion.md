@@ -27,6 +27,12 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
 
 **Compact spacing?** → `density="compact"` on `<sgds-accordion>`
 
+**Spacious spacing?** → `density="spacious"` on `<sgds-accordion>`
+
+**Icon before the header?** → Use the `icon` slot on `<sgds-accordion-item>`
+
+**Badge after the header?** → Use the `badge` slot on `<sgds-accordion-item>`
+
 **Start an item open?** → Add `open` on `<sgds-accordion-item>`
 
 ```html
@@ -65,6 +71,22 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
     <div slot="content">Content B.</div>
   </sgds-accordion-item>
 </sgds-accordion>
+
+<!-- Spacious density with icon and badge slots -->
+<sgds-accordion density="spacious">
+  <sgds-accordion-item open>
+    <sgds-icon slot="icon" name="info-circle" size="xl"></sgds-icon>
+    <div slot="header">Section with icon</div>
+    <sgds-badge slot="badge" variant="primary">New</sgds-badge>
+    <div slot="content">Content here.</div>
+  </sgds-accordion-item>
+  <sgds-accordion-item>
+    <sgds-icon slot="icon" name="info-circle" size="xl"></sgds-icon>
+    <div slot="header">Another section</div>
+    <sgds-badge slot="badge" variant="warning">Updated</sgds-badge>
+    <div slot="content">More content here.</div>
+  </sgds-accordion-item>
+</sgds-accordion>
 ```
 
 ## API Summary
@@ -75,7 +97,7 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
 |---|---|---|---|
 | `allowMultiple` | boolean | `false` | Allows multiple items to be open simultaneously |
 | `variant` | `default \| border` | `default` | Visual style of the accordion |
-| `density` | `default \| compact` | `default` | Spacing density of accordion items |
+| `density` | `default \| compact \| spacious` | `default` | Spacing density of accordion items |
 
 ### `<sgds-accordion-item>`
 
@@ -88,9 +110,11 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
 
 | Slot | Purpose |
 |---|---|
+| `icon` | An icon placed before the header text |
 | `header` | The clickable header / title of the accordion item |
-| `content` | The body content shown when the item is expanded |
+| `badge` | A badge placed after the header text, aligned to the right |
 | `caret` | Custom caret/icon replacing the default chevron |
+| `content` | The body content shown when the item is expanded |
 
 ## Events (`<sgds-accordion-item>`)
 
@@ -111,15 +135,17 @@ The Accordion is a vertically stacked set of interactive headers that reveal or 
 ---
 
 **For AI agents**:
-1. `variant` and `density` are set on `<sgds-accordion>` (the parent), not on individual items.
-2. `sgds-show` and `sgds-hide` are cancelable on `<sgds-accordion-item>` — call `event.preventDefault()` to stop the transition.
-3. To start an item expanded on load, add the `open` attribute to `<sgds-accordion-item>`.
-4. Without `allowMultiple`, opening one item automatically closes others.
-5. Default to the first item open (`open` on first `<sgds-accordion-item>`) only when that section contains key information users need immediately.
-6. Use `allowMultiple` when users need to compare sections; use single-expand for guided or sequential reading.
-7. Never nest accordions more than one level deep.
-8. If a form section inside an accordion item has validation errors, auto-expand that item so the user can see and fix the error.
-9. There are no events or public methods on the `<sgds-accordion>` parent element.
+1. `variant` and `density` are set on `<sgds-accordion>` (the parent), not on individual items — the parent forwards both to each item automatically.
+2. `density` has three values: `default`, `compact`, and `spacious`. Match the density to the page context — use `compact` in data-dense UIs, `spacious` for landing pages or content-focused layouts.
+3. Use the `icon` slot to add a leading icon (e.g. `<sgds-icon slot="icon">`) and the `badge` slot for status indicators (e.g. `<sgds-badge slot="badge">`). Match `sgds-icon` size to the density: `md` for compact, `lg` for default, `xl` for spacious.
+4. `sgds-show` and `sgds-hide` are cancelable on `<sgds-accordion-item>` — call `event.preventDefault()` to stop the transition.
+5. To start an item expanded on load, add the `open` attribute to `<sgds-accordion-item>`.
+6. Without `allowMultiple`, opening one item automatically closes others.
+7. Default to the first item open (`open` on first `<sgds-accordion-item>`) only when that section contains key information users need immediately.
+8. Use `allowMultiple` when users need to compare sections; use single-expand for guided or sequential reading.
+9. Never nest accordions more than one level deep.
+10. If a form section inside an accordion item has validation errors, auto-expand that item so the user can see and fix the error.
+11. There are no events or public methods on the `<sgds-accordion>` parent element.
 
 ## Content Guidelines
 
