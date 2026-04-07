@@ -65,8 +65,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
     Scheduled maintenance on 12 December 2024, 10pm–12am SGT.
-    <sgds-link size="sm" variant="light" slot="action">
-      <a href="/maintenance">Read more <sgds-icon name="arrow-right"></sgds-icon></a>
+    <sgds-link size="sm" tone="fixed-light" slot="action">
     </sgds-link>
   </sgds-system-banner-item>
 </sgds-system-banner>
@@ -76,7 +75,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
   <sgds-system-banner-item>
     <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
     First announcement with details about a system update.
-    <sgds-link size="sm" variant="light" slot="action">
+    <sgds-link size="sm" tone="fixed-light" slot="action">
       <a href="#">Action link <sgds-icon name="arrow-right"></sgds-icon></a>
     </sgds-link>
   </sgds-system-banner-item>
@@ -119,7 +118,7 @@ No attributes.
 |---|---|
 | `icon` | Icon for the announcement (use `<sgds-icon size="md">`) |
 | *(default)* | Announcement message text |
-| `action` | Action link or button (`<sgds-link variant="light">` or `<sgds-button tone="fixed-light">`) |
+| `action` | Action link or button (`<sgds-link tone="fixed-light">` or `<sgds-button tone="fixed-light">`) |
 
 ## Events (`<sgds-system-banner>`)
 
@@ -135,5 +134,5 @@ No attributes.
 2. Pagination dots appear automatically when there are multiple `<sgds-system-banner-item>` elements.
 3. Items cycle every 5 seconds automatically when multiple items are present.
 4. Place the banner above `<sgds-masthead>` and `<sgds-mainnav>` in the page structure.
-5. Use `<sgds-link variant="light">` or `<sgds-button tone="fixed-light" variant="outline">` in the `action` slot to match the dark banner background.
+5. Use `<sgds-link tone="fixed-light">` or `<sgds-button tone="fixed-light" variant="outline">` in the `action` slot to match the dark banner background.
 6. There are no public methods on this component.
