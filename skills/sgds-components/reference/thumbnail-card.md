@@ -29,6 +29,26 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - `disabled` applies disabled styling; `hideBorder` removes the card border; `tinted` applies a tinted background.
 - No custom events or public methods.
 
+## Component Composition
+
+**`thumbnail` slot** — required; pass a single `<img>` at 64×64 px with explicit `width="64" height="64"` and descriptive `alt` text. Always set dimensions to prevent layout shift.
+
+**`subtitle` slot** — short category or type label in uppercase (e.g. `<span slot="subtitle">RESOURCES</span>`).
+
+**`title` slot** — concise card heading (1–6 words). Use plain text or `<span>`.
+
+**Default slot** — metadata between the title and description; `<sgds-icon-list>` is the standard pattern for date, location, or type metadata.
+
+**`description` slot** — 1–2 sentences of supporting text. Keep concise given the compact layout.
+
+**`lower` slot** — `<sgds-badge>` elements for tags below the description.
+
+**`footer` slot** — the card CTA; use `<sgds-link><a href="...">Label</a></sgds-link>`. The `link` slot is deprecated since v3.3.2.
+
+**Avoid placing inside a thumbnail card:**
+- Full-width or large photographs — use `<sgds-image-card>` instead
+- Multiple CTAs — cards should have a single navigation target
+
 ## Advanced Considerations
 
 - **`thumbnail` slot, not `image`**: this component uses `thumbnail` as the slot name — do not use `image` (that is the `<sgds-image-card>` slot name).
