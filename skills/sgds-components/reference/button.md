@@ -2,9 +2,18 @@
 
 `<sgds-button>` is the standard action element for forms, dialogs, and navigation. Use it instead of a native `<button>` whenever SGDS styling and behaviour are needed.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
-**When NOT to use:**
+### When to use
+
+- For primary, secondary, or tertiary actions that trigger an immediate operation (submit a form, open a modal, confirm a decision).
+- When a clear, clickable action element is needed — always prefer `<sgds-button>` over a native `<button>` within SGDS applications.
+- Use `variant="primary"` for the main action, `variant="outline"` for alternatives, and `variant="ghost"` for low-emphasis actions.
+- Use `tone="danger"` for destructive or irreversible actions (e.g. delete, remove).
+
+### When NOT to use
 - For navigation between pages — use links instead
 - For inline text actions within paragraphs — use inline links
 - When no action is required — avoid decorative buttons
