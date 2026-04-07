@@ -2,7 +2,15 @@
 
 `<sgds-icon-list>` renders a list where each item is prefixed by an `<sgds-icon>`. Use it for feature highlights, summaries, or any list that benefits from an icon prefix.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
+
+### When to use
+
+- For feature highlight lists, summaries, or metadata rows where each item benefits from an icon prefix to aid scannability.
+- Inside card components (`<sgds-icon-card>`, `<sgds-image-card>`, `<sgds-thumbnail-card>`) to display metadata such as dates, locations, or categories.
+- When a structured, icon-prefixed list needs consistent spacing and alignment that manual HTML would not guarantee.
 
 ### When NOT to use
 
@@ -21,7 +29,6 @@
 
 - **Icon size mapping**: the size relationship between `<sgds-icon-list size>` and `<sgds-icon size>` is manual — always pair `sm→md`, `md→lg`, `lg→xl`. Mismatches cause visual misalignment.
 - **Card integration**: `<sgds-icon-list>` is designed to work inside `<sgds-icon-card>`, `<sgds-image-card>`, and `<sgds-thumbnail-card>` — it slots naturally into the card's content area.
-- **No CSS parts**: custom properties and CSS parts are not exposed — styling is fixed by the design system.
 
 ## Edge Cases
 
