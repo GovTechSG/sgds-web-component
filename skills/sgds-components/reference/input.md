@@ -4,24 +4,7 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
-## Component Definition
-
-The Input component allows users to enter and edit a single line of text. It serves as a fundamental form control for collecting structured or unstructured user input such as names, email addresses, IDs, or short responses.
-
-## Purpose
-
-- Enable users to provide concise, structured information.
-- Support efficient data entry with clear affordances and feedback.
-- Ensure accessibility and consistency across all form experiences.
-
 ## Usage Guideline
-
-### When to use
-
-- When collecting single-line text input (e.g. name, email, NRIC, reference number).
-- When the expected input is short and structured.
-- When users need to edit or correct a value easily.
-- As part of a form, filter, or search pattern.
 
 ### When NOT to use
 
@@ -39,44 +22,6 @@ The Input component allows users to enter and edit a single line of text. It ser
 - `invalid` and `valid` can be set manually to override the validation state programmatically without relying on browser constraint validation.
 - `noValidate` disables browser-native constraint validation — use this when implementing fully custom validation logic.
 - `disabled` makes the field non-interactive; `readonly` makes it visible but not editable.
-
-## Content Guideline
-
-- **Label**: clearly describe what the user needs to input using concise, plain language (e.g. "Email address", not "Enter your email here").
-- **Placeholder**: provide hints or examples (e.g. "e.g. john@email.com"); avoid repeating the label. Never rely on placeholder as the only label.
-- **Hint text**: provide additional guidance when necessary (e.g. format requirements) via `hintText`.
-- **Error message**: be specific and actionable (e.g. "Enter a valid email address"); avoid generic messages like "Invalid input".
-
-## Interaction Guideline
-
-- Input receives focus on click or `Tab` key navigation; focus state must be visually distinct.
-- Input responds immediately to user typing.
-- Avoid aggressive real-time validation that interrupts typing — prefer validation on blur or after the user completes input.
-- Listen to `sgds-invalid` to react when the field fails validation, and `sgds-valid` when it passes — useful for enabling/disabling submit buttons or chaining field validation.
-- Keyboard: `Tab` moves between inputs; `Enter` submits the form (if applicable).
-- Ensure proper label association and ARIA attributes for assistive technology.
-
-## Best Practices
-
-**Do**
-- Use clear labels and helpful hint text.
-- Keep input width appropriate to the expected content length.
-- Use `type` where applicable (e.g. `email`, `number`, `password`) to get browser-native validation and keyboard support.
-- Provide real-time feedback when genuinely beneficial (e.g. password strength).
-- Ensure accessible colour contrast and visible focus states.
-
-**Don't**
-- Rely on placeholder as the only label.
-- Use input for selection-based tasks — use `<sgds-select>` or `<sgds-radio>` instead.
-- Validate too early and disrupt user flow.
-- Truncate important user input without a way to view the full value.
-
-## Common Use Cases
-
-- Personal details (e.g. name, email, phone number).
-- Login forms (username, password).
-- Search and filter fields.
-- Form fields in applications (e.g. address line, reference ID, NRIC).
 
 ## Advanced Considerations
 
