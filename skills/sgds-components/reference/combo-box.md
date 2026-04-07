@@ -2,6 +2,110 @@
 
 `<sgds-combo-box>` is a searchable select with client-side filtering out of the box. Add `multiSelect` to allow multiple selections (displayed as dismissible badges). Enable `async` for server-side filtering.
 
+## Component Definition
+
+A combo box is an input field combined with a dropdown list that allows users to type to filter options and select from the filtered results. It combines the behaviours of a text input and a select dropdown, supporting autocomplete, dynamic suggestions, and optionally multi-selection.
+
+## Purpose
+
+- Enable users to quickly find and select options from a large dataset.
+- Reduce cognitive load by filtering options as users type.
+- Improve efficiency compared to long static dropdowns.
+- Support async/server-side option loading for dynamic datasets.
+
+## Usage Guideline
+
+### When to use
+
+- When there are many options (e.g. >10 items) that benefit from search/filter.
+- When options are dynamic or fetched asynchronously.
+- When users may not know the exact option name upfront.
+- When multiple selections are needed — add `multiSelect`.
+- When space constraints prevent showing a full static list.
+
+### When NOT to use
+
+- For small, fixed lists (fewer than ~10 options) → use `<sgds-select>` or `<sgds-radio>` instead.
+- For binary or simple choices → use `<sgds-checkbox>` or `<sgds-radio>`.
+- When input must be fully freeform with no option list → use `<sgds-input>`.
+- When autocomplete suggestions may introduce ambiguity or data entry errors.
+
+## Behaviour
+
+- Dropdown opens on input focus, typing, or clicking the trigger.
+- Options are filtered client-side in real time based on user input (substring match by default); set a custom `filterFunction` to change the matching strategy.
+- Set `async` to disable client-side filtering and handle results server-side via the `sgds-input` event.
+- Selecting an option populates the input and closes the dropdown.
+- In `multiSelect` mode, each selected option appears as a dismissible badge; `element.value` is a comma-separated string.
+- `clearable` adds a clear button to reset the selection.
+- `loading` shows a spinner while async results are being fetched.
+- `required` makes the field required for form submission; an error state is shown on submit if no option is selected. Unlike `<sgds-select>`, there is no `hasFeedback` or `invalidFeedback` attribute — validation feedback relies on browser-native constraint validation.
+- `disabled` makes the combo box non-interactive; `readonly` makes it visible but not selectable.
+- Keyboard: `Arrow` keys navigate options; `Enter` selects the highlighted option; `Esc` closes the dropdown.
+- Supported states: default, hover, focus, disabled, loading, and empty (no results).
+
+## Content Guideline
+
+- Use clear, human-readable labels for options.
+- Avoid overly long option text; keep labels scannable.
+- Placeholder text should hint at the interaction (e.g. "Search for a country").
+- Use `hintText` for additional guidance (e.g. "Start typing to see suggestions").
+- Ensure consistent naming patterns across all options to make filtering predictable.
+
+## Interaction Guideline
+
+- Maintain input cursor focus while interacting with the dropdown.
+- Provide instant feedback when typing; debounce for async requests to avoid excessive API calls.
+- Highlight the currently focused option clearly.
+- Support mouse, keyboard, and touch interactions.
+- `clearable` allows users to reset without submitting the form.
+- Use `menuIsOpen` to programmatically control the dropdown open state when needed.
+- Ensure the dropdown positions correctly within the viewport — use `floatingOpts` for advanced positioning control.
+
+## Best Practices
+
+**Do**
+- Use combo box for large or searchable datasets (~10 or more options).
+- Debounce the `sgds-input` event for async searches to reduce server load.
+- Show `loading` while fetching async results; restore options and remove `loading` after.
+- Display an empty state message when no options match (the component handles this automatically).
+- Use `clearable` for fields where resetting to an empty state is a valid user action.
+
+**Don't**
+- Use for simple selections with few options — it adds unnecessary complexity.
+- Hide important options behind unclear search/filter logic.
+- Allow ambiguous or duplicate option labels without secondary metadata (e.g. country code alongside country name).
+- Block keyboard navigation.
+- Delay UI feedback noticeably after typing.
+
+## Common Use Cases
+
+- Country, nationality, or region selection.
+- Searchable organisational or user lookups.
+- Skills, categories, or tag selection (single or multi-select).
+- Address or location search with async suggestions.
+- Product or dataset filtering within forms or dashboards.
+
+## Advanced Considerations
+
+- **Custom filter**: set `filterFunction` as a JS property — not an HTML attribute — to implement prefix, fuzzy, or custom matching logic. Ignored when `async` is true.
+- **Async data**: set `async`, listen to `sgds-input` for `event.detail.displayValue`, fetch results, then replace `<sgds-combo-box-option>` children. Set `loading` to indicate fetch in progress.
+- **Multi-select**: add `multiSelect`; `element.value` becomes a comma-separated string of selected values. Use `badgeFullWidth` to make badges span the full input width.
+- **Empty async menu**: use `emptyMenuAsync` to show an open (empty) menu immediately when in async mode before the user types.
+- **Programmatic control**: `menuIsOpen` lets you open or close the dropdown from JavaScript without user interaction.
+- **Positioning**: `floatingOpts` passes options directly to Floating UI for advanced dropdown placement — use only when default positioning is insufficient.
+
+## Edge Cases
+
+- **No results**: the component shows an empty dropdown; ensure your UX communicates this clearly with `hintText` or external messaging.
+- **Async failure**: set `loading = false` and repopulate with an error option or show an adjacent error message — the component does not handle API errors automatically.
+- **Long option labels**: keep labels concise; no CSS parts are exposed to truncate overflow.
+- **Duplicate labels**: add secondary metadata to the option text (e.g. "Singapore (SG)") since filtering matches visible text.
+- **Pre-filled values**: set `value` to a string matching an existing option's `value` attribute; mismatches will show no selection.
+- **Clearing selection**: `clearable` resets `element.value` to empty — ensure downstream listeners on `sgds-change` handle an empty value gracefully.
+- **Mobile**: the dropdown renders inline; for very large datasets on small screens, consider limiting the option count via async filtering rather than rendering all options.
+- **IME input** (e.g. Chinese/Japanese): filtering fires via `sgds-input` which may fire during composition — use `async` mode with debouncing if IME input causes unintended filtering.
+
 ## Quick Decision Guide
 
 **Single-select searchable dropdown?** → Default `<sgds-combo-box>`
@@ -122,6 +226,6 @@
 
 **For AI agents**:
 1. For single-select, `element.value` is the selected option's `value`. For multi-select, it is a comma-separated string.
-2. For async filtering, set `async=true`, listen to `sgds-input` for `event.detail.displayValue`, fetch results, then populate `<sgds-combo-box-option>` children.
+2. For async filtering, set `async` (boolean attribute), listen to `sgds-input` for `event.detail.displayValue`, fetch results, then populate `<sgds-combo-box-option>` children.
 3. Use `clearable` to let users reset the selection without form submission.
 4. `filterFunction` must be set as a JS property (`.filterFunction = (input, item) => ...`), not as an HTML attribute.
