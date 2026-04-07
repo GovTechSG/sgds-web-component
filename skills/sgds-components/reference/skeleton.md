@@ -4,6 +4,93 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
+## Component Definition
+
+The Skeleton component renders a placeholder shape in place of content that has not yet loaded. It mimics the approximate size and shape of the real content to reduce perceived load time and prevent layout shift.
+
+## Purpose
+
+- Communicate that content is loading without using a spinner or blocking the full page.
+- Reduce perceived loading time by giving users a structural preview of the incoming content.
+- Prevent layout shift by reserving space that matches the real content dimensions.
+
+## Usage Guideline
+
+### When to use
+
+- When content is being fetched asynchronously and the layout structure is known in advance.
+- When the loading experience benefits from continuity — showing the page structure before data arrives.
+- For text blocks, images, avatars, cards, and other identifiable UI regions.
+- When load times are typically short but non-trivial (300ms–3s) — skeletons are most effective in this range.
+
+### When NOT to use
+
+- When loading time is very short (<300ms) — skeletons may flash briefly and cause more disruption than helping.
+- When the shape of the incoming content is unknown or highly variable — a generic spinner is more appropriate.
+- As a permanent placeholder for missing or unavailable content — use an empty state pattern instead.
+- Inside components that have a built-in `loading` prop (e.g. `<sgds-button loading>`, `<sgds-input loading>`) — those render their own loading indicator.
+
+## Behaviour
+
+- Renders a block-level placeholder at the specified `width` and `height`.
+- `borderRadius` shapes the placeholder — use `"50%"` with equal `width` and `height` for circles (avatars), or a small value (e.g. `"4px"`) for rounded rectangles.
+- `rows` renders multiple stacked skeleton lines within the total `height` — useful for representing a paragraph or list of text lines.
+- `sheen` adds an animated horizontal shimmer effect to suggest active loading; omit for a static placeholder.
+- The component has no slots, events, or public methods — it is purely presentational.
+
+## Content Guideline
+
+- No text content is placed inside `<sgds-skeleton>` — it has no slots.
+- Dimensions (`width`, `height`) must include CSS units (e.g. `"200px"`, `"100%"`, `"1.5rem"`) — bare numbers are invalid.
+- Match skeleton dimensions as closely as possible to the real content to prevent layout shift when content loads.
+- Use `rows` to represent multi-line text blocks; pair with a `height` that spans all rows proportionally.
+
+## Interaction Guideline
+
+- The skeleton is non-interactive and non-focusable — it carries no user action.
+- There is no built-in accessible announcement for skeleton screens; if an accessible loading announcement is needed, add an `aria-live` region on the containing element that updates when content is ready.
+- Replace the skeleton with real content as soon as data is available — do not leave skeletons visible after loading completes.
+
+## Best Practices
+
+**Do**
+- Match `width` and `height` to the dimensions of the real content being replaced.
+- Use `borderRadius="50%"` with equal dimensions for avatar or icon placeholders.
+- Use `rows` for text block placeholders to avoid stacking many individual skeleton elements.
+- Add `sheen` for animated loading feedback; omit it for subtle or non-distracting placeholders.
+- Always include CSS units in `width`, `height`, and `borderRadius` values.
+
+**Don't**
+- Leave skeletons visible after content has loaded.
+- Use skeletons for content whose shape is completely unknown.
+- Use bare numeric values for `width`, `height`, or `borderRadius` — always include units.
+- Stack more individual `<sgds-skeleton>` elements than necessary — use `rows` for text lines.
+- Use skeletons inside components that already have a built-in `loading` state.
+
+## Common Use Cases
+
+- Text line placeholders while article or description content loads.
+- Avatar or profile image placeholders (circle shape with `borderRadius="50%"`).
+- Card or image placeholder while media loads.
+- Table row placeholders while data is fetched.
+- Dashboard widget or chart area placeholders during data load.
+
+## Advanced Considerations
+
+- **Shape control**: `borderRadius` accepts any valid CSS border-radius value — use `"50%"` for circles, small values like `"4px"` or `"8px"` for card/button shapes, and omit for sharp rectangle placeholders.
+- **Multi-row text**: `rows` splits the total `height` evenly across all rows with small gaps. Pair with a `height` calculated as `rows × line-height + gaps` to match real text block dimensions.
+- **`sheen` animation**: the shimmer animation runs continuously while the skeleton is visible — remove the skeleton (rather than toggling `sheen`) when content loads to stop the animation.
+- **Layout matching**: use `width="100%"` to make the skeleton fill its container, matching fluid-width content. Use explicit pixel values only when the real content has a fixed dimension.
+- **No slots or events**: all show/hide logic must be managed by the host application — the skeleton has no internal state.
+
+## Edge Cases
+
+- **Missing units**: `width`, `height`, and `borderRadius` values without units (e.g. `"200"`) will not render correctly — always include a CSS unit.
+- **`rows` without `height`**: if `rows` is set but `height` is omitted, the skeleton may render with no visible height — always set `height` when using `rows`.
+- **Content loads faster than expected**: skeletons may flash briefly for very fast loads — consider a minimum display duration or omit the skeleton for sub-300ms loads.
+- **Mismatched dimensions**: if skeleton dimensions do not match real content, layout shift occurs when content appears — measure the real content and align skeleton dimensions accordingly.
+- **No accessible announcement**: screen readers do not inherently announce skeleton screens — pair with an `aria-live` region or `aria-busy="true"` on the container if accessible loading notifications are required.
+
 ## Quick Decision Guide
 
 **Size the skeleton to match the real content it replaces** — set `width` and `height` with CSS units (e.g., `"200px"`, `"100%"`, `"1.5rem"`).
