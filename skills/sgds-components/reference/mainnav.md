@@ -1,6 +1,6 @@
-# SGDS Table of Contents Component Skill
+# SGDS Mainnav Component Skill
 
-`<sgds-table-of-contents>` renders a list of anchor links for in-page navigation. Provide a heading via the default slot and a list of `<li>` items containing `<sgds-link>` elements via the `contents` slot.
+`<sgds-mainnav>` is the primary horizontal navigation bar. It collapses into a hamburger menu on small screens. Navigation items use `<sgds-mainnav-item>` and dropdown menus use `<sgds-mainnav-dropdown>`.
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
@@ -8,98 +8,149 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ### When to use
 
-- When a page has multiple distinct sections and users benefit from knowing the page structure upfront.
-- For long-form content pages (documentation, articles, guides) where users may want to jump to a specific section.
-- When the page is long enough that scrolling past all sections to find one would be disorienting.
+- As the primary horizontal navigation bar for any Singapore Government digital service or web application.
+- When users need to navigate between top-level sections of a site from a persistent header.
+- When the site has a brand logo that should link back to the homepage.
+- When some nav items should expand into dropdown menus with sub-links.
+- When right-aligned items (e.g. login button, language toggle) are needed in the navigation bar.
 
 ### When NOT to use
 
-- On short pages where all content is visible without scrolling — the component adds navigation overhead without benefit.
-- For site-level or multi-page navigation — use `<sgds-mainnav>` or `<sgds-sidenav>` instead.
-- When sections do not have unique `id` attributes on the page — anchor links will not function.
-- For dynamic or programmatically generated content trees — build a custom navigation component instead.
+- For secondary or section-level navigation — use `<sgds-subnav>` or `<sgds-sidenav>` instead.
+- For in-page navigation between sections — use `<sgds-table-of-contents>`.
+- As the sole navigation in a sidebar layout — use `<sgds-sidebar>` or `<sgds-sidenav>`.
+- When navigation is minimal and does not require a full header bar — consider a simpler standalone link structure.
 
 ## Behaviour
 
-- Renders a labelled list of anchor links for navigating within the current page.
-- The default slot accepts a heading element (e.g. `<h3>`) to label the table of contents.
-- The `contents` slot accepts `<li>` elements, each containing a `<sgds-link>` wrapping an `<a href="#section-id">`.
-- Clicking a link scrolls the page to the matching `id` on the target section.
-- The component has no attributes, events, or public methods — it is purely presentational and structural.
+- Renders a horizontal navigation bar with a brand area, primary nav items, and optional right-aligned items.
+- Collapses into a hamburger menu at the breakpoint defined by `expand` (default `lg`); use `expand="always"` to never collapse or `expand="never"` to always show the hamburger.
+- `<sgds-mainnav-item>` renders a nav link; the default slot takes an `<a>` tag.
+- `<sgds-mainnav-dropdown>` renders a dropdown trigger with `<sgds-dropdown-item>` children; the `toggler` slot takes the trigger element.
+- Items in the `end` slot are right-aligned and also collapse into the hamburger menu on small screens.
+- Items in the `non-collapsible` slot remain visible at all screen sizes regardless of the `expand` setting.
+- `active` on `<sgds-mainnav-item>` highlights the current page link.
+- Fires `sgds-show`, `sgds-after-show`, `sgds-hide`, `sgds-after-hide` when the collapsed menu opens or closes (mobile only).
 
 ## Advanced Considerations
 
-- **Heading level**: choose a heading level for the default slot that fits the surrounding document hierarchy — typically `<h3>` or `<h4>` depending on page structure.
-- **Anchor accuracy**: each `<a href="#id">` must exactly match the `id` of a section on the page — a mismatch produces a broken link that scrolls to the top of the page.
-- **No active state tracking**: `<sgds-table-of-contents>` does not highlight the currently visible section as the user scrolls — implement scroll-spy behaviour manually if needed.
-- **Ordering**: list items appear in the order they are added to the `contents` slot — match the visual order of sections on the page for consistency.
+- **`non-collapsible` slot**: use for items that must always be visible (e.g. a language toggle icon) — these are not hidden when the nav collapses.
+- **`end` slot collapse behaviour**: items in `end` collapse into the hamburger menu alongside default slot items — if an item must stay visible on mobile, use `non-collapsible` instead.
+- **`<sgds-mainnav-dropdown>` API**: inherits `<sgds-dropdown>` properties — see [dropdown.md](dropdown.md) for `active`, `menuIsOpen`, `close`, and `drop` options.
+- **`fluid` layout**: by default the mainnav uses a fixed-width container; set `fluid` for full-width layouts (e.g. dashboards or edge-to-edge designs).
+- **Singapore Government requirement**: `<sgds-masthead>` must appear above `<sgds-mainnav>` on all Singapore Government digital services.
 
 ## Edge Cases
 
-- **No heading provided**: the default slot is empty — the table of contents renders without a label; always provide a heading for accessibility.
-- **Broken anchor links**: `href="#id"` with no matching `id` attribute on the page scrolls to the top — verify all IDs match.
-- **Single entry**: technically valid, but a single-item table of contents provides no navigation value; only render the component when there are two or more sections.
-- **Duplicate section IDs**: the browser navigates to the first matching `id` — ensure all section IDs on the page are unique.
+- **No brand slot content**: the brand area renders empty — always provide an `<img>` in the `brand` slot and set `brandHref`.
+- **No `active` item set**: no nav item is highlighted — set `active` on the item matching the current route; update it on route changes in SPAs.
+- **`expand="never"` on desktop**: the hamburger menu is always shown even on wide screens — only use `never` for contexts where a collapsed nav is always desired.
+- **Dropdown without `toggler` slot content**: the dropdown trigger renders with no label — always provide a `<span>` or button in the `toggler` slot.
+- **Many nav items**: the horizontal bar may overflow on mid-size screens — test at the `expand` breakpoint and consider consolidating items into a dropdown.
 
 ## Quick Decision Guide
 
-**Standard table of contents for a content page?** → Use `<sgds-table-of-contents>` with a heading in the default slot and `<li>` items in the `contents` slot
+**When does the navbar collapse into hamburger?** → `expand="lg"` (default) — collapses below the `lg` breakpoint
 
-**Each entry links to a page section?** → Use `<sgds-link>` with `<a href="#section-id">` inside each `<li>`
+**Never collapse (always expanded)?** → `expand="always"`
+
+**Always collapsed?** → `expand="never"`
+
+**Full-width container?** → Add `fluid`
+
+**Brand logo link?** → Set `brandHref` to the target URL
 
 ```html
-<!-- Basic table of contents -->
-<sgds-table-of-contents>
-  <h3>Contents</h3>
-  <li slot="contents">
-    <sgds-link><a href="#overview">Overview</a></sgds-link>
-  </li>
-  <li slot="contents">
-    <sgds-link><a href="#installation">Installation</a></sgds-link>
-  </li>
-  <li slot="contents">
-    <sgds-link><a href="#usage">Usage</a></sgds-link>
-  </li>
-  <li slot="contents">
-    <sgds-link><a href="#api">API Reference</a></sgds-link>
-  </li>
-  <li slot="contents">
-    <sgds-link><a href="#changelog">Changelog</a></sgds-link>
-  </li>
-</sgds-table-of-contents>
+<!-- Full mainnav example -->
+<sgds-mainnav brandHref="/">
+  <img slot="brand" alt="Site logo" width="130" src="/logo.svg" />
 
-<!-- Corresponding page sections -->
-<section id="overview">
-  <h2>Overview</h2>
-  ...
-</section>
-<section id="installation">
-  <h2>Installation</h2>
-  ...
-</section>
+  <!-- Primary nav items -->
+  <sgds-mainnav-item>
+    <a href="/about">About</a>
+  </sgds-mainnav-item>
+
+  <sgds-mainnav-item active>
+    <a href="/services">Services</a>
+  </sgds-mainnav-item>
+
+  <!-- Dropdown nav item -->
+  <sgds-mainnav-dropdown>
+    <span slot="toggler">Resources</span>
+    <sgds-dropdown-item><a href="/docs">Documentation</a></sgds-dropdown-item>
+    <sgds-dropdown-item><a href="/faq">FAQ</a></sgds-dropdown-item>
+  </sgds-mainnav-dropdown>
+
+  <!-- Right-aligned items (end slot) -->
+  <sgds-mainnav-item slot="end">
+    <a href="/contact">Contact Us</a>
+  </sgds-mainnav-item>
+  <sgds-button slot="end">Login</sgds-button>
+</sgds-mainnav>
 ```
 
 ## API Summary
 
-### `<sgds-table-of-contents>`
+### `<sgds-mainnav>`
 
-No attributes.
+| Attribute | Type | Default | Purpose |
+|---|---|---|---|
+| `expand` | `sm \| md \| lg \| xl \| xxl \| always \| never` | `lg` | Breakpoint below which the nav collapses |
+| `brandHref` | string | `""` | URL for the brand logo link |
+| `fluid` | boolean | `false` | Uses a full-width container instead of a fixed-width one |
+
+### `<sgds-mainnav-item>`
+
+| Attribute | Type | Default | Purpose |
+|---|---|---|---|
+| `active` | boolean | `false` | Marks the item as the current active page |
+| `disabled` | boolean | `false` | Disables the nav item |
+
+### `<sgds-mainnav-dropdown>`
+
+Inherits `<sgds-dropdown>` properties — see **[components-dropdown](dropdown.md)** for full API.
+
+Key properties: `active`, `menuIsOpen`, `close`, `drop`.
 
 ## Slots
 
+### `<sgds-mainnav>`
+
 | Slot | Purpose |
 |---|---|
-| *(default)* | Heading element for the table of contents (e.g. `<h3>Contents</h3>`) |
-| `contents` | `<li>` elements, each containing a `<sgds-link>` with an anchor `<a href="#">` |
+| `brand` | Brand logo image |
+| *(default)* | `<sgds-mainnav-item>` and `<sgds-mainnav-dropdown>` elements |
+| `end` | Items right-aligned in the navbar; also collapses into the hamburger menu |
+| `non-collapsible` | Items that stay visible even when the menu is collapsed |
 
-## Events
+### `<sgds-mainnav-item>`
 
-None.
+| Slot | Purpose |
+|---|---|
+| *(default)* | Anchor `<a>` tag for navigation |
+
+### `<sgds-mainnav-dropdown>`
+
+| Slot | Purpose |
+|---|---|
+| `toggler` | The element that toggles the dropdown (typically `<span>` or `<sgds-button>`) |
+| *(default)* | `<sgds-dropdown-item>` elements |
+
+## Events (`<sgds-mainnav>`)
+
+| Event | When |
+|---|---|
+| `sgds-show` | Collapsed menu begins expanding (mobile only) |
+| `sgds-after-show` | Collapsed menu fully expanded |
+| `sgds-hide` | Collapsed menu begins collapsing |
+| `sgds-after-hide` | Collapsed menu fully collapsed |
 
 ---
 
 **For AI agents**:
-1. The *(default)* slot takes the heading — use a semantic heading element like `<h3>`.
-2. Each `contents` slot item is a `<li>` element containing `<sgds-link><a href="#section-id">Label</a></sgds-link>`.
-3. Anchor `href` values should match `id` attributes on the target page sections.
-4. There are no attributes, custom events, or public methods on this component.
+1. Always place the brand logo in the `brand` slot using an `<img>` element; set `brandHref` to `"/"` for home navigation.
+2. Regular nav links use `<a>` tags inside `<sgds-mainnav-item>`.
+3. Right-aligned items (login button, contact link) go in the `end` slot.
+4. `non-collapsible` slot stays visible on all screen sizes — use for icons that should never collapse.
+5. The collapsed menu events fire only on mobile breakpoints when using the hamburger toggle.
+6. Use `<sgds-masthead>` above `<sgds-mainnav>` as required for Singapore Government sites.
