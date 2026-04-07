@@ -2,22 +2,7 @@
 
 `<sgds-button>` is the standard action element for forms, dialogs, and navigation. Use it instead of a native `<button>` whenever SGDS styling and behaviour are needed.
 
-## Component Definition
-
-A button is an interactive UI element that allows users to trigger an action, such as submitting a form, confirming a choice, or initiating a process. Buttons are typically styled to indicate importance, hierarchy, and interactivity, and can include text, icons, or both.
-
-## Purpose
-
-- Provide a clear and actionable control that enables users to perform tasks efficiently
-- Guide users toward primary actions while supporting secondary and tertiary actions within an interface
-
 ## Usage Guideline
-
-**When to use:**
-- To trigger an action (e.g. submit, save, confirm)
-- To initiate workflows (e.g. next step, continue)
-- To present clear calls-to-action (CTA)
-- When user interaction is required to proceed
 
 **When NOT to use:**
 - For navigation between pages — use links instead
@@ -33,48 +18,6 @@ A button is an interactive UI element that allows users to trigger an action, su
 - Semantic tone via `tone`: `brand` (default), `danger` (destructive actions), `neutral` (no brand emphasis), `fixed-light` (dark backgrounds)
 - Can include leading icons (for clarity) or trailing icons (for direction/continuation)
 - Supports full-width or inline layout depending on context
-
-## Content Guidelines
-
-- Use clear, concise, and action-oriented labels
-- Use verbs to describe the action — "Submit", "Save changes", "Continue"
-- Keep labels short (1–3 words preferred)
-- Use sentence case for readability
-- Ensure the label reflects the outcome of the action
-- Avoid ambiguous wording like "Click here" or "Button"
-
-## Interaction Guidelines
-
-- Must be accessible via keyboard (`Tab`, `Enter`, `Space`)
-- Focus state must be visible and clear
-- Disabled buttons: should not be interactive and must clearly communicate unavailable state
-- Loading state: prevent multiple submissions and provide visual feedback (spinner or progress)
-- Icon-only buttons: must include accessible labels (`aria-label`)
-- Ensure sufficient touch target size (minimum ~44px)
-
-## Best Practices
-
-**Do**
-- Use one primary button per section or screen
-- Maintain clear hierarchy between actions
-- Place buttons where users expect them (e.g. bottom-right for forms)
-- Use consistent styling across products
-- Provide feedback after interaction (e.g. loading, success state)
-
-**Don't**
-- Use multiple primary buttons in the same context
-- Overload the UI with too many buttons
-- Use vague or unclear labels
-- Disable buttons without explanation when possible
-- Use buttons for navigation when a link is more appropriate
-
-## Common Use Cases
-
-- **Form submission** — Submit, Save, Cancel
-- **Confirmation actions** — Confirm, Delete
-- **Navigation within flows** — Next, Back, Continue
-- **Triggering modals or dialogs**
-- **Inline actions** — Add item, Remove
 
 ## Advanced Considerations
 
