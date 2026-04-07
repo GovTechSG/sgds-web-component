@@ -4,23 +4,7 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
-## Component Definition
-
-A Link is an interactive text element that navigates users to another location — either within the same application (internal navigation) or to an external resource. Links are visually distinguished from surrounding text through colour and/or underline styling.
-
-## Purpose
-
-Enable navigation and discoverability, allowing users to move between content, access additional information, or perform lightweight actions without interrupting their current flow.
-
 ## Usage Guideline
-
-### When to use
-
-- To navigate to another page or route.
-- To link to external resources (e.g. documents, websites).
-- Within body text as inline links for contextual navigation — use a plain `<a>` tag; `sgds.css` applies default anchor styling automatically.
-- As standalone links for secondary actions — use `<sgds-link>`.
-- When the action is low-emphasis compared to primary actions (vs. a button).
 
 ### When NOT to use
 
@@ -36,45 +20,6 @@ Enable navigation and discoverability, allowing users to move between content, a
 - Supports leading or trailing icons (e.g. external-link icon); icon size is managed automatically based on the link `size`.
 - `disabled` sets `href="javascript:void(0)"` and `tabindex="-1"` on the slotted anchor automatically.
 - `active` applies active styling to indicate the current page or selected state.
-
-## Content Guideline
-
-- Use clear, descriptive labels — "View application status" not "Click here".
-- Link text should describe the destination or outcome; keep it concise but meaningful.
-- Inline links should integrate naturally within sentence flow.
-- For external links, indicate the behaviour clearly (e.g. an icon or "(opens in new tab)") when it may surprise the user.
-
-## Interaction Guideline
-
-- External links should open in a new tab only when necessary — avoid overuse.
-- Keyboard: links are focusable and activatable with `Enter`.
-- Visited state should not reduce readability or contrast.
-
-## Best Practices
-
-**Do**
-- Use links for navigation, not actions.
-- Keep link text specific and meaningful.
-- Maintain consistent styling across all link types using the `tone` prop.
-- Use inline links sparingly to avoid visual clutter.
-- Provide a clear indication for external links.
-- Ensure sufficient colour contrast, a visible focus state, and keyboard support.
-
-**Don't**
-- Use vague text like "here" or "more".
-- Overload content with too many links.
-- Style non-interactive text as links.
-- Use links where a button is more appropriate.
-- Open new tabs without a clear user expectation.
-- Use the deprecated `variant` prop — use `tone` instead.
-
-## Common Use Cases
-
-- Inline links within paragraphs (e.g. policy pages, help content) — use plain `<a>`.
-- Navigation to related content or subpages — use `<sgds-link>`.
-- External resource links (e.g. downloads, official sites).
-- Secondary actions (e.g. "Cancel", "Learn more") below cards or forms.
-- Linking to documents (PDF, reports).
 
 ## Advanced Considerations
 
