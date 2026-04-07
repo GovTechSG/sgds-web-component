@@ -4,6 +4,50 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
+## Usage Guideline
+
+### When to use
+
+- When content can be split into distinct, mutually exclusive sections and users need to switch between them without leaving the page.
+- For categorised content where only one section needs to be visible at a time (e.g. product details, settings categories, filtered views).
+- When vertical navigation between content sections is preferred — use `orientation="vertical"`.
+
+### When NOT to use
+
+- When users need to compare content across sections simultaneously — consider showing all sections instead.
+- For sequential steps where order matters — use `<sgds-stepper>` instead.
+- For primary page navigation — use `<sgds-mainnav>` or `<sgds-sidenav>`.
+- When there are fewer than 2 tabs — a single tab provides no value; show the content directly.
+- When there are more tabs than can reasonably fit in the tab list — consider grouping or a different navigation pattern.
+
+## Behaviour
+
+- `<sgds-tab>` elements must be placed in the `nav` slot of `<sgds-tab-group>`; `<sgds-tab-panel>` elements go in the default slot.
+- Each `<sgds-tab panel="x">` is linked to a `<sgds-tab-panel name="x">` by matching `panel` and `name` values — mismatches result in no panel being shown.
+- The first non-disabled tab is active by default; add `active` to a specific `<sgds-tab>` to override the initial selection.
+- `disabled` on a `<sgds-tab>` prevents selection and skips the tab during keyboard navigation.
+- `variant` controls visual style: `underlined` (default) or `solid`. Set on `<sgds-tab-group>` — propagates to all child tabs.
+- `orientation` controls layout: `horizontal` (default) or `vertical`. Set on `<sgds-tab-group>`.
+- `density` controls spacing: `default` or `compact`. Set on `<sgds-tab-group>`.
+- Fires `sgds-tab-show` (with `event.detail.name`) when a tab is activated and `sgds-tab-hide` when it is deactivated.
+- No public methods on `<sgds-tab-group>`.
+
+## Advanced Considerations
+
+- **`panel`/`name` matching**: the link between a tab and its panel is entirely string-based — a typo in either attribute results in a broken tab with no panel displayed. Always verify both values match exactly.
+- **`active` attribute**: sets the initially active tab at render time only; once the tab group is interactive, active state is managed internally and the `active` attribute is not reactively updated.
+- **`variant` and `density` propagation**: these are set on `<sgds-tab-group>` and automatically propagate to all child `<sgds-tab>` elements — do not set them on individual tabs.
+- **`sgds-tab-show` / `sgds-tab-hide`**: both events fire with `event.detail.name` (the panel name string) — use to lazy-load content, track analytics, or sync URL state with the active tab.
+- **No public methods**: programmatic tab activation is not supported via methods — manage active state by adding/removing the `active` attribute on a `<sgds-tab>` directly if needed.
+
+## Edge Cases
+
+- **Mismatched `panel` / `name`**: the tab renders but clicking it shows no content — always keep `panel` and `name` in sync.
+- **All tabs disabled**: the tab group renders with no selectable tab — ensure at least one tab is enabled.
+- **No `active` tab set**: the first non-disabled tab is selected automatically; this is correct behaviour, not a bug.
+- **Dynamically added tabs**: tabs added after initial render may not be registered — initialise the full tab list before mounting the component where possible.
+- **Long tab labels**: may overflow the tab bar on narrow viewports — keep labels concise (1–3 words) or use `orientation="vertical"` for longer labels.
+
 ## Quick Decision Guide
 
 **Visual style?**
