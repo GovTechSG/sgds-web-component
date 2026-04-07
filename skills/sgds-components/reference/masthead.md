@@ -4,6 +4,8 @@
 
 > **Mandatory usage**: All .gov.sg digital services must include this banner at the top of every page, as mandated by the Singapore Government Design System guidelines.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
 ### When to use
