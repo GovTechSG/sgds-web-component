@@ -6,11 +6,8 @@ import { defaultValue } from "../../utils/defaultvalue";
 import { watch } from "../../utils/watch";
 import stepperStyle from "./stepper.css";
 import SgdsIcon from "../Icon/sgds-icon";
-export interface IStepMetaData {
-  component: unknown;
-  stepHeader: string;
-  iconName?: string;
-}
+import { IStepMetaData } from "./types";
+export type { IStepMetaData };
 /**
  * @summary Steppers are used to inform users which step they are at in a form or a process
  *
