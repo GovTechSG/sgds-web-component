@@ -2,9 +2,18 @@
 
 `<sgds-checkbox>` can be used standalone or grouped in `<sgds-checkbox-group>`. The group manages shared validation, a fieldset label, and change detection. Standalone checkboxes work for "I agree" cases.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
-**When NOT to use:**
+### When to use
+
+- When users can select zero, one, or multiple options from a list independently.
+- For consent or acknowledgement scenarios where a single standalone checkbox is appropriate (e.g. "I agree to the terms").
+- For parent–child selection groups where a parent checkbox reflects the aggregate state of its children (checked / indeterminate / unchecked).
+- When options are displayed as a visible list and users benefit from seeing all choices at once.
+
+### When NOT to use
 - When only one option can be selected → use radio buttons
 - For immediate actions → use a switch
 - When there are too many options (>7–10) → consider select or combobox
@@ -26,6 +35,8 @@
 **Accessibility** — use proper label association; support `aria-checked="mixed"` for indeterminate; ensure screen readers announce label and state (checked / unchecked / mixed)
 
 **Layout & responsiveness** — maintain alignment between checkbox and label; support wrapping labels without breaking layout; ensure spacing consistency using design tokens
+
+**`hasFeedback` type differs between group and standalone** — on `<sgds-checkbox-group>` it is a boolean presence attribute (`hasFeedback`); on standalone `<sgds-checkbox>` it is a string enum (`hasFeedback="style"`, `hasFeedback="text"`, `hasFeedback="both"`). Never add `hasFeedback="both"` to a group — it will not work as expected.
 
 ## Edge Cases
 
@@ -141,3 +152,4 @@
 3. On `sgds-change` from a group, read `element.value` to get the current selection — no event detail for group.
 4. `indeterminate` is useful for "select all" patterns; toggling it programmatically is valid.
 5. Standalone `<sgds-checkbox>` elements (outside a group) work like a plain HTML checkbox with `name` and `value`.
+6. `hasFeedback` type differs: `<sgds-checkbox-group hasFeedback>` takes a boolean; `<sgds-checkbox hasFeedback="both">` takes a string enum (`style | text | both`). Never add `hasFeedback="both"` to a group.
