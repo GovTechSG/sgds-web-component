@@ -37,6 +37,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 - **`value` out of range**: values below `ariamin` may render as empty; values above `ariamax` may overflow — always clamp `value` within the valid range.
 - **Missing `ariamin` / `ariamax`**: screen readers cannot accurately announce progress without these attributes — always set both.
+- **Value regression** (decreasing `value`): the bar instantly snaps back to the lower value with no animation — implement smooth transitions externally if a decreasing animation is required.
+- **`value` at `ariamax`**: the bar appears full but no completion event is fired — always handle the completion state in the host application.
 
 ## Quick Decision Guide
 
