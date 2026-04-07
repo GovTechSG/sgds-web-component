@@ -1,5 +1,5 @@
-import SgdsSpinner from "@govtechsg/sgds-web-component/react/spinner/index.js";
+'use client';
 
 export const Spinner = () => {
-  return <SgdsSpinner />;
+  return <sgds-spinner suppressHydrationWarning />;
 };
