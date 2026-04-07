@@ -6,6 +6,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Usage Guideline
 
+### When to use
+
+- When exactly one option must be selected from a small set of mutually exclusive choices (e.g. gender, payment method, delivery option).
+- When all options should be visible simultaneously so users can compare before selecting.
+- For 2–7 options where a dropdown would add unnecessary interaction overhead.
+
 ### When NOT to use
 
 - When multiple selections are allowed → use `<sgds-checkbox>`.
@@ -130,7 +136,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 **For AI agents**:
 1. Always wrap `<sgds-radio>` elements in `<sgds-radio-group>` — standalone radios are not supported.
-2. Set `name` on the group — it propagates to all child radios.
+2. Set `name` on the **group** — it propagates to all child radios. Setting `name` on individual `<sgds-radio>` elements has no effect; only the group's `name` attribute is used for form submission.
 3. Listen to `sgds-change` on the group (not on individual radios) to get the selected value via `event.detail.value`.
 4. `hasFeedback` and `invalidFeedback` are set on the group, not on individual radios.
 5. To pre-select an option, prefer setting `value` on `<sgds-radio-group>`. The `checked` attribute on `<sgds-radio>` also pre-checks that radio on render, but avoid using both simultaneously — `value` on the group takes precedence and may conflict with `checked` on a child.
