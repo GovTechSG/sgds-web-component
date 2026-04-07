@@ -2,6 +2,8 @@
 
 `<sgds-accordion>` is a container for one or more `<sgds-accordion-item>` elements. Items can be opened and closed individually; setting `allowMultiple` lets multiple items stay open at once.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
 ### When to use
@@ -46,6 +48,16 @@ Accordion items support two expand modes:
 
 **Avoid placing inside accordion items:**
 - Heavy nested interactive components that compete for attention
+
+## Advanced Considerations
+
+- **`variant` and `density` are on `<sgds-accordion>`, not items**: these attributes are set on the parent container and cascade to all child `<sgds-accordion-item>` elements — never set them on individual items.
+- **Cancelable events**: `sgds-show` and `sgds-hide` on `<sgds-accordion-item>` are cancelable — call `event.preventDefault()` to block a transition (e.g. to validate before allowing collapse).
+- **Public methods**: `show()` and `hide()` on `<sgds-accordion-item>` allow programmatic control — useful for auto-expanding an item with validation errors.
+- **`caret` slot**: replace the default chevron with any custom icon by placing an element in the `caret` slot on `<sgds-accordion-item>`.
+- **Auto-expand on error**: when a form field inside an accordion item fails validation, call `item.show()` programmatically so the error is visible — do not leave users confused by hidden errors.
+- **No nesting**: do not nest `<sgds-accordion>` inside another accordion — keep content hierarchy flat within items.
+- **No events on `<sgds-accordion>`**: all events (`sgds-show`, `sgds-hide`, `sgds-after-show`, `sgds-after-hide`) fire on `<sgds-accordion-item>`, not on the parent `<sgds-accordion>`.
 
 ## Edge Cases
 
