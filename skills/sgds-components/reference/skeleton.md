@@ -6,6 +6,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Usage Guideline
 
+### When to use
+
+- While content is loading asynchronously, to reserve space and reduce perceived loading time.
+- When the shape and layout of incoming content is known — mirror the expected content structure with skeleton shapes (rectangles for text, circles for avatars).
+- To prevent layout shift when data populates, keeping the page structure stable during the load phase.
+
 ### When NOT to use
 
 - When loading time is very short (<300ms) — skeletons may flash briefly and cause more disruption than helping.
