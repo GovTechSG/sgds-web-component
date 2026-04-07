@@ -4,21 +4,7 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
-## Component Definition
-
-A Textarea is a multi-line input field that allows users to enter and edit longer text content, such as comments, descriptions, or messages. It supports wrapping, scrolling, and optionally resizing.
-
-## Purpose
-
-- Enable users to input free-form text that exceeds the length of a single-line input
-- Capture detailed user information while maintaining readability and accessibility
-
 ## Usage Guideline
-
-**When to use:**
-- Capturing user feedback, comments, or descriptions
-- Input that requires multiple lines or paragraphs
-- Situations where content may exceed typical single-line limits
 
 **When NOT to use:**
 - When input is expected to be short or single-line — use `<sgds-input>` instead
@@ -31,38 +17,6 @@ A Textarea is a multi-line input field that allows users to enter and edit longe
 - Supports scrollbars if content exceeds the visible area
 - Maintains focus and cursor position on input
 - Provides visual feedback for error, warning, or success states
-
-## Content Guidelines
-
-- Use clear and concise placeholder text to guide user input
-- Keep character limits visible when applicable via `maxlength`
-- Use `hintText` for instructions — avoid placing guidance inside the textarea itself
-
-## Interaction Guidelines
-
-- Keyboard navigation: `Tab` to focus, `Shift+Tab` to move backward
-- Provide accessible labels and ARIA attributes for screen readers
-- Highlight focus state clearly
-
-## Best Practices
-
-**Do**
-- Use for multi-line input only
-- Indicate optional vs required fields
-- Provide clear labels and `hintText`
-- Use visual states for validation (error, success)
-
-**Don't**
-- Use for short or single-line input
-- Overload with instructions inside the textarea
-- Allow uncontrolled resizing that breaks layout — use `resize="none"` or `resize="vertical"` where needed
-
-## Common Use Cases
-
-- **Feedback forms** — user feedback, ratings, suggestions
-- **Comment sections** — replies, annotations
-- **Message input** — chat or email applications
-- **Description fields** — forms or applications requiring detailed text
 
 ## Advanced Considerations
 
