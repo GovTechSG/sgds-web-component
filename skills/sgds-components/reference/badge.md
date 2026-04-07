@@ -2,9 +2,18 @@
 
 `<sgds-badge>` is the standard label and status indicator element. Use it to highlight categories, states, or short descriptive text alongside other content.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
-**When NOT to use:**
+### When to use
+
+- To label or categorise content items (e.g. status tags, category chips, count indicators).
+- When a short, scannable label helps users identify the type or state of an item at a glance.
+- Alongside other elements (cards, list items, table cells) to surface metadata like "New", "Active", or a numeric count.
+- When a visual distinction between states is needed in a compact, non-interactive form.
+
+### When NOT to use
 - For long or detailed content
 - As a primary method of communication
 - When the meaning relies only on color without text/icon support
