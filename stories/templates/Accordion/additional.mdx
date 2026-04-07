@@ -37,12 +37,12 @@ To disable individual accordion items, add `disabled` prop to the targeted `<sgd
   <Story of={AccordionStories.Disabled} />
 </Canvas>
 
-## Trailing icon slot
+## Icon slot
 
-Use the `trailingIcon` slot to place an icon before the header text. Match the `size` of `<sgds-icon>` to the accordion `density`: `lg` for `default`, `md` for `compact`. Toggle the `density` control to see the icon resize accordingly.
+Use the `icon` slot to place an icon before the header text. Match the `size` of `<sgds-icon>` to the accordion `density`: `md` for `compact`, `lg` for `default`, `xl` for `spacious`.
 
-<Canvas of={AccordionStories.TrailingIconSlot}>
-  <Story of={AccordionStories.TrailingIconSlot} />
+<Canvas of={AccordionStories.LeadingIconSlot}>
+  <Story of={AccordionStories.LeadingIconSlot} />
 </Canvas>
 
 ## Badge slot

@@ -44,21 +44,21 @@ export const Disabled = {
 const LeadingIconTemplate = iconSize => html`
 <sgds-accordion >
   <sgds-accordion-item open density="compact">
-    <sgds-icon slot="leadingIcon" name="info-circle" size="md"></sgds-icon>
+    <sgds-icon slot="icon" name="info-circle" size="md"></sgds-icon>
     <div slot="header">Accordion density compact</div>
     <div slot="content">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
     </div>
   </sgds-accordion-item>
     <sgds-accordion-item density="default">
-    <sgds-icon slot="leadingIcon" name="info-circle" size="lg"></sgds-icon>
+    <sgds-icon slot="icon" name="info-circle" size="lg"></sgds-icon>
     <div slot="header">Accordion density default</div>
     <div slot="content">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
     </div>
   </sgds-accordion-item>
     <sgds-accordion-item density="spacious">
-    <sgds-icon slot="leadingIcon" name="info-circle" size="xl"></sgds-icon>
+    <sgds-icon slot="icon" name="info-circle" size="xl"></sgds-icon>
     <div slot="header">Accordion density spacious</div>
     <div slot="content">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores soluta eaque fugit fuga distinctio? Eum.
@@ -71,7 +71,7 @@ const LeadingIconTemplate = iconSize => html`
 
 export const LeadingIconSlot = {
   render: LeadingIconTemplate.bind({}),
-  name: "Leading icon slot",
+  name: "Icon slot",
   args: {},
   parameters: {},
   tags: ["!dev"]

@@ -235,4 +235,16 @@ describe("<sgds-accordion-item>", () => {
     const accordionBody = el.shadowRoot?.querySelector(".accordion-body") as HTMLButtonElement;
     expect(accordionBody?.classList.contains("hidden")).to.be.true;
   });
+
+  it("should have an icon slot inside the accordion button", async () => {
+    const el = await fixture<SgdsAccordionItem>(html`<sgds-accordion-item></sgds-accordion-item>`);
+    const button = el.shadowRoot?.querySelector(".accordion-btn");
+    expect(button?.querySelector("slot[name='icon']")).to.exist;
+  });
+
+  it("should have a badge slot inside accordion-header__trailing", async () => {
+    const el = await fixture<SgdsAccordionItem>(html`<sgds-accordion-item></sgds-accordion-item>`);
+    const trailing = el.shadowRoot?.querySelector(".accordion-header__trailing");
+    expect(trailing?.querySelector("slot[name='badge']")).to.exist;
+  });
 });
