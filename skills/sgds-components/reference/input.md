@@ -4,6 +4,96 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
+## Component Definition
+
+The Input component allows users to enter and edit a single line of text. It serves as a fundamental form control for collecting structured or unstructured user input such as names, email addresses, IDs, or short responses.
+
+## Purpose
+
+- Enable users to provide concise, structured information.
+- Support efficient data entry with clear affordances and feedback.
+- Ensure accessibility and consistency across all form experiences.
+
+## Usage Guideline
+
+### When to use
+
+- When collecting single-line text input (e.g. name, email, NRIC, reference number).
+- When the expected input is short and structured.
+- When users need to edit or correct a value easily.
+- As part of a form, filter, or search pattern.
+
+### When NOT to use
+
+- For long-form or multi-line input → use `<sgds-textarea>` instead.
+- For predefined options → use `<sgds-select>`, `<sgds-radio>`, or `<sgds-checkbox>`.
+- For read-only display of data — use `readonly` if the value must be visible but not editable; consider a plain text element for purely decorative display.
+
+## Behaviour
+
+- Accepts keyboard input and supports standard text editing (copy, paste, delete).
+- Displays states: default, hover, focus, filled, disabled, and error.
+- Supports placeholder text, pre-filled values, prefix/suffix addons, and an action slot.
+- Shows an inline loading spinner when `loading` is set.
+- Validation can be triggered inline, on blur, or on submit; error state is shown when `hasFeedback` is set and validation fails.
+- `disabled` makes the field non-interactive; `readonly` makes it visible but not editable.
+
+## Content Guideline
+
+- **Label**: clearly describe what the user needs to input using concise, plain language (e.g. "Email address", not "Enter your email here").
+- **Placeholder**: provide hints or examples (e.g. "e.g. john@email.com"); avoid repeating the label. Never rely on placeholder as the only label.
+- **Hint text**: provide additional guidance when necessary (e.g. format requirements) via `hintText`.
+- **Error message**: be specific and actionable (e.g. "Enter a valid email address"); avoid generic messages like "Invalid input".
+
+## Interaction Guideline
+
+- Input receives focus on click or `Tab` key navigation; focus state must be visually distinct.
+- Input responds immediately to user typing.
+- Avoid aggressive real-time validation that interrupts typing — prefer validation on blur or after the user completes input.
+- Keyboard: `Tab` moves between inputs; `Enter` submits the form (if applicable).
+- Ensure proper label association and ARIA attributes for assistive technology.
+
+## Best Practices
+
+**Do**
+- Use clear labels and helpful hint text.
+- Keep input width appropriate to the expected content length.
+- Use `type` where applicable (e.g. `email`, `number`, `password`) to get browser-native validation and keyboard support.
+- Provide real-time feedback when genuinely beneficial (e.g. password strength).
+- Ensure accessible colour contrast and visible focus states.
+
+**Don't**
+- Rely on placeholder as the only label.
+- Use input for selection-based tasks — use `<sgds-select>` or `<sgds-radio>` instead.
+- Validate too early and disrupt user flow.
+- Truncate important user input without a way to view the full value.
+
+## Common Use Cases
+
+- Personal details (e.g. name, email, phone number).
+- Login forms (username, password).
+- Search and filter fields.
+- Form fields in applications (e.g. address line, reference ID, NRIC).
+
+## Advanced Considerations
+
+- **Prefix/Suffix**: use `prefix` / `suffix` for text addons (e.g. `$`, `kg`) shown inline inside the input border. For icon addons, use the `action` slot with `<sgds-icon-button>` instead.
+- **Action slot**: use the `action` slot with `<sgds-icon-button>` for icon actions after the field (e.g. toggle password visibility, clear).
+- **Debounced input**: for search or filtering, debounce the `sgds-input` event to reduce performance load.
+- **Input masking / auto-formatting**: not built in — implement externally for structured formats (e.g. phone number, NRIC, credit card spacing).
+- **Character limits**: `minlength` and `maxlength` are direct attributes on `<sgds-input>`; show counters when limits are enforced. For numeric/date types, use `min` and `max` to constrain the value range.
+- **Accessibility**: screen readers announce label, state, and errors — ensure `label` is always set and `invalidFeedback` is descriptive.
+
+## Edge Cases
+
+- **Long input values**: content scrolls horizontally within the field; keep expected input width in mind when sizing the component.
+- **Pasted content**: browsers may paste unexpected formatting — validate or sanitise on blur/submit rather than blocking paste.
+- **Browser autofill**: autofill may override styles or values; test autofill behaviour for common fields (email, password, address).
+- **Mobile keyboards**: use the correct `type` to trigger the appropriate soft keyboard (e.g. `type="email"` for email keyboards).
+- **Validation dependencies**: for fields like "confirm password", validate on blur of the second field and revalidate when the first field changes.
+- **Disabled vs read-only**: `disabled` — not interactive and excluded from form submission; `readonly` — visible and submitted but not editable.
+- **Special characters and non-Latin scripts**: `<sgds-input>` accepts any Unicode text; validate or sanitise server-side as needed.
+
 ## Quick Decision Guide
 
 **Standard text input?** → `type="text"` (default)
@@ -14,7 +104,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 **Password field?** → `type="password"`
 
-**Show validation feedback?** → Set `hasFeedback` and `invalidFeedback`
+**Show validation feedback?** → Set `hasFeedback="both"` (border + message), `"style"` (border only), or `"text"` (message only), and `invalidFeedback`
 
 **Show inline loading spinner?** → `loading`
 
