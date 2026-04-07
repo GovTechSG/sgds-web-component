@@ -2,7 +2,16 @@
 
 `<sgds-combo-box>` is a searchable select with client-side filtering out of the box. Add `multiSelect` to allow multiple selections (displayed as dismissible badges). Enable `async` for server-side filtering.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
+
+### When to use
+
+- When users need to search or filter through a large list of options to find their selection.
+- For multi-select scenarios where users can pick several items displayed as dismissible badges — use `multiSelect`.
+- When option lists are too long to scan in a fixed dropdown — the built-in client-side filtering reduces cognitive load.
+- For server-driven autocomplete where results load asynchronously based on user input — use `async` mode.
 
 ### When NOT to use
 
@@ -168,3 +177,4 @@
 2. For async filtering, set `async` (boolean attribute), listen to `sgds-input` for `event.detail.displayValue`, fetch results, then populate `<sgds-combo-box-option>` children.
 3. Use `clearable` to let users reset the selection without form submission.
 4. `filterFunction` must be set as a JS property (`.filterFunction = (input, item) => ...`), not as an HTML attribute.
+5. `<sgds-combo-box>` does **not** have `hasFeedback` or `invalidFeedback` attributes — unlike all other SGDS form components. Validation relies entirely on the browser-native `required` constraint. Do not add these attributes.
