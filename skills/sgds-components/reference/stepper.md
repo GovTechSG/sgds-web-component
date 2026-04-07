@@ -4,24 +4,7 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
-## Component Definition
-
-The Stepper component renders a sequential step indicator for multi-step workflows. It tracks the active step, manages navigation between steps via public methods, and fires events to allow the host application to render the correct content for each step.
-
-## Purpose
-
-- Guide users through a structured, multi-step process with clear progress visibility.
-- Enforce sequential task completion with optional jump-navigation.
-- Provide a consistent step indicator UI that is decoupled from the content rendered at each step.
-
 ## Usage Guideline
-
-### When to use
-
-- For multi-step forms or wizards where tasks must be completed in a defined sequence (e.g. registration, checkout, onboarding).
-- When users benefit from seeing their overall progress and knowing how many steps remain.
-- When steps are discrete and each has a clear, distinct purpose.
-- When jump navigation between steps is useful — enable `clickable`.
 
 ### When NOT to use
 
@@ -41,45 +24,6 @@ The Stepper component renders a sequential step indicator for multi-step workflo
 - `orientation` controls the layout direction: `horizontal` (default) or `vertical`.
 - `clickable` allows users to click a step indicator to jump directly to that step.
 - Each step's `iconName` is optional — the step indicator defaults to showing the step number if omitted.
-
-## Content Guideline
-
-- `stepHeader` should be concise and describe the step's task (e.g. "Personal Info", "Review", "Confirm").
-- Use 2–4 words per step header; avoid full sentences.
-- If using `iconName`, choose icons that reinforce the step's purpose — they are sourced from the SGDS icon set.
-- Step count: 3–5 steps is the recommended range for most workflows; more than 7 becomes visually crowded.
-- The stepper displays step indicators only — the content for each step must be rendered by the host application based on `activeStep`.
-
-## Interaction Guideline
-
-- Place navigation buttons (Prev/Next) outside the stepper and call `.previousStep()` / `.nextStep()` from click handlers.
-- Disable the Previous button at step 0 and the Next button at the last step to prevent out-of-range navigation.
-- Listen to `sgds-arrived` to update the displayed content whenever the active step changes.
-- If `clickable` is enabled, clicking a step indicator also fires `sgds-arrived` — ensure the content update handler covers this.
-- Use `reset()` to restart the workflow and return to step 0 (e.g. after successful completion or cancellation).
-
-## Best Practices
-
-**Do**
-- Set `steps` as a JavaScript property — never as an HTML attribute.
-- Always listen to `sgds-arrived` to synchronise step content with the active step index.
-- Disable navigation buttons at the boundaries (first and last step) to avoid navigation errors.
-- Use `stepHeader` labels that clearly distinguish each step.
-- Use `reset()` to clean up state when re-entering a completed workflow.
-
-**Don't**
-- Use for single-step or unstructured flows.
-- Render all step content simultaneously — show only the content corresponding to `activeStep`.
-- Use more than ~7 steps without breaking the flow into sub-sections.
-- Rely on `sgds-next-step` / `sgds-previous-step` events for content rendering — always use `sgds-arrived` as the reliable trigger.
-
-## Common Use Cases
-
-- Multi-step registration or onboarding forms.
-- Checkout flows (cart → address → payment → confirmation).
-- Application wizards (personal details → documents → review → submit).
-- Configuration or setup workflows in admin tools.
-- Step-by-step guided processes in government digital services.
 
 ## Advanced Considerations
 
