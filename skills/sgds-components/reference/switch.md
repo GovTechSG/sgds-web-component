@@ -4,23 +4,7 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
-## Component Definition
-
-The Switch component is a toggle control that represents a binary on/off state. It is visually styled as a sliding thumb inside a track and is used for settings or preferences where the change takes effect immediately.
-
-## Purpose
-
-- Enable users to toggle a binary setting on or off.
-- Provide immediate, visible feedback for preference changes.
-- Offer a compact, accessible control for boolean options without requiring form submission.
-
 ## Usage Guideline
-
-### When to use
-
-- For settings and preferences that take effect immediately upon toggling (e.g. dark mode, notifications, auto-save).
-- When a binary on/off state is clear and unambiguous.
-- When the user should see the result of their action without submitting a form.
 
 ### When NOT to use
 
@@ -38,42 +22,6 @@ The Switch component is a toggle control that represents a binary on/off state. 
 - `size` controls the physical size of the switch: `sm`, `md` (default), or `lg`.
 - Fires `sgds-change` with `event.detail.checked` (boolean) on each toggle.
 - The component has no `name`, `label`, `hintText`, or validation attributes — it is a UI toggle, not a form field.
-
-## Content Guideline
-
-- Place a concise, clear label in the default slot (right of the switch) or `left-label` slot (left of the switch).
-- Labels should describe the on state — not the action (e.g. "Dark mode" not "Toggle dark mode").
-- Avoid long labels; keep them to a few words so the on/off context is immediately obvious.
-- If no label is used (e.g. in a table row), ensure the purpose is communicated through surrounding context or an `aria-label`.
-
-## Interaction Guideline
-
-- Clicking anywhere on the switch or its label toggles the state.
-- Keyboard: `Tab` focuses the switch; `Space` toggles it.
-- `sgds-change` fires on each toggle — read `event.detail.checked` for the new state.
-- For form submission, listen to `sgds-change` and update a hidden input's value to reflect the switch state.
-- The switch provides instant feedback — no additional confirmation step.
-
-## Best Practices
-
-**Do**
-- Use for settings that take immediate effect.
-- Label clearly using the on-state description.
-- Use `icon` when additional visual clarity is needed (e.g. in dense UIs or for users with colour vision differences).
-- Match `size` to adjacent form elements for visual consistency.
-
-**Don't**
-- Use for actions requiring confirmation before effect — prefer a checkbox + submit pattern.
-- Use in place of a checkbox for form-based agreement or acceptance.
-- Leave the switch without any label or accessible description in context.
-- Use multiple switches for mutually exclusive options — use `<sgds-radio>` instead.
-
-## Common Use Cases
-
-- Enabling or disabling notifications, themes, or accessibility features.
-- Toggling auto-save, auto-update, or background sync settings.
-- Showing/hiding optional UI elements (e.g. advanced options, sidebars).
-- Per-row feature toggles in admin or settings tables.
 
 ## Advanced Considerations
 
