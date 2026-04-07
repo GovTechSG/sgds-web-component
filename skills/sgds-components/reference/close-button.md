@@ -2,6 +2,8 @@
 
 `<sgds-close-button>` renders a standardised close/dismiss button (× icon). It is used internally by `<sgds-alert>`, `<sgds-drawer>`, `<sgds-modal>`, `<sgds-toast>`, `<sgds-badge>`, and `<sgds-file-upload>`. Use it directly only when building custom dismissible UI that those components do not cover.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
 ### When to use
