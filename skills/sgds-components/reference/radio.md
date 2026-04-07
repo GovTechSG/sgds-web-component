@@ -4,24 +4,7 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
-## Component Definition
-
-Radio buttons allow users to select one option from a mutually exclusive set of predefined choices. Selecting one option automatically deselects the others within the same group.
-
-## Purpose
-
-- Enable single selection from a list of options.
-- Present clear, comparable choices upfront.
-- Support structured decision-making where all options are visible.
-
 ## Usage Guideline
-
-### When to use
-
-- When users must select only one option from a list.
-- When all options should be visible at once.
-- When there are 2–7 options for easy scanning.
-- For important decisions where visibility matters (e.g. payment method, delivery option).
 
 ### When NOT to use
 
@@ -37,44 +20,6 @@ Radio buttons allow users to select one option from a mutually exclusive set of 
 - Supported states: default, hover, focus, selected, disabled, and error (validation failure).
 - If `required` and no option is selected, an error state is shown when `hasFeedback` is set.
 - Radios must always be grouped with a shared `name` attribute via `<sgds-radio-group>`.
-
-## Content Guideline
-
-- Use clear, concise labels that are mutually exclusive and unambiguous.
-- Keep wording parallel (same grammatical structure across all options).
-- Use hint text for clarification when needed; keep descriptions short.
-- Avoid overly long sentences, overlapping meanings, or vague labels (e.g. "Option 1").
-
-**Good examples**: Credit card / Debit card / PayNow
-
-## Interaction Guideline
-
-- The entire label and radio control should be clickable.
-- Keyboard: `Tab` moves focus into the group; `Arrow` keys navigate options; `Space` selects.
-- Provide a clear visible focus indicator.
-- The group must have a label or legend so screen readers announce it correctly.
-- Each option must be announced clearly; ensure sufficient touch target size for accessibility.
-
-## Best Practices
-
-**Do**
-- Use radios for single, visible choices.
-- Provide a default selection when there is a clear recommended option.
-- Keep option labels short and scannable.
-- Align options vertically for readability.
-
-**Don't**
-- Use for multiple selections.
-- Use when there are more than 7 options — use `<sgds-select>` instead.
-- Preselect an option if it may bias the user unnecessarily.
-- Use inconsistent or unclear labels.
-
-## Common Use Cases
-
-- Selecting a payment method or delivery option.
-- Choosing user preferences (e.g. notification type).
-- Survey or form questions with a single answer.
-- Selecting a plan or tier (basic, standard, premium).
 
 ## Advanced Considerations
 
