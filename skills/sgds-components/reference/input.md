@@ -36,6 +36,8 @@ The Input component allows users to enter and edit a single line of text. It ser
 - Supports placeholder text, pre-filled values, prefix/suffix addons, and an action slot.
 - Shows an inline loading spinner when `loading` is set.
 - Validation can be triggered inline, on blur, or on submit; error state is shown when `hasFeedback` is set and validation fails.
+- `invalid` and `valid` can be set manually to override the validation state programmatically without relying on browser constraint validation.
+- `noValidate` disables browser-native constraint validation — use this when implementing fully custom validation logic.
 - `disabled` makes the field non-interactive; `readonly` makes it visible but not editable.
 
 ## Content Guideline
@@ -50,6 +52,7 @@ The Input component allows users to enter and edit a single line of text. It ser
 - Input receives focus on click or `Tab` key navigation; focus state must be visually distinct.
 - Input responds immediately to user typing.
 - Avoid aggressive real-time validation that interrupts typing — prefer validation on blur or after the user completes input.
+- Listen to `sgds-invalid` to react when the field fails validation, and `sgds-valid` when it passes — useful for enabling/disabling submit buttons or chaining field validation.
 - Keyboard: `Tab` moves between inputs; `Enter` submits the form (if applicable).
 - Ensure proper label association and ARIA attributes for assistive technology.
 
@@ -82,9 +85,10 @@ The Input component allows users to enter and edit a single line of text. It ser
 - **Debounced input**: for search or filtering, debounce the `sgds-input` event to reduce performance load.
 - **Input masking / auto-formatting**: not built in — implement externally for structured formats (e.g. phone number, NRIC, credit card spacing).
 - **Character limits**: `minlength` and `maxlength` are direct attributes on `<sgds-input>`; show counters when limits are enforced. For numeric/date types, use `min` and `max` to constrain the value range.
-- **Accessibility**: screen readers announce label, state, and errors — ensure `label` is always set and `invalidFeedback` is descriptive.
-
-## Edge Cases
+- **Pattern validation**: use `pattern` with a regex string to enforce a specific format (e.g. NRIC, postal code). Pair with `invalidFeedback` to explain the expected format to the user.
+- **Manual state override**: use `invalid` or `valid` to programmatically set the field's validation state — useful when validation logic lives outside the component (e.g. server-side errors).
+- **Custom validation flow**: set `noValidate` to disable browser-native constraint validation and take full control with your own logic; combine with `invalid` and `setInvalid()` for server-driven error states.
+- **Autofocus**: use `autofocus` to focus the input on page load — limit to one field per page to avoid disorienting keyboard and screen reader users.
 
 - **Long input values**: content scrolls horizontally within the field; keep expected input width in mind when sizing the component.
 - **Pasted content**: browsers may paste unexpected formatting — validate or sanitise on blur/submit rather than blocking paste.
