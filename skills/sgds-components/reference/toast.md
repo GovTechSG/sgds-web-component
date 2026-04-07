@@ -6,6 +6,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Usage Guideline
 
+### When to use
+
+- For brief, non-blocking status notifications that confirm a completed action or report a background event (e.g. "Changes saved", "File uploaded successfully", "Error sending message").
+- When the notification is transient and does not require user action or sustained attention.
+- For system-level feedback that is not tied to a specific element on the page.
+
 ### When NOT to use
 
 - For critical messages that require immediate action — use a modal or alert instead.
@@ -14,12 +20,28 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Behaviour
 
-- Multiple `<sgds-toast>` elements inside one `<sgds-toast-container>` stack vertically automatically — limit to 3–4 to avoid clutter.
+- `show` attribute controls whether the toast is visible; set it on page load to show a toast immediately or use `showToast()` / `hideToast()` methods for programmatic control.
+- `variant` sets the visual tone: `info` (default), `success`, `danger`, `warning`, or `neutral`.
+- `autohide` dismisses the toast automatically after `delay` milliseconds (default 5000); without `autohide` the toast persists until dismissed or hidden via JS.
+- `dismissible` renders a close button users can click to dismiss the toast manually.
+- Multiple `<sgds-toast>` elements inside one `<sgds-toast-container>` stack vertically — limit to 3–4 to avoid clutter.
+- Events fire in sequence: `sgds-show` → `sgds-after-show` when showing; `sgds-hide` → `sgds-after-hide` when hiding.
+- `noAnimation` disables show/hide animations for reduced-motion contexts.
+
+## Advanced Considerations
+
+- **Always use `<sgds-toast-container>`**: `<sgds-toast>` must be placed inside `<sgds-toast-container>` — the container handles screen positioning and stacking.
+- **`title` is required for accessibility**: always set a meaningful `title` on every `<sgds-toast>` — it is the accessible heading of the notification.
+- **`show` attribute vs `showToast()` method**: use the `show` attribute for toasts that should be visible on initial render; use `showToast()` / `hideToast()` for dynamically triggered notifications (e.g. after a form submit).
+- **Deprecated positions**: `top-start`, `middle-start`, `middle-center`, `middle-end` are deprecated since v3.7.1 — use only `top-center`, `top-end`, `bottom-start`, `bottom-center`, `bottom-end`.
+- **One container per position**: use a single `<sgds-toast-container>` per screen position — do not create multiple containers at the same position.
+- **Auto-dismiss timing**: `delay` only takes effect when `autohide` is also set — setting `delay` alone has no effect.
 
 ## Edge Cases
 
 - **Multiple rapid toasts**: implement queueing or throttling in the host application to avoid flooding the UI with simultaneous toasts.
 - **Z-index conflicts**: ensure `<sgds-toast-container>` appears above modals, banners, and other overlays — check stacking context if toasts are hidden behind other elements.
+- **`sgds-after-hide` for DOM cleanup**: use `sgds-after-hide` (not `sgds-hide`) to remove the toast element from the DOM or reset state — `sgds-hide` fires before the animation completes, so the element is still visible at that point.
 
 ## Quick Decision Guide
 
