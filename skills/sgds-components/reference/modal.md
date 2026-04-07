@@ -31,6 +31,21 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - `size` controls modal width: `sm`, `md` (default), `lg`, `xl`, `fullscreen`.
 - Open/close programmatically via `show()` and `hide()` methods.
 
+## Component Composition
+
+**`title` slot** — a single heading element (e.g. `<h2>`) with a concise label (2–6 words) that describes the task or confirmation.
+
+**`description` slot** — one-line context below the title; omit if the title is already self-explanatory.
+
+**Body slot (`default`)** — short forms (3–5 fields), confirmation text, detail views, or image previews. Keep body concise — the modal body scrolls, but long content is a sign that a dedicated page or `<sgds-drawer>` is a better fit.
+
+**`footer` slot** — always include two actions: a dismiss/cancel action (`<sgds-button variant="link">`) and a primary action (`<sgds-button variant="primary">`). Both must call `modal.hide()` explicitly; footer buttons do not auto-close the modal.
+
+**Avoid placing inside a modal:**
+- Data tables with horizontal scroll — they overflow the fixed modal width
+- Nested modals or drawers — not a supported pattern
+- Multi-step flows requiring significant vertical space — consider a dedicated page instead
+
 ## Advanced Considerations
 
 - **`sgds-close` guard**: inspect `event.detail.source` (`"close-button"`, `"overlay"`, `"keyboard"`) to apply different close guards — e.g. allow the close button but block overlay/keyboard when the user has unsaved input.
@@ -147,3 +162,4 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 3. Place action buttons in the `footer` slot — typically a cancel/link button and a primary action button.
 4. Modal renders a built-in close button by default. Set `noCloseButton` to hide it — useful for mandatory confirmations where only footer buttons should dismiss the modal.
 5. Footer buttons that close the modal must call `modal.hide()` explicitly — they do not auto-close the modal.
+6. The close event on `<sgds-modal>` is named `sgds-close`; on `<sgds-drawer>` the equivalent is named `sgds-request-close`. Do not confuse the two event names when working with both components.
