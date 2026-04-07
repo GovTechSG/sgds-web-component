@@ -4,6 +4,96 @@
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
+## Component Definition
+
+The Quantity Toggle component renders a numeric input field flanked by minus (−) and plus (+) buttons. It allows users to increment or decrement a numeric value in controlled steps, with optional minimum, maximum, and read-only constraints.
+
+## Purpose
+
+- Enable users to adjust a numeric quantity through explicit increment and decrement controls.
+- Reduce input errors compared to a free-text number field by constraining values within defined bounds.
+- Provide clear, accessible controls for quantity-based interactions in forms.
+
+## Usage Guideline
+
+### When to use
+
+- When users need to select a numeric quantity (e.g. item count, ticket number, portion size).
+- When the valid range is known and bounded — set `min` and `max` to enforce limits.
+- When step-based changes are more appropriate than free-text entry.
+- When a read-only quantity display is needed alongside other form controls — use `readonly`.
+
+### When NOT to use
+
+- For large numeric ranges where clicking repeatedly would be impractical — use `<sgds-input type="number">` instead.
+- For non-integer or highly precise values (e.g. currency amounts, measurements) where direct text entry is more efficient.
+- For selecting from a discrete set of options — use `<sgds-select>` or `<sgds-radio>` instead.
+- When quantity is purely informational and not editable — use plain text.
+
+## Behaviour
+
+- Clicking the plus (+) button increments the value by `step`; clicking minus (−) decrements by `step`.
+- The minus button is disabled when the value reaches `min`; the plus button is disabled when the value reaches `max`.
+- Users can also type directly into the input field unless `readonly` is set.
+- `readonly` makes the text input non-editable; the +/− buttons remain visible.
+- `disabled` disables the entire control — both buttons and the input.
+- `hasFeedback` controls validation UI: `"style"` (border colour only), `"text"` (message only), `"both"` (border + message). Pair with `invalidFeedback`.
+- `invalid` manually sets the invalid state without relying on browser constraint validation.
+- Fires `sgds-change` after a button click or committed keyboard input, and `sgds-input` on each input event.
+
+## Content Guideline
+
+- `label` should clearly describe what quantity is being set (e.g. "Number of Tickets", "Quantity").
+- `hintText` should communicate constraints upfront (e.g. "Maximum 10 tickets per order").
+- `invalidFeedback` should be specific (e.g. "Must be at least 1") — avoid generic messages.
+- Do not rely on `min`/`max` alone to communicate limits — always reinforce via `hintText`.
+
+## Interaction Guideline
+
+- Button clicks are the primary interaction; direct text input is also supported unless `readonly`.
+- The minus button disables at `min` and the plus button disables at `max`, providing clear visual bounds.
+- Keyboard: `Tab` focuses the input; `Arrow Up`/`Down` increment or decrement the value natively; button focus follows standard tab order.
+- Listen to `sgds-change` to react to committed value changes; listen to `sgds-input` for real-time updates on each keystroke.
+- Read `element.value` (a number) after `sgds-change` to get the current quantity.
+
+## Best Practices
+
+**Do**
+- Always set `min` to prevent negative or zero quantities where they are not meaningful.
+- Set `max` when there is a real upper bound (e.g. available stock, seat limit).
+- Use `hintText` to communicate the allowed range to users upfront.
+- Pair `hasFeedback` with a descriptive `invalidFeedback` message.
+- Use `step` greater than 1 only when the domain naturally calls for it (e.g. packs of 5).
+
+**Don't**
+- Use for large or unbounded numeric ranges — direct text input is more efficient.
+- Omit `min` and `max` when bounds exist — unguarded inputs may lead to invalid submissions.
+- Use `readonly` when the quantity should not be visible to users at all — hide the component instead.
+- Set `invalid` without also setting `invalidFeedback` — the error state without a message provides no actionable guidance.
+
+## Common Use Cases
+
+- Cart item quantity selection in e-commerce or order forms.
+- Ticket quantity selection for events or bookings.
+- Portion or serving size adjustment in food or meal-planning forms.
+- Seat or headcount selection in reservation flows.
+- Controlled numeric input in surveys or assessment tools.
+
+## Advanced Considerations
+
+- **`step` with `min`/`max`**: if `step` does not evenly divide the range between `min` and `max`, the last increment may overshoot `max` — the component clamps the value at `max`.
+- **Manual invalid state**: use `invalid` to programmatically reflect server-side validation errors or cross-field validation results without triggering browser constraint validation.
+- **`size`**: matches the size scale of `<sgds-input>` — use to align the toggle visually with adjacent form fields.
+- **`readonly` vs `disabled`**: `readonly` preserves the value in form submission and keeps the input visible but non-editable; `disabled` excludes the field from form submission entirely.
+
+## Edge Cases
+
+- **Value below `min` on load**: if `value` is set below `min`, the component does not automatically correct it on render — initialise `value` within the valid range.
+- **Value above `max` on load**: same as above — set `value` within `min`–`max` on initialisation.
+- **Direct text input exceeding bounds**: users can type a value outside `min`/`max` directly; validate on `sgds-change` and set `invalid` if needed.
+- **`step` mismatch**: if the user types a value that is not a multiple of `step` from `min`, the buttons will increment correctly from that value — validate and guide users via `invalidFeedback` if strict step alignment is required.
+- **`disabled` in form submission**: a `disabled` quantity toggle's value is not included in form data — use `readonly` if the value must be submitted.
+
 ## Quick Decision Guide
 
 **Set initial value?** → `value="0"` (default is 0)
