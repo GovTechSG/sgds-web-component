@@ -6,6 +6,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Usage Guideline
 
+### When to use
+
+- When users need to select a whole-number quantity within a bounded range — typical use cases include cart item quantities, ticket counts, or seat selection.
+- When the value range is small and browsing by increment is practical (e.g. 1–10).
+- When `min`, `max`, and `step` constraints provide natural boundaries for the input.
+
 ### When NOT to use
 
 - For large numeric ranges where clicking repeatedly would be impractical — use `<sgds-input type="number">` instead.
@@ -115,7 +121,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | `step` | number | `1` | Amount to increment or decrement per click |
 | `min` | number | — | Minimum allowed value |
 | `max` | number | — | Maximum allowed value |
-| `size` | string | — | Size of the toggle (matches `<sgds-input>` size) |
+| `size` | `sm \| md \| lg` | — | Size of the toggle control (matches `<sgds-input>` size values) |
 | `disabled` | boolean | `false` | Disables the control |
 | `readonly` | boolean | `false` | Makes the value read-only (hides +/− buttons is false — they are still shown but the input becomes non-editable) |
 | `invalid` | boolean | `false` | Manually sets the invalid state |
