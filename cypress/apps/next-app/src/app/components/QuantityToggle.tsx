@@ -1,5 +1,7 @@
-import SgdsQuantityToggle from "@govtechsg/sgds-web-component/react/quantity-toggle/index.js";
+'use client';
 
 export const QuantityToggle = () => {
-  return <SgdsQuantityToggle step={1} buttonVariant="primary" defaultValue="0" />;
+  return (
+    <sgds-quantity-toggle step="1" buttonVariant="primary" defaultValue="0" suppressHydrationWarning></sgds-quantity-toggle>
+  );
 };

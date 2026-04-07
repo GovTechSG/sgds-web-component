@@ -1,15 +1,21 @@
-import SgdsPagination from "@govtechsg/sgds-web-component/react/pagination/index.js";
+'use client';
+
+import { useRef, useEffect } from "react";
 
 export const Pagination = () => {
-  return (
-    <SgdsPagination
-      dataLength={50}
-      currentPage={1}
-      itemsPerPage={5}
-      limit={3}
-      directionVariant="icon-text"
-      size="sm"
-      ellipsisJump={3}
-    />
-  );
+  const ref = useRef<any>(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.dataLength = 50;
+      ref.current.currentPage = 1;
+      ref.current.itemsPerPage = 5;
+      ref.current.limit = 3;
+      ref.current.directionVariant = "icon-text";
+      ref.current.size = "sm";
+      ref.current.ellipsisJump = 3;
+    }
+  }, []);
+
+  return <sgds-pagination ref={ref} suppressHydrationWarning></sgds-pagination>;
 };

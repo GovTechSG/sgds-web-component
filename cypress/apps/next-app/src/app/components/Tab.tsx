@@ -1,72 +1,52 @@
-import SgdsTab from "@govtechsg/sgds-web-component/react/tab/index.js";
-import SgdsTabGroup from "@govtechsg/sgds-web-component/react/tab-group/index.js";
-import SgdsTabPanel from "@govtechsg/sgds-web-component/react/tab-panel/index.js";
-import SgdsIcon from "@govtechsg/sgds-web-component/react/icon/index.js";
+'use client';
 
 export const Tab = () => {
   return (
     <>
-      <SgdsTabGroup variant="underlined" orientation="horizontal">
-        <SgdsTab slot="nav" state="active" panel="one">
-          <SgdsIcon slot="icon" name="map"></SgdsIcon>
+      <sgds-tab-group variant="underlined" orientation="horizontal" suppressHydrationWarning>
+        <sgds-tab slot="nav" state="active" panel="one" suppressHydrationWarning>
+          <sgds-icon slot="icon" name="map" suppressHydrationWarning></sgds-icon>
           <span>hellotab</span>
-        </SgdsTab>
-        <SgdsTab slot="nav" panel="two">
-          two
-        </SgdsTab>
-        <SgdsTab slot="nav" state="active" panel="three">
-          three
-        </SgdsTab>
-        <SgdsTabPanel name="one">one</SgdsTabPanel>
-        <SgdsTabPanel name="two">two</SgdsTabPanel>
-        <SgdsTabPanel name="three">three</SgdsTabPanel>
-      </SgdsTabGroup>
-      <SgdsTabGroup orientation="horizontal" density="compact">
-        <SgdsTab slot="nav" state="active" panel="one">
-          hellotab
-        </SgdsTab>
-        <SgdsTab slot="nav" panel="two">
-          two
-        </SgdsTab>
-        <SgdsTab slot="nav" state="active" panel="three">
-          three
-        </SgdsTab>
-        <SgdsTabPanel name="one">one</SgdsTabPanel>
-        <SgdsTabPanel name="two">two</SgdsTabPanel>
-        <SgdsTabPanel name="three">three</SgdsTabPanel>
-      </SgdsTabGroup>
-      <SgdsTabGroup id="tabs-lukhei-test" orientation="horizontal">
-        <SgdsTab slot="nav" panel="one">
-          lukhei testing
-        </SgdsTab>
-        <SgdsTab slot="nav" panel="two">
-          disabled
-        </SgdsTab>
-        <SgdsTab slot="nav" panel="three">
-          <SgdsIcon slot="icon" name="placeholder"></SgdsIcon>
-          three
-        </SgdsTab>
+        </sgds-tab>
+        <sgds-tab slot="nav" panel="two" suppressHydrationWarning>two</sgds-tab>
+        <sgds-tab slot="nav" state="active" panel="three" suppressHydrationWarning>three</sgds-tab>
+        <sgds-tab-panel name="one" suppressHydrationWarning>one</sgds-tab-panel>
+        <sgds-tab-panel name="two" suppressHydrationWarning>two</sgds-tab-panel>
+        <sgds-tab-panel name="three" suppressHydrationWarning>three</sgds-tab-panel>
+      </sgds-tab-group>
 
-        <SgdsTabPanel name="one">one</SgdsTabPanel>
-        <SgdsTabPanel name="two">two</SgdsTabPanel>
-        <SgdsTabPanel name="three">three</SgdsTabPanel>
-      </SgdsTabGroup>
-      <SgdsTabGroup variant="underlined" orientation="vertical" density="compact">
-        <SgdsTab slot="nav" panel="one" variant="solid">
-          lukhei test
-        </SgdsTab>
-        <SgdsTab slot="nav" disabled panel="two">
-          cdisabled
-        </SgdsTab>
-        <SgdsTab slot="nav" panel="three">
-          <SgdsIcon slot="icon" name="placeholder"></SgdsIcon>
-          three
-        </SgdsTab>
+      <sgds-tab-group orientation="horizontal" density="compact" suppressHydrationWarning>
+        <sgds-tab slot="nav" state="active" panel="one" suppressHydrationWarning>hellotab</sgds-tab>
+        <sgds-tab slot="nav" panel="two" suppressHydrationWarning>two</sgds-tab>
+        <sgds-tab slot="nav" state="active" panel="three" suppressHydrationWarning>three</sgds-tab>
+        <sgds-tab-panel name="one" suppressHydrationWarning>one</sgds-tab-panel>
+        <sgds-tab-panel name="two" suppressHydrationWarning>two</sgds-tab-panel>
+        <sgds-tab-panel name="three" suppressHydrationWarning>three</sgds-tab-panel>
+      </sgds-tab-group>
 
-        <SgdsTabPanel name="one">one</SgdsTabPanel>
-        <SgdsTabPanel name="two">two</SgdsTabPanel>
-        <SgdsTabPanel name="three">three</SgdsTabPanel>
-      </SgdsTabGroup>
+      <sgds-tab-group id="tabs-lukhei-test" orientation="horizontal" suppressHydrationWarning>
+        <sgds-tab slot="nav" panel="one" suppressHydrationWarning>lukhei testing</sgds-tab>
+        <sgds-tab slot="nav" panel="two" suppressHydrationWarning>disabled</sgds-tab>
+        <sgds-tab slot="nav" panel="three" suppressHydrationWarning>
+          <sgds-icon slot="icon" name="placeholder" suppressHydrationWarning></sgds-icon>
+          three
+        </sgds-tab>
+        <sgds-tab-panel name="one" suppressHydrationWarning>one</sgds-tab-panel>
+        <sgds-tab-panel name="two" suppressHydrationWarning>two</sgds-tab-panel>
+        <sgds-tab-panel name="three" suppressHydrationWarning>three</sgds-tab-panel>
+      </sgds-tab-group>
+
+      <sgds-tab-group variant="underlined" orientation="vertical" density="compact" suppressHydrationWarning>
+        <sgds-tab slot="nav" panel="one" variant="solid" suppressHydrationWarning>lukhei test</sgds-tab>
+        <sgds-tab slot="nav" disabled panel="two" suppressHydrationWarning>cdisabled</sgds-tab>
+        <sgds-tab slot="nav" panel="three" suppressHydrationWarning>
+          <sgds-icon slot="icon" name="placeholder" suppressHydrationWarning></sgds-icon>
+          three
+        </sgds-tab>
+        <sgds-tab-panel name="one" suppressHydrationWarning>one</sgds-tab-panel>
+        <sgds-tab-panel name="two" suppressHydrationWarning>two</sgds-tab-panel>
+        <sgds-tab-panel name="three" suppressHydrationWarning>three</sgds-tab-panel>
+      </sgds-tab-group>
     </>
   );
 };
