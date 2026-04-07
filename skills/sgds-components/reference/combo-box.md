@@ -2,26 +2,7 @@
 
 `<sgds-combo-box>` is a searchable select with client-side filtering out of the box. Add `multiSelect` to allow multiple selections (displayed as dismissible badges). Enable `async` for server-side filtering.
 
-## Component Definition
-
-A combo box is an input field combined with a dropdown list that allows users to type to filter options and select from the filtered results. It combines the behaviours of a text input and a select dropdown, supporting autocomplete, dynamic suggestions, and optionally multi-selection.
-
-## Purpose
-
-- Enable users to quickly find and select options from a large dataset.
-- Reduce cognitive load by filtering options as users type.
-- Improve efficiency compared to long static dropdowns.
-- Support async/server-side option loading for dynamic datasets.
-
 ## Usage Guideline
-
-### When to use
-
-- When there are many options (e.g. >10 items) that benefit from search/filter.
-- When options are dynamic or fetched asynchronously.
-- When users may not know the exact option name upfront.
-- When multiple selections are needed — add `multiSelect`.
-- When space constraints prevent showing a full static list.
 
 ### When NOT to use
 
@@ -43,48 +24,6 @@ A combo box is an input field combined with a dropdown list that allows users to
 - `disabled` makes the combo box non-interactive; `readonly` makes it visible but not selectable.
 - Keyboard: `Arrow` keys navigate options; `Enter` selects the highlighted option; `Esc` closes the dropdown.
 - Supported states: default, hover, focus, disabled, loading, and empty (no results).
-
-## Content Guideline
-
-- Use clear, human-readable labels for options.
-- Avoid overly long option text; keep labels scannable.
-- Placeholder text should hint at the interaction (e.g. "Search for a country").
-- Use `hintText` for additional guidance (e.g. "Start typing to see suggestions").
-- Ensure consistent naming patterns across all options to make filtering predictable.
-
-## Interaction Guideline
-
-- Maintain input cursor focus while interacting with the dropdown.
-- Provide instant feedback when typing; debounce for async requests to avoid excessive API calls.
-- Highlight the currently focused option clearly.
-- Support mouse, keyboard, and touch interactions.
-- `clearable` allows users to reset without submitting the form.
-- Use `menuIsOpen` to programmatically control the dropdown open state when needed.
-- Ensure the dropdown positions correctly within the viewport — use `floatingOpts` for advanced positioning control.
-
-## Best Practices
-
-**Do**
-- Use combo box for large or searchable datasets (~10 or more options).
-- Debounce the `sgds-input` event for async searches to reduce server load.
-- Show `loading` while fetching async results; restore options and remove `loading` after.
-- Display an empty state message when no options match (the component handles this automatically).
-- Use `clearable` for fields where resetting to an empty state is a valid user action.
-
-**Don't**
-- Use for simple selections with few options — it adds unnecessary complexity.
-- Hide important options behind unclear search/filter logic.
-- Allow ambiguous or duplicate option labels without secondary metadata (e.g. country code alongside country name).
-- Block keyboard navigation.
-- Delay UI feedback noticeably after typing.
-
-## Common Use Cases
-
-- Country, nationality, or region selection.
-- Searchable organisational or user lookups.
-- Skills, categories, or tag selection (single or multi-select).
-- Address or location search with async suggestions.
-- Product or dataset filtering within forms or dashboards.
 
 ## Advanced Considerations
 
