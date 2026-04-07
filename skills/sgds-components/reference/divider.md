@@ -2,23 +2,7 @@
 
 `<sgds-divider>` renders a separator line to visually group or divide adjacent content. Use it instead of a native `<hr>` whenever SGDS consistent styling is needed.
 
-## Component Definition
-
-The Divider component renders a horizontal or vertical separator line to visually separate or group adjacent sections of content. It is a non-interactive, presentational element used to improve layout clarity and readability.
-
-## Purpose
-
-- Visually separate distinct sections of content.
-- Improve scannability by creating clear groupings.
-- Provide consistent separator styling aligned with the SGDS design system.
-
 ## Usage Guideline
-
-### When to use
-
-- Between rows of content to separate sections (e.g. between form groups, list items, or card sections).
-- Between side-by-side columns to visually divide regions — use `orientation="vertical"`.
-- As a structural aid when whitespace alone is insufficient to communicate separation.
 
 ### When NOT to use
 
@@ -34,40 +18,6 @@ The Divider component renders a horizontal or vertical separator line to visuall
 - `thickness` controls the visual weight: `thin` (default), `thick`, or `thicker`.
 - `role="separator"` and `aria-orientation` are set automatically — do not add them manually.
 - The component has no interactive states, slots, events, or public methods.
-
-## Content Guideline
-
-- Dividers are purely visual; they carry no text content.
-- Do not place text or other elements inside `<sgds-divider>` — it has no slots.
-- Rely on surrounding labels or headings to communicate the meaning of the separation, not the divider itself.
-
-## Interaction Guideline
-
-- The divider is non-interactive and non-focusable.
-- Screen readers will announce it as a separator via the automatic `role="separator"` — no additional ARIA attributes are needed.
-- Ensure sufficient spacing above and below the divider to make the separation visually clear on all screen sizes.
-
-## Best Practices
-
-**Do**
-- Use `<sgds-divider>` as a semantic separator between meaningfully distinct content groups.
-- Use `orientation="vertical"` to divide side-by-side columns inside a flex or grid container.
-- Choose `thickness` based on the visual hierarchy needed: `thin` for subtle separation, `thicker` for strong section breaks.
-- Ensure the parent container has an explicit `height` whenever `orientation="vertical"` is used.
-
-**Don't**
-- Overuse dividers — too many separators reduce rather than improve clarity.
-- Use a raw `<hr>` or CSS border utilities instead of `<sgds-divider>`.
-- Place content inside `<sgds-divider>` — it has no slots.
-- Add `role`, `aria-orientation`, or other ARIA attributes manually — they are set automatically.
-
-## Common Use Cases
-
-- Separating sections within a card or panel.
-- Dividing items in a navigation menu or list.
-- Separating form sections (e.g. personal details vs. contact details).
-- Dividing columns in a two-panel or sidebar layout using `orientation="vertical"`.
-- Separating footer links or metadata rows.
 
 ## Advanced Considerations
 
