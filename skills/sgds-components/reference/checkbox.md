@@ -2,23 +2,7 @@
 
 `<sgds-checkbox>` can be used standalone or grouped in `<sgds-checkbox-group>`. The group manages shared validation, a fieldset label, and change detection. Standalone checkboxes work for "I agree" cases.
 
-## Component Definition
-
-A checkbox is a form control that allows users to select one or more options from a list. Each checkbox operates independently, enabling multi-selection.
-
-## Purpose
-
-- Select multiple items from a group
-- Toggle a binary state (on/off) when the option is independent
-- Make non-exclusive choices without affecting other selections
-
 ## Usage Guideline
-
-**When to use:**
-- When users can select multiple options from a list
-- When options are independent of each other
-- For optional selections (e.g. preferences, filters)
-- For binary choices that are not the primary action (e.g. "Remember me")
 
 **When NOT to use:**
 - When only one option can be selected → use radio buttons
@@ -34,45 +18,6 @@ A checkbox is a form control that allows users to select one or more options fro
 - **Disabled**: cannot be interacted with; visually muted
 - Each checkbox in a group functions independently
 - Parent-child relationships may exist: parent reflects aggregated state (checked / indeterminate / unchecked)
-
-## Content Guidelines
-
-- Use clear, concise labels that describe the option, not the action
-- ✅ "Email notifications"
-- Keep labels scannable and consistent; use sentence case
-- Use `hintText` on `<sgds-checkbox-group>` to provide clarifying instructions below the group label (e.g. "Check all that apply")
-- Avoid long descriptions inside the label
-
-## Interaction Guidelines
-
-- Entire checkbox + label area is clickable
-- Provide clear focus state for keyboard navigation
-- Keyboard: `Tab` to move focus, `Space` to toggle
-- Maintain sufficient touch target size (minimum ~44px)
-- Immediate visual change on selection — no delay unless tied to a backend action
-
-## Best Practices
-
-**Do**
-- Group related checkboxes logically
-- Use vertical stacking for readability
-- Provide a "Select all" option when relevant
-- Use indeterminate state correctly for nested groups
-- Ensure accessibility (labels, ARIA, focus states)
-
-**Don't**
-- Use checkboxes for single selection
-- Overload with too many options without grouping
-- Use a checkbox without a visible label
-- Use ambiguous labels (e.g. "Option 1")
-- Trigger unexpected side effects on toggle
-
-## Common Use Cases
-
-- **Form inputs** — accept terms and conditions, subscribe to newsletters
-- **Filters** — multi-select filtering (e.g. categories, tags)
-- **Settings / Preferences** — notification preferences, feature toggles (non-immediate)
-- **Bulk selection** — select multiple items in tables or lists
 
 ## Advanced Considerations
 
