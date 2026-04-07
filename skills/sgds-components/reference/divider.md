@@ -2,7 +2,15 @@
 
 `<sgds-divider>` renders a separator line to visually group or divide adjacent content. Use it instead of a native `<hr>` whenever SGDS consistent styling is needed.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
+
+### When to use
+
+- To visually separate distinct content sections or groups within a layout.
+- Between list items, form sections, or card areas where a clear visual boundary between groups improves readability.
+- As a vertical separator between inline elements in a flex row (e.g. between toolbar items or nav links).
 
 ### When NOT to use
 
@@ -23,7 +31,6 @@
 
 - **Vertical divider height**: the divider has no intrinsic height when vertical — always ensure the parent has `display: flex` (or `display: grid`) and an explicit `height`.
 - **Thickness scale**: use `thin` (default) for subtle in-context separators, `thick` for moderate section boundaries, and `thicker` for strong top-level section breaks.
-- **No CSS parts exposed**: no custom properties or CSS parts are available — styling is fixed by the design system.
 
 ## Edge Cases
 
