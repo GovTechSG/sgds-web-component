@@ -6,6 +6,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Usage Guideline
 
+### When to use
+
+- For multi-step sequential workflows where each step must be completed before proceeding to the next (e.g. checkout flows, application forms, onboarding wizards).
+- When breaking a complex form into logical stages reduces cognitive load and helps users understand their progress.
+- When a visible progress indicator communicates how many steps remain and where the user currently is.
+
 ### When NOT to use
 
 - For fewer than 2 steps — a single step does not benefit from a stepper; use a plain form instead.
