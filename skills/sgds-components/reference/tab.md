@@ -32,6 +32,20 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - Fires `sgds-tab-show` (with `event.detail.name`) when a tab is activated and `sgds-tab-hide` when it is deactivated.
 - No public methods on `<sgds-tab-group>`.
 
+## Component Composition
+
+**`nav` slot (`<sgds-tab-group>`)** — only `<sgds-tab slot="nav" panel="...">` elements. Do not place any other content in this slot.
+
+**Default slot (`<sgds-tab-group>`)** — only `<sgds-tab-panel name="...">` elements. The `panel` value on `<sgds-tab>` and the `name` value on `<sgds-tab-panel>` must match exactly — a typo in either results in a tab with no visible content.
+
+**`<sgds-tab>` default slot** — the tab label text (1–3 words recommended). Keep labels concise to avoid overflow on narrow screens.
+
+**`<sgds-tab-panel>` default slot** — any content that would appear in a normal page section: text, forms, tables, lists, `<sgds-card>` grids. Each panel is an independent content area.
+
+**Avoid placing inside tab panels:**
+- Nested `<sgds-tab-group>` — nested tabs are a known accessibility and usability anti-pattern
+- Content that users need to compare simultaneously across panels — show it side by side instead
+
 ## Advanced Considerations
 
 - **`panel`/`name` matching**: the link between a tab and its panel is entirely string-based — a typo in either attribute results in a broken tab with no panel displayed. Always verify both values match exactly.
