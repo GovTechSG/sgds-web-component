@@ -6,6 +6,13 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Usage Guideline
 
+### When to use
+
+- For collecting single-line text data from users (e.g. name, email, search query, ID number).
+- When the expected input is freeform or not constrained to a predefined set of options.
+- When prefix/suffix addons, inline actions, or a loading state are needed alongside the input field.
+- For all standard HTML input types (`text`, `email`, `tel`, `number`, `password`, `search`, `url`) within SGDS forms.
+
 ### When NOT to use
 
 - For long-form or multi-line input → use `<sgds-textarea>` instead.
@@ -34,6 +41,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - **Manual state override**: use `invalid` or `valid` to programmatically set the field's validation state — useful when validation logic lives outside the component (e.g. server-side errors).
 - **Custom validation flow**: set `noValidate` to disable browser-native constraint validation and take full control with your own logic; combine with `invalid` and `setInvalid()` for server-driven error states.
 - **Autofocus**: use `autofocus` to focus the input on page load — limit to one field per page to avoid disorienting keyboard and screen reader users.
+
+## Edge Cases
 
 - **Long input values**: content scrolls horizontally within the field; keep expected input width in mind when sizing the component.
 - **Pasted content**: browsers may paste unexpected formatting — validate or sanitise on blur/submit rather than blocking paste.
@@ -164,10 +173,17 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | `sgds-invalid` | Input fails validation |
 | `sgds-valid` | Input passes validation |
 
+## Public Methods
+
+| Method | Description |
+|---|---|
+| `setInvalid(message)` | Programmatically sets the field to invalid state with a custom message — use for server-driven or cross-field validation errors. Pair with `noValidate` for fully custom validation flows. |
+
 ---
 
 **For AI agents**:
-1. `hasFeedback` controls how validation is displayed: `"style"` (only border colour changes), `"text"` (only the message), `"both"` (border + message). Always set `invalidFeedback` alongside `hasFeedback`.
+1. `hasFeedback` controls how validation is displayed: `"style"` (only border colour changes), `"text"` (only the message), `"both"` (border + message). Always set `invalidFeedback` alongside `hasFeedback`. The default (no attribute) shows no feedback UI at all — setting `required` alone without `hasFeedback` does not display an error message.
 2. `prefix` and `suffix` render text inline inside the input border — for icon addons, use the `action` slot with `<sgds-icon-button>` instead.
 3. `type="number"` with `min` and `max` enforces numeric bounds natively.
 4. For reactive frameworks, listen to `sgds-input` for immediate value tracking and `sgds-change` for committed values.
+5. `setInvalid('message')` programmatically marks the field invalid with a custom message — use after server-side validation or for cross-field rules. Pair with `noValidate` to disable browser constraint validation entirely and take full control of the validation flow.
