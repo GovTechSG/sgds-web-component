@@ -2,28 +2,7 @@
 
 `<sgds-alert>` displays short, contextual feedback messages — info, success, warnings, or errors. `<sgds-alert-link>` renders a styled inline link inside the alert body. Use this instead of building custom notification banners.
 
-## Component Definition
-
-Alert is a non-blocking, inline feedback component used to communicate important contextual messages to users.
-
-- Appears within content flow (not overlay)
-- Provides system feedback, status, or guidance
-- Can be persistent or dismissible
-
-## Purpose
-
-- Communicate system status and feedback
-- Provide guidance or important contextual information
-- Help users understand outcomes, issues, or next steps
-- Surface non-critical messages without interrupting flow
-
 ## Usage Guideline
-
-**When to use:**
-- Show success, warning, error, or informational messages
-- Provide feedback after user actions (e.g. form submission)
-- Highlight important contextual information
-- Communicate recoverable issues
 
 **When NOT to use:**
 - For interruptive or critical decisions → use modal/dialog
@@ -50,60 +29,6 @@ Alert is a non-blocking, inline feedback component used to communicate important
 - Multiple alerts stack vertically
 - Limit number to avoid overload
 - Prioritise by severity: Danger > Warning > Info > Success > Neutral
-
-## Content Guidelines
-
-**Writing Principles**
-- Clear, concise, and actionable
-- Avoid technical jargon
-- Focus on: what happened + what to do next
-
-**Structure**
-- Title (optional) → short summary
-- Description (required) → main message
-
-**Tone by Variant**
-- Info → informational, helpful
-- Success → positive, reassuring
-- Warning → cautionary
-- Danger → direct and serious
-- Neutral → neutral 
-
-## Interaction Guidelines
-
-**Inline links should:**
-- Be clearly distinguishable
-- Indicate action or next step
-
-**Dismiss button:**
-- Must be visible and accessible
-- Should not conflict with other actions
-
-**Avoid:**
-- Multiple competing actions inside alert
-- Overloading with interactive elements
-
-## Best Practices
-
-**Do**
-- Use alerts sparingly
-- Match severity with correct variant
-- Keep content concise
-- Provide clear next steps
-- Use icons to reinforce meaning
-
-**Don't**
-- Overuse alerts in a single view
-- Use vague messages (e.g. "Something went wrong")
-- Rely on color alone to convey meaning
-- Auto-dismiss important alerts too quickly
-
-## Common Use Cases
-
-- **Success Confirmation** — after completing an action (e.g. form submission); pattern: Success + Filled
-- **Warning Before Action** — before risky or irreversible action; pattern: Warning + Outlined
-- **Error Summary** — system or form-level errors; pattern: Danger + Filled
-- **Informational Notice** — general updates or tips; pattern: Info + Outlined
 
 ## Advanced Considerations
 
