@@ -2,24 +2,7 @@
 
 `<sgds-breadcrumb>` renders a navigational trail showing the user's location within a page hierarchy. Each step is a `<sgds-breadcrumb-item>` wrapping a standard `<a>` tag.
 
-## Component Definition
-
-A breadcrumb is a navigational component that displays the user's current location within a hierarchical structure, showing the path from a higher-level page (e.g. homepage) to the current page.
-
-## Purpose
-
-- Help users understand where they are within the system
-- Enable quick navigation to previous levels
-- Reduce reliance on the browser back button
-- Improve orientation in multi-level or deep structures
-
 ## Usage Guideline
-
-**When to use:**
-- When content is organised in a clear hierarchy (e.g. category → subcategory → page)
-- For systems with more than 2 levels of navigation
-- When users may enter from deep links (e.g. search results)
-- For content-heavy platforms (e.g. services, articles, datasets)
 
 **When NOT to use:**
 - For flat structures with minimal hierarchy
@@ -35,46 +18,6 @@ A breadcrumb is a navigational component that displays the user's current locati
 - The last item represents the current page and is non-clickable
 - Middle items collapse into an overflow menu when 5 or more items are present
 - Separators visually distinguish levels and are non-interactive
-
-## Content Guidelines
-
-- Use clear, concise, and recognisable labels
-- Labels should match the actual page or navigation names
-- Avoid overly long text — keep each item short
-- Do not include unnecessary words (e.g. avoid "Page", "Section")
-- Maintain consistent naming conventions across levels
-- Use sentence case unless system-wide convention differs
-
-## Interaction Guidelines
-
-- Breadcrumb links behave like standard navigation links
-- Clicking a breadcrumb navigates to the corresponding level
-- Provide clear hover and focus states for accessibility
-- Keyboard navigation: `Tab` through each link with a visible focus indicator
-- Ensure separators are non-interactive
-
-## Best Practices
-
-**Do**
-- Keep the hierarchy logical and predictable
-- Ensure breadcrumb reflects the actual IA structure
-- Use it together with other navigation (e.g. sidebar, menu)
-- Place breadcrumb consistently — typically below the header
-
-**Don't**
-- Make the current page clickable
-- Overload with too many levels unnecessarily
-- Use breadcrumbs for process indication — use stepper instead
-- Truncate in a way that removes important context
-- Rely on breadcrumb as the only navigation method
-
-## Common Use Cases
-
-- **Government service portals** — multi-level categories
-- **Knowledge bases / documentation** — section → article navigation
-- **E-commerce** — category → subcategory → product
-- **Search results** — leading to deep-linked pages
-- **Administrative dashboards** — nested sections
 
 ## Advanced Considerations
 
