@@ -2,6 +2,8 @@
 
 `<sgds-footer>` is the standard footer for Singapore Government digital services. It renders a structured footer with mandatory links (Contact, Feedback, Privacy, Terms of Use) and supports optional site columns via `<sgds-footer-item>`.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
 ## Usage Guideline
 
 ### When to use
@@ -27,6 +29,22 @@
 - The *(default)* slot replaces the entire column layout — use only when full custom control is needed.
 - `copyrightLiner` sets the copyright entity name in the bottom bar; defaults to `"Government of Singapore"`.
 - No custom events or public methods.
+
+## Component Composition
+
+**`title` slot** — the site or portal name as a heading element (e.g. `<h2 slot="title">Portal Name</h2>`).
+
+**`description` slot** — a single short paragraph describing the portal's purpose.
+
+**`items` slot** — one `<sgds-footer-item slot="items">` per column. Inside each `<sgds-footer-item>`:
+- `title` slot: the column heading (e.g. `<div slot="title">Guides</div>`)
+- Default slot: `<sgds-link><a href="...">Label</a></sgds-link>` elements for column navigation links. Do not use bare `<a>` tags.
+
+**Default slot (`<sgds-footer>`)** — full custom column layout that replaces the `items` slot entirely. Use only when the standard grid layout is insufficient; do not mix with `items` slot in the same footer.
+
+**Avoid placing inside a footer:**
+- Interactive components beyond navigation links — the footer is a navigation and compliance element
+- Content that belongs in the page body — the footer is a page-level structural component, not a content container
 
 ## Advanced Considerations
 
