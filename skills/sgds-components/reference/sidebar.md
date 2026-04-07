@@ -90,10 +90,10 @@
     <sgds-icon name="grid-fill" slot="leadingIcon"></sgds-icon>
   </sgds-sidebar-item>
   <sgds-sidebar-item name="records" title="Records">
-    <sgds-icon name="people-fill" slot="leadingIcon"></sgds-icon>
+    <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
   </sgds-sidebar-item>
   <sgds-sidebar-item name="settings" title="Settings">
-    <sgds-icon name="gear-fill" slot="leadingIcon"></sgds-icon>
+    <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
   </sgds-sidebar-item>
 </sgds-sidebar>
 ```
@@ -145,14 +145,14 @@
     <!-- Item with a custom trailing icon -->
     <sgds-sidebar-item title="Public Members" name="public-members">
       <sgds-icon name="user-circle" slot="leadingIcon"></sgds-icon>
-      <sgds-icon name="arrow-up-right" slot="trailingIcon"></sgds-icon>
+      <sgds-icon name="box-arrow-up-right" slot="trailingIcon"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 
   <!-- Collapsible sections -->
   <sgds-sidebar-section title="Organization" name="organization" collapsible>
     <sgds-sidebar-item title="Team Management" name="team-management">
-      <sgds-icon name="people-fill" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item title="Projects" name="projects">
       <sgds-icon name="layers" slot="leadingIcon"></sgds-icon>
@@ -161,7 +161,7 @@
 
   <sgds-sidebar-section title="Configuration" name="configuration" collapsible>
     <sgds-sidebar-item title="Settings" name="settings">
-      <sgds-icon name="gear-fill" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 
