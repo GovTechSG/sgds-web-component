@@ -32,6 +32,24 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - `active` on `<sgds-mainnav-item>` highlights the current page link.
 - Fires `sgds-show`, `sgds-after-show`, `sgds-hide`, `sgds-after-hide` when the collapsed menu opens or closes (mobile only).
 
+## Component Composition
+
+**`brand` slot** — a single `<img>` with `alt`, `width`, and `src`. Set `brandHref` on `<sgds-mainnav>` to the homepage URL (`"/"`). Always provide brand content.
+
+**Default slot** — `<sgds-mainnav-item>` and `<sgds-mainnav-dropdown>` elements for primary navigation. Do not place other elements directly in the default slot.
+
+**Inside `<sgds-mainnav-item>`** — a single `<a href="...">Label</a>`. Set `active` on the item matching the current route.
+
+**Inside `<sgds-mainnav-dropdown>`** — a `toggler` slot element (typically `<span>` with the section label) and `<sgds-dropdown-item>` children with `<a>` tags for sub-navigation links.
+
+**`end` slot** — right-aligned secondary actions: login button (`<sgds-button>`), language toggle (`<sgds-mainnav-item>`), or similar. These also collapse into the hamburger menu on small screens.
+
+**`non-collapsible` slot** — items that stay visible at all screen sizes regardless of hamburger collapse state (e.g. a language icon, accessibility toggle).
+
+**Avoid placing inside mainnav:**
+- Form inputs or search bars in the default slot — use the `end` slot or a dedicated search component
+- More than 5–7 primary nav items — consolidate into dropdowns to prevent overflow at mid-size breakpoints
+
 ## Advanced Considerations
 
 - **`non-collapsible` slot**: use for items that must always be visible (e.g. a language toggle icon) — these are not hidden when the nav collapses.
