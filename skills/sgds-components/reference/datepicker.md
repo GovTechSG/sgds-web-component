@@ -34,6 +34,9 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - First click sets the start date; second click sets the end date
 - Visual range highlight shown between selected dates
 
+**Validation feedback placement**
+- `hintText` and the error message occupy the same space below the input — when the field is invalid, `hintText` is replaced by the error message. Once the error is resolved, `hintText` reappears.
+
 ## Advanced Considerations
 
 **Accessibility** — ensure proper label association; announce selected date, focused date, and disabled dates; use `role="grid"` for the calendar; provide meaningful keyboard navigation
