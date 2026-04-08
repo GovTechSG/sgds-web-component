@@ -29,6 +29,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - `required` makes the field required for form submission.
 - `hasFeedback` enables validation feedback UI; pair with `invalidFeedback` to show an error message.
 - `invalid` manually sets the invalid state without relying on browser constraint validation.
+- `hintText` and the error message occupy the same space below the button — when the field is invalid, `hintText` is replaced by the error message. Once the error is resolved, `hintText` reappears.
 - Fires `sgds-files-selected` with a `FileList` as `event.detail` when files are selected.
 
 ## Advanced Considerations
