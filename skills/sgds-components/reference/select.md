@@ -28,6 +28,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - Closes the dropdown on outside click or pressing `Esc`.
 - Updates the value immediately upon selection.
 - Shows a loading spinner when `loading` is set.
+- `hintText` and the error message occupy the same space below the select — when the field is invalid, `hintText` is replaced by the error message. Once the error is resolved, `hintText` reappears.
 
 ## Advanced Considerations
 
