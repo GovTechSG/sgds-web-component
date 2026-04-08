@@ -27,6 +27,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - **Disabled**: cannot be interacted with; visually muted
 - Each checkbox in a group functions independently
 - Parent-child relationships may exist: parent reflects aggregated state (checked / indeterminate / unchecked)
+- In `<sgds-checkbox-group>`, `hintText` is rendered in the label row above the checkboxes and is always visible — unlike single-field components, it is not replaced by the error message when invalid. Both `hintText` and the error message can be visible simultaneously.
 
 ## Advanced Considerations
 
