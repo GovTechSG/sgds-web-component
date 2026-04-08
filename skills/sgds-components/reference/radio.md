@@ -26,6 +26,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - Supported states: default, hover, focus, selected, disabled, and error (validation failure).
 - If `required` and no option is selected, an error state is shown when `hasFeedback` is set.
 - Radios must always be grouped with a shared `name` attribute via `<sgds-radio-group>`.
+- In `<sgds-radio-group>`, `hintText` is rendered in the label row above the radio options and is always visible — unlike single-field components, it is not replaced by the error message when invalid. Both `hintText` and the error message can be visible simultaneously.
 
 ## Advanced Considerations
 
