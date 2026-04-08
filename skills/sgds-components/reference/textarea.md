@@ -23,6 +23,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - **Character counter**: when `maxlength` is set, a live counter appears below the field showing characters remaining — input is blocked once the limit is reached.
 - **Validation feedback**: `hasFeedback` is a string enum (`"style"`, `"text"`, `"both"`) that controls whether the error border colour, message text, or both are rendered when the field is invalid. Requires `invalidFeedback` to be set for the message.
 - **States**: default, focused, disabled (visually muted, non-interactive), readonly (value visible but not editable), and invalid.
+- **`hintText` and error message placement**: they occupy the same space below the textarea — when the field is invalid, `hintText` is replaced by the error message. Once the error is resolved, `hintText` reappears.
 - `noValidate` is **not available** on `<sgds-textarea>` — unlike `<sgds-input>`, browser constraint validation cannot be disabled via an attribute. Use `invalid` attribute + `setInvalid()` method for server-driven error flows.
 
 ## Advanced Considerations
