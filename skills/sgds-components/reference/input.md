@@ -26,6 +26,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - Supports placeholder text, pre-filled values, prefix/suffix addons, and an action slot.
 - Shows an inline loading spinner when `loading` is set.
 - Validation can be triggered inline, on blur, or on submit; error state is shown when `hasFeedback` is set and validation fails.
+- `hintText` and the error message occupy the same space below the input — when the field is invalid, `hintText` is replaced by the error message. Once the error is resolved, `hintText` reappears.
 - `invalid` and `valid` can be set manually to override the validation state programmatically without relying on browser constraint validation.
 - `noValidate` disables browser-native constraint validation — use this when implementing fully custom validation logic.
 - `disabled` makes the field non-interactive; `readonly` makes it visible but not editable.
