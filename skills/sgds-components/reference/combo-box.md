@@ -31,6 +31,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - `loading` shows a spinner while async results are being fetched.
 - `required` makes the field required for form submission; an error state is shown on submit if no option is selected. Unlike `<sgds-select>`, there is no `hasFeedback` or `invalidFeedback` attribute — validation feedback relies on browser-native constraint validation.
 - `disabled` makes the combo box non-interactive; `readonly` makes it visible but not selectable.
+- `hintText` and the error message occupy the same space below the input — when the field is invalid, `hintText` is replaced by the error message. Once the error is resolved, `hintText` reappears.
 - Keyboard: `Arrow` keys navigate options; `Enter` selects the highlighted option; `Esc` closes the dropdown.
 - Supported states: default, hover, focus, disabled, loading, and empty (no results).
 
