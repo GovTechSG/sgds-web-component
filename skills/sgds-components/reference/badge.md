@@ -2,6 +2,55 @@
 
 `<sgds-badge>` is the standard label and status indicator element. Use it to highlight categories, states, or short descriptive text alongside other content.
 
+No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
+
+## Usage Guideline
+
+### When to use
+
+- To label or categorise content items (e.g. status tags, category chips, count indicators).
+- When a short, scannable label helps users identify the type or state of an item at a glance.
+- Alongside other elements (cards, list items, table cells) to surface metadata like "New", "Active", or a numeric count.
+- When a visual distinction between states is needed in a compact, non-interactive form.
+
+### When NOT to use
+- For long or detailed content
+- As a primary method of communication
+- When the meaning relies only on color without text/icon support
+- For critical alerts or important messages — use alert instead
+- As a replacement for buttons or interactive elements
+
+## Behaviour
+
+- Badges are non-interactive by default
+- Content inside badges should be short and concise
+- Badge size adapts to content but maintains consistent height
+- Supports different variants (e.g. neutral, success, warning, danger)
+- Can include: text only, icon + text, or numeric values
+- May support dismissible behaviour (use cautiously)
+- **Auto-truncation**: when badge text overflows its container, the text is truncated with an ellipsis and a tooltip appears showing the full text. Always active — no configuration needed.
+- **Icon slot suppression**: the `icon` slot is silently suppressed when `dismissible` is set — a leading icon and a close button cannot coexist.
+
+## Advanced Considerations
+
+**Semantic consistency** — ensure badge variants align with system-wide meaning (e.g. success ≠ completed unless defined)
+
+**Scalability** — badge should work across different components (cards, tables, lists)
+
+**Accessibility** — ensure sufficient color contrast, provide text alternatives for icons, avoid relying solely on color
+
+**Density & layout** — maintain spacing consistency when used in groups; avoid clutter in high-density UI (e.g. tables)
+
+**Tokenisation** — use design tokens for color, spacing, typography, and border radius; ensure alignment with system roles (e.g. surface, text, border)
+
+## Edge Cases
+
+- **Large numbers** — use truncation (e.g. "99+") instead of long values
+- **Dynamic content** — ensure layout does not break with changing values
+- **Localisation** — handle longer translated text gracefully
+- **Icon-only badges** — must include accessible labels (ARIA)
+- **Multiple badges together** — avoid visual overload; maintain consistent spacing and hierarchy
+
 ## Quick Decision Guide
 
 **Which `variant`?**
@@ -44,10 +93,6 @@
 <sgds-badge variant="neutral" outlined fullWidth>Status</sgds-badge>
 ```
 
-**Auto-truncation**: when badge text overflows its container, the text is truncated with an ellipsis and a tooltip appears showing the full text. This is always active — no configuration needed.
-
-> The `icon` slot is suppressed when `dismissible` is set. A leading icon and a close button cannot coexist.
-
 ## API Summary
 
 | Attribute | Type | Default | Purpose |
@@ -80,7 +125,7 @@ For framework-specific event syntax (React, Vue, Angular) see the **[sgds-compon
 
 | Method | Description |
 |---|---|
-| `close()` | Sets `show` to `false`, triggering the hide sequence |
+| `close()` | Sets `show` to `false`, triggering the hide sequence. Only has a visual effect when `dismissible` is set — calling it on a non-dismissible badge fires events but the badge remains visible. |
 
 ---
 
