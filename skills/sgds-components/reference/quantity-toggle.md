@@ -28,6 +28,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - `disabled` disables the entire control — both buttons and the input.
 - `hasFeedback` controls validation UI: `"style"` (border colour only), `"text"` (message only), `"both"` (border + message). Pair with `invalidFeedback`.
 - `invalid` manually sets the invalid state without relying on browser constraint validation.
+- `hintText` and the error message occupy the same space below the toggle — when the field is invalid, `hintText` is replaced by the error message. Once the error is resolved, `hintText` reappears.
 - Fires `sgds-change` after a button click or committed keyboard input, and `sgds-input` on each input event.
 
 ## Advanced Considerations
