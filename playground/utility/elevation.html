@@ -1,0 +1,164 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div
+    class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl"
+  >
+    <h1>Elevation</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Surface Elevation</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:shadow-1</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >--sgds-elevation-surface-1</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><div class="sgds:shadow-1 sgds:bg-surface-raised sgds:p-md sgds:rounded-sm">
+            Subtle elevation
+          </div></sgds-table-cell
+        >
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:shadow-2</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >--sgds-elevation-surface-2</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><div class="sgds:shadow-2 sgds:bg-surface-raised sgds:p-md sgds:rounded-sm">
+            Light elevation for cards
+          </div></sgds-table-cell
+        >
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:shadow-3</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >--sgds-elevation-surface-3</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><div class="sgds:shadow-3 sgds:bg-surface-raised sgds:p-md sgds:rounded-sm">
+            Standard card elevation
+          </div></sgds-table-cell
+        >
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:shadow-4</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >--sgds-elevation-surface-4</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><div class="sgds:shadow-4 sgds:bg-surface-raised sgds:p-md sgds:rounded-sm">
+            Prominent for modals
+          </div></sgds-table-cell
+        >
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:shadow-5</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >--sgds-elevation-surface-5</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><div class="sgds:shadow-5 sgds:bg-surface-raised sgds:p-md sgds:rounded-sm">
+            Maximum elevation
+          </div></sgds-table-cell
+        >
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Edge Elevation</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:shadow-edge-top</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >--sgds-elevation-edge-top</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><div class="sgds:shadow-edge-top sgds:bg-surface-raised sgds:p-md sgds:rounded-sm">
+            Sticky headers shadow
+          </div></sgds-table-cell
+        >
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >sgds:shadow-edge-bottom</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono"
+            >--sgds-elevation-edge-bottom</code
+          ></sgds-table-cell
+        >
+        <sgds-table-cell
+          ><div class="sgds:shadow-edge-bottom sgds:bg-surface-raised sgds:p-md sgds:rounded-sm">
+            Sticky footers shadow
+          </div></sgds-table-cell
+        >
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <script>
+    document.getElementById("night-theme").addEventListener("click", () => {
+      document.body.classList.toggle("sgds-night");
+    });
+  </script>
+</body>

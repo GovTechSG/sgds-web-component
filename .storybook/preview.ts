@@ -1,4 +1,3 @@
-import { withThemeByClassName } from "@storybook/addon-themes";
 import { setCustomElementsManifest } from "@storybook/web-components";
 import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js";
 import customElements from "../custom-elements.json";
@@ -7,6 +6,7 @@ import "../lib/themes/day.css";
 import "../lib/themes/night.css";
 import "../lib/css/sgds.css";
 import "./utility.css";
+import "./gt-themes.css";
 import "./global.css";
 import sgdsTheme from "./sgdsTheme";
 
@@ -94,12 +94,65 @@ export const parameters = {
 };
 export const tags = ["autodocs"];
 
-export const decorators = [
-  withThemeByClassName({
-    themes: {
-      day: "",
-      night: "sgds-night-theme"
-    },
-    defaultTheme: "day"
-  })
+const GT_CLASSES = [
+  "gt-blue-theme",
+  "gt-cyan-theme",
+  "gt-magenta-theme",
+  "gt-pink-theme",
+  "gt-purple-theme",
+  "gt-red-theme"
 ];
+
+const withTheme = (StoryFn: any, context: any) => {
+  const { colorMode = "day", brandTheme = "" } = context.globals;
+  const html = document.documentElement;
+
+  if (colorMode === "night") {
+    html.classList.add("sgds-night-theme");
+  } else {
+    html.classList.remove("sgds-night-theme");
+  }
+
+  html.classList.remove(...GT_CLASSES);
+  if (brandTheme) {
+    html.classList.add(brandTheme);
+  }
+
+  return StoryFn();
+};
+
+export const globalTypes = {
+  colorMode: {
+    name: "Color Mode",
+    defaultValue: "day",
+    toolbar: {
+      icon: "sun",
+      items: [
+        { value: "day", title: "Day", icon: "sun" },
+        { value: "night", title: "Night", icon: "moon" }
+      ],
+      showName: true,
+      dynamicTitle: true
+    }
+  },
+  brandTheme: {
+    name: "Brand",
+    defaultValue: "",
+    toolbar: {
+      icon: "paintbrush",
+      items: [
+        { value: "", title: "Default" },
+        { value: "gt-blue-theme", title: "GT Blue" },
+        { value: "gt-cyan-theme", title: "GT Cyan" },
+        { value: "gt-magenta-theme", title: "GT Magenta" },
+        { value: "gt-pink-theme", title: "GT Pink" },
+        { value: "gt-purple-theme", title: "GT Purple" },
+        { value: "gt-red-theme", title: "GT Red" }
+      ],
+      showName: true,
+      dynamicTitle: true
+    }
+  }
+};
+
+export const decorators = [withTheme];

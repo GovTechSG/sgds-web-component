@@ -5,7 +5,7 @@
 @theme {
   --*: initial;
   --spacing: 4px;
-  
+
   /* Breakpoints (raw values required) */
   --breakpoint-xs: 320px;
   --breakpoint-sm: 512px;
@@ -13,7 +13,7 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2-xl: 1440px;
-  
+
   /* Margin and Padding */
   --spacing-none: var(--sgds-spacer-0);
   --spacing-3-xs: var(--sgds-spacer-1);
@@ -27,7 +27,7 @@
   --spacing-3-xl: var(--sgds-spacer-9);
   --spacing-4-xl: var(--sgds-spacer-10);
   --spacing-5-xl: var(--sgds-spacer-11);
- 
+
   /* Semantic background colors */
   --background-color-default: var(--sgds-bg-default);
   --background-color-alternate: var(--sgds-bg-alternate);
@@ -63,7 +63,7 @@
   --border-color-fixed-dark: var(--sgds-border-color-fixed-dark);
   --border-color-translucent: var(--sgds-border-color-translucent);
   --border-color-transparent: var(--sgds-border-color-transparent);
-  
+
   /* Semantic - Primary Colors */
   --background-color-primary-default: var(--sgds-primary-bg-default);
   --background-color-primary-muted: var(--sgds-primary-bg-muted);
@@ -267,16 +267,23 @@
   --font-weight-bold: var(--sgds-font-weight-bold);
 
   /* Font Size - Primitive */
-  --text-0: var(--sgds-font-size-0);
-  --text-1: var(--sgds-font-size-1);
-  --text-2: var(--sgds-font-size-2);
-  --text-3: var(--sgds-font-size-3);
-  --text-4: var(--sgds-font-size-4);
-  --text-5: var(--sgds-font-size-5);
-  --text-6: var(--sgds-font-size-6);
-  --text-7: var(--sgds-font-size-7);
-  --text-8: var(--sgds-font-size-8);
-  --text-9: var(--sgds-font-size-9);
+  --text-12: var(--sgds-font-size-12);
+  --text-14: var(--sgds-font-size-14);
+  --text-16: var(--sgds-font-size-16);
+  --text-18: var(--sgds-font-size-18);
+  --text-20: var(--sgds-font-size-20);
+  --text-22: var(--sgds-font-size-22);
+  --text-24: var(--sgds-font-size-24);
+  --text-26: var(--sgds-font-size-26);
+  --text-28: var(--sgds-font-size-28);
+  --text-30: var(--sgds-font-size-30);
+  --text-32: var(--sgds-font-size-32);
+  --text-36: var(--sgds-font-size-36);
+  --text-40: var(--sgds-font-size-40);
+  --text-44: var(--sgds-font-size-44);
+  --text-48: var(--sgds-font-size-48);
+  --text-52: var(--sgds-font-size-52);
+  --text-56: var(--sgds-font-size-56);
 
   /* Font Size - Semantic Responsive */
   --text-display-sm: var(--sgds-font-size-display-sm);
@@ -439,4 +446,12 @@
   --margin-paragraph-lg: var(--sgds-paragraph-spacing-lg);
   --margin-paragraph-xl: var(--sgds-paragraph-spacing-xl);
 
+  /* Elevation - Box Shadows */
+  --shadow-1: var(--sgds-elevation-surface-1);
+  --shadow-2: var(--sgds-elevation-surface-2);
+  --shadow-3: var(--sgds-elevation-surface-3);
+  --shadow-4: var(--sgds-elevation-surface-4);
+  --shadow-5: var(--sgds-elevation-surface-5);
+  --shadow-edge-top: var(--sgds-elevation-edge-top);
+  --shadow-edge-bottom: var(--sgds-elevation-edge-bottom);
 }

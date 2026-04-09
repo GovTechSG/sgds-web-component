@@ -126,7 +126,7 @@
   --sgds-breakpoint-xl: var(--sgds-dimension-1280);
   --sgds-breakpoint-2-xl: var(--sgds-dimension-1440);
 
-    /* Primitive - Breakpoint with sticky side bar*/
+  /* Primitive - Breakpoint with sticky side bar*/
   --sgds-breakpoint-sbar-md: var(--sgds-dimension-768);
   --sgds-breakpoint-sbar-lg: var(--sgds-dimension-1024);
   --sgds-breakpoint-sbar-xl: var(--sgds-dimension-1280);
@@ -322,7 +322,7 @@
   --sgds-form-padding-inline-lg: var(--sgds-padding-sm);
   --sgds-form-padding-inline-xl: var(--sgds-padding-md);
 
-    /* NEW - MARGIN */
+  /* NEW - MARGIN */
   --sgds-margin-none: var(--sgds-spacer-0);
   --sgds-margin-3-xs: var(--sgds-spacer-1);
   --sgds-margin-2-xs: var(--sgds-spacer-2);
@@ -339,7 +339,7 @@
   --sgds-gutter-sm: var(--sgds-dimension-16);
   --sgds-gutter-md: var(--sgds-dimension-24);
   --sgds-gutter-lg: var(--sgds-dimension-32);
-  
+
   --sgds-gap-none: var(--sgds-spacer-0);
   --sgds-gap-2-xs: var(--sgds-spacer-2);
   --sgds-gap-xs: var(--sgds-spacer-3);
@@ -411,4 +411,13 @@
   --sgds-motion-duration-standard: 300ms;
   --sgds-motion-duration-slow: 400ms;
   --sgds-motion-duration-slower: 500ms;
+
+  /* Elevation */
+  --sgds-elevation-surface-1: 0 0 2px 0 rgba(14, 14, 14, 0.16);
+  --sgds-elevation-surface-2: 0 0 2px 0 rgba(14, 14, 14, 0.16), 0 2px 4px 0 rgba(14, 14, 14, 0.08);
+  --sgds-elevation-surface-3: 0 0 2px 0 rgba(14, 14, 14, 0.16), 0 4px 8px 0 rgba(14, 14, 14, 0.08);
+  --sgds-elevation-surface-4: 0 0 2px 0 rgba(14, 14, 14, 0.16), 0 8px 16px 0 rgba(14, 14, 14, 0.08);
+  --sgds-elevation-surface-5: 0 0 2px 0 rgba(14, 14, 14, 0.16), 0 16px 32px 0 rgba(14, 14, 14, 0.08);
+  --sgds-elevation-edge-top: 0 -2px 4px 0 rgba(14, 14, 14, 0.08);
+  --sgds-elevation-edge-bottom: 0 2px 4px 0 rgba(14, 14, 14, 0.08);
 }
