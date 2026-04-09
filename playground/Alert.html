@@ -19,7 +19,7 @@
     <div class="container">
       <div>
         <h2>Info (default)</h2>
-        <sgds-alert show variant="info" title="Info Alert">
+        <sgds-alert show variant="info" title="Info Alert" dismissible>
           <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
           <div>This is an informational message with a <sgds-alert-link href="#">link</sgds-alert-link>.</div>
         </sgds-alert>
@@ -27,7 +27,7 @@
 
       <div>
         <h2>Success</h2>
-        <sgds-alert show variant="success" title="Success Alert">
+        <sgds-alert show variant="success" title="Success Alert" dismissible>
           <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
           <div>Operation completed successfully.</div>
         </sgds-alert>
@@ -35,7 +35,7 @@
 
       <div>
         <h2>Danger</h2>
-        <sgds-alert show variant="danger" title="Error Alert">
+        <sgds-alert show variant="danger" title="Error Alert" dismissible>
           <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
           <div>Something went wrong. Please try again.</div>
         </sgds-alert>
@@ -43,7 +43,7 @@
 
       <div>
         <h2>Warning</h2>
-        <sgds-alert show variant="warning" title="Warning Alert">
+        <sgds-alert show variant="warning" title="Warning Alert" dismissible>
           <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
           <div>Proceed with caution.</div>
         </sgds-alert>
@@ -51,7 +51,7 @@
 
       <div>
         <h2>Neutral</h2>
-        <sgds-alert show variant="neutral" title="Neutral Alert">
+        <sgds-alert show variant="neutral" title="Neutral Alert" dismissible>
           <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
           <div>Here is some neutral information.</div>
         </sgds-alert>
@@ -59,15 +59,43 @@
 
       <div>
         <h2>Outlined</h2>
-        <sgds-alert show variant="info" title="Outlined Alert" outlined>
+        <sgds-alert show variant="info" title="Outlined Alert" outlined dismissible>
           <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          <div>This alert uses the outlined style.</div>
+        </sgds-alert>
+      </div>
+      <div>
+        <h2>Outlined</h2>
+        <sgds-alert show variant="info" title="Outlined Alert" outlined dismissible>
+          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          <div>This alert uses the outlined style.</div>
+        </sgds-alert>
+      </div>
+      <div>
+        <h2>Outlined Warning</h2>
+        <sgds-alert show variant="warning" title="Outlined Warning Alert" outlined dismissible>
+          <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
+          <div>This alert uses the outlined style.</div>
+        </sgds-alert>
+      </div>
+      <div>
+        <h2>Outlined Success</h2>
+        <sgds-alert show variant="success" title="Outlined Success Alert" outlined dismissible>
+          <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
+          <div>This alert uses the outlined style.</div>
+        </sgds-alert>
+      </div>
+      <div>
+        <h2>Outlined Danger</h2>
+        <sgds-alert show variant="danger" title="Outlined Danger Alert" outlined dismissible>
+          <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
           <div>This alert uses the outlined style.</div>
         </sgds-alert>
       </div>
 
       <div>
         <h2>Dismissible</h2>
-        <sgds-alert show variant="info" title="Dismissible Alert" dismissible>
+        <sgds-alert show variant="info" title="Dismissible Alert" dismissible dismissible>
           <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
           <div>This alert can be closed by the user.</div>
         </sgds-alert>

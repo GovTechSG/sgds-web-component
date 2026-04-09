@@ -1,16 +1,16 @@
-import SgdsButton from "@govtechsg/sgds-web-component/react/button/index.js";
+'use client';
 
 export const Button = () => {
-    return (
-        <>
-            <SgdsButton variant="primary"> primary </SgdsButton>
-            <SgdsButton variant="secondary"> secondary </SgdsButton>
-            <SgdsButton variant="success"> success </SgdsButton>
-            <SgdsButton variant="danger"> danger </SgdsButton>
-            <SgdsButton variant="warning"> warning </SgdsButton>
-            <SgdsButton variant="info"> info </SgdsButton>
-            <SgdsButton variant="light"> light </SgdsButton>
-            <SgdsButton variant="dark"> dark </SgdsButton>
-        </>
-    )
-}
+  return (
+    <>
+      <sgds-button variant="primary" suppressHydrationWarning>primary</sgds-button>
+      <sgds-button variant="secondary" suppressHydrationWarning>secondary</sgds-button>
+      <sgds-button variant="success" suppressHydrationWarning>success</sgds-button>
+      <sgds-button variant="danger" suppressHydrationWarning>danger</sgds-button>
+      <sgds-button variant="warning" suppressHydrationWarning>warning</sgds-button>
+      <sgds-button variant="info" suppressHydrationWarning>info</sgds-button>
+      <sgds-button variant="light" suppressHydrationWarning>light</sgds-button>
+      <sgds-button variant="dark" suppressHydrationWarning>dark</sgds-button>
+    </>
+  );
+};
