@@ -3,13 +3,16 @@
   cursor: pointer;
 }
 
-.alert-link, .alert-link:hover {
+.alert-link,
+.alert-link:hover {
   color: var(--sgds-alert-color);
   text-decoration-line: underline;
+  font-size: var(--sgds-font-size-body-sm);
+  font-weight: var(--sgds-font-weight-regular);
+  line-height: var(--sgds-line-height-2-xs);
 }
 
 .alert-link:focus-visible {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
-
 }
