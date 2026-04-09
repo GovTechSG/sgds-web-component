@@ -9,10 +9,10 @@ const VariantTemplate = args =>
   html`
     <sgds-toast show variant=${ifDefined(args.variant)} dismissible title=${capitalizeFirstLetter(args.variant)}>
       ${args.variant === "warning"
-        ? html`<sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>`
-        : html`<sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>`}
+        ? html`<sgds-icon slot="icon" name="exclamation-triangle-fill" size="md"></sgds-icon>`
+        : html`<sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>`}
       Message
-      <sgds-link slot="action"><a href="#" target="_blank">Action</a></sgds-link>
+      <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
     </sgds-toast>
   `;
 
@@ -56,14 +56,14 @@ const DismissibleTemplate = args =>
   html`
     <div class="d-flex-column">
       <sgds-toast show dismissible title="Dismissible">
-        <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+        <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
         Message
-        <sgds-link slot="action"><a href="#" target="_blank">Action</a></sgds-link>
+        <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
       </sgds-toast>
       <sgds-toast show title="Not dismissible">
-        <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+        <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
         Message
-        <sgds-link slot="action"><a href="#" target="_blank">Action</a></sgds-link>
+        <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
       </sgds-toast>
     </div>
   `;
@@ -98,9 +98,9 @@ const PositionTemplate = args =>
           ?dismissable=${args.dismissable}
           title=${ifDefined(args.title)}
         >
-          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
           This is a toast notifications
-          <sgds-link slot="action"><a href="#" target="_blank">Action</a></sgds-link>
+          <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
         </sgds-toast>
       </sgds-toast-container>
     </div>
@@ -146,14 +146,14 @@ const StackingTemplate = () =>
     <div style="height:400px;">
       <sgds-toast-container position=${ifDefined(args.position)}>
         <sgds-toast show>
-          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
           This is a toast notifications
-          <sgds-link slot="action"><a href="#" target="_blank">Action</a></sgds-link>
+          <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
         </sgds-toast>
         <sgds-toast show>
-          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
           This is a toast notifications
-          <sgds-link slot="action"><a href="#" target="_blank">Action</a></sgds-link>
+          <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
         </sgds-toast>
       </sgds-toast-container>
     </div>
