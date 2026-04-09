@@ -1,3 +1,6 @@
+:host{
+  display: inline-block;
+}
 .dropdown {
   position: relative;
   display: flex; 
