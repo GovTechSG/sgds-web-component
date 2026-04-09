@@ -12,7 +12,7 @@ import toastStyle from "./toast.css";
  *
  * @slot default - The content to pass into toast's body
  * @slot action - The content to pass into toast's action
- * @slot icon - The icon in toast
+ * @slot icon - The icon in toast.
  *
  * @event sgds-show - Emitted on show.
  * @event sgds-after-show - Emitted on show after animation has completed.
@@ -125,8 +125,8 @@ export class SgdsToast extends SgdsElement {
         <slot name="icon"></slot>
         <div class="toast-content">
           <div class="toast-body">
-            <strong>${this.title}</strong>
-            <span><slot></slot></span>
+            <div class="toast-body__title">${this.title}</div>
+            <span class="toast-body__message"><slot></slot></span>
           </div>
           <slot class="toast-action" name="action"></slot>
         </div>
