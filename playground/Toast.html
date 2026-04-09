@@ -14,153 +14,23 @@
     <sgds-masthead></sgds-masthead>
     <sgds-mainnav></sgds-mainnav>
 
-    <div class="sgds:px-layout-sm sgds:pt-layout-sm sgds:pb-layout-xl">
-      <h1 class="sgds:text-heading-xl sgds:font-bold sgds:mb-2">Toast Position Playground</h1>
-      <p class="sgds:text-body-md sgds:text-subtle sgds:mb-1">
-        Each click dynamically creates a new toast at the specified position.
-      </p>
-      <p class="sgds:text-body-sm sgds:text-muted sgds:mb-layout-sm">
-        <em>top-* positions: newest toast appears at the top, pushing older ones down.
-        bottom-* positions: newest toast appears at the bottom, pushing older ones up.</em>
-      </p>
-
-      <div class="sgds-grid">
-
-        <div class="sgds-col-4 sgds-col-md-6 sgds-col-sm-12
-                    sgds:border sgds:border-muted sgds:rounded-md
-                    sgds:p-component-md sgds:bg-surface-default
-                    sgds:flex sgds:flex-col sgds:gap-component-xs">
-          <div class="sgds:text-label-md sgds:font-semibold"><code>top-center</code></div>
-          <sgds-button size="sm" data-container="container-top-center" data-position="top-center">Add toast</sgds-button>
-        </div>
-
-        <div class="sgds-col-4 sgds-col-md-6 sgds-col-sm-12
-                    sgds:border sgds:border-muted sgds:rounded-md
-                    sgds:p-component-md sgds:bg-surface-default
-                    sgds:flex sgds:flex-col sgds:gap-component-xs">
-          <div class="sgds:text-label-md sgds:font-semibold"><code>top-end</code></div>
-          <sgds-button size="sm" data-container="container-top-end" data-position="top-end">Add toast</sgds-button>
-        </div>
-
-        <div class="sgds-col-4 sgds-col-md-6 sgds-col-sm-12
-                    sgds:border sgds:border-muted sgds:rounded-md
-                    sgds:p-component-md sgds:bg-surface-default
-                    sgds:flex sgds:flex-col sgds:gap-component-xs">
-          <div class="sgds:text-label-md sgds:font-semibold"><code>bottom-start</code></div>
-          <sgds-button size="sm" data-container="container-bottom-start" data-position="bottom-start">Add toast</sgds-button>
-        </div>
-
-        <div class="sgds-col-4 sgds-col-md-6 sgds-col-sm-12
-                    sgds:border sgds:border-muted sgds:rounded-md
-                    sgds:p-component-md sgds:bg-surface-default
-                    sgds:flex sgds:flex-col sgds:gap-component-xs">
-          <div class="sgds:text-label-md sgds:font-semibold"><code>bottom-center</code></div>
-          <sgds-button size="sm" data-container="container-bottom-center" data-position="bottom-center">Add toast</sgds-button>
-        </div>
-
-        <div class="sgds-col-4 sgds-col-md-6 sgds-col-sm-12
-                    sgds:border sgds:border-muted sgds:rounded-md
-                    sgds:p-component-md sgds:bg-surface-default
-                    sgds:flex sgds:flex-col sgds:gap-component-xs">
-          <div class="sgds:text-label-md sgds:font-semibold"><code>bottom-end</code></div>
-          <sgds-button size="sm" data-container="container-bottom-end" data-position="bottom-end">Add toast</sgds-button>
-        </div>
-
-        <div class="sgds-col-4 sgds-col-md-6 sgds-col-sm-12
-                    sgds:border sgds:border-muted sgds:rounded-md
-                    sgds:p-component-md sgds:bg-surface-default
-                    sgds:flex sgds:flex-col sgds:gap-component-xs">
-          <div class="sgds:text-label-md sgds:font-semibold">
-            <code>top-start</code>
-            <span class="sgds:bg-warning-muted sgds:text-warning-emphasis sgds:rounded sgds:px-component-xs sgds:text-label-xs sgds:font-medium">deprecated</span>
-          </div>
-          <sgds-button size="sm" variant="outline" data-container="container-top-start" data-position="top-start">Add toast</sgds-button>
-        </div>
-
-        <div class="sgds-col-4 sgds-col-md-6 sgds-col-sm-12
-                    sgds:border sgds:border-muted sgds:rounded-md
-                    sgds:p-component-md sgds:bg-surface-default
-                    sgds:flex sgds:flex-col sgds:gap-component-xs">
-          <div class="sgds:text-label-md sgds:font-semibold">
-            <code>middle-start</code>
-            <span class="sgds:bg-warning-muted sgds:text-warning-emphasis sgds:rounded sgds:px-component-xs sgds:text-label-xs sgds:font-medium">deprecated</span>
-          </div>
-          <sgds-button size="sm" variant="outline" data-container="container-middle-start" data-position="middle-start">Add toast</sgds-button>
-        </div>
-
-        <div class="sgds-col-4 sgds-col-md-6 sgds-col-sm-12
-                    sgds:border sgds:border-muted sgds:rounded-md
-                    sgds:p-component-md sgds:bg-surface-default
-                    sgds:flex sgds:flex-col sgds:gap-component-xs">
-          <div class="sgds:text-label-md sgds:font-semibold">
-            <code>middle-center</code>
-            <span class="sgds:bg-warning-muted sgds:text-warning-emphasis sgds:rounded sgds:px-component-xs sgds:text-label-xs sgds:font-medium">deprecated</span>
-          </div>
-          <sgds-button size="sm" variant="outline" data-container="container-middle-center" data-position="middle-center">Add toast</sgds-button>
-        </div>
-
-        <div class="sgds-col-4 sgds-col-md-6 sgds-col-sm-12
-                    sgds:border sgds:border-muted sgds:rounded-md
-                    sgds:p-component-md sgds:bg-surface-default
-                    sgds:flex sgds:flex-col sgds:gap-component-xs">
-          <div class="sgds:text-label-md sgds:font-semibold">
-            <code>middle-end</code>
-            <span class="sgds:bg-warning-muted sgds:text-warning-emphasis sgds:rounded sgds:px-component-xs sgds:text-label-xs sgds:font-medium">deprecated</span>
-          </div>
-          <sgds-button size="sm" variant="outline" data-container="container-middle-end" data-position="middle-end">Add toast</sgds-button>
-        </div>
-
-      </div>
-    </div>
-
-    <sgds-toast-container id="container-top-center"    position="top-center"></sgds-toast-container>
-    <sgds-toast-container id="container-top-end"       position="top-end"></sgds-toast-container>
-    <sgds-toast-container id="container-bottom-start"  position="bottom-start"></sgds-toast-container>
-    <sgds-toast-container id="container-bottom-center" position="bottom-center"></sgds-toast-container>
-    <sgds-toast-container id="container-bottom-end"    position="bottom-end"></sgds-toast-container>
-    <sgds-toast-container id="container-top-start"     position="top-start"></sgds-toast-container>
-    <sgds-toast-container id="container-middle-start"  position="middle-start"></sgds-toast-container>
-    <sgds-toast-container id="container-middle-center" position="middle-center"></sgds-toast-container>
-    <sgds-toast-container id="container-middle-end"    position="middle-end"></sgds-toast-container>
-
-    <script>
-      let toastCount = 0;
-
-      const variants = [
-        { variant: '',        icon: 'info-circle-fill' },
-        { variant: 'warning', icon: 'exclamation-circle-fill' },
-        { variant: 'success', icon: 'check-circle-fill' },
-        { variant: 'danger',  icon: 'x-circle-fill' },
-      ];
-
-      async function addToast(containerId, position) {
-        toastCount++;
-        const { variant, icon } = variants[toastCount % variants.length];
-
-        const container = document.getElementById(containerId);
-
-        const toast = document.createElement('sgds-toast');
-        toast.setAttribute('dismissible', '');
-        if (variant) toast.setAttribute('variant', variant);
-
-        const iconEl = document.createElement('sgds-icon');
-        iconEl.setAttribute('slot', 'icon');
-        iconEl.setAttribute('name', icon);
-        toast.appendChild(iconEl);
-        toast.appendChild(document.createTextNode(` ${position} — toast #${toastCount}`));
-
-        container.appendChild(toast);
-        await toast.updateComplete;
-        toast.showToast();
-
-        toast.addEventListener('sgds-after-hide', () => toast.remove());
-      }
-
-      document.querySelectorAll('[data-container]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          addToast(btn.dataset.container, btn.dataset.position);
-        });
-      });
-    </script>
-  </body>
-</html>
+<sgds-masthead></sgds-masthead>
+ <sgds-system-banner show></sgds-system-banner>
+<sgds-mainnav></sgds-mainnav>
+<sgds-toast-container>
+        <sgds-toast show>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+          This is a toast notifications
+          <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
+        </sgds-toast>
+        <sgds-toast show>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+          This is a toast notifications
+          <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
+        </sgds-toast>
+<sgds-toast dismissible show>
+  <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+  This is a toast notifications This is a toast notifications his is a toast notifications his is a toast notifications
+  his is a toast notifications his is a toast notifications his is a toast notifications
+</sgds-toast>
+</sgds-toast-container>
