@@ -8,7 +8,11 @@ function capitalizeFirstLetter(val) {
 const VariantTemplate = args =>
   html`
     <sgds-toast show variant=${ifDefined(args.variant)} dismissible title=${capitalizeFirstLetter(args.variant)}>
-      ${args.variant === "warning"
+      ${args.variant === "success"
+        ? html`<sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>`
+        : args.variant === "danger"
+        ? html`<sgds-icon slot="icon" name="exclamation-circle-fill" size="md"></sgds-icon>`
+        : args.variant === "warning"
         ? html`<sgds-icon slot="icon" name="exclamation-triangle-fill" size="md"></sgds-icon>`
         : html`<sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>`}
       Message

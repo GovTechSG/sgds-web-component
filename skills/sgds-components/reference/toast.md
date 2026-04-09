@@ -46,11 +46,11 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 ## Quick Decision Guide
 
 **Variant?**
-- Informational → `variant="info"` (default)
-- Confirmation → `variant="success"`
-- Error → `variant="danger"`
-- Caution → `variant="warning"`
-- Theme-neutral → `variant="neutral"`
+- Informational → `variant="info"` (default) — `<sgds-icon slot="icon" name="info-circle-fill" size="md">`
+- Confirmation → `variant="success"` — `<sgds-icon slot="icon" name="check-circle-fill" size="md">`
+- Error → `variant="danger"` — `<sgds-icon slot="icon" name="exclamation-circle-fill" size="md">`
+- Caution → `variant="warning"` — `<sgds-icon slot="icon" name="exclamation-triangle-fill" size="md">`
+- Theme-neutral → `variant="neutral"` — `<sgds-icon slot="icon" name="info-circle-fill" size="md">`
 
 **Auto-dismiss?** → Add `autohide` and optionally `delay` (ms, default 5000)
 
