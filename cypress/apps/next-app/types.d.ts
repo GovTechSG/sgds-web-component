@@ -5,7 +5,7 @@ import "react";
 declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
-      "sgds-thumbnail-card": any;
+      [key: `sgds-${string}`]: any;
     }
   }
 }

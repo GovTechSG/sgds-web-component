@@ -29,6 +29,29 @@ const SgdsSelect = () => {
 };
 ```
 
+### TypeScript support
+
+Add a `types.d.ts` file at the project root and import the SGDS React type definitions. This gives full IntelliSense for props and typed `CustomEvent` detail payloads on all `sgds-*` elements:
+
+```ts
+// types.d.ts
+import "@govtechsg/sgds-web-component/types/react";
+```
+
+Ensure it is included by your `tsconfig.json`:
+
+```json
+{
+  "include": ["types.d.ts", "**/*.ts", "**/*.tsx"]
+}
+```
+
+With this in place, event handlers are fully typed — no manual casting needed:
+
+```tsx
+<sgds-switch onsgds-change={(e: CustomEvent<ISgdsSwitchChangeEventDetail>) => console.log(e.detail.checked)} />
+```
+
 ### Complex props
 
 Complex properties like arrays and objects can now be declaratively defined in React 19

@@ -8,6 +8,8 @@ import { watch } from "../../utils/watch";
 import { HasSlotController } from "../../utils/slot";
 import formLabelStyles from "../../styles/form-label.css";
 import switchStyle from "./switch.css";
+import type { ISgdsSwitchChangeEventDetail } from "./types";
+export type { ISgdsSwitchChangeEventDetail };
 
 /**
  * @summary Switch component is used to toggle on and off or yes or no action.
@@ -16,6 +18,7 @@ import switchStyle from "./switch.css";
  * @slot leftLabel - The label on the left side of the switch
  *
  * @event sgds-change - Emitted when the checked state changes.
+ * @eventDetail {ISgdsSwitchChangeEventDetail} sgds-change
  *
  */
 export class SgdsSwitch extends SgdsElement {
@@ -70,7 +73,7 @@ export class SgdsSwitch extends SgdsElement {
 
   private _handleChange() {
     this.checked = !this.checked;
-    this.emit("sgds-change", { detail: { checked: this.checked } });
+    this.emit<ISgdsSwitchChangeEventDetail>("sgds-change", { detail: { checked: this.checked } });
   }
 
   private _handleKeyDown(event: KeyboardEvent) {

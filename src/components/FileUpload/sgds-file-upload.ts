@@ -9,6 +9,8 @@ import FormControlElement from "../../base/form-control-element";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import SgdsIcon from "../Icon/sgds-icon";
+import type { ISgdsFileUploadFilesSelectedEventDetail } from "./types";
+export type { ISgdsFileUploadFilesSelectedEventDetail };
 
 /**
  * @summary Allows users to upload files of various sizes and formats
@@ -16,6 +18,7 @@ import SgdsIcon from "../Icon/sgds-icon";
  * @slot default - Label for file upload button
  *
  * @event sgds-files-selected - Emitted when files are selected for uploading. Access the selected files with event.target.detail
+ * @eventDetail {ISgdsFileUploadFilesSelectedEventDetail} sgds-files-selected
  */
 
 export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
@@ -78,7 +81,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   }
 
   private _setFileList(files: FileList) {
-    this.emit("sgds-files-selected", { detail: files });
+    this.emit<ISgdsFileUploadFilesSelectedEventDetail>("sgds-files-selected", { detail: files });
   }
 
   private inputRef = createRef<HTMLInputElement>();
