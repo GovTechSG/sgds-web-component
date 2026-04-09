@@ -14,9 +14,9 @@ export const Template = args =>
           ?dismissable=${args.dismissable}
           title=${ifDefined(args.title)}
         >
-          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
           This is a toast notifications
-          <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
+          <sgds-link slot="action"><a href="#" target="_blank">Action</a></sgds-link>
         </sgds-toast>
       </sgds-toast-container>
     </div>

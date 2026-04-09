@@ -66,16 +66,16 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 <!-- Basic toast (already shown) -->
 <sgds-toast-container position="bottom-end">
   <sgds-toast show variant="info" title="Info" dismissible>
-    <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+    <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
     Your changes have been saved.
-    <sgds-link slot="action" size="sm"><a href="#" target="_blank">Undo</a></sgds-link>
+    <sgds-link slot="action"><a href="#" target="_blank">Undo</a></sgds-link>
   </sgds-toast>
 </sgds-toast-container>
 
 <!-- Auto-dismissing toast after 3 seconds -->
 <sgds-toast-container position="top-end">
   <sgds-toast show variant="success" title="Success" autohide delay="3000">
-    <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
+    <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
     Item added to cart.
   </sgds-toast>
 </sgds-toast-container>
@@ -84,7 +84,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 <sgds-button id="trigger-toast">Show Toast</sgds-button>
 <sgds-toast-container position="bottom-end">
   <sgds-toast id="my-toast" variant="danger" title="Error" dismissible>
-    <sgds-icon slot="icon" name="exclamation-circle-fill" size="md"></sgds-icon>
+    <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
     Something went wrong. Please try again.
   </sgds-toast>
 </sgds-toast-container>
@@ -98,11 +98,11 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 <!-- Multiple toasts stacked -->
 <sgds-toast-container position="bottom-end">
   <sgds-toast show variant="success" title="Saved">
-    <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
+    <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
     Document saved.
   </sgds-toast>
   <sgds-toast show variant="warning" title="Warning">
-    <sgds-icon slot="icon" name="exclamation-triangle-fill" size="md"></sgds-icon>
+    <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
     Storage almost full.
   </sgds-toast>
 </sgds-toast-container>
@@ -137,9 +137,9 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 | Slot | Purpose |
 |---|---|
-| `icon` | Icon displayed on the left (use `<sgds-icon size="md">`) |
+| `icon` | Icon displayed on the left (use `<sgds-icon>`) |
 | *(default)* | Toast message body text |
-| `action` | Action link on the right (use `<sgds-link size="sm">`) |
+| `action` | Action link on the right (use `<sgds-link>`) |
 
 ## Events (`<sgds-toast>`)
 
@@ -165,4 +165,4 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 3. Always wrap `<sgds-toast>` inside `<sgds-toast-container>` — the container handles positioning.
 4. Multiple `<sgds-toast>` elements inside one container stack vertically automatically.
 5. Avoid deprecated position values (`top-start`, `middle-*`); use `bottom-end` as the default position.
-6. Icon slot accepts `<sgds-icon size="md">`, action slot accepts `<sgds-link size="sm">` wrapping an `<a>` tag.
+6. Icon slot accepts `<sgds-icon>`, action slot accepts `<sgds-link>` wrapping an `<a>` tag.
