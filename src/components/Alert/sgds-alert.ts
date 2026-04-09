@@ -64,10 +64,10 @@ export class SgdsAlert extends SgdsElement {
             role="alert"
             aria-hidden=${this.show ? "false" : "true"}
           >
-            <slot name="icon"></slot>
+            <slot name="icon" class=${classMap({ "alert-icon__outlined": this.outlined })}></slot>
             <div class="alert-content">
               ${this.title ? html`<div class="alert-title">${this.title}</div>` : nothing}
-              <slot></slot>
+              <slot class="alert-content__description"></slot>
             </div>
             ${this.dismissible
               ? html`<sgds-close-button
