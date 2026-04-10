@@ -150,21 +150,18 @@ export default SgdsInput;
 
 ### 3. TypeScript Support
 
-Add type definitions for SGDS web components in a `types.d.ts` file:
+Add a `types.d.ts` file at the project root and import the SGDS React type definitions. This gives full IntelliSense for props and typed `CustomEvent` detail payloads on all `sgds-*` elements without manual per-component declarations:
 
-```typescript
-import * as React from 'react';
+```ts
+// types.d.ts
+import "@govtechsg/sgds-web-component/types/react";
+```
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'sgds-masthead': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-      'sgds-input': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-      'sgds-button': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-      'sgds-icon': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-      // Add other SGDS components as needed
-    }
-  }
+Ensure the file is picked up by your `tsconfig.json`:
+
+```json
+{
+  "include": ["types.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
 ```
 

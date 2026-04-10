@@ -107,6 +107,32 @@ export default {
     },
         cemInheritancePlugin(),
     {
+      name: 'sgds-event-detail-types',
+      analyzePhase({ ts, node, moduleDoc }) {
+        if (node.kind !== ts.SyntaxKind.ClassDeclaration) return;
+        const className = node.name.getText();
+        const classDoc = moduleDoc?.declarations?.find(d => d.name === className);
+        if (!classDoc?.events?.length) return;
+
+        let customComments = '/**';
+        node.jsDoc?.forEach(jsDoc => {
+          jsDoc?.tags?.forEach(tag => {
+            if (tag.tagName.getText() === 'eventDetail') {
+              customComments += `\n * @eventDetail ${tag.comment}`;
+            }
+          });
+        });
+        customComments += '\n */';
+
+        const parsed = parse(customComments);
+        parsed[0]?.tags.forEach(t => {
+          if (t.tag !== 'eventDetail' || !t.type || !t.name) return;
+          const event = classDoc.events.find(e => e.name === t.name);
+          if (event) event.detailType = t.type;
+        });
+      }
+    },
+    {
       name: 'sgds-react-event-names',
       analyzePhase({ ts, node, moduleDoc }) {
         switch (node.kind) {

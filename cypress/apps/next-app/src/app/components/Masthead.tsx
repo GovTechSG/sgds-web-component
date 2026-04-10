@@ -1,5 +1,5 @@
-import SgdsMasthead from "@govtechsg/sgds-web-component/react/masthead/index.js";
+'use client';
 
 export const Masthead = () => {
-  return <SgdsMasthead />;
+  return <sgds-masthead suppressHydrationWarning />;
 };
