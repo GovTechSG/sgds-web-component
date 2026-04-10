@@ -25,7 +25,8 @@
   white-space: normal;
   word-break: normal;
   word-spacing: normal;
-  z-index: 900;
+  /* takes effect when floating ui adds inline-styles via javascript */
+  z-index: var(--sgds-z-index-overlay);
 }
 
 div {

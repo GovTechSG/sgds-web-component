@@ -1,14 +1,13 @@
 :host {
-  position: sticky;
-  top: 0;
-  z-index: 950;
   display: block;
+  z-index: var(--sgds-z-index-raised);
 }
 
 nav {
   background-color: var(--sgds-surface-raised);
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   width: 100%;
+  position: relative;
 }
 
 .subnav {

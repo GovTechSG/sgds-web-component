@@ -1,12 +1,12 @@
 :host {
-  z-index: 1200;
-  position: relative;
   display: block;
 }
 
 nav {
   background-color: var(--sgds-surface-default);
   box-shadow: 0px 2px 2px 0px rgba(14, 14, 14, 0.08);
+  position: relative;
+  z-index: var(--sgds-z-index-floating);
 }
 
 .navbar {
@@ -15,7 +15,6 @@ nav {
   align-items: stretch;
   justify-content: space-between;
   gap: var(--sgds-gap-xs);
-  position: relative;
   padding: 0px var(--sgds-mainnav-mobile-padding-x);
   width: 100%;
   max-width: var(--sgds-mainnav-max-width, 1440px);
@@ -50,7 +49,7 @@ nav {
 
 nav > .navbar-body {
   position: absolute;
-  z-index: 2000;
+  z-index: var(--sgds-z-index-floating);
   width: 100%;
   background-color: var(--sgds-surface-default);
   padding: var(--sgds-padding-md) 0px;

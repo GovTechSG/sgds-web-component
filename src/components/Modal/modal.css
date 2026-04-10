@@ -31,7 +31,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 105500;
+  z-index: var(--sgds-z-index-modal);
   font-family: var(--sgds-body-font-family);
 }
 
