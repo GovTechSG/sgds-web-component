@@ -74,7 +74,9 @@ Skills are read by the agent at query time — they do not add runtime dependenc
 Run the following command to pull the latest skill updates:
 
 ```bash
-npx skills update
+
+npx skills add govtechsg/sgds-web-component
+
 ```
 
 Skills follow the library version. After upgrading `@govtechsg/sgds-web-component`, update skills to ensure the AI agent's knowledge matches the installed version.
