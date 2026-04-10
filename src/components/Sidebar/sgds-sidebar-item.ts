@@ -1,5 +1,4 @@
 import { html, nothing } from "lit";
-import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarOptionStyle from "./sidebar-item.css";
@@ -25,7 +24,7 @@ export class SgdsSidebarItem extends SidebarElement {
       <div
         class=${classMap({
           "sidebar-item": true,
-          "sidebar-item--collapsed": this._sidebarCollapsed && this._childLevel === 1,
+          "sidebar-item--collapsed": !this._isOverlay && this._sidebarCollapsed && this._childLevel === 1,
           active: this._selected
         })}
         @click=${() => this._handleClick()}

@@ -1,8 +1,8 @@
 import { html } from "lit";
 
 export const Template = args => html`
-  <div style="height:600px;">
-    <sgds-sidebar active=${args.active} ?collapsed=${args.collapsed}>
+  <div class="sgds:h-175">
+    <sgds-sidebar active=${args.active} ?collapsed=${args.collapsed} ?scrim=${args.scrim}>
       <div slot="top">SGDS Sidebar</div>
 
       <!-- Main Navigation Section -->
@@ -61,18 +61,7 @@ export const Template = args => html`
           <sgds-icon name="question-circle" slot="leadingIcon"></sgds-icon>
           <span
             slot="trailingIcon"
-            style="
-          background: #ef4444;
-          color: white;
-          border-radius: 50%;
-          width: 20px;
-          height: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 11px;
-          font-weight: 600;
-        "
+            class="sgds:bg-error-default sgds:text-fixed-light sgds:rounded-full sgds:w-5 sgds:h-5 sgds:flex sgds:items-center sgds:justify-center sgds:text-xs sgds:font-semibold"
             >3</span
           >
         </sgds-sidebar-item>
@@ -89,11 +78,18 @@ export const Template = args => html`
 
 export const args = {
   active: "meetings",
-  collapsed: false
+  collapsed: false,
+  scrim: true
 };
 
 export const parameters = {
-  layout: "fullscreen"
+  layout: "fullscreen",
+  docs: {
+    story: {
+      inline: false,
+      height: 700
+    }
+  }
 };
 
 export const play = undefined;

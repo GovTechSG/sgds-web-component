@@ -57,14 +57,13 @@ export class SgdsSidebarSection extends SidebarElement {
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "region");
-    this._childLevel = null;
+    this._childLevel = -1;
   }
 
   /**
-   * Handles click events on the section label.
-   * Toggles the collapsed state to show/hide section content.
-   * Only called if the section is collapsible (collapsible prop is true).
-   * @private
+   * Toggles the collapsed state when section is collapsible.
+   * Called when user clicks the section header. No-op if section is not collapsible.
+   * @internal
    * @returns {void}
    */
   override _handleClick() {
@@ -76,7 +75,7 @@ export class SgdsSidebarSection extends SidebarElement {
       <div
         class=${classMap({
           "sidebar-section": true,
-          "sidebar-section--collapsed": this._sidebarCollapsed
+          "sidebar-section--collapsed": !this._isOverlay && this._sidebarCollapsed
         })}
       >
         ${this.title !== ""

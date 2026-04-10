@@ -17,11 +17,12 @@
 
       .container {
         display: flex;
-        height: calc(100vh - 28px);
+        height: calc(100vh - 28px - 40px);
       }
 
       .sidebar-wrapper {
         height: 100%;
+        position: relative;
       }
 
       .content {
@@ -50,15 +51,63 @@
         color: #6b7280;
         margin-bottom: 16px;
       }
+      .toggle {
+        padding: 8px 16px;
+        background-color: var(--sgds-surface-raised);
+        border-bottom: 1px solid var(--sgds-border-default);
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .toggle-section {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .toggle-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--sgds-text-default);
+        margin-right: 4px;
+      }
     </style>
   </head>
 
   <body>
     <sgds-masthead fluid></sgds-masthead>
+    <div class="toggle">
+      <div class="toggle-section">
+        <sgds-icon-button
+          data-sidebar-toggler="true"
+          size="xs"
+          variant="ghost"
+          name="sidebar-expand"
+          onclick="handleToggle()"
+        ></sgds-icon-button>
+      </div>
 
+      <div class="toggle-section">
+        <span class="toggle-label">Set Active:</span>
+        <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('dashboard')"
+          >Dashboard</sgds-button
+        >
+        <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('meetings')"
+          >Meetings</sgds-button
+        >
+        <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('settings')"
+          >Settings</sgds-button
+        >
+        <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('team-management')"
+          >Team</sgds-button
+        >
+      </div>
+    </div>
     <div class="container">
       <div class="sidebar-wrapper">
-        <sgds-sidebar active="meetings">
+        <sgds-sidebar active="meetings" scrim>
           <div slot="top">brand-name</div>
           <!-- Main Navigation Section -->
 
@@ -255,11 +304,17 @@
       </div>
     </div>
     <script>
-      // Log sidebar events
-      const sidebar = document.querySelector("sgds-sidebar");
-      sidebar?.addEventListener("sgds-sidebar-toggle", event => {
-        console.log("Sidebar toggled:", event.detail);
-      });
+      function handleToggle() {
+        const sidebar = document.querySelector("sgds-sidebar");
+        sidebar.toggleCollapsed();
+      }
+
+      function setActive(itemName) {
+        const sidebar = document.querySelector("sgds-sidebar");
+        if (sidebar) {
+          sidebar.active = itemName;
+        }
+      }
     </script>
   </body>
 </html>

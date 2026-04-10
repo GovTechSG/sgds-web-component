@@ -193,6 +193,210 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ---
 
+## Patterns
+
+### Overlay Sidebar with External Toggler
+
+Use the overlay mode (`overlay="true"`) combined with an external toggle button to display the sidebar as a floating panel over page content. This is ideal for responsive mobile layouts and dashboards where you want to save horizontal space.
+
+**Key features:**
+
+- Sidebar floats above page content
+- Optional dark scrim overlay for focus
+- Click outside the sidebar to close it
+- External toggle button controls the collapsed state
+
+**Implementation:**
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="path/to/sgds/index.ts"></script>
+    <link href="path/to/sgds/themes/day.css" rel="stylesheet" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .app-container {
+        display: flex;
+        height: 100vh;
+      }
+
+      .sidebar-wrapper {
+        height: 100%;
+        position: relative;
+      }
+
+      .content {
+        flex: 1;
+        padding: 24px;
+        overflow-y: auto;
+      }
+
+      .toggle-header {
+        padding: 8px 16px;
+        background-color: var(--sgds-surface-raised);
+        border-bottom: 1px solid var(--sgds-border-default);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Toggle button in header -->
+    <div class="toggle-header">
+      <sgds-icon-button
+        data-sidebar-toggler="true"
+        size="xs"
+        variant="ghost"
+        name="sidebar-expand"
+        onclick="handleToggle()"
+        aria-label="Toggle sidebar"
+      ></sgds-icon-button>
+    </div>
+
+    <div class="app-container">
+      <!-- Sidebar in overlay mode -->
+      <div class="sidebar-wrapper">
+        <sgds-sidebar overlay scrim collapsed>
+          <div slot="top">My App</div>
+
+          <sgds-sidebar-section title="Navigation" name="navigation" ?collapsible="false">
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Settings" name="settings">
+              <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      </div>
+
+      <!-- Main page content -->
+      <div class="content">
+        <h1>Dashboard</h1>
+        <p>Click the toggle button to open the sidebar overlay.</p>
+      </div>
+    </div>
+
+    <script>
+      // Toggle the sidebar's collapsed state
+      function handleToggle() {
+        const sidebar = document.querySelector("sgds-sidebar");
+        if (sidebar) {
+          sidebar.toggleCollapsed();
+        }
+      }
+    </script>
+  </body>
+</html>
+```
+
+**Important attributes:**
+
+- `overlay="true"` — Display sidebar as a floating panel over content
+- `scrim` — Show a dark overlay behind the sidebar for focus (optional, recommended for mobile)
+- `collapsed="true"` — Start with sidebar hidden (optional, default is expanded)
+- `data-sidebar-toggler="true"` on toggle button — Identifies this as a sidebar control
+
+**How it works:**
+
+1. The toggle button has `data-sidebar-toggler="true"` attribute and calls `handleToggle()` on click
+2. `handleToggle()` finds the sidebar element and calls `toggleCollapsed()`
+3. The sidebar's `collapsed` property toggles between `true` (hidden) and `false` (visible)
+4. Clicking outside the sidebar automatically closes it in overlay mode
+5. The optional `scrim` adds a dark background to emphasize the floating panel
+
+**React example:**
+
+```jsx
+import { useRef } from "react";
+
+export default function Dashboard() {
+  const sidebarRef = useRef(null);
+
+  const handleToggle = () => {
+    if (sidebarRef.current) {
+      sidebarRef.current.toggleCollapsed();
+    }
+  };
+
+  return (
+    <>
+      <div className="toggle-header">
+        <sgds-icon-button
+          size="xs"
+          variant="ghost"
+          name="sidebar-expand"
+          onClick={handleToggle}
+          aria-label="Toggle sidebar"
+        ></sgds-icon-button>
+      </div>
+
+      <div className="app-container">
+        <div className="sidebar-wrapper">
+          <sgds-sidebar ref={sidebarRef} overlay scrim collapsed>
+            <div slot="top">My App</div>
+            {/* sidebar content */}
+          </sgds-sidebar>
+        </div>
+
+        <div className="content">{/* page content */}</div>
+      </div>
+    </>
+  );
+}
+```
+
+**Vue example:**
+
+```vue
+<template>
+  <div>
+    <div class="toggle-header">
+      <sgds-icon-button
+        size="xs"
+        variant="ghost"
+        name="sidebar-expand"
+        @click="handleToggle"
+        aria-label="Toggle sidebar"
+      ></sgds-icon-button>
+    </div>
+
+    <div class="app-container">
+      <div class="sidebar-wrapper">
+        <sgds-sidebar ref="sidebar" overlay scrim collapsed>
+          <div slot="top">My App</div>
+          <!-- sidebar content -->
+        </sgds-sidebar>
+      </div>
+
+      <div class="content">
+        <!-- page content -->
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from "vue";
+
+const sidebar = ref(null);
+
+const handleToggle = () => {
+  if (sidebar.value) {
+    sidebar.value.toggleCollapsed();
+  }
+};
+</script>
+```
+
+---
+
 **For AI agents**:
 
 1. **Always use sections** — Wrap items in `<sgds-sidebar-section>` for proper organization, even for simple sidebars.
