@@ -45,16 +45,42 @@ const OutlinedVariantTemplate = args => {
   `;
 };
 const DismissibleTemplate = args => {
+  const variants = [
+    { variant: "info", icon: "info-circle-fill" },
+    { variant: "success", icon: "check-circle-fill" },
+    { variant: "danger", icon: "exclamation-circle-fill" },
+    { variant: "warning", icon: "exclamation-triangle-fill" },
+    { variant: "neutral", icon: "info-circle-fill" }
+  ];
   return html`
     <div class="d-flex-column">
-      <sgds-alert show title="Title" dismissible>
-        <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
-        <div>A dismissible alert</div>
-      </sgds-alert>
-      <sgds-alert show title="Title" outlined dismissible>
-        <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
-        <div>A non-dismissible alert</div>
-      </sgds-alert>
+      ${variants.map(
+        v => html`
+          <sgds-alert
+            show
+            variant=${v.variant}
+            title="${v.variant.charAt(0).toUpperCase() + v.variant.slice(1)} alert"
+            dismissible
+          >
+            <sgds-icon slot="icon" name=${v.icon}></sgds-icon>
+            <div>A dismissible alert</div>
+          </sgds-alert>
+        `
+      )}
+      ${variants.map(
+        v => html`
+          <sgds-alert
+            show
+            variant=${v.variant}
+            title="${v.variant.charAt(0).toUpperCase() + v.variant.slice(1)} outlined alert"
+            outlined
+            dismissible
+          >
+            <sgds-icon slot="icon" name=${v.icon}></sgds-icon>
+            <div>A dismissible outlined alert</div>
+          </sgds-alert>
+        `
+      )}
     </div>
   `;
 };
