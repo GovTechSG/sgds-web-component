@@ -32,7 +32,6 @@
     "build-storybook": "npm run utility:storybook && npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build --loglevel verbose",
     "convert:icons": "node scripts/convertIcons.js && pnpm run generate:icons",
     "generate:icons": "node scripts/generateIconRegistry.js",
-    "sync-figma-to-tokens": "tsx scripts/figma/sync-figma-to-tokens/sync-figma-to-tokens.ts",
     "chromatic": "chromatic",
     "utility:dev": "tailwindcss -i ./src/css/utility.css -o ./playground/css/utility.css --config tailwind.config.js --watch",
     "utility:storybook": "tailwindcss -i ./src/css/utility.css -o ./.storybook/utility.css --config tailwind.config.js"
