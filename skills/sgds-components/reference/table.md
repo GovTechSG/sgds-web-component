@@ -19,6 +19,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - When there is only one column of data — a simple list is more appropriate.
 - For displaying key–value pairs of a single item — use `<sgds-description-list>` instead.
 - When the data volume is very small (1–2 rows with 1–2 columns) — a plain prose format may be clearer.
+- **Inside a narrow grid column, or beside other elements sharing the same row** — a table must always span the full 12-column grid width. Placing it in a split layout (e.g. 6 + 6 columns) compresses columns and harms readability.
 
 ## Behaviour
 
@@ -146,3 +147,4 @@ None.
 3. `<sgds-table-cell>` accepts rich HTML — badges, buttons, links are fine inside cells.
 4. `headerBackground` and `tableBorder` are boolean attributes on `<sgds-table>` only — they cascade down to sub-components automatically.
 5. There are no custom events or public methods on this component.
+6. **`<sgds-table>` must always occupy the full 12-column grid width.** Never place it beside another element sharing the same grid row (e.g. do not put it in a 6-column half alongside a sidebar or form). Tables need the full width to display columns legibly — splitting them into a partial-width column makes them unreadable. If a filter panel or sidebar is needed, stack it above or below the table, not beside it.
