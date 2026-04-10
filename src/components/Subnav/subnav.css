@@ -1,5 +1,6 @@
 :host {
   display: block;
+  z-index: var(--sgds-z-index-raised);
 }
 
 nav {
@@ -7,7 +8,6 @@ nav {
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   width: 100%;
   position: relative;
-  z-index: var(--sgds-z-index-raised);
 }
 
 .subnav {
