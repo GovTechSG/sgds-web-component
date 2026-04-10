@@ -34,4 +34,22 @@ Example prompt:
 
 ---
 
+## Final Review
+
+Before wrapping up, start a **fresh agent session** and ask it to review the implementation against the SGDS skills:
+
+> "Review the code in `<path>` against the SGDS skills. Plan out any incorrect implementations you find and provide the correct fixes."
+
+Use a fresh agent — not the one that wrote the code. An agent that made a mistake (e.g. wrong icon name, missing slot wrapper, incorrect attribute) will likely review its own work and confirm it was correct, because it made that decision confidently the first time. A fresh agent has no anchoring bias and will catch issues the original agent missed.
+
+Things a review agent commonly catches:
+- Wrong icon names that silently render nothing
+- `href` placed on a custom element instead of the slotted `<a>` tag
+- Missing required attributes (e.g. `ariaLabel` on icon buttons)
+- `active` manually set on breadcrumb items (auto-managed by the parent)
+- Icons inside badges without `size="sm"`
+- Tables placed in partial-width grid columns instead of full-width
+
+---
+
 For more details, see the [Agent Skills documentation](?path=/docs/agent-skills-introduction--docs).
