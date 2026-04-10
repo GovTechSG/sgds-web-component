@@ -4,6 +4,7 @@ import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarOptionStyle from "./sidebar-item.css";
 import SgdsIcon from "../Icon/sgds-icon";
+import { watch } from "../../utils/watch";
 
 import { SidebarElement } from "./sidebar-element";
 
@@ -17,7 +18,7 @@ import { SidebarElement } from "./sidebar-element";
  * - Level 2+ (nested): Clicking toggles submenu visibility. Keyboard: ArrowRight toggles submenu.
  *
  * @slot default - Insert sgds-sidebar-group or sgds-sidebar-item elements as nested children
- * @slot trailingIcon - Icon to display after the label text. A chevron is auto-appended.
+ * @slot trailing-icon - Icon to display after the label text. A chevron is auto-appended.
  *
  */
 export class SgdsSidebarGroup extends SidebarElement {
@@ -34,7 +35,7 @@ export class SgdsSidebarGroup extends SidebarElement {
    * Root-level groups use drawer overlay instead of submenu.
    * @internal
    */
-  @state() _showMenu = false;
+  @state() private _showMenu = false;
 
   /**
    * Reports the visibility state of the submenu for nested groups.
@@ -45,6 +46,18 @@ export class SgdsSidebarGroup extends SidebarElement {
    */
   get showMenu(): boolean {
     return this._showMenu;
+  }
+
+  /**
+   * Reacts to the active item context changing. If the newly active item is a descendant
+   * of this group, expand the submenu without external callers touching internal state.
+   * @internal
+   */
+  @watch("_sidebarActiveItem")
+  _handleActiveItemContext() {
+    if (this._childLevel > 1 && this._sidebarActiveItem && this.contains(this._sidebarActiveItem)) {
+      this._showMenu = true;
+    }
   }
 
   /** @internal */
@@ -89,12 +102,12 @@ export class SgdsSidebarGroup extends SidebarElement {
       >
         <div class="sidebar-item-label-wrapper">
           <div>
-            <slot name="leadingIcon"></slot>
+            <slot name="leading-icon"></slot>
             <span class="sidebar-item-label">${this.title}</span>
           </div>
 
-          <span class="sidebar-item-trailingIcon">
-            <slot name="trailingIcon"></slot>
+          <span class="sidebar-item-trailing-icon">
+            <slot name="trailing-icon"></slot>
             <sgds-icon aria-label=${this.title || this.name} name=${this._getIcon()} size="sm"></sgds-icon>
           </span>
         </div>

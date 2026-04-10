@@ -99,7 +99,7 @@ export class SgdsSidebar extends SgdsElement {
   /** @internal Tracks the currently active group and provides it via context to all child elements */
   @provide({ context: SidebarActiveGroup })
   @state()
-  _sidebarActiveGroup: SgdsSidebarGroup | null = null;
+  private _sidebarActiveGroup: SgdsSidebarGroup | null = null;
 
   /** @internal Syncs collapsed state to all descendants via context */
   @provide({ context: SidebarCollapsed })
@@ -220,7 +220,6 @@ export class SgdsSidebar extends SgdsElement {
 
           parentEle._selected = true;
 
-          parentEle._showMenu = parentEle._childLevel > 1; // setting this to true as the child is active
           parentEle = parentEle.parentElement as SgdsSidebarGroup;
         }
       }

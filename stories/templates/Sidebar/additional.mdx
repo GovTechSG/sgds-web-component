@@ -2,7 +2,7 @@
 
 The sidebar organizes navigation into sections and items. Each item requires a leading icon for proper accessibility and visual consistency.
 
-**Requirement:** Level 1 items must have a leading icon in the `leadingIcon` slot. Trailing icon is optional.
+**Requirement:** Level 1 items must have a leading icon in the `leading-icon` slot. Trailing icon is optional.
 
 <Canvas of={SidebarStories.Default}>
   <Story of={SidebarStories.Default} />
@@ -65,12 +65,12 @@ Sidebar items can include anchor links that navigate to different pages or route
 
 ```html
 <sgds-sidebar-item title="Dashboard" name="dashboard">
-  <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+  <sgds-icon name="house" slot="leading-icon"></sgds-icon>
   <a href="/dashboard"></a>
 </sgds-sidebar-item>
 
 <sgds-sidebar-item title="Analytics" name="analytics">
-  <sgds-icon name="trend-up" slot="leadingIcon"></sgds-icon>
+  <sgds-icon name="trend-up" slot="leading-icon"></sgds-icon>
   <a href="/analytics"></a>
 </sgds-sidebar-item>
 ```

@@ -103,81 +103,88 @@
         <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('team-management')"
           >Team</sgds-button
         >
+        <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('q1-revenue')"
+          >Q1 Revenue (level 4)</sgds-button
+        >
       </div>
     </div>
     <div class="container">
       <div class="sidebar-wrapper">
-        <sgds-sidebar active="refunds" scrim>
+        <sgds-sidebar scrim active="summary">
           <div slot="top">brand-name</div>
           <!-- Main Navigation Section -->
 
           <sgds-sidebar-section title="Main" name="main" ?collapsible="false">
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
-              <sgds-icon name="placeholder" slot="trailingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="placeholder" slot="trailing-icon"></sgds-icon>
               <sgds-sidebar-group title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
                 <sgds-sidebar-item title="Latest Sales" name="latest-sales">
-                  <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
-                  <sgds-icon name="placeholder" slot="trailingIcon"></sgds-icon>
+                  <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                  <sgds-icon name="placeholder" slot="trailing-icon"></sgds-icon>
                   <a href="#"></a>
                 </sgds-sidebar-item>
                 <sgds-sidebar-item title="Refunds" name="refunds"> </sgds-sidebar-item>
+                <sgds-sidebar-group title="Revenue Breakdown" name="revenue-breakdown">
+                  <sgds-sidebar-item title="Q1 Revenue" name="q1-revenue"></sgds-sidebar-item>
+                  <sgds-sidebar-item title="Q2 Revenue" name="q2-revenue"></sgds-sidebar-item>
+                </sgds-sidebar-group>
               </sgds-sidebar-group>
 
               <sgds-sidebar-item title="Meetings" name="meetings">
-                <sgds-icon name="calendar" slot="leadingIcon"></sgds-icon>
-                <a href="http://localhost:5173/playground/select.html"></a>
+                <sgds-icon name="calendar" slot="leading-icon"></sgds-icon>
+                <a href="#"></a>
               </sgds-sidebar-item>
               <sgds-sidebar-item title="Gallery" name="gallery">
-                <sgds-icon name="camera" slot="leadingIcon"></sgds-icon>
-                <a href="http://localhost:5173/playground/combobox.html"></a>
+                <sgds-icon name="camera" slot="leading-icon"></sgds-icon>
+                <a href="/playground/combobox.html"></a>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
 
             <sgds-sidebar-group title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Yearly" name="yearly">
-                <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-item title="Monthly" name="monthly">
-                <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
 
             <sgds-sidebar-item title="Public Members" name="public-members">
-              <sgds-icon name="user-circle" slot="leadingIcon"></sgds-icon>
-              <sgds-icon slot="trailingIcon" name="summary"></sgds-icon>
+              <sgds-icon name="user-circle" slot="leading-icon"></sgds-icon>
+              <sgds-icon slot="trailing-icon" name="summary"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
 
           <!-- Organization Section (Collapsible) -->
-          <sgds-sidebar-section title="Organization" name="organization" seperator>
+          <sgds-sidebar-section title="Organization" name="organization" separator>
             <sgds-sidebar-item
               title="Team Management Team Management Team Management Team Management"
               name="team-management"
             >
-              <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="users" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
 
             <sgds-sidebar-item title="Projects" name="projects">
-              <sgds-icon name="layers" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="layers" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
 
           <!-- Configuration Section (Collapsible) -->
           <sgds-sidebar-section title="Configuration" name="configuration" collapsible>
             <sgds-sidebar-item title="Settings" name="settings">
-              <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="gear" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
 
           <!-- Support Section -->
           <sgds-sidebar-section name="main" ?collapsible="false">
             <sgds-sidebar-item title="Help & Support" name="help-support">
-              <sgds-icon name="question-circle" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="question-circle" slot="leading-icon"></sgds-icon>
               <span
-                slot="trailingIcon"
+                slot="trailing-icon"
                 style="
                   background: #ef4444;
                   color: white;
@@ -195,7 +202,7 @@
             </sgds-sidebar-item>
 
             <sgds-sidebar-item title="Premium Features" name="premium-features">
-              <sgds-icon name="star" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="star" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
 
@@ -204,7 +211,7 @@
               title="Team Management Team Management Team Management Team Management"
               name="team-management"
             >
-              <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="users" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>

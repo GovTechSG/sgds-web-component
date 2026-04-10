@@ -47,14 +47,14 @@
   color: var(--sgds-primary-color-default);
 }
 
-.sidebar-item-label-wrapper .sidebar-item-trailingIcon {
+.sidebar-item-label-wrapper .sidebar-item-trailing-icon {
   display: flex;
   align-items: center;
   gap: var(--sgds-gap-2-xs);
 }
 
 .sidebar-item--collapsed .sidebar-item-label,
-.sidebar-item--collapsed .sidebar-item-trailingIcon {
+.sidebar-item--collapsed .sidebar-item-trailing-icon {
   display: none;
 }
 

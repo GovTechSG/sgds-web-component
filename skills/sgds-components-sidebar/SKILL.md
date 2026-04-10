@@ -32,9 +32,9 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 **Icon requirements:**
 
-- **Level 1 items/groups**: REQUIRED — must have `leadingIcon` slot with `<sgds-icon>`
-- **Level 2 items/groups**: REQUIRED — must have `leadingIcon` slot with `<sgds-icon>`
-- **Level 3 items**: OPTIONAL — `leadingIcon` is optional; `trailingIcon` is optional for all levels
+- **Level 1 items/groups**: REQUIRED — must have `leading-icon` slot with `<sgds-icon>`
+- **Level 2 items/groups**: REQUIRED — must have `leading-icon` slot with `<sgds-icon>`
+- **Level 3 items**: OPTIONAL — `leading-icon` is optional; `trailing-icon` is optional for all levels
 
 **Drawer overlays:** Level 1 groups automatically show nested items in a drawer overlay when clicked; keyboard Left/Right arrows manage the drawer.
 
@@ -47,25 +47,25 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
   <sgds-sidebar-section title="Main" ?collapsible="false">
     <!-- Level 1 item (required icon) -->
     <sgds-sidebar-item title="Dashboard" name="dashboard">
-      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="house" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
 
     <!-- Level 1 group with nested items -->
     <sgds-sidebar-group title="Reports" name="reports">
-      <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
 
       <!-- Level 2 items (required icon) -->
       <sgds-sidebar-item title="Sales Report" name="sales-report">
-        <sgds-icon name="trend-up" slot="leadingIcon"></sgds-icon>
+        <sgds-icon name="trend-up" slot="leading-icon"></sgds-icon>
       </sgds-sidebar-item>
 
       <!-- Level 2 group with further nesting -->
       <sgds-sidebar-group title="Analytics" name="analytics">
-        <sgds-icon name="bar-chart" slot="leadingIcon"></sgds-icon>
+        <sgds-icon name="bar-chart" slot="leading-icon"></sgds-icon>
 
         <!-- Level 3 items (optional icon) -->
         <sgds-sidebar-item title="Monthly View" name="monthly-view">
-          <sgds-icon name="calendar" slot="leadingIcon"></sgds-icon>
+          <sgds-icon name="calendar" slot="leading-icon"></sgds-icon>
         </sgds-sidebar-item>
         <sgds-sidebar-item title="Yearly View" name="yearly-view"></sgds-sidebar-item>
       </sgds-sidebar-group>
@@ -75,7 +75,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
   <!-- Optional: Another section -->
   <sgds-sidebar-section title="Settings" name="settings" collapsible>
     <sgds-sidebar-item title="Account" name="account">
-      <sgds-icon name="user-circle" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="user-circle" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 
@@ -88,7 +88,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
   <div slot="top">A</div>
   <sgds-sidebar-section>
     <sgds-sidebar-item title="Home" name="home">
-      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="house" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 </sgds-sidebar>
@@ -140,17 +140,17 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 | Slot           | Purpose                                                                   |
 | -------------- | ------------------------------------------------------------------------- |
-| `leadingIcon`  | Icon displayed before the label **[REQUIRED for L1/L2, optional for L3]** |
+| `leading-icon`  | Icon displayed before the label **[REQUIRED for L1/L2, optional for L3]** |
 | _(default)_    | Item label text                                                           |
-| `trailingIcon` | Icon displayed after the label (optional)                                 |
+| `trailing-icon` | Icon displayed after the label (optional)                                 |
 
 ### `<sgds-sidebar-group>`
 
 | Slot           | Purpose                                                                         |
 | -------------- | ------------------------------------------------------------------------------- |
-| `leadingIcon`  | Icon displayed before the group label **[REQUIRED for L1/L2, optional for L3]** |
+| `leading-icon`  | Icon displayed before the group label **[REQUIRED for L1/L2, optional for L3]** |
 | _(default)_    | `<sgds-sidebar-item>` and nested `<sgds-sidebar-group>` children                |
-| `trailingIcon` | Icon displayed after the label (optional)                                       |
+| `trailing-icon` | Icon displayed after the label (optional)                                       |
 
 ### `<sgds-sidebar-section>`
 
@@ -267,10 +267,10 @@ Use the overlay mode (`overlay="true"`) combined with an external toggle button 
 
           <sgds-sidebar-section title="Navigation" name="navigation" ?collapsible="false">
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Settings" name="settings">
-              <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="gear" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -400,7 +400,7 @@ const handleToggle = () => {
 **For AI agents**:
 
 1. **Always use sections** — Wrap items in `<sgds-sidebar-section>` for proper organization, even for simple sidebars.
-2. **Levels 1 and 2 need icons** — Both `<sgds-sidebar-item>` and `<sgds-sidebar-group>` at these levels MUST have `leadingIcon` slot with `<sgds-icon>`. This is a hard requirement for UX consistency.
+2. **Levels 1 and 2 need icons** — Both `<sgds-sidebar-item>` and `<sgds-sidebar-group>` at these levels MUST have `leading-icon` slot with `<sgds-icon>`. This is a hard requirement for UX consistency.
 3. **Drawer behavior** — When a Level 1 group is clicked, its children appear in a right-sliding drawer overlay. The drawer closes by clicking outside, pressing Escape, or navigating away.
 4. **Anchors for navigation** — Anchor links can be placed inside items: `<sgds-sidebar-item>...<a href="/page"></a></sgds-sidebar-item>`. When an anchor is present, clicking the item follows the link.
 5. **Active state** — Set `active="item-name"` on the root `<sgds-sidebar>` to highlight the current page and automatically open parent groups if needed.

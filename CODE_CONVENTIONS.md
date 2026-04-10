@@ -300,9 +300,13 @@ class Alert extends LitElement {
 
 :white_check_mark: Good: `sgds-hide, sgds-show, sgds-after-show, sgds-toggle`
 
-2. Before creating a new event name, check if there are existing names for the same purposed.
+2. Internal events (not intended for consumers) must be prefixed with `i-sgds-`
 
-3. Use the `emit` method of SgdsElement class to emit a custom event
+:white_check_mark: Good: `i-sgds-change, i-sgds-select`
+
+3. Before creating a new event name, check if there are existing names for the same purposed.
+
+4. Use the `emit` method of SgdsElement class to emit a custom event
 
 ---
 
@@ -330,9 +334,9 @@ Example with element state
 
 ---
 
-### Naming slots 
+### Naming slots
 
-Slots name should be concise and straight to the point. No need to add component prefix name. 
+Slots name should be concise and straight to the point. No need to add component prefix name.
 
 :white_check_mark: Good:
 
@@ -343,12 +347,30 @@ Slots name should be concise and straight to the point. No need to add component
 ```
 
 
-:x: Bad: 
+:x: Bad:
 
 ```html
 <sgds-footer>
 <h2 slot="footer-title"></h2>
 </sgds-footer>
+```
+
+When a slot name requires more than one word, use kebab-case.
+
+:white_check_mark: Good:
+
+```html
+<sgds-input>
+  <sgds-icon slot="trailing-icon"></sgds-icon>
+</sgds-input>
+```
+
+:x: Bad:
+
+```html
+<sgds-input>
+  <sgds-icon slot="trailingIcon"></sgds-icon>
+</sgds-input>
 ```
 
 ## Typescript
