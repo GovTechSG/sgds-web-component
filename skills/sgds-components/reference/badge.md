@@ -66,6 +66,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 **Filled or outlined?**
 - Filled (default) → omit `outlined`
 - Low-emphasis / outlined style → add `outlined`
+- **Many badges visible at once** (e.g. a table column full of status badges, or a list of tagged items) → use `outlined` to reduce visual noise. Filled badges compete for attention when repeated; outlined variants keep the label readable without overwhelming the surrounding content.
 
 **Dismissible?**
 - Permanent label → omit `dismissible`
@@ -110,7 +111,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | Slot | Purpose |
 |---|---|
 | *(default)* | Badge label text |
-| `icon` | Icon displayed to the left of the badge text (suppressed when `dismissible` is set) |
+| `icon` | Icon displayed to the left of the badge text. Always use `size="sm"` on the `<sgds-icon>` — larger sizes overflow the badge height. (Suppressed when `dismissible` is set.) |
 
 ## Events
 
@@ -136,6 +137,7 @@ For framework-specific event syntax (React, Vue, Angular) see the **[sgds-compon
 2. The `info` variant is deprecated; always substitute `primary`.
 3. For dismissible badges, both `dismissible` and `show` must be set; setting only one has no visible effect.
 4. The `icon` slot is silently suppressed when `dismissible` is true — never combine them.
+5. Icons inside `<sgds-badge>` must use `size="sm"` — it is the only size that fits the badge height. Any larger size (`md`, `lg`, etc.) will overflow the badge visually.
 5. Auto-truncation is always active; no attribute is needed to enable it.
 6. `sgds-show` and `sgds-hide` are cancelable — users can call `event.preventDefault()` inside the listener to abort the transition.
 7. Use `close()` to dismiss a badge programmatically without requiring a user click.
