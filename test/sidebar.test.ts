@@ -513,6 +513,22 @@ describe("sgds-sidebar", () => {
       expect(nestedGroup._selected).to.be.true;
       expect(item._selected).to.be.true;
     });
+
+    it("expands the submenu of a level-2 group when its nested item is programmatically activated", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar active="sales">
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-sidebar-item title="Sales" name="sales"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const nestedGroup = el.querySelector('sgds-sidebar-group[name="overview"]') as SgdsSidebarGroup;
+
+      const submenu = nestedGroup.shadowRoot?.querySelector(".sidebar-submenu");
+      expect(submenu).to.have.class("show");
+    });
   });
 
   describe("Collapsed State Management", () => {
