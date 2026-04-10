@@ -29,10 +29,9 @@ export class SgdsSidebarGroup extends SidebarElement {
   };
 
   /**
-   * Manages submenu visibility state for nested groups.
-   * When true, the submenu is displayed showing nested children.
-   * When false, the submenu is hidden.
-   * Only used for nested groups (level 2+). Root-level groups use drawer overlay instead.
+   * Manages submenu visibility state for nested groups (level 2+).
+   * When true, nested children are displayed. When false, they are hidden.
+   * Root-level groups use drawer overlay instead of submenu.
    * @internal
    */
   @state() _showMenu = false;
@@ -60,12 +59,12 @@ export class SgdsSidebarGroup extends SidebarElement {
     }
   }
   /**
-   * Determines the appropriate chevron icon based on nesting level and menu visibility.
-   * Icon changes provide visual feedback on expandable/collapsible state:
-   * - Level 1: chevron-right (closed drawer) or chevron-right (no change - drawer controlled by parent)
-   * - Level 2+: chevron-down (submenu open) or chevron-up (submenu closed)
-   * @private
-   * @returns {string} The icon name to display (e.g., 'chevron-right', 'chevron-down')
+   * Determines the appropriate chevron icon based on nesting level and submenu state.
+   * Provides visual feedback for expandable/collapsible state:
+   * - Level 1: chevron-right (drawer controlled by parent)
+   * - Level 2+: chevron-down (open), chevron-up (closed)
+   * @internal
+   * @returns {string} Icon name to display
    */
   private _getIcon() {
     if (this._childLevel === 1) {
@@ -80,7 +79,7 @@ export class SgdsSidebarGroup extends SidebarElement {
       <div
         class=${classMap({
           "sidebar-item": true,
-          "sidebar-item--collapsed": this._sidebarCollapsed && this._childLevel === 1,
+          "sidebar-item--collapsed": !this._isOverlay && this._sidebarCollapsed && this._childLevel === 1,
           active: this._selected
         })}
         @click=${() => this._handleClick()}

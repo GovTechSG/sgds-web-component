@@ -6,7 +6,7 @@ import "./sgds-web-component";
 
 describe("sgds-sidebar", () => {
   describe("Rendering", () => {
-    it("renders with correct structure", async () => {
+    it("renders basic sidebar structure with navigation role", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
       const nav = el.shadowRoot?.querySelector("nav");
       expect(nav).to.exist;
@@ -15,18 +15,17 @@ describe("sgds-sidebar", () => {
     it("has correct initial classes", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
       const sidebar = el.shadowRoot?.querySelector(".sidebar");
-      expect(sidebar).to.have.class("sidebar--expanded");
+
       expect(sidebar).not.to.have.class("sidebar--collapsed");
     });
 
-    it("renders with collapsed class when collapsed property is true", async () => {
+    it("applies collapsed CSS class when collapsed property is true", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar collapsed></sgds-sidebar>`);
       const sidebar = el.shadowRoot?.querySelector(".sidebar");
       expect(sidebar).to.have.class("sidebar--collapsed");
-      expect(sidebar).not.to.have.class("sidebar--expanded");
     });
 
-    it("accepts slot content for brand name", async () => {
+    it("accepts and displays brand/logo content in top slot", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <div slot="top">My App</div>
@@ -36,7 +35,7 @@ describe("sgds-sidebar", () => {
       expect(brand?.textContent).to.equal("My App");
     });
 
-    it("renders root level groups", async () => {
+    it("renders multiple root level groups within section", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -53,7 +52,7 @@ describe("sgds-sidebar", () => {
       expect(groups.length).to.equal(2);
     });
 
-    it("renders leaf level items", async () => {
+    it("renders leaf items with correct structure within section", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -71,13 +70,13 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Properties", () => {
-    it("has collapsed property set to false by default", async () => {
+  describe("Properties and Attributes", () => {
+    it("initializes collapsed property to false", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
       expect(el.collapsed).to.be.false;
     });
 
-    it("has active property set to empty string by default", async () => {
+    it("initializes active property to empty string", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
       expect(el.active).to.equal("");
     });
@@ -96,20 +95,18 @@ describe("sgds-sidebar", () => {
       expect(el).to.have.attribute("active", "dashboard");
     });
 
-    it("updates collapsed class when collapsed property changes", async () => {
+    it("applies sidebar--collapsed CSS class when collapsed changes", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
       const sidebar = el.shadowRoot?.querySelector(".sidebar");
-      expect(sidebar).to.have.class("sidebar--expanded");
 
       el.collapsed = true;
       await elementUpdated(el);
       expect(sidebar).to.have.class("sidebar--collapsed");
-      expect(sidebar).not.to.have.class("sidebar--expanded");
     });
   });
 
-  describe("Level 1 (Root) Groups", () => {
-    it("renders root level group with correct attributes", async () => {
+  describe("Root Level Groups", () => {
+    it("renders root group with title and name attributes", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -125,7 +122,7 @@ describe("sgds-sidebar", () => {
       expect(group).to.have.attribute("name", "dashboard");
     });
 
-    it("displays root level groups with icon", async () => {
+    it("displays leading icon in root level group", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -140,7 +137,7 @@ describe("sgds-sidebar", () => {
       expect(icon).to.exist;
     });
 
-    it("root group visual state updates on click", async () => {
+    it("updates visual state with active class when clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -161,8 +158,8 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Level 2 (Nested) Groups", () => {
-    it("renders level 2 nested groups inside level 1 group", async () => {
+  describe("Nested Groups (Level 2+)", () => {
+    it("renders level 2 groups nested inside level 1 group", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -183,7 +180,7 @@ describe("sgds-sidebar", () => {
       expect(nestedGroups.length).to.equal(2);
     });
 
-    it("level 2 groups display chevron icon for expand/collapse", async () => {
+    it("displays chevron icon for nested group expand/collapse", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -200,7 +197,7 @@ describe("sgds-sidebar", () => {
       expect(chevronIcon).to.exist;
     });
 
-    it("clicking level 2 group toggles submenu visibility state", async () => {
+    it("toggles submenu visibility when nested group is clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -232,7 +229,7 @@ describe("sgds-sidebar", () => {
       expect(nestedGroup.showMenu).to.be.true;
     });
 
-    it("level 2 groups toggle submenu without emitting sgds-select", async () => {
+    it("does not emit sgds-select when toggling nested group menu", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -262,8 +259,8 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Level 3 (Deeply Nested) Groups", () => {
-    it("renders level 3 nested groups with items", async () => {
+  describe("Deeply Nested Groups (Level 3)", () => {
+    it("renders level 3 items nested under level 2 group", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -286,7 +283,7 @@ describe("sgds-sidebar", () => {
       expect(level3Items.length).to.equal(2);
     });
 
-    it("level 2 groups can contain level 3 items", async () => {
+    it("displays level 3 items under expanded level 2 group", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -311,7 +308,7 @@ describe("sgds-sidebar", () => {
       expect(level3Items.length).to.equal(2);
     });
 
-    it("maintains correct menu toggle states in max nested hierarchies", async () => {
+    it("maintains menu toggle states in maximal nesting hierarchy", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Level 1" name="l1">
@@ -345,7 +342,7 @@ describe("sgds-sidebar", () => {
   });
 
   describe("Leaf Items (sgds-sidebar-item)", () => {
-    it("renders leaf items with correct attributes", async () => {
+    it("renders item with title and name attributes", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -360,7 +357,7 @@ describe("sgds-sidebar", () => {
       expect(item).to.have.attribute("name", "dashboard");
     });
 
-    it("clicking leaf item should emit sgds-select event", async () => {
+    it("emits sgds-select event when item is clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -381,7 +378,7 @@ describe("sgds-sidebar", () => {
       expect(selectHandler).to.have.been.called;
     });
 
-    it("leaf item becomes active when clicked", async () => {
+    it("marks item selected with active class when clicked", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -401,7 +398,7 @@ describe("sgds-sidebar", () => {
       expect(itemDiv).to.have.class("active");
     });
 
-    it("nested leaf items under expanded group are visible", async () => {
+    it("hides nested items until parent group drawer is opened", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -424,7 +421,7 @@ describe("sgds-sidebar", () => {
       });
     });
 
-    it("leaf items display icons when not collapsed", async () => {
+    it("displays leading icon on items when not collapsed", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-item title="Dashboard" name="dashboard">
@@ -438,8 +435,8 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Click Events and Selection", () => {
-    it("clicking different items emits select events with correct names", async () => {
+  describe("Item Selection and Events", () => {
+    it("emits select event with correct item name for each clicked item", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -463,7 +460,7 @@ describe("sgds-sidebar", () => {
       expect(selectHandler).to.have.been.calledOnce;
     });
 
-    it("only one root group can be active at a time", async () => {
+    it("only one root group remains active when switching between groups", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -490,7 +487,7 @@ describe("sgds-sidebar", () => {
       expect(dashboardDiv).not.to.have.class("active");
     });
 
-    it("clicking nested item expands parent groups", async () => {
+    it("automatically expands parent groups when nested item is selected", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -518,8 +515,8 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Collapsed State", () => {
-    it("applies collapsed styling when sidebar is collapsed", async () => {
+  describe("Collapsed State Management", () => {
+    it("applies sidebar-item--collapsed class when sidebar is collapsed", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar collapsed>
           <sgds-sidebar-section>
@@ -534,7 +531,7 @@ describe("sgds-sidebar", () => {
       expect(groupDiv).to.have.class("sidebar-item--collapsed");
     });
 
-    it("toggling collapsed property updates all child items", async () => {
+    it("applies collapsed styling to all child items when collapsed changes", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -556,7 +553,7 @@ describe("sgds-sidebar", () => {
       expect(message).to.have.class("sidebar-item--collapsed");
     });
 
-    it("collapsed sidebar shows only icons for root level items", async () => {
+    it("provides _sidebarCollapsed state to child items when sidebar collapsed", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar collapsed>
           <sgds-sidebar-section>
@@ -571,8 +568,8 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Active Item Management", () => {
-    it("sets active property to select an item by name", async () => {
+  describe("Active Item Management and Selection", () => {
+    it("selects item by name when active property is set programmatically", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -593,7 +590,7 @@ describe("sgds-sidebar", () => {
       expect(reportsItem._selected).to.be.true;
     });
 
-    it("programmatically setting active property selects item", async () => {
+    it("updates active class when programmatically switching items", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -619,7 +616,7 @@ describe("sgds-sidebar", () => {
       expect(reportsDiv).to.have.class("active");
     });
 
-    it("setting active on nested item selects the item", async () => {
+    it("selects deeply nested item by setting active property", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -646,8 +643,8 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Complex Nested Hierarchies", () => {
-    it("handles mixed groups and items at same level", async () => {
+  describe("Complex Hierarchies", () => {
+    it("handles mixed groups and items at the same level", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -675,7 +672,7 @@ describe("sgds-sidebar", () => {
       expect(nestedItem).to.exist;
     });
 
-    it("maintains state with multiple root groups", async () => {
+    it("maintains selection state across multiple root groups", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -708,7 +705,7 @@ describe("sgds-sidebar", () => {
       expect(el.active).to.equal("monthly");
     });
 
-    it("handles navigation between root level items", async () => {
+    it("switches active selection between different navigation branches", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -746,15 +743,15 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("Edge Cases and Error Handling", () => {
-    it("handles empty sidebar gracefully", async () => {
+  describe("Error Handling and Edge Cases", () => {
+    it("handles empty sidebar without errors", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
       expect(el).to.exist;
       expect(el.querySelectorAll("sgds-sidebar-group").length).to.equal(0);
       expect(el.querySelectorAll("sgds-sidebar-item").length).to.equal(0);
     });
 
-    it("handles missing required attributes gracefully", async () => {
+    it("renders elements gracefully when required attributes are missing", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -767,7 +764,7 @@ describe("sgds-sidebar", () => {
       expect(el.querySelector("sgds-sidebar-item")).to.exist;
     });
 
-    it("handles setting active to non-existent item", async () => {
+    it("deselects all items when active is set to non-existent name", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -784,7 +781,7 @@ describe("sgds-sidebar", () => {
       expect(item._selected).to.be.false;
     });
 
-    it("handles rapid consecutive clicks", async () => {
+    it("correctly handles rapidly consecutive item clicks", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section>
@@ -811,8 +808,8 @@ describe("sgds-sidebar", () => {
     });
   });
 
-  describe("sgds-sidebar-section", () => {
-    it("renders section with title", async () => {
+  describe("Sidebar Sections (sgds-sidebar-section)", () => {
+    it("renders section with title attribute", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main Navigation" name="main"></sgds-sidebar-section>
@@ -823,7 +820,7 @@ describe("sgds-sidebar", () => {
       expect(section).to.have.attribute("title", "Main Navigation");
     });
 
-    it("displays section title in DOM", async () => {
+    it("displays section title text in the DOM", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
@@ -844,7 +841,7 @@ describe("sgds-sidebar", () => {
       expect(section.collapsed).to.be.false;
     });
 
-    it("has collapsible property set to false by default", async () => {
+    it("initializes collapsible property to false", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
@@ -854,7 +851,7 @@ describe("sgds-sidebar", () => {
       expect(section.collapsible).to.be.false;
     });
 
-    it("renders chevron icon only when collapsible is true", async () => {
+    it("displays chevron icon only when section is collapsible", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main" collapsible></sgds-sidebar-section>
@@ -865,7 +862,7 @@ describe("sgds-sidebar", () => {
       expect(chevron).to.exist;
     });
 
-    it("does not render chevron icon when collapsible is false", async () => {
+    it("does not render chevron icon when section is not collapsible", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
@@ -876,7 +873,7 @@ describe("sgds-sidebar", () => {
       expect(chevron).not.to.exist;
     });
 
-    it("toggles collapsed state when clicked and collapsible is true", async () => {
+    it("toggles collapsed state when clicking collapsible section header", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main" collapsible></sgds-sidebar-section>
@@ -898,7 +895,7 @@ describe("sgds-sidebar", () => {
       expect(section.collapsed).to.be.false;
     });
 
-    it("has aria-expanded attribute that reflects collapsed state", async () => {
+    it("reflects collapsed state in aria-expanded attribute", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main" collapsible collapsed></sgds-sidebar-section>
@@ -910,7 +907,7 @@ describe("sgds-sidebar", () => {
       expect(sectionLabel).to.have.attribute("aria-expanded", "false");
     });
 
-    it("contains sidebar items and groups within slot", async () => {
+    it("contains items and groups within the section slot", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main">
@@ -931,7 +928,7 @@ describe("sgds-sidebar", () => {
       expect(groups?.length).to.equal(1);
     });
 
-    it("hides content when collapsed and collapsible is true", async () => {
+    it("hides section content when collapsed and collapsible", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main" collapsible collapsed>
@@ -947,7 +944,7 @@ describe("sgds-sidebar", () => {
       expect(content).to.have.class("sidebar-section-content--collapsed");
     });
 
-    it("shows content when expanded or collapsible is false", async () => {
+    it("displays section content when expanded or not collapsible", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main">
@@ -979,7 +976,7 @@ describe("sgds-sidebar", () => {
       expect(section).to.have.attribute("collapsed");
     });
 
-    it("has role region attribute", async () => {
+    it("has region role for accessibility", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
@@ -990,7 +987,7 @@ describe("sgds-sidebar", () => {
       expect(section).to.have.attribute("role", "region");
     });
 
-    it("handles multiple sections in sidebar", async () => {
+    it("renders multiple sections within sidebar", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main"></sgds-sidebar-section>
@@ -1003,7 +1000,7 @@ describe("sgds-sidebar", () => {
       expect(sections.length).to.equal(3);
     });
 
-    it("chevron icon changes when toggling collapsed state", async () => {
+    it("updates chevron icon when toggling collapsible section", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main" collapsible></sgds-sidebar-section>
@@ -1021,7 +1018,7 @@ describe("sgds-sidebar", () => {
       expect(chevronIcon).to.have.attribute("name", "chevron-down");
     });
 
-    it("sections within collapsed sidebar maintain visibility", async () => {
+    it("maintains section visibility in collapsed sidebar", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar collapsed>
           <sgds-sidebar-section title="Main" name="main">

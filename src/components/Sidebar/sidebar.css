@@ -4,15 +4,18 @@
   height: 100%;
   position: relative;
   z-index: 1100;
+  width: var(--sgds-dimension-288);
   transition: width var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
 }
 
-.sidebar--expanded {
-  width: var(--sgds-dimension-288);
+:not(.overlay).sidebar--collapsed {
+  width: var(--sgds-dimension-72);
 }
 
-.sidebar--collapsed {
-  width: var(--sgds-dimension-72);
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .sidebar-top {
@@ -23,11 +26,11 @@
   padding: 0 var(--sgds-padding-xs);
 }
 
-.sidebar--collapsed .sidebar-brand-name {
+:not(.overlay).sidebar--collapsed .sidebar-brand-name {
   display: none;
 }
 
-.sidebar--collapsed .sidebar-top {
+:not(.overlay).sidebar--collapsed .sidebar-top {
   justify-content: center;
 }
 
@@ -40,6 +43,15 @@
   border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.overlay .sidebar-main {
+  left: 0;
+  transition: left var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
+}
+
+.overlay.sidebar--collapsed .sidebar-main {
+  left: calc(var(--sgds-dimension-288) * -1);
 }
 
 .sidebar-wrapper {
@@ -76,7 +88,7 @@
 .sidebar--overlay {
   content: "";
   position: absolute;
-  width: 100dvw;
+  width: 100vw;
   top: 0;
   bottom: 0;
   left: 0;
@@ -98,7 +110,7 @@
   border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
 
-.sidebar--collapsed .sidebar-nested-overlay.show {
+:not(.overlay).sidebar--collapsed .sidebar-nested-overlay.show {
   left: var(--sgds-dimension-72);
 }
 
@@ -129,7 +141,7 @@
     display: block;
   }
 
-  .sidebar--expanded {
+  .sidebar {
     width: var(--sgds-dimension-256);
   }
 
@@ -148,7 +160,7 @@
     display: none;
   }
 
-  .sidebar--expanded {
+  .sidebar {
     width: 100dvw;
     position: absolute;
   }
@@ -159,11 +171,12 @@
     left: -100dvw;
   }
 
-  .sidebar-nested-overlay.show {
+  .sidebar-nested-overlay.show,
+  :not(.overlay).sidebar--collapsed .sidebar-nested-overlay.show {
     left: 0;
   }
 
-  .sidebar--collapsed .sidebar-nested-overlay.show {
-    left: 0;
+  .overlay.sidebar--collapsed .sidebar-main {
+    left: calc(100dvw * -1);
   }
 }
