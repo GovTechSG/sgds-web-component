@@ -1,3 +1,11 @@
 declare module "@webcomponents/scoped-custom-element-registry";
 
-import "@govtechsg/sgds-web-component/types/react";
+import "react";
+
+declare module "react" {
+  namespace JSX {
+    interface IntrinsicElements {
+      [key: `sgds-${string}`]: any;
+    }
+  }
+}
