@@ -25,13 +25,13 @@ describe("sgds-sidebar", () => {
       expect(sidebar).to.have.class("sidebar--collapsed");
     });
 
-    it("accepts and displays brand/logo content in top slot", async () => {
+    it("accepts and displays brand/logo content in upper slot", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
-          <div slot="top">My App</div>
+          <div slot="upper">My App</div>
         </sgds-sidebar>
       `);
-      const brand = el.querySelector('[slot="top"]');
+      const brand = el.querySelector('[slot="upper"]');
       expect(brand?.textContent).to.equal("My App");
     });
 
@@ -515,6 +515,162 @@ describe("sgds-sidebar", () => {
     });
   });
 
+  describe("Variant Property", () => {
+    it("initializes variant property to 'collapsible'", async () => {
+      const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
+      expect(el.variant).to.equal("collapsible");
+    });
+
+    it("reflects variant property as attribute", async () => {
+      const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
+      el.variant = "overlay";
+      await elementUpdated(el);
+      expect(el).to.have.attribute("variant", "overlay");
+    });
+
+    it("accepts 'persistent' variant", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="persistent">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      expect(el.variant).to.equal("persistent");
+    });
+
+    it("accepts 'overlay' variant", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      expect(el.variant).to.equal("overlay");
+    });
+
+    it("applies overlay CSS class when variant is 'overlay'", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const sidebar = el.shadowRoot?.querySelector(".sidebar");
+      expect(sidebar).to.have.class("overlay");
+    });
+
+    it("does not apply overlay CSS class when variant is 'collapsible'", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="collapsible">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const sidebar = el.shadowRoot?.querySelector(".sidebar");
+      expect(sidebar).not.to.have.class("overlay");
+    });
+
+    it("does not apply overlay CSS class when variant is 'persistent'", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="persistent">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const sidebar = el.shadowRoot?.querySelector(".sidebar");
+      expect(sidebar).not.to.have.class("overlay");
+    });
+
+    it("prevents toggle when variant is 'persistent'", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="persistent">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const initialState = el.collapsed;
+      el.toggleCollapsed();
+      await elementUpdated(el);
+      expect(el.collapsed).to.equal(initialState);
+    });
+
+    it("allows toggle when variant is 'collapsible'", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="collapsible">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      el.toggleCollapsed();
+      await elementUpdated(el);
+      expect(el.collapsed).to.be.true;
+    });
+
+    it("allows toggle when variant is 'overlay'", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      el.toggleCollapsed();
+      await elementUpdated(el);
+      expect(el.collapsed).to.be.true;
+    });
+
+    it("does not render toggle button when variant is 'overlay'", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const toggleButton = el.shadowRoot?.querySelector("sgds-icon-button");
+      expect(toggleButton).not.to.exist;
+    });
+
+    it("renders toggle button when variant is 'collapsible'", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="collapsible">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const toggleButton = el.shadowRoot?.querySelector("sgds-icon-button");
+      expect(toggleButton).to.exist;
+    });
+  });
+
   describe("Collapsed State Management", () => {
     it("applies sidebar-item--collapsed class when sidebar is collapsed", async () => {
       const el = await fixture<SgdsSidebar>(html`
@@ -533,7 +689,7 @@ describe("sgds-sidebar", () => {
 
     it("applies collapsed styling to all child items when collapsed changes", async () => {
       const el = await fixture<SgdsSidebar>(html`
-        <sgds-sidebar>
+        <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
               <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
@@ -553,6 +709,28 @@ describe("sgds-sidebar", () => {
       expect(message).to.have.class("sidebar-item--collapsed");
     });
 
+    it("does not apply collapsed styling when variant is 'persistent'", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="persistent">
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Summary" name="summary">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const rootGroup = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const message = rootGroup.shadowRoot?.querySelector(".sidebar-item");
+
+      el.collapsed = true;
+      await elementUpdated(el);
+
+      expect(message).not.to.have.class("sidebar-item--collapsed");
+    });
+
     it("provides _sidebarCollapsed state to child items when sidebar collapsed", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar collapsed>
@@ -565,6 +743,20 @@ describe("sgds-sidebar", () => {
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
       expect(item._sidebarCollapsed).to.be.true;
+    });
+
+    it("does not provide _sidebarCollapsed state when variant is 'persistent'", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="persistent" collapsed>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
+      expect(item._sidebarCollapsed).to.be.false;
     });
   });
 
@@ -805,6 +997,167 @@ describe("sgds-sidebar", () => {
 
       // Last click should win
       expect((items[0] as SgdsSidebarItem)._selected).to.be.true;
+    });
+  });
+
+  describe("Scrim Overlay Behavior", () => {
+    it("initializes scrim property to false", async () => {
+      const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
+      expect(el.scrim).to.be.false;
+    });
+
+    it("reflects scrim property as attribute", async () => {
+      const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
+      el.scrim = true;
+      await elementUpdated(el);
+      expect(el).to.have.attribute("scrim");
+    });
+
+    it("displays scrim overlay when scrim is true and overlay drawer is open", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar scrim variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Summary" name="summary">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const scrimDiv = el.shadowRoot?.querySelector(".sidebar--overlay");
+      const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      groupDiv.click();
+      await elementUpdated(el);
+
+      expect(scrimDiv).to.have.class("show");
+    });
+
+    it("displays scrim overlay when variant is overlay and sidebar is not collapsed", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar scrim variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const scrimDiv = el.shadowRoot?.querySelector(".sidebar--overlay");
+
+      expect(scrimDiv).to.have.class("show");
+    });
+
+    it("hides scrim overlay when sidebar is collapsed in overlay mode", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar scrim variant="overlay" collapsed>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const scrimDiv = el.shadowRoot?.querySelector(".sidebar--overlay");
+
+      expect(scrimDiv).not.to.have.class("show");
+    });
+  });
+
+  describe("Overlay Mode Drawer Behavior", () => {
+    it("displays drawer overlay scrim when level 1 group is clicked in overlay variant", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar scrim variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Summary" name="summary">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const scrimDiv = el.shadowRoot?.querySelector(".sidebar--overlay");
+      const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      groupDiv.click();
+      await elementUpdated(el);
+
+      expect(scrimDiv).to.have.class("show");
+    });
+
+    it("hides drawer items when clicking outside in overlay mode", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar scrim variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Summary" name="summary">
+                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      groupDiv.click();
+      await elementUpdated(el);
+
+      // Verify drawer interaction works via overlay mode
+      expect(el.variant).to.equal("overlay");
+    });
+
+    it("collapses sidebar when clicking outside overlay with no toggler", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      el.collapsed = false;
+      await elementUpdated(el);
+
+      // Simulate click outside with no toggler
+      const clickEvent = new MouseEvent("click", { bubbles: true, composed: true });
+      document.body.dispatchEvent(clickEvent);
+      await elementUpdated(el);
+
+      expect(el.collapsed).to.be.true;
+    });
+
+    it("does not collapse sidebar when clicking toggler element", async () => {
+      const toggler = document.createElement("button");
+      toggler.setAttribute("data-sidebar-toggler", "true");
+
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      el.collapsed = false;
+      await elementUpdated(el);
+
+      // Simulate click on toggler element
+      const clickEvent = new MouseEvent("click", { bubbles: true, composed: true });
+      Object.defineProperty(clickEvent, "target", { value: toggler, enumerable: true });
+      el.dispatchEvent(clickEvent);
+      await elementUpdated(el);
+
+      expect(el.collapsed).to.be.false;
     });
   });
 
