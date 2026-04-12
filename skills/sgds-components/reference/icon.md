@@ -151,8 +151,9 @@ xcircle, xcircle-fill, youtube, zoom-in, zoom-out
 
 **For AI agents**:
 1. `name` is required — always include it. A missing or unrecognised name logs a warning and renders nothing.
-2. **Only use names from the list above.** Common mistakes: `people-fill` does not exist — use `users`; `funnel` does not exist — use `bi-funnel`; `inbox` does not exist — use `in-box`; `file-earmark-text-fill` does not exist — use `file-earmark-text`; `bar-chart-fill` does not exist — there is no fill variant, use `speedometer` or `trend-up` for chart-related icons; `plus-lg` does not exist — use `plus`; `person-badge-fill` does not exist — use `person` or `user-circle`.
-3. Icons render from the internal SGDS SVG registry — they are not `<img>` tags and do not accept `src`.
-4. Default size is `lg` — if a user needs a smaller inline icon, explicitly set `size="sm"` or `size="md"`.
-5. Inside `<sgds-link>`, `<sgds-badge>`, and similar components, icon size is managed automatically; do not override it with `size`.
-6. There are no slots, events, or public methods on this component.
+2. **Only use names from the list above.** Before using any icon name, verify it exists in the registry. If the name the user asked for is not in the list, tell them explicitly — do not silently substitute. Instead, suggest the closest available alternative from the list and explain why. Example: *"There is no `funnel` icon in the SGDS registry. The closest available option is `bi-funnel`."*
+3. `size` only accepts the enum strings `xs | sm | md | lg | xl | 2-xl | 3-xl` — pixel values (e.g. `size="16"`) and CSS lengths (e.g. `size="1.5rem"`) are silently ignored.
+4. Icons render from the internal SGDS SVG registry — they are not `<img>` tags and do not accept `src`.
+5. Default size is `lg` — if a user needs a smaller inline icon, explicitly set `size="sm"` or `size="md"`.
+6. Inside `<sgds-link>`, `<sgds-badge>`, and similar components, icon size is managed automatically; do not override it with `size`.
+7. There are no slots, events, or public methods on this component.
