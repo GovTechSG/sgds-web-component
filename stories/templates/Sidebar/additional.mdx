@@ -1,28 +1,113 @@
 ## Basic structure
 
-The sidebar organizes navigation into sections and items. Each item requires a leading icon for proper accessibility and visual consistency.
-
-**Requirement:** Level 1 items must have a leading icon in the `leadingIcon` slot. Trailing icon is optional.
+The sidebar organizes navigation into sections and items. Icons improve visual hierarchy and accessibility.
 
 <Canvas of={SidebarStories.Default}>
   <Story of={SidebarStories.Default} />
 </Canvas>
 
+### Leading and trailing icons
+
+**Leading icons** appear before the item/group label and are essential for visual navigation. **Trailing icons** appear after the label and are typically used for badges, indicators, or external link symbols.
+
+**Leading icon example:**
+
+```html
+<sgds-sidebar-item title="Dashboard" name="dashboard">
+  <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+</sgds-sidebar-item>
+```
+
+**Trailing icon example (badge or indicator):**
+
+```html
+<sgds-sidebar-item title="Notifications" name="notifications">
+  <sgds-icon name="bell" slot="leadingIcon"></sgds-icon>
+  <sgds-badge slot="trailingIcon" variant="danger">5</sgds-badge>
+</sgds-sidebar-item>
+```
+
+**Icon requirements by level:**
+
+- **Level 1 items/groups:** Leading icon is **required**. Trailing icon is optional.
+- **Level 2 items/groups:** Leading icon is **required**. Trailing icon is optional.
+- **Level 3 items:** Leading icon is **optional**. Trailing icon is optional.
+
+> When collapsed to icon-only mode, only leading icons are visible. Always use meaningful icons at Level 1 and Level 2 to ensure the sidebar remains usable when collapsed.
+
 ## Multi-level navigation
 
 The sidebar supports nested navigation structures with up to three levels. Use `sgds-sidebar-group` for parent items with children, and `sgds-sidebar-item` for leaf navigation items. Control the active state and collapse behavior with the `active`, `collapsed`, and `overlay` properties.
 
-<Canvas of={SidebarStories.MultiLevel}>
-  <Story of={SidebarStories.MultiLevel} />
-</Canvas>
+### Trailing icons on groups
 
-## Overlay sidebar
+Groups automatically display a chevron icon that indicates expand/collapse state. You can optionally add a trailing icon before the chevron using `slot="trailingIcon"` for visual indicators like badges, notification counts, or status icons.
 
-The overlay mode displays the sidebar as a floating panel above the page content. This is ideal for responsive designs and mobile layouts. Use the `overlay` property to enable overlay mode and `scrim` to show a dark background behind the panel.
+When a group is collapsed to icon-only mode, the leading icon, label, and any trailing icon will be visible in the compact view. Groups always show the chevron indicator at the end.
 
-### Toggle button with data attribute
+**Example: Group with trailing badge indicator**
 
-To enable external control of the sidebar collapse state, add the `data-sidebar-toggler="true"` attribute to any button element. When clicked, this attribute automatically triggers the sidebar's toggle functionality:
+```html
+<sgds-sidebar-group title="Reports" name="reports">
+  <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+  <sgds-badge slot="trailingIcon">3</sgds-badge>
+  <!-- children items -->
+</sgds-sidebar-group>
+```
+
+**Example: Group with external link icon as trailing element**
+
+```html
+<sgds-sidebar-group title="Resources" name="resources">
+  <sgds-icon name="book" slot="leadingIcon"></sgds-icon>
+  <sgds-icon name="box-arrow-up-right" slot="trailingIcon"></sgds-icon>
+  <!-- children items -->
+</sgds-sidebar-group>
+```
+
+## Sidebar variants
+
+The sidebar supports three distinct layout variants controlled by the `variant` property:
+
+### Collapsible (default)
+
+Set `variant="collapsible"` to enable the internal collapse toggle button in the sidebar header. Users can click the button to switch between full and icon-only modes.
+
+```html
+<sgds-sidebar variant="collapsible" active="dashboard">
+  <!-- content -->
+</sgds-sidebar>
+```
+
+### Overlay
+
+Set `variant="overlay"` to display the sidebar as a floating panel above page content. **This variant does not render an internal toggle button.** You must provide an external toggle button with `data-sidebar-toggler="true"` attribute to control the sidebar's collapsed state. This is ideal for responsive mobile layouts and maximizing content space.
+
+```html
+<sgds-icon-button
+  data-sidebar-toggler="true"
+  size="xs"
+  variant="ghost"
+  name="sidebar-expand"
+  onclick="handleToggle()"
+></sgds-icon-button>
+
+<sgds-sidebar variant="overlay" scrim active="dashboard">
+  <div slot="upper">My App</div>
+  <!-- content -->
+  <div slot="lower">Footer Content</div>
+</sgds-sidebar>
+```
+
+### Persistent
+
+Set `variant="persistent"` to display a sidebar that cannot be collapsed. This is useful for layouts where navigation should always remain visible.
+
+---
+
+## Toggle control
+
+For `variant="overlay"`, add the `data-sidebar-toggler="true"` attribute to any button element to enable collapse/expand control:
 
 ```html
 <sgds-icon-button

@@ -50,7 +50,8 @@
 - **RC CDN loading order**: the CDN `<script>` must be loaded before any SGDS imports — in React/Vue/Angular projects, add it to the root HTML file (`index.html` or `public/index.html`), not via JS `import`.
 - **Drawer vs inline submenu**: root-level `<sgds-sidebar-group>` elements open as drawer overlays; nested groups open inline. Design your hierarchy with this distinction in mind — typically keep top-level groups broad.
 - **Sticky layout**: pair `<sgds-sidebar>` with `sgds:sticky`, a fixed height, and `sgds:overflow-y-auto` on the wrapper element to achieve a sticky left rail.
-- **`trailingIcon` and `brandName` slots**: accept any HTML — use for notification badges, external link icons, or custom logos.
+- **`upper` and `lower` slots**: accept any HTML for header and footer content — use for brand logos, app names, user menus, or custom layouts.
+- **`trailingIcon` slot**: accepts any HTML after item/group labels — use for notification badges, external link icons, or custom indicators.
 
 ## Edge Cases
 
@@ -75,7 +76,7 @@
 
 **Programmatic navigation (track active page)?** → Set `active="item-name"` on `sgds-sidebar`; give each item/group a unique `name`
 
-**Logo/brand in the sidebar header?** → Use `slot="brandName"` — any HTML is accepted (`<div>`, `<img>`, etc.)
+**Logo/brand in the sidebar header?** → Use `slot="upper"` — any HTML is accepted (`<div>`, `<img>`, etc.)
 
 **Badge or notification count on an item?** → Put custom HTML in `slot="trailingIcon"`
 
@@ -102,7 +103,7 @@
 
 ```html
 <sgds-sidebar active="meetings">
-  <div slot="brandName">My App</div>
+  <div slot="upper">My App</div>
 
   <!-- Non-collapsible section -->
   <sgds-sidebar-section title="Main" name="main">
@@ -215,7 +216,8 @@
 | Component | Slot | Required? | Purpose |
 |-----------|------|-----------|--------|
 | `sgds-sidebar` | *(default)* | — | `sgds-sidebar-item`, `sgds-sidebar-group`, `sgds-sidebar-section` — top-level items outside sections are valid |
-| `sgds-sidebar` | `brandName` | — | Any HTML — brand name, logo image, or custom element |
+| `sgds-sidebar` | `upper` | — | Any HTML — brand name, logo image, or custom element |
+| `sgds-sidebar` | `lower` | — | Any HTML for sidebar footer content |
 | `sgds-sidebar-item` | `leadingIcon` | **Required at levels 1 & 2** | Icon before the label (typically `<sgds-icon>`) |
 | `sgds-sidebar-item` | `trailingIcon` | — | Any HTML after the label — icon or custom badge |
 | `sgds-sidebar-group` | `leadingIcon` | **Required at levels 1 & 2** | Icon before the group label |
@@ -247,6 +249,242 @@ For real URL routing, place an `<a>` as a direct child of `sgds-sidebar-item`. W
   <a href="/dashboard"></a>
 </sgds-sidebar-item>
 ```
+
+---
+
+## Variants
+
+### Variant 1: Flat Navigation with Sections
+
+Simple dashboard with grouped items — no nesting. Use sections to organize related navigation items.
+
+```html
+<sgds-sidebar active="dashboard">
+  <div slot="upper">Dashboard</div>
+
+  <sgds-sidebar-section title="Main Navigation" name="main">
+    <sgds-sidebar-item name="dashboard" title="Dashboard">
+      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item name="analytics" title="Analytics">
+      <sgds-icon name="bar-chart" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item name="reports" title="Reports">
+      <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+  </sgds-sidebar-section>
+
+  <sgds-sidebar-section title="Settings" name="settings" collapsible>
+    <sgds-sidebar-item name="account" title="Account">
+      <sgds-icon name="user-circle" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item name="configuration" title="Configuration">
+      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+  </sgds-sidebar-section>
+</sgds-sidebar>
+```
+
+**Key features:**
+- All items at the same level — no group hierarchy
+- `collapsible` sections allow users to collapse/expand Settings independently
+- Perfect for apps with shallow navigation
+
+---
+
+### Variant 2: Multi-Level Nested Navigation
+
+Complex management system with expandable groups and multiple nesting levels. Root groups (`<sgds-sidebar-group>` at level 0) open drawer overlays.
+
+```html
+<sgds-sidebar active="monthly-view">
+  <div slot="upper">Admin Portal</div>
+
+  <sgds-sidebar-section title="Content" name="content">
+    <!-- Root group: opens drawer overlay on click -->
+    <sgds-sidebar-group name="reports" title="Reports">
+      <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+
+      <!-- Level 1 group: toggles inline submenu -->
+      <sgds-sidebar-group name="analytics" title="Analytics">
+        <sgds-icon name="chart-line" slot="leadingIcon"></sgds-icon>
+
+        <!-- Level 2 items: optional icons -->
+        <sgds-sidebar-item name="monthly-view" title="Monthly View">
+          <sgds-icon name="calendar" slot="leadingIcon"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item name="yearly-view" title="Yearly View"></sgds-sidebar-item>
+      </sgds-sidebar-group>
+
+      <!-- Level 1 items -->
+      <sgds-sidebar-item name="sales-report" title="Sales Report">
+        <sgds-icon name="trending-up" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
+    </sgds-sidebar-group>
+
+    <sgds-sidebar-group name="content-mgmt" title="Content Management">
+      <sgds-icon name="pencil-square" slot="leadingIcon"></sgds-icon>
+      <sgds-sidebar-item name="pages" title="Pages">
+        <sgds-icon name="file" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
+      <sgds-sidebar-item name="media" title="Media">
+        <sgds-icon name="image" slot="leadingIcon"></sgds-icon>
+      </sgds-sidebar-item>
+    </sgds-sidebar-group>
+  </sgds-sidebar-section>
+</sgds-sidebar>
+```
+
+**Key features:**
+- Root groups (`reports`, `content-mgmt`) open drawer overlays
+- Nested groups (`analytics`) toggle inline submenus
+- Up to 3 levels of nesting supported
+- Active state automatically expands parent groups
+
+---
+
+### Variant 3: Overlay Sidebar with External Toggle
+
+Floating sidebar panel for responsive layouts (mobile-first). Ideal for dashboards on narrow screens.
+
+```html
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc/components/Sidebar/index.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-header" style="padding: 12px 16px; border-bottom: 1px solid {{color-border}};">
+    <button onclick="toggleSidebar()" style="background: none; border: none; cursor: pointer;">
+      <sgds-icon name="three-dots" size="24"></sgds-icon>
+    </button>
+  </div>
+
+  <div style="display: flex; height: 100vh;">
+    <!-- Overlay sidebar: floats over content -->
+    <div>
+      <sgds-sidebar id="app-sidebar" overlay scrim collapsed>
+        <div slot="upper">My Application</div>
+        <sgds-sidebar-section name="nav">
+          <sgds-sidebar-item name="dashboard" title="Dashboard">
+            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item name="settings" title="Settings">
+            <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+          </sgds-sidebar-item>
+        </sgds-sidebar-section>
+      </sgds-sidebar>
+    </div>
+
+    <!-- Main content -->
+    <div style="flex: 1; padding: 24px; overflow-y: auto;">
+      <h1>Dashboard</h1>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('app-sidebar');
+      sidebar.toggleCollapsed();
+    }
+  </script>
+</body>
+</html>
+```
+
+**Key features:**
+- `overlay` attribute makes sidebar float above content
+- `scrim` adds a dark background for focus (optional)
+- `collapsed` hides the sidebar on load (ideal for mobile)
+- `toggleCollapsed()` method controlled by external button
+- Clicks outside close the overlay automatically
+
+---
+
+### Variant 4: Programmatic Active State Control
+
+Sync sidebar with external controls — update active state dynamically via buttons or routing changes.
+
+```html
+<div style="margin-bottom: 16px;">
+  <button onclick="setActive('dashboard')">📊 Dashboard</button>
+  <button onclick="setActive('analytics')">📈 Analytics</button>
+  <button onclick="setActive('settings')">⚙️ Settings</button>
+</div>
+
+<sgds-sidebar id="main-sidebar" active="dashboard">
+  <sgds-sidebar-section name="main">
+    <sgds-sidebar-item name="dashboard" title="Dashboard">
+      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item name="analytics" title="Analytics">
+      <sgds-icon name="bar-chart" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item name="settings" title="Settings">
+      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+  </sgds-sidebar-section>
+</sgds-sidebar>
+
+<script>
+  function setActive(itemName) {
+    document.getElementById('main-sidebar').active = itemName;
+  }
+</script>
+```
+
+**Key features:**
+- Buttons trigger programmatic navigation
+- `sidebar.active = "item-name"` updates active state and highlights the item
+- Parent groups expand automatically when a nested item becomes active
+- Useful for SPA routing or command palettes
+- Works with framework event handlers (React/Vue/Angular)
+
+---
+
+### Variant 5: Collapsible Sections with Badges
+
+Organize navigation into collapsible groups with visual indicators like notification badges.
+
+```html
+<sgds-sidebar active="inbox">
+  <div slot="upper">Email Manager</div>
+
+  <!-- Non-collapsible main section -->
+  <sgds-sidebar-section title="Folders" name="folders" collapsible="false">
+    <sgds-sidebar-item name="inbox" title="Inbox">
+      <sgds-icon name="envelope" slot="leadingIcon"></sgds-icon>
+      <span slot="trailingIcon" style="background: #dc2626; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600;">5</span>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item name="sent" title="Sent">
+      <sgds-icon name="send" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item name="drafts" title="Drafts">
+      <sgds-icon name="pencil" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+  </sgds-sidebar-section>
+
+  <!-- Collapsible tags/labels section -->
+  <sgds-sidebar-section title="Labels" name="labels" collapsible>
+    <sgds-sidebar-item name="work" title="Work">
+      <sgds-icon name="tag" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item name="personal" title="Personal">
+      <sgds-icon name="tag" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+    <sgds-sidebar-item name="important" title="Important">
+      <sgds-icon name="star" slot="leadingIcon"></sgds-icon>
+    </sgds-sidebar-item>
+  </sgds-sidebar-section>
+</sgds-sidebar>
+```
+
+**Key features:**
+- Notification counts in `trailingIcon` slot
+- `collapsible` sections toggle independently
+- Combines flat and grouped navigation styles
+- Perfect for email, task managers, or document apps
+
+---
 
 ## Sidebar App Layout Integration
 
@@ -292,4 +530,4 @@ See **[Application Shell](../../sgds-pattern-block-templates/reference/applicati
 
 ---
 
-**For AI agents**: Always include the CDN `<script>` tag — `sgds-sidebar` is not bundled in the stable npm package. Use `name` on every `sgds-sidebar-item` and `sgds-sidebar-group` — without it, `active` tracking will not work. `sgds-sidebar-section` accepts `name` for identification but its `name` does NOT participate in `active` tracking — only items and groups do. Top-level `sgds-sidebar-item` elements placed directly inside `sgds-sidebar` (outside any section) are valid. The `brandName` slot and `trailingIcon` slot accept any HTML — not just `sgds-icon`. At level 0, `sgds-sidebar-group` opens a drawer overlay (items slide in from the side); at level 1+, it toggles an inline submenu. Use `collapsible` (boolean attribute) on `sgds-sidebar-section` to let users collapse the section. **`leadingIcon` is compulsory on every `sgds-sidebar-item` and `sgds-sidebar-group` at level 1 and level 2 — this rule applies to both component types equally. Never omit it at these levels, even for groups that only serve as structural containers.**
+**For AI agents**: Always include the CDN `<script>` tag — `sgds-sidebar` is not bundled in the stable npm package. Use `name` on every `sgds-sidebar-item` and `sgds-sidebar-group` — without it, `active` tracking will not work. `sgds-sidebar-section` accepts `name` for identification but its `name` does NOT participate in `active` tracking — only items and groups do. Top-level `sgds-sidebar-item` elements placed directly inside `sgds-sidebar` (outside any section) are valid. The `upper` slot and `trailingIcon` slot accept any HTML — not just `sgds-icon`. At level 0, `sgds-sidebar-group` opens a drawer overlay (items slide in from the side); at level 1+, it toggles an inline submenu. Use `collapsible` (boolean attribute) on `sgds-sidebar-section` to let users collapse the section. **`leadingIcon` is compulsory on every `sgds-sidebar-item` and `sgds-sidebar-group` at level 1 and level 2 — this rule applies to both component types equally. Never omit it at these levels, even for groups that only serve as structural containers.**
