@@ -169,7 +169,7 @@ function generateReactTypes() {
   lines.push("type SgdsEventHandler = (event: CustomEvent) => void;");
   lines.push("");
   lines.push("/** Common props shared by every SGDS element */");
-  lines.push("interface SgdsBaseProps extends React.HTMLAttributes<HTMLElement> {");
+  lines.push("interface SgdsBaseProps extends React.HTMLAttributes<HTMLElement>, React.RefAttributes<HTMLElement> {");
   lines.push('  /** Override the CSS `class` attribute (use `className` in JSX for React) */');
   lines.push("  class?: string;");
   lines.push("}");
