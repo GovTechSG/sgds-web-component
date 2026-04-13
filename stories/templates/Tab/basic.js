@@ -1,8 +1,8 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 
-export const Template = ({ variant, orientation, density }) => html`
-  <sgds-tab-group variant=${ifDefined(variant)} orientation=${ifDefined(orientation)} density=${ifDefined(density)}>
+export const Template = ({ variant, orientation, density, hasDivider }) => html`
+  <sgds-tab-group variant=${ifDefined(variant)} orientation=${ifDefined(orientation)} density=${ifDefined(density)} ?hasDivider=${hasDivider}>
     <sgds-tab slot="nav" panel="home">Home</sgds-tab>
     <sgds-tab slot="nav" panel="profile">Profile</sgds-tab>
     <sgds-tab slot="nav" panel="contact">Contact</sgds-tab>

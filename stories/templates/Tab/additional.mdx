@@ -1,7 +1,7 @@
 ## Variants
 
 The variants of tab is controlled by `SgdsTabGroup`
-The default tab variant is `underlined`. Modify the `variant` prop to achieve solid tabs 
+The default tab variant is `underlined`. Modify the `variant` prop to achieve solid tabs
 
 ### Underlined tabs (default)
 
@@ -15,10 +15,9 @@ The default tab variant is `underlined`. Modify the `variant` prop to achieve so
   <Story of={TabStories.SolidVariant} />
 </Canvas>
 
-## Density 
+## Density
 
 The density of tabs is controlled by `SgdsTabGroup`. For a more compact tabs, modify `density` prop to `compact`
-
 
 ### Compact underlined tabs
 
@@ -34,8 +33,8 @@ The density of tabs is controlled by `SgdsTabGroup`. For a more compact tabs, mo
 
 ## Orientation
 
-Tabs can also be of horizontal or vertical orientation. 
-The orientation of tabs is controlled by `SgdsTabGroup`. 
+Tabs can also be of horizontal or vertical orientation.
+The orientation of tabs is controlled by `SgdsTabGroup`.
 By default, tabs are presented horizontally. Set `orientation` to `vertical` for vertical tabs
 
 ### Vertical underlined tabs
@@ -50,6 +49,36 @@ By default, tabs are presented horizontally. Set `orientation` to `vertical` for
   <Story of={TabStories.OrientationSolid} />
 </Canvas>
 
+## Divider
+
+When using vertical orientation, tabs can optionally display a divider line between the tab nav and the content area.
+The divider is controlled by `SgdsTabGroup` via the `hasDivider` property.
+By default, the divider is shown (`hasDivider="true"`). Set it to `false` to hide the divider line.
+
+### Vertical tabs without divider
+
+<Canvas of={TabStories.VerticalWithoutDivider}>
+  <Story of={TabStories.VerticalWithoutDivider} />
+</Canvas>
+
+### Vertical tabs with divider
+
+<Canvas of={TabStories.VerticalWithDivider}>
+  <Story of={TabStories.VerticalWithDivider} />
+</Canvas>
+
+### Solid variant - Vertical without divider
+
+<Canvas of={TabStories.SolidVerticalWithoutDivider}>
+  <Story of={TabStories.SolidVerticalWithoutDivider} />
+</Canvas>
+
+### Solid variant - Vertical with divider
+
+<Canvas of={TabStories.SolidVerticalWithDivider}>
+  <Story of={TabStories.SolidVerticalWithDivider} />
+</Canvas>
+
 ## Tab Events
 
 The `sgds-tab-group` component emits custom events when tabs are shown or hidden, allowing you to perform side effects and track which tab is currently active.
@@ -58,7 +87,6 @@ The `sgds-tab-group` component emits custom events when tabs are shown or hidden
 
 - **`sgds-tab-show`**: Emitted when a tab becomes active. Use `event.detail.name` to get the active tab's panel name.
 - **`sgds-tab-hide`**: Emitted when a tab is hidden (another tab becomes active). Use `event.detail.name` to get the hidden tab's panel name.
-
 
 <Canvas of={TabStories.Events}>
   <Story of={TabStories.Events} />

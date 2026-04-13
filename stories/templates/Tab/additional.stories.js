@@ -37,6 +37,38 @@ export const OrientationSolid = {
   tags: ["!dev"]
 };
 
+export const VerticalWithoutDivider = {
+  render: Template.bind({}),
+  name: "Vertical without divider",
+  args: { orientation: "vertical", hasDivider: false },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const VerticalWithDivider = {
+  render: Template.bind({}),
+  name: "Vertical with divider",
+  args: { orientation: "vertical", hasDivider: true },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const SolidVerticalWithoutDivider = {
+  render: Template.bind({}),
+  name: "Solid variant - Vertical without divider",
+  args: { orientation: "vertical", variant: "solid", hasDivider: false },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const SolidVerticalWithDivider = {
+  render: Template.bind({}),
+  name: "Solid variant - Vertical with divider",
+  args: { orientation: "vertical", variant: "solid", hasDivider: true },
+  parameters: {},
+  tags: ["!dev"]
+};
+
 const EventsTemplate = () => {
   return html`
     <div>

@@ -24,3 +24,17 @@
 :host([variant="solid"]) .tab-group__nav {
   gap: var(--sgds-gap-xs);
 }
+
+:host([variant="underlined"][orientation="horizontal"]) .tab-group__nav {
+  display: flex;
+  flex-direction: row;
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}
+
+:host([variant="underlined"][orientation="vertical"]) .tab-group__nav {
+  border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}
+
+.noDivider {
+  border: none;
+}
