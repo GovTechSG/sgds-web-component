@@ -2,7 +2,12 @@ import { html } from "lit";
 
 const BasicTemplate = args => html`
   <div class="sgds:h-110">
-    <sgds-sidebar active=${args.active} ?collapsed=${args.collapsed} ?scrim=${args.scrim} ?overlay=${args.overlay}>
+    <sgds-sidebar
+      active=${args.active}
+      ?collapsed=${args.collapsed}
+      ?scrim=${args.scrim}
+      variant=${args.variant || "collapsible"}
+    >
       <sgds-sidebar-section title="Navigation" name="navigation" ?collapsible=${false}>
         <sgds-sidebar-item title="Dashboard" name="dashboard">
           <sgds-icon name="house" slot="leading-icon"></sgds-icon>
@@ -12,8 +17,9 @@ const BasicTemplate = args => html`
           <sgds-icon name="trend-up" slot="leading-icon"></sgds-icon>
         </sgds-sidebar-item>
         <sgds-sidebar-item title="Reports" name="reports">
-          <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
-          <sgds-icon name="placeholder" slot="trailing-icon"></sgds-icon>
+          <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+
+          <sgds-badge slot="trailingIcon" variant="danger" outlined size="sm">5</sgds-badge>
         </sgds-sidebar-item>
       </sgds-sidebar-section>
 
@@ -31,7 +37,12 @@ const BasicTemplate = args => html`
 
 const MultiLevelTemplate = args => html`
   <div class="sgds:h-110">
-    <sgds-sidebar active=${args.active} ?collapsed=${args.collapsed} ?scrim=${args.scrim} ?overlay=${args.overlay}>
+    <sgds-sidebar
+      active=${args.active}
+      ?collapsed=${args.collapsed}
+      ?scrim=${args.scrim}
+      variant=${args.variant || "collapsible"}
+    >
       <sgds-sidebar-section title="Navigation" name="navigation" ?collapsible=${false}>
         <!-- Level 1: Dashboard Group -->
         <sgds-sidebar-group title="Dashboard" name="dashboard">
@@ -97,7 +108,7 @@ const OverlayTemplate = args => html`
     </div>
 
     <div class="sgds:relative sgds:bg-white sgds:h-full">
-      <sgds-sidebar overlay ?scrim=${args.scrim} ?collapsed=${args.collapsed} active=${args.active}>
+      <sgds-sidebar variant="overlay" ?scrim=${args.scrim} ?collapsed=${args.collapsed} active=${args.active}>
         <div slot="top" class="sgds:font-semibold">Navigation</div>
 
         <sgds-sidebar-section title="Main" name="main" ?collapsible=${false}>
@@ -165,7 +176,12 @@ const DynamicTemplate = args => {
       </div>
 
       <div class="sgds:flex-1 sgds:overflow-auto">
-        <sgds-sidebar active=${activeItem} ?collapsed=${args.collapsed} ?scrim=${args.scrim} ?overlay=${args.overlay}>
+        <sgds-sidebar
+          active=${activeItem}
+          ?collapsed=${args.collapsed}
+          ?scrim=${args.scrim}
+          variant=${args.variant || "collapsible"}
+        >
           <sgds-sidebar-section title="Navigation" name="navigation" ?collapsible=${false}>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
               <sgds-icon name="house" slot="leading-icon"></sgds-icon>
@@ -191,7 +207,12 @@ const DynamicTemplate = args => {
 
 const LinkedItemsTemplate = args => html`
   <div class="sgds:h-110">
-    <sgds-sidebar active=${args.active} ?collapsed=${args.collapsed} ?scrim=${args.scrim} ?overlay=${args.overlay}>
+    <sgds-sidebar
+      active=${args.active}
+      ?collapsed=${args.collapsed}
+      ?scrim=${args.scrim}
+      variant=${args.variant || "collapsible"}
+    >
       <sgds-sidebar-section title="Navigation" name="navigation" ?collapsible=${false}>
         <sgds-sidebar-item title="Dashboard" name="dashboard">
           <sgds-icon name="house" slot="leading-icon"></sgds-icon>
@@ -228,7 +249,7 @@ export const Default = {
     active: "dashboard",
     collapsed: false,
     scrim: false,
-    overlay: false
+    variant: "collapsible"
   },
   parameters: {
     layout: "fullscreen",
@@ -248,7 +269,7 @@ export const MultiLevel = {
     active: "latest-sales",
     collapsed: false,
     scrim: false,
-    overlay: false
+    variant: "collapsible"
   },
   parameters: {
     layout: "fullscreen",
@@ -265,6 +286,7 @@ export const Overlay = {
   render: OverlayTemplate.bind({}),
   name: "Overlay Sidebar",
   args: {
+    variant: "overlay",
     scrim: true,
     collapsed: true,
     active: "dashboard"
@@ -290,7 +312,7 @@ export const Dynamic = {
     active: "dashboard",
     collapsed: false,
     scrim: false,
-    overlay: false
+    variant: "collapsible"
   },
   parameters: {
     layout: "fullscreen",
@@ -310,7 +332,7 @@ export const LinkedItems = {
     active: "dashboard",
     collapsed: false,
     scrim: false,
-    overlay: false
+    variant: "collapsible"
   },
   parameters: {
     layout: "fullscreen",

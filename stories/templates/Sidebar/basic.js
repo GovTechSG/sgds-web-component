@@ -3,7 +3,7 @@ import { html } from "lit";
 export const Template = args => html`
   <div class="sgds:h-175">
     <sgds-sidebar active=${args.active} ?collapsed=${args.collapsed} ?scrim=${args.scrim}>
-      <div slot="top">SGDS Sidebar</div>
+      <div slot="upper">SGDS Sidebar</div>
 
       <!-- Main Navigation Section -->
       <sgds-sidebar-section title="Main" name="main" ?collapsible=${false}>
@@ -67,7 +67,7 @@ export const Template = args => html`
         </sgds-sidebar-item>
       </sgds-sidebar-section>
 
-      <sgds-sidebar-section slot="bottom">
+      <sgds-sidebar-section slot="lower">
         <sgds-sidebar-item title="Premium Features" name="premium-features">
           <sgds-icon name="star" slot="leading-icon"></sgds-icon>
         </sgds-sidebar-item>

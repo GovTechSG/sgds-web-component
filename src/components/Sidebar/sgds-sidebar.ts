@@ -40,14 +40,15 @@ const SGDS_SIDEBAR_GROUP = "sgds-sidebar-group";
  * - Tab: Standard focus management to interactive elements
  *
  * @slot default - Insert sgds-sidebar-item, sgds-sidebar-group, and sgds-sidebar-section elements
- * @slot top - Insert brand/logo content in sidebar header
- * @slot bottom - Insert content in sidebar footer
+ * @slot upper - Insert brand/logo content in sidebar header
+ * @slot lower - Insert content in sidebar footer
  *
  * @fires sgds-select - Emitted when a sidebar item or group is selected.
  *   Event detail: { activeItem: string } - name of the selected item
  *
  */
 
+type SidebarVariant = "persistent" | "overlay" | "collapsible";
 export class SgdsSidebar extends SgdsElement {
   static styles = [...SgdsElement.styles, sidebarStyle];
 
@@ -86,15 +87,7 @@ export class SgdsSidebar extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) scrim = false;
 
-  /**
-   * Enables overlay mode for the sidebar, displaying it as a floating panel over page content.
-   * When true, sidebar behaves as an overlay with a close button. When false, sidebar is inline.
-   * In overlay mode, clicking outside the sidebar closes it. Used for responsive mobile layouts.
-   * @attribute overlay
-   * @type {boolean}
-   * @default false
-   */
-  @property({ type: Boolean, reflect: true }) overlay = false;
+  @property({ type: String, reflect: true }) variant: SidebarVariant = "collapsible";
 
   /** @internal Tracks the currently active group and provides it via context to all child elements */
   @provide({ context: SidebarActiveGroup })
@@ -158,7 +151,7 @@ export class SgdsSidebar extends SgdsElement {
 
   firstUpdated() {
     document?.addEventListener("click", this._handleClickOutOfElement);
-    this._isOverlay = this.overlay;
+    this._isOverlay = this.variant === "overlay";
   }
 
   updated() {
@@ -176,7 +169,9 @@ export class SgdsSidebar extends SgdsElement {
    */
   @watch("collapsed")
   _handleCollapsed() {
-    this._sidebarCollapsed = this.collapsed;
+    if (this.variant !== "persistent") {
+      this._sidebarCollapsed = this.collapsed;
+    }
   }
 
   /**
@@ -377,7 +372,7 @@ export class SgdsSidebar extends SgdsElement {
    * @returns {void}
    */
   public toggleCollapsed() {
-    this.collapsed = !this.collapsed;
+    if (this.variant !== "persistent") this.collapsed = !this.collapsed;
   }
 
   /**
@@ -392,7 +387,7 @@ export class SgdsSidebar extends SgdsElement {
     if (overlay || !e.composedPath().includes(this)) {
       this._showDrawer = false;
 
-      if (this.overlay) {
+      if (this._isOverlay) {
         const toggler = (e.target as HTMLElement).getAttribute("data-sidebar-toggler");
 
         if (!toggler) this.collapsed = true;
@@ -406,13 +401,13 @@ export class SgdsSidebar extends SgdsElement {
         class=${classMap({
           sidebar: true,
           "sidebar--collapsed": this._sidebarCollapsed,
-          overlay: this.overlay
+          overlay: this._isOverlay
         })}
       >
         <div
           class=${classMap({
             "sidebar--overlay": this.scrim,
-            show: this.scrim && (this._showDrawer || (this.overlay && !this._sidebarCollapsed))
+            show: this.scrim && (this._showDrawer || (this._isOverlay && !this._sidebarCollapsed))
           })}
         ></div>
 
@@ -420,10 +415,10 @@ export class SgdsSidebar extends SgdsElement {
           <div class="sidebar-wrapper">
             <div class="sidebar-top">
               <div class="sidebar-brand-name">
-                <slot name="top"></slot>
+                <slot name="upper"></slot>
               </div>
 
-              ${!this.overlay
+              ${this.variant === "collapsible"
                 ? html`<sgds-icon-button
                     name=${this._sidebarCollapsed ? "sidebar-expand" : "sidebar-collapse"}
                     variant="ghost"
@@ -440,7 +435,7 @@ export class SgdsSidebar extends SgdsElement {
               <slot @slotchange=${this._handleSlotChange}></slot>
             </nav>
 
-            <slot name="bottom"></slot>
+            <slot name="lower"></slot>
           </div>
         </div>
 
