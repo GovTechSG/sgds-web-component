@@ -952,6 +952,48 @@ describe("sgds-sidebar", () => {
       expect(l1b._selected).to.be.true;
       expect(l1a._selected).to.be.false;
     });
+
+    it("deselects a drawer item when switching to another drawer item in the same group", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-sidebar-item title="Meetings" name="meetings"></sgds-sidebar-item>
+            <sgds-sidebar-group title="Summary" name="summary">
+              <sgds-sidebar-item title="Refunds" name="refunds"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+
+      // Grab references before the drawer moves them out of the light DOM
+      const meetings = el.querySelector('sgds-sidebar-item[name="meetings"]') as SgdsSidebarItem;
+      const refunds = el.querySelector('sgds-sidebar-item[name="refunds"]') as SgdsSidebarItem;
+      const summaryGroup = el.querySelector('sgds-sidebar-group[name="summary"]') as SgdsSidebarGroup;
+
+      // Open drawer by clicking Dashboard
+      const dashboardDiv = (el.querySelector('sgds-sidebar-group[name="dashboard"]') as SgdsSidebarGroup)
+        .shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      dashboardDiv.click();
+      await elementUpdated(el);
+
+      // Activate Meetings (a direct drawer item)
+      const meetingsDiv = meetings.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      meetingsDiv.click();
+      await elementUpdated(el);
+      expect(meetingsDiv).to.have.class("active");
+
+      // Now activate Refunds (a nested drawer item inside Summary)
+      const summaryDiv = summaryGroup.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      summaryDiv.click();
+      await elementUpdated(el);
+
+      const refundsDiv = refunds.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      refundsDiv.click();
+      await elementUpdated(el);
+
+      expect(refundsDiv).to.have.class("active");
+      expect(meetingsDiv).not.to.have.class("active");
+    });
   });
 
   describe("Error Handling and Edge Cases", () => {
@@ -1083,6 +1125,54 @@ describe("sgds-sidebar", () => {
       const scrimDiv = el.shadowRoot?.querySelector(".sidebar--overlay");
 
       expect(scrimDiv).not.to.have.class("show");
+    });
+  });
+
+  describe("Drawer Content Population", () => {
+    it("populates drawer overlay with direct children of clicked root group", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-sidebar-item title="Summary" name="summary"></sgds-sidebar-item>
+            <sgds-sidebar-item title="Analytics" name="analytics"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      groupDiv.click();
+      await elementUpdated(el);
+
+      const drawer = el.shadowRoot?.querySelector(".sidebar-nested-overlay");
+      const drawerItems = drawer?.querySelectorAll("sgds-sidebar-item");
+      expect(drawerItems?.length).to.equal(2);
+    });
+
+    it("updates drawer content when switching between root groups", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-sidebar-item title="Summary" name="summary"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+          <sgds-sidebar-group title="Reports" name="reports">
+            <sgds-sidebar-item title="Monthly" name="monthly"></sgds-sidebar-item>
+            <sgds-sidebar-item title="Weekly" name="weekly"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const groups = el.querySelectorAll("sgds-sidebar-group");
+      const dashboardDiv = (groups[0] as SgdsSidebarGroup).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      const reportsDiv = (groups[1] as SgdsSidebarGroup).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      dashboardDiv.click();
+      await elementUpdated(el);
+      const drawer = el.shadowRoot?.querySelector(".sidebar-nested-overlay");
+      expect(drawer?.querySelectorAll("sgds-sidebar-item").length).to.equal(1);
+
+      reportsDiv.click();
+      await elementUpdated(el);
+      expect(drawer?.querySelectorAll("sgds-sidebar-item").length).to.equal(2);
     });
   });
 

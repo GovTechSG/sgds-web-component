@@ -19,8 +19,6 @@ import SgdsSidebarGroup from "./sgds-sidebar-group";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import { SM_BREAKPOINT } from "../../utils/breakpoints";
 
-const SGDS_SIDEBAR_GROUP = "sgds-sidebar-group";
-
 /**
  * @summary Sidebar is a collapsible navigation component that displays menu items and groups.
  * Users can expand and collapse the sidebar to save screen space while navigating through organized menu items.
@@ -130,6 +128,9 @@ export class SgdsSidebar extends SgdsElement {
   /** @internal Bound resize handler for proper event listener removal */
   private _boundHandleResize = this._handleResize.bind(this);
 
+  /** @internal Bound i-sgds-click handler for proper event listener removal */
+  private _boundHandleItemClick = this._handleItemClick.bind(this);
+
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute("role", "navigation");
@@ -141,12 +142,14 @@ export class SgdsSidebar extends SgdsElement {
 
     window?.addEventListener("resize", this._boundHandleResize);
     this._handleResize();
+    this.addEventListener("i-sgds-click", this._boundHandleItemClick);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     document?.removeEventListener("click", this._handleClickOutOfElement);
     window?.removeEventListener("resize", this._boundHandleResize);
+    this.removeEventListener("i-sgds-click", this._boundHandleItemClick);
   }
 
   firstUpdated() {
@@ -158,9 +161,6 @@ export class SgdsSidebar extends SgdsElement {
     this._handleActive();
   }
 
-  private _handleSlotChange = () => {
-    this.addItemListeners();
-  };
   /**
    * Syncs collapsed property changes to all child items through context provider.
    * Updates internal state and triggers re-render with appropriate CSS classes.
@@ -182,13 +182,13 @@ export class SgdsSidebar extends SgdsElement {
    * @returns {void}
    */
   @watch("_sidebarActiveItem")
-  _handleActiveItem() {
+  _handleActiveItem(oldItem?: unknown) {
     if (!this._sidebarActiveItem) return;
 
-    const items = this.querySelectorAll("sgds-sidebar-item");
-    const groups = this.querySelectorAll(SGDS_SIDEBAR_GROUP);
-    const allItems = [...items, ...groups] as SidebarElement[];
+    const allItems = this._getAllItems();
     allItems.forEach(item => (item._selected = false));
+    (this._drawerItems as SidebarElement[]).forEach(item => (item._selected = false));
+    if (oldItem) (oldItem as SidebarElement)._selected = false;
 
     const childLevel = this._sidebarActiveItem._childLevel;
     this._sidebarActiveItem._selected = true;
@@ -204,19 +204,17 @@ export class SgdsSidebar extends SgdsElement {
       // when nested, we will find the top level of parent
       let parentEle = this._sidebarActiveItem.parentElement as SgdsSidebarGroup;
 
-      while (parentEle._childLevel >= 1 && parentEle.tagName.toLowerCase() === SGDS_SIDEBAR_GROUP) {
-        if (parentEle.tagName.toLowerCase() === SGDS_SIDEBAR_GROUP) {
-          if (parentEle._childLevel === 1) {
-            // when active item not in drawer, set nodes into drawer.
-            if (!parentEle.classList.contains("sidebar-nested-overlay")) {
-              this._setNodesToDrawer(parentEle);
-            }
+      while (parentEle instanceof SgdsSidebarGroup && parentEle._childLevel >= 1) {
+        if (parentEle._childLevel === 1) {
+          // when active item not in drawer, set nodes into drawer.
+          if (!parentEle.classList.contains("sidebar-nested-overlay")) {
+            this._setNodesToDrawer(parentEle);
           }
-
-          parentEle._selected = true;
-
-          parentEle = parentEle.parentElement as SgdsSidebarGroup;
         }
+
+        parentEle._selected = true;
+
+        parentEle = parentEle.parentElement as SgdsSidebarGroup;
       }
 
       if (this._sidebarActiveGroup) {
@@ -262,7 +260,7 @@ export class SgdsSidebar extends SgdsElement {
       return null;
     };
 
-    return findByName(this._defaultNodes);
+    return findByName(this._defaultNodes) ?? findByName(this._drawerItems as SidebarElement[]);
   }
   /**
    * Manages responsive collapse behavior on window resize.
@@ -297,13 +295,7 @@ export class SgdsSidebar extends SgdsElement {
     this._sidebarActiveGroup = element;
 
     // when there is an active group set, always set new menu items
-    this._drawerItems = []; // always set to empty to prevent duplicate
-    const menuItems = this._sidebarActiveGroup.querySelectorAll(
-      ":scope > sgds-sidebar-group, :scope > sgds-sidebar-item"
-    );
-    menuItems.forEach(e => {
-      this._drawerItems.push(e);
-    });
+    this._drawerItems = [...this._sidebarActiveGroup._childElements];
   }
 
   /**
@@ -325,44 +317,58 @@ export class SgdsSidebar extends SgdsElement {
   }
 
   /**
-   * Registers click handlers on sidebar items and groups for selection and drawer management.
-   * Emits sgds-select events to notify external components of item selection.
+   * Recursively collects all descendant sidebar elements via slot assignments.
+   * Traverses _defaultNodes and their _childElements to build a flat list of all items and groups.
    * @internal
+   * @returns {SidebarElement[]} All descendant sidebar elements
+   */
+  private _getAllItems(): SidebarElement[] {
+    const collect = (elements: SidebarElement[]): SidebarElement[] => {
+      const result: SidebarElement[] = [];
+      for (const el of elements) {
+        result.push(el);
+        if (el._childElements?.length) {
+          result.push(...collect(el._childElements));
+        }
+      }
+      return result;
+    };
+    return collect(this._defaultNodes ?? []);
+  }
+
+  /**
+   * Handles item click events via delegation on the sidebar root.
+   * Manages selection state, drawer visibility, anchor navigation, and sgds-select emission.
+   * @internal
+   * @param {Event} e - The bubbled i-sgds-click event
    * @returns {void}
    */
-  private addItemListeners() {
-    const items = this.querySelectorAll("sgds-sidebar-item");
-    const groups = this.querySelectorAll(SGDS_SIDEBAR_GROUP);
-    const allItems = [...items, ...groups] as SidebarElement[];
+  private _handleItemClick(e: Event) {
+    const element = (e as CustomEvent).detail.element as SidebarElement;
 
-    allItems.forEach(item => {
-      item.addEventListener("i-sgds-click", (e: Event) => {
-        const element = (e as CustomEvent).detail.element as SidebarElement;
+    if (element === this._sidebarActiveGroup) {
+      // just toggle drawer
+      this._showDrawer = !this._showDrawer;
+    } else {
+      if (this.active !== element.name) {
+        const allItems = this._getAllItems();
+        this.active = element.name;
+        allItems.forEach(item => (item._selected = false));
+      }
 
-        if (element === this._sidebarActiveGroup) {
-          // just toggle drawer
-          this._showDrawer = !this._showDrawer;
-        } else {
-          if (this.active !== element.name) {
-            this.active = element.name;
-            allItems.forEach(item => (item._selected = false));
-          }
+      if (element._childElements.length > 0) {
+        this._showDrawer = true;
+      } else {
+        this._showDrawer = false;
 
-          if (element._childElements.length > 0) {
-            this._showDrawer = true;
-          } else {
-            this._showDrawer = false;
+        // when there is anchorLink we will trigger click to redirect and allow user to handle the navigation themselves
+        const anchorLink = element.querySelector(":scope > a") as HTMLAnchorElement;
+        if (anchorLink) anchorLink.click();
+      }
 
-            // when there is anchorLink we will trigger click to redirect and allow user to handle the navigation themselves
-            const anchorLink = item.querySelector(":scope > a") as HTMLAnchorElement;
-            if (anchorLink) anchorLink.click();
-          }
-
-          // Emit sgds-select event when an item is selected
-          this.emit("sgds-select", { detail: { activeItem: element.name } });
-        }
-      });
-    });
+      // Emit sgds-select event when an item is selected
+      this.emit("sgds-select", { detail: { activeItem: element.name } });
+    }
   }
 
   /**
@@ -432,7 +438,7 @@ export class SgdsSidebar extends SgdsElement {
             </div>
 
             <nav class="sidebar-content" aria-activedescendant=${this._sidebarActiveItem?.name || ""}>
-              <slot @slotchange=${this._handleSlotChange}></slot>
+              <slot></slot>
             </nav>
 
             <slot name="lower"></slot>
