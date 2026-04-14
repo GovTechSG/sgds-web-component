@@ -101,7 +101,7 @@ export class SgdsSidebarGroup extends SidebarElement {
       >
         <div class="sidebar-item-label-wrapper">
           <div>
-            <slot name="leading-icon"></slot>
+            <slot name="icon"></slot>
             <span class="sidebar-item-label">${this.title}</span>
           </div>
 

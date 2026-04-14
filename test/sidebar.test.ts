@@ -40,10 +40,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-group>
             <sgds-sidebar-group title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -57,10 +57,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -111,7 +111,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -127,13 +127,13 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
-      const icon = group.querySelector("sgds-icon[slot='leading-icon']");
+      const icon = group.querySelector("sgds-icon[slot='icon']");
       expect(icon).to.exist;
     });
 
@@ -142,7 +142,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -164,12 +164,12 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
               <sgds-sidebar-group title="Overview" name="overview">
-                <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="file-text" slot="icon"></sgds-icon>
               </sgds-sidebar-group>
               <sgds-sidebar-group title="Analytics" name="analytics">
-                <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="file-text" slot="icon"></sgds-icon>
               </sgds-sidebar-group>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -184,9 +184,9 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
         </sgds-sidebar>
@@ -201,14 +201,14 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-item title="Details" name="details">
-                <sgds-icon name="info" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="info" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -233,11 +233,11 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -264,14 +264,14 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Sales" name="sales">
-                <sgds-icon name="users" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="users" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-item title="Users" name="users">
-                <sgds-icon name="users" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="users" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -287,14 +287,14 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Sales" name="sales">
-                <sgds-icon name="users" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="users" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-item title="Revenue" name="revenue">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -312,14 +312,14 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Level 1" name="l1">
-            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon"></sgds-icon>
             <sgds-sidebar-group title="Level 2" name="l2">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Level 3 Item" name="l3">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-item title="Level 3 Item 2" name="l3_2">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -347,7 +347,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -362,7 +362,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -383,7 +383,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -401,12 +401,12 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon"></sgds-icon>
             <sgds-sidebar-item title="Summary" name="summary">
-              <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="building" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Analytics" name="analytics">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-group>
         </sgds-sidebar>
@@ -427,12 +427,12 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-item title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon"></sgds-icon>
           </sgds-sidebar-item>
         </sgds-sidebar>
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
-      const icon = item.querySelector("sgds-icon[slot='leading-icon']");
+      const icon = item.querySelector("sgds-icon[slot='icon']");
       expect(icon).to.exist;
     });
   });
@@ -443,10 +443,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -467,10 +467,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-group>
             <sgds-sidebar-group title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -493,11 +493,11 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Sales" name="sales">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -554,7 +554,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -567,7 +567,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -580,7 +580,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -594,7 +594,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -608,7 +608,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -622,7 +622,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -638,7 +638,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -653,7 +653,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -668,7 +668,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -682,7 +682,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -698,7 +698,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar collapsed>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -713,9 +713,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -735,9 +735,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -757,7 +757,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar collapsed>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -771,7 +771,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent" collapsed>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -787,10 +787,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -808,10 +808,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -833,11 +833,11 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Sales" name="sales">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -862,19 +862,19 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-group title="Analytics" name="analytics">
-                <sgds-icon name="users" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="users" slot="icon"></sgds-icon>
                 <sgds-sidebar-item title="Revenue" name="revenue">
-                  <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                  <sgds-icon name="building" slot="icon"></sgds-icon>
                 </sgds-sidebar-item>
               </sgds-sidebar-group>
             </sgds-sidebar-group>
             <sgds-sidebar-item title="Settings" name="settings">
-              <sgds-icon name="gear" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="gear" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -890,15 +890,15 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
             <sgds-sidebar-group title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Monthly" name="monthly">
-                <sgds-icon name="calendar" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="calendar" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -923,15 +923,15 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="L1-A" name="l1a">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="L2-Item1" name="l2item1">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
             <sgds-sidebar-group title="L1-B" name="l1b">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="L2-Item2" name="l2item2">
-                <sgds-icon name="users" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="users" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -1025,7 +1025,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1042,10 +1042,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1082,9 +1082,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -1105,7 +1105,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1120,7 +1120,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay" collapsed>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1185,9 +1185,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -1208,9 +1208,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
+                <sgds-icon name="building" slot="icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -1231,7 +1231,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1255,7 +1255,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1377,10 +1377,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main">
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-group title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1398,7 +1398,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main" collapsible collapsed>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1414,7 +1414,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main">
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1488,7 +1488,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar collapsed>
           <sgds-sidebar-section title="Main" name="main">
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+              <sgds-icon name="house" slot="icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
