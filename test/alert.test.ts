@@ -40,7 +40,7 @@ describe("<Alert>", () => {
         <div class="alert show" role="alert" aria-hidden="false">
         <slot name="icon"></slot>
         <div class="alert-content">
-           <slot></slot>
+           <slot class="alert-content__description">
           </div>        
         </div>
       `
@@ -75,7 +75,7 @@ describe("<Alert>", () => {
                 </svg>  
                 </slot>
         <div class="alert-content">
-           <slot></slot>
+           <slot class="alert-content__description">
           </div>        
         </div>
       `
@@ -143,6 +143,40 @@ describe("<Alert>", () => {
     const el = await fixture<SgdsAlert>(html`<sgds-alert show>Test alert</sgds-alert>`);
     const base = el.shadowRoot?.querySelector(".alert");
     expect(base?.classList.contains("show")).to.be.true;
+  });
+
+  describe("close button tone", () => {
+    it("should have tone='fixed-light' by default (non-outlined, non-warning variant)", async () => {
+      const el = await fixture<SgdsAlert>(html`<sgds-alert show dismissible></sgds-alert>`);
+      const closeButton = el.shadowRoot?.querySelector("sgds-close-button");
+      expect(closeButton?.getAttribute("tone")).to.equal("fixed-light");
+    });
+
+    it("should have tone='fixed-dark' when outlined is true", async () => {
+      const el = await fixture<SgdsAlert>(html`<sgds-alert show dismissible outlined></sgds-alert>`);
+      const closeButton = el.shadowRoot?.querySelector("sgds-close-button");
+      expect(closeButton?.getAttribute("tone")).to.equal("fixed-dark");
+    });
+
+    it("should have tone='fixed-dark' when variant is 'warning'", async () => {
+      const el = await fixture<SgdsAlert>(html`<sgds-alert show dismissible variant="warning"></sgds-alert>`);
+      const closeButton = el.shadowRoot?.querySelector("sgds-close-button");
+      expect(closeButton?.getAttribute("tone")).to.equal("fixed-dark");
+    });
+
+    it("should have tone='fixed-dark' when both outlined and variant='warning'", async () => {
+      const el = await fixture<SgdsAlert>(html`<sgds-alert show dismissible outlined variant="warning"></sgds-alert>`);
+      const closeButton = el.shadowRoot?.querySelector("sgds-close-button");
+      expect(closeButton?.getAttribute("tone")).to.equal("fixed-dark");
+    });
+
+    it("should have tone='fixed-light' for non-warning variants without outlined", async () => {
+      for (const variant of ["info", "success", "danger", "neutral"] as const) {
+        const el = await fixture<SgdsAlert>(html`<sgds-alert show dismissible variant=${variant}></sgds-alert>`);
+        const closeButton = el.shadowRoot?.querySelector("sgds-close-button");
+        expect(closeButton?.getAttribute("tone"), `variant="${variant}"`).to.equal("fixed-light");
+      }
+    });
   });
 
   describe("Web Accessibility", () => {

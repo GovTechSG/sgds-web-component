@@ -24,6 +24,29 @@ Select all existing skills from the list. This pulls the latest skills from the 
 
 ---
 
+## Add SGDS to Your Agent Instructions File
+
+The most reliable way to ensure your agent always uses SGDS skills is to add it to your project's agent instructions file — so the rule is persistent across every session without needing to repeat it.
+
+Depending on your agent or IDE, add the following to the relevant file:
+
+| Agent / Tool | File |
+|---|---|
+| Claude Code | `CLAUDE.md` |
+| GitHub Copilot | `.github/copilot-instructions.md` |
+| Cursor | `.cursor/rules` |
+| Other agents | `agents.md` or equivalent |
+
+Add a line like:
+
+```
+When building any UI, always use the SGDS web component library and SGDS Tailwind utilities for styling. Consult the SGDS skills for correct component usage, slot structure, design patterns, and utility classes.
+```
+
+This means every new session automatically inherits the SGDS constraint — you never have to remind the agent to use SGDS, and it will consult the skills before reaching for non-SGDS patterns.
+
+---
+
 ## Available Skills
 
 | Skill | What it covers |
@@ -74,7 +97,9 @@ Skills are read by the agent at query time — they do not add runtime dependenc
 Run the following command to pull the latest skill updates:
 
 ```bash
-npx skills update
+
+npx skills add govtechsg/sgds-web-component
+
 ```
 
 Skills follow the library version. After upgrading `@govtechsg/sgds-web-component`, update skills to ensure the AI agent's knowledge matches the installed version.
