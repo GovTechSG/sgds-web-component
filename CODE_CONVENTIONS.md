@@ -16,6 +16,7 @@
   - [Lit](#lit)
   - [Scoped Elements](#scoped-elements)
   - [Icons](#icons)
+  - [Testing](#testing)
 
 ---
 
@@ -244,7 +245,7 @@ close() {}
 public close();
 ```
 
-- All internal methods, private and protected, must be prefixed with a underscore _ to differentiate from Lit native lifecycle methods and the public methods 
+- All internal methods, private and protected, must be prefixed with a underscore _ to differentiate from Lit native lifecycle methods and the public methods
 
 :x: Bad:
 
@@ -256,6 +257,22 @@ handleChange() {}
 
 ```typescript
 private _handleChange() {};
+```
+
+- `@watch`-decorated methods must **not** have an access modifier. The `@watch` decorator's type constraint (`UpdateHandlerFunctionKeys<T>`) is based on `keyof T`, which only includes public members. Adding `private` or `protected` causes a TypeScript type error. The `_` prefix is sufficient to signal internal use.
+
+:white_check_mark: Good:
+
+```typescript
+@watch("propName")
+_handlePropChange() {}
+```
+
+:x: Bad:
+
+```typescript
+@watch("propName")
+private _handlePropChange() {}
 ```
 
 - Keep it simple. If the action can be understood with the least amount of words. If the method has many action and needs to be described in multiple words, then you should refactor the method to have a single responsibility
@@ -300,9 +317,13 @@ class Alert extends LitElement {
 
 :white_check_mark: Good: `sgds-hide, sgds-show, sgds-after-show, sgds-toggle`
 
-2. Before creating a new event name, check if there are existing names for the same purposed.
+2. Internal events (not intended for consumers) must be prefixed with `i-sgds-`
 
-3. Use the `emit` method of SgdsElement class to emit a custom event
+:white_check_mark: Good: `i-sgds-change, i-sgds-select`
+
+3. Before creating a new event name, check if there are existing names for the same purposed.
+
+4. Use the `emit` method of SgdsElement class to emit a custom event
 
 ---
 
@@ -330,9 +351,9 @@ Example with element state
 
 ---
 
-### Naming slots 
+### Naming slots
 
-Slots name should be concise and straight to the point. No need to add component prefix name. 
+Slots name should be concise and straight to the point. No need to add component prefix name.
 
 :white_check_mark: Good:
 
@@ -343,12 +364,30 @@ Slots name should be concise and straight to the point. No need to add component
 ```
 
 
-:x: Bad: 
+:x: Bad:
 
 ```html
 <sgds-footer>
 <h2 slot="footer-title"></h2>
 </sgds-footer>
+```
+
+When a slot name requires more than one word, use kebab-case.
+
+:white_check_mark: Good:
+
+```html
+<sgds-input>
+  <sgds-icon slot="trailing-icon"></sgds-icon>
+</sgds-input>
+```
+
+:x: Bad:
+
+```html
+<sgds-input>
+  <sgds-icon slot="trailingIcon"></sgds-icon>
+</sgds-input>
 ```
 
 ## Typescript
@@ -486,9 +525,41 @@ e.g.
 </sgds-alert>
 ```
 
-Use hard coded svg when: 
+Use hard coded svg when:
 
-- Icons are super fixed. Example, accordion's caret, combobox caret, 
-- If ever such icons are requested to be customised, should first try to create a slot for user to pass in 
+- Icons are super fixed. Example, accordion's caret, combobox caret,
+- If ever such icons are requested to be customised, should first try to create a slot for user to pass in
+
+---
+
+## Testing
+
+- **Test DOM outcomes, not class internals.** Assert what the user sees — CSS classes, attributes, rendered elements — rather than reading internal `@state()` fields (those prefixed with `_`). Internal state is an implementation detail that can change without affecting the user-facing behaviour.
+
+:x: Bad:
+
+```typescript
+expect(item._selected).to.be.true;
+expect(item._hidden).to.be.true;
+expect(item._sidebarCollapsed).to.be.true;
+```
+
+:white_check_mark: Good:
+
+```typescript
+expect(item.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
+expect(item.shadowRoot?.querySelector(".sidebar-item")).to.have.attribute("tabindex", "-1");
+expect(item.shadowRoot?.querySelector(".sidebar-item")).to.have.class("sidebar-item--collapsed");
+```
+
+- **Public methods and properties may be tested directly.** If a method or getter has no access modifier (or is explicitly `public`) and carries no `_` prefix, it is part of the component's public API and is valid to assert against.
+
+:white_check_mark: Good:
+
+```typescript
+expect(group.showMenu).to.be.true;
+expect(el.collapsed).to.be.false;
+el.toggleCollapsed();
+```
 
 Last resort is to introduce sgds-icon as an internal dependency, to avoid usage of the ScopedElementMixin as much as possible  -->

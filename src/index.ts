@@ -44,4 +44,5 @@ import "./components/Select";
 import "./components/ImageCard";
 import "./components/ThumbnailCard";
 import "./components/IconCard";
+import "./components/Sidebar";
 // COMPONENT IMPORTS

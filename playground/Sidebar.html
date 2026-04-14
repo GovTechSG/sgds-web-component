@@ -1,75 +1,327 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
-    <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc/components/Sidebar/index.umd.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebar Playground</title>
     <script type="module" src="../src/index.ts"></script>
     <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
     <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
     <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <link href="./css/utility.css" rel="stylesheet" type="text/css" />
     <style>
-      .container {
-        max-width: 800px;
-        margin: 36px auto;
-        display: flex;
-        flex-direction: column;
-        gap: 36px;
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       }
-      .sidebar-demo {
-        height: 400px;
+
+      .container {
+        display: flex;
+        height: calc(100vh - 28px - 40px);
+      }
+
+      .sidebar-wrapper {
+        height: 100%;
         position: relative;
-        border: 1px solid #ccc;
-        overflow: hidden;
+      }
+
+      .content {
+        flex: 1;
+        padding: 24px;
+        overflow-y: auto;
+      }
+
+      .content h1 {
+        margin-top: 0;
+      }
+
+      .example-section {
+        margin-bottom: 32px;
+      }
+
+      .example-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #374151;
+      }
+
+      .example-description {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 16px;
+      }
+      .toggle {
+        padding: 8px 16px;
+        background-color: var(--sgds-surface-raised);
+        border-bottom: 1px solid var(--sgds-border-default);
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .toggle-section {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .toggle-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--sgds-text-default);
+        margin-right: 4px;
       }
     </style>
   </head>
+
   <body>
-    <div class="container">
-      <div>
-        <h2>Basic Flat Navigation</h2>
-        <div class="sidebar-demo">
-          <sgds-sidebar active="dashboard">
-            <sgds-sidebar-item name="dashboard" title="Dashboard">
-              <sgds-icon name="grid-fill" slot="leadingIcon"></sgds-icon>
-            </sgds-sidebar-item>
-            <sgds-sidebar-item name="records" title="Records">
-              <sgds-icon name="people-fill" slot="leadingIcon"></sgds-icon>
-            </sgds-sidebar-item>
-            <sgds-sidebar-item name="settings" title="Settings">
-              <sgds-icon name="gear-fill" slot="leadingIcon"></sgds-icon>
-            </sgds-sidebar-item>
-          </sgds-sidebar>
-        </div>
+    <sgds-masthead fluid></sgds-masthead>
+    <div class="toggle">
+      <div class="toggle-section">
+        <sgds-icon-button
+          data-sidebar-toggler="true"
+          size="xs"
+          variant="ghost"
+          name="sidebar-expand"
+          onclick="handleToggle()"
+        ></sgds-icon-button>
       </div>
 
-      <div>
-        <h2>Sections and Groups</h2>
-        <div class="sidebar-demo">
-          <sgds-sidebar active="meetings">
-            <div slot="brandName">My App</div>
+      <div class="toggle-section">
+        <span class="toggle-label">Theme:</span>
+        <sgds-icon-button
+          id="theme-toggler"
+          size="xs"
+          variant="ghost"
+          name="moon"
+          onclick="toggleTheme()"
+          aria-label="Toggle dark mode"
+        ></sgds-icon-button>
+      </div>
 
-            <sgds-sidebar-section title="Main" name="main">
-              <sgds-sidebar-group title="Dashboard" name="dashboard">
-                <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
-                <sgds-sidebar-item title="Overview" name="overview">
-                  <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+      <div class="toggle-section">
+        <span class="toggle-label">Set Active:</span>
+        <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('dashboard')"
+          >Dashboard</sgds-button
+        >
+        <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('meetings')"
+          >Meetings</sgds-button
+        >
+        <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('settings')"
+          >Settings</sgds-button
+        >
+        <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('team-management')"
+          >Team</sgds-button
+        >
+        <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('refunds')"
+          >Refunds</sgds-button
+        >
+      </div>
+    </div>
+    <div class="container">
+      <div class="sidebar-wrapper">
+                <sgds-sidebar active="meetings" scrim variant="overlay">
+          <div slot="upper">brand-name</div>
+
+          <sgds-sidebar-section title="Main" name="main">
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+              <sgds-icon name="placeholder" slot="indicator"></sgds-icon>
+              <sgds-sidebar-group title="Summary" name="summary">
+                <sgds-icon name="building" slot="icon"></sgds-icon>
+                <sgds-sidebar-item title="Latest Sales" name="latest-sales">
+                  <sgds-icon name="building" slot="icon"></sgds-icon>
+                  <sgds-icon name="placeholder" slot="indicator"></sgds-icon>
+                  <a href="#"></a>
                 </sgds-sidebar-item>
-                <sgds-sidebar-item title="Stats" name="stats">
-                  <sgds-icon name="bar-chart-fill" slot="leadingIcon"></sgds-icon>
-                </sgds-sidebar-item>
+                <sgds-sidebar-item title="Refunds" name="refunds"> </sgds-sidebar-item>
               </sgds-sidebar-group>
-            </sgds-sidebar-section>
 
-            <sgds-sidebar-section title="Collaboration" name="collaboration" collapsible>
               <sgds-sidebar-item title="Meetings" name="meetings">
-                <sgds-icon name="calendar-fill" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="calendar" slot="icon"></sgds-icon>
+                <a href="#"></a>
               </sgds-sidebar-item>
-              <sgds-sidebar-item title="Messages" name="messages">
-                <sgds-icon name="chat-fill" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item title="Gallery" name="gallery">
+                <sgds-icon name="camera" slot="icon"></sgds-icon>
+                <a href="/playground/combobox.html"></a>
               </sgds-sidebar-item>
-            </sgds-sidebar-section>
-          </sgds-sidebar>
+            </sgds-sidebar-group>
+
+            <sgds-sidebar-group title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
+              <sgds-sidebar-item title="Yearly" name="yearly">
+                <sgds-icon name="house" slot="icon"></sgds-icon>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item title="Monthly" name="monthly">
+                <sgds-icon name="house" slot="icon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+
+            <sgds-sidebar-item title="Public Members" name="public-members">
+              <sgds-icon name="user-circle" slot="icon"></sgds-icon>
+              <sgds-icon slot="indicator" name="summary"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+
+          <sgds-sidebar-section title="Organization" name="organization" separator>
+            <sgds-sidebar-item
+              title="Team Management Team Management Team Management Team Management"
+              name="team-management"
+            >
+              <sgds-icon name="users" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+
+            <sgds-sidebar-item title="Projects" name="projects">
+              <sgds-icon name="layers" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+
+          <sgds-sidebar-section title="Configuration" name="configuration" collapsible>
+            <sgds-sidebar-item title="Settings" name="settings">
+              <sgds-icon name="gear" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+
+          <sgds-sidebar-section name="support">
+            <sgds-sidebar-item title="Help & Support" name="help-support">
+              <sgds-icon name="question-circle" slot="icon"></sgds-icon>
+              <span
+                slot="indicator"
+                class="sgds:bg-danger-surface-emphasis sgds:text-fixed-light sgds:rounded-full sgds:w-5 sgds:h-5 sgds:flex sgds:items-center sgds:justify-center sgds:text-label-xs sgds:font-semibold"
+                >3</span
+              >
+            </sgds-sidebar-item>
+
+            <sgds-sidebar-item title="Premium Features" name="premium-features">
+              <sgds-icon name="star" slot="icon"></sgds-icon>
+              <sgds-badge slot="indicator" outlined="" variant="white">3</sgds-badge>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+
+          <sgds-sidebar-section slot="lower">
+            <sgds-sidebar-group title="Settings" name="settings-footer">
+              <sgds-icon name="gear" slot="icon"></sgds-icon>
+            </sgds-sidebar-group>
+            <sgds-sidebar-group title="Account" name="account-footer">
+              <sgds-icon name="user-circle" slot="icon"></sgds-icon>
+            </sgds-sidebar-group>
+            <sgds-sidebar-group title="Logout" name="logout">
+              <sgds-icon name="box-arrow-right" slot="icon"></sgds-icon>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      </div>
+
+      <div class="content">
+        <h1>Sidebar Component Playground</h1>
+
+        <div class="example-section">
+          <div class="example-title">Overview</div>
+          <div class="example-description">
+            This sidebar demonstrates a collapsible navigation component with support for:
+            <ul style="color: #6b7280; margin: 8px 0 0 0; padding-left: 20px">
+              <li>Organized sections to group related options</li>
+              <li>Collapsible sections to save space</li>
+              <li>Up to 3 levels of nested navigation</li>
+              <li>Drawer overlay for root-level groups</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">Components</div>
+          <ul style="color: #4b5563; line-height: 1.8">
+            <li><strong>sgds-sidebar</strong> - Main container component</li>
+            <li><strong>sgds-sidebar-section</strong> - Organizes and groups options (NEW!)</li>
+            <li><strong>sgds-sidebar-item</strong> - Individual navigation items</li>
+          </ul>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">Features</div>
+          <ul style="color: #4b5563; line-height: 1.8">
+            <li>Click the toggle button in the toolbar to open/close the overlay sidebar</li>
+            <li>Click section headers to expand/collapse sections (if collapsible)</li>
+            <li>Click root-level groups to open their drawer overlay</li>
+            <li>Organize items with sidebar sections for better structure</li>
+            <li>Supports up to 3 levels of nesting</li>
+            <li>Selected state for active item (Meetings)</li>
+            <li>Custom icons using sgds-icon component</li>
+            <li>Smooth animations and transitions</li>
+          </ul>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">Sidebar Sections</div>
+          <p style="color: #6b7280; margin-bottom: 12px">The sidebar is organized into sections:</p>
+          <ul style="color: #4b5563; line-height: 1.8">
+            <li><strong>Main Section</strong> - Always expanded, contains Dashboard and Reports</li>
+            <li><strong>Organization Section</strong> - Collapsible, contains Team Management and Projects</li>
+            <li><strong>Configuration Section</strong> - Collapsible, contains Settings</li>
+            <li><strong>Support Section</strong> - Always expanded, contains Help & Support and Premium Features</li>
+          </ul>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">sgds-sidebar-section Properties</div>
+          <ul style="color: #4b5563; line-height: 2; font-family: monospace; font-size: 13px">
+            <li><strong>title</strong> (string) - The section header text displayed above the options</li>
+            <li><strong>collapsed</strong> (boolean, default: false) - Whether the section is in collapsed state</li>
+            <li>
+              <strong>collapsible</strong> (boolean, default: false) - If true, users can toggle the section open/closed
+            </li>
+          </ul>
+          <p style="color: #6b7280; margin-top: 12px; font-size: 13px">
+            Example: &lt;sgds-sidebar-section title="Organization" collapsible
+            collapsed="true"&gt;...&lt;/sgds-sidebar-section&gt;
+          </p>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">Slot Features</div>
+          <ul style="color: #4b5563; line-height: 1.8">
+            <li><strong>Default slot</strong> - Nested sgds-sidebar-item / sgds-sidebar-group children (group only)</li>
+            <li><strong>icon slot</strong> - Icon displayed before the label (required at levels 1 &amp; 2)</li>
+            <li><strong>indicator slot</strong> - Badge, icon, or any element up to 24×24 px displayed after the label</li>
+          </ul>
+          <p style="color: #6b7280; margin-top: 12px; font-size: 13px">
+            The "Help &amp; Support" item demonstrates the <code>indicator</code> slot with a custom badge.
+          </p>
+        </div>
+
+        <div class="example-section">
+          <div class="example-title">Interactive Examples</div>
+          <p style="color: #6b7280; margin-bottom: 12px">Try these interactions:</p>
+          <ul style="color: #4b5563; line-height: 1.8">
+            <li>Use the toolbar toggle button to open/close the overlay sidebar</li>
+            <li>Click "Dashboard" group to open its drawer overlay with nested items</li>
+            <li>Inside the drawer, click "Summary" group to expand its inline submenu</li>
+            <li>Check the red badge on "Help &amp; Support" — demonstrates the <code>indicator</code> slot</li>
+            <li>Use the "Set Active" toolbar buttons to programmatically change the active item</li>
+          </ul>
         </div>
       </div>
     </div>
+    <script>
+      function handleToggle() {
+        const sidebar = document.querySelector("sgds-sidebar");
+        sidebar.toggleCollapsed();
+      }
+
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.toggle("sgds-night-theme");
+        document.getElementById("theme-toggler").name = isDark ? "sun" : "moon";
+      }
+
+      function setActive(itemName) {
+        const sidebar = document.querySelector("sgds-sidebar");
+        if (sidebar) {
+          sidebar.active = itemName;
+        }
+      }
+    </script>
   </body>
 </html>

@@ -8,6 +8,7 @@ Agent skills are specialized knowledge modules that teach AI assistants how to w
 
 Skills that help with building and maintaining the SGDS library:
 
+- **[component-authoring](component-authoring/)** - End-to-end workflow for composing or extending an SGDS component (scaffold, TDD, conventions, ADRs, playground, stories)
 - **[tailwind-mapping](tailwind-mapping/)** - Converting SGDS CSS variables to Tailwind v4 utilities
 - **[token-workflow](token-workflow/)** - Maintaining design token architecture across theme layers
 - **[storybook-stories](storybook-stories/)** - Writing Storybook stories following project patterns

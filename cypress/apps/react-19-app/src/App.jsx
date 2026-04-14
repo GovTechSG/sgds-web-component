@@ -36,14 +36,32 @@ import { Tooltip } from "./components/Tooltip";
 import { IconButton } from "./components/IconButton";
 import { SgdsTokensShowcase } from "./components/SgdsTokensShowcase";
 
+import { SgdsIcon, SgdsSidebar, SgdsSidebarItem } from "@govtechsg/sgds-web-component/react";
 
 function App() {
-
   return (
     <>
-    <SgdsTokensShowcase />
-    <Select />
-    <Masthead />
+      <SgdsSidebar active={"risk-controls"}>
+        <SgdsSidebarItem title="SSP Management" name="ssp-management">
+          <SgdsIcon name="file-earmark-text" slot="icon"></SgdsIcon>
+        </SgdsSidebarItem>
+        <SgdsSidebarItem title="Waviers" name="waviers">
+          <SgdsIcon name="window-stack" slot="icon"></SgdsIcon>
+        </SgdsSidebarItem>
+        <SgdsSidebarItem title="Decision Records" name="decision-records">
+          <SgdsIcon name="user-square" slot="icon"></SgdsIcon>
+        </SgdsSidebarItem>
+        <SgdsSidebarItem title="Risk Controls" name="risk-controls">
+          <SgdsIcon name="exclamation" slot="icon"></SgdsIcon>
+        </SgdsSidebarItem>
+        <SgdsSidebarItem title="Analytics" name="analytics">
+          <SgdsIcon name="share" slot="icon"></SgdsIcon>
+        </SgdsSidebarItem>
+      </SgdsSidebar>
+
+      <SgdsTokensShowcase />
+      <Select />
+      <Masthead />
       <Mainnav />
       <IconButton />
       <Accordion />
@@ -75,7 +93,7 @@ function App() {
       <Tooltip />
       <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
