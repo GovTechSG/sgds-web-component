@@ -14,7 +14,7 @@ The sidebar organizes navigation into sections and items. Icons improve visual h
 
 ```html
 <sgds-sidebar-item title="Dashboard" name="dashboard">
-  <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+  <sgds-icon name="house" slot="icon"></sgds-icon>
 </sgds-sidebar-item>
 ```
 
@@ -22,7 +22,7 @@ The sidebar organizes navigation into sections and items. Icons improve visual h
 
 ```html
 <sgds-sidebar-item title="Notifications" name="notifications">
-  <sgds-icon name="bell" slot="leading-icon"></sgds-icon>
+  <sgds-icon name="bell" slot="icon"></sgds-icon>
   <sgds-badge slot="indicator" variant="danger">5</sgds-badge>
 </sgds-sidebar-item>
 ```
@@ -49,7 +49,7 @@ When a group is collapsed to icon-only mode, the leading icon, label, and any tr
 
 ```html
 <sgds-sidebar-group title="Reports" name="reports">
-  <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+  <sgds-icon name="file-text" slot="icon"></sgds-icon>
   <sgds-badge slot="indicator">3</sgds-badge>
   <!-- children items -->
 </sgds-sidebar-group>
@@ -59,7 +59,7 @@ When a group is collapsed to icon-only mode, the leading icon, label, and any tr
 
 ```html
 <sgds-sidebar-group title="Resources" name="resources">
-  <sgds-icon name="book" slot="leading-icon"></sgds-icon>
+  <sgds-icon name="book" slot="icon"></sgds-icon>
   <sgds-icon name="box-arrow-up-right" slot="indicator"></sgds-icon>
   <!-- children items -->
 </sgds-sidebar-group>
@@ -150,12 +150,12 @@ Sidebar items can include anchor links that navigate to different pages or route
 
 ```html
 <sgds-sidebar-item title="Dashboard" name="dashboard">
-  <sgds-icon name="house" slot="leading-icon"></sgds-icon>
+  <sgds-icon name="house" slot="icon"></sgds-icon>
   <a href="/dashboard"></a>
 </sgds-sidebar-item>
 
 <sgds-sidebar-item title="Analytics" name="analytics">
-  <sgds-icon name="trend-up" slot="leading-icon"></sgds-icon>
+  <sgds-icon name="trend-up" slot="icon"></sgds-icon>
   <a href="/analytics"></a>
 </sgds-sidebar-item>
 ```
