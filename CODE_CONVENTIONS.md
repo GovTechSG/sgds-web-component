@@ -386,7 +386,7 @@ When a slot name requires more than one word, use kebab-case.
 
 ```html
 <sgds-input>
-  <sgds-icon slot="trailingIcon"></sgds-icon>
+  <sgds-icon slot="trailing-icon"></sgds-icon>
 </sgds-input>
 ```
 

@@ -56,8 +56,8 @@
 ## Edge Cases
 
 - **Missing `name` on items**: `active` tracking will not work — always provide a unique `name` on every item and group.
-- **Missing `leading-icon` at levels 1–2**: breaks icon-only collapse mode — always supply a `leadingIcon` slot at these levels even if visually redundant.
-- **Unknown icon name**: if an icon name cannot be verified, use `name="placeholder"` as a safe fallback — do not omit the `leadingIcon` slot or leave the name empty.
+- **Missing `leading-icon` at levels 1–2**: breaks icon-only collapse mode — always supply a `leading-icon` slot at these levels even if visually redundant.
+- **Unknown icon name**: if an icon name cannot be verified, use `name="placeholder"` as a safe fallback — do not omit the `leading-icon` slot or leave the name empty.
 - **CDN not loaded**: the component silently fails to register — ensure the RC CDN `<script>` is present and loads before the app bundle.
 - **Nesting beyond level 3**: not officially supported — limit to 3 levels to avoid rendering issues.
 - **`sgds-sidebar-section` `collapsed` without `collapsible`**: the section renders collapsed but has no user control to expand — only use `collapsed` together with `collapsible`.
@@ -265,22 +265,22 @@ Simple dashboard with grouped items — no nesting. Use sections to organize rel
 
   <sgds-sidebar-section title="Main Navigation" name="main">
     <sgds-sidebar-item name="dashboard" title="Dashboard">
-      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="house" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="analytics" title="Analytics">
-      <sgds-icon name="bar-chart" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="bar-chart" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="reports" title="Reports">
-      <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 
   <sgds-sidebar-section title="Settings" name="settings" collapsible>
     <sgds-sidebar-item name="account" title="Account">
-      <sgds-icon name="user-circle" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="user-circle" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="configuration" title="Configuration">
-      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="gear" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 </sgds-sidebar>
@@ -304,32 +304,32 @@ Complex management system with expandable groups and multiple nesting levels. Ro
   <sgds-sidebar-section title="Content" name="content">
     <!-- Root group: opens drawer overlay on click -->
     <sgds-sidebar-group name="reports" title="Reports">
-      <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
 
       <!-- Level 1 group: toggles inline submenu -->
       <sgds-sidebar-group name="analytics" title="Analytics">
-        <sgds-icon name="chart-line" slot="leadingIcon"></sgds-icon>
+        <sgds-icon name="chart-line" slot="leading-icon"></sgds-icon>
 
         <!-- Level 2 items: optional icons -->
         <sgds-sidebar-item name="monthly-view" title="Monthly View">
-          <sgds-icon name="calendar" slot="leadingIcon"></sgds-icon>
+          <sgds-icon name="calendar" slot="leading-icon"></sgds-icon>
         </sgds-sidebar-item>
         <sgds-sidebar-item name="yearly-view" title="Yearly View"></sgds-sidebar-item>
       </sgds-sidebar-group>
 
       <!-- Level 1 items -->
       <sgds-sidebar-item name="sales-report" title="Sales Report">
-        <sgds-icon name="trending-up" slot="leadingIcon"></sgds-icon>
+        <sgds-icon name="trending-up" slot="leading-icon"></sgds-icon>
       </sgds-sidebar-item>
     </sgds-sidebar-group>
 
     <sgds-sidebar-group name="content-mgmt" title="Content Management">
-      <sgds-icon name="pencil-square" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="pencil-square" slot="leading-icon"></sgds-icon>
       <sgds-sidebar-item name="pages" title="Pages">
-        <sgds-icon name="file" slot="leadingIcon"></sgds-icon>
+        <sgds-icon name="file" slot="leading-icon"></sgds-icon>
       </sgds-sidebar-item>
       <sgds-sidebar-item name="media" title="Media">
-        <sgds-icon name="image" slot="leadingIcon"></sgds-icon>
+        <sgds-icon name="image" slot="leading-icon"></sgds-icon>
       </sgds-sidebar-item>
     </sgds-sidebar-group>
   </sgds-sidebar-section>
@@ -367,10 +367,10 @@ Floating sidebar panel for responsive layouts (mobile-first). Ideal for dashboar
         <div slot="upper">My Application</div>
         <sgds-sidebar-section name="nav">
           <sgds-sidebar-item name="dashboard" title="Dashboard">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
           </sgds-sidebar-item>
           <sgds-sidebar-item name="settings" title="Settings">
-            <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="gear" slot="leading-icon"></sgds-icon>
           </sgds-sidebar-item>
         </sgds-sidebar-section>
       </sgds-sidebar>
@@ -415,13 +415,13 @@ Sync sidebar with external controls — update active state dynamically via butt
 <sgds-sidebar id="main-sidebar" active="dashboard">
   <sgds-sidebar-section name="main">
     <sgds-sidebar-item name="dashboard" title="Dashboard">
-      <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="house" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="analytics" title="Analytics">
-      <sgds-icon name="bar-chart" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="bar-chart" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="settings" title="Settings">
-      <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="gear" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 </sgds-sidebar>
@@ -453,34 +453,34 @@ Organize navigation into collapsible groups with visual indicators like notifica
   <!-- Non-collapsible main section -->
   <sgds-sidebar-section title="Folders" name="folders" collapsible="false">
     <sgds-sidebar-item name="inbox" title="Inbox">
-      <sgds-icon name="envelope" slot="leadingIcon"></sgds-icon>
-      <span slot="trailingIcon" style="background: #dc2626; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600;">5</span>
+      <sgds-icon name="envelope" slot="leading-icon"></sgds-icon>
+      <span slot="trailing-icon" style="background: #dc2626; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600;">5</span>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="sent" title="Sent">
-      <sgds-icon name="send" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="send" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="drafts" title="Drafts">
-      <sgds-icon name="pencil" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="pencil" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 
   <!-- Collapsible tags/labels section -->
   <sgds-sidebar-section title="Labels" name="labels" collapsible>
     <sgds-sidebar-item name="work" title="Work">
-      <sgds-icon name="tag" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="tag" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="personal" title="Personal">
-      <sgds-icon name="tag" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="tag" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="important" title="Important">
-      <sgds-icon name="star" slot="leadingIcon"></sgds-icon>
+      <sgds-icon name="star" slot="leading-icon"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 </sgds-sidebar>
 ```
 
 **Key features:**
-- Notification counts in `trailingIcon` slot
+- Notification counts in `trailing-icon` slot
 - `collapsible` sections toggle independently
 - Combines flat and grouped navigation styles
 - Perfect for email, task managers, or document apps
@@ -531,4 +531,4 @@ See **[Application Shell](../../sgds-pattern-block-templates/reference/applicati
 
 ---
 
-**For AI agents**: Always include the CDN `<script>` tag — `sgds-sidebar` is not bundled in the stable npm package. Use `name` on every `sgds-sidebar-item` and `sgds-sidebar-group` — without it, `active` tracking will not work. `sgds-sidebar-section` accepts `name` for identification but its `name` does NOT participate in `active` tracking — only items and groups do. Top-level `sgds-sidebar-item` elements placed directly inside `sgds-sidebar` (outside any section) are valid. The `upper`, `lower`, and `trailingIcon` slots accept any HTML — not just `sgds-icon`. Use `upper` for headers (brand names, logos), `lower` for footers (user menus, copyright info), and `trailingIcon` for badges and indicators. At level 0, `sgds-sidebar-group` opens a drawer overlay (items slide in from the side); at level 1+, it toggles an inline submenu. Use `collapsible` (boolean attribute) on `sgds-sidebar-section` to let users collapse the section. **`leadingIcon` is compulsory on every `sgds-sidebar-item` and `sgds-sidebar-group` at level 1 and level 2 — this rule applies to both component types equally. Never omit it at these levels, even for groups that only serve as structural containers.** **Icon fallback rule**: when you are not certain that a specific `sgds-icon` name exists, always use `name="placeholder"` — never guess an icon name or omit the slot. Only use a named icon if you have seen it confirmed in existing playground or Storybook examples.
+**For AI agents**: Always include the CDN `<script>` tag — `sgds-sidebar` is not bundled in the stable npm package. Use `name` on every `sgds-sidebar-item` and `sgds-sidebar-group` — without it, `active` tracking will not work. `sgds-sidebar-section` accepts `name` for identification but its `name` does NOT participate in `active` tracking — only items and groups do. Top-level `sgds-sidebar-item` elements placed directly inside `sgds-sidebar` (outside any section) are valid. The `upper`, `lower`, and `trailing-icon` slots accept any HTML — not just `sgds-icon`. Use `upper` for headers (brand names, logos), `lower` for footers (user menus, copyright info), and `trailing-icon` for badges and indicators. At level 0, `sgds-sidebar-group` opens a drawer overlay (items slide in from the side); at level 1+, it toggles an inline submenu. Use `collapsible` (boolean attribute) on `sgds-sidebar-section` to let users collapse the section. **`leading-icon` is compulsory on every `sgds-sidebar-item` and `sgds-sidebar-group` at level 1 and level 2 — this rule applies to both component types equally. Never omit it at these levels, even for groups that only serve as structural containers.** **Icon fallback rule**: when you are not certain that a specific `sgds-icon` name exists, always use `name="placeholder"` — never guess an icon name or omit the slot. Only use a named icon if you have seen it confirmed in existing playground or Storybook examples.

@@ -17,9 +17,9 @@ const BasicTemplate = args => html`
           <sgds-icon name="trend-up" slot="leading-icon"></sgds-icon>
         </sgds-sidebar-item>
         <sgds-sidebar-item title="Reports" name="reports">
-          <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+          <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
 
-          <sgds-badge slot="trailingIcon" variant="danger" outlined size="sm">5</sgds-badge>
+          <sgds-badge slot="trailing-icon" variant="danger" outlined size="sm">5</sgds-badge>
         </sgds-sidebar-item>
       </sgds-sidebar-section>
 

@@ -554,7 +554,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -567,7 +567,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -580,7 +580,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -594,7 +594,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -608,7 +608,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -622,7 +622,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -638,7 +638,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -653,7 +653,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -668,7 +668,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -682,7 +682,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -735,9 +735,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -771,7 +771,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent" collapsed>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1082,9 +1082,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -1105,7 +1105,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1120,7 +1120,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay" collapsed>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1185,9 +1185,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -1208,9 +1208,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -1231,7 +1231,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1255,7 +1255,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
