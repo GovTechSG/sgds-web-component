@@ -15,6 +15,7 @@
 }
 
 .toast {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -24,8 +25,7 @@
   background-color: var(--sgds-surface-default);
   border-radius: var(--sgds-border-radius-md);
   pointer-events: auto;
-  width: 320px;
-  min-width: var(--sgds-dimension-320);
+  min-width: var(--sgds-dimension-280);
   max-width: var(--sgds-dimension-480);
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 8px 16px 0px rgba(0, 0, 0, 0.14);
 }
