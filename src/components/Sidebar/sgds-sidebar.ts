@@ -96,6 +96,17 @@ export class SgdsSidebar extends SgdsElement {
    */
   @property({ type: String, reflect: true }) variant: SidebarVariant = "collapsible";
 
+  /**
+   * Accessible label for the sidebar navigation landmark.
+   * Passed to the `<nav>` element's `aria-label` attribute so screen readers can distinguish
+   * this sidebar from other navigation regions on the page (e.g. a top mainnav).
+   * Override when your page uses a more specific term (e.g. `"Dashboard navigation"`).
+   * @attribute aria-label
+   * @type {string}
+   * @default "Sidebar navigation"
+   */
+  @property({ type: String }) ariaLabel = "Sidebar navigation";
+
   /** @internal Tracks the currently active group and provides it via context to all child elements */
   @provide({ context: SidebarActiveGroup })
   @state()
@@ -142,9 +153,6 @@ export class SgdsSidebar extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute("role", "navigation");
-    this.setAttribute("aria-label", "Main navigation");
-
     this.updateComplete.then(() => {
       this._handleActive();
     });
@@ -412,12 +420,13 @@ export class SgdsSidebar extends SgdsElement {
 
   render() {
     return html`
-      <div
+      <nav
         class=${classMap({
           sidebar: true,
           "sidebar--collapsed": this._sidebarCollapsed,
           overlay: this._isOverlay
         })}
+        aria-label=${this.ariaLabel}
       >
         <div
           class=${classMap({
@@ -446,9 +455,9 @@ export class SgdsSidebar extends SgdsElement {
                 : nothing}
             </div>
 
-            <nav class="sidebar-content" aria-activedescendant=${this._sidebarActiveItem?.name || ""}>
+            <div class="sidebar-content">
               <slot></slot>
-            </nav>
+            </div>
 
             <slot name="lower"></slot>
           </div>
@@ -459,8 +468,6 @@ export class SgdsSidebar extends SgdsElement {
             "sidebar-nested-overlay": true,
             show: this._showDrawer
           })}
-          role="dialog"
-          aria-label=${this._sidebarActiveGroup?.title ? `Nested items for ${this._sidebarActiveGroup.title}` : ""}
         >
           ${this._isMobile
             ? html`<sgds-icon-button
@@ -475,7 +482,7 @@ export class SgdsSidebar extends SgdsElement {
             : nothing}
           ${this._drawerItems}
         </div>
-      </div>
+      </nav>
     `;
   }
 }

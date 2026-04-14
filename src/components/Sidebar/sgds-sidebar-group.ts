@@ -18,7 +18,7 @@ import { SidebarElement } from "./sidebar-element";
  * - Level 2+ (nested): Clicking toggles submenu visibility. Keyboard: ArrowRight toggles submenu.
  *
  * @slot default - Insert sgds-sidebar-group or sgds-sidebar-item elements as nested children
- * @slot trailing-icon - Icon to display after the label text. A chevron is auto-appended.
+ * @slot indicator - Display after the label text. A chevron is auto-appended. Typically used to show badges or other indicators for the group.
  *
  */
 export class SgdsSidebarGroup extends SidebarElement {
@@ -96,8 +96,7 @@ export class SgdsSidebarGroup extends SidebarElement {
           active: this._selected
         })}
         @click=${() => this._handleClick()}
-        aria-level=${this._childLevel}
-        .aria-expanded=${this._showMenu}
+        aria-expanded=${this._showMenu}
         tabindex=${this._childLevel > 2 && !this._showMenu ? -1 : 0}
       >
         <div class="sidebar-item-label-wrapper">
@@ -106,8 +105,8 @@ export class SgdsSidebarGroup extends SidebarElement {
             <span class="sidebar-item-label">${this.title}</span>
           </div>
 
-          <span class="sidebar-item-trailing-icon">
-            <slot name="trailing-icon"></slot>
+          <span class="sidebar-item-indicator">
+            <slot name="indicator"></slot>
             <sgds-icon aria-label=${this.title || this.name} name=${this._getIcon()} size="sm"></sgds-icon>
           </span>
         </div>

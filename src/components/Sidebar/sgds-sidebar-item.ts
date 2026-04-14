@@ -12,7 +12,7 @@ import { SidebarElement } from "./sidebar-element";
  *
  * @slot default - Text content for the item label
  * @slot leading-icon - Icon to display before the label text (required for level 1 and level 2)
- * @slot trailing-icon - Icon to display after the label text (optional)
+ * @slot indicator - Display after the label text (optional). Typically used for badges or status indicators.
  *
  * See SgdsSidebar for parent component usage and selection events.
  */
@@ -28,7 +28,6 @@ export class SgdsSidebarItem extends SidebarElement {
           active: this._selected
         })}
         @click=${() => this._handleClick()}
-        aria-level=${this._childLevel}
         aria-label=${this.title || this.name}
         name=${this.name}
         tabindex=${this._hidden ? -1 : 0}
@@ -49,8 +48,8 @@ export class SgdsSidebarItem extends SidebarElement {
 
           <!-- For level 1 and 2 -->
           ${this._childLevel <= 2
-            ? html`<span class="sidebar-item-trailing-icon">
-                <slot name="trailing-icon"></slot>
+            ? html`<span class="sidebar-item-indicator">
+                <slot name="indicator"></slot>
               </span>`
             : nothing}
         </div>

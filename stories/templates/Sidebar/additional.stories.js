@@ -11,7 +11,7 @@ const BasicTemplate = args => html`
       <sgds-sidebar-section title="Navigation" name="navigation" ?collapsible=${false}>
         <sgds-sidebar-item title="Dashboard" name="dashboard">
           <sgds-icon name="house" slot="leading-icon"></sgds-icon>
-          <sgds-icon name="placeholder" slot="trailing-icon"></sgds-icon>
+          <sgds-icon name="placeholder" slot="indicator"></sgds-icon>
         </sgds-sidebar-item>
         <sgds-sidebar-item title="Analytics" name="analytics">
           <sgds-icon name="trend-up" slot="leading-icon"></sgds-icon>
@@ -19,7 +19,7 @@ const BasicTemplate = args => html`
         <sgds-sidebar-item title="Reports" name="reports">
           <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
 
-          <sgds-badge slot="trailing-icon" variant="danger" outlined size="sm">5</sgds-badge>
+          <sgds-badge slot="indicator" variant="danger" outlined size="sm">5</sgds-badge>
         </sgds-sidebar-item>
       </sgds-sidebar-section>
 
@@ -82,7 +82,7 @@ const MultiLevelTemplate = args => html`
         <!-- Level 1: Item -->
         <sgds-sidebar-item title="Members" name="members">
           <sgds-icon name="users" slot="leading-icon"></sgds-icon>
-          <sgds-icon name="placeholder" slot="trailing-icon"></sgds-icon>
+          <sgds-icon name="placeholder" slot="indicator"></sgds-icon>
         </sgds-sidebar-item>
       </sgds-sidebar-section>
 
@@ -109,7 +109,7 @@ const OverlayTemplate = args => html`
 
     <div class="sgds:relative sgds:bg-white sgds:h-full">
       <sgds-sidebar variant="overlay" ?scrim=${args.scrim} ?collapsed=${args.collapsed} active=${args.active}>
-        <div slot="top" class="sgds:font-semibold">Navigation</div>
+        <div slot="upper" class="sgds:font-semibold">Navigation</div>
 
         <sgds-sidebar-section title="Main" name="main" ?collapsible=${false}>
           <sgds-sidebar-item title="Dashboard" name="dashboard">

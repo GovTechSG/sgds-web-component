@@ -62,8 +62,17 @@ export class SgdsSidebarSection extends SidebarElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute("role", "region");
+    this.setAttribute("role", "group");
     this._childLevel = -1;
+  }
+
+  updated() {
+    super.updated();
+    if (this.title) {
+      this.setAttribute("aria-label", this.title);
+    } else {
+      this.removeAttribute("aria-label");
+    }
   }
 
   /**
@@ -87,6 +96,7 @@ export class SgdsSidebarSection extends SidebarElement {
         ${this.title !== ""
           ? html`<div
               class="sidebar-section-label"
+              role="button"
               @click=${this._handleClick}
               aria-expanded=${!this.collapsed}
               aria-disabled=${!this.collapsible}

@@ -193,7 +193,7 @@ describe("sgds-sidebar", () => {
       `);
       const rootGroup = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
       const nestedGroup = rootGroup.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
-      const chevronIcon = nestedGroup.shadowRoot?.querySelector(".sidebar-item-trailing-icon sgds-icon");
+      const chevronIcon = nestedGroup.shadowRoot?.querySelector(".sidebar-item-indicator sgds-icon");
       expect(chevronIcon).to.exist;
     });
 
@@ -1449,7 +1449,7 @@ describe("sgds-sidebar", () => {
       `);
       const section = el.querySelector("sgds-sidebar-section");
 
-      expect(section).to.have.attribute("role", "region");
+      expect(section).to.have.attribute("role", "group");
     });
 
     it("renders multiple sections within sidebar", async () => {

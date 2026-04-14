@@ -17,6 +17,7 @@ const ARROW_UP = "ArrowUp";
 const ARROW_LEFT = "ArrowLeft";
 const ARROW_RIGHT = "ArrowRight";
 const ENTER = "Enter";
+const SPACE = " ";
 
 /**
  * @summary Base class for sidebar navigation components.
@@ -129,7 +130,6 @@ export class SidebarElement extends SgdsElement {
   connectedCallback() {
     super.connectedCallback();
     this._getChildLevel();
-    this.setAttribute("role", "navigation");
     this.addEventListener("keydown", this._handleKeyDown);
   }
 
@@ -181,6 +181,7 @@ export class SidebarElement extends SgdsElement {
     const target = event.target as HTMLElement;
 
     switch (event.key) {
+      case SPACE:
       case ENTER: {
         event.preventDefault();
         event.stopPropagation();

@@ -32,7 +32,7 @@ export const Template = args => html`
 
         <sgds-sidebar-group title="Reports" name="reports">
           <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
-          <sgds-icon name="placeholder" slot="trailing-icon"></sgds-icon>
+          <sgds-icon name="placeholder" slot="indicator"></sgds-icon>
 
           <sgds-sidebar-item title="Yearly" name="yearly">
             <sgds-icon name="house" slot="leading-icon"></sgds-icon>
@@ -44,7 +44,7 @@ export const Template = args => html`
 
         <sgds-sidebar-item title="Public Members" name="public-members">
           <sgds-icon name="user-circle" slot="leading-icon"></sgds-icon>
-          <sgds-icon name="summary" slot="trailing-icon"></sgds-icon>
+          <sgds-icon name="summary" slot="indicator"></sgds-icon>
         </sgds-sidebar-item>
       </sgds-sidebar-section>
 
@@ -60,7 +60,7 @@ export const Template = args => html`
         <sgds-sidebar-item title="Help & Support" name="help-support">
           <sgds-icon name="question-circle" slot="leading-icon"></sgds-icon>
           <span
-            slot="trailing-icon"
+            slot="indicator"
             class="sgds:bg-error-default sgds:text-fixed-light sgds:rounded-full sgds:w-5 sgds:h-5 sgds:flex sgds:items-center sgds:justify-center sgds:text-xs sgds:font-semibold"
             >3</span
           >
