@@ -52,6 +52,12 @@ export class SgdsSidebarSection extends SidebarElement {
    * @default false
    */
   @property({ type: Boolean, reflect: true }) collapsible = false;
+  /**
+   * When true, renders a divider below the section content to visually separate it from the next section.
+   * @attribute separator
+   * @type {boolean}
+   * @default false
+   */
   @property({ type: Boolean, reflect: true }) separator = false;
 
   connectedCallback() {

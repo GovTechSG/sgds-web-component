@@ -73,6 +73,7 @@ description: 'AI agent guide for contributing to and navigating the sgds-web-com
 Specialized knowledge for specific development tasks:
 
 ### Internal Skills (Maintainer tools in .github/skills/)
+- [component-authoring](.github/skills/component-authoring/SKILL.md) - End-to-end workflow for composing a new or extending an existing SGDS component: scaffolding, TDD, code conventions, ADRs, playground preview, and Storybook stories
 - [storybook-stories](.github/skills/storybook-stories/SKILL.md) - Storybook story writing patterns for templates folder
 - [agent-skills-writing](.github/skills/agent-skills-writing/SKILL.md) - Standards and patterns for authoring new agent skills
 - [token-workflow](.github/skills/token-workflow/SKILL.md) - Design token architecture and documentation workflows

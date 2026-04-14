@@ -128,7 +128,7 @@ export class SidebarElement extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.getChildLevel();
+    this._getChildLevel();
     this.setAttribute("role", "navigation");
     this.addEventListener("keydown", this._handleKeyDown);
   }
@@ -140,7 +140,7 @@ export class SidebarElement extends SgdsElement {
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
-    this.getChildLevel();
+    this._getChildLevel();
   }
 
   updated() {
@@ -155,7 +155,7 @@ export class SidebarElement extends SgdsElement {
    * @internal
    * @returns {void}
    */
-  _handleSlotChange() {
+  protected _handleSlotChange() {
     this._childElements = this._defaultNodes;
   }
 
@@ -274,7 +274,7 @@ export class SidebarElement extends SgdsElement {
    * @internal
    * @returns {void}
    */
-  private getChildLevel() {
+  private _getChildLevel() {
     let currentEle = this.parentElement;
     let level = 1;
 

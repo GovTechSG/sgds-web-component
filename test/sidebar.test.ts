@@ -394,7 +394,6 @@ describe("sgds-sidebar", () => {
       itemDiv.click();
       await elementUpdated(el);
 
-      expect(item._selected).to.be.true;
       expect(itemDiv).to.have.class("active");
     });
 
@@ -417,7 +416,10 @@ describe("sgds-sidebar", () => {
 
       expect(items.length).to.equal(2);
       items.forEach((item: Element) => {
-        expect((item as SgdsSidebarItem)._hidden).to.be.true; // Initially hidden until group opens drawer
+        expect((item as SgdsSidebarItem).shadowRoot?.querySelector(".sidebar-item")).to.have.attribute(
+          "tabindex",
+          "-1"
+        );
       });
     });
 
@@ -509,9 +511,9 @@ describe("sgds-sidebar", () => {
       await elementUpdated(el);
 
       // Parent groups should be expanded to show the active item
-      expect(rootGroup._selected).to.be.true;
-      expect(nestedGroup._selected).to.be.true;
-      expect(item._selected).to.be.true;
+      expect(rootGroup.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
+      expect(nestedGroup.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
+      expect(item.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
     });
 
     it("expands the submenu of a level-2 group when its nested item is programmatically activated", async () => {
@@ -750,7 +752,7 @@ describe("sgds-sidebar", () => {
       expect(message).not.to.have.class("sidebar-item--collapsed");
     });
 
-    it("provides _sidebarCollapsed state to child items when sidebar collapsed", async () => {
+    it("applies sidebar-item--collapsed class to child items when sidebar is collapsed", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar collapsed>
           <sgds-sidebar-section>
@@ -761,10 +763,10 @@ describe("sgds-sidebar", () => {
         </sgds-sidebar>
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
-      expect(item._sidebarCollapsed).to.be.true;
+      expect(item.shadowRoot?.querySelector(".sidebar-item")).to.have.class("sidebar-item--collapsed");
     });
 
-    it("does not provide _sidebarCollapsed state when variant is 'persistent'", async () => {
+    it("does not apply sidebar-item--collapsed class when variant is 'persistent'", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar variant="persistent" collapsed>
           <sgds-sidebar-section>
@@ -775,7 +777,7 @@ describe("sgds-sidebar", () => {
         </sgds-sidebar>
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
-      expect(item._sidebarCollapsed).to.be.false;
+      expect(item.shadowRoot?.querySelector(".sidebar-item")).not.to.have.class("sidebar-item--collapsed");
     });
   });
 
@@ -798,7 +800,7 @@ describe("sgds-sidebar", () => {
 
       const items = el.querySelectorAll("sgds-sidebar-item");
       const reportsItem = items[1] as SgdsSidebarItem;
-      expect(reportsItem._selected).to.be.true;
+      expect(reportsItem.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
     });
 
     it("updates active class when programmatically switching items", async () => {
@@ -849,7 +851,7 @@ describe("sgds-sidebar", () => {
       const item = nestedGroup?.querySelector('sgds-sidebar-item[name="sales"]') as SgdsSidebarItem;
 
       if (item) {
-        expect(item._selected).to.be.true;
+        expect(item.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
       }
     });
   });
@@ -943,14 +945,14 @@ describe("sgds-sidebar", () => {
       const l1aDiv = l1a.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       l1aDiv.click();
       await elementUpdated(el);
-      expect(l1a._selected).to.be.true;
+      expect(l1aDiv).to.have.class("active");
 
       // Click L1-B to switch active group
       const l1bDiv = l1b.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       l1bDiv.click();
       await elementUpdated(el);
-      expect(l1b._selected).to.be.true;
-      expect(l1a._selected).to.be.false;
+      expect(l1bDiv).to.have.class("active");
+      expect(l1aDiv).not.to.have.class("active");
     });
 
     it("deselects a drawer item when switching to another drawer item in the same group", async () => {
@@ -971,8 +973,9 @@ describe("sgds-sidebar", () => {
       const summaryGroup = el.querySelector('sgds-sidebar-group[name="summary"]') as SgdsSidebarGroup;
 
       // Open drawer by clicking Dashboard
-      const dashboardDiv = (el.querySelector('sgds-sidebar-group[name="dashboard"]') as SgdsSidebarGroup)
-        .shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      const dashboardDiv = (
+        el.querySelector('sgds-sidebar-group[name="dashboard"]') as SgdsSidebarGroup
+      ).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       dashboardDiv.click();
       await elementUpdated(el);
 
@@ -1031,7 +1034,7 @@ describe("sgds-sidebar", () => {
       await elementUpdated(el);
       // Should not throw and should deselect current item
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
-      expect(item._selected).to.be.false;
+      expect(item.shadowRoot?.querySelector(".sidebar-item")).not.to.have.class("active");
     });
 
     it("correctly handles rapidly consecutive item clicks", async () => {
@@ -1057,7 +1060,7 @@ describe("sgds-sidebar", () => {
       await elementUpdated(el);
 
       // Last click should win
-      expect((items[0] as SgdsSidebarItem)._selected).to.be.true;
+      expect(dashboardDiv).to.have.class("active");
     });
   });
 

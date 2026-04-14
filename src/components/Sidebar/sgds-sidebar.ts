@@ -85,6 +85,15 @@ export class SgdsSidebar extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true }) scrim = false;
 
+  /**
+   * Controls the sidebar's collapse behaviour.
+   * - `"collapsible"` (default): shows a toggle button that collapses/expands the sidebar.
+   * - `"persistent"`: sidebar is always visible and cannot be collapsed.
+   * - `"overlay"`: sidebar slides over the content as a drawer on smaller viewports.
+   * @attribute variant
+   * @type {"collapsible" | "persistent" | "overlay"}
+   * @default "collapsible"
+   */
   @property({ type: String, reflect: true }) variant: SidebarVariant = "collapsible";
 
   /** @internal Tracks the currently active group and provides it via context to all child elements */
