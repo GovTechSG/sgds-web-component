@@ -160,7 +160,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
     const radios = this._radios;
 
     radios.forEach(radio => {
-      radio._autofocus = this.autofocus;
+      radio.autofocus = this.autofocus;
       radio.checked = radio.value === this.value;
 
       return radio;
