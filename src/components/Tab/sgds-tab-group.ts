@@ -4,7 +4,6 @@ import SgdsElement from "../../base/sgds-element";
 import { SgdsTab } from "./sgds-tab";
 import { SgdsTabPanel } from "./sgds-tab-panel";
 import tabGroupStyle from "./tab-group.css";
-import { classMap } from "lit/directives/class-map.js";
 /**
  * @summary Tab Group organizes content into a container with the syncing of tab and their corresponding panels.
  * Each tab must be slotted into the nav slot and its `panel` must refer to a tab panel of the same name.
@@ -255,7 +254,7 @@ export class SgdsTabGroup extends SgdsElement {
   render() {
     return html`
       <div class="tab-group" @click=${this._handleClick} @keydown=${this._handleKeyDown}>
-        <div class="${classMap({ "tab-group__nav": true })}" role="tablist">
+        <div class="tab-group__nav" role="tablist">
           <slot name="nav" @slotchange=${this._handleSlotChange}></slot>
         </div>
 
