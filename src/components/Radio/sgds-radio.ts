@@ -47,7 +47,7 @@ export class SgdsRadio extends SgdsElement {
 
   @watch("checked")
   handleCheckedChange() {
-    if (this.checked && this._autofocus) {
+    if (this.checked && this.autofocus) {
       this.input?.focus();
     }
     this.setAttribute("aria-checked", this.checked ? "true" : "false");
