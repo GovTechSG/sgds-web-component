@@ -41,8 +41,6 @@ export class SgdsTabGroup extends SgdsElement {
   /** The density of tabs. Controls the density of all `sgds-tabs` in its slot. It also sets the density attribute of `sgds-tab` */
   @property({ type: String, reflect: true }) density: "compact" | "default" = "default";
 
-  @property({ type: Boolean, reflect: true }) noDivider = false;
-
   connectedCallback() {
     const whenAllDefined = Promise.all([
       customElements.whenDefined("sgds-tab"),
@@ -257,7 +255,7 @@ export class SgdsTabGroup extends SgdsElement {
   render() {
     return html`
       <div class="tab-group" @click=${this._handleClick} @keydown=${this._handleKeyDown}>
-        <div class="${classMap({ "tab-group__nav": true, noDivider: this.noDivider })}" role="tablist">
+        <div class="${classMap({ "tab-group__nav": true })}" role="tablist">
           <slot name="nav" @slotchange=${this._handleSlotChange}></slot>
         </div>
 

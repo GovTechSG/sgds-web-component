@@ -49,36 +49,6 @@ By default, tabs are presented horizontally. Set `orientation` to `vertical` for
   <Story of={TabStories.OrientationSolid} />
 </Canvas>
 
-## Divider
-
-When using vertical orientation, tabs can optionally display a divider line between the tab nav and the content area.
-The divider is controlled by `SgdsTabGroup` via the `hasDivider` property.
-By default, the divider is shown (`hasDivider="true"`). Set it to `false` to hide the divider line.
-
-### Vertical tabs without divider
-
-<Canvas of={TabStories.VerticalWithoutDivider}>
-  <Story of={TabStories.VerticalWithoutDivider} />
-</Canvas>
-
-### Vertical tabs with divider
-
-<Canvas of={TabStories.VerticalWithDivider}>
-  <Story of={TabStories.VerticalWithDivider} />
-</Canvas>
-
-### Solid variant - Vertical without divider
-
-<Canvas of={TabStories.SolidVerticalWithoutDivider}>
-  <Story of={TabStories.SolidVerticalWithoutDivider} />
-</Canvas>
-
-### Solid variant - Vertical with divider
-
-<Canvas of={TabStories.SolidVerticalWithDivider}>
-  <Story of={TabStories.SolidVerticalWithDivider} />
-</Canvas>
-
 ## Tab Events
 
 The `sgds-tab-group` component emits custom events when tabs are shown or hidden, allowing you to perform side effects and track which tab is currently active.
