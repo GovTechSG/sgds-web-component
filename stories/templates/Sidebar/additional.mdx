@@ -14,7 +14,7 @@ The sidebar organizes navigation into sections and items. Icons improve visual h
 
 ```html
 <sgds-sidebar-item title="Dashboard" name="dashboard">
-  <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+  <sgds-icon name="house" slot="leading-icon"></sgds-icon>
 </sgds-sidebar-item>
 ```
 
@@ -22,8 +22,8 @@ The sidebar organizes navigation into sections and items. Icons improve visual h
 
 ```html
 <sgds-sidebar-item title="Notifications" name="notifications">
-  <sgds-icon name="bell" slot="leadingIcon"></sgds-icon>
-  <sgds-badge slot="trailingIcon" variant="danger">5</sgds-badge>
+  <sgds-icon name="bell" slot="leading-icon"></sgds-icon>
+  <sgds-badge slot="indicator" variant="danger">5</sgds-badge>
 </sgds-sidebar-item>
 ```
 
@@ -41,7 +41,7 @@ The sidebar supports nested navigation structures with up to three levels. Use `
 
 ### Trailing icons on groups
 
-Groups automatically display a chevron icon that indicates expand/collapse state. You can optionally add a trailing icon before the chevron using `slot="trailingIcon"` for visual indicators like badges, notification counts, or status icons.
+Groups automatically display a chevron icon that indicates expand/collapse state. You can optionally add a trailing icon before the chevron using `slot="indicator"` for visual indicators like badges, notification counts, or status icons.
 
 When a group is collapsed to icon-only mode, the leading icon, label, and any trailing icon will be visible in the compact view. Groups always show the chevron indicator at the end.
 
@@ -49,8 +49,8 @@ When a group is collapsed to icon-only mode, the leading icon, label, and any tr
 
 ```html
 <sgds-sidebar-group title="Reports" name="reports">
-  <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
-  <sgds-badge slot="trailingIcon">3</sgds-badge>
+  <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
+  <sgds-badge slot="indicator">3</sgds-badge>
   <!-- children items -->
 </sgds-sidebar-group>
 ```
@@ -59,8 +59,8 @@ When a group is collapsed to icon-only mode, the leading icon, label, and any tr
 
 ```html
 <sgds-sidebar-group title="Resources" name="resources">
-  <sgds-icon name="book" slot="leadingIcon"></sgds-icon>
-  <sgds-icon name="box-arrow-up-right" slot="trailingIcon"></sgds-icon>
+  <sgds-icon name="book" slot="leading-icon"></sgds-icon>
+  <sgds-icon name="box-arrow-up-right" slot="indicator"></sgds-icon>
   <!-- children items -->
 </sgds-sidebar-group>
 ```
@@ -150,12 +150,12 @@ Sidebar items can include anchor links that navigate to different pages or route
 
 ```html
 <sgds-sidebar-item title="Dashboard" name="dashboard">
-  <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+  <sgds-icon name="house" slot="leading-icon"></sgds-icon>
   <a href="/dashboard"></a>
 </sgds-sidebar-item>
 
 <sgds-sidebar-item title="Analytics" name="analytics">
-  <sgds-icon name="trend-up" slot="leadingIcon"></sgds-icon>
+  <sgds-icon name="trend-up" slot="leading-icon"></sgds-icon>
   <a href="/analytics"></a>
 </sgds-sidebar-item>
 ```

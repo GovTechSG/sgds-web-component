@@ -39,7 +39,7 @@
   z-index: 1;
   height: 100%;
   padding: var(--sgds-padding-lg) 0;
-  background-color: var(--sgds-bg-default);
+  background-color: var(--sgds-surface-default);
   border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
   overflow-x: hidden;
   overflow-y: auto;
@@ -82,7 +82,7 @@
   z-index: 0;
   transition: all var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
   transition-property: opacity left;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .sidebar--overlay {

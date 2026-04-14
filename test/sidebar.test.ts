@@ -40,10 +40,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-group>
             <sgds-sidebar-group title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -57,10 +57,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -111,7 +111,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -127,13 +127,13 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
-      const icon = group.querySelector("sgds-icon[slot='leadingIcon']");
+      const icon = group.querySelector("sgds-icon[slot='leading-icon']");
       expect(icon).to.exist;
     });
 
@@ -142,7 +142,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -164,12 +164,12 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-group title="Overview" name="overview">
-                <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-group>
               <sgds-sidebar-group title="Analytics" name="analytics">
-                <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-group>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -184,16 +184,16 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
         </sgds-sidebar>
       `);
       const rootGroup = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
       const nestedGroup = rootGroup.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
-      const chevronIcon = nestedGroup.shadowRoot?.querySelector(".sidebar-item-trailingIcon sgds-icon");
+      const chevronIcon = nestedGroup.shadowRoot?.querySelector(".sidebar-item-indicator sgds-icon");
       expect(chevronIcon).to.exist;
     });
 
@@ -201,14 +201,14 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-item title="Details" name="details">
-                <sgds-icon name="info" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="info" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -233,11 +233,11 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -264,14 +264,14 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Sales" name="sales">
-                <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="users" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-item title="Users" name="users">
-                <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="users" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -287,14 +287,14 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Sales" name="sales">
-                <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="users" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-item title="Revenue" name="revenue">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -312,14 +312,14 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Level 1" name="l1">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             <sgds-sidebar-group title="Level 2" name="l2">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Level 3 Item" name="l3">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-item title="Level 3 Item 2" name="l3_2">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -347,7 +347,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -362,7 +362,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -383,7 +383,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -394,7 +394,6 @@ describe("sgds-sidebar", () => {
       itemDiv.click();
       await elementUpdated(el);
 
-      expect(item._selected).to.be.true;
       expect(itemDiv).to.have.class("active");
     });
 
@@ -402,12 +401,12 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             <sgds-sidebar-item title="Summary" name="summary">
-              <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="building" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Analytics" name="analytics">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-group>
         </sgds-sidebar>
@@ -417,7 +416,10 @@ describe("sgds-sidebar", () => {
 
       expect(items.length).to.equal(2);
       items.forEach((item: Element) => {
-        expect((item as SgdsSidebarItem)._hidden).to.be.true; // Initially hidden until group opens drawer
+        expect((item as SgdsSidebarItem).shadowRoot?.querySelector(".sidebar-item")).to.have.attribute(
+          "tabindex",
+          "-1"
+        );
       });
     });
 
@@ -425,12 +427,12 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-item title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
           </sgds-sidebar-item>
         </sgds-sidebar>
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
-      const icon = item.querySelector("sgds-icon[slot='leadingIcon']");
+      const icon = item.querySelector("sgds-icon[slot='leading-icon']");
       expect(icon).to.exist;
     });
   });
@@ -441,10 +443,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -465,10 +467,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-group>
             <sgds-sidebar-group title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -491,11 +493,11 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Sales" name="sales">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -509,9 +511,28 @@ describe("sgds-sidebar", () => {
       await elementUpdated(el);
 
       // Parent groups should be expanded to show the active item
-      expect(rootGroup._selected).to.be.true;
-      expect(nestedGroup._selected).to.be.true;
-      expect(item._selected).to.be.true;
+      expect(rootGroup.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
+      expect(nestedGroup.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
+      expect(item.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
+    });
+
+    it("expands the submenu of a level-2 group when its nested item is programmatically activated", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-sidebar-item title="Sales" name="sales"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const nestedGroup = el.querySelector('sgds-sidebar-group[name="overview"]') as SgdsSidebarGroup;
+
+      el.active = "sales";
+      await elementUpdated(el);
+
+      const submenu = nestedGroup.shadowRoot?.querySelector(".sidebar-submenu");
+      expect(submenu).to.have.class("show");
     });
   });
 
@@ -533,7 +554,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -546,7 +567,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -559,7 +580,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -573,7 +594,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -587,7 +608,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -601,7 +622,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -617,7 +638,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -632,7 +653,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -647,7 +668,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -661,7 +682,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -677,7 +698,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar collapsed>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -692,9 +713,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="collapsible">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -714,9 +735,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="persistent">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -731,32 +752,32 @@ describe("sgds-sidebar", () => {
       expect(message).not.to.have.class("sidebar-item--collapsed");
     });
 
-    it("provides _sidebarCollapsed state to child items when sidebar collapsed", async () => {
+    it("applies sidebar-item--collapsed class to child items when sidebar is collapsed", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar collapsed>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
-      expect(item._sidebarCollapsed).to.be.true;
+      expect(item.shadowRoot?.querySelector(".sidebar-item")).to.have.class("sidebar-item--collapsed");
     });
 
-    it("does not provide _sidebarCollapsed state when variant is 'persistent'", async () => {
+    it("does not apply sidebar-item--collapsed class when variant is 'persistent'", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar variant="persistent" collapsed>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
       `);
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
-      expect(item._sidebarCollapsed).to.be.false;
+      expect(item.shadowRoot?.querySelector(".sidebar-item")).not.to.have.class("sidebar-item--collapsed");
     });
   });
 
@@ -766,10 +787,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -779,7 +800,7 @@ describe("sgds-sidebar", () => {
 
       const items = el.querySelectorAll("sgds-sidebar-item");
       const reportsItem = items[1] as SgdsSidebarItem;
-      expect(reportsItem._selected).to.be.true;
+      expect(reportsItem.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
     });
 
     it("updates active class when programmatically switching items", async () => {
@@ -787,10 +808,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -812,11 +833,11 @@ describe("sgds-sidebar", () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar>
           <sgds-sidebar-group title="Dashboard" name="dashboard">
-            <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+            <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             <sgds-sidebar-group title="Overview" name="overview">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Sales" name="sales">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-group>
@@ -830,7 +851,7 @@ describe("sgds-sidebar", () => {
       const item = nestedGroup?.querySelector('sgds-sidebar-item[name="sales"]') as SgdsSidebarItem;
 
       if (item) {
-        expect(item._selected).to.be.true;
+        expect(item.shadowRoot?.querySelector(".sidebar-item")).to.have.class("active");
       }
     });
   });
@@ -841,19 +862,19 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
               <sgds-sidebar-group title="Analytics" name="analytics">
-                <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="users" slot="leading-icon"></sgds-icon>
                 <sgds-sidebar-item title="Revenue" name="revenue">
-                  <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                  <sgds-icon name="building" slot="leading-icon"></sgds-icon>
                 </sgds-sidebar-item>
               </sgds-sidebar-group>
             </sgds-sidebar-group>
             <sgds-sidebar-item title="Settings" name="settings">
-              <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="gear" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -869,15 +890,15 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
             <sgds-sidebar-group title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Monthly" name="monthly">
-                <sgds-icon name="calendar" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="calendar" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -902,15 +923,15 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-group title="L1-A" name="l1a">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="L2-Item1" name="l2item1">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
             <sgds-sidebar-group title="L1-B" name="l1b">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="L2-Item2" name="l2item2">
-                <sgds-icon name="users" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="users" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -924,14 +945,57 @@ describe("sgds-sidebar", () => {
       const l1aDiv = l1a.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       l1aDiv.click();
       await elementUpdated(el);
-      expect(l1a._selected).to.be.true;
+      expect(l1aDiv).to.have.class("active");
 
       // Click L1-B to switch active group
       const l1bDiv = l1b.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
       l1bDiv.click();
       await elementUpdated(el);
-      expect(l1b._selected).to.be.true;
-      expect(l1a._selected).to.be.false;
+      expect(l1bDiv).to.have.class("active");
+      expect(l1aDiv).not.to.have.class("active");
+    });
+
+    it("deselects a drawer item when switching to another drawer item in the same group", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-sidebar-item title="Meetings" name="meetings"></sgds-sidebar-item>
+            <sgds-sidebar-group title="Summary" name="summary">
+              <sgds-sidebar-item title="Refunds" name="refunds"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+
+      // Grab references before the drawer moves them out of the light DOM
+      const meetings = el.querySelector('sgds-sidebar-item[name="meetings"]') as SgdsSidebarItem;
+      const refunds = el.querySelector('sgds-sidebar-item[name="refunds"]') as SgdsSidebarItem;
+      const summaryGroup = el.querySelector('sgds-sidebar-group[name="summary"]') as SgdsSidebarGroup;
+
+      // Open drawer by clicking Dashboard
+      const dashboardDiv = (
+        el.querySelector('sgds-sidebar-group[name="dashboard"]') as SgdsSidebarGroup
+      ).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      dashboardDiv.click();
+      await elementUpdated(el);
+
+      // Activate Meetings (a direct drawer item)
+      const meetingsDiv = meetings.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      meetingsDiv.click();
+      await elementUpdated(el);
+      expect(meetingsDiv).to.have.class("active");
+
+      // Now activate Refunds (a nested drawer item inside Summary)
+      const summaryDiv = summaryGroup.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      summaryDiv.click();
+      await elementUpdated(el);
+
+      const refundsDiv = refunds.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      refundsDiv.click();
+      await elementUpdated(el);
+
+      expect(refundsDiv).to.have.class("active");
+      expect(meetingsDiv).not.to.have.class("active");
     });
   });
 
@@ -961,7 +1025,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -970,7 +1034,7 @@ describe("sgds-sidebar", () => {
       await elementUpdated(el);
       // Should not throw and should deselect current item
       const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
-      expect(item._selected).to.be.false;
+      expect(item.shadowRoot?.querySelector(".sidebar-item")).not.to.have.class("active");
     });
 
     it("correctly handles rapidly consecutive item clicks", async () => {
@@ -978,10 +1042,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-item title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -996,7 +1060,7 @@ describe("sgds-sidebar", () => {
       await elementUpdated(el);
 
       // Last click should win
-      expect((items[0] as SgdsSidebarItem)._selected).to.be.true;
+      expect(dashboardDiv).to.have.class("active");
     });
   });
 
@@ -1018,9 +1082,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -1041,7 +1105,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1056,7 +1120,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay" collapsed>
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1067,15 +1131,63 @@ describe("sgds-sidebar", () => {
     });
   });
 
+  describe("Drawer Content Population", () => {
+    it("populates drawer overlay with direct children of clicked root group", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-sidebar-item title="Summary" name="summary"></sgds-sidebar-item>
+            <sgds-sidebar-item title="Analytics" name="analytics"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      groupDiv.click();
+      await elementUpdated(el);
+
+      const drawer = el.shadowRoot?.querySelector(".sidebar-nested-overlay");
+      const drawerItems = drawer?.querySelectorAll("sgds-sidebar-item");
+      expect(drawerItems?.length).to.equal(2);
+    });
+
+    it("updates drawer content when switching between root groups", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-sidebar-item title="Summary" name="summary"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+          <sgds-sidebar-group title="Reports" name="reports">
+            <sgds-sidebar-item title="Monthly" name="monthly"></sgds-sidebar-item>
+            <sgds-sidebar-item title="Weekly" name="weekly"></sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      const groups = el.querySelectorAll("sgds-sidebar-group");
+      const dashboardDiv = (groups[0] as SgdsSidebarGroup).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      const reportsDiv = (groups[1] as SgdsSidebarGroup).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      dashboardDiv.click();
+      await elementUpdated(el);
+      const drawer = el.shadowRoot?.querySelector(".sidebar-nested-overlay");
+      expect(drawer?.querySelectorAll("sgds-sidebar-item").length).to.equal(1);
+
+      reportsDiv.click();
+      await elementUpdated(el);
+      expect(drawer?.querySelectorAll("sgds-sidebar-item").length).to.equal(2);
+    });
+  });
+
   describe("Overlay Mode Drawer Behavior", () => {
     it("displays drawer overlay scrim when level 1 group is clicked in overlay variant", async () => {
       const el = await fixture<SgdsSidebar>(html`
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -1096,9 +1208,9 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar scrim variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-group title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-sidebar-item title="Summary" name="summary">
-                <sgds-icon name="building" slot="leadingIcon"></sgds-icon>
+                <sgds-icon name="building" slot="leading-icon"></sgds-icon>
               </sgds-sidebar-item>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
@@ -1119,7 +1231,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1143,7 +1255,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar variant="overlay">
           <sgds-sidebar-section>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1265,10 +1377,10 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main">
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
             <sgds-sidebar-group title="Reports" name="reports">
-              <sgds-icon name="file-text" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="file-text" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-group>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1286,7 +1398,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main" collapsible collapsed>
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1302,7 +1414,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar>
           <sgds-sidebar-section title="Main" name="main">
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>
@@ -1337,7 +1449,7 @@ describe("sgds-sidebar", () => {
       `);
       const section = el.querySelector("sgds-sidebar-section");
 
-      expect(section).to.have.attribute("role", "region");
+      expect(section).to.have.attribute("role", "group");
     });
 
     it("renders multiple sections within sidebar", async () => {
@@ -1376,7 +1488,7 @@ describe("sgds-sidebar", () => {
         <sgds-sidebar collapsed>
           <sgds-sidebar-section title="Main" name="main">
             <sgds-sidebar-item title="Dashboard" name="dashboard">
-              <sgds-icon name="house" slot="leadingIcon"></sgds-icon>
+              <sgds-icon name="house" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
         </sgds-sidebar>

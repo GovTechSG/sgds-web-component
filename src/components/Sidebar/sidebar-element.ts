@@ -17,6 +17,7 @@ const ARROW_UP = "ArrowUp";
 const ARROW_LEFT = "ArrowLeft";
 const ARROW_RIGHT = "ArrowRight";
 const ENTER = "Enter";
+const SPACE = " ";
 
 /**
  * @summary Base class for sidebar navigation components.
@@ -128,8 +129,7 @@ export class SidebarElement extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.getChildLevel();
-    this.setAttribute("role", "navigation");
+    this._getChildLevel();
     this.addEventListener("keydown", this._handleKeyDown);
   }
 
@@ -140,7 +140,7 @@ export class SidebarElement extends SgdsElement {
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
-    this.getChildLevel();
+    this._getChildLevel();
   }
 
   updated() {
@@ -155,7 +155,7 @@ export class SidebarElement extends SgdsElement {
    * @internal
    * @returns {void}
    */
-  _handleSlotChange() {
+  protected _handleSlotChange() {
     this._childElements = this._defaultNodes;
   }
 
@@ -181,6 +181,7 @@ export class SidebarElement extends SgdsElement {
     const target = event.target as HTMLElement;
 
     switch (event.key) {
+      case SPACE:
       case ENTER: {
         event.preventDefault();
         event.stopPropagation();
@@ -274,7 +275,7 @@ export class SidebarElement extends SgdsElement {
    * @internal
    * @returns {void}
    */
-  private getChildLevel() {
+  private _getChildLevel() {
     let currentEle = this.parentElement;
     let level = 1;
 
