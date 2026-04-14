@@ -55,6 +55,18 @@
           <sgds-button type="submit">Submit</sgds-button>
         </form>
       </div>
+
+      <div>
+        <h2>With Autofocus</h2>
+        <sgds-radio-group label="Notification Preference" name="notification-pref" value="email" autofocus>
+          <sgds-radio value="email">Email</sgds-radio>
+          <sgds-radio value="sms">SMS</sgds-radio>
+          <sgds-radio value="push">Push Notification</sgds-radio>
+        </sgds-radio-group>
+        <p style="margin-top: 12px; font-size: 0.875rem; color: #666;">
+          When checking a radio, it automatically receives focus for better keyboard navigation.
+        </p>
+      </div>
     </div>
   </body>
 </html>

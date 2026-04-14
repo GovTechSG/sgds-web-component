@@ -32,6 +32,8 @@ export class SgdsRadio extends SgdsElement {
   /** Marks the radio input as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  @property({ type: Boolean, reflect: false }) _autofocus = false;
+
   @query("input")
   private input: HTMLInputElement;
 
@@ -45,7 +47,7 @@ export class SgdsRadio extends SgdsElement {
 
   @watch("checked")
   handleCheckedChange() {
-    if (this.checked) {
+    if (this.checked && this._autofocus) {
       this.input?.focus();
     }
     this.setAttribute("aria-checked", this.checked ? "true" : "false");
