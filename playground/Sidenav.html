@@ -1,87 +1,121 @@
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
-    <script type="module" src="../src/index.ts"></script>
-    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
-    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
-    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
-    <style>
-      .container {
-        max-width: 800px;
-        margin: 36px auto;
-        display: flex;
-        flex-direction: column;
-        gap: 36px;
-      }
-      .sidenav-demo {
-        height: 350px;
-        border: 1px solid #ccc;
-        overflow: auto;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div>
-        <h2>Basic</h2>
-        <div class="sidenav-demo">
-          <sgds-sidenav>
-            <sgds-sidenav-item>
-              <span slot="title">Dashboard</span>
-              <sgds-sidenav-link href="#">Overview</sgds-sidenav-link>
-              <sgds-sidenav-link href="#">Analytics</sgds-sidenav-link>
-            </sgds-sidenav-item>
-            <sgds-sidenav-item>
-              <span slot="title">Settings</span>
-              <sgds-sidenav-link href="#">General</sgds-sidenav-link>
-              <sgds-sidenav-link href="#">Security</sgds-sidenav-link>
-            </sgds-sidenav-item>
-          </sgds-sidenav>
-        </div>
-      </div>
 
-      <div>
-        <h2>Nested Items</h2>
-        <div class="sidenav-demo">
-          <sgds-sidenav>
-            <sgds-sidenav-item>
-              <span slot="title">Reports</span>
-              <sgds-sidenav-link href="#">Monthly</sgds-sidenav-link>
-              <sgds-sidenav-link href="#">Yearly</sgds-sidenav-link>
-              <sgds-sidenav-item>
-                <span slot="title">Custom Reports</span>
-                <sgds-sidenav-link href="#">Report A</sgds-sidenav-link>
-                <sgds-sidenav-link href="#">Report B</sgds-sidenav-link>
-              </sgds-sidenav-item>
-            </sgds-sidenav-item>
-          </sgds-sidenav>
-        </div>
-      </div>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+  <script type="module" src="../src/index.ts"></script>
+  <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 36px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
 
-      <div>
-        <h2>Sticky</h2>
-        <div class="sidenav-demo">
-          <sgds-sidenav sticky>
-            <sgds-sidenav-item>
-              <span slot="title">Navigation</span>
-              <sgds-sidenav-link href="#">Home</sgds-sidenav-link>
-              <sgds-sidenav-link href="#">About</sgds-sidenav-link>
-              <sgds-sidenav-link href="#">Contact</sgds-sidenav-link>
-            </sgds-sidenav-item>
-          </sgds-sidenav>
-        </div>
-      </div>
+    .sidenav-demo {
+      height: 350px;
+      border: 1px solid #ccc;
+      overflow: auto;
+    }
+  </style>
+</head>
 
-      <div>
-        <h2>Link Type</h2>
-        <div class="sidenav-demo">
-          <sgds-sidenav>
-            <sgds-sidenav-link href="#">Standalone Link 1</sgds-sidenav-link>
-            <sgds-sidenav-link href="#">Standalone Link 2</sgds-sidenav-link>
-            <sgds-sidenav-link href="#" disabled>Disabled Link</sgds-sidenav-link>
-          </sgds-sidenav>
-        </div>
+<body>
+  <div class="container">
+    <div>
+      <h2>Basic</h2>
+      <div class="sidenav-demo">
+        <sgds-sidenav>
+          <sgds-sidenav-item>
+            <span slot="title"> SidenavItem L1</span>
+            <sgds-sidenav-link>
+              <a href="#"> SidenavLink 1 L2</a>
+            </sgds-sidenav-link>
+            <sgds-sidenav-link>
+              <a href="#">SidenavLink 2 L2</a>
+            </sgds-sidenav-link>
+            <sgds-sidenav-item>
+              <span slot="title"> SidenavItem L2 </span>
+              <sgds-sidenav-link>
+                <a href="#"> SidenavLink 1 L3</a>
+              </sgds-sidenav-link>
+              <sgds-sidenav-link active>
+                <a href="#">SidenavLink 2 L3</a>
+              </sgds-sidenav-link>
+            </sgds-sidenav-item>
+          </sgds-sidenav-item>
+        </sgds-sidenav>
       </div>
     </div>
-  </body>
+
+    <div>
+      <h2>With Icons</h2>
+      <sgds-sidenav>
+        <sgds-sidenav-item>
+          <span slot="title"> SidenavItem L1</span>
+          <sgds-icon slot="icon" name="placeholder"></sgds-icon>
+          <sgds-sidenav-link>
+            <a href="#"> SidenavLink 1 L2</a>
+          </sgds-sidenav-link>
+          <sgds-sidenav-link>
+            <a href="#">SidenavLink 2 L2</a>
+          </sgds-sidenav-link>
+        </sgds-sidenav-item>
+        <sgds-sidenav-item>
+          <a href="#"> <sgds-icon name="placeholder"></sgds-icon> SidenavItem L1 (link)</a>
+        </sgds-sidenav-item>
+      </sgds-sidenav>
+    </div>
+    <div>
+      <h2>Nested Items</h2>
+      <div class="sidenav-demo">
+        <sgds-sidenav>
+          <sgds-sidenav-item>
+            <span slot="title">Reports</span>
+            <sgds-sidenav-link><a href="#"> <sgds-icon name="placeholder"></sgds-icon> SidenavItem L1 (link)</a></sgds-sidenav-link>
+            <sgds-sidenav-link><a href="#"> <sgds-icon name="placeholder"></sgds-icon> SidenavItem L1 (link)</a></sgds-sidenav-link>
+            <sgds-sidenav-item>
+              <span slot="title">Custom Reports</span>
+              <sgds-sidenav-link><a href="#"> <sgds-icon name="placeholder"></sgds-icon> SidenavItem L1 (link)</a> A</sgds-sidenav-link>
+              <sgds-sidenav-link><a href="#"> <sgds-icon name="placeholder"></sgds-icon> SidenavItem L1 (link)</a> B</sgds-sidenav-link>
+            </sgds-sidenav-item>
+          </sgds-sidenav-item>
+        </sgds-sidenav>
+      </div>
+    </div>
+
+    <div>
+      <h2>Sticky</h2>
+      <div class="sidenav-demo">
+          <sgds-sidenav sticky>
+          <sgds-sidenav-item>
+            <span slot="title">Reports</span>
+            <sgds-sidenav-link><a href="#"> <sgds-icon name="placeholder"></sgds-icon> SidenavItem L1 (link)</a></sgds-sidenav-link>
+            <sgds-sidenav-link><a href="#"> <sgds-icon name="placeholder"></sgds-icon> SidenavItem L1 (link)</a></sgds-sidenav-link>
+            <sgds-sidenav-item>
+              <span slot="title">Custom Reports</span>
+              <sgds-sidenav-link><a href="#"> <sgds-icon name="placeholder"></sgds-icon> SidenavItem L1 (link)</a> A</sgds-sidenav-link>
+              <sgds-sidenav-link><a href="#"> <sgds-icon name="placeholder"></sgds-icon> SidenavItem L1 (link)</a> B</sgds-sidenav-link>
+            </sgds-sidenav-item>
+          </sgds-sidenav-item>
+        </sgds-sidenav>
+      </div>
+    </div>
+
+    <div>
+      <h2>Link Type</h2>
+      <div class="sidenav-demo">
+        <sgds-sidenav>
+          <sgds-sidenav-link href="#">Standalone Link 1</sgds-sidenav-link>
+          <sgds-sidenav-link href="#">Standalone Link 2</sgds-sidenav-link>
+          <sgds-sidenav-link href="#" disabled>Disabled Link</sgds-sidenav-link>
+        </sgds-sidenav>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
