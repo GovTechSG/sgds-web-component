@@ -14,7 +14,7 @@
 }
 
 :host([density="compact"]) .content {
-  padding: var(--sgds-padding-xs) var(--sgds-padding-sm) var(--sgds-padding-sm);
+  padding: var(--sgds-padding-xs) var(--sgds-padding-md) var(--sgds-padding-md);
 }
 :host([density="spacious"]) .content {
   padding: var(--sgds-padding-xs) var(--sgds-padding-xl) var(--sgds-padding-xl);
