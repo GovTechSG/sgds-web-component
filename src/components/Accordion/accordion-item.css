@@ -37,6 +37,7 @@
   line-height: var(--sgds-line-height-xs);
   font-size: var(--sgds-font-size-subtitle-md);
   overflow-anchor: none;
+  font-weight: var(--sgds-font-weight-semibold);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -44,10 +45,6 @@
   .accordion-btn:after {
     transition: none;
   }
-}
-
-.accordion-btn:not(.collapsed) {
-  font-weight: var(--sgds-font-weight-semibold);
 }
 
 .accordion-btn:not(.disabled):hover,
