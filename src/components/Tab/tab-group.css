@@ -34,7 +34,3 @@
 :host([variant="underlined"][orientation="vertical"]) .tab-group__nav {
   border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
-
-.noDivider {
-  border: none;
-}
