@@ -91,6 +91,18 @@
       </div>
 
       <div class="toggle-section">
+        <span class="toggle-label">Theme:</span>
+        <sgds-icon-button
+          id="theme-toggler"
+          size="xs"
+          variant="ghost"
+          name="moon"
+          onclick="toggleTheme()"
+          aria-label="Toggle dark mode"
+        ></sgds-icon-button>
+      </div>
+
+      <div class="toggle-section">
         <span class="toggle-label">Set Active:</span>
         <sgds-button data-sidebar-toggler="true" size="sm" variant="ghost" onclick="setActive('dashboard')"
           >Dashboard</sgds-button
@@ -111,11 +123,10 @@
     </div>
     <div class="container">
       <div class="sidebar-wrapper">
-        <sgds-sidebar active="meetings" scrim variant="overlay">
+                <sgds-sidebar active="meetings" scrim variant="overlay">
           <div slot="upper">brand-name</div>
-          <!-- Main Navigation Section -->
 
-          <sgds-sidebar-section title="Main" name="main" ?collapsible="false">
+          <sgds-sidebar-section title="Main" name="main">
             <sgds-sidebar-group title="Dashboard" name="dashboard">
               <sgds-icon name="house" slot="leading-icon"></sgds-icon>
               <sgds-icon name="placeholder" slot="indicator"></sgds-icon>
@@ -127,10 +138,6 @@
                   <a href="#"></a>
                 </sgds-sidebar-item>
                 <sgds-sidebar-item title="Refunds" name="refunds"> </sgds-sidebar-item>
-                <sgds-sidebar-group title="Revenue Breakdown" name="revenue-breakdown">
-                  <sgds-sidebar-item title="Q1 Revenue" name="q1-revenue"></sgds-sidebar-item>
-                  <sgds-sidebar-item title="Q2 Revenue" name="q2-revenue"></sgds-sidebar-item>
-                </sgds-sidebar-group>
               </sgds-sidebar-group>
 
               <sgds-sidebar-item title="Meetings" name="meetings">
@@ -159,7 +166,6 @@
             </sgds-sidebar-item>
           </sgds-sidebar-section>
 
-          <!-- Organization Section (Collapsible) -->
           <sgds-sidebar-section title="Organization" name="organization" separator>
             <sgds-sidebar-item
               title="Team Management Team Management Team Management Team Management"
@@ -173,15 +179,13 @@
             </sgds-sidebar-item>
           </sgds-sidebar-section>
 
-          <!-- Configuration Section (Collapsible) -->
           <sgds-sidebar-section title="Configuration" name="configuration" collapsible>
             <sgds-sidebar-item title="Settings" name="settings">
               <sgds-icon name="gear" slot="leading-icon"></sgds-icon>
             </sgds-sidebar-item>
           </sgds-sidebar-section>
 
-          <!-- Support Section -->
-          <sgds-sidebar-section name="main" ?collapsible="false">
+          <sgds-sidebar-section name="support">
             <sgds-sidebar-item title="Help & Support" name="help-support">
               <sgds-icon name="question-circle" slot="leading-icon"></sgds-icon>
               <span
@@ -221,8 +225,8 @@
             <ul style="color: #6b7280; margin: 8px 0 0 0; padding-left: 20px">
               <li>Organized sections to group related options</li>
               <li>Collapsible sections to save space</li>
-              <li>Up to 3 levels of nested options</li>
-              <li>Floating overlays for nested content</li>
+              <li>Up to 3 levels of nested navigation</li>
+              <li>Drawer overlay for root-level groups</li>
             </ul>
           </div>
         </div>
@@ -239,13 +243,12 @@
         <div class="example-section">
           <div class="example-title">Features</div>
           <ul style="color: #4b5563; line-height: 1.8">
-            <li>Click the menu icon in the sidebar header to collapse/expand the entire sidebar</li>
+            <li>Click the toggle button in the toolbar to open/close the overlay sidebar</li>
             <li>Click section headers to expand/collapse sections (if collapsible)</li>
-            <li>Hover over or focus on options with nested items to show floating overlay</li>
-            <li>Organize options with sidebar sections for better structure</li>
-            <li>Supports up to 3 levels of nesting within options</li>
-            <li>Selected state for active option (Dashboard)</li>
-            <li>Disabled state example (Premium Features)</li>
+            <li>Click root-level groups to open their drawer overlay</li>
+            <li>Organize items with sidebar sections for better structure</li>
+            <li>Supports up to 3 levels of nesting</li>
+            <li>Selected state for active item (Meetings)</li>
             <li>Custom icons using sgds-icon component</li>
             <li>Smooth animations and transitions</li>
           </ul>
@@ -280,13 +283,12 @@
         <div class="example-section">
           <div class="example-title">Slot Features</div>
           <ul style="color: #4b5563; line-height: 1.8">
-            <li><strong>Default slot</strong> - Label text for the option</li>
-            <li><strong>before slot</strong> - Icon or content displayed before the label</li>
-            <li><strong>after slot</strong> - Icon, badge, or indicator displayed after the label</li>
-            <li><strong>nested slot</strong> - Nested options that appear in overlay on hover</li>
+            <li><strong>Default slot</strong> - Nested sgds-sidebar-item / sgds-sidebar-group children (group only)</li>
+            <li><strong>leading-icon slot</strong> - Icon displayed before the label (required at levels 1 &amp; 2)</li>
+            <li><strong>indicator slot</strong> - Badge, icon, or any element up to 24×24 px displayed after the label</li>
           </ul>
           <p style="color: #6b7280; margin-top: 12px; font-size: 13px">
-            The "Help & Support" option demonstrates the <code>after</code> slot with a badge indicator.
+            The "Help &amp; Support" item demonstrates the <code>indicator</code> slot with a custom badge.
           </p>
         </div>
 
@@ -294,12 +296,11 @@
           <div class="example-title">Interactive Examples</div>
           <p style="color: #6b7280; margin-bottom: 12px">Try these interactions:</p>
           <ul style="color: #4b5563; line-height: 1.8">
-            <li>Hover over "Team Management" to see options with 3 levels of nesting</li>
-            <li>Hover over "Settings" to see nested Privacy & Security with 3rd level items</li>
-            <li>Hover over "Projects" to see multiple branches with nested items</li>
-            <li>Check the red badge on "Help & Support" - demonstrates the <code>after</code> slot</li>
-            <li>Click the collapse button to minimize the sidebar width</li>
-            <li>Try "Premium Features" - it's disabled and cannot be interacted with</li>
+            <li>Use the toolbar toggle button to open/close the overlay sidebar</li>
+            <li>Click "Dashboard" group to open its drawer overlay with nested items</li>
+            <li>Inside the drawer, click "Summary" group to expand its inline submenu</li>
+            <li>Check the red badge on "Help &amp; Support" — demonstrates the <code>indicator</code> slot</li>
+            <li>Use the "Set Active" toolbar buttons to programmatically change the active item</li>
           </ul>
         </div>
       </div>
@@ -308,6 +309,11 @@
       function handleToggle() {
         const sidebar = document.querySelector("sgds-sidebar");
         sidebar.toggleCollapsed();
+      }
+
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.toggle("sgds-night-theme");
+        document.getElementById("theme-toggler").name = isDark ? "sun" : "moon";
       }
 
       function setActive(itemName) {
