@@ -3,7 +3,7 @@
 }
 
 :host([density="compact"]) .accordion-btn {
-  padding: var(--sgds-padding-sm) var(--sgds-padding-sm);
+  padding: var(--sgds-padding-md);
   font-size: var(--sgds-font-size-subtitle-sm);
   line-height: var(--sgds-line-height-2-xs);
 }
