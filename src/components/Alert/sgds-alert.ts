@@ -13,7 +13,8 @@ export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral"
  * @summary Alerts provide short, timely, and relevant information for your users. It can be a simple text message or customised HTML content with paragraphs, headings and links.
  *
  * @slot default - The alert's main content.
- * @slot icon - An icon to show in the alert. Pass in SVG elements.
+ * @slot icon - An icon to show in the alert. Pass in sgds-icon size="md" elements.
+ * @slot action - An action button or link to show in the alert.
  *
  * @event sgds-show - Emitted when the alert appears.
  * @event sgds-hide - Emitted after the alert closes.
@@ -39,7 +40,7 @@ export class SgdsAlert extends SgdsElement {
   @property({ type: Boolean, reflect: true }) outlined = false;
 
   /** The title of the alert. Only text is allowed */
-  @property({ type: String, reflect: true }) title: string;
+  @property({ type: String, reflect: true }) title = "";
 
   /** Closes the alert  */
   public close() {
@@ -66,8 +67,11 @@ export class SgdsAlert extends SgdsElement {
           >
             <slot name="icon" class=${classMap({ "alert-icon__outlined": this.outlined })}></slot>
             <div class="alert-content">
+              <div class="alert-content__upper">
               ${this.title ? html`<div class="alert-title">${this.title}</div>` : nothing}
               <slot class="alert-content__description"></slot>
+              </div>
+              <slot class="alert-content__action" name="action"></slot>
             </div>
             ${this.dismissible
               ? html`<sgds-close-button
