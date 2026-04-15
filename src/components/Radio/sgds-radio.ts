@@ -32,6 +32,7 @@ export class SgdsRadio extends SgdsElement {
   /** Marks the radio input as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** Automatically focuses the radio input when it becomes checked. */
   @property({ type: Boolean, reflect: false }) autofocus = false;
 
   @query("input")

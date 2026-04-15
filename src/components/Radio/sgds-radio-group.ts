@@ -41,6 +41,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
   /** Makes the input as a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Automatically focuses the selected radio input in the group when it becomes checked. */
   @property({ type: Boolean, reflect: true }) autofocus = false;
 
   @watch("value", { waitUntilFirstUpdate: true })
