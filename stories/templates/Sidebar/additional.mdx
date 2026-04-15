@@ -1,61 +1,167 @@
-## Level 1 only
+## Basic structure
 
-SidebarItem is used as a standalone top-level navigation item. Level 1 items are shown directly in the sidebar and do not have nested children. They can be terminal leaf nodes in your navigation structure.
+The sidebar organizes navigation into sections and items. Icons improve visual hierarchy and accessibility.
 
-**Requirement:** Level 1 items must have a leading icon in the `leadingIcon` slot. Trailing icon is optional.
-
-<Canvas of={SidebarStories.Level1Only}>
-  <Story of={SidebarStories.Level1Only} />
+<Canvas of={SidebarStories.Default}>
+  <Story of={SidebarStories.Default} />
 </Canvas>
 
-## With nested items (Level 2)
+### Leading and trailing icons
 
-SidebarGroup is used for parent navigation items that contain nested children. Level 2 groups display their items in a drawer overlay when the parent group is clicked, allowing for expandable menu hierarchies.
+**Leading icons** appear before the item/group label and are essential for visual navigation. **Trailing icons** appear after the label and are typically used for badges, indicators, or external link symbols.
 
-**Requirement:** Level 1 and 2 items/groups must have leading icons in the `leadingIcon` slot. Trailing icon is optional for all levels.
+**Leading icon example:**
 
-<Canvas of={SidebarStories.Level1Level2}>
-  <Story of={SidebarStories.Level1Level2} />
+```html
+<sgds-sidebar-item title="Dashboard" name="dashboard">
+  <sgds-icon name="house" slot="icon"></sgds-icon>
+</sgds-sidebar-item>
+```
+
+**Trailing icon example (badge or indicator):**
+
+```html
+<sgds-sidebar-item title="Notifications" name="notifications">
+  <sgds-icon name="bell" slot="icon"></sgds-icon>
+  <sgds-badge slot="indicator" variant="danger">5</sgds-badge>
+</sgds-sidebar-item>
+```
+
+**Icon requirements by level:**
+
+- **Level 1 items/groups:** Leading icon is **required**. Trailing icon is optional.
+- **Level 2 items/groups:** Leading icon is **required**. Trailing icon is optional.
+- **Level 3 items:** Leading icon is **optional**. Trailing icon is optional.
+
+> When collapsed to icon-only mode, only leading icons are visible. Always use meaningful icons at Level 1 and Level 2 to ensure the sidebar remains usable when collapsed.
+
+## Multi-level navigation
+
+The sidebar supports nested navigation structures with up to three levels. Use `sgds-sidebar-group` for parent items with children, and `sgds-sidebar-item` for leaf navigation items. Control the active state and collapse behavior with the `active`, `collapsed`, and `overlay` properties.
+
+### Trailing icons on groups
+
+Groups automatically display a chevron icon that indicates expand/collapse state. You can optionally add a trailing icon before the chevron using `slot="indicator"` for visual indicators like badges, notification counts, or status icons.
+
+When a group is collapsed to icon-only mode, the leading icon, label, and any trailing icon will be visible in the compact view. Groups always show the chevron indicator at the end.
+
+**Example: Group with trailing badge indicator**
+
+```html
+<sgds-sidebar-group title="Reports" name="reports">
+  <sgds-icon name="file-text" slot="icon"></sgds-icon>
+  <sgds-badge slot="indicator">3</sgds-badge>
+  <!-- children items -->
+</sgds-sidebar-group>
+```
+
+**Example: Group with external link icon as trailing element**
+
+```html
+<sgds-sidebar-group title="Resources" name="resources">
+  <sgds-icon name="book" slot="icon"></sgds-icon>
+  <sgds-icon name="box-arrow-up-right" slot="indicator"></sgds-icon>
+  <!-- children items -->
+</sgds-sidebar-group>
+```
+
+## Sidebar variants
+
+The sidebar supports three distinct layout variants controlled by the `variant` property:
+
+### Collapsible (default)
+
+Set `variant="collapsible"` to enable the internal collapse toggle button in the sidebar header. Users can click the button to switch between full and icon-only modes.
+
+```html
+<sgds-sidebar variant="collapsible" active="dashboard">
+  <!-- content -->
+</sgds-sidebar>
+```
+
+### Overlay
+
+Set `variant="overlay"` to display the sidebar as a floating panel above page content. **This variant does not render an internal toggle button.** You must provide an external toggle button with `data-sidebar-toggler="true"` attribute to control the sidebar's collapsed state. This is ideal for responsive mobile layouts and maximizing content space.
+
+```html
+<sgds-icon-button
+  data-sidebar-toggler="true"
+  size="xs"
+  variant="ghost"
+  name="sidebar-expand"
+  onclick="handleToggle()"
+></sgds-icon-button>
+
+<sgds-sidebar variant="overlay" scrim active="dashboard">
+  <div slot="upper">My App</div>
+  <!-- content -->
+  <div slot="lower">Footer Content</div>
+</sgds-sidebar>
+```
+
+### Persistent
+
+Set `variant="persistent"` to display a sidebar that cannot be collapsed. This is useful for layouts where navigation should always remain visible.
+
+---
+
+## Toggle control
+
+For `variant="overlay"`, add the `data-sidebar-toggler="true"` attribute to any button element to enable collapse/expand control:
+
+```html
+<sgds-icon-button
+  data-sidebar-toggler="true"
+  size="xs"
+  variant="ghost"
+  name="sidebar-expand"
+  onclick="handleToggle()"
+></sgds-icon-button>
+```
+
+The toggle handler function queries the sidebar and calls its `toggleCollapsed()` method:
+
+```javascript
+function handleToggle() {
+  const sidebar = document.querySelector("sgds-sidebar");
+  if (sidebar) {
+    sidebar.toggleCollapsed();
+  }
+}
+```
+
+This approach allows you to place the toggle button anywhere in your layout while maintaining control over the sidebar's collapsed state.
+
+<Canvas of={SidebarStories.Overlay}>
+  <Story of={SidebarStories.Overlay} />
 </Canvas>
 
-## Double nested structure (Level 3)
+## Dynamic active state
 
-SidebarGroup supports up to two levels of nesting, creating three-level navigation hierarchies. Nested groups show their items in a drawer when Level 1 groups open, making complex navigation structures manageable.
+Use buttons to dynamically control which sidebar item is active. This pattern is useful for displaying different sections of your application based on user interaction. Click any button to update the active navigation item in the sidebar.
 
-**Requirement:** For Level 3, leading icon is optional. Trailing icon is optional for all levels.
-
-<Canvas of={SidebarStories.Level1Level2Level3}>
-  <Story of={SidebarStories.Level1Level2Level3} />
+<Canvas of={SidebarStories.Dynamic}>
+  <Story of={SidebarStories.Dynamic} />
 </Canvas>
 
-## Collapsed state
+## Linked items
 
-The sidebar can be collapsed by setting the `collapsed` property to `true`. When collapsed, only icons are visible for Level 1 options. Nested options are still accessible via the drawer overlay.
+Sidebar items can include anchor links that navigate to different pages or routes. Add an `<a>` element inside each `sgds-sidebar-item` with the desired `href` attribute. Clicking the sidebar item will follow the link and navigate to the specified destination.
 
-<Canvas of={SidebarStories.CollapsedState}>
-  <Story of={SidebarStories.CollapsedState} />
-</Canvas>
+```html
+<sgds-sidebar-item title="Dashboard" name="dashboard">
+  <sgds-icon name="house" slot="icon"></sgds-icon>
+  <a href="/dashboard"></a>
+</sgds-sidebar-item>
 
-## With sections
+<sgds-sidebar-item title="Analytics" name="analytics">
+  <sgds-icon name="trend-up" slot="icon"></sgds-icon>
+  <a href="/analytics"></a>
+</sgds-sidebar-item>
+```
 
-SidebarSection is used to organize sidebar items into logical groups. Sections are collapsible containers that can hold both items and groups, enabling a well-organized navigation structure with clear separation between different parts of your application.
+The invisible anchor tag allows the sidebar item to function as a navigation link while maintaining the visual styling of the sidebar component.
 
-<Canvas of={SidebarStories.WithSections}>
-  <Story of={SidebarStories.WithSections} />
-</Canvas>
-
-## Active state
-
-The sidebar tracks the currently active item via the `active` property. When an item or group is selected, its `name` property is set as the active value. This is useful for highlighting the current page or section in your application, providing clear user feedback about their location.
-
-<Canvas of={SidebarStories.ActiveState}>
-  <Story of={SidebarStories.ActiveState} />
-</Canvas>
-
-## Link navigation
-
-SidebarItem and SidebarGroup can wrap anchor elements to enable programmatic navigation. When an item with an anchor link is clicked, the link is automatically followed, allowing the sidebar to work seamlessly with your application's routing system.
-
-<Canvas of={SidebarStories.LinkNavigation}>
-  <Story of={SidebarStories.LinkNavigation} />
+<Canvas of={SidebarStories.LinkedItems}>
+  <Story of={SidebarStories.LinkedItems} />
 </Canvas>

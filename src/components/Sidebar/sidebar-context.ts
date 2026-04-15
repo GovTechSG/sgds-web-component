@@ -45,3 +45,12 @@ export const SidebarDrawerItems = createContext<SidebarElement[]>("sidebar-drawe
  * @type {boolean}
  */
 export const SidebarDrawerOpen = createContext<boolean>("sidebar-drawer-open");
+
+/**
+ * Context indicating whether the sidebar is in overlay mode (floating panel) or inline (static).
+ * When true, sidebar is displayed as a floating panel over page content with close button.
+ * When false, sidebar is displayed inline as part of the page layout with collapse button.
+ * Consumed by child elements to adjust their rendering and behavior based on layout mode.
+ * @type {boolean}
+ */
+export const SidebarDrawerOverlay = createContext<boolean>("sidebar-drawer-overlay");

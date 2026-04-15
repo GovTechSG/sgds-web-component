@@ -43,19 +43,19 @@ function App() {
     <>
       <SgdsSidebar active={"risk-controls"}>
         <SgdsSidebarItem title="SSP Management" name="ssp-management">
-          <SgdsIcon name="file-earmark-text" slot="leadingIcon"></SgdsIcon>
+          <SgdsIcon name="file-earmark-text" slot="icon"></SgdsIcon>
         </SgdsSidebarItem>
         <SgdsSidebarItem title="Waviers" name="waviers">
-          <SgdsIcon name="window-stack" slot="leadingIcon"></SgdsIcon>
+          <SgdsIcon name="window-stack" slot="icon"></SgdsIcon>
         </SgdsSidebarItem>
         <SgdsSidebarItem title="Decision Records" name="decision-records">
-          <SgdsIcon name="user-square" slot="leadingIcon"></SgdsIcon>
+          <SgdsIcon name="user-square" slot="icon"></SgdsIcon>
         </SgdsSidebarItem>
         <SgdsSidebarItem title="Risk Controls" name="risk-controls">
-          <SgdsIcon name="exclamation" slot="leadingIcon"></SgdsIcon>
+          <SgdsIcon name="exclamation" slot="icon"></SgdsIcon>
         </SgdsSidebarItem>
         <SgdsSidebarItem title="Analytics" name="analytics">
-          <SgdsIcon name="share" slot="leadingIcon"></SgdsIcon>
+          <SgdsIcon name="share" slot="icon"></SgdsIcon>
         </SgdsSidebarItem>
       </SgdsSidebar>
 

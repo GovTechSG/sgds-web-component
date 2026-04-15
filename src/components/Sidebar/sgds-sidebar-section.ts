@@ -52,22 +52,36 @@ export class SgdsSidebarSection extends SidebarElement {
    * @default false
    */
   @property({ type: Boolean, reflect: true }) collapsible = false;
-  @property({ type: Boolean, reflect: true }) seperator = false;
+  /**
+   * When true, renders a divider below the section content to visually separate it from the next section.
+   * @attribute separator
+   * @type {boolean}
+   * @default false
+   */
+  @property({ type: Boolean, reflect: true }) separator = false;
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute("role", "region");
-    this._childLevel = null;
+    this.setAttribute("role", "group");
+    this._childLevel = -1;
+  }
+
+  updated() {
+    super.updated();
+    if (this.title) {
+      this.setAttribute("aria-label", this.title);
+    } else {
+      this.removeAttribute("aria-label");
+    }
   }
 
   /**
-   * Handles click events on the section label.
-   * Toggles the collapsed state to show/hide section content.
-   * Only called if the section is collapsible (collapsible prop is true).
-   * @private
+   * Toggles the collapsed state when section is collapsible.
+   * Called when user clicks the section header. No-op if section is not collapsible.
+   * @internal
    * @returns {void}
    */
-  override _handleClick() {
+  protected override _handleClick(): void {
     if (this.collapsible) this.collapsed = !this.collapsed;
   }
 
@@ -76,12 +90,13 @@ export class SgdsSidebarSection extends SidebarElement {
       <div
         class=${classMap({
           "sidebar-section": true,
-          "sidebar-section--collapsed": this._sidebarCollapsed
+          "sidebar-section--collapsed": !this._isOverlay && this._sidebarCollapsed
         })}
       >
         ${this.title !== ""
           ? html`<div
               class="sidebar-section-label"
+              role="button"
               @click=${this._handleClick}
               aria-expanded=${!this.collapsed}
               aria-disabled=${!this.collapsible}
@@ -98,7 +113,7 @@ export class SgdsSidebarSection extends SidebarElement {
           class=${classMap({
             "sidebar-section-content": true,
             "sidebar-section-content--collapsed": this.collapsed && this.collapsible,
-            "sidebar-section-seperator": this.seperator
+            "sidebar-section-separator": this.separator
           })}
         >
           <div>
@@ -106,7 +121,7 @@ export class SgdsSidebarSection extends SidebarElement {
           </div>
         </div>
 
-        ${this.seperator ? html`<sgds-divider></sgds-divider>` : nothing}
+        ${this.separator ? html`<sgds-divider></sgds-divider>` : nothing}
       </div>
     `;
   }

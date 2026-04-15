@@ -8,7 +8,8 @@ import {
   SidebarActiveItem,
   SidebarCollapsed,
   SidebarDrawerItems,
-  SidebarDrawerOpen
+  SidebarDrawerOpen,
+  SidebarDrawerOverlay
 } from "./sidebar-context";
 
 const ARROW_DOWN = "ArrowDown";
@@ -16,6 +17,7 @@ const ARROW_UP = "ArrowUp";
 const ARROW_LEFT = "ArrowLeft";
 const ARROW_RIGHT = "ArrowRight";
 const ENTER = "Enter";
+const SPACE = " ";
 
 /**
  * @summary Base class for sidebar navigation components.
@@ -89,23 +91,30 @@ export class SidebarElement extends SgdsElement {
   @state()
   _showDrawer = false;
 
+  /** @internal Tracks whether sidebar is overlay or not */
+  @consume({ context: SidebarDrawerOverlay, subscribe: true })
+  @state()
+  _isOverlay = false;
+
   /** @internal */
   @state() _childLevel = 1;
 
   /**
-   * Indicates whether this element is currently selected/active.
+   * Indicates whether this element is currently selected/active in the sidebar.
    * @internal
    */
   @state() _selected = false;
 
   /**
-   * Indicates whether this element should be hidden based on nesting context.
+   * Indicates whether this element should be hidden based on parent drawer visibility.
+   * Used to hide level 2 items until their parent's drawer is opened.
    * @internal
    */
   @state() _hidden = false;
 
   /**
-   * List of child elements assigned to this component.
+   * List of direct child sidebar elements (items or groups).
+   * Updated when slot content changes.
    * @internal
    */
   @state()
@@ -120,8 +129,7 @@ export class SidebarElement extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.getChildLevel();
-    this.setAttribute("role", "navigation");
+    this._getChildLevel();
     this.addEventListener("keydown", this._handleKeyDown);
   }
 
@@ -132,7 +140,7 @@ export class SidebarElement extends SgdsElement {
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
-    this.getChildLevel();
+    this._getChildLevel();
   }
 
   updated() {
@@ -142,19 +150,19 @@ export class SidebarElement extends SgdsElement {
   }
 
   /**
-   * Handles slot change events and updates child elements list.
+   * Updates child elements from slot content when DOM changes.
+   * Called automatically when slot content changes.
    * @internal
    * @returns {void}
    */
-  _handleSlotChange() {
+  protected _handleSlotChange() {
     this._childElements = this._defaultNodes;
   }
 
   /**
-   * Handles click/activation events on the sidebar element.
-   * Emits internal click event for parent sidebar to handle selection.
+   * Handles click/activation of this element, emitting internal event for parent sidebar.
+   * Parent sidebar processes this event to manage selection and drawer state.
    * @internal
-   * @param {SidebarElement} [element] - Optional element parameter (for keyboard compatibility)
    * @returns {void}
    */
   protected _handleClick() {
@@ -162,16 +170,18 @@ export class SidebarElement extends SgdsElement {
   }
 
   /**
-   * Handles keyboard navigation events for sidebar elements.
-   * Supports Arrow Up/Down for navigation and Arrow Left/Right for drawer management.
+   * Manages keyboard navigation for the sidebar hierarchy.
+   * Handles arrow keys for navigation, Enter to activate, and manages drawer/submenu expansion.
+   * Prevents default browser behavior and stops event propagation.
    * @internal
-   * @param {KeyboardEvent} event - The keyboard event object
+   * @param {KeyboardEvent} event - The keyboard event
    * @returns {void}
    */
   private _handleKeyDown(event: KeyboardEvent) {
     const target = event.target as HTMLElement;
 
     switch (event.key) {
+      case SPACE:
       case ENTER: {
         event.preventDefault();
         event.stopPropagation();
@@ -186,7 +196,7 @@ export class SidebarElement extends SgdsElement {
 
         const isChildHidden = child?._hidden;
         const childElement = !isChildHidden ? child : null;
-        const nextElement = childElement || target.nextElementSibling || target.parentElement.nextElementSibling;
+        const nextElement = childElement || target.nextElementSibling || target.parentElement?.nextElementSibling;
 
         if (nextElement?.shadowRoot) {
           const focusTarget = nextElement.shadowRoot.querySelector("[tabindex]") as HTMLElement | null;
@@ -259,22 +269,22 @@ export class SidebarElement extends SgdsElement {
   }
 
   /**
-   * Calculates the nesting level by counting parent sgds-sidebar-group ancestors.
-   * Level 1 = top-level element, Level 2+ = nested within another group.
-   * Updates the _childLevel state property.
+   * Calculates the nesting depth by counting sgds-sidebar-group ancestors.
+   * Level 1 = root items, Level 2+ = nested within groups.
+   * Accounts for items positioned in drawer overlays.
    * @internal
    * @returns {void}
    */
-  private getChildLevel() {
+  private _getChildLevel() {
     let currentEle = this.parentElement;
     let level = 1;
 
-    while (currentEle.tagName.toLowerCase() === "sgds-sidebar-group") {
+    while (currentEle?.tagName.toLowerCase() === "sgds-sidebar-group") {
       level += 1;
       currentEle = currentEle.parentElement;
     }
 
-    const isInDrawer = currentEle.classList.contains("sidebar-nested-overlay");
+    const isInDrawer = currentEle?.classList.contains("sidebar-nested-overlay");
     this._childLevel = isInDrawer ? level + 1 : level;
   }
 }

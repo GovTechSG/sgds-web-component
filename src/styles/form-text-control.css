@@ -21,9 +21,9 @@
   padding: 0px var(--sgds-form-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   height: var(--sgds-dimension-48);
-  min-width: var(--sgds-dimension-256);
   width: -webkit-fill-available;
   width: -moz-available;
+  overflow: hidden;
 }
 
 .form-control {
@@ -35,6 +35,7 @@
   outline: none;
   padding: 0;
   flex-grow: 1;
+  min-width: 0;
   color: var(--sgds-form-color-default);
   font-size: var(--sgds-font-size-16);
   line-height: var(--sgds-line-height-24);
