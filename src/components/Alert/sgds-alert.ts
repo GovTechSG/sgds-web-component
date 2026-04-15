@@ -68,8 +68,8 @@ export class SgdsAlert extends SgdsElement {
             <slot name="icon" class=${classMap({ "alert-icon__outlined": this.outlined })}></slot>
             <div class="alert-content">
               <div class="alert-content__upper">
-              ${this.title ? html`<div class="alert-title">${this.title}</div>` : nothing}
-              <slot class="alert-content__description"></slot>
+                ${this.title ? html`<div class="alert-title">${this.title}</div>` : nothing}
+                <slot class="alert-content__description"></slot>
               </div>
               <slot class="alert-content__action" name="action"></slot>
             </div>
