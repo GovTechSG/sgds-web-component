@@ -230,7 +230,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
 
   render() {
     return html`
-      <div class="form-control-container">
+      <div class="form-control-container m-width-256">
         ${this._renderLabel()}
         <div class="input-group">
           <sgds-icon-button

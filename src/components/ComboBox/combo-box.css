@@ -29,7 +29,6 @@
 
 .combobox .form-control-group {
   min-height: var(--sgds-dimension-48);
-  min-width: var(--sgds-dimension-256);
   height: unset;
 }
 

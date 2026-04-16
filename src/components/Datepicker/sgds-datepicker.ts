@@ -421,7 +421,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   render() {
     return html`
-      <div class="datepicker-container">
+      <div class="datepicker-container m-width-160">
         <sgds-datepicker-input
           .value=${live(this.value)}
           ?required=${this.required}

@@ -118,7 +118,7 @@ describe("sgds-combo-box ", () => {
     assert.shadowDom.equal(
       el,
       `
-      <div class="combobox form-control-container">
+      <div class="combobox form-control-container m-width-256">
         <div class="form-control-group">
           <div class="combobox-input-container">
             <input
