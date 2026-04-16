@@ -35,6 +35,10 @@ sgds-icon-button{
   --btn-border-radius: 0 var(--sgds-form-border-radius-md) var(--sgds-form-border-radius-md) 0;
 }
 
+.m-width-160 {
+  min-width: var(--sgds-dimension-160);
+}
+
 .datepicker-container {
   display: flex;
 }
