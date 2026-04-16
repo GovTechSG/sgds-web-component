@@ -525,7 +525,12 @@ export class SgdsComboBox extends SelectElement {
       (this.isFocused || this.menuIsOpen) && this.value !== "" && this.clearable && !this.readonly;
     return html`
       <div
-        class=${classMap({ "form-control-container": true, disabled: this.disabled, combobox: true })}
+        class=${classMap({
+          "form-control-container": true,
+          "m-width-256": true,
+          disabled: this.disabled,
+          combobox: true
+        })}
         @keydown=${this._handleMultiSelectKeyDown}
       >
         ${this._renderLabel()}

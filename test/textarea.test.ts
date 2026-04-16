@@ -10,7 +10,7 @@ describe("sgds-textarea", () => {
     assert.shadowDom.equal(
       el,
       `
-      <div class="form-control-container">
+      <div class="form-control-container m-width-256">
         <label class="form-label"></label>
         <textarea class=" form-control-group textarea-resize-vertical "  rows="4" placeholder="Placeholder" maxlength="10" aria-invalid="false" spellcheck="false" required=""></textarea>
         <div class="textarea-info-container">
