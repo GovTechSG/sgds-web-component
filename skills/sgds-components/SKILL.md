@@ -277,18 +277,13 @@ node_modules/@govtechsg/sgds-web-component/components/Accordion/sgds-accordion.d
 
 Replace `Accordion/sgds-accordion` with the relevant component folder and file name. The `.js` file contains the full implementation; the `.d.ts` file lists all properties, types, events, slots, and JSDoc descriptions.
 
-**Only if `node_modules` is absent (CDN users)** — browse the source for the exact version in use on the npm package page:
+**If `node_modules` is absent** — extract the package into a temp directory (does not touch the project's `package.json` or `node_modules`):
 
-```
-https://www.npmjs.com/package/@govtechsg/sgds-web-component/v/{version}?activeTab=code
-```
-
-Example for `v3.4.0-rc.4`:
-```
-https://www.npmjs.com/package/@govtechsg/sgds-web-component/v/3.4.0-rc.4?activeTab=code
+```bash
+cd $(mktemp -d) && npm pack @govtechsg/sgds-web-component --quiet && tar -xzf *.tgz
 ```
 
-Navigate into `components/{ComponentName}/` to find the same `.js` and `.d.ts` files. Ask the user for their version if unknown — it is visible in the CDN `<script>` or `<link>` tag URL they are using.
+Then read from `./package/components/{ComponentName}/sgds-{component-name}.js`. To target a specific version, append `@{version}` to the package name (e.g. `npm pack @govtechsg/sgds-web-component@3.16.0`).
 
 ---
 
@@ -320,7 +315,7 @@ When a user reports unexpected component behaviour (wrong event, property not re
 | **Navigation** | Breadcrumb | [→ reference/breadcrumb.md](reference/breadcrumb.md) |
 | **Navigation** | Pagination | [→ reference/pagination.md](reference/pagination.md) |
 | **Navigation** | Sidenav | [→ reference/sidenav.md](reference/sidenav.md) |
-| **Navigation** | Sidebar (RC) | [→ reference/sidebar.md](reference/sidebar.md) |
+| **Navigation** | Sidebar | [→ reference/sidebar.md](reference/sidebar.md) |
 | **Navigation** | Subnav | [→ reference/subnav.md](reference/subnav.md) |
 | **Navigation** | Tab | [→ reference/tab.md](reference/tab.md) |
 | **Navigation** | Table of Contents | [→ reference/table-of-contents.md](reference/table-of-contents.md) |
