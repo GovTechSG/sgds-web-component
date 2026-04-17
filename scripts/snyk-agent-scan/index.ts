@@ -1,8 +1,8 @@
 import * as fs from "fs";
 import { glob } from "fs/promises";
-import { getChangedFiles } from "./lib/git.js";
-import { printChangedFiles, printScanHeader, printSummary } from "./lib/reporter.js";
-import { scanFile, type ScanResult } from "./lib/scanner.js";
+import { getChangedFiles } from "./utils/git.js";
+import { printChangedFiles, printScanHeader, printSummary } from "./utils/reporter.js";
+import { scanFile, type ScanResult } from "./utils/scanner.js";
 
 const SCAN_PATHS = ["skills/", ".github/skills/"];
 
