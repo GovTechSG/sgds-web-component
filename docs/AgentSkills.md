@@ -22,13 +22,13 @@ For Govtechies, use <a href="https://software-engineering.gto.tech.gov.sg/handbo
 gt apd install sgds
 ```
 
-<!-- For others, 
+For others, 
 
 ```bash
-npx skills add govtechsg/sgds-web-component
-``` -->
+npx skills add govtechsg/sgds-web-component --yes
+```
 
-<!-- Select all existing skills from the list. This pulls the latest skills from the `skills/` folder of this repository into your local `.agents/` directory, where compatible AI tools automatically pick them up. -->
+Select all existing skills from the list. This pulls the latest skills from the `skills/` folder of this repository into your local `.agents/` directory, where compatible AI tools automatically pick them up.
 
 ---
 
@@ -109,11 +109,11 @@ For Govtechies,
 ```bash
 gt apd install sgds
 ```
-<!-- 
+
 ```bash
 
 npx skills add govtechsg/sgds-web-component
 
-``` -->
+```
 
 Skills follow the latest library version. After upgrading `@govtechsg/sgds-web-component`, update skills to ensure the AI agent's knowledge matches the installed version.
