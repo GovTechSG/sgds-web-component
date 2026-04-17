@@ -1,8 +1,9 @@
+sgds-input {
+  --input-min-width: var(--sgds-dimension-0);
+}
 .input-group {
   align-items: stretch;
   display: flex;
-  flex-wrap: wrap;
-  position: relative;
   gap: var(--sgds-gap-none);
 }
 .input-group > sgds-input {

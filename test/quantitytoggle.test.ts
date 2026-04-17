@@ -297,7 +297,7 @@ describe("in form context", () => {
 
   it("when disabled, invalid state is removed", async () => {
     const el = await fixture<SgdsInput>(
-      html` <sgds-quantity-toggle invalid invalidFeedback="" hasFeedback></sgds-quantity-toggle> `
+      html` <sgds-quantity-toggle invalid invalidFeedback="" hasFeedback="both"></sgds-quantity-toggle> `
     );
     expect(el.invalid).to.be.true;
     el.disabled = true;
