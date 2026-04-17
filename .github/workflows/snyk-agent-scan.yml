@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+permissions:
+  contents: read
+
 jobs:
   snyk-agent-scan:
     name: Snyk Agent Scan
