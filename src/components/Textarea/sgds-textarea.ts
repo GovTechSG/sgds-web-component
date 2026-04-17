@@ -202,7 +202,7 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   render() {
     return html`
       <div
-        class="form-control-container ${classMap({
+        class="form-control-container m-width-256 ${classMap({
           disabled: this.disabled
         })}"
       >
