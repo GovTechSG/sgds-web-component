@@ -28,16 +28,13 @@ async function resolveFiles(): Promise<string[]> {
     return getChangedFiles(baseSha, SCAN_PATHS);
   }
 
-  console.error(
-    "Usage: pnpm scan:snyk-agent -- <glob|file> [...]\n" +
-      "       Or set GIT_BASE_SHA for CI mode.",
-  );
+  console.error("Usage: pnpm scan:snyk-agent -- <glob|file> [...]\n" + "       Or set GIT_BASE_SHA for CI mode.");
   process.exit(1);
 }
 
 async function main(): Promise<void> {
   const allFiles = await resolveFiles();
-  const mdFiles = allFiles.filter((f) => f.endsWith(".md") && fs.existsSync(f));
+  const mdFiles = allFiles.filter(f => f.endsWith(".md") && fs.existsSync(f));
 
   if (mdFiles.length === 0) {
     console.log("No .md files to scan, skipping.");

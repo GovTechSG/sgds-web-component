@@ -277,13 +277,13 @@ node_modules/@govtechsg/sgds-web-component/components/Accordion/sgds-accordion.d
 
 Replace `Accordion/sgds-accordion` with the relevant component folder and file name. The `.js` file contains the full implementation; the `.d.ts` file lists all properties, types, events, slots, and JSDoc descriptions.
 
-**If `node_modules` is absent** — extract the package into a temp directory (does not touch the project's `package.json` or `node_modules`):
+**If `node_modules` is absent** — install the package into a temp directory (does not touch the project's `package.json` or `node_modules`):
 
 ```bash
-cd $(mktemp -d) && npm pack @govtechsg/sgds-web-component --quiet && tar -xzf *.tgz
+npm install --prefix /tmp/sgds-temp @govtechsg/sgds-web-component
 ```
 
-Then read from `./package/components/{ComponentName}/sgds-{component-name}.js`. To target a specific version, append `@{version}` to the package name (e.g. `npm pack @govtechsg/sgds-web-component@3.16.0`).
+Then read from `/tmp/sgds-temp/node_modules/@govtechsg/sgds-web-component/components/{ComponentName}/sgds-{component-name}.js`. To target a specific version, append `@{version}` to the package name (e.g. `npm install --prefix /tmp/sgds-temp @govtechsg/sgds-web-component@3.16.0`).
 
 ---
 
