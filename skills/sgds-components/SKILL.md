@@ -267,7 +267,7 @@ Angular supports web components natively via `CUSTOM_ELEMENTS_SCHEMA` — no SGD
 
 When a component behaves unexpectedly — wrong event fired, property not reflected, slot not rendering — read the compiled source directly. It contains full method bodies, event logic, internal defaults, and edge-case handling that no documentation captures.
 
-**Always check `node_modules` first** — if `node_modules/@govtechsg/sgds-web-component` exists, read from there:
+Read from `node_modules/@govtechsg/sgds-web-component` — this directory is present once the package is installed:
 
 ```
 node_modules/@govtechsg/sgds-web-component/components/Accordion/sgds-accordion.js
@@ -277,13 +277,7 @@ node_modules/@govtechsg/sgds-web-component/components/Accordion/sgds-accordion.d
 
 Replace `Accordion/sgds-accordion` with the relevant component folder and file name. The `.js` file contains the full implementation; the `.d.ts` file lists all properties, types, events, slots, and JSDoc descriptions.
 
-**If `node_modules` is absent** — install the package into a temp directory (does not touch the project's `package.json` or `node_modules`):
-
-```bash
-npm install --prefix /tmp/sgds-temp @govtechsg/sgds-web-component
-```
-
-Then read from `/tmp/sgds-temp/node_modules/@govtechsg/sgds-web-component/components/{ComponentName}/sgds-{component-name}.js`. To target a specific version, append `@{version}` to the package name (e.g. `npm install --prefix /tmp/sgds-temp @govtechsg/sgds-web-component@3.16.0`).
+**If `node_modules` is absent** — the package has not been installed. Ask the user to run their normal install step (`npm install` / `pnpm install`) before inspecting source files.
 
 ---
 
