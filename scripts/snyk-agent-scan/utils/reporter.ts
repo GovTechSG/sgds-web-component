@@ -18,8 +18,8 @@ export function printScanHeader(file: string): void {
 }
 
 export function printSummary(results: ScanResult[]): void {
-  const passed = results.filter((r) => r.passed);
-  const failed = results.filter((r) => !r.passed);
+  const passed = results.filter(r => r.passed);
+  const failed = results.filter(r => !r.passed);
 
   console.log();
   console.log(`${BOLD}========== Scan Summary ==========${RESET}`);
@@ -29,14 +29,12 @@ export function printSummary(results: ScanResult[]): void {
     for (const r of passed) console.log(`  ${GREEN}✔ ${r.file}${RESET}`);
   }
 
-  const unauthorized = results.filter((r) => r.unauthorized);
+  const unauthorized = results.filter(r => r.unauthorized);
 
   if (unauthorized.length > 0) {
     console.log(`${YELLOW}${BOLD}UNAUTHORIZED (${unauthorized.length}):${RESET}`);
     for (const r of unauthorized) console.log(`  ${YELLOW}⚠ ${r.file}${RESET}`);
-    console.log(
-      `${YELLOW}${BOLD}SNYK_TOKEN is invalid or missing. Scan results are incomplete.${RESET}`,
-    );
+    console.log(`${YELLOW}${BOLD}SNYK_TOKEN is invalid or missing. Scan results are incomplete.${RESET}`);
     process.exit(1);
   }
 
@@ -47,9 +45,7 @@ export function printSummary(results: ScanResult[]): void {
       console.log(r.output.trimEnd());
       console.log();
     }
-    console.log(
-      `${RED}${BOLD}Job failed due to security findings in the files above.${RESET}`,
-    );
+    console.log(`${RED}${BOLD}Job failed due to security findings in the files above.${RESET}`);
     process.exit(1);
   }
 
