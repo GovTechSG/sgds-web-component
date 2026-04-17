@@ -10,7 +10,7 @@ describe("sgds-input", () => {
     assert.shadowDom.equal(
       el,
       `
-        <div class="form-control-container">
+        <div class="form-control-container m-width-160">
           <label class="form-label" for="test-id">label</label>
            <div class="form-control-row">
           <div class="form-control-group">
@@ -31,7 +31,7 @@ describe("sgds-input", () => {
     assert.shadowDom.equal(
       el,
       `
-        <div class="form-control-container">
+        <div class="form-control-container m-width-160">
         <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
@@ -50,7 +50,7 @@ describe("sgds-input", () => {
     assert.shadowDom.equal(
       el,
       `
-        <div class="form-control-container">
+        <div class="form-control-container m-width-160">
         <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
@@ -71,7 +71,7 @@ describe("sgds-input", () => {
     assert.shadowDom.equal(
       el,
       `
-        <div class="form-control-container">
+        <div class="form-control-container m-width-160">
           <div class="form-control-row">
             <div class="form-control-group">
               <slot name="icon"></slot>
