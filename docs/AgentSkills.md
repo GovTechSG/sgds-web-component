@@ -16,11 +16,19 @@ Once installed, your AI assistant can answer questions like:
 
 Run the following command in your project root:
 
+For Govtechies, use <a href="https://software-engineering.gto.tech.gov.sg/handbook/how-to/local-development/developer-cli/" target="_blank">GovTech Developer CLI</a> to install
+
 ```bash
-npx skills add govtechsg/sgds-web-component
+gt apd install sgds
 ```
 
-Select all existing skills from the list. This pulls the latest skills from the `skills/` folder of this repository into your local `.agents/` directory, where compatible AI tools automatically pick them up.
+<!-- For others, 
+
+```bash
+npx skills add govtechsg/sgds-web-component
+``` -->
+
+<!-- Select all existing skills from the list. This pulls the latest skills from the `skills/` folder of this repository into your local `.agents/` directory, where compatible AI tools automatically pick them up. -->
 
 ---
 
@@ -96,10 +104,16 @@ Skills are read by the agent at query time — they do not add runtime dependenc
 
 Run the following command to pull the latest skill updates:
 
+For Govtechies, 
+
+```bash
+gt apd install sgds
+```
+<!-- 
 ```bash
 
 npx skills add govtechsg/sgds-web-component
 
-```
+``` -->
 
-Skills follow the library version. After upgrading `@govtechsg/sgds-web-component`, update skills to ensure the AI agent's knowledge matches the installed version.
+Skills follow the latest library version. After upgrading `@govtechsg/sgds-web-component`, update skills to ensure the AI agent's knowledge matches the installed version.

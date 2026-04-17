@@ -2,7 +2,6 @@
   "workbench.colorCustomizations": {
     "activityBar.background": "#203220",
     "titleBar.activeBackground": "#2C452D",
-    "titleBar.activeForeground": "#FAFCFA"
   },
   "todo-tree.highlights.customHighlight": {
     "TODO": {
