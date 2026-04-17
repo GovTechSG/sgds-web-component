@@ -198,6 +198,23 @@ describe("<sgds-radio-group>", () => {
     expect(document.activeElement === radio1).to.be.true;
   });
 
+  it("autofocus should focus the checked radio in the group", async () => {
+    const el = await fixture<SgdsRadioGroup>(html`<sgds-radio-group name="test-autofocus" autofocus>
+      <sgds-radio value="1">one</sgds-radio>
+      <sgds-radio value="2">two</sgds-radio>
+      <sgds-radio value="3">three</sgds-radio>
+    </sgds-radio-group>`);
+
+    const radio2 = <SgdsRadio>el.querySelectorAll("sgds-radio")[1];
+
+    radio2.click();
+    await Promise.all([el.updateComplete, radio2.updateComplete]);
+
+    expect(radio2.checked).to.be.true;
+    const input = radio2.shadowRoot?.querySelector("input");
+    expect(document.activeElement === radio2 || input?.matches(":focus")).to.be.true;
+  });
+
   it("when a radio is checked, clicking label should focus on the checked radio", async () => {
     const el = await fixture<SgdsRadioGroup>(html`<sgds-radio-group label="Hello world">
       <sgds-radio value="1">one</sgds-radio>
