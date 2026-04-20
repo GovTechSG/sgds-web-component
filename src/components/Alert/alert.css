@@ -57,6 +57,7 @@
 
 .alert {
   --sgds-alert-color: var(--sgds-color-fixed-light);
+  position: relative;
   display: flex;
   flex-direction: row;
   gap: var(--sgds-gap-sm);
@@ -98,4 +99,10 @@
   font-size: var(--sgds-font-size-body-sm);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-2-xs);
+}
+
+.alert sgds-close-button {
+  position: absolute;
+  right: 14px;
+  top: 14px;
 }
