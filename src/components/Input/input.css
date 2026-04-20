@@ -1,5 +1,9 @@
 :host {
   --input-border-radius: var(--sgds-form-border-radius-md);
+  --input-min-width: var(--sgds-dimension-160);
+}
+.form-control-container {
+  min-width: var(--input-min-width);
 }
 
 :host(.quantity-toggle) input::-webkit-inner-spin-button {

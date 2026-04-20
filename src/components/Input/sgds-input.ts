@@ -297,7 +297,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   render() {
     return html`
       <div
-        class="form-control-container m-width-160 ${classMap({
+        class="form-control-container ${classMap({
           disabled: this.disabled
         })}"
       >
