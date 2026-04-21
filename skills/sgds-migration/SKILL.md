@@ -136,37 +136,13 @@ Phase 2 is just about getting components to render. Full styling setup (fonts, u
 
 ---
 
-## Component & Layout Migration Strategy
+## Component Migration Strategy
 
 **The strategy is the same regardless of which UI library you're migrating from** (MUI, Chakra, v1 Bulma, v2 Bootstrap, etc.).
 
-### Two-Phase Migration: Components First, Layout Second
+**Migrate components first** because web components use Shadow DOM and won't conflict with old CSS. After components are done, migrate styling in Phase 4.
 
-**Phase 1: Migrate Components** (web components with Shadow DOM)
-- Replace component classes/elements with `<sgds-*>` web components
-- Examples:
-  - MUI: `<Button>` → `<sgds-button>`
-  - Chakra: `<Button>` → `<sgds-button>`
-  - v1 Bulma: `.sgds-button` class → `<sgds-button>` web component
-  - v2 Bootstrap: `<Button>` React Bootstrap → `<sgds-button>` web component
-- Write/update tests for new components
-- **Safe**: Web components use Shadow DOM, won't conflict with old CSS
-
-**Phase 2: Migrate Layout CSS** (after Phase 1 is complete)
-- Replace layout system with CSS Grid or Flexbox using SGDS utilities
-- Examples:
-  - MUI: `<Box display="grid">` → CSS Grid with `sgds:grid`
-  - Chakra: `<Grid>` → CSS Grid with `sgds:grid`
-  - v1 Bulma: `.container`, `.columns` → CSS Grid with `sgds:grid`
-  - v2 Bootstrap: `<Container>`, `<Row>`, `<Col>` → CSS Grid with `sgds:grid`
-- Update layout-related tests
-- **Minimal CSS conflicts**: Components already migrated, old layout CSS can be safely replaced
-
-### Why This Order?
-
-✅ **Components first** — Web components' Shadow DOM is isolated from light DOM CSS, safe to migrate anytime
-✅ **Layout second** — Avoid dual systems (old layout + v3 layout). Remove old CSS once components are done
-✅ **Reduces conflicts** — v1/v2 have `.sgds-container` in light DOM; v3 also has it. Migrating components first means old CSS is already gone when layout migration happens
+**For component-specific details and APIs**, refer to `../sgds-components/SKILL.md` which documents all 46 `<sgds-*>` components.
 
 ---
 
@@ -207,20 +183,9 @@ SGDS web components use Shadow DOM, which jsdom cannot pierce. The recommended a
 
 **How to Migrate**:
 
-**Read**: `../sgds-utilities/SKILL.md` for the complete SGDS utilities reference.
+**Read**: `../sgds-utilities/SKILL.md` for the complete reference on all SGDS utility classes, CSS tokens, and styling.
 
-**Summary**:
-- SGDS v3 uses Tailwind CSS with the `sgds:` prefix
-- Available utilities: grid, flexbox, spacing (margin/padding/gap), color (text, background, border), typography, border-radius, dimensions, etc.
-- Use `sgds:grid`, `sgds:flex`, `sgds:gap-*`, `sgds:p-*`, `sgds:m-*`, `sgds:text-*`, etc.
-- CSS tokens available for design consistency (colors, spacing, typography)
-- **Preserve layout**: Keep the same grid/flex arrangement, just update to SGDS utilities and styling
-
-**Examples** (layout preserved, visual styling updated to SGDS v3):
-- MUI: `<Box display="grid" gap={2}>` → `<div className="sgds:grid sgds:gap-2">` (same grid, SGDS spacing)
-- Chakra: `<Grid gridTemplateColumns="repeat(3, 1fr)">` → `<div className="sgds:grid sgds:grid-cols-3">` (same 3-col layout, SGDS utilities)
-- v1 Bulma: `<div class="columns">` → `<div className="sgds:flex">` (same flex arrangement, SGDS styling)
-- v2 Bootstrap: `<Row><Col md={6}/>` → `<div className="sgds:flex"><div className="sgds:flex-1">` (same layout, SGDS utilities)
+**Key Principle**: Replace old layout/utility systems with SGDS v3 utilities (Tailwind-based with `sgds:` prefix) while **preserving the layout arrangement** — grid becomes `sgds:grid`, flex becomes `sgds:flex`, spacing becomes `sgds:gap-*`, `sgds:p-*`, etc.
 
 **Result**: Application now uses SGDS v3 brand colors, typography, and spacing tokens while maintaining the original information architecture and layout decisions.
 
@@ -289,13 +254,7 @@ Depends on:
 - Cleaner final state with fewer CSS conflicts
 
 ### "What if I'm using SGDS v1 (Bulma) or v2 (Bootstrap)?"
-**Same strategy**:
-- Phase 1: Replace v1/v2 **components** with `<sgds-*>` web components
-- Phase 2: Replace v1/v2 **layout** with CSS Grid / Flexbox + `sgds:` utilities
-- References:
-  - v1 layouts: https://v1.designsystem.tech.gov.sg/docs/container/
-  - v2 layouts: https://designsystem.tech.gov.sg/layouts/bootstrap-grid-system
-  - v3 utilities: Use `sgds:grid`, `sgds:flex`, `sgds:gap-*` etc. from Tailwind
+**Same four-phase strategy applies** — scan, set up, migrate tests, migrate styling. The component swaps are the same as other libraries.
 
 ### "Do I need to rewrite all my components?"
 Only the ones you're migrating to SGDS. If you have custom components (layout, logic, etc.) that don't have SGDS equivalents, they can stay unchanged.
