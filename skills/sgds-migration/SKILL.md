@@ -1,6 +1,6 @@
 ---
 name: "sgds-migration"
-description: "Complete workflow for migrating an existing frontend application to SGDS web components. Use this skill when a user wants to migrate from another UI library (MUI, Chakra UI, shadcn/ui, Ant Design, Vuetify, Angular Material, Bootstrap, etc.) to SGDS, or asks how to start using SGDS in an existing project. Covers three phases: (1) scan the current frontend tech stack to understand what framework and component library is in use, (2) install and configure SGDS components via the sgds-getting-started skill, (3) set up the test environment and migrate test suites to match SGDS web components. React → vitest-browser-react path is fully documented; Vue and Angular are coming soon."
+description: "Complete workflow for migrating an existing frontend application to SGDS web components. Use this skill when a user wants to migrate from another UI library (MUI, Chakra UI, shadcn/ui, Ant Design, Vuetify, Angular Material, Bootstrap, etc.) to SGDS, or asks how to start using SGDS in an existing project. Covers four phases: (1) scan the current frontend tech stack, (2) install and configure SGDS components, (3) set up Vitest + Playwright browser testing environment and migrate tests, (4) replace old styling systems with SGDS v3 utilities. React fully supported."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -12,12 +12,13 @@ metadata:
 
 You are helping users migrate an existing frontend application from another component library (Material UI, Chakra UI, shadcn/ui, Bootstrap, Ant Design, Vuetify, Angular Material, etc.) to SGDS web components.
 
-This is a **three-phase workflow**:
+This is a **four-phase workflow**:
 1. **Scan** the existing frontend tech stack (framework + UI library)
 2. **Set up** SGDS via the `sgds-getting-started` skill
-3. **Migrate tests** to SGDS-compatible test runners
+3. **Migrate tests** to Vitest + Playwright browser testing
+4. **Migrate styling** - Replace old CSS systems with SGDS v3 utilities
 
-Each phase builds on the previous one. Users should complete Phase 1 before Phase 2, and Phase 2 before Phase 3.
+Each phase builds on the previous one. Users should complete each phase in order.
 
 ---
 
@@ -181,6 +182,37 @@ SGDS web components use Shadow DOM, which jsdom cannot pierce. The recommended a
 
 ---
 
+## Phase 4: Migrate Foundation and Styling CSS
+
+**Goal**: Replace old styling systems with SGDS v3 utilities (Tailwind-based with `sgds:` prefix).
+
+**When to Start**: After Phase 3 is complete and components are using SGDS web components.
+
+**What to Replace**:
+- Old layout systems (MUI `<Box>`, Chakra `<Grid>`, v1 Bulma `.columns`, v2 Bootstrap `<Row>/<Col>`)
+- Old utility classes (MUI `sx` prop, Chakra style props, Bulma `.is-*`, Bootstrap `.m-*` `.p-*`)
+- Old color/typography systems (replace with SGDS CSS tokens and utilities)
+
+**How to Migrate**:
+
+**Read**: `../sgds-utilities/SKILL.md` for the complete SGDS utilities reference.
+
+**Summary**:
+- SGDS v3 uses Tailwind CSS with the `sgds:` prefix
+- Available utilities: grid, flexbox, spacing (margin/padding/gap), color (text, background, border), typography, border-radius, dimensions, etc.
+- Use `sgds:grid`, `sgds:flex`, `sgds:gap-*`, `sgds:p-*`, `sgds:m-*`, `sgds:text-*`, etc.
+- CSS tokens available for design consistency (colors, spacing, typography)
+
+**Examples**:
+- MUI: `<Box display="grid" gap={2}>` → `<div className="sgds:grid sgds:gap-2">`
+- Chakra: `<Grid gridTemplateColumns="repeat(3, 1fr)">` → `<div className="sgds:grid sgds:grid-cols-3">`
+- v1 Bulma: `<div class="columns">` → `<div className="sgds:flex">`
+- v2 Bootstrap: `<Row><Col md={6}/>` → `<div className="sgds:flex"><div className="sgds:flex-1">`
+
+**Time Estimate**: 1–2 weeks depending on size of CSS surface area
+
+---
+
 ## Overall Workflow
 
 ```
@@ -197,8 +229,12 @@ Phase 2: Set Up SGDS
 Phase 3: Migrate Tests & Components
   ↓
   For React: Follow reference/react-test-migration.md
-  For Vue/Angular: WIP (see timeline above)
-  Output: Tests passing, components using SGDS
+  Output: Tests passing, components using SGDS web components
+
+Phase 4: Migrate Foundation & Styling CSS
+  ↓
+  Replace old layout/utility systems with sgds-utilities
+  Output: All styling uses SGDS v3 utilities (Tailwind + sgds: prefix)
 ```
 
 ---
@@ -257,11 +293,12 @@ When using this skill:
 
 1. **Start with Phase 1**: Always ask the user about their current stack before making recommendations.
 2. **Defer to referenced skills**: Use exact skill names when delegating:
-   - `../sgds-getting-started/SKILL.md` for setup
+   - `../sgds-getting-started/SKILL.md` for setup (Phase 2)
    - `../sgds-components/SKILL.md` for component-specific APIs
-   - `reference/react-test-migration.md` for React test migration
-3. **Don't duplicate**: Do not rewrite getting-started or component instructions here. Link to them instead.
-4. **Be honest about scope**: Clearly state which frameworks are supported (React: yes, Vue/Angular: WIP) and set expectations.
+   - `reference/react-test-migration.md` for React test migration (Phase 3)
+   - `../sgds-utilities/SKILL.md` for CSS utilities and styling (Phase 4)
+3. **Don't duplicate**: Do not rewrite getting-started, components, or utilities instructions here. Link to them instead.
+4. **Be honest about scope**: Clearly state which frameworks are supported (React: yes, others: use Vitest + Playwright foundation) and set expectations.
 5. **Ask clarifying questions** before diving into migration work:
    - How many components need migrating? (prioritizes effort)
    - Any custom components we should keep? (speeds up decision-making)
