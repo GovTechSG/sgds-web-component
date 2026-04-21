@@ -99,28 +99,40 @@ The approach shifts to:
 
 ## Phase 2: Install and Configure SGDS
 
-**Goal**: Set up SGDS web components in your project.
+**Goal**: Minimal setup to make SGDS web components render with their default styling.
 
-**Defer entirely to the `sgds-getting-started` skill** at this point. The user should:
+**Only do what's necessary** to render components:
 
-1. Read `../sgds-getting-started/SKILL.md` fully
-2. Complete Steps 1–3:
-   - **Step 1**: Set the Font (Inter from Google Fonts)
-   - **Step 2**: Import Foundation and Utility CSS (order matters)
-   - **Step 3**: Register SGDS Web Components (single import)
-3. *Optional* **Step 4**: Understand SGDS App Layouts (Simple vs Sidebar)
+1. **Install the package** (if not already installed):
+   ```bash
+   npm install @govtechsg/sgds-web-component
+   ```
 
-### Why Defer to sgds-getting-started
+2. **Import the SGDS web components JS**:
+   ```javascript
+   import '@govtechsg/sgds-web-component';
+   ```
 
-The getting-started skill is authoritative for setup. Do not repeat its instructions here. Just reference it and note what to complete before proceeding.
+3. **Import the design token CSS** (day or night theme):
+   ```javascript
+   import '@govtechsg/sgds-web-component/themes/day.css';
+   ```
+   This provides CSS variables and design tokens that style the web components.
 
-### What Happens After Phase 2
+### What You Get
 
-Once SGDS is installed:
-- SGDS component library is available in your project
-- CSS tokens and utilities are loaded
-- You can import `<sgds-button>`, `<sgds-input>`, etc. and they will render
-- **But your existing components still use the old UI library** (MUI, Chakra, Bootstrap, v1 Bulma, etc.)
+After Phase 2:
+- SGDS web components are available and can be used in your templates (e.g., `<sgds-button>`, `<sgds-input>`)
+- Components render with SGDS v3 design tokens and styling
+- Your existing components still use the old UI library (MUI, Chakra, Bootstrap, v1 Bulma, etc.)
+- **You are NOT setting up**:
+  - Font loading (do this in Phase 4)
+  - Foundation CSS or utility classes (do this in Phase 4)
+  - App layouts (not needed for component migration)
+
+### Why This Minimal Approach
+
+Phase 2 is just about getting components to render. Full styling setup (fonts, utilities, layouts) happens in Phase 4 after components are migrated.
 
 ---
 
