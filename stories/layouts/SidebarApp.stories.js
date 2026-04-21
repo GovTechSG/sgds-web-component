@@ -12,7 +12,7 @@ const Template = () => {
         <sgds-mainnav fluid>
           <strong slot="brand">SGDS</strong>
           <sgds-mainnav-item>
-            <a href="#">sldfjskdgh ksdhf ksjhfksjdhf bjskdmzhfjls d</a>
+            <a href="#">About</a>
           </sgds-mainnav-item>
           <strong slot="end">End</strong>
         </sgds-mainnav>
