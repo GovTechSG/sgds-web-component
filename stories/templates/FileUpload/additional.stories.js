@@ -16,9 +16,7 @@ export const DragAndDrop = {
 
 const UploadingStateDefaultTemplate = args => {
   return html`
-    <sgds-file-upload id="uploadingStateDefault" label="Upload Files">
-      Choose Files
-    </sgds-file-upload>
+    <sgds-file-upload id="uploadingStateDefault" label="Upload Files"> Choose Files </sgds-file-upload>
     <script>
       setTimeout(async () => {
         const fileUpload = document.getElementById("uploadingStateDefault");
@@ -86,9 +84,7 @@ export const UploadingStateDragDrop = {
 
 const ErrorStateDefaultTemplate = args => {
   return html`
-    <sgds-file-upload id="errorStateDefault" label="Upload Files">
-      Choose Files
-    </sgds-file-upload>
+    <sgds-file-upload id="errorStateDefault" label="Upload Files"> Choose Files </sgds-file-upload>
     <script>
       setTimeout(async () => {
         const fileUpload = document.getElementById("errorStateDefault");
@@ -166,9 +162,7 @@ export const ErrorStateDragDrop = {
 
 const SuccessStateDefaultTemplate = args => {
   return html`
-    <sgds-file-upload id="successStateDefault" label="Upload Files">
-      Choose Files
-    </sgds-file-upload>
+    <sgds-file-upload id="successStateDefault" label="Upload Files"> Choose Files </sgds-file-upload>
     <script>
       setTimeout(async () => {
         const fileUpload = document.getElementById("successStateDefault");
@@ -256,7 +250,7 @@ const UploadToServerTemplate = args => {
     <script>
       const fileUpload = document.getElementById("uploadToServerDemo");
 
-      fileUpload.addEventListener("sgds-files-selected", async (e) => {
+      fileUpload.addEventListener("sgds-files-selected", async e => {
         const files = e.detail;
 
         // Show uploading state for all files

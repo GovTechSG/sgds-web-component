@@ -39,7 +39,12 @@ export class SgdsCloseButton extends SgdsElement {
   }
   render() {
     return html`
-      <button class="btn-close" aria-label="Close button" ?disabled=${this.disabled} @click=${(e: Event) => this._handleClick(e)}>
+      <button
+        class="btn-close"
+        aria-label="Close button"
+        ?disabled=${this.disabled}
+        @click=${(e: Event) => this._handleClick(e)}
+      >
         <sgds-icon name="cross" size=${this.size}></sgds-icon>
       </button>
     `;

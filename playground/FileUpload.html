@@ -159,15 +159,37 @@
       }
 
       fileUpload.addEventListener('sgds-files-selected', async (e) => {
+        console.log('Upload State Demo - Files from event.detail:', e.detail);
+        console.log('File count:', e.detail.length);
+        Array.from(e.detail).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
         handleFileUpload(fileUpload, e.detail);
       });
 
       fileUploadDragDrop.addEventListener('sgds-files-selected', async (e) => {
+        console.log('Drag and Drop Upload State Demo - Files from event.detail:', e.detail);
+        console.log('File count:', e.detail.length);
+        Array.from(e.detail).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
         handleFileUpload(fileUploadDragDrop, e.detail);
       });
 
       fileUploadError.addEventListener('sgds-files-selected', async (e) => {
+        console.log('Error State Demo - Files from event.detail:', e.detail);
+        console.log('File count:', e.detail.length);
+        Array.from(e.detail).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
         handleFileUploadWithErrors(fileUploadError, e.detail);
+      });
+
+      // Also log all file uploads with event listener
+      document.querySelectorAll('sgds-file-upload').forEach((el) => {
+        el.addEventListener('sgds-files-selected', (e) => {
+          console.log(`${el.id || 'unnamed'} - Files selected:`, e.detail);
+        });
       });
     </script>
   </body>

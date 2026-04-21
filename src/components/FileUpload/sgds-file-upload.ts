@@ -60,6 +60,8 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   @state()
   private fileMetadata: Map<number, { uploading: boolean; error?: string }> = new Map();
 
+  private _isProgrammaticChange = false;
+
   /**
    * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
    * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
@@ -126,10 +128,22 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     const files = inputElement.files as FileList;
 
     if (files.length > 0) {
-      this.selectedFiles = Array.from(files);
+      // Only combine files if this is user-initiated (not programmatic removal)
+      if (this.multiple && this.selectedFiles.length > 0 && !this._isProgrammaticChange) {
+        const newFiles = Array.from(files);
+        const combined = [...this.selectedFiles, ...newFiles];
+        this.selectedFiles = combined;
+
+        // Update inputElement.files with combined files using DataTransfer
+        const fileBuffer = new DataTransfer();
+        combined.forEach(file => fileBuffer.items.add(file));
+        inputElement.files = fileBuffer.files;
+      } else {
+        this.selectedFiles = Array.from(files);
+      }
     }
     // Trigger a re-render of the component to update the list of selected files
-    this._setFileList(files);
+    this._setFileList(inputElement.files as FileList);
     this.requestUpdate();
     super._mixinHandleChange(event);
   }
@@ -152,6 +166,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         if (index !== i) fileBuffer.items.add(attachments[i]);
       }
 
+      // Mark as programmatic change to prevent file combining in _handleChange
+      this._isProgrammaticChange = true;
+
       // Assign buffer to file input
       inputElement.files = fileBuffer.files;
       // Re-populate selected files to the lists
@@ -162,6 +179,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
 
       // Dispatch change event to trigger validation
       inputElement.dispatchEvent(new Event("change", { bubbles: true }));
+
+      // Reset flag after change event is processed
+      this._isProgrammaticChange = false;
     }, 300); // Motion token for standard duration
   }
 
@@ -294,40 +314,36 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       return html`<sgds-icon name="check-circle-fill" class="${iconClass}"></sgds-icon>`;
     };
 
-    const listItems = this.selectedFiles.map(
-      (file, index) => {
-        const metadata = this.fileMetadata.get(index);
-        return html`
-          <div class="file-upload-list-item-container" key=${index}>
-            <li
-              key=${index}
-              class="file-upload-list-item ${this.exitingIndex === index ? "file-upload-exit" : ""} ${metadata?.error ? "file-upload-error" : ""}"
-            >
-              ${metadata?.uploading
-                ? html`<sgds-spinner size="sm"></sgds-spinner>`
-                : getCheckedIcon(metadata)
-              }
-              <span class="filename">${file.name}</span>
-              <span class="filesize">${formatFileSize(file.size)}</span>
-              <sgds-close-button
-                aria-label="remove the file"
-                ?disabled=${metadata?.uploading}
-                @click=${() => this._removeFileHandler(index)}
-              ></sgds-close-button>
-            </li>
-            ${metadata?.error
-              ? html`
-                  <div class="invalid-feedback-container">
-                    <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
-                    <div class="invalid-feedback">${metadata.error}</div>
-                  </div>
-                `
-              : ""
-            }
-          </div>
-        `;
-      }
-    );
+    const listItems = this.selectedFiles.map((file, index) => {
+      const metadata = this.fileMetadata.get(index);
+      return html`
+        <div class="file-upload-list-item-container" key=${index}>
+          <li
+            key=${index}
+            class="file-upload-list-item ${this.exitingIndex === index ? "file-upload-exit" : ""} ${metadata?.error
+              ? "file-upload-error"
+              : ""}"
+          >
+            ${metadata?.uploading ? html`<sgds-spinner size="sm"></sgds-spinner>` : getCheckedIcon(metadata)}
+            <span class="filename">${file.name}</span>
+            <span class="filesize">${formatFileSize(file.size)}</span>
+            <sgds-close-button
+              aria-label="remove the file"
+              ?disabled=${metadata?.uploading}
+              @click=${() => this._removeFileHandler(index)}
+            ></sgds-close-button>
+          </li>
+          ${metadata?.error
+            ? html`
+                <div class="invalid-feedback-container">
+                  <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+                  <div class="invalid-feedback">${metadata.error}</div>
+                </div>
+              `
+            : ""}
+        </div>
+      `;
+    });
 
     return html`
       <div class="file-upload">

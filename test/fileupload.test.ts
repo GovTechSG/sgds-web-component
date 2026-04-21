@@ -290,6 +290,78 @@ describe("sgds-file-upload", () => {
       expect(closeBtn?.hasAttribute("disabled")).to.be.true;
     }
   });
+  it("should add new files to existing files when multiple is true", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      // Select first batch of files
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["file1"], "file1.txt"));
+      dt1.items.add(new File(["file2"], "file2.txt"));
+
+      const promise1 = oneEvent(el, "sgds-files-selected");
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await promise1;
+      await el.updateComplete;
+
+      let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(2);
+
+      // Select second batch of files
+      const dt2 = new DataTransfer();
+      dt2.items.add(new File(["file3"], "file3.txt"));
+      dt2.items.add(new File(["file4"], "file4.txt"));
+
+      const promise2 = oneEvent(el, "sgds-files-selected");
+      input.files = dt2.files;
+      input.dispatchEvent(new Event("change"));
+      await promise2;
+      await el.updateComplete;
+
+      // Should have 4 files total (file1, file2, file3, file4)
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(4);
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file2.txt");
+      expect(listItems?.[2].querySelector(".filename")?.textContent).to.include("file3.txt");
+      expect(listItems?.[3].querySelector(".filename")?.textContent).to.include("file4.txt");
+    }
+  });
+  it("should not duplicate files when removing one from multiple selected files", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      // Select first batch of 3 files
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["file1"], "file1.txt"));
+      dt1.items.add(new File(["file2"], "file2.txt"));
+      dt1.items.add(new File(["file3"], "file3.txt"));
+
+      const promise1 = oneEvent(el, "sgds-files-selected");
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await promise1;
+      await el.updateComplete;
+
+      let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(3);
+
+      // Delete the middle file (file2)
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[1].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      // Should have 2 files left (file1, file3) - NOT duplicated
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(2);
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file3.txt");
+    }
+  });
   it("should preserve upload state of remaining files when one is removed", async () => {
     const fileList = [
       new File(["file1"], "file1.txt"),
@@ -325,6 +397,71 @@ describe("sgds-file-upload", () => {
       // Files 1 and 2 should still be uploading (now at indices 0 and 1)
       const spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
       expect(spinners?.length).to.equal(2);
+    }
+  });
+
+  it("sgds-files-selected event detail files should sync with UI across selections and removals", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      // First selection: 2 files
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+      dt1.items.add(new File(["content2"], "file2.txt"));
+
+      const promise1 = oneEvent(el, "sgds-files-selected");
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      const event1 = (await promise1) as CustomEvent;
+      await el.updateComplete;
+
+      // Verify event detail matches UI
+      let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      let eventFiles = event1.detail as FileList;
+      expect(eventFiles.length).to.equal(2);
+      expect(listItems?.length).to.equal(2);
+      expect(eventFiles[0].name).to.equal("file1.txt");
+      expect(eventFiles[1].name).to.equal("file2.txt");
+
+      // Second selection: add 2 more files
+      const dt2 = new DataTransfer();
+      dt2.items.add(new File(["content3"], "file3.txt"));
+      dt2.items.add(new File(["content4"], "file4.txt"));
+
+      const promise2 = oneEvent(el, "sgds-files-selected");
+      input.files = dt2.files;
+      input.dispatchEvent(new Event("change"));
+      const event2 = (await promise2) as CustomEvent;
+      await el.updateComplete;
+
+      // Verify event detail matches UI (4 files total)
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      eventFiles = event2.detail as FileList;
+      expect(eventFiles.length).to.equal(4);
+      expect(listItems?.length).to.equal(4);
+      expect(eventFiles[0].name).to.equal("file1.txt");
+      expect(eventFiles[1].name).to.equal("file2.txt");
+      expect(eventFiles[2].name).to.equal("file3.txt");
+      expect(eventFiles[3].name).to.equal("file4.txt");
+
+      // Remove the second file (file2.txt)
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[1].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      // Verify UI and component.files both reflect the removal
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      const componentFiles = el.files;
+      expect(listItems?.length).to.equal(3);
+      expect(componentFiles.length).to.equal(3);
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file3.txt");
+      expect(listItems?.[2].querySelector(".filename")?.textContent).to.include("file4.txt");
+      expect(componentFiles[0].name).to.equal("file1.txt");
+      expect(componentFiles[1].name).to.equal("file3.txt");
+      expect(componentFiles[2].name).to.equal("file4.txt");
     }
   });
 });
