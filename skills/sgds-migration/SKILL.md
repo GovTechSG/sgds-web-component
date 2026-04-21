@@ -163,31 +163,33 @@ Once SGDS is installed:
 
 **Goal**: Migrate your test suite to run in a real browser environment (required for Shadow DOM testing).
 
-**Key Principle**: SGDS web components use Shadow DOM, which jsdom cannot pierce. Your test runner must use a real browser (Chromium, Firefox, etc.) to access Shadow DOM internals.
+**Recommended Approach**: **Vitest + Playwright (headless Chromium)**
+
+SGDS web components use Shadow DOM, which jsdom cannot pierce. The recommended and tested approach is Vitest running in browser mode with Playwright as the Chromium provider.
 
 ### React (Fully Supported)
 
-**Read**: `reference/react-test-migration.md` for the complete React migration workflow including setup, testing patterns, and examples.
+**Read**: `reference/react-test-migration.md` for the complete React migration workflow including Vitest setup, testing patterns, and examples.
 
 **Time Estimate**: 1–2 weeks depending on test coverage
 
-**No Existing Tests?** Still proceed — the reference file includes guidance for setting up the test environment and creating a simple template test even if your codebase has no tests today.
+**No Existing Tests?** Still proceed — the reference file includes guidance for setting up the Vitest browser environment and creating a simple template test even if your codebase has no tests today.
 
 ### Vue (Coming Soon)
 
-Same principle: migrate from jsdom-based runners to a real browser test runner. Setup will be framework-specific, but Shadow DOM access patterns remain the same (Playwright locators).
+Same approach: migrate from jsdom-based runners to **Vitest + Playwright**. Setup will be framework-specific, but Shadow DOM access patterns remain the same (Playwright locators).
 
 ### Angular (Coming Soon)
 
-Same principle: real browser required for Shadow DOM. Setup will be framework-specific.
+Same approach: **Vitest + Playwright** for Shadow DOM testing. Setup will be framework-specific.
 
 ### Vanilla JS (Coming Soon)
 
-Same principle: any real browser test runner (Playwright, Cypress) works.
+Same approach: **Vitest + Playwright** works for any framework.
 
 ---
 
-**For all frameworks**: The setup process is framework-specific knowledge (standard vitest, Playwright, or Cypress docs). The key insight we provide is that you **must use a real browser**, and the React path demonstrates the pattern you'd follow for other frameworks.
+**For all frameworks**: Use **Vitest running in browser mode with Playwright headless Chromium**. The React path demonstrates this pattern; the setup is framework-specific but follows the same vitest + playwright foundation.
 
 ---
 
