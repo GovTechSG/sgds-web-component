@@ -28,6 +28,17 @@
   }
 }
 
+@keyframes fileUploadExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
 .file-upload-list-item {
   display: flex;
   align-items: center;
@@ -37,6 +48,10 @@
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
   border-radius: var(--sgds-form-border-radius-md);
   animation: fileUploadEnter var(--sgds-motion-duration-standard) var(--sgds-motion-easing-enter);
+}
+
+.file-upload-list-item.file-upload-exit {
+  animation: fileUploadExit var(--sgds-motion-duration-standard) var(--sgds-motion-easing-exit);
 }
 
 .file-upload-list-item span:not(:first-of-type) {

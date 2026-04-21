@@ -51,6 +51,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   @state()
   private selectedFiles: File[] = [];
 
+  @state()
+  private exitingIndex: number | null = null;
+
   /**
    * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
    * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput
@@ -97,7 +100,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       // Get a reference to the input element using the inputRef
       const inputElement = this.inputRef.value;
       // Do something with the input element
-      inputElement.click();
+      inputElement?.click();
     }
   }
 
@@ -115,30 +118,43 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   }
 
   private _removeFileHandler(index: number) {
-    const inputElement = this.inputRef.value;
-    const attachments = inputElement.files;
-
-    const fileBuffer = new DataTransfer();
-    for (let i = 0; i < attachments.length; i++) {
-      if (index !== i) fileBuffer.items.add(attachments[i]);
-    }
-
-    // Assign buffer to file input
-    inputElement.files = fileBuffer.files;
-    // Re-populate selected files to the lists
-    this._setFileList(fileBuffer.files);
-    this.selectedFiles = Array.from(fileBuffer.files);
-
+    // Mark the file as exiting to trigger the animation
+    this.exitingIndex = index;
     this.requestUpdate();
 
-    // Dispatch change event to trigger validation
-    inputElement.dispatchEvent(new Event("change", { bubbles: true }));
+    // Wait for animation to complete before removing the file
+    setTimeout(() => {
+      const inputElement = this.inputRef.value;
+      if (!inputElement) return;
+
+      const attachments = inputElement.files;
+      if (!attachments) return;
+
+      const fileBuffer = new DataTransfer();
+      for (let i = 0; i < attachments.length; i++) {
+        if (index !== i) fileBuffer.items.add(attachments[i]);
+      }
+
+      // Assign buffer to file input
+      inputElement.files = fileBuffer.files;
+      // Re-populate selected files to the lists
+      this._setFileList(fileBuffer.files);
+      this.selectedFiles = Array.from(fileBuffer.files);
+      this.exitingIndex = null;
+
+      this.requestUpdate();
+
+      // Dispatch change event to trigger validation
+      inputElement.dispatchEvent(new Event("change", { bubbles: true }));
+    }, 300); // Motion token for standard duration
   }
 
   private _clearAllFiles() {
     const inputElement = this.inputRef.value;
     const fileBuffer = new DataTransfer();
-    inputElement.files = fileBuffer.files;
+    if (inputElement) {
+      inputElement.files = fileBuffer.files;
+    }
     this._setFileList(fileBuffer.files);
     this.selectedFiles = Array.from(fileBuffer.files);
   }
@@ -263,7 +279,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
 
     const listItems = this.selectedFiles.map(
       (file, index) => html`
-        <li key=${index} class="file-upload-list-item">
+        <li key=${index} class="file-upload-list-item ${this.exitingIndex === index ? "file-upload-exit" : ""}">
           ${getCheckedIcon()}
           <span class="filename">${file.name}</span>
           <sgds-close-button

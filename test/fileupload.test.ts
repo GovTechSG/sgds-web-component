@@ -1,5 +1,5 @@
 import "./sgds-web-component";
-import { expect, fixture, oneEvent, waitUntil } from "@open-wc/testing";
+import { expect, fixture, oneEvent, waitUntil, aTimeout } from "@open-wc/testing";
 import { html } from "lit";
 import type { SgdsFileUpload, SgdsButton, SgdsIcon } from "../src/components";
 import SgdsCloseButton from "../src/components/CloseButton/sgds-close-button";
@@ -118,6 +118,7 @@ describe("sgds-file-upload", () => {
 
       const removeBtn = listItems?.[0].querySelector(".file-upload-list-item sgds-close-button");
       removeBtn?.dispatchEvent(new Event("click"));
+      await aTimeout(300); // wait for animation to complete
       await el.updateComplete;
 
       listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
@@ -140,6 +141,59 @@ describe("sgds-file-upload", () => {
       await el.updateComplete;
 
       expect(el.files).to.deep.equal(fileList);
+    }
+  });
+  it("should add file-upload-exit class immediately when close button is clicked", async () => {
+    const fileList = [new File(["file1"], "file1.txt"), new File(["file2"], "file2.txt")];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    if (input) {
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+
+      let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      const removeBtn = listItems?.[0].querySelector("sgds-close-button");
+
+      removeBtn?.dispatchEvent(new Event("click"));
+      await el.updateComplete;
+
+      // Exit class should be applied, file still in DOM during animation
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.[0].classList.contains("file-upload-exit")).to.be.true;
+      expect(listItems?.length).to.equal(2);
+    }
+  });
+  it("should remove file from DOM after animation completes", async () => {
+    const fileList = [new File(["file1"], "file1.txt")];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    if (input) {
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+
+      const listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      const removeBtn = listItems?.[0].querySelector("sgds-close-button");
+      removeBtn?.dispatchEvent(new Event("click"));
+
+      // After animation completes
+      await aTimeout(300);
+      await el.updateComplete;
+      const finalItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(finalItems?.length).to.equal(0);
     }
   });
 });
@@ -215,6 +269,7 @@ describe("Fileupload validation", () => {
 
       const cancelButtonOnListItems = fileupload?.shadowRoot?.querySelector<SgdsCloseButton>("sgds-close-button");
       cancelButtonOnListItems?.click();
+      await aTimeout(300); // wait for animation to complete
       await fileupload?.updateComplete;
       expect(form.reportValidity()).to.be.false;
     }
