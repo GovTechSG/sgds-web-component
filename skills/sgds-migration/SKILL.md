@@ -175,21 +175,9 @@ SGDS web components use Shadow DOM, which jsdom cannot pierce. The recommended a
 
 **No Existing Tests?** Still proceed — the reference file includes guidance for setting up the Vitest browser environment and creating a simple template test even if your codebase has no tests today.
 
-### Vue (Coming Soon)
-
-Same approach: migrate from jsdom-based runners to **Vitest + Playwright**. Setup will be framework-specific, but Shadow DOM access patterns remain the same (Playwright locators).
-
-### Angular (Coming Soon)
-
-Same approach: **Vitest + Playwright** for Shadow DOM testing. Setup will be framework-specific.
-
-### Vanilla JS (Coming Soon)
-
-Same approach: **Vitest + Playwright** works for any framework.
-
 ---
 
-**For all frameworks**: Use **Vitest running in browser mode with Playwright headless Chromium**. The React path demonstrates this pattern; the setup is framework-specific but follows the same vitest + playwright foundation.
+**For Vue, Angular, and other frameworks**: Use the same **Vitest + Playwright** approach. The React migration guide demonstrates the testing pattern you'd follow; setup is framework-specific but the foundation is consistent.
 
 ---
 
