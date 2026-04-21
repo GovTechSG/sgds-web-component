@@ -100,6 +100,9 @@ These skills cover two domains. Each domain uses a folder naming prefix so agent
 - [Application Shell](../skills/sgds-pattern-block-templates/reference/application-shell.md) - Mandatory page chrome (masthead, mainnav, footer) and layout templates: simple app (sgds-container, public-facing) and sidebar app (sgds-container-sidebar, dashboards/internal tools)
 - [sgds-data-visualisation](../skills/sgds-data-visualisation/SKILL.md) - Data visualisation with ECharts and the SGDS colour palette; charts, graphs, dashboards
 
+#### Migration Skills — Migrating from other UI libraries
+- [sgds-migration](../skills/sgds-migration/SKILL.md) - Complete workflow for migrating an existing frontend application to SGDS web components: (1) scan the current tech stack, (2) install SGDS via sgds-getting-started, (3) migrate test suites. React → vitest-browser-react fully supported; Vue/Angular coming soon.
+
 #### Theming Skills — Visual customisation
 - [sgds-theming](../skills/sgds-theming/SKILL.md) - Product brand colour overrides, day/night mode setup, and font customisation via CSS token overrides
 
