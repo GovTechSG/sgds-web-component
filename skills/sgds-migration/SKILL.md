@@ -184,9 +184,9 @@ SGDS web components use Shadow DOM, which jsdom cannot pierce. The recommended a
 
 ## Phase 4: Migrate Foundation and Styling CSS
 
-**Goal**: Replace old styling systems with SGDS v3 utilities (Tailwind-based with `sgds:` prefix). The visual styling will now match SGDS v3 brand and design system, but the general layout/arrangement of elements remains the same.
+**Goal**: Replace old styling systems with SGDS v3 utilities (Tailwind-based with `sgds:` prefix). The visual styling will now match SGDS v3 brand and design system, but the position and arrangement of elements remain the same.
 
-**Important**: You're updating the visual appearance to SGDS v3 styling while preserving the overall page/component structure. The general layout and arrangement of elements should not change significantly.
+**Important - UX Consistency**: Elements must stay in the same positions. Your product's users have learned where to find things (navigation, buttons, forms, etc.). Preserving element positions ensures users won't be confused or unable to locate features they depend on. You're updating the look (colors, typography, spacing tokens), not rearranging the page structure.
 
 **When to Start**: After Phase 3 is complete and components are using SGDS web components.
 
