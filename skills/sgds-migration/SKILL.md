@@ -184,7 +184,9 @@ SGDS web components use Shadow DOM, which jsdom cannot pierce. The recommended a
 
 ## Phase 4: Migrate Foundation and Styling CSS
 
-**Goal**: Replace old styling systems with SGDS v3 utilities (Tailwind-based with `sgds:` prefix).
+**Goal**: Replace old styling systems with SGDS v3 utilities (Tailwind-based with `sgds:` prefix), **while keeping the UI appearance the same**.
+
+**Important**: This is a direct replacement of CSS classes — no design changes. The UI should look identical after migration. You're swapping the underlying styling approach, not redesigning the application.
 
 **When to Start**: After Phase 3 is complete and components are using SGDS web components.
 
@@ -202,8 +204,9 @@ SGDS web components use Shadow DOM, which jsdom cannot pierce. The recommended a
 - Available utilities: grid, flexbox, spacing (margin/padding/gap), color (text, background, border), typography, border-radius, dimensions, etc.
 - Use `sgds:grid`, `sgds:flex`, `sgds:gap-*`, `sgds:p-*`, `sgds:m-*`, `sgds:text-*`, etc.
 - CSS tokens available for design consistency (colors, spacing, typography)
+- **Match existing styles**: Review the current CSS to ensure replacements maintain the same visual appearance
 
-**Examples**:
+**Examples** (direct style replacement, no UI changes):
 - MUI: `<Box display="grid" gap={2}>` → `<div className="sgds:grid sgds:gap-2">`
 - Chakra: `<Grid gridTemplateColumns="repeat(3, 1fr)">` → `<div className="sgds:grid sgds:grid-cols-3">`
 - v1 Bulma: `<div class="columns">` → `<div className="sgds:flex">`
