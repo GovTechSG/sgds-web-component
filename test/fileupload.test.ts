@@ -196,6 +196,137 @@ describe("sgds-file-upload", () => {
       expect(finalItems?.length).to.equal(0);
     }
   });
+  it("should apply error class when file has error state", async () => {
+    const fileList = [new File(["file1"], "file1.txt")];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    if (input) {
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+      await el.updateComplete;
+
+      el.setFileUploadState(0, "error", "File size exceeds limit");
+      await el.updateComplete;
+
+      const listItem = el.shadowRoot?.querySelector(".file-upload-list-item");
+      expect(listItem?.classList.contains("file-upload-error")).to.be.true;
+    }
+  });
+  it("should display error message when file has error state", async () => {
+    const fileList = [new File(["file1"], "file1.txt")];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    if (input) {
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+      await el.updateComplete;
+
+      const errorMsg = "File size exceeds limit";
+      el.setFileUploadState(0, "error", errorMsg);
+      await el.updateComplete;
+
+      const errorContainer = el.shadowRoot?.querySelector(".invalid-feedback");
+      expect(errorContainer?.textContent).to.equal(errorMsg);
+    }
+  });
+  it("should display error icon when file has error state", async () => {
+    const fileList = [new File(["file1"], "file1.txt")];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    if (input) {
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+      await el.updateComplete;
+
+      el.setFileUploadState(0, "error", "Upload failed");
+      await el.updateComplete;
+
+      const errorContainer = el.shadowRoot?.querySelector(".invalid-feedback-container");
+      const icon = errorContainer?.querySelector('sgds-icon[name="exclamation-circle-fill"]');
+      expect(icon).to.exist;
+    }
+  });
+  it("should disable close button when file is in uploading state", async () => {
+    const fileList = [new File(["file1"], "file1.txt")];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    if (input) {
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+      await el.updateComplete;
+
+      el.setFileUploadState(0, "uploading");
+      await el.updateComplete;
+
+      const closeBtn = el.shadowRoot?.querySelector("sgds-close-button");
+      expect(closeBtn?.hasAttribute("disabled")).to.be.true;
+    }
+  });
+  it("should preserve upload state of remaining files when one is removed", async () => {
+    const fileList = [
+      new File(["file1"], "file1.txt"),
+      new File(["file2"], "file2.txt"),
+      new File(["file3"], "file3.txt")
+    ];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    if (input) {
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+      await el.updateComplete;
+
+      // Set all files to uploading
+      el.setFileUploadState(0, "uploading");
+      el.setFileUploadState(1, "uploading");
+      el.setFileUploadState(2, "uploading");
+      await el.updateComplete;
+
+      // Remove first file
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[0].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      // Files 1 and 2 should still be uploading (now at indices 0 and 1)
+      const spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
+      expect(spinners?.length).to.equal(2);
+    }
+  });
 });
 
 describe("Fileupload validation", () => {
@@ -272,6 +403,58 @@ describe("Fileupload validation", () => {
       await aTimeout(300); // wait for animation to complete
       await fileupload?.updateComplete;
       expect(form.reportValidity()).to.be.false;
+    }
+  });
+});
+
+describe("sgds-file-upload upload state", () => {
+  it("should show spinner when file is in uploading state", async () => {
+    const fileList = [new File(["file1"], "file1.txt")];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    if (input) {
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+      await el.updateComplete;
+
+      // Set file to uploading state
+      el.setFileUploadState(0, "uploading");
+      await el.updateComplete;
+
+      const listItem = el.shadowRoot?.querySelector(".file-upload-list-item");
+      const spinner = listItem?.querySelector("sgds-spinner");
+      expect(spinner).to.exist;
+    }
+  });
+
+  it("should disable close button when file is uploading", async () => {
+    const fileList = [new File(["file1"], "file1.txt")];
+    const dt = new DataTransfer();
+    fileList.forEach(file => {
+      dt.items.add(file);
+    });
+
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    if (input) {
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+      await el.updateComplete;
+
+      el.setFileUploadState(0, "uploading");
+      await el.updateComplete;
+
+      const closeBtn = el.shadowRoot?.querySelector("sgds-close-button");
+      expect(closeBtn?.hasAttribute("disabled")).to.be.true;
     }
   });
 });

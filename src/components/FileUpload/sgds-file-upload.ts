@@ -8,7 +8,9 @@ import fileUploadStyles from "./file-upload.css";
 import FormControlElement from "../../base/form-control-element";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
+import { formatFileSize } from "../../utils/file";
 import SgdsIcon from "../Icon/sgds-icon";
+import SgdsSpinner from "../Spinner/sgds-spinner";
 import type { ISgdsFileUploadFilesSelectedEventDetail } from "./types";
 export type { ISgdsFileUploadFilesSelectedEventDetail };
 
@@ -27,7 +29,8 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   static dependencies = {
     "sgds-button": SgdsButton,
     "sgds-close-button": SgdsCloseButton,
-    "sgds-icon": SgdsIcon
+    "sgds-icon": SgdsIcon,
+    "sgds-spinner": SgdsSpinner
   };
 
   /** Allows multiple files to be listed for uploading */
@@ -53,6 +56,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
 
   @state()
   private exitingIndex: number | null = null;
+
+  @state()
+  private fileMetadata: Map<number, { uploading: boolean; error?: string }> = new Map();
 
   /**
    * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
@@ -84,6 +90,17 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
    */
   public get files(): File[] {
     return this.selectedFiles;
+  }
+
+  /**
+   * Set the upload state of a file at the given index
+   */
+  public setFileUploadState(index: number, state: "uploading" | "success" | "error", error?: string) {
+    this.fileMetadata.set(index, {
+      uploading: state === "uploading",
+      error: error
+    });
+    this.requestUpdate();
   }
 
   private _setFileList(files: FileList) {
@@ -140,7 +157,6 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       // Re-populate selected files to the lists
       this._setFileList(fileBuffer.files);
       this.selectedFiles = Array.from(fileBuffer.files);
-      this.exitingIndex = null;
 
       this.requestUpdate();
 
@@ -273,21 +289,44 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   }
 
   render() {
-    const getCheckedIcon = () => {
-      return html`<sgds-icon name="check-circle-fill" class="${this.invalid ? "invalid" : "valid"}"></sgds-icon>`;
+    const getCheckedIcon = (metadata?: { uploading: boolean; error?: string }) => {
+      const iconClass = this.invalid || metadata?.error ? "invalid" : "valid";
+      return html`<sgds-icon name="check-circle-fill" class="${iconClass}"></sgds-icon>`;
     };
 
     const listItems = this.selectedFiles.map(
-      (file, index) => html`
-        <li key=${index} class="file-upload-list-item ${this.exitingIndex === index ? "file-upload-exit" : ""}">
-          ${getCheckedIcon()}
-          <span class="filename">${file.name}</span>
-          <sgds-close-button
-            aria-label="remove the file"
-            @click=${() => this._removeFileHandler(index)}
-          ></sgds-close-button>
-        </li>
-      `
+      (file, index) => {
+        const metadata = this.fileMetadata.get(index);
+        return html`
+          <div class="file-upload-list-item-container" key=${index}>
+            <li
+              key=${index}
+              class="file-upload-list-item ${this.exitingIndex === index ? "file-upload-exit" : ""} ${metadata?.error ? "file-upload-error" : ""}"
+            >
+              ${metadata?.uploading
+                ? html`<sgds-spinner size="sm"></sgds-spinner>`
+                : getCheckedIcon(metadata)
+              }
+              <span class="filename">${file.name}</span>
+              <span class="filesize">${formatFileSize(file.size)}</span>
+              <sgds-close-button
+                aria-label="remove the file"
+                ?disabled=${metadata?.uploading}
+                @click=${() => this._removeFileHandler(index)}
+              ></sgds-close-button>
+            </li>
+            ${metadata?.error
+              ? html`
+                  <div class="invalid-feedback-container">
+                    <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+                    <div class="invalid-feedback">${metadata.error}</div>
+                  </div>
+                `
+              : ""
+            }
+          </div>
+        `;
+      }
     );
 
     return html`

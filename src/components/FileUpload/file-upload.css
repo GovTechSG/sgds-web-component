@@ -16,6 +16,9 @@
   gap: var(--sgds-form-gap-xl);
   list-style-type: none;
 }
+.filesize {
+  color: var(--sgds-form-color-subtle);
+}
 
 @keyframes fileUploadEnter {
   from {
@@ -38,7 +41,11 @@
     transform: translateY(-8px);
   }
 }
-
+.file-upload-list-item-container {
+  display: flex;
+  gap: var(--sgds-form-gap-md);
+  flex-direction: column;
+}
 .file-upload-list-item {
   display: flex;
   align-items: center;
@@ -48,6 +55,11 @@
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
   border-radius: var(--sgds-form-border-radius-md);
   animation: fileUploadEnter var(--sgds-motion-duration-standard) var(--sgds-motion-easing-enter);
+  position: relative;
+}
+
+.file-upload-list-item.file-upload-error {
+  border: var(--sgds-form-border-width-default) solid var(--sgds-form-danger-border-color-default);
 }
 
 .file-upload-list-item.file-upload-exit {
@@ -56,6 +68,24 @@
 
 .file-upload-list-item span:not(:first-of-type) {
   cursor: pointer;
+}
+
+.file-upload-item-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sgds-form-gap-lg);
+}
+
+.file-upload-item-error sgds-icon {
+  color: var(--sgds-color-muted);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.file-upload-item-error-message {
+  color: var(--sgds-form-danger-color-default);
+  font-size: var(--sgds-font-size-12);
+  line-height: var(--sgds-line-height-16);
 }
 
 ul {
@@ -73,7 +103,9 @@ label {
 }
 
 sgds-close-button {
-  margin-left: auto;
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
 sgds-icon.valid {
@@ -101,7 +133,6 @@ sgds-icon.invalid {
   line-height: var(--sgds-line-height-20);
 }
 
-
 .drag-drop-zone:focus,
 .drag-drop-zone:focus-visible {
   outline: var(--sgds-form-outline-focus);
@@ -126,7 +157,7 @@ sgds-icon.invalid {
   border: var(--sgds-form-border-width-default) solid var(--sgds-form-danger-border-color-default);
 }
 
-:host([invalid]:not([disabled])) .drag-drop-zone:focus-visible, 
+:host([invalid]:not([disabled])) .drag-drop-zone:focus-visible,
 :host([invalid]:not([disabled])) .drag-drop-zone:focus {
   outline: var(--sgds-border-width-2) solid var(--sgds-form-danger-color-default);
   outline-offset: var(--sgds-form-outline-offset-focus);

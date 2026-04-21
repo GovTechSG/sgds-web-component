@@ -1,0 +1,98 @@
+## Drag and Drop Variant
+
+Basic drag and drop file upload interface.
+
+<Canvas of={FileUploadStories.DragAndDrop} />
+
+## File States
+
+Control the upload state of individual files programmatically.
+
+```typescript
+public setFileUploadState(
+  index: number,
+  state: 'uploading' | 'success' | 'error',
+  error?: string
+): void
+```
+
+### Parameters
+
+- **index** - The file index in the list (0-based)
+- **state** - The upload state: `'uploading'`, `'success'`, or `'error'`
+- **error** - Error message to display (only used with `'error'` state)
+
+### Uploading State
+
+Show loading spinners while files are being uploaded to the server.
+
+#### Default Variant
+<Canvas of={FileUploadStories.UploadingStateDefault} />
+
+#### Drag and Drop Variant
+<Canvas of={FileUploadStories.UploadingStateDragDrop} />
+
+### Error State
+
+Display error messages for individual files when upload fails.
+
+#### Default Variant
+<Canvas of={FileUploadStories.ErrorStateDefault} />
+
+#### Drag and Drop Variant
+<Canvas of={FileUploadStories.ErrorStateDragDrop} />
+
+### Success State
+
+Display all files with successful upload status.
+
+#### Default Variant
+<Canvas of={FileUploadStories.SuccessStateDefault} />
+
+#### Drag and Drop Variant
+<Canvas of={FileUploadStories.SuccessStateDragDrop} />
+
+## Upload to Server
+
+Demonstrates the complete workflow for uploading files to a server. Select files to see them transition through uploading, success, and error states.
+
+<Canvas of={FileUploadStories.UploadToServer} />
+
+### Implementation Example
+
+```typescript
+const fileUpload = document.querySelector('sgds-file-upload');
+
+fileUpload.addEventListener('sgds-files-selected', async (e) => {
+  const files = e.detail;
+
+  // Show uploading state for all files
+  for (let i = 0; i < files.length; i++) {
+    fileUpload.setFileUploadState(i, 'uploading');
+  }
+
+  try {
+    // Upload files to your server
+    for (let i = 0; i < files.length; i++) {
+      const formData = new FormData();
+      formData.append('file', files[i]);
+
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        fileUpload.setFileUploadState(i, 'success');
+      } else {
+        fileUpload.setFileUploadState(i, 'error', 'Upload failed. Please try again.');
+      }
+    }
+  } catch (error) {
+    // Mark file as error if upload fails
+    for (let i = 0; i < files.length; i++) {
+      fileUpload.setFileUploadState(i, 'error', error.message);
+    }
+  }
+});
+```

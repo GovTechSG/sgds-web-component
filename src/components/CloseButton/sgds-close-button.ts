@@ -14,8 +14,15 @@ export class SgdsCloseButton extends SgdsElement {
   @property({ type: String, reflect: true }) size: "sm" | "md" = "md";
   /** The tone of the close button */
   @property({ type: String, reflect: true }) tone: "default" | "fixed-dark" | "fixed-light" = "default";
+  /** Disables the close button, preventing click events */
+  @property({ type: Boolean, reflect: true }) disabled = false;
 
-  private _handleClick() {
+  private _handleClick(e: Event) {
+    if (this.disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
     this.removeEventListener("click", this._clickHandler);
     this.addEventListener("click", this._clickHandler);
   }
@@ -32,7 +39,7 @@ export class SgdsCloseButton extends SgdsElement {
   }
   render() {
     return html`
-      <button class="btn-close" aria-label="Close button" @click=${this._handleClick}>
+      <button class="btn-close" aria-label="Close button" ?disabled=${this.disabled} @click=${(e: Event) => this._handleClick(e)}>
         <sgds-icon name="cross" size=${this.size}></sgds-icon>
       </button>
     `;

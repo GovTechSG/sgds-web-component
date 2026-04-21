@@ -78,6 +78,97 @@
         <h2>Drag and Drop Disabled</h2>
         <sgds-file-upload label="Disabled Drag Zone" variant="drag-and-drop" name="dragdrop-disabled" disabled multiple>Choose Files</sgds-file-upload>
       </div>
+
+      <div>
+        <h2>With Upload State (Simulate Server Upload)</h2>
+        <sgds-file-upload
+          id="uploadStateDemo"
+          label="Upload to Server"
+          name="upload-demo"
+          multiple
+          hintText="Select files to automatically simulate upload to server"
+        >
+          Choose Files
+        </sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>Drag and Drop with Upload State (Simulate Server Upload)</h2>
+        <sgds-file-upload
+          id="uploadStateDragDropDemo"
+          label="Upload to Server"
+          variant="drag-and-drop"
+          name="upload-demo-drag"
+          multiple
+        >
+          Choose Files
+        </sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>With Error State (Simulate Upload Failure)</h2>
+        <sgds-file-upload
+          id="uploadStateErrorDemo"
+          label="Upload to Server"
+          name="upload-demo-error"
+          multiple
+          hintText="Select files to simulate upload with errors on even-indexed files"
+        >
+          Choose Files
+        </sgds-file-upload>
+      </div>
     </div>
+
+    <script>
+      const fileUpload = document.getElementById('uploadStateDemo');
+      const fileUploadDragDrop = document.getElementById('uploadStateDragDropDemo');
+      const fileUploadError = document.getElementById('uploadStateErrorDemo');
+
+      async function handleFileUpload(fileUploadEl, files) {
+        // Show spinner while uploading for each file
+        for (let i = 0; i < files.length; i++) {
+          fileUploadEl.setFileUploadState(i, 'uploading');
+        }
+
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Mark all as success
+        for (let i = 0; i < files.length; i++) {
+          fileUploadEl.setFileUploadState(i, 'success');
+        }
+      }
+
+      async function handleFileUploadWithErrors(fileUploadEl, files) {
+        // Show spinner while uploading for each file
+        for (let i = 0; i < files.length; i++) {
+          fileUploadEl.setFileUploadState(i, 'uploading');
+        }
+
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Mark even-indexed files as error, odd-indexed as success
+        for (let i = 0; i < files.length; i++) {
+          if (i % 2 === 0) {
+            fileUploadEl.setFileUploadState(i, 'error', 'File size exceeds maximum limit of 10MB');
+          } else {
+            fileUploadEl.setFileUploadState(i, 'success');
+          }
+        }
+      }
+
+      fileUpload.addEventListener('sgds-files-selected', async (e) => {
+        handleFileUpload(fileUpload, e.detail);
+      });
+
+      fileUploadDragDrop.addEventListener('sgds-files-selected', async (e) => {
+        handleFileUpload(fileUploadDragDrop, e.detail);
+      });
+
+      fileUploadError.addEventListener('sgds-files-selected', async (e) => {
+        handleFileUploadWithErrors(fileUploadError, e.detail);
+      });
+    </script>
   </body>
 </html>
