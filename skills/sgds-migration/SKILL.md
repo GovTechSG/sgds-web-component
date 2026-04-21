@@ -161,66 +161,33 @@ Once SGDS is installed:
 
 ## Phase 3: Set Up Testing Environment and Migrate Tests
 
-**Goal**: Adapt your test suite to work with SGDS web components (which use Shadow DOM).
+**Goal**: Migrate your test suite to run in a real browser environment (required for Shadow DOM testing).
 
-The path forward depends on your framework (from Phase 1).
+**Key Principle**: SGDS web components use Shadow DOM, which jsdom cannot pierce. Your test runner must use a real browser (Chromium, Firefox, etc.) to access Shadow DOM internals.
 
-### React + Jest / Vitest (Fully Supported)
+### React (Fully Supported)
 
-**Read**: `reference/react-test-migration.md` for the complete React migration workflow.
-
-**Summary**:
-- Migrate from **RTL (React Testing Library) + Jest (jsdom)** to **Vitest + vitest-browser-react**
-- jsdom cannot pierce Shadow DOM; vitest-browser runs tests in real Chromium
-- Use Playwright locators (`locator.getByRole()`) instead of RTL queries
-- Write tests before swapping components (test-first approach)
+**Read**: `reference/react-test-migration.md` for the complete React migration workflow including setup, testing patterns, and examples.
 
 **Time Estimate**: 1–2 weeks depending on test coverage
 
-**Key Tools**:
-- `vitest` + `@vitest/browser`
-- `@vitest/browser-playwright` (Chromium provider)
-- `vitest-browser-react` for React integration
-
-
-#### No Existing Tests?
-
-If the application has no existing tests (or they couldn't be detected):
-
-1. **Still proceed** — Set up vitest-browser-react environment anyway
-2. **Create a simple template** — Provide one basic test case (e.g., Button component rendering & click)
-3. **Do NOT write business logic tests** — User is responsible for product-specific test cases
-4. **Swap components** — Proceed with migration of UI components in source code
-5. **User extends** — User can build upon the template to add their own tests
-
-This ensures the testing infrastructure is ready, even if you need to build the test suite incrementally.
+**No Existing Tests?** Still proceed — the reference file includes guidance for setting up the test environment and creating a simple template test even if your codebase has no tests today.
 
 ### Vue (Coming Soon)
 
-Vue support is in progress. Conceptually:
-- Migrate from Jest (jsdom) to **Vitest + vitest-browser-vue**
-- Use Playwright locators for Shadow DOM queries
-- Vue reactivity works the same in real browser
-
-**Placeholder**: Check back or open a GitHub issue for timeline.
+Same principle: migrate from jsdom-based runners to a real browser test runner. Setup will be framework-specific, but Shadow DOM access patterns remain the same (Playwright locators).
 
 ### Angular (Coming Soon)
 
-Angular support is in progress. Conceptually:
-- Migrate from Karma to **Playwright component testing**
-- Shadow DOM support via real browser execution
-- TestBed wiring remains similar
-
-**Placeholder**: Check back or open a GitHub issue for timeline.
+Same principle: real browser required for Shadow DOM. Setup will be framework-specific.
 
 ### Vanilla JS (Coming Soon)
 
-Vanilla JS support is in progress. Conceptually:
-- Any test runner that supports real browsers (Playwright, Cypress)
-- Shadow DOM access via standard DOM APIs + Playwright locators
-- No framework-specific bindings needed
+Same principle: any real browser test runner (Playwright, Cypress) works.
 
-**Placeholder**: Check back or open a GitHub issue for timeline.
+---
+
+**For all frameworks**: The setup process is framework-specific knowledge (standard vitest, Playwright, or Cypress docs). The key insight we provide is that you **must use a real browser**, and the React path demonstrates the pattern you'd follow for other frameworks.
 
 ---
 
