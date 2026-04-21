@@ -55,6 +55,29 @@
         <h2>Disabled</h2>
         <sgds-file-upload label="Disabled Upload" name="disabled" disabled> Choose File </sgds-file-upload>
       </div>
+
+      <div>
+        <h2>Drag and Drop Variant</h2>
+        <sgds-file-upload label="Drop Files Here" variant="drag-and-drop" name="dragdrop" multiple>Choose Files</sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>Drag and Drop with Validation</h2>
+        <sgds-file-upload
+          label="Upload Documents"
+          variant="drag-and-drop"
+          name="dragdrop-required"
+          accept=".pdf,.doc,.docx"
+          required
+          hasFeedback
+          invalidFeedback="Please upload at least one document"
+        >Choose Files</sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>Drag and Drop Disabled</h2>
+        <sgds-file-upload label="Disabled Drag Zone" variant="drag-and-drop" name="dragdrop-disabled" disabled multiple>Choose Files</sgds-file-upload>
+      </div>
     </div>
   </body>
 </html>

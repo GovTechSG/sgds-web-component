@@ -15,7 +15,7 @@ export type { ISgdsFileUploadFilesSelectedEventDetail };
 /**
  * @summary Allows users to upload files of various sizes and formats
  *
- * @slot default - Label for file upload button
+ * @slot default - Label for file upload button (used in default variant)
  *
  * @event sgds-files-selected - Emitted when files are selected for uploading. Access the selected files with event.target.detail
  * @eventDetail {ISgdsFileUploadFilesSelectedEventDetail} sgds-files-selected
@@ -44,6 +44,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
 
   /** Makes the input as a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
+
+  /** Variant of the file upload component: "default" or "drag-and-drop" */
+  @property({ type: String, reflect: true }) variant: "default" | "drag-and-drop" = "default";
 
   @state()
   private selectedFiles: File[] = [];
@@ -85,6 +88,8 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   }
 
   private inputRef = createRef<HTMLInputElement>();
+  private _dragZoneRef = createRef<HTMLDivElement>();
+  private _dragCounter = 0;
 
   private _handleClick(event: Event) {
     event.preventDefault();
@@ -124,9 +129,10 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     this._setFileList(fileBuffer.files);
     this.selectedFiles = Array.from(fileBuffer.files);
 
-    // Trigger a re-render of the component to update the list of selected files
     this.requestUpdate();
-    this._mixinValidate(this.input);
+
+    // Dispatch change event to trigger validation
+    inputElement.dispatchEvent(new Event("change", { bubbles: true }));
   }
 
   private _clearAllFiles() {
@@ -171,6 +177,85 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       </div>
     `;
   }
+  private _handleDragEnter(e: DragEvent) {
+    e.preventDefault();
+    this._dragCounter++;
+    if (this._dragCounter === 1) {
+      this._dragZoneRef.value?.focus();
+    }
+  }
+
+  private _handleDragOver(e: DragEvent) {
+    e.preventDefault();
+    if (e.dataTransfer) {
+      e.dataTransfer.dropEffect = "copy";
+    }
+  }
+
+  private _handleDragLeave(e: DragEvent) {
+    this._dragCounter--;
+    if (this._dragCounter === 0) {
+      this._dragZoneRef.value?.blur();
+    }
+  }
+
+  private _handleDrop(e: DragEvent) {
+    e.preventDefault();
+    this._dragCounter = 0;
+    this._dragZoneRef.value?.blur();
+
+    if (this.disabled || !e.dataTransfer) {
+      return;
+    }
+
+    let files = Array.from(e.dataTransfer.files);
+
+    // Apply multiple constraint
+    if (!this.multiple && files.length > 1) {
+      files = files.slice(0, 1);
+    }
+
+    // Sync files into inputRef using DataTransfer
+    const fileBuffer = new DataTransfer();
+    files.forEach(file => fileBuffer.items.add(file));
+    const inputElement = this.inputRef.value;
+    if (inputElement) {
+      inputElement.files = fileBuffer.files;
+      this.selectedFiles = Array.from(fileBuffer.files);
+      this._setFileList(fileBuffer.files);
+      this._mixinValidate(this.input);
+    }
+  }
+
+  private _renderUploadZone() {
+    if (this.variant === "drag-and-drop") {
+      return html`
+        <div
+          class="drag-drop-zone"
+          tabindex=${this.disabled ? "-1" : "0"}
+          ${ref(this._dragZoneRef)}
+          @dragenter=${this._handleDragEnter}
+          @dragover=${this._handleDragOver}
+          @dragleave=${this._handleDragLeave}
+          @drop=${this._handleDrop}
+        >
+          <sgds-icon name="upload" size="lg"></sgds-icon>
+          <div class="drag-drop-text">Drag and drop files here</div>
+          <sgds-button size="sm" variant="outline" tone="brand" ?disabled=${this.disabled} @click=${this._handleClick}>
+            <slot></slot>
+          </sgds-button>
+        </div>
+      `;
+    }
+
+    return html`
+      <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this._handleClick}>
+        <label for=${this._controlId}><slot></slot></label>
+        <sgds-icon slot="rightIcon" name="upload"></sgds-icon>
+      </sgds-button>
+    `;
+  }
+
   render() {
     const getCheckedIcon = () => {
       return html`<sgds-icon name="check-circle-fill" class="${this.invalid ? "invalid" : "valid"}"></sgds-icon>`;
@@ -202,11 +287,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
           ?disabled=${this.disabled}
         />
         <div class="file-upload-container">
-          ${this._renderLabel()}
-          <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this._handleClick}>
-            <label for=${this._controlId}><slot></slot></label>
-            <sgds-icon slot="rightIcon" name="upload"></sgds-icon>
-          </sgds-button>
+          ${this._renderLabel()} ${this._renderUploadZone()}
           ${this.hasFeedback && this.invalid ? this._renderFeedback() : this._renderHintText()}
         </div>
         <ul class="file-upload-list">

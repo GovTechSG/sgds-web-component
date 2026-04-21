@@ -1,7 +1,7 @@
 import "./sgds-web-component";
 import { expect, fixture, oneEvent, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
-import type { SgdsFileUpload, SgdsButton } from "../src/components";
+import type { SgdsFileUpload, SgdsButton, SgdsIcon } from "../src/components";
 import SgdsCloseButton from "../src/components/CloseButton/sgds-close-button";
 
 describe("sgds-file-upload", () => {
@@ -218,5 +218,115 @@ describe("Fileupload validation", () => {
       await fileupload?.updateComplete;
       expect(form.reportValidity()).to.be.false;
     }
+  });
+});
+
+describe("sgds-file-upload variant prop", () => {
+  it("renders default variant with button when variant is 'default'", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload variant="default"></sgds-file-upload>`);
+
+    const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
+    expect(button).to.exist;
+  });
+
+  it("renders default variant by default when variant prop is not specified", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload></sgds-file-upload>`);
+
+    const button = el.shadowRoot?.querySelector<HTMLElement>("sgds-button");
+    expect(button).to.exist;
+  });
+
+  it("renders drag-and-drop variant with upload icon and text when variant is 'drag-and-drop'", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload variant="drag-and-drop"></sgds-file-upload>`);
+
+    const dragDropDiv = el.shadowRoot?.querySelector<HTMLElement>(".drag-drop-zone");
+    expect(dragDropDiv).to.exist;
+
+    // Check for icon
+    const icon = dragDropDiv?.querySelector<SgdsIcon>("sgds-icon");
+    expect(icon).to.exist;
+    expect(icon?.getAttribute("name")).to.equal("upload");
+    expect(icon?.getAttribute("size")).to.equal("lg");
+
+    // Check for text container
+    const textDiv = dragDropDiv?.querySelector<HTMLElement>(".drag-drop-text");
+    expect(textDiv).to.exist;
+  });
+
+  it("drag-and-drop zone should have correct styling classes", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload variant="drag-and-drop"></sgds-file-upload>`);
+
+    const dragDropDiv = el.shadowRoot?.querySelector<HTMLElement>(".drag-drop-zone");
+    expect(dragDropDiv?.classList.contains("drag-drop-zone")).to.be.true;
+  });
+});
+
+describe("sgds-file-upload drag-and-drop interactions", () => {
+  function makeDragEvent(type: string, files: File[] = []): DragEvent {
+    const dt = new DataTransfer();
+    files.forEach(f => dt.items.add(f));
+    return new DragEvent(type, { bubbles: true, cancelable: true, dataTransfer: dt });
+  }
+
+  it("drag-drop zone has tabindex='0' to be focusable", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload variant="drag-and-drop"></sgds-file-upload>`);
+    const zone = el.shadowRoot?.querySelector<HTMLElement>(".drag-drop-zone");
+    expect(zone?.getAttribute("tabindex")).to.equal("0");
+  });
+
+  it("dragenter focuses the drag-drop zone", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload variant="drag-and-drop"></sgds-file-upload>`);
+    const zone = el.shadowRoot?.querySelector<HTMLElement>(".drag-drop-zone");
+    zone?.dispatchEvent(makeDragEvent("dragenter"));
+    expect(el.shadowRoot?.activeElement).to.equal(zone);
+  });
+
+  it("dragleave after dragenter blurs the drag-drop zone", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload variant="drag-and-drop"></sgds-file-upload>`);
+    const zone = el.shadowRoot?.querySelector<HTMLElement>(".drag-drop-zone");
+    zone?.dispatchEvent(makeDragEvent("dragenter"));
+    zone?.dispatchEvent(makeDragEvent("dragleave"));
+    expect(el.shadowRoot?.activeElement).to.not.equal(zone);
+  });
+
+  it("drop appends files to the file list", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload variant="drag-and-drop" multiple></sgds-file-upload>`
+    );
+    const zone = el.shadowRoot?.querySelector<HTMLElement>(".drag-drop-zone");
+    const file = new File(["content"], "test.pdf", { type: "application/pdf" });
+    zone?.dispatchEvent(makeDragEvent("drop", [file]));
+    await el.updateComplete;
+
+    const items = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+    expect(items?.length).to.equal(1);
+    expect(el.shadowRoot?.querySelector(".filename")?.textContent).to.equal("test.pdf");
+  });
+
+  it("drop with multiple=false keeps only the first file", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload variant="drag-and-drop"></sgds-file-upload>`);
+    const zone = el.shadowRoot?.querySelector<HTMLElement>(".drag-drop-zone");
+    const files = [
+      new File(["a"], "a.pdf", { type: "application/pdf" }),
+      new File(["b"], "b.pdf", { type: "application/pdf" })
+    ];
+    zone?.dispatchEvent(makeDragEvent("drop", files));
+    await el.updateComplete;
+
+    const items = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+    expect(items?.length).to.equal(1);
+  });
+
+  it("drop does nothing when disabled", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload variant="drag-and-drop" disabled></sgds-file-upload>`
+    );
+    const zone = el.shadowRoot?.querySelector<HTMLElement>(".drag-drop-zone");
+    const file = new File(["content"], "test.pdf", { type: "application/pdf" });
+    zone?.dispatchEvent(makeDragEvent("drop", [file]));
+    await el.updateComplete;
+
+    const items = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+    expect(items?.length).to.equal(0);
   });
 });
