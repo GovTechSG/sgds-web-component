@@ -184,9 +184,9 @@ SGDS web components use Shadow DOM, which jsdom cannot pierce. The recommended a
 
 ## Phase 4: Migrate Foundation and Styling CSS
 
-**Goal**: Replace old styling systems with SGDS v3 utilities (Tailwind-based with `sgds:` prefix), **while keeping the UI appearance the same**.
+**Goal**: Replace old styling systems with SGDS v3 utilities (Tailwind-based with `sgds:` prefix). The visual styling will now match SGDS v3 brand and design system, but the general layout/arrangement of elements remains the same.
 
-**Important**: This is a direct replacement of CSS classes — no design changes. The UI should look identical after migration. You're swapping the underlying styling approach, not redesigning the application.
+**Important**: You're updating the visual appearance to SGDS v3 styling while preserving the overall page/component structure. The general layout and arrangement of elements should not change significantly.
 
 **When to Start**: After Phase 3 is complete and components are using SGDS web components.
 
@@ -204,13 +204,15 @@ SGDS web components use Shadow DOM, which jsdom cannot pierce. The recommended a
 - Available utilities: grid, flexbox, spacing (margin/padding/gap), color (text, background, border), typography, border-radius, dimensions, etc.
 - Use `sgds:grid`, `sgds:flex`, `sgds:gap-*`, `sgds:p-*`, `sgds:m-*`, `sgds:text-*`, etc.
 - CSS tokens available for design consistency (colors, spacing, typography)
-- **Match existing styles**: Review the current CSS to ensure replacements maintain the same visual appearance
+- **Preserve layout**: Keep the same grid/flex arrangement, just update to SGDS utilities and styling
 
-**Examples** (direct style replacement, no UI changes):
-- MUI: `<Box display="grid" gap={2}>` → `<div className="sgds:grid sgds:gap-2">`
-- Chakra: `<Grid gridTemplateColumns="repeat(3, 1fr)">` → `<div className="sgds:grid sgds:grid-cols-3">`
-- v1 Bulma: `<div class="columns">` → `<div className="sgds:flex">`
-- v2 Bootstrap: `<Row><Col md={6}/>` → `<div className="sgds:flex"><div className="sgds:flex-1">`
+**Examples** (layout preserved, visual styling updated to SGDS v3):
+- MUI: `<Box display="grid" gap={2}>` → `<div className="sgds:grid sgds:gap-2">` (same grid, SGDS spacing)
+- Chakra: `<Grid gridTemplateColumns="repeat(3, 1fr)">` → `<div className="sgds:grid sgds:grid-cols-3">` (same 3-col layout, SGDS utilities)
+- v1 Bulma: `<div class="columns">` → `<div className="sgds:flex">` (same flex arrangement, SGDS styling)
+- v2 Bootstrap: `<Row><Col md={6}/>` → `<div className="sgds:flex"><div className="sgds:flex-1">` (same layout, SGDS utilities)
+
+**Result**: Application now uses SGDS v3 brand colors, typography, and spacing tokens while maintaining the original information architecture and layout decisions.
 
 **Time Estimate**: 1–2 weeks depending on size of CSS surface area
 
