@@ -39,8 +39,6 @@ Ask the user about their current setup:
 4. **Build Tool**: Create React App, Next.js, Vite, Angular CLI, Webpack?
 5. **Node/Package Manager**: npm, pnpm, yarn?
 
-**IMPORTANT for SGDS v1/v2 users**: These are major framework upgrades, not just library swaps. See "SGDS v1/v2 Migrations" section below.
-
 ### Analysis Tools
 
 For **React projects**, you can use the provided analysis script to scan the codebase:
