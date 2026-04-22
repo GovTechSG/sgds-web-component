@@ -1,0 +1,95 @@
+<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body>
+  <sgds-masthead></sgds-masthead>
+  <sgds-mainnav>
+    <strong slot="brand">My Organisation</strong>
+  </sgds-mainnav>
+
+  <div class="sgds:bg-surface-default sgds:min-h-screen">
+    <div class="sgds-container sgds:py-layout-xl">
+
+      <!-- Feature Block -->
+      <section>
+
+        <!-- Slot: Header -->
+        <div class="sgds:flex sgds:flex-col sgds:items-center sgds:text-center sgds:gap-component-sm sgds:mb-layout-lg">
+
+          <!-- Overline -->
+          <p class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-muted">
+            Why It Matters
+          </p>
+
+          <!-- Heading -->
+          <h2 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-default sgds:max-w-container-md">
+            Everything You Need in One Place
+          </h2>
+
+          <!-- Body -->
+          <p class="sgds:text-body-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:text-muted sgds:max-w-container-sm">
+            Designed to reduce complexity and save you time across all your daily needs.
+          </p>
+
+        </div>
+
+        <!-- Slot: Feature Cards -->
+        <div class="sgds-grid">
+
+          <!-- Card 1: Secure & Trusted -->
+          <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+            <div class="sgds:bg-surface-raised sgds:rounded-lg sgds:p-layout-md sgds:h-full sgds:flex sgds:flex-col sgds:gap-component-sm">
+              <div class="sgds:inline-flex sgds:items-center sgds:justify-center sgds:w-12 sgds:h-12 sgds:rounded-md sgds:bg-accent-surface-muted sgds:shrink-0">
+                <sgds-icon name="shield-check" size="24"></sgds-icon>
+              </div>
+              <p class="sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-muted sgds:uppercase sgds:text-overline-md">
+                Secure &amp; Trusted
+              </p>
+              <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-default">
+                Built on government-grade security standards trusted by agencies across Singapore.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2: Mobile-First -->
+          <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+            <div class="sgds:bg-surface-raised sgds:rounded-lg sgds:p-layout-md sgds:h-full sgds:flex sgds:flex-col sgds:gap-component-sm">
+              <div class="sgds:inline-flex sgds:items-center sgds:justify-center sgds:w-12 sgds:h-12 sgds:rounded-md sgds:bg-accent-surface-muted sgds:shrink-0">
+                <sgds-icon name="device-mobile" size="24"></sgds-icon>
+              </div>
+              <p class="sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-muted sgds:uppercase sgds:text-overline-md">
+                Mobile-First
+              </p>
+              <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-default">
+                Fully accessible on any device, anytime — optimised for residents on the go.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3: Fast & Reliable -->
+          <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+            <div class="sgds:bg-surface-raised sgds:rounded-lg sgds:p-layout-md sgds:h-full sgds:flex sgds:flex-col sgds:gap-component-sm">
+              <div class="sgds:inline-flex sgds:items-center sgds:justify-center sgds:w-12 sgds:h-12 sgds:rounded-md sgds:bg-accent-surface-muted sgds:shrink-0">
+                <sgds-icon name="lightning" size="24"></sgds-icon>
+              </div>
+              <p class="sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-muted sgds:uppercase sgds:text-overline-md">
+                Fast &amp; Reliable
+              </p>
+              <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-default">
+                99.9% uptime with instant service responses across the entire platform.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <sgds-footer></sgds-footer>
+</body>

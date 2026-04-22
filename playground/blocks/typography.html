@@ -1,0 +1,34 @@
+<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body>
+  <sgds-masthead></sgds-masthead>
+  <sgds-mainnav>
+    <sgds-mainnav-item slot="start">
+      <a href="/">My App</a>
+    </sgds-mainnav-item>
+  </sgds-mainnav>
+
+  <div class="sgds:bg-surface-default sgds:min-h-screen">
+    <div class="sgds:w-container sgds:mx-auto sgds:py-layout-md">
+
+      <!-- Section heading -->
+      <div class="sgds:flex sgds:flex-col">
+        <div class="sgds:flex sgds:items-center sgds:justify-between">
+          <h2 class="sgds:text-heading-lg sgds:font-bold sgds:leading-lg sgds:tracking-tight sgds:max-w-container-md">
+            Section Heading
+          </h2>
+          <sgds-button size="sm">Action</sgds-button>
+        </div>
+        <p class="sgds:text-body-md sgds:leading-xs sgds:text-body-subtle sgds:max-w-container-md">
+          Supporting body text that provides context or description for the section above.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</body>
