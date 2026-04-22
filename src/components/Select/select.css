@@ -2,6 +2,12 @@
   display: block;
   position: relative;
 }
+
+input.form-control {
+  caret-color: transparent;
+  cursor: default;
+}
+
 .dropdown {
   display: flex;
   height: 100%;
