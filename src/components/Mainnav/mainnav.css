@@ -65,13 +65,7 @@ nav > .navbar-body .navbar-nav {
 }
 
 nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown)) {
-  padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
-}
-
-@media screen and (max-width: 767px) {
-  nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown)) {
-    padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
-  }
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
 }
 
 .navbar-collapse {
