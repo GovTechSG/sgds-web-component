@@ -249,6 +249,10 @@ slot[name="non-collapsible"] {
   margin-left: auto;
 }
 
+slot[name="non-collapsible"].non-collapsible-empty {
+  display: none;
+}
+
 .slot-end {
   display: flex;
   margin-left: auto;
