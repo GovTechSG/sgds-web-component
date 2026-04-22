@@ -23,6 +23,12 @@ This skill assumes familiarity with:
 - **Vitest Browser (with vitest-browser-react)** — [Official docs](https://vitest.dev/guide/browser.html)
 - **Playwright** — [Official docs](https://playwright.dev/)
 
+### Jest → Vitest API Migration
+
+For comprehensive API migration (test functions, assertions, mocking, etc.), refer to the [official Vitest migration guide](https://vitest.dev/guide/migration.html#jest).
+
+This skill focuses on **SGDS-specific patterns** on top of that foundation.
+
 ## Why Migrate to Vitest + Vitest Browser for SGDS
 
 The key advantage: **Shadow DOM support**. SGDS web components use shadow DOM, which jsdom cannot test. Using vitest with `vitest-browser-react` (with Playwright as the browser provider) runs tests in a real Chromium browser, enabling:
@@ -40,6 +46,36 @@ For detailed API documentation on the migration from RTL to vitest-browser-react
 - [vitest-browser-react API](https://vitest.dev/guide/browser.html#libraries-and-frameworks)
 - [Playwright Locator API](https://playwright.dev/docs/api/class-locator)
 
+## Setting Up SGDS in Your Test Environment
+
+Before writing any tests, SGDS web components must be available in your test environment. Add a `vitest.setup.ts` file:
+
+```typescript
+// vitest.setup.ts - Runs once before all tests
+
+// Import SGDS CSS for vitest browser tests
+import "@govtechsg/sgds-web-component/themes/day.css";
+import "@govtechsg/sgds-web-component/css/sgds.css";
+import "@govtechsg/sgds-web-component";
+
+// Optional: Set up global test utilities, mocks, etc.
+```
+
+Then reference it in your `vitest.config.ts`:
+
+```typescript
+export default defineConfig({
+  test: {
+    // ... other config
+    setupFiles: ["./vitest.setup.ts"],  // This file runs once at start
+  },
+});
+```
+
+**Result**: SGDS web components are now available in ALL tests without importing them individually.
+
+---
+
 ### SGDS-Specific Testing Patterns
 
 When migrating tests that use SGDS web components, remember:
@@ -52,18 +88,54 @@ import { render } from "vitest-browser-react";
 const { container, locator } = await render(<MyComponent />);
 ```
 
-**2. Querying SGDS Components**
+**2. Testing React Components That Render SGDS**
 
-For **host element attributes** (use standard DOM):
+The key distinction: You're testing React components that **render** SGDS web components, not testing the web components themselves.
+
+For **querying the web component host** (use standard DOM):
 ```typescript
 const sgdsInput = container.querySelector("sgds-input");
 expect(sgdsInput?.getAttribute("label")).toBe("Email");
+expect(sgdsInput?.getAttribute("disabled")).toBe("true");
 ```
 
-For **shadow DOM internals** (use Playwright locators):
+For **interacting with shadow DOM internals** (use Playwright Locator API):
 ```typescript
+// Fill input inside sgds-input
 const input = locator.getByRole("textbox");
 await input.fill("test@example.com");
+
+// Click button inside sgds-button
+const button = locator.getByRole("button", { name: /submit/i });
+await button.click();
+
+// Check checkbox inside sgds-checkbox
+const checkbox = locator.getByRole("checkbox");
+await checkbox.check();
+```
+
+**Pattern**: Use `locator` for any **interaction** (click, fill, check, etc.), and `container.querySelector()` for **verification** (checking attributes, text content).
+
+**Complete Example:**
+
+```typescript
+test('user can fill and submit form', async () => {
+  const { container, locator } = await render(<LoginForm />);
+
+  // 1. Interact using locator (pierces shadow DOM)
+  const input = locator.getByRole("textbox");
+  await input.fill("test@example.com");
+
+  const button = locator.getByRole("button", { name: /submit/i });
+  await button.click();
+
+  // 2. Verify using container.querySelector (check host element)
+  const sgdsInput = container.querySelector("sgds-input");
+  expect(sgdsInput?.getAttribute("value")).toBe("test@example.com");
+
+  // Verify form submission happened
+  expect(container.textContent).toContain("Success!");
+});
 ```
 
 **3. Mocking**
@@ -199,6 +271,14 @@ If you provide a React codebase:
 
 ## Tips & Gotchas
 
+### Running Tests in CI/CD
+
+For comprehensive CI/CD setup with different systems (GitHub Actions, GitLab CI, Azure Pipelines, Docker, Jenkins, CircleCI), see the [official Playwright CI documentation](https://playwright.dev/docs/ci).
+
+When setting up Playwright in CI, use the `--with-deps` flag to install system libraries (fonts, graphics libraries) that browsers need.
+
+---
+
 ### Shadow DOM in Web Components
 SGDS web components use shadow DOM. This means:
 - Internal elements are not visible to `document.querySelector()`
@@ -225,19 +305,30 @@ SGDS forms use native `<form>` elements. When migrating form tests:
 - Replace inner input/button/select with SGDS equivalents
 - Test form submission by clicking buttons, not calling `.submit()` on the form
 
-### Event Handlers
-With web components, event handlers work via attributes or methods:
-```typescript
-// React pattern
-<Button onClick={handleClick} />
+### Event Handlers & React Version
 
-// Web component pattern
-<sgds-button @click=${handleClick}></sgds-button>
-// Or in React wrapping it:
+SGDS web components emit custom events. How you handle them depends on your React version:
+
+**React 19+**: Supports custom events directly via camelCase attributes
+```typescript
+// React 19+ — Custom events work via attributes
+<sgds-input onsgds-input={(e) => setEmail(e.target.value)} />
+<sgds-button onclick={(e) => handleClick()} />
+```
+
+**React 18 and earlier**: Need React wrapper components or event listeners
+```typescript
+// React ≤18 — Use sgds-react wrapper components or manually attach listeners
+<SgdsInput onChange={(value) => setEmail(value)} />
 <SgdsButton onClick={handleClick} />
 ```
 
-The wrapper component (React component using the web component) handles the bridge.
+**For event binding patterns specific to your React version**, refer to the [sgds-components skill](../sgds-components/SKILL.md#react-integration), which includes:
+- React 19+ attribute binding
+- React 18 wrapper component patterns
+- Next.js integration details
+
+The wrapper component (React component using the web component) handles the bridge between React's event system and web component custom events.
 
 ### Component Variants & Props
 Check if your React component has variants or theme props. SGDS components may have:
