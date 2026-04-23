@@ -46,6 +46,7 @@ See **[sgds-components](../sgds-components/SKILL.md)** for full installation det
 | Sidebar panel that filters content by category using checkboxes | [Filter Sidebar — Checkbox](#→-read-referencefilter-sidebar-checkboxmd) |
 | Full detail view of a single event session: time, title, speaker, badges, description, profile | [Session Detail](#→-read-referencesession-detailmd) |
 | Search input + filter button + results count + data table for list and admin pages | [Table Filter](#→-read-referencetable-filtermd) |
+| Multi-field form with proper component sizing, grouping, and layout rules | [Form Layout](#→-read-referenceform-layoutmd) |
 
 ---
 
@@ -82,6 +83,12 @@ Full session detail block for event and conference websites. Shows time slot, se
 ## → Read [reference/table-filter.md](reference/table-filter.md)
 
 Page header + search input + outline filter button + results count + data table. Use on list and admin pages where users search or filter tabular records. Table cells support `sgds-link`, `sgds-badge`, and `sgds-button` for rich row content.
+
+---
+
+## → Read [reference/form-layout.md](reference/form-layout.md)
+
+Responsive form grid with SGDS-specific component sizing rules. Forms live in the 8-column content area. Most form inputs take 4 columns (max 2 per row for relational fields like first/last name), while full-width components like textarea, checkbox-group, radio-group, and combobox must always span all 8 columns.
 
 ---
 
