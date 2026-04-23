@@ -388,12 +388,8 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       (file, index) => {
         const metadata = this.fileMetadata.get(file);
         return html`
-          <div class="file-upload-list-item-container">
-            <li
-              class="file-upload-list-item ${this.exitingFile === file ? "file-upload-exit" : ""} ${metadata?.error
-                ? "file-upload-error"
-                : ""}"
-            >
+          <div class="file-upload-list-item-container ${this.exitingFile === file ? "file-upload-exit" : ""}">
+            <li class="file-upload-list-item ${metadata?.error ? "file-upload-error" : ""}">
               ${metadata?.uploading ? html`<sgds-spinner size="sm"></sgds-spinner>` : getCheckedIcon(metadata)}
               <span class="filename">${file.name}</span>
               <span class="filesize">${formatFileSize(file.size)}</span>
