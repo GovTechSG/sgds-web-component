@@ -15,3 +15,4 @@ cypress/apps/nuxt-app/.nuxt
 cypress/apps/next-app/.next
 cypress/apps/angular-app/.angular
 coverage
+test/skills/*

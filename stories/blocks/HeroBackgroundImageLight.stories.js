@@ -16,7 +16,9 @@ const Template = () => {
         class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left sgds:p-layout-lg sgds:w-1/2 sgds:box-border sgds:relative sgds:z-10"
       >
         <div class="sgds:mb-xl">
-          <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-fixed-dark sgds:mb-xs">
+          <div
+            class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-fixed-dark sgds:mb-xs"
+          >
             Singapore Government Digital Services
           </div>
 
@@ -25,8 +27,7 @@ const Template = () => {
           </h1>
 
           <h4 class="sgds:text-heading-sm sgds:font-light sgds:leading-sm sgds:tracking-tight sgds:text-fixed-dark">
-            Access government services anytime, anywhere.
-            Built for residents, designed for ease.
+            Access government services anytime, anywhere. Built for residents, designed for ease.
           </h4>
         </div>
 
