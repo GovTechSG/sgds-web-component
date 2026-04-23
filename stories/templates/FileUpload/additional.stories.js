@@ -432,22 +432,31 @@ const UploadToServerTemplate = args => {
 
         if (fileUpload) {
           fileUpload.addEventListener("sgds-add-files", async e => {
-            const files = e.detail;
+            const newFiles = e.detail; // Only contains newly-added files
+            const allFiles = fileUpload.files;
 
-            // Show uploading state for all files
-            for (let i = 0; i < files.length; i++) {
-              fileUpload.setFileUploadState(i, "uploading");
+            // Calculate the starting index of the new files
+            const startIndex = allFiles.length - newFiles.length;
+
+            // Show uploading state for NEW files only
+            for (let i = 0; i < newFiles.length; i++) {
+              fileUpload.setFileUploadState(startIndex + i, "uploading");
             }
 
             // Simulate server upload with delay
             await new Promise(resolve => setTimeout(resolve, 2000));
 
             // Simulate: even-indexed files succeed, odd-indexed files fail
-            for (let i = 0; i < files.length; i++) {
-              if (i % 2 === 0) {
-                fileUpload.setFileUploadState(i, "success");
+            for (let i = 0; i < newFiles.length; i++) {
+              const fileIndex = startIndex + i;
+              if (fileIndex % 2 === 0) {
+                fileUpload.setFileUploadState(fileIndex, "success");
               } else {
-                fileUpload.setFileUploadState(i, "error", "Server validation failed. File format not supported.");
+                fileUpload.setFileUploadState(
+                  fileIndex,
+                  "error",
+                  "Server validation failed. File format not supported."
+                );
               }
             }
           });

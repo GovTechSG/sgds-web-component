@@ -122,7 +122,7 @@ describe("sgds-file-upload", () => {
       await el.updateComplete;
 
       // Check that file-upload-exit class is on the first file
-      let exitingItems = el.shadowRoot?.querySelectorAll(".file-upload-exit");
+      const exitingItems = el.shadowRoot?.querySelectorAll(".file-upload-exit");
       expect(exitingItems?.length).to.equal(1);
       expect(exitingItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
 
@@ -788,7 +788,7 @@ describe("sgds-file-upload", () => {
       closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
       expect(closeButtons?.[0].hasAttribute("disabled")).to.be.false;
 
-      let checkIcons = el.shadowRoot?.querySelectorAll('sgds-icon[name="check-circle-fill"]');
+      const checkIcons = el.shadowRoot?.querySelectorAll('sgds-icon[name="check-circle-fill"]');
       expect(checkIcons?.length).to.be.greaterThan(0);
 
       // State 3: Set file2 to uploading
@@ -846,7 +846,7 @@ describe("sgds-file-upload", () => {
       el.setFileUploadState(1, "uploading");
       await el.updateComplete;
 
-      let spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
+      const spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
       expect(spinners?.length).to.equal(2);
 
       // Second selection: add 2 more files (should combine, not replace)
@@ -936,6 +936,102 @@ describe("sgds-file-upload", () => {
       // Verify no spinner exists (file3 is error, not uploading)
       spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
       expect(spinners?.length).to.equal(0);
+    }
+  });
+
+  it("drag and drop combines files with existing files when multiple is enabled", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload variant="drag-and-drop" multiple>Hello</sgds-file-upload>`
+    );
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      // First: Select files via button click (not drag-drop)
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+      dt1.items.add(new File(["content2"], "file2.txt"));
+
+      const promise1 = oneEvent(el, "sgds-add-files");
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await promise1;
+      await el.updateComplete;
+
+      let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(2);
+
+      // Second: Simulate drag-drop with new files
+      const dragDropZone = el.shadowRoot?.querySelector(".drag-drop-zone");
+      if (!dragDropZone) return;
+
+      const dt2 = new DataTransfer();
+      dt2.items.add(new File(["content3"], "file3.txt"));
+      dt2.items.add(new File(["content4"], "file4.txt"));
+
+      const dropEvent = new DragEvent("drop", {
+        bubbles: true,
+        cancelable: true,
+        dataTransfer: dt2
+      });
+
+      const promise2 = oneEvent(el, "sgds-add-files");
+      dragDropZone.dispatchEvent(dropEvent);
+      await promise2;
+      await el.updateComplete;
+
+      // Should have 4 files total (combined, not replaced)
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(4);
+
+      // Verify all files are present in order
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file2.txt");
+      expect(listItems?.[2].querySelector(".filename")?.textContent).to.include("file3.txt");
+      expect(listItems?.[3].querySelector(".filename")?.textContent).to.include("file4.txt");
+    }
+  });
+
+  it("drag and drop replaces files when multiple is disabled", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload variant="drag-and-drop">Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      // First: Select a file via button click
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+
+      const promise1 = oneEvent(el, "sgds-add-files");
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await promise1;
+      await el.updateComplete;
+
+      let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(1);
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+
+      // Second: Simulate drag-drop with new file
+      const dragDropZone = el.shadowRoot?.querySelector(".drag-drop-zone");
+      if (!dragDropZone) return;
+
+      const dt2 = new DataTransfer();
+      dt2.items.add(new File(["content2"], "file2.txt"));
+
+      const dropEvent = new DragEvent("drop", {
+        bubbles: true,
+        cancelable: true,
+        dataTransfer: dt2
+      });
+
+      const promise2 = oneEvent(el, "sgds-add-files");
+      dragDropZone.dispatchEvent(dropEvent);
+      await promise2;
+      await el.updateComplete;
+
+      // Should have 1 file (replaced, not combined)
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(1);
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file2.txt");
     }
   });
 

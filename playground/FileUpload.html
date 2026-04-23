@@ -124,36 +124,51 @@
       const fileUploadDragDrop = document.getElementById('uploadStateDragDropDemo');
       const fileUploadError = document.getElementById('uploadStateErrorDemo');
 
-      async function handleFileUpload(fileUploadEl, files) {
-        // Show spinner while uploading for each file
-        for (let i = 0; i < files.length; i++) {
-          fileUploadEl.setFileUploadState(i, 'uploading');
+      async function handleFileUpload(fileUploadEl, newFiles) {
+        // Wait for component to update and reflect new files
+        await fileUploadEl.updateComplete;
+
+        // newFiles now contains ONLY the newly-added files from sgds-add-files event
+        const allFiles = fileUploadEl.files;
+        const startIndex = allFiles.length - newFiles.length;
+
+        // Show spinner while uploading for NEW files only
+        for (let i = 0; i < newFiles.length; i++) {
+          fileUploadEl.setFileUploadState(startIndex + i, 'uploading');
         }
 
         // Simulate network delay
         await new Promise(resolve => setTimeout(resolve, 2000));
 
-        // Mark all as success
-        for (let i = 0; i < files.length; i++) {
-          fileUploadEl.setFileUploadState(i, 'success');
+        // Mark all new files as success
+        for (let i = 0; i < newFiles.length; i++) {
+          fileUploadEl.setFileUploadState(startIndex + i, 'success');
         }
       }
 
-      async function handleFileUploadWithErrors(fileUploadEl, files) {
-        // Show spinner while uploading for each file
-        for (let i = 0; i < files.length; i++) {
-          fileUploadEl.setFileUploadState(i, 'uploading');
+      async function handleFileUploadWithErrors(fileUploadEl, newFiles) {
+        // Wait for component to update and reflect new files
+        await fileUploadEl.updateComplete;
+
+        // newFiles now contains ONLY the newly-added files from sgds-add-files event
+        const allFiles = fileUploadEl.files;
+        const startIndex = allFiles.length - newFiles.length;
+
+        // Show spinner while uploading for NEW files only
+        for (let i = 0; i < newFiles.length; i++) {
+          fileUploadEl.setFileUploadState(startIndex + i, 'uploading');
         }
 
         // Simulate network delay
         await new Promise(resolve => setTimeout(resolve, 2000));
 
         // Mark even-indexed files as error, odd-indexed as success
-        for (let i = 0; i < files.length; i++) {
-          if (i % 2 === 0) {
-            fileUploadEl.setFileUploadState(i, 'error', 'File size exceeds maximum limit of 10MB');
+        for (let i = 0; i < newFiles.length; i++) {
+          const fileIndex = startIndex + i;
+          if (fileIndex % 2 === 0) {
+            fileUploadEl.setFileUploadState(fileIndex, 'error', 'File size exceeds maximum limit of 10MB');
           } else {
-            fileUploadEl.setFileUploadState(i, 'success');
+            fileUploadEl.setFileUploadState(fileIndex, 'success');
           }
         }
       }

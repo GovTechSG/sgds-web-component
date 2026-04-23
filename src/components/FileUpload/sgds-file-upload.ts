@@ -132,9 +132,23 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     // Always emit sgds-files-selected for backwards compatibility (deprecated)
     this.emit<ISgdsFileUploadFilesSelectedEventDetail>("sgds-files-selected", { detail: files });
 
-    // Emit sgds-add-files when files are ADDED (count increased)
+    // Emit sgds-add-files when files are ADDED (count increased or file set changed while maintaining same count)
     if (files.length > previousCount) {
-      this.emit<ISgdsFileUploadAddFilesEventDetail>("sgds-add-files", { detail: files });
+      // Extract only the new files (those added after previousCount)
+      const allFilesArray = Array.from(files);
+      const newFilesArray = allFilesArray.slice(previousCount);
+
+      // Create a FileList containing only new files using DataTransfer
+      const dt = new DataTransfer();
+      newFilesArray.forEach(file => dt.items.add(file));
+
+      this.emit<ISgdsFileUploadAddFilesEventDetail>("sgds-add-files", { detail: dt.files });
+    } else if (files.length === previousCount && previousCount > 0 && !deletedFile) {
+      // Handle single-file replacement case (e.g., when multiple=false and user selects a different file)
+      // In this case, all files are "new" (different from before)
+      const dt = new DataTransfer();
+      Array.from(files).forEach(file => dt.items.add(file));
+      this.emit<ISgdsFileUploadAddFilesEventDetail>("sgds-add-files", { detail: dt.files });
     }
 
     // Emit sgds-remove-file when files are REMOVED (count decreased)
@@ -314,11 +328,20 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     // Sync files into inputRef using DataTransfer
     const previousCount = this.selectedFiles.length;
     const fileBuffer = new DataTransfer();
-    files.forEach(file => fileBuffer.items.add(file));
+
+    // Combine with existing files if multiple is enabled
+    if (this.multiple && this.selectedFiles.length > 0) {
+      const combined = [...this.selectedFiles, ...files];
+      combined.forEach(file => fileBuffer.items.add(file));
+      this.selectedFiles = combined;
+    } else {
+      files.forEach(file => fileBuffer.items.add(file));
+      this.selectedFiles = Array.from(files);
+    }
+
     const inputElement = this.inputRef.value;
     if (inputElement) {
       inputElement.files = fileBuffer.files;
-      this.selectedFiles = Array.from(fileBuffer.files);
       this._setFileList(fileBuffer.files, previousCount);
       this._mixinValidate(this.input);
     }
