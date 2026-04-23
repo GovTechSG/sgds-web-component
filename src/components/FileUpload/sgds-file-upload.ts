@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
+import { repeat } from "lit/directives/repeat.js";
 import SgdsCloseButton from "../CloseButton/sgds-close-button";
 import { SgdsButton } from "../Button/sgds-button";
 import fileUploadStyles from "./file-upload.css";
@@ -11,16 +12,32 @@ import { watch } from "../../utils/watch";
 import { formatFileSize } from "../../utils/file";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsSpinner from "../Spinner/sgds-spinner";
-import type { ISgdsFileUploadFilesSelectedEventDetail } from "./types";
-export type { ISgdsFileUploadFilesSelectedEventDetail };
+import type {
+  ISgdsFileUploadFilesSelectedEventDetail,
+  ISgdsFileUploadChangeEventDetail,
+  ISgdsFileUploadAddFilesEventDetail,
+  ISgdsFileUploadRemoveFileEventDetail
+} from "./types";
+export type {
+  ISgdsFileUploadAddFilesEventDetail,
+  ISgdsFileUploadChangeEventDetail,
+  ISgdsFileUploadFilesSelectedEventDetail,
+  ISgdsFileUploadRemoveFileEventDetail
+};
 
 /**
  * @summary Allows users to upload files of various sizes and formats
  *
  * @slot default - Label for file upload button (used in default variant)
  *
- * @event sgds-files-selected - Emitted when files are selected for uploading. Access the selected files with event.target.detail
+ * @event sgds-files-selected - Emitted whenever the file set changes (files added or removed). Access the files with event.detail  @deprecated Use sgds-add-files for file additions or sgds-change for all file set changes instead
  * @eventDetail {ISgdsFileUploadFilesSelectedEventDetail} sgds-files-selected
+ * @event sgds-add-files - Emitted when files are added to the upload. Access the files with event.detail
+ * @eventDetail {ISgdsFileUploadAddFilesEventDetail} sgds-add-files
+ * @event sgds-remove-file - Emitted when files are removed from the upload. Access the remaining files with event.detail
+ * @eventDetail {ISgdsFileUploadRemoveFileEventDetail} sgds-remove-file
+ * @event sgds-change - Emitted whenever the file set changes (files added or removed). Access the current files with event.detail
+ * @eventDetail {ISgdsFileUploadChangeEventDetail} sgds-change
  */
 
 export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
@@ -55,10 +72,10 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   private selectedFiles: File[] = [];
 
   @state()
-  private exitingIndex: number | null = null;
+  private exitingFile: File | null = null;
 
   @state()
-  private fileMetadata: Map<number, { uploading: boolean; error?: string }> = new Map();
+  private fileMetadata: Map<File, { uploading: boolean; error?: string }> = new Map();
 
   private _isProgrammaticChange = false;
 
@@ -98,15 +115,32 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
    * Set the upload state of a file at the given index
    */
   public setFileUploadState(index: number, state: "uploading" | "success" | "error", error?: string) {
-    this.fileMetadata.set(index, {
-      uploading: state === "uploading",
-      error: error
-    });
-    this.requestUpdate();
+    const file = this.selectedFiles[index];
+    if (file) {
+      this.fileMetadata.set(file, {
+        uploading: state === "uploading",
+        error: error
+      });
+      this.requestUpdate();
+    }
   }
 
-  private _setFileList(files: FileList) {
+  private _setFileList(files: FileList, previousCount = 0, deletedFile?: File) {
+    // Always emit sgds-change event (fires on any file set change)
+    this.emit<ISgdsFileUploadChangeEventDetail>("sgds-change", { detail: files });
+
+    // Always emit sgds-files-selected for backwards compatibility (deprecated)
     this.emit<ISgdsFileUploadFilesSelectedEventDetail>("sgds-files-selected", { detail: files });
+
+    // Emit sgds-add-files when files are ADDED (count increased)
+    if (files.length > previousCount) {
+      this.emit<ISgdsFileUploadAddFilesEventDetail>("sgds-add-files", { detail: files });
+    }
+
+    // Emit sgds-remove-file when files are REMOVED (count decreased)
+    if (files.length < previousCount && deletedFile) {
+      this.emit<ISgdsFileUploadRemoveFileEventDetail>("sgds-remove-file", { detail: { file: deletedFile, files } });
+    }
   }
 
   private inputRef = createRef<HTMLInputElement>();
@@ -126,6 +160,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   private _handleChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const files = inputElement.files as FileList;
+    const previousCount = this.selectedFiles.length; // Track count before update
 
     if (files.length > 0) {
       // Only combine files if this is user-initiated (not programmatic removal)
@@ -142,15 +177,18 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         this.selectedFiles = Array.from(files);
       }
     }
-    // Trigger a re-render of the component to update the list of selected files
-    this._setFileList(inputElement.files as FileList);
+    // Only emit events if this is a user-initiated change, not programmatic
+    if (!this._isProgrammaticChange) {
+      this._setFileList(inputElement.files as FileList, previousCount);
+    }
     this.requestUpdate();
     super._mixinHandleChange(event);
   }
 
   private _removeFileHandler(index: number) {
-    // Mark the file as exiting to trigger the animation
-    this.exitingIndex = index;
+    // Mark the file as exiting to trigger the animation (store the actual File object)
+    const deletedFile = this.selectedFiles[index];
+    this.exitingFile = deletedFile;
     this.requestUpdate();
 
     // Wait for animation to complete before removing the file
@@ -160,6 +198,8 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
 
       const attachments = inputElement.files;
       if (!attachments) return;
+
+      const previousCount = attachments.length; // Track count before removal
 
       const fileBuffer = new DataTransfer();
       for (let i = 0; i < attachments.length; i++) {
@@ -171,9 +211,12 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
 
       // Assign buffer to file input
       inputElement.files = fileBuffer.files;
-      // Re-populate selected files to the lists
-      this._setFileList(fileBuffer.files);
+      // Re-populate selected files to the lists, passing the deleted file
+      this._setFileList(fileBuffer.files, previousCount, deletedFile);
       this.selectedFiles = Array.from(fileBuffer.files);
+
+      // Clear exiting file after removal
+      this.exitingFile = null;
 
       this.requestUpdate();
 
@@ -187,11 +230,12 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
 
   private _clearAllFiles() {
     const inputElement = this.inputRef.value;
+    const previousCount = this.selectedFiles.length;
     const fileBuffer = new DataTransfer();
     if (inputElement) {
       inputElement.files = fileBuffer.files;
     }
-    this._setFileList(fileBuffer.files);
+    this._setFileList(fileBuffer.files, previousCount);
     this.selectedFiles = Array.from(fileBuffer.files);
   }
 
@@ -268,13 +312,14 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     }
 
     // Sync files into inputRef using DataTransfer
+    const previousCount = this.selectedFiles.length;
     const fileBuffer = new DataTransfer();
     files.forEach(file => fileBuffer.items.add(file));
     const inputElement = this.inputRef.value;
     if (inputElement) {
       inputElement.files = fileBuffer.files;
       this.selectedFiles = Array.from(fileBuffer.files);
-      this._setFileList(fileBuffer.files);
+      this._setFileList(fileBuffer.files, previousCount);
       this._mixinValidate(this.input);
     }
   }
@@ -314,36 +359,39 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       return html`<sgds-icon name="check-circle-fill" class="${iconClass}"></sgds-icon>`;
     };
 
-    const listItems = this.selectedFiles.map((file, index) => {
-      const metadata = this.fileMetadata.get(index);
-      return html`
-        <div class="file-upload-list-item-container" key=${index}>
-          <li
-            key=${index}
-            class="file-upload-list-item ${this.exitingIndex === index ? "file-upload-exit" : ""} ${metadata?.error
-              ? "file-upload-error"
-              : ""}"
-          >
-            ${metadata?.uploading ? html`<sgds-spinner size="sm"></sgds-spinner>` : getCheckedIcon(metadata)}
-            <span class="filename">${file.name}</span>
-            <span class="filesize">${formatFileSize(file.size)}</span>
-            <sgds-close-button
-              aria-label="remove the file"
-              ?disabled=${metadata?.uploading}
-              @click=${() => this._removeFileHandler(index)}
-            ></sgds-close-button>
-          </li>
-          ${metadata?.error
-            ? html`
-                <div class="invalid-feedback-container">
-                  <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
-                  <div class="invalid-feedback">${metadata.error}</div>
-                </div>
-              `
-            : ""}
-        </div>
-      `;
-    });
+    const listItems = repeat(
+      this.selectedFiles,
+      file => file, // Use File object as stable key
+      (file, index) => {
+        const metadata = this.fileMetadata.get(file);
+        return html`
+          <div class="file-upload-list-item-container">
+            <li
+              class="file-upload-list-item ${this.exitingFile === file ? "file-upload-exit" : ""} ${metadata?.error
+                ? "file-upload-error"
+                : ""}"
+            >
+              ${metadata?.uploading ? html`<sgds-spinner size="sm"></sgds-spinner>` : getCheckedIcon(metadata)}
+              <span class="filename">${file.name}</span>
+              <span class="filesize">${formatFileSize(file.size)}</span>
+              <sgds-close-button
+                aria-label="remove the file"
+                ?disabled=${metadata?.uploading}
+                @click=${() => this._removeFileHandler(index)}
+              ></sgds-close-button>
+            </li>
+            ${metadata?.error
+              ? html`
+                  <div class="invalid-feedback-container">
+                    <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+                    <div class="invalid-feedback">${metadata.error}</div>
+                  </div>
+                `
+              : ""}
+          </div>
+        `;
+      }
+    );
 
     return html`
       <div class="file-upload">

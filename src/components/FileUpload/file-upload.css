@@ -56,6 +56,7 @@
   border-radius: var(--sgds-form-border-radius-md);
   animation: fileUploadEnter var(--sgds-motion-duration-standard) var(--sgds-motion-easing-enter);
   position: relative;
+  transition: transform var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
 }
 
 .file-upload-list-item.file-upload-error {

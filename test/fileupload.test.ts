@@ -116,8 +116,16 @@ describe("sgds-file-upload", () => {
       let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
       expect(listItems?.length).to.equal(2);
 
-      const removeBtn = listItems?.[0].querySelector(".file-upload-list-item sgds-close-button");
+      // Verify exit animation is applied to the correct file (file1.txt)
+      const removeBtn = listItems?.[0].querySelector("sgds-close-button");
       removeBtn?.dispatchEvent(new Event("click"));
+      await el.updateComplete;
+
+      // Check that file-upload-exit class is on the first file
+      let exitingItems = el.shadowRoot?.querySelectorAll(".file-upload-exit");
+      expect(exitingItems?.length).to.equal(1);
+      expect(exitingItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+
       await aTimeout(300); // wait for animation to complete
       await el.updateComplete;
 
@@ -462,6 +470,505 @@ describe("sgds-file-upload", () => {
       expect(componentFiles[0].name).to.equal("file1.txt");
       expect(componentFiles[1].name).to.equal("file3.txt");
       expect(componentFiles[2].name).to.equal("file4.txt");
+    }
+  });
+
+  it("sgds-add-files fires ONLY when files are added, not when removed", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      let addFilesEventCount = 0;
+      el.addEventListener("sgds-add-files", () => {
+        addFilesEventCount++;
+      });
+
+      // Select 2 files - should fire sgds-add-files
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+      dt1.items.add(new File(["content2"], "file2.txt"));
+
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      expect(addFilesEventCount).to.equal(1);
+
+      // Delete one file - should NOT fire sgds-add-files
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[0].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      expect(addFilesEventCount).to.equal(1); // Still 1, not incremented
+    }
+  });
+
+  it("sgds-remove-file fires ONLY when files are removed, not when added", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      let removeFilesEventCount = 0;
+      el.addEventListener("sgds-remove-file", () => {
+        removeFilesEventCount++;
+      });
+
+      // Select 2 files - should NOT fire sgds-remove-file
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+      dt1.items.add(new File(["content2"], "file2.txt"));
+
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      expect(removeFilesEventCount).to.equal(0); // Not fired
+
+      // Delete one file - should fire sgds-remove-file
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[0].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      expect(removeFilesEventCount).to.equal(1); // Fired once
+    }
+  });
+
+  it("sgds-files-selected fires every time file set changes (backwards compatible)", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      let filesSelectedEventCount = 0;
+      el.addEventListener("sgds-files-selected", () => {
+        filesSelectedEventCount++;
+      });
+
+      // Select 2 files - should fire sgds-files-selected
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+      dt1.items.add(new File(["content2"], "file2.txt"));
+
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      expect(filesSelectedEventCount).to.equal(1);
+
+      // Delete one file - should also fire sgds-files-selected (backwards compatible)
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[0].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      expect(filesSelectedEventCount).to.equal(2); // Incremented on delete too
+    }
+  });
+
+  it("sgds-change fires every time file set changes (add or remove)", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      let changeEventCount = 0;
+      el.addEventListener("sgds-change", () => {
+        changeEventCount++;
+      });
+
+      // Select 2 files - should fire sgds-change
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+      // dt1.items.add(new File(["content2"], "file2.txt"));
+
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      expect(changeEventCount).to.equal(1);
+
+      // Delete one file - should fire sgds-change again
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[0].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      expect(changeEventCount).to.equal(2);
+
+      // Add more files - should fire sgds-change again
+      const dt2 = new DataTransfer();
+      dt2.items.add(new File(["content3"], "file3.txt"));
+
+      input.files = dt2.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      expect(changeEventCount).to.equal(3);
+    }
+  });
+
+  it("prevents re-triggering upload handlers when files are deleted (sgds-add-files only on add)", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      let addFilesEventCount = 0;
+      el.addEventListener("sgds-add-files", () => {
+        addFilesEventCount++;
+      });
+
+      // Select 3 files initially
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+      dt1.items.add(new File(["content2"], "file2.txt"));
+      dt1.items.add(new File(["content3"], "file3.txt"));
+
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      // sgds-add-files fired once
+      expect(addFilesEventCount).to.equal(1);
+
+      // Simulate upload handler: set file1 and file3 to uploading, file2 to success
+      el.setFileUploadState(0, "uploading");
+      el.setFileUploadState(1, "success");
+      el.setFileUploadState(2, "uploading");
+      await el.updateComplete;
+
+      // Delete file2 (the one in success state, close button is enabled)
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      expect(closeButtons?.[1].hasAttribute("disabled")).to.be.false; // file2 is not disabled (success state)
+      closeButtons?.[1].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      // sgds-add-files should NOT have fired again on deletion (still 1)
+      expect(addFilesEventCount).to.equal(1);
+
+      // Remaining files (file1 and file3) should still have uploading state
+      const spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
+      expect(spinners?.length).to.equal(2);
+
+      // Close buttons for uploading files should still be disabled
+      const remainingCloseButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      expect(remainingCloseButtons?.[0].hasAttribute("disabled")).to.be.true; // file1 still uploading
+      expect(remainingCloseButtons?.[1].hasAttribute("disabled")).to.be.true; // file3 still uploading
+    }
+  });
+
+  it("sgds-remove-file fires with deleted file and remaining file list", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      let removeFilesEventDetail: any = null;
+      el.addEventListener("sgds-remove-file", (e: any) => {
+        removeFilesEventDetail = e.detail;
+      });
+
+      // Select 3 files
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+      dt1.items.add(new File(["content2"], "file2.txt"));
+      dt1.items.add(new File(["content3"], "file3.txt"));
+
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      // No removal yet
+      expect(removeFilesEventDetail).to.be.null;
+
+      // Delete file2 (middle file)
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[1].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      // sgds-remove-file event detail should have both deleted file and remaining files
+      expect(removeFilesEventDetail).to.not.be.null;
+
+      // Verify deleted file
+      expect(removeFilesEventDetail.file).to.exist;
+      expect(removeFilesEventDetail.file.name).to.equal("file2.txt");
+
+      // Verify remaining files
+      expect(removeFilesEventDetail.files).to.exist;
+      expect(removeFilesEventDetail.files.length).to.equal(2);
+      expect(removeFilesEventDetail.files[0].name).to.equal("file1.txt");
+      expect(removeFilesEventDetail.files[1].name).to.equal("file3.txt");
+    }
+  });
+
+  it("file tracking with stable keys: deleted middle file does not re-animate remaining files", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      // Select 3 files
+      const dt = new DataTransfer();
+      dt.items.add(new File(["content1"], "file1.txt"));
+      dt.items.add(new File(["content2"], "file2.txt"));
+      dt.items.add(new File(["content3"], "file3.txt"));
+
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+      await el.updateComplete;
+
+      let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(3);
+
+      // Delete middle file (file2.txt)
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[1].click();
+      await el.updateComplete;
+      await aTimeout(300); // ← Wait for animation to finish
+      await el.updateComplete;
+
+      // Remaining files should NOT have file-upload-exit or file-upload-enter animations
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(2);
+
+      // Verify file1.txt and file3.txt are still visible (not re-animated)
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file3.txt");
+
+      // Neither remaining item should have exit animation class
+      expect(listItems?.[0].classList.contains("file-upload-exit")).to.be.false;
+      expect(listItems?.[1].classList.contains("file-upload-exit")).to.be.false;
+
+      await aTimeout(300);
+      await el.updateComplete;
+
+      // After animation completes, verify files are still there
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(2);
+    }
+  });
+
+  it("upload state management: cycles through uploading, success, and error states", async () => {
+    const fileList = [
+      new File(["file1"], "file1.txt"),
+      new File(["file2"], "file2.txt"),
+      new File(["file3"], "file3.txt")
+    ];
+    const dt = new DataTransfer();
+    fileList.forEach(file => dt.items.add(file));
+
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+      await el.updateComplete;
+
+      // State 1: Set file1 to uploading
+      el.setFileUploadState(0, "uploading");
+      await el.updateComplete;
+      let spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
+      expect(spinners?.length).to.equal(1);
+
+      // During uploading, close button should be disabled (not clickable)
+      let closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      expect(closeButtons?.[0].hasAttribute("disabled")).to.be.true;
+
+      // State 2: Set file1 to success
+      el.setFileUploadState(0, "success");
+      await el.updateComplete;
+      spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
+      expect(spinners?.length).to.equal(0);
+
+      // After success, close button should be enabled again
+      closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      expect(closeButtons?.[0].hasAttribute("disabled")).to.be.false;
+
+      let checkIcons = el.shadowRoot?.querySelectorAll('sgds-icon[name="check-circle-fill"]');
+      expect(checkIcons?.length).to.be.greaterThan(0);
+
+      // State 3: Set file2 to uploading
+      el.setFileUploadState(1, "uploading");
+      await el.updateComplete;
+      spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
+      expect(spinners?.length).to.equal(1);
+
+      // During uploading, close button should be disabled
+      closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      expect(closeButtons?.[1].hasAttribute("disabled")).to.be.true;
+
+      // State 4: Set file2 to error
+      el.setFileUploadState(1, "error", "Upload failed");
+      await el.updateComplete;
+      spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
+      expect(spinners?.length).to.equal(0);
+
+      // After error, close button should be enabled again
+      closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      expect(closeButtons?.[1].hasAttribute("disabled")).to.be.false;
+
+      const errorMessages = el.shadowRoot?.querySelectorAll(".invalid-feedback");
+      expect(errorMessages?.length).to.equal(1);
+      expect(errorMessages?.[0].textContent).to.include("Upload failed");
+
+      // Verify file3 is still in default state with enabled close button
+      const listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(3);
+      expect(closeButtons?.[2].hasAttribute("disabled")).to.be.false;
+    }
+  });
+
+  it("file combining: multiple selections combine instead of replace, duplication prevented on removal", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      // First selection: 2 files
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+      dt1.items.add(new File(["content2"], "file2.txt"));
+
+      const promise1 = oneEvent(el, "sgds-files-selected");
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await promise1;
+      await el.updateComplete;
+
+      let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(2);
+
+      // Simulate user setting upload states
+      el.setFileUploadState(0, "uploading");
+      el.setFileUploadState(1, "uploading");
+      await el.updateComplete;
+
+      let spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
+      expect(spinners?.length).to.equal(2);
+
+      // Second selection: add 2 more files (should combine, not replace)
+      const dt2 = new DataTransfer();
+      dt2.items.add(new File(["content3"], "file3.txt"));
+      dt2.items.add(new File(["content4"], "file4.txt"));
+
+      const promise2 = oneEvent(el, "sgds-files-selected");
+      input.files = dt2.files;
+      input.dispatchEvent(new Event("change"));
+      await promise2;
+      await el.updateComplete;
+
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(4); // Combined, not replaced
+
+      // Verify all 4 files are visible
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file2.txt");
+      expect(listItems?.[2].querySelector(".filename")?.textContent).to.include("file3.txt");
+      expect(listItems?.[3].querySelector(".filename")?.textContent).to.include("file4.txt");
+
+      // Delete middle file (file2.txt) - should NOT duplicate
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[1].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(3); // Not duplicated, just 3 remaining
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file3.txt");
+      expect(listItems?.[2].querySelector(".filename")?.textContent).to.include("file4.txt");
+    }
+  });
+
+  it("file states are maintained correctly after deletion (keyed by File object, not index)", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      // Select 3 files
+      const dt = new DataTransfer();
+      dt.items.add(new File(["content1"], "file1.txt"));
+      dt.items.add(new File(["content2"], "file2.txt"));
+      dt.items.add(new File(["content3"], "file3.txt"));
+
+      const promise = oneEvent(el, "sgds-files-selected");
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await promise;
+      await el.updateComplete;
+
+      // Set different states: file1=success, file2=uploading, file3=error
+      el.setFileUploadState(0, "success");
+      el.setFileUploadState(1, "uploading");
+      el.setFileUploadState(2, "error", "File too large");
+      await el.updateComplete;
+
+      // Verify initial states
+      let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file2.txt");
+      expect(listItems?.[2].querySelector(".filename")?.textContent).to.include("file3.txt");
+
+      // Delete file2 (the uploading one in the middle)
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[1].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      // After deletion, verify remaining files have CORRECT states
+      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(2);
+
+      // file1 should still be in success state (no spinner, has checkmark)
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+      let spinners = listItems?.[0].querySelectorAll("sgds-spinner");
+      expect(spinners?.length).to.equal(0);
+
+      // file3 should still be in error state (not success state from old index 1)
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file3.txt");
+      const errorContainer = el.shadowRoot?.querySelectorAll(".invalid-feedback");
+      expect(errorContainer?.length).to.equal(1);
+      expect(errorContainer?.[0].textContent).to.include("File too large");
+
+      // Verify no spinner exists (file3 is error, not uploading)
+      spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
+      expect(spinners?.length).to.equal(0);
+    }
+  });
+
+  it("sgds-change event detail contains current file list after deletion", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      let lastChangeEventFiles: FileList | null = null;
+      el.addEventListener("sgds-change", (e: any) => {
+        lastChangeEventFiles = e.detail;
+      });
+
+      // Select 2 files
+      const dt1 = new DataTransfer();
+      dt1.items.add(new File(["content1"], "file1.txt"));
+      dt1.items.add(new File(["content2"], "file2.txt"));
+
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      expect(lastChangeEventFiles?.length).to.equal(2);
+
+      // Delete one file
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[0].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      // sgds-change event detail should reflect 1 file remaining
+      expect(lastChangeEventFiles?.length).to.equal(1);
+      expect(lastChangeEventFiles?.[0].name).to.equal("file2.txt");
     }
   });
 });

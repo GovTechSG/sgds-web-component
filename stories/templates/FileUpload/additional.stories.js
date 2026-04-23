@@ -12,11 +12,41 @@ export const DragAndDrop = {
   tags: []
 };
 
+// ========== VALIDATION STATES ==========
+
+export const ValidationDefaultInvalid = {
+  render: Template.bind({}),
+  name: "Validation: Default - Invalid",
+  args: {
+    variant: "default",
+    required: true,
+    hasFeedback: true,
+    invalid: true,
+    invalidFeedback: "Please upload at least one file"
+  },
+  parameters: { layout: "padded" },
+  tags: []
+};
+
+export const ValidationDragDropInvalid = {
+  render: Template.bind({}),
+  name: "Validation: Drag and Drop - Invalid",
+  args: {
+    variant: "drag-and-drop",
+    required: true,
+    hasFeedback: true,
+    invalid: true,
+    invalidFeedback: "Please upload at least one file"
+  },
+  parameters: { layout: "padded" },
+  tags: []
+};
+
 // ========== UPLOADING STATE ==========
 
 const UploadingStateDefaultTemplate = args => {
   return html`
-    <sgds-file-upload id="uploadingStateDefault" label="Upload Files"> Choose Files </sgds-file-upload>
+    <sgds-file-upload id="uploadingStateDefault" label="Upload File"> Choose File </sgds-file-upload>
     <script>
       setTimeout(async () => {
         const fileUpload = document.getElementById("uploadingStateDefault");
@@ -48,8 +78,8 @@ export const UploadingStateDefault = {
 
 const UploadingStateDragDropTemplate = args => {
   return html`
-    <sgds-file-upload id="uploadingStateDragDrop" variant="drag-and-drop" label="Upload Files">
-      Choose Files
+    <sgds-file-upload id="uploadingStateDragDrop" variant="drag-and-drop" label="Upload File">
+      Choose File
     </sgds-file-upload>
     <script>
       setTimeout(async () => {
@@ -84,7 +114,7 @@ export const UploadingStateDragDrop = {
 
 const ErrorStateDefaultTemplate = args => {
   return html`
-    <sgds-file-upload id="errorStateDefault" label="Upload Files"> Choose Files </sgds-file-upload>
+    <sgds-file-upload id="errorStateDefault" label="Upload File"> Choose File </sgds-file-upload>
     <script>
       setTimeout(async () => {
         const fileUpload = document.getElementById("errorStateDefault");
@@ -121,8 +151,8 @@ export const ErrorStateDefault = {
 
 const ErrorStateDragDropTemplate = args => {
   return html`
-    <sgds-file-upload id="errorStateDragDrop" variant="drag-and-drop" label="Upload Files">
-      Choose Files
+    <sgds-file-upload id="errorStateDragDrop" variant="drag-and-drop" label="Upload File">
+      Choose File
     </sgds-file-upload>
     <script>
       setTimeout(async () => {
@@ -162,7 +192,7 @@ export const ErrorStateDragDrop = {
 
 const SuccessStateDefaultTemplate = args => {
   return html`
-    <sgds-file-upload id="successStateDefault" label="Upload Files"> Choose Files </sgds-file-upload>
+    <sgds-file-upload id="successStateDefault" label="Upload File"> Choose File </sgds-file-upload>
     <script>
       setTimeout(async () => {
         const fileUpload = document.getElementById("successStateDefault");
@@ -198,8 +228,8 @@ export const SuccessStateDefault = {
 
 const SuccessStateDragDropTemplate = args => {
   return html`
-    <sgds-file-upload id="successStateDragDrop" variant="drag-and-drop" label="Upload Files">
-      Choose Files
+    <sgds-file-upload id="successStateDragDrop" variant="drag-and-drop" label="Upload File">
+      Choose File
     </sgds-file-upload>
     <script>
       setTimeout(async () => {
@@ -236,6 +266,155 @@ export const SuccessStateDragDrop = {
 
 // ========== UPLOAD TO SERVER ==========
 
+// ========== EVENT: sgds-add-files ==========
+
+const SgdsAddFilesTemplate = args => {
+  return html`
+    <sgds-file-upload
+      id="sgdsAddFilesDemo"
+      variant="drag-and-drop"
+      ?multiple=${args.multiple}
+      label="Listen to sgds-add-files"
+      hintText="Select files - sgds-add-files will fire only on file additions, not deletions."
+    >
+      Choose Files
+    </sgds-file-upload>
+    <div
+      id="addFilesLog"
+      style="margin-top: 16px; padding: 12px; background-color: #f5f5f5; border-radius: 4px; max-height: 200px; overflow-y: auto;"
+    >
+      <div style="font-weight: bold; margin-bottom: 8px;">sgds-add-files events:</div>
+    </div>
+    <script>
+      const fileUpload = document.getElementById("sgdsAddFilesDemo");
+      const logElement = document.getElementById("addFilesLog");
+
+      fileUpload.addEventListener("sgds-add-files", async e => {
+        const files = e.detail;
+        const timestamp = new Date().toLocaleTimeString();
+        const fileNames = Array.from(files)
+          .map(f => f.name)
+          .join(", ");
+        const logEntry = document.createElement("div");
+        logEntry.textContent = \`[\${timestamp}] Added \${files.length} file(s): \${fileNames}\`;
+        logEntry.style.fontSize = "12px";
+        logEntry.style.marginBottom = "4px";
+        logElement.appendChild(logEntry);
+      });
+    </script>
+  `;
+};
+
+export const SgdsAddFiles = {
+  render: SgdsAddFilesTemplate.bind({}),
+  name: "Event: sgds-add-files",
+  args: { multiple: true },
+  parameters: { layout: "padded" },
+  tags: []
+};
+
+// ========== EVENT: sgds-remove-file ==========
+
+const SgdsRemoveFileTemplate = args => {
+  return html`
+    <sgds-file-upload
+      id="sgdsRemoveFileDemo"
+      variant="drag-and-drop"
+      ?multiple=${args.multiple}
+      label="Listen to sgds-remove-file"
+      hintText="Select files and delete them - sgds-remove-file will show which file was deleted."
+    >
+      Choose Files
+    </sgds-file-upload>
+    <div
+      id="removeFileLog"
+      style="margin-top: 16px; padding: 12px; background-color: #f5f5f5; border-radius: 4px; max-height: 200px; overflow-y: auto;"
+    >
+      <div style="font-weight: bold; margin-bottom: 8px;">sgds-remove-file events:</div>
+    </div>
+    <script>
+      setTimeout(() => {
+        const fileUpload = document.getElementById("sgdsRemoveFileDemo");
+        const logElement = document.getElementById("removeFileLog");
+
+        if (fileUpload && logElement) {
+          fileUpload.addEventListener("sgds-remove-file", async e => {
+            const timestamp = new Date().toLocaleTimeString();
+            const deletedFileName = e.detail.file.name;
+            const remainingCount = e.detail.files.length;
+            const logEntry = document.createElement("div");
+            logEntry.textContent = \`[\${timestamp}] Deleted "\${deletedFileName}" - \${remainingCount} file(s) remaining\`;
+            logEntry.style.fontSize = "12px";
+            logEntry.style.marginBottom = "4px";
+            logElement.appendChild(logEntry);
+          });
+        }
+      }, 0);
+    </script>
+  `;
+};
+
+export const SgdsRemoveFile = {
+  render: SgdsRemoveFileTemplate.bind({}),
+  name: "Event: sgds-remove-file",
+  args: { multiple: true },
+  parameters: { layout: "padded" },
+  tags: []
+};
+
+// ========== EVENT: sgds-change ==========
+
+const SgdsChangeTemplate = args => {
+  return html`
+    <sgds-file-upload
+      id="sgdsChangeDemo"
+      variant="drag-and-drop"
+      ?multiple=${args.multiple}
+      label="Listen to sgds-change"
+      hintText="Select or delete files - sgds-change will fire on any file set change."
+    >
+      Choose Files
+    </sgds-file-upload>
+    <div
+      id="changeLog"
+      style="margin-top: 16px; padding: 12px; background-color: #f5f5f5; border-radius: 4px; max-height: 200px; overflow-y: auto;"
+    >
+      <div style="font-weight: bold; margin-bottom: 8px;">sgds-change events:</div>
+    </div>
+    <script>
+      setTimeout(() => {
+        const fileUpload = document.getElementById("sgdsChangeDemo");
+        const logElement = document.getElementById("changeLog");
+
+        if (fileUpload && logElement) {
+          fileUpload.addEventListener("sgds-change", async e => {
+            const timestamp = new Date().toLocaleTimeString();
+            const currentCount = e.detail.length;
+            const fileNames = Array.from(e.detail)
+              .map(f => f.name)
+              .join(", ");
+            const logEntry = document.createElement("div");
+            logEntry.textContent = \`[\${timestamp}] Current: \${currentCount} file(s): \${fileNames}\`;
+            logEntry.style.fontSize = "12px";
+            logEntry.style.marginBottom = "4px";
+            logElement.appendChild(logEntry);
+          });
+        }
+      }, 0);
+    </script>
+  `;
+};
+
+export const SgdsChange = {
+  render: SgdsChangeTemplate.bind({}),
+  name: "Event: sgds-change",
+  args: { multiple: true },
+  parameters: { layout: "padded" },
+  tags: []
+};
+
+// ========== UPLOAD TO SERVER ==========
+
 const UploadToServerTemplate = args => {
   return html`
     <sgds-file-upload
@@ -248,28 +427,32 @@ const UploadToServerTemplate = args => {
       Choose Files
     </sgds-file-upload>
     <script>
-      const fileUpload = document.getElementById("uploadToServerDemo");
+      setTimeout(() => {
+        const fileUpload = document.getElementById("uploadToServerDemo");
 
-      fileUpload.addEventListener("sgds-files-selected", async e => {
-        const files = e.detail;
+        if (fileUpload) {
+          fileUpload.addEventListener("sgds-add-files", async e => {
+            const files = e.detail;
 
-        // Show uploading state for all files
-        for (let i = 0; i < files.length; i++) {
-          fileUpload.setFileUploadState(i, "uploading");
+            // Show uploading state for all files
+            for (let i = 0; i < files.length; i++) {
+              fileUpload.setFileUploadState(i, "uploading");
+            }
+
+            // Simulate server upload with delay
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Simulate: even-indexed files succeed, odd-indexed files fail
+            for (let i = 0; i < files.length; i++) {
+              if (i % 2 === 0) {
+                fileUpload.setFileUploadState(i, "success");
+              } else {
+                fileUpload.setFileUploadState(i, "error", "Server validation failed. File format not supported.");
+              }
+            }
+          });
         }
-
-        // Simulate server upload with delay
-        await new Promise(resolve => setTimeout(resolve, 2000));
-
-        // Simulate: even-indexed files succeed, odd-indexed files fail
-        for (let i = 0; i < files.length; i++) {
-          if (i % 2 === 0) {
-            fileUpload.setFileUploadState(i, "success");
-          } else {
-            fileUpload.setFileUploadState(i, "error", "Server validation failed. File format not supported.");
-          }
-        }
-      });
+      }, 0);
     </script>
   `;
 };

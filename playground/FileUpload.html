@@ -159,7 +159,15 @@
       }
 
       fileUpload.addEventListener('sgds-files-selected', async (e) => {
-        console.log('Upload State Demo - Files from event.detail:', e.detail);
+        console.log('📤 sgds-files-selected (Upload State Demo) - Any file change:', e.detail);
+        console.log('File count:', e.detail.length);
+        Array.from(e.detail).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
+      });
+
+      fileUpload.addEventListener('sgds-add-files', async (e) => {
+        console.log('✅ sgds-add-files (Upload State Demo) - NEW files added:', e.detail);
         console.log('File count:', e.detail.length);
         Array.from(e.detail).forEach((file, index) => {
           console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
@@ -167,8 +175,27 @@
         handleFileUpload(fileUpload, e.detail);
       });
 
+      fileUpload.addEventListener('sgds-remove-file', async (e) => {
+        console.log('❌ sgds-remove-file (Upload State Demo) - File deleted:', e.detail.file.name);
+        console.log('Remaining files:', e.detail.files);
+        console.log('Remaining file count:', e.detail.files.length);
+        Array.from(e.detail.files).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
+      });
+
+      fileUpload.addEventListener('sgds-change', async (e) => {
+        console.log('🔄 sgds-change (Upload State Demo) - Current file set:', e.detail);
+        console.log('File count:', e.detail.length);
+      });
+
       fileUploadDragDrop.addEventListener('sgds-files-selected', async (e) => {
-        console.log('Drag and Drop Upload State Demo - Files from event.detail:', e.detail);
+        console.log('📤 sgds-files-selected (Drag and Drop Upload State Demo) - Any file change:', e.detail);
+        console.log('File count:', e.detail.length);
+      });
+
+      fileUploadDragDrop.addEventListener('sgds-add-files', async (e) => {
+        console.log('✅ sgds-add-files (Drag and Drop Upload State Demo) - NEW files added:', e.detail);
         console.log('File count:', e.detail.length);
         Array.from(e.detail).forEach((file, index) => {
           console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
@@ -176,8 +203,27 @@
         handleFileUpload(fileUploadDragDrop, e.detail);
       });
 
+      fileUploadDragDrop.addEventListener('sgds-remove-file', async (e) => {
+        console.log('❌ sgds-remove-file (Drag and Drop Upload State Demo) - File deleted:', e.detail.file.name);
+        console.log('Remaining files:', e.detail.files);
+        console.log('Remaining file count:', e.detail.files.length);
+        Array.from(e.detail.files).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
+      });
+
+      fileUploadDragDrop.addEventListener('sgds-change', async (e) => {
+        console.log('🔄 sgds-change (Drag and Drop Upload State Demo) - Current file set:', e.detail);
+        console.log('File count:', e.detail.length);
+      });
+
       fileUploadError.addEventListener('sgds-files-selected', async (e) => {
-        console.log('Error State Demo - Files from event.detail:', e.detail);
+        console.log('📤 sgds-files-selected (Error State Demo) - Any file change:', e.detail);
+        console.log('File count:', e.detail.length);
+      });
+
+      fileUploadError.addEventListener('sgds-add-files', async (e) => {
+        console.log('✅ sgds-add-files (Error State Demo) - NEW files added:', e.detail);
         console.log('File count:', e.detail.length);
         Array.from(e.detail).forEach((file, index) => {
           console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
@@ -185,11 +231,18 @@
         handleFileUploadWithErrors(fileUploadError, e.detail);
       });
 
-      // Also log all file uploads with event listener
-      document.querySelectorAll('sgds-file-upload').forEach((el) => {
-        el.addEventListener('sgds-files-selected', (e) => {
-          console.log(`${el.id || 'unnamed'} - Files selected:`, e.detail);
+      fileUploadError.addEventListener('sgds-remove-file', async (e) => {
+        console.log('❌ sgds-remove-file (Error State Demo) - File deleted:', e.detail.file.name);
+        console.log('Remaining files:', e.detail.files);
+        console.log('Remaining file count:', e.detail.files.length);
+        Array.from(e.detail.files).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
         });
+      });
+
+      fileUploadError.addEventListener('sgds-change', async (e) => {
+        console.log('🔄 sgds-change (Error State Demo) - Current file set:', e.detail);
+        console.log('File count:', e.detail.length);
       });
     </script>
   </body>
