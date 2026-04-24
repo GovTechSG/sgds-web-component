@@ -2,7 +2,7 @@ import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => html`<sgds-table-of-contents>
-  <h3>${ifDefined(args.title)}</h3>
+  <h5>${ifDefined(args.title)}</h5>
   ${args.contents?.map(
     item =>
       html`<li slot="contents">
