@@ -5,37 +5,38 @@
 <link href="../css/utility.css" rel="stylesheet" type="text/css" />
 
 <body>
-  <div>
-    <sgds-masthead fluid></sgds-masthead>
-    <sgds-mainnav fluid>
-      <strong slot="brand">My Application</strong>
-      <sgds-mainnav-item slot="end">
-        <a href="#">Admin</a>
+    <sgds-masthead></sgds-masthead>
+
+    <sgds-mainnav>
+      <sgds-mainnav-item slot="start">
+        <a href="/">My Application</a>
       </sgds-mainnav-item>
     </sgds-mainnav>
-  </div>
 
   <div class="sgds:bg-surface-default sgds:min-h-screen">
     <div class="sgds:w-container sgds:mx-auto sgds:py-layout-md">
-      <!-- Page header with actions -->
-      <div class="sgds:flex sgds:items-start sgds:justify-between sgds:mb-layout-md">
-        <div>
-          <h1 class="sgds:text-2xl sgds:font-semibold sgds:text-default">Edit profile</h1>
-          <p class="sgds:text-sm sgds:text-muted sgds:mt-1">Update your personal details and preferences.</p>
+        <!-- Page header with actions -->
+        <div class="sgds:flex sgds:items-start sgds:justify-between sgds:mb-layout-md">
+          <div>
+            <h1 class="sgds:text-2xl sgds:font-semibold sgds:text-default">Edit profile</h1>
+            <p class="sgds:text-sm sgds:text-body-subtle sgds:mt-1">
+              Update your personal details and preferences.
+            </p>
+          </div>
+          <!-- Sticky save/cancel — duplicate at bottom of form too -->
+          <div class="sgds:flex sgds:gap-component-sm sgds:shrink-0 sgds:ml-layout-sm">
+            <sgds-button variant="outline" onclick="history.back()">Cancel</sgds-button>
+            <sgds-button variant="primary" form="profile-form" type="submit">Save changes</sgds-button>
+          </div>
         </div>
-        <div class="sgds:flex sgds:gap-component-sm sgds:shrink-0 sgds:ml-layout-sm">
-          <sgds-button variant="outline">Cancel</sgds-button>
-          <sgds-button variant="primary" type="submit" form="profile-form">Save changes</sgds-button>
-        </div>
-      </div>
 
-      <form id="profile-form">
+        <form id="profile-form" method="post" novalidate>
         <!-- Section 1: Personal information -->
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
               <h2 class="sgds:text-base sgds:font-semibold sgds:text-default">Personal information</h2>
-              <p class="sgds:text-sm sgds:text-muted sgds:mt-1">
+              <p class="sgds:text-sm sgds:text-body-subtle sgds:mt-1">
                 Your name and contact details. Only your agency administrator can see this information.
               </p>
             </div>
@@ -81,7 +82,7 @@
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
               <h2 class="sgds:text-base sgds:font-semibold sgds:text-default">Role &amp; access</h2>
-              <p class="sgds:text-sm sgds:text-muted sgds:mt-1">
+              <p class="sgds:text-sm sgds:text-body-subtle sgds:mt-1">
                 Your position and assigned permissions within the system.
               </p>
             </div>
@@ -108,7 +109,7 @@
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
               <h2 class="sgds:text-base sgds:font-semibold sgds:text-default">Notes</h2>
-              <p class="sgds:text-sm sgds:text-muted sgds:mt-1">
+              <p class="sgds:text-sm sgds:text-body-subtle sgds:mt-1">
                 Optional additional context visible to your team.
               </p>
             </div>
@@ -126,14 +127,16 @@
           </div>
         </div>
 
-        <!-- Form footer -->
-        <div class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-end sgds:gap-component-sm">
-          <sgds-button variant="outline" type="button">Cancel</sgds-button>
-          <sgds-button variant="primary" type="submit">Save changes</sgds-button>
-        </div>
-      </form>
-    </div>
-  </div>
+          <!-- Form footer actions -->
+          <div class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-end sgds:gap-component-sm">
+            <sgds-button variant="outline" type="button" onclick="history.back()">Cancel</sgds-button>
+            <sgds-button variant="primary" type="submit">Save changes</sgds-button>
+          </div>
 
-  <sgds-footer></sgds-footer>
+        </form>
+
+      </div>
+    </div>
+
+    <sgds-footer></sgds-footer>
 </body>

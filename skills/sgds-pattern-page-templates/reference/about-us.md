@@ -65,7 +65,7 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
         </h1>
       </div>
       <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6 sgds:flex sgds:items-end">
-        <p class="sgds:text-body-lg sgds:font-regular sgds:leading-md sgds:text-muted">
+        <p class="sgds:text-body-lg sgds:font-regular sgds:leading-md sgds:text-body-subtle">
           We are a team of designers, engineers, and product thinkers committed
           to delivering citizen-centric digital experiences across government.
         </p>
@@ -112,7 +112,7 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
     <!-- ③ Logo strip -->
     <div class="sgds:mb-layout-lg sgds:overflow-hidden">
       <div class="sgds:text-center sgds:mb-layout-sm">
-        <p class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-muted">
+        <p class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-body-subtle">
           Trusted by agencies
         </p>
       </div>
@@ -164,7 +164,7 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
           </h2>
         </div>
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6">
-          <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:text-muted">
+          <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:text-body-subtle">
             Our platform powers services used by millions of residents and thousands
             of officers across the Singapore government.
           </p>
@@ -175,19 +175,19 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
       <div class="sgds-grid">
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3">
           <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">12,000+</p>
-          <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-muted sgds:mt-1">Active users</p>
+          <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-body-subtle sgds:mt-1">Active users</p>
         </div>
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3">
           <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">98%</p>
-          <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-muted sgds:mt-1">Platform uptime</p>
+          <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-body-subtle sgds:mt-1">Platform uptime</p>
         </div>
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3">
           <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">50+</p>
-          <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-muted sgds:mt-1">Government agencies</p>
+          <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-body-subtle sgds:mt-1">Government agencies</p>
         </div>
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3">
           <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">5 years</p>
-          <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-muted sgds:mt-1">In production</p>
+          <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-body-subtle sgds:mt-1">In production</p>
         </div>
       </div>
 
@@ -224,5 +224,5 @@ If animation is unwanted, replace the marquee with a static centred flex row:
 - **Logo opacity**: set logos to `sgds:opacity-60` so they read as supporting social proof, not primary content
 - **Marquee accessibility**: duplicate logos carry `aria-hidden="true"` and `alt=""` to avoid screen readers announcing them twice; always include `prefers-reduced-motion` to disable animation for motion-sensitive users
 - **Stats panel background**: use `sgds:bg-surface-raised` — one level above `sgds:bg-surface-default` — to visually lift the section without introducing a heavy coloured band
-- **Stats typography**: stat value uses `sgds:text-display-sm` (large, bold, prominent); label uses `sgds:text-body-sm sgds:text-muted` (small, muted, supporting)
+- **Stats typography**: stat value uses `sgds:text-display-sm` (large, bold, prominent); label uses `sgds:text-body-sm sgds:text-body-subtle` (small, subtle, supporting)
 - **Section spacing**: separate top-level sections with `sgds:mb-layout-lg` so each zone breathes without collapsing into the next
