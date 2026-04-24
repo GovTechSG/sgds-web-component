@@ -1403,3 +1403,213 @@ describe("form novalidate disables sgds validation on all children", () => {
     expect(upload.invalid).to.be.true;
   });
 });
+describe("sgds-file-upload touched validation (blur-triggered)", () => {
+  it("should NOT show invalid feedback on required field until blur (touched behavior)", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload required hasFeedback></sgds-file-upload>`
+    );
+
+    // Initially, should NOT show invalid feedback (not touched yet)
+    await el.updateComplete;
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback-container");
+    expect(feedback).to.not.exist;
+    expect(el.invalid).to.be.false;
+  });
+
+  it("should show invalid feedback when focus leaves the button without selecting files (default variant)", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload required hasFeedback variant="default"></sgds-file-upload>`
+    );
+    const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
+
+    // Focus the button
+    button?.focus();
+    await el.updateComplete;
+
+    // Simulate blur by emitting sgds-blur event on the button
+    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
+    await el.updateComplete;
+
+    // Now should show invalid feedback
+    expect(el.invalid).to.be.true;
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback-container");
+    expect(feedback).to.exist;
+  });
+
+  it("should show invalid feedback when focus leaves drag-and-drop zone without selecting files", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload required hasFeedback variant="drag-and-drop"></sgds-file-upload>`
+    );
+    const dragZone = el.shadowRoot?.querySelector<HTMLDivElement>(".drag-drop-zone");
+
+    // Focus the drag zone
+    dragZone?.focus();
+    await el.updateComplete;
+
+    // Simulate blur
+    dragZone?.dispatchEvent(new Event("blur", { bubbles: true }));
+    await el.updateComplete;
+
+    // Now should show invalid feedback
+    expect(el.invalid).to.be.true;
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback-container");
+    expect(feedback).to.exist;
+  });
+
+  it("should NOT show invalid feedback after blur if files are added", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload required hasFeedback variant="default"></sgds-file-upload>`
+    );
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
+
+    // Add a file
+    const dt = new DataTransfer();
+    dt.items.add(new File(["content"], "test.txt"));
+    if (input) {
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+    }
+    await el.updateComplete;
+
+    // Blur the button
+    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
+    await el.updateComplete;
+
+    // Should NOT be invalid (files are present)
+    expect(el.invalid).to.be.false;
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback-container");
+    expect(feedback).to.not.exist;
+  });
+
+  it("should clear invalid state when files are added after blur", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload required hasFeedback></sgds-file-upload>`
+    );
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
+
+    // Blur without files (should become invalid)
+    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+
+    // Now add a file
+    const dt = new DataTransfer();
+    dt.items.add(new File(["content"], "test.txt"));
+    if (input) {
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+    }
+    await el.updateComplete;
+
+    // Should now be valid
+    expect(el.invalid).to.be.false;
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback-container");
+    expect(feedback).to.not.exist;
+  });
+
+  it("should show invalid feedback when all files are removed after blur", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload required hasFeedback multiple></sgds-file-upload>`
+    );
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
+
+    // Add a file
+    const dt = new DataTransfer();
+    dt.items.add(new File(["content1"], "file1.txt"));
+    if (input) {
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+    }
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+
+    // Blur (should remain valid since file is present)
+    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+
+    // Remove the file
+    const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+    closeButtons?.[0].click();
+    await aTimeout(300);
+    await el.updateComplete;
+
+    // After removal, should be invalid again (when touched)
+    expect(el.invalid).to.be.true;
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback-container");
+    expect(feedback).to.exist;
+  });
+
+  it("should emit sgds-blur event when button loses focus", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload required hasFeedback></sgds-file-upload>`
+    );
+    const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
+
+    let blurEventFired = false;
+    el.addEventListener("sgds-blur", () => {
+      blurEventFired = true;
+    });
+
+    // Emit blur on button
+    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
+    await el.updateComplete;
+
+    expect(blurEventFired).to.be.true;
+  });
+
+  it("should not show invalid state when noValidate is true, even after blur", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload required hasFeedback noValidate></sgds-file-upload>`
+    );
+    const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
+
+    // Blur without files
+    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
+    await el.updateComplete;
+
+    // Should NOT be invalid (noValidate skips validation)
+    expect(el.invalid).to.be.false;
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback-container");
+    expect(feedback).to.not.exist;
+  });
+
+  it("should re-validate on subsequent blur after files added and removed", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload required hasFeedback></sgds-file-upload>`
+    );
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
+
+    // Step 1: Blur without files → invalid
+    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+
+    // Step 2: Add files → valid
+    const dt1 = new DataTransfer();
+    dt1.items.add(new File(["content"], "test.txt"));
+    if (input) {
+      input.files = dt1.files;
+      input.dispatchEvent(new Event("change"));
+    }
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+
+    // Step 3: Clear files (by setting empty DataTransfer)
+    const dt2 = new DataTransfer();
+    if (input) {
+      input.files = dt2.files;
+      input.dispatchEvent(new Event("change"));
+    }
+    await el.updateComplete;
+
+    // Step 4: Blur again → should be invalid again
+    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+  });
+});

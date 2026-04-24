@@ -2,20 +2,20 @@ import { html } from "lit";
 import { property, state } from "lit/decorators.js";
 import { createRef, ref } from "lit/directives/ref.js";
 import { repeat } from "lit/directives/repeat.js";
-import SgdsCloseButton from "../CloseButton/sgds-close-button";
 import { SgdsButton } from "../Button/sgds-button";
+import SgdsCloseButton from "../CloseButton/sgds-close-button";
 import fileUploadStyles from "./file-upload.css";
 
 import FormControlElement from "../../base/form-control-element";
+import { formatFileSize } from "../../utils/file";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
-import { formatFileSize } from "../../utils/file";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsSpinner from "../Spinner/sgds-spinner";
 import type {
-  ISgdsFileUploadFilesSelectedEventDetail,
-  ISgdsFileUploadChangeEventDetail,
   ISgdsFileUploadAddFilesEventDetail,
+  ISgdsFileUploadChangeEventDetail,
+  ISgdsFileUploadFilesSelectedEventDetail,
   ISgdsFileUploadRemoveFileEventDetail
 } from "./types";
 export type {
@@ -79,6 +79,8 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
 
   @state()
   private fileMetadata: Map<File, { uploading: boolean; error?: string }> = new Map();
+
+  @state() protected _isTouched = false;
 
   private _isProgrammaticChange = false;
 
@@ -268,6 +270,23 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     // Disabled form controls are always valid, so we need to recheck validity when the state changes
     this.setInvalid(false);
   }
+
+  protected _handleBlur() {
+    const sgdsBlur = this.emit("sgds-blur", { cancelable: true });
+    if (this._mixinShouldSkipSgdsValidation()) return;
+    if (sgdsBlur.defaultPrevented) return;
+
+    this.setInvalid(!this._mixinCheckValidity());
+    this._isTouched = true;
+  }
+
+  @watch("_isTouched", { waitUntilFirstUpdate: true })
+  _handleIsTouched() {
+    if (this._mixinShouldSkipSgdsValidation()) return;
+    if (this._isTouched) {
+      this.setInvalid(!this._mixinCheckValidity());
+    }
+  }
   protected _renderLabel() {
     const labelTemplate = html` <label id=${this._labelId} class="form-label"> ${this.label} </label> `;
     return this.label && labelTemplate;
@@ -361,6 +380,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
           @dragover=${this._handleDragOver}
           @dragleave=${this._handleDragLeave}
           @drop=${this._handleDrop}
+          @blur=${this._handleBlur}
         >
           <sgds-icon name="upload" size="lg"></sgds-icon>
           <div class="drag-drop-text">Drag and drop files here</div>
@@ -372,7 +392,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     }
 
     return html`
-      <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this._handleClick}>
+      <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this._handleClick} @sgds-blur=${this._handleBlur}>
         <slot>Choose files</slot>
         <sgds-icon slot="rightIcon" name="upload"></sgds-icon>
       </sgds-button>
@@ -391,8 +411,8 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       (file, index) => {
         const metadata = this.fileMetadata.get(file);
         return html`
-          <div class="file-upload-list-item-container ${this.exitingFile === file ? "file-upload-exit" : ""}">
-            <li class="file-upload-list-item ${metadata?.error ? "file-upload-error" : ""}">
+          <li class="file-upload-list-item-container ${this.exitingFile === file ? "file-upload-exit" : ""}">
+            <div class="file-upload-list-item ${metadata?.error ? "file-upload-error" : ""}">
               ${metadata?.uploading ? html`<sgds-spinner size="sm"></sgds-spinner>` : getCheckedIcon(metadata)}
               <span class="filename">${file.name}</span>
               <span class="filesize">${formatFileSize(file.size)}</span>
@@ -401,7 +421,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
                 ?disabled=${metadata?.uploading}
                 @click=${() => this._removeFileHandler(index)}
               ></sgds-close-button>
-            </li>
+            </div>
             ${metadata?.error
               ? html`
                   <div class="invalid-feedback-container">
@@ -410,7 +430,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
                   </div>
                 `
               : ""}
-          </div>
+          </li>
         `;
       }
     );
@@ -430,7 +450,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         ${this._renderLabel()} ${this._renderUploadZone()}
         ${this.hasFeedback && this.invalid ? this._renderFeedback() : this._renderHintText()}
       </div>
-      <ul class="file-upload-list">
+      <ul class="file-upload-list ${this.selectedFiles.length > 0 ? 'has-files' : ''}">
         ${listItems}
       </ul>
     `;
