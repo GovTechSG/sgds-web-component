@@ -1,7 +1,7 @@
 import { property, query, state } from "lit/decorators.js";
 import { DropdownElement } from "./dropdown-element";
-import { SgdsDropdownItem } from "../components";
 import { PropertyValueMap } from "lit";
+import SgdsDropdownItem from "../components/Dropdown/sgds-dropdown-item";
 
 const TAB = "Tab";
 const ARROW_DOWN = "ArrowDown";
@@ -51,7 +51,29 @@ export class DropdownListElement extends DropdownElement {
     this.prevDropdownItemNo = currentItemNo <= 0 ? items.length - 1 : currentItemNo - 1;
 
     /** Emitted event from SgdsDropdown element when a slot item is selected */
-    const selectedItem = e.target as SgdsDropdownItem;
+    /**
+     * If nested slotted element is the event target,
+     * traverse up the Shadow DOM to find the root
+     * SgdsDropdownItem component
+     * */
+    let target: Element | null = e.target as Element;
+
+    while (target && !(target instanceof SgdsDropdownItem)) {
+      if (target.assignedSlot) {
+        const root = target.assignedSlot.getRootNode();
+
+        target = root instanceof ShadowRoot ? root.host : null;
+      } else {
+        target = target.parentElement;
+      }
+    }
+
+    /** Fallback to event target in case traversal fails */
+    if (!target) {
+      target = e.target as Element;
+    }
+
+    const selectedItem = target as SgdsDropdownItem;
     if (!selectedItem.disabled) {
       this.emit("sgds-select", { detail: { item: selectedItem } });
       if (this.close !== "outside") {
