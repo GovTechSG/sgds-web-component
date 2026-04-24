@@ -10,7 +10,9 @@ const BasicLeftTemplate = () => html`
       <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Contact Information
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -43,10 +45,14 @@ const BasicLeftTemplate = () => html`
 const BasicCenterTemplate = () => html`
   <div class="sgds-container sgds:py-layout-md">
     <div class="sgds-grid sgds:gap-layout-md">
-      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8">
+      <form
+        class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8"
+      >
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Personal Information
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -66,15 +72,27 @@ const BasicCenterTemplate = () => html`
               </div>
             </div>
             <div>
-              <sgds-textarea label="Additional comments" name="comments" placeholder="Enter any additional information..." hasFeedback="both"></sgds-textarea>
+              <sgds-textarea
+                label="Additional comments"
+                name="comments"
+                placeholder="Enter any additional information..."
+                hasFeedback="both"
+              ></sgds-textarea>
             </div>
           </div>
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Preferences
             </h5>
             <div>
-              <sgds-radio-group label="Communication preference" name="communicationPreference" required hasFeedback="both">
+              <sgds-radio-group
+                label="Communication preference"
+                name="communicationPreference"
+                required
+                hasFeedback="both"
+              >
                 <sgds-radio value="email">Email</sgds-radio>
                 <sgds-radio value="sms">SMS</sgds-radio>
                 <sgds-radio value="phone">Phone</sgds-radio>
@@ -112,7 +130,9 @@ const BasicRightTemplate = () => html`
       <form class="form-right sgds-col-4 sgds-col-sm-8 sgds-col-md-8">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Personal Information
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -132,15 +152,27 @@ const BasicRightTemplate = () => html`
               </div>
             </div>
             <div>
-              <sgds-textarea label="Additional comments" name="comments" placeholder="Enter any additional information..." hasFeedback="both"></sgds-textarea>
+              <sgds-textarea
+                label="Additional comments"
+                name="comments"
+                placeholder="Enter any additional information..."
+                hasFeedback="both"
+              ></sgds-textarea>
             </div>
           </div>
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Preferences
             </h5>
             <div>
-              <sgds-radio-group label="Communication preference" name="communicationPreference" required hasFeedback="both">
+              <sgds-radio-group
+                label="Communication preference"
+                name="communicationPreference"
+                required
+                hasFeedback="both"
+              >
                 <sgds-radio value="email">Email</sgds-radio>
                 <sgds-radio value="sms">SMS</sgds-radio>
                 <sgds-radio value="phone">Phone</sgds-radio>
@@ -171,11 +203,19 @@ const FullwidthOnlyTemplate = () => html`
       <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               All Full-Width
             </h5>
             <div>
-              <sgds-textarea label="Description" name="description" placeholder="Enter description..." required hasFeedback="both"></sgds-textarea>
+              <sgds-textarea
+                label="Description"
+                name="description"
+                placeholder="Enter description..."
+                required
+                hasFeedback="both"
+              ></sgds-textarea>
             </div>
             <div>
               <sgds-radio-group label="Category" name="category" required hasFeedback="both">
@@ -192,7 +232,11 @@ const FullwidthOnlyTemplate = () => html`
               </sgds-checkbox-group>
             </div>
             <div>
-              <sgds-textarea label="Additional comments" name="comments" placeholder="Any additional comments..."></sgds-textarea>
+              <sgds-textarea
+                label="Additional comments"
+                name="comments"
+                placeholder="Any additional comments..."
+              ></sgds-textarea>
             </div>
           </div>
           <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
@@ -211,7 +255,9 @@ const PairedOnlyTemplate = () => html`
       <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               All Paired Fields
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -295,10 +341,14 @@ export const PairedOnly = {
 const AllTypesTemplate = () => html`
   <div class="sgds-container sgds:py-layout-md">
     <div class="sgds-grid sgds:gap-layout-md">
-      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8">
+      <form
+        class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8"
+      >
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Basic Info
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -311,7 +361,14 @@ const AllTypesTemplate = () => html`
             </div>
             <div class="sgds-grid sgds:gap-layout-md">
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-select placeholder="Select an option" label="Country" name="country" placeholder="Select country" required hasFeedback="both">
+                <sgds-select
+                  placeholder="Select an option"
+                  label="Country"
+                  name="country"
+                  placeholder="Select country"
+                  required
+                  hasFeedback="both"
+                >
                   <sgds-select-option value="sg">Singapore</sgds-select-option>
                   <sgds-select-option value="my">Malaysia</sgds-select-option>
                 </sgds-select>
@@ -322,10 +379,24 @@ const AllTypesTemplate = () => html`
             </div>
             <div class="sgds-grid sgds:gap-layout-md">
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-quantity-toggle label="Tickets" name="tickets" value="1" min="1" max="10" required hasFeedback="both"></sgds-quantity-toggle>
+                <sgds-quantity-toggle
+                  label="Tickets"
+                  name="tickets"
+                  value="1"
+                  min="1"
+                  max="10"
+                  required
+                  hasFeedback="both"
+                ></sgds-quantity-toggle>
               </div>
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-combo-box placeholder="Search or select..." label="Event" name="event"  required hasFeedback="both">
+                <sgds-combo-box
+                  placeholder="Search or select..."
+                  label="Event"
+                  name="event"
+                  required
+                  hasFeedback="both"
+                >
                   <sgds-combo-box-option value="event-1">Event 1</sgds-combo-box-option>
                   <sgds-combo-box-option value="event-2">Event 2</sgds-combo-box-option>
                 </sgds-combo-box>
@@ -333,11 +404,18 @@ const AllTypesTemplate = () => html`
             </div>
           </div>
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Preferences
             </h5>
             <div>
-              <sgds-textarea label="Special requests" name="requests" placeholder="Any special requests?..." hasFeedback="both"></sgds-textarea>
+              <sgds-textarea
+                label="Special requests"
+                name="requests"
+                placeholder="Any special requests?..."
+                hasFeedback="both"
+              ></sgds-textarea>
             </div>
             <div>
               <sgds-radio-group label="Delivery method" name="delivery" required hasFeedback="both">
@@ -354,7 +432,14 @@ const AllTypesTemplate = () => html`
               </sgds-checkbox-group>
             </div>
             <div>
-              <sgds-combo-box placeholder="Search or select..." label="Interests" name="interests" multiSelect="true" placeholder="Select interests..." hasFeedback="both">
+              <sgds-combo-box
+                placeholder="Search or select..."
+                label="Interests"
+                name="interests"
+                multiSelect="true"
+                placeholder="Select interests..."
+                hasFeedback="both"
+              >
                 <sgds-combo-box-option value="tech">Technology</sgds-combo-box-option>
                 <sgds-combo-box-option value="design">Design</sgds-combo-box-option>
                 <sgds-combo-box-option value="business">Business</sgds-combo-box-option>
@@ -380,7 +465,9 @@ const SectionsSingleTemplate = () => html`
       <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Quick Form
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -392,7 +479,13 @@ const SectionsSingleTemplate = () => html`
               </div>
             </div>
             <div>
-              <sgds-textarea label="Message" name="message" placeholder="Enter your message..." required hasFeedback="both"></sgds-textarea>
+              <sgds-textarea
+                label="Message"
+                name="message"
+                placeholder="Enter your message..."
+                required
+                hasFeedback="both"
+              ></sgds-textarea>
             </div>
           </div>
           <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
@@ -408,10 +501,14 @@ const SectionsSingleTemplate = () => html`
 const SectionsTwoTemplate = () => html`
   <div class="sgds-container sgds:py-layout-md">
     <div class="sgds-grid sgds:gap-layout-md">
-      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8">
+      <form
+        class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8"
+      >
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Personal Details
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -427,7 +524,9 @@ const SectionsTwoTemplate = () => html`
             </div>
           </div>
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Contact Preferences
             </h5>
             <div>
@@ -462,7 +561,9 @@ const SectionsThreeTemplate = () => html`
       <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Personal Information
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -483,18 +584,33 @@ const SectionsThreeTemplate = () => html`
             </div>
           </div>
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Address
             </h5>
             <div>
-              <sgds-textarea label="Full address" name="address" placeholder="Street, City, Country..." required hasFeedback="both"></sgds-textarea>
+              <sgds-textarea
+                label="Full address"
+                name="address"
+                placeholder="Street, City, Country..."
+                required
+                hasFeedback="both"
+              ></sgds-textarea>
             </div>
             <div class="sgds-grid sgds:gap-layout-md">
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
                 <sgds-input label="Postal code" name="postalCode" type="text" required hasFeedback="both"></sgds-input>
               </div>
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-select placeholder="Select an option" label="Country" name="country" placeholder="Select country" required hasFeedback="both">
+                <sgds-select
+                  placeholder="Select an option"
+                  label="Country"
+                  name="country"
+                  placeholder="Select country"
+                  required
+                  hasFeedback="both"
+                >
                   <sgds-select-option value="sg">Singapore</sgds-select-option>
                   <sgds-select-option value="my">Malaysia</sgds-select-option>
                 </sgds-select>
@@ -502,7 +618,9 @@ const SectionsThreeTemplate = () => html`
             </div>
           </div>
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Preferences
             </h5>
             <div>
@@ -519,7 +637,13 @@ const SectionsThreeTemplate = () => html`
               </sgds-radio-group>
             </div>
             <div>
-              <sgds-select placeholder="Select an option" label="Communication frequency" name="frequency" placeholder="Select frequency" hasFeedback="both">
+              <sgds-select
+                placeholder="Select an option"
+                label="Communication frequency"
+                name="frequency"
+                placeholder="Select frequency"
+                hasFeedback="both"
+              >
                 <sgds-select-option value="daily">Daily</sgds-select-option>
                 <sgds-select-option value="weekly">Weekly</sgds-select-option>
                 <sgds-select-option value="monthly">Monthly</sgds-select-option>
@@ -570,7 +694,9 @@ const FormFieldsRadioTemplate = () => html`
       <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Survey
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -610,10 +736,14 @@ const FormFieldsRadioTemplate = () => html`
 const FormFieldsCheckboxTemplate = () => html`
   <div class="sgds-container sgds:py-layout-md">
     <div class="sgds-grid sgds:gap-layout-md">
-      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8">
+      <form
+        class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8"
+      >
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Preferences
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -654,10 +784,14 @@ const FormFieldsCheckboxTemplate = () => html`
 const FormFieldsTextareaTemplate = () => html`
   <div class="sgds-container sgds:py-layout-md">
     <div class="sgds-grid sgds:gap-layout-md">
-      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8">
+      <form
+        class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8"
+      >
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Contact Us
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -669,10 +803,20 @@ const FormFieldsTextareaTemplate = () => html`
               </div>
             </div>
             <div>
-              <sgds-textarea label="Message" name="message" placeholder="Please enter your message..." required hasFeedback="both"></sgds-textarea>
+              <sgds-textarea
+                label="Message"
+                name="message"
+                placeholder="Please enter your message..."
+                required
+                hasFeedback="both"
+              ></sgds-textarea>
             </div>
             <div>
-              <sgds-textarea label="Additional details" name="details" placeholder="Any additional information..."></sgds-textarea>
+              <sgds-textarea
+                label="Additional details"
+                name="details"
+                placeholder="Any additional information..."
+              ></sgds-textarea>
             </div>
           </div>
           <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
@@ -691,19 +835,35 @@ const FormFieldsSelectsTemplate = () => html`
       <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Product Selection
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-select placeholder="Select an option" label="Category" name="category" placeholder="Select a category" required hasFeedback="both">
+                <sgds-select
+                  placeholder="Select an option"
+                  label="Category"
+                  name="category"
+                  placeholder="Select a category"
+                  required
+                  hasFeedback="both"
+                >
                   <sgds-select-option value="electronics">Electronics</sgds-select-option>
                   <sgds-select-option value="furniture">Furniture</sgds-select-option>
                   <sgds-select-option value="clothing">Clothing</sgds-select-option>
                 </sgds-select>
               </div>
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-select placeholder="Select an option" label="Brand" name="brand" placeholder="Select a brand" required hasFeedback="both">
+                <sgds-select
+                  placeholder="Select an option"
+                  label="Brand"
+                  name="brand"
+                  placeholder="Select a brand"
+                  required
+                  hasFeedback="both"
+                >
                   <sgds-select-option value="brand-a">Brand A</sgds-select-option>
                   <sgds-select-option value="brand-b">Brand B</sgds-select-option>
                   <sgds-select-option value="brand-c">Brand C</sgds-select-option>
@@ -711,14 +871,27 @@ const FormFieldsSelectsTemplate = () => html`
               </div>
             </div>
             <div>
-              <sgds-combo-box placeholder="Search or select..." label="Supplier" name="supplier" placeholder="Search suppliers..." hasFeedback="both">
+              <sgds-combo-box
+                placeholder="Search or select..."
+                label="Supplier"
+                name="supplier"
+                placeholder="Search suppliers..."
+                hasFeedback="both"
+              >
                 <sgds-combo-box-option value="supplier-1">Supplier 1</sgds-combo-box-option>
                 <sgds-combo-box-option value="supplier-2">Supplier 2</sgds-combo-box-option>
                 <sgds-combo-box-option value="supplier-3">Supplier 3</sgds-combo-box-option>
               </sgds-combo-box>
             </div>
             <div>
-              <sgds-combo-box placeholder="Search or select..." label="Features" name="features" multiSelect="true" placeholder="Select features..." hasFeedback="both">
+              <sgds-combo-box
+                placeholder="Search or select..."
+                label="Features"
+                name="features"
+                multiSelect="true"
+                placeholder="Select features..."
+                hasFeedback="both"
+              >
                 <sgds-combo-box-option value="feature-1">Feature 1</sgds-combo-box-option>
                 <sgds-combo-box-option value="feature-2">Feature 2</sgds-combo-box-option>
                 <sgds-combo-box-option value="feature-3">Feature 3</sgds-combo-box-option>
@@ -739,10 +912,14 @@ const FormFieldsSelectsTemplate = () => html`
 const FormFieldsDatesQuantitiesTemplate = () => html`
   <div class="sgds-container sgds:py-layout-md">
     <div class="sgds-grid sgds:gap-layout-md">
-      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8">
+      <form
+        class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8"
+      >
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Event Booking
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -763,10 +940,26 @@ const FormFieldsDatesQuantitiesTemplate = () => html`
             </div>
             <div class="sgds-grid sgds:gap-layout-md">
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-quantity-toggle label="Number of guests" name="guests" value="1" min="1" max="20" required hasFeedback="both"></sgds-quantity-toggle>
+                <sgds-quantity-toggle
+                  label="Number of guests"
+                  name="guests"
+                  value="1"
+                  min="1"
+                  max="20"
+                  required
+                  hasFeedback="both"
+                ></sgds-quantity-toggle>
               </div>
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-quantity-toggle label="Quantity ordered" name="quantity" value="1" min="1" max="100" required hasFeedback="both"></sgds-quantity-toggle>
+                <sgds-quantity-toggle
+                  label="Quantity ordered"
+                  name="quantity"
+                  value="1"
+                  min="1"
+                  max="100"
+                  required
+                  hasFeedback="both"
+                ></sgds-quantity-toggle>
               </div>
             </div>
           </div>
@@ -783,10 +976,14 @@ const FormFieldsDatesQuantitiesTemplate = () => html`
 const FormFieldsFileUploadTemplate = () => html`
   <div class="sgds-container sgds:py-layout-md">
     <div class="sgds-grid sgds:gap-layout-md">
-      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8">
+      <form
+        class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8"
+      >
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Document Submission
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -798,13 +995,19 @@ const FormFieldsFileUploadTemplate = () => html`
               </div>
             </div>
             <div>
-              <sgds-file-upload label="Upload ID" name="idDocument" required hasFeedback="both">Choose files</sgds-file-upload>
+              <sgds-file-upload label="Upload ID" name="idDocument" required hasFeedback="both"
+                >Choose files</sgds-file-upload
+              >
             </div>
             <div>
-              <sgds-file-upload label="Upload Proof of Address" name="addressProof" required hasFeedback="both">Choose files</sgds-file-upload>
+              <sgds-file-upload label="Upload Proof of Address" name="addressProof" required hasFeedback="both"
+                >Choose files</sgds-file-upload
+              >
             </div>
             <div>
-              <sgds-file-upload label="Additional Documents" name="additionalDocs" hasFeedback="both">Choose files</sgds-file-upload>
+              <sgds-file-upload label="Additional Documents" name="additionalDocs" hasFeedback="both"
+                >Choose files</sgds-file-upload
+              >
             </div>
           </div>
           <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
@@ -836,7 +1039,9 @@ const FormWithSidebarTemplate = () => html`
       <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Personal Information
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -849,7 +1054,9 @@ const FormWithSidebarTemplate = () => html`
             </div>
           </div>
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Contact Details
             </h5>
             <div class="sgds-grid sgds:gap-layout-md">
@@ -890,7 +1097,9 @@ const FormWithSidebarTocTemplate = () => html`
       <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md" id="personal">
-            <h4 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h4
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Personal Information
             </h4>
             <div>
@@ -901,7 +1110,9 @@ const FormWithSidebarTocTemplate = () => html`
             </div>
           </div>
           <div class="sgds:flex sgds:flex-col sgds:gap-layout-md" id="contact">
-            <h4 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h4
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Contact Details
             </h4>
             <div>
@@ -941,60 +1152,124 @@ const FormMultistepStepperTemplate = () => html`
     <div class="sgds-grid sgds:gap-layout-md">
       <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
         <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
-
           <!-- Stepper -->
           <sgds-stepper id="stepper"></sgds-stepper>
 
           <!-- Step 1: Personal Information -->
           <div id="step-1" class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:text-heading-default sgds:mb-0">Personal Information</h5>
+            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:text-heading-default sgds:mb-0">
+              Personal Information
+            </h5>
 
             <div class="sgds-grid sgds:gap-layout-md">
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both" invalidFeedback="First name is required"></sgds-input>
+                <sgds-input
+                  label="First name"
+                  name="firstName"
+                  type="text"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="First name is required"
+                ></sgds-input>
               </div>
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both" invalidFeedback="Last name is required"></sgds-input>
+                <sgds-input
+                  label="Last name"
+                  name="lastName"
+                  type="text"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="Last name is required"
+                ></sgds-input>
               </div>
             </div>
 
             <div>
-              <sgds-input label="Email" name="email" type="email" required hasFeedback="both" invalidFeedback="Valid email required"></sgds-input>
+              <sgds-input
+                label="Email"
+                name="email"
+                type="email"
+                required
+                hasFeedback="both"
+                invalidFeedback="Valid email required"
+              ></sgds-input>
             </div>
 
             <div>
-              <sgds-datepicker label="Date of birth" name="birthDate" required hasFeedback="both" invalidFeedback="Birth date required"></sgds-datepicker>
+              <sgds-datepicker
+                label="Date of birth"
+                name="birthDate"
+                required
+                hasFeedback="both"
+                invalidFeedback="Birth date required"
+              ></sgds-datepicker>
             </div>
           </div>
 
           <!-- Step 2: Contact Details -->
           <div id="step-2" class="sgds:flex sgds:flex-col sgds:gap-layout-md" style="display: none;">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:text-heading-default sgds:mb-0">Contact Details</h5>
+            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:text-heading-default sgds:mb-0">
+              Contact Details
+            </h5>
 
             <div class="sgds-grid sgds:gap-layout-md">
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
                 <sgds-input label="Phone" name="phone" type="tel" hasFeedback="text" hintText="Optional"></sgds-input>
               </div>
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Mobile" name="mobile" type="tel" required hasFeedback="both" invalidFeedback="Mobile required"></sgds-input>
+                <sgds-input
+                  label="Mobile"
+                  name="mobile"
+                  type="tel"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="Mobile required"
+                ></sgds-input>
               </div>
             </div>
 
             <div>
-              <sgds-textarea label="Street address" name="address" required hasFeedback="both" invalidFeedback="Address required"></sgds-textarea>
+              <sgds-textarea
+                label="Street address"
+                name="address"
+                required
+                hasFeedback="both"
+                invalidFeedback="Address required"
+              ></sgds-textarea>
             </div>
 
             <div class="sgds-grid sgds:gap-layout-md">
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="City" name="city" type="text" required hasFeedback="both" invalidFeedback="City required"></sgds-input>
+                <sgds-input
+                  label="City"
+                  name="city"
+                  type="text"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="City required"
+                ></sgds-input>
               </div>
               <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Postal code" name="postal" type="text" required hasFeedback="both" invalidFeedback="Postal code required"></sgds-input>
+                <sgds-input
+                  label="Postal code"
+                  name="postal"
+                  type="text"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="Postal code required"
+                ></sgds-input>
               </div>
             </div>
 
             <div>
-              <sgds-select label="Country" name="country" placeholder="Select a country" required hasFeedback="both" invalidFeedback="Country required">
+              <sgds-select
+                label="Country"
+                name="country"
+                placeholder="Select a country"
+                required
+                hasFeedback="both"
+                invalidFeedback="Country required"
+              >
                 <sgds-select-option value="sg">Singapore</sgds-select-option>
                 <sgds-select-option value="my">Malaysia</sgds-select-option>
                 <sgds-select-option value="th">Thailand</sgds-select-option>
@@ -1004,10 +1279,18 @@ const FormMultistepStepperTemplate = () => html`
 
           <!-- Step 3: Preferences -->
           <div id="step-3" class="sgds:flex sgds:flex-col sgds:gap-layout-md" style="display: none;">
-            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:text-heading-default sgds:mb-0">Preferences & Consent</h5>
+            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:text-heading-default sgds:mb-0">
+              Preferences & Consent
+            </h5>
 
             <div>
-              <sgds-radio-group label="Delivery method" name="delivery" required hasFeedback="both" invalidFeedback="Select a method">
+              <sgds-radio-group
+                label="Delivery method"
+                name="delivery"
+                required
+                hasFeedback="both"
+                invalidFeedback="Select a method"
+              >
                 <sgds-radio value="pickup">Pickup</sgds-radio>
                 <sgds-radio value="standard">Standard delivery</sgds-radio>
                 <sgds-radio value="express">Express delivery</sgds-radio>
@@ -1023,7 +1306,13 @@ const FormMultistepStepperTemplate = () => html`
             </div>
 
             <div>
-              <sgds-checkbox name="terms" value="agree" required hasFeedback="both" invalidFeedback="You must agree to proceed">
+              <sgds-checkbox
+                name="terms"
+                value="agree"
+                required
+                hasFeedback="both"
+                invalidFeedback="You must agree to proceed"
+              >
                 I agree to the terms and conditions
               </sgds-checkbox>
             </div>
@@ -1042,7 +1331,6 @@ const FormMultistepStepperTemplate = () => html`
               <sgds-button type="submit" id="submitBtn" style="display: none;">Submit</sgds-button>
             </div>
           </div>
-
         </div>
       </form>
     </div>
@@ -1151,7 +1439,7 @@ export const FormMultistepStepper = {
       stepper.previousStep();
     });
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", e => {
       e.preventDefault();
       alert("Form submitted!");
     });

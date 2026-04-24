@@ -1405,9 +1405,7 @@ describe("form novalidate disables sgds validation on all children", () => {
 });
 describe("sgds-file-upload touched validation (blur-triggered)", () => {
   it("should NOT show invalid feedback on required field until blur (touched behavior)", async () => {
-    const el = await fixture<SgdsFileUpload>(
-      html`<sgds-file-upload required hasFeedback></sgds-file-upload>`
-    );
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback></sgds-file-upload>`);
 
     // Initially, should NOT show invalid feedback (not touched yet)
     await el.updateComplete;
@@ -1483,9 +1481,7 @@ describe("sgds-file-upload touched validation (blur-triggered)", () => {
   });
 
   it("should clear invalid state when files are added after blur", async () => {
-    const el = await fixture<SgdsFileUpload>(
-      html`<sgds-file-upload required hasFeedback></sgds-file-upload>`
-    );
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback></sgds-file-upload>`);
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
 
@@ -1510,9 +1506,7 @@ describe("sgds-file-upload touched validation (blur-triggered)", () => {
   });
 
   it("should show invalid feedback when all files are removed after blur", async () => {
-    const el = await fixture<SgdsFileUpload>(
-      html`<sgds-file-upload required hasFeedback multiple></sgds-file-upload>`
-    );
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback multiple></sgds-file-upload>`);
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
 
@@ -1544,9 +1538,7 @@ describe("sgds-file-upload touched validation (blur-triggered)", () => {
   });
 
   it("should emit sgds-blur event when button loses focus", async () => {
-    const el = await fixture<SgdsFileUpload>(
-      html`<sgds-file-upload required hasFeedback></sgds-file-upload>`
-    );
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback></sgds-file-upload>`);
     const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
 
     let blurEventFired = false;
@@ -1578,9 +1570,7 @@ describe("sgds-file-upload touched validation (blur-triggered)", () => {
   });
 
   it("should re-validate on subsequent blur after files added and removed", async () => {
-    const el = await fixture<SgdsFileUpload>(
-      html`<sgds-file-upload required hasFeedback></sgds-file-upload>`
-    );
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback></sgds-file-upload>`);
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
 

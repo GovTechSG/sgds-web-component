@@ -392,7 +392,12 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     }
 
     return html`
-      <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this._handleClick} @sgds-blur=${this._handleBlur}>
+      <sgds-button
+        variant="outline"
+        ?disabled=${this.disabled}
+        @click=${this._handleClick}
+        @sgds-blur=${this._handleBlur}
+      >
         <slot>Choose files</slot>
         <sgds-icon slot="rightIcon" name="upload"></sgds-icon>
       </sgds-button>
@@ -450,7 +455,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         ${this._renderLabel()} ${this._renderUploadZone()}
         ${this.hasFeedback && this.invalid ? this._renderFeedback() : this._renderHintText()}
       </div>
-      <ul class="file-upload-list ${this.selectedFiles.length > 0 ? 'has-files' : ''}">
+      <ul class="file-upload-list ${this.selectedFiles.length > 0 ? "has-files" : ""}">
         ${listItems}
       </ul>
     `;
