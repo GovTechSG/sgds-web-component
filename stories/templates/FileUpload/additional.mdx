@@ -93,3 +93,54 @@ Fires on any file set change (add or remove). Useful for tracking current state.
 Demonstrates the complete workflow for uploading files to a server. Select files to see them transition through uploading, success, and error states.
 
 <Canvas of={FileUploadStories.UploadToServer} />
+
+## Custom Validation with noValidate
+
+Disable SGDS's built-in validation to implement custom validation logic using your own validation library (Zod, Yup, VeeValidate, etc).
+
+Set the `noValidate` prop to opt out of native HTML5 and SGDS validation:
+
+```html
+<sgds-file-upload
+  noValidate
+  required
+  hasFeedback
+  name="documents"
+>
+  Choose Files
+</sgds-file-upload>
+```
+
+Then handle validation manually via events:
+
+```js
+const fileUpload = document.querySelector('sgds-file-upload');
+
+fileUpload.addEventListener('sgds-add-files', (e) => {
+  const files = e.detail;
+
+  // Your custom validation logic
+  const error = validateFiles(files); // max 2 files, PDF only, etc.
+
+  if (error) {
+    fileUpload.invalidFeedback = error;
+    fileUpload.setInvalid(true);
+  } else {
+    fileUpload.setInvalid(false);
+  }
+});
+```
+
+### Alternative: Form-level novalidate
+
+Disable validation for all form components at once:
+
+```html
+<form novalidate>
+  <sgds-file-upload required name="doc"></sgds-file-upload>
+  <sgds-input required name="name"></sgds-input>
+  <!-- All SGDS components auto-detect form novalidate -->
+</form>
+```
+
+> **Note:** When `noValidate` is true, native HTML5 validation is disabled. Only your custom validation runs. Use the `sgds-add-files` and `sgds-remove-file` events to implement your validation rules.

@@ -68,6 +68,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   /** Variant of the file upload component: "default" or "drag-and-drop" */
   @property({ type: String, reflect: true }) variant: "default" | "drag-and-drop" = "default";
 
+  /** Disables native and sgds validation for the component. */
+  @property({ type: Boolean, reflect: true }) noValidate = false;
+
   @state()
   private selectedFiles: File[] = [];
 
@@ -343,7 +346,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     if (inputElement) {
       inputElement.files = fileBuffer.files;
       this._setFileList(fileBuffer.files, previousCount);
-      this._mixinValidate(this.input);
+      if (!this._mixinShouldSkipSgdsValidation()) {
+        this._mixinValidate(this.input);
+      }
     }
   }
 
@@ -421,7 +426,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
           ?multiple=${this.multiple}
           accept=${this.accept}
           id=${this._controlId}
-          ?required=${this.required}
+          ?required=${this.required && !this.noValidate}
           ?disabled=${this.disabled}
         />
         <div class="file-upload-container">

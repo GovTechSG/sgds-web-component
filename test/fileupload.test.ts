@@ -166,16 +166,16 @@ describe("sgds-file-upload", () => {
       input.dispatchEvent(new Event("change"));
       await promise;
 
-      let listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
-      const removeBtn = listItems?.[0].querySelector("sgds-close-button");
+      let containers = el.shadowRoot?.querySelectorAll(".file-upload-list-item-container");
+      const removeBtn = containers?.[0].querySelector("sgds-close-button");
 
       removeBtn?.dispatchEvent(new Event("click"));
       await el.updateComplete;
 
-      // Exit class should be applied, file still in DOM during animation
-      listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
-      expect(listItems?.[0].classList.contains("file-upload-exit")).to.be.true;
-      expect(listItems?.length).to.equal(2);
+      // Exit class should be applied to container, file still in DOM during animation
+      containers = el.shadowRoot?.querySelectorAll(".file-upload-list-item-container");
+      expect(containers?.[0].classList.contains("file-upload-exit")).to.be.true;
+      expect(containers?.length).to.equal(2);
     }
   });
   it("should remove file from DOM after animation completes", async () => {
@@ -1306,5 +1306,100 @@ describe("sgds-file-upload drag-and-drop interactions", () => {
 
     const items = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
     expect(items?.length).to.equal(0);
+  });
+});
+
+describe("noValidate disables native and sgds validation behaviours", () => {
+  it("noValidate=true prevents form submission from being blocked by required validation", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-file-upload noValidate required hasFeedback name="doc"></sgds-file-upload>
+      </form>
+    `);
+    const upload = form.querySelector("sgds-file-upload");
+
+    // Try to submit empty form
+    const canSubmit = form.reportValidity();
+
+    // Should NOT be blocked (form is valid despite required + empty)
+    expect(canSubmit).to.be.true;
+    // Component should not be marked invalid
+    expect(upload?.invalid).to.be.false;
+  });
+
+  it("noValidate=true allows custom validation via setInvalid with custom feedback", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-file-upload noValidate required hasFeedback name="doc"></sgds-file-upload>
+      </form>
+    `);
+    const upload = form.querySelector<SgdsFileUpload>("sgds-file-upload");
+    const input = upload?.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (!input) return;
+
+    // Select a file
+    const dt = new DataTransfer();
+    dt.items.add(new File(["content"], "test.txt"));
+    input.files = dt.files;
+    input.dispatchEvent(new Event("change"));
+    await upload?.updateComplete;
+
+    // Manually set custom validation error
+    upload.invalidFeedback = "Custom validation failed";
+    upload.setInvalid(true);
+    await upload.updateComplete;
+
+    // Custom feedback should be visible
+    const feedback = upload.shadowRoot?.querySelector(".invalid-feedback");
+    expect(feedback?.textContent).to.include("Custom validation failed");
+    expect(upload.invalid).to.be.true;
+  });
+});
+
+describe("form novalidate disables sgds validation on all children", () => {
+  it("form novalidate prevents required validation from blocking submission", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-file-upload required hasFeedback name="doc"></sgds-file-upload>
+      </form>
+    `);
+    const upload = form.querySelector("sgds-file-upload");
+
+    // Try to submit empty form
+    const canSubmit = form.reportValidity();
+
+    // Should NOT be blocked
+    expect(canSubmit).to.be.true;
+    expect(upload?.invalid).to.be.false;
+  });
+
+  it("form novalidate allows custom validation via setInvalid", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-file-upload required hasFeedback name="doc"></sgds-file-upload>
+      </form>
+    `);
+    const upload = form.querySelector<SgdsFileUpload>("sgds-file-upload");
+    const input = upload?.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (!input) return;
+
+    // Select a file
+    const dt = new DataTransfer();
+    dt.items.add(new File(["content"], "test.txt"));
+    input.files = dt.files;
+    input.dispatchEvent(new Event("change"));
+    await upload?.updateComplete;
+
+    // Manually set custom validation error
+    upload.invalidFeedback = "Custom validation failed";
+    upload.setInvalid(true);
+    await upload.updateComplete;
+
+    // Custom feedback should be visible
+    const feedback = upload.shadowRoot?.querySelector(".invalid-feedback");
+    expect(feedback?.textContent).to.include("Custom validation failed");
+    expect(upload.invalid).to.be.true;
   });
 });

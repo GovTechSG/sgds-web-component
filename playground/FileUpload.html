@@ -117,6 +117,23 @@
           Choose Files
         </sgds-file-upload>
       </div>
+
+      <div>
+        <h2>Custom Validation with noValidate (Max 2 files, PDF only)</h2>
+        <sgds-file-upload
+          id="customValidationDemo"
+          label="Upload Documents"
+          name="documents"
+          required
+          hasFeedback
+          noValidate
+          multiple
+          accept=".pdf"
+          hintText="Max 2 PDF files. SGDS validation is disabled, using custom validation instead"
+        >
+          Choose Files
+        </sgds-file-upload>
+      </div>
     </div>
 
     <script>
@@ -258,6 +275,57 @@
       fileUploadError.addEventListener('sgds-change', async (e) => {
         console.log('🔄 sgds-change (Error State Demo) - Current file set:', e.detail);
         console.log('File count:', e.detail.length);
+      });
+
+      // Custom validation example with noValidate
+      const customValidationEl = document.getElementById('customValidationDemo');
+
+      customValidationEl.addEventListener('sgds-add-files', async (e) => {
+        console.log('📋 Custom validation triggered for new files:', e.detail);
+        const files = e.detail;
+
+        // Custom validation rules:
+        // 1. Max 2 files total
+        // 2. PDF only
+
+        const allFiles = customValidationEl.files;
+        let isValid = true;
+        let errorMsg = '';
+
+        if (allFiles.length > 2) {
+          isValid = false;
+          errorMsg = 'Maximum 2 files allowed';
+        }
+
+        for (const file of files) {
+          if (!file.name.toLowerCase().endsWith('.pdf')) {
+            isValid = false;
+            errorMsg = 'Only PDF files are allowed';
+            break;
+          }
+        }
+
+        // Set invalid state based on custom validation
+        customValidationEl.invalidFeedback = errorMsg;
+        customValidationEl.setInvalid(!isValid);
+
+        if (isValid) {
+          console.log('✅ Custom validation passed!');
+        } else {
+          console.log('❌ Custom validation failed:', errorMsg);
+        }
+      });
+
+      customValidationEl.addEventListener('sgds-remove-file', async (e) => {
+        console.log('🗑️ File removed:', e.detail.file.name);
+        // Re-validate remaining files
+        const remaining = e.detail.files;
+        if (remaining.length === 0) {
+          customValidationEl.invalidFeedback = 'At least one file is required';
+          customValidationEl.setInvalid(true);
+        } else {
+          customValidationEl.setInvalid(false);
+        }
       });
     </script>
   </body>
