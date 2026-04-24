@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 100%;
   position: relative;
-  z-index: 1100;
+  z-index: var(--sgds-z-index-sticky);
   width: var(--sgds-dimension-288);
   transition: width var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
 }
