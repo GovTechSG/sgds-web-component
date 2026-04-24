@@ -1,6 +1,6 @@
 # Form Patterns Reference
 
-Complete guide to SGDS form layouts, component sizing, positioning, validation patterns, and 5 canonical patterns covering all permutations.
+Complete guide to SGDS form layouts, component sizing, positioning, validation patterns, and 4 canonical patterns covering all permutations.
 
 ## Table of Contents
 
@@ -15,21 +15,17 @@ Complete guide to SGDS form layouts, component sizing, positioning, validation p
    - [Left Positioning (Default)](#left-positioning-default)
    - [Center Positioning](#center-positioning)
    - [Right Positioning](#right-positioning)
-   - [With Sidebar Navigation (Left)](#with-sidebar-navigation-left)
-   - [With Sidebar + Right TOC](#with-sidebar--right-toc)
 5. [Canonical Layout Patterns](#canonical-layout-patterns)
    - [Pattern 1: Full-Width Fields Only](#pattern-1-full-width-fields-only)
    - [Pattern 2: Two-Column Paired Fields](#pattern-2-two-column-paired-fields)
    - [Pattern 3: Mixed Layout (Pairs + Full-Width)](#pattern-3-mixed-layout-pairs--full-width)
    - [Pattern 4: Multiple Sections](#pattern-4-multiple-sections)
-6. [When Form Width is Constrained](#when-form-width-is-constrained)
-7. [Form Actions (Submit/Reset)](#form-actions-submitreset)
-8. [Common Permutations](#common-permutations)
-9. [Validation & Help Text (Default)](#validation--help-text-default)
-10. [Customization Notes](#customization-notes)
-11. [Common Mistakes (Anti-Patterns)](#common-mistakes-anti-patterns)
+6. [Form Actions (Submit/Reset)](#form-actions-submitreset)
+7. [Common Permutations](#common-permutations)
+8. [Validation & Help Text (Default)](#validation--help-text-default)
+9. [Customization Notes](#customization-notes)
+10. [Common Mistakes (Anti-Patterns)](#common-mistakes-anti-patterns)
     - [Mistake 1: Pairing a Single Checkbox](#mistake-1-pairing-a-single-checkbox-with-another-component)
-    - [Mistake 2: Pairing Fields in Constrained Form](#mistake-2-pairing-fields-in-a-constrained-form-6-columns)
 
 For select/combobox option formatting, see [sgds-components skill](../sgds-components/SKILL.md) or the [sgds-components reference](../sgds-components/reference).
 

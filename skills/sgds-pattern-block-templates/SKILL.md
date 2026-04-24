@@ -1,6 +1,6 @@
 ---
 name: "sgds-pattern-block-templates"
-description: "Reusable UI blocks built with SGDS components and utilities that can be mixed and matched inside any page template. Use this skill whenever a user asks about app layout, application shell, page structure, sticky header, masthead placement, mainnav placement, footer placement, sgds-container, sgds-container-sidebar, simple app layout, sidebar app layout, dashboard layout, filter panel, sidebar filter, category filter, checkbox filter, or any self-contained UI section — even if they don't name it a 'block'. These are drop-in sections and shell structures, not full pages. Compose them with sgds-pattern-page-templates to build complete pages."
+description: "Reusable UI blocks built with SGDS components and utilities that can be mixed and matched inside any page template. Use this skill whenever a user asks about app layout, application shell, page structure, sticky header, masthead placement, mainnav placement, footer placement, sgds-container, sgds-container-sidebar, simple app layout, sidebar app layout, dashboard layout, filter panel, sidebar filter, category filter, checkbox filter, form layout, form patterns, call-to-action, CTA, or any self-contained UI section — even if they don't name it a 'block'. These are drop-in sections and shell structures, not full pages. Compose them with sgds-pattern-page-templates to build complete pages."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -36,7 +36,7 @@ See **[sgds-components](../sgds-components/SKILL.md)** for full installation det
 
 ---
 
-## Quick Decision Guide
+## Quick Decision Guide 
 
 | What you need | Block to use |
 |---|---|
@@ -45,6 +45,7 @@ See **[sgds-components](../sgds-components/SKILL.md)** for full installation det
 | Read-only entity summary card with key-value fields and an edit action | [Basic Details Card](#→-read-referencebasic-detailsmd) |
 | Sidebar panel that filters content by category using checkboxes | [Filter Sidebar — Checkbox](#→-read-referencefilter-sidebar-checkboxmd) |
 | Search input + filter button + results count + data table for list and admin pages | [Table Filter](#→-read-referencetable-filtermd) |
+| Call-to-action sections with messaging, imagery, and primary action buttons | [Call to Action](#→-read-referencecall-to-actionmd) |
 | Multi-field form layout with component sizing, grouping, and validation | [Form](#→-read-referenceformmd) |
 
 ---
