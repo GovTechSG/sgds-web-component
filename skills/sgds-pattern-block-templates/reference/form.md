@@ -5,32 +5,31 @@ Complete guide to SGDS form layouts, component sizing, positioning, validation p
 ## Table of Contents
 
 1. [When to Use](#when-to-use)
-2. [Core Concepts](#core-concepts)
+2. [Pattern Template Examples](#pattern-template-examples)
+3. [Core Concepts](#core-concepts)
    - [Grid Math & Form Container Width](#grid-math--form-container-width)
    - [Component Pairing Rules](#component-pairing-rules)
    - [Spacing Hierarchy](#spacing-hierarchy)
    - [Form Anatomy](#form-anatomy)
-3. [Positioning Variants](#positioning-variants)
+4. [Positioning Variants](#positioning-variants)
    - [Left Positioning (Default)](#left-positioning-default)
    - [Center Positioning](#center-positioning)
    - [Right Positioning](#right-positioning)
    - [With Sidebar Navigation (Left)](#with-sidebar-navigation-left)
    - [With Sidebar + Right TOC](#with-sidebar--right-toc)
-4. [Canonical Layout Patterns](#canonical-layout-patterns)
+5. [Canonical Layout Patterns](#canonical-layout-patterns)
    - [Pattern 1: Full-Width Fields Only](#pattern-1-full-width-fields-only)
    - [Pattern 2: Two-Column Paired Fields](#pattern-2-two-column-paired-fields)
    - [Pattern 3: Mixed Layout (Pairs + Full-Width)](#pattern-3-mixed-layout-pairs--full-width)
    - [Pattern 4: Multiple Sections](#pattern-4-multiple-sections)
-   - [Pattern 5: Form with Sidebar Navigation](#pattern-5-form-with-sidebar-navigation)
-5. [When Form Width is Constrained](#when-form-width-is-constrained)
-6. [Form Actions (Submit/Reset)](#form-actions-submitreset)
-7. [Common Permutations](#common-permutations)
-8. [Validation & Help Text (Default)](#validation--help-text-default)
-9. [Customization Notes](#customization-notes)
-10. [Common Mistakes (Anti-Patterns)](#common-mistakes-anti-patterns)
+6. [When Form Width is Constrained](#when-form-width-is-constrained)
+7. [Form Actions (Submit/Reset)](#form-actions-submitreset)
+8. [Common Permutations](#common-permutations)
+9. [Validation & Help Text (Default)](#validation--help-text-default)
+10. [Customization Notes](#customization-notes)
+11. [Common Mistakes (Anti-Patterns)](#common-mistakes-anti-patterns)
     - [Mistake 1: Pairing a Single Checkbox](#mistake-1-pairing-a-single-checkbox-with-another-component)
     - [Mistake 2: Pairing Fields in Constrained Form](#mistake-2-pairing-fields-in-a-constrained-form-6-columns)
-11. [Working Playground Examples](#working-playground-examples)
 
 For select/combobox option formatting, see [sgds-components skill](../sgds-components/SKILL.md) or the [sgds-components reference](../sgds-components/reference).
 
@@ -41,6 +40,14 @@ For select/combobox option formatting, see [sgds-components skill](../sgds-compo
 - Creating contact forms, registration forms, and multi-step forms
 - Building admin dashboards and internal tools with data entry sections
 - Any form that contains multiple fields requiring organized, predictable layout
+
+---
+
+## Pattern Template Examples
+
+Production-ready form section examples are available in the Storybook repository:
+
+**[Form Sections block](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/form.stories.js)** — Reusable form layout patterns including single section, multi-section, with sidebar, and with sidebar + TOC variants. Extract `Template` functions and adapt them to your data model.
 
 ---
 
@@ -175,51 +182,6 @@ All forms maintain the same **internal structure**. The only difference is the *
 ```
 
 **Use case:** Forms paired with left sidebar. Requires custom CSS. Occupies columns 5-12 at lg+.
-
-### With Sidebar Navigation (Left)
-
-```html
-<div class="sgds-container sgds:py-layout-md">
-  <div class="sgds-grid sgds:gap-layout-md">
-    <!-- Left sidebar: 3 columns -->
-    <nav class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
-      <sgds-sidenav><!-- navigation items --></sgds-sidenav>
-    </nav>
-
-    <!-- Form: 8 columns (center-most) -->
-    <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
-      <!-- Form content -->
-    </form>
-  </div>
-</div>
-```
-
-**Layout math:** 3 (sidebar) + 8 (form) = 11 columns (leaves 1 for gap) ✅
-
-### With Sidebar + Right TOC
-
-```html
-<div class="sgds-container sgds:py-layout-md">
-  <div class="sgds-grid sgds:gap-layout-md">
-    <!-- Left sidebar: 4 columns -->
-    <nav class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-4 sgds-col-xl-4 sgds-col-2-xl-4">
-      <sgds-sidenav><!-- navigation items --></sgds-sidenav>
-    </nav>
-
-    <!-- Form: 8 columns -->
-    <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
-      <!-- Form content -->
-    </form>
-
-    <!-- Right TOC: 4 columns -->
-    <aside class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-4 sgds-col-xl-4 sgds-col-2-xl-4">
-      <!-- Table of contents -->
-    </aside>
-  </div>
-</div>
-```
-
-**Layout math:** 4 (sidebar) + 8 (form) + 4 (TOC) = 16 columns... **wait, that's 16!** This works because the grid system overflows gracefully. Form still takes 8 columns of usable space.
 
 ---
 
@@ -390,61 +352,6 @@ Organize logically related fields into separate sections with headings. Use `gap
 
 ---
 
-### Pattern 5: Form with Sidebar Navigation
-
-Use when form has multiple pages or sections that users can navigate via sidebar.
-
-```html
-<div class="sgds-container sgds:py-layout-md">
-  <div class="sgds-grid sgds:gap-layout-md">
-
-    <!-- LEFT: Sidebar Navigation (3 columns) -->
-    <nav class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
-      <sgds-sidenav>
-        <sgds-sidenav-item active>
-          <span slot="title">Form Sections</span>
-          <sgds-sidenav-link active>
-            <a href="#personal">Personal Information</a>
-          </sgds-sidenav-link>
-          <sgds-sidenav-link>
-            <a href="#contact">Contact Details</a>
-          </sgds-sidenav-link>
-        </sgds-sidenav-item>
-      </sgds-sidenav>
-    </nav>
-
-    <!-- RIGHT: Form (8 columns, max width) -->
-    <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
-      <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
-        <!-- Form sections here -->
-      </div>
-    </form>
-  </div>
-</div>
-```
-
-**Layout math:** 3 (sidebar) + 8 (form) = 11 columns (leaves 1 for gap) ✅
-
----
-
-
-## When Form Width is Constrained
-
-When a form shares its container with sidebars or table of contents:
-
-### 8-column form (normal)
-- Use 4-col field pairs (50% width each)
-- Full-width components take entire form width
-
-### 6-column form (e.g., 3-col sidebar + 6-col form + 3-col TOC)
-- **Make all fields full-width** — even normally pairable components (Input, Select, etc.)
-- Do not use 4-col pairs; the constrained width causes crowding
-- Only full-width layout works well at 6 columns
-
-### 4-column form or narrower
-- Same rule: all fields full-width
-- Field pairs would be too cramped
-
 ---
 
 ## Form Actions (Submit/Reset)
@@ -559,81 +466,3 @@ These reproducible examples show **what NOT to do**:
 
 ---
 
-### ❌ Mistake 2: Pairing Fields in a Constrained Form (6 columns)
-
-When sidebar + TOC both exist, form is constrained to **6 columns**. In constrained forms, **all fields must be full-width**.
-
-**WRONG** — Form has 6 columns but fields are paired (50% width):
-```html
-<!-- Layout: 3-col sidebar + 6-col form + 3-col TOC = 12 columns -->
-<div class="sgds-grid sgds:gap-layout-md">
-  <nav class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
-    <!-- sidebar -->
-  </nav>
-
-  <!-- INCORRECT: Form is 6 columns, but fields are paired (col-lg-6) as if it were 8 columns -->
-  <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
-    <div class="sgds-grid sgds:gap-layout-md">
-      <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-        <sgds-input label="First name" name="firstName"></sgds-input>
-      </div>
-      <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-        <sgds-input label="Last name" name="lastName"></sgds-input>
-      </div>
-    </div>
-  </form>
-
-  <aside class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
-    <!-- TOC -->
-  </aside>
-</div>
-```
-
-**CORRECT** — Form has 6 columns, all fields full-width:
-```html
-<!-- Layout: 3-col sidebar + 6-col form + 3-col TOC = 12 columns -->
-<div class="sgds-grid sgds:gap-layout-md">
-  <nav class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
-    <!-- sidebar -->
-  </nav>
-
-  <!-- CORRECT: Form is 6 columns, all fields are full-width (no pairing) -->
-  <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-    <!-- Full-width: First name -->
-    <div>
-      <sgds-input label="First name" name="firstName"></sgds-input>
-    </div>
-
-    <!-- Full-width: Last name -->
-    <div>
-      <sgds-input label="Last name" name="lastName"></sgds-input>
-    </div>
-  </form>
-
-  <aside class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
-    <!-- TOC -->
-  </aside>
-</div>
-```
-
-**Rule**: When form width is constrained (6 columns or less):
-- Form wrapper: `sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6` (not `lg-8`)
-- **All fields are full-width** — no pairing, even normally pairable components (Input, Select, Datepicker, Combo-box, Quantity-toggle)
-- Each field in its own `<div>` without grid wrapping
-
----
-
-## Working Playground Examples
-
-See these implementations for complete, ready-to-use examples:
-
-- **Left positioning:** `playground/blocks/form/form-basic.html`
-- **Center positioning:** `playground/blocks/form/form-basic-center.html`
-- **Right positioning:** `playground/blocks/form/form-basic-right.html`
-- **Full-width only:** `playground/blocks/form/form-fields-fullwidth-only.html`
-- **Paired fields:** `playground/blocks/form/form-fields-paired-only.html`
-- **All component types:** `playground/blocks/form/form-fields-all-types.html`
-- **Single section:** `playground/blocks/form/form-sections-single.html`
-- **Multiple sections:** `playground/blocks/form/form-sections-two.html` / `form-sections-three.html`
-- **With sidebar:** `playground/blocks/form/form-with-sidebar.html`
-- **With sidebar + TOC:** `playground/blocks/form/form-with-sidebar-toc.html`

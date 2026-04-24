@@ -44,35 +44,14 @@ See **[sgds-components](../sgds-components/SKILL.md)** for full installation det
 | Page-level header with breadcrumb, icon + title, description, and primary CTA | [Page Header](#→-read-referencepage-headermd) |
 | Read-only entity summary card with key-value fields and an edit action | [Basic Details Card](#→-read-referencebasic-detailsmd) |
 | Sidebar panel that filters content by category using checkboxes | [Filter Sidebar — Checkbox](#→-read-referencefilter-sidebar-checkboxmd) |
-| Full detail view of a single event session: time, title, speaker, badges, description, profile | [Session Detail](#→-read-referencesession-detailmd) |
 | Search input + filter button + results count + data table for list and admin pages | [Table Filter](#→-read-referencetable-filtermd) |
-| Multi-field form with proper component sizing, grouping, and layout rules | [Form Patterns](#→-read-referenceform-patternsmd) |
-| Production-ready Storybook templates (call-to-action, form sections, and more) | [Live Block Templates](#live-block-templates) |
-
----
-
-## Live Block Templates
-
-All block templates are maintained as Storybook stories in the SGDS repository:
-
-| Block | Story File | Raw Link |
-|---|---|---|
-| Call to Action | `call-to-action.stories.js` | [raw](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/call-to-action.stories.js) |
-| Form Sections | `form.stories.js` | [raw](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/form.stories.js) |
-
-Extract template functions and story variations from these files to get production-ready code and component patterns.
+| Multi-field form layout with component sizing, grouping, and validation | [Form](#→-read-referenceformmd) |
 
 ---
 
 ## → Read [reference/application-shell.md](reference/application-shell.md)
 
 **Required for every page.** The application shell wraps all page content with the mandatory Singapore Government chrome: `<sgds-masthead>`, `<sgds-mainnav>`, and `<sgds-footer>`. Provides two layout variants — Simple App (`.sgds-container`, public-facing) and Sidebar App (`.sgds-container-sidebar`, dashboards and internal tools) — with full breakpoint tables and sticky-header patterns.
-
----
-
-## → Read [reference/page-header.md](reference/page-header.md)
-
-Breadcrumb trail + icon-tinted container + h1 heading + description + primary CTA button. Use at the top of any content page to orient the user and surface the primary action.
 
 ---
 
@@ -88,80 +67,45 @@ Vertical filter panel with grouped `sgds-checkbox-group` sections and a "Clear a
 
 ---
 
-## → Read [reference/session-detail.md](reference/session-detail.md)
-
-Full session detail block for event and conference websites. Shows time slot, session title with expand/collapse, speaker attribution, outlined classification badges, description, circular speaker photo with name and role, and a divider. Repeat for each session in a programme listing.
-
----
-
 ## → Read [reference/table-filter.md](reference/table-filter.md)
 
 Page header + search input + outline filter button + results count + data table. Use on list and admin pages where users search or filter tabular records. Table cells support `sgds-link`, `sgds-badge`, and `sgds-button` for rich row content.
 
 ---
 
-## → Read [reference/form-patterns.md](reference/form-patterns.md)
+## → Read [reference/call-to-action.md](reference/call-to-action.md)
 
-**Form layout rules: grid math, component pairing, validation feedback, and canonical patterns.** All forms use `.sgds-grid` with 12 columns. Form containers are 8 columns wide (left/center-aligned). Paired fields take 6 columns each (max 2 per row). Full-width fields (textarea, checkbox-group, radio-group, file-upload) always span 12 columns. Includes 5 reusable patterns: full-width only, paired fields, mixed layout, multiple sections, and sidebar navigation.
+Call-to-action sections with messaging, imagery, and primary action buttons. Use to drive user engagement and direct them toward key flows.
 
 ---
 
-## Composing blocks with page templates
+## → Read [reference/form.md](reference/form.md)
 
-Blocks live inside the content area of a page template. The typical pattern:
-
-```html
-<!-- Page template provides the chrome -->
-<sgds-masthead></sgds-masthead>
-<sgds-mainnav>...</sgds-mainnav>
-
-<div class="sgds:bg-surface-default sgds:min-h-screen">
-  <div class="sgds:w-container sgds:mx-auto sgds:py-layout-md">
-
-    <!-- Two-column layout: block on the left, content on the right -->
-    <div class="sgds:flex sgds:gap-layout-md sgds:items-start">
-
-      <!-- Drop the block here -->
-      <aside class="sgds:shrink-0 sgds:w-64">
-        <!-- Filter Sidebar block -->
-      </aside>
-
-      <!-- Content area -->
-      <div class="sgds:flex-1">
-        <!-- Cards, table, results, etc. -->
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<sgds-footer></sgds-footer>
-```
+**Form layout rules: grid math, component pairing, validation feedback, and canonical patterns.** All forms use `.sgds-grid` with 12 columns. Form containers are 8 columns wide (left/center-aligned). Paired fields take 6 columns each (max 2 per row). Full-width fields (textarea, checkbox-group, radio-group, file-upload) always span 12 columns. Includes 4 reusable patterns: full-width only, paired fields, mixed layout, and multiple sections.
 
 ---
 
 ## Before Writing Form Code
 
-Forms are complex because SGDS components have specific constraints. **Read [reference/form-patterns.md](reference/form-patterns.md) FIRST** — it contains all grid math, component pairing rules, 5 canonical patterns, and positioning variants.
+Forms are complex because SGDS components have specific constraints. **Read [reference/form.md](reference/form.md) FIRST** — it contains all grid math, component pairing rules, 4 canonical patterns, and positioning variants.
 
-### Component API Verification
-Read the component reference for every `<sgds-*>` element you use:
+### ⚠️ Component API Verification (Critical)
 
-- **Child element naming**: Each component has specific child element names. `<sgds-select>` uses `<sgds-select-option>` (not `<sgds-option>`). `<sgds-combo-box>` uses `<sgds-combobox-option>`. Always verify in the [sgds-components skill](../sgds-components/SKILL.md) reference.
-- **Slot requirements**: `<sgds-file-upload>` slots require text labels (not just icons). Check if the component expects child elements, slot content, or JS properties.
-- **Optional properties**: `<sgds-stepper>` uses a JS property (`steps` array), not HTML child elements like `<sgds-stepper-item>`. Verify which components accept attributes vs. JS properties.
+**ALWAYS verify component implementation before writing block code. Do not assume or imagine how components work.**
+
+See **[@skills/sgds-components/SKILL.md](../sgds-components/SKILL.md)** for the authoritative reference. Each component has a dedicated reference file with full API documentation.
 
 ### Form-Specific Constraints
 
-From [reference/form-patterns.md](reference/form-patterns.md):
+From [reference/form.md](reference/form.md):
 
 - Forms take exactly **8 columns** within `.sgds-container`
-- **Pairable fields** (Input, Select, Datepicker, Combo-box single-select): Take **6 columns each** at lg+ (4 columns at sm)
-- **Full-width fields** (Textarea, Checkbox-group, Radio-group, Combo-box multi-select, File-upload): Always 12 columns
-- **Grid math**: `sidebar_cols + form_cols + toc_cols ≤ 12`
+- Forms have a nested **12-column inner grid** (`.sgds-grid`)
+- **Pairable fields** (Input, Select, Datepicker, Combo-box single-select): Take **col-6** (50% of form's inner grid) at lg+
+- **Full-width fields** (Textarea, Checkbox-group, Radio-group, Combo-box multi-select, File-upload): Always **col-12** (100% of form's inner grid)
 - **Multi-select combo-box**: ⚠️ CRITICAL — must be full-width, never pair with any other component
 
-**Always cross-check** against [reference/form-patterns.md](reference/form-patterns.md) before coding.
+**Always cross-check** against [reference/form.md](reference/form.md) before coding.
 
 ---
 
