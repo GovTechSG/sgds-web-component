@@ -330,7 +330,7 @@ Combine paired fields with full-width fields in the same section.
     <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
       <sgds-combo-box label="Event" name="event" required hasFeedback="both">
         <sgds-combobox-option value="e1">Event 1</sgds-combobox-option>
-      </sgds-combo-box>x
+      </sgds-combo-box>
     </div>
   </div>
 </div>
@@ -511,8 +511,8 @@ All forms use the **default validation pattern** by default:
 
 - **Wrap form sections** in `sgds:flex sgds:flex-col` with `sgds:gap-layout-lg` between them
 - **Wrap field rows** in `.sgds-grid` with `sgds:gap-layout-md` between field pairs
-- **Apply validation attributes** — refer to the [sgds-forms reference](../sgds-forms/reference) for constraint validation
-- **Use custom validation** — see the [sgds-forms reference](../sgds-forms/reference) for ElementInternals patterns
+- **Apply validation attributes** — refer to the [sgds-forms SKILL](../sgds-forms/SKILL.md) for constraint validation
+- **Use custom validation** — see the [sgds-forms SKILL](../sgds-forms/SKILL.md) for ElementInternals patterns
 - **Never place full-width components** beside another component in a row
 - **Components with action buttons** (datepicker, quantity-toggle) should be paired as 50% width to prevent buttons from expanding
 - **Wrap text content** in a plain `<div>` to maintain alignment with form fields
