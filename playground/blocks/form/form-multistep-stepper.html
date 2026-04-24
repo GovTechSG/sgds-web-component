@@ -1,0 +1,185 @@
+<script type="module" src="../../../src/index.ts"></script>
+<link href="../../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body>
+  <div class="sgds-container sgds:py-layout-md">
+    <div class="sgds-grid sgds:gap-layout-md">
+      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
+        <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+
+          <!-- Stepper -->
+          <sgds-stepper id="stepper"></sgds-stepper>
+
+          <!-- Step 1: Personal Information -->
+          <div id="step-1" class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:text-heading-default sgds:mb-0">Personal Information</h5>
+
+            <!-- Pair: First & Last Name -->
+            <div class="sgds-grid sgds:gap-layout-md">
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both" invalidFeedback="First name is required"></sgds-input>
+              </div>
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both" invalidFeedback="Last name is required"></sgds-input>
+              </div>
+            </div>
+
+            <!-- Full-width: Email -->
+            <div>
+              <sgds-input label="Email" name="email" type="email" required hasFeedback="both" invalidFeedback="Valid email required"></sgds-input>
+            </div>
+
+            <!-- Full-width: Birth Date -->
+            <div>
+              <sgds-datepicker label="Date of birth" name="birthDate" required hasFeedback="both" invalidFeedback="Birth date required"></sgds-datepicker>
+            </div>
+          </div>
+
+          <!-- Step 2: Contact Details -->
+          <div id="step-2" class="sgds:flex sgds:flex-col sgds:gap-layout-md" style="display: none;">
+            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:text-heading-default sgds:mb-0">Contact Details</h5>
+
+            <!-- Pair: Phone & Mobile -->
+            <div class="sgds-grid sgds:gap-layout-md">
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Phone" name="phone" type="tel" hasFeedback="text" hintText="Optional"></sgds-input>
+              </div>
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Mobile" name="mobile" type="tel" required hasFeedback="both" invalidFeedback="Mobile required"></sgds-input>
+              </div>
+            </div>
+
+            <!-- Full-width: Address -->
+            <div>
+              <sgds-textarea label="Street address" name="address" required hasFeedback="both" invalidFeedback="Address required"></sgds-textarea>
+            </div>
+
+            <!-- Pair: City & Postal -->
+            <div class="sgds-grid sgds:gap-layout-md">
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="City" name="city" type="text" required hasFeedback="both" invalidFeedback="City required"></sgds-input>
+              </div>
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Postal code" name="postal" type="text" required hasFeedback="both" invalidFeedback="Postal code required"></sgds-input>
+              </div>
+            </div>
+
+            <!-- Full-width: Country -->
+            <div>
+              <sgds-select label="Country" name="country" placeholder="Select a country" required hasFeedback="both" invalidFeedback="Country required">
+                <sgds-select-option value="sg">Singapore</sgds-select-option>
+                <sgds-select-option value="my">Malaysia</sgds-select-option>
+                <sgds-select-option value="th">Thailand</sgds-select-option>
+              </sgds-select>
+            </div>
+          </div>
+
+          <!-- Step 3: Preferences -->
+          <div id="step-3" class="sgds:flex sgds:flex-col sgds:gap-layout-md" style="display: none;">
+            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:text-heading-default sgds:mb-0">Preferences & Consent</h5>
+
+            <!-- Full-width: Delivery Method (Radio) -->
+            <div>
+              <sgds-radio-group label="Delivery method" name="delivery" required hasFeedback="both" invalidFeedback="Select a method">
+                <sgds-radio value="pickup">Pickup</sgds-radio>
+                <sgds-radio value="standard">Standard delivery</sgds-radio>
+                <sgds-radio value="express">Express delivery</sgds-radio>
+              </sgds-radio-group>
+            </div>
+
+            <!-- Full-width: Communication Preferences (Checkbox Group) -->
+            <div>
+              <sgds-checkbox-group label="Communication preferences" name="communication">
+                <sgds-checkbox value="email">Email updates</sgds-checkbox>
+                <sgds-checkbox value="sms">SMS notifications</sgds-checkbox>
+                <sgds-checkbox value="phone">Phone calls</sgds-checkbox>
+              </sgds-checkbox-group>
+            </div>
+
+            <!-- Full-width: Terms Checkbox -->
+            <div>
+              <sgds-checkbox name="terms" value="agree" required hasFeedback="both" invalidFeedback="You must agree to proceed">
+                I agree to the terms and conditions
+              </sgds-checkbox>
+            </div>
+
+            <!-- Full-width: Newsletter Checkbox -->
+            <div>
+              <sgds-checkbox name="newsletter" value="subscribe">Subscribe to our newsletter</sgds-checkbox>
+            </div>
+          </div>
+
+          <!-- Form actions: Cancel on left, Back/Next on right -->
+          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-between">
+            <sgds-button type="reset" variant="ghost">Cancel</sgds-button>
+            <div class="sgds:flex sgds:gap-layout-sm">
+              <sgds-button type="button" id="prevBtn" variant="ghost" style="display: none;">Back</sgds-button>
+              <sgds-button type="button" id="nextBtn">Next</sgds-button>
+              <sgds-button type="submit" id="submitBtn" style="display: none;">Submit</sgds-button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const stepper = document.getElementById('stepper');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const form = document.querySelector('form');
+    const totalSteps = 3;
+
+    // Initialize stepper with steps data
+    stepper.steps = [
+      { stepHeader: "Personal Info", component: "personal-info" },
+      { stepHeader: "Contact Details", component: "contact-details" },
+      { stepHeader: "Preferences", component: "preferences" }
+    ];
+    stepper.activeStep = 0;
+
+    function showStep(stepIndex) {
+      // Hide all steps
+      for (let i = 1; i <= totalSteps; i++) {
+        const stepEl = document.getElementById(`step-${i}`);
+        if (stepEl) stepEl.style.display = 'none';
+      }
+
+      // Show current step
+      const currentStepEl = document.getElementById(`step-${stepIndex + 1}`);
+      if (currentStepEl) currentStepEl.style.display = 'flex';
+
+      // Update button visibility
+      prevBtn.style.display = stepIndex === 0 ? 'none' : 'block';
+      nextBtn.style.display = stepIndex === totalSteps - 1 ? 'none' : 'block';
+      submitBtn.style.display = stepIndex === totalSteps - 1 ? 'block' : 'none';
+    }
+
+    // Listen to stepper navigation
+    stepper.addEventListener('sgds-arrived', (e) => {
+      showStep(stepper.activeStep);
+    });
+
+    // Button handlers
+    nextBtn.addEventListener('click', () => {
+      stepper.nextStep();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      stepper.previousStep();
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Form submitted!');
+    });
+
+    // Initialize display
+    showStep(0);
+  </script>
+</body>
