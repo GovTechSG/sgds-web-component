@@ -1,0 +1,41 @@
+<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body>
+  <sgds-masthead></sgds-masthead>
+  <sgds-mainnav>
+    <strong slot="brand">My Organisation</strong>
+  </sgds-mainnav>
+
+  <!-- Call to Action Block — left-aligned, default background
+       Background : bg-surface-default
+       Spacing    : py-layout-lg
+  -->
+  <section class="sgds:bg-default sgds:py-layout-lg">
+    <div class="sgds-container">
+      <div class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left sgds:max-w-text">
+
+        <!-- Typography group -->
+        <div class="sgds:mb-xl">
+          <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+            Overline
+          </div>
+          <h2 class="sgds:text-display-sm sgds:font-bold sgds:leading-2-xl sgds:tracking-tighter sgds:text-display-default">
+            Headline
+          </h2>
+          <h5 class="sgds:text-subtitle-sm sgds:font-light sgds:leading-xs sgds:tracking-normal sgds:text-heading-subtle">
+            Description
+          </h5>
+        </div>
+        <sgds-button variant="primary" size="md">Button Label</sgds-button>
+
+      </div>
+    </div>
+  </section>
+
+  <sgds-footer></sgds-footer>
+</body>
