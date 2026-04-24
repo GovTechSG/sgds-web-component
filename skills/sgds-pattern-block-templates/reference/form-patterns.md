@@ -32,7 +32,7 @@ Complete guide to SGDS form layouts, component sizing, positioning, validation p
     - [Mistake 2: Pairing Fields in Constrained Form](#mistake-2-pairing-fields-in-a-constrained-form-6-columns)
 11. [Working Playground Examples](#working-playground-examples)
 
-For select/combobox option formatting, see [sgds-components skill](../sgds-components/SKILL.md).
+For select/combobox option formatting, see [sgds-components skill](../sgds-components/SKILL.md) or the [sgds-components reference](../sgds-components/reference).
 
 ---
 
@@ -511,12 +511,12 @@ All forms use the **default validation pattern** by default:
 
 - **Wrap form sections** in `sgds:flex sgds:flex-col` with `sgds:gap-layout-lg` between them
 - **Wrap field rows** in `.sgds-grid` with `sgds:gap-layout-md` between field pairs
-- **Apply validation attributes** — refer to [sgds-forms skill](../sgds-forms/SKILL.md) for constraint validation
-- **Use custom validation** — see [sgds-forms skill](../sgds-forms/SKILL.md) for ElementInternals patterns
+- **Apply validation attributes** — refer to the [sgds-forms reference](../sgds-forms/reference) for constraint validation
+- **Use custom validation** — see the [sgds-forms reference](../sgds-forms/reference) for ElementInternals patterns
 - **Never place full-width components** beside another component in a row
 - **Components with action buttons** (datepicker, quantity-toggle) should be paired as 50% width to prevent buttons from expanding
 - **Wrap text content** in a plain `<div>` to maintain alignment with form fields
-- **For component-specific details** (child element names, attributes, events) — refer to [sgds-components skill](../sgds-components/SKILL.md)
+- **For component-specific details** (child element names, attributes, events) — refer to the [sgds-components reference](../sgds-components/reference)
 
 ---
 

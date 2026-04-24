@@ -37,7 +37,7 @@ Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-
 
 ## Complete Template
 
-> See **[sgds-components-sidebar](../../sgds-components-sidebar/SKILL.md)** for the full API.
+> See **[sidebar component](../../sgds-components/reference/sidebar.md)** for the full API.
 
 ```html
 <!-- Sticky header -->
