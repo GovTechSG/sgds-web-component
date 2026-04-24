@@ -11,69 +11,37 @@
     <strong slot="brand">My Application</strong>
   </sgds-mainnav>
 
-  <div class="sgds:flex sgds:flex-col lg:sgds:flex-row sgds:bg-surface-default">
+    <div class="sgds:flex sgds:flex-col lg:sgds:flex-row sgds:bg-surface-default">
 
-    <!-- Left: brand panel (hidden on mobile) -->
-    <div
-      class="sgds:hidden lg:sgds:flex lg:sgds:w-1/2 sgds:flex-col sgds:justify-between sgds:bg-primary-default sgds:p-layout-lg"
-    >
-      <div>
-        <div class="sgds:flex sgds:items-center sgds:gap-2">
-          <sgds-icon name="shield-tick" size="xl" class="sgds:text-white"></sgds-icon>
-          <span class="sgds:text-white sgds:font-semibold sgds:text-lg">My Application</span>
+      <!-- Left: brand panel (hidden on mobile) -->
+      <div class="sgds:hidden lg:sgds:flex lg:sgds:w-1/2 sgds:flex-col sgds:justify-between sgds:bg-primary-default sgds:p-layout-lg">
+        <div>
+          <img src="/logo-white.svg" alt="App logo" class="sgds:h-8" />
         </div>
+        <blockquote class="sgds:text-white">
+          <p class="sgds:text-xl sgds:font-medium sgds:leading-relaxed">
+            "Serving citizens with speed and integrity."
+          </p>
+          <footer class="sgds:mt-4 sgds:text-sm sgds:opacity-75">— Your Agency Name</footer>
+        </blockquote>
       </div>
-      <blockquote class="sgds:text-white">
-        <p class="sgds:text-xl sgds:font-medium sgds:leading-relaxed">
-          "Serving citizens with speed and integrity."
-        </p>
-        <footer class="sgds:mt-4 sgds:text-sm sgds:opacity-75">— Your Agency Name</footer>
-      </blockquote>
-    </div>
 
-    <!-- Right: form panel -->
-    <div class="sgds:flex sgds:flex-col sgds:w-full lg:sgds:w-1/2">
-      <div class="sgds:flex sgds:flex-1 sgds:items-center sgds:justify-center sgds:p-layout-md">
+      <!-- Right: form panel -->
+      <div class="sgds:flex sgds:w-full lg:sgds:w-1/2 sgds:items-center sgds:justify-center sgds:p-layout-md">
         <div class="sgds:max-w-container-md sgds:w-full">
           <div class="sgds:mb-layout-sm">
             <h2 class="sgds:text-xl sgds:font-semibold sgds:text-default">Sign in</h2>
-            <p class="sgds:text-sm sgds:text-muted sgds:mt-1">Enter your credentials to access the portal</p>
+            <p class="sgds:text-sm sgds:text-body-subtle sgds:mt-1">Enter your credentials to access the portal</p>
           </div>
-
           <form class="sgds:flex sgds:flex-col sgds:gap-component-sm">
-            <sgds-input
-              label="Email"
-              type="email"
-              name="email"
-              placeholder="you@agency.gov.sg"
-              required
-              hasFeedback
-            ></sgds-input>
-
-            <div>
-              <sgds-input label="Password" type="password" name="password" required hasFeedback></sgds-input>
-              <div class="sgds:flex sgds:justify-end sgds:mt-1">
-                <sgds-link size="sm"><a href="#">Forgot password?</a></sgds-link>
-              </div>
-            </div>
-
+            <sgds-input label="Email" type="email" name="email" required hasFeedback></sgds-input>
+            <sgds-input label="Password" type="password" name="password" required hasFeedback></sgds-input>
             <sgds-button type="submit" variant="primary" fullWidth>Sign in</sgds-button>
-
-            <sgds-button variant="outline" fullWidth>
-              <sgds-icon slot="leftIcon" name="user-circle"></sgds-icon>
-              Singpass
-            </sgds-button>
           </form>
-
-          <p class="sgds:text-sm sgds:text-center sgds:text-muted sgds:mt-layout-xs">
-            Don't have an account?
-            <a href="#">Sign up</a>
-          </p>
         </div>
       </div>
+
     </div>
 
-  </div>
-
-  <sgds-footer></sgds-footer>
+    <sgds-footer></sgds-footer>
 </body>
