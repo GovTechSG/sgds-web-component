@@ -88,7 +88,7 @@ Always renders as a dark color. Use on fixed light backgrounds (e.g., a white ca
   <h2 class="sgds:text-heading-default sgds:text-2-xl sgds:font-bold sgds:mb-2">
     Article Title
   </h2>
-  <p class="sgds:text-muted sgds:text-sm sgds:mb-4">
+  <p class="sgds:text-subtle sgds:text-sm sgds:mb-4">
     Published on 1 January 2024
   </p>
   <p class="sgds:text-default sgds:mb-4">
