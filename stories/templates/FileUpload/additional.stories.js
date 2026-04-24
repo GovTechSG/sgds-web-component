@@ -46,7 +46,7 @@ export const ValidationDragDropInvalid = {
 
 const UploadingStateDefaultTemplate = args => {
   return html`
-    <sgds-file-upload id="uploadingStateDefault" label="Upload File"> Choose File </sgds-file-upload>
+    <sgds-file-upload id="uploadingStateDefault" label="Upload File"> Choose file </sgds-file-upload>
     <script>
       setTimeout(async () => {
         const fileUpload = document.getElementById("uploadingStateDefault");
@@ -62,7 +62,7 @@ const UploadingStateDefaultTemplate = args => {
 
         await fileUpload.updateComplete;
 
-        fileUpload.setFileUploadState(0, "uploading");
+        fileUpload.setFileUploadState(0, "loading");
       }, 0);
     </script>
   `;
@@ -79,7 +79,7 @@ export const UploadingStateDefault = {
 const UploadingStateDragDropTemplate = args => {
   return html`
     <sgds-file-upload id="uploadingStateDragDrop" variant="drag-and-drop" label="Upload File">
-      Choose File
+      Choose files
     </sgds-file-upload>
     <script>
       setTimeout(async () => {
@@ -96,7 +96,7 @@ const UploadingStateDragDropTemplate = args => {
 
         await fileUpload.updateComplete;
 
-        fileUpload.setFileUploadState(0, "uploading");
+        fileUpload.setFileUploadState(0, "loading");
       }, 0);
     </script>
   `;
@@ -114,7 +114,7 @@ export const UploadingStateDragDrop = {
 
 const ErrorStateDefaultTemplate = args => {
   return html`
-    <sgds-file-upload id="errorStateDefault" label="Upload File"> Choose File </sgds-file-upload>
+    <sgds-file-upload id="errorStateDefault" label="Upload File"> Choose file </sgds-file-upload>
     <script>
       setTimeout(async () => {
         const fileUpload = document.getElementById("errorStateDefault");
@@ -131,7 +131,7 @@ const ErrorStateDefaultTemplate = args => {
 
         await fileUpload.updateComplete;
 
-        fileUpload.setFileUploadState(0, "uploading");
+        fileUpload.setFileUploadState(0, "loading");
 
         await new Promise(resolve => setTimeout(resolve, 2000));
 
@@ -152,7 +152,7 @@ export const ErrorStateDefault = {
 const ErrorStateDragDropTemplate = args => {
   return html`
     <sgds-file-upload id="errorStateDragDrop" variant="drag-and-drop" label="Upload File">
-      Choose File
+      Choose files
     </sgds-file-upload>
     <script>
       setTimeout(async () => {
@@ -170,7 +170,7 @@ const ErrorStateDragDropTemplate = args => {
 
         await fileUpload.updateComplete;
 
-        fileUpload.setFileUploadState(0, "uploading");
+        fileUpload.setFileUploadState(0, "loading");
 
         await new Promise(resolve => setTimeout(resolve, 2000));
 
@@ -192,7 +192,7 @@ export const ErrorStateDragDrop = {
 
 const SuccessStateDefaultTemplate = args => {
   return html`
-    <sgds-file-upload id="successStateDefault" label="Upload File"> Choose File </sgds-file-upload>
+    <sgds-file-upload id="successStateDefault" label="Upload File"> Choose file </sgds-file-upload>
     <script>
       setTimeout(async () => {
         const fileUpload = document.getElementById("successStateDefault");
@@ -208,7 +208,7 @@ const SuccessStateDefaultTemplate = args => {
 
         await fileUpload.updateComplete;
 
-        fileUpload.setFileUploadState(0, "uploading");
+        fileUpload.setFileUploadState(0, "loading");
 
         await new Promise(resolve => setTimeout(resolve, 2000));
 
@@ -229,7 +229,7 @@ export const SuccessStateDefault = {
 const SuccessStateDragDropTemplate = args => {
   return html`
     <sgds-file-upload id="successStateDragDrop" variant="drag-and-drop" label="Upload File">
-      Choose File
+      Choose files
     </sgds-file-upload>
     <script>
       setTimeout(async () => {
@@ -246,7 +246,7 @@ const SuccessStateDragDropTemplate = args => {
 
         await fileUpload.updateComplete;
 
-        fileUpload.setFileUploadState(0, "uploading");
+        fileUpload.setFileUploadState(0, "loading");
 
         await new Promise(resolve => setTimeout(resolve, 2000));
 
@@ -277,7 +277,7 @@ const SgdsAddFilesTemplate = args => {
       label="Listen to sgds-add-files"
       hintText="Select files - sgds-add-files will fire only on file additions, not deletions."
     >
-      Choose Files
+      Choose files
     </sgds-file-upload>
     <div
       id="addFilesLog"
@@ -324,7 +324,7 @@ const SgdsRemoveFileTemplate = args => {
       label="Listen to sgds-remove-file"
       hintText="Select files and delete them - sgds-remove-file will show which file was deleted."
     >
-      Choose Files
+      Choose files
     </sgds-file-upload>
     <div
       id="removeFileLog"
@@ -373,7 +373,7 @@ const SgdsChangeTemplate = args => {
       label="Listen to sgds-change"
       hintText="Select or delete files - sgds-change will fire on any file set change."
     >
-      Choose Files
+      Choose files
     </sgds-file-upload>
     <div
       id="changeLog"
@@ -424,7 +424,7 @@ const UploadToServerTemplate = args => {
       label="Upload to Server"
       hintText="Select multiple files to upload. Simulates server upload with some files succeeding and some failing."
     >
-      Choose Files
+      Choose files
     </sgds-file-upload>
     <script>
       setTimeout(() => {
@@ -438,9 +438,9 @@ const UploadToServerTemplate = args => {
             // Calculate the starting index of the new files
             const startIndex = allFiles.length - newFiles.length;
 
-            // Show uploading state for NEW files only
+            // Show loading state for NEW files only
             for (let i = 0; i < newFiles.length; i++) {
-              fileUpload.setFileUploadState(startIndex + i, "uploading");
+              fileUpload.setFileUploadState(startIndex + i, "loading");
             }
 
             // Simulate server upload with delay
@@ -470,6 +470,82 @@ export const UploadToServer = {
   render: UploadToServerTemplate.bind({}),
   name: "Upload to Server",
   args: { multiple: true },
+  parameters: { layout: "padded" },
+  tags: []
+};
+
+// ========== CUSTOM VALIDATION WITH noValidate ==========
+
+const CustomValidationTemplate = args => {
+  return html`
+    <sgds-file-upload
+      id="customValidationDemo"
+      variant="drag-and-drop"
+      label="Upload Documents"
+      name="documents"
+      ?required=${args.required}
+      ?hasFeedback=${args.hasFeedback}
+      ?noValidate=${args.noValidate}
+      ?multiple=${args.multiple}
+      accept=".pdf"
+      hintText="Max 2 PDF files. SGDS validation is disabled, using custom validation instead"
+    >
+      Choose files
+    </sgds-file-upload>
+    <script>
+      setTimeout(() => {
+        const customValidationEl = document.getElementById("customValidationDemo");
+
+        if (customValidationEl) {
+          customValidationEl.addEventListener("sgds-add-files", async e => {
+            const files = e.detail;
+
+            // Custom validation rules:
+            // 1. Max 2 files total
+            // 2. PDF only
+
+            const allFiles = customValidationEl.files;
+            let isValid = true;
+            let errorMsg = "";
+
+            if (allFiles.length > 2) {
+              isValid = false;
+              errorMsg = "Maximum 2 files allowed";
+            }
+
+            for (const file of files) {
+              if (!file.name.toLowerCase().endsWith(".pdf")) {
+                isValid = false;
+                errorMsg = "Only PDF files are allowed";
+                break;
+              }
+            }
+
+            // Set invalid state based on custom validation
+            customValidationEl.invalidFeedback = errorMsg;
+            customValidationEl.setInvalid(!isValid);
+          });
+
+          customValidationEl.addEventListener("sgds-remove-file", async e => {
+            // Re-validate remaining files
+            const remaining = e.detail.files;
+            if (remaining.length === 0) {
+              customValidationEl.invalidFeedback = "At least one file is required";
+              customValidationEl.setInvalid(true);
+            } else {
+              customValidationEl.setInvalid(false);
+            }
+          });
+        }
+      }, 0);
+    </script>
+  `;
+};
+
+export const CustomValidation = {
+  render: CustomValidationTemplate.bind({}),
+  name: "Custom Validation with noValidate",
+  args: { required: true, hasFeedback: true, noValidate: true, multiple: true },
   parameters: { layout: "padded" },
   tags: []
 };

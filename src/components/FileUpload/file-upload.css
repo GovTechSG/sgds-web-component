@@ -1,13 +1,9 @@
-.file-upload {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sgds-form-gap-2-xl);
-}
-
 .file-upload-container {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-form-gap-md);
+  margin-bottom: var(--sgds-margin-xl);
+
 }
 
 .file-upload-list {
@@ -48,7 +44,7 @@
   overflow: hidden;
   max-height: 500px; /* for transition: arbitrary max-height that is definitely higher than the expected content */
   transition: max-height var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard),
-              opacity var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
+    opacity var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
 }
 
 .file-upload-list-item-container.file-upload-exit {
@@ -59,7 +55,8 @@
   display: flex;
   align-items: center;
   gap: var(--sgds-form-gap-lg);
-  padding: var(--sgds-form-padding-y) calc(var(--sgds-form-padding-x) + var(--sgds-padding-2-xl)) var(--sgds-form-padding-y) var(--sgds-form-padding-x);
+  padding: var(--sgds-form-padding-y) calc(var(--sgds-form-padding-x) + var(--sgds-padding-2-xl))
+    var(--sgds-form-padding-y) var(--sgds-form-padding-x);
   background-color: var(--sgds-form-surface-default);
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
   border-radius: var(--sgds-form-border-radius-md);
@@ -107,9 +104,9 @@ input {
   display: none;
 }
 
-sgds-button,
-label {
+sgds-button {
   cursor: pointer;
+  width: fit-content;
 }
 
 sgds-close-button {

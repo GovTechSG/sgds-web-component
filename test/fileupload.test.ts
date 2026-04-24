@@ -275,7 +275,7 @@ describe("sgds-file-upload", () => {
       expect(icon).to.exist;
     }
   });
-  it("should disable close button when file is in uploading state", async () => {
+  it("should disable close button when file is in loading state", async () => {
     const fileList = [new File(["file1"], "file1.txt")];
     const dt = new DataTransfer();
     fileList.forEach(file => {
@@ -291,7 +291,7 @@ describe("sgds-file-upload", () => {
       await promise;
       await el.updateComplete;
 
-      el.setFileUploadState(0, "uploading");
+      el.setFileUploadState(0, "loading");
       await el.updateComplete;
 
       const closeBtn = el.shadowRoot?.querySelector("sgds-close-button");
@@ -390,10 +390,10 @@ describe("sgds-file-upload", () => {
       await promise;
       await el.updateComplete;
 
-      // Set all files to uploading
-      el.setFileUploadState(0, "uploading");
-      el.setFileUploadState(1, "uploading");
-      el.setFileUploadState(2, "uploading");
+      // Set all files to loading
+      el.setFileUploadState(0, "loading");
+      el.setFileUploadState(1, "loading");
+      el.setFileUploadState(2, "loading");
       await el.updateComplete;
 
       // Remove first file
@@ -402,7 +402,7 @@ describe("sgds-file-upload", () => {
       await aTimeout(300);
       await el.updateComplete;
 
-      // Files 1 and 2 should still be uploading (now at indices 0 and 1)
+      // Files 1 and 2 should still be loading (now at indices 0 and 1)
       const spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
       expect(spinners?.length).to.equal(2);
     }
@@ -630,10 +630,10 @@ describe("sgds-file-upload", () => {
       // sgds-add-files fired once
       expect(addFilesEventCount).to.equal(1);
 
-      // Simulate upload handler: set file1 and file3 to uploading, file2 to success
-      el.setFileUploadState(0, "uploading");
+      // Simulate upload handler: set file1 and file3 to loading, file2 to success
+      el.setFileUploadState(0, "loading");
       el.setFileUploadState(1, "success");
-      el.setFileUploadState(2, "uploading");
+      el.setFileUploadState(2, "loading");
       await el.updateComplete;
 
       // Delete file2 (the one in success state, close button is enabled)
@@ -646,14 +646,14 @@ describe("sgds-file-upload", () => {
       // sgds-add-files should NOT have fired again on deletion (still 1)
       expect(addFilesEventCount).to.equal(1);
 
-      // Remaining files (file1 and file3) should still have uploading state
+      // Remaining files (file1 and file3) should still have loading state
       const spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
       expect(spinners?.length).to.equal(2);
 
-      // Close buttons for uploading files should still be disabled
+      // Close buttons for loading files should still be disabled
       const remainingCloseButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
-      expect(remainingCloseButtons?.[0].hasAttribute("disabled")).to.be.true; // file1 still uploading
-      expect(remainingCloseButtons?.[1].hasAttribute("disabled")).to.be.true; // file3 still uploading
+      expect(remainingCloseButtons?.[0].hasAttribute("disabled")).to.be.true; // file1 still loading
+      expect(remainingCloseButtons?.[1].hasAttribute("disabled")).to.be.true; // file3 still loading
     }
   });
 
@@ -749,7 +749,7 @@ describe("sgds-file-upload", () => {
     }
   });
 
-  it("upload state management: cycles through uploading, success, and error states", async () => {
+  it("upload state management: cycles through loading, success, and error states", async () => {
     const fileList = [
       new File(["file1"], "file1.txt"),
       new File(["file2"], "file2.txt"),
@@ -768,13 +768,13 @@ describe("sgds-file-upload", () => {
       await promise;
       await el.updateComplete;
 
-      // State 1: Set file1 to uploading
-      el.setFileUploadState(0, "uploading");
+      // State 1: Set file1 to loading
+      el.setFileUploadState(0, "loading");
       await el.updateComplete;
       let spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
       expect(spinners?.length).to.equal(1);
 
-      // During uploading, close button should be disabled (not clickable)
+      // During loading, close button should be disabled (not clickable)
       let closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
       expect(closeButtons?.[0].hasAttribute("disabled")).to.be.true;
 
@@ -791,13 +791,13 @@ describe("sgds-file-upload", () => {
       const checkIcons = el.shadowRoot?.querySelectorAll('sgds-icon[name="check-circle-fill"]');
       expect(checkIcons?.length).to.be.greaterThan(0);
 
-      // State 3: Set file2 to uploading
-      el.setFileUploadState(1, "uploading");
+      // State 3: Set file2 to loading
+      el.setFileUploadState(1, "loading");
       await el.updateComplete;
       spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
       expect(spinners?.length).to.equal(1);
 
-      // During uploading, close button should be disabled
+      // During loading, close button should be disabled
       closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
       expect(closeButtons?.[1].hasAttribute("disabled")).to.be.true;
 
@@ -842,8 +842,8 @@ describe("sgds-file-upload", () => {
       expect(listItems?.length).to.equal(2);
 
       // Simulate user setting upload states
-      el.setFileUploadState(0, "uploading");
-      el.setFileUploadState(1, "uploading");
+      el.setFileUploadState(0, "loading");
+      el.setFileUploadState(1, "loading");
       await el.updateComplete;
 
       const spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
@@ -900,9 +900,9 @@ describe("sgds-file-upload", () => {
       await promise;
       await el.updateComplete;
 
-      // Set different states: file1=success, file2=uploading, file3=error
+      // Set different states: file1=success, file2=loading, file3=error
       el.setFileUploadState(0, "success");
-      el.setFileUploadState(1, "uploading");
+      el.setFileUploadState(1, "loading");
       el.setFileUploadState(2, "error", "File too large");
       await el.updateComplete;
 
@@ -912,7 +912,7 @@ describe("sgds-file-upload", () => {
       expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file2.txt");
       expect(listItems?.[2].querySelector(".filename")?.textContent).to.include("file3.txt");
 
-      // Delete file2 (the uploading one in the middle)
+      // Delete file2 (the loading one in the middle)
       const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
       closeButtons?.[1].click();
       await aTimeout(300);
@@ -933,7 +933,7 @@ describe("sgds-file-upload", () => {
       expect(errorContainer?.length).to.equal(1);
       expect(errorContainer?.[0].textContent).to.include("File too large");
 
-      // Verify no spinner exists (file3 is error, not uploading)
+      // Verify no spinner exists (file3 is error, not loading)
       spinners = el.shadowRoot?.querySelectorAll("sgds-spinner");
       expect(spinners?.length).to.equal(0);
     }
@@ -1148,7 +1148,7 @@ describe("Fileupload validation", () => {
 });
 
 describe("sgds-file-upload upload state", () => {
-  it("should show spinner when file is in uploading state", async () => {
+  it("should show spinner when file is in loading state", async () => {
     const fileList = [new File(["file1"], "file1.txt")];
     const dt = new DataTransfer();
     fileList.forEach(file => {
@@ -1164,8 +1164,8 @@ describe("sgds-file-upload upload state", () => {
       await promise;
       await el.updateComplete;
 
-      // Set file to uploading state
-      el.setFileUploadState(0, "uploading");
+      // Set file to loading state
+      el.setFileUploadState(0, "loading");
       await el.updateComplete;
 
       const listItem = el.shadowRoot?.querySelector(".file-upload-list-item");
@@ -1174,7 +1174,7 @@ describe("sgds-file-upload upload state", () => {
     }
   });
 
-  it("should disable close button when file is uploading", async () => {
+  it("should disable close button when file is loading", async () => {
     const fileList = [new File(["file1"], "file1.txt")];
     const dt = new DataTransfer();
     fileList.forEach(file => {
@@ -1190,7 +1190,7 @@ describe("sgds-file-upload upload state", () => {
       await promise;
       await el.updateComplete;
 
-      el.setFileUploadState(0, "uploading");
+      el.setFileUploadState(0, "loading");
       await el.updateComplete;
 
       const closeBtn = el.shadowRoot?.querySelector("sgds-close-button");

@@ -4,20 +4,6 @@ Basic drag and drop file upload interface.
 
 <Canvas of={FileUploadStories.DragAndDrop} />
 
-## Validation States
-
-### Default Variant - Invalid
-
-Shows the default variant in an invalid state with feedback message.
-
-<Canvas of={FileUploadStories.ValidationDefaultInvalid} />
-
-### Drag and Drop Variant - Invalid
-
-Shows the drag and drop variant in an invalid state with feedback message.
-
-<Canvas of={FileUploadStories.ValidationDragDropInvalid} />
-
 ## File States
 
 Control the upload state of individual files programmatically.
@@ -25,7 +11,7 @@ Control the upload state of individual files programmatically.
 ```typescript
 public setFileUploadState(
   index: number,
-  state: 'uploading' | 'success' | 'error',
+  state: 'loading' | 'success' | 'error',
   error?: string
 ): void
 ```
@@ -33,10 +19,10 @@ public setFileUploadState(
 ### Parameters
 
 - **index** - The file index in the list (0-based)
-- **state** - The upload state: `'uploading'`, `'success'`, or `'error'`
+- **state** - The upload state: `'loading'`, `'success'`, or `'error'`
 - **error** - Error message to display (only used with `'error'` state)
 
-### Uploading State
+### Loading State
 
 Show loading spinners while files are being uploaded to the server.
 
@@ -94,9 +80,25 @@ Demonstrates the complete workflow for uploading files to a server. Select files
 
 <Canvas of={FileUploadStories.UploadToServer} />
 
+## Validation States
+
+### Default Variant - Invalid
+
+Shows the default variant in an invalid state with feedback message.
+
+<Canvas of={FileUploadStories.ValidationDefaultInvalid} />
+
+### Drag and Drop Variant - Invalid
+
+Shows the drag and drop variant in an invalid state with feedback message.
+
+<Canvas of={FileUploadStories.ValidationDragDropInvalid} />
+
 ## Custom Validation with noValidate
 
 Disable SGDS's built-in validation to implement custom validation logic using your own validation library (Zod, Yup, VeeValidate, etc).
+
+<Canvas of={FileUploadStories.CustomValidation} />
 
 Set the `noValidate` prop to opt out of native HTML5 and SGDS validation:
 
@@ -105,9 +107,13 @@ Set the `noValidate` prop to opt out of native HTML5 and SGDS validation:
   noValidate
   required
   hasFeedback
+  multiple
+  accept=".pdf"
+  label="Upload Documents"
   name="documents"
+  hintText="Max 2 PDF files. SGDS validation is disabled, using custom validation instead"
 >
-  Choose Files
+  Choose files
 </sgds-file-upload>
 ```
 
@@ -119,11 +125,36 @@ const fileUpload = document.querySelector('sgds-file-upload');
 fileUpload.addEventListener('sgds-add-files', (e) => {
   const files = e.detail;
 
-  // Your custom validation logic
-  const error = validateFiles(files); // max 2 files, PDF only, etc.
+  // Custom validation rules:
+  // 1. Max 2 files total
+  // 2. PDF only
 
-  if (error) {
-    fileUpload.invalidFeedback = error;
+  const allFiles = fileUpload.files;
+  let isValid = true;
+  let errorMsg = "";
+
+  if (allFiles.length > 2) {
+    isValid = false;
+    errorMsg = "Maximum 2 files allowed";
+  }
+
+  for (const file of files) {
+    if (!file.name.toLowerCase().endsWith(".pdf")) {
+      isValid = false;
+      errorMsg = "Only PDF files are allowed";
+      break;
+    }
+  }
+
+  fileUpload.invalidFeedback = errorMsg;
+  fileUpload.setInvalid(!isValid);
+});
+
+fileUpload.addEventListener('sgds-remove-file', (e) => {
+  // Re-validate remaining files
+  const remaining = e.detail.files;
+  if (remaining.length === 0) {
+    fileUpload.invalidFeedback = "At least one file is required";
     fileUpload.setInvalid(true);
   } else {
     fileUpload.setInvalid(false);

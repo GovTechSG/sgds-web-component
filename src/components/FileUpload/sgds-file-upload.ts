@@ -117,11 +117,11 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   /**
    * Set the upload state of a file at the given index
    */
-  public setFileUploadState(index: number, state: "uploading" | "success" | "error", error?: string) {
+  public setFileUploadState(index: number, state: "loading" | "success" | "error", error?: string) {
     const file = this.selectedFiles[index];
     if (file) {
       this.fileMetadata.set(file, {
-        uploading: state === "uploading",
+        uploading: state === "loading",
         error: error
       });
       this.requestUpdate();
@@ -269,9 +269,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     this.setInvalid(false);
   }
   protected _renderLabel() {
-    const labelTemplate = html`
-      <label for=${this._controlId} id=${this._labelId} class="form-label"> ${this.label} </label>
-    `;
+    const labelTemplate = html` <label id=${this._labelId} class="form-label"> ${this.label} </label> `;
     return this.label && labelTemplate;
   }
 
@@ -367,7 +365,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
           <sgds-icon name="upload" size="lg"></sgds-icon>
           <div class="drag-drop-text">Drag and drop files here</div>
           <sgds-button size="sm" variant="outline" tone="brand" ?disabled=${this.disabled} @click=${this._handleClick}>
-            <slot></slot>
+            <slot>Choose files</slot>
           </sgds-button>
         </div>
       `;
@@ -375,7 +373,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
 
     return html`
       <sgds-button variant="outline" ?disabled=${this.disabled} @click=${this._handleClick}>
-        <label for=${this._controlId}><slot></slot></label>
+        <slot>Choose files</slot>
         <sgds-icon slot="rightIcon" name="upload"></sgds-icon>
       </sgds-button>
     `;
@@ -418,25 +416,23 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     );
 
     return html`
-      <div class="file-upload">
-        <input
-          ${ref(this.inputRef)}
-          type="file"
-          @change=${this._handleChange}
-          ?multiple=${this.multiple}
-          accept=${this.accept}
-          id=${this._controlId}
-          ?required=${this.required && !this.noValidate}
-          ?disabled=${this.disabled}
-        />
-        <div class="file-upload-container">
-          ${this._renderLabel()} ${this._renderUploadZone()}
-          ${this.hasFeedback && this.invalid ? this._renderFeedback() : this._renderHintText()}
-        </div>
-        <ul class="file-upload-list">
-          ${listItems}
-        </ul>
+      <input
+        ${ref(this.inputRef)}
+        type="file"
+        @change=${this._handleChange}
+        ?multiple=${this.multiple}
+        accept=${this.accept}
+        id=${this._controlId}
+        ?required=${this.required && !this.noValidate}
+        ?disabled=${this.disabled}
+      />
+      <div class="file-upload-container">
+        ${this._renderLabel()} ${this._renderUploadZone()}
+        ${this.hasFeedback && this.invalid ? this._renderFeedback() : this._renderHintText()}
       </div>
+      <ul class="file-upload-list">
+        ${listItems}
+      </ul>
     `;
   }
 }

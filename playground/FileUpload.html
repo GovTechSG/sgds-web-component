@@ -149,9 +149,9 @@
         const allFiles = fileUploadEl.files;
         const startIndex = allFiles.length - newFiles.length;
 
-        // Show spinner while uploading for NEW files only
+        // Show spinner while loading for NEW files only
         for (let i = 0; i < newFiles.length; i++) {
-          fileUploadEl.setFileUploadState(startIndex + i, 'uploading');
+          fileUploadEl.setFileUploadState(startIndex + i, 'loading');
         }
 
         // Simulate network delay
@@ -171,9 +171,9 @@
         const allFiles = fileUploadEl.files;
         const startIndex = allFiles.length - newFiles.length;
 
-        // Show spinner while uploading for NEW files only
+        // Show spinner while loading for NEW files only
         for (let i = 0; i < newFiles.length; i++) {
-          fileUploadEl.setFileUploadState(startIndex + i, 'uploading');
+          fileUploadEl.setFileUploadState(startIndex + i, 'loading');
         }
 
         // Simulate network delay
