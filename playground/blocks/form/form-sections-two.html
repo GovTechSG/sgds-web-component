@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form - Two Sections</title>
+  <script type="module" src="../../../src/index.ts"></script>
+  <link href="../../../src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="../../../src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="../../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+  <link href="../../css/utility.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="sgds:bg-default sgds:p-0 sgds:m-0">
+  <div class="sgds-container sgds:py-layout-md">
+    <div class="sgds-grid sgds:gap-layout-md">
+      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8">
+        <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+          <!-- Section 1 -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+              Personal Details
+            </h5>
+            <div class="sgds-grid sgds:gap-layout-md">
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both"></sgds-input>
+              </div>
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both"></sgds-input>
+              </div>
+            </div>
+            <div>
+              <sgds-textarea label="Bio" name="bio" placeholder="Tell us about yourself..."></sgds-textarea>
+            </div>
+          </div>
+
+          <!-- Section 2 (gap-layout-lg creates visual break) -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+              Contact Preferences
+            </h5>
+            <div>
+              <sgds-radio-group label="Preferred method" name="preference" required hasFeedback="both">
+                <sgds-radio value="email">Email</sgds-radio>
+                <sgds-radio value="phone">Phone</sgds-radio>
+                <sgds-radio value="sms">SMS</sgds-radio>
+              </sgds-radio-group>
+            </div>
+            <div class="sgds-grid sgds:gap-layout-md">
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Phone" name="phone" type="tel" required hasFeedback="both"></sgds-input>
+              </div>
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-datepicker label="Preferred date" name="prefDate" hasFeedback="both"></sgds-datepicker>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form actions -->
+          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
+            <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+            <sgds-button type="submit">Save</sgds-button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
+<!--
+POSITIONING: Center
+FIELDS: Mixed (pairs + textarea + radio + inputs/datepicker)
+SECTIONS: Two sections (gap-layout-lg between them)
+Reference: form-layout.md (Spacing Hierarchy - Two sections)
+-->

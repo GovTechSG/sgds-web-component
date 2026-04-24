@@ -43,7 +43,8 @@ export default defineConfig({
                     title: entry.name.replace(".html", "")
                   });
                 } else if (entry.isDirectory() && !entry.name.startsWith(".")) {
-                  recursivelyFindHtmlFiles(path.join(dir, entry.name), entry.name);
+                  const newFolderName = folderName ? `${folderName}/${entry.name}` : entry.name;
+                  recursivelyFindHtmlFiles(path.join(dir, entry.name), newFolderName);
                 }
               });
             };

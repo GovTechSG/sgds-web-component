@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form with Sidebar and TOC</title>
+  <script type="module" src="../../../src/index.ts"></script>
+  <link href="../../../src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="../../../src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="../../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+  <link href="../../css/utility.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="sgds:bg-default sgds:p-0 sgds:m-0">
+  <div class="sgds-container sgds:py-layout-md">
+    <div class="sgds-grid sgds:gap-layout-md">
+      <!-- Left Sidebar: 3 columns -->
+      <nav class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
+        <sgds-sidenav>
+          <sgds-sidenav-item active>
+            <span slot="title">Form Sections</span>
+            <sgds-sidenav-link active><a href="#personal">Personal Information</a></sgds-sidenav-link>
+            <sgds-sidenav-link><a href="#contact">Contact Details</a></sgds-sidenav-link>
+          </sgds-sidenav-item>
+          <sgds-sidenav-item>
+            <a href="#actions">Form Actions</a>
+          </sgds-sidenav-item>
+        </sgds-sidenav>
+      </nav>
+
+      <!-- Form: 6 columns -->
+      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+        <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md" id="personal">
+            <h4 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+              Personal Information
+            </h4>
+            <div>
+              <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both"></sgds-input>
+            </div>
+            <div>
+              <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both"></sgds-input>
+            </div>
+          </div>
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md" id="contact">
+            <h4 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+              Contact Details
+            </h4>
+            <div>
+              <sgds-input label="Email" name="email" type="email" required hasFeedback="both"></sgds-input>
+            </div>
+            <div>
+              <sgds-input label="Phone" name="phone" type="tel" required hasFeedback="both"></sgds-input>
+            </div>
+          </div>
+          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end" id="actions">
+            <sgds-button type="reset" variant="ghost">Cancel</sgds-button>
+            <sgds-button type="submit">Save</sgds-button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Table of Contents: 3 columns -->
+      <aside class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
+        <sgds-table-of-contents>
+          <h5>On this page</h5>
+          <li slot="contents">
+            <sgds-link><a href="#personal">Personal Information</a></sgds-link>
+          </li>
+          <li slot="contents">
+            <sgds-link><a href="#contact">Contact Details</a></sgds-link>
+          </li>
+          <li slot="contents">
+            <sgds-link><a href="#actions">Form Actions</a></sgds-link>
+          </li>
+        </sgds-table-of-contents>
+      </aside>
+
+    </div>
+  </div>
+</body>
+</html>
+
+<!--
+POSITIONING: Left sidebar (3 columns) + form (6 columns) + right TOC (3 columns)
+FIELDS: Full-width only (no shared rows due to constrained form width)
+SECTIONS: Two sections
+Reference: form-positioning.md, form-layout.md
+-->
