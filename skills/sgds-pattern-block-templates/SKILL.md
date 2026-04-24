@@ -47,6 +47,20 @@ See **[sgds-components](../sgds-components/SKILL.md)** for full installation det
 | Full detail view of a single event session: time, title, speaker, badges, description, profile | [Session Detail](#→-read-referencesession-detailmd) |
 | Search input + filter button + results count + data table for list and admin pages | [Table Filter](#→-read-referencetable-filtermd) |
 | Multi-field form with proper component sizing, grouping, and layout rules | [Form Patterns](#→-read-referenceform-patternsmd) |
+| Production-ready Storybook templates (call-to-action, form sections, and more) | [Live Block Templates](#live-block-templates) |
+
+---
+
+## Live Block Templates
+
+All block templates are maintained as Storybook stories in the SGDS repository:
+
+| Block | Story File | Raw Link |
+|---|---|---|
+| Call to Action | `call-to-action.stories.js` | [raw](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/call-to-action.stories.js) |
+| Form Sections | `form.stories.js` | [raw](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/form.stories.js) |
+
+Extract template functions and story variations from these files to get production-ready code and component patterns.
 
 ---
 
