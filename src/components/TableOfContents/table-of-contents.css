@@ -6,8 +6,9 @@
 
 slot:not([name])::slotted(*) {
   margin-bottom: var(--sgds-margin-none) !important;
-  font-size: var(--sgds-font-size-24) !important;
+  font-size: var(--sgds-font-size-subtitle-md) !important;
   font-weight: var(--sgds-font-weight-semibold) !important;
+  line-height: var(--sgds-line-height-xs) !important;
 }
 
 .contents {
