@@ -29,6 +29,19 @@ const DisableValidationByInputTemplate = args => {
         id="custom-validation__textarea-novalidate"
       >
       </sgds-textarea>
+      <sgds-file-upload
+        noValidate
+        label="Documents"
+        hinttext="Max 2 PDF files"
+        name="documents"
+        hasFeedback
+        required
+        multiple
+        accept=".pdf"
+        id="custom-validation__file-upload-novalidate"
+      >
+        Choose Files
+      </sgds-file-upload>
     </form>
     <script>
       const inputOne = document.querySelector("sgds-input#custom-validation__input-novalidate");
@@ -48,6 +61,39 @@ const DisableValidationByInputTemplate = args => {
         } else {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Bio must be at least 10 characters long";
+        }
+      });
+
+      const fileUploadOne = document.querySelector("sgds-file-upload#custom-validation__file-upload-novalidate");
+      fileUploadOne.addEventListener("sgds-add-files", e => {
+        const allFiles = fileUploadOne.files;
+        let isValid = true;
+        let errorMsg = "";
+
+        if (allFiles.length > 2) {
+          isValid = false;
+          errorMsg = "Maximum 2 files allowed";
+        }
+
+        for (const file of e.detail) {
+          if (!file.name.toLowerCase().endsWith(".pdf")) {
+            isValid = false;
+            errorMsg = "Only PDF files are allowed";
+            break;
+          }
+        }
+
+        fileUploadOne.invalidFeedback = errorMsg;
+        fileUploadOne.setInvalid(!isValid);
+      });
+
+      fileUploadOne.addEventListener("sgds-remove-file", e => {
+        const remaining = e.detail.files;
+        if (remaining.length === 0) {
+          fileUploadOne.invalidFeedback = "At least one file is required";
+          fileUploadOne.setInvalid(true);
+        } else {
+          fileUploadOne.setInvalid(false);
         }
       });
     </script>
@@ -74,6 +120,18 @@ const DisableValidationByFormTemplate = args => {
         id="custom-validation__textarea-two-novalidate"
       >
       </sgds-textarea>
+      <sgds-file-upload
+        label="Documents"
+        hinttext="Max 2 PDF files"
+        name="documents"
+        hasFeedback
+        required
+        multiple
+        accept=".pdf"
+        id="custom-validation__file-upload-two-novalidate"
+      >
+        Choose Files
+      </sgds-file-upload>
     </form>
     <script>
       const inputTwo = document.getElementById("custom-validation__input-two-novalidate");
@@ -93,6 +151,39 @@ const DisableValidationByFormTemplate = args => {
         } else {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Notes must be at least 5 characters long";
+        }
+      });
+
+      const fileUploadTwo = document.getElementById("custom-validation__file-upload-two-novalidate");
+      fileUploadTwo.addEventListener("sgds-add-files", e => {
+        const allFiles = fileUploadTwo.files;
+        let isValid = true;
+        let errorMsg = "";
+
+        if (allFiles.length > 2) {
+          isValid = false;
+          errorMsg = "Maximum 2 files allowed";
+        }
+
+        for (const file of e.detail) {
+          if (!file.name.toLowerCase().endsWith(".pdf")) {
+            isValid = false;
+            errorMsg = "Only PDF files are allowed";
+            break;
+          }
+        }
+
+        fileUploadTwo.invalidFeedback = errorMsg;
+        fileUploadTwo.setInvalid(!isValid);
+      });
+
+      fileUploadTwo.addEventListener("sgds-remove-file", e => {
+        const remaining = e.detail.files;
+        if (remaining.length === 0) {
+          fileUploadTwo.invalidFeedback = "At least one file is required";
+          fileUploadTwo.setInvalid(true);
+        } else {
+          fileUploadTwo.setInvalid(false);
         }
       });
     </script>

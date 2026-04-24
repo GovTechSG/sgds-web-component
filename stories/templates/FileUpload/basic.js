@@ -3,6 +3,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = args => html`
   <sgds-file-upload
+    variant=${ifDefined(args.variant)}
     ?disabled=${args.disabled}
     accept=${ifDefined(args.accept)}
     ?multiple=${args.multiple}
@@ -12,7 +13,8 @@ export const Template = args => html`
     ?hasFeedback=${args.hasFeedback}
     ?invalid=${args.invalid}
     invalidFeedback=${ifDefined(args.invalidFeedback)}
-    >Choose a File</sgds-file-upload
+    ?required=${args.required}
+    >${args.multiple ? "Choose files" : "Choose file"}</sgds-file-upload
   >
 `;
 
