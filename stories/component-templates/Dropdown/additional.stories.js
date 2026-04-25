@@ -1,5 +1,49 @@
 import { html } from "lit";
 
+const SgdsSelectCloseTemplate = args => {
+  return html`
+    <sgds-dropdown close="default">
+      <sgds-button slot="toggler" role="button" variant="primary" tone="brand">
+        Default Close
+        <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+      </sgds-button>
+      <sgds-dropdown-item>Item #1</sgds-dropdown-item>
+      <sgds-dropdown-item>Item #2</sgds-dropdown-item>
+      <sgds-dropdown-item>Item #3</sgds-dropdown-item>
+    </sgds-dropdown>
+    <br />
+    <sgds-dropdown close="outside">
+      <sgds-button slot="toggler" role="button" variant="primary" tone="brand">
+        Close Outside
+        <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+      </sgds-button>
+      <sgds-dropdown-item>Item #1</sgds-dropdown-item>
+      <sgds-dropdown-item>Item #2</sgds-dropdown-item>
+      <sgds-dropdown-item>Item #3</sgds-dropdown-item>
+    </sgds-dropdown>
+    <br />
+    <sgds-dropdown close="inside">
+      <sgds-button slot="toggler" role="button" variant="primary" tone="brand">
+        Close Inside
+        <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+      </sgds-button>
+      <sgds-dropdown-item>Item #1</sgds-dropdown-item>
+      <sgds-dropdown-item>Item #2</sgds-dropdown-item>
+      <sgds-dropdown-item>Item #3</sgds-dropdown-item>
+    </sgds-dropdown>
+  `;
+};
+
+export const SgdsSelectClose = {
+  render: SgdsSelectCloseTemplate.bind({}),
+  name: "sgds-select close",
+  args: {},
+  parameters: {
+    chromatic: { disableSnapshot: true }
+  },
+  tags: ["!dev"]
+};
+
 const SgdsSelectEventTemplate = args => {
   return html`
     <sgds-dropdown id="select-event-dropdown">
