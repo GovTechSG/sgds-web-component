@@ -7,15 +7,6 @@ import dropdownMenuStyle from "./dropdown-menu.css";
 import dropdownStyle from "./dropdown.css";
 
 export type DropDirection = "left" | "right" | "up" | "down";
-export type DropdownButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark";
 
 /**
  * @summary `SgdsDropdown` toggles contextual overlays for displaying lists of links.
