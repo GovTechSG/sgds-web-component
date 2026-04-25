@@ -34,6 +34,10 @@ export class SgdsDropdown extends DropdownListElement {
   @property({ type: String, reflect: true, state: false })
   drop: DropDirection = "down";
 
+  /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
+  @property({ type: String, reflect: true, state: false })
+  close: "outside" | "default" | "inside" = "default";
+
   @queryAssignedElements({ slot: "toggler", flatten: true })
   private _toggler: Array<HTMLElement>;
 
