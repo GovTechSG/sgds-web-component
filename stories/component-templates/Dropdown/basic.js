@@ -7,7 +7,6 @@ export const Template = ({
   menuAlignRight,
   drop,
   floatingOpts,
-  variant,
   active,
   href,
   close,
@@ -21,7 +20,6 @@ export const Template = ({
       drop=${ifDefined(drop)}
       ?menuAlignRight=${menuAlignRight}
       floatingOpts=${ifDefined(floatingOpts)}
-      variant=${ifDefined(variant)}
       close=${ifDefined(close)}
       ?menuIsOpen=${menuIsOpen}
       ?disabled=${disabled}
@@ -48,7 +46,6 @@ export const Template = ({
 };
 
 export const args = {
-  variant: "secondary",
   href: "#"
 };
 
