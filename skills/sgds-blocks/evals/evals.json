@@ -1,0 +1,23 @@
+{
+  "skill_name": "sgds-blocks",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm building a landing page for a new product and I need a hero section at the top with a background image. Can you show me what hero block options are available?",
+      "expected_output": "List hero blocks with URLs, specifically highlighting the image-based hero blocks (hero-image, hero-bg-image, hero-bg-image-light). Should point to the exact raw GitHub URLs.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I need to build a CTA (call-to-action) section for my page. What are my options? I want to see what styles and layouts are available.",
+      "expected_output": "List all 8 CTA block options with descriptions, organized by type (contained vs full-bleed) and aligned vs center options. Include raw GitHub URLs for each.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I'm designing a dashboard page with multiple sections. I need a header, some feature blocks showing product benefits, and a stats section at the bottom. Which blocks should I use?",
+      "expected_output": "Suggest header blocks, feature blocks (with various image ratios and layouts), and stats blocks. Provide links to specific blocks and explain the grid ratios for feature blocks.",
+      "files": []
+    }
+  ]
+}
