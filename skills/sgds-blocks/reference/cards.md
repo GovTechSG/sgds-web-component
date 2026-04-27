@@ -2,12 +2,12 @@
 
 Card grid layouts for displaying content in card format.
 
-**Base URL:** `https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/cards/`
+**Base URL:** `https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/cards/`
 
 | Block Name | File Path | URL | Use Case |
 |---|---|---|---|
-| Cards 3-Column | `cards-3.stories.js` | [cards-3.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/cards/cards-3.stories.js) | 3-column card grid layout |
-| Cards 4-Column | `cards-4.stories.js` | [cards-4.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/cards/cards-4.stories.js) | 4-column card grid layout |
+| Cards 3-Column | `cards-3.stories.js` | [cards-3.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/cards/cards-3.stories.js) | 3-column card grid layout |
+| Cards 4-Column | `cards-4.stories.js` | [cards-4.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/cards/cards-4.stories.js) | 4-column card grid layout |
 
 ## How to Use
 

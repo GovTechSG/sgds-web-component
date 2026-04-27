@@ -1,3 +1,37 @@
+# Form Blocks Reference
+
+## Quick Block Reference
+
+**Base URL:** `https://github.com/GovTechSG/sgds-web-component/tree/master/stories/blocks/form`
+
+| Block Name | File Path | URL | Use Case |
+|---|---|---|---|
+| All Types | `all-types.stories.js` | [all-types.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/all-types.stories.js) | Multi-field form layouts with all component types |
+| Basic Left | `basic-left.stories.js` | [basic-left.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/basic-left.stories.js) | Left-aligned form positioning |
+| Basic Center | `basic-center.stories.js` | [basic-center.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/basic-center.stories.js) | Center-aligned form positioning |
+| Basic Right | `basic-right.stories.js` | [basic-right.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/basic-right.stories.js) | Right-aligned form positioning |
+| Full-width Only | `fullwidth-only.stories.js` | [fullwidth-only.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/fullwidth-only.stories.js) | Pattern 1: Full-width fields only |
+| Paired Only | `paired-only.stories.js` | [paired-only.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/paired-only.stories.js) | Pattern 2: Two-column paired fields |
+| Sections Single | `sections-single.stories.js` | [sections-single.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/sections-single.stories.js) | Pattern 4: Single section |
+| Sections Two | `sections-two.stories.js` | [sections-two.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/sections-two.stories.js) | Pattern 4: Two sections |
+| Sections Three | `sections-three.stories.js` | [sections-three.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/sections-three.stories.js) | Pattern 4: Three sections |
+| Form Fields — Checkbox | `form-fields-checkbox.stories.js` | [form-fields-checkbox.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/form-fields-checkbox.stories.js) | Checkbox and checkbox-group fields |
+| Form Fields — Radio | `form-fields-radio.stories.js` | [form-fields-radio.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/form-fields-radio.stories.js) | Radio and radio-group fields |
+| Form Fields — Textarea | `form-fields-textarea.stories.js` | [form-fields-textarea.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/form-fields-textarea.stories.js) | Textarea field layouts |
+| Form Fields — Selects | `form-fields-selects.stories.js` | [form-fields-selects.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/form-fields-selects.stories.js) | Select and combo-box fields |
+| Form Fields — Dates & Quantities | `form-fields-dates-quantities.stories.js` | [form-fields-dates-quantities.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/form-fields-dates-quantities.stories.js) | Datepicker and quantity-toggle fields |
+| Form Fields — File Upload | `form-fields-file-upload.stories.js` | [form-fields-file-upload.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/form-fields-file-upload.stories.js) | File upload field |
+| Multi-step — Stepper | `form-multistep-stepper.stories.js` | [form-multistep-stepper.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/form/form-multistep-stepper.stories.js) | Pattern 5: Multi-step form with stepper |
+
+Each block file is a JavaScript/TypeScript module exporting a Lit template. To fetch the raw template:
+
+1. Use the URL from the table above
+2. Look for the template function (e.g., `const FormTemplate = () => html\`...\``)
+3. Extract the HTML markup from the template literal
+4. Adapt the markup to your content
+
+---
+
 # Form Patterns Reference
 
 Complete guide to SGDS form layouts, component sizing, positioning, validation patterns, and 5 canonical patterns covering all permutations.

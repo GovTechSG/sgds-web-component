@@ -2,12 +2,12 @@
 
 Filter interfaces for data discovery and refinement.
 
-**Base URL:** `https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/filter/`
+**Base URL:** `https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/filter/`
 
 | Block Name | File Path | URL | Use Case |
 |---|---|---|---|
-| Filter Sidebar | `filter.stories.js` | [filter.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/filter/filter.stories.js) | Filter sidebar interface |
-| Table Filter | `table-filter.stories.js` | [table-filter.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/blocks/filter/table-filter.stories.js) | Filter interface for data tables |
+| Filter Sidebar checkboxes | `filter.stories.js` | [filter.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/filter/filter.stories.js) | Filter sidebar interface |
+| Table Filter | `table-filter.stories.js` | [table-filter.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/filter/table-filter.stories.js) | Filter interface for data tables |
 
 ## How to Use
 

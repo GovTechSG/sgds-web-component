@@ -129,4 +129,4 @@ Use `outlined` on all badges. Pick the variant that matches the session classifi
 3. If no speaker profile is available, omit the speaker profile section entirely — the divider stays.
 4. To toggle expand/collapse, wire the button in JS: toggle `hidden` on the description and speaker profile, and swap `chevron-up` ↔ `chevron-down` on the icon.
 5. When rendering a list of sessions, repeat this block for each session — the `<sgds-divider>` at the bottom naturally separates them.
-6. This block has no page chrome. Wrap it in a page template from **[sgds-pattern-page-templates](../../sgds-pattern-page-templates/SKILL.md)**.
+6. This block has no page chrome. Wrap it in a page template from **[sgds-templates](../../sgds-templates/SKILL.md)**.

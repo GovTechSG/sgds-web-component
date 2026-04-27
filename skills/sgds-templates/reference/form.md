@@ -1,46 +1,63 @@
 # Form Page Template
 
-Single-page form layout with labelled sections. Adapted from shadcn's settings page pattern.
+Single-page form with labelled sections for entity creation, editing, profile settings, or multi-section configuration pages.
 
-Use for: entity creation/editing, profile settings, multi-section configuration pages.
+## When to use
+
+- Collecting user information across multiple related sections (personal, role, preferences, etc.)
+- Profile or settings pages where users edit their own information
+- Complex forms that benefit from visual grouping and descriptive guidance
+- Full-page focused forms without competing page elements (as opposed to inline modal forms)
+
+## Block anatomy
+
+```
+┌──────────────────────────────────────────────────────────┐
+│ sgds-masthead                                            │
+├──────────────────────────────────────────────────────────┤
+│ sgds-mainnav                                             │
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│ Page Title                            [Cancel] [Save]   │
+│ Page description                                         │
+│                                                          │
+│ ──────────────────────────────────────────────────────── │
+│                                                          │
+│ Section 1 label  │  [Input field]                        │
+│ Section desc     │  [Input field]  [Input field]         │
+│                  │  [Full-width field]                   │
+│                                                          │
+│ ──────────────────────────────────────────────────────── │
+│                                                          │
+│ Section 2 label  │  [Select dropdown]                    │
+│ Section desc     │  [Select dropdown]                    │
+│                  │  [Select dropdown]                    │
+│                                                          │
+│ ──────────────────────────────────────────────────────── │
+│                                                          │
+│ Section 3 label  │  [Textarea field]                     │
+│ Section desc     │  [Character count]                    │
+│                                                          │
+│                              [Cancel] [Save changes]    │
+└──────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## Layout Structure
+## Raw Content Link
 
-Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block-templates/reference/application-shell.md). No sidebar. Form content is the full focus.
+To get the full HTML template, fetch and extract from the raw GitHub link below. See **[How to Extract HTML from Raw GitHub Links](../SKILL.md#how-to-extract-html-from-raw-github-links)** in SKILL.md for step-by-step instructions.
 
-```
-┌──────────────────────────────────────────────────────┐
-│  sgds-masthead                                       │
-├──────────────────────────────────────────────────────┤
-│  sgds-mainnav                                        │
-├──────────────────────────────────────────────────────┤
-│                                                      │
-│  Page title            [Cancel]  [Save changes]      │
-│  Page subtitle                                       │
-│                                                      │
-│  ─────────────────────────────────────────────────── │
-│                                                      │
-│  Section label  │  Field A                           │
-│  Description    │  Field B   Field C                 │
-│  of section     │                                    │
-│                 │  Field D (full width)              │
-│                                                      │
-│  ─────────────────────────────────────────────────── │
-│                                                      │
-│  Section 2      │  Field E                           │
-│  label          │  Field F                           │
-│                 │                                    │
-│  ─────────────────────────────────────────────────── │
-│                                                      │
-│                         [Cancel]  [Save changes]     │
-└──────────────────────────────────────────────────────┘
-```
+
+| File | GitHub Raw URL |
+|------|---|
+| Form - Basic | https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/templates/Form/basic.stories.js |
+| Form - Multi-Step Form | https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/templates/Form/multi-step-form.stories.js |
+| Form - Report Issue | https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/templates/Form/report-issue.stories.js |
 
 ---
 
-## Complete Template
+## Complete template
 
 ```html
 <sgds-masthead></sgds-masthead>
@@ -201,45 +218,14 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
 <sgds-footer></sgds-footer>
 ```
 
----
+## Customisation notes
 
-## Variant: Modal form (for quick edits)
-
-When editing a row in a table, open a modal instead of navigating to a full page.
-
-```html
-<sgds-modal size="medium" id="editModal">
-  <span slot="title">Edit record</span>
-
-  <div slot="body">
-    <form id="edit-form" class="sgds:flex sgds:flex-col sgds:gap-component-sm">
-      <sgds-input label="Name" name="name" required hasFeedback></sgds-input>
-      <sgds-select label="Status" name="status">
-        <sgds-select-option value="active">Active</sgds-select-option>
-        <sgds-select-option value="inactive">Inactive</sgds-select-option>
-      </sgds-select>
-      <sgds-textarea label="Remarks" name="remarks" rows="3"></sgds-textarea>
-    </form>
-  </div>
-
-  <div slot="footer">
-    <div class="sgds:flex sgds:justify-end sgds:gap-component-sm">
-      <sgds-button variant="outline" onclick="document.getElementById('editModal').hideModal()">
-        Cancel
-      </sgds-button>
-      <sgds-button variant="primary" form="edit-form" type="submit">Save</sgds-button>
-    </div>
-  </div>
-</sgds-modal>
-```
-
----
-
-## Key visual rules
-
-- **Sectioned layout**: `sgds:border-t sgds:border-muted sgds:py-layout-md` creates clean visual separation without heavy dividers
-- **3-column grid**: left 1/3 = meta (description, guidance), right 2/3 = inputs; drop to single column on mobile
-- **2-column rows**: `sgds:grid-cols-2` for pairs like first/last name; single column for email, select, etc.
-- **Duplicate actions**: Save/Cancel at top right of page header AND at the bottom of the form — users should never have to scroll far to save
-- **Full-form validation**: use `novalidate` on `<form>` and `hasFeedback` on each input; handle submit in JS with `form.reportValidity()`
-- **`hint` usage**: short instructional text below the input, not a label; keeps labels concise
+- **Page title & description**: Update `Edit profile` and description text to match your use case
+- **Section labels & descriptions**: Change each section's heading and paragraph text to reflect your form's purpose
+- **Form fields**: Add, remove, or modify inputs based on what data you're collecting; maintain `hasFeedback` for validation feedback
+- **Field grouping**: Use the 3-column layout (1/3 description + 2/3 fields) to organize related fields logically
+- **Two-column rows**: For paired fields like first/last name, use the nested `sgds-grid` with `sgds-col-lg-6`
+- **Full-width fields**: Place inputs outside the two-column grid to span full width
+- **Validation**: Keep `novalidate` on the form element and use `hasFeedback` on inputs; handle submission validation in JavaScript with `form.reportValidity()`
+- **Button placement**: Duplicate Save/Cancel buttons at top (sticky) and bottom for easy access on long forms
+- **Hints vs labels**: Use the `hint` attribute for instructional text; keep labels concise

@@ -102,7 +102,7 @@ Copy the template, substitute your content, and the pattern is ready to use.
 All patterns are stored in the repository at `stories/patterns/` and available on GitHub. Use the typography category links above to find the exact URL for any pattern:
 
 ```
-https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/patterns/Typography/[Subcategory]/[PatternName].stories.js
+https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/patterns/Typography/[Subcategory]/[PatternName].stories.js
 ```
 
 Each category reference file contains a table with direct links to all patterns in that category.

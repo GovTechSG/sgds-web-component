@@ -2,7 +2,15 @@
 
 Sidebar navigation + filters + stat cards + ECharts charts + data table. Adapted from shadcn's `dashboard-01` block.
 
-Use for: internal tools, admin portals, operations dashboards, analytics views.
+---
+
+## When to use
+
+- Internal tools and admin portals
+- Operations dashboards with real-time metrics
+- Analytics and reporting views
+- Pages combining charts, stat cards, and data tables
+- Multi-section layouts with sticky sidebar navigation
 
 **Prerequisites:** Install [ECharts](https://echarts.apache.org/) separately — see [sgds-data-visualisation](../../sgds-data-visualisation/SKILL.md).
 
@@ -10,11 +18,9 @@ Use for: internal tools, admin portals, operations dashboards, analytics views.
 npm install echarts
 ```
 
----
-
 ## Layout Structure
 
-Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-block-templates/reference/application-shell.md). The sidebar is sticky; the main content scrolls independently.
+Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-blocks/reference/application-shell.md). The sidebar is sticky; the main content scrolls independently.
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -32,6 +38,17 @@ Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-
 │              │  sgds-footer                          │
 └──────────────┴──────────────────────────────────────┘
 ```
+
+---
+
+## Raw Content Link
+
+To get the full HTML template, fetch and extract from the raw GitHub link below. See **[How to Extract HTML from Raw GitHub Links](../SKILL.md#how-to-extract-html-from-raw-github-links)** in SKILL.md for step-by-step instructions.
+
+
+| File | GitHub Raw URL |
+|------|---|
+| Dashboard | https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/templates/ApplicationManagement/applications-list.stories.js |
 
 ---
 
@@ -237,3 +254,18 @@ Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-
 - **Resize**: call `chart.resize()` on `window resize` so charts fill their container at every viewport width
 - **Stat value**: `sgds:text-3xl sgds:font-semibold sgds:tabular-nums` — tabular nums prevent jank on live-updating counters
 - **Trend up**: `sgds:text-success-default` · **Trend down**: `sgds:text-danger-default`
+
+---
+
+## Customisation notes
+
+- **Page title & description**: Update "Dashboard" and description to match your dashboard purpose
+- **Sidebar navigation**: Customize section titles and items to match your application structure
+- **Stat cards**: Update the 4 metrics (Total Users, Active Sessions, etc.) with your actual KPIs
+- **Stat values**: Replace example numbers with real data; use `sgds:tabular-nums` class to prevent jank on live updates
+- **Chart data**: Replace placeholder data with your actual datasets; ensure ECharts container has explicit `height` set
+- **Table columns**: Customize headers and cell content to match your data structure
+- **Table data**: Replace placeholder rows with actual records from your database
+- **Badges**: Use appropriate variant colors (success, warning, danger, neutral) for status indicators
+- **Dark mode support**: Implement the `MutationObserver` pattern shown in Key visual rules to update chart colors when theme changes
+- **Responsive charts**: Call `chart.resize()` on window resize to ensure charts scale properly at all viewport widths

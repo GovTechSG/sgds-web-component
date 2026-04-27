@@ -2,13 +2,13 @@
 
 Body text styles for longer-form content and prose. Available in three sizes to accommodate different layout contexts.
 
-**Base URL:** `https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/patterns/Typography/Paragraph/`
+**Base URL:** `https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/patterns/Typography/Paragraph/`
 
 | Pattern Name | File Path | URL | Use Case |
 |---|---|---|---|
-| Paragraph Body Small | `paragraph-body-sm.stories.js` | [paragraph-body-sm.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/patterns/Typography/Paragraph/paragraph-body-sm.stories.js) | Body text, small size |
-| Paragraph Body Medium | `paragraph-body-md.stories.js` | [paragraph-body-md.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/patterns/Typography/Paragraph/paragraph-body-md.stories.js) | Body text, medium size |
-| Paragraph Body Large | `paragraph-body-lg.stories.js` | [paragraph-body-lg.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/refs/heads/master/stories/patterns/Typography/Paragraph/paragraph-body-lg.stories.js) | Body text, large size |
+| Paragraph Body Small | `paragraph-body-sm.stories.js` | [paragraph-body-sm.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/patterns/Typography/Paragraph/paragraph-body-sm.stories.js) | Body text, small size |
+| Paragraph Body Medium | `paragraph-body-md.stories.js` | [paragraph-body-md.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/patterns/Typography/Paragraph/paragraph-body-md.stories.js) | Body text, medium size |
+| Paragraph Body Large | `paragraph-body-lg.stories.js` | [paragraph-body-lg.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/patterns/Typography/Paragraph/paragraph-body-lg.stories.js) | Body text, large size |
 
 ## How to Use
 
