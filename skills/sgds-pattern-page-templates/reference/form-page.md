@@ -58,7 +58,7 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
     <div class="sgds:flex sgds:items-start sgds:justify-between sgds:mb-layout-md">
       <div>
         <h1 class="sgds:text-2xl sgds:font-semibold sgds:text-default">Edit profile</h1>
-        <p class="sgds:text-sm sgds:text-muted sgds:mt-1">
+        <p class="sgds:text-sm sgds:text-body-subtle sgds:mt-1">
           Update your personal details and preferences.
         </p>
       </div>
@@ -78,7 +78,7 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
           <!-- Section description (left third) -->
           <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
             <h2 class="sgds:text-base sgds:font-semibold sgds:text-default">Personal information</h2>
-            <p class="sgds:text-sm sgds:text-muted sgds:mt-1">
+            <p class="sgds:text-sm sgds:text-body-subtle sgds:mt-1">
               Your name and contact details. Only your agency administrator can see this information.
             </p>
           </div>
@@ -132,7 +132,7 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
 
           <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
             <h2 class="sgds:text-base sgds:font-semibold sgds:text-default">Role &amp; access</h2>
-            <p class="sgds:text-sm sgds:text-muted sgds:mt-1">
+            <p class="sgds:text-sm sgds:text-body-subtle sgds:mt-1">
               Your position and assigned permissions within the system.
             </p>
           </div>
@@ -168,7 +168,7 @@ Uses the Simple App Layout from the [Application Shell](../../sgds-pattern-block
 
           <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
             <h2 class="sgds:text-base sgds:font-semibold sgds:text-default">Notes</h2>
-            <p class="sgds:text-sm sgds:text-muted sgds:mt-1">
+            <p class="sgds:text-sm sgds:text-body-subtle sgds:mt-1">
               Optional additional context visible to your team.
             </p>
           </div>

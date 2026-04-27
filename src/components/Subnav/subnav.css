@@ -1,6 +1,7 @@
 :host {
   display: block;
-  z-index: var(--sgds-z-index-raised);
+  position: relative;
+  z-index: var(--sgds-z-index-sticky);
 }
 
 nav {

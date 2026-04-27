@@ -267,7 +267,7 @@ Angular supports web components natively via `CUSTOM_ELEMENTS_SCHEMA` — no SGD
 
 When a component behaves unexpectedly — wrong event fired, property not reflected, slot not rendering — read the compiled source directly. It contains full method bodies, event logic, internal defaults, and edge-case handling that no documentation captures.
 
-**Always check `node_modules` first** — if `node_modules/@govtechsg/sgds-web-component` exists, read from there:
+Read from `node_modules/@govtechsg/sgds-web-component` — this directory is present once the package is installed:
 
 ```
 node_modules/@govtechsg/sgds-web-component/components/Accordion/sgds-accordion.js
@@ -277,18 +277,7 @@ node_modules/@govtechsg/sgds-web-component/components/Accordion/sgds-accordion.d
 
 Replace `Accordion/sgds-accordion` with the relevant component folder and file name. The `.js` file contains the full implementation; the `.d.ts` file lists all properties, types, events, slots, and JSDoc descriptions.
 
-**Only if `node_modules` is absent (CDN users)** — browse the source for the exact version in use on the npm package page:
-
-```
-https://www.npmjs.com/package/@govtechsg/sgds-web-component/v/{version}?activeTab=code
-```
-
-Example for `v3.4.0-rc.4`:
-```
-https://www.npmjs.com/package/@govtechsg/sgds-web-component/v/3.4.0-rc.4?activeTab=code
-```
-
-Navigate into `components/{ComponentName}/` to find the same `.js` and `.d.ts` files. Ask the user for their version if unknown — it is visible in the CDN `<script>` or `<link>` tag URL they are using.
+**If `node_modules` is absent** — the package has not been installed. Ask the user to run their normal install step (`npm install` / `pnpm install`) before inspecting source files.
 
 ---
 
@@ -320,7 +309,7 @@ When a user reports unexpected component behaviour (wrong event, property not re
 | **Navigation** | Breadcrumb | [→ reference/breadcrumb.md](reference/breadcrumb.md) |
 | **Navigation** | Pagination | [→ reference/pagination.md](reference/pagination.md) |
 | **Navigation** | Sidenav | [→ reference/sidenav.md](reference/sidenav.md) |
-| **Navigation** | Sidebar (RC) | [→ reference/sidebar.md](reference/sidebar.md) |
+| **Navigation** | Sidebar | [→ reference/sidebar.md](reference/sidebar.md) |
 | **Navigation** | Subnav | [→ reference/subnav.md](reference/subnav.md) |
 | **Navigation** | Tab | [→ reference/tab.md](reference/tab.md) |
 | **Navigation** | Table of Contents | [→ reference/table-of-contents.md](reference/table-of-contents.md) |
@@ -347,8 +336,29 @@ When a user reports unexpected component behaviour (wrong event, property not re
 | **Forms** | Datepicker | [→ reference/datepicker.md](reference/datepicker.md) |
 | **Forms** | File Upload | [→ reference/file-upload.md](reference/file-upload.md) |
 | **Forms** | Quantity Toggle | [→ reference/quantity-toggle.md](reference/quantity-toggle.md) |
-| **Forms** | Switch | [→ reference/switch.md](reference/switch.md) |
-| **Forms** | Stepper | [→ reference/stepper.md](reference/stepper.md) |
+| **Feedback** | Switch | [→ reference/switch.md](reference/switch.md) |
+| **Workflow** | Stepper | [→ reference/stepper.md](reference/stepper.md) |
+
+---
+
+## Form Input Components
+
+When building forms, use these 9 form input components to capture user data:
+1. `<sgds-input>` — text fields
+2. `<sgds-textarea>` — multi-line text
+3. `<sgds-select>` — dropdown selection
+4. `<sgds-checkbox>` / `<sgds-checkbox-group>` — multiple choice
+5. `<sgds-radio>` / `<sgds-radio-group>` — single choice
+6. `<sgds-combo-box>` — searchable select
+7. `<sgds-datepicker>` — date input
+8. `<sgds-file-upload>` — file picker
+9. `<sgds-quantity-toggle>` — numeric counter
+
+**DO NOT use in forms (these are feedback/state, not input):**
+- `<sgds-switch>` — This is a **feedback component** (displays toggle state), not a form input. Use `<sgds-checkbox>` or `<sgds-radio-group>` to collect user choice instead.
+- Other non-input components (Alert, Badge, Button, Card, etc.) — These are layout/feedback, not form controls.
+
+For form layout patterns (field pairing, spacing, width constraints, multi-step forms with `<sgds-stepper>`, header hierarchy), see the [sgds-pattern-block-templates form layout skill](../sgds-pattern-block-templates/reference/form-layout.md).
 | **Feedback** | Alert | [→ reference/alert.md](reference/alert.md) |
 | **Feedback** | Spinner | [→ reference/spinner.md](reference/spinner.md) |
 | **Feedback** | Skeleton | [→ reference/skeleton.md](reference/skeleton.md) |

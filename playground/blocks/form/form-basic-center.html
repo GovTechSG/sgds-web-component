@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Layout - Center Aligned</title>
+  <script type="module" src="../../../src/index.ts"></script>
+  <link href="../../../src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="../../../src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="../../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+  <link href="../../css/utility.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="sgds:bg-default sgds:p-0 sgds:m-0">
+  <!-- Form in 8-column center-aligned layout -->
+  <div class="sgds-container sgds:py-layout-md">
+    <div class="sgds-grid sgds:gap-layout-md">
+      <!-- Form takes center 8 columns at lg breakpoint and above (12-column grid) -->
+      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8">
+        <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+          <!-- Section 1: Personal Information -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+          <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            Personal Information
+          </h5>
+
+          <!-- First name + Last name row (4-col + 4-col) -->
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+              <sgds-input
+                label="First name"
+                name="firstName"
+                type="text"
+                required
+                hasFeedback="both"
+              ></sgds-input>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+              <sgds-input
+                label="Last name"
+                name="lastName"
+                type="text"
+                required
+                hasFeedback="both"
+              ></sgds-input>
+            </div>
+          </div>
+
+          <!-- Email + Phone row (4-col + 4-col) -->
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+              <sgds-input
+                label="Email address"
+                name="email"
+                type="email"
+                required
+                hasFeedback="both"
+              ></sgds-input>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+              <sgds-input
+                label="Phone number"
+                name="phone"
+                type="tel"
+                required
+                hasFeedback="both"
+              ></sgds-input>
+            </div>
+          </div>
+
+          <!-- Full-width: Comments textarea -->
+          <div>
+            <sgds-textarea
+              label="Additional comments"
+              name="comments"
+              placeholder="Enter any additional information..."
+              hasFeedback="both"
+            ></sgds-textarea>
+          </div>
+          </div>
+
+          <!-- Section 2: Preferences -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+          <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            Preferences
+          </h5>
+
+          <!-- Full-width: Radio group -->
+          <div>
+            <sgds-radio-group
+              label="Communication preference"
+              name="communicationPreference"
+              required
+              hasFeedback="both"
+            >
+              <sgds-radio value="email">Email</sgds-radio>
+              <sgds-radio value="sms">SMS</sgds-radio>
+              <sgds-radio value="phone">Phone</sgds-radio>
+            </sgds-radio-group>
+          </div>
+
+          <!-- Full-width: Checkbox group -->
+          <div>
+            <sgds-checkbox-group
+              label="Interests"
+              name="interests"
+              required
+              hasFeedback="both"
+            >
+              <sgds-checkbox value="technology">Technology</sgds-checkbox>
+              <sgds-checkbox value="business">Business</sgds-checkbox>
+              <sgds-checkbox value="design">Design</sgds-checkbox>
+              <sgds-checkbox value="marketing">Marketing</sgds-checkbox>
+            </sgds-checkbox-group>
+          </div>
+          </div>
+
+          <!-- Form actions: Cancel/Back on left, Submit on right -->
+          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
+            <div class="sgds:flex sgds:gap-layout-sm">
+              <sgds-button type="reset" variant="ghost">Cancel</sgds-button>
+            <sgds-button type="submit">Submit</sgds-button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
+<!--
+FORM LAYOUT - CENTER ALIGNED PERMUTATION
+
+This playground demonstrates the SGDS form layout pattern with an 8-column form positioned
+at the center of the sgds-container and sgds-grid.
+
+Key differences from form-basic.html:
+- Form uses .sgds-col-lg-center-8, .sgds-col-xl-center-8, .sgds-col-2-xl-center-8 tokens
+- Equal 2-column gaps on left and right at lg breakpoint and above
+- Useful for centered forms with balanced whitespace on both sides
+
+Responsive behavior:
+- Mobile (4-col grid): sgds-col-4 = Form takes all 4 columns (full width)
+- Small/Medium (8-col grid): sgds-col-sm-8, sgds-col-md-8 = Form takes all 8 columns (full width)
+- Large+ (12-col grid): sgds-col-lg-center-8, sgds-col-xl-center-8, sgds-col-2-xl-center-8 = Form spans columns 3-10 (center 8 columns)
+
+Reference: skills/sgds-pattern-block-templates/reference/form-layout.md
+-->

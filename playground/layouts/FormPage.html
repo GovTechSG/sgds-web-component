@@ -5,15 +5,13 @@
 <link href="../css/utility.css" rel="stylesheet" type="text/css" />
 
 <body>
-  <div>
-    <sgds-masthead fluid></sgds-masthead>
-    <sgds-mainnav fluid>
-      <strong slot="brand">My Application</strong>
-      <sgds-mainnav-item slot="end">
-        <a href="#">Admin</a>
+    <sgds-masthead></sgds-masthead>
+
+    <sgds-mainnav>
+      <sgds-mainnav-item slot="start">
+        <a href="/">My Application</a>
       </sgds-mainnav-item>
     </sgds-mainnav>
-  </div>
 
   <!-- Page header -->
   <section class="sgds:bg-default sgds:py-layout-lg">
@@ -36,7 +34,7 @@
     <div class="sgds-container">
 
 
-      <form id="profile-form">
+        <form id="profile-form" method="post" novalidate>
         <!-- Section 1: Personal information -->
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
@@ -142,5 +140,10 @@
     </div>
   </section>
 
-  <sgds-footer></sgds-footer>
+        </form>
+
+      </div>
+    </div>
+
+    <sgds-footer></sgds-footer>
 </body>

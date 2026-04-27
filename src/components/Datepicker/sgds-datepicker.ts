@@ -421,7 +421,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   render() {
     return html`
-      <div class="datepicker-container">
+      <div class="datepicker-container m-width-160">
         <sgds-datepicker-input
           .value=${live(this.value)}
           ?required=${this.required}
@@ -444,6 +444,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
         <sgds-icon-button
           ${ref(this.myDropdown)}
           role="button"
+          tone="neutral"
           class=${classMap({
             "calendar-btn": true,
             "with-hint-text": this.hintText || this.invalid,
@@ -455,6 +456,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
           @click=${() => this.toggleMenu()}
           ariaLabel=${this.menuIsOpen ? "Close Calendar" : "Open Calendar"}
           ?disabled=${this.disabled || this.readonly}
+          ?active=${this.menuIsOpen}
           variant="outline"
           name="calendar"
         >

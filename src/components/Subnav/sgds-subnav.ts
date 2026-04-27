@@ -133,7 +133,7 @@ export class SgdsSubnav extends SgdsElement {
     if (this.isMenuOpen) {
       this.hide();
     } else {
-      document.querySelector("body").style.overflow = "hidden";
+      this._lockBodyScroll();
       this.show();
     }
 
@@ -164,9 +164,28 @@ export class SgdsSubnav extends SgdsElement {
     }
 
     this.isMenuOpen = false;
-    document.querySelector("body").style.removeProperty("overflow");
+    this._unlockBodyScroll();
 
     return waitForEvent(this, "sgds-after-hide");
+  }
+
+  private _lockBodyScroll() {
+    if (typeof window === "undefined") return;
+
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+  }
+
+  private _unlockBodyScroll() {
+    if (typeof window === "undefined") return;
+
+    const scrollY = parseInt(document.body.style.top || "0") * -1;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    window.scrollTo(0, scrollY);
   }
 
   private async _animateToShow() {
