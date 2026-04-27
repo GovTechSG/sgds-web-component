@@ -210,7 +210,7 @@ const Template = () => html`
             </sgds-table>
 
             <!-- Pagination -->
-            <sgds-pagination total-items="14" items-per-page="6" page="1"></sgds-pagination>
+            <sgds-pagination total-items="14" items-per-page="6" page="1" class="sgds:me-auto"></sgds-pagination>
           </div>
         </div>
       </div>
