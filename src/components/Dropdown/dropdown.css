@@ -1,5 +1,14 @@
 .dropdown {
   position: relative;
-  display: flex; 
+  display: flex;
   height: inherit;
+}
+
+.toggler-container {
+  flex: 1;
+  pointer-events: none;
+}
+
+.toggler-container ::slotted(*) {
+  pointer-events: auto;
 }
