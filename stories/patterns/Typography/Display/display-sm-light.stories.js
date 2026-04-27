@@ -2,7 +2,9 @@ import { html } from "lit";
 
 const DisplaySmLightTemplate = () => html`
   <div class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left" style="max-width: var(--sgds-text-max-width);">
-    <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+    <div
+      class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
+    >
       Overline Label
     </div>
     <h1 class="sgds:text-display-sm sgds:font-light sgds:leading-2-xl sgds:tracking-tighter sgds:text-display-default">

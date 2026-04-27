@@ -3,32 +3,38 @@ import { html } from "lit";
 const Template = () => html`
   <div class="sgds:bg-surface-default sgds:min-h-screen">
     <div class="sgds:w-container sgds:mx-auto sgds:py-layout-md">
-
       <!-- Session Detail Block -->
       <div class="sgds:flex sgds:flex-col sgds:gap-xl">
-
         <!-- Header -->
         <div class="sgds:flex sgds:flex-col sgds:gap-4">
-
           <div class="sgds:flex sgds:flex-col sgds:gap-1">
             <!-- Time slot — overline/semibold -->
-            <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-primary-default">
+            <div
+              class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-primary-default"
+            >
               10:45 AM - 11:15 AM
             </div>
 
             <!-- Title + expand/collapse -->
             <div class="sgds:flex sgds:items-start sgds:gap-6">
-              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default sgds:m-0" style="flex: 1;">
+              <h3
+                class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default sgds:m-0"
+                style="flex: 1;"
+              >
                 Singapore's Cybersecurity Strategy in An Evolving Threat Landscape
               </h3>
-              <button aria-label="Collapse session"
-                      style="width: 32px; height: 32px; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+              <button
+                aria-label="Collapse session"
+                style="width: 32px; height: 32px; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0; display: flex; align-items: center; justify-content: center;"
+              >
                 <sgds-icon name="chevron-up" size="md"></sgds-icon>
               </button>
             </div>
 
             <!-- Speaker attribution -->
-            <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle sgds:m-0">
+            <p
+              class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle sgds:m-0"
+            >
               Mr Tan Tony Leng, Cyber Security Agency of Singapore
             </p>
           </div>
@@ -39,34 +45,42 @@ const Template = () => html`
             <sgds-badge variant="warning" outlined>Morning</sgds-badge>
             <sgds-badge variant="neutral" outlined>Hall A</sgds-badge>
           </div>
-
         </div>
 
         <!-- Description -->
-        <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-body-default sgds:m-0">
+        <p
+          class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-body-default sgds:m-0"
+        >
           National cybersecurity challenges require a whole-of-nation response across the three pillars of operations,
-          policy and technology. Central to these are the efforts to evolve national cybersecurity operational frameworks
-          and develop national-level cybersecurity capabilities. Correspondingly, policy and regulatory levers should
-          give us the assurance in enabling our national cyber defence concept of operations. We will need to harness the
-          strengths of various parts of the cybersecurity ecosystem to push the boundaries of research, innovation, and
-          workforce professionalisation. To this end, governmental agencies should play the role of a "steady hand" in
-          shaping and guiding the trajectory of our cybersecurity ecosystem to meet national security needs. Lastly, we
-          must also invest in regional and global partnerships to stay ahead in this fast-evolving field of cybersecurity.
+          policy and technology. Central to these are the efforts to evolve national cybersecurity operational
+          frameworks and develop national-level cybersecurity capabilities. Correspondingly, policy and regulatory
+          levers should give us the assurance in enabling our national cyber defence concept of operations. We will need
+          to harness the strengths of various parts of the cybersecurity ecosystem to push the boundaries of research,
+          innovation, and workforce professionalisation. To this end, governmental agencies should play the role of a
+          "steady hand" in shaping and guiding the trajectory of our cybersecurity ecosystem to meet national security
+          needs. Lastly, we must also invest in regional and global partnerships to stay ahead in this fast-evolving
+          field of cybersecurity.
         </p>
 
         <!-- Speaker profile -->
         <div class="sgds:flex sgds:gap-xl sgds:items-start">
-          <img src="https://via.placeholder.com/88"
-               alt="Mr Tan Tony Leng"
-               style="width: 88px; height: 88px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+          <img
+            src="https://via.placeholder.com/88"
+            alt="Mr Tan Tony Leng"
+            style="width: 88px; height: 88px; border-radius: 50%; object-fit: cover; flex-shrink: 0;"
+          />
           <div class="sgds:flex sgds:flex-col sgds:gap-xl" style="flex: 1;">
             <div class="sgds:flex sgds:flex-col sgds:gap-xs">
-              <h5 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:m-0">
+              <h5
+                class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:m-0"
+              >
                 Mr Tan Tony Leng
               </h5>
-              <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle sgds:m-0">
-                Deputy Commissioner of Cybersecurity &amp; Deputy Chief Executive (Development),
-                Cyber Security Agency of Singapore
+              <p
+                class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle sgds:m-0"
+              >
+                Deputy Commissioner of Cybersecurity &amp; Deputy Chief Executive (Development), Cyber Security Agency
+                of Singapore
               </p>
             </div>
             <sgds-link>
@@ -76,9 +90,7 @@ const Template = () => html`
         </div>
 
         <sgds-divider></sgds-divider>
-
       </div>
-
     </div>
   </div>
 `;

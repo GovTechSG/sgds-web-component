@@ -1,8 +1,13 @@
 import { html } from "lit";
 
 const DisplayMdCenterTemplate = () => html`
-  <div class="sgds:flex sgds:flex-col sgds:items-center sgds:text-center" style="max-width: var(--sgds-text-max-width);">
-    <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+  <div
+    class="sgds:flex sgds:flex-col sgds:items-center sgds:text-center"
+    style="max-width: var(--sgds-text-max-width);"
+  >
+    <div
+      class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
+    >
       Overline Label
     </div>
     <h1 class="sgds:text-display-md sgds:font-bold sgds:leading-3-xl sgds:tracking-tighter sgds:text-display-default">

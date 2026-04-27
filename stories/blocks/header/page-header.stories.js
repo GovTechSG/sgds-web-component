@@ -8,8 +8,9 @@ const Template = () => html`
   <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
       <div class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left" class="sgds:max-w-text">
-
-        <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+        <div
+          class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
+        >
           Overline Label
         </div>
 
@@ -20,7 +21,6 @@ const Template = () => html`
         <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
           Supporting body text that provides context and detail for the page or section above.
         </p>
-
       </div>
     </div>
   </section>

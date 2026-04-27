@@ -8,7 +8,6 @@ const Template = () => html`
   <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
       <div class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left sgds:gap-layout-md" class="sgds:max-w-text">
-
         <!-- Breadcrumb -->
         <sgds-breadcrumb>
           <sgds-breadcrumb-item><a href="#">Home</a></sgds-breadcrumb-item>
@@ -18,7 +17,9 @@ const Template = () => html`
 
         <!-- Heading group -->
         <div>
-          <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+          <div
+            class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
+          >
             Overline Label
           </div>
 
@@ -30,7 +31,6 @@ const Template = () => html`
             Supporting body text that provides context and detail for the page or section above.
           </p>
         </div>
-
       </div>
     </div>
   </section>

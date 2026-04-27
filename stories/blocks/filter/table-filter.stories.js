@@ -3,16 +3,22 @@ import { html } from "lit";
 const Template = () => html`
   <div class="sgds:bg-surface-default sgds:min-h-screen">
     <div class="sgds:w-container sgds:mx-auto sgds:py-layout-md">
-
       <!-- Table filter card -->
-      <div class="sgds:bg-surface-default sgds:border sgds:border-muted sgds:rounded-lg sgds:p-layout-xs sgds:flex sgds:flex-col sgds:gap-5">
-
+      <div
+        class="sgds:bg-surface-default sgds:border sgds:border-muted sgds:rounded-lg sgds:p-layout-xs sgds:flex sgds:flex-col sgds:gap-5"
+      >
         <!-- Card header: icon + title -->
         <div class="sgds:flex sgds:items-center sgds:gap-text-md">
-          <div class="sgds:inline-flex sgds:items-center sgds:justify-center sgds:w-10 sgds:h-10 sgds:shrink-0 sgds:p-2 sgds:rounded-md sgds:bg-accent-surface-muted">
+          <div
+            class="sgds:inline-flex sgds:items-center sgds:justify-center sgds:w-10 sgds:h-10 sgds:shrink-0 sgds:p-2 sgds:rounded-md sgds:bg-accent-surface-muted"
+          >
             <sgds-icon name="trend-up" size="24"></sgds-icon>
           </div>
-          <h5 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">API subscriptions</h5>
+          <h5
+            class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+          >
+            API subscriptions
+          </h5>
         </div>
 
         <!-- Search + filter toolbar -->
@@ -40,45 +46,55 @@ const Template = () => html`
             <sgds-table-head>Actions</sgds-table-head>
           </sgds-table-row>
           <sgds-table-row>
-            <sgds-table-cell><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell>
+            <sgds-table-cell
+              ><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell
+            >
             <sgds-table-cell>REST API for test rotation functionality</sgds-table-cell>
             <sgds-table-cell><sgds-badge variant="success">Published</sgds-badge></sgds-table-cell>
             <sgds-table-cell>Data</sgds-table-cell>
           </sgds-table-row>
           <sgds-table-row>
-            <sgds-table-cell><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell>
+            <sgds-table-cell
+              ><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell
+            >
             <sgds-table-cell>REST API for test rotation functionality</sgds-table-cell>
             <sgds-table-cell><sgds-badge variant="success">Published</sgds-badge></sgds-table-cell>
             <sgds-table-cell>Data</sgds-table-cell>
           </sgds-table-row>
           <sgds-table-row>
-            <sgds-table-cell><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell>
+            <sgds-table-cell
+              ><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell
+            >
             <sgds-table-cell>REST API for test rotation functionality</sgds-table-cell>
             <sgds-table-cell><sgds-badge variant="success">Published</sgds-badge></sgds-table-cell>
             <sgds-table-cell>Data</sgds-table-cell>
           </sgds-table-row>
           <sgds-table-row>
-            <sgds-table-cell><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell>
+            <sgds-table-cell
+              ><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell
+            >
             <sgds-table-cell>REST API for test rotation functionality</sgds-table-cell>
             <sgds-table-cell><sgds-badge variant="success">Published</sgds-badge></sgds-table-cell>
             <sgds-table-cell>Data</sgds-table-cell>
           </sgds-table-row>
           <sgds-table-row>
-            <sgds-table-cell><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell>
+            <sgds-table-cell
+              ><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell
+            >
             <sgds-table-cell>REST API for test rotation functionality</sgds-table-cell>
             <sgds-table-cell><sgds-badge variant="success">Published</sgds-badge></sgds-table-cell>
             <sgds-table-cell>Data</sgds-table-cell>
           </sgds-table-row>
           <sgds-table-row>
-            <sgds-table-cell><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell>
+            <sgds-table-cell
+              ><sgds-link><a href="#">yx rotate test 8 v1.0.0</a></sgds-link></sgds-table-cell
+            >
             <sgds-table-cell>REST API for test rotation functionality</sgds-table-cell>
             <sgds-table-cell><sgds-badge variant="success">Published</sgds-badge></sgds-table-cell>
             <sgds-table-cell>Data</sgds-table-cell>
           </sgds-table-row>
         </sgds-table>
-
       </div>
-
     </div>
   </div>
 `;
