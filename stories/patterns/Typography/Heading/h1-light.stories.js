@@ -19,8 +19,7 @@ const H1LightTemplate = () => html`
 export default {
   title: "Patterns/Typography/Heading",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const H1Light = {

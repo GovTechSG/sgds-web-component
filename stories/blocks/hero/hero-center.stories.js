@@ -52,8 +52,7 @@ const Template = () => html`
 export default {
   title: "Blocks/Hero",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const HeroCenter = {

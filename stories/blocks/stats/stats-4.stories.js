@@ -3,8 +3,13 @@ import { html } from "lit";
 const Template = () => html`
   <style>
     @media (width >= 1024px) {
-      .stats-row { flex-wrap: nowrap !important; }
-      .stats-row > * { width: auto; flex: 1; }
+      .stats-row {
+        flex-wrap: nowrap !important;
+      }
+      .stats-row > * {
+        width: auto;
+        flex: 1;
+      }
     }
   </style>
 
@@ -114,8 +119,7 @@ const Template = () => html`
 export default {
   title: "Blocks/Stats",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const Stats4 = {

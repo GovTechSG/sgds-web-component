@@ -14,8 +14,7 @@ const H6LightTemplate = () => html`
 export default {
   title: "Patterns/Typography/Content",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const H6Light = {

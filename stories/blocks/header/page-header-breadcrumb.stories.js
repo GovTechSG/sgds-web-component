@@ -39,8 +39,7 @@ const Template = () => html`
 export default {
   title: "Blocks/Header",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const PageHeaderBreadcrumb = {

@@ -19,8 +19,7 @@ const DisplayMdLightTemplate = () => html`
 export default {
   title: "Patterns/Typography/Display",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const DisplayMediumLight = {

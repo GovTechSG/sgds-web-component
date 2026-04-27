@@ -27,8 +27,7 @@ const BodyLgTemplate = () => html`
 export default {
   title: "Patterns/Typography/Paragraph",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const BodyLarge = {

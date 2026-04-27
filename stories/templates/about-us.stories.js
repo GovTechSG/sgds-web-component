@@ -3,26 +3,31 @@ import { html } from "lit";
 const Template = () => html`
   <style>
     @keyframes sgds-marquee {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
     }
     .sgds-about-logo-track {
       animation: sgds-marquee 30s linear infinite;
     }
     @media (prefers-reduced-motion: reduce) {
-      .sgds-about-logo-track { animation: none; }
+      .sgds-about-logo-track {
+        animation: none;
+      }
     }
   </style>
 
   <sgds-masthead></sgds-masthead>
 
   <sgds-mainnav>
-    <strong slot="brand">My Organisation</strong>
+    <strong slot="brand">Logo placeholder</strong>
   </sgds-mainnav>
 
   <div class="sgds:bg-surface-default sgds:min-h-screen">
     <div class="sgds-container sgds:py-layout-xl">
-
       <!-- ① Header: two-column headline + description -->
       <div class="sgds-grid sgds:mb-layout-lg">
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6">
@@ -32,15 +37,14 @@ const Template = () => html`
         </div>
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6 sgds:flex sgds:items-end">
           <p class="sgds:text-body-lg sgds:font-regular sgds:leading-md sgds:text-muted">
-            We are a team of designers, engineers, and product thinkers committed
-            to delivering citizen-centric digital experiences across government.
+            We are a team of designers, engineers, and product thinkers committed to delivering citizen-centric digital
+            experiences across government.
           </p>
         </div>
       </div>
 
       <!-- ② Image grid: main image (8 cols) + right column (4 cols) -->
       <div class="sgds-grid sgds:mb-layout-lg">
-
         <!-- Main image -->
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex">
           <img
@@ -52,13 +56,18 @@ const Template = () => html`
 
         <!-- Right column: breakout card + secondary image -->
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4 sgds:flex sgds:flex-col sgds:gap-layout-md">
-
           <!-- Breakout card -->
           <sgds-thumbnail-card class="sgds:flex-1">
-            <img slot="thumbnail" src="https://placehold.co/64x64/1f69ff/ffffff?text=SG" alt="Organisation logo" width="64" height="64" />
+            <img
+              slot="thumbnail"
+              src="https://placehold.co/64x64/1f69ff/ffffff?text=SG"
+              alt="Organisation logo"
+              width="64"
+              height="64"
+            />
             <span slot="description">
-              Trusted by agencies across the whole-of-government ecosystem to deliver
-              accessible, compliant, and consistent digital interfaces.
+              Trusted by agencies across the whole-of-government ecosystem to deliver accessible, compliant, and
+              consistent digital interfaces.
             </span>
             <sgds-link slot="footer">
               <a href="/about">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
@@ -72,12 +81,13 @@ const Template = () => html`
             class="sgds:w-full sgds:object-cover sgds:rounded-lg"
           />
         </div>
-
       </div>
 
       <!-- ③ Logo strip -->
       <div class="sgds:mb-layout-lg">
-        <p class="sgds:text-center sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-muted sgds:mb-layout-sm">
+        <p
+          class="sgds:text-center sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-muted sgds:mb-layout-sm"
+        >
           Trusted by agencies
         </p>
 
@@ -88,19 +98,59 @@ const Template = () => html`
           <div class="sgds-about-logo-track sgds:flex sgds:gap-layout-xl sgds:w-max">
             <!-- First set -->
             <div class="sgds:flex sgds:gap-layout-xl sgds:items-center sgds:shrink-0">
-              <img src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+A" alt="Agency A" class="sgds:h-8 sgds:w-auto sgds:opacity-60" />
-              <img src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+B" alt="Agency B" class="sgds:h-8 sgds:w-auto sgds:opacity-60" />
-              <img src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+C" alt="Agency C" class="sgds:h-8 sgds:w-auto sgds:opacity-60" />
-              <img src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+D" alt="Agency D" class="sgds:h-8 sgds:w-auto sgds:opacity-60" />
-              <img src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+E" alt="Agency E" class="sgds:h-8 sgds:w-auto sgds:opacity-60" />
+              <img
+                src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+A"
+                alt="Agency A"
+                class="sgds:h-8 sgds:w-auto sgds:opacity-60"
+              />
+              <img
+                src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+B"
+                alt="Agency B"
+                class="sgds:h-8 sgds:w-auto sgds:opacity-60"
+              />
+              <img
+                src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+C"
+                alt="Agency C"
+                class="sgds:h-8 sgds:w-auto sgds:opacity-60"
+              />
+              <img
+                src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+D"
+                alt="Agency D"
+                class="sgds:h-8 sgds:w-auto sgds:opacity-60"
+              />
+              <img
+                src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+E"
+                alt="Agency E"
+                class="sgds:h-8 sgds:w-auto sgds:opacity-60"
+              />
             </div>
             <!-- Duplicate for seamless loop -->
             <div class="sgds:flex sgds:gap-layout-xl sgds:items-center sgds:shrink-0" aria-hidden="true">
-              <img src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+A" alt="" class="sgds:h-8 sgds:w-auto sgds:opacity-60" />
-              <img src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+B" alt="" class="sgds:h-8 sgds:w-auto sgds:opacity-60" />
-              <img src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+C" alt="" class="sgds:h-8 sgds:w-auto sgds:opacity-60" />
-              <img src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+D" alt="" class="sgds:h-8 sgds:w-auto sgds:opacity-60" />
-              <img src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+E" alt="" class="sgds:h-8 sgds:w-auto sgds:opacity-60" />
+              <img
+                src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+A"
+                alt=""
+                class="sgds:h-8 sgds:w-auto sgds:opacity-60"
+              />
+              <img
+                src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+B"
+                alt=""
+                class="sgds:h-8 sgds:w-auto sgds:opacity-60"
+              />
+              <img
+                src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+C"
+                alt=""
+                class="sgds:h-8 sgds:w-auto sgds:opacity-60"
+              />
+              <img
+                src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+D"
+                alt=""
+                class="sgds:h-8 sgds:w-auto sgds:opacity-60"
+              />
+              <img
+                src="https://placehold.co/120x40/f1f3f4/5f6368?text=Agency+E"
+                alt=""
+                class="sgds:h-8 sgds:w-auto sgds:opacity-60"
+              />
             </div>
           </div>
         </div>
@@ -108,7 +158,6 @@ const Template = () => html`
 
       <!-- ④ Achievements panel -->
       <div class="sgds:bg-surface-raised sgds:rounded-lg sgds:p-layout-lg">
-
         <!-- Panel header -->
         <div class="sgds-grid sgds:mb-layout-md">
           <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6">
@@ -118,8 +167,8 @@ const Template = () => html`
           </div>
           <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6">
             <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:text-muted">
-              Our platform powers services used by millions of residents and thousands
-              of officers across the Singapore government.
+              Our platform powers services used by millions of residents and thousands of officers across the Singapore
+              government.
             </p>
           </div>
         </div>
@@ -127,25 +176,35 @@ const Template = () => html`
         <!-- Stats: 4 cols on LG, 2 on SM/MD, 1 on XS -->
         <div class="sgds-grid">
           <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3">
-            <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">12,000+</p>
+            <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">
+              12,000+
+            </p>
             <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-muted sgds:mt-1">Active users</p>
           </div>
           <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3">
-            <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">98%</p>
-            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-muted sgds:mt-1">Platform uptime</p>
+            <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">
+              98%
+            </p>
+            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-muted sgds:mt-1">
+              Platform uptime
+            </p>
           </div>
           <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3">
-            <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">50+</p>
-            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-muted sgds:mt-1">Government agencies</p>
+            <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">
+              50+
+            </p>
+            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-muted sgds:mt-1">
+              Government agencies
+            </p>
           </div>
           <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3">
-            <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">5 years</p>
+            <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">
+              5 years
+            </p>
             <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-muted sgds:mt-1">In production</p>
           </div>
         </div>
-
       </div>
-
     </div>
   </div>
 

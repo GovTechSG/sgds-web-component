@@ -80,8 +80,7 @@ const Template = () => html`
 export default {
   title: "Blocks/Details",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const ApplicationDetails = {

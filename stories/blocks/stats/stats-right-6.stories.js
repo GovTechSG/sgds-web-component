@@ -2,9 +2,15 @@ import { html } from "lit";
 
 const Template = () => html`
   <style>
-    .stats-inner { display: flex; flex-direction: column; gap: var(--sgds-gap-layout-md); }
+    .stats-inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sgds-gap-layout-md);
+    }
     @media (width >= 1024px) {
-      .stats-heading { padding-right: var(--sgds-spacing-layout-md); }
+      .stats-heading {
+        padding-right: var(--sgds-spacing-layout-md);
+      }
     }
   </style>
 
@@ -117,8 +123,7 @@ const Template = () => html`
 export default {
   title: "Blocks/Stats",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const StatsRight6 = {

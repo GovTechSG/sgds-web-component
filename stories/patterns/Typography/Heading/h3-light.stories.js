@@ -14,8 +14,7 @@ const H3LightTemplate = () => html`
 export default {
   title: "Patterns/Typography/Heading",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const H3Light = {

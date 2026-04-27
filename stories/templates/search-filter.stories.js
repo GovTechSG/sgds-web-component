@@ -2,8 +2,12 @@ import { html } from "lit";
 
 const Template = () => html`
   <style>
-    .empty-state { display: none; }
-    .empty-state.active { display: flex; }
+    .empty-state {
+      display: none;
+    }
+    .empty-state.active {
+      display: flex;
+    }
     .title-clamp {
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -15,8 +19,13 @@ const Template = () => html`
   <!-- Page header block (no breadcrumb) -->
   <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
-      <div class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left" style="max-width: var(--sgds-text-max-width);">
-        <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+      <div
+        class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left"
+        style="max-width: var(--sgds-text-max-width);"
+      >
+        <div
+          class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
+        >
           Programmes
         </div>
         <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
@@ -45,16 +54,15 @@ const Template = () => html`
   -->
   <section class="sgds:bg-default sgds:py-layout-md">
     <div class="sgds-container">
-
       <div class="sgds-grid sgds:items-start">
-
         <!-- ── Left sidebar: filters ───────────────────────────────────── -->
         <aside class="sgds-col-12 sgds-col-lg-3 sgds:mr-layout-md">
           <div class="sgds:flex sgds:flex-col sgds:gap-2-xl sgds:pt-sm">
-
             <!-- Sidebar header -->
             <div class="sgds:flex sgds:items-center sgds:justify-between">
-              <span class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default">
+              <span
+                class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default"
+              >
                 Filters
               </span>
               <sgds-link><a href="#" id="clear-all-btn">Clear all</a></sgds-link>
@@ -62,7 +70,9 @@ const Template = () => html`
 
             <!-- Filter: Programme type -->
             <div class="sgds:flex sgds:flex-col sgds:gap-xs">
-              <div class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default">
+              <div
+                class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default"
+              >
                 Programme type
               </div>
               <sgds-checkbox-group>
@@ -75,7 +85,9 @@ const Template = () => html`
 
             <!-- Filter: Sessions -->
             <div class="sgds:flex sgds:flex-col sgds:gap-xs">
-              <div class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default">
+              <div
+                class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default"
+              >
                 Sessions
               </div>
               <sgds-checkbox-group>
@@ -86,7 +98,9 @@ const Template = () => html`
 
             <!-- Filter: Track -->
             <div class="sgds:flex sgds:flex-col sgds:gap-xs">
-              <div class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default">
+              <div
+                class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default"
+              >
                 Track
               </div>
               <sgds-checkbox-group>
@@ -98,7 +112,9 @@ const Template = () => html`
 
             <!-- Filter: Event hall -->
             <div class="sgds:flex sgds:flex-col sgds:gap-xs">
-              <div class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default">
+              <div
+                class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default"
+              >
                 Event hall
               </div>
               <sgds-checkbox-group>
@@ -107,16 +123,16 @@ const Template = () => html`
                 <sgds-checkbox value="hall-c">Hall C</sgds-checkbox>
               </sgds-checkbox-group>
             </div>
-
           </div>
         </aside>
 
         <!-- ── Right main: chips + sort + results ─────────────────── -->
         <div class="sgds-col-12 sgds-col-lg-9">
-
           <!-- Results meta row: count + sort -->
           <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mb-xl">
-            <h5 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+            <h5
+              class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
               Showing 12 results
             </h5>
             <sgds-select label="" placeholder="Sort by" style="min-width: 200px;">
@@ -130,14 +146,17 @@ const Template = () => html`
 
           <!-- Results grid -->
           <div class="sgds-grid sgds:items-stretch" id="results-grid">
-
             <!-- Result card 1 -->
             <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">Digital Infrastructure for the Next Decade</span>
-                <span slot="description">An overview of Singapore's plans for resilient and future-ready digital infrastructure.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >An overview of Singapore's plans for resilient and future-ready digital infrastructure.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -146,8 +165,12 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Panel Discussion</sgds-badge>
                 <span slot="title" class="title-clamp">AI Governance in the Public Sector</span>
-                <span slot="description">Panellists explore responsible AI adoption frameworks and inter-agency collaboration.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >Panellists explore responsible AI adoption frameworks and inter-agency collaboration.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -156,8 +179,12 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Zero-Trust Architecture for Government Systems</span>
-                <span slot="description">A deep dive into implementing zero-trust principles across legacy and modern systems.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >A deep dive into implementing zero-trust principles across legacy and modern systems.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -166,8 +193,12 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">Securing the Cloud: Lessons from the Field</span>
-                <span slot="description">Key takeaways from real-world cloud migration projects across the Singapore government.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >Key takeaways from real-world cloud migration projects across the Singapore government.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -176,8 +207,12 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Incident Response Playbooks for CISOs</span>
-                <span slot="description">Practical frameworks for building effective incident response and recovery strategies.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >Practical frameworks for building effective incident response and recovery strategies.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -186,8 +221,12 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Panel Discussion</sgds-badge>
                 <span slot="title" class="title-clamp">Workforce Upskilling for Cyber Resilience</span>
-                <span slot="description">How agencies are building cyber talent pipelines and fostering a security-aware culture.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >How agencies are building cyber talent pipelines and fostering a security-aware culture.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -196,8 +235,12 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Opening Address</sgds-badge>
                 <span slot="title" class="title-clamp">Building a Resilient Digital Government</span>
-                <span slot="description">An opening address on Singapore's whole-of-government approach to digital resilience.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >An opening address on Singapore's whole-of-government approach to digital resilience.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -206,8 +249,12 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Identity and Access Management at Scale</span>
-                <span slot="description">Strategies for managing digital identities across thousands of government users securely.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >Strategies for managing digital identities across thousands of government users securely.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -216,8 +263,13 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">The Future of GovTech: People, Process and Platform</span>
-                <span slot="description">How people-centred design and agile delivery are shaping the next wave of government technology.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >How people-centred design and agile delivery are shaping the next wave of government
+                  technology.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -226,8 +278,13 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Panel Discussion</sgds-badge>
                 <span slot="title" class="title-clamp">Data Sharing Across Agencies: Challenges and Solutions</span>
-                <span slot="description">Panellists discuss governance models and technical standards enabling safe cross-agency data sharing.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >Panellists discuss governance models and technical standards enabling safe cross-agency data
+                  sharing.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -236,8 +293,12 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Automating Compliance Monitoring with AI</span>
-                <span slot="description">Using machine learning to continuously monitor systems for policy and regulatory compliance.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >Using machine learning to continuously monitor systems for policy and regulatory compliance.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
 
@@ -246,20 +307,31 @@ const Template = () => html`
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">Cybersecurity as a National Imperative</span>
-                <span slot="description">Why cybersecurity investment is central to Singapore's long-term digital sovereignty strategy.</span>
-                <sgds-link slot="footer"><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+                <span slot="description"
+                  >Why cybersecurity investment is central to Singapore's long-term digital sovereignty strategy.</span
+                >
+                <sgds-link slot="footer"
+                  ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+                ></sgds-link>
               </sgds-card>
             </div>
-
           </div>
 
           <!-- Empty state (shown when no results) -->
-          <div class="empty-state sgds:flex-col sgds:items-center sgds:justify-center sgds:py-2-xl sgds:text-center" id="empty-state">
+          <div
+            class="empty-state sgds:flex-col sgds:items-center sgds:justify-center sgds:py-2-xl sgds:text-center"
+            id="empty-state"
+          >
             <sgds-icon name="search" size="48" class="sgds:text-body-subtle sgds:mb-md"></sgds-icon>
-            <h5 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default">
+            <h5
+              class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default"
+            >
               No results found
             </h5>
-            <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle sgds:mb-md" style="max-width: 360px;">
+            <p
+              class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle sgds:mb-md"
+              style="max-width: 360px;"
+            >
               Try adjusting your search or filters to find what you're looking for.
             </p>
             <sgds-button variant="outline" tone="neutral" id="reset-btn">Clear all filters</sgds-button>
@@ -269,10 +341,8 @@ const Template = () => html`
           <div class="sgds:mt-layout-sm sgds:flex sgds:justify-end">
             <sgds-pagination length="5" currentPage="1" limit="6" size="sm"></sgds-pagination>
           </div>
-
         </div>
       </div>
-
     </div>
   </section>
 `;
@@ -306,14 +376,14 @@ export const Default = {
     }
 
     if (resetBtn) {
-      resetBtn.addEventListener("click", (e) => {
+      resetBtn.addEventListener("click", e => {
         e.preventDefault();
         showResults();
       });
     }
 
     if (clearAllBtn) {
-      clearAllBtn.addEventListener("click", (e) => {
+      clearAllBtn.addEventListener("click", e => {
         e.preventDefault();
       });
     }

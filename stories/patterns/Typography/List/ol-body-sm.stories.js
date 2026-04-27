@@ -27,8 +27,7 @@ const OLBodySmTemplate = () => html`
 export default {
   title: "Patterns/Typography/List",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const OLBodySmall = {

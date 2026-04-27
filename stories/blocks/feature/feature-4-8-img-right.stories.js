@@ -50,8 +50,7 @@ const Template = () => html`
 export default {
   title: "Blocks/Feature",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const FeatureImageRight48 = {

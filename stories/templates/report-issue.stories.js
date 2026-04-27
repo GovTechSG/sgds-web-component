@@ -2,24 +2,26 @@ import { html } from "lit";
 
 const Template = () => html`
   <style>
-    #view-success { display: none; }
+    #view-success {
+      display: none;
+    }
   </style>
 
   <sgds-masthead></sgds-masthead>
   <sgds-mainnav>
-    <strong slot="brand">My Organisation</strong>
+    <strong slot="brand">Logo placeholder</strong>
   </sgds-mainnav>
 
   <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
       <div class="sgds-grid">
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8">
-
           <!-- VIEW: FORM -->
           <div id="view-form">
-
             <div class="sgds:mb-layout-md">
-              <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
+              <h1
+                class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default"
+              >
                 Report an Issue
               </h1>
               <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
@@ -28,7 +30,6 @@ const Template = () => html`
             </div>
 
             <form id="report-issue-form" class="sgds:flex sgds:flex-col sgds:gap-form-2-xl" novalidate>
-
               <sgds-input
                 type="text"
                 label="Location"
@@ -66,19 +67,23 @@ const Template = () => html`
               <sgds-button id="submit-btn" type="submit" variant="primary" size="md" class="sgds:self-end">
                 Submit Report
               </sgds-button>
-
             </form>
           </div>
 
           <!-- VIEW: SUCCESS -->
           <div id="view-success">
-
             <div class="sgds:mb-lg">
-              <sgds-icon name="check-circle-fill" size="3-xl" style="color: var(--sgds-success-color-default);"></sgds-icon>
+              <sgds-icon
+                name="check-circle-fill"
+                size="3-xl"
+                style="color: var(--sgds-success-color-default);"
+              ></sgds-icon>
             </div>
 
             <div class="sgds:mb-layout-md">
-              <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
+              <h1
+                class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default"
+              >
                 Report Submitted
               </h1>
               <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
@@ -87,10 +92,15 @@ const Template = () => html`
             </div>
 
             <div class="sgds:mb-layout-sm">
-              <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+              <div
+                class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
+              >
                 Reference Number
               </div>
-              <h4 id="ref-number" class="sgds:text-heading-sm sgds:font-light sgds:leading-sm sgds:tracking-tight sgds:text-heading-default"></h4>
+              <h4
+                id="ref-number"
+                class="sgds:text-heading-sm sgds:font-light sgds:leading-sm sgds:tracking-tight sgds:text-heading-default"
+              ></h4>
             </div>
 
             <!-- Submission summary -->
@@ -115,8 +125,15 @@ const Template = () => html`
 
             <!-- What happens next -->
             <div class="sgds:mb-layout-md">
-              <p class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-sm">What happens next</p>
-              <ul class="sgds:text-body-md sgds:font-regular sgds:leading-md sgds:text-default" style="padding-left: var(--sgds-spacing-lg); margin: 0;">
+              <p
+                class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-sm"
+              >
+                What happens next
+              </p>
+              <ul
+                class="sgds:text-body-md sgds:font-regular sgds:leading-md sgds:text-default"
+                style="padding-left: var(--sgds-spacing-lg); margin: 0;"
+              >
                 <li>Our team will review your report within 3 working days.</li>
                 <li>You may be contacted for more information if needed.</li>
                 <li>98% of reports are resolved within 7 working days.</li>
@@ -124,13 +141,9 @@ const Template = () => html`
             </div>
 
             <div class="sgds:flex sgds:justify-end">
-              <sgds-button id="new-report-btn" variant="outline" size="md">
-                Submit Another Report
-              </sgds-button>
+              <sgds-button id="new-report-btn" variant="outline" size="md"> Submit Another Report </sgds-button>
             </div>
-
           </div>
-
         </div>
       </div>
     </div>
@@ -140,15 +153,18 @@ const Template = () => html`
 `;
 
 function generateRef() {
-  const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const date = new Date().toISOString().slice(0, 10).replace(/-/g, "");
   const rand = String(Math.floor(1000 + Math.random() * 9000));
-  return 'RPT-' + date + '-' + rand;
+  return "RPT-" + date + "-" + rand;
 }
 
 function formatDate(date) {
-  return date.toLocaleDateString('en-SG', {
-    day: 'numeric', month: 'long', year: 'numeric',
-    hour: '2-digit', minute: '2-digit'
+  return date.toLocaleDateString("en-SG", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
   });
 }
 
@@ -164,23 +180,23 @@ export const Default = {
   render: Template.bind({}),
   name: "Default",
   play: async ({ canvasElement }) => {
-    const form = canvasElement.querySelector('#report-issue-form');
-    const submitBtn = canvasElement.querySelector('#submit-btn');
-    const newReportBtn = canvasElement.querySelector('#new-report-btn');
-    const viewForm = canvasElement.querySelector('#view-form');
-    const viewSuccess = canvasElement.querySelector('#view-success');
-    const photoUpload = canvasElement.querySelector('#photo-upload');
+    const form = canvasElement.querySelector("#report-issue-form");
+    const submitBtn = canvasElement.querySelector("#submit-btn");
+    const newReportBtn = canvasElement.querySelector("#new-report-btn");
+    const viewForm = canvasElement.querySelector("#view-form");
+    const viewSuccess = canvasElement.querySelector("#view-success");
+    const photoUpload = canvasElement.querySelector("#photo-upload");
 
     let selectedFiles = [];
 
     if (photoUpload) {
-      photoUpload.addEventListener('sgds-files-selected', (e) => {
+      photoUpload.addEventListener("sgds-files-selected", e => {
         selectedFiles = Array.from(e.detail);
       });
     }
 
     if (form) {
-      form.addEventListener('submit', (e) => {
+      form.addEventListener("submit", e => {
         e.preventDefault();
 
         const locationEl = form.querySelector('[name="location"]');
@@ -188,17 +204,17 @@ export const Default = {
         let valid = true;
 
         if (!locationEl.value.trim()) {
-          locationEl.setAttribute('invalid', '');
+          locationEl.setAttribute("invalid", "");
           valid = false;
         } else {
-          locationEl.removeAttribute('invalid');
+          locationEl.removeAttribute("invalid");
         }
 
         if (!descriptionEl.value.trim() || descriptionEl.value.trim().length < 20) {
-          descriptionEl.setAttribute('invalid', '');
+          descriptionEl.setAttribute("invalid", "");
           valid = false;
         } else {
-          descriptionEl.removeAttribute('invalid');
+          descriptionEl.removeAttribute("invalid");
         }
 
         if (!valid) return;
@@ -209,38 +225,38 @@ export const Default = {
         const photoCount = selectedFiles.length;
 
         // Loading state
-        submitBtn.setAttribute('loading', '');
-        submitBtn.setAttribute('disabled', '');
+        submitBtn.setAttribute("loading", "");
+        submitBtn.setAttribute("disabled", "");
 
         // Simulate API call (1.5s)
         setTimeout(() => {
-          submitBtn.removeAttribute('loading');
-          submitBtn.removeAttribute('disabled');
+          submitBtn.removeAttribute("loading");
+          submitBtn.removeAttribute("disabled");
 
           // Populate success view
-          canvasElement.querySelector('#ref-number').textContent = generateRef();
-          canvasElement.querySelector('#summary-location').textContent = locationVal;
-          canvasElement.querySelector('#summary-description').textContent =
-            descriptionVal.length > 120 ? descriptionVal.slice(0, 120) + '...' : descriptionVal;
-          canvasElement.querySelector('#summary-photos').textContent =
-            photoCount > 0 ? photoCount + ' photo' + (photoCount > 1 ? 's' : '') + ' attached' : 'None';
-          canvasElement.querySelector('#summary-date').textContent = formatDate(new Date());
+          canvasElement.querySelector("#ref-number").textContent = generateRef();
+          canvasElement.querySelector("#summary-location").textContent = locationVal;
+          canvasElement.querySelector("#summary-description").textContent =
+            descriptionVal.length > 120 ? descriptionVal.slice(0, 120) + "..." : descriptionVal;
+          canvasElement.querySelector("#summary-photos").textContent =
+            photoCount > 0 ? photoCount + " photo" + (photoCount > 1 ? "s" : "") + " attached" : "None";
+          canvasElement.querySelector("#summary-date").textContent = formatDate(new Date());
 
           // Switch views
-          viewForm.style.display = 'none';
-          viewSuccess.style.display = 'block';
-          canvasElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          viewForm.style.display = "none";
+          viewSuccess.style.display = "block";
+          canvasElement.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 1500);
       });
     }
 
     if (newReportBtn) {
-      newReportBtn.addEventListener('click', () => {
+      newReportBtn.addEventListener("click", () => {
         form.reset();
         selectedFiles = [];
-        viewSuccess.style.display = 'none';
-        viewForm.style.display = 'block';
-        canvasElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        viewSuccess.style.display = "none";
+        viewForm.style.display = "block";
+        canvasElement.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     }
   }

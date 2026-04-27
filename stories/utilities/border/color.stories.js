@@ -1,10 +1,10 @@
 import { html } from "lit";
 import "../../../mocks/color-item.ts";
 
-  export default {
-    title: "Utilities/Border/Color",
-    tags: ["!autodocs"]
-  };
+export default {
+  title: "Utilities/Border/Color",
+  tags: ["!autodocs"]
+};
 
 const ColorItem = (token, variable, borderColorValue = true) => {
   return html`

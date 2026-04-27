@@ -191,8 +191,7 @@ const Template = () => html`
 export default {
   title: "Blocks/Cards",
   tags: ["!autodocs"],
-  parameters: { layout: "padded"
-  }
+  parameters: { layout: "padded" }
 };
 
 export const Cards4 = {
