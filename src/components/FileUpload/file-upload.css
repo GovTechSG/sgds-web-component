@@ -40,7 +40,11 @@ input {
   display: none;
 }
 
-sgds-button,
+sgds-button {
+  cursor: pointer;
+  align-self: flex-start;
+}
+
 label {
   cursor: pointer;
 }

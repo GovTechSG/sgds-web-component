@@ -42,7 +42,7 @@ src/components/<ComponentName>/
 test/
   <component-name>.test.ts     # Unit test file
 
-stories/templates/<ComponentName>/
+stories/component-templates/<ComponentName>/
   basic.js                     # Base Storybook template
   additional.stories.js        # Additional story variants
   additional.mdx               # Story documentation

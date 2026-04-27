@@ -1,0 +1,263 @@
+import { html } from "lit";
+
+const Template = () => html`
+  <style>
+    #view-success {
+      display: none;
+    }
+  </style>
+
+  <sgds-masthead></sgds-masthead>
+  <sgds-mainnav>
+    <strong slot="brand">Logo placeholder</strong>
+  </sgds-mainnav>
+
+  <section class="sgds:bg-default sgds:py-layout-lg">
+    <div class="sgds-container">
+      <div class="sgds-grid">
+        <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8">
+          <!-- VIEW: FORM -->
+          <div id="view-form">
+            <div class="sgds:mb-layout-md">
+              <h1
+                class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default"
+              >
+                Report an Issue
+              </h1>
+              <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
+                Help us improve by reporting problems in your area. We aim to respond within 3 working days.
+              </p>
+            </div>
+
+            <form id="report-issue-form" class="sgds:flex sgds:flex-col sgds:gap-form-2-xl" novalidate>
+              <sgds-input
+                type="text"
+                label="Location"
+                name="location"
+                placeholder="e.g. Blk 123 Ang Mo Kio Ave 6, near bus stop"
+                hintText="Enter a street address or describe the location"
+                required
+                hasFeedback="both"
+                invalidFeedback="Please enter the location of the issue"
+              ></sgds-input>
+
+              <sgds-textarea
+                label="Description"
+                name="description"
+                placeholder="Describe the issue in detail - what it is, how long it has been there, and any safety concerns"
+                hintText="Minimum 20 characters"
+                rows="5"
+                maxlength="500"
+                required
+                hasFeedback="both"
+                invalidFeedback="Please describe the issue (at least 20 characters)"
+              ></sgds-textarea>
+
+              <sgds-file-upload
+                id="photo-upload"
+                label="Photos (optional)"
+                name="photos"
+                accept="image/*"
+                multiple
+                hintText="Upload up to 3 photos. JPEG or PNG, max 5MB each."
+              >
+                Upload Photos
+              </sgds-file-upload>
+
+              <sgds-button id="submit-btn" type="submit" variant="primary" size="md" class="sgds:self-end">
+                Submit Report
+              </sgds-button>
+            </form>
+          </div>
+
+          <!-- VIEW: SUCCESS -->
+          <div id="view-success">
+            <div class="sgds:mb-lg">
+              <sgds-icon
+                name="check-circle-fill"
+                size="3-xl"
+                style="color: var(--sgds-success-color-default);"
+              ></sgds-icon>
+            </div>
+
+            <div class="sgds:mb-layout-md">
+              <h1
+                class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default"
+              >
+                Report Submitted
+              </h1>
+              <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
+                Thank you for helping us keep the community safe and clean.
+              </p>
+            </div>
+
+            <div class="sgds:mb-layout-sm">
+              <div
+                class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
+              >
+                Reference Number
+              </div>
+              <h4
+                id="ref-number"
+                class="sgds:text-heading-sm sgds:font-light sgds:leading-sm sgds:tracking-tight sgds:text-heading-default"
+              ></h4>
+            </div>
+
+            <!-- Submission summary -->
+            <sgds-description-list-group bordered class="sgds:mb-layout-sm">
+              <sgds-description-list>
+                Location
+                <span slot="data" id="summary-location"></span>
+              </sgds-description-list>
+              <sgds-description-list>
+                Description
+                <span slot="data" id="summary-description"></span>
+              </sgds-description-list>
+              <sgds-description-list>
+                Photos
+                <span slot="data" id="summary-photos"></span>
+              </sgds-description-list>
+              <sgds-description-list>
+                Submitted on
+                <span slot="data" id="summary-date"></span>
+              </sgds-description-list>
+            </sgds-description-list-group>
+
+            <!-- What happens next -->
+            <div class="sgds:mb-layout-md">
+              <p
+                class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-sm"
+              >
+                What happens next
+              </p>
+              <ul
+                class="sgds:text-body-md sgds:font-regular sgds:leading-md sgds:text-default"
+                style="padding-left: var(--sgds-spacing-lg); margin: 0;"
+              >
+                <li>Our team will review your report within 3 working days.</li>
+                <li>You may be contacted for more information if needed.</li>
+                <li>98% of reports are resolved within 7 working days.</li>
+              </ul>
+            </div>
+
+            <div class="sgds:flex sgds:justify-end">
+              <sgds-button id="new-report-btn" variant="outline" size="md"> Submit Another Report </sgds-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <sgds-footer></sgds-footer>
+`;
+
+function generateRef() {
+  const date = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+  const rand = String(Math.floor(1000 + Math.random() * 9000));
+  return "RPT-" + date + "-" + rand;
+}
+
+function formatDate(date) {
+  return date.toLocaleDateString("en-SG", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
+export default {
+  title: "Templates/Report Issue",
+  tags: ["!autodocs"],
+  parameters: {
+    layout: "fullscreen"
+  }
+};
+
+export const Default = {
+  render: Template.bind({}),
+  name: "Default",
+  play: async ({ canvasElement }) => {
+    const form = canvasElement.querySelector("#report-issue-form");
+    const submitBtn = canvasElement.querySelector("#submit-btn");
+    const newReportBtn = canvasElement.querySelector("#new-report-btn");
+    const viewForm = canvasElement.querySelector("#view-form");
+    const viewSuccess = canvasElement.querySelector("#view-success");
+    const photoUpload = canvasElement.querySelector("#photo-upload");
+
+    let selectedFiles = [];
+
+    if (photoUpload) {
+      photoUpload.addEventListener("sgds-files-selected", e => {
+        selectedFiles = Array.from(e.detail);
+      });
+    }
+
+    if (form) {
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+
+        const locationEl = form.querySelector('[name="location"]');
+        const descriptionEl = form.querySelector('[name="description"]');
+        let valid = true;
+
+        if (!locationEl.value.trim()) {
+          locationEl.setAttribute("invalid", "");
+          valid = false;
+        } else {
+          locationEl.removeAttribute("invalid");
+        }
+
+        if (!descriptionEl.value.trim() || descriptionEl.value.trim().length < 20) {
+          descriptionEl.setAttribute("invalid", "");
+          valid = false;
+        } else {
+          descriptionEl.removeAttribute("invalid");
+        }
+
+        if (!valid) return;
+
+        // Capture values before reset
+        const locationVal = locationEl.value.trim();
+        const descriptionVal = descriptionEl.value.trim();
+        const photoCount = selectedFiles.length;
+
+        // Loading state
+        submitBtn.setAttribute("loading", "");
+        submitBtn.setAttribute("disabled", "");
+
+        // Simulate API call (1.5s)
+        setTimeout(() => {
+          submitBtn.removeAttribute("loading");
+          submitBtn.removeAttribute("disabled");
+
+          // Populate success view
+          canvasElement.querySelector("#ref-number").textContent = generateRef();
+          canvasElement.querySelector("#summary-location").textContent = locationVal;
+          canvasElement.querySelector("#summary-description").textContent =
+            descriptionVal.length > 120 ? descriptionVal.slice(0, 120) + "..." : descriptionVal;
+          canvasElement.querySelector("#summary-photos").textContent =
+            photoCount > 0 ? photoCount + " photo" + (photoCount > 1 ? "s" : "") + " attached" : "None";
+          canvasElement.querySelector("#summary-date").textContent = formatDate(new Date());
+
+          // Switch views
+          viewForm.style.display = "none";
+          viewSuccess.style.display = "block";
+          canvasElement.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 1500);
+      });
+    }
+
+    if (newReportBtn) {
+      newReportBtn.addEventListener("click", () => {
+        form.reset();
+        selectedFiles = [];
+        viewSuccess.style.display = "none";
+        viewForm.style.display = "block";
+        canvasElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }
+};
