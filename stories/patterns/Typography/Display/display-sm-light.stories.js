@@ -18,9 +18,8 @@ const DisplaySmLightTemplate = () => html`
 
 export default {
   title: "Patterns/Typography/Display",
-  parameters: {
-    tags: ["!autodocs"],
-    layout: "padded"
+  tags: ["!autodocs"],
+  parameters: { layout: "padded"
   }
 };
 

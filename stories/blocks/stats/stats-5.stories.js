@@ -1,6 +1,13 @@
 import { html } from "lit";
 
 const Template = () => html`
+  <style>
+    @media (width >= 1024px) {
+      .stats-row { flex-wrap: nowrap !important; }
+      .stats-row > * { width: auto; flex: 1; }
+    }
+  </style>
+
   <!-- Stats Block — section header + 5 stats
        Background : bg-surface-default
        Spacing    : py-layout-md, gap-layout-md
@@ -26,8 +33,8 @@ const Template = () => html`
         </div>
 
         <!-- 5 stats -->
-        <div class="sgds:flex sgds:flex-wrap md:sgds:flex-nowrap sgds:gap-layout-md sgds:w-full">
-          <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+        <div class="stats-row sgds:flex sgds:flex-wrap sgds:gap-layout-md">
+          <div class="sgds:flex sgds:flex-col sgds:items-start sgds:w-full sgds:pr-layout-xs">
             <div
               class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default"
             >
@@ -45,7 +52,7 @@ const Template = () => html`
             </p>
           </div>
 
-          <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+          <div class="sgds:flex sgds:flex-col sgds:items-start sgds:w-full sgds:pr-layout-xs">
             <div
               class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default"
             >
@@ -63,7 +70,7 @@ const Template = () => html`
             </p>
           </div>
 
-          <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+          <div class="sgds:flex sgds:flex-col sgds:items-start sgds:w-full sgds:pr-layout-xs">
             <div
               class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default"
             >
@@ -81,7 +88,7 @@ const Template = () => html`
             </p>
           </div>
 
-          <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+          <div class="sgds:flex sgds:flex-col sgds:items-start sgds:w-full sgds:pr-layout-xs">
             <div
               class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default"
             >
@@ -99,7 +106,7 @@ const Template = () => html`
             </p>
           </div>
 
-          <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+          <div class="sgds:flex sgds:flex-col sgds:items-start sgds:w-full sgds:pr-layout-xs">
             <div
               class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default"
             >
@@ -124,13 +131,12 @@ const Template = () => html`
 
 export default {
   title: "Blocks/Stats",
-  parameters: {
-    tags: ["!autodocs"],
-    layout: "padded"
+  tags: ["!autodocs"],
+  parameters: { layout: "padded"
   }
 };
 
 export const Stats5 = {
   render: Template.bind({}),
-  name: "Stats5"
+  name: "5 statistics"
 };

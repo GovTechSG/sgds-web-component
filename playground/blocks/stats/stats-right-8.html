@@ -1,10 +1,16 @@
-<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
-<script type="module" src="../../src/index.ts"></script>
-<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
-<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+<link href="../../css/fonts.css" rel="stylesheet" type="text/css" />
+<script type="module" src="../../../src/index.ts"></script>
+<link href="../../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../../css/utility.css" rel="stylesheet" type="text/css" />
 
+<style>
+  .stats-inner { display: flex; flex-direction: column; gap: var(--sgds-gap-layout-md); }
+  @media (width >= 1024px) {
+    .stats-heading { padding-right: var(--sgds-spacing-layout-md); }
+  }
+</style>
 
 <body>
   <!-- Stats Block — heading left 4 cols + 4 stats right 8 cols (flex row)
@@ -17,7 +23,7 @@
       <div class="sgds-grid sgds:gap-layout-md sgds:items-start">
 
         <!-- Heading — left 4 cols -->
-        <div class="sgds-col-4 sgds-col-sm-8 sgds-col-md-4 sgds-col-lg-4">
+        <div class="stats-heading sgds-col-4 sgds-col-sm-8 sgds-col-md-4 sgds-col-lg-4">
           <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
             By the Numbers
           </div>
@@ -31,9 +37,9 @@
 
         <!-- 4 stats — right 8 cols in flex row -->
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-md-4 sgds-col-lg-8">
-          <div class="sgds:flex sgds:flex-wrap md:sgds:flex-nowrap sgds:gap-layout-md">
+          <div class="stats-inner sgds:flex sgds:flex-wrap sgds:gap-layout-md">
 
-            <div class="sgds:flex sgds:flex-col sgds:items-start md:sgds:pr-layout-xs sgds:flex-1">
+            <div class="sgds:flex sgds:flex-col sgds:items-start sgds:flex-1 md:sgds:pr-layout-xs">
               <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
                 2.4M
               </div>
@@ -45,7 +51,7 @@
               </p>
             </div>
 
-            <div class="sgds:flex sgds:flex-col sgds:items-start md:sgds:pr-layout-xs sgds:flex-1">
+            <div class="sgds:flex sgds:flex-col sgds:items-start sgds:flex-1 md:sgds:pr-layout-xs">
               <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
                 400+
               </div>
@@ -57,7 +63,7 @@
               </p>
             </div>
 
-            <div class="sgds:flex sgds:flex-col sgds:items-start md:sgds:pr-layout-xs sgds:flex-1">
+            <div class="sgds:flex sgds:flex-col sgds:items-start sgds:flex-1 md:sgds:pr-layout-xs">
               <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
                 99.9%
               </div>
@@ -69,7 +75,7 @@
               </p>
             </div>
 
-            <div class="sgds:flex sgds:flex-col sgds:items-start md:sgds:pr-layout-xs sgds:flex-1">
+            <div class="sgds:flex sgds:flex-col sgds:items-start sgds:flex-1 md:sgds:pr-layout-xs">
               <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
                 16
               </div>

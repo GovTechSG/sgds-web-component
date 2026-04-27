@@ -97,13 +97,12 @@ const Template = () => html`
 
 export default {
   title: "Blocks/Details",
-  parameters: {
-    tags: ["!autodocs"],
-    layout: "padded"
+  tags: ["!autodocs"],
+  parameters: { layout: "padded"
   }
 };
 
 export const SessionDetail = {
   render: Template.bind({}),
-  name: "SessionDetail"
+  name: "Session detail"
 };

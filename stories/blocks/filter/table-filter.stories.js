@@ -101,9 +101,8 @@ const Template = () => html`
 
 export default {
   title: "Blocks/Filter",
-  parameters: {
-    tags: ["!autodocs"],
-    layout: "padded"
+  tags: ["!autodocs"],
+  parameters: { layout: "padded"
   }
 };
 

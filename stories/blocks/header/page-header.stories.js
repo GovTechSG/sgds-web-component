@@ -28,9 +28,8 @@ const Template = () => html`
 
 export default {
   title: "Blocks/Header",
-  parameters: {
-    tags: ["!autodocs"],
-    layout: "padded"
+  tags: ["!autodocs"],
+  parameters: { layout: "padded"
   }
 };
 

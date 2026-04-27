@@ -1,28 +1,23 @@
-<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
-<script type="module" src="../../src/index.ts"></script>
-<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
-<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+import { html } from "lit";
 
-<style>
-  @keyframes sgds-marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .sgds-about-logo-track {
-    animation: sgds-marquee 30s linear infinite;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .sgds-about-logo-track { animation: none; }
-  }
-</style>
+const Template = () => html`
+  <style>
+    @keyframes sgds-marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .sgds-about-logo-track {
+      animation: sgds-marquee 30s linear infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sgds-about-logo-track { animation: none; }
+    }
+  </style>
 
-<body>
   <sgds-masthead></sgds-masthead>
 
   <sgds-mainnav>
-    <strong slot="brand">Logo placeholder</strong>
+    <strong slot="brand">My Organisation</strong>
   </sgds-mainnav>
 
   <div class="sgds:bg-surface-default sgds:min-h-screen">
@@ -73,7 +68,7 @@
           <!-- Secondary image -->
           <img
             src="https://images.pexels.com/photos/4078342/pexels-photo-4078342.jpeg"
-            alt="Office environment"  
+            alt="Office environment"
             class="sgds:w-full sgds:object-cover sgds:rounded-lg"
           />
         </div>
@@ -155,4 +150,17 @@
   </div>
 
   <sgds-footer></sgds-footer>
-</body>
+`;
+
+export default {
+  title: "Templates/About Us",
+  tags: ["!autodocs"],
+  parameters: {
+    layout: "fullscreen"
+  }
+};
+
+export const Default = {
+  render: Template.bind({}),
+  name: "Default"
+};

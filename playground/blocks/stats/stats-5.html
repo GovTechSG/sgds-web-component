@@ -1,10 +1,16 @@
-<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
-<script type="module" src="../../src/index.ts"></script>
-<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
-<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+<link href="../../css/fonts.css" rel="stylesheet" type="text/css" />
+<script type="module" src="../../../src/index.ts"></script>
+<link href="../../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../../css/utility.css" rel="stylesheet" type="text/css" />
 
+<style>
+  @media (width >= 1024px) {
+    .stats-row { flex-wrap: nowrap !important; }
+    .stats-row > * { width: auto; flex: 1; }
+  }
+</style>
 
 <body>
   <!-- Stats Block — section header + 5 stats
@@ -29,9 +35,9 @@
         </div>
 
         <!-- 5 stats -->
-        <div class="sgds:flex sgds:flex-wrap md:sgds:flex-nowrap sgds:gap-layout-md sgds:w-full">
+        <div class="stats-row sgds:flex sgds:flex-wrap sgds:gap-layout-md">
 
-          <div class="sgds:flex sgds:flex-col sgds:items-start" class="md:sgds:pr-layout-xs">
+          <div class="sgds:flex sgds:flex-col sgds:items-start sgds:w-full sgds:pr-layout-xs">
             <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
               2.4M
             </div>
@@ -43,7 +49,7 @@
             </p>
           </div>
 
-          <div class="sgds:flex sgds:flex-col sgds:items-start" class="md:sgds:pr-layout-xs">
+          <div class="sgds:flex sgds:flex-col sgds:items-start sgds:w-full sgds:pr-layout-xs">
             <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
               400+
             </div>
@@ -55,7 +61,7 @@
             </p>
           </div>
 
-          <div class="sgds:flex sgds:flex-col sgds:items-start" class="md:sgds:pr-layout-xs">
+          <div class="sgds:flex sgds:flex-col sgds:items-start sgds:w-full sgds:pr-layout-xs">
             <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
               99.9%
             </div>
@@ -67,7 +73,7 @@
             </p>
           </div>
 
-          <div class="sgds:flex sgds:flex-col sgds:items-start" class="md:sgds:pr-layout-xs">
+          <div class="sgds:flex sgds:flex-col sgds:items-start sgds:w-full sgds:pr-layout-xs">
             <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
               16
             </div>
@@ -79,7 +85,7 @@
             </p>
           </div>
 
-          <div class="sgds:flex sgds:flex-col sgds:items-start" class="md:sgds:pr-layout-xs">
+          <div class="sgds:flex sgds:flex-col sgds:items-start sgds:w-full sgds:pr-layout-xs">
             <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
               4.8
             </div>

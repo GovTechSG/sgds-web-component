@@ -1,31 +1,26 @@
-<html style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
-<script type="module" src="../../src/index.ts"></script>
-<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
-<link href="../css/utility.css" rel="stylesheet" type="text/css" />
-<style>
-  .hero-row { display: flex; flex-direction: column; gap: var(--sgds-gap-layout-md); }
-  .hero-row > * { width: 100%; }
-  @media (width >= 768px) {
-    .hero-row { flex-direction: row; align-items: center; }
-    .hero-row > :first-child { width: 50%; padding-top: var(--sgds-spacing-layout-xs); padding-right: var(--sgds-spacing-layout-md); }
-    .hero-row > :last-child { width: 50%; }
-  }
+import { html } from "lit";
 
-  .stats-row { display: flex; flex-wrap: wrap; gap: var(--sgds-gap-layout-md); }
-  .stats-row > * { width: 100%; }
-  @media (width >= 1024px) {
-    .stats-row { flex-wrap: nowrap; }
-    .stats-row > * { flex: 1; width: auto; }
-  }
-</style>
+const Template = () => html`
+  <style>
+    .hero-row { display: flex; flex-direction: column; gap: var(--sgds-gap-layout-md); }
+    .hero-row > * { width: 100%; }
+    @media (width >= 768px) {
+      .hero-row { flex-direction: row; align-items: center; }
+      .hero-row > :first-child { width: 50%; padding-top: var(--sgds-spacing-layout-xs); padding-right: var(--sgds-spacing-layout-md); }
+      .hero-row > :last-child { width: 50%; }
+    }
 
-<body>
+    .stats-row { display: flex; flex-wrap: wrap; gap: var(--sgds-gap-layout-md); }
+    .stats-row > * { width: 100%; }
+    @media (width >= 1024px) {
+      .stats-row { flex-wrap: nowrap; }
+      .stats-row > * { flex: 1; width: auto; }
+    }
+  </style>
+
   <sgds-masthead></sgds-masthead>
   <sgds-mainnav>
-    <strong slot="brand">Logo placeholder</strong>
+    <strong slot="brand">LifeSG</strong>
   </sgds-mainnav>
 
   <!--   HERO - display-lg + overline + h4 light                           -->
@@ -54,7 +49,7 @@
 
         <div>
           <img
-            src="../blocks/placeholder-sgds.png"
+            src="https://placehold.co/512x512/e8f0fe/1f69ff?text=Government+Services"
             alt="Government digital services"
             style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; border-radius: var(--sgds-border-radius-xl);"
           />
@@ -248,4 +243,17 @@
   </section>
 
   <sgds-footer></sgds-footer>
-</body>
+`;
+
+export default {
+  title: "Templates/Landing Page",
+  tags: ["!autodocs"],
+  parameters: {
+    layout: "fullscreen"
+  }
+};
+
+export const Default = {
+  render: Template.bind({}),
+  name: "Default"
+};

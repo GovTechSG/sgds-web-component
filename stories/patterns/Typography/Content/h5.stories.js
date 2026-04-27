@@ -13,9 +13,8 @@ const H5Template = () => html`
 
 export default {
   title: "Patterns/Typography/Content",
-  parameters: {
-    tags: ["!autodocs"],
-    layout: "padded"
+  tags: ["!autodocs"],
+  parameters: { layout: "padded"
   }
 };
 

@@ -26,9 +26,8 @@ const OLBodyMdTemplate = () => html`
 
 export default {
   title: "Patterns/Typography/List",
-  parameters: {
-    tags: ["!autodocs"],
-    layout: "padded"
+  tags: ["!autodocs"],
+  parameters: { layout: "padded"
   }
 };
 

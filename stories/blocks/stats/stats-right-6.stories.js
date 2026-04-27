@@ -1,6 +1,13 @@
 import { html } from "lit";
 
 const Template = () => html`
+  <style>
+    .stats-inner { display: flex; flex-direction: column; gap: var(--sgds-gap-layout-md); }
+    @media (width >= 1024px) {
+      .stats-heading { padding-right: var(--sgds-spacing-layout-md); }
+    }
+  </style>
+
   <!-- Stats Block — heading left 6 cols + 4 stats right 6 cols (2×2 grid)
        Background : bg-surface-default
        Spacing    : py-layout-md
@@ -28,11 +35,8 @@ const Template = () => html`
 
         <!-- 4 stats — right 6 cols in 2×2 grid -->
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6">
-          <div
-            class="sgds:grid sgds-grid"
-            style="grid-template-columns: repeat(2, 1fr); gap: var(--sgds-gap-layout-md);"
-          >
-            <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+          <div class="stats-inner sgds:grid sgds-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="sgds:flex sgds:flex-col sgds:items-start md:sgds:pr-layout-xs">
               <div
                 class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default"
               >
@@ -50,7 +54,7 @@ const Template = () => html`
               </p>
             </div>
 
-            <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+            <div class="sgds:flex sgds:flex-col sgds:items-start md:sgds:pr-layout-xs">
               <div
                 class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default"
               >
@@ -68,7 +72,7 @@ const Template = () => html`
               </p>
             </div>
 
-            <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+            <div class="sgds:flex sgds:flex-col sgds:items-start md:sgds:pr-layout-xs">
               <div
                 class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default"
               >
@@ -86,7 +90,7 @@ const Template = () => html`
               </p>
             </div>
 
-            <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+            <div class="sgds:flex sgds:flex-col sgds:items-start md:sgds:pr-layout-xs">
               <div
                 class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default"
               >
@@ -112,13 +116,12 @@ const Template = () => html`
 
 export default {
   title: "Blocks/Stats",
-  parameters: {
-    tags: ["!autodocs"],
-    layout: "padded"
+  tags: ["!autodocs"],
+  parameters: { layout: "padded"
   }
 };
 
 export const StatsRight6 = {
   render: Template.bind({}),
-  name: "StatsRight6"
+  name: "Statistic right 6 column"
 };

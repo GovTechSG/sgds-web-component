@@ -79,13 +79,12 @@ const Template = () => html`
 
 export default {
   title: "Blocks/Details",
-  parameters: {
-    tags: ["!autodocs"],
-    layout: "padded"
+  tags: ["!autodocs"],
+  parameters: { layout: "padded"
   }
 };
 
 export const ApplicationDetails = {
   render: Template.bind({}),
-  name: "ApplicationDetails"
+  name: "Application details"
 };

@@ -1,21 +1,13 @@
-<html style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
-<script type="module" src="../../src/index.ts"></script>
-<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
-<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+import { html } from "lit";
 
-<style>
-  #view-success { display: none; }
+const Template = () => html`
+  <style>
+    #view-success { display: none; }
+  </style>
 
-
-</style>
-
-<body>
   <sgds-masthead></sgds-masthead>
   <sgds-mainnav>
-    strong slot="brand">Logo placeholder</strong>
+    <strong slot="brand">My Organisation</strong>
   </sgds-mainnav>
 
   <section class="sgds:bg-default sgds:py-layout-lg">
@@ -145,92 +137,111 @@
   </section>
 
   <sgds-footer></sgds-footer>
+`;
 
-  <script type="module">
-    const form         = document.getElementById('report-issue-form');
-    const submitBtn    = document.getElementById('submit-btn');
-    const newReportBtn = document.getElementById('new-report-btn');
-    const viewForm     = document.getElementById('view-form');
-    const viewSuccess  = document.getElementById('view-success');
-    const photoUpload  = document.getElementById('photo-upload');
+function generateRef() {
+  const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const rand = String(Math.floor(1000 + Math.random() * 9000));
+  return 'RPT-' + date + '-' + rand;
+}
+
+function formatDate(date) {
+  return date.toLocaleDateString('en-SG', {
+    day: 'numeric', month: 'long', year: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+}
+
+export default {
+  title: "Templates/Report Issue",
+  tags: ["!autodocs"],
+  parameters: {
+    layout: "fullscreen"
+  }
+};
+
+export const Default = {
+  render: Template.bind({}),
+  name: "Default",
+  play: async ({ canvasElement }) => {
+    const form = canvasElement.querySelector('#report-issue-form');
+    const submitBtn = canvasElement.querySelector('#submit-btn');
+    const newReportBtn = canvasElement.querySelector('#new-report-btn');
+    const viewForm = canvasElement.querySelector('#view-form');
+    const viewSuccess = canvasElement.querySelector('#view-success');
+    const photoUpload = canvasElement.querySelector('#photo-upload');
 
     let selectedFiles = [];
-    photoUpload.addEventListener('sgds-files-selected', (e) => {
-      selectedFiles = Array.from(e.detail);
-    });
 
-    function generateRef() {
-      const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
-      const rand = String(Math.floor(1000 + Math.random() * 9000));
-      return 'RPT-' + date + '-' + rand;
-    }
-
-    function formatDate(date) {
-      return date.toLocaleDateString('en-SG', {
-        day: 'numeric', month: 'long', year: 'numeric',
-        hour: '2-digit', minute: '2-digit'
+    if (photoUpload) {
+      photoUpload.addEventListener('sgds-files-selected', (e) => {
+        selectedFiles = Array.from(e.detail);
       });
     }
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-      const locationEl    = form.querySelector('[name="location"]');
-      const descriptionEl = form.querySelector('[name="description"]');
-      let valid = true;
+        const locationEl = form.querySelector('[name="location"]');
+        const descriptionEl = form.querySelector('[name="description"]');
+        let valid = true;
 
-      if (!locationEl.value.trim()) {
-        locationEl.setAttribute('invalid', '');
-        valid = false;
-      } else {
-        locationEl.removeAttribute('invalid');
-      }
+        if (!locationEl.value.trim()) {
+          locationEl.setAttribute('invalid', '');
+          valid = false;
+        } else {
+          locationEl.removeAttribute('invalid');
+        }
 
-      if (!descriptionEl.value.trim() || descriptionEl.value.trim().length < 20) {
-        descriptionEl.setAttribute('invalid', '');
-        valid = false;
-      } else {
-        descriptionEl.removeAttribute('invalid');
-      }
+        if (!descriptionEl.value.trim() || descriptionEl.value.trim().length < 20) {
+          descriptionEl.setAttribute('invalid', '');
+          valid = false;
+        } else {
+          descriptionEl.removeAttribute('invalid');
+        }
 
-      if (!valid) return;
+        if (!valid) return;
 
-      // Capture values before reset
-      const locationVal    = locationEl.value.trim();
-      const descriptionVal = descriptionEl.value.trim();
-      const photoCount     = selectedFiles.length;
+        // Capture values before reset
+        const locationVal = locationEl.value.trim();
+        const descriptionVal = descriptionEl.value.trim();
+        const photoCount = selectedFiles.length;
 
-      // Loading state
-      submitBtn.setAttribute('loading', '');
-      submitBtn.setAttribute('disabled', '');
+        // Loading state
+        submitBtn.setAttribute('loading', '');
+        submitBtn.setAttribute('disabled', '');
 
-      // Simulate API call (1.5s)
-      setTimeout(() => {
-        submitBtn.removeAttribute('loading');
-        submitBtn.removeAttribute('disabled');
+        // Simulate API call (1.5s)
+        setTimeout(() => {
+          submitBtn.removeAttribute('loading');
+          submitBtn.removeAttribute('disabled');
 
-        // Populate success view
-        document.getElementById('ref-number').textContent        = generateRef();
-        document.getElementById('summary-location').textContent  = locationVal;
-        document.getElementById('summary-description').textContent =
-          descriptionVal.length > 120 ? descriptionVal.slice(0, 120) + '...' : descriptionVal;
-        document.getElementById('summary-photos').textContent    =
-          photoCount > 0 ? photoCount + ' photo' + (photoCount > 1 ? 's' : '') + ' attached' : 'None';
-        document.getElementById('summary-date').textContent      = formatDate(new Date());
+          // Populate success view
+          canvasElement.querySelector('#ref-number').textContent = generateRef();
+          canvasElement.querySelector('#summary-location').textContent = locationVal;
+          canvasElement.querySelector('#summary-description').textContent =
+            descriptionVal.length > 120 ? descriptionVal.slice(0, 120) + '...' : descriptionVal;
+          canvasElement.querySelector('#summary-photos').textContent =
+            photoCount > 0 ? photoCount + ' photo' + (photoCount > 1 ? 's' : '') + ' attached' : 'None';
+          canvasElement.querySelector('#summary-date').textContent = formatDate(new Date());
 
-        // Switch views
-        viewForm.style.display    = 'none';
-        viewSuccess.style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 1500);
-    });
+          // Switch views
+          viewForm.style.display = 'none';
+          viewSuccess.style.display = 'block';
+          canvasElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 1500);
+      });
+    }
 
-    newReportBtn.addEventListener('click', () => {
-      form.reset();
-      selectedFiles = [];
-      viewSuccess.style.display = 'none';
-      viewForm.style.display    = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  </script>
-</body>
+    if (newReportBtn) {
+      newReportBtn.addEventListener('click', () => {
+        form.reset();
+        selectedFiles = [];
+        viewSuccess.style.display = 'none';
+        viewForm.style.display = 'block';
+        canvasElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
+};

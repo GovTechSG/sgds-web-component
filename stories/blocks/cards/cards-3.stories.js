@@ -151,13 +151,12 @@ const Template = () => html`
 
 export default {
   title: "Blocks/Cards",
-  parameters: {
-    tags: ["!autodocs"],
-    layout: "padded"
+  tags: ["!autodocs"],
+  parameters: { layout: "padded"
   }
 };
 
 export const Cards3 = {
   render: Template.bind({}),
-  name: "Cards3"
+  name: "3 per column"
 };
