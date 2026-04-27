@@ -10,8 +10,13 @@ const Template = () => html`
   <!-- Page header -->
   <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
-      <div class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left" style="max-width: var(--sgds-text-max-width);">
-        <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+      <div
+        class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left"
+        style="max-width: var(--sgds-text-max-width);"
+      >
+        <div
+          class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
+        >
           Profile Settings
         </div>
         <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
@@ -31,7 +36,11 @@ const Template = () => html`
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Personal information</h3>
+              <h3
+                class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default"
+              >
+                Personal information
+              </h3>
               <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
                 Your name and contact details. Only your agency administrator can see this information.
               </p>
@@ -77,7 +86,11 @@ const Template = () => html`
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Role &amp; access</h3>
+              <h3
+                class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default"
+              >
+                Role &amp; access
+              </h3>
               <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
                 Your position and assigned permissions within the system.
               </p>
@@ -103,7 +116,11 @@ const Template = () => html`
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Notes</h3>
+              <h3
+                class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default"
+              >
+                Notes
+              </h3>
               <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
                 Optional additional context visible to your team.
               </p>
@@ -123,7 +140,9 @@ const Template = () => html`
         </div>
 
         <!-- Form footer -->
-        <div class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-end sgds:gap-component-sm sgds:mb-layout-lg ">
+        <div
+          class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-end sgds:gap-component-sm sgds:mb-layout-lg "
+        >
           <sgds-button variant="outline" type="button">Cancel</sgds-button>
           <sgds-button variant="primary" type="submit">Save changes</sgds-button>
         </div>

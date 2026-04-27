@@ -353,7 +353,7 @@ const Template = () => html`
 `;
 
 export default {
-  title: "Templates/Catalog/Search & Filter",
+  title: "Templates/Catalogue/Search & Filter",
   tags: ["!autodocs"],
   parameters: {
     layout: "fullscreen"

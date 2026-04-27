@@ -58,7 +58,10 @@ const Template = () => html`
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4 sgds:flex sgds:flex-col sgds:gap-layout-md">
           <!-- Breakout card -->
           <sgds-thumbnail-card class="sgds:flex-1">
-            <div slot="thumbnail" class="sgds:w-32 sgds:h-32 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:rounded-lg">
+            <div
+              slot="thumbnail"
+              class="sgds:w-32 sgds:h-32 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:rounded-lg"
+            >
               Logo
             </div>
             <span slot="description">
@@ -82,7 +85,9 @@ const Template = () => html`
       <!-- ③ Logo strip -->
       <div class="sgds:mb-layout-lg sgds:overflow-hidden">
         <div class="sgds:text-center sgds:mb-layout-sm">
-          <p class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-body-subtle">
+          <p
+            class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-body-subtle"
+          >
             Trusted by agencies
           </p>
         </div>
@@ -95,19 +100,59 @@ const Template = () => html`
           <div class="sgds-about-logo-track sgds:flex sgds:gap-layout-xl sgds:w-max">
             <!-- Duplicate the logo set for seamless loop -->
             <div class="sgds:flex sgds:gap-layout-xl sgds:items-center sgds:shrink-0">
-              <div class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60">Agency A</div>
-              <div class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60">Agency B</div>
-              <div class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60">Agency C</div>
-              <div class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60">Agency D</div>
-              <div class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60">Agency E</div>
+              <div
+                class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60"
+              >
+                Agency A
+              </div>
+              <div
+                class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60"
+              >
+                Agency B
+              </div>
+              <div
+                class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60"
+              >
+                Agency C
+              </div>
+              <div
+                class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60"
+              >
+                Agency D
+              </div>
+              <div
+                class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60"
+              >
+                Agency E
+              </div>
             </div>
             <!-- Duplicate for seamless loop -->
             <div class="sgds:flex sgds:gap-layout-xl sgds:items-center sgds:shrink-0" aria-hidden="true">
-              <div class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60">Agency A</div>
-              <div class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60">Agency B</div>
-              <div class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60">Agency C</div>
-              <div class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60">Agency D</div>
-              <div class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60">Agency E</div>
+              <div
+                class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60"
+              >
+                Agency A
+              </div>
+              <div
+                class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60"
+              >
+                Agency B
+              </div>
+              <div
+                class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60"
+              >
+                Agency C
+              </div>
+              <div
+                class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60"
+              >
+                Agency D
+              </div>
+              <div
+                class="sgds:w-30 sgds:h-10 sgds:bg-surface-raised sgds:text-default sgds:flex sgds:items-center sgds:justify-center sgds:opacity-60"
+              >
+                Agency E
+              </div>
             </div>
           </div>
         </div>
@@ -136,7 +181,9 @@ const Template = () => html`
             <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">
               12,000+
             </p>
-            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-body-subtle sgds:mt-1">Active users</p>
+            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-body-subtle sgds:mt-1">
+              Active users
+            </p>
           </div>
           <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3">
             <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">
@@ -158,7 +205,9 @@ const Template = () => html`
             <p class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-default">
               5 years
             </p>
-            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-body-subtle sgds:mt-1">In production</p>
+            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:text-body-subtle sgds:mt-1">
+              In production
+            </p>
           </div>
         </div>
       </div>
