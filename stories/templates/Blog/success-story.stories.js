@@ -23,7 +23,7 @@ const Template = () => html`
 
   <sgds-masthead></sgds-masthead>
   <sgds-mainnav>
-    <strong slot="brand">Logo placeholder</strong>
+    <strong slot="brand">Logo</strong>
   </sgds-mainnav>
 
   <!--   PAGE HEADER - breadcrumb + overline + h1 + body-lg               -->
@@ -261,14 +261,14 @@ const Template = () => html`
 `;
 
 export default {
-  title: "Templates/Success Story",
+  title: "Templates/Blog/Success Story",
   tags: ["!autodocs"],
   parameters: {
     layout: "fullscreen"
   }
 };
 
-export const Default = {
+export const SuccessStory = {
   render: Template.bind({}),
-  name: "Default"
+  name: "Success Story"
 };

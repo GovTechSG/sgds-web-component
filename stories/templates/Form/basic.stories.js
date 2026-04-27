@@ -1,17 +1,11 @@
-<script type="module" src="../../src/index.ts"></script>
-<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
-<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+import { html } from "lit";
 
-<body>
-    <sgds-masthead></sgds-masthead>
+const Template = () => html`
+  <sgds-masthead></sgds-masthead>
 
-    <sgds-mainnav>
-      <sgds-mainnav-item slot="start">
-        <a href="/">My Application</a>
-      </sgds-mainnav-item>
-    </sgds-mainnav>
+  <sgds-mainnav>
+    <strong slot="brand">Logo</strong>
+  </sgds-mainnav>
 
   <!-- Page header -->
   <section class="sgds:bg-default sgds:py-layout-lg">
@@ -32,9 +26,7 @@
 
   <section class="sgds:bg-surface-default sgds:min-h-screen">
     <div class="sgds-container">
-
-
-        <form id="profile-form" method="post" novalidate>
+      <form id="profile-form" method="post" novalidate>
         <!-- Section 1: Personal information -->
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
@@ -93,8 +85,7 @@
 
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-component-sm">
               <sgds-input label="Job title" name="jobTitle" hasFeedback></sgds-input>
-              <sgds-select label="Department" name="department" hasFeedback>
-                <sgds-select-option value="">Select department</sgds-select-option>
+              <sgds-select label="Department" name="department" placeholder="Select department" hasFeedback>
                 <sgds-select-option value="policy">Policy</sgds-select-option>
                 <sgds-select-option value="operations">Operations</sgds-select-option>
                 <sgds-select-option value="ict">ICT</sgds-select-option>
@@ -140,10 +131,18 @@
     </div>
   </section>
 
-        </form>
+  <sgds-footer></sgds-footer>
+`;
 
-      </div>
-    </div>
+export default {
+  title: "Templates/Form/Basic",
+  tags: ["!autodocs"],
+  parameters: {
+    layout: "fullscreen"
+  }
+};
 
-    <sgds-footer></sgds-footer>
-</body>
+export const Basic = {
+  render: Template.bind({}),
+  name: "Basic"
+};

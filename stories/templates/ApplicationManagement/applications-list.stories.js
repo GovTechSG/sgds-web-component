@@ -6,7 +6,7 @@ const Template = () => html`
     <div>
       <sgds-masthead fluid></sgds-masthead>
       <sgds-mainnav fluid>
-        <strong slot="brand">Logo placeholder</strong>
+        <strong slot="brand">Logo</strong>
         <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
         <sgds-mainnav-item href="#" active>Applications</sgds-mainnav-item>
         <sgds-mainnav-item href="#">Reports</sgds-mainnav-item>
@@ -220,14 +220,14 @@ const Template = () => html`
 `;
 
 export default {
-  title: "Templates/Applications List",
+  title: "Templates/Application Management/Application list",
   tags: ["!autodocs"],
   parameters: {
     layout: "fullscreen"
   }
 };
 
-export const Default = {
+export const ApplicationList = {
   render: Template.bind({}),
-  name: "Default"
+  name: "Application list"
 };
