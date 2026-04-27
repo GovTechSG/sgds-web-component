@@ -1,0 +1,177 @@
+## Drag and Drop Variant
+
+Basic drag and drop file upload interface.
+
+<Canvas of={FileUploadStories.DragAndDrop} />
+
+## File States
+
+Control the upload state of individual files programmatically.
+
+```typescript
+public setFileUploadState(
+  index: number,
+  state: 'loading' | 'success' | 'error',
+  error?: string
+): void
+```
+
+### Parameters
+
+- **index** - The file index in the list (0-based)
+- **state** - The upload state: `'loading'`, `'success'`, or `'error'`
+- **error** - Error message to display (only used with `'error'` state)
+
+### Loading State
+
+Show loading spinners while files are being uploaded to the server.
+
+#### Default Variant
+<Canvas of={FileUploadStories.UploadingStateDefault} />
+
+#### Drag and Drop Variant
+<Canvas of={FileUploadStories.UploadingStateDragDrop} />
+
+### Error State
+
+Display error messages for individual files when upload fails.
+
+#### Default Variant
+<Canvas of={FileUploadStories.ErrorStateDefault} />
+
+#### Drag and Drop Variant
+<Canvas of={FileUploadStories.ErrorStateDragDrop} />
+
+### Success State
+
+Display all files with successful upload status.
+
+#### Default Variant
+<Canvas of={FileUploadStories.SuccessStateDefault} />
+
+#### Drag and Drop Variant
+<Canvas of={FileUploadStories.SuccessStateDragDrop} />
+
+## Events
+
+### sgds-add-files
+
+Fires when files are added to the upload. Use this to initiate uploads.
+
+<Canvas of={FileUploadStories.SgdsAddFiles} />
+
+### sgds-remove-file
+
+Fires when a file is deleted. Includes the deleted file and remaining files.
+
+<Canvas of={FileUploadStories.SgdsRemoveFile} />
+
+### sgds-change
+
+Fires on any file set change (add or remove). Useful for tracking current state.
+
+> **Note:** Use `sgds-change` instead of the deprecated `sgds-files-selected` event for tracking all file set changes.
+
+<Canvas of={FileUploadStories.SgdsChange} />
+
+## Upload to Server
+
+Demonstrates the complete workflow for uploading files to a server. Select files to see them transition through uploading, success, and error states.
+
+<Canvas of={FileUploadStories.UploadToServer} />
+
+## Validation States
+
+### Default Variant - Invalid
+
+Shows the default variant in an invalid state with feedback message.
+
+<Canvas of={FileUploadStories.ValidationDefaultInvalid} />
+
+### Drag and Drop Variant - Invalid
+
+Shows the drag and drop variant in an invalid state with feedback message.
+
+<Canvas of={FileUploadStories.ValidationDragDropInvalid} />
+
+## Custom Validation with noValidate
+
+Disable SGDS's built-in validation to implement custom validation logic using your own validation library (Zod, Yup, VeeValidate, etc).
+
+<Canvas of={FileUploadStories.CustomValidation} />
+
+Set the `noValidate` prop to opt out of native HTML5 and SGDS validation:
+
+```html
+<sgds-file-upload
+  noValidate
+  required
+  hasFeedback
+  multiple
+  accept=".pdf"
+  label="Upload Documents"
+  name="documents"
+  hintText="Max 2 PDF files. SGDS validation is disabled, using custom validation instead"
+>
+  Choose files
+</sgds-file-upload>
+```
+
+Then handle validation manually via events:
+
+```js
+const fileUpload = document.querySelector('sgds-file-upload');
+
+fileUpload.addEventListener('sgds-add-files', (e) => {
+  const files = e.detail;
+
+  // Custom validation rules:
+  // 1. Max 2 files total
+  // 2. PDF only
+
+  const allFiles = fileUpload.files;
+  let isValid = true;
+  let errorMsg = "";
+
+  if (allFiles.length > 2) {
+    isValid = false;
+    errorMsg = "Maximum 2 files allowed";
+  }
+
+  for (const file of files) {
+    if (!file.name.toLowerCase().endsWith(".pdf")) {
+      isValid = false;
+      errorMsg = "Only PDF files are allowed";
+      break;
+    }
+  }
+
+  fileUpload.invalidFeedback = errorMsg;
+  fileUpload.setInvalid(!isValid);
+});
+
+fileUpload.addEventListener('sgds-remove-file', (e) => {
+  // Re-validate remaining files
+  const remaining = e.detail.files;
+  if (remaining.length === 0) {
+    fileUpload.invalidFeedback = "At least one file is required";
+    fileUpload.setInvalid(true);
+  } else {
+    fileUpload.setInvalid(false);
+  }
+});
+```
+
+### Alternative: Form-level novalidate
+
+Disable validation for all form components at once:
+
+```html
+<form novalidate>
+  <sgds-file-upload required name="doc"></sgds-file-upload>
+  <sgds-input required name="name"></sgds-input>
+  <!-- All SGDS components auto-detect form novalidate -->
+</form>
+```
+
+> **Note:** When `noValidate` is true, native HTML5 validation is disabled. Only your custom validation runs. Use the `sgds-add-files` and `sgds-remove-file` events to implement your validation rules.

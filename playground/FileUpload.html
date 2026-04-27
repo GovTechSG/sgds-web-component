@@ -55,6 +55,278 @@
         <h2>Disabled</h2>
         <sgds-file-upload label="Disabled Upload" name="disabled" disabled> Choose File </sgds-file-upload>
       </div>
+
+      <div>
+        <h2>Drag and Drop Variant</h2>
+        <sgds-file-upload label="Drop Files Here" variant="drag-and-drop" name="dragdrop" multiple>Choose Files</sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>Drag and Drop with Validation</h2>
+        <sgds-file-upload
+          label="Upload Documents"
+          variant="drag-and-drop"
+          name="dragdrop-required"
+          accept=".pdf,.doc,.docx"
+          required
+          hasFeedback
+          invalidFeedback="Please upload at least one document"
+        >Choose Files</sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>Drag and Drop Disabled</h2>
+        <sgds-file-upload label="Disabled Drag Zone" variant="drag-and-drop" name="dragdrop-disabled" disabled multiple>Choose Files</sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>With Upload State (Simulate Server Upload)</h2>
+        <sgds-file-upload
+          id="uploadStateDemo"
+          label="Upload to Server"
+          name="upload-demo"
+          multiple
+          hintText="Select files to automatically simulate upload to server"
+        >
+          Choose Files
+        </sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>Drag and Drop with Upload State (Simulate Server Upload)</h2>
+        <sgds-file-upload
+          id="uploadStateDragDropDemo"
+          label="Upload to Server"
+          variant="drag-and-drop"
+          name="upload-demo-drag"
+          multiple
+        >
+          Choose Files
+        </sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>With Error State (Simulate Upload Failure)</h2>
+        <sgds-file-upload
+          id="uploadStateErrorDemo"
+          label="Upload to Server"
+          name="upload-demo-error"
+          multiple
+          hintText="Select files to simulate upload with errors on even-indexed files"
+        >
+          Choose Files
+        </sgds-file-upload>
+      </div>
+
+      <div>
+        <h2>Custom Validation with noValidate (Max 2 files, PDF only)</h2>
+        <sgds-file-upload
+          id="customValidationDemo"
+          label="Upload Documents"
+          name="documents"
+          required
+          hasFeedback
+          noValidate
+          multiple
+          accept=".pdf"
+          hintText="Max 2 PDF files. SGDS validation is disabled, using custom validation instead"
+        >
+          Choose Files
+        </sgds-file-upload>
+      </div>
     </div>
+
+    <script>
+      const fileUpload = document.getElementById('uploadStateDemo');
+      const fileUploadDragDrop = document.getElementById('uploadStateDragDropDemo');
+      const fileUploadError = document.getElementById('uploadStateErrorDemo');
+
+      async function handleFileUpload(fileUploadEl, newFiles) {
+        // Wait for component to update and reflect new files
+        await fileUploadEl.updateComplete;
+
+        // newFiles now contains ONLY the newly-added files from sgds-add-files event
+        const allFiles = fileUploadEl.files;
+        const startIndex = allFiles.length - newFiles.length;
+
+        // Show spinner while loading for NEW files only
+        for (let i = 0; i < newFiles.length; i++) {
+          fileUploadEl.setFileUploadState(startIndex + i, 'loading');
+        }
+
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Mark all new files as success
+        for (let i = 0; i < newFiles.length; i++) {
+          fileUploadEl.setFileUploadState(startIndex + i, 'success');
+        }
+      }
+
+      async function handleFileUploadWithErrors(fileUploadEl, newFiles) {
+        // Wait for component to update and reflect new files
+        await fileUploadEl.updateComplete;
+
+        // newFiles now contains ONLY the newly-added files from sgds-add-files event
+        const allFiles = fileUploadEl.files;
+        const startIndex = allFiles.length - newFiles.length;
+
+        // Show spinner while loading for NEW files only
+        for (let i = 0; i < newFiles.length; i++) {
+          fileUploadEl.setFileUploadState(startIndex + i, 'loading');
+        }
+
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Mark even-indexed files as error, odd-indexed as success
+        for (let i = 0; i < newFiles.length; i++) {
+          const fileIndex = startIndex + i;
+          if (fileIndex % 2 === 0) {
+            fileUploadEl.setFileUploadState(fileIndex, 'error', 'File size exceeds maximum limit of 10MB');
+          } else {
+            fileUploadEl.setFileUploadState(fileIndex, 'success');
+          }
+        }
+      }
+
+      fileUpload.addEventListener('sgds-files-selected', async (e) => {
+        console.log('📤 sgds-files-selected (Upload State Demo) - Any file change:', e.detail);
+        console.log('File count:', e.detail.length);
+        Array.from(e.detail).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
+      });
+
+      fileUpload.addEventListener('sgds-add-files', async (e) => {
+        console.log('✅ sgds-add-files (Upload State Demo) - NEW files added:', e.detail);
+        console.log('File count:', e.detail.length);
+        Array.from(e.detail).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
+        handleFileUpload(fileUpload, e.detail);
+      });
+
+      fileUpload.addEventListener('sgds-remove-file', async (e) => {
+        console.log('❌ sgds-remove-file (Upload State Demo) - File deleted:', e.detail.file.name);
+        console.log('Remaining files:', e.detail.files);
+        console.log('Remaining file count:', e.detail.files.length);
+        Array.from(e.detail.files).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
+      });
+
+      fileUpload.addEventListener('sgds-change', async (e) => {
+        console.log('🔄 sgds-change (Upload State Demo) - Current file set:', e.detail);
+        console.log('File count:', e.detail.length);
+      });
+
+      fileUploadDragDrop.addEventListener('sgds-files-selected', async (e) => {
+        console.log('📤 sgds-files-selected (Drag and Drop Upload State Demo) - Any file change:', e.detail);
+        console.log('File count:', e.detail.length);
+      });
+
+      fileUploadDragDrop.addEventListener('sgds-add-files', async (e) => {
+        console.log('✅ sgds-add-files (Drag and Drop Upload State Demo) - NEW files added:', e.detail);
+        console.log('File count:', e.detail.length);
+        Array.from(e.detail).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
+        handleFileUpload(fileUploadDragDrop, e.detail);
+      });
+
+      fileUploadDragDrop.addEventListener('sgds-remove-file', async (e) => {
+        console.log('❌ sgds-remove-file (Drag and Drop Upload State Demo) - File deleted:', e.detail.file.name);
+        console.log('Remaining files:', e.detail.files);
+        console.log('Remaining file count:', e.detail.files.length);
+        Array.from(e.detail.files).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
+      });
+
+      fileUploadDragDrop.addEventListener('sgds-change', async (e) => {
+        console.log('🔄 sgds-change (Drag and Drop Upload State Demo) - Current file set:', e.detail);
+        console.log('File count:', e.detail.length);
+      });
+
+      fileUploadError.addEventListener('sgds-files-selected', async (e) => {
+        console.log('📤 sgds-files-selected (Error State Demo) - Any file change:', e.detail);
+        console.log('File count:', e.detail.length);
+      });
+
+      fileUploadError.addEventListener('sgds-add-files', async (e) => {
+        console.log('✅ sgds-add-files (Error State Demo) - NEW files added:', e.detail);
+        console.log('File count:', e.detail.length);
+        Array.from(e.detail).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
+        handleFileUploadWithErrors(fileUploadError, e.detail);
+      });
+
+      fileUploadError.addEventListener('sgds-remove-file', async (e) => {
+        console.log('❌ sgds-remove-file (Error State Demo) - File deleted:', e.detail.file.name);
+        console.log('Remaining files:', e.detail.files);
+        console.log('Remaining file count:', e.detail.files.length);
+        Array.from(e.detail.files).forEach((file, index) => {
+          console.log(`  [${index}] ${file.name} (${file.size} bytes)`);
+        });
+      });
+
+      fileUploadError.addEventListener('sgds-change', async (e) => {
+        console.log('🔄 sgds-change (Error State Demo) - Current file set:', e.detail);
+        console.log('File count:', e.detail.length);
+      });
+
+      // Custom validation example with noValidate
+      const customValidationEl = document.getElementById('customValidationDemo');
+
+      customValidationEl.addEventListener('sgds-add-files', async (e) => {
+        console.log('📋 Custom validation triggered for new files:', e.detail);
+        const files = e.detail;
+
+        // Custom validation rules:
+        // 1. Max 2 files total
+        // 2. PDF only
+
+        const allFiles = customValidationEl.files;
+        let isValid = true;
+        let errorMsg = '';
+
+        if (allFiles.length > 2) {
+          isValid = false;
+          errorMsg = 'Maximum 2 files allowed';
+        }
+
+        for (const file of files) {
+          if (!file.name.toLowerCase().endsWith('.pdf')) {
+            isValid = false;
+            errorMsg = 'Only PDF files are allowed';
+            break;
+          }
+        }
+
+        // Set invalid state based on custom validation
+        customValidationEl.invalidFeedback = errorMsg;
+        customValidationEl.setInvalid(!isValid);
+
+        if (isValid) {
+          console.log('✅ Custom validation passed!');
+        } else {
+          console.log('❌ Custom validation failed:', errorMsg);
+        }
+      });
+
+      customValidationEl.addEventListener('sgds-remove-file', async (e) => {
+        console.log('🗑️ File removed:', e.detail.file.name);
+        // Re-validate remaining files
+        const remaining = e.detail.files;
+        if (remaining.length === 0) {
+          customValidationEl.invalidFeedback = 'At least one file is required';
+          customValidationEl.setInvalid(true);
+        } else {
+          customValidationEl.setInvalid(false);
+        }
+      });
+    </script>
   </body>
 </html>
