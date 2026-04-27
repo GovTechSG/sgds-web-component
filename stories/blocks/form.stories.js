@@ -15,21 +15,17 @@ const BasicLeftTemplate = () => html`
             >
               Contact Information
             </h5>
-            <div class="sgds-grid sgds:gap-layout-md">
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both"></sgds-input>
-              </div>
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both"></sgds-input>
-              </div>
+            <div>
+              <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both"></sgds-input>
             </div>
-            <div class="sgds-grid sgds:gap-layout-md">
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Email" name="email" type="email" required hasFeedback="both"></sgds-input>
-              </div>
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Phone" name="phone" type="tel" required hasFeedback="both"></sgds-input>
-              </div>
+            <div>
+              <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both"></sgds-input>
+            </div>
+            <div>
+              <sgds-input label="Email" name="email" type="email" required hasFeedback="both"></sgds-input>
+            </div>
+            <div>
+              <sgds-input label="Phone" name="phone" type="tel" required hasFeedback="both"></sgds-input>
             </div>
           </div>
           <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
@@ -55,21 +51,17 @@ const BasicCenterTemplate = () => html`
             >
               Personal Information
             </h5>
-            <div class="sgds-grid sgds:gap-layout-md">
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both"></sgds-input>
-              </div>
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both"></sgds-input>
-              </div>
+            <div>
+              <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both"></sgds-input>
             </div>
-            <div class="sgds-grid sgds:gap-layout-md">
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Email address" name="email" type="email" required hasFeedback="both"></sgds-input>
-              </div>
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Phone number" name="phone" type="tel" required hasFeedback="both"></sgds-input>
-              </div>
+            <div>
+              <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both"></sgds-input>
+            </div>
+            <div>
+              <sgds-input label="Email address" name="email" type="email" required hasFeedback="both"></sgds-input>
+            </div>
+            <div>
+              <sgds-input label="Phone number" name="phone" type="tel" required hasFeedback="both"></sgds-input>
             </div>
             <div>
               <sgds-textarea
@@ -135,21 +127,17 @@ const BasicRightTemplate = () => html`
             >
               Personal Information
             </h5>
-            <div class="sgds-grid sgds:gap-layout-md">
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both"></sgds-input>
-              </div>
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both"></sgds-input>
-              </div>
+            <div>
+              <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both"></sgds-input>
             </div>
-            <div class="sgds-grid sgds:gap-layout-md">
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Email address" name="email" type="email" required hasFeedback="both"></sgds-input>
-              </div>
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Phone number" name="phone" type="tel" required hasFeedback="both"></sgds-input>
-              </div>
+            <div>
+              <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both"></sgds-input>
+            </div>
+            <div>
+              <sgds-input label="Email address" name="email" type="email" required hasFeedback="both"></sgds-input>
+            </div>
+            <div>
+              <sgds-input label="Phone number" name="phone" type="tel" required hasFeedback="both"></sgds-input>
             </div>
             <div>
               <sgds-textarea
@@ -1020,133 +1008,6 @@ const FormFieldsFileUploadTemplate = () => html`
   </div>
 `;
 
-const FormWithSidebarTemplate = () => html`
-  <div class="sgds-container sgds:py-layout-md">
-    <div class="sgds-grid sgds:gap-layout-md">
-      <nav class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
-        <sgds-sidenav>
-          <sgds-sidenav-item active>
-            <span slot="title">Form Sections</span>
-            <sgds-sidenav-link active><a href="#personal">Personal Information</a></sgds-sidenav-link>
-            <sgds-sidenav-link><a href="#contact">Contact Details</a></sgds-sidenav-link>
-          </sgds-sidenav-item>
-          <sgds-sidenav-item>
-            <a href="#actions">Form Actions</a>
-          </sgds-sidenav-item>
-        </sgds-sidenav>
-      </nav>
-
-      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
-        <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
-          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5
-              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
-            >
-              Personal Information
-            </h5>
-            <div class="sgds-grid sgds:gap-layout-md">
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both"></sgds-input>
-              </div>
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both"></sgds-input>
-              </div>
-            </div>
-          </div>
-          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
-            <h5
-              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
-            >
-              Contact Details
-            </h5>
-            <div class="sgds-grid sgds:gap-layout-md">
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Email" name="email" type="email" required hasFeedback="both"></sgds-input>
-              </div>
-              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-                <sgds-input label="Phone" name="phone" type="tel" required hasFeedback="both"></sgds-input>
-              </div>
-            </div>
-          </div>
-          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
-            <sgds-button type="reset" variant="ghost">Cancel</sgds-button>
-            <sgds-button type="submit">Save</sgds-button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-`;
-
-const FormWithSidebarTocTemplate = () => html`
-  <div class="sgds-container sgds:py-layout-md">
-    <div class="sgds-grid sgds:gap-layout-md">
-      <nav class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
-        <sgds-sidenav>
-          <sgds-sidenav-item active>
-            <span slot="title">Form Sections</span>
-            <sgds-sidenav-link active><a href="#personal">Personal Information</a></sgds-sidenav-link>
-            <sgds-sidenav-link><a href="#contact">Contact Details</a></sgds-sidenav-link>
-          </sgds-sidenav-item>
-          <sgds-sidenav-item>
-            <a href="#actions">Form Actions</a>
-          </sgds-sidenav-item>
-        </sgds-sidenav>
-      </nav>
-
-      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
-        <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
-          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md" id="personal">
-            <h4
-              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
-            >
-              Personal Information
-            </h4>
-            <div>
-              <sgds-input label="First name" name="firstName" type="text" required hasFeedback="both"></sgds-input>
-            </div>
-            <div>
-              <sgds-input label="Last name" name="lastName" type="text" required hasFeedback="both"></sgds-input>
-            </div>
-          </div>
-          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md" id="contact">
-            <h4
-              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
-            >
-              Contact Details
-            </h4>
-            <div>
-              <sgds-input label="Email" name="email" type="email" required hasFeedback="both"></sgds-input>
-            </div>
-            <div>
-              <sgds-input label="Phone" name="phone" type="tel" required hasFeedback="both"></sgds-input>
-            </div>
-          </div>
-          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end" id="actions">
-            <sgds-button type="reset" variant="ghost">Cancel</sgds-button>
-            <sgds-button type="submit">Save</sgds-button>
-          </div>
-        </div>
-      </form>
-
-      <aside class="sgds-col-3 sgds-col-sm-3 sgds-col-md-3 sgds-col-lg-3 sgds-col-xl-3 sgds-col-2-xl-3">
-        <sgds-table-of-contents>
-          <h5>On this page</h5>
-          <li slot="contents">
-            <sgds-link><a href="#personal">Personal Information</a></sgds-link>
-          </li>
-          <li slot="contents">
-            <sgds-link><a href="#contact">Contact Details</a></sgds-link>
-          </li>
-          <li slot="contents">
-            <sgds-link><a href="#actions">Form Actions</a></sgds-link>
-          </li>
-        </sgds-table-of-contents>
-      </aside>
-    </div>
-  </div>
-`;
-
 const FormMultistepStepperTemplate = () => html`
   <div class="sgds-container sgds:py-layout-md">
     <div class="sgds-grid sgds:gap-layout-md">
@@ -1323,10 +1184,10 @@ const FormMultistepStepperTemplate = () => html`
           </div>
 
           <!-- Form actions -->
-          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-between">
-            <sgds-button type="reset" variant="ghost">Cancel</sgds-button>
-            <div class="sgds:flex sgds:gap-layout-sm">
-              <sgds-button type="button" id="prevBtn" variant="ghost" style="display: none;">Back</sgds-button>
+          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center">
+            <sgds-button type="button" id="prevBtn" variant="ghost" style="display: none;">Previous</sgds-button>
+            <div class="sgds:flex sgds:gap-layout-sm" style="margin-left: auto;">
+              <sgds-button type="reset" variant="ghost">Cancel</sgds-button>
               <sgds-button type="button" id="nextBtn">Next</sgds-button>
               <sgds-button type="submit" id="submitBtn" style="display: none;">Submit</sgds-button>
             </div>
@@ -1375,20 +1236,6 @@ export const FormFieldsDatesQuantities = {
 export const FormFieldsFileUpload = {
   render: FormFieldsFileUploadTemplate.bind({}),
   name: "Form Fields File Upload",
-  parameters: { layout: "fullscreen" },
-  tags: ["!autodocs"]
-};
-
-export const FormWithSidebar = {
-  render: FormWithSidebarTemplate.bind({}),
-  name: "Form With Sidebar",
-  parameters: { layout: "fullscreen" },
-  tags: ["!autodocs"]
-};
-
-export const FormWithSidebarToc = {
-  render: FormWithSidebarTocTemplate.bind({}),
-  name: "Form With Sidebar Toc",
   parameters: { layout: "fullscreen" },
   tags: ["!autodocs"]
 };

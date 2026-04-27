@@ -47,18 +47,15 @@ export class SgdsThumbnailCard extends CardElement {
   }
   private _handleFooterSlotChange(e: Event) {
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    const footerHref = this._getAnchorFromSlot(assignedElements)?.href;
-
-    if (this.stretchedLink && footerHref) {
-      this.card.setAttribute("href", footerHref);
-    }
+    const anchor = this._getAnchorFromSlot(assignedElements);
+    if (this.stretchedLink) this._forwardAnchorAttributes(anchor);
   }
 
   private _handleLinkSlotChange(e: Event) {
     this.warnLinkSlotMisused(e);
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    const linkHref = this._getAnchorFromSlot(assignedElements)?.href;
-    if (this.stretchedLink && linkHref) this.card.setAttribute("href", linkHref);
+    const anchor = this._getAnchorFromSlot(assignedElements);
+    if (this.stretchedLink) this._forwardAnchorAttributes(anchor);
   }
 
   render() {

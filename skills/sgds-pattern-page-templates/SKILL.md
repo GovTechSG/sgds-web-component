@@ -77,5 +77,5 @@ Every card: padding inside (`sgds:p-component-lg`), gap between card rows (`sgds
 **4. Action hierarchy in forms**
 Primary action → `<sgds-button variant="primary">`. Secondary / cancel → `<sgds-button variant="outline">`. Destructive → `<sgds-button variant="ghost" tone="danger">`.
 
-**5. Muted labels, prominent values**
-In stat cards and description lists: label in `sgds:text-muted sgds:text-sm`, value in `sgds:text-default sgds:text-2xl sgds:font-semibold`.
+**5. Subtle labels, prominent values**
+In stat cards and description lists: label in `sgds:text-body-subtle sgds:text-sm`, value in `sgds:text-default sgds:text-2xl sgds:font-semibold`.

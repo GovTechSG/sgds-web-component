@@ -41,6 +41,16 @@ export class CardElement extends SgdsElement {
     return;
   }
 
+  protected _forwardAnchorAttributes(anchor: HTMLAnchorElement | null) {
+    const SKIP = new Set(["class", "style", "id"]);
+    if (!anchor?.href || anchor.href.startsWith("javascript:")) return;
+    for (const { name, value } of Array.from(anchor.attributes)) {
+      if (!SKIP.has(name) && !name.startsWith("on")) {
+        this.card.setAttribute(name, value);
+      }
+    }
+  }
+
   warnLinkSlotMisused(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as
       | Array<HTMLLinkElement>
