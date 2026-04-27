@@ -1,0 +1,557 @@
+<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Dashboard</title>
+    <script type="module" src="../../src/index.ts"></script>
+    <link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <link href="../css/utility.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.14.1-rc.0/components/Sidebar/index.umd.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Sticky top bar -->
+    <div class="sgds:sticky sgds:top-0 sgds:z-10">
+      <sgds-masthead fluid></sgds-masthead>
+      <sgds-mainnav fluid>
+        <strong slot="brand">ShopAdmin</strong>
+        <div slot="end" class="sgds:flex sgds:items-center sgds:gap-sm">
+          <sgds-button variant="ghost" size="sm" id="night-toggle">
+            <sgds-icon name="lightbulb" slot="leftIcon"></sgds-icon>
+            Toggle Theme
+          </sgds-button>
+          <sgds-button variant="ghost" size="sm">
+            <sgds-icon name="bell" slot="leftIcon"></sgds-icon>
+          </sgds-button>
+          <sgds-button variant="ghost" size="sm">Jane Lim</sgds-button>
+        </div>
+      </sgds-mainnav>
+    </div>
+
+    <!-- Two-column layout -->
+    <div class="sgds:flex sgds:flex-row sgds:bg-surface-default">
+      <!-- Sticky sidebar -->
+      <div class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)]">
+        <sgds-sidebar active="overview">
+          <div slot="brandName">ShopAdmin</div>
+
+          <sgds-sidebar-section title="Catalogue" name="catalogue">
+            <sgds-sidebar-item name="overview" title="Overview">
+              <sgds-icon name="grid-fill" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-group name="products" title="Products">
+              <sgds-icon name="box-seam" slot="leadingIcon"></sgds-icon>
+              <sgds-sidebar-item name="all-products" title="All Products">
+                <sgds-icon name="list-ul" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item name="inventory" title="Inventory">
+                <sgds-icon name="archive" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+              <sgds-sidebar-item name="categories" title="Categories">
+                <sgds-icon name="tag" slot="leadingIcon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+            <sgds-sidebar-item name="orders" title="Orders">
+              <sgds-icon name="receipt" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+
+          <sgds-sidebar-section title="Analytics" name="analytics">
+            <sgds-sidebar-item name="sales" title="Sales">
+              <sgds-icon name="graph-up" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item name="customers" title="Customers">
+              <sgds-icon name="people-fill" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+
+          <sgds-sidebar-section title="Settings" name="config">
+            <sgds-sidebar-item name="settings" title="Settings">
+              <sgds-icon name="gear" slot="leadingIcon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      </div>
+
+      <!-- Main content -->
+      <div class="sgds:flex sgds:flex-col sgds:w-full">
+        <div class="sgds-container-sidebar sgds:py-layout-md">
+
+          <!-- Page header -->
+          <div class="sgds:flex sgds:items-start sgds:justify-between sgds:mb-layout-sm">
+            <div>
+              <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-muted sgds:mb-xs">
+                Overview
+              </div>
+              <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight">
+                Product Dashboard
+              </h1>
+              <p class="sgds:text-body-md sgds:text-muted sgds:mt-xs">
+                Wednesday, 9 April 2026
+              </p>
+            </div>
+            <div class="sgds:flex sgds:gap-sm">
+              <sgds-button variant="outline" size="sm">
+                <sgds-icon name="download" slot="leftIcon"></sgds-icon>
+                Export
+              </sgds-button>
+              <sgds-button variant="primary" size="sm">
+                <sgds-icon name="plus" slot="leftIcon"></sgds-icon>
+                Add Product
+              </sgds-button>
+            </div>
+          </div>
+
+          <!-- System alert -->
+          <sgds-alert variant="warning" class="sgds:mb-layout-sm" dismissible>
+            <sgds-icon name="exclamation-triangle-fill" slot="icon"></sgds-icon>
+            <strong>Low stock alert:</strong> 6 products are below their reorder threshold. <a href="#" class="sgds:underline">Review inventory</a>
+          </sgds-alert>
+
+          <!-- KPI cards -->
+          <div class="sgds-grid sgds:gap-layout-sm sgds:mb-layout-md">
+            <!-- Total Products -->
+            <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
+              <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mb-sm">
+                <p class="sgds:text-label-sm sgds:text-muted">Total Products</p>
+                <div class="sgds:bg-surface-default sgds:rounded-md sgds:p-xs">
+                  <sgds-icon name="box-seam" size="md"></sgds-icon>
+                </div>
+              </div>
+              <p class="sgds:text-heading-lg sgds:font-bold sgds:leading-lg sgds:tabular-nums">1,284</p>
+              <div class="sgds:flex sgds:items-center sgds:gap-xs sgds:mt-sm">
+                <sgds-icon name="arrow-up" size="sm" class="sgds:text-success-default"></sgds-icon>
+                <span class="sgds:text-label-sm sgds:text-success-default">+12 this week</span>
+              </div>
+            </div>
+
+            <!-- Monthly Revenue -->
+            <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
+              <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mb-sm">
+                <p class="sgds:text-label-sm sgds:text-muted">Monthly Revenue</p>
+                <div class="sgds:bg-surface-default sgds:rounded-md sgds:p-xs">
+                  <sgds-icon name="currency-dollar" size="md"></sgds-icon>
+                </div>
+              </div>
+              <p class="sgds:text-heading-lg sgds:font-bold sgds:leading-lg sgds:tabular-nums">$84,320</p>
+              <div class="sgds:flex sgds:items-center sgds:gap-xs sgds:mt-sm">
+                <sgds-icon name="arrow-up" size="sm" class="sgds:text-success-default"></sgds-icon>
+                <span class="sgds:text-label-sm sgds:text-success-default">+6.4% vs last month</span>
+              </div>
+            </div>
+
+            <!-- Orders Today -->
+            <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
+              <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mb-sm">
+                <p class="sgds:text-label-sm sgds:text-muted">Orders Today</p>
+                <div class="sgds:bg-surface-default sgds:rounded-md sgds:p-xs">
+                  <sgds-icon name="receipt" size="md"></sgds-icon>
+                </div>
+              </div>
+              <p class="sgds:text-heading-lg sgds:font-bold sgds:leading-lg sgds:tabular-nums">137</p>
+              <div class="sgds:flex sgds:items-center sgds:gap-xs sgds:mt-sm">
+                <sgds-icon name="arrow-down" size="sm" class="sgds:text-danger-default"></sgds-icon>
+                <span class="sgds:text-label-sm sgds:text-danger-default">-3.1% vs yesterday</span>
+              </div>
+            </div>
+
+            <!-- Low Stock -->
+            <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
+              <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mb-sm">
+                <p class="sgds:text-label-sm sgds:text-muted">Low Stock Items</p>
+                <div class="sgds:bg-surface-default sgds:rounded-md sgds:p-xs">
+                  <sgds-icon name="exclamation-triangle" size="md"></sgds-icon>
+                </div>
+              </div>
+              <p class="sgds:text-heading-lg sgds:font-bold sgds:leading-lg sgds:tabular-nums">6</p>
+              <div class="sgds:flex sgds:items-center sgds:gap-xs sgds:mt-sm">
+                <sgds-badge variant="warning">Reorder needed</sgds-badge>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts row -->
+          <div class="sgds-grid sgds:gap-layout-md sgds:mb-layout-md">
+            <!-- Revenue trend line chart -->
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs">
+              <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mb-component-sm">
+                <h2 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs">Revenue Trend</h2>
+                <div class="sgds:flex sgds:gap-xs">
+                  <sgds-button variant="ghost" size="sm">7D</sgds-button>
+                  <sgds-button variant="outline" size="sm">30D</sgds-button>
+                  <sgds-button variant="ghost" size="sm">90D</sgds-button>
+                </div>
+              </div>
+              <div id="chart-revenue" class="sgds:h-[260px] sgds:w-full"></div>
+            </div>
+
+            <!-- Category donut -->
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs">
+              <h2 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:mb-component-sm">Sales by Category</h2>
+              <div id="chart-category" class="sgds:h-[220px] sgds:w-full"></div>
+              <!-- Legend with progress bars -->
+              <div class="sgds:flex sgds:flex-col sgds:gap-sm sgds:mt-sm">
+                <div>
+                  <div class="sgds:flex sgds:justify-between sgds:mb-3-xs">
+                    <span class="sgds:text-label-sm">Electronics</span>
+                    <span class="sgds:text-label-sm sgds:font-semibold">38%</span>
+                  </div>
+                  <sgds-progress-bar value="38" variant="primary"></sgds-progress-bar>
+                </div>
+                <div>
+                  <div class="sgds:flex sgds:justify-between sgds:mb-3-xs">
+                    <span class="sgds:text-label-sm">Apparel</span>
+                    <span class="sgds:text-label-sm sgds:font-semibold">24%</span>
+                  </div>
+                  <sgds-progress-bar value="24" variant="success"></sgds-progress-bar>
+                </div>
+                <div>
+                  <div class="sgds:flex sgds:justify-between sgds:mb-3-xs">
+                    <span class="sgds:text-label-sm">Home & Living</span>
+                    <span class="sgds:text-label-sm sgds:font-semibold">21%</span>
+                  </div>
+                  <sgds-progress-bar value="21" variant="warning"></sgds-progress-bar>
+                </div>
+                <div>
+                  <div class="sgds:flex sgds:justify-between sgds:mb-3-xs">
+                    <span class="sgds:text-label-sm">Others</span>
+                    <span class="sgds:text-label-sm sgds:font-semibold">17%</span>
+                  </div>
+                  <sgds-progress-bar value="17" variant="info"></sgds-progress-bar>
+                </div>
+              </div>
+            </div>
+
+            <!-- Orders by status bar chart -->
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-12 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:p-component-xs">
+              <h2 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:mb-component-sm">Weekly Orders by Status</h2>
+              <div id="chart-orders" class="sgds:h-[200px] sgds:w-full"></div>
+            </div>
+          </div>
+
+          <!-- Bottom row: Recent Orders + Top Products -->
+          <div class="sgds-grid sgds:gap-layout-md">
+
+            <!-- Recent Orders table -->
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:overflow-hidden">
+              <div class="sgds:flex sgds:items-center sgds:justify-between sgds:p-component-xs sgds:border-b sgds:border-muted">
+                <h2 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs">Recent Orders</h2>
+                <div class="sgds:flex sgds:gap-sm sgds:items-center">
+                  <sgds-input placeholder="Search orders…" size="sm">
+                    <sgds-icon name="search" slot="prefix"></sgds-icon>
+                  </sgds-input>
+                  <sgds-button variant="outline" size="sm">
+                    <sgds-icon name="bi-funnel" slot="leftIcon"></sgds-icon>
+                    Filter
+                  </sgds-button>
+                </div>
+              </div>
+              <sgds-table>
+                <sgds-table-row>
+                  <sgds-table-head>Order ID</sgds-table-head>
+                  <sgds-table-head>Customer</sgds-table-head>
+                  <sgds-table-head>Product</sgds-table-head>
+                  <sgds-table-head>Amount</sgds-table-head>
+                  <sgds-table-head>Status</sgds-table-head>
+                  <sgds-table-head>Date</sgds-table-head>
+                  <sgds-table-head></sgds-table-head>
+                </sgds-table-row>
+                <sgds-table-row>
+                  <sgds-table-cell><code class="sgds:text-caption-md sgds:font-mono">#ORD-4821</code></sgds-table-cell>
+                  <sgds-table-cell>Alice Tan</sgds-table-cell>
+                  <sgds-table-cell>Wireless Earbuds Pro</sgds-table-cell>
+                  <sgds-table-cell class="sgds:tabular-nums">$129.00</sgds-table-cell>
+                  <sgds-table-cell><sgds-badge variant="success">Shipped</sgds-badge></sgds-table-cell>
+                  <sgds-table-cell class="sgds:text-muted sgds:text-label-sm">9 Apr 2026</sgds-table-cell>
+                  <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+                </sgds-table-row>
+                <sgds-table-row>
+                  <sgds-table-cell><code class="sgds:text-caption-md sgds:font-mono">#ORD-4820</code></sgds-table-cell>
+                  <sgds-table-cell>Bob Lim</sgds-table-cell>
+                  <sgds-table-cell>Standing Desk Frame</sgds-table-cell>
+                  <sgds-table-cell class="sgds:tabular-nums">$549.00</sgds-table-cell>
+                  <sgds-table-cell><sgds-badge variant="warning">Processing</sgds-badge></sgds-table-cell>
+                  <sgds-table-cell class="sgds:text-muted sgds:text-label-sm">9 Apr 2026</sgds-table-cell>
+                  <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+                </sgds-table-row>
+                <sgds-table-row>
+                  <sgds-table-cell><code class="sgds:text-caption-md sgds:font-mono">#ORD-4819</code></sgds-table-cell>
+                  <sgds-table-cell>Carol Ng</sgds-table-cell>
+                  <sgds-table-cell>Cotton Tee (3-pack)</sgds-table-cell>
+                  <sgds-table-cell class="sgds:tabular-nums">$59.90</sgds-table-cell>
+                  <sgds-table-cell><sgds-badge variant="success">Delivered</sgds-badge></sgds-table-cell>
+                  <sgds-table-cell class="sgds:text-muted sgds:text-label-sm">8 Apr 2026</sgds-table-cell>
+                  <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+                </sgds-table-row>
+                <sgds-table-row>
+                  <sgds-table-cell><code class="sgds:text-caption-md sgds:font-mono">#ORD-4818</code></sgds-table-cell>
+                  <sgds-table-cell>David Koh</sgds-table-cell>
+                  <sgds-table-cell>Smart LED Bulb 4-pk</sgds-table-cell>
+                  <sgds-table-cell class="sgds:tabular-nums">$39.00</sgds-table-cell>
+                  <sgds-table-cell><sgds-badge variant="danger">Cancelled</sgds-badge></sgds-table-cell>
+                  <sgds-table-cell class="sgds:text-muted sgds:text-label-sm">8 Apr 2026</sgds-table-cell>
+                  <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+                </sgds-table-row>
+                <sgds-table-row>
+                  <sgds-table-cell><code class="sgds:text-caption-md sgds:font-mono">#ORD-4817</code></sgds-table-cell>
+                  <sgds-table-cell>Eva Wong</sgds-table-cell>
+                  <sgds-table-cell>Yoga Mat Premium</sgds-table-cell>
+                  <sgds-table-cell class="sgds:tabular-nums">$88.00</sgds-table-cell>
+                  <sgds-table-cell><sgds-badge variant="info">Pending</sgds-badge></sgds-table-cell>
+                  <sgds-table-cell class="sgds:text-muted sgds:text-label-sm">7 Apr 2026</sgds-table-cell>
+                  <sgds-table-cell><sgds-button variant="ghost" size="sm">View</sgds-button></sgds-table-cell>
+                </sgds-table-row>
+              </sgds-table>
+              <div class="sgds:flex sgds:justify-between sgds:items-center sgds:p-component-xs sgds:border-t sgds:border-muted">
+                <span class="sgds:text-caption-md sgds:text-muted">Showing 5 of 137 orders</span>
+                <sgds-pagination length="28" limit="5"></sgds-pagination>
+              </div>
+            </div>
+
+            <!-- Top Products + Low Stock -->
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4 sgds:flex sgds:flex-col sgds:gap-layout-sm">
+
+              <!-- Top Products -->
+              <div class="sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:overflow-hidden">
+                <div class="sgds:p-component-xs sgds:border-b sgds:border-muted">
+                  <h2 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs">Top Products</h2>
+                  <p class="sgds:text-caption-md sgds:text-muted">By revenue this month</p>
+                </div>
+                <div class="sgds:flex sgds:flex-col sgds:divide-y sgds:divide-muted">
+                  <div class="sgds:flex sgds:items-center sgds:justify-between sgds:px-component-xs sgds:py-sm">
+                    <div class="sgds:flex sgds:items-center sgds:gap-sm">
+                      <div class="sgds:w-8 sgds:h-8 sgds:bg-surface-default sgds:rounded sgds:flex sgds:items-center sgds:justify-center sgds:text-label-xs sgds:font-bold">1</div>
+                      <div>
+                        <p class="sgds:text-label-md sgds:font-semibold">Wireless Earbuds Pro</p>
+                        <p class="sgds:text-caption-md sgds:text-muted">Electronics</p>
+                      </div>
+                    </div>
+                    <span class="sgds:text-label-md sgds:font-semibold sgds:tabular-nums">$12,840</span>
+                  </div>
+                  <div class="sgds:flex sgds:items-center sgds:justify-between sgds:px-component-xs sgds:py-sm">
+                    <div class="sgds:flex sgds:items-center sgds:gap-sm">
+                      <div class="sgds:w-8 sgds:h-8 sgds:bg-surface-default sgds:rounded sgds:flex sgds:items-center sgds:justify-center sgds:text-label-xs sgds:font-bold">2</div>
+                      <div>
+                        <p class="sgds:text-label-md sgds:font-semibold">Standing Desk Frame</p>
+                        <p class="sgds:text-caption-md sgds:text-muted">Home & Living</p>
+                      </div>
+                    </div>
+                    <span class="sgds:text-label-md sgds:font-semibold sgds:tabular-nums">$9,330</span>
+                  </div>
+                  <div class="sgds:flex sgds:items-center sgds:justify-between sgds:px-component-xs sgds:py-sm">
+                    <div class="sgds:flex sgds:items-center sgds:gap-sm">
+                      <div class="sgds:w-8 sgds:h-8 sgds:bg-surface-default sgds:rounded sgds:flex sgds:items-center sgds:justify-center sgds:text-label-xs sgds:font-bold">3</div>
+                      <div>
+                        <p class="sgds:text-label-md sgds:font-semibold">Smart LED Bulb 4-pk</p>
+                        <p class="sgds:text-caption-md sgds:text-muted">Home & Living</p>
+                      </div>
+                    </div>
+                    <span class="sgds:text-label-md sgds:font-semibold sgds:tabular-nums">$7,410</span>
+                  </div>
+                  <div class="sgds:flex sgds:items-center sgds:justify-between sgds:px-component-xs sgds:py-sm">
+                    <div class="sgds:flex sgds:items-center sgds:gap-sm">
+                      <div class="sgds:w-8 sgds:h-8 sgds:bg-surface-default sgds:rounded sgds:flex sgds:items-center sgds:justify-center sgds:text-label-xs sgds:font-bold">4</div>
+                      <div>
+                        <p class="sgds:text-label-md sgds:font-semibold">Cotton Tee (3-pack)</p>
+                        <p class="sgds:text-caption-md sgds:text-muted">Apparel</p>
+                      </div>
+                    </div>
+                    <span class="sgds:text-label-md sgds:font-semibold sgds:tabular-nums">$6,190</span>
+                  </div>
+                  <div class="sgds:flex sgds:items-center sgds:justify-between sgds:px-component-xs sgds:py-sm">
+                    <div class="sgds:flex sgds:items-center sgds:gap-sm">
+                      <div class="sgds:w-8 sgds:h-8 sgds:bg-surface-default sgds:rounded sgds:flex sgds:items-center sgds:justify-center sgds:text-label-xs sgds:font-bold">5</div>
+                      <div>
+                        <p class="sgds:text-label-md sgds:font-semibold">Yoga Mat Premium</p>
+                        <p class="sgds:text-caption-md sgds:text-muted">Sports</p>
+                      </div>
+                    </div>
+                    <span class="sgds:text-label-md sgds:font-semibold sgds:tabular-nums">$5,720</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Low Stock Alerts -->
+              <div class="sgds:bg-surface-raised sgds:rounded-lg sgds:border sgds:border-muted sgds:overflow-hidden">
+                <div class="sgds:p-component-xs sgds:border-b sgds:border-muted sgds:flex sgds:items-center sgds:justify-between">
+                  <div>
+                    <h2 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs">Low Stock</h2>
+                    <p class="sgds:text-caption-md sgds:text-muted">Items needing reorder</p>
+                  </div>
+                  <sgds-badge variant="danger">6 items</sgds-badge>
+                </div>
+                <div class="sgds:flex sgds:flex-col sgds:divide-y sgds:divide-muted">
+                  <div class="sgds:flex sgds:items-center sgds:justify-between sgds:px-component-xs sgds:py-sm">
+                    <div>
+                      <p class="sgds:text-label-md sgds:font-semibold">USB-C Hub 7-in-1</p>
+                      <p class="sgds:text-caption-md sgds:text-muted">SKU: ELEC-0042</p>
+                    </div>
+                    <div class="sgds:text-right">
+                      <p class="sgds:text-label-sm sgds:font-semibold sgds:text-danger-default">3 left</p>
+                      <p class="sgds:text-caption-md sgds:text-muted">Min: 20</p>
+                    </div>
+                  </div>
+                  <div class="sgds:flex sgds:items-center sgds:justify-between sgds:px-component-xs sgds:py-sm">
+                    <div>
+                      <p class="sgds:text-label-md sgds:font-semibold">Linen Throw Pillow</p>
+                      <p class="sgds:text-caption-md sgds:text-muted">SKU: HOME-0118</p>
+                    </div>
+                    <div class="sgds:text-right">
+                      <p class="sgds:text-label-sm sgds:font-semibold sgds:text-danger-default">7 left</p>
+                      <p class="sgds:text-caption-md sgds:text-muted">Min: 25</p>
+                    </div>
+                  </div>
+                  <div class="sgds:flex sgds:items-center sgds:justify-between sgds:px-component-xs sgds:py-sm">
+                    <div>
+                      <p class="sgds:text-label-md sgds:font-semibold">Running Shorts (L)</p>
+                      <p class="sgds:text-caption-md sgds:text-muted">SKU: APP-0307</p>
+                    </div>
+                    <div class="sgds:text-right">
+                      <p class="sgds:text-label-sm sgds:font-semibold sgds:text-warning-default">12 left</p>
+                      <p class="sgds:text-caption-md sgds:text-muted">Min: 30</p>
+                    </div>
+                  </div>
+                  <div class="sgds:flex sgds:items-center sgds:justify-between sgds:px-component-xs sgds:py-sm">
+                    <div>
+                      <p class="sgds:text-label-md sgds:font-semibold">Bamboo Cutting Board</p>
+                      <p class="sgds:text-caption-md sgds:text-muted">SKU: HOME-0204</p>
+                    </div>
+                    <div class="sgds:text-right">
+                      <p class="sgds:text-label-sm sgds:font-semibold sgds:text-warning-default">15 left</p>
+                      <p class="sgds:text-caption-md sgds:text-muted">Min: 40</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="sgds:p-component-xs sgds:border-t sgds:border-muted">
+                  <sgds-button variant="outline" size="sm" class="sgds:w-full">View all low stock items</sgds-button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <sgds-footer></sgds-footer>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    // Night theme toggle
+    document.querySelector("#night-toggle").addEventListener("click", () => {
+      document.documentElement.classList.toggle("sgds-night-theme");
+    });
+
+    // Chart colours
+    const COLORS = ["#ac1cdb", "#00758d", "#0e7c3d", "#0269d0", "#7e6917"];
+
+    const isNight = () => document.documentElement.classList.contains("sgds-night-theme");
+
+    function theme() {
+      const n = isNight();
+      return {
+        text:    n ? "#d1d5db" : "#374151",
+        grid:    n ? "#374151" : "#e5e7eb",
+        bgTip:   n ? "#1f2937" : "#ffffff",
+        borTip:  n ? "#374151" : "#e5e7eb",
+        txtTip:  n ? "#f9fafb" : "#111827"
+      };
+    }
+
+    function revOpt(t) {
+      return {
+        color: COLORS,
+        backgroundColor: "transparent",
+        textStyle: { color: t.text, fontFamily: "Inter, sans-serif" },
+        tooltip: { trigger: "axis", backgroundColor: t.bgTip, borderColor: t.borTip, textStyle: { color: t.txtTip } },
+        legend: { top: 0, textStyle: { color: t.text } },
+        grid: { top: 40, right: 16, bottom: 0, left: 0, containLabel: true },
+        xAxis: {
+          type: "category",
+          data: ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr"],
+          axisLine: { lineStyle: { color: t.grid } },
+          axisTick: { lineStyle: { color: t.grid } },
+          axisLabel: { color: t.text }
+        },
+        yAxis: {
+          type: "value",
+          axisLabel: { color: t.text, formatter: v => "$" + (v / 1000).toFixed(0) + "k" },
+          splitLine: { lineStyle: { color: t.grid } }
+        },
+        series: [
+          { name: "Revenue", type: "line", smooth: true, areaStyle: { opacity: 0.1 },
+            data: [62000, 71000, 58000, 75000, 79000, 81000, 84000] },
+          { name: "Cost",    type: "line", smooth: true, areaStyle: { opacity: 0.06 },
+            data: [38000, 44000, 36000, 47000, 48000, 49000, 51000] }
+        ]
+      };
+    }
+
+    function catOpt(t) {
+      return {
+        color: COLORS,
+        backgroundColor: "transparent",
+        textStyle: { color: t.text, fontFamily: "Inter, sans-serif" },
+        tooltip: { trigger: "item", backgroundColor: t.bgTip, borderColor: t.borTip, textStyle: { color: t.txtTip } },
+        series: [{
+          type: "pie", radius: ["45%", "70%"],
+          label: { show: false },
+          data: [
+            { value: 38, name: "Electronics" },
+            { value: 24, name: "Apparel" },
+            { value: 21, name: "Home & Living" },
+            { value: 17, name: "Others" }
+          ]
+        }]
+      };
+    }
+
+    function ordOpt(t) {
+      return {
+        color: COLORS,
+        backgroundColor: "transparent",
+        textStyle: { color: t.text, fontFamily: "Inter, sans-serif" },
+        tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, backgroundColor: t.bgTip, borderColor: t.borTip, textStyle: { color: t.txtTip } },
+        legend: { top: 0, textStyle: { color: t.text } },
+        grid: { top: 36, right: 16, bottom: 0, left: 0, containLabel: true },
+        xAxis: {
+          type: "category",
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          axisLine: { lineStyle: { color: t.grid } },
+          axisTick: { lineStyle: { color: t.grid } },
+          axisLabel: { color: t.text }
+        },
+        yAxis: {
+          type: "value",
+          splitLine: { lineStyle: { color: t.grid } },
+          axisLabel: { color: t.text }
+        },
+        series: [
+          { name: "Delivered",  type: "bar", stack: "s", data: [95, 112, 88, 120, 145, 98, 76] },
+          { name: "Processing", type: "bar", stack: "s", data: [22, 18, 30, 25, 32, 14, 10] },
+          { name: "Cancelled",  type: "bar", stack: "s", data: [5, 8, 4, 6, 9, 3, 2] }
+        ]
+      };
+    }
+
+    window.addEventListener("load", () => {
+      const rev = echarts.init(document.querySelector("#chart-revenue"));
+      const cat = echarts.init(document.querySelector("#chart-category"));
+      const ord = echarts.init(document.querySelector("#chart-orders"));
+
+      function apply() {
+        const t = theme();
+        rev.setOption(revOpt(t));
+        cat.setOption(catOpt(t));
+        ord.setOption(ordOpt(t));
+      }
+
+      apply();
+      window.addEventListener("resize", () => [rev, cat, ord].forEach(c => c.resize()));
+      new MutationObserver(apply).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    });
+  </script>
+</html>

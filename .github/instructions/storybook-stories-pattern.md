@@ -1,20 +1,20 @@
 ---
 description: 'Guidelines for writing Storybook stories in the templates folder'
-applyTo: 'stories/templates/**'
+applyTo: 'stories/component-templates/**'
 ---
 
 # Storybook Story Writing Pattern
 
 ## Overview
 
-This document defines the standardized pattern for organizing and writing Storybook stories in the `stories/templates/` directory.
+This document defines the standardized pattern for organizing and writing Storybook stories in the `stories/component-templates/` directory.
 
 ## File Structure Pattern
 
-Each component in `stories/templates/` follows this structure:
+Each component in `stories/component-templates/` follows this structure:
 
 ```
-stories/templates/[ComponentName]/
+stories/component-templates/[ComponentName]/
 ├── basic.js              # Base template, args, and parameters
 ├── additional.stories.js # Additional story variants
 └── additional.mdx        # Documentation for additional stories
@@ -302,7 +302,7 @@ component.addEventListener('custom-event', (e) => {
 ### Alert Component
 
 ```javascript
-// stories/templates/Alert/additional.stories.js
+// stories/component-templates/Alert/additional.stories.js
 import { html } from "lit";
 
 const VariantTemplate = args => {
@@ -335,7 +335,7 @@ export const AllVariants = {
 ### SystemBanner Component
 
 ```javascript
-// stories/templates/SystemBanner/additional.stories.js
+// stories/component-templates/SystemBanner/additional.stories.js
 import { html } from "lit";
 
 const ShowMoreHookTemplate = args => {

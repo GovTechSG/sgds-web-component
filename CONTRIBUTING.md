@@ -62,7 +62,7 @@ To start the storybook server
 
 2. `pnpm run storybook`
 
-The basic storybook documentation is auto-generated from the cem metadata. Write your basic template example inside `stories/templates/<Component>/basic.js`. Follow this template and be sure to export `args` and `Template`
+The basic storybook documentation is auto-generated from the cem metadata. Write your basic template example inside `stories/component-templates/<Component>/basic.js`. Follow this template and be sure to export `args` and `Template`
 
 ```hbs
 import { html } from "lit";
@@ -77,7 +77,7 @@ export const parameters= {};
 
 ```
 
-Beyond basic template, any additional documentation and storybook template examples should go into `stories/templates/<Component>/additional.mdx file`.
+Beyond basic template, any additional documentation and storybook template examples should go into `stories/component-templates/<Component>/additional.mdx file`.
 This file will be concatenated with the basic template to give the final stories.mdx files
 
 ## Markdown files and README.md

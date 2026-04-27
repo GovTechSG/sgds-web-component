@@ -7,7 +7,7 @@ Real-world component examples from the codebase to use as models when writing ne
 Renders all semantic variants in a single loop using a local template:
 
 ```javascript
-// stories/templates/Alert/additional.stories.js
+// stories/component-templates/Alert/additional.stories.js
 import { html } from "lit";
 
 const VariantTemplate = args => {
@@ -42,7 +42,7 @@ export const AllVariants = {
 Uses `<script>` inside the template for interactive demos that require DOM event wiring:
 
 ```javascript
-// stories/templates/SystemBanner/additional.stories.js
+// stories/component-templates/SystemBanner/additional.stories.js
 import { html } from "lit";
 
 const ShowMoreHookTemplate = args => html`

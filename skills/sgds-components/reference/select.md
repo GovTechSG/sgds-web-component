@@ -49,7 +49,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Form Layout Context
 
-`<sgds-select>` is a **4-column form component** — it can share a row with other 4-column components in form layouts. For detailed form pattern guidance (when to pair fields, spacing, responsive behavior), see the [sgds-pattern-block-templates form layout skill](../sgds-pattern-block-templates/reference/form-layout.md).
+`<sgds-select>` is a **4-column form component** — it can share a row with other 4-column components in form layouts. For detailed form pattern guidance (when to pair fields, spacing, responsive behavior), see the [sgds-pattern-block-templates form layout skill](../sgds-pattern-block-templates/reference/form-patterns.md).
 
 ## Quick Decision Guide
 

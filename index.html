@@ -56,6 +56,9 @@
     <script type="module">
       const categoryDescriptions = {
         null: "Core components for building user interfaces and forms.",
+        pattern: "Atomic typography and layout patterns used as building blocks.",
+        blocks: "Section-level blocks combining components into reusable page sections.",
+        templates: "Full page templates assembled from blocks for common page types.",
         layouts: "Pre-built page layouts and templates for common application patterns.",
         patterns: "Reusable pattern examples combining multiple components.",
         typography: "Typography examples and text styling demonstrations.",
@@ -134,7 +137,12 @@
           nav.appendChild(dropdown);
         }
 
-        for (const [folder, folderFiles] of Object.entries(folders)) {
+        const navFolders = ["pattern", "blocks", "templates", "layouts", "typography", "utility"];
+
+        for (const folder of navFolders) {
+          const folderFiles = folders[folder];
+          if (!folderFiles || folderFiles.length === 0) continue;
+
           const dropdown = document.createElement("sgds-mainnav-dropdown");
           const toggler = document.createElement("span");
           toggler.setAttribute("slot", "toggler");
@@ -293,7 +301,7 @@
           }, {});
 
           // Sort categories by appearance order
-          const categoryOrder = [null, "layouts", "patterns", "typography", "utility", "css"];
+          const categoryOrder = [null, "pattern", "blocks", "templates", "layouts", "patterns", "typography", "utility", "css"];
 
           const sortedCategories = categoryOrder.filter(cat => groupedByFolder[cat]);
 

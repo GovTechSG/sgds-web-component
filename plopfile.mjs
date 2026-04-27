@@ -23,7 +23,7 @@ export default function (plop) {
       },
       {
         type: "add",
-        path: "stories/templates/{{main-component-name}}/basic.js",
+        path: "stories/component-templates/{{main-component-name}}/basic.js",
         templateFile: "plop-templates/basic.hbs"
       },
       {

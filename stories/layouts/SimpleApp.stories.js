@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Templates/App layout simple"
+  title: "Layouts/App layout simple"
 };
 
 const Template = () => {
