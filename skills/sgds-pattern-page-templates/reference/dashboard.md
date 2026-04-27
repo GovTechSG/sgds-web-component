@@ -37,11 +37,7 @@ Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-
 
 ## Complete Template
 
-> **Prerequisite**: `sgds-sidebar` is RC only — add this script **before** any other SGDS imports:
-> ```html
-> <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@rc/components/Sidebar/index.umd.min.js"></script>
-> ```
-> See **[sgds-components-sidebar](../../sgds-components-sidebar/SKILL.md)** for the full API.
+> See **[sidebar component](../../sgds-components/reference/sidebar.md)** for the full API.
 
 ```html
 <!-- Sticky header -->
@@ -106,7 +102,7 @@ Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-
       <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mb-layout-sm">
         <div>
           <h1 class="sgds:text-2xl sgds:font-semibold sgds:text-default">Dashboard</h1>
-          <p class="sgds:text-sm sgds:text-muted sgds:mt-1">Overview of your application metrics</p>
+          <p class="sgds:text-sm sgds:text-body-subtle sgds:mt-1">Overview of your application metrics</p>
         </div>
         <sgds-button variant="primary" size="sm">
           <sgds-icon name="download" slot="leftIcon"></sgds-icon>
@@ -119,37 +115,37 @@ Uses the **Sidebar App Layout** from the [Application Shell](../../sgds-pattern-
 
         <!-- Stat cards: 4 × 3/12 cols -->
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
-          <p class="sgds:text-sm sgds:text-muted sgds:mb-1">Total Users</p>
+          <p class="sgds:text-sm sgds:text-body-subtle sgds:mb-1">Total Users</p>
           <p class="sgds:text-2xl sgds:font-semibold sgds:text-default">12,486</p>
           <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
             <sgds-icon name="arrow-up" class="sgds:text-success-default" size="sm"></sgds-icon>
             <span class="sgds:text-sm sgds:text-success-default">+8.2%</span>
-            <span class="sgds:text-sm sgds:text-muted">vs last month</span>
+            <span class="sgds:text-sm sgds:text-body-subtle">vs last month</span>
           </div>
         </div>
 
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
-          <p class="sgds:text-sm sgds:text-muted sgds:mb-1">Active Sessions</p>
+          <p class="sgds:text-sm sgds:text-body-subtle sgds:mb-1">Active Sessions</p>
           <p class="sgds:text-2xl sgds:font-semibold sgds:text-default">3,241</p>
           <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
             <sgds-icon name="arrow-up" class="sgds:text-success-default" size="sm"></sgds-icon>
             <span class="sgds:text-sm sgds:text-success-default">+4.1%</span>
-            <span class="sgds:text-sm sgds:text-muted">vs last month</span>
+            <span class="sgds:text-sm sgds:text-body-subtle">vs last month</span>
           </div>
         </div>
 
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
-          <p class="sgds:text-sm sgds:text-muted sgds:mb-1">Submissions</p>
+          <p class="sgds:text-sm sgds:text-body-subtle sgds:mb-1">Submissions</p>
           <p class="sgds:text-2xl sgds:font-semibold sgds:text-default">847</p>
           <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
             <sgds-icon name="arrow-down" class="sgds:text-danger-default" size="sm"></sgds-icon>
             <span class="sgds:text-sm sgds:text-danger-default">-2.4%</span>
-            <span class="sgds:text-sm sgds:text-muted">vs last month</span>
+            <span class="sgds:text-sm sgds:text-body-subtle">vs last month</span>
           </div>
         </div>
 
         <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-3 sgds:bg-surface-raised sgds:rounded-lg sgds:p-component-xs sgds:shadow-card">
-          <p class="sgds:text-sm sgds:text-muted sgds:mb-1">Pending Reviews</p>
+          <p class="sgds:text-sm sgds:text-body-subtle sgds:mb-1">Pending Reviews</p>
           <p class="sgds:text-2xl sgds:font-semibold sgds:text-default">23</p>
           <div class="sgds:flex sgds:items-center sgds:gap-1 sgds:mt-2">
             <sgds-badge variant="warning">Action needed</sgds-badge>

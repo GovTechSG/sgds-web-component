@@ -51,3 +51,11 @@ export const Disabled = {
   parameters: {},
   tags: ["!dev"]
 };
+
+export const Autofocus = {
+  render: Template.bind({}),
+  name: "Autofocus",
+  args: { ...args, autofocus: true },
+  parameters: {},
+  tags: ["!dev"]
+};

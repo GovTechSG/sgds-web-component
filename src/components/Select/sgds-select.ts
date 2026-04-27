@@ -209,7 +209,8 @@ export class SgdsSelect extends SelectElement {
         class=${classMap({
           disabled: this.disabled,
           select: true,
-          "form-control-container": true
+          "form-control-container": true,
+          "m-width-160": true
         })}
       >
         ${this._renderLabel()}

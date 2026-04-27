@@ -230,11 +230,14 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
 
   render() {
     return html`
-      <div class="form-control-container">
+      <div class="form-control-container m-width-160">
         ${this._renderLabel()}
         <div class="input-group">
           <sgds-icon-button
-            variant="ghost"
+            class="minus-btn"
+            variant="outline"
+            tone="neutral"
+            size="md"
             ariaLabel=${`decrease by ${this.step}`}
             ?disabled=${this.disabled ||
             (this.min !== undefined ? this.value <= this.min : this.value < 1) ||
@@ -262,7 +265,10 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             hasFeedback=${ifDefined(this.hasFeedback !== "text" ? "style" : undefined)}
           ></sgds-input>
           <sgds-icon-button
-            variant="ghost"
+            class="plus-btn"
+            variant="outline"
+            tone="neutral"
+            size="md"
             ariaLabel=${`increase by ${this.step}`}
             @click=${this._onPlus}
             ?disabled=${this.disabled ||

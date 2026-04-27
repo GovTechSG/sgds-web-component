@@ -12,7 +12,8 @@ export const Template = ({
   invalid,
   hasFeedback,
   hintText,
-  label
+  label,
+  autofocus
 }) => {
   return html`
     <sgds-radio-group
@@ -24,6 +25,7 @@ export const Template = ({
       ?hasFeedback=${hasFeedback}
       hintText=${ifDefined(hintText)}
       label=${ifDefined(label)}
+      ?autofocus=${autofocus}
     >
       <sgds-radio value=${ifDefined(radioValue)} ?disabled=${disabled} ?checked=${checked} ?invalid=${invalid}
         >Option 1</sgds-radio

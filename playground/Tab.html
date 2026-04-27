@@ -7,74 +7,241 @@
     <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
     <style>
       .container {
-        max-width: 800px;
+        max-width: 1000px;
         margin: 36px auto;
         display: flex;
         flex-direction: column;
-        gap: 36px;
+        gap: 48px;
+      }
+      .example {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .demo-container {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 20px;
+        background: #f9fafb;
+      }
+      h3 {
+        margin: 0 0 12px 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <div>
-        <h2>Underlined (default)</h2>
-        <sgds-tab-group>
-          <sgds-tab slot="nav" panel="tab1">Tab 1</sgds-tab>
-          <sgds-tab slot="nav" panel="tab2">Tab 2</sgds-tab>
-          <sgds-tab slot="nav" panel="tab3">Tab 3</sgds-tab>
-          <sgds-tab-panel name="tab1">Content for Tab 1</sgds-tab-panel>
-          <sgds-tab-panel name="tab2">Content for Tab 2</sgds-tab-panel>
-          <sgds-tab-panel name="tab3">Content for Tab 3</sgds-tab-panel>
-        </sgds-tab-group>
+      <!-- Underlined (Default) -->
+      <div class="example">
+        <h2>Underlined (Default)</h2>
+        <div class="demo-container">
+          <sgds-tab-group>
+            <sgds-tab slot="nav" panel="tab1">Dashboard</sgds-tab>
+            <sgds-tab slot="nav" panel="tab2">Analytics</sgds-tab>
+            <sgds-tab slot="nav" panel="tab3">Reports</sgds-tab>
+            <sgds-tab-panel name="tab1">Welcome to your dashboard</sgds-tab-panel>
+            <sgds-tab-panel name="tab2">View your analytics here</sgds-tab-panel>
+            <sgds-tab-panel name="tab3">Access your reports</sgds-tab-panel>
+          </sgds-tab-group>
+        </div>
       </div>
 
-      <div>
+      <!-- Underlined with Icons -->
+      <div class="example">
+        <h2>Underlined with Leading Icons</h2>
+        <div class="demo-container">
+          <sgds-tab-group>
+            <sgds-tab slot="nav" panel="icon1">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+              Home
+            </sgds-tab>
+            <sgds-tab slot="nav" panel="icon2">
+              <sgds-icon name="bar-chart" slot="icon"></sgds-icon>
+              Analytics
+            </sgds-tab>
+            <sgds-tab slot="nav" panel="icon3">
+              <sgds-icon name="gear" slot="icon"></sgds-icon>
+              Settings
+            </sgds-tab>
+            <sgds-tab-panel name="icon1">Home content with icon</sgds-tab-panel>
+            <sgds-tab-panel name="icon2">Analytics content with icon</sgds-tab-panel>
+            <sgds-tab-panel name="icon3">Settings content with icon</sgds-tab-panel>
+          </sgds-tab-group>
+        </div>
+      </div>
+
+      <!-- Solid Variant -->
+      <div class="example">
         <h2>Solid Variant</h2>
-        <sgds-tab-group variant="solid">
-          <sgds-tab slot="nav" panel="solid1">Overview</sgds-tab>
-          <sgds-tab slot="nav" panel="solid2">Details</sgds-tab>
-          <sgds-tab slot="nav" panel="solid3">Settings</sgds-tab>
-          <sgds-tab-panel name="solid1">Overview content</sgds-tab-panel>
-          <sgds-tab-panel name="solid2">Details content</sgds-tab-panel>
-          <sgds-tab-panel name="solid3">Settings content</sgds-tab-panel>
-        </sgds-tab-group>
+        <div class="demo-container">
+          <sgds-tab-group variant="solid">
+            <sgds-tab slot="nav" panel="solid1">Overview</sgds-tab>
+            <sgds-tab slot="nav" panel="solid2">Details</sgds-tab>
+            <sgds-tab slot="nav" panel="solid3">Settings</sgds-tab>
+            <sgds-tab-panel name="solid1">Overview content</sgds-tab-panel>
+            <sgds-tab-panel name="solid2">Details content</sgds-tab-panel>
+            <sgds-tab-panel name="solid3">Settings content</sgds-tab-panel>
+          </sgds-tab-group>
+        </div>
       </div>
 
-      <div>
-        <h2>Vertical</h2>
-        <sgds-tab-group orientation="vertical">
-          <sgds-tab slot="nav" panel="v1">First</sgds-tab>
-          <sgds-tab slot="nav" panel="v2">Second</sgds-tab>
-          <sgds-tab slot="nav" panel="v3">Third</sgds-tab>
-          <sgds-tab-panel name="v1">First panel content</sgds-tab-panel>
-          <sgds-tab-panel name="v2">Second panel content</sgds-tab-panel>
-          <sgds-tab-panel name="v3">Third panel content</sgds-tab-panel>
-        </sgds-tab-group>
+      <!-- Solid with Icons -->
+      <div class="example">
+        <h2>Solid Variant with Leading Icons</h2>
+        <div class="demo-container">
+          <sgds-tab-group variant="solid">
+            <sgds-tab slot="nav" panel="solid-icon1">
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
+              Docs
+            </sgds-tab>
+            <sgds-tab slot="nav" panel="solid-icon2">
+              <sgds-icon name="code" slot="icon"></sgds-icon>
+              Code
+            </sgds-tab>
+            <sgds-tab slot="nav" panel="solid-icon3">
+              <sgds-icon name="question-circle" slot="icon"></sgds-icon>
+              Help
+            </sgds-tab>
+            <sgds-tab-panel name="solid-icon1">Documentation content</sgds-tab-panel>
+            <sgds-tab-panel name="solid-icon2">Code examples</sgds-tab-panel>
+            <sgds-tab-panel name="solid-icon3">Help and support</sgds-tab-panel>
+          </sgds-tab-group>
+        </div>
       </div>
 
-      <div>
-        <h2>Compact</h2>
-        <sgds-tab-group density="compact">
-          <sgds-tab slot="nav" panel="c1">Alpha</sgds-tab>
-          <sgds-tab slot="nav" panel="c2">Beta</sgds-tab>
-          <sgds-tab slot="nav" panel="c3">Gamma</sgds-tab>
-          <sgds-tab-panel name="c1">Alpha content</sgds-tab-panel>
-          <sgds-tab-panel name="c2">Beta content</sgds-tab-panel>
-          <sgds-tab-panel name="c3">Gamma content</sgds-tab-panel>
-        </sgds-tab-group>
+      <!-- Vertical with Divider -->
+      <div class="example">
+        <h2>Vertical Layout (With Divider)</h2>
+        <div class="demo-container">
+          <div>
+            <sgds-tab-group orientation="vertical">
+              <sgds-tab slot="nav" panel="vd1">User Accounts</sgds-tab>
+              <sgds-tab slot="nav" panel="vd2">Access Roles</sgds-tab>
+              <sgds-tab slot="nav" panel="vd3">Permissions & Groups</sgds-tab>
+              <sgds-tab-panel name="vd1"
+                >Comprehensive user account management dashboard for administrators and team leads. Create new user
+                accounts with customized initial settings and onboarding workflows. Edit existing user profiles to
+                update contact information, department assignments, and account preferences. Reset forgotten passwords
+                securely and temporarily disable accounts as needed. Monitor detailed login history including
+                timestamps, IP addresses, and device information. Access comprehensive activity logs for security
+                auditing, compliance verification, and operational analytics. Export reports for external review and
+                archival purposes. Implement two-factor authentication and security policies across user
+                accounts.</sgds-tab-panel
+              >
+              <sgds-tab-panel name="vd2"
+                >Define, create, and manage organizational roles with customized responsibilities and authority levels.
+                Establish role hierarchies that reflect your organizational structure and reporting relationships.
+                Create custom roles with tailored permissions sculpted precisely to job functions. Assign users to
+                multiple roles for flexible team structures and project assignments. Manage role inheritance to
+                automatically cascade permissions through organizational layers. Configure role approval workflows for
+                compliance and governance requirements. Review comprehensive role-based access control settings with
+                detailed audit trails. Track all role changes and modifications for compliance documentation and
+                regulatory requirements.</sgds-tab-panel
+              >
+              <sgds-tab-panel name="vd3"
+                >Configure granular resource-level permissions and user groups for complete access management control.
+                Set specific permissions for individual files, folders, applications, and services. Create logical
+                permission groups based on organizational structure or project teams. Apply permission groups to users
+                for simplified ongoing access management. Manage dynamic group membership rules and automatic permission
+                updates. Enforce comprehensive security policies across your entire organization. Monitor permission
+                usage and access patterns for optimization. Implement principle of least privilege with detailed
+                permission reviews and periodic audits.</sgds-tab-panel
+              >
+            </sgds-tab-group>
+          </div>
+        </div>
       </div>
 
-      <div>
-        <h2>Disabled Tab</h2>
-        <sgds-tab-group>
-          <sgds-tab slot="nav" panel="d1">Active</sgds-tab>
-          <sgds-tab slot="nav" panel="d2" disabled>Disabled</sgds-tab>
-          <sgds-tab slot="nav" panel="d3">Another</sgds-tab>
-          <sgds-tab-panel name="d1">Active panel</sgds-tab-panel>
-          <sgds-tab-panel name="d2">Disabled panel</sgds-tab-panel>
-          <sgds-tab-panel name="d3">Another panel</sgds-tab-panel>
-        </sgds-tab-group>
+      <!-- Compact Density -->
+      <div class="example">
+        <h2>Compact Density</h2>
+        <div class="demo-container">
+          <sgds-tab-group density="compact">
+            <sgds-tab slot="nav" panel="c1">Alpha</sgds-tab>
+            <sgds-tab slot="nav" panel="c2">Beta</sgds-tab>
+            <sgds-tab slot="nav" panel="c3">Gamma</sgds-tab>
+            <sgds-tab slot="nav" panel="c4">Delta</sgds-tab>
+            <sgds-tab panel="c1">Alpha content</sgds-tab>
+            <sgds-tab-panel name="c2">Beta content</sgds-tab-panel>
+            <sgds-tab-panel name="c3">Gamma content</sgds-tab-panel>
+            <sgds-tab-panel name="c4">Delta content</sgds-tab-panel>
+          </sgds-tab-group>
+        </div>
+      </div>
+
+      <!-- Compact with Icons -->
+      <div class="example">
+        <h2>Compact Density with Icons</h2>
+        <div class="demo-container">
+          <sgds-tab-group density="compact">
+            <sgds-tab slot="nav" panel="ci1">
+              <sgds-icon name="phone" slot="icon"></sgds-icon>
+            </sgds-tab>
+            <sgds-tab slot="nav" panel="ci2">
+              <sgds-icon name="envelope" slot="icon"></sgds-icon>
+            </sgds-tab>
+            <sgds-tab slot="nav" panel="ci3">
+              <sgds-icon name="chat" slot="icon"></sgds-icon>
+            </sgds-tab>
+            <sgds-tab-panel name="ci1">Phone contact options</sgds-tab-panel>
+            <sgds-tab-panel name="ci2">Email contact options</sgds-tab-panel>
+            <sgds-tab-panel name="ci3">Chat support options</sgds-tab-panel>
+          </sgds-tab-group>
+        </div>
+      </div>
+
+      <!-- Disabled Tab -->
+      <div class="example">
+        <h2>Disabled Tab State</h2>
+        <div class="demo-container">
+          <sgds-tab-group>
+            <sgds-tab slot="nav" panel="e1">Enabled</sgds-tab>
+            <sgds-tab slot="nav" panel="e2" disabled>Disabled</sgds-tab>
+            <sgds-tab slot="nav" panel="e3">Enabled</sgds-tab>
+            <sgds-tab-panel name="e1">This tab is enabled</sgds-tab-panel>
+            <sgds-tab-panel name="e2">This tab is disabled and cannot be selected</sgds-tab-panel>
+            <sgds-tab-panel name="e3">This tab is also enabled</sgds-tab-panel>
+          </sgds-tab-group>
+        </div>
+      </div>
+
+      <!-- Solid + Vertical Combination -->
+      <div class="example">
+        <h2>Solid Variant + Vertical Layout</h2>
+        <div class="demo-container">
+          <div>
+            <sgds-tab-group variant="solid" orientation="vertical">
+              <sgds-tab slot="nav" panel="sv1">Section A</sgds-tab>
+              <sgds-tab slot="nav" panel="sv2">Section B</sgds-tab>
+              <sgds-tab slot="nav" panel="sv3">Section C</sgds-tab>
+              <sgds-tab-panel name="sv1">Section A content</sgds-tab-panel>
+              <sgds-tab-panel name="sv2">Section B content</sgds-tab-panel>
+              <sgds-tab-panel name="sv3">Section C content</sgds-tab-panel>
+            </sgds-tab-group>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mixed Disabled and Enabled -->
+      <div class="example">
+        <h2>Mixed Enabled and Disabled Tabs</h2>
+        <div class="demo-container">
+          <sgds-tab-group variant="solid">
+            <sgds-tab slot="nav" panel="m1">Public</sgds-tab>
+            <sgds-tab slot="nav" panel="m2" disabled>Private</sgds-tab>
+            <sgds-tab slot="nav" panel="m3">Shared</sgds-tab>
+            <sgds-tab slot="nav" panel="m4" disabled>Archived</sgds-tab>
+            <sgds-tab-panel name="m1">Public content accessible to all</sgds-tab-panel>
+            <sgds-tab-panel name="m2">Private content (requires upgrade)</sgds-tab-panel>
+            <sgds-tab-panel name="m3">Shared content with collaborators</sgds-tab-panel>
+            <sgds-tab-panel name="m4">Archived content (read-only)</sgds-tab-panel>
+          </sgds-tab-group>
+        </div>
       </div>
     </div>
   </body>

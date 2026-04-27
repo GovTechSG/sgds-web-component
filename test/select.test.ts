@@ -83,7 +83,7 @@ describe("<sgds-select>", () => {
     assert.shadowDom.equal(
       el,
       `
-        <div class="form-control-container select">
+        <div class="form-control-container m-width-160 select">
           <div class="form-control-group">
               <input
                 aria-invalid="false"

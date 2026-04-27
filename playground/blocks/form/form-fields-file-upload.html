@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form - File Upload Pattern</title>
+  <script type="module" src="../../../src/index.ts"></script>
+  <link href="../../../src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="../../../src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="../../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+  <link href="../../css/utility.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="sgds:bg-default sgds:p-0 sgds:m-0">
+  <div class="sgds-container sgds:py-layout-md">
+    <div class="sgds-grid sgds:gap-layout-md">
+      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8">
+        <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+              Document Submission
+            </h5>
+            <div class="sgds-grid sgds:gap-layout-md">
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Name" name="name" type="text" required hasFeedback="both"></sgds-input>
+              </div>
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Email" name="email" type="email" required hasFeedback="both"></sgds-input>
+              </div>
+            </div>
+            <!-- Full-width file upload 1 -->
+            <div>
+              <sgds-file-upload label="Upload ID" name="idDocument" required hasFeedback="both">Choose files</sgds-file-upload>
+            </div>
+            <!-- Full-width file upload 2 -->
+            <div>
+              <sgds-file-upload label="Upload Proof of Address" name="addressProof" required hasFeedback="both">Choose files</sgds-file-upload>
+            </div>
+            <!-- Full-width file upload 3 -->
+            <div>
+              <sgds-file-upload label="Additional Documents" name="additionalDocs" hasFeedback="both">Choose files</sgds-file-upload>
+            </div>
+          </div>
+          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
+            <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+            <sgds-button type="submit">Upload Documents</sgds-button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
+<!--
+POSITIONING: Center
+FIELDS: 4-col pairs + full-width file uploads
+SECTIONS: Single section
+Reference: form-layout.md (Full-Width Components)
+-->

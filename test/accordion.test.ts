@@ -235,4 +235,46 @@ describe("<sgds-accordion-item>", () => {
     const accordionBody = el.shadowRoot?.querySelector(".accordion-body") as HTMLButtonElement;
     expect(accordionBody?.classList.contains("hidden")).to.be.true;
   });
+
+  it("accordion-btn should use --sgds-font-size-subtitle-sm and --sgds-line-height-2-xs for compact density", async () => {
+    const el = await fixture<SgdsAccordionItem>(html`<sgds-accordion-item density="compact"></sgds-accordion-item>`);
+    const button = el.shadowRoot?.querySelector<HTMLElement>(".accordion-btn");
+    el.style.setProperty("--sgds-font-size-subtitle-sm", "14px");
+    el.style.setProperty("--sgds-line-height-2-xs", "20px");
+    await el.updateComplete;
+    expect(getComputedStyle(button!).fontSize).to.equal("14px");
+    expect(getComputedStyle(button!).lineHeight).to.equal("20px");
+  });
+
+  it("accordion-btn should use --sgds-font-size-subtitle-md and --sgds-line-height-xs for default density", async () => {
+    const el = await fixture<SgdsAccordionItem>(html`<sgds-accordion-item></sgds-accordion-item>`);
+    const button = el.shadowRoot?.querySelector<HTMLElement>(".accordion-btn");
+    el.style.setProperty("--sgds-font-size-subtitle-md", "18px");
+    el.style.setProperty("--sgds-line-height-xs", "24px");
+    await el.updateComplete;
+    expect(getComputedStyle(button!).fontSize).to.equal("18px");
+    expect(getComputedStyle(button!).lineHeight).to.equal("24px");
+  });
+
+  it("accordion-btn should use --sgds-font-size-heading-sm and --sgds-line-height-sm for spacious density", async () => {
+    const el = await fixture<SgdsAccordionItem>(html`<sgds-accordion-item density="spacious"></sgds-accordion-item>`);
+    const button = el.shadowRoot?.querySelector<HTMLElement>(".accordion-btn");
+    el.style.setProperty("--sgds-font-size-heading-sm", "24px");
+    el.style.setProperty("--sgds-line-height-sm", "28px");
+    await el.updateComplete;
+    expect(getComputedStyle(button!).fontSize).to.equal("24px");
+    expect(getComputedStyle(button!).lineHeight).to.equal("28px");
+  });
+
+  it("should have an icon slot inside the accordion button", async () => {
+    const el = await fixture<SgdsAccordionItem>(html`<sgds-accordion-item></sgds-accordion-item>`);
+    const button = el.shadowRoot?.querySelector(".accordion-btn");
+    expect(button?.querySelector("slot[name='icon']")).to.exist;
+  });
+
+  it("should have a badge slot inside accordion-header__trailing", async () => {
+    const el = await fixture<SgdsAccordionItem>(html`<sgds-accordion-item></sgds-accordion-item>`);
+    const trailing = el.shadowRoot?.querySelector(".accordion-header__trailing");
+    expect(trailing?.querySelector("slot[name='badge']")).to.exist;
+  });
 });

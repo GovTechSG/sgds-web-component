@@ -53,8 +53,24 @@ Title is added via `title` prop. Adding of title is optional.
 
 ## Alert link
 
-Use `<sgds-alert-link>` for links within the alert 
+Use `<sgds-alert-link>` for links within the alert
 
 <Canvas of={AlertStories.WithLink}>
   <Story of={AlertStories.WithLink} />
+</Canvas>
+
+## Action slot (filled)
+
+Use the `action` slot to place a call-to-action button inside a filled alert. Pass `<sgds-button>` with `variant="outline"` and `size="sm"`. Use `tone="fixed-light"` for all variants except `warning`, which uses `tone="fixed-dark"` to maintain contrast against the light background.
+
+<Canvas of={AlertStories.FilledWithAction}>
+  <Story of={AlertStories.FilledWithAction} />
+</Canvas>
+
+## Action slot (outlined)
+
+For outlined alerts, use `<sgds-button>` with `variant="outline"`, `size="sm"`, and `tone="neutral"`.
+
+<Canvas of={AlertStories.OutlinedWithAction}>
+  <Story of={AlertStories.OutlinedWithAction} />
 </Canvas>

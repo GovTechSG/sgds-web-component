@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "3.16.0",
+  "version": "3.17.0",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -34,7 +34,8 @@
     "generate:icons": "node scripts/generateIconRegistry.js",
     "chromatic": "chromatic",
     "utility:dev": "tailwindcss -i ./src/css/utility.css -o ./playground/css/utility.css --config tailwind.config.js --watch",
-    "utility:storybook": "tailwindcss -i ./src/css/utility.css -o ./.storybook/utility.css --config tailwind.config.js"
+    "utility:storybook": "tailwindcss -i ./src/css/utility.css -o ./.storybook/utility.css --config tailwind.config.js",
+    "scan:snyk-agent": "tsx scripts/snyk-agent-scan/index.ts"
   },
   "author": "GovTechSG",
   "contributors": [

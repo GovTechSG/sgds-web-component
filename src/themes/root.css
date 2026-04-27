@@ -418,13 +418,15 @@
   --sgds-z-index-200: 200;
   --sgds-z-index-400: 400;
   --sgds-z-index-800: 800;
+  --sgds-z-index-1600: 1600;
 
   /* Semantic - Z-Index */
   --sgds-z-index-base: var(--sgds-z-index-0);
   --sgds-z-index-raised: var(--sgds-z-index-100);
-  --sgds-z-index-floating: var(--sgds-z-index-200);
-  --sgds-z-index-overlay: var(--sgds-z-index-400);
-  --sgds-z-index-modal: var(--sgds-z-index-800);
+  --sgds-z-index-sticky: var(--sgds-z-index-200);
+  --sgds-z-index-floating: var(--sgds-z-index-400);
+  --sgds-z-index-overlay: var(--sgds-z-index-800);
+  --sgds-z-index-modal: var(--sgds-z-index-1600);
   /* Elevation */
   --sgds-elevation-surface-1: 0 0 2px 0 rgba(14, 14, 14, 0.16);
   --sgds-elevation-surface-2: 0 0 2px 0 rgba(14, 14, 14, 0.16), 0 2px 4px 0 rgba(14, 14, 14, 0.08);

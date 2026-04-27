@@ -1,17 +1,29 @@
+sgds-input {
+  --input-min-width: var(--sgds-dimension-0);
+}
 .input-group {
   align-items: stretch;
   display: flex;
-  flex-wrap: wrap;
-  position: relative;
-  gap: var(--sgds-form-gap-lg);
+  gap: var(--sgds-gap-none);
 }
 .input-group > sgds-input {
   flex: 1 1 auto;
   min-width: 0;
   position: relative;
+  z-index: 1;
+  --input-border-radius: 0;
+  margin-inline: calc(-1 * var(--sgds-form-border-width-default));
 }
-.input-group > sgds-input:focus {
+.input-group > sgds-input:focus-within {
   z-index: 3;
+}
+
+.input-group > sgds-icon-button.minus-btn {
+  --btn-border-radius: var(--sgds-form-border-radius-md) 0 0 var(--sgds-form-border-radius-md);
+}
+
+.input-group > sgds-icon-button.plus-btn {
+  --btn-border-radius: 0 var(--sgds-form-border-radius-md) var(--sgds-form-border-radius-md) 0;
 }
 
 .input-group sgds-button:focus {

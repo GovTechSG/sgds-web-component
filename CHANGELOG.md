@@ -1,3 +1,78 @@
+## v3.17.0 (2026-04-17)
+
+### Feat
+
+- **Accordion, AccordionItem**:  new spacious density, responsive typography, badge and icon slots [run-chromatic] (#591)
+- **Accordion**: new spacious density and slot
+- **Tab**: added new props to control divider
+- **Form**: apply min width 160 to combobox, input, select
+- **Sidebar**: new sidebar component [skip-cd] (#570)
+- **Sidebar**: added handling for 3 level of side bar option
+- *****: react types definition for better intellisense and custom element manifest [skip-cd] (#586)
+
+### Fix
+
+- **Tabs, Toast, Radio**: new autofocus prop on Radio, styling fixes for Tabs and Toast [skip-cd] (#602)
+- *****: z-index in components [run-chromatic][skip-cd] (#585)
+- **Alert**: close button colour fixed dark in warning filled [run-chromatic] (#594)
+- **Alert**: visual refinements
+- **Alert**: close button colour fixed dark in warning filled
+- **Toast**: ui enhancements on spacings,icon, link sizes, typography [skip-cd][run-chromatic] (#595)
+- **Toast**: ui enhancements on spacings,icon, link sizes, typography
+- **Alert**: ui enhancements on spacings, icon , link sizes, typography
+- **Tooltip**: z index management
+- **Subnav**: z-index management
+- **Dropdown**: menu z-index management
+- **ToastContainer**: z-index management
+- **Modal**: z-index management
+- **Mainnav**: z-index management
+- **Drawer**: z-index management
+- **Sidenav**: remove outer most padding
+
+### Refactor
+
+- **Accordion**: header button always semibold
+- **Accordino**: compact content paddings
+- **Accordion**: compact button padding increase tomd
+- **Accordion**: use responsive tokens for the typography of accordion items
+- *****: define display block at sgds element by default and allo… [run-chromatic] (#593)
+- **Skills**: refine sidebar restricting width (#597)
+- **Skills**: refine sidebar restricting width
+- **Skills**: improve skill (#598)
+- **Skills**: improve skill
+- **Subnav**: move z-index to light dom
+- *****: define display block at sgds element by default and allow ovveride on component level
+- **Skills**: typography content
+
+## v3.16.0 (2026-04-02)
+
+### Feat
+
+- *****: add custom elements manifest into the repository
+- *****: typescript support and intellisense for react users
+- **Theming**: govtech brand colours (#584)
+- **themes**: add gt colour schemes
+- **Utility**: added new elevation tokens [run-chromatic][skip-cd] (#580)
+- **Utility**: added new elevation tokens
+- **Modal**: make close button optional [run-chromatic][skip-cd] (#583)
+- **Playground**: updated playground, to be dynamic and added all com… (#582)
+- **Playground**: updated playground, to be dynamic and added all components
+- **Skills**: update modal noCloseButton in skills
+- **Modal**: noCloseButton prop to make close button optional
+- **Skills**: more explicit token naming for border and text colors
+- **Skills**: always use utilties to style rule
+
+### Fix
+
+- **Skills**: add rule not to use raw tailiwind max widht on containers
+- **Accordion**: caret size sgds icon based on density using reactive props
+
+### Refactor
+
+- **Skills**: nextjs instructions enhancements [run-chromatic] (#581)
+- **Skills**: add a note to use divider compoentn over border wfor divider
+- **Skills**: explicitly no href prop
+
 ## v3.15.0 (2026-03-20)
 
 ### Feat
