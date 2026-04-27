@@ -15,27 +15,34 @@
     </sgds-mainnav>
   </div>
 
-  <div class="sgds:bg-surface-default sgds:min-h-screen">
-    <div class="sgds:w-container sgds:mx-auto sgds:py-layout-md">
-      <!-- Page header with actions -->
-      <div class="sgds:flex sgds:items-start sgds:justify-between sgds:mb-layout-md">
-        <div>
-          <h1 class="sgds:text-2xl sgds:font-semibold sgds:text-default">Edit profile</h1>
-          <p class="sgds:text-sm sgds:text-muted sgds:mt-1">Update your personal details and preferences.</p>
+  <!-- Page header -->
+  <section class="sgds:bg-default sgds:py-layout-lg">
+    <div class="sgds-container">
+      <div class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left" style="max-width: var(--sgds-text-max-width);">
+        <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+          Profile Settings
         </div>
-        <div class="sgds:flex sgds:gap-component-sm sgds:shrink-0 sgds:ml-layout-sm">
-          <sgds-button variant="outline">Cancel</sgds-button>
-          <sgds-button variant="primary" type="submit" form="profile-form">Save changes</sgds-button>
-        </div>
+        <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
+          Edit profile
+        </h1>
+        <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
+          Update your personal details and preferences.
+        </p>
       </div>
+    </div>
+  </section>
+
+  <section class="sgds:bg-surface-default sgds:min-h-screen">
+    <div class="sgds-container">
+
 
       <form id="profile-form">
         <!-- Section 1: Personal information -->
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-              <h2 class="sgds:text-base sgds:font-semibold sgds:text-default">Personal information</h2>
-              <p class="sgds:text-sm sgds:text-muted sgds:mt-1">
+              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Personal information</h3>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
                 Your name and contact details. Only your agency administrator can see this information.
               </p>
             </div>
@@ -80,8 +87,8 @@
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-              <h2 class="sgds:text-base sgds:font-semibold sgds:text-default">Role &amp; access</h2>
-              <p class="sgds:text-sm sgds:text-muted sgds:mt-1">
+              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Role &amp; access</h3>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
                 Your position and assigned permissions within the system.
               </p>
             </div>
@@ -107,8 +114,8 @@
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-              <h2 class="sgds:text-base sgds:font-semibold sgds:text-default">Notes</h2>
-              <p class="sgds:text-sm sgds:text-muted sgds:mt-1">
+              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Notes</h3>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
                 Optional additional context visible to your team.
               </p>
             </div>
@@ -133,7 +140,7 @@
         </div>
       </form>
     </div>
-  </div>
+  </section>
 
   <sgds-footer></sgds-footer>
 </body>
