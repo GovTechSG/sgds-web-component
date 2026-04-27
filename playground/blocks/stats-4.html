@@ -1,0 +1,95 @@
+<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<style>
+  .stats-row { display: flex; flex-wrap: wrap; gap: var(--sgds-gap-layout-md); }
+  .stats-row > * { width: 100%; }
+  @media (width >= 1024px) {
+    .stats-row { flex-wrap: nowrap; }
+    .stats-row > * { flex: 1; width: auto; }
+  }
+</style>
+
+<body>
+  <!-- Stats Block — section header + 4 stats
+       Background : bg-surface-default
+       Spacing    : py-layout-md, gap-layout-md
+  -->
+  <section class="sgds:bg-default sgds:py-layout-md">
+    <div class="sgds-container">
+      <div style="display: flex; flex-direction: column; gap: var(--sgds-gap-layout-md);">
+
+        <!-- Section header -->
+        <div style="max-width: var(--sgds-text-max-width);">
+          <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+            By the Numbers
+          </div>
+          <h2 class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
+            Impact at a Glance
+          </h2>
+          <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle sgds:mb-0">
+            Key metrics measured over the past 12 months across all participating agencies.
+          </p>
+        </div>
+
+        <!-- 4 stats -->
+        <div class="stats-row">
+
+          <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+            <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
+              2.4M
+            </div>
+            <h5 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default">
+              Active Users
+            </h5>
+            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:text-body-subtle sgds:mb-0">
+              Residents actively using the platform to access government services each month.
+            </p>
+          </div>
+
+          <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+            <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
+              400+
+            </div>
+            <h5 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default">
+              Government Services
+            </h5>
+            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:text-body-subtle sgds:mb-0">
+              Integrated services from agencies across the public sector in one place.
+            </p>
+          </div>
+
+          <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+            <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
+              99.9%
+            </div>
+            <h5 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default">
+              Platform Uptime
+            </h5>
+            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:text-body-subtle sgds:mb-0">
+              Consistently high availability so residents can access services anytime.
+            </p>
+          </div>
+
+          <div class="sgds:flex sgds:flex-col sgds:items-start" style="padding-right: var(--sgds-spacing-layout-xs);">
+            <div class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:text-display-default">
+              16
+            </div>
+            <h5 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default">
+              Partner Agencies
+            </h5>
+            <p class="sgds:text-body-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:text-body-subtle sgds:mb-0">
+              Public agencies contributing services and data to the shared platform.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+</body>

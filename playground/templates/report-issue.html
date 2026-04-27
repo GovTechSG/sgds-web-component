@@ -1,3 +1,4 @@
+<html style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
 <link href="../css/fonts.css" rel="stylesheet" type="text/css" />
 <script type="module" src="../../src/index.ts"></script>
 <link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
@@ -26,57 +27,51 @@
           <div id="view-form">
 
             <div class="sgds:mb-layout-md">
-              <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-display-default">
+              <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
                 Report an Issue
               </h1>
-              <p class="sgds:text-body-md sgds:font-regular sgds:leading-md sgds:text-default">
+              <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
                 Help us improve by reporting problems in your area. We aim to respond within 3 working days.
               </p>
             </div>
 
-            <form id="report-issue-form" novalidate>
+            <form id="report-issue-form" class="sgds:flex sgds:flex-col sgds:gap-form-2-xl" novalidate>
 
-              <div class="sgds:mb-lg">
-                <sgds-input
-                  type="text"
-                  label="Location"
-                  name="location"
-                  placeholder="e.g. Blk 123 Ang Mo Kio Ave 6, near bus stop"
-                  hintText="Enter a street address or describe the location"
-                  required
-                  hasFeedback="both"
-                  invalidFeedback="Please enter the location of the issue"
-                ></sgds-input>
-              </div>
+              <sgds-input
+                type="text"
+                label="Location"
+                name="location"
+                placeholder="e.g. Blk 123 Ang Mo Kio Ave 6, near bus stop"
+                hintText="Enter a street address or describe the location"
+                required
+                hasFeedback="both"
+                invalidFeedback="Please enter the location of the issue"
+              ></sgds-input>
 
-              <div class="sgds:mb-lg">
-                <sgds-textarea
-                  label="Description"
-                  name="description"
-                  placeholder="Describe the issue in detail - what it is, how long it has been there, and any safety concerns"
-                  hintText="Minimum 20 characters"
-                  rows="5"
-                  maxlength="500"
-                  required
-                  hasFeedback="both"
-                  invalidFeedback="Please describe the issue (at least 20 characters)"
-                ></sgds-textarea>
-              </div>
+              <sgds-textarea
+                label="Description"
+                name="description"
+                placeholder="Describe the issue in detail - what it is, how long it has been there, and any safety concerns"
+                hintText="Minimum 20 characters"
+                rows="5"
+                maxlength="500"
+                required
+                hasFeedback="both"
+                invalidFeedback="Please describe the issue (at least 20 characters)"
+              ></sgds-textarea>
 
-              <div class="sgds:mb-layout-md">
-                <sgds-file-upload
-                  id="photo-upload"
-                  label="Photos (optional)"
-                  name="photos"
-                  accept="image/*"
-                  multiple
-                  hintText="Upload up to 3 photos. JPEG or PNG, max 5MB each."
-                >
-                  Upload Photos
-                </sgds-file-upload>
-              </div>
+              <sgds-file-upload
+                id="photo-upload"
+                label="Photos (optional)"
+                name="photos"
+                accept="image/*"
+                multiple
+                hintText="Upload up to 3 photos. JPEG or PNG, max 5MB each."
+              >
+                Upload Photos
+              </sgds-file-upload>
 
-              <sgds-button id="submit-btn" type="submit" variant="primary" size="md">
+              <sgds-button id="submit-btn" type="submit" variant="primary" size="md" class="sgds:self-end">
                 Submit Report
               </sgds-button>
 
@@ -90,12 +85,14 @@
               <sgds-icon name="check-circle-fill" size="3-xl" style="color: var(--sgds-success-color-default);"></sgds-icon>
             </div>
 
-            <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-display-default sgds:mb-xs">
-              Report Submitted
-            </h1>
-            <p class="sgds:text-body-md sgds:font-regular sgds:leading-md sgds:text-default sgds:mb-layout-sm">
-              Thank you for helping us keep the community safe and clean.
-            </p>
+            <div class="sgds:mb-layout-md">
+              <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
+                Report Submitted
+              </h1>
+              <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
+                Thank you for helping us keep the community safe and clean.
+              </p>
+            </div>
 
             <div class="sgds:mb-layout-sm">
               <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
@@ -134,9 +131,11 @@
               </ul>
             </div>
 
-            <sgds-button id="new-report-btn" variant="outline" size="md">
-              Submit Another Report
-            </sgds-button>
+            <div class="sgds:flex sgds:justify-end">
+              <sgds-button id="new-report-btn" variant="outline" size="md">
+                Submit Another Report
+              </sgds-button>
+            </div>
 
           </div>
 

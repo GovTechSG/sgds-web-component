@@ -15,18 +15,13 @@
 </style>
 
 <body>
-  <sgds-masthead></sgds-masthead>
-  <sgds-mainnav>
-    <strong slot="brand">My Organisation</strong>
-  </sgds-mainnav>
-
   <!-- Feature Block — component left 6 cols / content right 6 cols
        Background : bg-surface-default
        Spacing    : py-layout-lg, gap-layout-md
        Alignment  : items-start (top-aligned)
        Component  : replace <sgds-accordion> with any component
   -->
-  <section class="sgds:bg-default sgds:py-layout-lg">
+  <section class="sgds:bg-default sgds:py-layout-lg sgds:min-h-[600px]">
     <div class="sgds-container">
       <div class="sgds-grid sgds:items-start" style="gap: var(--sgds-gap-layout-md);">
 
@@ -62,12 +57,9 @@
               Supporting subtitle text that provides context and detail for the feature being described.
             </h5>
           </div>
-          <sgds-button variant="primary" size="md">Get Started</sgds-button>
+          <sgds-button variant="primary" tone="neutral" size="md">Get Started</sgds-button>
         </div>
 
       </div>
     </div>
-  </section>
-
-  <sgds-footer></sgds-footer>
-</body>
+  </section></body>

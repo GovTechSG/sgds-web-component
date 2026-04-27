@@ -27,7 +27,7 @@ export default defineConfig({
             const playgroundDir = path.resolve("./playground");
             const files = [];
 
-            const recursivelyFindHtmlFiles = (dir, folderName = null) => {
+            const recursivelyFindHtmlFiles = (dir, rootFolder = null, subPath = "") => {
               const entries = fs.readdirSync(dir, { withFileTypes: true });
               entries.forEach(entry => {
                 if (
@@ -36,14 +36,16 @@ export default defineConfig({
                   entry.name !== "index.html" &&
                   !entry.name.startsWith(".")
                 ) {
+                  const filePath = subPath ? `${subPath}/${entry.name}` : entry.name;
                   files.push({
                     filename: entry.name,
-                    folder: folderName,
-                    url: folderName ? `./playground/${folderName}/${entry.name}` : `./playground/${entry.name}`,
+                    folder: rootFolder,
+                    url: `./playground/${filePath}`,
                     title: entry.name.replace(".html", "")
                   });
                 } else if (entry.isDirectory() && !entry.name.startsWith(".")) {
-                  recursivelyFindHtmlFiles(path.join(dir, entry.name), entry.name);
+                  const nextSubPath = subPath ? `${subPath}/${entry.name}` : entry.name;
+                  recursivelyFindHtmlFiles(path.join(dir, entry.name), rootFolder || entry.name, nextSubPath);
                 }
               });
             };

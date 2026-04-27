@@ -1,0 +1,48 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Text Max Width</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <p class="sgds:mb-2-xl sgds:text-subtle">A single max-width token for constraining text content areas to an optimal reading width.</p>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Token</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Value</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:max-w-text</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-text-max-width</code></sgds-table-cell>
+        <sgds-table-cell>864px</sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Preview</h2>
+    <p class="sgds:mb-md sgds:text-subtle">The paragraph below is constrained to <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:max-w-text</code> (864px) for comfortable reading.</p>
+    <div class="sgds:max-w-text sgds:bg-primary-surface-muted sgds:p-md sgds:rounded-md">
+      <p class="sgds:text-label-sm sgds:text-subtle sgds:mb-xs">max-w-text — 864px</p>
+      <p>This paragraph is constrained to the text max-width token, keeping line lengths within a comfortable reading range regardless of the viewport width.</p>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById("night-theme").addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+    });
+  </script>
+</body>
