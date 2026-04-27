@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form - Radio Group Pattern</title>
+  <script type="module" src="../../../src/index.ts"></script>
+  <link href="../../../src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="../../../src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="../../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+  <link href="../../css/utility.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="sgds:bg-default sgds:p-0 sgds:m-0">
+  <div class="sgds-container sgds:py-layout-md">
+    <div class="sgds-grid sgds:gap-layout-md">
+      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
+        <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+            <h5 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0">
+              Survey
+            </h5>
+            <div class="sgds-grid sgds:gap-layout-md">
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Name" name="name" type="text" required hasFeedback="both"></sgds-input>
+              </div>
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Email" name="email" type="email" required hasFeedback="both"></sgds-input>
+              </div>
+            </div>
+            <!-- Full-width radio group 1 -->
+            <div>
+              <sgds-radio-group label="How satisfied are you?" name="satisfaction" required hasFeedback="both">
+                <sgds-radio value="very-satisfied">Very satisfied</sgds-radio>
+                <sgds-radio value="satisfied">Satisfied</sgds-radio>
+                <sgds-radio value="neutral">Neutral</sgds-radio>
+                <sgds-radio value="dissatisfied">Dissatisfied</sgds-radio>
+              </sgds-radio-group>
+            </div>
+            <!-- Full-width radio group 2 -->
+            <div>
+              <sgds-radio-group label="How likely to recommend?" name="likelihood" required hasFeedback="both">
+                <sgds-radio value="very-likely">Very likely</sgds-radio>
+                <sgds-radio value="likely">Likely</sgds-radio>
+                <sgds-radio value="unlikely">Unlikely</sgds-radio>
+              </sgds-radio-group>
+            </div>
+          </div>
+          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
+            <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+            <sgds-button type="submit">Submit Survey</sgds-button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
+<!--
+POSITIONING: Left
+FIELDS: 4-col pairs + full-width radio groups
+SECTIONS: Single section
+Reference: form-layout.md (Full-Width Components)
+-->

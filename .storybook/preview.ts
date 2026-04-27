@@ -84,10 +84,11 @@ export const parameters = {
         "Utilities",
         ["Introduction", "Spacing", ["Introduction"]],
         "Components",
+        "Patterns",
+        "Blocks",
         "Templates",
         ["Introduction"],
-        "Troubleshoot",
-        "Patterns"
+        "Troubleshoot"
       ]
     }
   }
