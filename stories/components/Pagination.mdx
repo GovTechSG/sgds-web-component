@@ -1,0 +1,81 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as PaginationStories from "./Pagination.stories";
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+The Pagination component enables the user to select a specific page from a range of pages
+
+<Canvas>
+  <Story of={PaginationStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsPagination  from "@govtechsg/sgds-web-component/react/pagination/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/Pagination";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/Pagination/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-pagination
+
+<ArgTypes of="sgds-pagination" />
+
+import { MockPagination } from "../../mocks/pagination.ts";
+
+## Pagination with API sample
+
+The `<sgds-pagination>` component will include some props which is needed for the pagination to work. Users will be required to provide the data objects to be passed in as data length `dataLength`,
+a current page `currentPage` set as initial active, and set the number of data items to be rendered per page `itemsPerPage`. Listen to `sgds-page-change` event for page changes and populate back the logic to `sgds-table` component. Below is a sample of pagination with a table formatted data.
+
+<Canvas of={PaginationStories.PaginationWithAPI}>
+  <Story of={PaginationStories.PaginationWithAPI} />
+</Canvas>
+
+
+## Sizes
+
+Pagination sizes can be `sm` or `md`. By default, the size is set at `md`
+
+<Canvas of={PaginationStories.PaginationSizes}>
+  <Story of={PaginationStories.PaginationSizes} />
+</Canvas>
+
+## Variant
+
+There are different variants of pagination offered: `default`, `number`, `button` and `description`
+
+- The `default` pagination includes navigation buttons and page number buttons 
+- The `number` pagination only has page number buttons 
+- The `button` pagination only has navigation buttons, typically used for mobile. 
+- The `description` pagination has navigation buttons with a description text to tell users the current page and the total pages
+
+<Canvas of={PaginationStories.PaginationVariants}>
+  <Story of={PaginationStories.PaginationVariants} />
+</Canvas>
+
+## Navigation
+
+There are two types of navigation buttons to choose from `navigation="icon-button"` or `navigation="button"`
+
+<Canvas of={PaginationStories.Navigation}>
+  <Story of={PaginationStories.Navigation} />
+</Canvas>
+

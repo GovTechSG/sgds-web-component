@@ -1,0 +1,60 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as DividerStories from "./Divider.stories";
+
+<Meta of={DividerStories} />
+
+# Divider
+
+A divider is a thin line that groups content in lists and layouts. They bring clarity to a layout by grouping and dividing content in close proximity.
+
+<Canvas>
+  <Story of={DividerStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsDivider  from "@govtechsg/sgds-web-component/react/divider/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/Divider";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/Divider/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-divider
+
+<ArgTypes of="sgds-divider" />
+
+## Vertical orientation 
+
+By default, the divider is of horizontal orientation.
+
+Change to vertical orientation by setting `orientation="vertical"`.
+Ensure that the parent container has a height. 
+
+<Canvas of={DividerStories.Orientation}>
+  <Story of={DividerStories.Orientation} />
+</Canvas>
+
+## Thickness 
+
+By default, the divider is of horizontal orientation.
+
+Change to vertical orientation by setting `orientation="vertical"`
+
+<Canvas of={DividerStories.Thickness}>
+  <Story of={DividerStories.Thickness} />
+</Canvas>

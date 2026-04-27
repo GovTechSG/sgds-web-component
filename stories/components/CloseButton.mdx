@@ -1,0 +1,74 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as CloseButtonStories from "./CloseButton.stories";
+
+<Meta of={CloseButtonStories} />
+
+# CloseButton
+
+Close button for closing actions. Used in Modal, Drawer, Alert and Toast.
+
+<Canvas>
+  <Story of={CloseButtonStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsCloseButton  from "@govtechsg/sgds-web-component/react/close-button/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/CloseButton";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/CloseButton/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-close-button
+
+<ArgTypes of="sgds-close-button" />
+
+# Additional Usage for sgds-close-button
+
+This section demonstrates the `size` and `tone` props for the `sgds-close-button` component.
+
+## Sizes
+
+Use the `size` prop to render different button sizes:
+
+<Canvas of={CloseButtonStories.Sizes}>
+  <Story of={CloseButtonStories.Sizes} />
+</Canvas>
+
+- `sm`: Small
+- `md`: Medium (default)
+
+## Tones
+
+Use the `tone` prop to change the visual style. Each tone is shown below:
+
+### Default
+<Canvas of={CloseButtonStories.ToneDefault}>
+  <Story of={CloseButtonStories.ToneDefault} />
+</Canvas>
+
+
+### Fixed-dark (for light backgrounds)
+<Canvas of={CloseButtonStories.ToneFixedDark}>
+  <Story of={CloseButtonStories.ToneFixedDark} />
+</Canvas>
+
+### Fixed-light (for dark backgrounds)
+<Canvas of={CloseButtonStories.ToneFixedLight}>
+  <Story of={CloseButtonStories.ToneFixedLight} />
+</Canvas>

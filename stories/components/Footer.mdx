@@ -1,0 +1,47 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as FooterStories from "./Footer.stories";
+
+<Meta of={FooterStories} />
+
+# Footer
+
+The footer item component organizes links under a clear, descriptive title within the footer. It helps users easily navigate to related resources or information, ensuring clarity and accessibility.<br/>The footer contains supporting information for your service at the bottom of your website. All .gov.sg digital services shall contain a Global Footer Bar across all pages. The Global Footer Bar should include the name of the digital service, contact information, a privacy statement and the terms of use.
+
+<Canvas>
+  <Story of={FooterStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsFooterItem  from "@govtechsg/sgds-web-component/react/footer-item/index.js";
+    ```
+
+    ``` jsx
+    import SgdsFooter  from "@govtechsg/sgds-web-component/react/footer/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/Footer";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/Footer/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-footer-item
+
+<ArgTypes of="sgds-footer-item" />
+
+### sgds-footer
+
+<ArgTypes of="sgds-footer" />

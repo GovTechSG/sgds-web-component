@@ -1,0 +1,82 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as TooltipStories from "./Tooltip.stories";
+
+<Meta of={TooltipStories} />
+
+# Tooltip
+
+Tooltips display more information when users hover over, focus on, or interact with an element.
+
+<Canvas>
+  <Story of={TooltipStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsTooltip  from "@govtechsg/sgds-web-component/react/tooltip/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/Tooltip";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/Tooltip/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-tooltip
+
+<ArgTypes of="sgds-tooltip" />
+
+## Methods
+
+### sgds-tooltip
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show()</td>
+      <td>Show tooltip</td>
+    </tr>
+    <tr>
+      <td>hide()</td>
+      <td>Hide tooltip</td>
+    </tr>
+    <tr>
+      <td>toggle()</td>
+      <td>Toggle tooltip</td>
+    </tr>
+  </tbody>
+</table>
+
+## Placement
+
+Change `placement` of tooltip relative to its target child
+
+<Canvas of={TooltipStories.Placement}>
+  <Story of={TooltipStories.Placement} />
+</Canvas>
+
+## Trigger
+
+Change `trigger` of tooltip to invoke the tooltip differently
+
+<Canvas of={TooltipStories.Trigger}>
+  <Story of={TooltipStories.Trigger} />
+</Canvas>

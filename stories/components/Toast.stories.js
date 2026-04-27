@@ -1,0 +1,189 @@
+
+    import { Template, args, parameters, play } from "../templates/Toast/basic.js";
+
+    export default {
+      title: 'Components/Toast',
+      component: 'sgds-toast',
+      argTypes: {"position":{"control":"select","options":["top-start","top-center","top-end","middle-start","middle-center","middle-end","bottom-start","bottom-center","bottom-end"]},"show":{"defaultValue":false,"control":"boolean"},"title":{"defaultValue":"Title","control":"text"},"noAnimation":{"defaultValue":false,"control":"boolean"},"autohide":{"defaultValue":false,"control":"boolean"},"delay":{"defaultValue":"5000","control":"number"},"variant":{"defaultValue":"info","control":"select","options":["success","warning","danger","info"]},"dismissible":{"defaultValue":false,"control":"boolean"}}
+    }
+
+    export const Basic = {
+      render: Template.bind({}),
+      name: "Basic",
+      args,
+      parameters,
+      ...(play ? { play } : {}),
+    }
+  
+import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
+
+function capitalizeFirstLetter(val) {
+  return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
+const VariantTemplate = args =>
+  html`
+    <sgds-toast show variant=${ifDefined(args.variant)} dismissible title=${capitalizeFirstLetter(args.variant)}>
+      ${args.variant === "success"
+        ? html`<sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>`
+        : args.variant === "danger"
+        ? html`<sgds-icon slot="icon" name="exclamation-circle-fill" size="md"></sgds-icon>`
+        : args.variant === "warning"
+        ? html`<sgds-icon slot="icon" name="exclamation-triangle-fill" size="md"></sgds-icon>`
+        : html`<sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>`}
+      Message
+      <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
+    </sgds-toast>
+  `;
+
+export const InfoVariant = {
+  render: VariantTemplate.bind({}),
+  name: "Variant info",
+  args: { variant: "info" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const SuccessVariant = {
+  render: VariantTemplate.bind({}),
+  name: "Variant success",
+  args: { variant: "success" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const DangerVariant = {
+  render: VariantTemplate.bind({}),
+  name: "Variant danger",
+  args: { variant: "danger" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const WarningVariant = {
+  render: VariantTemplate.bind({}),
+  name: "Variant warning",
+  args: { variant: "warning" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const NeutralVariant = {
+  render: VariantTemplate.bind({}),
+  name: "Variant neutral",
+  args: { variant: "neutral" },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+const DismissibleTemplate = args =>
+  html`
+    <div class="d-flex-column">
+      <sgds-toast show dismissible title="Dismissible">
+        <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+        Message
+        <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
+      </sgds-toast>
+      <sgds-toast show title="Not dismissible">
+        <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+        Message
+        <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
+      </sgds-toast>
+    </div>
+  `;
+
+export const Dismissible = {
+  render: DismissibleTemplate.bind({}),
+  name: "Dismissible",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
+const PositionTemplate = args =>
+  html`
+    <div style="height:600px;">
+      <sgds-masthead></sgds-masthead>
+      <sgds-mainnav>
+        <img
+          alt="sgds logo"
+          width="130"
+          src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
+          slot="brand"
+        />
+      </sgds-mainnav>
+      <sgds-toast-container position=${ifDefined(args.position)}>
+        <sgds-toast
+          ?show=${args.show}
+          variant=${ifDefined(args.variant)}
+          ?autohide=${args.autohide}
+          delay=${ifDefined(args.delay)}
+          ?noAnimation=${args.noAnimation}
+          ?dismissable=${args.dismissable}
+          title=${ifDefined(args.title)}
+        >
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+          This is a toast notifications
+          <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
+        </sgds-toast>
+      </sgds-toast-container>
+    </div>
+  `;
+export const TopCenter = {
+  render: PositionTemplate.bind({}),
+  name: "Top center",
+  args: { ...args, position: "top-center" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const TopEnd = {
+  render: PositionTemplate.bind({}),
+  name: "Top end",
+  args: { ...args, position: "top-end" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const BottomStart = {
+  render: PositionTemplate.bind({}),
+  name: "Bottom start",
+  args: { ...args, position: "bottom-start" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const BottomCenter = {
+  render: PositionTemplate.bind({}),
+  name: "Bottom Center",
+  args: { ...args, position: "bottom-center" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const BottomEnd = {
+  render: PositionTemplate.bind({}),
+  name: "Bottom End",
+  args: { ...args, position: "bottom-end" },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+const StackingTemplate = () =>
+  html`
+    <div style="height:400px;">
+      <sgds-toast-container position=${ifDefined(args.position)}>
+        <sgds-toast show>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+          This is a toast notifications
+          <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
+        </sgds-toast>
+        <sgds-toast show>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+          This is a toast notifications
+          <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
+        </sgds-toast>
+      </sgds-toast-container>
+    </div>
+  `;
+
+export const Stacking = {
+  render: StackingTemplate.bind({}),
+  name: "Stacking the toasts",
+  args: { position: "bottom-end" },
+  parameters: {},
+  tags: ["!dev"]
+};

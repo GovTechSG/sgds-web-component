@@ -1,0 +1,44 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as TableOfContentsStories from "./TableOfContents.stories";
+
+<Meta of={TableOfContentsStories} />
+
+# TableOfContents
+
+Tables of contents provide a page overview and direct access to specific sections.
+
+<Canvas>
+  <Story of={TableOfContentsStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsTableOfContents  from "@govtechsg/sgds-web-component/react/table-of-contents/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/TableOfContents";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/TableOfContents/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-table-of-contents
+
+<ArgTypes of="sgds-table-of-contents" />
+
+## Pass in anchor tags to the `contents` slot
+
+For better SEO, anchor tags are to be passed by the user in the light dom. It is recommended to use `sgds-link` to wrap the anchor tags.
+Every `contents` slot requires an anchor element.

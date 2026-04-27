@@ -1,0 +1,103 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as AccordionStories from "./Accordion.stories";
+
+<Meta of={AccordionStories} />
+
+# Accordion
+
+A dropdown mechanism that allow users to either show or hide related content. `SgdsAccordion` is a wrapper to manage the behaviour for multiple `SgdsAccordionItems`
+
+<Canvas>
+  <Story of={AccordionStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsAccordionItem  from "@govtechsg/sgds-web-component/react/accordion-item/index.js";
+    ```
+
+    ``` jsx
+    import SgdsAccordion  from "@govtechsg/sgds-web-component/react/accordion/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/Accordion";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/Accordion/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-accordion-item
+
+<ArgTypes of="sgds-accordion-item" />
+
+### sgds-accordion
+
+<ArgTypes of="sgds-accordion" />
+
+## Methods
+
+### sgds-accordion-item
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show()</td>
+      <td>Shows the accordion.</td>
+    </tr>
+    <tr>
+      <td>hide()</td>
+      <td>Hide the accordion</td>
+    </tr>
+  </tbody>
+</table>
+
+## Border variant
+
+The default variant for accordion has no border. To enable bordered accordions, set `variant="border"` on `<sgds-accordion>`
+
+<Canvas of={AccordionStories.BorderVariant} >
+  <Story of={AccordionStories.BorderVariant} />
+</Canvas>
+
+## Density 
+
+To enable compact density, set `density="compact"` on `<sgds-accordion>`
+
+<Canvas of={AccordionStories.DensityVariant}>
+  <Story of={AccordionStories.DensityVariant} />
+</Canvas>
+
+## Allow multiple accordion to open together
+
+By default, only one accordion item remains active at a time. To allow multiple accordion items to remain open, set `allowMultiple` 
+prop to `<sgds-accordion>`
+
+<Canvas of={AccordionStories.AllowMultiple}>
+  <Story of={AccordionStories.AllowMultiple} />
+</Canvas>
+
+## Disable individual accordion items
+
+To disable individual accordion items, add `disabled` prop to the targeted `<sgds-accordion-item>`
+
+<Canvas of={AccordionStories.Disabled}>
+  <Story of={AccordionStories.Disabled} />
+</Canvas>  

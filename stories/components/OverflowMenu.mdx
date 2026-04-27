@@ -1,0 +1,53 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as OverflowMenuStories from "./OverflowMenu.stories";
+
+<Meta of={OverflowMenuStories} />
+
+# OverflowMenu
+
+An overflow menu is a UI element, often represented by three dots (⋮ or …), that opens a menu with additional actions or options.
+
+<Canvas>
+  <Story of={OverflowMenuStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsOverflowMenu  from "@govtechsg/sgds-web-component/react/overflow-menu/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/OverflowMenu";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/OverflowMenu/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-overflow-menu
+
+<ArgTypes of="sgds-overflow-menu" />
+
+## Sizes
+
+### Small size
+
+<Canvas of={OverflowMenuStories.SmallSize}>
+  <Story of={OverflowMenuStories.SmallSize} />
+</Canvas>
+
+### Medium size (default)
+
+<Canvas of={OverflowMenuStories.MediumSize}>
+  <Story of={OverflowMenuStories.MediumSize} />
+</Canvas>

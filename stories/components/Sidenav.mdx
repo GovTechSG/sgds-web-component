@@ -1,0 +1,160 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as SidenavStories from "./Sidenav.stories";
+
+<Meta of={SidenavStories} />
+
+# Sidenav
+
+The side navigation is used to display a list of links to move between pages within a related category.
+It is used as a secondary form of navigation where the primary navigation is located hierachically above the page frame.
+Maximum three levels of navigations are allowed.
+
+<Canvas>
+  <Story of={SidenavStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsSidenavItem  from "@govtechsg/sgds-web-component/react/sidenav-item/index.js";
+    ```
+
+    ``` jsx
+    import SgdsSidenavLink  from "@govtechsg/sgds-web-component/react/sidenav-link/index.js";
+    ```
+
+    ``` jsx
+    import SgdsSidenav  from "@govtechsg/sgds-web-component/react/sidenav/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/Sidenav";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/Sidenav/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-sidenav-item
+
+<ArgTypes of="sgds-sidenav-item" />
+
+### sgds-sidenav-link
+
+<ArgTypes of="sgds-sidenav-link" />
+
+### sgds-sidenav
+
+<ArgTypes of="sgds-sidenav" />
+
+## Methods
+
+### sgds-sidenav-item
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show()</td>
+      <td>
+        Shows the sidenav item. Only applicable to sgds-sidenav-item that are of
+        menu types
+      </td>
+    </tr>
+    <tr>
+      <td>hide()</td>
+      <td>
+        Hide the sidenav item. Only applicable to sgds-sidenav-item that are of
+        menu types
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## SgdsSidenavItem as a link
+
+SidenavItem can be configured as a link by passing in a single anchor tag element into the default slot
+
+<Canvas of={SidenavStories.SidenavItemAsLink}>
+  <Story of={SidenavStories.SidenavItemAsLink} />
+</Canvas>
+
+## SgdsSidenavItem as a menu 
+
+SidenavItem can be configured as a menu by passing in a SgdsSidenavLink into the default slot
+
+<Canvas of={SidenavStories.SidenavItemAsMenu}>
+  <Story of={SidenavStories.SidenavItemAsMenu} />
+</Canvas>
+
+## Embedded second level menu in SgdsSidenavItem
+
+SidenavItem accepts another SidenavItem as its children in the default slot. This results in a second level menu in the SidenavItem
+
+<Canvas of={SidenavStories.EmbeddedMenu}>
+  <Story of={SidenavStories.EmbeddedMenu} />
+</Canvas>
+
+## Icons 
+
+Icons show a visual indication of what the item category is about. Only add icons prefixed to the label at the first level 
+
+<Canvas of={SidenavStories.IconsOnFirstLevel}>
+  <Story of={SidenavStories.IconsOnFirstLevel} />
+</Canvas>
+
+## Active state 
+
+Both SgdsSidenavItem and SgdsSidenavLink have `active` state. 
+
+As a menu type, SgdsSidenavItem will be automatically assigned `active` to true when one of its SgdsSidenavLink children is active. When this happens, SgdsSidenavItem menu will be open on first load
+
+As a link type, add `active` prop to SgdsSidenavItem to achieve the active styles 
+
+
+### Active SgdsSidenavLink
+
+<Canvas of={SidenavStories.ActiveLinkState}>
+  <Story of={SidenavStories.ActiveLinkState} />
+</Canvas>
+
+### Active SgdsSidenavItem as link type
+
+<Canvas of={SidenavStories.ActiveaSidenavItemAsLinkState}>
+  <Story of={SidenavStories.ActiveaSidenavItemAsLinkState} />
+</Canvas>
+
+### Active SgdsSidenavItem as menu type
+
+<Canvas of={SidenavStories.ActiveaSidenavItemAsMenu}>
+  <Story of={SidenavStories.ActiveaSidenavItemAsMenu} />
+</Canvas>
+
+
+## Disabled state
+
+### Disabled SgdsSidenavItem
+
+<Canvas of={SidenavStories.DisabledItem}>
+  <Story of={SidenavStories.DisabledItem} />
+</Canvas>
+
+### Disabled SgdsSidenavLink
+
+<Canvas of={SidenavStories.DisabledLink}>
+  <Story of={SidenavStories.DisabledLink} />
+</Canvas>

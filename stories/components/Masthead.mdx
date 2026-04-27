@@ -1,0 +1,49 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as MastheadStories from "./Masthead.stories";
+
+<Meta of={MastheadStories} />
+
+# Masthead
+
+All .gov.sg digital services shall adopt The Official Government Banner for every page in the digital service and be placed at the top of the page.
+
+<Canvas>
+  <Story of={MastheadStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsMasthead  from "@govtechsg/sgds-web-component/react/masthead/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/Masthead";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/Masthead/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-masthead
+
+<ArgTypes of="sgds-masthead" />
+
+## Fluid
+
+By default, the Masthead content is contained within a max-width container. Use the `fluid` prop to remove this constraint and allow the content to stretch to the full screen width.
+
+- Use `fluid` masthead when you need the banner to span the full viewport width.
+
+<Canvas of={MastheadStories.Fluid}>
+  <Story of={MastheadStories.Fluid} />
+</Canvas>

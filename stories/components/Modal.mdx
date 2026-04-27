@@ -1,0 +1,132 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as ModalStories from "./Modal.stories";
+
+<Meta of={ModalStories} />
+
+# Modal
+
+The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
+
+<Canvas>
+  <Story of={ModalStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsModal  from "@govtechsg/sgds-web-component/react/modal/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/Modal";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/Modal/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-modal
+
+<ArgTypes of="sgds-modal" />
+
+## Methods
+
+### sgds-modal
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show()</td>
+      <td>Shows the dialog.</td>
+    </tr>
+    <tr>
+      <td>hide()</td>
+      <td>Hides the dialog</td>
+    </tr>
+  </tbody>
+</table>
+
+## Sizes
+
+### Small modal
+
+<Canvas of={ModalStories.SmallSize}>
+  <Story of={ModalStories.SmallSize} />
+</Canvas>
+
+### Medium modal (default)
+
+<Canvas of={ModalStories.MediumSize}>
+  <Story of={ModalStories.MediumSize} />
+</Canvas>
+
+### Large modal
+
+<Canvas of={ModalStories.LargeSize}>
+  <Story of={ModalStories.LargeSize} />
+</Canvas>
+
+### Extra large modal
+
+<Canvas of={ModalStories.ExtraLargeSize}>
+  <Story of={ModalStories.ExtraLargeSize} />
+</Canvas>
+
+### Fullscreen modal
+
+<Canvas of={ModalStories.FullscreenSize}>
+  <Story of={ModalStories.FullscreenSize} />
+</Canvas>
+
+
+## Long content 
+
+When content is long, auto-scrolling will be activated in the modal body. Modal header and footer are in fixed position
+
+<Canvas of={ModalStories.LongContent}>
+  <Story of={ModalStories.LongContent} />
+</Canvas>
+
+## No animation
+
+Disabled animation by setting `noAnimation` to true
+
+<Canvas of={ModalStories.noAnimation}>
+  <Story of={ModalStories.noAnimation} />
+</Canvas>
+
+## Prevent close
+
+The `sgds-close` event is cancelable, allowing you to prevent the modal from closing by calling `event.preventDefault()`. This is useful when you need to validate user input or confirm an action before allowing the modal to close.
+
+The event provides `event.detail.source` which indicates how the close was triggered:
+- `'close-button'` - User clicked the close button
+- `'overlay'` - User clicked the modal overlay
+- `'keyboard'` - User pressed the Escape key
+
+<Canvas of={ModalStories.PreventClose}>
+  <Story of={ModalStories.PreventClose} />
+</Canvas>
+
+## Remove close button
+
+Hide the close button in the modal header by setting `noCloseButton` to true. Users can still close the modal programmatically or via the overlay and keyboard.
+
+<Canvas of={ModalStories.NoCloseButton}>
+  <Story of={ModalStories.NoCloseButton} />
+</Canvas>

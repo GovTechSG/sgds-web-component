@@ -1,0 +1,51 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as IconListStories from "./IconList.stories";
+
+<Meta of={IconListStories} />
+
+# IconList
+
+A IconList can be used to display content related to the same topic. Each list item begins an icon.
+
+<Canvas>
+  <Story of={IconListStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsIconList  from "@govtechsg/sgds-web-component/react/icon-list/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/IconList";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/IconList/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-icon-list
+
+<ArgTypes of="sgds-icon-list" />
+
+## Sizes
+
+The default icon list size is medium. Add `size="lg"`,` size="sm"` for additional sizes.
+
+- `size="sm"`: Reduces the icon and text size.
+- Default (`size="md"`): Standard icon and text size, applied when no `size` attribute is specified
+- `size="lg"`: Increases both the icon and text size.
+
+<Canvas of={IconListStories.Sizes}>
+  <Story of={IconListStories.Sizes} />
+</Canvas>

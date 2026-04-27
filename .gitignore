@@ -5,7 +5,6 @@ storybook-static
 react
 src/react
 custom-elements.json
-stories/components
 stats.html
 *storybook.log
 .env

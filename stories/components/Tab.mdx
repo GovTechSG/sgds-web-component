@@ -1,0 +1,160 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as TabStories from "./Tab.stories";
+
+<Meta of={TabStories} />
+
+# Tab
+
+Tab Group organizes content into a container with the syncing of tab and their corresponding panels.
+Each tab must be slotted into the nav slot and its `panel` must refer to a tab panel of the same name.<br/>Tab panels are used inside tab groups to display tabbed content.<br/>Tabs are used within tab group to activate the tab panels
+
+<Canvas>
+  <Story of={TabStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsTabGroup  from "@govtechsg/sgds-web-component/react/tab-group/index.js";
+    ```
+
+    ``` jsx
+    import SgdsTabPanel  from "@govtechsg/sgds-web-component/react/tab-panel/index.js";
+    ```
+
+    ``` jsx
+    import SgdsTab  from "@govtechsg/sgds-web-component/react/tab/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/Tab";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/Tab/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-tab-group
+
+<ArgTypes of="sgds-tab-group" />
+
+### sgds-tab-panel
+
+<ArgTypes of="sgds-tab-panel" />
+
+### sgds-tab
+
+<ArgTypes of="sgds-tab" />
+
+## Methods
+
+### sgds-tab-group
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>show(panel: string)</td>
+      <td>Shows the specified tab panel.</td>
+    </tr>
+  </tbody>
+</table>
+## Methods ### sgds-tab
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>focus(options: FocusOptions)</td>
+      <td>Sets focus to the tab.</td>
+    </tr>
+    <tr>
+      <td>blur()</td>
+      <td>Removes focus from the tab.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Variants
+
+The variants of tab is controlled by `SgdsTabGroup`
+The default tab variant is `underlined`. Modify the `variant` prop to achieve solid tabs 
+
+### Underlined tabs (default)
+
+<Canvas of={TabStories.Basic}>
+  <Story of={TabStories.Basic} />
+</Canvas>
+
+### Solid tabs
+
+<Canvas of={TabStories.SolidVariant}>
+  <Story of={TabStories.SolidVariant} />
+</Canvas>
+
+## Density 
+
+The density of tabs is controlled by `SgdsTabGroup`. For a more compact tabs, modify `density` prop to `compact`
+
+
+### Compact underlined tabs
+
+<Canvas of={TabStories.UnderlinedDensityCompact}>
+  <Story of={TabStories.UnderlinedDensityCompact} />
+</Canvas>
+
+### Compact solid tabs
+
+<Canvas of={TabStories.SolidDensityCompact}>
+  <Story of={TabStories.SolidDensityCompact} />
+</Canvas>
+
+## Orientation
+
+Tabs can also be of horizontal or vertical orientation. 
+The orientation of tabs is controlled by `SgdsTabGroup`. 
+By default, tabs are presented horizontally. Set `orientation` to `vertical` for vertical tabs
+
+### Vertical underlined tabs
+
+<Canvas of={TabStories.OrientationUnderlined}>
+  <Story of={TabStories.OrientationUnderlined} />
+</Canvas>
+
+### Vertical solid tabs
+
+<Canvas of={TabStories.OrientationSolid}>
+  <Story of={TabStories.OrientationSolid} />
+</Canvas>
+
+## Tab Events
+
+The `sgds-tab-group` component emits custom events when tabs are shown or hidden, allowing you to perform side effects and track which tab is currently active.
+
+### Available Events
+
+- **`sgds-tab-show`**: Emitted when a tab becomes active. Use `event.detail.name` to get the active tab's panel name.
+- **`sgds-tab-hide`**: Emitted when a tab is hidden (another tab becomes active). Use `event.detail.name` to get the hidden tab's panel name.
+
+
+<Canvas of={TabStories.Events}>
+  <Story of={TabStories.Events} />
+</Canvas>

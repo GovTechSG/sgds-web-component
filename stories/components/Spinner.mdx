@@ -1,0 +1,75 @@
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { html } from "lit";
+import * as SpinnerStories from "./Spinner.stories";
+
+<Meta of={SpinnerStories} />
+
+# Spinner
+
+Spinners notify the users that their request is being processed.
+
+<Canvas>
+  <Story of={SpinnerStories.Basic} />
+</Canvas>
+
+## Import
+
+### React
+
+    ``` jsx
+    import SgdsSpinner  from "@govtechsg/sgds-web-component/react/spinner/index.js";
+    ```
+
+### Others (Vue, Angular, plain HTML etc.)
+
+```js
+import "@govtechsg/sgds-web-component/components/Spinner";
+```
+
+### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.16.0/components/Spinner/index.umd.min.js"></script>
+```
+
+## API
+
+### sgds-spinner
+
+<ArgTypes of="sgds-spinner" />
+
+## Tone
+
+Spinners come in various tones: brand, neutral, inverse, fixed-light, and fixed-dark.
+
+<Canvas of={SpinnerStories.Tone}>
+  <Story of={SpinnerStories.Tone} />
+</Canvas>
+
+<Canvas of={SpinnerStories.ToneInverseFixedLight}>
+  <Story of={SpinnerStories.ToneInverseFixedLight} parameters={{ backgrounds: { default: "custom-blue" } }} />
+</Canvas>
+
+## Size
+
+There are three sizes of spinners: extra-small, small, medium(default), large and extra-large.
+
+<Canvas of={SpinnerStories.Size}>
+  <Story of={SpinnerStories.Size} />
+</Canvas>
+
+## Label
+
+Set a label for the spinner with `label` prop of string type.
+
+<Canvas of={SpinnerStories.Label}>
+  <Story of={SpinnerStories.Label} />
+</Canvas>
+
+## Label - Horizontal
+
+Set the orientation of the label to horizontal with `orientation` prop set to "horizontal".
+
+<Canvas of={SpinnerStories.LabelHorizontal}>
+  <Story of={SpinnerStories.LabelHorizontal} />
+</Canvas>
