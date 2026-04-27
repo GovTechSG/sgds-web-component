@@ -46,7 +46,7 @@ const Template = () => html`
 
   <sgds-masthead></sgds-masthead>
   <sgds-mainnav>
-    <strong slot="brand">Logo placeholder</strong>
+    <strong slot="brand">Logo</strong>
   </sgds-mainnav>
 
   <!--   HERO - display-lg + overline + h4 light                           -->
@@ -326,14 +326,14 @@ const Template = () => html`
 `;
 
 export default {
-  title: "Templates/Landing Page",
+  title: "Templates/Landing/Basic",
   tags: ["!autodocs"],
   parameters: {
     layout: "fullscreen"
   }
 };
 
-export const Default = {
+export const Basic = {
   render: Template.bind({}),
-  name: "Default"
+  name: "Basic"
 };

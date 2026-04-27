@@ -16,6 +16,11 @@ const Template = () => html`
     }
   </style>
 
+  <sgds-masthead></sgds-masthead>
+  <sgds-mainnav>
+    <strong slot="brand">Logo</strong>
+  </sgds-mainnav>
+
   <!-- Page header block (no breadcrumb) -->
   <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
@@ -147,7 +152,7 @@ const Template = () => html`
           <!-- Results grid -->
           <div class="sgds-grid sgds:items-stretch" id="results-grid">
             <!-- Result card 1 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">Digital Infrastructure for the Next Decade</span>
@@ -161,7 +166,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 2 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Panel Discussion</sgds-badge>
                 <span slot="title" class="title-clamp">AI Governance in the Public Sector</span>
@@ -175,7 +180,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 3 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Zero-Trust Architecture for Government Systems</span>
@@ -189,7 +194,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 4 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">Securing the Cloud: Lessons from the Field</span>
@@ -203,7 +208,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 5 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Incident Response Playbooks for CISOs</span>
@@ -217,7 +222,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 6 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Panel Discussion</sgds-badge>
                 <span slot="title" class="title-clamp">Workforce Upskilling for Cyber Resilience</span>
@@ -231,7 +236,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 7 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Opening Address</sgds-badge>
                 <span slot="title" class="title-clamp">Building a Resilient Digital Government</span>
@@ -245,7 +250,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 8 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Identity and Access Management at Scale</span>
@@ -259,7 +264,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 9 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">The Future of GovTech: People, Process and Platform</span>
@@ -274,7 +279,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 10 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Panel Discussion</sgds-badge>
                 <span slot="title" class="title-clamp">Data Sharing Across Agencies: Challenges and Solutions</span>
@@ -289,7 +294,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 11 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Automating Compliance Monitoring with AI</span>
@@ -303,7 +308,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 12 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-2-xl-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">Cybersecurity as a National Imperative</span>
@@ -348,16 +353,16 @@ const Template = () => html`
 `;
 
 export default {
-  title: "Templates/Search & Filter",
+  title: "Templates/Catalogue/Search & Filter",
   tags: ["!autodocs"],
   parameters: {
     layout: "fullscreen"
   }
 };
 
-export const Default = {
+export const SearchAndFilter = {
   render: Template.bind({}),
-  name: "Default",
+  name: "Search & Filter",
   play: async ({ canvasElement }) => {
     // Toggle empty state demo
     const resetBtn = canvasElement.querySelector("#reset-btn");

@@ -9,7 +9,7 @@ const Template = () => html`
 
   <sgds-masthead></sgds-masthead>
   <sgds-mainnav>
-    <strong slot="brand">Logo placeholder</strong>
+    <strong slot="brand">Logo</strong>
   </sgds-mainnav>
 
   <section class="sgds:bg-default sgds:py-layout-lg">
@@ -169,16 +169,16 @@ function formatDate(date) {
 }
 
 export default {
-  title: "Templates/Report Issue",
+  title: "Templates/Form/Report Issue",
   tags: ["!autodocs"],
   parameters: {
     layout: "fullscreen"
   }
 };
 
-export const Default = {
+export const ReportIssue = {
   render: Template.bind({}),
-  name: "Default",
+  name: "Report Issue",
   play: async ({ canvasElement }) => {
     const form = canvasElement.querySelector("#report-issue-form");
     const submitBtn = canvasElement.querySelector("#submit-btn");

@@ -1,0 +1,1104 @@
+<html style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
+<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<style>
+  .step-section { display: none; }
+  .step-section.active { display: block; }
+
+</style>
+
+<!-- ── Application Shell ───────────────────────────────────── -->
+<div>
+  <sgds-masthead fluid></sgds-masthead>
+  <sgds-mainnav fluid>
+    <span slot="brand" class="sgds:font-semibold sgds:text-default">Enterprise Sustainability Grant</span>
+    <sgds-mainnav-item slot="end">
+      <a href="#" class="sgds:text-sm sgds:text-muted">Save draft</a>
+    </sgds-mainnav-item>
+  </sgds-mainnav>
+</div>
+
+<!-- ── Page header ──────────────────────────────────────── -->
+<section id="page-header" class="sgds:bg-default sgds:py-layout-lg">
+  <div class="sgds-container">
+    <div class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left sgds:gap-layout-md" style="max-width: var(--sgds-text-max-width);">
+
+      <sgds-breadcrumb>
+        <sgds-breadcrumb-item><a href="#">Home</a></sgds-breadcrumb-item>
+        <sgds-breadcrumb-item><a href="#">Grants</a></sgds-breadcrumb-item>
+        <sgds-breadcrumb-item active><a href="#">Sustainability Grant Application</a></sgds-breadcrumb-item>
+      </sgds-breadcrumb>
+
+      <div>
+        <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+          Grant Programme
+        </div>
+        <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
+          Enterprise Sustainability Grant
+        </h1>
+        <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
+          Apply for funding to implement sustainability initiatives in your business.
+          Grant quantum: up to 70% of qualifying costs, capped at S$30,000 per project.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="sgds:bg-surface-default sgds:min-h-screen">
+  <div class="sgds-container sgds:py-2-xl">
+
+    <!-- ── Info alert ─────────────────────────────────────── -->
+    <sgds-alert variant="info" class="sgds:mb-layout-md" dismissible>
+      <strong>Before you begin:</strong> Ensure you have your company UEN, latest financial statements,
+      and project quotations ready. Applications typically take 20-30 minutes to complete.
+    </sgds-alert>
+
+    <!-- ── Stepper ───────────────────────────────────────── -->
+    <sgds-stepper id="grant-stepper" class="sgds:mb-layout-md"></sgds-stepper>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 1 Eligibility Check
+    ════════════════════════════════════════════════════ -->
+    <section id="step-eligibility" class="step-section active">
+      <form id="form-eligibility" novalidate>
+
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Company Information</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Basic details about your registered business entity.
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="uen"
+                  label="Unique Entity Number (UEN)"
+                  name="uen"
+                  placeholder="e.g. 201234567A"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="Enter a valid 9- or 10-character UEN"
+                ></sgds-input>
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="companyName"
+                  label="Registered Company Name"
+                  name="companyName"
+                  placeholder="e.g. Green Solutions Pte. Ltd."
+                  required
+                  hasFeedback="both"
+                ></sgds-input>
+              </div>
+
+              <sgds-select id="businessStructure" label="Business Structure" name="businessStructure" placeholder="Select a business structure" required hasFeedback invalidFeedback="Please select a business structure">
+                <sgds-select-option value="sole-proprietorship">Sole Proprietorship</sgds-select-option>
+                <sgds-select-option value="partnership">Partnership / Limited Liability Partnership</sgds-select-option>
+                <sgds-select-option value="private-limited">Private Limited Company (Pte. Ltd.)</sgds-select-option>
+                <sgds-select-option value="public-limited">Public Limited Company (Ltd.)</sgds-select-option>
+                <sgds-select-option value="cooperative">Co-operative</sgds-select-option>
+              </sgds-select>
+
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-select
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="employeeCount"
+                  label="Number of Employees"
+                  name="employeeCount"
+                  placeholder="Select a range"
+                  required
+                  hasFeedback
+                  invalidFeedback="Please select employee count"
+                  hintText="As at last financial year end"
+                >
+                  <sgds-select-option value="1-10">1 - 10</sgds-select-option>
+                  <sgds-select-option value="11-50">11 - 50</sgds-select-option>
+                  <sgds-select-option value="51-200">51 - 200</sgds-select-option>
+                  <sgds-select-option value="201+">More than 200 (not eligible)</sgds-select-option>
+                </sgds-select>
+                <sgds-select
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="annualTurnover"
+                  label="Annual Turnover"
+                  name="annualTurnover"
+                  placeholder="Select a range"
+                  required
+                  hasFeedback
+                  invalidFeedback="Please select annual turnover"
+                  hintText="As at last financial year end"
+                >
+                  <sgds-select-option value="lt-1m">Less than S$1 million</sgds-select-option>
+                  <sgds-select-option value="1m-10m">S$1 million - S$10 million</sgds-select-option>
+                  <sgds-select-option value="10m-50m">S$10 million - S$50 million</sgds-select-option>
+                  <sgds-select-option value="50m-100m">S$50 million - S$100 million</sgds-select-option>
+                  <sgds-select-option value="gt-100m">More than S$100 million (not eligible)</sgds-select-option>
+                </sgds-select>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Industry & History</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Your primary sector and prior engagement with government grants.
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-select
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="industrySector"
+                  label="Primary Industry Sector"
+                  name="industrySector"
+                  placeholder="Select a sector"
+                  required
+                  hasFeedback
+                >
+                  <sgds-select-option value="food-beverage">Food & Beverage</sgds-select-option>
+                  <sgds-select-option value="retail">Retail</sgds-select-option>
+                  <sgds-select-option value="manufacturing">Manufacturing</sgds-select-option>
+                  <sgds-select-option value="construction">Construction</sgds-select-option>
+                  <sgds-select-option value="logistics">Logistics & Transportation</sgds-select-option>
+                  <sgds-select-option value="hospitality">Hospitality & Tourism</sgds-select-option>
+                  <sgds-select-option value="professional-services">Professional Services</sgds-select-option>
+                  <sgds-select-option value="healthcare">Healthcare</sgds-select-option>
+                  <sgds-select-option value="ict">ICT & Digital Services</sgds-select-option>
+                  <sgds-select-option value="other">Other</sgds-select-option>
+                </sgds-select>
+                <sgds-select
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="yearsInOperation"
+                  label="Years in Operation"
+                  name="yearsInOperation"
+                  placeholder="Select a range"
+                  required
+                  hasFeedback
+                >
+                  <sgds-select-option value="lt-1">Less than 1 year (not eligible)</sgds-select-option>
+                  <sgds-select-option value="1-3">1 - 3 years</sgds-select-option>
+                  <sgds-select-option value="3-5">3 - 5 years</sgds-select-option>
+                  <sgds-select-option value="gt-5">More than 5 years</sgds-select-option>
+                </sgds-select>
+              </div>
+
+              <sgds-radio-group
+                id="priorGrant"
+                label="Have you previously received this grant?"
+                name="priorGrant"
+                required
+                hasFeedback
+              >
+                <sgds-radio value="no">No, this is my first application</sgds-radio>
+                <sgds-radio value="yes-different">Yes, for a different project</sgds-radio>
+                <sgds-radio value="yes-same">Yes, for a similar project (may affect eligibility)</sgds-radio>
+              </sgds-radio-group>
+
+              <sgds-checkbox-group
+                id="existingCerts"
+                label="Current Sustainability Certifications (if any)"
+                name="existingCerts"
+                hintText="Check all that your company currently holds"
+              >
+                <sgds-checkbox value="iso-14001">ISO 14001 - Environmental Management</sgds-checkbox>
+                <sgds-checkbox value="bca-green-mark">BCA Green Mark</sgds-checkbox>
+                <sgds-checkbox value="ss-564">SS 564 - Water Efficiency</sgds-checkbox>
+                <sgds-checkbox value="sg-eco-biz">Singapore Eco Business</sgds-checkbox>
+                <sgds-checkbox value="none">None</sgds-checkbox>
+              </sgds-checkbox-group>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Ineligibility warning (shown dynamically) -->
+        <sgds-alert id="ineligibility-alert" variant="danger" class="sgds:mb-layout-md" style="display:none">
+          <strong>Ineligibility detected:</strong> Based on your selection, your company may not meet the SME criteria
+          (max 200 employees <em>or</em> max S$100 million annual turnover, and at least 1 year in operation).
+          Please review before proceeding.
+        </sgds-alert>
+
+        <div class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-end sgds:gap-component-sm">
+          <sgds-button id="btn-next-1" variant="primary" type="button">
+            Next: Project Details
+            <sgds-icon name="arrow-right" slot="rightIcon"></sgds-icon>
+          </sgds-button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 2 Project Details
+    ════════════════════════════════════════════════════ -->
+    <section id="step-project" class="step-section">
+      <form id="form-project" novalidate>
+
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Project Overview</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Describe the sustainability initiative you are seeking funding for.
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+              <sgds-input
+                id="projectTitle"
+                label="Project Title"
+                name="projectTitle"
+                placeholder="e.g. Solar Panel Installation at Ang Mo Kio Factory"
+                required
+                hasFeedback="both"
+                invalidFeedback="Please provide a project title"
+              ></sgds-input>
+
+              <sgds-select
+                id="projectCategory"
+                label="Project Category"
+                name="projectCategory"
+                placeholder="Select a category"
+                required
+                hasFeedback
+              >
+                <sgds-select-option value="renewable-energy">Renewable Energy (Solar, Wind, Biogas)</sgds-select-option>
+                <sgds-select-option value="energy-efficiency">Energy Efficiency & Management</sgds-select-option>
+                <sgds-select-option value="water-conservation">Water Conservation & Recycling</sgds-select-option>
+                <sgds-select-option value="waste-management">Waste Reduction & Circular Economy</sgds-select-option>
+                <sgds-select-option value="green-transport">Green Transport & Logistics</sgds-select-option>
+                <sgds-select-option value="sustainable-procurement">Sustainable Procurement & Supply Chain</sgds-select-option>
+                <sgds-select-option value="green-building">Green Building Retrofit</sgds-select-option>
+                <sgds-select-option value="carbon-management">Carbon Measurement & Management</sgds-select-option>
+              </sgds-select>
+
+              <sgds-textarea
+                id="projectDescription"
+                label="Project Description"
+                name="projectDescription"
+                placeholder="e.g. We plan to install rooftop solar panels across our warehouse facility to reduce grid electricity dependency and lower carbon emissions..."
+                rows="5"
+                minlength="100"
+                maxlength="2000"
+                characterCount
+                required
+                hasFeedback="both"
+                invalidFeedback="Please provide a description of at least 100 characters"
+                hintText="Describe what you plan to implement and how it will improve your sustainability performance (min. 100 characters)"
+              ></sgds-textarea>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Timeline & Location</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                When and where the project will be implemented.
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-datepicker
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="startDate"
+                  label="Expected Start Date"
+                  name="startDate"
+                  required
+                  hasFeedback
+                ></sgds-datepicker>
+                <sgds-datepicker
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="endDate"
+                  label="Expected Completion Date"
+                  name="endDate"
+                  required
+                  hasFeedback
+                ></sgds-datepicker>
+              </div>
+
+              <sgds-input
+                id="projectAddress"
+                label="Project Site Address"
+                name="projectAddress"
+                placeholder="e.g. 123 Jurong East Street 13, Singapore 600123"
+                required
+                hasFeedback="both"
+                hintText="Full address where the project will be implemented"
+              ></sgds-input>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Outcomes & Standards</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Measurable results you expect to achieve and any certifications you are working towards.
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+              <sgds-textarea
+                id="expectedOutcomes"
+                label="Expected Sustainability Outcomes"
+                name="expectedOutcomes"
+                placeholder="e.g. 30% reduction in electricity consumption, diversion of 5 tonnes of waste from landfill per month"
+                rows="4"
+                minlength="50"
+                maxlength="1000"
+                characterCount
+                required
+                hasFeedback="both"
+                invalidFeedback="Please describe the expected outcomes (min. 50 characters)"
+                hintText="e.g. 30% reduction in electricity consumption, diversion of 5 tonnes of waste from landfill per month"
+              ></sgds-textarea>
+
+              <sgds-checkbox-group
+                id="targetCertifications"
+                label="Target Certifications / Standards"
+                name="targetCertifications"
+                hintText="Select all that apply to this project"
+              >
+                <sgds-checkbox value="iso-14001">ISO 14001 - Environmental Management System</sgds-checkbox>
+                <sgds-checkbox value="bca-green-mark">BCA Green Mark (New / Existing Building)</sgds-checkbox>
+                <sgds-checkbox value="ss-564">SS 564 - Water Efficiency Management System</sgds-checkbox>
+                <sgds-checkbox value="sg-eco-biz">Singapore Eco Business Standard</sgds-checkbox>
+                <sgds-checkbox value="enterprise-sustainability">Enterprise Sustainability Programme Badge</sgds-checkbox>
+                <sgds-checkbox value="none">No specific certification targeted</sgds-checkbox>
+              </sgds-checkbox-group>
+
+              <sgds-input
+                id="keyVendors"
+                label="Key Vendors / Implementation Partners"
+                name="keyVendors"
+                placeholder="e.g. SolarEdge Technologies, Schneider Electric"
+                hintText="Optional: list the main vendors or contractors you plan to engage"
+              ></sgds-input>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-between sgds:gap-component-sm">
+          <sgds-button id="btn-prev-2" variant="outline" type="button">
+            <sgds-icon name="arrow-left" slot="leftIcon"></sgds-icon>
+            Back
+          </sgds-button>
+          <sgds-button id="btn-next-2" variant="primary" type="button">
+            Next: Funding Request
+            <sgds-icon name="arrow-right" slot="rightIcon"></sgds-icon>
+          </sgds-button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 3 Funding Request
+    ════════════════════════════════════════════════════ -->
+    <section id="step-funding" class="step-section">
+      <form id="form-funding" novalidate>
+
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Project Costs</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Provide an itemised breakdown of all project costs.
+                Grant supports up to <strong>70%</strong> of qualifying costs, capped at <strong>S$30,000</strong>.
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="costEquipment"
+                  label="Equipment & Hardware (S$)"
+                  name="costEquipment"
+                  type="number"
+                  min="0"
+                  placeholder="0.00"
+                  hasFeedback="both"
+                  hintText="Include cost of all physical equipment purchased"
+                ></sgds-input>
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="costInstallation"
+                  label="Installation & Implementation (S$)"
+                  name="costInstallation"
+                  type="number"
+                  min="0"
+                  placeholder="0.00"
+                  hasFeedback="both"
+                  hintText="Labour and installation contractor fees"
+                ></sgds-input>
+              </div>
+
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="costConsultancy"
+                  label="Professional & Consultancy Fees (S$)"
+                  name="costConsultancy"
+                  type="number"
+                  min="0"
+                  placeholder="0.00"
+                  hasFeedback="both"
+                  hintText="Fees for engineers, auditors, consultants"
+                ></sgds-input>
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="costTraining"
+                  label="Training & Capability Building (S$)"
+                  name="costTraining"
+                  type="number"
+                  min="0"
+                  placeholder="0.00"
+                  hasFeedback="both"
+                  hintText="Staff training and certification costs"
+                ></sgds-input>
+              </div>
+
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="costOther"
+                  label="Other Costs (S$)"
+                  name="costOther"
+                  type="number"
+                  min="0"
+                  placeholder="0.00"
+                  hasFeedback="both"
+                ></sgds-input>
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="totalProjectCost"
+                  label="Total Project Cost (S$)"
+                  name="totalProjectCost"
+                  type="number"
+                  min="1"
+                  placeholder="0.00"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="Please enter the total project cost"
+                  hintText="Sum of all cost items above"
+                ></sgds-input>
+              </div>
+
+              <!-- Auto-calculated funding summary -->
+              <div class="sgds:bg-info-surface-muted sgds:rounded-md sgds:p-4 sgds:flex sgds:flex-col sgds:gap-1" id="funding-calc" style="display:none">
+                <p class="sgds:text-sm sgds:font-semibold sgds:text-default">Estimated Grant Amount</p>
+                <p class="sgds:text-2xl sgds:font-bold sgds:text-info-default" id="calc-amount">S$0</p>
+                <p class="sgds:text-xs sgds:text-muted" id="calc-note">Based on 70% of total project cost, capped at S$30,000.</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Funding Request</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                State the exact amount you are requesting and your justification.
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="grantAmountRequested"
+                  label="Grant Amount Requested (S$)"
+                  name="grantAmountRequested"
+                  type="number"
+                  min="1"
+                  max="30000"
+                  placeholder="0.00"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="Amount must be between S$1 and S$30,000"
+                  hintText="Maximum S$30,000"
+                ></sgds-input>
+                <sgds-select
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="disbursementMode"
+                  label="Preferred Disbursement Mode"
+                  name="disbursementMode"
+                  placeholder="Select a disbursement mode"
+                  required
+                  hasFeedback
+                >
+                  <sgds-select-option value="direct-credit">PayNow / Direct Bank Credit</sgds-select-option>
+                  <sgds-select-option value="cheque">Cheque</sgds-select-option>
+                </sgds-select>
+              </div>
+
+              <sgds-textarea
+                id="fundingJustification"
+                label="Justification for Funding Request"
+                name="fundingJustification"
+                placeholder="e.g. The grant will cover 70% of equipment costs, allowing us to proceed with the project this financial year. Without co-funding, the upfront capital outlay is not feasible for our SME..."
+                rows="4"
+                minlength="80"
+                maxlength="1500"
+                characterCount
+                required
+                hasFeedback="both"
+                invalidFeedback="Please provide a justification of at least 80 characters"
+                hintText="Explain how the grant will enable the project, including cost-sharing rationale"
+              ></sgds-textarea>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Supporting Documents</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Upload quotations and financial documents to support your application.
+                Accepted: PDF, JPG, PNG (max 10 MB each).
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+              <sgds-file-upload
+                id="vendorQuotations"
+                label="Vendor Quotations"
+                name="vendorQuotations"
+                accept=".pdf,.jpg,.jpeg,.png"
+                multiple
+                required
+                hasFeedback
+                hintText="At least one quotation from a vendor is required"
+              >Choose Files</sgds-file-upload>
+
+              <sgds-file-upload
+                id="financialStatements"
+                label="Latest Financial Statements or IRAS Notice of Assessment"
+                name="financialStatements"
+                accept=".pdf,.jpg,.jpeg,.png"
+                multiple
+                hasFeedback
+                hintText="Supporting documentation for annual turnover declared"
+              >Choose Files</sgds-file-upload>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-between sgds:gap-component-sm">
+          <sgds-button id="btn-prev-3" variant="outline" type="button">
+            <sgds-icon name="arrow-left" slot="leftIcon"></sgds-icon>
+            Back
+          </sgds-button>
+          <sgds-button id="btn-next-3" variant="primary" type="button">
+            Next: Review & Declare
+            <sgds-icon name="arrow-right" slot="rightIcon"></sgds-icon>
+          </sgds-button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         STEP 4 Declaration
+    ════════════════════════════════════════════════════ -->
+    <section id="step-declaration" class="step-section">
+      <form id="form-declaration" novalidate>
+
+        <!-- Review summary -->
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Application Summary</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Review all details before submitting. Use the Back button to correct any information.
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8">
+              <div class="sgds:flex sgds:flex-col sgds:gap-layout-sm">
+
+                <sgds-description-list-group bordered>
+                  <span slot="title">Company & Eligibility</span>
+                  <sgds-description-list>UEN<span slot="data" id="rv-uen">-</span></sgds-description-list>
+                  <sgds-description-list>Company Name<span slot="data" id="rv-companyName">-</span></sgds-description-list>
+                  <sgds-description-list>Business Structure<span slot="data" id="rv-businessStructure">-</span></sgds-description-list>
+                  <sgds-description-list>Employees<span slot="data" id="rv-employeeCount">-</span></sgds-description-list>
+                  <sgds-description-list>Annual Turnover<span slot="data" id="rv-annualTurnover">-</span></sgds-description-list>
+                  <sgds-description-list>Industry Sector<span slot="data" id="rv-industrySector">-</span></sgds-description-list>
+                  <sgds-description-list>Years in Operation<span slot="data" id="rv-yearsInOperation">-</span></sgds-description-list>
+                  <sgds-description-list>Prior Grant<span slot="data" id="rv-priorGrant">-</span></sgds-description-list>
+                </sgds-description-list-group>
+
+                <sgds-description-list-group bordered>
+                  <span slot="title">Project Details</span>
+                  <sgds-description-list>Project Title<span slot="data" id="rv-projectTitle">-</span></sgds-description-list>
+                  <sgds-description-list>Category<span slot="data" id="rv-projectCategory">-</span></sgds-description-list>
+                  <sgds-description-list>Start Date<span slot="data" id="rv-startDate">-</span></sgds-description-list>
+                  <sgds-description-list>End Date<span slot="data" id="rv-endDate">-</span></sgds-description-list>
+                  <sgds-description-list>Site Address<span slot="data" id="rv-projectAddress">-</span></sgds-description-list>
+                  <sgds-description-list>Expected Outcomes<span slot="data" id="rv-expectedOutcomes">-</span></sgds-description-list>
+                </sgds-description-list-group>
+
+                <sgds-description-list-group bordered>
+                  <span slot="title">Funding Request</span>
+                  <sgds-description-list>Total Project Cost<span slot="data" id="rv-totalProjectCost">-</span></sgds-description-list>
+                  <sgds-description-list>Grant Amount Requested<span slot="data" id="rv-grantAmountRequested">-</span></sgds-description-list>
+                  <sgds-description-list>Disbursement Mode<span slot="data" id="rv-disbursementMode">-</span></sgds-description-list>
+                </sgds-description-list-group>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Authorised representative -->
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Authorised Representative</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                The person submitting this application on behalf of the company must be authorised to do so.
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="repName"
+                  label="Full Name (as in NRIC/FIN)"
+                  name="repName"
+                  placeholder="e.g. Tan Ah Kow"
+                  required
+                  hasFeedback="both"
+                ></sgds-input>
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="repDesignation"
+                  label="Designation / Position"
+                  name="repDesignation"
+                  placeholder="e.g. Director, CEO"
+                  required
+                  hasFeedback="both"
+                ></sgds-input>
+              </div>
+
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="repEmail"
+                  label="Contact Email"
+                  name="repEmail"
+                  type="email"
+                  placeholder="e.g. name@company.com.sg"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="Enter a valid email address"
+                ></sgds-input>
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"
+                  id="repPhone"
+                  label="Contact Phone"
+                  name="repPhone"
+                  type="tel"
+                  placeholder="+65 9123 4567"
+                  required
+                  hasFeedback="both"
+                  hintText="Singapore number, e.g. +65 9123 4567"
+                ></sgds-input>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Declarations -->
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h2 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Declarations</h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                All declarations must be acknowledged before submission.
+              </p>
+            </div>
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+              <sgds-checkbox
+                id="decl-accurate"
+                name="declAccurate"
+                value="yes"
+                required
+                hasFeedback="both"
+                invalidFeedback="You must confirm this declaration"
+              >
+                I declare that all information provided in this application is true, complete, and accurate to the best of my knowledge.
+              </sgds-checkbox>
+
+              <sgds-checkbox
+                id="decl-sme"
+                name="declSme"
+                value="yes"
+                required
+                hasFeedback="both"
+                invalidFeedback="You must confirm this declaration"
+              >
+                I confirm that the company named in this application qualifies as an SME under the Enterprise Singapore definition
+                (max 200 employees <em>or</em> max S$100 million annual turnover, incorporated and operating in Singapore).
+              </sgds-checkbox>
+
+              <sgds-checkbox
+                id="decl-no-duplication"
+                name="declNoDuplication"
+                value="yes"
+                required
+                hasFeedback="both"
+                invalidFeedback="You must confirm this declaration"
+              >
+                I declare that the costs stated in this application have not been and will not be funded by any other government grant or subsidy for the same project scope.
+              </sgds-checkbox>
+
+              <sgds-checkbox
+                id="decl-verification"
+                name="declVerification"
+                value="yes"
+                required
+                hasFeedback="both"
+                invalidFeedback="You must confirm this declaration"
+              >
+                I consent to the administering agency verifying the information provided, including contacting third parties named in this application.
+              </sgds-checkbox>
+
+              <sgds-checkbox
+                id="decl-tnc"
+                name="declTnc"
+                value="yes"
+                required
+                hasFeedback="both"
+                invalidFeedback="You must agree to the Terms and Conditions"
+              >
+                I have read and agree to the <a href="#" class="sgds:text-info-default sgds:underline">Terms and Conditions</a>
+                of the Enterprise Sustainability Grant.
+              </sgds-checkbox>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-between sgds:gap-component-sm">
+          <sgds-button id="btn-prev-4" variant="outline" type="button">
+            <sgds-icon name="arrow-left" slot="leftIcon"></sgds-icon>
+            Back
+          </sgds-button>
+          <sgds-button id="btn-submit" variant="primary" type="submit">
+            Submit Application
+            <sgds-icon name="send" slot="rightIcon"></sgds-icon>
+          </sgds-button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         SUCCESS STATE
+    ════════════════════════════════════════════════════ -->
+    <section id="step-success" class="step-section">
+      <div class="sgds:flex sgds:flex-col sgds:items-center sgds:text-center sgds:py-layout-xl sgds:gap-layout-md">
+
+        <sgds-icon name="check-circle-fill" size="3-xl" class="sgds:text-success-default"></sgds-icon>
+
+        <div>
+          <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
+            Application Submitted
+          </h1>
+          <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
+            Thank you for applying for the Enterprise Sustainability Grant.
+          </p>
+        </div>
+
+        <div>
+          <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+            Reference Number
+          </div>
+          <h4 id="ref-number" class="sgds:text-heading-sm sgds:font-light sgds:leading-sm sgds:tracking-tight sgds:text-heading-default"></h4>
+        </div>
+
+        <div>
+          <p class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-sm">What happens next</p>
+          <ul class="sgds:text-body-md sgds:leading-md sgds:text-default" style="padding-left: var(--sgds-spacing-lg); margin: 0; text-align: left;">
+            <li>Your application will be reviewed within 10 working days.</li>
+            <li>You may be contacted for additional documents or clarifications.</li>
+            <li>A grant offer letter will be issued if your application is approved.</li>
+          </ul>
+        </div>
+
+        <div class="sgds:flex sgds:gap-component-sm">
+          <sgds-button variant="outline" onclick="window.location.reload()">Submit another application</sgds-button>
+          <sgds-button variant="primary" onclick="window.location.href='#'">Return to home</sgds-button>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</section>
+
+<sgds-footer></sgds-footer>
+
+<!-- ── Script ──────────────────────────────────────────────── -->
+<script>
+  const stepper = document.getElementById("grant-stepper");
+
+  const STEPS = [
+    { stepHeader: "Eligibility",     component: "eligibility" },
+    { stepHeader: "Project Details", component: "project" },
+    { stepHeader: "Funding Request", component: "funding" },
+    { stepHeader: "Declaration",     component: "declaration" }
+  ];
+
+  const SECTIONS = {
+    eligibility: document.getElementById("step-eligibility"),
+    project:     document.getElementById("step-project"),
+    funding:     document.getElementById("step-funding"),
+    declaration: document.getElementById("step-declaration"),
+    success:     document.getElementById("step-success")
+  };
+
+  const FORMS = {
+    eligibility: document.getElementById("form-eligibility"),
+    project:     document.getElementById("form-project"),
+    funding:     document.getElementById("form-funding"),
+    declaration: document.getElementById("form-declaration")
+  };
+
+  stepper.steps = STEPS;
+  stepper.activeStep = 0;
+
+  function showSection(key) {
+    Object.values(SECTIONS).forEach(s => s.classList.remove("active"));
+    SECTIONS[key].classList.add("active");
+  }
+
+  // Validate a form section; returns true if all required fields pass
+  function validateStep(formId) {
+    const form = FORMS[formId];
+    if (!form) return true;
+    // reportValidity triggers hasFeedback visuals on each SGDS component
+    return form.reportValidity();
+  }
+
+  // ── Step navigation ────────────────────────────────────────
+  stepper.addEventListener("sgds-arrived", () => {
+    const key = STEPS[stepper.activeStep].component;
+    showSection(key);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.getElementById("btn-next-1").addEventListener("click", () => {
+    if (!validateStep("eligibility")) return;
+    stepper.nextStep();
+  });
+  document.getElementById("btn-prev-2").addEventListener("click", () => stepper.previousStep());
+  document.getElementById("btn-next-2").addEventListener("click", () => {
+    if (!validateStep("project")) return;
+    stepper.nextStep();
+  });
+  document.getElementById("btn-prev-3").addEventListener("click", () => stepper.previousStep());
+  document.getElementById("btn-next-3").addEventListener("click", () => {
+    if (!validateStep("funding")) return;
+    populateReview();
+    stepper.nextStep();
+  });
+  document.getElementById("btn-prev-4").addEventListener("click", () => stepper.previousStep());
+
+  // ── Ineligibility warning ──────────────────────────────────
+  const ineligibleAlert = document.getElementById("ineligibility-alert");
+  const ineligibleValues = new Set(["201+", "gt-100m", "lt-1"]);
+
+  ["employeeCount", "annualTurnover", "yearsInOperation"].forEach(id => {
+    document.getElementById(id).addEventListener("sgds-change", checkEligibility);
+  });
+
+  function checkEligibility() {
+    const ec  = document.getElementById("employeeCount").value;
+    const at  = document.getElementById("annualTurnover").value;
+    const yio = document.getElementById("yearsInOperation").value;
+    const isIneligible = ineligibleValues.has(ec) || ineligibleValues.has(at) || ineligibleValues.has(yio);
+    ineligibleAlert.style.display = isIneligible ? "block" : "none";
+  }
+
+  // ── Funding calculator ────────────────────────────────────
+  document.getElementById("totalProjectCost").addEventListener("sgds-input", updateCalc);
+
+  function updateCalc(e) {
+    const total = parseFloat(e.target.value) || 0;
+    const grant = Math.min(total * 0.7, 30000);
+    const calcEl = document.getElementById("funding-calc");
+    calcEl.style.display = total > 0 ? "flex" : "none";
+    document.getElementById("calc-amount").textContent =
+      "S$" + grant.toLocaleString("en-SG", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  // Auto-fill grant amount from calculator
+  document.getElementById("grantAmountRequested").addEventListener("focus", () => {
+    const total = parseFloat(document.getElementById("totalProjectCost").value) || 0;
+    const field = document.getElementById("grantAmountRequested");
+    if (!field.value && total > 0) {
+      field.value = Math.min(total * 0.7, 30000).toFixed(2);
+    }
+  });
+
+  // ── Review summary population ─────────────────────────────
+  function readVal(id) {
+    const el = document.getElementById(id);
+    if (!el) return "-";
+    // For select, get the displayed text
+    if (el.tagName === "SGDS-SELECT" || el.shadowRoot) {
+      return el.value || "-";
+    }
+    return el.value || "-";
+  }
+
+  function readRadio(name) {
+    const checked = document.querySelector(`[name="${name}"][value="${
+      document.querySelector(`[name="${name}"]`)?.value
+    }"]`);
+    // Walk through radio group children
+    const group = document.querySelector(`[name="${name}"]`);
+    return group ? (group.value || "-") : "-";
+  }
+
+  function fmtCurrency(id) {
+    const v = parseFloat(readVal(id));
+    if (isNaN(v)) return "-";
+    return "S$" + v.toLocaleString("en-SG", { minimumFractionDigits: 2 });
+  }
+
+  // Map select values to human-readable labels
+  const LABELS = {
+    businessStructure: {
+      "sole-proprietorship": "Sole Proprietorship",
+      "partnership": "Partnership / LLP",
+      "private-limited": "Private Limited (Pte. Ltd.)",
+      "public-limited": "Public Limited (Ltd.)",
+      "cooperative": "Co-operative"
+    },
+    employeeCount: {
+      "1-10": "1 - 10", "11-50": "11 - 50", "51-200": "51 - 200", "201+": "> 200"
+    },
+    annualTurnover: {
+      "lt-1m": "< S$1M", "1m-10m": "S$1M - S$10M", "10m-50m": "S$10M - S$50M",
+      "50m-100m": "S$50M - S$100M", "gt-100m": "> S$100M"
+    },
+    industrySector: {
+      "food-beverage": "Food & Beverage", "retail": "Retail", "manufacturing": "Manufacturing",
+      "construction": "Construction", "logistics": "Logistics & Transportation",
+      "hospitality": "Hospitality & Tourism", "professional-services": "Professional Services",
+      "healthcare": "Healthcare", "ict": "ICT & Digital Services", "other": "Other"
+    },
+    yearsInOperation: {
+      "lt-1": "< 1 year", "1-3": "1 - 3 years", "3-5": "3 - 5 years", "gt-5": "> 5 years"
+    },
+    priorGrant: {
+      "no": "No", "yes-different": "Yes (different project)", "yes-same": "Yes (similar project)"
+    },
+    projectCategory: {
+      "renewable-energy": "Renewable Energy", "energy-efficiency": "Energy Efficiency",
+      "water-conservation": "Water Conservation", "waste-management": "Waste Management",
+      "green-transport": "Green Transport", "sustainable-procurement": "Sustainable Procurement",
+      "green-building": "Green Building Retrofit", "carbon-management": "Carbon Management"
+    },
+    disbursementMode: {
+      "direct-credit": "PayNow / Direct Bank Credit", "cheque": "Cheque"
+    }
+  };
+
+  function resolveLabel(field, value) {
+    const map = LABELS[field];
+    return (map && map[value]) ? map[value] : (value || "-");
+  }
+
+  function populateReview() {
+    const fields = [
+      "uen", "companyName", "employeeCount", "annualTurnover",
+      "industrySector", "yearsInOperation", "businessStructure",
+      "projectTitle", "projectCategory", "projectAddress", "expectedOutcomes",
+      "totalProjectCost", "grantAmountRequested", "disbursementMode"
+    ];
+
+    // Radio groups
+    const radioFields = ["priorGrant"];
+
+    fields.forEach(id => {
+      const el = document.getElementById(id);
+      const rvEl = document.getElementById("rv-" + id);
+      if (!el || !rvEl) return;
+      const raw = el.value || "";
+      rvEl.textContent = resolveLabel(id, raw) || "-";
+    });
+
+    radioFields.forEach(name => {
+      const group = document.getElementById(name);
+      const rvEl = document.getElementById("rv-" + name);
+      if (!group || !rvEl) return;
+      rvEl.textContent = resolveLabel(name, group.value) || "-";
+    });
+
+    // Datepickers
+    ["startDate", "endDate"].forEach(id => {
+      const el = document.getElementById(id);
+      const rvEl = document.getElementById("rv-" + id);
+      if (el && rvEl) rvEl.textContent = el.value || "-";
+    });
+
+    // Currency fields
+    ["totalProjectCost", "grantAmountRequested"].forEach(id => {
+      const rvEl = document.getElementById("rv-" + id);
+      if (rvEl) {
+        const v = parseFloat(document.getElementById(id)?.value);
+        rvEl.textContent = isNaN(v) ? "-" : "S$" + v.toLocaleString("en-SG", { minimumFractionDigits: 2 });
+      }
+    });
+  }
+
+  // ── Form submission ───────────────────────────────────────
+  document.getElementById("form-declaration").addEventListener("submit", e => {
+    e.preventDefault();
+    if (!e.target.reportValidity()) return;
+
+    const refNum = "ESG-2026-" + String(Math.floor(10000 + Math.random() * 90000)).padStart(5, "0");
+    document.getElementById("ref-number").textContent = refNum;
+
+    // Hide stepper, page header and show success
+    stepper.style.display = "none";
+    document.getElementById("page-header").style.display = "none";
+    Object.values(SECTIONS).forEach(s => s.classList.remove("active"));
+    SECTIONS.success.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
