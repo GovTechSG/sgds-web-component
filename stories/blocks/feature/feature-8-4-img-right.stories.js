@@ -3,10 +3,15 @@ import { html } from "lit";
 const Template = () => html`
   <style>
     @media (max-width: 1023px) {
-      .feature-img { order: -1; padding-bottom: var(--sgds-spacing-layout-md); }
+      .feature-img {
+        order: -1;
+        padding-bottom: var(--sgds-spacing-layout-md);
+      }
     }
     @media (min-width: 1024px) {
-      .feature-content { padding-right: var(--sgds-spacing-layout-md); }
+      .feature-content {
+        padding-right: var(--sgds-spacing-layout-md);
+      }
     }
   </style>
 
