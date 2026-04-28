@@ -14,6 +14,7 @@ import { MainnavBreakpointContext, MainnavExpandedContext } from "./mainnav-cont
 import mainnavStyle from "./mainnav.css";
 import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
 import SgdsMainnavItem from "./sgds-mainnav-item";
+import { HasSlotController } from "../../utils/slot";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
 const SIZES = {
@@ -71,6 +72,9 @@ export class SgdsMainnav extends SgdsElement {
   /** @internal */
   @query("slot[name='non-collapsible']") nonCollapsibleSlot: HTMLSlotElement;
 
+  /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
+  @property({ type: Boolean }) hasNonCollapsibleSlot = false;
+
   /** The href link for brand logo */
   @property({ type: String })
   brandHref = "";
@@ -109,6 +113,8 @@ export class SgdsMainnav extends SgdsElement {
       | SgdsMainnavDropdown[];
   }
 
+  private readonly hasSlotController = new HasSlotController(this, "non-collapsible");
+
   connectedCallback() {
     super.connectedCallback();
 
@@ -136,6 +142,10 @@ export class SgdsMainnav extends SgdsElement {
     }
   }
 
+  updated() {
+    if (!this.hasNonCollapsibleSlot) this.hasNonCollapsibleSlot = this.hasSlotController.test("non-collapsible");
+  }
+
   private _handleClickOutOfElement(e: MouseEvent, self: HTMLElement) {
     if (!e.composedPath().includes(self) && !e.composedPath().includes(this.header)) {
       this.hide();
@@ -146,7 +156,7 @@ export class SgdsMainnav extends SgdsElement {
     if (this.expanded) {
       this.hide();
     } else {
-      document.querySelector("body").style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
       this.show();
     }
   }
@@ -261,7 +271,7 @@ export class SgdsMainnav extends SgdsElement {
     }
 
     this.expanding = false;
-    document.querySelector("body").style.removeProperty("overflow");
+    document.body.style.removeProperty("overflow");
 
     return waitForEvent(this, "sgds-after-hide");
   }
@@ -302,7 +312,10 @@ export class SgdsMainnav extends SgdsElement {
               ></slot>
             </div>
           </div>
-          <slot name="non-collapsible"></slot>
+          <slot
+            name="non-collapsible"
+            class=${classMap({ "non-collapsible-empty": !this.hasNonCollapsibleSlot })}
+          ></slot>
           <sgds-icon-button
             name=${this.expanded ? "cross" : "menu"}
             variant="ghost"
