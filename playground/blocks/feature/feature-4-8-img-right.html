@@ -7,7 +7,7 @@
 
 <style>
   @media (max-width: 1023px) {
-    .feature-img { padding-top: var(--sgds-spacing-layout-md); }
+    .feature-img { order: -1; padding-bottom: var(--sgds-spacing-layout-md); }
   }
   @media (min-width: 1024px) {
     .feature-content { padding-right: var(--sgds-spacing-layout-md); }
@@ -20,9 +20,9 @@
        Spacing    : py-layout-lg, gap-layout-md
        Content    : padding-left layout-md (outer edge, image on right)
   -->
-  <section class="sgds:bg-default sgds:py-layout-lg sgds:min-h-[600px]">
+  <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
-      <div class="sgds-grid sgds:items-center" class="sgds:gap-layout-md">
+      <div class="sgds-grid sgds:items-center sgds:gap-layout-md">
 
         <!-- Content — 8 cols, padding-left layout-md (image on right) -->
         <div
@@ -44,7 +44,7 @@
         </div>
 
         <!-- Image — 4 cols -->
-        <div class="feature-img sgds-col-4 sgds-col-sm-8 sgds-col-lg-4" class="sgds:self-stretch">
+        <div class="feature-img sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
           <img
             src="../placeholder-sgds.png"
             alt=""

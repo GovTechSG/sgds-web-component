@@ -1,6 +1,6 @@
 ---
 name: "sgds-blocks"
-description: "Reusable UI blocks for building full SGDS pages and sections. Use this skill whenever the user wants to build pages, design layouts, create sections, or compose multiple sections together. Trigger on ANY mention of: app layout, application shell, page structure, hero sections, CTAs (call-to-action), cards, card grids, feature sections, product benefits, statistics displays, metrics, page headers, page titles, filter interfaces, search filters, data tables, detail cards, session details, application details, forms, landing pages, dashboards, sidebar navigation, or any major page component — even if they don't name it a 'block'. Also use for: 'I need a filter', 'build a form', 'create a call to action', 'design a landing page', 'show statistics', 'display details', 'sidebar layout', or similar requests for page-level UI. These are drop-in sections and shell structures, not full pages. Compose them with sgds-templates to build complete pages."
+description: "Reusable UI blocks for building full SGDS pages and sections. Use this skill whenever the user wants to build pages, design layouts, create sections, or compose multiple sections together. Trigger on ANY mention of: app layout, application shell, page structure, hero sections, CTAs (call-to-action), cards, card grids, feature sections, product benefits, statistics displays, metrics, page headers, page titles, filter interfaces, search filters, data tables, forms, landing pages, dashboards, sidebar navigation, or any major page component — even if they don't name it a 'block'. Also use for: 'I need a filter', 'build a form', 'create a call to action', 'design a landing page', 'show statistics', 'sidebar layout', or similar requests for page-level UI. These are drop-in sections and shell structures, not full pages. Compose them with sgds-templates to build complete pages."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -48,10 +48,7 @@ See **[sgds-components](../sgds-components/SKILL.md)** for full installation det
 | Card grid layout (3-column or 4-column) | [Cards](reference/cards.md) |
 | Page-level header with breadcrumb, icon + title, description, and primary CTA | [Page Header](reference/page-header.md) |
 | Read-only entity summary card with key-value fields and an edit action | [Basic Details Card](reference/basic-details.md) |
-| Detail cards and session information displays | [Details](reference/details.md) |
-| Search input + filter button + results count + data table for list and admin pages | [Table Filter](reference/table-filter.md) |
 | Filter interfaces and search results layout | [Filter](reference/filter.md) |
-| Full detail view of a single event session: time, title, speaker, badges, description, profile | [Session Detail](reference/session-detail.md) |
 | Multi-field form with proper component sizing, grouping, and layout rules | [Form](reference/form.md) |
 
 ---
@@ -104,27 +101,9 @@ Bordered card with a subtitle heading, stacked key-value field pairs, and an opt
 
 ---
 
-## → Read [reference/details.md](reference/details.md)
-
-Detail cards and session information displays. Use for displaying comprehensive entity details or session information.
-
----
-
-## → Read [reference/table-filter.md](reference/table-filter.md)
-
-Page header + search input + outline filter button + results count + data table. Use on list and admin pages where users search or filter tabular records. Table cells support `sgds-link`, `sgds-badge`, and `sgds-button` for rich row content.
-
----
-
 ## → Read [reference/filter.md](reference/filter.md)
 
 Filter interfaces and search results layout. Use for advanced filtering and search result displays.
-
----
-
-## → Read [reference/session-detail.md](reference/session-detail.md)
-
-Full session detail block for event and conference websites. Shows time slot, session title with expand/collapse, speaker attribution, outlined classification badges, description, circular speaker photo with name and role, and a divider. Repeat for each session in a programme listing.
 
 ---
 

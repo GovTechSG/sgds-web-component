@@ -6,8 +6,7 @@ Filter interfaces for data discovery and refinement.
 
 | Block Name | File Path | URL | Use Case |
 |---|---|---|---|
-| Filter Sidebar checkboxes | `filter.stories.js` | [filter.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/filter/filter.stories.js) | Filter sidebar interface |
-| Table Filter | `table-filter.stories.js` | [table-filter.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/filter/table-filter.stories.js) | Filter interface for data tables |
+| Filter Sidebar checkboxes | `filter-checkboxes.stories.js` | [filter-checkboxes.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/filter/filter-checkboxes.stories.js) | Filter sidebar interface |
 
 ## How to Use
 

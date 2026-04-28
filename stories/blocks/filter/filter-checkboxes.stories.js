@@ -75,7 +75,7 @@ const Template = () => html`
 `;
 
 export default {
-  title: "Blocks/Filter checkboxes",
+  title: "Blocks/Filter",
   tags: ["!autodocs"],
   parameters: { layout: "padded" }
 };

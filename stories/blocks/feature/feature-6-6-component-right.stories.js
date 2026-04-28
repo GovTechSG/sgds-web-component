@@ -7,7 +7,7 @@ const Template = () => html`
        Alignment  : items-start (top-aligned)
        Component  : replace <sgds-accordion> with any component
   -->
-  <section class="sgds:bg-default sgds:py-layout-lg sgds:min-h-[600px]">
+  <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
       <div class="sgds-grid sgds:items-start" class="sgds:gap-layout-md">
         <!-- Content — 6 cols, padding-right layout-md (component on right) -->

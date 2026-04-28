@@ -153,70 +153,73 @@ const Template = () => html`
   <sgds-footer></sgds-footer>
 
   <script>
-    const form         = document.getElementById('report-issue-form');
-    const submitBtn    = document.getElementById('submit-btn');
-    const newReportBtn = document.getElementById('new-report-btn');
-    const viewForm     = document.getElementById('view-form');
-    const viewSuccess  = document.getElementById('view-success');
-    const photoUpload  = document.getElementById('photo-upload');
+    const form = document.getElementById("report-issue-form");
+    const submitBtn = document.getElementById("submit-btn");
+    const newReportBtn = document.getElementById("new-report-btn");
+    const viewForm = document.getElementById("view-form");
+    const viewSuccess = document.getElementById("view-success");
+    const photoUpload = document.getElementById("photo-upload");
 
     let selectedFiles = [];
-    photoUpload.addEventListener('sgds-files-selected', (e) => {
+    photoUpload.addEventListener("sgds-files-selected", e => {
       selectedFiles = Array.from(e.detail);
     });
 
     function generateRef() {
-      const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      const date = new Date().toISOString().slice(0, 10).replace(/-/g, "");
       const rand = String(Math.floor(1000 + Math.random() * 9000));
-      return 'RPT-' + date + '-' + rand;
+      return "RPT-" + date + "-" + rand;
     }
 
     function formatDate(date) {
-      return date.toLocaleDateString('en-SG', {
-        day: 'numeric', month: 'long', year: 'numeric',
-        hour: '2-digit', minute: '2-digit'
+      return date.toLocaleDateString("en-SG", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
       });
     }
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener("submit", e => {
       e.preventDefault();
 
-      const formData       = new FormData(form);
-      const locationVal    = formData.get('location');
-      const descriptionVal = formData.get('description');
-      const photoCount     = selectedFiles.length;
+      const formData = new FormData(form);
+      const locationVal = formData.get("location");
+      const descriptionVal = formData.get("description");
+      const photoCount = selectedFiles.length;
 
       // Loading state
-      submitBtn.setAttribute('loading', '');
-      submitBtn.setAttribute('disabled', '');
+      submitBtn.setAttribute("loading", "");
+      submitBtn.setAttribute("disabled", "");
 
       // Simulate API call (1.5s)
       setTimeout(() => {
-        submitBtn.removeAttribute('loading');
-        submitBtn.removeAttribute('disabled');
+        submitBtn.removeAttribute("loading");
+        submitBtn.removeAttribute("disabled");
 
         // Populate success view
-        document.getElementById('ref-number').textContent        = generateRef();
-        document.getElementById('summary-location').textContent  = locationVal;
-        document.getElementById('summary-description').textContent =
-          descriptionVal.length > 120 ? descriptionVal.slice(0, 120) + '...' : descriptionVal;
-        document.getElementById('summary-photos').textContent    =
-          photoCount > 0 ? photoCount + ' photo' + (photoCount > 1 ? 's' : '') + ' attached' : 'None';
-        document.getElementById('summary-date').textContent      = formatDate(new Date());
+        document.getElementById("ref-number").textContent = generateRef();
+        document.getElementById("summary-location").textContent = locationVal;
+        document.getElementById("summary-description").textContent =
+          descriptionVal.length > 120 ? descriptionVal.slice(0, 120) + "..." : descriptionVal;
+        document.getElementById("summary-photos").textContent =
+          photoCount > 0 ? photoCount + " photo" + (photoCount > 1 ? "s" : "") + " attached" : "None";
+        document.getElementById("summary-date").textContent = formatDate(new Date());
 
         // Switch views
-        viewForm.style.display    = 'none';
-        viewSuccess.style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        viewForm.style.display = "none";
+        viewSuccess.style.display = "block";
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }, 1500);
     });
 
-    newReportBtn.addEventListener('click', () => {
+    newReportBtn.addEventListener("click", () => {
       form.reset();
       selectedFiles = [];
-      viewSuccess.style.display = 'none';
-      viewForm.style.display    = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      viewSuccess.style.display = "none";
+      viewForm.style.display = "block";
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   </script>
 `;

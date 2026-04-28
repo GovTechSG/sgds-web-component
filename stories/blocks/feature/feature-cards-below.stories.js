@@ -6,7 +6,7 @@ const Template = () => html`
        Spacing    : py-layout-lg, gap-layout-md
        Cards      : tinted, hideBorder, stretchedLink
   -->
-  <section class="sgds:bg-default sgds:py-layout-lg sgds:min-h-[600px]">
+  <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
       <div class="sgds:flex sgds:flex-col" class="sgds:gap-layout-md">
         <!-- Content -->

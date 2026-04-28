@@ -1,14 +1,23 @@
 import { html } from "lit";
 
 const Template = () => html`
+  <style>
+    @media (max-width: 1023px) {
+      .feature-img { order: -1; padding-bottom: var(--sgds-spacing-layout-md); }
+    }
+    @media (min-width: 1024px) {
+      .feature-content { padding-right: var(--sgds-spacing-layout-md); }
+    }
+  </style>
+
   <!-- Feature Block — content left 8 cols / image right 4 cols
        Background : bg-surface-default
        Spacing    : py-layout-lg, gap-layout-md
        Content    : padding-left layout-md (outer edge, image on right)
   -->
-  <section class="sgds:bg-default sgds:py-layout-lg sgds:min-h-[600px]">
+  <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
-      <div class="sgds-grid sgds:items-center" class="sgds:gap-layout-md">
+      <div class="sgds-grid sgds:items-center sgds:gap-layout-md">
         <!-- Content — 8 cols, padding-left layout-md (image on right) -->
         <div
           class="feature-content sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:items-start sgds:text-left"
@@ -35,7 +44,7 @@ const Template = () => html`
         </div>
 
         <!-- Image — 4 cols -->
-        <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4 sgds:self-stretch">
+        <div class="feature-img sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
           <img
             src="/placeholder-sgds.png"
             alt=""
