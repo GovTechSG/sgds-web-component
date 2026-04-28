@@ -31,7 +31,7 @@ describe("sgds-mainnav", () => {
           >
             <slot name="brand"></slot>
           </a>
-          <slot name="non-collapsible"></slot>
+          <slot class="non-collapsible-empty" name="non-collapsible"></slot>
           <sgds-icon-button
             aria-expanded="false"
             aria-label="Toggle navigation"
