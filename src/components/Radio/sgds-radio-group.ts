@@ -41,6 +41,9 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
   /** Makes the input as a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Automatically focuses the selected radio input in the group when it becomes checked. */
+  @property({ type: Boolean, reflect: true }) autofocus = false;
+
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
     this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
@@ -157,7 +160,12 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
   private _handleSlotChange() {
     const radios = this._radios;
 
-    radios.forEach(radio => (radio.checked = radio.value === this.value));
+    radios.forEach(radio => {
+      radio.autofocus = this.autofocus;
+      radio.checked = radio.value === this.value;
+
+      return radio;
+    });
     this._disabledChildRadios();
     if (!radios.some(radio => radio.checked)) {
       if (radios[0]) radios[0].tabIndex = 0;

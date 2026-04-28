@@ -452,10 +452,12 @@
   --z-200: var(--sgds-z-index-200);
   --z-400: var(--sgds-z-index-400);
   --z-800: var(--sgds-z-index-800);
+  --z-1600: var(--sgds-z-index-1600);
 
   /* Z-Index - Semantic */
   --z-base: var(--sgds-z-index-base);
   --z-raised: var(--sgds-z-index-raised);
+  --z-sticky: var(--sgds-z-index-sticky);
   --z-floating: var(--sgds-z-index-floating);
   --z-overlay: var(--sgds-z-index-overlay);
   --z-modal: var(--sgds-z-index-modal);

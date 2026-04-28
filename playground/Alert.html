@@ -5,6 +5,7 @@
     <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
     <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
     <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <link href="./css/utility.css" rel="stylesheet" type="text/css" />
     <style>
       .container {
         max-width: 800px;
@@ -20,7 +21,7 @@
       <div>
         <h2>Info (default)</h2>
         <sgds-alert show variant="info" title="Info Alert" dismissible>
-          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
           <div>This is an informational message with a <sgds-alert-link href="#">link</sgds-alert-link>.</div>
         </sgds-alert>
       </div>
@@ -28,7 +29,7 @@
       <div>
         <h2>Success</h2>
         <sgds-alert show variant="success" title="Success Alert" dismissible>
-          <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
           <div>Operation completed successfully.</div>
         </sgds-alert>
       </div>
@@ -36,7 +37,7 @@
       <div>
         <h2>Danger</h2>
         <sgds-alert show variant="danger" title="Error Alert" dismissible>
-          <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="exclamation-circle-fill" size="md"></sgds-icon>
           <div>Something went wrong. Please try again.</div>
         </sgds-alert>
       </div>
@@ -44,7 +45,7 @@
       <div>
         <h2>Warning</h2>
         <sgds-alert show variant="warning" title="Warning Alert" dismissible>
-          <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="exclamation-triangle-fill" size="md"></sgds-icon>
           <div>Proceed with caution.</div>
         </sgds-alert>
       </div>
@@ -52,7 +53,7 @@
       <div>
         <h2>Neutral</h2>
         <sgds-alert show variant="neutral" title="Neutral Alert" dismissible>
-          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
           <div>Here is some neutral information.</div>
         </sgds-alert>
       </div>
@@ -60,35 +61,35 @@
       <div>
         <h2>Outlined</h2>
         <sgds-alert show variant="info" title="Outlined Alert" outlined dismissible>
-          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
           <div>This alert uses the outlined style.</div>
         </sgds-alert>
       </div>
       <div>
         <h2>Outlined</h2>
         <sgds-alert show variant="info" title="Outlined Alert" outlined dismissible>
-          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
           <div>This alert uses the outlined style.</div>
         </sgds-alert>
       </div>
       <div>
         <h2>Outlined Warning</h2>
         <sgds-alert show variant="warning" title="Outlined Warning Alert" outlined dismissible>
-          <sgds-icon slot="icon" name="exclamation-triangle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="exclamation-triangle-fill" size="md"></sgds-icon>
           <div>This alert uses the outlined style.</div>
         </sgds-alert>
       </div>
       <div>
         <h2>Outlined Success</h2>
         <sgds-alert show variant="success" title="Outlined Success Alert" outlined dismissible>
-          <sgds-icon slot="icon" name="check-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
           <div>This alert uses the outlined style.</div>
         </sgds-alert>
       </div>
       <div>
         <h2>Outlined Danger</h2>
         <sgds-alert show variant="danger" title="Outlined Danger Alert" outlined dismissible>
-          <sgds-icon slot="icon" name="exclamation-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="exclamation-circle-fill" size="md"></sgds-icon>
           <div>This alert uses the outlined style.</div>
         </sgds-alert>
       </div>
@@ -96,8 +97,66 @@
       <div>
         <h2>Dismissible</h2>
         <sgds-alert show variant="info" title="Dismissible Alert" dismissible dismissible>
-          <sgds-icon slot="icon" name="info-circle-fill"></sgds-icon>
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
           <div>This alert can be closed by the user.</div>
+        </sgds-alert>
+      </div>
+
+      <div>
+        <h2>Action slot — Filled</h2>
+        <sgds-alert show variant="info" title="Info alert" class="sgds:mb-md">
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+          <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          <sgds-button slot="action" variant="outline" size="sm" tone="fixed-light">Take Action</sgds-button>
+        </sgds-alert>
+        <sgds-alert show variant="success" title="Success alert" class="sgds:mb-md">
+          <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
+          <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          <sgds-button slot="action" variant="outline" size="sm" tone="fixed-light">Take Action</sgds-button>
+        </sgds-alert>
+        <sgds-alert show variant="danger" title="Danger alert" class="sgds:mb-md">
+          <sgds-icon slot="icon" name="exclamation-circle-fill" size="md"></sgds-icon>
+          <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          <sgds-button slot="action" variant="outline" size="sm" tone="fixed-light">Take Action</sgds-button>
+        </sgds-alert>
+        <sgds-alert show variant="warning" title="Warning alert" class="sgds:mb-md">
+          <sgds-icon slot="icon" name="exclamation-triangle-fill" size="md"></sgds-icon>
+          <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          <sgds-button slot="action" variant="outline" size="sm" tone="neutral">Take Action</sgds-button>
+        </sgds-alert>
+        <sgds-alert show variant="neutral" title="Neutral alert" class="sgds:mb-md">
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+          <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          <sgds-button slot="action" variant="outline" size="sm" tone="fixed-light">Take Action</sgds-button>
+        </sgds-alert>
+      </div>
+
+      <div>
+        <h2>Action slot — Outlined</h2>
+        <sgds-alert show variant="info" title="Info alert" outlined class="sgds:mb-md">
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+          <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          <sgds-button slot="action" variant="outline" size="sm" tone="neutral">Take Action</sgds-button>
+        </sgds-alert>
+        <sgds-alert show variant="success" title="Success alert" outlined class="sgds:mb-md">
+          <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
+          <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          <sgds-button slot="action" variant="outline" size="sm" tone="neutral">Take Action</sgds-button>
+        </sgds-alert>
+        <sgds-alert show variant="danger" title="Danger alert" outlined class="sgds:mb-md">
+          <sgds-icon slot="icon" name="exclamation-circle-fill" size="md"></sgds-icon>
+          <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          <sgds-button slot="action" variant="outline" size="sm" tone="neutral">Take Action</sgds-button>
+        </sgds-alert>
+        <sgds-alert show variant="warning" title="Warning alert" outlined class="sgds:mb-md">
+          <sgds-icon slot="icon" name="exclamation-triangle-fill" size="md"></sgds-icon>
+          <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          <sgds-button slot="action" variant="outline" size="sm" tone="neutral">Take Action</sgds-button>
+        </sgds-alert>
+        <sgds-alert show variant="neutral" title="Neutral alert" outlined class="sgds:mb-md">
+          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+          <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          <sgds-button slot="action" variant="outline" size="sm" tone="neutral">Take Action</sgds-button>
         </sgds-alert>
       </div>
     </div>

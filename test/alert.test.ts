@@ -40,7 +40,16 @@ describe("<Alert>", () => {
         <div class="alert show" role="alert" aria-hidden="false">
         <slot name="icon"></slot>
         <div class="alert-content">
-           <slot class="alert-content__description">
+           <div class="alert-content__upper">
+            <slot class="alert-content__description">
+            </slot>
+          </div>
+          <slot
+            class="alert-content__action"
+            name="action"
+          >
+          </slot>
+        </div>
           </div>        
         </div>
       `
@@ -75,8 +84,16 @@ describe("<Alert>", () => {
                 </svg>  
                 </slot>
         <div class="alert-content">
-           <slot class="alert-content__description">
-          </div>        
+               <div class="alert-content__upper">
+            <slot class="alert-content__description">
+            </slot>
+          </div>
+          <slot
+            class="alert-content__action"
+            name="action"
+          >
+          </slot>
+        </div>        
         </div>
       `
     );

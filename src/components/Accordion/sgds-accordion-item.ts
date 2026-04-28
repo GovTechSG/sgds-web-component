@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, query, state } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
@@ -16,9 +16,11 @@ import { AccordionDensity } from "./sgds-accordion";
  * @event sgds-hide - Emitted on hide.
  * @event sgds-after-hide - Emitted on hide after animation has completed.
  *
+ * @slot icon - An icon placed before the header text, typically used to provide visual context for the accordion item.
  * @slot header - The accordion-item button header slot.
+ * @slot badge - A badge placed after the header text, aligned to the right via auto left margin.
  * @slot content - The accordion-item content slot.
- * @slot caret - The caret icon of accordion-item.
+ * @slot caret - The caret icon of accordion-item. Defaults to a chevron-down icon.
  *
  */
 export class SgdsAccordionItem extends SgdsElement {
@@ -128,9 +130,11 @@ export class SgdsAccordionItem extends SgdsElement {
     this.open = false;
     return waitForEvent(this, "sgds-after-hide");
   }
-  render() {
-    const isHydrated = this.hasUpdated;
+  firstUpdated() {
+    if (!this.open) this.body.classList.add("hidden");
+  }
 
+  render() {
     return html`
       <div class="accordion-item">
         <button
@@ -148,17 +152,16 @@ export class SgdsAccordionItem extends SgdsElement {
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
+          <slot name="icon"></slot>
           <slot name="header"></slot>
-          <slot name="caret">
-            <sgds-icon name="chevron-down" size=${this.density === "compact" ? "md" : "lg"}></sgds-icon>
-          </slot>
+          <div class="accordion-header__trailing">
+            <slot name="badge"></slot>
+            <slot name="caret">
+              <sgds-icon name="chevron-down" size=${this.density === "compact" ? "md" : "lg"}></sgds-icon>
+            </slot>
+          </div>
         </button>
-        <div
-          class=${classMap({
-            "accordion-body": true,
-            hidden: !this.open && !isHydrated
-          })}
-        >
+        <div class="accordion-body">
           <slot id="content" name="content" class="content" role="region" aria-labelledby="header"></slot>
         </div>
       </div>

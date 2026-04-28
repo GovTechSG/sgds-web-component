@@ -43,7 +43,7 @@
   outline-offset: var(--sgds-outline-offset-focus);
 }
 
-.stepper.horizontal .stepper-item-container:not(:first-child) .stepper-item:before {
+.stepper.horizontal .stepper-item-container:not(:first-of-type) .stepper-item:before {
   content: " ";
   position: absolute;
   top: 15px;

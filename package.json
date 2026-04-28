@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "3.16.1-rc.3",
+  "version": "3.17.1-rc.0",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -28,13 +28,14 @@
     "lint:fix": "npm run lint -- --fix",
     "cem": "cem analyze --litelement ",
     "e2e-test": "node cypress/scripts/run_all.js & cypress open",
-    "storybook": "nodemon --exec \"npm run utility:storybook && npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch stories/templates stories/getting-started src/css/utility.css -e js,mdx,css",
+    "storybook": "nodemon --exec \"npm run utility:storybook && npm run write:stories &&  STORYBOOK_ENV=development storybook dev -p 6006\" --watch stories/component-templates stories/getting-started src/css/utility.css -e js,mdx,css",
     "build-storybook": "npm run utility:storybook && npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build --loglevel verbose",
     "convert:icons": "node scripts/convertIcons.js && pnpm run generate:icons",
     "generate:icons": "node scripts/generateIconRegistry.js",
     "chromatic": "chromatic",
     "utility:dev": "tailwindcss -i ./src/css/utility.css -o ./playground/css/utility.css --config tailwind.config.js --watch",
-    "utility:storybook": "tailwindcss -i ./src/css/utility.css -o ./.storybook/utility.css --config tailwind.config.js"
+    "utility:storybook": "tailwindcss -i ./src/css/utility.css -o ./.storybook/utility.css --config tailwind.config.js",
+    "scan:snyk-agent": "tsx scripts/snyk-agent-scan/index.ts"
   },
   "author": "GovTechSG",
   "contributors": [

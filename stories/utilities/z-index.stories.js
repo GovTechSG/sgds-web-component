@@ -34,9 +34,18 @@ const semanticLayers = [
     textClass: "sgds:text-default"
   },
   {
+    token: "sgds:z-sticky",
+    var: "--sgds-z-index-sticky",
+    value: "200",
+    label: "sticky",
+    zClass: "sgds:z-sticky",
+    bgClass: "sgds:bg-neutral-surface-muted",
+    textClass: "sgds:text-default"
+  },
+  {
     token: "sgds:z-floating",
     var: "--sgds-z-index-floating",
-    value: "200",
+    value: "400",
     label: "floating",
     zClass: "sgds:z-floating",
     bgClass: "sgds:bg-primary-surface-muted",
@@ -45,7 +54,7 @@ const semanticLayers = [
   {
     token: "sgds:z-overlay",
     var: "--sgds-z-index-overlay",
-    value: "400",
+    value: "800",
     label: "overlay",
     zClass: "sgds:z-overlay",
     bgClass: "sgds:bg-primary-surface-default",
@@ -54,7 +63,7 @@ const semanticLayers = [
   {
     token: "sgds:z-modal",
     var: "--sgds-z-index-modal",
-    value: "800",
+    value: "1600",
     label: "modal",
     zClass: "sgds:z-modal",
     bgClass: "sgds:bg-primary-default",
@@ -84,7 +93,7 @@ export const ZIndexAllStacks = () => {
   const zAx = { x: cx, y: layerTopY(n - 1) - 28 };
 
   // Layer fills: neutral → purple gradient (base → modal)
-  const fills = ["#f7f7fa", "#f0ecfb", "#e4dcf6", "#d3c8ef", "#bfade6"];
+  const fills = ["#f7f7fa", "#f0ecfb", "#e4dcf6", "#d3c8ef", "#bfade6", "#9d8dd9"];
   const stroke = "#ccc4e8";
   const dash = "#c4b0df";
   const chip = "#1d1d1f";
@@ -184,9 +193,9 @@ export const ZIndexAllStacks = () => {
         <div
           style="display: grid; grid-template-columns: 1fr 1fr 80px 32px; gap: 8px; padding: 0 12px 8px; border-bottom: 1px solid var(--sgds-color-neutral-border-subtle, #e5e7eb);"
         >
-          <span class="sgds:text-label-xs sgds:text-muted sgds:font-semibold">Token</span>
-          <span class="sgds:text-label-xs sgds:text-muted sgds:font-semibold">CSS Variable</span>
-          <span class="sgds:text-label-xs sgds:text-muted sgds:font-semibold">Value</span>
+          <span class="sgds:text-label-xs sgds:text-default sgds:font-semibold">Token</span>
+          <span class="sgds:text-label-xs sgds:text-default sgds:font-semibold">CSS Variable</span>
+          <span class="sgds:text-label-xs sgds:text-default sgds:font-semibold">Value</span>
           <span></span>
         </div>
         <!-- Rows — highest z-index first -->
@@ -196,7 +205,7 @@ export const ZIndexAllStacks = () => {
               style="display: grid; grid-template-columns: 1fr 1fr 80px 32px; gap: 8px; align-items: center; padding: 8px 12px; border-radius: 6px;"
             >
               <code class="sgds:text-label-xs">${token}</code>
-              <code class="sgds:text-label-xs sgds:text-muted">${cssVar}</code>
+              <code class="sgds:text-label-xs sgds:text-subtle">${cssVar}</code>
               <code class="sgds:text-label-xs sgds:font-semibold">${value}</code>
               <button
                 class="sgds:flex sgds:items-center sgds:justify-center sgds:cursor-pointer sgds:opacity-50 sgds:bg-transparent sgds:border-none sgds:p-0"

@@ -18,46 +18,76 @@
   <body>
     <div class="container">
       <div>
-        <h2>Horizontal (default)</h2>
-        <sgds-stepper activeStep="1">
-          <sgds-stepper-item>Step 1</sgds-stepper-item>
-          <sgds-stepper-item>Step 2</sgds-stepper-item>
-          <sgds-stepper-item>Step 3</sgds-stepper-item>
+        <h2>Horizontal (default) - Using sgds-step Non-linear and has completed steps</h2>
+        <sgds-stepper activeStep="1" clickable>
+          <sgds-step stepHeader="Step 1"> This is a slot with very long text </sgds-step>
+          <sgds-step stepHeader="Step 2" completed> This is a slot with very long text </sgds-step>
+          <sgds-step stepHeader="Step 3" completed> This is a slot with very long text </sgds-step>
         </sgds-stepper>
       </div>
 
       <div>
-        <h2>Vertical</h2>
+        <h2>Vertical - Using sgds-step</h2>
         <sgds-stepper orientation="vertical" activeStep="1">
-          <sgds-stepper-item>Step 1</sgds-stepper-item>
-          <sgds-stepper-item>Step 2</sgds-stepper-item>
-          <sgds-stepper-item>Step 3</sgds-stepper-item>
+          <sgds-step stepHeader="Personal Details"> slot </sgds-step>
+          <sgds-step stepHeader="Address Information"> slot </sgds-step>
+          <sgds-step stepHeader="Review"> slot </sgds-step>
         </sgds-stepper>
       </div>
 
       <div>
-        <h2>Clickable Steps</h2>
+        <h2>With Icons - Using sgds-step</h2>
+        <sgds-stepper activeStep="0">
+          <sgds-step stepHeader="Account" iconName="person"> slot </sgds-step>
+          <sgds-step stepHeader="Profile" iconName="users"> slot </sgds-step>
+          <sgds-step stepHeader="Review" iconName="check-circle"> slot </sgds-step>
+        </sgds-stepper>
+      </div>
+
+      <div>
+        <h2>Clickable Steps - Using sgds-step</h2>
         <sgds-stepper activeStep="0" clickable>
-          <sgds-stepper-item>Account</sgds-stepper-item>
-          <sgds-stepper-item>Profile</sgds-stepper-item>
-          <sgds-stepper-item>Review</sgds-stepper-item>
-          <sgds-stepper-item>Submit</sgds-stepper-item>
+          <sgds-step stepHeader="Account"> slot </sgds-step>
+          <sgds-step stepHeader="Profile"> slot </sgds-step>
+          <sgds-step stepHeader="Review"> slot </sgds-step>
+          <sgds-step stepHeader="Submit"> slot </sgds-step>
         </sgds-stepper>
       </div>
 
       <div>
-        <h2>With Navigation Buttons</h2>
-        <sgds-stepper id="nav-stepper" activeStep="0">
-          <sgds-stepper-item>Details</sgds-stepper-item>
-          <sgds-stepper-item>Verification</sgds-stepper-item>
-          <sgds-stepper-item>Confirmation</sgds-stepper-item>
+        <h2>With Slot Content - Using sgds-step</h2>
+        <sgds-stepper activeStep="0">
+          <sgds-step stepHeader="Personal Details">
+            <p style="margin-top: 16px; font-size: 14px; color: #666">Enter your personal information here</p>
+          </sgds-step>
+          <sgds-step stepHeader="Address Information">
+            <p style="margin-top: 16px; font-size: 14px; color: #666">Enter your address details here</p>
+          </sgds-step>
+          <sgds-step stepHeader="Review">
+            <p style="margin-top: 16px; font-size: 14px; color: #666">Review all your information before submitting</p>
+          </sgds-step>
         </sgds-stepper>
+      </div>
+
+      <div>
+        <h2>With Navigation Buttons - Using sgds-step linear</h2>
+        <sgds-stepper orientation="vertical" id="nav-stepper" activeStep="0" clickable linear>
+          <sgds-step stepHeader="Details"> slot </sgds-step>
+          <sgds-step stepHeader="Verification"> slot </sgds-step>
+          <sgds-step stepHeader="Confirmation" disabled> slot </sgds-step>
+        </sgds-stepper>
+
         <div style="display: flex; gap: 8px; margin-top: 16px">
           <sgds-button id="prev-btn" variant="outlined" disabled>Previous</sgds-button>
           <sgds-button id="next-btn">Next</sgds-button>
         </div>
+
         <script>
           const stepper = document.getElementById("nav-stepper");
+          stepper.addEventListener("sgds-arrived", () => {
+            updateButtons();
+          });
+
           const prevBtn = document.getElementById("prev-btn");
           const nextBtn = document.getElementById("next-btn");
           const totalSteps = 3;
@@ -83,6 +113,8 @@
               updateButtons();
             }
           });
+
+          updateButtons();
         </script>
       </div>
     </div>
