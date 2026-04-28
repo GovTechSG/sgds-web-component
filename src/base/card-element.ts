@@ -43,7 +43,15 @@ export class CardElement extends SgdsElement {
 
   protected _forwardAnchorAttributes(anchor: HTMLAnchorElement | null) {
     const SKIP = new Set(["class", "style", "id"]);
-    if (!anchor?.href || anchor.href.startsWith("javascript:")) return;
+    if (
+      !anchor?.href ||
+      anchor.href.startsWith("javascript:") ||
+      anchor.href.startsWith("data:") ||
+      anchor.href.startsWith("vbscript:")
+    ) {
+      return;
+    }
+
     for (const { name, value } of Array.from(anchor.attributes)) {
       if (!SKIP.has(name) && !name.startsWith("on")) {
         this.card.setAttribute(name, value);
