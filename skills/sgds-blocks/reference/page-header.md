@@ -20,46 +20,14 @@ Page header
     └── Right: CTA button (sgds-button primary)
 ```
 
-## Complete block
+## Source files
 
-```html
-<div class="sgds:flex sgds:flex-col sgds:gap-layout-sm">
+**Base URL:** `https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/header/`
 
-  <!-- Breadcrumb -->
-  <sgds-breadcrumb>
-    <sgds-breadcrumb-item><a href="#">Link</a></sgds-breadcrumb-item>
-    <sgds-breadcrumb-item><a href="#">Link</a></sgds-breadcrumb-item>
-    <sgds-breadcrumb-item active><a href="#">Link</a></sgds-breadcrumb-item>
-  </sgds-breadcrumb>
-
-  <!-- Title row: left content + right action -->
-  <div class="sgds:flex sgds:items-start sgds:justify-between">
-
-    <!-- Left: icon + title + description -->
-    <div class="sgds:flex sgds:flex-col sgds:gap-component-sm sgds:flex-1">
-
-      <!-- Icon + heading -->
-      <div class="sgds:flex sgds:items-center sgds:gap-text-sm">
-        <div class="sgds:inline-flex sgds:items-center sgds:justify-center sgds:w-10 sgds:h-10 sgds:shrink-0 sgds:p-2 sgds:rounded-md sgds:bg-accent-surface-muted">
-          <sgds-icon name="trend-up" size="24"></sgds-icon>
-        </div>
-        <h1 class="sgds:text-heading-lg sgds:font-bold sgds:leading-lg sgds:tracking-tight sgds:text-heading-default sgds:mb-0">Applications</h1>
-      </div>
-
-      <!-- Description -->
-      <div class="sgds:text-label-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-label-default">Placeholder texts</div>
-
-    </div>
-
-    <!-- Right: CTA -->
-    <sgds-button variant="primary">
-      <sgds-icon name="plus" slot="leftIcon"></sgds-icon>
-      Create application
-    </sgds-button>
-
-  </div>
-</div>
-```
+| Block Name | File Path | URL |
+|---|---|---|
+| Page Header | `page-header.stories.js` | [page-header.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/header/page-header.stories.js) |
+| Page Header with Breadcrumb | `page-header-breadcrumb.stories.js` | [page-header-breadcrumb.stories.js](https://raw.githubusercontent.com/GovTechSG/sgds-web-component/master/stories/blocks/header/page-header-breadcrumb.stories.js) |
 
 ## Customisation notes
 
