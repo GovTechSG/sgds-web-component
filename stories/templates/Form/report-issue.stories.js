@@ -29,7 +29,7 @@ const Template = () => html`
               </p>
             </div>
 
-            <form id="report-issue-form" class="sgds:flex sgds:flex-col sgds:gap-form-2-xl" novalidate>
+            <form id="report-issue-form" class="sgds:flex sgds:flex-col sgds:gap-form-2-xl">
               <sgds-input
                 type="text"
                 label="Location"
@@ -47,6 +47,7 @@ const Template = () => html`
                 placeholder="Describe the issue in detail - what it is, how long it has been there, and any safety concerns"
                 hintText="Minimum 20 characters"
                 rows="5"
+                minlength="20"
                 maxlength="500"
                 required
                 hasFeedback="both"
@@ -150,23 +151,75 @@ const Template = () => html`
   </section>
 
   <sgds-footer></sgds-footer>
+
+  <script>
+    const form         = document.getElementById('report-issue-form');
+    const submitBtn    = document.getElementById('submit-btn');
+    const newReportBtn = document.getElementById('new-report-btn');
+    const viewForm     = document.getElementById('view-form');
+    const viewSuccess  = document.getElementById('view-success');
+    const photoUpload  = document.getElementById('photo-upload');
+
+    let selectedFiles = [];
+    photoUpload.addEventListener('sgds-files-selected', (e) => {
+      selectedFiles = Array.from(e.detail);
+    });
+
+    function generateRef() {
+      const date = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      const rand = String(Math.floor(1000 + Math.random() * 9000));
+      return 'RPT-' + date + '-' + rand;
+    }
+
+    function formatDate(date) {
+      return date.toLocaleDateString('en-SG', {
+        day: 'numeric', month: 'long', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const formData       = new FormData(form);
+      const locationVal    = formData.get('location');
+      const descriptionVal = formData.get('description');
+      const photoCount     = selectedFiles.length;
+
+      // Loading state
+      submitBtn.setAttribute('loading', '');
+      submitBtn.setAttribute('disabled', '');
+
+      // Simulate API call (1.5s)
+      setTimeout(() => {
+        submitBtn.removeAttribute('loading');
+        submitBtn.removeAttribute('disabled');
+
+        // Populate success view
+        document.getElementById('ref-number').textContent        = generateRef();
+        document.getElementById('summary-location').textContent  = locationVal;
+        document.getElementById('summary-description').textContent =
+          descriptionVal.length > 120 ? descriptionVal.slice(0, 120) + '...' : descriptionVal;
+        document.getElementById('summary-photos').textContent    =
+          photoCount > 0 ? photoCount + ' photo' + (photoCount > 1 ? 's' : '') + ' attached' : 'None';
+        document.getElementById('summary-date').textContent      = formatDate(new Date());
+
+        // Switch views
+        viewForm.style.display    = 'none';
+        viewSuccess.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 1500);
+    });
+
+    newReportBtn.addEventListener('click', () => {
+      form.reset();
+      selectedFiles = [];
+      viewSuccess.style.display = 'none';
+      viewForm.style.display    = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 `;
-
-function generateRef() {
-  const date = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-  const rand = String(Math.floor(1000 + Math.random() * 9000));
-  return "RPT-" + date + "-" + rand;
-}
-
-function formatDate(date) {
-  return date.toLocaleDateString("en-SG", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
-  });
-}
 
 export default {
   title: "Templates/Form/Report Issue",
@@ -178,86 +231,5 @@ export default {
 
 export const ReportIssue = {
   render: Template.bind({}),
-  name: "Report Issue",
-  play: async ({ canvasElement }) => {
-    const form = canvasElement.querySelector("#report-issue-form");
-    const submitBtn = canvasElement.querySelector("#submit-btn");
-    const newReportBtn = canvasElement.querySelector("#new-report-btn");
-    const viewForm = canvasElement.querySelector("#view-form");
-    const viewSuccess = canvasElement.querySelector("#view-success");
-    const photoUpload = canvasElement.querySelector("#photo-upload");
-
-    let selectedFiles = [];
-
-    if (photoUpload) {
-      photoUpload.addEventListener("sgds-files-selected", e => {
-        selectedFiles = Array.from(e.detail);
-      });
-    }
-
-    if (form) {
-      form.addEventListener("submit", e => {
-        e.preventDefault();
-
-        const locationEl = form.querySelector('[name="location"]');
-        const descriptionEl = form.querySelector('[name="description"]');
-        let valid = true;
-
-        if (!locationEl.value.trim()) {
-          locationEl.setAttribute("invalid", "");
-          valid = false;
-        } else {
-          locationEl.removeAttribute("invalid");
-        }
-
-        if (!descriptionEl.value.trim() || descriptionEl.value.trim().length < 20) {
-          descriptionEl.setAttribute("invalid", "");
-          valid = false;
-        } else {
-          descriptionEl.removeAttribute("invalid");
-        }
-
-        if (!valid) return;
-
-        // Capture values before reset
-        const locationVal = locationEl.value.trim();
-        const descriptionVal = descriptionEl.value.trim();
-        const photoCount = selectedFiles.length;
-
-        // Loading state
-        submitBtn.setAttribute("loading", "");
-        submitBtn.setAttribute("disabled", "");
-
-        // Simulate API call (1.5s)
-        setTimeout(() => {
-          submitBtn.removeAttribute("loading");
-          submitBtn.removeAttribute("disabled");
-
-          // Populate success view
-          canvasElement.querySelector("#ref-number").textContent = generateRef();
-          canvasElement.querySelector("#summary-location").textContent = locationVal;
-          canvasElement.querySelector("#summary-description").textContent =
-            descriptionVal.length > 120 ? descriptionVal.slice(0, 120) + "..." : descriptionVal;
-          canvasElement.querySelector("#summary-photos").textContent =
-            photoCount > 0 ? photoCount + " photo" + (photoCount > 1 ? "s" : "") + " attached" : "None";
-          canvasElement.querySelector("#summary-date").textContent = formatDate(new Date());
-
-          // Switch views
-          viewForm.style.display = "none";
-          viewSuccess.style.display = "block";
-          canvasElement.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 1500);
-      });
-    }
-
-    if (newReportBtn) {
-      newReportBtn.addEventListener("click", () => {
-        form.reset();
-        selectedFiles = [];
-        viewSuccess.style.display = "none";
-        viewForm.style.display = "block";
-        canvasElement.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    }
-  }
+  name: "Report Issue"
 };
