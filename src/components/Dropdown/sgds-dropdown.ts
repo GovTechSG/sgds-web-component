@@ -107,12 +107,7 @@ export class SgdsDropdown extends DropdownListElement {
   render() {
     return html`
       <div class="dropdown" @click=${this._handleClick}>
-        <div
-          class="toggler-container"
-          ${ref(this.myDropdown)}
-          aria-expanded="${this.menuIsOpen}"
-          aria-haspopup="menu"
-        >
+        <div class="toggler-container" ${ref(this.myDropdown)} aria-expanded="${this.menuIsOpen}" aria-haspopup="menu">
           <slot name="toggler"></slot>
         </div>
         <div class="dropdown-menu" role="menu" ${ref(this.menuRef)}>
