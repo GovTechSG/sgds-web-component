@@ -65,14 +65,9 @@ export class SgdsImageCard extends CardElement {
     }
 
     if (this.stretchedLink) {
-      const footerHref = this.footerSlotItems?.href;
-      const linkHref = this.linkSlotItems?.href;
-
-      if (footerHref) {
-        this.card.setAttribute("href", footerHref);
-      } else if (linkHref) {
-        this.card.setAttribute("href", linkHref);
-      }
+      const footerAnchor = this.footerSlotItems;
+      const linkAnchor = this.linkSlotItems;
+      this._forwardAnchorAttributes(footerAnchor?.href ? footerAnchor : linkAnchor);
     }
   }
 
