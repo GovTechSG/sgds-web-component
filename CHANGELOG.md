@@ -1,3 +1,40 @@
+## v3.18.0 (2026-04-29)
+
+### Feat
+
+- **Skills**: rename skill to sgds-blocks, sgds-templates, sgds-patterns
+- **Skill**: add sgds-blocks and sgds-patterns
+- **Blocks, Patterns, Templates**: by andy teng [skip-cd] (#627)
+- **block**: add call to action blocks [skip-cd] (#620)
+- **block**: add call to action blocks
+- **Blocks**: form patterns skills
+- **Form**: blocks
+- **Pattern, Blocks, Template**: new typograhy patterns
+- **Blocks**: new blocks for landing and general pages
+- **skills**: add sgds-writing content style guide (#616) [skip-cd]
+- **skills**: add sgds-writing content style guide
+- **Alert**: visual refinement on border and new action slot [skip-cd][run-chromatic] (#604)
+- **Alert**: visual refinement on border and new action slot
+
+### Fix
+
+- **dropdown menu**: allow slotted element to fill parent width via flex grow [skip-cd] [run-chromatic] (#626)
+- **dropdown menu**: allow slotted element to set its width and fix menu not closing when clicking in toggler container
+- **cards**: fix stretchedLink card not reading the hyperlink attributes
+- **mainnav**: prevent non-collapsible slot from taking space when it is empty
+- **dropdown menu**: set max width on dropdown menu [run-chromatic] (#629)
+- **dropdown menu**: set max width on dropdown menu
+- **Skills**: keep using text-muted instead of text-subtle [skip-cd] (#622)
+- **Skills**: keep using text-muted instead of text-subtle
+- **docs**: resolve broken internal skill references in documentation
+- **Subnav**: activate z-index and lockBodyScroll when menu is open [skip-cd] [run-chromatic] (#613)
+- **subnav**: apply position relative to activate z-index
+- **subnav**: prevent body hidden overflow from breaking subnav stickiness
+- **select**: hide input caret and update cursor [skip-cd] (#614)
+- **select**: hide input caret and update cursor
+- **Sidebar, Subnav**: sidebar and sidenav to be on new z index sticky layer (#612)
+- **Sidebar, Subnav**: sidebar and sidenav to be on new z index sticky layer
+
 ## v3.17.0 (2026-04-17)
 
 ### Feat
@@ -121,10 +158,12 @@
 - **Utility**: responsive tokens
 
 ### Fix
-- **Mainnav, Masthead, SystemBanner**: update the alignment of the header components
+
+- *****: update the alignment of the header components [run-chromatic][skip-cd] (#566)
+- *****: update the alignment of the header components
 - **Pagination**: active color and button color[run-chromatic]  (#567)
-- **Footer** replace container query with media query to resolve responsive issue [run-chromatic] (#563)
-- **Footer** replace container query with media query to resolve responsive issue
+- replace container query with media query to resolve responsive issue [run-chromatic] (#563)
+- replace container query with media query to resolve responsive issue
 - **Pagination**: active color and button color
 
 ## v3.13.1 (2026-03-06)
@@ -156,8 +195,6 @@
 - **Drawer**: move padding from outer container to inner header and body container respectively
 
 ## v3.12.0 (2026-03-02)
-
-## 3.12.0 (2026-03-02)
 
 ### Feat
 
