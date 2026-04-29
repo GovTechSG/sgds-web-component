@@ -7,7 +7,6 @@ export const Template = ({
   menuAlignRight,
   drop,
   floatingOpts,
-  variant,
   active,
   href,
   close,
@@ -21,12 +20,11 @@ export const Template = ({
       drop=${ifDefined(drop)}
       ?menuAlignRight=${menuAlignRight}
       floatingOpts=${ifDefined(floatingOpts)}
-      variant=${ifDefined(variant)}
       close=${ifDefined(close)}
       ?menuIsOpen=${menuIsOpen}
       ?disabled=${disabled}
     >
-      <sgds-button slot="toggler" role="button">
+      <sgds-button slot="toggler" role="button" variant="primary" tone="brand">
         Dropdown
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
@@ -48,7 +46,6 @@ export const Template = ({
 };
 
 export const args = {
-  variant: "secondary",
   href: "#"
 };
 
