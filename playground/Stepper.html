@@ -119,7 +119,7 @@
 
           function updateButtons() {
             const current = parseInt(stepper.getAttribute("activeStep"));
-            console.log(current);
+
             prevBtn.disabled = current === 0;
             nextBtn.disabled = current === totalSteps - 1;
           }
