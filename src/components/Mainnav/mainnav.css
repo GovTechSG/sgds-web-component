@@ -65,13 +65,7 @@ nav > .navbar-body .navbar-nav {
 }
 
 nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown)) {
-  padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
-}
-
-@media screen and (max-width: 767px) {
-  nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown)) {
-    padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
-  }
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
 }
 
 .navbar-collapse {
@@ -253,6 +247,10 @@ slot[name="non-collapsible"] {
   gap: var(--sgds-spacer-4);
   align-items: center;
   margin-left: auto;
+}
+
+slot[name="non-collapsible"].non-collapsible-empty {
+  display: none;
 }
 
 .slot-end {

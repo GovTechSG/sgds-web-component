@@ -1,0 +1,733 @@
+<html style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
+<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<style>
+  /* ── Status badge pill ─────────────────────────────────────── */
+  .status-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Attachment row ────────────────────────────────────────── */
+  .attachment-row {
+    display: flex;
+    align-items: center;
+    gap: var(--sgds-gap-md);
+    padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+    border: 1px solid var(--sgds-border-color-muted);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .attachment-row:hover { border-color: var(--sgds-border-color-default); }
+
+  .file-chip {
+    width: 36px; height: 36px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 800; letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .file-chip--pdf  { background: #fef2f2; color: #ef4444; }
+  .file-chip--xls  { background: #f0fdf4; color: #16a34a; }
+
+  /* ── Comment item ──────────────────────────────────────────── */
+  .comment-item {
+    display: flex;
+    gap: var(--sgds-gap-md);
+    padding: var(--sgds-padding-md) 0;
+    border-bottom: 1px solid var(--sgds-border-color-muted);
+  }
+  .comment-item:last-child { border-bottom: none; }
+
+  /* ── Avatar ────────────────────────────────────────────────── */
+  .avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    color: #fff; flex-shrink: 0;
+    user-select: none;
+  }
+
+  /* ── Audit timeline ────────────────────────────────────────── */
+  .audit-item { display: flex; gap: var(--sgds-gap-md); position: relative; }
+  .audit-item:not(:last-child) .audit-stem {
+    position: absolute;
+    left: 14px; top: 32px; bottom: 0;
+    width: 1px; background: var(--sgds-border-color-muted);
+  }
+
+  /* ── Tabs ──────────────────────────────────────────────────── */
+  .tab-bar { display: flex; border-bottom: 1px solid var(--sgds-border-color-muted); }
+  .tab-btn {
+    padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
+    border: none; background: none; cursor: pointer;
+    font-size: 13px; font-weight: 500;
+    color: var(--sgds-color-subtle);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    font-family: inherit;
+    transition: color 0.15s;
+  }
+  .tab-btn.active {
+    font-weight: 700;
+    color: var(--sgds-color-default);
+    border-bottom-color: var(--sgds-primary-color-default);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+
+  /* ── Decision panel states ─────────────────────────────────── */
+  .decision-taken { display: none; text-align: center; padding: var(--sgds-padding-lg); border-radius: 8px; }
+  .decision-taken.show { display: block; }
+
+  /* ── Info row ──────────────────────────────────────────────── */
+  .info-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: var(--sgds-padding-xs) 0;
+    border-bottom: 1px solid var(--sgds-border-color-muted);
+    font-size: 13px;
+  }
+  .info-row:last-child { border-bottom: none; }
+
+  /* ── Banner ────────────────────────────────────────────────── */
+  #decision-banner { display: none; }
+  #decision-banner.show { display: flex; }
+
+  /* ── Reviewer identity card ────────────────────────────────── */
+  .reviewer-card {
+    display: flex; align-items: center; gap: var(--sgds-gap-md);
+    padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+    background: var(--sgds-bg-alternate);
+    border: 1px solid var(--sgds-border-color-muted);
+    border-radius: 8px;
+  }
+</style>
+
+<body>
+
+  <!-- ── Page header (breadcrumb block) ─────────────────────────── -->
+  <section class="sgds:bg-default sgds:py-layout-lg">
+    <div class="sgds-container">
+      <div class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left sgds:gap-layout-md" style="max-width: var(--sgds-text-max-width);">
+
+        <!-- Breadcrumb -->
+        <sgds-breadcrumb>
+          <sgds-breadcrumb-item><a href="#">Review Queue</a></sgds-breadcrumb-item>
+          <sgds-breadcrumb-item><a href="#">Budget Approvals</a></sgds-breadcrumb-item>
+          <sgds-breadcrumb-item active><a href="#">REQ-2026-0892</a></sgds-breadcrumb-item>
+        </sgds-breadcrumb>
+
+        <!-- Heading group -->
+        <div>
+          <div class="sgds:flex sgds:items-center sgds:gap-xs sgds:mb-xs">
+            <sgds-badge id="status-badge-header" variant="warning">
+              <span class="status-dot" style="background:#f59e0b;" slot="icon"></span>
+              Pending Review
+            </sgds-badge>
+            <sgds-badge variant="danger" outlined>High Priority</sgds-badge>
+          </div>
+          <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
+            REQ-2026-0892
+          </h1>
+          <div class="sgds:flex sgds:items-center sgds:gap-sm sgds:mt-xs">
+            <div class="avatar" style="background:#6366f1; width:28px; height:28px; font-size:10px;">SC</div>
+            <span class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+              Sarah Chen · Marketing Director
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Content ──────────────────────────────────────────────────── -->
+  <section class="sgds:bg-default sgds:py-layout-md">
+    <div class="sgds-container">
+
+      <!-- Decision banner (shown after action) -->
+      <div
+        id="decision-banner"
+        class="sgds:flex sgds:items-start sgds:gap-md sgds:p-md sgds:rounded-lg sgds:mb-lg"
+        style="border: 1px solid; border-radius: 8px;"
+      >
+        <div id="banner-icon" style="width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <!-- injected by JS -->
+        </div>
+        <div style="flex:1">
+          <div id="banner-title" class="sgds:text-subtitle-sm sgds:font-semibold sgds:text-heading-default"></div>
+          <div id="banner-body"  class="sgds:text-body-sm  sgds:text-body-subtle sgds:mt-2-xs"></div>
+        </div>
+        <button
+          id="banner-close"
+          onclick="document.getElementById('decision-banner').classList.remove('show')"
+          style="background:none;border:none;cursor:pointer;padding:4px;"
+          aria-label="Dismiss"
+        >
+          <sgds-icon name="x-lg" size="sm"></sgds-icon>
+        </button>
+      </div>
+
+      <!-- Two-column layout -->
+      <div class="sgds-grid sgds:items-start">
+
+        <!-- ══════════════════ LEFT COLUMN ══════════════════════ -->
+        <div class="sgds-col-12 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-layout-xs">
+
+          <!-- ── Detail card ─────────────────────────────────── -->
+          <div class="sgds:surface-raised sgds:rounded-xl">
+
+            <!-- Description -->
+            <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-body-default sgds:px-layout-xs sgds:py-layout-xs">
+              Requesting an increase to the Q4 marketing budget to support the upcoming product launch campaign. The
+              additional funds will cover digital advertising, influencer partnerships, and event sponsorships.
+              This investment is projected to drive a 23% increase in lead generation based on comparable Q2
+              performance data.
+            </p>
+
+            <!-- Metadata grid -->
+            <sgds-description-list-group bordered>
+              <sgds-description-list>
+                <span class="sgds:text-body-sm sgds:text-body-subtle">Department</span>
+                <span slot="data" class="sgds:text-body-sm sgds:text-body-default">Marketing</span>
+              </sgds-description-list>
+              <sgds-description-list>
+                <span class="sgds:text-body-sm sgds:text-body-subtle">Requested Amount</span>
+                <span slot="data" class="sgds:text-body-sm sgds:text-body-default">$45,000</span>
+              </sgds-description-list>
+              <sgds-description-list>
+                <span class="sgds:text-body-sm sgds:text-body-subtle">Current Budget</span>
+                <span slot="data" class="sgds:text-body-sm sgds:text-body-default">$120,000</span>
+              </sgds-description-list>
+              <sgds-description-list>
+                <span class="sgds:text-body-sm sgds:text-body-subtle">Period</span>
+                <span slot="data" class="sgds:text-body-sm sgds:text-body-default">Q4 2026</span>
+              </sgds-description-list>
+              <sgds-description-list>
+                <span class="sgds:text-body-sm sgds:text-body-subtle">Cost Centre</span>
+                <span slot="data" class="sgds:text-body-sm sgds:text-body-default">CC-MKTG-04</span>
+              </sgds-description-list>
+              <sgds-description-list>
+                <span class="sgds:text-body-sm sgds:text-body-subtle">Approver Level</span>
+                <span slot="data" class="sgds:text-body-sm sgds:text-body-default">VP Finance</span>
+              </sgds-description-list>
+            </sgds-description-list-group>
+          </div>
+
+          <!-- ── Attachments card ─────────────────────────────── -->
+          <div class="sgds:surface-raised sgds:rounded-xl">
+            <div class="sgds:flex sgds:items-center sgds:gap-xs sgds:pt-layout-xs sgds:mb-md">
+              <sgds-icon name="paperclip" size="sm" class="sgds:text-body-subtle"></sgds-icon>
+              <span class="sgds:text-subtitle-sm sgds:font-semibold sgds:text-heading-default">Attachments (3)</span>
+            </div>
+            <div class="sgds:flex sgds:flex-col sgds:gap-xs sgds:pb-layout-xs">
+              <div class="attachment-row">
+                <div class="file-chip file-chip--xls">XLS</div>
+                <div style="flex:1;min-width:0;">
+                  <div class="sgds:text-body-sm sgds:font-medium sgds:text-heading-default" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Q4-Budget-Breakdown.xlsx</div>
+                  <div class="sgds:text-body-xs sgds:text-body-subtle">124 KB</div>
+                </div>
+                <sgds-icon name="download" size="sm" class="sgds:text-body-subtle"></sgds-icon>
+              </div>
+              <div class="attachment-row">
+                <div class="file-chip file-chip--pdf">PDF</div>
+                <div style="flex:1;min-width:0;">
+                  <div class="sgds:text-body-sm sgds:font-medium sgds:text-heading-default" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Campaign-ROI-Analysis.pdf</div>
+                  <div class="sgds:text-body-xs sgds:text-body-subtle">2.3 MB</div>
+                </div>
+                <sgds-icon name="download" size="sm" class="sgds:text-body-subtle"></sgds-icon>
+              </div>
+              <div class="attachment-row">
+                <div class="file-chip file-chip--pdf">PDF</div>
+                <div style="flex:1;min-width:0;">
+                  <div class="sgds:text-body-sm sgds:font-medium sgds:text-heading-default" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Vendor-Quotes.pdf</div>
+                  <div class="sgds:text-body-xs sgds:text-body-subtle">890 KB</div>
+                </div>
+                <sgds-icon name="download" size="sm" class="sgds:text-body-subtle"></sgds-icon>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Comments + Audit Trail card ─────────────────── -->
+          <div class="sgds:surface-raised sgds:rounded-xl" style="overflow:hidden;">
+
+            <!-- Tab bar -->
+            <div class="tab-bar">
+              <button class="tab-btn active" data-tab="comments">Comments (2)</button>
+              <button class="tab-btn"        data-tab="audit">Audit Trail (4)</button>
+            </div>
+
+            <!-- Comments panel -->
+            <div id="panel-comments" class="tab-panel active">
+              <div id="comment-list" class="sgds:pt-layout-xs">
+                <!-- Seed comment 1 -->
+                <div class="comment-item">
+                  <div class="avatar" style="background:#0891b2;">JW</div>
+                  <div style="flex:1;min-width:0;">
+                    <div class="sgds:flex sgds:items-center sgds:gap-xs sgds:mb-2-xs sgds:flex-wrap">
+                      <span class="sgds:text-subtitle-sm sgds:font-semibold sgds:text-heading-default">James Wu</span>
+                      <span class="sgds:text-body-xs sgds:text-body-subtle">Finance Analyst</span>
+                      <span class="sgds:text-body-xs sgds:text-body-subtle sgds:ml-auto">2d ago</span>
+                    </div>
+                    <p class="sgds:text-body-sm sgds:leading-xs sgds:text-body-default" style="margin:0;">
+                      Reviewed the Q3 performance data. The ROI projections look reasonable, but I'd like to see
+                      a breakdown of the influencer partnership costs specifically.
+                    </p>
+                  </div>
+                </div>
+                <!-- Seed comment 2 -->
+                <div class="comment-item">
+                  <div class="avatar" style="background:#6366f1;">SC</div>
+                  <div style="flex:1;min-width:0;">
+                    <div class="sgds:flex sgds:items-center sgds:gap-xs sgds:mb-2-xs sgds:flex-wrap">
+                      <span class="sgds:text-subtitle-sm sgds:font-semibold sgds:text-heading-default">Sarah Chen</span>
+                      <span class="sgds:text-body-xs sgds:text-body-subtle">Marketing Director</span>
+                      <span class="sgds:text-body-xs sgds:text-body-subtle sgds:ml-auto">1d ago</span>
+                    </div>
+                    <p class="sgds:text-body-sm sgds:leading-xs sgds:text-body-default" style="margin:0;">
+                      Added the vendor quotes PDF — the influencer breakdown is on page 3. Happy to walk through
+                      it on a call if that helps.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Compose -->
+              <div class="sgds:flex sgds:gap-md sgds:mt-md sgds:items-start sgds:pb-layout-xs">
+                <div class="avatar" style="background:#7c3aed;">AR</div>
+                <div style="flex:1;">
+                  <sgds-textarea
+                    id="comment-input"
+                    placeholder="Add a comment… (⌘↵ to submit)"
+                    rows="3"
+                    resize="none"
+                  ></sgds-textarea>
+                  <div class="sgds:flex sgds:justify-end sgds:mt-xs">
+                    <sgds-button id="comment-btn" variant="outline" size="sm" disabled>Comment</sgds-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Audit trail panel -->
+            <div id="panel-audit" class="tab-panel">
+              <div id="audit-list" class="sgds:flex sgds:flex-col sgds:gap-sm sgds:py-layout-xs">
+
+                <div class="audit-item">
+                  <div class="audit-stem"></div>
+                  <div class="avatar" style="background:#6366f1;">SC</div>
+                  <div style="padding-bottom:var(--sgds-padding-md);">
+                    <div class="sgds:text-body-sm sgds:text-heading-default">
+                      <strong>Sarah Chen</strong> <span class="sgds:text-body-subtle">submitted the request</span>
+                    </div>
+                    <div class="sgds:text-body-xs sgds:text-body-subtle sgds:mt-2-xs">22 Apr 2026 · 5 days ago</div>
+                  </div>
+                </div>
+
+                <div class="audit-item">
+                  <div class="audit-stem"></div>
+                  <div class="avatar" style="background:#94a3b8;">SY</div>
+                  <div style="padding-bottom:var(--sgds-padding-md);">
+                    <div class="sgds:text-body-sm sgds:text-heading-default">
+                      <strong>System</strong> <span class="sgds:text-body-subtle">assigned to VP Finance queue</span>
+                    </div>
+                    <div class="sgds:text-body-xs sgds:text-body-subtle sgds:mt-2-xs">22 Apr 2026 · 5 days ago</div>
+                  </div>
+                </div>
+
+                <div class="audit-item">
+                  <div class="audit-stem"></div>
+                  <div class="avatar" style="background:#0891b2;">JW</div>
+                  <div style="padding-bottom:var(--sgds-padding-md);">
+                    <div class="sgds:text-body-sm sgds:text-heading-default">
+                      <strong>James Wu</strong> <span class="sgds:text-body-subtle">opened for review</span>
+                    </div>
+                    <div class="sgds:text-body-xs sgds:text-body-subtle sgds:mt-2-xs">23 Apr 2026 · 4 days ago</div>
+                  </div>
+                </div>
+
+                <div class="audit-item">
+                  <div class="avatar" style="background:#0891b2;">JW</div>
+                  <div>
+                    <div class="sgds:text-body-sm sgds:text-heading-default">
+                      <strong>James Wu</strong> <span class="sgds:text-body-subtle">left a comment</span>
+                    </div>
+                    <div class="sgds:text-body-xs sgds:text-body-subtle sgds:mt-2-xs">23 Apr 2026 · 4 days ago</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ══════════════════ RIGHT COLUMN ══════════════════════ -->
+        <div class="sgds-col-12 sgds-col-lg-4 sgds:flex sgds:flex-col sgds:gap-layout-xs">
+
+          <!-- ── Action panel ─────────────────────────────────── -->
+          <div class="sgds:surface-raised sgds:rounded-xl">
+            <div class="sgds:text-overline-md sgds:font-semibold sgds:text-label-default sgds:tracking-wide sgds:uppercase sgds:px-layout-xs sgds:pt-layout-xs sgds:mb-md">
+              Your Decision
+            </div>
+
+            <!-- Reviewer identity -->
+            <div class="reviewer-card sgds:mx-layout-xs sgds:mb-lg">
+              <div class="avatar" style="background:#7c3aed; width:36px;height:36px;font-size:12px;">AR</div>
+              <div style="flex:1;">
+                <div class="sgds:text-subtitle-sm sgds:font-semibold sgds:text-heading-default">Alex Rivera</div>
+                <div class="sgds:text-body-xs sgds:text-body-subtle">VP Finance · Approver</div>
+              </div>
+              <sgds-badge variant="primary">Assigned</sgds-badge>
+            </div>
+
+            <!-- Action buttons -->
+            <div id="action-buttons" class="sgds:flex sgds:flex-col sgds:gap-xs sgds:px-layout-xs sgds:pb-layout-xs">
+              <sgds-button id="approve-btn" variant="primary" fullWidth>
+                <sgds-icon slot="leftIcon" name="check-lg"></sgds-icon>
+                Approve
+              </sgds-button>
+              <sgds-button id="reject-btn" variant="danger" fullWidth>
+                <sgds-icon slot="leftIcon" name="x-lg"></sgds-icon>
+                Reject
+              </sgds-button>
+              <sgds-button id="changes-btn" variant="outline" fullWidth>
+                <sgds-icon slot="leftIcon" name="pencil"></sgds-icon>
+                Request Changes
+              </sgds-button>
+            </div>
+
+            <!-- Decision taken state (hidden until action) -->
+            <div id="decision-taken" class="decision-taken sgds:mx-layout-xs sgds:mb-layout-xs">
+              <div id="decision-icon" style="width:44px;height:44px;border-radius:50%;margin:0 auto var(--sgds-margin-sm);display:flex;align-items:center;justify-content:center;">
+                <!-- injected by JS -->
+              </div>
+              <div id="decision-label" class="sgds:text-subtitle-md sgds:font-bold sgds:text-heading-default"></div>
+              <div class="sgds:text-body-xs sgds:text-body-subtle sgds:mt-2-xs">Decision recorded · 27 Apr 2026</div>
+            </div>
+          </div>
+
+          <!-- ── Progress tracker ──────────────────────────────── -->
+          <div class="sgds:surface-raised sgds:rounded-xl">
+            <div class="sgds:text-overline-md sgds:font-semibold sgds:text-label-default sgds:tracking-wide sgds:uppercase sgds:px-layout-xs sgds:pt-layout-xs sgds:mb-md">
+              Progress
+            </div>
+            <div class="sgds:px-layout-xs sgds:pb-layout-xs">
+              <sgds-stepper id="progress-stepper" orientation="vertical" activeStep="1"></sgds-stepper>
+            </div>
+          </div>
+
+          <!-- ── Request info ──────────────────────────────────── -->
+          <div class="sgds:surface-raised sgds:rounded-xl">
+            <div class="sgds:text-overline-md sgds:font-semibold sgds:text-label-default sgds:tracking-wide sgds:uppercase sgds:px-layout-xs sgds:pt-layout-xs sgds:mb-md">
+              Request Info
+            </div>
+            <div class="sgds:px-layout-xs sgds:pb-layout-xs">
+              <div class="info-row">
+                <span class="sgds:text-body-sm sgds:text-body-subtle">Category</span>
+                <span class="sgds:text-body-sm sgds:font-medium sgds:text-heading-default">Budget Approval</span>
+              </div>
+              <div class="info-row">
+                <span class="sgds:text-body-sm sgds:text-body-subtle">Priority</span>
+                <sgds-badge variant="danger" outlined>High</sgds-badge>
+              </div>
+              <div class="info-row">
+                <span class="sgds:text-body-sm sgds:text-body-subtle">Submitted</span>
+                <span class="sgds:text-body-sm sgds:font-medium sgds:text-heading-default">22 Apr 2026</span>
+              </div>
+              <div class="info-row">
+                <span class="sgds:text-body-sm sgds:text-body-subtle">Submission ID</span>
+                <span class="sgds:text-body-sm sgds:font-medium sgds:text-body-subtle">REQ-2026-0892</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section><!-- end content -->
+
+  <!-- ── Reject modal ────────────────────────────────────────────── -->
+  <sgds-modal id="reject-modal" size="sm">
+    <span slot="title">Reject Submission</span>
+    <span slot="description">
+      Provide a reason so the submitter understands what to address before resubmitting.
+    </span>
+    <sgds-textarea
+      id="reject-reason"
+      label="Rejection Reason"
+      placeholder="Explain why this request is being rejected and what changes would be needed…"
+      rows="4"
+      required
+      invalidFeedback="Please provide at least 10 characters."
+    ></sgds-textarea>
+    <div slot="footer" class="sgds:flex sgds:justify-end sgds:gap-xs">
+      <sgds-button id="reject-cancel-btn" variant="outline">Cancel</sgds-button>
+      <sgds-button id="reject-confirm-btn" variant="danger" disabled>Confirm Rejection</sgds-button>
+    </div>
+  </sgds-modal>
+
+  <!-- ── Request-changes modal ───────────────────────────────────── -->
+  <sgds-modal id="changes-modal" size="sm">
+    <span slot="title">Request Changes</span>
+    <span slot="description">
+      Describe what needs to be updated before you can approve this submission.
+    </span>
+    <sgds-textarea
+      id="changes-reason"
+      label="Changes Required"
+      placeholder="Describe the changes needed…"
+      rows="4"
+      required
+      invalidFeedback="Please provide at least 10 characters."
+    ></sgds-textarea>
+    <div slot="footer" class="sgds:flex sgds:justify-end sgds:gap-xs">
+      <sgds-button id="changes-cancel-btn" variant="outline">Cancel</sgds-button>
+      <sgds-button id="changes-confirm-btn" variant="primary" disabled>Send Request</sgds-button>
+    </div>
+  </sgds-modal>
+
+</body>
+
+<script type="module">
+
+  /* ── DOM refs ─────────────────────────────────────────────────── */
+  const approveBtn     = document.getElementById('approve-btn');
+  const rejectBtn      = document.getElementById('reject-btn');
+  const changesBtn     = document.getElementById('changes-btn');
+  const actionButtons  = document.getElementById('action-buttons');
+  const decisionTaken  = document.getElementById('decision-taken');
+  const decisionIcon   = document.getElementById('decision-icon');
+  const decisionLabel  = document.getElementById('decision-label');
+  const statusBadgeHeader = document.getElementById('status-badge-header');
+
+  // Reject modal
+  const rejectModal      = document.getElementById('reject-modal');
+  const rejectReason     = document.getElementById('reject-reason');
+  const rejectConfirmBtn = document.getElementById('reject-confirm-btn');
+  const rejectCancelBtn  = document.getElementById('reject-cancel-btn');
+
+  // Changes modal
+  const changesModal      = document.getElementById('changes-modal');
+  const changesReason     = document.getElementById('changes-reason');
+  const changesConfirmBtn = document.getElementById('changes-confirm-btn');
+  const changesCancelBtn  = document.getElementById('changes-cancel-btn');
+
+  // Comments
+  const commentInput = document.getElementById('comment-input');
+  const commentBtn   = document.getElementById('comment-btn');
+  const commentList  = document.getElementById('comment-list');
+
+  // Audit
+  const auditList = document.getElementById('audit-list');
+
+  // Banner
+  const banner      = document.getElementById('decision-banner');
+  const bannerIcon  = document.getElementById('banner-icon');
+  const bannerTitle = document.getElementById('banner-title');
+  const bannerBody  = document.getElementById('banner-body');
+
+  // Progress stepper
+  const progressStepper = document.getElementById('progress-stepper');
+  progressStepper.steps = [
+    { stepHeader: 'Submitted',   component: '' },
+    { stepHeader: 'Under Review', component: '' },
+    { stepHeader: 'Decision',    component: '' },
+  ];
+
+  /* ── Tabs ─────────────────────────────────────────────────────── */
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  /* ── Comment compose ─────────────────────────────────────────── */
+  // Enable/disable submit button as user types
+  commentInput.addEventListener('sgds-input', () => {
+    const val = commentInput.value?.trim() ?? '';
+    commentBtn.disabled = val.length === 0;
+  });
+
+  // ⌘↵ / Ctrl↵ shortcut
+  commentInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submitComment();
+  });
+
+  commentBtn.addEventListener('click', submitComment);
+
+  function submitComment() {
+    const text = commentInput.value?.trim();
+    if (!text) return;
+    appendComment({ initials: 'AR', color: '#7c3aed', name: 'Alex Rivera', role: 'VP Finance' }, text, 'Just now');
+    appendAuditEntry({ initials: 'AR', color: '#7c3aed', name: 'Alex Rivera' }, 'left a comment', 'Just now');
+    commentInput.value = '';
+    commentBtn.disabled = true;
+    updateTabCounts();
+  }
+
+  function appendComment(author, text, time, tag) {
+    const el = document.createElement('div');
+    el.className = 'comment-item';
+    el.innerHTML = `
+      <div class="avatar" style="background:${author.color};">${author.initials}</div>
+      <div style="flex:1;min-width:0;">
+        <div class="sgds:flex sgds:items-center sgds:gap-xs sgds:mb-2-xs sgds:flex-wrap">
+          <span class="sgds:text-subtitle-sm sgds:font-semibold sgds:text-heading-default">${author.name}</span>
+          <span class="sgds:text-body-xs sgds:text-body-subtle">${author.role}</span>
+          ${tag ? `<sgds-badge variant="danger" outlined style="font-size:10px;">${tag}</sgds-badge>` : ''}
+          <span class="sgds:text-body-xs sgds:text-body-subtle sgds:ml-auto">${time}</span>
+        </div>
+        <p class="sgds:text-body-sm sgds:leading-xs sgds:text-body-default" style="margin:0;">${text}</p>
+      </div>
+    `;
+    commentList.appendChild(el);
+  }
+
+  function appendAuditEntry(actor, label, time) {
+    // Remove "last" marker from previous last item
+    const prevLast = auditList.querySelector('.audit-item:last-child');
+    if (prevLast && !prevLast.querySelector('.audit-stem')) {
+      const stem = document.createElement('div');
+      stem.className = 'audit-stem';
+      prevLast.insertBefore(stem, prevLast.firstChild.nextSibling);
+    }
+
+    const el = document.createElement('div');
+    el.className = 'audit-item';
+    el.innerHTML = `
+      <div class="avatar" style="background:${actor.color};">${actor.initials}</div>
+      <div>
+        <div class="sgds:text-body-sm sgds:text-heading-default">
+          <strong>${actor.name}</strong> <span class="sgds:text-body-subtle">${label}</span>
+        </div>
+        <div class="sgds:text-body-xs sgds:text-body-subtle sgds:mt-2-xs">27 Apr 2026 · ${time}</div>
+      </div>
+    `;
+    auditList.appendChild(el);
+  }
+
+  function updateTabCounts() {
+    const commentCount = commentList.querySelectorAll('.comment-item').length;
+    const auditCount   = auditList.querySelectorAll('.audit-item').length;
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      if (btn.dataset.tab === 'comments') btn.textContent = `Comments (${commentCount})`;
+      if (btn.dataset.tab === 'audit')    btn.textContent = `Audit Trail (${auditCount})`;
+    });
+  }
+
+  /* ── Approve ─────────────────────────────────────────────────── */
+  approveBtn.addEventListener('click', () => {
+    applyDecision('approved');
+  });
+
+  /* ── Reject modal ─────────────────────────────────────────────── */
+  rejectBtn.addEventListener('click', () => {
+    rejectReason.value = '';
+    rejectConfirmBtn.disabled = true;
+    rejectModal.open = true;
+  });
+
+  rejectReason.addEventListener('sgds-input', () => {
+    rejectConfirmBtn.disabled = (rejectReason.value?.trim().length ?? 0) < 10;
+  });
+
+  rejectCancelBtn.addEventListener('click', () => { rejectModal.open = false; });
+
+  rejectConfirmBtn.addEventListener('click', () => {
+    const reason = rejectReason.value?.trim();
+    rejectModal.open = false;
+    appendComment(
+      { initials: 'AR', color: '#7c3aed', name: 'Alex Rivera', role: 'VP Finance' },
+      `Rejection reason: ${reason}`,
+      'Just now',
+      'Rejection'
+    );
+    applyDecision('rejected');
+  });
+
+  /* ── Request changes modal ───────────────────────────────────── */
+  changesBtn.addEventListener('click', () => {
+    changesReason.value = '';
+    changesConfirmBtn.disabled = true;
+    changesModal.open = true;
+  });
+
+  changesReason.addEventListener('sgds-input', () => {
+    changesConfirmBtn.disabled = (changesReason.value?.trim().length ?? 0) < 10;
+  });
+
+  changesCancelBtn.addEventListener('click', () => { changesModal.open = false; });
+
+  changesConfirmBtn.addEventListener('click', () => {
+    const reason = changesReason.value?.trim();
+    changesModal.open = false;
+    appendComment(
+      { initials: 'AR', color: '#7c3aed', name: 'Alex Rivera', role: 'VP Finance' },
+      `Changes requested: ${reason}`,
+      'Just now',
+      'Changes'
+    );
+    applyDecision('changes_requested');
+  });
+
+  /* ── Apply decision ──────────────────────────────────────────── */
+  function applyDecision(type) {
+    const cfg = {
+      approved:          { label: 'Approved',          badgeVariant: 'success', bannerBg: '#d1fae5', bannerBorder: '#6ee7b7', iconBg: '#10b981', iconName: 'check-lg',    bannerTitle: 'Submission Approved',         bannerBody: 'The submitter has been notified. This decision is recorded in the audit trail.' },
+      rejected:          { label: 'Rejected',          badgeVariant: 'danger',  bannerBg: '#fee2e2', bannerBorder: '#fca5a5', iconBg: '#ef4444', iconName: 'x-lg',        bannerTitle: 'Submission Rejected',         bannerBody: 'Your rejection reason has been sent to the submitter for revision and resubmission.' },
+      changes_requested: { label: 'Changes Requested', badgeVariant: 'warning', bannerBg: '#fef3c7', bannerBorder: '#fde68a', iconBg: '#f59e0b', iconName: 'pencil',      bannerTitle: 'Changes Requested',           bannerBody: 'The submitter has been notified of the required changes.' },
+    }[type];
+
+    // Update status badge in page header
+    statusBadgeHeader.variant = cfg.badgeVariant;
+    statusBadgeHeader.innerHTML = `<span class="status-dot" style="background:${cfg.iconBg};" slot="icon"></span>${cfg.label}`;
+
+    // Swap action buttons → decision taken panel
+    actionButtons.style.display = 'none';
+    decisionTaken.classList.add('show');
+    decisionTaken.style.background = cfg.bannerBg;
+    decisionTaken.style.border = `1.5px solid ${cfg.bannerBorder}`;
+    decisionIcon.style.background = cfg.iconBg;
+    decisionIcon.innerHTML = `<sgds-icon name="${cfg.iconName}" size="md" style="color:#fff;"></sgds-icon>`;
+    decisionLabel.textContent = cfg.label;
+
+    // Progress stepper — update decision label and advance to completed
+    progressStepper.steps = [
+      { stepHeader: 'Submitted',   component: '' },
+      { stepHeader: 'Under Review', component: '' },
+      { stepHeader: cfg.label,     component: '' },
+    ];
+    progressStepper.activeStep = 3; // past last index → all steps is-completed
+
+    // Audit
+    appendAuditEntry({ initials: 'AR', color: '#7c3aed', name: 'Alex Rivera' }, cfg.label.toLowerCase() + ' the submission', 'Just now');
+    updateTabCounts();
+
+    // Banner
+    banner.style.background = cfg.bannerBg;
+    banner.style.borderColor = cfg.bannerBorder;
+    bannerIcon.style.background = cfg.iconBg;
+    bannerIcon.innerHTML = `<sgds-icon name="${cfg.iconName}" size="md" style="color:#fff;"></sgds-icon>`;
+    bannerTitle.textContent = cfg.bannerTitle;
+    bannerBody.textContent = cfg.bannerBody;
+    banner.classList.add('show');
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+</script>

@@ -1,0 +1,494 @@
+<html style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
+<link href="../css/fonts.css" rel="stylesheet" type="text/css" />
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<style>
+  /* -- Form container ----------------------------------- */
+  .form-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* -- Section divider label (within a step) ----------- */
+  .form-section-label {
+    padding-bottom: var(--sgds-padding-sm);
+  }
+
+  /* -- Choice group (radio / checkbox block) ----------- */
+  .choice-group { display: flex; flex-direction: column; gap: var(--sgds-gap-xs); }
+
+  /* -- Switch preference row --------------------------- */
+  .switch-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sgds-gap-lg);
+    padding: var(--sgds-padding-md) var(--sgds-padding-lg);
+    border: 1px solid var(--sgds-border-color-muted);
+    border-radius: 8px;
+  }
+
+
+  /* -- Confirmation state ------------------------------ */
+  .ref-number { letter-spacing: 0.06em; }
+  .next-steps-list { padding-left: var(--sgds-padding-xl); margin: 0; }
+  .next-steps-list li { margin-bottom: var(--sgds-margin-sm); }
+
+  /* -- Form navigation bar ----------------------------- */
+  .form-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--sgds-padding-xl);
+    margin-top: var(--sgds-margin-xl);
+  }
+</style>
+
+<body>
+
+  <!-- Page Header -->
+  <section class="sgds:bg-default sgds:py-layout-lg">
+    <div class="sgds-container">
+      <div class="form-wrap">
+        <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+          Event Registration
+        </div>
+        <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
+          Register for STACK 2025
+        </h1>
+        <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle sgds:mb-0">
+          Secure your spot at Singapore's premier government technology conference.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Multi-step form -->
+  <section class="sgds:bg-default sgds:py-layout-md">
+    <div class="sgds-container">
+      <div class="form-wrap">
+
+        <!-- Progress stepper -->
+        <div class="sgds:mb-layout-md">
+          <sgds-stepper id="form-stepper"></sgds-stepper>
+        </div>
+
+        <!-- Step 0: Personal Details -->
+        <div class="step-panel" data-step="0">
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+            <!-- Group: Personal Information -->
+            <div class="sgds:flex sgds:flex-col sgds:gap-2-xs">
+              <h4 class="form-section-label sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-heading-default sgds:m-0">
+                Personal Information
+              </h4>
+              <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+                <!-- Name row -->
+                <div class="sgds-grid">
+                  <div class="sgds-col-12 sgds-col-md-6">
+                    <sgds-input
+                      label="First name"
+                      required
+                      placeholder="e.g. Wei Ming"
+                      hintText="As per NRIC or passport"
+                      value="Wei Ming"
+                    ></sgds-input>
+                  </div>
+                  <div class="sgds-col-12 sgds-col-md-6">
+                    <sgds-input
+                      label="Last name"
+                      required
+                      placeholder="e.g. Tan"
+                      value="Tan"
+                    ></sgds-input>
+                  </div>
+                </div>
+
+                <!-- Email: invalid state demo -->
+                <sgds-input
+                  label="Work email"
+                  type="email"
+                  required
+                  placeholder="you@agency.gov.sg"
+                  hintText="Use your government email address"
+                  invalid
+                  invalidFeedback="Please enter a valid government email address (e.g. name@agency.gov.sg)."
+                  hasFeedback="both"
+                  value="weiming.tan@gmail.com"
+                ></sgds-input>
+
+                <!-- Phone: optional -->
+                <sgds-input
+                  label="Mobile number (Optional)"
+                  type="tel"
+                  placeholder="+65 9123 4567"
+                ></sgds-input>
+
+              </div>
+            </div>
+
+            <!-- Group: Work Information -->
+            <div class="sgds:flex sgds:flex-col sgds:gap-2-xs">
+              <h4 class="form-section-label sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-heading-default sgds:m-0">
+                Work Information
+              </h4>
+              <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+                <!-- Organisation: valid state demo -->
+                <sgds-input
+                  label="Organisation"
+                  required
+                  placeholder="e.g. GovTech"
+                  valid
+                  value="GovTech"
+                ></sgds-input>
+
+                <sgds-select
+                  label="Job level"
+                  required
+                  hintText="Select the option that best describes your seniority"
+                >
+                  <sgds-select-option value="">Select a level</sgds-select-option>
+                  <sgds-select-option value="junior">Junior / Associate</sgds-select-option>
+                  <sgds-select-option value="mid" selected>Mid-level / Senior</sgds-select-option>
+                  <sgds-select-option value="lead">Lead / Principal</sgds-select-option>
+                  <sgds-select-option value="manager">Manager / Head</sgds-select-option>
+                  <sgds-select-option value="director">Director and above</sgds-select-option>
+                </sgds-select>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Step 1: Programme Preferences -->
+        <div class="step-panel" data-step="1" hidden>
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+            <!-- Group: Session Preferences -->
+            <div class="sgds:flex sgds:flex-col sgds:gap-2-xs">
+              <h4 class="form-section-label sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-heading-default sgds:m-0">
+                Session Preferences
+              </h4>
+              <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+                <!-- Session types: checkbox group -->
+                <div class="choice-group">
+                  <div class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default">
+                    Which session types interest you?
+                  </div>
+                  <div class="sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-body-subtle">
+                    Select all that apply
+                  </div>
+                  <sgds-checkbox-group>
+                    <sgds-checkbox value="keynote" checked>Keynotes</sgds-checkbox>
+                    <sgds-checkbox value="panel" checked>Panel Discussions</sgds-checkbox>
+                    <sgds-checkbox value="presentation" checked>Presentations</sgds-checkbox>
+                    <sgds-checkbox value="workshop">Workshops</sgds-checkbox>
+                  </sgds-checkbox-group>
+                </div>
+
+                <!-- Preferred track: radio group -->
+                <div class="choice-group">
+                  <div class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default">
+                    Preferred track
+                  </div>
+                  <sgds-radio-group>
+                    <sgds-radio value="ai-cyber" checked>AI x Cybersecurity</sgds-radio>
+                    <sgds-radio value="cloud">Resilient and Secure Cloud</sgds-radio>
+                    <sgds-radio value="ciso">CISOs of the Future</sgds-radio>
+                  </sgds-radio-group>
+                </div>
+
+                <!-- Session time: radio group -->
+                <div class="choice-group">
+                  <div class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default">
+                    Session preference
+                  </div>
+                  <sgds-radio-group>
+                    <sgds-radio value="morning" checked>Morning (9am - 12pm)</sgds-radio>
+                    <sgds-radio value="afternoon">Afternoon (1pm - 5pm)</sgds-radio>
+                    <sgds-radio value="full-day">Full day</sgds-radio>
+                  </sgds-radio-group>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Group: Additional Information -->
+            <div class="sgds:flex sgds:flex-col sgds:gap-2-xs">
+              <h4 class="form-section-label sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-heading-default sgds:m-0">
+                Additional Information
+              </h4>
+              <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+                <sgds-textarea
+                  label="Special requirements (Optional)"
+                  placeholder="E.g. dietary needs, accessibility requirements..."
+                  rows="3"
+                ></sgds-textarea>
+
+                <!-- Newsletter toggle -->
+                <div class="switch-row sgds:bg-surface-default">
+                  <div>
+                    <div class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default">
+                      Receive programme updates
+                    </div>
+                    <div class="sgds:text-body-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-body-subtle sgds:mt-2-xs">
+                      Get notified about new sessions and event changes
+                    </div>
+                  </div>
+                  <sgds-switch checked></sgds-switch>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Step 2: Review -->
+        <div class="step-panel" data-step="2" hidden>
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+
+            <div>
+              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">
+                Review your details
+              </h3>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Check your information carefully before submitting.
+              </p>
+            </div>
+
+            <!-- Review: Personal Details -->
+            <div class="sgds:flex sgds:flex-col sgds:gap-md">
+              <div class="sgds:flex sgds:items-center sgds:justify-between">
+                <h4 class="sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-heading-default sgds:mb-0">Personal Details</h4>
+                <sgds-link><a href="#" data-go-step="0">Edit</a></sgds-link>
+              </div>
+              <sgds-description-list-group bordered>
+                <sgds-description-list>
+                  <span class="sgds:text-body-sm sgds:text-body-subtle">Full name</span>
+                  <span slot="data" class="sgds:text-body-sm sgds:text-body-default">Wei Ming Tan</span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  <span class="sgds:text-body-sm sgds:text-body-subtle">Work email</span>
+                  <span slot="data" class="sgds:text-body-sm sgds:text-body-default">weiming.tan@govtech.gov.sg</span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  <span class="sgds:text-body-sm sgds:text-body-subtle">Mobile</span>
+                  <span slot="data" class="sgds:text-body-sm sgds:text-body-subtle">None</span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  <span class="sgds:text-body-sm sgds:text-body-subtle">Organisation</span>
+                  <span slot="data" class="sgds:text-body-sm sgds:text-body-default">GovTech</span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  <span class="sgds:text-body-sm sgds:text-body-subtle">Job level</span>
+                  <span slot="data" class="sgds:text-body-sm sgds:text-body-default">Mid-level / Senior</span>
+                </sgds-description-list>
+              </sgds-description-list-group>
+            </div>
+
+            <!-- Review: Programme Preferences -->
+            <div class="sgds:flex sgds:flex-col sgds:gap-md">
+              <div class="sgds:flex sgds:items-center sgds:justify-between">
+                <h4 class="sgds:text-heading-sm sgds:font-semibold sgds:leading-sm sgds:tracking-tight sgds:text-heading-default sgds:mb-0">Programme Preferences</h4>
+                <sgds-link><a href="#" data-go-step="1">Edit</a></sgds-link>
+              </div>
+              <sgds-description-list-group bordered>
+                <sgds-description-list>
+                  <span class="sgds:text-body-sm sgds:text-body-subtle">Session types</span>
+                  <span slot="data" class="sgds:text-body-sm sgds:text-body-default">Keynotes, Panel Discussions, Presentations</span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  <span class="sgds:text-body-sm sgds:text-body-subtle">Preferred track</span>
+                  <span slot="data" class="sgds:text-body-sm sgds:text-body-default">AI x Cybersecurity</span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  <span class="sgds:text-body-sm sgds:text-body-subtle">Session preference</span>
+                  <span slot="data" class="sgds:text-body-sm sgds:text-body-default">Morning (9am - 12pm)</span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  <span class="sgds:text-body-sm sgds:text-body-subtle">Special requirements</span>
+                  <span slot="data" class="sgds:text-body-sm sgds:text-body-subtle">None</span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  <span class="sgds:text-body-sm sgds:text-body-subtle">Programme updates</span>
+                  <span slot="data" class="sgds:text-body-sm sgds:text-body-default">Yes</span>
+                </sgds-description-list>
+              </sgds-description-list-group>
+            </div>
+
+            <!-- Terms -->
+            <div class="sgds:pt-sm">
+              <sgds-checkbox required value="terms">
+                I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.
+              </sgds-checkbox>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Step 3: Confirmation -->
+        <div class="step-panel" data-step="3" hidden>
+          <div class="sgds:flex sgds:flex-col sgds:py-2-xl">
+
+            <!-- Success icon -->
+            <div class="sgds:mb-lg">
+              <sgds-icon name="check-circle-fill" size="3-xl" style="color: var(--sgds-success-color-default);"></sgds-icon>
+            </div>
+
+            <!-- Heading + message -->
+            <div class="sgds:mb-layout-md">
+              <h2 class="sgds:text-heading-lg sgds:font-bold sgds:leading-lg sgds:tracking-tight sgds:text-heading-default">
+                Registration confirmed!
+              </h2>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                You're registered for STACK 2025. A confirmation email has been sent to
+                <strong>weiming.tan@govtech.gov.sg</strong>.
+              </p>
+            </div>
+
+            <!-- Reference number -->
+            <div class="sgds:mb-layout-sm">
+              <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+                Reference number
+              </div>
+              <h4 class="ref-number sgds:text-heading-sm sgds:font-light sgds:leading-sm sgds:tracking-tight sgds:text-heading-default">STACK-2025-08741</h4>
+            </div>
+
+            <!-- What's next -->
+            <div class="sgds:mb-layout-md">
+              <p class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-sm">What's next</p>
+              <ul class="next-steps-list sgds:text-body-md sgds:font-regular sgds:leading-md sgds:text-default">
+                <li>Check your inbox for a confirmation and calendar invite</li>
+                <li>Log in to your account to manage your registration or make changes</li>
+                <li>Explore the full programme schedule and plan your day</li>
+              </ul>
+            </div>
+
+            <!-- Actions -->
+            <div class="sgds:flex sgds:justify-end sgds:gap-md sgds:flex-wrap">
+              <sgds-button variant="outline" tone="brand">Return to home</sgds-button>
+              <sgds-button variant="primary" tone="brand">View programme</sgds-button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Form Navigation -->
+        <div class="form-nav" id="form-nav">
+          <sgds-button variant="ghost" tone="brand" id="prev-btn">Back</sgds-button>
+          <div class="sgds:flex sgds:gap-md">
+            <sgds-button variant="outline" tone="brand" id="save-btn">Save draft</sgds-button>
+            <sgds-button variant="primary" tone="brand" id="next-btn">Next</sgds-button>
+            <sgds-button variant="primary" tone="brand" id="submit-btn" style="display:none;">Submit</sgds-button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script type="module">
+    const stepper   = document.getElementById('form-stepper');
+    const panels    = document.querySelectorAll('.step-panel');
+    const prevBtn   = document.getElementById('prev-btn');
+    const nextBtn   = document.getElementById('next-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const saveBtn   = document.getElementById('save-btn');
+    const formNav   = document.getElementById('form-nav');
+
+    let current = 0;
+
+    const STEPS = [
+      { stepHeader: 'Personal Details' },
+      { stepHeader: 'Preferences' },
+      { stepHeader: 'Review' },
+      { stepHeader: 'Confirm' }
+    ];
+
+    customElements.whenDefined('sgds-stepper').then(() => {
+      stepper.steps = STEPS;
+      stepper.activeStep = 0;
+    });
+
+    function goTo(step) {
+      current = step;
+
+      // Show only the active panel
+      panels.forEach((p, i) => { p.hidden = i !== step; });
+
+      // Sync stepper indicator
+      stepper.activeStep = step;
+
+      // Confirmation step: hide navigation entirely
+      if (step === 3) {
+        formNav.style.display = 'none';
+        return;
+      }
+
+      formNav.style.display = '';
+
+      // Back button: invisible on first step so layout stays stable
+      prevBtn.style.visibility = step === 0 ? 'hidden' : 'visible';
+
+      // Save draft: not needed on review step
+      saveBtn.style.display = step === 2 ? 'none' : '';
+
+      // Swap Next / Submit on the review step
+      nextBtn.style.display   = step === 2 ? 'none' : '';
+      submitBtn.style.display = step === 2 ? ''     : 'none';
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (current < panels.length - 1) goTo(current + 1);
+    });
+
+    submitBtn.addEventListener('click', () => {
+      goTo(3);
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (current > 0) goTo(current - 1);
+    });
+
+    // "Edit" links in the review step jump back to a specific step
+    document.querySelectorAll('[data-go-step]').forEach(el => {
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        goTo(parseInt(el.dataset.goStep, 10));
+      });
+    });
+
+    goTo(0);
+
+    // Save draft toast
+    const saveDraftToast = document.getElementById('save-draft-toast');
+    saveBtn.addEventListener('click', () => {
+      saveDraftToast.showToast();
+    });
+  </script>
+
+  <!-- Save draft toast -->
+  <sgds-toast-container position="bottom-end">
+    <sgds-toast
+      id="save-draft-toast"
+      title="Draft saved"
+      variant="success"
+      autohide
+      delay="4000"
+      dismissible
+    >
+      Your progress has been saved. You can continue your registration at any time.
+    </sgds-toast>
+  </sgds-toast-container>
+
+</body>

@@ -4,6 +4,10 @@
   height: inherit;
 }
 
+.dropdown-menu {
+  max-width: var(--sgds-dimension-320);
+}
+
 .toggler-container {
   flex: 1;
   pointer-events: none;

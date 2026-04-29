@@ -1,0 +1,51 @@
+import { html } from "lit";
+
+export default {
+  title: "Blocks/Form"
+};
+
+const Template = () => html`
+  <div class="sgds-container sgds:py-layout-md">
+    <div class="sgds-grid sgds:gap-layout-md">
+      <form class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-8 sgds-col-xl-8 sgds-col-2-xl-8">
+        <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+            <h5
+              class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+            >
+              Quick Form
+            </h5>
+            <div class="sgds-grid sgds:gap-layout-md">
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Name" name="name" type="text" required hasFeedback="both"></sgds-input>
+              </div>
+              <div class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6 sgds-col-xl-6 sgds-col-2-xl-6">
+                <sgds-input label="Email" name="email" type="email" required hasFeedback="both"></sgds-input>
+              </div>
+            </div>
+            <div>
+              <sgds-textarea
+                label="Message"
+                name="message"
+                placeholder="Enter your message..."
+                required
+                hasFeedback="both"
+              ></sgds-textarea>
+            </div>
+          </div>
+          <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
+            <sgds-button type="reset" variant="ghost">Cancel</sgds-button>
+            <sgds-button type="submit">Send</sgds-button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+`;
+
+export const SectionsSingle = {
+  render: Template.bind({}),
+  name: "Sections Single",
+  parameters: { layout: "fullscreen" },
+  tags: ["!autodocs"]
+};

@@ -1,6 +1,6 @@
 ---
 name: storybook-stories
-description: Writes Storybook stories following the templates folder pattern with automatic file concatenation. Use when creating or updating component stories in stories/templates/, organizing story variants, or documenting component usage in Storybook.
+description: Writes Storybook stories following the templates folder pattern with automatic file concatenation. Use when creating or updating component stories in stories/component-templates/, organizing story variants, or documenting component usage in Storybook.
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -12,7 +12,7 @@ metadata:
 ## File Structure
 
 ```
-stories/templates/[ComponentName]/
+stories/component-templates/[ComponentName]/
 ├── basic.js               Base template, args, and parameters
 ├── additional.stories.js  Additional story variants
 └── additional.mdx         Documentation for additional stories

@@ -2,6 +2,7 @@ html {
   line-height: var(--sgds-line-height-24);
   -webkit-text-size-adjust: 100%;
   font-family: var(--sgds-font-family-brand);
+  -webkit-font-smoothing: antialiased;
 }
 
 /* BODY */
