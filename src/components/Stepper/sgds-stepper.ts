@@ -107,7 +107,7 @@ export class SgdsStepper extends SgdsElement {
   public nextStep() {
     this.emit("sgds-next-step");
     if (this.activeStep < this._totalSteps - 1) {
-      if (!this._slotNodes[this.activeStep + 1].disabled) {
+      if (!this._slotNodes[this.activeStep + 1]?.disabled) {
         this.activeStep++;
       }
     }
@@ -118,7 +118,7 @@ export class SgdsStepper extends SgdsElement {
     this.emit("sgds-previous-step");
 
     if (this.activeStep > 0) {
-      if (!this._slotNodes[this.activeStep - 1].disabled) {
+      if (!this._slotNodes[this.activeStep - 1]?.disabled) {
         this.activeStep--;
       }
     }

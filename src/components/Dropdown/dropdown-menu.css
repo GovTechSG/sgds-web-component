@@ -12,7 +12,6 @@
   list-style: none;
   margin: 0;
   min-width: var(--sgds-dimension-192);
-  max-width: var(--sgds-dimension-320);
   max-height: var(--sgds-dimension-480);
   padding: var(--sgds-padding-xs) 0;
   position: absolute;
