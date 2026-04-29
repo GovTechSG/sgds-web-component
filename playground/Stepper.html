@@ -20,18 +20,43 @@
       <div>
         <h2>Horizontal (default) - Using sgds-step Non-linear and has completed steps</h2>
         <sgds-stepper activeStep="1" clickable>
-          <sgds-step stepHeader="Step 1"> This is a slot with very long text </sgds-step>
-          <sgds-step stepHeader="Step 2" completed> This is a slot with very long text </sgds-step>
-          <sgds-step stepHeader="Step 3" completed> This is a slot with very long text </sgds-step>
+          <sgds-step stepHeader="Step 1">
+            <span>helloworld</span>
+            <span>line 2</span>
+            <span>line 3</span>
+          </sgds-step>
+          <sgds-step stepHeader="Step 2" completed>
+            <span>helloworld</span>
+            <span><sgds-badge>status</sgds-badge></span>
+            <span>helloworld</span>
+          </sgds-step>
+          <sgds-step stepHeader="Step 3" completed>
+            <span>helloworld</span>
+            <span>helloworld</span>
+            <span>helloworld</span>
+          </sgds-step>
         </sgds-stepper>
       </div>
 
       <div>
         <h2>Vertical - Using sgds-step</h2>
         <sgds-stepper orientation="vertical" activeStep="1">
-          <sgds-step stepHeader="Personal Details"> slot </sgds-step>
-          <sgds-step stepHeader="Address Information"> slot </sgds-step>
-          <sgds-step stepHeader="Review"> slot </sgds-step>
+          <sgds-step stepHeader="Personal Details">
+            <span>helloworld</span>
+            <span><sgds-badge>status</sgds-badge></span>
+            <span>helloworld</span>
+          </sgds-step>
+          <sgds-step stepHeader="Address Information">
+            <span>helloworld</span>
+            <span>helloworld</span>
+          </sgds-step>
+          <sgds-step stepHeader="Review">
+            <span>helloworld</span>
+            <span
+              ><sgds-link><a href="#">download</a></sgds-link> this link for a comprehensive make up tutorial for
+              free</span
+            >
+          </sgds-step>
         </sgds-stepper>
       </div>
 
@@ -94,24 +119,27 @@
 
           function updateButtons() {
             const current = parseInt(stepper.getAttribute("activeStep"));
+            console.log(current);
             prevBtn.disabled = current === 0;
             nextBtn.disabled = current === totalSteps - 1;
           }
 
           prevBtn.addEventListener("click", () => {
             const current = parseInt(stepper.getAttribute("activeStep"));
-            if (current > 0) {
-              stepper.setAttribute("activeStep", current - 1);
+
+            stepper.previousStep();
+            setTimeout(() => {
               updateButtons();
-            }
+            }, 200);
           });
 
           nextBtn.addEventListener("click", () => {
             const current = parseInt(stepper.getAttribute("activeStep"));
-            if (current < totalSteps - 1) {
-              stepper.setAttribute("activeStep", current + 1);
+
+            stepper.nextStep();
+            setTimeout(() => {
               updateButtons();
-            }
+            }, 200);
           });
 
           updateButtons();
