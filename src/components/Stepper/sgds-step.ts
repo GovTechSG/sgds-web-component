@@ -84,10 +84,9 @@ export class SgdsStep extends SgdsElement {
           </div>
 
           <div class="stepper-detail">
-            <div class="sgds:text-body-md">${this.stepHeader}</div>
-            <div class="stepper-slot">
-              <slot></slot>
-            </div>
+            <div class="stepper-label">${this.stepHeader}</div>
+
+            <slot class="stepper-slot"></slot>
           </div>
         </div>
       </div>
