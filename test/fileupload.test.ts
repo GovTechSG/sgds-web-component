@@ -1035,6 +1035,73 @@ describe("sgds-file-upload", () => {
     }
   });
 
+  it("cancelling the file picker does not fire sgds-change or sgds-files-selected events", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      // First selection: 2 files
+      const dt = new DataTransfer();
+      dt.items.add(new File(["content1"], "file1.txt"));
+      dt.items.add(new File(["content2"], "file2.txt"));
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      let changeCount = 0;
+      let filesSelectedCount = 0;
+      el.addEventListener("sgds-change", () => changeCount++);
+      el.addEventListener("sgds-files-selected", () => filesSelectedCount++);
+
+      // Simulate cancel: browser resets input.files to empty and fires change in some browsers
+      const emptyDt = new DataTransfer();
+      input.files = emptyDt.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      expect(changeCount).to.equal(0);
+      expect(filesSelectedCount).to.equal(0);
+
+      // Existing files should still be shown
+      const listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(2);
+    }
+  });
+
+  it("after cancelling the file picker, closing one file removes only that file", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    if (input) {
+      // First selection: 3 files
+      const dt = new DataTransfer();
+      dt.items.add(new File(["content1"], "file1.txt"));
+      dt.items.add(new File(["content2"], "file2.txt"));
+      dt.items.add(new File(["content3"], "file3.txt"));
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      // Simulate cancel: browser resets input.files to empty and fires change in some browsers
+      const emptyDt = new DataTransfer();
+      input.files = emptyDt.files;
+      input.dispatchEvent(new Event("change"));
+      await el.updateComplete;
+
+      // Remove the second file
+      const closeButtons = el.shadowRoot?.querySelectorAll("sgds-close-button");
+      closeButtons?.[1].click();
+      await aTimeout(300);
+      await el.updateComplete;
+
+      // Only file2 should be removed; file1 and file3 remain
+      const listItems = el.shadowRoot?.querySelectorAll(".file-upload-list-item");
+      expect(listItems?.length).to.equal(2);
+      expect(listItems?.[0].querySelector(".filename")?.textContent).to.include("file1.txt");
+      expect(listItems?.[1].querySelector(".filename")?.textContent).to.include("file3.txt");
+    }
+  });
+
   it("sgds-change event detail contains current file list after deletion", async () => {
     const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload multiple>Hello</sgds-file-upload>`);
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");

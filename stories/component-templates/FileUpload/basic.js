@@ -14,6 +14,7 @@ export const Template = args => html`
     ?invalid=${args.invalid}
     invalidFeedback=${ifDefined(args.invalidFeedback)}
     ?required=${args.required}
+    ?noValidate=${args.noValidate}
     >${args.multiple ? "Choose files" : "Choose file"}</sgds-file-upload
   >
 `;

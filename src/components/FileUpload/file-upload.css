@@ -109,11 +109,6 @@ input {
 
 sgds-button {
   cursor: pointer;
-  align-self: flex-start;
-}
-
-label {
-  cursor: pointer;
   width: fit-content;
 }
 

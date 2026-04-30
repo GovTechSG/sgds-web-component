@@ -30,7 +30,7 @@ export type {
  *
  * @slot default - Label for file upload button (used in default variant)
  *
- * @event sgds-files-selected - Emitted whenever the file set changes (files added or removed). Access the files with event.detail  @deprecated Use sgds-add-files for file additions or sgds-change for all file set changes instead
+ * @event sgds-files-selected - (@deprecated) Deprecated since 3.19.0 in favour of sgds-change. Emitted whenever the file set changes (files added or removed). Access the files with event.detail.
  * @eventDetail {ISgdsFileUploadFilesSelectedEventDetail} sgds-files-selected
  * @event sgds-add-files - Emitted when files are added to the upload. Access the files with event.detail
  * @eventDetail {ISgdsFileUploadAddFilesEventDetail} sgds-add-files
@@ -68,7 +68,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   /** Variant of the file upload component: "default" or "drag-and-drop" */
   @property({ type: String, reflect: true }) variant: "default" | "drag-and-drop" = "default";
 
-  /** Disables native and sgds validation for the component. */
+  /** Disables native and sgds validation for the component. Use this when you want to do custom validation */
   @property({ type: Boolean, reflect: true }) noValidate = false;
 
   @state()
@@ -196,8 +196,8 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         this.selectedFiles = Array.from(files);
       }
     }
-    // Only emit events if this is a user-initiated change, not programmatic
-    if (!this._isProgrammaticChange) {
+    // Only emit events if this is a user-initiated change with actual files selected (not cancel or programmatic)
+    if (!this._isProgrammaticChange && files.length > 0) {
       this._setFileList(inputElement.files as FileList, previousCount);
     }
     this.requestUpdate();
@@ -215,15 +215,12 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       const inputElement = this.inputRef.value;
       if (!inputElement) return;
 
-      const attachments = inputElement.files;
-      if (!attachments) return;
-
-      const previousCount = attachments.length; // Track count before removal
+      const previousCount = this.selectedFiles.length; // Track count before removal
 
       const fileBuffer = new DataTransfer();
-      for (let i = 0; i < attachments.length; i++) {
-        if (index !== i) fileBuffer.items.add(attachments[i]);
-      }
+      this.selectedFiles.forEach((file, i) => {
+        if (index !== i) fileBuffer.items.add(file);
+      });
 
       // Mark as programmatic change to prevent file combining in _handleChange
       this._isProgrammaticChange = true;
