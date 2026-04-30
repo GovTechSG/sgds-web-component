@@ -358,7 +358,7 @@ When building forms, use these 9 form input components to capture user data:
 - `<sgds-switch>` — This is a **feedback component** (displays toggle state), not a form input. Use `<sgds-checkbox>` or `<sgds-radio-group>` to collect user choice instead.
 - Other non-input components (Alert, Badge, Button, Card, etc.) — These are layout/feedback, not form controls.
 
-For form layout patterns (field pairing, spacing, width constraints, multi-step forms with `<sgds-stepper>`, header hierarchy), see the [sgds-pattern-block-templates form layout skill](../sgds-pattern-block-templates/reference/form-layout.md).
+For form layout patterns (field pairing, spacing, width constraints, multi-step forms with `<sgds-stepper>`, header hierarchy), see the [sgds-blocks form layout skill](../sgds-blocks/reference/form-layout.md).
 | **Feedback** | Alert | [→ reference/alert.md](reference/alert.md) |
 | **Feedback** | Spinner | [→ reference/spinner.md](reference/spinner.md) |
 | **Feedback** | Skeleton | [→ reference/skeleton.md](reference/skeleton.md) |

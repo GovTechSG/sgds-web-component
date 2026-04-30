@@ -552,6 +552,67 @@ describe("sgds-dropdown", () => {
     await el.updateComplete;
     expect(getComputedStyle(menuEl).display).to.equal("none");
   });
+  it("clicking the slotted toggler opens the menu when closed", async () => {
+    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown>
+      <sgds-button slot="toggler">Dropdown</sgds-button>
+      <sgds-dropdown-item>item 1</sgds-dropdown-item>
+    </sgds-dropdown>`);
+    expect(el.menuIsOpen).to.be.false;
+    const button = el.querySelector("sgds-button") as HTMLElement;
+    button.click();
+    await el.updateComplete;
+    expect(el.menuIsOpen).to.be.true;
+  });
+
+  it("clicking the slotted toggler closes the menu when open", async () => {
+    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown menuIsOpen>
+      <sgds-button slot="toggler">Dropdown</sgds-button>
+      <sgds-dropdown-item>item 1</sgds-dropdown-item>
+    </sgds-dropdown>`);
+    expect(el.menuIsOpen).to.be.true;
+    const button = el.querySelector("sgds-button") as HTMLElement;
+    button.click();
+    await el.updateComplete;
+    expect(el.menuIsOpen).to.be.false;
+  });
+
+  it("clicking the empty toggler-container area closes an open menu", async () => {
+    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown menuIsOpen>
+      <sgds-button slot="toggler">Dropdown</sgds-button>
+      <sgds-dropdown-item>item 1</sgds-dropdown-item>
+    </sgds-dropdown>`);
+    expect(el.menuIsOpen).to.be.true;
+    // Simulate the click that falls through pointer-events:none on .toggler-container to .dropdown
+    const dropdownDiv = el.shadowRoot?.querySelector(".dropdown") as HTMLElement;
+    dropdownDiv.dispatchEvent(new MouseEvent("click", { bubbles: true, composed: true }));
+    await el.updateComplete;
+    expect(el.menuIsOpen).to.be.false;
+  });
+
+  it("clicking the empty toggler-container area does not open a closed menu", async () => {
+    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown>
+      <sgds-button slot="toggler">Dropdown</sgds-button>
+      <sgds-dropdown-item>item 1</sgds-dropdown-item>
+    </sgds-dropdown>`);
+    expect(el.menuIsOpen).to.be.false;
+    const dropdownDiv = el.shadowRoot?.querySelector(".dropdown") as HTMLElement;
+    dropdownDiv.dispatchEvent(new MouseEvent("click", { bubbles: true, composed: true }));
+    await el.updateComplete;
+    expect(el.menuIsOpen).to.be.false;
+  });
+
+  it("clicking a menu item does not prevent the menu from closing", async () => {
+    const el = await fixture<SgdsDropdown>(html`<sgds-dropdown menuIsOpen>
+      <sgds-button slot="toggler">Dropdown</sgds-button>
+      <sgds-dropdown-item>item 1</sgds-dropdown-item>
+    </sgds-dropdown>`);
+    expect(el.menuIsOpen).to.be.true;
+    const item = el.querySelector("sgds-dropdown-item") as HTMLElement;
+    item.click();
+    await el.updateComplete;
+    expect(el.menuIsOpen).to.be.false;
+  });
+
   // // tests _handleClickOutOfElement & blur event listener
   it("click outside of component, closes the dropdown by default", async () => {
     const el = await fixture<SgdsDropdown>(

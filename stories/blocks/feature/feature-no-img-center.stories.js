@@ -5,7 +5,7 @@ const Template = () => html`
        Background : bg-surface-default
        Spacing    : py-layout-lg
   -->
-  <section class="sgds:bg-default sgds:py-layout-lg sgds:min-h-[600px]">
+  <section class="sgds:bg-default sgds:py-layout-lg">
     <div class="sgds-container">
       <div class="sgds:flex sgds:flex-col sgds:items-center sgds:text-center sgds:mx-auto sgds:max-w-text">
         <!-- Typography group -->

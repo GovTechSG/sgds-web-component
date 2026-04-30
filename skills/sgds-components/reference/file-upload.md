@@ -137,7 +137,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Form Layout Context
 
-`<sgds-file-upload>` is a **full-width form component** — it must take the entire form width and cannot share a row with any other component. For detailed form pattern guidance (when to pair fields, spacing, responsive behavior), see the [sgds-pattern-block-templates form layout skill](../sgds-pattern-block-templates/reference/form-patterns.md).
+`<sgds-file-upload>` is a **full-width form component** — it must take the entire form width and cannot share a row with any other component. For detailed form pattern guidance (when to pair fields, spacing, responsive behavior), see the [sgds-blocks form layout skill](../sgds-blocks/reference/form.md).
 
 ---
 

@@ -180,6 +180,64 @@ describe("<sgds-card>", () => {
     const tag = el.shadowRoot?.querySelector(".card") as HTMLElement;
     expect(tag.tagName.toLowerCase()).to.equal("a");
   });
+
+  it("forwards href and target from footer slot anchor when stretchedLink is true", async () => {
+    const el = await fixture<SgdsCard>(html`
+      <sgds-card stretchedLink>
+        <a slot="footer" href="https://example.com" target="_blank">Read More</a>
+      </sgds-card>
+    `);
+    const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(card.getAttribute("href")).to.equal("https://example.com");
+    expect(card.getAttribute("target")).to.equal("_blank");
+  });
+
+  it("forwards safe attributes (rel, aria-label, data-*) from footer slot anchor", async () => {
+    const el = await fixture<SgdsCard>(html`
+      <sgds-card stretchedLink>
+        <a slot="footer" href="https://example.com" rel="noopener noreferrer" aria-label="Read more" data-id="123"
+          >Read More</a
+        >
+      </sgds-card>
+    `);
+    const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(card.getAttribute("rel")).to.equal("noopener noreferrer");
+    expect(card.getAttribute("aria-label")).to.equal("Read more");
+    expect(card.getAttribute("data-id")).to.equal("123");
+  });
+
+  it("does not forward class, style, id from footer slot anchor", async () => {
+    const el = await fixture<SgdsCard>(html`
+      <sgds-card stretchedLink>
+        <a slot="footer" href="https://example.com" class="custom-link" style="color:red" id="my-link">Read More</a>
+      </sgds-card>
+    `);
+    const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(card.getAttribute("class")).to.not.include("custom-link");
+    expect(card.getAttribute("style")).to.be.null;
+    expect(card.getAttribute("id")).to.be.null;
+  });
+
+  it("does not forward on* event handler attributes from footer slot anchor", async () => {
+    const el = await fixture<SgdsCard>(html`
+      <sgds-card stretchedLink>
+        <a slot="footer" href="https://example.com" onclick="alert(1)">Read More</a>
+      </sgds-card>
+    `);
+    const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(card.getAttribute("onclick")).to.be.null;
+  });
+
+  it("does not forward attributes when anchor href uses javascript: protocol", async () => {
+    const el = await fixture<SgdsCard>(html`
+      <sgds-card stretchedLink>
+        <a slot="footer" href="javascript:alert(1)" target="_blank">Read More</a>
+      </sgds-card>
+    `);
+    const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
+    expect(card.getAttribute("href")).to.be.null;
+    expect(card.getAttribute("target")).to.be.null;
+  });
 });
 
 describe("SgdsCard error logging", () => {

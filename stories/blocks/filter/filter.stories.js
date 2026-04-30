@@ -75,12 +75,12 @@ const Template = () => html`
 `;
 
 export default {
-  title: "Blocks/Filter",
+  title: "Blocks/Filter checkboxes",
   tags: ["!autodocs"],
   parameters: { layout: "padded" }
 };
 
-export const Filter = {
+export const FilterCheckboxes = {
   render: Template.bind({}),
-  name: "Filter"
+  name: "Filter checkboxes"
 };

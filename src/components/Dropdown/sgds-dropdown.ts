@@ -48,11 +48,26 @@ export class SgdsDropdown extends DropdownListElement {
 
   protected menuRef;
 
-  private async _handleClick() {
-    if (this.disabled) {
+  private async _handleClick(e: MouseEvent) {
+    if (this.disabled) return;
+
+    const slottedToggler = this._toggler[0];
+
+    if (!slottedToggler) {
+      this.toggleMenu();
       return;
     }
-    this.toggleMenu();
+
+    if (e.composedPath().includes(slottedToggler)) {
+      this.toggleMenu();
+      return;
+    }
+
+    // Click landed in the toggler-container's empty area (passed through pointer-events: none)
+    if (!this.menuIsOpen) return;
+    const menu = this.menuRef.value;
+    if (menu && e.composedPath().includes(menu)) return;
+    this.hideMenu();
   }
 
   private _handleCloseMenu() {
@@ -91,14 +106,8 @@ export class SgdsDropdown extends DropdownListElement {
 
   render() {
     return html`
-      <div class="dropdown">
-        <div
-          class="toggler-container"
-          ${ref(this.myDropdown)}
-          @click=${this._handleClick}
-          aria-expanded="${this.menuIsOpen}"
-          aria-haspopup="menu"
-        >
+      <div class="dropdown" @click=${this._handleClick}>
+        <div class="toggler-container" ${ref(this.myDropdown)} aria-expanded="${this.menuIsOpen}" aria-haspopup="menu">
           <slot name="toggler"></slot>
         </div>
         <div class="dropdown-menu" role="menu" ${ref(this.menuRef)}>

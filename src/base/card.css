@@ -12,6 +12,10 @@
   display: none;
 }
 
+:host([stretchedLink]) .card::after {
+  display: none;
+}
+
 :host([orientation="horizontal"]) .card {
   flex-direction: row;
 }

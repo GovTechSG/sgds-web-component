@@ -66,7 +66,7 @@ This means every new session automatically inherits the SGDS constraint — you 
 | **sgds-theming** | Brand colour overrides, day/night mode setup, and font customisation via CSS token overrides. |
 | **sgds-forms** | Form validation using `ElementInternals`, `hasFeedback`, constraint validation, `FormData`, and `setInvalid`. |
 | **sgds-pattern-block-templates** | Application shell (masthead, mainnav, footer) and self-contained UI blocks: filter sidebar, session detail, and more. |
-| **sgds-pattern-page-templates** | Full-page layouts: dashboard, login, list page, form page, settings. |
+| **sgds-templates** | Full-page layouts: dashboard, login, list page, form page, settings. |
 | **sgds-data-visualisation** | Charts and data dashboards with ECharts and the SGDS colour palette. |
 
 ---
@@ -77,7 +77,7 @@ For a **new application**, work through skills in this order:
 
 1. **sgds-getting-started** — complete project setup before writing any component code
 2. **sgds-components** + **sgds-utilities** — your day-to-day references while building
-3. **sgds-pattern-page-templates** + **sgds-pattern-block-templates** — when assembling full pages
+3. **sgds-templates** + **sgds-pattern-block-templates** — when assembling full pages
 4. **sgds-forms** — when any `<form>` element is involved
 5. **sgds-data-visualisation** — only when charts or dashboards are needed
 

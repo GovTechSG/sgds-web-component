@@ -1,0 +1,167 @@
+import { html } from "lit";
+
+const Template = () => html`
+  <sgds-masthead></sgds-masthead>
+
+  <sgds-mainnav>
+    <strong slot="brand">Logo</strong>
+  </sgds-mainnav>
+
+  <!-- Page header -->
+  <section class="sgds:bg-default sgds:py-layout-lg">
+    <div class="sgds-container">
+      <div
+        class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left"
+        style="max-width: var(--sgds-text-max-width);"
+      >
+        <div
+          class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
+        >
+          Profile Settings
+        </div>
+        <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
+          Edit profile
+        </h1>
+        <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
+          Update your personal details and preferences.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sgds:bg-surface-default sgds:min-h-screen">
+    <div class="sgds-container">
+      <form id="profile-form" method="post" novalidate>
+        <!-- Section 1: Personal information -->
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h3
+                class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default"
+              >
+                Personal information
+              </h3>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Your name and contact details. Only your agency administrator can see this information.
+              </p>
+            </div>
+
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-component-sm">
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6"
+                  label="First name"
+                  name="firstName"
+                  required
+                  hasFeedback
+                ></sgds-input>
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6"
+                  label="Last name"
+                  name="lastName"
+                  required
+                  hasFeedback
+                ></sgds-input>
+              </div>
+              <sgds-input
+                label="Email address"
+                type="email"
+                name="email"
+                hint="Must be a gov.sg email address."
+                required
+                hasFeedback
+              ></sgds-input>
+              <sgds-input
+                label="Phone number"
+                type="tel"
+                name="phone"
+                hint="Singapore number including country code, e.g. +65 9123 4567"
+                hasFeedback
+              ></sgds-input>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Role & access -->
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h3
+                class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default"
+              >
+                Role &amp; access
+              </h3>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Your position and assigned permissions within the system.
+              </p>
+            </div>
+
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-component-sm">
+              <sgds-input label="Job title" name="jobTitle" hasFeedback></sgds-input>
+              <sgds-select label="Department" name="department" placeholder="Select department" hasFeedback>
+                <sgds-select-option value="policy">Policy</sgds-select-option>
+                <sgds-select-option value="operations">Operations</sgds-select-option>
+                <sgds-select-option value="ict">ICT</sgds-select-option>
+              </sgds-select>
+              <sgds-select label="Access level" name="accessLevel" hasFeedback>
+                <sgds-select-option value="viewer">Viewer</sgds-select-option>
+                <sgds-select-option value="editor">Editor</sgds-select-option>
+                <sgds-select-option value="admin">Admin</sgds-select-option>
+              </sgds-select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Notes -->
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h3
+                class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default"
+              >
+                Notes
+              </h3>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Optional additional context visible to your team.
+              </p>
+            </div>
+
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8">
+              <sgds-textarea
+                label="Internal notes"
+                name="notes"
+                rows="4"
+                maxlength="500"
+                characterCount
+                hint="Max 500 characters."
+              ></sgds-textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form footer -->
+        <div
+          class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-end sgds:gap-component-sm sgds:mb-layout-lg "
+        >
+          <sgds-button variant="outline" type="button">Cancel</sgds-button>
+          <sgds-button variant="primary" type="submit">Save changes</sgds-button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <sgds-footer></sgds-footer>
+`;
+
+export default {
+  title: "Templates/Form/Basic",
+  tags: ["!autodocs"],
+  parameters: {
+    layout: "fullscreen"
+  }
+};
+
+export const Basic = {
+  render: Template.bind({}),
+  name: "Basic"
+};

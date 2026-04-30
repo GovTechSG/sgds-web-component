@@ -15,7 +15,7 @@ module.exports = {
     "../stories/utilities/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/form-validation/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/troubleshoot/*.@(mdx|stories.@(js|jsx|ts|tsx))",
-    "../stories/blocks/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/blocks/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/*.mdx"
   ],
   addons: [
