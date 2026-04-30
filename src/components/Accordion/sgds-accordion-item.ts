@@ -157,7 +157,10 @@ export class SgdsAccordionItem extends SgdsElement {
           <div class="accordion-header__trailing">
             <slot name="badge"></slot>
             <slot name="caret">
-              <sgds-icon name="chevron-down" size=${this.density === "compact" ? "md" : "lg"}></sgds-icon>
+              <sgds-icon
+                name="chevron-down"
+                size=${this.density === "compact" ? "md" : this.density === "spacious" ? "xl" : "lg"}
+              ></sgds-icon>
             </slot>
           </div>
         </button>
