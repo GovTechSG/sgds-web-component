@@ -1,11 +1,11 @@
 :host {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  color: var(--sgds-body-color-default);
-  font-family: var(--sgds-font-family-brand);
-  font-size: var(--sgds-font-size-16);
-  font-weight: var(--sgds-font-weight-regular);
-  line-height: var(--sgds-line-height-24);
+  color: var(--sgds-body-color-default, #1a1a1a);
+  font-family: var(--sgds-font-family-brand, "Inter", system-ui, sans-serif);
+  font-size: var(--sgds-font-size-16, 1rem);
+  font-weight: var(--sgds-font-weight-regular, 400);
+  line-height: var(--sgds-line-height-24, 24px);
   margin: 0;
   display: block;
   -webkit-font-smoothing: antialiased;
