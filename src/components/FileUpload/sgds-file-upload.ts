@@ -82,6 +82,18 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
 
   @state() protected _isTouched = false;
 
+  /**
+   * Flag to distinguish code-driven file changes from user-initiated ones.
+   *
+   * Set to `true` inside `_removeFileHandler` before it manually assigns
+   * `inputElement.files` and dispatches a synthetic `change` event.
+   * This tells `_handleChange` to:
+   *  - Skip appending/combining files (avoid duplicating remaining files)
+   *  - Skip emitting user-facing events (sgds-add-files, sgds-change)
+   *  - Still run validation (so required-field checks update after removal)
+   *
+   * Reset to `false` immediately after the synthetic change event is processed.
+   */
   private _isProgrammaticChange = false;
 
   /**
@@ -179,29 +191,44 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   private _handleChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const files = inputElement.files as FileList;
-    const previousCount = this.selectedFiles.length; // Track count before update
+    const previousCount = this.selectedFiles.length;
 
-    if (files.length > 0) {
-      // Only combine files if this is user-initiated (not programmatic removal)
-      if (this.multiple && this.selectedFiles.length > 0 && !this._isProgrammaticChange) {
-        const newFiles = Array.from(files);
-        const combined = [...this.selectedFiles, ...newFiles];
-        this.selectedFiles = combined;
+    const isUserCancel = files.length === 0 && !this._isProgrammaticChange;
+    const isUserSelection = files.length > 0 && !this._isProgrammaticChange;
+    const shouldAppendFiles = isUserSelection && this.multiple && this.selectedFiles.length > 0;
 
-        // Update inputElement.files with combined files using DataTransfer
-        const fileBuffer = new DataTransfer();
-        combined.forEach(file => fileBuffer.items.add(file));
-        inputElement.files = fileBuffer.files;
-      } else {
-        this.selectedFiles = Array.from(files);
-      }
+    // --- 1. Sync selectedFiles with native input ---
+    if (isUserCancel && this.selectedFiles.length > 0) {
+      this._restoreNativeInput(inputElement);
+    } else if (shouldAppendFiles) {
+      this._appendFiles(inputElement, files);
+    } else if (files.length > 0) {
+      this.selectedFiles = Array.from(files);
     }
-    // Only emit events if this is a user-initiated change with actual files selected (not cancel or programmatic)
-    if (!this._isProgrammaticChange && files.length > 0) {
+
+    // --- 2. Emit events (only on user-initiated selection) ---
+    if (isUserSelection) {
       this._setFileList(inputElement.files as FileList, previousCount);
     }
-    this.requestUpdate();
-    super._mixinHandleChange(event);
+
+    // --- 3. Run validation ---
+    if (!isUserCancel || this._isTouched) {
+      super._mixinHandleChange(event);
+    }
+  }
+
+  private _restoreNativeInput(inputElement: HTMLInputElement) {
+    const fileBuffer = new DataTransfer();
+    this.selectedFiles.forEach(file => fileBuffer.items.add(file));
+    inputElement.files = fileBuffer.files;
+  }
+
+  private _appendFiles(inputElement: HTMLInputElement, files: FileList) {
+    const combined = [...this.selectedFiles, ...Array.from(files)];
+    this.selectedFiles = combined;
+    const fileBuffer = new DataTransfer();
+    combined.forEach(file => fileBuffer.items.add(file));
+    inputElement.files = fileBuffer.files;
   }
 
   private _removeFileHandler(index: number) {

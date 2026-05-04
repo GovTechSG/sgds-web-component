@@ -1636,7 +1636,70 @@ describe("sgds-file-upload touched validation (blur-triggered)", () => {
     expect(feedback).to.not.exist;
   });
 
-  it("should re-validate on subsequent blur after files added and removed", async () => {
+  it("should NOT show validation when user cancels file picker before being touched", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback></sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    // Step 1: User selects a file → valid (not yet touched)
+    const dt = new DataTransfer();
+    dt.items.add(new File(["content"], "report.pdf"));
+    if (input) {
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+    }
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+
+    // Step 2: User opens file picker again but cancels — change fires with empty FileList
+    // Since the component is NOT touched, validation should not trigger
+    const emptyDt = new DataTransfer();
+    if (input) {
+      input.files = emptyDt.files;
+      input.dispatchEvent(new Event("change"));
+    }
+    await el.updateComplete;
+
+    // Should remain valid — not touched yet, so no validation
+    expect(el.invalid).to.be.false;
+  });
+
+  it("should NOT show validation when user cancels file picker after being touched and having a file selected", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback></sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+    const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
+
+    // Step 1: Blur to mark as touched → invalid (no file yet)
+    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+
+    // Step 2: User selects a file → valid
+    const dt = new DataTransfer();
+    dt.items.add(new File(["content"], "report.pdf"));
+    if (input) {
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+    }
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+
+    // Step 3: User opens file picker again but cancels — change fires with empty FileList
+    // Component is touched, but selectedFiles still has the file.
+    // Native input should be restored from selectedFiles, so validation passes.
+    const emptyDt = new DataTransfer();
+    if (input) {
+      input.files = emptyDt.files;
+      input.dispatchEvent(new Event("change"));
+    }
+    await el.updateComplete;
+
+    // Should remain valid — cancel restores native input from selectedFiles
+    expect(el.invalid).to.be.false;
+    // selectedFiles should still have the file
+    expect(el.files.length).to.equal(1);
+  });
+
+  it("should re-validate after file is removed via close button", async () => {
     const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback></sgds-file-upload>`);
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
     const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
@@ -1646,27 +1709,26 @@ describe("sgds-file-upload touched validation (blur-triggered)", () => {
     await el.updateComplete;
     expect(el.invalid).to.be.true;
 
-    // Step 2: Add files → valid
-    const dt1 = new DataTransfer();
-    dt1.items.add(new File(["content"], "test.txt"));
+    // Step 2: Add a file → valid
+    const dt = new DataTransfer();
+    dt.items.add(new File(["content"], "test.txt"));
     if (input) {
-      input.files = dt1.files;
+      input.files = dt.files;
       input.dispatchEvent(new Event("change"));
     }
     await el.updateComplete;
     expect(el.invalid).to.be.false;
 
-    // Step 3: Clear files (by setting empty DataTransfer)
-    const dt2 = new DataTransfer();
-    if (input) {
-      input.files = dt2.files;
-      input.dispatchEvent(new Event("change"));
-    }
+    // Step 3: Remove the file via close button (simulates _removeFileHandler)
+    const closeButton = el.shadowRoot?.querySelector<HTMLElement>("sgds-close-button");
+    closeButton?.click();
+
+    // Wait for the 300ms exit animation timeout
+    await new Promise(resolve => setTimeout(resolve, 350));
     await el.updateComplete;
 
-    // Step 4: Blur again → should be invalid again
-    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
-    await el.updateComplete;
+    // Should be invalid again — required field has no files
     expect(el.invalid).to.be.true;
+    expect(el.files.length).to.equal(0);
   });
 });
