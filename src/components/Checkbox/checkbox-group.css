@@ -19,7 +19,7 @@ fieldset {
 
 .label-hint-container .form-label {
   color: var(--sgds-form-color-default);
-  font-size: var(--sgds-font-size-16);
+  font-size: var(--sgds-font-size-label-md);
   font-weight: var(--sgds-font-weight-regular);
 }
 
@@ -27,6 +27,7 @@ fieldset {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-form-gap-md);
+  padding: var(--sgds-form-padding-inline-sm) 0px;
 }
 
 .checkbox-group-validation-input {
