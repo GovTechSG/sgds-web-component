@@ -141,5 +141,27 @@ Set the `async` attribute to true. You can then hook onto the `sgds-input` event
   <Story of={ComboBoxStories.AsyncCombobox} />
 </Canvas>
 
-  [React demo](https://codesandbox.io/p/github/clukhei/sgds-asynchronous-combo-box-demo)
+## Validation
+
+Set `required` and `hasFeedback` to enable constraint validation with feedback styling.
+
+<Canvas of={ComboBoxStories.Validation}>
+  <Story of={ComboBoxStories.Validation} />
+</Canvas>
+
+### Override default invalid feedback
+
+Use the `invalidFeedback` property to customise the error message.
+
+<Canvas of={ComboBoxStories.OverrideInvalidFeedback}>
+  <Story of={ComboBoxStories.OverrideInvalidFeedback} />
+</Canvas>
+
+## Custom Validation with `noValidate`
+
+Set `noValidate` to disable built-in constraint validation. Use `setInvalid(bool)` and `invalidFeedback` to control the validation state programmatically via event listeners.
+
+<Canvas of={ComboBoxStories.NoValidate}>
+  <Story of={ComboBoxStories.NoValidate} />
+</Canvas>
 

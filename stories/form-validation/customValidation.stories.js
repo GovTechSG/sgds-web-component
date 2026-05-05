@@ -29,8 +29,29 @@ const DisableValidationByInputTemplate = args => {
         id="custom-validation__textarea-novalidate"
       >
       </sgds-textarea>
+      <sgds-combo-box
+        noValidate
+        label="Fruit"
+        hinttext="Selection must start with 'A'"
+        name="combo-fruit"
+        hasFeedback
+        placeholder="Select a fruit"
+        id="custom-validation__combobox-novalidate"
+      >
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="apricot">Apricot</sgds-combo-box-option>
+        <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+        <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+      </sgds-combo-box>
+      <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
+      const formOne = document.getElementById("custom-validation-form");
+      formOne.addEventListener("submit", e => {
+        e.preventDefault();
+        alert("Submitted");
+      });
+
       const inputOne = document.querySelector("sgds-input#custom-validation__input-novalidate");
       inputOne.addEventListener("sgds-input", e => {
         if (!/^[^a-zA-Z0-9]/.test(e.target.value)) {
@@ -48,6 +69,19 @@ const DisableValidationByInputTemplate = args => {
         } else {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Bio must be at least 10 characters long";
+        }
+      });
+
+      const comboOne = document.querySelector("sgds-combo-box#custom-validation__combobox-novalidate");
+      comboOne.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Select an option";
+        } else if (!e.target.value.startsWith("a")) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Selection must start with 'A'";
+        } else {
+          e.target.setInvalid(false);
         }
       });
     </script>
@@ -74,8 +108,28 @@ const DisableValidationByFormTemplate = args => {
         id="custom-validation__textarea-two-novalidate"
       >
       </sgds-textarea>
+      <sgds-combo-box
+        label="Fruit"
+        hinttext="Selection must start with 'A'"
+        name="combo-fruit"
+        hasFeedback
+        placeholder="Select a fruit"
+        id="custom-validation__combobox-two-novalidate"
+      >
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="apricot">Apricot</sgds-combo-box-option>
+        <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+        <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+      </sgds-combo-box>
+      <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
+      const formTwo = document.getElementById("custom-validation-form_novalidate");
+      formTwo.addEventListener("submit", e => {
+        e.preventDefault();
+        alert("Submitted");
+      });
+
       const inputTwo = document.getElementById("custom-validation__input-two-novalidate");
       inputTwo.addEventListener("sgds-input", e => {
         if (!/^[^a-zA-Z0-9]/.test(e.target.value)) {
@@ -93,6 +147,19 @@ const DisableValidationByFormTemplate = args => {
         } else {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Notes must be at least 5 characters long";
+        }
+      });
+
+      const comboTwo = document.getElementById("custom-validation__combobox-two-novalidate");
+      comboTwo.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Select an option";
+        } else if (!e.target.value.startsWith("a")) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Selection must start with 'A'";
+        } else {
+          e.target.setInvalid(false);
         }
       });
     </script>
@@ -114,3 +181,4 @@ export const DisableThroughInput = {
   parameters: {},
   tags: ["!dev"]
 };
+

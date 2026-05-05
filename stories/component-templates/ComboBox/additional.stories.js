@@ -1,4 +1,5 @@
 import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 import "../../mocks/comboBoxMultiAsync";
 import "../../mocks/comboBoxSingleAsync";
 
@@ -390,6 +391,98 @@ const AsyncComboboxTemplate = () => {
 export const AsyncCombobox = {
   render: AsyncComboboxTemplate.bind({}),
   name: "Asynchronous ComboBox",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
+const ValidationTemplate = args =>
+  html`
+    <form>
+      <sgds-combo-box
+        class="sgds:mb-layout-sm"
+        name="comboBoxValidationExample"
+        required
+        hasFeedback
+        label="Country"
+        hintText="Required field"
+        placeholder="Select a country"
+        invalidFeedback=${ifDefined(args.invalidFeedback)}
+      >
+        <sgds-combo-box-option value="singapore">Singapore</sgds-combo-box-option>
+        <sgds-combo-box-option value="malaysia">Malaysia</sgds-combo-box-option>
+        <sgds-combo-box-option value="thailand">Thailand</sgds-combo-box-option>
+        <sgds-combo-box-option value="japan">Japan</sgds-combo-box-option>
+      </sgds-combo-box>
+      <sgds-button type="submit">Submit</sgds-button>
+      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+    </form>
+  `;
+
+export const Validation = {
+  render: ValidationTemplate.bind({}),
+  name: "Validation",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const OverrideInvalidFeedback = {
+  render: ValidationTemplate.bind({}),
+  name: "Override default invalid feedback",
+  args: { invalidFeedback: "Custom error message" },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+const NoValidateTemplate = () => {
+  return html`
+    <form id="novalidate-combobox-story-form">
+      <sgds-combo-box
+        class="sgds:mb-layout-sm"
+        noValidate
+        required
+        hasFeedback
+        label="Fruit"
+        hintText="Custom validation: must select a fruit starting with 'A'"
+        id="novalidate-combobox-story"
+        placeholder="Select a fruit"
+      >
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="apricot">Apricot</sgds-combo-box-option>
+        <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+        <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+      </sgds-combo-box>
+      <sgds-button type="submit">Submit</sgds-button>
+    </form>
+    <script>
+      const noValidateCombo = document.querySelector("#novalidate-combobox-story");
+      const noValidateFormStory = document.querySelector("#novalidate-combobox-story-form");
+
+      noValidateCombo.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Select an option";
+        } else if (!e.target.value.startsWith("a")) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Selection must start with 'A'";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+
+      noValidateFormStory.addEventListener("submit", e => {
+        e.preventDefault();
+        alert("Submitted");
+      });
+
+    </script>
+  `;
+};
+
+export const NoValidate = {
+  render: NoValidateTemplate.bind({}),
+  name: "Custom Validation with noValidate",
   args: {},
   parameters: {},
   tags: ["!dev"]
