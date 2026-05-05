@@ -1,15 +1,18 @@
 :host([active]) .dropdown-item {
-  background-color: var(--sgds-primary-surface-translucent);
+  background-color: var(--sgds-bg-translucent-subtle);
 }
 
 .dropdown-item {
   background-color: var(--sgds-bg-transparent);
-  padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
+  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
   clear: both;
-  color: var(--sgds-color-default);
+  color: var(--sgds-form-color-default);
+  font-size: var(--sgds-font-size-label-md);
   text-align: inherit;
   cursor: pointer;
   height: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 .dropdown-item.disabled {
   opacity: var(--sgds-opacity-40);
@@ -22,13 +25,9 @@
 }
 
 :host([active]) .dropdown-item .normal-item-content {
-  color: var(--sgds-primary-bg-default);
+  color: var(--sgds-form-primary-color-default);
 }
 
-:host([active]) .dropdown-item .normal-item-content sgds-icon {
-  color: var(--sgds-primary-bg-default);
-  fill: var(--sgds-primary-bg-default);
-}
 .dropdown-item:hover {
   background: var(--sgds-bg-translucent-subtle);
 }

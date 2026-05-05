@@ -18,6 +18,11 @@
   min-width: var(--sgds-dimension-256);
 }
 
+.form-label {
+  color: var(--sgds-form-color-default);
+  font-size: var(--sgds-font-size-label-md);
+}
+
 .form-control-group {
   display: flex;
   align-items: center;
@@ -46,8 +51,8 @@
   min-width: 0;
   width: 100%;
   color: var(--sgds-form-color-default);
-  font-size: var(--sgds-font-size-16);
-  line-height: var(--sgds-line-height-24);
+  font-size: var(--sgds-font-size-label-md);
+  line-height: var(--sgds-line-height-xs);
 }
 
 .form-clearable {
