@@ -32,11 +32,6 @@ export class SgdsToastContainer extends SgdsElement {
   }
 }
 
-export type ToastPosition =
-  | "top-center"
-  | "top-end"
-  | "bottom-start"
-  | "bottom-center"
-  | "bottom-end";
+export type ToastPosition = "top-center" | "top-end" | "bottom-start" | "bottom-center" | "bottom-end";
 
 export default SgdsToastContainer;
