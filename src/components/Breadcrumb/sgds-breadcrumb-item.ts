@@ -26,6 +26,7 @@ export class SgdsBreadcrumbItem extends SgdsElement {
       const anchor = this.querySelector<HTMLAnchorElement>("a");
       if (anchor) {
         if (this.active) {
+          anchor.setAttribute("tabindex", "-1");
           anchor.addEventListener("click", this._preventNavigation);
         } else {
           anchor.removeEventListener("click", this._preventNavigation);
