@@ -1732,3 +1732,136 @@ describe("sgds-file-upload touched validation (blur-triggered)", () => {
     expect(el.files.length).to.equal(0);
   });
 });
+
+describe("sgds-file-upload dialog and drop validation behavior", () => {
+  function makeDragEvent(type: string, files: File[] = []): DragEvent {
+    const dt = new DataTransfer();
+    files.forEach(f => dt.items.add(f));
+    return new DragEvent(type, { bubbles: true, cancelable: true, dataTransfer: dt });
+  }
+
+  it("should NOT show validation when clicking the upload button (dialog opens)", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback></sgds-file-upload>`);
+    const button = el.shadowRoot?.querySelector<SgdsButton>("sgds-button");
+
+    // Simulate clicking the button (which sets _isDialogOpen = true)
+    // then the blur that follows when the dialog steals focus
+    button?.click();
+    await el.updateComplete;
+
+    // Simulate the blur that happens when dialog opens
+    button?.dispatchEvent(new CustomEvent("sgds-blur", { bubbles: true }));
+    await el.updateComplete;
+
+    // Should NOT show invalid — dialog is open, blur should be ignored
+    expect(el.invalid).to.be.false;
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback-container");
+    expect(feedback).to.not.exist;
+  });
+
+  it("should show validation when user cancels the file dialog", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback></sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    // Simulate cancel event (user opened dialog and clicked cancel)
+    input?.dispatchEvent(new Event("cancel"));
+    await el.updateComplete;
+
+    // Should show invalid — user explicitly cancelled without selecting files
+    expect(el.invalid).to.be.true;
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback-container");
+    expect(feedback).to.exist;
+  });
+
+  it("should NOT show validation on cancel when noValidate is set", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload required hasFeedback noValidate></sgds-file-upload>`
+    );
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    // Simulate cancel event
+    input?.dispatchEvent(new Event("cancel"));
+    await el.updateComplete;
+
+    // Should NOT show invalid — noValidate skips validation
+    expect(el.invalid).to.be.false;
+  });
+
+  it("should clear invalid state when files are dropped on a drag-and-drop variant that starts invalid", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload
+        variant="drag-and-drop"
+        multiple
+        required
+        hasFeedback
+        invalid
+        invalidFeedback="Please upload at least one file"
+      ></sgds-file-upload>`
+    );
+    await el.updateComplete;
+
+    // Verify it starts invalid
+    expect(el.invalid).to.be.true;
+
+    // Drop a file
+    const zone = el.shadowRoot?.querySelector<HTMLElement>(".drag-drop-zone");
+    const file = new File(["content"], "test.pdf", { type: "application/pdf" });
+    zone?.dispatchEvent(makeDragEvent("drop", [file]));
+    await el.updateComplete;
+
+    // Should clear invalid state
+    expect(el.invalid).to.be.false;
+    const feedback = el.shadowRoot?.querySelector(".invalid-feedback-container");
+    expect(feedback).to.not.exist;
+  });
+
+  it("should clear invalid state when files are dropped after cancel triggered validation", async () => {
+    const el = await fixture<SgdsFileUpload>(
+      html`<sgds-file-upload variant="drag-and-drop" required hasFeedback></sgds-file-upload>`
+    );
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    // Cancel dialog to trigger validation
+    input?.dispatchEvent(new Event("cancel"));
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+
+    // Drop a file — should clear invalid
+    const zone = el.shadowRoot?.querySelector<HTMLElement>(".drag-drop-zone");
+    const file = new File(["content"], "report.pdf", { type: "application/pdf" });
+    zone?.dispatchEvent(makeDragEvent("drop", [file]));
+    await el.updateComplete;
+
+    expect(el.invalid).to.be.false;
+    expect(el.files.length).to.equal(1);
+  });
+
+  it("should show validation after selecting files then cancelling the dialog (touched)", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload required hasFeedback></sgds-file-upload>`);
+    const input = el.shadowRoot?.querySelector<HTMLInputElement>("input");
+
+    // First cancel to mark as touched
+    input?.dispatchEvent(new Event("cancel"));
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+
+    // Select a file — clears invalid
+    const dt = new DataTransfer();
+    dt.items.add(new File(["content"], "test.txt"));
+    if (input) {
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change"));
+    }
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+
+    // Remove the file via close button
+    const closeButton = el.shadowRoot?.querySelector<HTMLElement>("sgds-close-button");
+    closeButton?.click();
+    await new Promise(resolve => setTimeout(resolve, 350));
+    await el.updateComplete;
+
+    // Should be invalid again — required field is empty and component is touched
+    expect(el.invalid).to.be.true;
+  });
+});

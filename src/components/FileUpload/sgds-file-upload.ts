@@ -177,10 +177,12 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   private inputRef = createRef<HTMLInputElement>();
   private _dragZoneRef = createRef<HTMLDivElement>();
   private _dragCounter = 0;
+  private _isDialogOpen = false;
 
   private _handleClick(event: Event) {
     event.preventDefault();
     if (!this.disabled) {
+      this._isDialogOpen = true;
       // Get a reference to the input element using the inputRef
       const inputElement = this.inputRef.value;
       // Do something with the input element
@@ -188,7 +190,15 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     }
   }
 
+  private _handleCancel() {
+    this._isDialogOpen = false;
+    this._isTouched = true;
+    if (this._mixinShouldSkipSgdsValidation()) return;
+    this.setInvalid(!this._mixinCheckValidity());
+  }
+
   private _handleChange(event: Event) {
+    this._isDialogOpen = false;
     const inputElement = event.target as HTMLInputElement;
     const files = inputElement.files as FileList;
     const previousCount = this.selectedFiles.length;
@@ -299,6 +309,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     const sgdsBlur = this.emit("sgds-blur", { cancelable: true });
     if (this._mixinShouldSkipSgdsValidation()) return;
     if (sgdsBlur.defaultPrevented) return;
+    if (this._isDialogOpen) return;
 
     this.setInvalid(!this._mixinCheckValidity());
     this._isTouched = true;
@@ -369,27 +380,15 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       files = files.slice(0, 1);
     }
 
-    // Sync files into inputRef using DataTransfer
-    const previousCount = this.selectedFiles.length;
+    // Set only the new files on the input, then let _handleChange
+    // handle combining, event emission, and validation
     const fileBuffer = new DataTransfer();
-
-    // Combine with existing files if multiple is enabled
-    if (this.multiple && this.selectedFiles.length > 0) {
-      const combined = [...this.selectedFiles, ...files];
-      combined.forEach(file => fileBuffer.items.add(file));
-      this.selectedFiles = combined;
-    } else {
-      files.forEach(file => fileBuffer.items.add(file));
-      this.selectedFiles = Array.from(files);
-    }
+    files.forEach(file => fileBuffer.items.add(file));
 
     const inputElement = this.inputRef.value;
     if (inputElement) {
       inputElement.files = fileBuffer.files;
-      this._setFileList(fileBuffer.files, previousCount);
-      if (!this._mixinShouldSkipSgdsValidation()) {
-        this._mixinValidate(this.input);
-      }
+      inputElement.dispatchEvent(new Event("change", { bubbles: true }));
     }
   }
 
@@ -469,6 +468,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         ${ref(this.inputRef)}
         type="file"
         @change=${this._handleChange}
+        @cancel=${this._handleCancel}
         ?multiple=${this.multiple}
         accept=${this.accept}
         id=${this._controlId}
