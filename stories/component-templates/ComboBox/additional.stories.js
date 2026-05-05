@@ -475,7 +475,6 @@ const NoValidateTemplate = () => {
         e.preventDefault();
         alert("Submitted");
       });
-
     </script>
   `;
 };
