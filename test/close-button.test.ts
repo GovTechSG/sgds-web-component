@@ -12,7 +12,7 @@ describe("<sgds-close-button>", () => {
       el,
       `
       <button class="btn-close" aria-label="Close button">
-        <sgds-icon name="cross" size="md"></sgds-icon>
+        <sgds-icon name="cross" size="sm"></sgds-icon>
       </button>
       `
     );
