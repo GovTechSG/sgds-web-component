@@ -20,7 +20,8 @@ button.month,
 button.year {
   padding: 0;
   border: 0;
-  line-height: var(--sgds-line-height-20);
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs);
   background-color: transparent;
   border-radius: var(--sgds-form-border-radius-sm);
   position: relative;
@@ -70,7 +71,8 @@ td, th {
   width: var(--sgds-form-width-md);
   height: var(--sgds-form-height-lg);
   padding: 0;
-  line-height: var(--sgds-line-height-20);
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs);
   border-radius: var(--sgds-form-border-radius-sm);
   position: relative;
 }
