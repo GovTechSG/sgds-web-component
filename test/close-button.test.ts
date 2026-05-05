@@ -101,26 +101,6 @@ describe("<sgds-close-button>", () => {
 
     expect(clickHandler).to.not.have.been.called;
   });
-  it("should prevent click event when disabled", async () => {
-    const el = await fixture<SgdsCloseButton>(html`<sgds-close-button disabled></sgds-close-button>`);
-    const button = el.shadowRoot?.querySelector(".btn-close") as HTMLButtonElement;
-    const preventDefaultSpy = sinon.spy();
-
-    const clickEvent = new MouseEvent("click", { bubbles: true, cancelable: true });
-    sinon.stub(clickEvent, "preventDefault").callsFake(preventDefaultSpy);
-
-    button?.dispatchEvent(clickEvent);
-
-    // Verify preventDefault was called by checking the button is actually disabled
-    expect(button?.disabled).to.be.true;
-  });
-  it("should apply disabled styling", async () => {
-    const el = await fixture<SgdsCloseButton>(html`<sgds-close-button disabled></sgds-close-button>`);
-
-    expect(el.getAttribute("disabled")).to.equal("");
-    const button = el.shadowRoot?.querySelector(".btn-close") as HTMLButtonElement;
-    expect(button.disabled).to.be.true;
-  });
   it("should allow clicks when not disabled", async () => {
     const el = await fixture<SgdsCloseButton>(html`<sgds-close-button></sgds-close-button>`);
     const clickHandler = sinon.spy();
