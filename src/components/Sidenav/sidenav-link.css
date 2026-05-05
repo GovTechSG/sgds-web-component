@@ -39,7 +39,7 @@
 }
 
 :host([disabled]) ::slotted(a) {
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
   pointer-events: none;
 }
 :host([disabled]) ::slotted(a:focus),

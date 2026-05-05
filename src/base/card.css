@@ -114,7 +114,7 @@ a.card {
 }
 
 .card.disabled {
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
   pointer-events: none;
 }
 

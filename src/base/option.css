@@ -12,7 +12,7 @@
   height: 100%;
 }
 .dropdown-item.disabled {
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
   pointer-events: none;
 }
 .dropdown-item .normal-item-content {

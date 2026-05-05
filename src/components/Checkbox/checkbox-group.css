@@ -34,7 +34,7 @@ fieldset {
   display: none;
 }
 
-:host([disabled]) .label-hint-container{
-  opacity: var(--sgds-opacity-50);
+:host([disabled]) .label-hint-container {
+  opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
 }
