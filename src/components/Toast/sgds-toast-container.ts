@@ -13,10 +13,10 @@ export class SgdsToastContainer extends SgdsElement {
   static styles = [toastContainerStyle];
 
   /**
-   * Controls the position of `sgds-toast` within itself.
+   * Controls the position of `sgds-toast` within itself. Defaults to "top-end".
    * Since 3.7.1, the positions "top-start", "middle-start", "middle-center", and "middle-end" are deprecated.
    */
-  @property({ type: String, reflect: true }) position: ToastPosition;
+  @property({ type: String, reflect: true }) position: ToastPosition = "top-end";
 
   render() {
     return html`
@@ -32,15 +32,6 @@ export class SgdsToastContainer extends SgdsElement {
   }
 }
 
-export type ToastPosition =
-  | "top-start"
-  | "top-center"
-  | "top-end"
-  | "middle-start"
-  | "middle-center"
-  | "middle-end"
-  | "bottom-start"
-  | "bottom-center"
-  | "bottom-end";
+export type ToastPosition = "top-center" | "top-end" | "bottom-start" | "bottom-center" | "bottom-end";
 
 export default SgdsToastContainer;

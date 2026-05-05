@@ -33,7 +33,6 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - **Always use `<sgds-toast-container>`**: `<sgds-toast>` must be placed inside `<sgds-toast-container>` — the container handles screen positioning and stacking.
 - **`title` is required for accessibility**: always set a meaningful `title` on every `<sgds-toast>` — it is the accessible heading of the notification.
 - **`show` attribute vs `showToast()` method**: use the `show` attribute for toasts that should be visible on initial render; use `showToast()` / `hideToast()` for dynamically triggered notifications (e.g. after a form submit).
-- **Deprecated positions**: `top-start`, `middle-start`, `middle-center`, `middle-end` are deprecated since v3.7.1 — use only `top-center`, `top-end`, `bottom-start`, `bottom-center`, `bottom-end`.
 - **One container per position**: use a single `<sgds-toast-container>` per screen position — do not create multiple containers at the same position.
 - **Auto-dismiss timing**: `delay` only takes effect when `autohide` is also set — setting `delay` alone has no effect.
 
@@ -57,14 +56,14 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 **User can dismiss?** → Add `dismissible`
 
 **Position on screen?**
-- Bottom right → `position="bottom-end"` on `<sgds-toast-container>` (common default)
-- Use `"top-end"`, `"top-center"`, `"bottom-center"`, `"bottom-start"` etc.
+- Top right → `position="top-end"` on `<sgds-toast-container>` (default)
+- Use `"top-center"`, `"bottom-start"`, `"bottom-center"`, `"bottom-end"` for other positions
 
 **Show/hide a toast via JS?** → Use `showToast()` / `hideToast()` methods
 
 ```html
-<!-- Basic toast (already shown) -->
-<sgds-toast-container position="bottom-end">
+<!-- Basic toast (already shown, uses default top-end position) -->
+<sgds-toast-container>
   <sgds-toast show variant="info" title="Info" dismissible>
     <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
     Your changes have been saved.
@@ -73,7 +72,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 </sgds-toast-container>
 
 <!-- Auto-dismissing toast after 3 seconds -->
-<sgds-toast-container position="top-end">
+<sgds-toast-container position="top-center">
   <sgds-toast show variant="success" title="Success" autohide delay="3000">
     <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
     Item added to cart.
@@ -96,7 +95,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 </script>
 
 <!-- Multiple toasts stacked -->
-<sgds-toast-container position="bottom-end">
+<sgds-toast-container>
   <sgds-toast show variant="success" title="Saved">
     <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
     Document saved.
@@ -126,12 +125,10 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 | Attribute | Type | Default | Purpose |
 |---|---|---|---|
-| `position` | ToastPosition | — | Screen position for the toast stack |
+| `position` | ToastPosition | `top-end` | Screen position for the toast stack |
 
 #### ToastPosition values (current)
 `top-center`, `top-end`, `bottom-start`, `bottom-center`, `bottom-end`
-
-> `top-start`, `middle-start`, `middle-center`, `middle-end` are **deprecated since 3.7.1** — avoid these positions.
 
 ## Slots (`<sgds-toast>`)
 
@@ -164,5 +161,5 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 2. `show` must be set on the toast for it to be visible on page load; `showToast()` / `hideToast()` are the programmatic API.
 3. Always wrap `<sgds-toast>` inside `<sgds-toast-container>` — the container handles positioning.
 4. Multiple `<sgds-toast>` elements inside one container stack vertically automatically.
-5. Avoid deprecated position values (`top-start`, `middle-*`); use `bottom-end` as the default position.
+5. The default position is `top-end` — only set `position` explicitly when a different position is needed.
 6. Icon slot accepts `<sgds-icon size="md">`, action slot accepts `<sgds-link size="sm">` wrapping an `<a>` tag.
