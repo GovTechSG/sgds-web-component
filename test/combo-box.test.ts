@@ -1787,3 +1787,187 @@ describe("async combobox", () => {
     expect(el.filterFunction("", { label: "", value: "" })).to.be.true;
   });
 });
+
+describe("noValidate disables native and sgds validation behaviours", () => {
+  it("should override required and allow form submission when noValidate is set", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-combo-box noValidate required>
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("with noValidate, invalid state does not appear on blur when required and empty", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box noValidate hasFeedback required>
+        <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+    el.blur();
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+  });
+
+  it("with noValidate, setInvalid(true) still works for programmatic control", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box noValidate required>
+        <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+  });
+
+  it("with noValidate, programmatic setInvalid(true) persists after blur", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box noValidate required>
+        <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    el.setInvalid(true);
+    await el.updateComplete;
+
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+    el.blur();
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+  });
+
+  it("should still populate FormData when noValidate is enabled", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-combo-box noValidate name="combo-field" value="option1">
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      expect(formData.get("combo-field")).to.equal("option1");
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+});
+
+describe("form novalidate for combo-box", () => {
+  it("when form has novalidate, form submission proceeds even when combo-box is required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-combo-box required>
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(true);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("when form has novalidate, combo-box does not show invalid state on blur", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-combo-box required hasFeedback>
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const comboBox = form.querySelector<SgdsComboBox>("sgds-combo-box");
+    const input = comboBox?.shadowRoot?.querySelector("input");
+    input?.focus();
+    comboBox?.blur();
+    await comboBox?.updateComplete;
+    expect(comboBox?.invalid).to.be.false;
+  });
+});
+
+describe("setInvalid emits sgds-invalid and sgds-valid events", () => {
+  it("setInvalid(true) emits sgds-invalid event", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box noValidate>
+        <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    const handler = sinon.spy();
+    el.addEventListener("sgds-invalid", handler);
+
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("setInvalid(false) emits sgds-valid event", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box noValidate>
+        <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    const handler = sinon.spy();
+    el.addEventListener("sgds-valid", handler);
+
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("setInvalid(true) followed by setInvalid(false) emits both events in order", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box noValidate>
+        <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    const invalidHandler = sinon.spy();
+    const validHandler = sinon.spy();
+    el.addEventListener("sgds-invalid", invalidHandler);
+    el.addEventListener("sgds-valid", validHandler);
+
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(invalidHandler).to.have.been.calledOnce;
+    expect(validHandler).not.to.have.been.called;
+
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(validHandler).to.have.been.calledOnce;
+  });
+});

@@ -172,7 +172,7 @@ For 3rd-party validation libraries (e.g. Zod) or fully custom logic, disable SGD
 
 ### Option 1 — Disable per component with `noValidate`
 
-Currently supported on **`<sgds-input>`** and **`<sgds-textarea>`** only. Other components are WIP.
+Currently supported on **`<sgds-input>`**, **`<sgds-textarea>`**, and **`<sgds-combo-box>`**. Other components are WIP.
 
 ```html
 <sgds-input
