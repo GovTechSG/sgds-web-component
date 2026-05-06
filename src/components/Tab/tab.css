@@ -32,7 +32,7 @@
 }
 
 :host([disabled]) .tab {
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
 }
 
