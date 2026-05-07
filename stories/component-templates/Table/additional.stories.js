@@ -142,7 +142,7 @@ const StructuredElementsTemplateBoth = () => html` <sgds-table ?headerbackground
 
 export const AlwaysResponsive = {
   render: Template.bind({}),
-  name: "Always Responsive",
+  name: "Always responsive",
   args: { responsive: "always" },
   parameters: {},
   tags: ["!dev"]

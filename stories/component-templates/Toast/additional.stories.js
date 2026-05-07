@@ -132,14 +132,14 @@ export const BottomStart = {
 };
 export const BottomCenter = {
   render: PositionTemplate.bind({}),
-  name: "Bottom Center",
+  name: "Bottom center",
   args: { ...args, position: "bottom-center" },
   parameters: {},
   tags: ["!dev"]
 };
 export const BottomEnd = {
   render: PositionTemplate.bind({}),
-  name: "Bottom End",
+  name: "Bottom end",
   args: { ...args, position: "bottom-end" },
   parameters: {},
   tags: ["!dev"]

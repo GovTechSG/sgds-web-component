@@ -57,7 +57,7 @@ const FullWidthTemplate = () => {
 
 export const FullWidth = {
   render: FullWidthTemplate.bind({}),
-  name: "Full Width",
+  name: "Full width",
   args: {},
   parameters: {},
   tags: ["!dev"]
@@ -116,7 +116,7 @@ export const ButtonWithIcon = {
       Trailing icon
     </sgds-button>
   `,
-  name: "Button with Icon",
+  name: "Button with icon",
   args: {},
   parameters: {},
   tags: ["!dev"]

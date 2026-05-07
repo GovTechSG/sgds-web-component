@@ -36,7 +36,7 @@ const MockStepperTemplate = () => html`<mock-stepper></mock-stepper>`;
 
 export const StepperExample = {
   render: MockStepperTemplate.bind({}),
-  name: "Stepper Example",
+  name: "Stepper example",
   args: {},
   parameters: {},
   tags: ["!dev"]

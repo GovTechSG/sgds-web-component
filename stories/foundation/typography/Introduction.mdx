@@ -10,22 +10,22 @@ SGDS foundation styles include a comprehensive responsive typography system that
 - **Tablet**: 1024px and above
 - **Desktop**: 1440px and above
 
-## Key Features
+## Key features
 
-**Automatic Responsive Scaling**: All foundation elements automatically scale their typography based on the viewport size. No additional media queries needed—just import and use.
+**Automatic responsive scaling**: All foundation elements automatically scale their typography based on the viewport size. No additional media queries needed. Import and use.
 
-**Consistent Typography Hierarchy**: Headings (h1–h6) maintain visual hierarchy across all screen sizes with responsive font sizes and line heights:
+**Consistent typography hierarchy**: Headings (h1–h6) maintain visual hierarchy across all screen sizes with responsive font sizes and line heights:
 
 - h1: 32px (mobile) → 36px (tablet) → 40px (desktop)
 - h2: 28px (mobile) → 30px (tablet) → 32px (desktop)
 - And so on for h3–h6
 
-**Body Text Handling**:
+**Body text handling**:
 
 - Small and regular body text (`body-sm`, `body-md`) remain consistent at 14px and 16px across all viewports
 - Large body text (`body-lg`) scales from 18px (mobile) to 20px (tablet/desktop)
 
-## Typography Variables
+## Typography variables
 
 Font sizes for headings, body text, labels, links and captions automatically scale at different breakpoints:
 
@@ -36,7 +36,7 @@ Font sizes for headings, body text, labels, links and captions automatically sca
 - `--sgds-font-size-heading-lg`: Responsive H2 sizing
 - `--sgds-font-size-heading-xl`: Responsive H1 sizing
 
-### Body Text
+### Body text
 
 - `--sgds-font-size-body-sm`: Small body text (14px on all viewports)
 - `--sgds-font-size-body-md`: Regular body text (16px on all viewports)
@@ -47,9 +47,9 @@ Font sizes for headings, body text, labels, links and captions automatically sca
 - `--sgds-font-size-link-xs`: 12px on all viewports
 - `--sgds-font-size-link-sm`: 14px on all viewports
 - `--sgds-font-size-link-md`: 16px on all viewports
-- `--sgds-font-size-link-lg`: Responsive — 18px mobile → 20px tablet/desktop
+- `--sgds-font-size-link-lg`: Responsive, 18px mobile → 20px tablet/desktop
 
-### Line Heights
+### Line heights
 
 Line height variables scale proportionally with font sizes for improved readability:
 
@@ -61,7 +61,7 @@ Example progression:
 - Tablet (1024px+): `--sgds-line-height-xs: 24px`, `--sgds-line-height-md: 32px`
 - Desktop (1440px+): `--sgds-line-height-xs: 24px`, `--sgds-line-height-md: 32px`
 
-## How Responsive Typography Works
+## How responsive typography works
 
 All typography variables are defined at the root level with default (mobile) values, then updated via media queries at each breakpoint:
 

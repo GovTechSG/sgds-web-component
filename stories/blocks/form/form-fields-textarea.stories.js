@@ -29,7 +29,7 @@ const Template = () => html`
               <sgds-textarea
                 label="Message"
                 name="message"
-                placeholder="Please enter your message..."
+                placeholder="Enter your message..."
                 required
                 hasFeedback="both"
               ></sgds-textarea>

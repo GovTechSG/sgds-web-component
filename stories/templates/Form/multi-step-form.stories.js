@@ -108,7 +108,7 @@ const Template = () => html`
                   placeholder="Select a business structure"
                   required
                   hasFeedback
-                  invalidFeedback="Please select a business structure"
+                  invalidFeedback="Select a business structure"
                 >
                   <sgds-select-option value="sole-proprietorship">Sole Proprietorship</sgds-select-option>
                   <sgds-select-option value="partnership"
@@ -128,7 +128,7 @@ const Template = () => html`
                     placeholder="Select a range"
                     required
                     hasFeedback
-                    invalidFeedback="Please select employee count"
+                    invalidFeedback="Select an employee count"
                     hintText="As at last financial year end"
                   >
                     <sgds-select-option value="1-10">1 - 10</sgds-select-option>
@@ -144,7 +144,7 @@ const Template = () => html`
                     placeholder="Select a range"
                     required
                     hasFeedback
-                    invalidFeedback="Please select annual turnover"
+                    invalidFeedback="Select an annual turnover range"
                     hintText="As at last financial year end"
                   >
                     <sgds-select-option value="lt-1m">Less than S$1 million</sgds-select-option>
@@ -259,7 +259,7 @@ const Template = () => html`
                   placeholder="e.g. Solar Panel Installation at Ang Mo Kio Factory"
                   required
                   hasFeedback="both"
-                  invalidFeedback="Please provide a project title"
+                  invalidFeedback="Provide a project title"
                 ></sgds-input>
 
                 <sgds-select
@@ -295,7 +295,7 @@ const Template = () => html`
                   characterCount
                   required
                   hasFeedback="both"
-                  invalidFeedback="Please provide a description of at least 100 characters"
+                  invalidFeedback="Provide a description of at least 100 characters"
                   hintText="Describe what you plan to implement and how it will improve your sustainability performance (min. 100 characters)"
                 ></sgds-textarea>
               </div>

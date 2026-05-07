@@ -1,8 +1,8 @@
-# Attributes and Properties
+# Attributes and properties
 
 ## String
 
-The web components uses attributes to set the properties. For example, the variant attribute is used to set the variant property of the button and in turn alters its class and changes its color
+The web components uses attributes to set the properties. For example, the variant attribute is used to set the variant property of the button and in turn alters its class and changes its colour
 
 ```html
 <sgds-button variant="secondary"></sgds-button>
@@ -18,7 +18,7 @@ Boolean properties are usually false by default. To set it to true, add it as an
 <sgds-input disabled></sgds-input>
 ```
 
-## Objects, Arrays and Functions
+## Objects, arrays, and functions
 
 Functions have to be passed in via javascript. For attributes that accepts Objects or Arrays, you can pass in as a JSON string or via javascript.
 

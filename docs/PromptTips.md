@@ -1,10 +1,10 @@
-# Prompt Tips for Agent Skills
+# Prompt tips for agent skills
 
 This guide helps you craft effective prompts for AI coding agents using the SGDS agent skills. Use these tips to get the best results, whether you are starting a new project or migrating an existing app to SGDS V3.
 
 ---
 
-## For New Applications
+## For new applications
 
 When starting a new frontend application, prompt your coding agent with instructions like:
 
@@ -15,7 +15,7 @@ When starting a new frontend application, prompt your coding agent with instruct
 
 ---
 
-## For Existing Applications (Migrating to SGDS V3)
+## For existing applications (migrating to SGDS V3)
 
 When migrating an existing app, prompt your agent with:
 
@@ -23,9 +23,9 @@ When migrating an existing app, prompt your agent with:
 
 Key tips for migration prompts:
 
-- **Always use plan mode first**: Ask the agent to analyze your codebase and generate a migration plan before making changes.
+- **Always use plan mode first**: Ask the agent to analyse your codebase and generate a migration plan before making changes.
 - **1-to-1 component swap**: Instruct the agent to replace old UI components with their SGDS equivalents, one at a time.
-- **Foundation swap**: Ask the agent to replace your old design system's foundational styles (typography, spacing, colors) with SGDS V3 foundations.
+- **Foundation swap**: Ask the agent to replace your old design system's foundational styles (typography, spacing, colours) with SGDS V3 foundations.
 - **Suggest utility replacements**: Request the agent to recommend the appropriate SGDS semantic CSS utility tokens to replace existing styles (inline styles, CSS classes, or old utility classes).
 
 Example prompt:
@@ -34,13 +34,13 @@ Example prompt:
 
 ---
 
-## Final Review
+## Final review
 
 Before wrapping up, start a **fresh agent session** and ask it to review the implementation against the SGDS skills:
 
 > "Review the code in `<path>` against the SGDS skills. Plan out any incorrect implementations you find and provide the correct fixes."
 
-Use a fresh agent — not the one that wrote the code. An agent that made a mistake (e.g. wrong icon name, missing slot wrapper, incorrect attribute) will likely review its own work and confirm it was correct, because it made that decision confidently the first time. A fresh agent has no anchoring bias and will catch issues the original agent missed.
+Use a fresh agent, not the one that wrote the code. An agent that made a mistake (e.g. wrong icon name, missing slot wrapper, incorrect attribute) will likely review its own work and confirm it was correct, because it made that decision confidently the first time. A fresh agent has no anchoring bias and will catch issues the original agent missed.
 
 Things a review agent commonly catches:
 - Wrong icon names that silently render nothing

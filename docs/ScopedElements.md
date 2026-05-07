@@ -1,6 +1,6 @@
 # Scoped Elements
 
-As a global registry, the [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry) cannot have multiple version of the same custom element. This is the limitation of the CustomElementRegistry. [Scoped Custom Element Registries](https://github.com/w3c/webcomponents/issues/716) is a proposal that will solve the problem. Since this functionality won't be available (especially not cross browser) anytime soon, we've adopted [OpenWC's Scoped Elements](https://open-wc.org/docs/development/scoped-elements/).
+As a global registry, the [CustomElementRegistry](https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry) cannot have multiple version of the same custom element. This is the limitation of the CustomElementRegistry. [Scoped Custom Element Registries](https://github.com/w3c/webcomponents/issues/716) is a proposal that will solve the problem. Since this functionality will not be available (especially not cross browser) anytime soon, we have adopted [OpenWC's Scoped Elements](https://open-wc.org/docs/development/scoped-elements/).
 
 Whenever a sgds web component uses composition (meaning it uses another sgds component inside), we
 apply ScopedElementsMixin to make sure it uses the right version of this internal component.
