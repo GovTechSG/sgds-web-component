@@ -1,6 +1,6 @@
 # Flash of unstyled content
 
-Flash of unstyled content (FOUC) is the the momentary flicker where the user sees a page (or a part of it) before styles have finished applying — typically showing raw HTML without CSS styling or custom element rendering.
+Flash of unstyled content (FOUC) is the momentary flicker where the user sees a page (or a part of it) before styles have finished applying, typically showing raw HTML without CSS styling or custom element rendering.
 
 Web Components rely on custom elements and Shadow DOM, both of which depend on client-side JavaScript to define and hydrate those components.
 

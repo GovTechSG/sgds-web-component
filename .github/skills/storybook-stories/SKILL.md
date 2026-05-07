@@ -9,7 +9,20 @@ metadata:
 
 # Storybook Stories
 
-## File Structure
+## Writing style
+
+All prose in `additional.mdx` files and story display names MUST follow the [sgds-writing skill](../../../skills/sgds-writing/SKILL.md). Before writing or editing any `.mdx` documentation, read the sgds-writing skill and apply its rules:
+
+- **Sentence case** for all headings (capitalise first word and proper nouns only)
+- **UK English** spelling (colour, behaviour, organisation, customise)
+- **No contractions** (use "do not" instead of "don't")
+- **No em dashes** (use colons, commas, or separate sentences)
+- **No "please"** in instructions (use direct imperatives)
+- **No subjective adjectives** (do not say "simple", "easy", "important")
+- **Active voice** preferred
+- **Oxford comma** in lists of three or more
+
+## File structure
 
 ```
 stories/component-templates/[ComponentName]/
@@ -18,9 +31,9 @@ stories/component-templates/[ComponentName]/
 └── additional.mdx         Documentation for additional stories
 ```
 
-### File Concatenation
+### File concatenation
 
-`basic.js` is automatically concatenated with `additional.stories.js` at load time. Do NOT import from `basic.js` in `additional.stories.js` — `Template`, `args`, and `parameters` are already in scope.
+`basic.js` is automatically concatenated with `additional.stories.js` at load time. Do NOT import from `basic.js` in `additional.stories.js`. `Template`, `args`, and `parameters` are already in scope.
 
 ## basic.js Pattern
 
@@ -75,11 +88,11 @@ export const ShowMore = {
 
 See [reference/examples.md](reference/examples.md) for full real-world component examples.
 
-## DRY Rules
+## DRY rules
 
 The folder name is the namespace. Strip it from filenames and export names.
 
-### File Naming
+### File naming
 
 ```
 stories/utilities/border/
@@ -95,7 +108,7 @@ stories/utilities/spacing/padding/
   ✅ layout.stories.js      ❌ layout-padding.stories.js
 ```
 
-### Storybook Title
+### Storybook title
 
 ```javascript
 // ✅ Folder path already provides context
@@ -107,7 +120,7 @@ export default { title: "Utilities/Border/Border Color" };
 export default { title: "Utilities/Spacing/Gap/Form Gap" };
 ```
 
-### Export Names
+### Export names
 
 ```javascript
 // In stories/utilities/border/color.stories.js
@@ -116,11 +129,11 @@ export const Grayscales = ...   // ✅ not BorderGrayscales
 export const Primary = ...      // ✅ not PrimaryBorder
 ```
 
-## Story Naming Conventions
+## Story naming conventions
 
 - **Export name:** PascalCase (`NoClampAction`)
-- **Display name:** Title Case (`"No Clamp Action"`)
-- Be descriptive, not generic — avoid `Story1`, `Story2`
+- **Display name:** Sentence case (`"No clamp action"`)
+- Be descriptive, not generic. Avoid `Story1`, `Story2`
 
 ## Commands
 

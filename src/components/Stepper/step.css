@@ -76,6 +76,7 @@
   color: var(--sgds-color-default);
   height: var(--sgds-dimension-32);
   width: var(--sgds-dimension-32);
+  flex-shrink: 0;
 }
 
 .stepper-detail {
@@ -89,6 +90,7 @@
 .stepper-item.vertical .stepper-detail {
   text-align: left;
   padding: var(--sgds-padding-2-xs) 0 0;
+  max-width: unset;
 }
 
 .stepper-item:not(.active):not(.completed) .stepper-label {

@@ -46,7 +46,7 @@ Ensure it is included by your `tsconfig.json`:
 }
 ```
 
-With this in place, event handlers are fully typed — no manual casting needed:
+With this in place, event handlers are fully typed with no manual casting needed:
 
 ```tsx
 <sgds-switch onsgds-change={(e: CustomEvent<ISgdsSwitchChangeEventDetail>) => console.log(e.detail.checked)} />
@@ -113,7 +113,7 @@ const ButtonWc = () => {
 export default ButtonWc;
 ```
 
-## Event Handling
+## Event handling
 
 We follow the React convention for events name, each custom event emitted by the web component is prefixed with a `on` and converted to camel case. Native events still applies to the components.
 

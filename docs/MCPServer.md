@@ -1,4 +1,4 @@
-# MCP Server with Agent Skills
+# MCP server with agent skills
 
 Use a Figma MCP server plugin with Claude Code to turn your Figma designs into working code powered by SGDS components and utilities.
 
@@ -50,6 +50,6 @@ The agent will:
 ## Tips
 
 - Keep your Figma frames clean and well-structured for the best results.
-- Name your Figma layers descriptively — the agent uses layer names to infer intent.
+- Name your Figma layers descriptively. The agent uses layer names to infer intent.
 - If the output is not accurate, refine your prompt by specifying which section or component to focus on.
 - Combine this workflow with the [Prompt Tips](?path=/docs/agent-skills-prompt-tips--docs) for more effective results.

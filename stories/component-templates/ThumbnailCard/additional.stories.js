@@ -2,7 +2,7 @@ import { html } from "lit";
 
 export const Stretched = {
   render: Template.bind({}),
-  name: "Stretched Link",
+  name: "Stretched link",
   args: { ...args, stretchedLink: true },
   parameters: {},
   tags: ["!dev"]
@@ -10,7 +10,7 @@ export const Stretched = {
 
 export const Disabled = {
   render: Template.bind({}),
-  name: "Disabled State",
+  name: "Disabled state",
   args: { ...args, disabled: true },
   parameters: {},
   tags: ["!dev"]
@@ -29,7 +29,7 @@ const OrientationTemplate = () =>
         />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
-        <span slot="title">Innovative Solutions for You</span>
+        <span slot="title">Innovative solutions for you</span>
         <sgds-icon-list size="sm">
           <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
           <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>
@@ -55,7 +55,7 @@ const OrientationTemplate = () =>
         />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
-        <span slot="title">Innovative Solutions for You</span>
+        <span slot="title">Innovative solutions for you</span>
         <sgds-icon-list size="sm">
           <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
           <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>
@@ -84,7 +84,7 @@ export const Orientation = {
 
 export const HideBorder = {
   render: Template.bind({}),
-  name: "Hide Border",
+  name: "Hide border",
   args: { ...args, hideBorder: true },
   parameters: {},
   tags: ["!dev"]
@@ -111,7 +111,7 @@ const NoPaddingTemplate = () =>
         />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
-        <span slot="title">Innovative Solutions for You</span>
+        <span slot="title">Innovative solutions for you</span>
         <sgds-icon-list size="sm">
           <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
           <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>
@@ -137,7 +137,7 @@ const NoPaddingTemplate = () =>
         />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
-        <span slot="title">Innovative Solutions for You</span>
+        <span slot="title">Innovative solutions for you</span>
         <sgds-icon-list size="sm">
           <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
           <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>
@@ -158,7 +158,7 @@ const NoPaddingTemplate = () =>
 
 export const NoPadding = {
   render: NoPaddingTemplate.bind({}),
-  name: "No Padding",
+  name: "No padding",
   args: {},
   parameters: {},
   tags: ["!dev"]

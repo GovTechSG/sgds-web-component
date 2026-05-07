@@ -3,7 +3,7 @@ import * as ValidationStories from "./validation.stories.js";
 
 <Meta title="Form/Validation" />
 
-# Form Validation
+# Form validation
 
 SGDS form web components have HTML constraint validation and sgds's own validation behaviour built into it with the [ElementInternals API](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals)
 
@@ -21,7 +21,7 @@ Click submit button on an empty form to observe the error message and invalid st
 
 Click reset button to reset the form's validity and the control's value.
 
-## SGDS validation behavour
+## SGDS validation behaviour
 
 Sgds form components are validated onchange, after the input is blurred. If the input's value do not meet the constraint validation, it will be flagged as invalid.
 During input, validation state gets reset and re-validated again upon onchange (when the input is out of focus again).

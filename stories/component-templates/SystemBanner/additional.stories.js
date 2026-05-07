@@ -43,7 +43,7 @@ export const Dismissible = {
 
 export const ShowMore = {
   render: ShowMoreHookTemplate.bind({}),
-  name: "Show More",
+  name: "Show more",
   args: {},
   parameters,
   tags: ["!dev"]
@@ -51,7 +51,7 @@ export const ShowMore = {
 
 export const NoClampAction = {
   render: Template.bind({}),
-  name: "No Clamp Action",
+  name: "No clamp action",
   args: {
     show: true,
     noClampAction: true
@@ -96,7 +96,7 @@ const BadgeSlotTemplate = args => {
 
 export const BadgeSlot = {
   render: BadgeSlotTemplate.bind({}),
-  name: "Badge Slot",
+  name: "Badge slot",
   args: {},
   parameters,
   tags: ["!dev"]

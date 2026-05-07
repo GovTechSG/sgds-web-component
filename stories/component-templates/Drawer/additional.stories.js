@@ -59,7 +59,7 @@ const SizeTemplate = () => {
     <sgds-button @click=${() => showDrawerSize("lg")}>Open Large Drawer</sgds-button>
 
     <sgds-drawer id="drawer_size">
-      <h4 slot="title">Size Example</h4>
+      <h4 slot="title">Size example</h4>
       <p slot="description">This demonstrates drawer size options.</p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit.
       Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa

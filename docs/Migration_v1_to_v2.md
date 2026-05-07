@@ -2,13 +2,13 @@
 
 ## From version 1.x.x to 2.x.x
 
-### Architectural Changes
+### Architectural changes
 
 In version 1, we use `@govtechsg/sgds` as a dependency to style the web components. While that saved us a lot of time building the web components and reduced maintenance overload across all our SGDS repositories, it has several drawbacks like big bundle size per component which CSS cannot be purged and customisation limitations by css properties.
 
 In version 2, we rectified the issues by changing up the architecture of the library. Each component only carries their specific styles and any common styles that are shared are kept to a minimal. We also introduced a global css file to be imported with the components. The global css file contains all the css properties tokens and values referenced by the components.
 
-### Package Updates
+### Package updates
 
 We took this opportunity to upgrade our dependency packages.
 
@@ -19,7 +19,7 @@ Our end-to-end testings with NextJS framework flagged out an error when using th
 
 > Not loading the polyfill by default will also allow sites to opt out of it altogether. This means until the browser ships scoped registries, the developer can choose to fall back to the global registry, by not loading the polyfill. This will save bandwidth & complexity since it doesn't need to be loaded by the client in that case. [Source](https://open-wc.org/blog/scoped-elements-without-polyfill/)
 
-### Breaking Changes
+### Breaking changes
 
 #### Import of a global css file is now required
 

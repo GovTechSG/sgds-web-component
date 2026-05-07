@@ -38,7 +38,7 @@ const Template = () => html`
                 hintText="Enter a street address or describe the location"
                 required
                 hasFeedback="both"
-                invalidFeedback="Please enter the location of the issue"
+                invalidFeedback="Enter the location of the issue"
               ></sgds-input>
 
               <sgds-textarea
@@ -51,7 +51,7 @@ const Template = () => html`
                 maxlength="500"
                 required
                 hasFeedback="both"
-                invalidFeedback="Please describe the issue (at least 20 characters)"
+                invalidFeedback="Describe the issue (at least 20 characters)"
               ></sgds-textarea>
 
               <sgds-file-upload

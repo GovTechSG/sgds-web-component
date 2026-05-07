@@ -77,7 +77,7 @@ const closeModal = () => {
 const PreventCloseTemplate = args => {
   return html`
     <sgds-modal id="prevent-close-modal" open=${true}>
-      <h2 slot="title">Prevent Close Example</h2>
+      <h2 slot="title">Prevent close example</h2>
       <p slot="description">This modal cannot be closed by clicking the close button, overlay, or pressing Escape</p>
       <p>
         The <code>sgds-close</code> event is cancelable. By calling <code>event.preventDefault()</code>, you can prevent
@@ -214,7 +214,7 @@ export const PreventClose = {
 const NoCloseButtonTemplate = args => {
   return html`
     <sgds-modal open=${true} noCloseButton>
-      <h2 slot="title">No Close Button</h2>
+      <h2 slot="title">No close button</h2>
       <p slot="description">This modal has no close button in the header</p>
       <p>
         Set the <code>noCloseButton</code> attribute to hide the close button. Users can still close the modal

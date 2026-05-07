@@ -20,7 +20,7 @@ import "@govtechsg/sgds-web-component";
 
 ### Step 2: Framework specific setup
 
-Please refer to the respective framework setup before importing the components.
+Refer to the respective framework setup before importing the components.
 
 - [Angular](/docs/frameworks-angular--docs)
 - [Vue](/docs/frameworks-vue--docs)

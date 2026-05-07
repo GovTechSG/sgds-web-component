@@ -40,7 +40,7 @@ The **SGDS Grid System** is a mobile-first, fully responsive layout system based
 6. **Centered Columns (`.sgds-col-*-center-*`)**:
    - Horizontally centers grid items by calculating the appropriate starting column (grid-column) based on the number of columns the item spans.
    - Only available for even-numbered column spans (e.g., 2, 4, 6, 8, 10) within a 12-column grid.
-   - Example: `.sgds-col-lg-center-4` centers a 4-column-wide item by starting it at column 5 — calculated as `(12 - 4) / 2 = 4`, so it starts at the 5th grid line.
+   - Example: `.sgds-col-lg-center-4` centres a 4-column-wide item by starting it at column 5. This is calculated as `(12 - 4) / 2 = 4`, so it starts at the 5th grid line.
    - Enables centered layout alignment without manually adding offset classes or wrappers.
    - Defined per breakpoint (e.g., `-sm-center-*`, `-md-center-*`, etc.) to support responsive designs.
 
