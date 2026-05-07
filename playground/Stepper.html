@@ -2,6 +2,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
     <script type="module" src="../src/index.ts"></script>
+    <script type="module" src="../mocks/stepper.ts"></script>
     <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
     <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
     <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
@@ -18,8 +19,16 @@
   <body>
     <div class="container">
       <div>
+        <sgds-stepper
+          steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'
+        ></sgds-stepper>
+
         <h2>Horizontal (default) - Using sgds-step Non-linear and has completed steps</h2>
-        <sgds-stepper activeStep="1" clickable>
+        <sgds-stepper
+          activeStep="0"
+          clickable
+          steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'
+        >
           <sgds-step stepHeader="Step 1">
             <span>helloworld</span>
             <span>line 2</span>
@@ -144,6 +153,11 @@
 
           updateButtons();
         </script>
+      </div>
+
+      <div>
+        <h2>Form Stepper with State Management - Mock Component</h2>
+        <mock-stepper></mock-stepper>
       </div>
     </div>
   </body>
