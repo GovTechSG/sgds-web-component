@@ -10,8 +10,8 @@ export default {
 
 const DefaultTemplate = () => html`
   <div class="sgds:flex sgds:flex-col">
-    <h5>Subtitle Header H5</h5>
-    <h6>Subtitle Header H6</h6>
+    <h5>Subtitle header H5</h5>
+    <h6>Subtitle header H6</h6>
   </div>
 `;
 

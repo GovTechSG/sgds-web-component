@@ -12,6 +12,7 @@ textarea {
 textarea.form-control-group {
   padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
   min-height: var(--sgds-dimension-136);
+  overflow: auto;
 }
 
 .textarea-resize-none {

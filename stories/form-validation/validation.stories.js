@@ -60,7 +60,7 @@ const ConstraintValidationTemplate = args => {
       ></sgds-quantity-toggle>
       <sgds-checkbox-group
         hasFeedback
-        hintText="Please checked at least one option"
+        hintText="Check at least one option"
         required
         label="Food preference"
         name="food"
@@ -160,7 +160,7 @@ const FormDataTemplate = args => {
       ></sgds-combo-box>
       <sgds-checkbox-group
         hasFeedback
-        hintText="Please checked at least one option"
+        hintText="Check at least one option"
         required
         label="Food preference"
         name="food"

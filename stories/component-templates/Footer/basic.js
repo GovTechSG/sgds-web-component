@@ -25,7 +25,7 @@ export const Template = args => {
         <h2 slot="title">Name of portal/digital service</h2>
         <p slot="description">Description of portal/digital service</p>
         <sgds-footer-item slot="items">
-          <div slot="title">Application Guidelines</div>
+          <div slot="title">Application guidelines</div>
           <sgds-link><a href="/application-guidelines/lorem-ipsum-one/second-level-a/">hello world</a></sgds-link>
           <sgds-link><a href="/application-guidelines/lorem-ipsum-one/part-A/">Second Level B</a></sgds-link>
           <sgds-link><a href="/application-guidelines/lorem-ipsum-three/">Lorem Ipsum Three</a></sgds-link>

@@ -284,7 +284,7 @@ export const MultiLevel = {
 
 export const Overlay = {
   render: OverlayTemplate.bind({}),
-  name: "Overlay Sidebar",
+  name: "Overlay sidebar",
   args: {
     variant: "overlay",
     scrim: true,
@@ -307,7 +307,7 @@ export const Overlay = {
 
 export const Dynamic = {
   render: DynamicTemplate.bind({}),
-  name: "Dynamic Active State",
+  name: "Dynamic active state",
   args: {
     active: "dashboard",
     collapsed: false,
@@ -327,7 +327,7 @@ export const Dynamic = {
 
 export const LinkedItems = {
   render: LinkedItemsTemplate.bind({}),
-  name: "Linked Items",
+  name: "Linked items",
   args: {
     active: "dashboard",
     collapsed: false,

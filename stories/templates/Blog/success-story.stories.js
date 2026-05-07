@@ -229,7 +229,7 @@ const Template = () => html`
     <div class="sgds-container">
       <div style="max-width: var(--sgds-text-max-width);">
         <h2 class="sgds:text-heading-lg sgds:font-bold sgds:leading-lg sgds:tracking-tight sgds:text-heading-default">
-          What's Next
+          What is next
         </h2>
 
         <p class="sgds:text-body-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:text-body-default">

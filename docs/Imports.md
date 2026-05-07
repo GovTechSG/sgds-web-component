@@ -16,7 +16,7 @@ import "@govtechsg/sgds-web-component";
 // <sgds-button>Hello World</sgds-button>
 ```
 
-## Typescript: Using the component's class object
+## TypeScript: using the component's class object
 
 When writing with Typescript, you might be required to type the components in certain cases. Import the component class like so. 
 Each component's Class is exported via named exports, prefixed with `Sgds`.

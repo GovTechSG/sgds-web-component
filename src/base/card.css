@@ -114,7 +114,7 @@ a.card {
 }
 
 .card.disabled {
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
   pointer-events: none;
 }
 
@@ -150,7 +150,7 @@ a.card:not(.disabled):focus-visible {
 .card-body {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-xl);
+  gap: var(--sgds-gap-lg);
   flex: 1 1 auto;
   color: var(--sgds-body-color-default);
   padding: var(--sgds-padding-xl);
@@ -160,45 +160,43 @@ a.card:not(.disabled):focus-visible {
 .card-header-container {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-sm);
+  gap: var(--sgds-gap-xs);
 }
 
 .card-header {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-xs);
+  gap: var(--sgds-gap-2-xs);
 }
 
 .card-title,
 slot[name="title"]::slotted(*) {
-  color: var(--sgds-body-color-default);
-  font-size: var(--sgds-font-size-24) !important;
+  color: var(--sgds-color-default);
+  font-size: var(--sgds-font-size-heading-sm) !important;
   font-weight: var(--sgds-font-weight-semibold) !important;
+  line-height: var(--sgds-line-height-sm) !important;
+  letter-spacing: var(--sgds-letter-spacing-tight) !important;
   margin-bottom: var(--sgds-margin-none) !important;
 }
 
 slot[name="subtitle"]::slotted(*) {
   color: var(--sgds-color-subtle);
-  font-size: var(--sgds-font-size-14) !important;
+  font-size: var(--sgds-font-size-overline-md) !important;
   font-weight: var(--sgds-font-weight-semibold) !important;
   letter-spacing: var(--sgds-letter-spacing-wide) !important;
   text-transform: uppercase;
-  line-height: var(--sgds-line-height-20) !important;
+  line-height: var(--sgds-line-height-2-xs) !important;
   margin: var(--sgds-margin-none) !important;
 }
 
 slot[name="title"]::slotted(a) {
   color: var(--sgds-link-color-default);
-  font-size: var(--sgds-font-size-24) !important;
-  font-weight: var(--sgds-font-weight-semibold) !important;
-  margin-bottom: var(--sgds-margin-none) !important;
   text-decoration: none !important;
 }
 
 slot[name="description"]::slotted(*) {
-  --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
   color: var(--sgds-color-subtle);
-  margin-bottom: var(--sgds-paragraph-spacing-xl, --sgds-margin-none);
+  margin-bottom: var(--sgds-margin-none) !important;
 }
 
 slot[name="image"]::slotted(img) {
@@ -211,7 +209,7 @@ slot[name="image"]::slotted(img) {
 slot[name="footer"]::slotted(*),
 slot[name="link"]::slotted(*) {
   margin-top: auto;
-  padding-top: var(--sgds-padding-sm);
+  padding-top: var(--sgds-padding-2-xs);
   width: fit-content;
 }
 

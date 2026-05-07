@@ -1,3 +1,17 @@
+## v3.18.1 (2026-05-04)
+
+### Feat
+
+- **Badge**: update badge font size and line height [run-chromatic] (#635)
+- **Badge**: update badge font size and line height
+
+### Fix
+
+- **Masthead**: provide fallback value for icons size and all variable… [skip-cd][run-chromatic] (#640)
+- **Masthead**: provide fallback value for icons size and all variables used
+- **Accordion**: update caret icon size for spacious density
+- **Accordion**: update typography styles for compact and spacious density
+
 ## v3.18.0 (2026-04-29)
 
 ### Feat

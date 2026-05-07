@@ -21,7 +21,7 @@ export const Template = args =>
         />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
-        <span slot="title">Innovative Solutions for You</span>
+        <span slot="title">Innovative solutions for you</span>
         <sgds-icon-list size="sm">
           <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
           <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>

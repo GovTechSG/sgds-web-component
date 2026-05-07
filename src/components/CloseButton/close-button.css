@@ -51,13 +51,3 @@
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }
-
-.btn-close-sm {
-  width: var(--sgds-dimension-24);
-  height: var(--sgds-dimension-24);
-}
-
-.btn-close.btn-close-sm {
-  width: var(--sgds-icon-size-sm);
-  height: var(--sgds-icon-size-sm);
-}

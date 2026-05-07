@@ -40,7 +40,7 @@ We are monitoring and evaluating these libraries to help recommend a solution fo
 
 Read more about the <a href="https://web.dev/articles/declarative-shadow-dom" target="_blank">declarative shadow dom </a>.
 
-### Search Engine Optimisation
+### Search engine optimisation
 
 Its a myth in 2024 that search engine crawlers like Google and Bing cannot unravel a javascript application. They can , and this means client side rendering does not mean poor SEO!
 

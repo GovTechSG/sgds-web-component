@@ -337,7 +337,7 @@ const Template = () => html`
               class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle sgds:mb-md"
               style="max-width: 360px;"
             >
-              Try adjusting your search or filters to find what you're looking for.
+              Try adjusting your search or filters to find what you are looking for.
             </p>
             <sgds-button variant="outline" tone="neutral" id="reset-btn">Clear all filters</sgds-button>
           </div>

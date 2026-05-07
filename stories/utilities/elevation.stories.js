@@ -44,7 +44,7 @@ const createShadowRow = (tokenName, cssVariable, value, shadowClass) => html`
 
 export const Elevation = () => html`
   <div>
-    <h2 class="sgds:mb-lg">Surface Elevation</h2>
+    <h2 class="sgds:mb-lg">Surface elevation</h2>
     <sgds-table class="sgds:mb-2-xl">
       <sgds-table-row>
         <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
@@ -78,7 +78,7 @@ export const Elevation = () => html`
         "shadow-5"
       )}
     </sgds-table>
-    <h2 class="sgds:my-lg">Edge Elevation</h2>
+    <h2 class="sgds:my-lg">Edge elevation</h2>
     <sgds-table>
       <sgds-table-row>
         <sgds-table-head>SGDS Tailwind Token</sgds-table-head>

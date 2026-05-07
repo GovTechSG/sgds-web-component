@@ -38,8 +38,9 @@ sgds-link {
   white-space: nowrap;
 }
 
-.separator svg {
-  display: block;
+.separator {
+  color: var(--sgds-color-subtle);
+  display: flex;
 }
 
 :host(:last-of-type) .separator {

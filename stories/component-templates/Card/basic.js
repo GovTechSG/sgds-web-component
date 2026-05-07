@@ -44,7 +44,7 @@ export const Template = args =>
       <sgds-card>
         <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
         <span slot="subtitle">SUBTITLE</span>
-        <h3 slot="title">Icon Card</h3>
+        <h3 slot="title">Icon card</h3>
         <span slot="description"
           >Some quick example text to build on the card title and make up the bulk of the card's content.</span
         >
@@ -55,7 +55,7 @@ export const Template = args =>
       <sgds-card>
         <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
         <span slot="subtitle">SUBTITLE</span>
-        <h3 slot="title">Icon Card</h3>
+        <h3 slot="title">Icon card</h3>
         <span slot="description">
           Some quick example text to build on the card title and make up the bulk of the card's content. Some quick
           example text to build on the card title and make up the bulk of the card's content.
