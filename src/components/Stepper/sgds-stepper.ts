@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -8,6 +8,7 @@ import stepperStyle from "./stepper.css";
 import SgdsIcon from "../Icon/sgds-icon";
 import { IStepMetaData } from "./types";
 import type SgdsStep from "./sgds-step";
+import { HasSlotController } from "../../utils/slot";
 export type { IStepMetaData };
 
 /**
@@ -53,11 +54,21 @@ export class SgdsStepper extends SgdsElement {
   @queryAssignedElements() private _slotNodes!: SgdsStep[];
 
   /** @internal */
-  private _items!: SgdsStep[];
+  private _items: SgdsStep[] = [];
   private _totalSteps = 0;
 
   /** @internal Bound i-sgds-click handler for proper event listener removal */
   private _boundHandleItemClick = this._handleStepClick.bind(this);
+
+  /**
+   * Indicates the presence of the default slot.
+   * Used for server-side rendering to determine table structure.
+   * @type {boolean}
+   * @internal
+   * @default false
+   */
+  @property({ type: Boolean }) hasDefaultSlot = false;
+  private readonly hasSlotController = new HasSlotController(this, "[default]");
 
   connectedCallback() {
     super.connectedCallback();
@@ -72,6 +83,10 @@ export class SgdsStepper extends SgdsElement {
     this._totalSteps = this._items.length;
 
     this._updateStepItems();
+  }
+
+  updated() {
+    if (!this.hasDefaultSlot) this.hasDefaultSlot = this.hasSlotController.test("[default]");
   }
 
   /** @internal Updates step item properties based on active step and clickable state */
@@ -96,7 +111,9 @@ export class SgdsStepper extends SgdsElement {
 
   /** By default, it returns the corresponding component of the current activeStep as defined in the steps metadata. To get other components, pass in your desired step number as the parameter*/
   public getComponent(step: number = this.activeStep) {
-    const items = this._slotNodes.length > 1 ? this._items : this.steps;
+    const items = this.hasDefaultSlot ? this._items : this.steps;
+    console.log(step, this._items);
+
     if (items && items.length > 0) {
       return items[step]?.component;
     }
@@ -196,29 +213,31 @@ export class SgdsStepper extends SgdsElement {
       >
         <slot @slotchange=${this._handleSlotChange}></slot>
 
-        ${this.steps.map(({ stepHeader: step, iconName }, index) => {
-          return html`
-            <div class="stepper-item-container">
-              <div
-                class="stepper-item ${classMap({
-                  "is-active": this.activeStep === index,
-                  "is-completed": this.activeStep > index,
-                  "is-clickable": this.clickable && this.activeStep > index
-                })}"
-                tabindex=${this.clickable && this.activeStep > index ? "0" : "-1"}
-                aria-current=${this.activeStep === index ? "step" : "false"}
-                aria-disabled=${this.activeStep <= index ? "true" : "false"}
-                @click="${this.clickable ? () => this._onStepperItemClick(index) : null}"
-                @keydown=${this.clickable ? (e: KeyboardEvent) => this._handleKeyDown(e, index) : null}
-              >
-                <div class="stepper-marker">
-                  ${iconName ? html`<sgds-icon name=${iconName} size="md"></sgds-icon>` : index + 1}
+        ${!this.hasDefaultSlot
+          ? this.steps.map(({ stepHeader: step, iconName }, index) => {
+              return html`
+                <div class="stepper-item-container">
+                  <div
+                    class="stepper-item ${classMap({
+                      "is-active": this.activeStep === index,
+                      "is-completed": this.activeStep > index,
+                      "is-clickable": this.clickable && this.activeStep > index
+                    })}"
+                    tabindex=${this.clickable && this.activeStep > index ? "0" : "-1"}
+                    aria-current=${this.activeStep === index ? "step" : "false"}
+                    aria-disabled=${this.activeStep <= index ? "true" : "false"}
+                    @click="${this.clickable ? () => this._onStepperItemClick(index) : null}"
+                    @keydown=${this.clickable ? (e: KeyboardEvent) => this._handleKeyDown(e, index) : null}
+                  >
+                    <div class="stepper-marker">
+                      ${iconName ? html`<sgds-icon name=${iconName} size="md"></sgds-icon>` : index + 1}
+                    </div>
+                    <div class="stepper-detail">${step}</div>
+                  </div>
                 </div>
-                <div class="stepper-detail">${step}</div>
-              </div>
-            </div>
-          `;
-        })}
+              `;
+            })
+          : nothing}
       </div>
     `;
   }
