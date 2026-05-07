@@ -2,7 +2,7 @@
 
 export const Card = () => {
   return (
-    <sgds-thumbnail-card stretchedlink="" orientation="vertical" suppressHydrationWarning>
+    <sgds-thumbnail-card stretchedLink orientation="vertical" suppressHydrationWarning>
       <span slot="subtitle">EXPLORE THE FEATURES</span>
       <span slot="title">Innovative Solutions for You</span>
       <span slot="description">
