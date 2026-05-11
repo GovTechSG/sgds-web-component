@@ -1,0 +1,62 @@
+import { html } from "lit";
+
+export default {
+  title: "Layouts/Full Width/Split"
+};
+
+const placeholderStyle = html`
+  <style>
+    .content-placeholder {
+      min-height: calc(100vh - 108px);
+      background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 6px,
+        var(--sgds-color-border-muted, #e5e7eb) 6px,
+        var(--sgds-color-border-muted, #e5e7eb) 7px
+      );
+    }
+  </style>
+`;
+
+const Template = () => html`
+  ${placeholderStyle}
+  <div>
+    <sgds-masthead></sgds-masthead>
+    <sgds-mainnav>
+      <strong slot="brand">My App</strong>
+      <sgds-mainnav-dropdown>
+        <span slot="toggler">Workspace</span>
+        <sgds-dropdown-item><a href="#">Dashboard</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Analytics</a></sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+      <sgds-mainnav-dropdown>
+        <span slot="toggler">Manage</span>
+        <sgds-dropdown-item><a href="#">Team</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Reports</a></sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+      <div slot="end">
+        <sgds-button variant="primary" size="sm">New</sgds-button>
+      </div>
+    </sgds-mainnav>
+  </div>
+  <div class="sgds:flex sgds:flex-col">
+    <main>
+      <div class="sgds-container sgds:py-layout-md sgds:flex sgds:flex-col sgds:gap-layout-md">
+        <div class="sgds:flex sgds:gap-layout-md">
+          <div class="content-placeholder sgds:border sgds:border-muted sgds:flex-1"></div>
+          <div class="content-placeholder sgds:border sgds:border-muted sgds:flex-1"></div>
+        </div>
+      </div>
+    </main>
+    <sgds-footer></sgds-footer>
+  </div>
+`;
+
+export const Split = {
+  render: Template.bind({}),
+  name: "Split",
+  args: {},
+  parameters: { layout: "fullscreen" },
+  tags: ["!autodocs"]
+};

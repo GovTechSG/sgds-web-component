@@ -11,18 +11,17 @@
       <strong slot="brand">SGDS</strong>
       <strong slot="end">End</strong>
     </sgds-mainnav>
+    <sgds-system-banner show fluid>This is a system banner message.</sgds-system-banner>
   </div>
   <div class="sgds:flex sgds:flex-row">
-    <div class="sgds:sticky sgds:bg-translucent-subtle sgds:h-[calc(100vh-108px)] sgds:overflow-y-scroll sgds:top-27 sgds:md:w-68 sgds:w-18 ">
-      <div id="sidebar-component" class="sgds:bg-translucent-subtle sgds:h-500 sgds:w-full">Place SideBar here </div>
-    </div>
+    <sgds-sidebar></sgds-sidebar>
     <div class="sgds:flex sgds:flex-col sgds:w-full ">
       <div class="sgds-container-sidebar sgds:py-2-xl">
-        <div id="content" class="sgds:bg-translucent-subtle sgds:h-500 sgds:w-full">
+        <div id="content" class="sgds:bg-translucent-subtle sgds:h-100 sgds:w-full">
           Place content here
         </div>
       </div>
-      <sgds-footer></sgds-footer>
+      <sgds-footer layout="sidebar"></sgds-footer>
     </div>
   </div>
 </body>

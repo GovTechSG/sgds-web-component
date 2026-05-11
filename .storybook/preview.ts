@@ -88,6 +88,14 @@ export const parameters = {
         "Blocks",
         "Templates",
         ["Introduction"],
+        "Layouts",
+        [
+          "Introduction",
+          "Full Width",
+          ["Default", "Breadcrumb", "Split", "Aside Left", "Aside Right", "Aside Both"],
+          "With Sidebar",
+          ["Default", "Split", "Aside Left", "Aside Right"]
+        ],
         "Troubleshoot"
       ]
     }

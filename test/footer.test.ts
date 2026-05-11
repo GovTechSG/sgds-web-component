@@ -1,7 +1,7 @@
 import "./sgds-web-component";
 import { fixture, assert, expect } from "@open-wc/testing";
 import { html } from "lit";
-import { SgdsFooter, SgdsLink } from "../src/components";
+import { SgdsFooter, SgdsFooterItem, SgdsLink } from "../src/components";
 
 describe("footer", () => {
   it("renders with default values", async () => {
@@ -178,9 +178,102 @@ describe("footer", () => {
   });
 });
 
+describe("footer layout prop", () => {
+  it("defaults to layout='default' with no sidebar class", async () => {
+    const el = await fixture<SgdsFooter>(html`<sgds-footer><p>content</p></sgds-footer>`);
+    expect(el.layout).to.equal("default");
+
+    const footerTop = el.shadowRoot?.querySelector(".footer-top");
+    const footerBottom = el.shadowRoot?.querySelector(".footer-bottom");
+    expect(footerTop?.classList.contains("sidebar")).to.be.false;
+    expect(footerBottom?.classList.contains("sidebar")).to.be.false;
+  });
+
+  it("adds sidebar class to footer-top and footer-bottom when layout='sidebar'", async () => {
+    const el = await fixture<SgdsFooter>(html`<sgds-footer layout="sidebar"><p>content</p></sgds-footer>`);
+    expect(el.layout).to.equal("sidebar");
+
+    const footerTop = el.shadowRoot?.querySelector(".footer-top");
+    const footerBottom = el.shadowRoot?.querySelector(".footer-bottom");
+    expect(footerTop?.classList.contains("sidebar")).to.be.true;
+    expect(footerBottom?.classList.contains("sidebar")).to.be.true;
+  });
+
+  it("reflects layout attribute to the host element", async () => {
+    const el = await fixture<SgdsFooter>(html`<sgds-footer layout="sidebar"><p>content</p></sgds-footer>`);
+    expect(el.getAttribute("layout")).to.equal("sidebar");
+  });
+
+  it("removes sidebar class when layout changes from sidebar to default", async () => {
+    const el = await fixture<SgdsFooter>(html`<sgds-footer layout="sidebar"><p>content</p></sgds-footer>`);
+    el.layout = "default";
+    await el.updateComplete;
+
+    const footerTop = el.shadowRoot?.querySelector(".footer-top");
+    const footerBottom = el.shadowRoot?.querySelector(".footer-bottom");
+    expect(footerTop?.classList.contains("sidebar")).to.be.false;
+    expect(footerBottom?.classList.contains("sidebar")).to.be.false;
+  });
+});
+
+describe("footer tone prop", () => {
+  it("defaults to tone='fixed-dark'", async () => {
+    const el = await fixture<SgdsFooter>(html`<sgds-footer></sgds-footer>`);
+    expect(el.tone).to.equal("fixed-dark");
+    expect(el.getAttribute("tone")).to.equal("fixed-dark");
+  });
+
+  it("reflects tone attribute to the host element", async () => {
+    const el = await fixture<SgdsFooter>(html`<sgds-footer tone="neutral"></sgds-footer>`);
+    expect(el.getAttribute("tone")).to.equal("neutral");
+  });
+
+  it("renders mandatory links with tone='fixed-light' when tone='fixed-dark'", async () => {
+    const el = await fixture<SgdsFooter>(html`<sgds-footer></sgds-footer>`);
+    const links = el.shadowRoot?.querySelectorAll<SgdsLink>("sgds-link");
+    links?.forEach(link => {
+      expect(link.tone).to.equal("fixed-light");
+    });
+  });
+
+  it("renders mandatory links with tone='neutral' when tone='neutral'", async () => {
+    const el = await fixture<SgdsFooter>(html`<sgds-footer tone="neutral"></sgds-footer>`);
+    const links = el.shadowRoot?.querySelectorAll<SgdsLink>("sgds-link");
+    links?.forEach(link => {
+      expect(link.tone).to.equal("neutral");
+    });
+  });
+
+  it("propagates tone to sgds-footer-item children", async () => {
+    const el = await fixture<SgdsFooter>(html`
+      <sgds-footer tone="neutral">
+        <sgds-footer-item slot="items">
+          <div slot="title">Title</div>
+          <sgds-link><a href="#">Link</a></sgds-link>
+        </sgds-footer-item>
+      </sgds-footer>
+    `);
+    const footerItem = el.querySelector<SgdsFooterItem>("sgds-footer-item");
+    expect(footerItem?.tone).to.equal("neutral");
+  });
+
+  it("footer-item sets link tone to neutral when its tone is neutral", async () => {
+    const el = await fixture<SgdsFooterItem>(html`
+      <sgds-footer-item tone="neutral">
+        <div slot="title">Title</div>
+        <sgds-link><a href="#">Link</a></sgds-link>
+      </sgds-footer-item>
+    `);
+    const links = el.querySelectorAll<SgdsLink>("sgds-link");
+    links.forEach(l => {
+      expect(l.tone).to.equal("neutral");
+    });
+  });
+});
+
 describe("SgdsFooterItem", () => {
   it("renders with default structure", async () => {
-    const el = await fixture<SgdsFooter>(html` <sgds-footer-item>
+    const el = await fixture<SgdsFooterItem>(html` <sgds-footer-item>
       <div slot="title">Application Guidelines</div>
       <sgds-link><a href="/application-guidelines/lorem-ipsum-one/second-level-a/">hello world</a></sgds-link>
       <sgds-link><a href="/application-guidelines/lorem-ipsum-one/part-A/">Second Level B</a></sgds-link>
@@ -193,7 +286,7 @@ describe("SgdsFooterItem", () => {
     expect(defaultSlot).to.exist;
   });
   it("slotted sgds-link should have tone=fixed-light and size=sm attributes added", async () => {
-    const el = await fixture<SgdsFooter>(html`<sgds-footer-item>
+    const el = await fixture<SgdsFooterItem>(html`<sgds-footer-item>
       <div slot="title">Application Guidelines</div>
       <sgds-link><a href="/application-guidelines/lorem-ipsum-one/second-level-a/">hello world</a></sgds-link>
       <sgds-link><a href="/application-guidelines/lorem-ipsum-one/part-A/">Second Level B</a></sgds-link>

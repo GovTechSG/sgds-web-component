@@ -4,121 +4,262 @@
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 
 <div class="sgds-container">
-  <div class="sgds-grid">
-    <sgds-card class="sgds-col-4 sgds-col-sm-4 sgds-col-md-4 sgds-col-lg-4" tinted>
-      <!-- <img slot="image" alt="img alternate text goes here" width="80" height="80" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"> -->
-      <sgds-badge variant="primary" slot="upper">  New</sgds-badge>
-      <!-- <sgds-icon slot="icon" name="box-seam" size="3-xl"></sgds-icon> -->
-      <sgds-overflow-menu slot="menu">
-        <sgds-dropdown-item>View</sgds-dropdown-item>
-        <sgds-dropdown-item>Edit</sgds-dropdown-item>
-        <sgds-dropdown-item>Delete</sgds-dropdown-item>
-      </sgds-overflow-menu>
-      <span slot="subtitle">EVENTS</span>
-      <span slot="title">Innovative Solutions for You</span>
-      <div style="display: flex; flex-direction: column; gap: 24px">
-        <sgds-icon-list size="sm">
-          <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
-          <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>
-        </sgds-icon-list>
-        <sgds-link>
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
-        </sgds-link>
-      </div>
-      <span slot="description"
-        >Discover how our platform can streamline your workflow and enhance productivity. With cutting-edge technology
-        and user-friendly design, we empower you to achieve more.</span
-      >
-      <div slot="lower" style="display: flex; flex-wrap: wrap; gap: 8px">
-        <sgds-badge variant="neutral" outlined>Design</sgds-badge>
-        <sgds-badge variant="neutral" outlined>Research</sgds-badge>
-      </div>
-      <sgds-link slot="link">
-        <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
-      </sgds-link>
-    </sgds-card>
-    <sgds-card class="sgds-col-4 sgds-col-sm-4 sgds-col-md-4 sgds-col-lg-4" tinted hideBorder>
-      <!-- <sgds-badge variant="primary" slot="upper">New</sgds-badge> -->
-      <sgds-icon slot="icon" name="box-seam" size="3-xl"></sgds-icon>
+<div class="sgds-grid" style="
+"><div class="sgds-col-4"><sgds-thumbnail-card stretchedlink="" orientation="vertical">
+      <a class="card   " tabindex="0" href="/products/categories/productivity-tools/aibots"> 
+        <!--?lit$186432344$-->
+        <div class="card-media">
+          <slot name="thumbnail"></slot>
+					<!--?lit$186432344$--><slot name="upper"></slot>
+        </div>
+        <div class="card-body">
+					<!--?lit$186432344$-->
+          <div class="card-header-container">
+            <div class="card-header">
+              <slot name="subtitle"></slot>
+              <h3 class="card-title"><slot name="title"></slot></h3>
+            </div>
+            <slot></slot>
+          </div>
+          <slot name="description"></slot>
+          <slot name="lower"></slot>
+          <slot name="footer">
+            <slot name="link"></slot>
+          </slot>
+        </div>
+      </a>
+    <img width="64" height="64" data-nuxt-img="" srcset="https://files.app.optical.gov.sg/devportal/production/assets/fc4c91fa-1d3c-4650-af8c-54697d96d8f7.png 1x, https://files.app.optical.gov.sg/devportal/production/assets/fc4c91fa-1d3c-4650-af8c-54697d96d8f7.png 2x" slot="thumbnail" alt="AIBots logo" loading="lazy" src="https://files.app.optical.gov.sg/devportal/production/assets/fc4c91fa-1d3c-4650-af8c-54697d96d8f7.png"><!----><span slot="title">AIBots</span><sgds-badge variant="neutral" outlined=""><div class="  
+           badge outlined " aria-hidden="true">
+      <!--?lit$186432344$--><slot name="icon"></slot>
 
-      <sgds-overflow-menu slot="menu">
-        <sgds-dropdown-item>View</sgds-dropdown-item>
-        <sgds-dropdown-item>Edit</sgds-dropdown-item>
-        <sgds-dropdown-item>Delete</sgds-dropdown-item>
-      </sgds-overflow-menu>
-      <span slot="subtitle">EVENTS</span>
-      <span slot="title">Innovative Solutions for You</span>
-      <div style="display: flex; flex-direction: column; gap: 24px">
-        <sgds-icon-list size="sm">
-          <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
-          <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>
-        </sgds-icon-list>
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div>Proof of Concept</sgds-badge><p slot="description" class="card-text product-card__product-short-desc">Create AI chatbots easily.</p><span slot="footer"><a href="/products/categories/productivity-tools/aibots" class=""></a><div class="product-card__topic-name-list-container"><div><sgds-badge variant="primary" outlined=""><div class="
+           badge outlined " aria-hidden="true">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div>Productivity Tools</sgds-badge></div></div></span></sgds-thumbnail-card></div><div class="sgds-col-4"><sgds-thumbnail-card stretchedlink="" orientation="vertical">
+      <a class="card   " tabindex="0" href="/products/categories/infrastructure-and-hosting/airbase">
+        <!--?lit$186432344$-->
+        <div class="card-media">
+          <slot name="thumbnail"></slot>
+					<!--?lit$186432344$--><slot name="upper"></slot>
+        </div>
+        <div class="card-body">
+					<!--?lit$186432344$-->
+          <div class="card-header-container">
+            <div class="card-header">
+              <slot name="subtitle"></slot>
+              <h3 class="card-title"><slot name="title"></slot></h3>
+            </div>
+            <slot></slot>
+          </div>
+          <slot name="description"></slot>
+          <slot name="lower"></slot>
+          <slot name="footer">
+            <slot name="link"></slot>
+          </slot>
+        </div>
+      </a>
+    <img width="64" height="64" data-nuxt-img="" srcset="https://files.app.optical.gov.sg/devportal/production/assets/b145b46a-c21f-4513-8725-9d70e249fc13.png 1x, https://files.app.optical.gov.sg/devportal/production/assets/b145b46a-c21f-4513-8725-9d70e249fc13.png 2x" slot="thumbnail" alt="Airbase logo" loading="lazy" src="https://files.app.optical.gov.sg/devportal/production/assets/b145b46a-c21f-4513-8725-9d70e249fc13.png"><!----><span slot="title">Airbase</span><sgds-badge variant="neutral" outlined=""><div class="  
+           badge outlined " aria-hidden="true">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div>Pilot</sgds-badge><p slot="description" class="card-text product-card__product-short-desc">Airbase, the fastest and easiest way to deploy apps to the Government Commercial Cloud</p><span slot="footer"><a href="/products/categories/infrastructure-and-hosting/airbase" class=""></a><div class="product-card__topic-name-list-container"><div><sgds-badge variant="primary" outlined=""><sgds-tooltip content="Infrastructure and Hosting">
+      <div class="tooltip-placeholder">
+        <slot></slot>
+        <!--?lit$622112372$-->
       </div>
-      <span slot="description"
-        >Discover how our platform can streamline your workflow and enhance productivity. With cutting-edge technology
-        and user-friendly design, we empower you to achieve more.</span
-      >
-      <div slot="lower" style="display: flex; flex-wrap: wrap; gap: 8px">
-        <sgds-badge variant="neutral" outlined>Design</sgds-badge>
-        <sgds-badge variant="neutral" outlined>Research</sgds-badge>
+    <div class="  
+           badge outlined truncated " aria-hidden="true" data-sgds-tooltip="Infrastructure and Hosting">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div></sgds-tooltip>Infrastructure and Hosting</sgds-badge></div></div></span></sgds-thumbnail-card></div><div class="sgds-col-4"><sgds-thumbnail-card stretchedlink="" orientation="vertical">
+      <a class="card   " tabindex="0" href="/products/categories/productivity-tools/aisay"> 
+        <!--?lit$186432344$-->
+        <div class="card-media">
+          <slot name="thumbnail"></slot>
+					<!--?lit$186432344$--><slot name="upper"></slot>
+        </div>
+        <div class="card-body">
+					<!--?lit$186432344$-->
+          <div class="card-header-container">
+            <div class="card-header">
+              <slot name="subtitle"></slot>
+              <h3 class="card-title"><slot name="title"></slot></h3>
+            </div>
+            <slot></slot>
+          </div>
+          <slot name="description"></slot>
+          <slot name="lower"></slot>
+          <slot name="footer">
+            <slot name="link"></slot>
+          </slot>
+        </div>
+      </a>
+    <img width="64" height="64" data-nuxt-img="" srcset="https://files.app.optical.gov.sg/devportal/production/assets/3378971f-1cf2-4ded-8795-ed852577623c.png 1x, https://files.app.optical.gov.sg/devportal/production/assets/3378971f-1cf2-4ded-8795-ed852577623c.png 2x" slot="thumbnail" alt="AISAY v2 logo" loading="lazy" src="https://files.app.optical.gov.sg/devportal/production/assets/3378971f-1cf2-4ded-8795-ed852577623c.png"><!----><span slot="title">AISAY v2</span><sgds-badge variant="neutral" outlined=""><div class="  
+           badge outlined " aria-hidden="true">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div>Pilot</sgds-badge><p slot="description" class="card-text product-card__product-short-desc">AISAY is an AI-powered document reader that extracts, classifies, and transforms information from unstructured documents into structured responses. It leverages advanced machine learning models to understand complex document layouts, tables, and handwritten text. AISAY supports multiple languages and can process thousands of pages per hour with high accuracy. Teams across government agencies use AISAY to automate their document processing workflows.</p><span slot="footer"><a href="/products/categories/productivity-tools/aisay" class=""></a><div class="product-card__topic-name-list-container"><div><sgds-badge variant="primary" outlined=""><div class="
+           badge outlined " aria-hidden="true">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div>Productivity Tools</sgds-badge></div></div></span></sgds-thumbnail-card></div><div class="sgds-col-4"><sgds-thumbnail-card stretchedlink="" orientation="vertical">
+      <a class="card   " tabindex="0" href="/products/categories/productivity-tools/aibots">
+        <!--?lit$186432344$-->
+        <div class="card-media">
+          <slot name="thumbnail"></slot>
+					<!--?lit$186432344$--><slot name="upper"></slot>
+        </div>
+        <div class="card-body">
+					<!--?lit$186432344$-->
+          <div class="card-header-container">
+            <div class="card-header">
+              <slot name="subtitle"></slot>
+              <h3 class="card-title"><slot name="title"></slot></h3>
+            </div>
+            <slot></slot>
+          </div>
+          <slot name="description"></slot>
+          <slot name="lower"></slot>
+          <slot name="footer">
+            <slot name="link"></slot>
+          </slot>
+        </div>
+      </a>
+    <img width="64" height="64" data-nuxt-img="" srcset="https://files.app.optical.gov.sg/devportal/production/assets/fc4c91fa-1d3c-4650-af8c-54697d96d8f7.png 1x, https://files.app.optical.gov.sg/devportal/production/assets/fc4c91fa-1d3c-4650-af8c-54697d96d8f7.png 2x" slot="thumbnail" alt="AIBots logo" loading="lazy" src="https://files.app.optical.gov.sg/devportal/production/assets/fc4c91fa-1d3c-4650-af8c-54697d96d8f7.png"><!----><span slot="title">AIBots</span><sgds-badge variant="neutral" outlined=""><div class="
+           badge outlined " aria-hidden="true">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div>Proof of Concept</sgds-badge><p slot="description" class="card-text product-card__product-short-desc">Short description.</p><span slot="footer"><a href="/products/categories/productivity-tools/aibots" class=""></a><div class="product-card__topic-name-list-container"><div><sgds-badge variant="primary" outlined=""><div class="
+           badge outlined " aria-hidden="true">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div>Productivity Tools</sgds-badge></div></div></span></sgds-thumbnail-card></div><div class="sgds-col-4"><sgds-thumbnail-card stretchedlink="" orientation="vertical">
+      <a class="card   " tabindex="0" href="/products/categories/infrastructure-and-hosting/airbase">
+        <!--?lit$186432344$-->
+        <div class="card-media">
+          <slot name="thumbnail"></slot>
+					<!--?lit$186432344$--><slot name="upper"></slot>
+        </div>
+        <div class="card-body">
+					<!--?lit$186432344$-->
+          <div class="card-header-container">
+            <div class="card-header">
+              <slot name="subtitle"></slot>
+              <h3 class="card-title"><slot name="title"></slot></h3>
+            </div>
+            <slot></slot>
+          </div>
+          <slot name="description"></slot>
+          <slot name="lower"></slot>
+          <slot name="footer">
+            <slot name="link"></slot>
+          </slot>
+        </div>
+      </a>
+    <img width="64" height="64" data-nuxt-img="" srcset="https://files.app.optical.gov.sg/devportal/production/assets/b145b46a-c21f-4513-8725-9d70e249fc13.png 1x, https://files.app.optical.gov.sg/devportal/production/assets/b145b46a-c21f-4513-8725-9d70e249fc13.png 2x" slot="thumbnail" alt="Airbase logo" loading="lazy" src="https://files.app.optical.gov.sg/devportal/production/assets/b145b46a-c21f-4513-8725-9d70e249fc13.png"><!----><span slot="title">Airbase</span><sgds-badge variant="neutral" outlined=""><div class="
+           badge outlined " aria-hidden="true">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div>Pilot</sgds-badge><p slot="description" class="card-text product-card__product-short-desc">Airbase, the fastest and easiest way to deploy apps to the Government Commercial Cloud</p><span slot="footer"><a href="/products/categories/infrastructure-and-hosting/airbase" class=""></a><div class="product-card__topic-name-list-container"><div><sgds-badge variant="primary" outlined=""><sgds-tooltip content="Infrastructure and Hosting">
+      <div class="tooltip-placeholder">
+        <slot></slot>
+        <!--?lit$622112372$-->
       </div>
-      <sgds-link slot="link">
-        <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
-      </sgds-link>
-    </sgds-card>
-    <sgds-card class="sgds-col-4 sgds-col-sm-4 sgds-col-md-4 sgds-col-lg-4">
-      <!-- <sgds-badge variant="primary" slot="upper">New</sgds-badge> -->
-      <sgds-overflow-menu slot="menu">
-        <sgds-dropdown-item>View</sgds-dropdown-item>
-        <sgds-dropdown-item>Edit</sgds-dropdown-item>
-        <sgds-dropdown-item>Delete</sgds-dropdown-item>
-      </sgds-overflow-menu>
-      <span slot="subtitle">EVENTS</span>
-      <span slot="title">Innovative Solutions for You</span>
-      <div style="display: flex; flex-direction: column; gap: 24px">
-        <sgds-icon-list size="sm">
-          <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
-          <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>
-        </sgds-icon-list>
-      </div>
-      <span slot="description"
-        >Discover how our platform can streamline your workflow and enhance productivity. With cutting-edge technology
-        and user-friendly design, we empower you to achieve more.</span
-      >
-      <div slot="lower" style="display: flex; flex-wrap: wrap; gap: 8px">
-        <sgds-badge variant="neutral" outlined>Design</sgds-badge>
-        <sgds-badge variant="neutral" outlined>Research</sgds-badge>
-      </div>
-      <sgds-link slot="link">
-        <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
-      </sgds-link>
-    </sgds-card>
-    <sgds-card class="sgds-col-4 sgds-col-sm-4 sgds-col-md-4 sgds-col-lg-4" tinted hideBorder>
-      <sgds-badge variant="primary" slot="upper">New</sgds-badge>
-      <sgds-overflow-menu slot="menu">
-        <sgds-dropdown-item>View</sgds-dropdown-item>
-        <sgds-dropdown-item>Edit</sgds-dropdown-item>
-        <sgds-dropdown-item>Delete</sgds-dropdown-item>
-      </sgds-overflow-menu>
-      <span slot="subtitle">EVENTS</span>
-      <span slot="title">Innovative Solutions for You</span>
-      <div style="display: flex; flex-direction: column; gap: 24px">
-        <sgds-icon-list size="sm">
-          <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
-          <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>
-        </sgds-icon-list>
-      </div>
-      <span slot="description"
-        >Discover how our platform can streamline your workflow and enhance productivity. With cutting-edge technology
-        and user-friendly design, we empower you to achieve more.</span
-      >
-      <div slot="lower" style="display: flex; flex-wrap: wrap; gap: 8px">
-        <sgds-badge variant="neutral" outlined>Design</sgds-badge>
-        <sgds-badge variant="neutral" outlined>Research</sgds-badge>
-      </div>
-      <sgds-link slot="link">
-        <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
-      </sgds-link>
-    </sgds-card>
-  </div>
+    <div class="
+           badge outlined truncated " aria-hidden="true" data-sgds-tooltip="Infrastructure and Hosting">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div></sgds-tooltip>Infrastructure and Hosting</sgds-badge></div></div></span></sgds-thumbnail-card></div><div class="sgds-col-4"><sgds-thumbnail-card stretchedlink="" orientation="vertical">
+      <a class="card   " tabindex="0" href="/products/categories/productivity-tools/aisay">
+        <!--?lit$186432344$-->
+        <div class="card-media">
+          <slot name="thumbnail"></slot>
+					<!--?lit$186432344$--><slot name="upper"></slot>
+        </div>
+        <div class="card-body">
+					<!--?lit$186432344$-->
+          <div class="card-header-container">
+            <div class="card-header">
+              <slot name="subtitle"></slot>
+              <h3 class="card-title"><slot name="title"></slot></h3>
+            </div>
+            <slot></slot>
+          </div>
+          <slot name="description"></slot>
+          <slot name="lower"></slot>
+          <slot name="footer">
+            <slot name="link"></slot>
+          </slot>
+        </div>
+      </a>
+    <img width="64" height="64" data-nuxt-img="" srcset="https://files.app.optical.gov.sg/devportal/production/assets/3378971f-1cf2-4ded-8795-ed852577623c.png 1x, https://files.app.optical.gov.sg/devportal/production/assets/3378971f-1cf2-4ded-8795-ed852577623c.png 2x" slot="thumbnail" alt="AISAY v2 logo" loading="lazy" src="https://files.app.optical.gov.sg/devportal/production/assets/3378971f-1cf2-4ded-8795-ed852577623c.png"><!----><span slot="title">AISAY v2</span><sgds-badge variant="neutral" outlined=""><div class="
+           badge outlined " aria-hidden="true">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div>Pilot</sgds-badge><p slot="description" class="card-text product-card__product-short-desc">AISAY is an AI-powered document reader that extracts, classifies, and transforms information from unstructured documents into structured responses.</p><span slot="footer"><a href="/products/categories/productivity-tools/aisay" class=""></a><div class="product-card__topic-name-list-container"><div><sgds-badge variant="primary" outlined=""><div class="
+           badge outlined " aria-hidden="true">
+      <!--?lit$186432344$--><slot name="icon"></slot>
+
+      <span class="badge-label">
+        <slot></slot>
+      </span>
+
+      <!--?lit$186432344$-->
+    </div>Productivity Tools</sgds-badge></div></div></span></sgds-thumbnail-card></div></div>
 </div>

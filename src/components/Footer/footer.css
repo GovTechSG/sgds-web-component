@@ -1,12 +1,18 @@
+:host {
+  container-type: inline-size;
+}
+
 .footer {
   height: auto;
   background-color: var(--sgds-bg-fixed-dark);
-  padding: var(--sgds-padding-none) var(--sgds-padding-lg);
 }
 
 .footer-top {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: calc(100% - 40px);
+  margin-inline: auto;
   padding: var(--sgds-padding-2-xl) var(--sgds-padding-none);
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-default);
 }
@@ -56,6 +62,9 @@ slot:not([name])::slotted(*) {
 .footer-bottom {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: calc(100% - 40px);
+  margin-inline: auto;
   gap: var(--sgds-gap-md);
   padding: var(--sgds-padding-2-xl) var(--sgds-padding-none);
 }
@@ -94,15 +103,19 @@ slot:not([name])::slotted(*) {
   font-size: var(--sgds-font-size-14);
 }
 
-@media (min-width: 512px) {
-  .footer {
-    padding: var(--sgds-padding-none) var(--sgds-padding-xl);
+/* Non-sidebar (default): match .sgds-container */
+
+@container (min-width: 512px) {
+  .footer-top,
+  .footer-bottom {
+    max-width: calc(100% - 48px);
   }
 }
 
-@media (min-width: 768px) {
-  .footer {
-    padding: var(--sgds-padding-none) var(--sgds-padding-2-xl);
+@container (min-width: 768px) {
+  .footer-top,
+  .footer-bottom {
+    max-width: calc(100% - 56px);
   }
 
   .footer-mandatory-links ul {
@@ -111,18 +124,16 @@ slot:not([name])::slotted(*) {
   }
 }
 
-@media (min-width: 1024px) {
-  .footer {
-    padding: var(--sgds-padding-none);
+@container (min-width: 1024px) {
+  .footer-top,
+  .footer-bottom {
+    max-width: var(--sgds-dimension-888);
   }
 
   .footer-top {
-    width: 100%;
-    max-width: var(--sgds-dimension-888);
-    margin: auto;
     padding: var(--sgds-padding-3-xl) var(--sgds-padding-none);
   }
-  
+
   .footer-top.has-content {
     gap: var(--sgds-gap-3-xl);
   }
@@ -132,19 +143,12 @@ slot:not([name])::slotted(*) {
     line-height: var(--sgds-line-height-36) !important;
   }
 
-  .footer-bottom {
-    width: 100%;
-    max-width: var(--sgds-dimension-888);
-    margin: auto;
-    padding: var(--sgds-padding-2-xl) var(--sgds-padding-none);
-  }
-
   .footer-mandatory-links ul {
     gap: var(--sgds-gap-xl);
   }
 }
 
-@media (min-width: 1280px) {
+@container (min-width: 1280px) {
   .footer-top,
   .footer-bottom {
     max-width: var(--sgds-dimension-1168);
@@ -155,9 +159,59 @@ slot:not([name])::slotted(*) {
   }
 }
 
-@media (min-width: 1440px) {
+@container (min-width: 1440px) {
   .footer-top,
   .footer-bottom {
     max-width: var(--sgds-dimension-1312);
+  }
+}
+
+/* Neutral tone: light background with default text colors */
+
+:host([tone="neutral"]) .footer {
+  background-color: var(--sgds-bg-default);
+}
+
+:host([tone="neutral"]) slot[name="title"]::slotted(*) {
+  color: var(--sgds-color-default) !important;
+}
+
+:host([tone="neutral"]) slot[name="description"]::slotted(*),
+:host([tone="neutral"]) slot:not([name])::slotted(*) {
+  color: var(--sgds-color-default);
+}
+
+:host([tone="neutral"]) .footer-copyrights {
+  color: var(--sgds-color-default);
+}
+
+/* Sidebar detected: .sidebar class added by JS when a non-overlay sgds-sidebar exists */
+/* Match .sgds-container-sidebar values using media queries (viewport-based, same as grid.css) */
+
+@media (min-width: 768px) {
+  .footer-top.sidebar,
+  .footer-bottom.sidebar {
+    max-width: calc(100% - 96px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-top.sidebar,
+  .footer-bottom.sidebar {
+    max-width: var(--sgds-dimension-840);
+  }
+}
+
+@media (min-width: 1280px) {
+  .footer-top.sidebar,
+  .footer-bottom.sidebar {
+    max-width: var(--sgds-dimension-888);
+  }
+}
+
+@media (min-width: 1440px) {
+  .footer-top.sidebar,
+  .footer-bottom.sidebar {
+    max-width: var(--sgds-dimension-1024);
   }
 }

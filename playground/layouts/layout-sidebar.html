@@ -1,0 +1,137 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<!-- sgds-sidebar (RC) loaded from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.14.1-rc.0/components/Sidebar/index.umd.min.js"></script>
+
+<style>
+  .content-placeholder {
+    min-height: calc(100vh - 108px);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 6px,
+      var(--sgds-color-border-muted, #e5e7eb) 6px,
+      var(--sgds-color-border-muted, #e5e7eb) 7px
+    );
+  }
+
+  .shell-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+</style>
+
+<body>
+
+  <!-- ── STICKY TOP: Masthead + Mainnav ── -->
+  <div class="shell-nav">
+    <sgds-masthead fluid></sgds-masthead>
+    <sgds-mainnav fluid>
+      <strong slot="brand">My App</strong>
+
+      <sgds-mainnav-dropdown>
+        <span slot="toggler">Workspace</span>
+        <sgds-dropdown-item><a href="#">Dashboard</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Analytics</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Projects</a></sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+
+      <sgds-mainnav-dropdown>
+        <span slot="toggler">Manage</span>
+        <sgds-dropdown-item><a href="#">Team</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Reports</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Billing</a></sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+
+      <div slot="end">
+        <sgds-button variant="primary" size="sm">New</sgds-button>
+      </div>
+    </sgds-mainnav>
+  </div>
+
+  <!-- ── SHELL BODY: Sidebar + Main ── -->
+  <div class="sgds:flex sgds:flex-row">
+
+    <!-- SIDE NAVIGATION -->
+    <div class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)]">
+      <sgds-sidebar active="dashboard">
+        <div slot="brandName">My App</div>
+
+        <sgds-sidebar-section title="Workspace" name="workspace">
+          <sgds-sidebar-item name="dashboard" title="Dashboard">
+            <sgds-icon name="grid-fill" slot="icon"></sgds-icon>
+            <a href="#"></a>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item name="analytics" title="Analytics">
+            <sgds-icon name="trend-up" slot="icon"></sgds-icon>
+            <a href="#"></a>
+          </sgds-sidebar-item>
+          <sgds-sidebar-group name="projects" title="Projects">
+            <sgds-icon name="folder-plus" slot="icon"></sgds-icon>
+            <sgds-sidebar-item name="active-projects" title="Active">
+              <sgds-icon name="folder-check" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item name="archived-projects" title="Archived">
+              <sgds-icon name="folder-minus" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-group>
+        </sgds-sidebar-section>
+
+        <sgds-sidebar-section title="Manage" name="manage">
+          <sgds-sidebar-item name="team" title="Team">
+            <sgds-icon name="user-circle" slot="icon"></sgds-icon>
+            <a href="#"></a>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item name="reports" title="Reports">
+            <sgds-icon name="file-earmark-text" slot="icon"></sgds-icon>
+            <a href="#"></a>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item name="messages" title="Messages">
+            <sgds-icon name="chat-dots" slot="icon"></sgds-icon>
+            <a href="#"></a>
+          </sgds-sidebar-item>
+        </sgds-sidebar-section>
+
+        <sgds-sidebar-section title="System" name="system">
+          <sgds-sidebar-item name="settings" title="Settings">
+            <sgds-icon name="laptop-gear" slot="icon"></sgds-icon>
+            <a href="#"></a>
+          </sgds-sidebar-item>
+        </sgds-sidebar-section>
+      </sgds-sidebar>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="sgds:flex sgds:flex-col sgds:w-full sgds:min-h-[calc(100vh-108px)]" id="main-content" tabindex="-1">
+      <div class="sgds-container-sidebar sgds:py-layout-md sgds:flex-1">
+        <div class="content-placeholder sgds:border sgds:border-muted sgds:flex-1"></div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="sgds:bg-default">
+        <div class="sgds-container-sidebar sgds:py-layout-md">
+          <div class="sgds:flex sgds:flex-wrap sgds:justify-between sgds:items-center sgds:gap-md">
+            <div class="sgds:flex sgds:flex-wrap sgds:gap-xl">
+              <sgds-link variant="neutral" size="sm"><a href="#">Privacy</a></sgds-link>
+              <sgds-link variant="neutral" size="sm"><a href="#">Terms of Use</a></sgds-link>
+              <sgds-link variant="neutral" size="sm"><a href="#">Contact Us</a></sgds-link>
+              <sgds-link variant="neutral" size="sm"><a href="#">Report Vulnerability</a></sgds-link>
+            </div>
+            <p class="sgds:text-label-sm sgds:text-subtle sgds:m-0">&copy; <span id="footer-year"></span>, Government of Singapore</p>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+  </div>
+
+</body>
+
+<script>
+  document.getElementById("footer-year").textContent = new Date().getFullYear();
+</script>
