@@ -1,22 +1,31 @@
-## Responsive
+## Layout
 
-Responsive tables allow tables to be scrolled horizontally with ease.
+Controls the CSS `table-layout` algorithm to determine how column widths are calculated.
 
-## Always responsive
+### Auto
 
-Across every breakpoint, use `responsive="always"` for horizontally scrolling tables. Responsive tables are wrapped automatically in a `div`. The following example has 12 columns that are scrollable horizontally.
+Use `layout="auto"` (default) to let the browser size columns based on content. Columns expand or contract to fit their content naturally.
 
-<Canvas of={TableStories.AlwaysResponsive}>
-  <Story of={TableStories.AlwaysResponsive} />
+<Canvas of={TableStories.LayoutAuto}>
+  <Story of={TableStories.LayoutAuto} />
 </Canvas>
 
-## Breakpoint specific
+### Fixed
 
-Use `responsive="sm"`, `responsive="md"` , `responsive="lg"`, or `responsive="xl"` as needed to create responsive tables up to a particular breakpoint. From that breakpoint and up, the table will behave normally and not scroll horizontally.
+Use `layout="fixed"` to distribute column widths evenly regardless of content, providing uniform column sizing.
 
-<Canvas of={TableStories.Responsive}>
-  <Story of={TableStories.Responsive} />
+<Canvas of={TableStories.LayoutFixed}>
+  <Story of={TableStories.LayoutFixed} />
 </Canvas>
+
+### Fixed with custom column widths
+
+When using `layout="fixed"`, you can assign arbitrary widths to individual `<sgds-table-head>` cells using the `class` attribute with SGDS utility classes (e.g. `class="sgds:w-50"`). Columns without an explicit width will share the remaining space equally.
+
+<Canvas of={TableStories.LayoutFixedCustomWidth}>
+  <Story of={TableStories.LayoutFixedCustomWidth} />
+</Canvas>
+
 
 ## Structured elements
 

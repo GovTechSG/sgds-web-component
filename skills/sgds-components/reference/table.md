@@ -27,7 +27,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - The first `<sgds-table-row>` should contain `<sgds-table-head>` cells; all subsequent rows use `<sgds-table-cell>`.
 - `headerBackground` on `<sgds-table>` applies a background shade to all `<sgds-table-head>` cells automatically.
 - `tableBorder` on `<sgds-table>` renders visible borders on all cells.
-- `responsive` on `<sgds-table>` enables horizontal scrolling at the specified breakpoint (`sm`, `md`, `lg`, `xl`, or `always`).
+- `layout` on `<sgds-table>` controls the CSS `table-layout` algorithm — `"auto"` (default) sizes columns based on content, `"fixed"` distributes column widths evenly regardless of content.
 - `<sgds-table-cell>` accepts any HTML content — use for badges, buttons, links, or mixed content.
 - No custom events or public methods on any sub-component.
 
@@ -35,7 +35,6 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 - **Always use slot-based sub-components**: the legacy array-based properties (`tableData`, `columnHeader`, `rowHeader`) exist on `<sgds-table>` but must never be used — use `<sgds-table-row>`, `<sgds-table-head>`, and `<sgds-table-cell>` exclusively.
 - **`headerBackground` and `tableBorder` cascade**: these attributes are set on `<sgds-table>` only and automatically affect all descendant header and cell elements — do not set them on individual sub-components.
-- **`responsive` breakpoint behaviour**: a table with `responsive="md"` scrolls horizontally only on viewports narrower than the `md` breakpoint; on wider viewports it renders normally.
 - **Rich cell content**: `<sgds-table-cell>` slots accept any HTML — placing interactive elements (buttons, links) inside cells is the supported pattern for action columns.
 - **No sorting or pagination built in**: `<sgds-table>` is a presentational component — implement sorting, filtering, and pagination logic in your application layer.
 
@@ -44,7 +43,6 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - **Empty table**: `<sgds-table>` with no rows renders an empty container — always include at least a header row.
 - **Missing header row**: without `<sgds-table-head>` cells, the table has no accessible column headers — always include a header row with `<sgds-table-head>` elements.
 - **Inconsistent column counts**: rows with fewer cells than the header row leave trailing empty columns — ensure all rows have the same number of cells.
-- **Very wide tables without `responsive`**: content overflows the container on narrow viewports — add `responsive` when the table has many columns.
 - **Complex content in cells on narrow viewports**: buttons or badges inside cells may wrap or overflow — test rich cell layouts at target breakpoints.
 
 ## Sub-components
@@ -115,13 +113,49 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 </sgds-table-row>
 ```
 
-## Responsive horizontal scroll
+## Fixed column layout
+
+Use `layout="fixed"` to distribute column widths evenly regardless of content length:
 
 ```html
-<sgds-table responsive="md">
-  <!-- rows and cells -->
+<sgds-table layout="fixed" tableBorder>
+  <sgds-table-row>
+    <sgds-table-head>Name</sgds-table-head>
+    <sgds-table-head>Short</sgds-table-head>
+    <sgds-table-head>A very long column header indeed</sgds-table-head>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>Alice</sgds-table-cell>
+    <sgds-table-cell>Yes</sgds-table-cell>
+    <sgds-table-cell>Some longer content here</sgds-table-cell>
+  </sgds-table-row>
 </sgds-table>
 ```
+
+## Fixed layout with custom column widths
+
+When using `layout="fixed"`, you can assign specific widths to individual `<sgds-table-head>` cells via the `class` attribute using SGDS width utilities (e.g. `sgds:w-50`, `sgds:w-25`). The width set on the first row's header cells determines column sizing for the entire table. Columns without an explicit width share the remaining space equally.
+
+```html
+<sgds-table layout="fixed" tableBorder headerBackground>
+  <sgds-table-row>
+    <sgds-table-head class="sgds:w-25">#</sgds-table-head>
+    <sgds-table-head class="sgds:w-50">Name</sgds-table-head>
+    <sgds-table-head>Description</sgds-table-head>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>1</sgds-table-cell>
+    <sgds-table-cell>Alice</sgds-table-cell>
+    <sgds-table-cell>Some longer content here</sgds-table-cell>
+  </sgds-table-row>
+  <sgds-table-row>
+    <sgds-table-cell>2</sgds-table-cell>
+    <sgds-table-cell>Bob</sgds-table-cell>
+    <sgds-table-cell>Short</sgds-table-cell>
+  </sgds-table-row>
+</sgds-table>
+```
+
 
 ## API Summary
 
@@ -131,9 +165,9 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 |---|---|---|---|
 | `headerBackground` | boolean | `false` | Applies background shade to all `<sgds-table-head>` cells |
 | `tableBorder` | boolean | `false` | Renders borders on all cells |
-| `responsive` | `sm \| md \| lg \| xl \| always` | — | Enables horizontal scroll below the breakpoint |
+| `layout` | `auto \| fixed` | `auto` | Controls the CSS `table-layout` algorithm — `auto` sizes columns based on content, `fixed` distributes widths evenly |
 
-`<sgds-table-row>`, `<sgds-table-head>`, and `<sgds-table-cell>` have no attributes — all content goes in their default slot.
+`<sgds-table-row>` and `<sgds-table-cell>` have no custom attributes — all content goes in their default slot. `<sgds-table-head>` also uses its default slot but accepts a `class` attribute for width utilities (e.g. `class="sgds:w-50"`) when paired with `layout="fixed"`.
 
 ## Events
 
@@ -148,3 +182,4 @@ None.
 4. `headerBackground` and `tableBorder` are boolean attributes on `<sgds-table>` only — they cascade down to sub-components automatically.
 5. There are no custom events or public methods on this component.
 6. **`<sgds-table>` must always occupy the full 12-column grid width.** Never place it beside another element sharing the same grid row (e.g. do not put it in a 6-column half alongside a sidebar or form). Tables need the full width to display columns legibly — splitting them into a partial-width column makes them unreadable. If a filter panel or sidebar is needed, stack it above or below the table, not beside it.
+7. **Custom column widths**: when using `layout="fixed"`, assign width utilities (e.g. `class="sgds:w-50"`, `class="sgds:w-25"`) to `<sgds-table-head>` cells in the first row to control individual column widths. Columns without explicit widths share the remaining space equally.
