@@ -39,3 +39,19 @@ Example with both header
 <Canvas of={TableStories.StructuredElementsBoth}>
   <Story of={TableStories.StructuredElementsBoth} />
 </Canvas>
+
+## Layout
+
+Controls the CSS `table-layout` algorithm. Use `layout="auto"` (default) to let the browser size columns based on content, or `layout="fixed"` to distribute column widths evenly regardless of content.
+
+### Auto
+
+<Canvas of={TableStories.LayoutAuto}>
+  <Story of={TableStories.LayoutAuto} />
+</Canvas>
+
+### Fixed
+
+<Canvas of={TableStories.LayoutFixed}>
+  <Story of={TableStories.LayoutFixed} />
+</Canvas>

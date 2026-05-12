@@ -179,3 +179,19 @@ export const StructuredElementsBoth = {
   parameters: {},
   tags: ["!dev"]
 };
+
+export const LayoutAuto = {
+  render: Template.bind({}),
+  name: "Layout auto",
+  args: { layout: "auto", tableBorder: true },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const LayoutFixed = {
+  render: Template.bind({}),
+  name: "Layout fixed",
+  args: { layout: "fixed", tableBorder: true },
+  parameters: {},
+  tags: ["!dev"]
+};
