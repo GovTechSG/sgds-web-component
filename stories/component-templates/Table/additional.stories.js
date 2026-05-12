@@ -140,18 +140,46 @@ const StructuredElementsTemplateBoth = () => html` <sgds-table ?headerbackground
   </sgds-table-row>
 </sgds-table>`;
 
-export const AlwaysResponsive = {
+export const LayoutAuto = {
   render: Template.bind({}),
-  name: "Always responsive",
-  args: { responsive: "always" },
+  name: "Layout Auto",
+  args: { layout: "auto", tableBorder: true },
   parameters: {},
   tags: ["!dev"]
 };
 
-export const Responsive = {
+export const LayoutFixed = {
   render: Template.bind({}),
-  name: "Responsive",
-  args: { responsive: "sm" },
+  name: "Layout Fixed",
+  args: { layout: "fixed", tableBorder: true },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+const LayoutFixedCustomWidthTemplate = () => html`
+  <sgds-table layout="fixed" ?tableBorder=${true} ?headerBackground=${true}>
+    <sgds-table-row>
+      <sgds-table-head class="sgds:w-25">#</sgds-table-head>
+      <sgds-table-head class="sgds:w-50">Name</sgds-table-head>
+      <sgds-table-head>A very long column header indeed</sgds-table-head>
+    </sgds-table-row>
+    <sgds-table-row>
+      <sgds-table-cell>1</sgds-table-cell>
+      <sgds-table-cell>Alice</sgds-table-cell>
+      <sgds-table-cell>Some longer content here</sgds-table-cell>
+    </sgds-table-row>
+    <sgds-table-row>
+      <sgds-table-cell>2</sgds-table-cell>
+      <sgds-table-cell>Bob</sgds-table-cell>
+      <sgds-table-cell>Short</sgds-table-cell>
+    </sgds-table-row>
+  </sgds-table>
+`;
+
+export const LayoutFixedCustomWidth = {
+  render: LayoutFixedCustomWidthTemplate.bind({}),
+  name: "Layout Fixed with Custom Column Widths",
+  args: {},
   parameters: {},
   tags: ["!dev"]
 };
