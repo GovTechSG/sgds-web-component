@@ -5,7 +5,7 @@ import tableRowStyle from "./table-row.css";
 /**
  * @summary Table row organizes and groups table cells or header cells into a single horizontal line within the table.
  *
- * @slot - Insert any table cell or header elements to be displayed as part of this row.
+ * @slot default - Insert any table cell or header elements to be displayed as part of this row.
  */
 export class SgdsTableRow extends SgdsElement {
   static styles = [...SgdsElement.styles, tableRowStyle];

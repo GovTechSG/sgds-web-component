@@ -76,6 +76,14 @@ export class SgdsTable extends SgdsElement {
   @property({ type: Boolean }) tableBorder = false;
 
   /**
+   * Controls the CSS `table-layout` algorithm.
+   * Use "auto" to let the browser size columns based on content, or "fixed" to distribute column widths evenly regardless of content.
+   * @type {"auto" | "fixed"}
+   * @default "auto"
+   */
+  @property({ type: String }) layout: "auto" | "fixed" = "auto";
+
+  /**
    * Indicates the presence of the default slot.
    * Used for server-side rendering to determine table structure.
    * @type {boolean}
@@ -112,7 +120,7 @@ export class SgdsTable extends SgdsElement {
           ${this.tableData.map(
             row => html`
               <tr>
-                ${row.map((cell: string) => html`<td><div>${cell}</div></td>`)}
+                ${row.map((cell: string | number) => html`<td><div>${cell}</div></td>`)}
               </tr>
             `
           )}
@@ -133,7 +141,7 @@ export class SgdsTable extends SgdsElement {
             (row, index) => html`
               <tr>
                 <th><div>${this.columnHeader[index]}</div></th>
-                ${row.map((cell: string) => html`<td><div>${cell}</div></td>`)}
+                ${row.map((cell: string | number) => html`<td><div>${cell}</div></td>`)}
               </tr>
             `
           )}
@@ -149,7 +157,7 @@ export class SgdsTable extends SgdsElement {
           (row, index) => html`
             <tr>
               <th><div>${this.columnHeader[index]}</div></th>
-              ${row.map((cell: string) => html`<td><div>${cell}</div></td>`)}
+              ${row.map((cell: string | number) => html`<td><div>${cell}</div></td>`)}
             </tr>
           `
         )}
