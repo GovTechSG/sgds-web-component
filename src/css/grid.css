@@ -9,6 +9,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  max-width: calc(100% - 40px); /* outer margin of 20px on each side. Expects sidebar to be overlayed */
 }
 
 .sgds-grid {
@@ -29,7 +30,7 @@
     grid-template-columns: repeat(8, 1fr);
   }
 
-  .sgds-container {
+  .sgds-container, .sgds-container-sidebar {
     max-width: calc(100% - 48px); /* outer margin of 24px on each side */
   }
 

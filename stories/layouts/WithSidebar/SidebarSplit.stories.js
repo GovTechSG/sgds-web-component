@@ -16,6 +16,14 @@ const placeholderStyle = html`
         var(--sgds-color-border-muted, #e5e7eb) 7px
       );
     }
+    .sidebar-toggler-bar {
+      display: none;
+    }
+    @media screen and (max-width: 767px) {
+      .sidebar-toggler-bar {
+        display: block;
+      }
+    }
   </style>
 `;
 
@@ -66,8 +74,20 @@ const Template = () => html`
           <sgds-button variant="primary" size="sm">New</sgds-button>
         </div>
       </sgds-mainnav>
+      <div class="sidebar-toggler-bar sgds:border-b sgds:border-muted sgds:bg-default">
+        <div class="sgds:py-md sgds:px-sm sgds:flex sgds:items-center">
+          <sgds-icon-button
+            data-sidebar-toggler="true"
+            size="sm"
+            tone="neutral"
+            variant="ghost"
+            name="sidebar-expand"
+            @click=${() => document.querySelector("sgds-sidebar").toggleCollapsed()}
+          ></sgds-icon-button>
+        </div>
+      </div>
     </div>
-    <div class="sgds:flex sgds:flex-row sgds:flex-1 sgds:overflow-hidden">
+    <div class="sgds:flex sgds:flex-row sgds:flex-1 sgds:overflow-hidden sgds:relative">
       ${sidebarNav}
       <div class="sgds:flex sgds:flex-col sgds:flex-1 sgds:overflow-y-auto">
         <div class="sgds-container-sidebar sgds:py-layout-md sgds:flex-1">

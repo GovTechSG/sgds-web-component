@@ -6,6 +6,7 @@ import SgdsElement from "../../base/sgds-element";
 import { HasSlotController } from "../../utils/slot";
 import { watch } from "../../utils/watch";
 import footerStyle from "./footer.css";
+import gridStyle from "../../css/grid.css";
 import type { SgdsFooterItem } from "./sgds-footer-item";
 
 /**
@@ -17,7 +18,7 @@ import type { SgdsFooterItem } from "./sgds-footer-item";
  * @slot items - the slot for the list of footer items, styled automatically with `.footer-items`. For custom layouts or styles, use the `default` slot instead.
  */
 export class SgdsFooter extends SgdsElement {
-  static styles = [...SgdsElement.styles, footerStyle];
+  static styles = [...SgdsElement.styles, gridStyle, footerStyle];
 
   /** @internal */
   static dependencies = {
@@ -105,7 +106,8 @@ export class SgdsFooter extends SgdsElement {
           class="${classMap({
             "footer-top": this.hasDefaultSlot || this.hasTitleSlot || this.hasDescriptionSlot || this.hasItemsSlot,
             "has-content": this.hasDefaultSlot || this.hasItemsSlot,
-            sidebar: this.layout === "sidebar"
+            "sgds-container": this.layout === "default",
+            "sgds-container-sidebar": this.layout === "sidebar"
           })}"
         >
           <div class="footer-header">
@@ -122,7 +124,13 @@ export class SgdsFooter extends SgdsElement {
                 `}
           </div>
         </section>
-        <section class="${classMap({ "footer-bottom": true, sidebar: this.layout === "sidebar" })}">
+        <section
+          class="${classMap({
+            "footer-bottom": true,
+            "sgds-container": this.layout === "default",
+            "sgds-container-sidebar": this.layout === "sidebar"
+          })}"
+        >
           <div class="footer-mandatory-links">
             <ul>
               <li>

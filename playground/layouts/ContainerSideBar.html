@@ -4,18 +4,42 @@
 <link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
 <link href="../css/utility.css" rel="stylesheet" type="text/css" />
 
+<style>
+  .sidebar-toggler-bar {
+    display: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    .sidebar-toggler-bar {
+      display: block;
+    }
+  }
+</style>
+
 <body>
-  <div class="sgds:sticky sgds:top-0">
+  <div class="sgds:sticky sgds:top-0 sgds:z-sticky">
     <sgds-masthead fluid></sgds-masthead>
     <sgds-mainnav fluid>
       <strong slot="brand">SGDS</strong>
       <strong slot="end">End</strong>
     </sgds-mainnav>
     <sgds-system-banner show fluid>This is a system banner message.</sgds-system-banner>
+    <div class="sidebar-toggler-bar sgds:border-b sgds:border-muted sgds:bg-default">
+      <div class="sgds:py-md sgds:px-sm sgds:flex sgds:items-center">
+        <sgds-icon-button
+          data-sidebar-toggler="true"
+          size="sm"
+          tone="neutral"
+          variant="ghost"
+          name="sidebar-expand"
+          onclick="document.querySelector('sgds-sidebar').toggleCollapsed()"
+        ></sgds-icon-button>
+      </div>
+    </div>
   </div>
-  <div class="sgds:flex sgds:flex-row">
+  <div class="sgds:flex sgds:flex-row sgds:relative">
     <sgds-sidebar></sgds-sidebar>
-    <div class="sgds:flex sgds:flex-col sgds:w-full ">
+    <div class="sgds:flex sgds:flex-col sgds:w-full">
       <div class="sgds-container-sidebar sgds:py-2-xl">
         <div id="content" class="sgds:bg-translucent-subtle sgds:h-100 sgds:w-full">
           Place content here
@@ -25,5 +49,3 @@
     </div>
   </div>
 </body>
-
-

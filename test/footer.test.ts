@@ -10,7 +10,7 @@ describe("footer", () => {
       el,
       `
           <footer class="footer">
-          <section>
+          <section class="sgds-container">
             <div class="footer-header">
               <slot name="title"></slot>
               <slot name="description"></slot>
@@ -21,7 +21,7 @@ describe("footer", () => {
               </div>
             </div>
           </section>
-          <section class="footer-bottom">
+          <section class="footer-bottom sgds-container">
             <div class="footer-mandatory-links">
               <ul>
                 <li>
@@ -76,7 +76,7 @@ describe("footer", () => {
       el,
       `
           <footer class="footer">
-          <section class="footer-top has-content">
+          <section class="footer-top has-content sgds-container">
             <div class="footer-header">
               <slot name="title"></slot>
               <slot name="description"></slot>
@@ -85,7 +85,7 @@ describe("footer", () => {
               <slot></slot>
             </div>
           </section>
-          <section class="footer-bottom">
+          <section class="footer-bottom sgds-container">
             <div class="footer-mandatory-links">
               <ul>
                 <li>
@@ -179,24 +179,24 @@ describe("footer", () => {
 });
 
 describe("footer layout prop", () => {
-  it("defaults to layout='default' with no sidebar class", async () => {
+  it("defaults to layout='default' with no sgds-container-sidebar class", async () => {
     const el = await fixture<SgdsFooter>(html`<sgds-footer><p>content</p></sgds-footer>`);
     expect(el.layout).to.equal("default");
 
     const footerTop = el.shadowRoot?.querySelector(".footer-top");
     const footerBottom = el.shadowRoot?.querySelector(".footer-bottom");
-    expect(footerTop?.classList.contains("sidebar")).to.be.false;
-    expect(footerBottom?.classList.contains("sidebar")).to.be.false;
+    expect(footerTop?.classList.contains("sgds-container-sidebar")).to.be.false;
+    expect(footerBottom?.classList.contains("sgds-container-sidebar")).to.be.false;
   });
 
-  it("adds sidebar class to footer-top and footer-bottom when layout='sidebar'", async () => {
+  it("adds sgds-container-sidebar class to footer-top and footer-bottom when layout='sidebar'", async () => {
     const el = await fixture<SgdsFooter>(html`<sgds-footer layout="sidebar"><p>content</p></sgds-footer>`);
     expect(el.layout).to.equal("sidebar");
 
     const footerTop = el.shadowRoot?.querySelector(".footer-top");
     const footerBottom = el.shadowRoot?.querySelector(".footer-bottom");
-    expect(footerTop?.classList.contains("sidebar")).to.be.true;
-    expect(footerBottom?.classList.contains("sidebar")).to.be.true;
+    expect(footerTop?.classList.contains("sgds-container-sidebar")).to.be.true;
+    expect(footerBottom?.classList.contains("sgds-container-sidebar")).to.be.true;
   });
 
   it("reflects layout attribute to the host element", async () => {
@@ -204,15 +204,15 @@ describe("footer layout prop", () => {
     expect(el.getAttribute("layout")).to.equal("sidebar");
   });
 
-  it("removes sidebar class when layout changes from sidebar to default", async () => {
+  it("removes sgds-container-sidebar class when layout changes from sidebar to default", async () => {
     const el = await fixture<SgdsFooter>(html`<sgds-footer layout="sidebar"><p>content</p></sgds-footer>`);
     el.layout = "default";
     await el.updateComplete;
 
     const footerTop = el.shadowRoot?.querySelector(".footer-top");
     const footerBottom = el.shadowRoot?.querySelector(".footer-bottom");
-    expect(footerTop?.classList.contains("sidebar")).to.be.false;
-    expect(footerBottom?.classList.contains("sidebar")).to.be.false;
+    expect(footerTop?.classList.contains("sgds-container-sidebar")).to.be.false;
+    expect(footerBottom?.classList.contains("sgds-container-sidebar")).to.be.false;
   });
 });
 

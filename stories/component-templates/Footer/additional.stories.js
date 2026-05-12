@@ -12,7 +12,7 @@ const ExtendedTemplate = args => html`
     tone=${ifDefined(args.tone)}
     layout=${ifDefined(args.layout)}
   >
-    <h2 slot="title">Name of portal/digital service</h2>
+    <h3 slot="title">Name of portal/digital service</h3>
     <p slot="description">Description of portal/digital service</p>
     <sgds-footer-item slot="items">
       <div slot="title">Application guidelines</div>
