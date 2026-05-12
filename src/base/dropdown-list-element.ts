@@ -46,12 +46,15 @@ export class DropdownListElement extends DropdownElement {
 
   protected handleSelectSlot(e: KeyboardEvent | MouseEvent) {
     const items = this._getActiveMenuItems();
-    const currentItemNo = items.indexOf(e.target as SgdsDropdownItem);
+
+    const selectedItem = items.find(item => e.composedPath().includes(item));
+    if (!selectedItem) return;
+
+    const currentItemNo = items.indexOf(selectedItem);
     this.nextDropdownItemNo = currentItemNo + 1;
     this.prevDropdownItemNo = currentItemNo <= 0 ? items.length - 1 : currentItemNo - 1;
 
     /** Emitted event from SgdsDropdown element when a slot item is selected */
-    const selectedItem = e.target as SgdsDropdownItem;
     if (!selectedItem.disabled) {
       this.emit("sgds-select", { detail: { item: selectedItem } });
       if (this.close !== "outside") {
@@ -93,11 +96,13 @@ export class DropdownListElement extends DropdownElement {
           this._setMenuItem(this.nextDropdownItemNo);
         }
         break;
-      case ENTER:
-        if (menuItems.includes(e.target as SgdsDropdownItem)) {
+      case ENTER: {
+        const target = menuItems.find(item => e.composedPath().includes(item));
+        if (target) {
           this.handleSelectSlot(e);
         }
         break;
+      }
       default:
         break;
     }

@@ -29,7 +29,7 @@ export class SgdsDropdownItem extends SgdsElement {
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("keydown", (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
+      if (e.key === "Enter" && this.anchor.length > 0) {
         this.anchor[0].click();
       }
     });
