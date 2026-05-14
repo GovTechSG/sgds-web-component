@@ -72,6 +72,26 @@ export const StepComponentClickable = {
   tags: ["!dev"]
 };
 
+const SlottedClickableTemplate = () => html`
+  <sgds-stepper activeStep="1" clickable>
+    <sgds-step stepHeader="Personal Details">
+      <a href="#" data-clickable>Learn more</a>
+    </sgds-step>
+    <sgds-step stepHeader="Address">
+      <button data-clickable @click=${() => alert("Button clicked")}>Action</button>
+    </sgds-step>
+    <sgds-step stepHeader="Review"></sgds-step>
+  </sgds-stepper>
+`;
+
+export const SlottedClickable = {
+  render: SlottedClickableTemplate.bind({}),
+  name: "Slotted Clickable Items",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
 const MockStepperTemplate = () => html`<mock-stepper></mock-stepper>`;
 
 export const StepperExample = {

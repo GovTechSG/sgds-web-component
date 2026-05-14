@@ -55,6 +55,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 - **Framework integration**: In `sgds-step` components, the `component` property is framework-agnostic — pass a Vue/React/Angular component reference, or a plain string identifier in vanilla JS.
 - **`clickable`**: enables jump navigation — ensure step content can handle being accessed non-linearly (e.g. validate prior steps or prefill data before allowing jumps).
+- **`data-clickable` on slotted elements**: when a `<sgds-step>` contains interactive elements in its default slot (e.g. `<a>` or `<button>`), add the `data-clickable` attribute to those elements so their clicks are handled independently and do **not** bubble up to trigger step navigation.
 - **`firstStep()` / `lastStep()`**: useful for "Back to start" or "Skip to review" actions outside the standard Prev/Next flow.
 - **`iconName` per step**: optional; sourced from the SGDS icon set. Omit to show the default step number. Consistent use across all steps is recommended.
 - **`activeStep` as a property**: can be read at any time to determine the current step index; also writeable to jump programmatically without calling `nextStep()`/`previousStep()`.
@@ -67,6 +68,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - **Single step**: a stepper with one step is technically valid but provides no navigation value — use a plain form section instead.
 - **`reset()` mid-flow**: calling `reset()` clears step statuses and returns to step 0 — ensure the content renderer also resets to the initial state via the `sgds-reset` event.
 - **`clickable` with validation**: if steps require prior completion before proceeding, disable `clickable` or implement a guard in the `sgds-arrived` handler to redirect invalid jumps.
+- **Slotted interactive elements firing step navigation**: clicks on `<a>` or `<button>` elements inside a step's slot bubble up and also trigger step navigation. Add `data-clickable` to those elements to prevent this.
 - **Mixing sgds-step children with steps property**: if `<sgds-step>` children are provided, the `steps` property is ignored entirely.
 
 ## Quick Decision Guide
@@ -80,6 +82,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 **Vertical steps?** → `orientation="vertical"`
 
 **Allow clicking a step to jump to it?** → `clickable`
+
+**Prevent a slotted link/button from also triggering step navigation?** → add `data-clickable` attribute to that element
 
 **Track current step?** → Listen to `sgds-arrived` or check `activeStep`
 
@@ -176,6 +180,17 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | `disabled` | boolean | `false` | Whether this step is disabled and cannot be clicked |
 | `completed` | boolean | `false` | Whether this step is marked as completed |
 
+### `data-clickable` attribute (on slotted elements)
+
+Add `data-clickable` to any element placed in a `<sgds-step>`'s default slot to prevent its click from bubbling up and triggering step navigation. Applies to any tag, but most commonly used on `<a>` and `<button>` elements.
+
+```html
+<sgds-step stepHeader="Details">
+  <a href="/info" data-clickable>Learn more</a>
+  <button data-clickable>Secondary action</button>
+</sgds-step>
+```
+
 ### `IStepMetaData` interface (Deprecated)
 
 | Field | Type | Required | Purpose |
@@ -217,3 +232,4 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 6. Use `sgds-button` elements outside the stepper for Prev/Next controls; call `.previousStep()` and `.nextStep()` from button click handlers.
 7. `iconName` is optional per step — defaults to a step number.
 8. If `<sgds-step>` children are provided, the `steps` property is completely ignored — do not mix both approaches.
+9. If a `<sgds-step>` slot contains interactive elements (`<a>`, `<button>`, `<sgds-button>`) whose clicks should not navigate the stepper, add the `data-clickable` attribute to those elements.
