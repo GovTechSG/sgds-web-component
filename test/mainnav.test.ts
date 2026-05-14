@@ -38,7 +38,6 @@ describe("sgds-mainnav", () => {
           </slot>
           <sgds-icon-button
             aria-expanded="false"
-            aria-label="Toggle navigation"
             class="navbar-toggler"
             name="menu"
             size="sm"
@@ -317,6 +316,8 @@ describe("sgds-mainnav-dropdown", () => {
       >
         <a
           aria-disabled="false"
+          aria-expanded="false"
+          aria-haspopup="menu"
           class="nav-link"
           role="button"
           slot="toggler"

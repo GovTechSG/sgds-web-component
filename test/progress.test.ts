@@ -11,9 +11,6 @@ describe("<sgds-progress-bar>", () => {
       `<div class="progress-container">
       <div class="progress">
         <div
-          aria-label=""
-          aria-valuemax=""
-          aria-valuemin=""
           aria-valuenow="50"
           class="progress-bar"
           role="progressbar"

@@ -87,6 +87,24 @@ export class SgdsDropdown extends DropdownListElement {
     this._handleDisabled();
   }
 
+  private _handleTogglerSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    const elements = slot.assignedElements({ flatten: true });
+    const button = elements[0];
+    if (button) {
+      button.setAttribute("aria-haspopup", "menu");
+      button.setAttribute("aria-expanded", String(this.menuIsOpen));
+    }
+  }
+
+  @watch("menuIsOpen")
+  _handleMenuIsOpenChange() {
+    const button = this._toggler[0];
+    if (button) {
+      button.setAttribute("aria-expanded", String(this.menuIsOpen));
+    }
+  }
+
   @watch("disabled", { waitUntilFirstUpdate: true })
   _handleDisabled() {
     const button = this._toggler[0];
@@ -102,8 +120,8 @@ export class SgdsDropdown extends DropdownListElement {
   render() {
     return html`
       <div class="dropdown" @click=${this._handleClick}>
-        <div class="toggler-container" ${ref(this.myDropdown)} aria-expanded="${this.menuIsOpen}" aria-haspopup="menu">
-          <slot name="toggler"></slot>
+        <div class="toggler-container" ${ref(this.myDropdown)}>
+          <slot name="toggler" @slotchange=${this._handleTogglerSlotChange}></slot>
         </div>
         <div class="dropdown-menu" role="menu" ${ref(this.menuRef)}>
           <slot id="default" @click=${this.handleSelectSlot}></slot>

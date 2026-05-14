@@ -237,11 +237,7 @@ describe("sgds-dropdown", () => {
     assert.shadowDom.equal(
       el,
       `<div class="dropdown">
-        <div
-          class="toggler-container"
-          aria-expanded="false"
-          aria-haspopup="menu"
-        >
+        <div class="toggler-container">
           <slot name="toggler"></slot>
         </div>
         <div class="dropdown-menu" role="menu">

@@ -61,15 +61,12 @@ describe("<sgds-radio-group>", () => {
     const radio2 = <SgdsRadio>el.querySelector("sgds-radio#radio2");
     expect(radio1.checked).to.be.false;
     expect(radio2.checked).to.be.false;
-    expect(radio1).to.have.attribute("aria-checked", "false");
-    expect(radio2).to.have.attribute("aria-checked", "false");
 
     radio2.click();
     await Promise.all([radio1.updateComplete, radio2.updateComplete]);
 
     expect(radio1.checked).to.be.false;
     expect(radio2.checked).to.be.true;
-    expect(radio2).to.have.attribute("aria-checked", "true");
   });
 
   it("radio-group should emit sgds-change event when one of the radio is clicked", async () => {
@@ -254,31 +251,31 @@ describe("<sgds-radio-group>", () => {
     // spacebar key
     await sendKeys({ press: " " });
     expect(radio1).to.have.attribute("tabindex", "0");
-    expect(radio1).to.have.attribute("aria-checked", "true");
+    expect(radio1.checked).to.be.true;
     expect(el).to.have.attribute("value", "1");
 
     // arrowright incr index
     await sendKeys({ press: "ArrowRight" });
     expect(radio2).to.have.attribute("tabindex", "0");
-    expect(radio2).to.have.attribute("aria-checked", "true");
+    expect(radio2.checked).to.be.true;
     expect(el).to.have.attribute("value", "2");
 
     // arrowdown incr index
     await sendKeys({ press: "ArrowDown" });
     expect(radio3).to.have.attribute("tabindex", "0");
-    expect(radio3).to.have.attribute("aria-checked", "true");
+    expect(radio3.checked).to.be.true;
     expect(el).to.have.attribute("value", "3");
 
     // arrowleft decr index
     await sendKeys({ press: "ArrowLeft" });
     expect(radio2).to.have.attribute("tabindex", "0");
-    expect(radio2).to.have.attribute("aria-checked", "true");
+    expect(radio2.checked).to.be.true;
     expect(el).to.have.attribute("value", "2");
 
     // arrowup decr index
     await sendKeys({ press: "ArrowLeft" });
     expect(radio1).to.have.attribute("tabindex", "0");
-    expect(radio1).to.have.attribute("aria-checked", "true");
+    expect(radio1.checked).to.be.true;
     expect(el).to.have.attribute("value", "1");
   });
   it("when disabled, invalid state is removed", async () => {

@@ -1,3 +1,55 @@
+## v3.19.0 (2026-05-13)
+
+### Feat
+
+- **Dropdown**: close prop to control menu closing for interactive dropdown behaviour [skip-cd][run-chromatic] (#625)
+- **Dropdown**: tweaks to sgds-select event story to better highlight versatility of use cases
+- **Dropdown**: add SgdsDropdownItem customisation story
+- **Dropdown**: expose close attribute for sgds-dropdown
+- **Footer**: neutral tone and layout prop [run-chromatic] [skip-cd] (#657)
+- **Sidebar**: smoothen out motion  from overlay to collapsed 72px for defualt sidebar state
+- **Sidebar**: deefault variant sswaps to overlay when viewports becomes smaller
+- **Skills**: sgds layout skill
+- **Footer**: new tone and and layout prop for footer
+- **Footer**: layout prop to toggle between default and sidebar
+- **Footer**: is aware of its size relative to sidebar presence collapsed or exapnded
+- *****: types definition for react wrapped components [skip-cd] (#652)
+- *****: types definition for react wrapped components
+- **FileUpload**: unify drag-and-drop with button validation path
+- **FileUpload**: custom validation and touched validation behaviours
+- **FileUpload**: emit only new files in sgds-add-files, handle single-file replacement
+- **FileUpload**: new events to track addition of files and deletion of files
+- **CloseButton**: new disabled prop
+- **FileUpload**: drag and drop variant
+- *****: types definition for react wrapped components
+- **Playground**: add layout shell templates
+
+### Fix
+
+- **Dropdown**: added check for anchor elements for dropdown item keydown listener
+- **Dropdown**: fix to ensure sgds-select returns the SGDS Dropdown Item
+- **Utility**: breakpoints can only point to raw value [run-chromatic][skip-cd] (#662)
+- **Utility**: breakpoints and add story for breakpoint
+- **Table**: created new prop for table-layout [run-chromatic] [skip-cd]  (#659)
+- **Table**: created new prop for table-layout
+- **Breadcrumb**: prevent last breadcrumb item from keyboard navigation [run-chromatic][skip-cd] (#648)
+- **Breadcrumb**: prevent last breadcrumb item from keyboard navigation
+- **Cards**: 100% height to host of card[run-chromatic][skip-cd] (#653)
+- **Cards**: revert the default display to inline
+- **FileUpload**: drag and drop [run-chromatic][skip-cd] (#621)
+- **FileUpload**: when cancel file selection does not trigger event and file list state is maintained
+- **FileUpload**: selecting more files will not remove existing selection
+
+### Refactor
+
+- **Footer**: updates token css var and use the right semantic header for title
+- **CloseButton**: update close button disabled opacity to 40%
+- **Datepicker**: update typography css variables [run-chromatic][skip-cd] (#650)
+- **OptionElement**: update option element styling discrepancy [run-chromatic][skip-cd] (#649)
+- *****: update the opacity of the disabled element [run-chromatic][skip-cd] (#647)
+- **CloseButton**: remove unused style and set close icon size to be sm [run-chromatic][skip-cd] (#645)
+- **Checkbox**: ui discrepancy [run-chromatic][skip-cd] (#643)
+
 ## v3.18.1 (2026-05-04)
 
 ### Feat
