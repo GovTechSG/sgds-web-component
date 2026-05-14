@@ -8,8 +8,11 @@ describe("<sgds-overflow-menu>", () => {
     assert.shadowDom.equal(
       el,
       `
-      <sgds-dropdown drop="down">
-        <button slot="toggler" class="overflow-btn">
+      <sgds-dropdown
+        close="default"
+        drop="down"
+      >
+        <button aria-expanded="false" aria-haspopup="menu" aria-label="More options" slot="toggler" class="overflow-btn">
             <sgds-icon name="three-dots" size="md"></sgds-icon>
         </button>
         <slot></slot>

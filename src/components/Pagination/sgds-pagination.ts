@@ -78,11 +78,11 @@ export class SgdsPagination extends SgdsElement {
   }
 
   private _handlePageClick(event: MouseEvent) {
-    const liTarget = event.target as HTMLElement;
-    const clickedLi = liTarget.closest("li");
+    const target = event.target as HTMLElement;
+    const clickedItem = target.closest(".page-item");
 
-    if (clickedLi) {
-      const clickedPage = Number(clickedLi.getAttribute("key"));
+    if (clickedItem) {
+      const clickedPage = Number(clickedItem.getAttribute("key"));
       if (clickedPage !== this.currentPage) {
         this.currentPage = clickedPage;
       }
@@ -124,7 +124,7 @@ export class SgdsPagination extends SgdsElement {
 
   private _renderFirstPage() {
     return html`
-      <li key=${1} class="page-item ${this.currentPage === 1 ? "active" : ""}">
+      <div key=${1} class="page-item ${this.currentPage === 1 ? "active" : ""}">
         <span
           role="button"
           class="page-link"
@@ -135,7 +135,7 @@ export class SgdsPagination extends SgdsElement {
           @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", 1)}
           >1</span
         >
-      </li>
+      </div>
     `;
   }
 
@@ -184,7 +184,7 @@ export class SgdsPagination extends SgdsElement {
   private _renderPgNumbers(pagesToShow: number[]) {
     return pagesToShow.map(
       number => html`
-        <li key=${number} class="page-item ${this.currentPage === number ? "active" : ""}">
+        <div key=${number} class="page-item ${this.currentPage === number ? "active" : ""}">
           <span
             role="button"
             class="page-link"
@@ -195,7 +195,7 @@ export class SgdsPagination extends SgdsElement {
             @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", number)}
             >${number}</span
           >
-        </li>
+        </div>
       `
     );
   }
@@ -214,9 +214,9 @@ export class SgdsPagination extends SgdsElement {
     }
 
     return html`
-      <li class="page-item ">
+      <div class="page-item">
         <span class="page-link ellipsis">${this.ellipsisContent}</span>
-      </li>
+      </div>
     `;
   };
 
@@ -233,15 +233,15 @@ export class SgdsPagination extends SgdsElement {
       return null;
     }
     return html`
-      <li class="page-item">
+      <div class="page-item">
         <span class="page-link ellipsis ">${this.ellipsisContent}</span>
-      </li>
+      </div>
     `;
   }
 
   private _renderLastPage() {
     return html`
-      <li key=${this.pages.length} class="page-item ${this.currentPage === this.pages.length ? "active" : ""}">
+      <div key=${this.pages.length} class="page-item ${this.currentPage === this.pages.length ? "active" : ""}">
         <span
           role="button"
           class="page-link"
@@ -254,7 +254,7 @@ export class SgdsPagination extends SgdsElement {
           @keydown=${(e: KeyboardEvent) => this._handleKeyDown(e, "pageNumber", this.pages.length)}
           >${this.pages.length}</span
         >
-      </li>
+      </div>
     `;
   }
 
@@ -338,12 +338,12 @@ export class SgdsPagination extends SgdsElement {
   render() {
     return html`
       <nav aria-label="pagination" role="navigation">
-        <ul class="pagination pagination-${this.size}">
+        <div class="pagination pagination-${this.size}">
           ${this.variant === "description" ? this._renderDescriptionPagination() : nothing}
           ${this.variant === "default" ? this._renderDefaultPagination() : nothing}
           ${this.variant === "number" ? this._renderNumberPagination() : nothing}
           ${this.variant === "button" ? this._renderButtonPagination() : nothing}
-        </ul>
+        </div>
       </nav>
     `;
   }

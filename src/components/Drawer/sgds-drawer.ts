@@ -1,4 +1,4 @@
-import { html, PropertyValueMap } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -62,6 +62,11 @@ export class SgdsDrawer extends SgdsElement {
 
   /** The direction from which the drawer will open. */
   @property({ type: String, reflect: true }) placement: "top" | "end" | "bottom" | "start" = "end";
+
+  /**
+   * The accessible label for the drawer dialog. This is required for assistive technology.
+   */
+  @property({ type: String, reflect: true }) ariaLabel = "";
 
   /**
    * By default, the drawer slides out of its containing block (usually the viewport). To make the drawer slide out of
@@ -270,6 +275,7 @@ export class SgdsDrawer extends SgdsElement {
           class="drawer-panel"
           role="dialog"
           aria-modal="true"
+          aria-label=${this.ariaLabel || nothing}
           aria-hidden=${this.open ? "false" : "true"}
           tabindex="0"
         >

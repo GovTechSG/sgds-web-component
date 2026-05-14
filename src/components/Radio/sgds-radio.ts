@@ -51,7 +51,6 @@ export class SgdsRadio extends SgdsElement {
     if (this.checked && this.autofocus) {
       this.input?.focus();
     }
-    this.setAttribute("aria-checked", this.checked ? "true" : "false");
     this.setAttribute("tabindex", this.checked ? "0" : "-1");
   }
 
@@ -81,7 +80,6 @@ export class SgdsRadio extends SgdsElement {
   }
 
   private setInitialAttributes() {
-    this.setAttribute("role", "radio");
     this.setAttribute("tabindex", "-1");
     this.setAttribute("aria-disabled", this.disabled ? "true" : "false");
   }

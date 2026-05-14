@@ -1,3 +1,11 @@
+## Close
+
+The close behaviour of `sgds-dropdown` can be modified using the `close` attribute
+
+<Canvas of={DropdownStories.SgdsSelectClose}>
+  <Story of={DropdownStories.SgdsSelectClose} />
+</Canvas>
+
 ## sgds-select event
 
 The `sgds-select` event is emitted on `sgds-dropdown` whenever a non-disabled item is clicked. Use `event.detail.item` to access the selected `SgdsDropdownItem` element.
@@ -6,4 +14,12 @@ Disabled items do not emit `sgds-select`.
 
 <Canvas of={DropdownStories.SgdsSelectEvent}>
   <Story of={DropdownStories.SgdsSelectEvent} />
+</Canvas>
+
+## SGDS Dropdown Item Customisation
+
+Using SGDS utility classes, the layout of `SgdsDropdownItem` can be customised as needed.
+
+<Canvas of={DropdownStories.SgdsSelectDropdownItem}>
+  <Story of={DropdownStories.SgdsSelectDropdownItem} />
 </Canvas>

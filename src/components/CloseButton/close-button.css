@@ -51,3 +51,9 @@
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }
+
+:host([disabled]) .btn-close {
+  cursor: not-allowed;
+  opacity: var(--sgds-opacity-40);
+  pointer-events: none;
+}

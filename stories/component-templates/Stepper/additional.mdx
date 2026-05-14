@@ -59,11 +59,37 @@ By default, stepper is of `horizontal` orientation. Set stepper to vertical with
 By default steps indicator are non-interactive. To enable steps to be clickable, add `clickable` prop.
 
     Note that the steps are only backwards clickable.
-    To allow users to go back and forth, please create the action buttons with the methods from the methods table above.
+
+To allow users to go back and forth, please create the action buttons with the methods from the methods table above.
 
 <Canvas of={StepperStories.Clickable}>
   <Story of={StepperStories.Clickable} />
 </Canvas>
+
+## Slotted clickable items
+
+When a clickable `sgds-step` contains interactive elements in its slot (e.g. links or buttons), clicks on those elements
+would normally bubble up and also trigger the step's navigation. To prevent this, add the `data-clickable` attribute to
+any slotted element whose click should be handled independently and **not** propagate to the step.
+
+```html
+<sgds-stepper activeStep="1" clickable>
+  <sgds-step stepHeader="Personal Details">
+    <!-- This link handles its own click; the step will not receive the event -->
+    <a href="/details" data-clickable>Learn more</a>
+  </sgds-step>
+  <sgds-step stepHeader="Address">
+    <!-- This button fires its own handler without navigating the stepper -->
+    <button data-clickable>Action</button>
+  </sgds-step>
+</sgds-stepper>
+```
+
+<Canvas of={StepperStories.SlottedClickable}>
+  <Story of={StepperStories.SlottedClickable} />
+</Canvas>
+
+---
 
 ## Stepper in a form context
 
@@ -103,15 +129,7 @@ See a <a target="_blank" href="https://stackblitz.com/github/tonghauhive/sgds-vu
 
 ## Contributions
 
-<<<<<<< HEAD
-We accept contributions from the community!
-If you have an SgdsStepper to showcase from a different framework or a better example to showcase
-please raise a PR or raise an issue with your stackblitz example on our <a href="https://github.com/GovTechSG/sgds-web-component" target="_blank">github page</a>.
-If the examples above are not working, please also notify us by raising a github issue.
-=======
 We accept contributions from the community!
 If you have an SgdsStepper to showcase from a different framework or a better example to showcase,
 raise a PR or raise an issue with your StackBlitz example on our <a href="https://github.com/GovTechSG/sgds-web-component" target="_blank">GitHub page</a>.
 If the examples above are not working, notify us by raising a GitHub issue.
-
-> > > > > > > 3848155d2f6a2749d56538b3359c4f4a412b81c9

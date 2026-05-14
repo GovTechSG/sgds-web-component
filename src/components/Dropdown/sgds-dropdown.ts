@@ -7,15 +7,6 @@ import dropdownMenuStyle from "./dropdown-menu.css";
 import dropdownStyle from "./dropdown.css";
 
 export type DropDirection = "left" | "right" | "up" | "down";
-export type DropdownButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark";
 
 /**
  * @summary `SgdsDropdown` toggles contextual overlays for displaying lists of links.
@@ -42,6 +33,10 @@ export class SgdsDropdown extends DropdownListElement {
   /** The drop position of menu relative to the toggle button */
   @property({ type: String, reflect: true, state: false })
   drop: DropDirection = "down";
+
+  /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
+  @property({ type: String, reflect: true, state: false })
+  close: "outside" | "default" | "inside" = "default";
 
   @queryAssignedElements({ slot: "toggler", flatten: true })
   private _toggler: Array<HTMLElement>;
@@ -92,6 +87,24 @@ export class SgdsDropdown extends DropdownListElement {
     this._handleDisabled();
   }
 
+  private _handleTogglerSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    const elements = slot.assignedElements({ flatten: true });
+    const button = elements[0];
+    if (button) {
+      button.setAttribute("aria-haspopup", "menu");
+      button.setAttribute("aria-expanded", String(this.menuIsOpen));
+    }
+  }
+
+  @watch("menuIsOpen")
+  _handleMenuIsOpenChange() {
+    const button = this._toggler[0];
+    if (button) {
+      button.setAttribute("aria-expanded", String(this.menuIsOpen));
+    }
+  }
+
   @watch("disabled", { waitUntilFirstUpdate: true })
   _handleDisabled() {
     const button = this._toggler[0];
@@ -107,8 +120,8 @@ export class SgdsDropdown extends DropdownListElement {
   render() {
     return html`
       <div class="dropdown" @click=${this._handleClick}>
-        <div class="toggler-container" ${ref(this.myDropdown)} aria-expanded="${this.menuIsOpen}" aria-haspopup="menu">
-          <slot name="toggler"></slot>
+        <div class="toggler-container" ${ref(this.myDropdown)}>
+          <slot name="toggler" @slotchange=${this._handleTogglerSlotChange}></slot>
         </div>
         <div class="dropdown-menu" role="menu" ${ref(this.menuRef)}>
           <slot id="default" @click=${this.handleSelectSlot}></slot>

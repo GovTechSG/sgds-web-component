@@ -65,8 +65,8 @@ export class MockPagination extends LitElement {
       .slice(indexOfFirstItem, indexOfLastItem)
       .map(post => [post.id, post.title, post.body]);
 
-    const table = this.shadowRoot?.querySelector("sgds-table") as SgdsTable;
-    const pagination = this.shadowRoot?.querySelector("sgds-pagination") as SgdsPagination;
+    const table = this.shadowRoot?.querySelector<SgdsTable>("sgds-table");
+    const pagination = this.shadowRoot?.querySelector<SgdsPagination>("sgds-pagination");
 
     if (table && pagination) {
       table.rowHeader = this.rowHeader;

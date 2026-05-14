@@ -1,19 +1,19 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
-import SgdsDrawer from "@govtechsg/sgds-web-component/components/Drawer/sgds-drawer";
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, ViewChild } from "@angular/core";
 
 @Component({
   selector: "drawer-component",
-  templateUrl: "./drawer.component.html"
+  templateUrl: "./drawer.component.html",
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Drawer {
   @ViewChild("drawer")
-  drawer?: ElementRef<SgdsDrawer>;
+  drawer?: ElementRef<HTMLElement>;
 
   showDrawer() {
-    this.drawer?.nativeElement.show();
+    (this.drawer?.nativeElement as any).show();
   }
 
   closeDrawer() {
-    this.drawer?.nativeElement.hide();
+    (this.drawer?.nativeElement as any).hide();
   }
 }

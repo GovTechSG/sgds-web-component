@@ -46,8 +46,8 @@ describe("sgds-stepper", () => {
     expect(stepperItems?.length).to.equal(3);
   });
   it("should render the correct number of steps when passed in steps prop", async () => {
-    stepMetaData.push({ stepHeader: "Submitted", component: "4 test" });
-    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData}></sgds-stepper> `);
+    const fourSteps = [...stepMetaData, { stepHeader: "Submitted", component: "4 test" }];
+    const el = await fixture(html` <sgds-stepper .steps=${fourSteps}></sgds-stepper> `);
     const stepperItems = el.shadowRoot?.querySelectorAll(".stepper-item");
     expect(stepperItems?.length).to.equal(4);
   });
@@ -418,10 +418,10 @@ describe("sgds-stepper with sgds-step child components", () => {
     await el.updateComplete;
     expect(el.hasDefaultSlot).to.be.false;
   });
-  // FAILING TEST - to be fixed after slot implementation is done
-  // it("should render fallback steps when steps prop is provided and no children are slotted", async () => {
-  //   const el = await fixture(html` <sgds-stepper .steps=${stepMetaData}></sgds-stepper> `);
-  //   const shadowSteps = el.shadowRoot?.querySelectorAll(".stepper-item-container");
-  //   expect(shadowSteps?.length).to.equal(3);
-  // });
+
+  it("should render fallback steps when steps prop is provided and no children are slotted", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData}></sgds-stepper> `);
+    const shadowSteps = el.shadowRoot?.querySelectorAll(".stepper-item-container");
+    expect(shadowSteps?.length).to.equal(3);
+  });
 });

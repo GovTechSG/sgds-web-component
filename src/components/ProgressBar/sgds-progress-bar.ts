@@ -32,6 +32,11 @@ export class SgdsProgressBar extends SgdsElement {
   /**
    * Sets the aria label for assistive devices.
    */
+  @property({ type: String, reflect: true }) ariaLabel = "";
+
+  /**
+   * @deprecated Use `ariaLabel` instead.
+   */
   @property({ type: String, reflect: true }) arialabel = "";
 
   /** Add label on top of progress bar */
@@ -45,10 +50,10 @@ export class SgdsProgressBar extends SgdsElement {
             class="progress-bar"
             role="progressbar"
             style=${styleMap({ width: `${this.value}%` })}
-            aria-label=${this.arialabel}
+            aria-label=${this.ariaLabel || this.arialabel || nothing}
             aria-valuenow=${this.value}
-            aria-valuemin=${this.ariamin}
-            aria-valuemax=${this.ariamax}
+            aria-valuemin=${this.ariamin ?? nothing}
+            aria-valuemax=${this.ariamax ?? nothing}
           ></div>
         </div>
         ${this.label ? html`<span class="label">${this.label}</span>` : nothing}

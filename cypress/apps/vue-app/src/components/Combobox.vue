@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ISgdsComboBoxInputEventDetail } from '@govtechsg/sgds-web-component/components/ComboBox/sgds-combo-box';
+import type { ISgdsComboBoxInputEventDetail } from '@govtechsg/sgds-web-component/components/ComboBox/sgds-combo-box.js';
 
 
 const inputHandler = (e: CustomEvent<ISgdsComboBoxInputEventDetail>) => {

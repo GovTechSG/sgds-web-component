@@ -1,7 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 @Component({
   selector: "icon-button-component",
-  templateUrl: "./iconbutton.component.html"
+  templateUrl: "./iconbutton.component.html",
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class IconButton {}

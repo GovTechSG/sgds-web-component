@@ -443,7 +443,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
         </sgds-datepicker-input>
         <sgds-icon-button
           ${ref(this.myDropdown)}
-          role="button"
           tone="neutral"
           class=${classMap({
             "calendar-btn": true,

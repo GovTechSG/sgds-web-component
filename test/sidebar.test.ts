@@ -5,6 +5,16 @@ import type { SgdsSidebar, SgdsSidebarGroup, SgdsSidebarItem, SgdsSidebarSection
 import "./sgds-web-component";
 
 describe("sgds-sidebar", () => {
+  let innerWidthStub: sinon.SinonStub;
+
+  beforeEach(() => {
+    innerWidthStub = sinon.stub(window, "innerWidth").get(() => 1440);
+  });
+
+  afterEach(() => {
+    innerWidthStub.restore();
+  });
+
   describe("Rendering", () => {
     it("renders basic sidebar structure with navigation role", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar></sgds-sidebar>`);
@@ -689,6 +699,106 @@ describe("sgds-sidebar", () => {
       `);
       const toggleButton = el.shadowRoot?.querySelector("sgds-icon-button");
       expect(toggleButton).to.exist;
+    });
+  });
+
+  describe("Responsive Overlay Behavior", () => {
+    it("switches collapsible variant to overlay mode when viewport is below MD_BREAKPOINT", async () => {
+      innerWidthStub.restore();
+      innerWidthStub = sinon.stub(window, "innerWidth").get(() => 600);
+
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="collapsible">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+
+      const sidebar = el.shadowRoot?.querySelector(".sidebar");
+      expect(sidebar).to.have.class("overlay");
+    });
+
+    it("does not apply overlay mode for collapsible variant when viewport is above MD_BREAKPOINT", async () => {
+      innerWidthStub.restore();
+      innerWidthStub = sinon.stub(window, "innerWidth").get(() => 1440);
+
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="collapsible">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+
+      const sidebar = el.shadowRoot?.querySelector(".sidebar");
+      expect(sidebar).not.to.have.class("overlay");
+    });
+
+    it("always applies overlay mode for overlay variant regardless of viewport", async () => {
+      innerWidthStub.restore();
+      innerWidthStub = sinon.stub(window, "innerWidth").get(() => 1440);
+
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="overlay">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+
+      const sidebar = el.shadowRoot?.querySelector(".sidebar");
+      expect(sidebar).to.have.class("overlay");
+    });
+
+    it("never applies overlay mode for persistent variant", async () => {
+      innerWidthStub.restore();
+      innerWidthStub = sinon.stub(window, "innerWidth").get(() => 600);
+
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="persistent">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+
+      const sidebar = el.shadowRoot?.querySelector(".sidebar");
+      expect(sidebar).not.to.have.class("overlay");
+    });
+
+    it("switches back from overlay to collapsible when viewport grows above MD_BREAKPOINT", async () => {
+      innerWidthStub.restore();
+      innerWidthStub = sinon.stub(window, "innerWidth").get(() => 600);
+
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar variant="collapsible">
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+
+      const sidebar = el.shadowRoot?.querySelector(".sidebar");
+      expect(sidebar).to.have.class("overlay");
+
+      // Simulate viewport growing
+      innerWidthStub.restore();
+      innerWidthStub = sinon.stub(window, "innerWidth").get(() => 1440);
+      window.dispatchEvent(new Event("resize"));
+      await elementUpdated(el);
+
+      expect(sidebar).not.to.have.class("overlay");
     });
   });
 
