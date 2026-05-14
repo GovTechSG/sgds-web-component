@@ -71,6 +71,31 @@ To allow users to go back and forth, please create the action buttons with the m
   <Story of={StepperStories.Clickable} />
 </Canvas>
 
+## Slotted clickable items
+
+When a clickable `sgds-step` contains interactive elements in its slot (e.g. links or buttons), clicks on those elements
+would normally bubble up and also trigger the step's navigation. To prevent this, add the `data-clickable` attribute to
+any slotted element whose click should be handled independently and **not** propagate to the step.
+
+```html
+<sgds-stepper activeStep="1" clickable>
+  <sgds-step stepHeader="Personal Details">
+    <!-- This link handles its own click; the step will not receive the event -->
+    <a href="/details" data-clickable>Learn more</a>
+  </sgds-step>
+  <sgds-step stepHeader="Address">
+    <!-- This button fires its own handler without navigating the stepper -->
+    <button data-clickable>Action</button>
+  </sgds-step>
+</sgds-stepper>
+```
+
+<Canvas of={StepperStories.SlottedClickable}>
+  <Story of={StepperStories.SlottedClickable} />
+</Canvas>
+
+---
+
 ## Stepper in a form context
 
 The example below is build with Lit library. As each frontend library has their own lifecycle hooks and unique syntax for props and event handling,
