@@ -49,7 +49,7 @@
 
       <div>
         <h2>Vertical - Using sgds-step</h2>
-        <sgds-stepper orientation="vertical" activeStep="1">
+        <sgds-stepper orientation="vertical" activeStep="1" clickable="true">
           <sgds-step stepHeader="Personal Details">
             <span>helloworld</span>
             <span><sgds-badge>status</sgds-badge></span>
@@ -61,10 +61,13 @@
           </sgds-step>
           <sgds-step stepHeader="Review">
             <span>helloworld</span>
-            <span
-              ><sgds-link><a href="#">download</a></sgds-link> this link for a comprehensive make up tutorial for
-              free</span
-            >
+            <span>
+              <sgds-link data-clickable>
+                <a href="#" data-clickable>download</a>
+              </sgds-link>
+              this link for a comprehensive make up tutorial for free
+            </span>
+            <sgds-button size="xs" data-clickable>ss</sgds-button>
           </sgds-step>
         </sgds-stepper>
       </div>

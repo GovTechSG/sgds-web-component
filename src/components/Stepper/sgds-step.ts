@@ -76,7 +76,7 @@ export class SgdsStep extends SgdsElement {
           tabindex=${isValidClickable ? "0" : "-1"}
           aria-current=${this.active ? "step" : "false"}
           aria-disabled=${this.disabled || (!this.active && !this._isCompleted) ? "true" : "false"}
-          @click="${isValidClickable ? () => this._handleClick() : null}"
+          @click="${isValidClickable ? e => this._handleClick(e) : null}"
           @keydown=${isValidClickable ? (e: KeyboardEvent) => this._handleKeyDown(e) : null}
         >
           <div class="stepper-marker">
@@ -85,7 +85,6 @@ export class SgdsStep extends SgdsElement {
 
           <div class="stepper-detail">
             <div class="stepper-label">${this.stepHeader}</div>
-
             <slot class="stepper-slot"></slot>
           </div>
         </div>
@@ -94,7 +93,15 @@ export class SgdsStep extends SgdsElement {
   }
 
   /**@internal */
-  _handleClick() {
+  _handleClick(e?: PointerEvent) {
+    if (e) {
+      const ele = e.target as HTMLElement;
+
+      // Allow user to have custom slotted item with attribute 'data-clickable' to skip i-sgds-click
+      // To handle if there are clickable objects within the slot
+      if (ele.hasAttribute("data-clickable")) return;
+    }
+
     this.emit("i-sgds-click", { detail: { stepIndex: this.stepIndex } });
   }
 
