@@ -79,7 +79,7 @@ const Template = () => html`
 
         <div>
           <img
-            src="https://placehold.co/512x512/e8f0fe/1f69ff?text=Government+Services"
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512'%3E%3Crect width='512' height='512' fill='%23e8f0fe'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='24' fill='%231f69ff'%3EGovernment Services%3C/text%3E%3C/svg%3E"
             alt="Government digital services"
             style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; border-radius: var(--sgds-border-radius-xl);"
           />
@@ -329,6 +329,9 @@ export default {
   title: "Templates/Landing/Basic",
   tags: ["!autodocs"],
   parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    interactions: { disable: true },
     layout: "fullscreen"
   }
 };

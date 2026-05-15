@@ -221,6 +221,9 @@ export default {
   title: "Templates/About Us/Basic",
   tags: ["!autodocs"],
   parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    interactions: { disable: true },
     layout: "fullscreen"
   }
 };

@@ -61,7 +61,7 @@ const Template = () => html`
     <div class="sgds-container">
       <div class="sgds-grid sgds:items-start">
         <!-- ── Left sidebar: filters ───────────────────────────────────── -->
-        <aside class="sgds-col-12 sgds-col-lg-3 sgds:mr-layout-md">
+        <aside class="sgds-col-12 sgds-col-lg-3 sgds:hidden sgds:lg:block sgds:mr-layout-md">
           <div class="sgds:flex sgds:flex-col sgds:gap-2-xl sgds:pt-sm">
             <!-- Sidebar header -->
             <div class="sgds:flex sgds:items-center sgds:justify-between">
@@ -132,7 +132,15 @@ const Template = () => html`
         </aside>
 
         <!-- ── Right main: chips + sort + results ─────────────────── -->
-        <div class="sgds-col-12 sgds-col-lg-9">
+        <div class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-9">
+          <!-- Mobile filter button (visible below lg) -->
+          <div class="sgds:mb-xl sgds:lg:hidden">
+            <sgds-button id="filter-drawer-btn" variant="outline" tone="neutral">
+              <sgds-icon name="bi-funnel" slot="leftIcon"></sgds-icon>
+              Filter
+            </sgds-button>
+          </div>
+
           <!-- Results meta row: count + sort -->
           <div class="sgds:flex sgds:items-center sgds:justify-between sgds:mb-xl">
             <h5
@@ -152,7 +160,7 @@ const Template = () => html`
           <!-- Results grid -->
           <div class="sgds-grid sgds:items-stretch" id="results-grid">
             <!-- Result card 1 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">Digital Infrastructure for the Next Decade</span>
@@ -166,7 +174,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 2 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Panel Discussion</sgds-badge>
                 <span slot="title" class="title-clamp">AI Governance in the Public Sector</span>
@@ -180,7 +188,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 3 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Zero-Trust Architecture for Government Systems</span>
@@ -194,7 +202,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 4 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">Securing the Cloud: Lessons from the Field</span>
@@ -208,7 +216,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 5 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Incident Response Playbooks for CISOs</span>
@@ -222,7 +230,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 6 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Panel Discussion</sgds-badge>
                 <span slot="title" class="title-clamp">Workforce Upskilling for Cyber Resilience</span>
@@ -236,7 +244,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 7 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Opening Address</sgds-badge>
                 <span slot="title" class="title-clamp">Building a Resilient Digital Government</span>
@@ -250,7 +258,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 8 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Identity and Access Management at Scale</span>
@@ -264,7 +272,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 9 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">The Future of GovTech: People, Process and Platform</span>
@@ -279,7 +287,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 10 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Panel Discussion</sgds-badge>
                 <span slot="title" class="title-clamp">Data Sharing Across Agencies: Challenges and Solutions</span>
@@ -294,7 +302,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 11 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Presentation</sgds-badge>
                 <span slot="title" class="title-clamp">Automating Compliance Monitoring with AI</span>
@@ -308,7 +316,7 @@ const Template = () => html`
             </div>
 
             <!-- Result card 12 -->
-            <div class="sgds-col-12 sgds-col-md-6 sgds-col-lg-4 sgds:flex sgds:flex-col">
+            <div class="sgds-col-4 sgds-col-md-4 sgds-col-lg-4 sgds:flex sgds:flex-col">
               <sgds-card stretchedLink style="height: 100%;">
                 <sgds-badge slot="upper" outlined>Keynote</sgds-badge>
                 <span slot="title" class="title-clamp">Cybersecurity as a National Imperative</span>
@@ -348,6 +356,68 @@ const Template = () => html`
           </div>
         </div>
       </div>
+
+      <!-- Filter drawer (mobile) -->
+      <sgds-drawer id="filter-drawer" placement="end">
+        <span slot="title">Filters</span>
+        <div class="sgds:flex sgds:flex-col sgds:gap-2-xl">
+          <!-- Filter: Programme type -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-xs">
+            <div
+              class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default"
+            >
+              Programme type
+            </div>
+            <sgds-checkbox-group>
+              <sgds-checkbox value="opening-address">Opening Address (1)</sgds-checkbox>
+              <sgds-checkbox value="keynote">Keynote (4)</sgds-checkbox>
+              <sgds-checkbox value="panel-discussion">Panel Discussion (6)</sgds-checkbox>
+              <sgds-checkbox value="presentation">Presentation (12)</sgds-checkbox>
+            </sgds-checkbox-group>
+          </div>
+
+          <!-- Filter: Sessions -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-xs">
+            <div
+              class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default"
+            >
+              Sessions
+            </div>
+            <sgds-checkbox-group>
+              <sgds-checkbox value="morning">Morning (12)</sgds-checkbox>
+              <sgds-checkbox value="afternoon">Afternoon (16)</sgds-checkbox>
+            </sgds-checkbox-group>
+          </div>
+
+          <!-- Filter: Track -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-xs">
+            <div
+              class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default"
+            >
+              Track
+            </div>
+            <sgds-checkbox-group>
+              <sgds-checkbox value="ai-cybersecurity">AI x Cybersecurity (4)</sgds-checkbox>
+              <sgds-checkbox value="resilient-cloud">Resilient and Secure Cloud (6)</sgds-checkbox>
+              <sgds-checkbox value="cisos-future">CISOs of the Future (8)</sgds-checkbox>
+            </sgds-checkbox-group>
+          </div>
+
+          <!-- Filter: Event hall -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-xs">
+            <div
+              class="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal sgds:text-heading-default"
+            >
+              Event hall
+            </div>
+            <sgds-checkbox-group>
+              <sgds-checkbox value="hall-a">Hall A</sgds-checkbox>
+              <sgds-checkbox value="hall-b">Hall B</sgds-checkbox>
+              <sgds-checkbox value="hall-c">Hall C</sgds-checkbox>
+            </sgds-checkbox-group>
+          </div>
+        </div>
+      </sgds-drawer>
     </div>
   </section>
 `;
@@ -356,6 +426,9 @@ export default {
   title: "Templates/Catalogue/Search & Filter",
   tags: ["!autodocs"],
   parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    interactions: { disable: true },
     layout: "fullscreen"
   }
 };
@@ -364,6 +437,15 @@ export const SearchAndFilter = {
   render: Template.bind({}),
   name: "Search & Filter",
   play: async ({ canvasElement }) => {
+    // Filter drawer toggle
+    const filterDrawerBtn = canvasElement.querySelector("#filter-drawer-btn");
+    const filterDrawer = canvasElement.querySelector("#filter-drawer");
+    if (filterDrawerBtn && filterDrawer) {
+      filterDrawerBtn.addEventListener("click", () => {
+        filterDrawer.show();
+      });
+    }
+
     // Toggle empty state demo
     const resetBtn = canvasElement.querySelector("#reset-btn");
     const clearAllBtn = canvasElement.querySelector("#clear-all-btn");

@@ -157,6 +157,9 @@ export default {
   title: "Templates/Form/Basic",
   tags: ["!autodocs"],
   parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    interactions: { disable: true },
     layout: "fullscreen"
   }
 };
