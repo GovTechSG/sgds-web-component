@@ -178,14 +178,7 @@ export class SgdsTable extends SgdsElement {
         tabindex="0"
       >
         <div role="table">
-          <slot
-            id="table-slot"
-            class=${classMap({
-              table: true,
-              fixed: this.layout === "fixed",
-              "no-border": !this.hasDefaultSlot
-            })}
-          ></slot>
+          <slot id="table-slot" class=${classMap({ table: true, "no-border": !this.hasDefaultSlot })}></slot>
 
           ${!this.hasDefaultSlot
             ? html`<table class="table">
