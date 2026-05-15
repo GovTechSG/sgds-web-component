@@ -1,6 +1,7 @@
 import { html } from "lit";
 
 export default {
+  parameters: { controls: { disable: true }, actions: { disable: true }, interactions: { disable: true } },
   title: "Layouts/With Sidebar/Split"
 };
 

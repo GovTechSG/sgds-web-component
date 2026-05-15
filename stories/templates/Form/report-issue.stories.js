@@ -228,6 +228,9 @@ export default {
   title: "Templates/Form/Report Issue",
   tags: ["!autodocs"],
   parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    interactions: { disable: true },
     layout: "fullscreen"
   }
 };

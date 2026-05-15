@@ -569,6 +569,9 @@ export default {
   title: "Templates/Form/Multi-step Form",
   tags: ["!autodocs"],
   parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    interactions: { disable: true },
     layout: "fullscreen"
   }
 };

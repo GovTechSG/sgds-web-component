@@ -43,80 +43,116 @@ const DisableValidationByInputTemplate = args => {
         <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
         <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
       </sgds-combo-box>
+      <sgds-file-upload
+        label="Documents"
+        hinttext="Max 2 PDF files"
+        name="documents"
+        hasFeedback
+        required
+        multiple
+        accept=".pdf"
+        id="custom-validation__file-upload-novalidate"
+      >
+        Choose Files
+      </sgds-file-upload>
+      <sgds-datepicker
+        noValidate
+        label="Appointment Date"
+        hintText="Must be a future date"
+        name="appointment-date"
+        hasFeedback
+        id="custom-validation__datepicker-novalidate"
+      ></sgds-datepicker>
       <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
-            const formOne = document.getElementById("custom-validation-form");
-            formOne.addEventListener("submit", e => {
-              e.preventDefault();
-              alert("Submitted");
-            });
+      const formOne = document.getElementById("custom-validation-form");
+      formOne.addEventListener("submit", e => {
+        e.preventDefault();
+        alert("Submitted");
+      });
 
-            const inputOne = document.querySelector("sgds-input#custom-validation__input-novalidate");
-            inputOne.addEventListener("sgds-input", e => {
-              if (!/^[^a-zA-Z0-9]/.test(e.target.value)) {
-                e.target.setInvalid(false);
-              } else {
-                e.target.setInvalid(true);
-                e.target.invalidFeedback = "This is an invalid message";
-              }
-            });
+      const inputOne = document.querySelector("sgds-input#custom-validation__input-novalidate");
+      inputOne.addEventListener("sgds-input", e => {
+        if (!/^[^a-zA-Z0-9]/.test(e.target.value)) {
+          e.target.setInvalid(false);
+        } else {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "This is an invalid message";
+        }
+      });
 
-            const textareaOne = document.querySelector("sgds-textarea#custom-validation__textarea-novalidate");
-            textareaOne.addEventListener("sgds-input", e => {
-              if (!e.target.value || e.target.value.length >= 10) {
-                e.target.setInvalid(false);
-              } else {
-                e.target.setInvalid(true);
-                e.target.invalidFeedback = "Bio must be at least 10 characters long";
-              }
-            });
+      const textareaOne = document.querySelector("sgds-textarea#custom-validation__textarea-novalidate");
+      textareaOne.addEventListener("sgds-input", e => {
+        if (!e.target.value || e.target.value.length >= 10) {
+          e.target.setInvalid(false);
+        } else {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Bio must be at least 10 characters long";
+        }
+      });
 
-      <<<<<<< HEAD
-            const comboOne = document.querySelector("sgds-combo-box#custom-validation__combobox-novalidate");
-            comboOne.addEventListener("sgds-change", e => {
-              if (!e.target.value) {
-                e.target.setInvalid(true);
-                e.target.invalidFeedback = "Select an option";
-              } else if (!e.target.value.startsWith("a")) {
-                e.target.setInvalid(true);
-                e.target.invalidFeedback = "Selection must start with 'A'";
-              } else {
-                e.target.setInvalid(false);
-      =======
-            const fileUploadOne = document.querySelector("sgds-file-upload#custom-validation__file-upload-novalidate");
-            fileUploadOne.addEventListener("sgds-add-files", e => {
-              const allFiles = fileUploadOne.files;
-              let isValid = true;
-              let errorMsg = "";
+      const comboOne = document.querySelector("sgds-combo-box#custom-validation__combobox-novalidate");
+      comboOne.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Select an option";
+        } else if (!e.target.value.startsWith("a")) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Selection must start with 'A'";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
 
-              if (allFiles.length > 2) {
-                isValid = false;
-                errorMsg = "Maximum 2 files allowed";
-              }
+      const fileUploadOne = document.querySelector("sgds-file-upload#custom-validation__file-upload-novalidate");
+      fileUploadOne.addEventListener("sgds-add-files", e => {
+        const allFiles = fileUploadOne.files;
+        let isValid = true;
+        let errorMsg = "";
 
-              for (const file of e.detail) {
-                if (!file.name.toLowerCase().endsWith(".pdf")) {
-                  isValid = false;
-                  errorMsg = "Only PDF files are allowed";
-                  break;
-                }
-              }
+        if (allFiles.length > 2) {
+          isValid = false;
+          errorMsg = "Maximum 2 files allowed";
+        }
 
-              fileUploadOne.invalidFeedback = errorMsg;
-              fileUploadOne.setInvalid(!isValid);
-            });
+        for (const file of e.detail) {
+          if (!file.name.toLowerCase().endsWith(".pdf")) {
+            isValid = false;
+            errorMsg = "Only PDF files are allowed";
+            break;
+          }
+        }
 
-            fileUploadOne.addEventListener("sgds-remove-file", e => {
-              const remaining = e.detail.files;
-              if (remaining.length === 0) {
-                fileUploadOne.invalidFeedback = "At least one file is required";
-                fileUploadOne.setInvalid(true);
-              } else {
-                fileUploadOne.setInvalid(false);
-      >>>>>>> 631-stepper-updating-stepper-with-new-props
-              }
-            });
+        fileUploadOne.invalidFeedback = errorMsg;
+        fileUploadOne.setInvalid(!isValid);
+      });
+
+      fileUploadOne.addEventListener("sgds-remove-file", e => {
+        const remaining = e.detail.files;
+        if (remaining.length === 0) {
+          fileUploadOne.invalidFeedback = "At least one file is required";
+          fileUploadOne.setInvalid(true);
+        } else {
+          fileUploadOne.setInvalid(false);
+        }
+      });
+
+      const datepickerOne = document.querySelector("sgds-datepicker#custom-validation__datepicker-novalidate");
+      datepickerOne.addEventListener("sgds-change-date", e => {
+        const val = e.target.value;
+        if (!val || val === "DD/MM/YYYY") return;
+        const [day, month, year] = val.split("/");
+        const selected = new Date(Number(year), Number(month) - 1, Number(day));
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selected <= today) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a future date";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
     </script>
   `;
 };
@@ -141,7 +177,7 @@ const DisableValidationByFormTemplate = args => {
         id="custom-validation__textarea-two-novalidate"
       >
       </sgds-textarea>
-      <<<<<<< HEAD
+
       <sgds-combo-box
         label="Fruit"
         hinttext="Selection must start with 'A'"
@@ -155,8 +191,7 @@ const DisableValidationByFormTemplate = args => {
         <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
         <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
       </sgds-combo-box>
-      <sgds-button type="submit">Submit</sgds-button>
-      =======
+
       <sgds-file-upload
         label="Documents"
         hinttext="Max 2 PDF files"
@@ -169,80 +204,105 @@ const DisableValidationByFormTemplate = args => {
       >
         Choose Files
       </sgds-file-upload>
-      >>>>>>> 631-stepper-updating-stepper-with-new-props
+
+      <sgds-datepicker
+        label="Appointment Date"
+        hintText="Must be a future date"
+        name="appointment-date"
+        hasFeedback
+        id="custom-validation__datepicker-two-novalidate"
+      ></sgds-datepicker>
+
+      <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
-            const formTwo = document.getElementById("custom-validation-form_novalidate");
-            formTwo.addEventListener("submit", e => {
-              e.preventDefault();
-              alert("Submitted");
-            });
+      const formTwo = document.getElementById("custom-validation-form_novalidate");
+      formTwo.addEventListener("submit", e => {
+        e.preventDefault();
+        alert("Submitted");
+      });
 
-            const inputTwo = document.getElementById("custom-validation__input-two-novalidate");
-            inputTwo.addEventListener("sgds-input", e => {
-              if (!/^[^a-zA-Z0-9]/.test(e.target.value)) {
-                e.target.setInvalid(false);
-              } else {
-                e.target.setInvalid(true);
-                e.target.invalidFeedback = "This is an invalid message";
-              }
-            });
+      const inputTwo = document.getElementById("custom-validation__input-two-novalidate");
+      inputTwo.addEventListener("sgds-input", e => {
+        if (!/^[^a-zA-Z0-9]/.test(e.target.value)) {
+          e.target.setInvalid(false);
+        } else {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "This is an invalid message";
+        }
+      });
 
-            const textareaTwo = document.getElementById("custom-validation__textarea-two-novalidate");
-            textareaTwo.addEventListener("sgds-input", e => {
-              if (!e.target.value || e.target.value.length >= 5) {
-                e.target.setInvalid(false);
-              } else {
-                e.target.setInvalid(true);
-                e.target.invalidFeedback = "Notes must be at least 5 characters long";
-              }
-            });
+      const textareaTwo = document.getElementById("custom-validation__textarea-two-novalidate");
+      textareaTwo.addEventListener("sgds-input", e => {
+        if (!e.target.value || e.target.value.length >= 5) {
+          e.target.setInvalid(false);
+        } else {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Notes must be at least 5 characters long";
+        }
+      });
 
-      <<<<<<< HEAD
-            const comboTwo = document.getElementById("custom-validation__combobox-two-novalidate");
-            comboTwo.addEventListener("sgds-change", e => {
-              if (!e.target.value) {
-                e.target.setInvalid(true);
-                e.target.invalidFeedback = "Select an option";
-              } else if (!e.target.value.startsWith("a")) {
-                e.target.setInvalid(true);
-                e.target.invalidFeedback = "Selection must start with 'A'";
-              } else {
-                e.target.setInvalid(false);
-      =======
-            const fileUploadTwo = document.getElementById("custom-validation__file-upload-two-novalidate");
-            fileUploadTwo.addEventListener("sgds-add-files", e => {
-              const allFiles = fileUploadTwo.files;
-              let isValid = true;
-              let errorMsg = "";
+      const comboTwo = document.getElementById("custom-validation__combobox-two-novalidate");
+      comboTwo.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Select an option";
+        } else if (!e.target.value.startsWith("a")) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Selection must start with 'A'";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
 
-              if (allFiles.length > 2) {
-                isValid = false;
-                errorMsg = "Maximum 2 files allowed";
-              }
+      const fileUploadTwo = document.getElementById("custom-validation__file-upload-two-novalidate");
+      fileUploadTwo.addEventListener("sgds-add-files", e => {
+        const allFiles = fileUploadTwo.files;
+        let isValid = true;
+        let errorMsg = "";
 
-              for (const file of e.detail) {
-                if (!file.name.toLowerCase().endsWith(".pdf")) {
-                  isValid = false;
-                  errorMsg = "Only PDF files are allowed";
-                  break;
-                }
-              }
+        if (allFiles.length > 2) {
+          isValid = false;
+          errorMsg = "Maximum 2 files allowed";
+        }
 
-              fileUploadTwo.invalidFeedback = errorMsg;
-              fileUploadTwo.setInvalid(!isValid);
-            });
+        for (const file of e.detail) {
+          if (!file.name.toLowerCase().endsWith(".pdf")) {
+            isValid = false;
+            errorMsg = "Only PDF files are allowed";
+            break;
+          }
+        }
 
-            fileUploadTwo.addEventListener("sgds-remove-file", e => {
-              const remaining = e.detail.files;
-              if (remaining.length === 0) {
-                fileUploadTwo.invalidFeedback = "At least one file is required";
-                fileUploadTwo.setInvalid(true);
-              } else {
-                fileUploadTwo.setInvalid(false);
-      >>>>>>> 631-stepper-updating-stepper-with-new-props
-              }
-            });
+        fileUploadTwo.invalidFeedback = errorMsg;
+        fileUploadTwo.setInvalid(!isValid);
+      });
+
+      fileUploadTwo.addEventListener("sgds-remove-file", e => {
+        const remaining = e.detail.files;
+        if (remaining.length === 0) {
+          fileUploadTwo.invalidFeedback = "At least one file is required";
+          fileUploadTwo.setInvalid(true);
+        } else {
+          fileUploadTwo.setInvalid(false);
+        }
+      });
+
+      const datepickerTwo = document.getElementById("custom-validation__datepicker-two-novalidate");
+      datepickerTwo.addEventListener("sgds-change-date", e => {
+        const val = e.target.value;
+        if (!val || val === "DD/MM/YYYY") return;
+        const [day, month, year] = val.split("/");
+        const selected = new Date(Number(year), Number(month) - 1, Number(day));
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selected <= today) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a future date";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
     </script>
   `;
 };
