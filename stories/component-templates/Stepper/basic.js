@@ -1,16 +1,31 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 
-export const Template = ({ stepHeaders, activeStep, clickable, orientation }) => {
+export const Template = ({ steps, activeStep, clickable, orientation }) => {
   return html`
     <sgds-stepper activeStep=${ifDefined(activeStep)} ?clickable=${clickable} orientation=${ifDefined(orientation)}>
-      ${stepHeaders.map(header => html`<sgds-step stepHeader="${header}"></sgds-step> `)}
+      ${steps.map(
+        header => html`<sgds-step stepHeader="${header.stepHeader}" .component=${header.component}></sgds-step> `
+      )}
     </sgds-stepper>
   `;
 };
 
 export const args = {
-  stepHeaders: ["Personal Details", "Address and Contact Information", "Review"]
+  steps: [
+    {
+      stepHeader: "Personal Details",
+      component: "1 test"
+    },
+    {
+      stepHeader: "Address and Contact Information",
+      component: "2 test"
+    },
+    {
+      stepHeader: "Review",
+      component: "3 test"
+    }
+  ]
 };
 
 export const parameters = {};

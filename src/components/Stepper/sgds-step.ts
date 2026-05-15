@@ -6,9 +6,9 @@ import SgdsIcon from "../Icon/sgds-icon";
 import stepStyle from "./step.css";
 
 /**
- * @summary A step within a stepper component
- * @slot default - Additional content to display under the step header
+ * @summary A single step within an sgds-stepper. Manages its own active, completed, and disabled states based on props set by the parent stepper.
  *
+ * @slot default - Optional content displayed below the step header label
  */
 export class SgdsStep extends SgdsElement {
   static styles = [...SgdsElement.styles, stepStyle];
@@ -23,7 +23,7 @@ export class SgdsStep extends SgdsElement {
   @property({ type: String, reflect: true })
   iconName: string | undefined;
 
-  /** Optional component to render for this step */
+  /** Optional component reference associated with this step. Retrievable via `sgds-stepper.getComponent()`. */
   @property({ type: Object })
   component: unknown;
 
