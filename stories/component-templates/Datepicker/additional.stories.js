@@ -115,3 +115,47 @@ export const FormSubmission = {
   parameters: {},
   tags: ["!dev"]
 };
+
+const CustomValidationTemplate = () => html`
+  <form
+    @submit=${e => {
+      e.preventDefault();
+      alert("Submitted: " + new FormData(e.target).get("appointmentDate"));
+    }}
+  >
+    <sgds-datepicker
+      noValidate
+      id="custom-validation-example"
+      name="appointmentDate"
+      label="Appointment Date"
+      hintText="Must be a future date"
+      hasFeedback
+    ></sgds-datepicker>
+    <sgds-button type="submit">Submit</sgds-button>
+  </form>
+  <script>
+    const picker = document.getElementById("custom-validation-example");
+    picker.addEventListener("sgds-change-date", e => {
+      const val = e.target.value;
+      if (!val || val === "DD/MM/YYYY") return;
+      const [day, month, year] = val.split("/");
+      const selected = new Date(year + "-" + month + "-" + day);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (selected <= today) {
+        e.target.setInvalid(true);
+        e.target.invalidFeedback = "Please select a future date";
+      } else {
+        e.target.setInvalid(false);
+      }
+    });
+  </script>
+`;
+
+export const CustomValidation = {
+  render: CustomValidationTemplate.bind({}),
+  name: "Custom validation",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
