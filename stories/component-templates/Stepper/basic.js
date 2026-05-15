@@ -3,12 +3,10 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = ({ steps, activeStep, clickable, orientation }) => {
   return html`
-    <sgds-stepper
-      .steps=${steps}
-      activeStep=${ifDefined(activeStep)}
-      ?clickable=${clickable}
-      orientation=${ifDefined(orientation)}
-    >
+    <sgds-stepper activeStep=${ifDefined(activeStep)} ?clickable=${clickable} orientation=${ifDefined(orientation)}>
+      ${steps.map(
+        header => html`<sgds-step stepHeader="${header.stepHeader}" .component=${header.component}></sgds-step> `
+      )}
     </sgds-stepper>
   `;
 };
