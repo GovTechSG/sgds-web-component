@@ -27,25 +27,25 @@ export class SgdsStep extends SgdsElement {
   @property({ type: Object })
   component: unknown;
 
-  /** @internal The index of this step within the stepper */
-  @property({ type: Number })
-  stepIndex = 0;
+  /** Whether this step is clickable */
+  @property({ type: Boolean })
+  clickable = false;
 
-  /** @internal Whether this step is currently active */
+  /** Whether this step is currently active */
   @property({ type: Boolean, reflect: true })
   active = false;
 
-  /** @internal Whether this step is currently disabled */
+  /** Whether this step is currently disabled */
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
-  /** @internal Whether this step is completed */
+  /** Whether this step is completed */
   @property({ type: Boolean, reflect: true })
   completed = false;
 
-  /** @internal Whether this step is clickable */
-  @property({ type: Boolean })
-  isClickable = false;
+  /** @internal The index of this step within the stepper */
+  @property({ type: Number })
+  stepIndex = 0;
 
   /** @internal Orientation of parent stepper (horizontal or vertical) */
   @property({ type: String })
@@ -55,12 +55,8 @@ export class SgdsStep extends SgdsElement {
   @property({ type: Boolean })
   isFirstOfType = false;
 
-  /** @internal Whether this step is completed */
-  @property({ type: Boolean })
-  _isCompleted = false;
-
   render() {
-    const isValidClickable = !this.disabled && this.isClickable;
+    const isValidClickable = !this.disabled && this.clickable;
 
     return html`
       <div class="stepper-item-container">
@@ -68,14 +64,14 @@ export class SgdsStep extends SgdsElement {
           class="stepper-item ${classMap({
             first: this.isFirstOfType,
             active: this.active,
-            completed: this._isCompleted,
-            clickable: this.isClickable,
+            completed: this.completed,
+            clickable: this.clickable,
             vertical: this.orientation === "vertical",
             disabled: this.disabled
           })}"
           tabindex=${isValidClickable ? "0" : "-1"}
           aria-current=${this.active ? "step" : "false"}
-          aria-disabled=${this.disabled || (!this.active && !this._isCompleted) ? "true" : "false"}
+          aria-disabled=${this.disabled || (!this.active && !this.completed) ? "true" : "false"}
           @click="${isValidClickable ? e => this._handleClick(e) : null}"
           @keydown=${isValidClickable ? (e: KeyboardEvent) => this._handleKeyDown(e) : null}
         >
