@@ -17,8 +17,8 @@ export type { IStepMetaData };
  * @event sgds-next-step - Emitted right before the next step is reached. Event is fired when nextStep method is called.
  * @event sgds-previous-step - Emitted right before the previous step is reached. Event is fired when previousStep method is called.
  * @event sgds-last-step - Emitted right before the last step is reached. Event is fired when lastStep method is called.
- * @event sgds-first-step - Emitted on hide after animation has completed. Event is fired when firstStep method is called.
- * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived. Call `getMethod()` on this event to get the current step's component.
+ * @event sgds-first-step - Emitted right before the first step is reached. Event is fired when firstStep method is called.
+ * @event sgds-arrived - Emitted right after the activeStep has updated its state, when upcoming step has arrived. Call `getComponent()` on the stepper to get the current step's component.
  * @event sgds-reset - Emitted right before the step is reset to its defaultActiveStep. Event is fired when reset method is called.
  * @slot default - slot for sgds-step children
  *
@@ -62,7 +62,7 @@ export class SgdsStepper extends SgdsElement {
 
   /**
    * Indicates the presence of the default slot.
-   * Used for server-side rendering to determine table structure.
+   * Used to switch between slotted sgds-step children and the legacy steps property.
    * @type {boolean}
    * @internal
    * @default false
@@ -109,10 +109,9 @@ export class SgdsStepper extends SgdsElement {
     }
   }
 
-  /** By default, it returns the corresponding component of the current activeStep as defined in the steps metadata. To get other components, pass in your desired step number as the parameter*/
+  /** Returns the component associated with the given step index. Defaults to the current activeStep if no argument is provided. */
   public getComponent(step: number = this.activeStep) {
     const items = this.hasDefaultSlot ? this._items : this.steps;
-    console.log(step, this._items);
 
     if (items && items.length > 0) {
       return items[step]?.component;
