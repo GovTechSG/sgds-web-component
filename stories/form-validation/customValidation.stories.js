@@ -42,7 +42,7 @@ const DisableValidationByInputTemplate = args => {
       >
         Choose Files
       </sgds-file-upload>
-      <<<<<<< HEAD
+
       <sgds-combo-box
         noValidate
         label="Fruit"
@@ -57,8 +57,7 @@ const DisableValidationByInputTemplate = args => {
         <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
         <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
       </sgds-combo-box>
-      <sgds-button type="submit">Submit</sgds-button>
-      =======
+
       <sgds-datepicker
         noValidate
         label="Appointment Date"
@@ -67,7 +66,8 @@ const DisableValidationByInputTemplate = args => {
         hasFeedback
         id="custom-validation__datepicker-novalidate"
       ></sgds-datepicker>
-      >>>>>>> datepicker/custom-validation
+
+      <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
       const formOne = document.getElementById("custom-validation-form");
