@@ -43,3 +43,11 @@ We use `ElementInternals` API to implement the constraint validation.
 <Canvas of={DatepickerStories.FormSubmission}>
   <Story of={DatepickerStories.FormSubmission} />
 </Canvas>
+
+## Custom validation
+
+Add `noValidate` to disable SGDS built-in validation, then listen to `sgds-change-date` and call `setInvalid(bool)` with a matching `invalidFeedback` to drive the error state from your own logic.
+
+<Canvas of={DatepickerStories.CustomValidation}>
+  <Story of={DatepickerStories.CustomValidation} />
+</Canvas>

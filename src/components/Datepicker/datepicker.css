@@ -31,29 +31,10 @@ sgds-datepicker-input {
   margin-right: 0; /* Remove the margin on the right */
   --input-border-radius: var(--sgds-form-border-radius-md) 0 0 var(--sgds-form-border-radius-md);
 }
-sgds-icon-button{
+sgds-icon-button {
   --btn-border-radius: 0 var(--sgds-form-border-radius-md) var(--sgds-form-border-radius-md) 0;
 }
 
 .m-width-160 {
   min-width: var(--sgds-dimension-160);
-}
-
-.datepicker-container {
-  display: flex;
-}
-
-.calendar-btn:not(.with-hint-text) {
-  align-self: center;
-}
-
-.calendar-btn:not(.with-hint-text).with-label {
- align-self: end;
- margin-top: calc(var(--sgds-line-height-24) - var(--sgds-line-height-20))
-}
-
-.calendar-btn.with-hint-text.with-label {
-  align-self: center;
-  /* line height of label minus line height of hinttext/feedback */
-  margin-top: calc(var(--sgds-line-height-24) - var(--sgds-line-height-20))
 }

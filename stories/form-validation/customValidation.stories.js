@@ -42,6 +42,7 @@ const DisableValidationByInputTemplate = args => {
       >
         Choose Files
       </sgds-file-upload>
+      <<<<<<< HEAD
       <sgds-combo-box
         noValidate
         label="Fruit"
@@ -57,6 +58,16 @@ const DisableValidationByInputTemplate = args => {
         <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
       </sgds-combo-box>
       <sgds-button type="submit">Submit</sgds-button>
+      =======
+      <sgds-datepicker
+        noValidate
+        label="Appointment Date"
+        hintText="Must be a future date"
+        name="appointment-date"
+        hasFeedback
+        id="custom-validation__datepicker-novalidate"
+      ></sgds-datepicker>
+      >>>>>>> datepicker/custom-validation
     </form>
     <script>
       const formOne = document.getElementById("custom-validation-form");
@@ -127,6 +138,22 @@ const DisableValidationByInputTemplate = args => {
           e.target.setInvalid(false);
         }
       });
+
+      const datepickerOne = document.querySelector("sgds-datepicker#custom-validation__datepicker-novalidate");
+      datepickerOne.addEventListener("sgds-change-date", e => {
+        const val = e.target.value;
+        if (!val || val === "DD/MM/YYYY") return;
+        const [day, month, year] = val.split("/");
+        const selected = new Date(Number(year), Number(month) - 1, Number(day));
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selected <= today) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a future date";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
     </script>
   `;
 };
@@ -163,6 +190,7 @@ const DisableValidationByFormTemplate = args => {
       >
         Choose Files
       </sgds-file-upload>
+
       <sgds-combo-box
         label="Fruit"
         hinttext="Selection must start with 'A'"
@@ -176,6 +204,15 @@ const DisableValidationByFormTemplate = args => {
         <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
         <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
       </sgds-combo-box>
+
+      <sgds-datepicker
+        label="Appointment Date"
+        hintText="Must be a future date"
+        name="appointment-date"
+        hasFeedback
+        id="custom-validation__datepicker-two-novalidate"
+      ></sgds-datepicker>
+
       <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
@@ -243,6 +280,22 @@ const DisableValidationByFormTemplate = args => {
         } else if (!e.target.value.startsWith("a")) {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Selection must start with 'A'";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+
+      const datepickerTwo = document.getElementById("custom-validation__datepicker-two-novalidate");
+      datepickerTwo.addEventListener("sgds-change-date", e => {
+        const val = e.target.value;
+        if (!val || val === "DD/MM/YYYY") return;
+        const [day, month, year] = val.split("/");
+        const selected = new Date(Number(year), Number(month) - 1, Number(day));
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selected <= today) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a future date";
         } else {
           e.target.setInvalid(false);
         }
