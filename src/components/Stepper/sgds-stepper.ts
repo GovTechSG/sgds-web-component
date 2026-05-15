@@ -95,8 +95,8 @@ export class SgdsStepper extends SgdsElement {
       this._items.forEach((item, index) => {
         item.stepIndex = index;
         item.active = this.activeStep === index;
-        item._isCompleted = item.completed || this.activeStep > index;
-        item.isClickable = this.linear
+        item.completed = item.completed || this.activeStep > index;
+        item.clickable = this.linear
           ? !item.disabled && this.clickable && (this.activeStep - 1 == index || this.activeStep + 1 == index)
           : !item.disabled && this.clickable;
         item.orientation = this.orientation;
