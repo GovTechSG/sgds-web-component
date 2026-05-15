@@ -88,7 +88,6 @@
       label="Appointment Date"
       hintText="Must be a future date"
       hasFeedback
-      noFlip
       invalidFeedback="error"
       invalid
     ></sgds-datepicker>
@@ -107,7 +106,7 @@
     if (!val || val === "DD/MM/YYYY") return;
 
     const [day, month, year] = val.split("/");
-    const selected = new Date(`${year}-${month}-${day}`);
+    const selected = new Date(Number(year), Number(month) - 1, Number(day));
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
