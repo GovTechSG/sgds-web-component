@@ -148,7 +148,10 @@ export class MockStepper extends LitElement {
     return (this._getStepper().getComponent() as Function)(this.details);
   }
 
-  protected firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+  protected async firstUpdated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): Promise<void> {
+    await this.updateComplete;
+    await this._getStepper().updateComplete;
+
     this.component = this._getComponent();
     this.requestUpdate();
   }

@@ -4,9 +4,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 export const Template = ({ steps, activeStep, clickable, orientation }) => {
   return html`
     <sgds-stepper activeStep=${ifDefined(activeStep)} ?clickable=${clickable} orientation=${ifDefined(orientation)}>
-      ${steps.map(
-        header => html`<sgds-step stepHeader="${header.stepHeader}" .component=${header.component}></sgds-step> `
-      )}
+      ${steps.map(step => html`<sgds-step stepHeader="${step.stepHeader}">${step.description}</sgds-step> `)}
     </sgds-stepper>
   `;
 };
@@ -15,15 +13,15 @@ export const args = {
   steps: [
     {
       stepHeader: "Personal Details",
-      component: "1 test"
+      description: "Provide your personal information."
     },
     {
-      stepHeader: "Address and Contact Information",
-      component: "2 test"
+      stepHeader: "Address",
+      description: "Enter your address and contact details."
     },
     {
       stepHeader: "Review",
-      component: "3 test"
+      description: "Review all details before submitting."
     }
   ]
 };
