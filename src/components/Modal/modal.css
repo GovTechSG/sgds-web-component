@@ -22,6 +22,10 @@
   background-color: var(--sgds-surface-default);
 }
 
+:host([size="fullscreen"]) .modal-panel {
+  margin: var(--sgds-margin-xl) var(--sgds-margin-lg);
+}
+
 .modal {
   display: flex;
   justify-content: center;
