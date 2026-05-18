@@ -473,6 +473,9 @@ const NoValidateTemplate = () => {
 
       noValidateFormStory.addEventListener("submit", e => {
         e.preventDefault();
+        if (noValidateCombo.invalid) {
+          return;
+        }
         alert("Submitted");
       });
     </script>
