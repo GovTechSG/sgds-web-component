@@ -1,3 +1,16 @@
+## v3.19.1 (2026-05-19)
+
+### Fix
+
+- **SystemBanner**: vertical center align icon on desktop [skip-cd][run-chromatic] (#675)
+- **SystemBanner**: vertical center align icon on desktop
+- **Modal**: add margin to fullscreen mobile view for alignment (#673)
+- **Modal**: add margin to fullscreen mobile view for alignment
+- **Table**: sgds-table prop not reflected, causing layout not to work (#670)
+- **Table**: sgds-table prop not reflected, causing layout not to work properly
+- **Alert**: text color token  (#668)
+- **Alert**: text color token
+
 ## v3.19.0 (2026-05-13)
 
 ### Feat
