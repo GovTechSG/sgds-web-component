@@ -1662,6 +1662,95 @@ describe("datepicker in form context", () => {
   });
 });
 
+describe("datepicker noValidate and setInvalid", () => {
+  it("noValidate property defaults to false", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
+    expect(el.noValidate).to.be.false;
+  });
+
+  it("noValidate reflects as attribute", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker noValidate></sgds-datepicker>`);
+    expect(el.hasAttribute("novalidate")).to.be.true;
+  });
+
+  it("with noValidate, form.checkValidity() returns true even when required and empty", async () => {
+    const el = await fixture<HTMLFormElement>(
+      html`<form><sgds-datepicker noValidate required name="d"></sgds-datepicker></form>`
+    );
+    expect(el.checkValidity()).to.be.true;
+  });
+
+  it("with noValidate, checkValidity() returns true", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker noValidate required></sgds-datepicker>`);
+    expect(el.checkValidity()).to.be.true;
+  });
+
+  it("with noValidate, reportValidity() returns true", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker noValidate required></sgds-datepicker>`);
+    expect(el.reportValidity()).to.be.true;
+  });
+
+  it("setInvalid(true) sets invalid to true", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker noValidate></sgds-datepicker>`);
+    await elementUpdated(el);
+    el.setInvalid(true);
+    await elementUpdated(el);
+    expect(el.invalid).to.be.true;
+  });
+
+  it("setInvalid(false) clears invalid state", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker noValidate></sgds-datepicker>`);
+    await elementUpdated(el);
+    el.setInvalid(true);
+    await elementUpdated(el);
+    el.setInvalid(false);
+    await elementUpdated(el);
+    expect(el.invalid).to.be.false;
+  });
+
+  it("setInvalid(true) propagates to inner datepicker-input", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker noValidate hasFeedback></sgds-datepicker>`);
+    await elementUpdated(el);
+    el.setInvalid(true);
+    await elementUpdated(el);
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
+    expect(inputEl.invalid).to.be.true;
+  });
+
+  it("invalidFeedback is displayed when setInvalid(true) and hasFeedback", async () => {
+    const el = await fixture<SgdsDatepicker>(
+      html`<sgds-datepicker noValidate hasFeedback invalidFeedback="Custom error"></sgds-datepicker>`
+    );
+    await elementUpdated(el);
+    el.setInvalid(true);
+    await elementUpdated(el);
+    const inputEl = el.shadowRoot?.querySelector("sgds-datepicker-input") as DatepickerInput;
+    const feedbackEl = inputEl?.shadowRoot?.querySelector(".invalid-feedback");
+    expect(feedbackEl?.textContent?.trim()).to.equal("Custom error");
+  });
+
+  it("with noValidate, selected date value is still available in FormData", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form><sgds-datepicker noValidate name="apptDate"></sgds-datepicker></form>`
+    );
+    const datepicker = form.querySelector("sgds-datepicker") as SgdsDatepicker;
+    const calendarBtnEl = datepicker.shadowRoot?.querySelector(
+      "sgds-icon-button[aria-haspopup='dialog']"
+    ) as HTMLButtonElement;
+
+    calendarBtnEl?.click();
+    await datepicker.updateComplete;
+
+    const calendarEl = datepicker.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-calendar") as HTMLElement;
+    const tdButton = calendarEl.shadowRoot?.querySelector("tbody td[data-day='1']") as HTMLTableCellElement;
+    tdButton?.click();
+    await waitUntil(() => !datepicker.menuIsOpen);
+
+    const formData = new FormData(form);
+    expect(formData.get("apptDate")).to.contain("01");
+  });
+});
+
 describe("datepicker a11y labels", () => {
   // Faking the current time to prevent flaky test as the years past
   let fakeNow: SinonFakeTimers;
