@@ -11,7 +11,7 @@
   --sgds-product-primary-700: #523abc;
   --sgds-product-primary-800: #3c2b8a;
   --sgds-product-primary-900: #2a1e61;
-
+  
   /* Primitive - Purple Color */
   --sgds-purple-100: #fbf0fe;
   --sgds-purple-200: #f2d6fc;
@@ -103,15 +103,16 @@
   --sgds-form-border-width-thick: var(--sgds-border-width-2);
 
   /* Primitive - Border Radius */
-  --sgds-border-radius-none: 0px;
-  --sgds-border-radius-xs: 2px;
-  --sgds-border-radius-sm: 4px;
-  --sgds-border-radius-md: 8px;
-  --sgds-border-radius-lg: 12px;
-  --sgds-border-radius-xl: 16px;
-  --sgds-border-radius-2-xl: 24px;
-  --sgds-border-radius-3-xl: 32px;
-  --sgds-border-radius-full: 999px;
+  --sgds-border-radius-base: 4px;                                                                                                                                      
+  --sgds-border-radius-none: 0px;                                                                                                             
+  --sgds-border-radius-xs: calc(var(--sgds-border-radius-base) * 0.5);
+  --sgds-border-radius-sm: calc(var(--sgds-border-radius-base) * 1);  
+  --sgds-border-radius-md: calc(var(--sgds-border-radius-base) * 2);                                                                            
+  --sgds-border-radius-lg: calc(var(--sgds-border-radius-base) * 3);                                                                            
+  --sgds-border-radius-xl: calc(var(--sgds-border-radius-base) * 4);                                                                            
+  --sgds-border-radius-2-xl: calc(var(--sgds-border-radius-base) * 6);                                                                          
+  --sgds-border-radius-3-xl: calc(var(--sgds-border-radius-base) * 8);                                                                          
+  --sgds-border-radius-full: 999px; 
   --sgds-form-border-radius-none: var(--sgds-border-radius-none);
   --sgds-form-border-radius-xs: var(--sgds-border-radius-xs);
   --sgds-form-border-radius-sm: var(--sgds-border-radius-sm);
