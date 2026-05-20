@@ -34,6 +34,7 @@ export const Template = args => {
     <sgds-table
       headerPosition=${headerPositionVal}
       responsive=${args.responsive}
+      layout=${args.layout}
       .columnHeader=${data.columnHeader}
       .rowHeader=${data.rowHeader}
       .tableData=${data.tableData}
@@ -44,7 +45,7 @@ export const Template = args => {
   `;
 };
 
-export const args = { headerPosition: "horizontal", headerBackground: false, tableBorder: true };
+export const args = { headerPosition: "horizontal", headerBackground: false, tableBorder: true, layout: "auto" };
 
 export const parameters = {};
 

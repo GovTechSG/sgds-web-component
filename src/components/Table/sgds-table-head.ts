@@ -12,7 +12,7 @@ import { watch } from "../../utils/watch";
 /**
  * @summary Table head represents a table header cell that identifies a group of information within the table.
  *
- * @slot - Place any elements inside to display as the header content.
+ * @slot default - Place any elements inside to display as the header content.
  */
 
 export class SgdsTableHead extends SgdsElement {

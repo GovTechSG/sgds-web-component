@@ -17,7 +17,7 @@ import { watch } from "../../utils/watch";
 import { SidebarElement } from "./sidebar-element";
 import SgdsSidebarGroup from "./sgds-sidebar-group";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
-import { SM_BREAKPOINT } from "../../utils/breakpoints";
+import { XL_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
 
 /**
  * @summary Sidebar is a collapsible navigation component that displays menu items and groups.
@@ -143,7 +143,7 @@ export class SgdsSidebar extends SgdsElement {
 
   /** @internal */
   @state()
-  private _isMobile = false;
+  private _isNarrowViewport = false;
 
   /** @internal Bound resize handler for proper event listener removal */
   private _boundHandleResize = this._handleResize.bind(this);
@@ -171,7 +171,7 @@ export class SgdsSidebar extends SgdsElement {
 
   firstUpdated() {
     document?.addEventListener("click", this._handleClickOutOfElement);
-    this._isOverlay = this.variant === "overlay";
+    this._updateOverlayState();
   }
 
   updated() {
@@ -280,17 +280,36 @@ export class SgdsSidebar extends SgdsElement {
     return findByName(this._defaultNodes) ?? findByName(this._drawerItems as SidebarElement[]);
   }
   /**
-   * Manages responsive collapse behavior on window resize.
-   * Auto-collapses sidebar on mobile screens (width <= 576px), expands on larger screens.
+   * Manages responsive behavior on window resize.
+   * Auto-collapses sidebar on narrow viewports (< XL_BREAKPOINT).
+   * Switches collapsible variant to overlay mode on screens below MD_BREAKPOINT.
    * @internal
    * @returns {void}
    */
   private _handleResize() {
-    const isMobile = window.innerWidth <= SM_BREAKPOINT;
+    const isNarrowViewport = window.innerWidth < XL_BREAKPOINT;
 
-    if (isMobile !== this._isMobile) {
-      this._isMobile = isMobile;
-      this.collapsed = this._isMobile;
+    if (isNarrowViewport !== this._isNarrowViewport) {
+      this._isNarrowViewport = isNarrowViewport;
+      this.collapsed = this._isNarrowViewport;
+    }
+
+    this._updateOverlayState();
+  }
+
+  /**
+   * Updates overlay state based on variant and screen size.
+   * Collapsible variant switches to overlay mode on screens below MD_BREAKPOINT (768px).
+   * @internal
+   * @returns {void}
+   */
+  private _updateOverlayState() {
+    if (this.variant === "overlay") {
+      this._isOverlay = true;
+    } else if (this.variant === "collapsible") {
+      this._isOverlay = window.innerWidth < MD_BREAKPOINT;
+    } else {
+      this._isOverlay = false;
     }
   }
 
@@ -468,7 +487,7 @@ export class SgdsSidebar extends SgdsElement {
             show: this._showDrawer
           })}
         >
-          ${this._isMobile
+          ${this._isNarrowViewport
             ? html`<sgds-icon-button
                 name="chevron-left"
                 variant="ghost"

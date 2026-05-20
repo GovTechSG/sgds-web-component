@@ -22,7 +22,6 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "@storybook/addon-mdx-gfm",
-    "@storybook/addon-interactions",
     {
       name: "@storybook/addon-docs",
       options: {
@@ -33,6 +32,7 @@ module.exports = {
         }
       }
     },
+    "@storybook/addon-interactions",
     "@storybook/addon-themes"
   ],
   framework: {

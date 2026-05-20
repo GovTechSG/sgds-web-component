@@ -123,7 +123,7 @@ function buildPropInterfaceSection() {
     lines.push("");
     lines.push(`// ── ${className.replace(/^Sgds/, "")} ─────────────────────────────────────────────────────────────`);
     lines.push("");
-    lines.push(`interface ${propsName} extends SgdsBaseProps {`);
+    lines.push(`export interface ${propsName} extends SgdsBaseProps {`);
     lines.push(...propLines);
     lines.push("}");
   }
@@ -166,10 +166,10 @@ function generateReactTypes() {
   lines.push("// Helpers");
   lines.push("// ---------------------------------------------------------------------------");
   lines.push("");
-  lines.push("type SgdsEventHandler = (event: CustomEvent) => void;");
+  lines.push("export type SgdsEventHandler = (event: CustomEvent) => void;");
   lines.push("");
   lines.push("/** Common props shared by every SGDS element */");
-  lines.push("interface SgdsBaseProps extends React.HTMLAttributes<HTMLElement> {");
+  lines.push("export interface SgdsBaseProps extends React.HTMLAttributes<HTMLElement> {");
   lines.push('  /** Override the CSS `class` attribute (use `className` in JSX for React) */');
   lines.push("  class?: string;");
   lines.push("}");
@@ -228,10 +228,51 @@ function generateReactTypes() {
 }
 
 // ---------------------------------------------------------------------------
-// Write output file
+// Generate typed lib/react/<component>/index.d.ts files
+// ---------------------------------------------------------------------------
+
+function generateReactWrapperTypes() {
+  const REACT_DIR = path.join(LIB_DIR, "react");
+  let count = 0;
+
+  const processed = new Set();
+  for (const comp of sgdsComponents) {
+    const { name: className, tagName, modulePath } = comp;
+    if (!tagName?.startsWith("sgds-")) continue;
+    if (!modulePath.startsWith("src/components/")) continue;
+    if (processed.has(className)) continue;
+    processed.add(className);
+
+    const tagWithoutPrefix = tagName.replace(/^sgds-/, "");
+    const propsName = toPropsInterface(className);
+    const componentDir = path.join(REACT_DIR, tagWithoutPrefix);
+    const dtsPath = path.join(componentDir, "index.d.ts");
+
+    // Only write if directory exists (i.e., the React wrapper JS was built)
+    if (!fs.existsSync(componentDir)) continue;
+
+    const content = [
+      `import type { ${propsName} } from '../../types/react';`,
+      `import * as React from 'react';`,
+      `declare const _default: React.ForwardRefExoticComponent<React.PropsWithChildren<${propsName}> & React.RefAttributes<HTMLElement>>;`,
+      `export default _default;`,
+      "",
+    ].join("\n");
+
+    fs.writeFileSync(dtsPath, content, "utf8");
+    count++;
+  }
+
+  console.log(`Generated ${count} typed lib/react/*/index.d.ts files`);
+}
+
+// ---------------------------------------------------------------------------
+// Write output files
 // ---------------------------------------------------------------------------
 
 fs.mkdirSync(path.dirname(OUT_REACT), { recursive: true });
 const reactOutput = generateReactTypes();
 fs.writeFileSync(OUT_REACT, reactOutput, "utf8");
 console.log(`Generated lib/types/react.d.ts (${reactOutput.length} chars) at ${OUT_REACT}`);
+
+generateReactWrapperTypes();

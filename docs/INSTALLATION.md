@@ -8,7 +8,7 @@ Install SGDS web components locally with the following command
 
 ```js
 
-npm install @govtechsg/sgds-web-component@3.18.1
+npm install @govtechsg/sgds-web-component@3.19.0
 
 ```
 
@@ -53,14 +53,14 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 
 ```js
 // Load global css file
-<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.18.1/themes/day.css' rel='stylesheet' type='text/css' />
-<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.18.1/css/sgds.css' rel='stylesheet' type='text/css' />
+<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.19.0/themes/day.css' rel='stylesheet' type='text/css' />
+<link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.19.0/css/sgds.css' rel='stylesheet' type='text/css' />
 
 // it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.18.1" async crossorigin="anonymous" integrity="sha384-xZvACocZK19Q7376mEWGi8gUu3n1G9nEP71U33AIeW7QCwypwm713C0KwWNayxKj"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.19.0" async crossorigin="anonymous" integrity="sha384-YyOd0WvMkjNXe/YZvQtV3ubH7kcwNVwNELO7gxbVbs3TZpHcUz421oWhRMq0hHRH"></script>
 
 //or load a single component e.g. Masthead
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.18.1/components/Masthead/index.umd.min.js" async crossorigin="anonymous" integrity="sha384-Q6FLIOexz0nU1QlEkBydWY+wgRVck2LGBUYyzvlNBhib5juEnbFSZzxcmFc0uhWk"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.19.0/components/Masthead/index.umd.min.js" async crossorigin="anonymous" integrity="sha384-5OKa7RaQpYeIsx/ZOXW2ttNUa7ftAEKXiWuSgFRmlXJUaJ1Bvf3etjlCw2qqjia8"></script>
 
 ```
 

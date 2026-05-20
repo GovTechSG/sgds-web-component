@@ -19,7 +19,8 @@ export const Template = ({
   displayDate,
   value,
   readOnly,
-  menuIsOpen
+  menuIsOpen,
+  noValidate
 }) =>
   html`
     <sgds-datepicker
@@ -40,6 +41,7 @@ export const Template = ({
       displayDate=${ifDefined(displayDate)}
       ?readonly=${readOnly}
       ?menuIsOpen=${menuIsOpen}
+      ?noValidate=${noValidate}
     >
     </sgds-datepicker>
   `;

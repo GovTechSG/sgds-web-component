@@ -40,3 +40,21 @@ slot::slotted(a:hover),
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }
+
+/* Neutral tone overrides */
+
+:host([tone="neutral"]) slot[name="title"]::slotted(*) {
+  color: var(--sgds-color-default);
+}
+
+:host([tone="neutral"]) .links slot::slotted(a) {
+  --sgds-link-color-default: var(--sgds-color-default);
+  color: var(--sgds-link-color-default);
+}
+
+:host([tone="neutral"]) .links slot::slotted(a:hover),
+:host([tone="neutral"]) .links slot::slotted(a:focus),
+:host([tone="neutral"]) .links slot::slotted(a:focus-visible) {
+  --sgds-link-color-emphasis: var(--sgds-color-default);
+  color: var(--sgds-link-color-emphasis);
+}

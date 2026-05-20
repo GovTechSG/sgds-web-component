@@ -1,0 +1,161 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Breakpoints</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <section class="sgds:mb-2-xl">
+    <h2>Breakpoint Token Reference</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Syntax: <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:&lt;breakpoint&gt;:&lt;utility&gt;</code> (e.g. <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:sm:hidden</code>)</p>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>Prefix</sgds-table-head>
+        <sgds-table-head>CSS Variable</sgds-table-head>
+        <sgds-table-head>Min-width</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:xs:</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-breakpoint-xs</code></sgds-table-cell>
+        <sgds-table-cell>320px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:sm:</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-breakpoint-sm</code></sgds-table-cell>
+        <sgds-table-cell>512px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:md:</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-breakpoint-md</code></sgds-table-cell>
+        <sgds-table-cell>768px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:lg:</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-breakpoint-lg</code></sgds-table-cell>
+        <sgds-table-cell>1024px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:xl:</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-breakpoint-xl</code></sgds-table-cell>
+        <sgds-table-cell>1280px</sgds-table-cell>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:2-xl:</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-breakpoint-2-xl</code></sgds-table-cell>
+        <sgds-table-cell>1440px</sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <!-- Test 1: Background color changes at each breakpoint -->
+  <section class="sgds:mb-2-xl">
+    <h2>Test 1: Background Color Change per Breakpoint</h2>
+    <p class="sgds:mb-md sgds:text-subtle">This box changes background color at each breakpoint. Resize the viewport to verify.</p>
+    <div class="sgds:p-2-xl sgds:rounded-sm sgds:text-fixed-light sgds:font-weight-bold sgds:text-center sgds:bg-neutral-default sgds:xs:bg-primary-default sgds:sm:bg-accent-default sgds:md:bg-success-default sgds:lg:bg-warning-default sgds:xl:bg-danger-default sgds:2-xl:bg-info-default">
+      <p>Default: neutral (below 320px)</p>
+      <p>xs (320px+): primary (blue)</p>
+      <p>sm (512px+): accent (purple)</p>
+      <p>md (768px+): success (green)</p>
+      <p>lg (1024px+): warning (yellow)</p>
+      <p>xl (1280px+): danger (red)</p>
+      <p>2-xl (1440px+): info (teal)</p>
+    </div>
+  </section>
+
+  <!-- Test 2: Grid columns change at breakpoints -->
+  <section class="sgds:mb-2-xl">
+    <h2>Test 2: Responsive Grid Columns</h2>
+    <p class="sgds:mb-md sgds:text-subtle">1 col by default, 2 at sm, 3 at md, 4 at lg</p>
+    <div class="sgds:grid sgds:grid-cols-1 sgds:sm:grid-cols-2 sgds:md:grid-cols-3 sgds:lg:grid-cols-4 sgds:gap-md">
+      <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm sgds:text-center">1</div>
+      <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm sgds:text-center">2</div>
+      <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm sgds:text-center">3</div>
+      <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm sgds:text-center">4</div>
+    </div>
+  </section>
+
+  <!-- Test 3: Display/visibility at breakpoints -->
+  <section class="sgds:mb-2-xl">
+    <h2>Test 3: Show/Hide at Breakpoints</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Each label appears only at its breakpoint and above.</p>
+    <div class="sgds:flex sgds:flex-wrap sgds:gap-sm">
+      <sgds-badge variant="primary" class="sgds:hidden sgds:xs:inline-flex">xs+ (320px)</sgds-badge>
+      <sgds-badge variant="accent" class="sgds:hidden sgds:sm:inline-flex">sm+ (512px)</sgds-badge>
+      <sgds-badge variant="success" class="sgds:hidden sgds:md:inline-flex">md+ (768px)</sgds-badge>
+      <sgds-badge variant="warning" class="sgds:hidden sgds:lg:inline-flex">lg+ (1024px)</sgds-badge>
+      <sgds-badge variant="danger" class="sgds:hidden sgds:xl:inline-flex">xl+ (1280px)</sgds-badge>
+      <sgds-badge variant="cyan" class="sgds:hidden sgds:2-xl:inline-flex">2-xl+ (1440px)</sgds-badge>
+    </div>
+  </section>
+
+  <!-- Test 4: Padding changes at breakpoints -->
+  <section class="sgds:mb-2-xl">
+    <h2>Test 4: Responsive Padding</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Padding increases at each breakpoint. Observe the inner spacing grow.</p>
+    <div class="sgds:bg-surface-raised sgds:rounded-sm sgds:border sgds:border-default">
+      <div class="sgds:p-xs sgds:sm:p-sm sgds:md:p-md sgds:lg:p-lg sgds:xl:p-xl sgds:2-xl:p-2-xl sgds:bg-primary-default sgds:text-fixed-light sgds:rounded-sm">
+        <p>p-xs by default</p>
+        <p>sm: p-sm | md: p-md | lg: p-lg | xl: p-xl | 2-xl: p-2-xl</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Test 5: Flex direction change -->
+  <section class="sgds:mb-2-xl">
+    <h2>Test 5: Responsive Flex Direction</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Stacks vertically on mobile, switches to horizontal row at md breakpoint.</p>
+    <div class="sgds:flex sgds:flex-col sgds:md:flex-row sgds:gap-md">
+      <div class="sgds:bg-primary-default sgds:p-lg sgds:text-fixed-light sgds:rounded-sm sgds:flex-1 sgds:text-center">Item A</div>
+      <div class="sgds:bg-accent-default sgds:p-lg sgds:text-fixed-light sgds:rounded-sm sgds:flex-1 sgds:text-center">Item B</div>
+      <div class="sgds:bg-success-default sgds:p-lg sgds:text-fixed-light sgds:rounded-sm sgds:flex-1 sgds:text-center">Item C</div>
+    </div>
+  </section>
+
+  <!-- Test 6: Responsive gap -->
+  <section class="sgds:mb-2-xl">
+    <h2>Test 6: Responsive Gap</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Gap between items increases at larger breakpoints.</p>
+    <div class="sgds:flex sgds:flex-wrap sgds:gap-2-xs sgds:sm:gap-xs sgds:md:gap-sm sgds:lg:gap-md sgds:xl:gap-xl">
+      <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">A</div>
+      <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">B</div>
+      <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">C</div>
+      <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">D</div>
+      <div class="sgds:bg-primary-default sgds:p-md sgds:text-fixed-light sgds:rounded-sm">E</div>
+    </div>
+  </section>
+
+  <!-- Test 7: Hide/show with width utility -->
+  <section>
+    <h2>Test 7: Responsive Width</h2>
+    <p class="sgds:mb-md sgds:text-subtle">Sidebar takes full width on mobile, fixed width at lg+.</p>
+    <div class="sgds:flex sgds:flex-col sgds:lg:flex-row sgds:gap-md">
+      <aside class="sgds:w-full sgds:lg:w-[240px] sgds:bg-surface-raised sgds:p-md sgds:rounded-sm sgds:shrink-0">
+        Sidebar (full width &rarr; 240px at lg)
+      </aside>
+      <main class="sgds:flex-1 sgds:bg-primary-default sgds:text-fixed-light sgds:p-md sgds:rounded-sm">
+        Main content area
+      </main>
+    </div>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>

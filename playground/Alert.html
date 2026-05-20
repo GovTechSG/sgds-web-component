@@ -7,6 +7,10 @@
     <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
     <link href="./css/utility.css" rel="stylesheet" type="text/css" />
     <style>
+      body {
+        background-color: var(--sgds-bg-default);
+        transition: background-color 0.2s;
+      }
       .container {
         max-width: 800px;
         margin: 36px auto;
@@ -14,10 +18,29 @@
         flex-direction: column;
         gap: 36px;
       }
+      .toggle-bar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        background-color: var(--sgds-surface-raised);
+        border-radius: 8px;
+      }
+      .toggle-bar label {
+        font-weight: 600;
+        font-size: 14px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
+      <div class="toggle-bar">
+        <label>Theme:</label>
+        <sgds-button id="theme-toggle" size="sm" variant="outline">Switch to Night Mode</sgds-button>
+      </div>
       <div>
         <h2>Info (default)</h2>
         <sgds-alert show variant="info" title="Info Alert" dismissible>
@@ -160,5 +183,16 @@
         </sgds-alert>
       </div>
     </div>
+
+    <script>
+      const toggleBtn = document.getElementById("theme-toggle");
+      let isDark = false;
+
+      toggleBtn.addEventListener("click", () => {
+        isDark = !isDark;
+        document.documentElement.classList.toggle("sgds-night-theme", isDark);
+        toggleBtn.textContent = isDark ? "Switch to Day Mode" : "Switch to Night Mode";
+      });
+    </script>
   </body>
 </html>

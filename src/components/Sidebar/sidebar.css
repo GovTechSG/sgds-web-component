@@ -6,9 +6,9 @@
   z-index: var(--sgds-z-index-sticky);
   width: var(--sgds-dimension-288);
   transition: width var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
-}
 
-:not(.overlay).sidebar--collapsed {
+}
+.sidebar:not(.overlay).sidebar--collapsed {
   width: var(--sgds-dimension-72);
 }
 
@@ -16,6 +16,10 @@
   position: absolute;
   left: 0;
   top: 0;
+}
+
+.overlay.sidebar--collapsed {
+  width: var(--sgds-dimension-0);
 }
 
 .sidebar-top {

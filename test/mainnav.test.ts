@@ -311,6 +311,7 @@ describe("sgds-mainnav-dropdown", () => {
       dropdown as SgdsMainnavDropdown,
       `
       <sgds-dropdown
+        close="default"
         drop="down"
       >
         <a

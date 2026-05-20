@@ -722,3 +722,109 @@ describe("sgds-dropdown-item", () => {
     window.location.hash = "";
   });
 });
+
+describe("handleSelectSlot with nested elements", () => {
+  it("finds SgdsDropdownItem when clicking on nested anchor element", async () => {
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item><a href="#">Nested Link</a></sgds-dropdown-item>
+      </sgds-dropdown>`
+    );
+    const selectHandler = sinon.spy();
+    el.addEventListener("sgds-select", selectHandler);
+
+    const anchor = el.querySelector("sgds-dropdown-item a") as HTMLAnchorElement;
+    anchor.click();
+    await el.updateComplete;
+
+    expect(selectHandler).to.be.calledOnce;
+    expect(selectHandler.firstCall.args[0].detail.item).to.be.instanceOf(SgdsDropdownItem);
+  });
+
+  it("finds SgdsDropdownItem when clicking on deeply nested content", async () => {
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item>
+          <a href="#"
+            ><span><strong>Deep content</strong></span></a
+          >
+        </sgds-dropdown-item>
+      </sgds-dropdown>`
+    );
+    const selectHandler = sinon.spy();
+    el.addEventListener("sgds-select", selectHandler);
+
+    const strong = el.querySelector("sgds-dropdown-item strong") as HTMLElement;
+    strong.click();
+    await el.updateComplete;
+
+    expect(selectHandler).to.be.calledOnce;
+    expect(selectHandler.firstCall.args[0].detail.item).to.equal(el.querySelector("sgds-dropdown-item"));
+  });
+
+  it("returns correct SgdsDropdownItem when multiple items exist and nested content is clicked", async () => {
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item>Item 1</sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Item 2 Link</a></sgds-dropdown-item>
+        <sgds-dropdown-item>Item 3</sgds-dropdown-item>
+      </sgds-dropdown>`
+    );
+    const selectHandler = sinon.spy();
+    el.addEventListener("sgds-select", selectHandler);
+
+    const secondItemAnchor = el.querySelectorAll("sgds-dropdown-item")[1].querySelector("a") as HTMLAnchorElement;
+    secondItemAnchor.click();
+    await el.updateComplete;
+
+    expect(selectHandler).to.be.calledOnce;
+    expect(selectHandler.firstCall.args[0].detail.item).to.equal(el.querySelectorAll("sgds-dropdown-item")[1]);
+  });
+
+  it("does not emit sgds-select when disabled item's nested content is clicked", async () => {
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item disabled><a href="#">Disabled Link</a></sgds-dropdown-item>
+      </sgds-dropdown>`
+    );
+    const selectHandler = sinon.spy();
+    el.addEventListener("sgds-select", selectHandler);
+
+    const anchor = el.querySelector("sgds-dropdown-item a") as HTMLAnchorElement;
+    anchor.click();
+    await el.updateComplete;
+
+    expect(selectHandler).not.to.be.called;
+  });
+
+  it("emits sgds-select on Enter keypress when menu item is focused via keyboard navigation", async () => {
+    const el = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown menuIsOpen>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item>Item 1</sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Item 2 Link</a></sgds-dropdown-item>
+        <sgds-dropdown-item>Item 3</sgds-dropdown-item>
+      </sgds-dropdown>`
+    );
+
+    const selectHandler = sinon.spy();
+    el.addEventListener("sgds-select", selectHandler);
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const sgdsButton = el.querySelector("sgds-button")!;
+    expect(sgdsButton).to.be.not.null;
+
+    sgdsButton.shadowRoot?.querySelector("button")?.focus();
+    await waitUntil(() => sgdsButton.shadowRoot?.querySelector("button:focus"));
+    await sendKeys({ press: "ArrowUp" });
+    await el.updateComplete;
+    await sendKeys({ press: "Enter" });
+    await el.updateComplete;
+    expect(selectHandler).to.be.calledOnce;
+    expect(selectHandler.firstCall.args[0].detail.item).to.be.instanceOf(SgdsDropdownItem);
+  }).retries(1);
+});

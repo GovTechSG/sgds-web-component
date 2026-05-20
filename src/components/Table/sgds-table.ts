@@ -57,7 +57,7 @@ export class SgdsTable extends SgdsElement {
    * @type {"horizontal" | "vertical" | "both"}
    * @default "horizontal"
    */
-  @property({ type: String }) headerPosition: HeaderPosition = "horizontal";
+  @property({ type: String, reflect: true }) headerPosition: HeaderPosition = "horizontal";
 
   /**
    * Enables background styling on horizontal header rows.
@@ -65,7 +65,7 @@ export class SgdsTable extends SgdsElement {
    * @type {boolean}
    * @default false
    */
-  @property({ type: Boolean }) headerBackground = false;
+  @property({ type: Boolean, reflect: true }) headerBackground = false;
 
   /**
    * Enables borders around table cells.
@@ -73,7 +73,15 @@ export class SgdsTable extends SgdsElement {
    * @type {boolean}
    * @default false
    */
-  @property({ type: Boolean }) tableBorder = false;
+  @property({ type: Boolean, reflect: true }) tableBorder = false;
+
+  /**
+   * Controls the CSS `table-layout` algorithm.
+   * Use "auto" to let the browser size columns based on content, or "fixed" to distribute column widths evenly regardless of content.
+   * @type {"auto" | "fixed"}
+   * @default "auto"
+   */
+  @property({ type: String, reflect: true }) layout: "auto" | "fixed" = "auto";
 
   /**
    * Indicates the presence of the default slot.
@@ -112,7 +120,7 @@ export class SgdsTable extends SgdsElement {
           ${this.tableData.map(
             row => html`
               <tr>
-                ${row.map((cell: string) => html`<td><div>${cell}</div></td>`)}
+                ${row.map((cell: string | number) => html`<td><div>${cell}</div></td>`)}
               </tr>
             `
           )}
@@ -133,7 +141,7 @@ export class SgdsTable extends SgdsElement {
             (row, index) => html`
               <tr>
                 <th><div>${this.columnHeader[index]}</div></th>
-                ${row.map((cell: string) => html`<td><div>${cell}</div></td>`)}
+                ${row.map((cell: string | number) => html`<td><div>${cell}</div></td>`)}
               </tr>
             `
           )}
@@ -149,7 +157,7 @@ export class SgdsTable extends SgdsElement {
           (row, index) => html`
             <tr>
               <th><div>${this.columnHeader[index]}</div></th>
-              ${row.map((cell: string) => html`<td><div>${cell}</div></td>`)}
+              ${row.map((cell: string | number) => html`<td><div>${cell}</div></td>`)}
             </tr>
           `
         )}

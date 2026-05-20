@@ -7,15 +7,6 @@ import dropdownMenuStyle from "./dropdown-menu.css";
 import dropdownStyle from "./dropdown.css";
 
 export type DropDirection = "left" | "right" | "up" | "down";
-export type DropdownButtonVariant =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "danger"
-  | "warning"
-  | "info"
-  | "light"
-  | "dark";
 
 /**
  * @summary `SgdsDropdown` toggles contextual overlays for displaying lists of links.
@@ -42,6 +33,10 @@ export class SgdsDropdown extends DropdownListElement {
   /** The drop position of menu relative to the toggle button */
   @property({ type: String, reflect: true, state: false })
   drop: DropDirection = "down";
+
+  /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
+  @property({ type: String, reflect: true, state: false })
+  close: "outside" | "default" | "inside" = "default";
 
   @queryAssignedElements({ slot: "toggler", flatten: true })
   private _toggler: Array<HTMLElement>;

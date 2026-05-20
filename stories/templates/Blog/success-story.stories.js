@@ -264,6 +264,9 @@ export default {
   title: "Templates/Blog/Success Story",
   tags: ["!autodocs"],
   parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    interactions: { disable: true },
     layout: "fullscreen"
   }
 };

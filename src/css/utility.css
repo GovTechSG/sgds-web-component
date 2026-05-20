@@ -243,19 +243,6 @@
   --border-width-form-default: var(--sgds-form-border-width-default);
   --border-width-form-thick: var(--sgds-form-border-width-thick);
 
-  /* Breakpoint */
-  --breakpoint-xs: var(--sgds-breakpoint-xs);
-  --breakpoint-sm: var(--sgds-breakpoint-sm);
-  --breakpoint-md: var(--sgds-breakpoint-md);
-  --breakpoint-lg: var(--sgds-breakpoint-lg);
-  --breakpoint-xl: var(--sgds-breakpoint-xl);
-  --breakpoint-2-xl: var(--sgds-breakpoint-2-xl);
-
-  /* Breakpoint with Sidebar */
-  --breakpoint-sbar-md: var(--sgds-breakpoint-sbar-md);
-  --breakpoint-sbar-lg: var(--sgds-breakpoint-sbar-lg);
-  --breakpoint-sbar-xl: var(--sgds-breakpoint-sbar-xl);
-  --breakpoint-sbar-2-xl: var(--sgds-breakpoint-sbar-2-xl);
 
   /* Font Family */
   --font-display: var(--sgds-font-family-brand);

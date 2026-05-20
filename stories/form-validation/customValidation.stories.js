@@ -29,6 +29,27 @@ const DisableValidationByInputTemplate = args => {
         id="custom-validation__textarea-novalidate"
       >
       </sgds-textarea>
+      <sgds-file-upload
+        noValidate
+        label="Documents"
+        hinttext="Max 2 PDF files"
+        name="documents"
+        hasFeedback
+        required
+        multiple
+        accept=".pdf"
+        id="custom-validation__file-upload-novalidate"
+      >
+        Choose Files
+      </sgds-file-upload>
+      <sgds-datepicker
+        noValidate
+        label="Appointment Date"
+        hintText="Must be a future date"
+        name="appointment-date"
+        hasFeedback
+        id="custom-validation__datepicker-novalidate"
+      ></sgds-datepicker>
     </form>
     <script>
       const inputOne = document.querySelector("sgds-input#custom-validation__input-novalidate");
@@ -48,6 +69,55 @@ const DisableValidationByInputTemplate = args => {
         } else {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Bio must be at least 10 characters long";
+        }
+      });
+
+      const fileUploadOne = document.querySelector("sgds-file-upload#custom-validation__file-upload-novalidate");
+      fileUploadOne.addEventListener("sgds-add-files", e => {
+        const allFiles = fileUploadOne.files;
+        let isValid = true;
+        let errorMsg = "";
+
+        if (allFiles.length > 2) {
+          isValid = false;
+          errorMsg = "Maximum 2 files allowed";
+        }
+
+        for (const file of e.detail) {
+          if (!file.name.toLowerCase().endsWith(".pdf")) {
+            isValid = false;
+            errorMsg = "Only PDF files are allowed";
+            break;
+          }
+        }
+
+        fileUploadOne.invalidFeedback = errorMsg;
+        fileUploadOne.setInvalid(!isValid);
+      });
+
+      fileUploadOne.addEventListener("sgds-remove-file", e => {
+        const remaining = e.detail.files;
+        if (remaining.length === 0) {
+          fileUploadOne.invalidFeedback = "At least one file is required";
+          fileUploadOne.setInvalid(true);
+        } else {
+          fileUploadOne.setInvalid(false);
+        }
+      });
+
+      const datepickerOne = document.querySelector("sgds-datepicker#custom-validation__datepicker-novalidate");
+      datepickerOne.addEventListener("sgds-change-date", e => {
+        const val = e.target.value;
+        if (!val || val === "DD/MM/YYYY") return;
+        const [day, month, year] = val.split("/");
+        const selected = new Date(Number(year), Number(month) - 1, Number(day));
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selected <= today) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a future date";
+        } else {
+          e.target.setInvalid(false);
         }
       });
     </script>
@@ -74,6 +144,25 @@ const DisableValidationByFormTemplate = args => {
         id="custom-validation__textarea-two-novalidate"
       >
       </sgds-textarea>
+      <sgds-file-upload
+        label="Documents"
+        hinttext="Max 2 PDF files"
+        name="documents"
+        hasFeedback
+        required
+        multiple
+        accept=".pdf"
+        id="custom-validation__file-upload-two-novalidate"
+      >
+        Choose Files
+      </sgds-file-upload>
+      <sgds-datepicker
+        label="Appointment Date"
+        hintText="Must be a future date"
+        name="appointment-date"
+        hasFeedback
+        id="custom-validation__datepicker-two-novalidate"
+      ></sgds-datepicker>
     </form>
     <script>
       const inputTwo = document.getElementById("custom-validation__input-two-novalidate");
@@ -93,6 +182,55 @@ const DisableValidationByFormTemplate = args => {
         } else {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Notes must be at least 5 characters long";
+        }
+      });
+
+      const fileUploadTwo = document.getElementById("custom-validation__file-upload-two-novalidate");
+      fileUploadTwo.addEventListener("sgds-add-files", e => {
+        const allFiles = fileUploadTwo.files;
+        let isValid = true;
+        let errorMsg = "";
+
+        if (allFiles.length > 2) {
+          isValid = false;
+          errorMsg = "Maximum 2 files allowed";
+        }
+
+        for (const file of e.detail) {
+          if (!file.name.toLowerCase().endsWith(".pdf")) {
+            isValid = false;
+            errorMsg = "Only PDF files are allowed";
+            break;
+          }
+        }
+
+        fileUploadTwo.invalidFeedback = errorMsg;
+        fileUploadTwo.setInvalid(!isValid);
+      });
+
+      fileUploadTwo.addEventListener("sgds-remove-file", e => {
+        const remaining = e.detail.files;
+        if (remaining.length === 0) {
+          fileUploadTwo.invalidFeedback = "At least one file is required";
+          fileUploadTwo.setInvalid(true);
+        } else {
+          fileUploadTwo.setInvalid(false);
+        }
+      });
+
+      const datepickerTwo = document.getElementById("custom-validation__datepicker-two-novalidate");
+      datepickerTwo.addEventListener("sgds-change-date", e => {
+        const val = e.target.value;
+        if (!val || val === "DD/MM/YYYY") return;
+        const [day, month, year] = val.split("/");
+        const selected = new Date(Number(year), Number(month) - 1, Number(day));
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selected <= today) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a future date";
+        } else {
+          e.target.setInvalid(false);
         }
       });
     </script>
