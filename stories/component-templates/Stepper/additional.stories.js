@@ -147,6 +147,28 @@ export const SlottedClickable = {
   tags: ["!dev"]
 };
 
+const CustomIconTemplate = () => html`
+  <sgds-stepper activeStep="1">
+    <sgds-step stepHeader="Personal Details" iconName="user-circle">
+      <div>Provide your personal information.</div>
+    </sgds-step>
+    <sgds-step stepHeader="Address" iconName="geo-alt">
+      <div>Enter your address and contact details.</div>
+    </sgds-step>
+    <sgds-step stepHeader="Review" iconName="check-circle-fill">
+      <div>Review all details before submitting.</div>
+    </sgds-step>
+  </sgds-stepper>
+`;
+
+export const CustomIcon = {
+  render: CustomIconTemplate.bind({}),
+  name: "Custom Icon",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
 const MockStepperTemplate = () => html`<mock-stepper></mock-stepper>`;
 
 export const StepperExample = {
