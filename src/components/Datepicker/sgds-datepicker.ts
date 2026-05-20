@@ -423,12 +423,12 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
    * 3. sets the form value of datepicker
    */
   private _manageInternalsValid() {
+    this._mixinSetFormValue();
     if (this._mixinShouldSkipSgdsValidation()) return;
 
     this._mixinSetValidity({});
 
     this.invalid = this.datepickerInput.invalid = false;
-    this._mixinSetFormValue();
   }
 
   /**

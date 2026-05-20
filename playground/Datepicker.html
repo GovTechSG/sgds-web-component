@@ -99,6 +99,13 @@
 </div>
 
 <script>
+  const customForm = document.getElementById("custom-form");
+  customForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const fd = new FormData(customForm);
+    console.log("FormData entries:", Object.fromEntries(fd));
+  });
+
   const picker = document.getElementById("appt-date");
 
   picker.addEventListener("sgds-change-date", e => {
