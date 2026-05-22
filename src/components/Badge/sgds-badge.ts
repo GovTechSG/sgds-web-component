@@ -97,17 +97,12 @@ export class SgdsBadge extends SgdsElement {
   }
 
   /**@internal */
-  @watch("text")
+  @watch("text", { waitUntilFirstUpdate: true })
   _handleTruncation() {
-    // checking of text height if its exceeding parent, it needs to be truncated
-    const badge = this.shadowRoot.querySelector(".badge");
-    const badgeLabel = this.shadowRoot.querySelector(".badge-label");
-
-    if (badge && badgeLabel) {
-      const labelHeight = badgeLabel.getBoundingClientRect().height;
-      const badgeHeight = badge.getBoundingClientRect().height;
-
-      this.truncated = labelHeight > badgeHeight;
+    // check scroll width if its exceeding parent, it reflects truncation has happened
+    const badgeLabel = this.shadowRoot?.querySelector(".badge-label");
+    if (badgeLabel) {
+      this.truncated = badgeLabel.scrollWidth > badgeLabel.clientWidth;
     }
   }
 
@@ -125,7 +120,6 @@ export class SgdsBadge extends SgdsElement {
         [`badge-dismissible`]: this.dismissible,
         badge: true,
         outlined: this.outlined,
-        truncated: this.truncated,
         "full-width": this.fullWidth
       })}"
       aria-hidden=${this.show ? "false" : "true"}

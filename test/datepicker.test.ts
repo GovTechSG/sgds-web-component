@@ -1728,6 +1728,27 @@ describe("datepicker noValidate and setInvalid", () => {
     const feedbackEl = inputEl?.shadowRoot?.querySelector(".invalid-feedback");
     expect(feedbackEl?.textContent?.trim()).to.equal("Custom error");
   });
+
+  it("with noValidate, selected date value is still available in FormData", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form><sgds-datepicker noValidate name="apptDate"></sgds-datepicker></form>`
+    );
+    const datepicker = form.querySelector("sgds-datepicker") as SgdsDatepicker;
+    const calendarBtnEl = datepicker.shadowRoot?.querySelector(
+      "sgds-icon-button[aria-haspopup='dialog']"
+    ) as HTMLButtonElement;
+
+    calendarBtnEl?.click();
+    await datepicker.updateComplete;
+
+    const calendarEl = datepicker.shadowRoot?.querySelector("ul.datepicker sgds-datepicker-calendar") as HTMLElement;
+    const tdButton = calendarEl.shadowRoot?.querySelector("tbody td[data-day='1']") as HTMLTableCellElement;
+    tdButton?.click();
+    await waitUntil(() => !datepicker.menuIsOpen);
+
+    const formData = new FormData(form);
+    expect(formData.get("apptDate")).to.contain("01");
+  });
 });
 
 describe("datepicker a11y labels", () => {
