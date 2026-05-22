@@ -129,27 +129,20 @@ describe("SgdsBadge component", () => {
 
     const tooltip = el.shadowRoot?.querySelector("sgds-tooltip");
     expect(tooltip).to.not.exist;
-    expect(el.querySelector(".truncated")).to.not.exist;
   });
 
-  it("should render with the 'truncated' class when badge content exceeds parent width", async () => {
-    const parentNode = document.createElement("div");
-    parentNode.style.width = "100px";
-
+  it("should render with the sgds-tooltip when badge content exceeds max width", async () => {
     const el = await fixture<SgdsBadge>(
-      html`<sgds-badge> A very long badge name without limitation of parent width </sgds-badge>`,
-      { parentNode }
+      html`<sgds-badge> A very long badge name without limitation of parent width </sgds-badge>`
     );
 
-    await elementUpdated(el);
+    await el.updateComplete;
 
     const badge = el.shadowRoot?.querySelector(".badge");
     expect(badge).to.exist;
 
     const tooltip = el.shadowRoot?.querySelector("sgds-tooltip");
-
     expect(tooltip).to.exist;
-    expect(tooltip?.querySelector(".truncated")).to.exist;
   });
 
   it("should not trigger sgds-hide when tooltip is hidden", async () => {
@@ -173,7 +166,6 @@ describe("SgdsBadge component", () => {
     const tooltip = el.shadowRoot?.querySelector("sgds-tooltip");
 
     expect(tooltip).to.exist;
-    expect(tooltip?.querySelector(".truncated")).to.exist;
 
     await sendMouse({ type: "move", position: [50, 50] });
     await el.updateComplete;
