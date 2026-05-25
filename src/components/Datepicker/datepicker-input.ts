@@ -47,7 +47,7 @@ export class DatepickerInput extends SgdsInput {
 
     // Only clear if the mask is complete AND there are invalid dates
     // This clears complete but invalid dates like "20/20/2026"
-    // but leaves incomplete dates like "12/03/202Y" to show validation
+    // Incomplete dates remain in the input as-is (validation only runs on complete dates)
     if (this.mask.masked.isComplete && invalidDates.length > 0 && dateArray.length > 0) {
       this.value = "";
       this.mask.value = "";
