@@ -48,6 +48,7 @@ export * from "./Sidenav/sgds-sidenav-item";
 export * from "./Sidenav/sgds-sidenav-link";
 export * from "./Skeleton/sgds-skeleton";
 export * from "./Spinner/sgds-spinner";
+export * from "./Stepper/sgds-step";
 export * from "./Stepper/sgds-stepper";
 export * from "./Subnav/sgds-subnav";
 export * from "./Subnav/sgds-subnav-item";
