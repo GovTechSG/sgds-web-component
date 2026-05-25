@@ -183,9 +183,7 @@ Currently supported on **`<sgds-input>`**, **`<sgds-textarea>`**, **`<sgds-combo
     }
   });
 </script>
-```
 
-```html
 <sgds-input
   noValidate
   id="keys-input"
