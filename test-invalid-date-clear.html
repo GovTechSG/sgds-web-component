@@ -88,7 +88,9 @@
 
       test1.addEventListener("sgds-change-date", e => {
         value1.textContent = e.target.value || "(empty)";
-        log1.innerHTML += `<div>sgds-change-date: "${e.target.value}"</div>`;
+        const entry = document.createElement("div");
+        entry.textContent = `sgds-change-date: "${e.target.value}"`;
+        log1.appendChild(entry);
       });
 
       test1.addEventListener("sgds-invalid-input", () => {
@@ -106,7 +108,9 @@
 
       test2.addEventListener("sgds-change-date", e => {
         value2.textContent = e.target.value || "(empty)";
-        log2.innerHTML += `<div>sgds-change-date: "${e.target.value}"</div>`;
+        const entry = document.createElement("div");
+        entry.textContent = `sgds-change-date: "${e.target.value}"`;
+        log2.appendChild(entry);
       });
 
       test2.addEventListener("sgds-invalid-input", () => {
