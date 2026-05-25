@@ -4,7 +4,7 @@ const RangeTemplate = () => html`<sgds-datepicker mode="range"></sgds-datepicker
 
 export const RangeSelection = {
   render: RangeTemplate.bind({}),
-  name: "Range Selection",
+  name: "Range selection",
   args: {},
   parameters: {},
   tags: ["!dev"]
@@ -37,14 +37,14 @@ const ModeTemplate = args => {
 
 export const SingleMode = {
   render: ModeTemplate.bind({}),
-  name: "Initial Value for Single mode",
+  name: "Initial value for single mode",
   args: { value: "23/05/2023", mode: "single" },
   parameters: {},
   tags: ["!dev"]
 };
 export const RangeMode = {
   render: ModeTemplate.bind({}),
-  name: "Initial Value for Range mode",
+  name: "Initial value for range mode",
   args: { value: "23/05/2023 - 15/12/2023", mode: "range" },
   parameters: {},
   tags: ["!dev"]
@@ -70,7 +70,7 @@ const MinMaxTemplate = args => {
 };
 export const MinMax = {
   render: MinMaxTemplate.bind({}),
-  name: "Min and Max Date",
+  name: "Min and max date",
   args: { displayDate: new Date(2023, 5, 10) },
   parameters: {},
   tags: ["!dev"]
@@ -110,8 +110,44 @@ const FormSubmissionTemplate = args => {
 };
 export const FormSubmission = {
   render: FormSubmissionTemplate.bind({}),
-  name: "Form Submission",
+  name: "Form submission",
   args: { displayDate: new Date(2023, 5, 10) },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+const CustomValidationTemplate = () => html`
+  <sgds-datepicker
+    noValidate
+    id="custom-validation-example"
+    name="appointmentDate"
+    label="Appointment Date"
+    hintText="Must be a future date"
+    hasFeedback
+  ></sgds-datepicker>
+  <script>
+    const picker = document.getElementById("custom-validation-example");
+    picker.addEventListener("sgds-change-date", e => {
+      const val = e.target.value;
+      if (!val || val === "DD/MM/YYYY") return;
+      const [day, month, year] = val.split("/");
+      const selected = new Date(year + "-" + month + "-" + day);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (selected <= today) {
+        e.target.setInvalid(true);
+        e.target.invalidFeedback = "Please select a future date";
+      } else {
+        e.target.setInvalid(false);
+      }
+    });
+  </script>
+`;
+
+export const CustomValidation = {
+  render: CustomValidationTemplate.bind({}),
+  name: "Custom validation",
+  args: {},
   parameters: {},
   tags: ["!dev"]
 };

@@ -1,5 +1,7 @@
 import { html } from "lit";
+import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
+import { watch } from "../../utils/watch";
 import footerLinkStyle from "./footer-item.css";
 import type SgdsLink from "../Link/sgds-link";
 
@@ -13,12 +15,27 @@ import type SgdsLink from "../Link/sgds-link";
 export class SgdsFooterItem extends SgdsElement {
   static styles = [...SgdsElement.styles, footerLinkStyle];
 
+  /** Sets the color tone of the footer item. Inherited from the parent sgds-footer. */
+  @property({ type: String, reflect: true }) tone: "fixed-dark" | "neutral" = "fixed-dark";
+
+  /**@internal */
+  @watch("tone", { waitUntilFirstUpdate: true })
+  _handleToneChange() {
+    const defaultSlot = this.shadowRoot?.querySelector("slot:not([name])") as HTMLSlotElement | null;
+    defaultSlot?.assignedElements().forEach(el => {
+      if (el.tagName === "SGDS-LINK") {
+        (el as SgdsLink).tone = this.tone === "neutral" ? "neutral" : "fixed-light";
+      }
+    });
+  }
+
   private _handleSlotChange(e: Event) {
+    const linkTone = this.tone === "neutral" ? "neutral" : "fixed-light";
     const assignedElements = (e.target as HTMLSlotElement).assignedElements();
     assignedElements.forEach(el => {
       if (el.tagName === "SGDS-LINK") {
         const sgdsLink = el as SgdsLink;
-        sgdsLink.tone = "fixed-light";
+        sgdsLink.tone = linkTone;
         sgdsLink.size = "sm";
       }
     });

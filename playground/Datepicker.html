@@ -3,12 +3,125 @@
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 
+<style>
+  body {
+    padding: 2rem;
+  }
+  .playground-section {
+    margin-bottom: 3rem;
+  }
+  .playground-section h2 {
+    margin-bottom: 1rem;
+  }
+  .playground-section h3 {
+    margin-bottom: 0.75rem;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+</style>
 
-<form>
-  <sgds-datepicker noFlip hasFeedback value="18/07/2025"></sgds-datepicker>
-  <sgds-datepicker noFlip hasFeedback value="18/07/2025" disabled></sgds-datepicker>
-  <sgds-datepicker noFlip required value="07/08/2024 - 09/08/2024" mode="range"></sgds-datepicker>
-<sgds-datepicker menuIsOpen value='01/01/1900'></sgds-datepicker>
-  <sgds-button type="submit">Submit</sgds-button>
-  <sgds-button type="reset">Reset</sgds-button>
-</form>
+<h1>Datepicker</h1>
+
+<div class="playground-section">
+  <h2>Default</h2>
+  <sgds-datepicker label="Single date" noFlip></sgds-datepicker>
+</div>
+
+<div class="playground-section">
+  <h2>Pre-filled value</h2>
+  <div class="row">
+    <sgds-datepicker label="Single" value="18/07/2025" noFlip></sgds-datepicker>
+    <sgds-datepicker label="Range" mode="range" value="07/08/2024 - 09/08/2024" noFlip></sgds-datepicker>
+  </div>
+</div>
+
+<div class="playground-section">
+  <h2>Hint text</h2>
+  <div class="row">
+    <sgds-datepicker label="Single date" hintText="Select a date in DD/MM/YYYY format" noFlip></sgds-datepicker>
+    <sgds-datepicker label="Date range" mode="range" hintText="Select a start and end date" noFlip></sgds-datepicker>
+  </div>
+</div>
+
+<div class="playground-section">
+  <h2>States</h2>
+  <div class="row">
+    <sgds-datepicker label="Disabled" value="18/07/2025" disabled noFlip></sgds-datepicker>
+    <sgds-datepicker label="Readonly" value="18/07/2025" readonly noFlip></sgds-datepicker>
+  </div>
+</div>
+
+<div class="playground-section">
+  <h2>Validation feedback</h2>
+  <form>
+    <div class="row">
+      <sgds-datepicker label="Required (single)" name="date1" required hasFeedback noFlip></sgds-datepicker>
+      <sgds-datepicker
+        hintText="Select a start and end date"
+        label="Required (range)"
+        name="date2"
+        mode="range"
+        required
+        hasFeedback
+        noFlip
+      ></sgds-datepicker>
+    </div>
+    <div style="margin-top: 1rem; display: flex; gap: 0.5rem">
+      <sgds-button type="submit">Submit</sgds-button>
+      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+    </div>
+  </form>
+</div>
+
+<div class="playground-section">
+  <h2>Custom validation (noValidate + setInvalid)</h2>
+  <p>Select a past or today's date to see the custom error message.</p>
+  <form id="custom-form">
+    <sgds-datepicker
+      noValidate
+      id="appt-date"
+      name="appointmentDate"
+      label="Appointment Date"
+      hintText="Must be a future date"
+      hasFeedback
+      invalidFeedback="error"
+      invalid
+    ></sgds-datepicker>
+    <div style="margin-top: 1rem; display: flex; gap: 0.5rem">
+      <sgds-button type="submit">Submit</sgds-button>
+      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const customForm = document.getElementById("custom-form");
+  customForm.addEventListener("submit", e => {
+    e.preventDefault();
+    const fd = new FormData(customForm);
+    console.log("FormData entries:", Object.fromEntries(fd));
+  });
+
+  const picker = document.getElementById("appt-date");
+
+  picker.addEventListener("sgds-change-date", e => {
+    const val = e.target.value;
+    if (!val || val === "DD/MM/YYYY") return;
+
+    const [day, month, year] = val.split("/");
+    const selected = new Date(Number(year), Number(month) - 1, Number(day));
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (selected <= today) {
+      e.target.setInvalid(true);
+      e.target.invalidFeedback = "Please select a future date";
+    } else {
+      e.target.setInvalid(false);
+    }
+  });
+</script>

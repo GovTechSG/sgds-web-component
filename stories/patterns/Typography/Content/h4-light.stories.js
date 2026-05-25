@@ -14,7 +14,12 @@ const H4LightTemplate = () => html`
 export default {
   title: "Patterns/Typography/Content",
   tags: ["!autodocs"],
-  parameters: { layout: "padded" }
+  parameters: {
+    controls: { disable: true },
+    actions: { disable: true },
+    interactions: { disable: true },
+    layout: "padded"
+  }
 };
 
 export const H4Light = {

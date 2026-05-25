@@ -15,7 +15,7 @@ export const Template = args =>
         <sgds-icon slot="icon" name="box-seam" size="3-xl"></sgds-icon>
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
-        <span slot="title">Innovative Solutions for You</span>
+        <span slot="title">Innovative solutions for you</span>
         <div style="display: flex; flex-direction: column; gap: 24px;">
           <sgds-icon-list size="sm">
             <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>

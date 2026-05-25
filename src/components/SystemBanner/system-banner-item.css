@@ -100,4 +100,8 @@ slot[name="action"]::slotted(a) {
     -webkit-box-orient: vertical;
     max-height: calc(2 * var(--sgds-line-height-20, 20px)); /* 2 lines */
   }
+  /* Vertically center icon on desktop */
+  ::slotted(sgds-icon) {
+    align-self: center;
+  }
 }

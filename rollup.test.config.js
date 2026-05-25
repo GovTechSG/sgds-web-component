@@ -28,7 +28,11 @@ function getFilesInDirectorySync(directoryPath) {
 
 export default [
   {
-    input: [...getFilesInDirectorySync("./test"), ...getFilesInDirectorySync("./test/utils")],
+    input: [
+      ...getFilesInDirectorySync("./test"),
+      ...getFilesInDirectorySync("./test/utils"),
+      ...getFilesInDirectorySync("./test/a11y")
+    ],
     output: [
       {
         dir: "test-outdir",

@@ -1,5 +1,6 @@
 import { html, nothing } from "lit";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import sidebarOptionStyle from "./sidebar-item.css";
 
@@ -28,7 +29,7 @@ export class SgdsSidebarItem extends SidebarElement {
           active: this._selected
         })}
         @click=${() => this._handleClick()}
-        aria-label=${this.title || this.name}
+        aria-label=${ifDefined(this.title || this.name || undefined)}
         name=${this.name}
         tabindex=${this._hidden ? -1 : 0}
         role="button"

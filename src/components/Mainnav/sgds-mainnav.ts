@@ -324,7 +324,7 @@ export class SgdsMainnav extends SgdsElement {
             @click=${this._handleSummaryClick}
             aria-controls="${this.collapseId}"
             aria-expanded="${this.expanded}"
-            aria-label="Toggle navigation"
+            .ariaLabel=${"Toggle navigation"}
           ></sgds-icon-button>
         </div>
       </nav>

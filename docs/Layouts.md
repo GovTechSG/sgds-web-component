@@ -1,4 +1,4 @@
-# App Layout Templates
+# App layout templates
 
 Layout templates for common application patterns, helping you structure your pages with consistent spacing, navigation, and content containers.
 
@@ -8,7 +8,7 @@ Before using the app layout templates, ensure that you have set up the **utility
 
 For more details, see the [Utilities documentation](/docs/utilities-introduction--docs).
 
-### Import CSS Files
+### Import CSS files
 
 ```javascript
 // Theme files

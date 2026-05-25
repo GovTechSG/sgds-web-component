@@ -172,5 +172,33 @@
       >
       </sgds-table>
     </div>
+
+    <div class="container">
+      <h3>Table - layout auto (default)</h3>
+      <sgds-table
+        layout="auto"
+        tableBorder="true"
+        rowHeader='["Name", "Short", "A very long column header indeed"]'
+        tableData='[
+        ["Alice", "Yes", "Some longer content here"],
+        ["Bob", "No", "Short"]
+      ]'
+      >
+      </sgds-table>
+    </div>
+
+    <div class="container">
+      <h3>Table - layout fixed</h3>
+      <sgds-table
+        layout="fixed"
+        tableBorder="true"
+        rowHeader='["Name", "Short", "A very long column header indeed"]'
+        tableData='[
+        ["Alice", "Yes", "Some longer content here"],
+        ["Bob", "No", "Short"]
+      ]'
+      >
+      </sgds-table>
+    </div>
   </body>
 </html>

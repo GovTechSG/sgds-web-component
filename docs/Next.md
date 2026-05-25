@@ -1,16 +1,16 @@
-# Next.js Integration
+# Next.js integration
 
 SGDS web components are fully supported in Next.js with React 19+.
 
 ## Prerequisites
 
-Before integrating SGDS with Next.js, please read the [React integration guide](/docs/frameworks-react--docs) for foundational concepts.
+Before integrating SGDS with Next.js, read the [React integration guide](/docs/frameworks-react--docs) for foundational concepts.
 
-**Important:** Web components work best as client components as they rely on browser APIs (`document` and `window`).
+Web components work best as client components because they rely on browser APIs (`document` and `window`).
 
 ## Setup
 
-### Step 1: Create Library Loader
+### Step 1: Create library loader
 
 Create a file `sgds.tsx` to handle client-side web component initialization:
 
@@ -37,7 +37,7 @@ const SgdsLibraryLoader = () => {
 export default SgdsLibraryLoader;
 ```
 
-### Step 2: Import in Root Layout
+### Step 2: Import in root layout
 
 Add the library loader to your root layout (`src/app/layout.tsx`):
 
@@ -71,9 +71,9 @@ export default function RootLayout({
 }
 ```
 
-## Common Issues and Solutions
+## Common issues and solutions
 
-### 1. Event Listeners Not Firing on First Load
+### 1. Event listeners not firing on first load
 
 **Problem:** Custom event listeners fail to attach due to Next.js hydration timing.
 
@@ -134,7 +134,7 @@ const SgdsInput = ({
 export default SgdsInput;
 ```
 
-### 2. Hydration Mismatch Warnings
+### 2. Hydration mismatch warnings
 
 **Problem:** Next.js detects attribute differences between server and client rendering.
 
@@ -148,7 +148,7 @@ export default SgdsInput;
 </sgds-input>
 ```
 
-### 3. TypeScript Support
+### 3. TypeScript support
 
 Add a `types.d.ts` file at the project root and import the SGDS React type definitions. This gives full IntelliSense for props and typed `CustomEvent` detail payloads on all `sgds-*` elements without manual per-component declarations:
 

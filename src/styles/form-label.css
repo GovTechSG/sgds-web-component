@@ -4,7 +4,7 @@
 }
 
 .form-label.disabled {
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
 }
 
 .form-check-label {

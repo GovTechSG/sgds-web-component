@@ -256,6 +256,8 @@ export class SgdsSubnav extends SgdsElement {
             <sgds-icon
               class="subnav-toggler"
               name="chevron-down"
+              size="lg"
+              role="button"
               tabindex="0"
               @click=${this._toggleMenu}
               @keydown=${this._onKeyboardToggle}

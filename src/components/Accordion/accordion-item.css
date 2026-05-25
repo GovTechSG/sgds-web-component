@@ -77,7 +77,7 @@
 
 .accordion-btn.disabled,
 .accordion-btn:disabled {
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
 }
 

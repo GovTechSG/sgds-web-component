@@ -25,7 +25,7 @@ export const Template = args =>
         <sgds-icon-button name="heart" size="sm" slot="image-action"></sgds-icon-button>
         <sgds-badge variant="primary" slot="upper">Limited seat</sgds-badge>
         <span slot="subtitle">EVENTS</span>
-        <span slot="title">Innovative Solutions for You</span>
+        <span slot="title">Innovative solutions for you</span>
         <sgds-icon-list size="sm">
           <div role="listitem"><sgds-icon size="md" name="calendar"></sgds-icon>12 September</div>
           <div role="listitem"><sgds-icon size="md" name="laptop"></sgds-icon>Online</div>

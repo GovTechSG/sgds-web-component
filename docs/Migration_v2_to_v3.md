@@ -9,9 +9,9 @@ We also setup our own naming convention for css variable tokens which is used bo
 
 We also introduced foundational styles to allow users who want to wholistically style their app with SGDS.
 
-### Breaking Changes
+### Breaking changes
 
-If you are migrating from v2, please take note of the breaking changes below:
+If you are migrating from v2, take note of the breaking changes below:
 
 #### sgds-accordion
 
@@ -24,7 +24,7 @@ If you are migrating from v2, please take note of the breaking changes below:
 
 #### sgds-accordion-item
 
-##### Renamed Slots:
+##### Renamed slots:
 
 - `accordion-header` → `header`
 - `accordion-caret` → `caret`
@@ -143,7 +143,7 @@ If you are migrating from v2, please take note of the breaking changes below:
 
 #### sgds-card
 
-##### Renamed Slots:
+##### Renamed slots:
 
 - `card-title` → `title`
 - `card-image` → `image`

@@ -52,13 +52,13 @@ svg {
 }
 
 .page-item.disabled .page-link {
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
 }
 
 .ellipsis-disabled {
   cursor: not-allowed;
   pointer-events: none;
-  opacity: var(--sgds-opacity-50);
+  opacity: var(--sgds-opacity-40);
 }
 
 .pagination-sm .page-link {

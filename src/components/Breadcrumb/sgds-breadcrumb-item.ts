@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsLink from "../Link/sgds-link";
@@ -17,6 +17,23 @@ export class SgdsBreadcrumbItem extends SgdsElement {
   };
   /** Indicates the link matches the current location of the page. Programmatically handled by SgdsBreadcrumb to set this prop to true for the last breadcrumb item  */
   @property({ type: Boolean, reflect: true }) active = false;
+
+  private _preventNavigation = (e: MouseEvent) => e.preventDefault();
+
+  override updated(changedProperties: PropertyValueMap<this>) {
+    super.updated(changedProperties);
+    if (changedProperties.has("active")) {
+      const anchor = this.querySelector<HTMLAnchorElement>("a");
+      if (anchor) {
+        if (this.active) {
+          anchor.setAttribute("tabindex", "-1");
+          anchor.addEventListener("click", this._preventNavigation);
+        } else {
+          anchor.removeEventListener("click", this._preventNavigation);
+        }
+      }
+    }
+  }
 
   render() {
     return html`

@@ -1,4 +1,4 @@
-## Range-Selection DatePicker
+## Range-selection DatePicker
 
 When `mode="range"`, DatePicker allows a selection of two dates, start and end.
 
@@ -35,11 +35,19 @@ For better accesibility, include a hint text to let your users know what is the 
   <Story of={DatepickerStories.MinMax} />
 </Canvas>
 
-## Form Context
+## Form context
 
 Constraint validation is implemented in datepicker as much as possible to mimick the behaviour of native HTML form component.
 We use `ElementInternals` API to implement the constraint validation.
 
 <Canvas of={DatepickerStories.FormSubmission}>
   <Story of={DatepickerStories.FormSubmission} />
+</Canvas>
+
+## Custom validation
+
+Add `noValidate` to disable SGDS built-in validation, then listen to `sgds-change-date` and call `setInvalid(bool)` with a matching `invalidFeedback` to drive the error state from your own logic.
+
+<Canvas of={DatepickerStories.CustomValidation}>
+  <Story of={DatepickerStories.CustomValidation} />
 </Canvas>

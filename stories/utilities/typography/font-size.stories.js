@@ -352,7 +352,7 @@ export const LinkSizes = () => html`
 
 export const StaticFontSizes = () => html`
   <div class="sgds:mb-2-xl">
-    <h3 class="sgds:mb-md">Primitive Font Sizes</h3>
+    <h3 class="sgds:mb-md">Primitive font sizes</h3>
     <sgds-table>
       <sgds-table-row>
         <sgds-table-head>SGDS Tailwind Token</sgds-table-head>

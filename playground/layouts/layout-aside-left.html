@@ -1,0 +1,111 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<style>
+  /* Skip-to-content */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    padding: 8px 16px;
+    background: var(--sgds-color-primary-default);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-radius: 0 0 8px 0;
+    text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+
+  /* Sticky top bar */
+  .shell-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  /* Main grows to push footer down */
+  .shell-main {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 108px);
+  }
+
+  /* Content placeholder */
+  .content-placeholder {
+    min-height: calc(100vh - 108px);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 6px,
+      var(--sgds-color-border-muted, #e5e7eb) 6px,
+      var(--sgds-color-border-muted, #e5e7eb) 7px
+    );
+  }
+</style>
+
+<body>
+
+  <!-- Skip navigation for keyboard / screen reader users -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ── TOP BAR: Masthead + Mainnav (sticky) ── -->
+  <div class="shell-nav">
+    <sgds-masthead fluid></sgds-masthead>
+    <sgds-mainnav fluid>
+      <strong slot="brand">My App</strong>
+
+      <sgds-mainnav-dropdown>
+        <span slot="toggler">Workspace</span>
+        <sgds-dropdown-item><a href="#">Dashboard</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Analytics</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Projects</a></sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+
+      <sgds-mainnav-dropdown>
+        <span slot="toggler">Manage</span>
+        <sgds-dropdown-item><a href="#">Team</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Reports</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Billing</a></sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+
+      <div slot="end">
+        <sgds-button variant="primary" size="sm">New</sgds-button>
+      </div>
+    </sgds-mainnav>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <div class="shell-main">
+
+    <main id="main-content" tabindex="-1" class="sgds:flex-1">
+      <div class="sgds-container sgds:py-layout-md">
+        <div class="sgds-grid" style="gap: var(--sgds-gap-layout-md); align-items: stretch;">
+
+          <!-- ASIDE — 4 cols -->
+          <aside class="content-placeholder sgds:border sgds:border-muted sgds-col-4 sgds-col-sm-8 sgds-col-lg-4"></aside>
+
+          <!-- CONTENT — 8 cols -->
+          <div class="content-placeholder sgds:border sgds:border-muted sgds-col-8 sgds-col-sm-8 sgds-col-lg-8"></div>
+
+        </div>
+      </div>
+    </main>
+
+    <sgds-footer
+      privacyhref="#"
+      termsofusehref="#"
+      contacthref="#"
+      feedbackhref="#"
+    >
+      <h2 slot="title">My App</h2>
+      <p slot="description">A Singapore Government digital service.</p>
+    </sgds-footer>
+
+  </div>
+
+</body>
