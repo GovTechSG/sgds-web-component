@@ -1380,6 +1380,44 @@ describe("datepicker input masking", () => {
     expect(inputEl.value).to.equal("20/02/2024 - DD/MM/YYYY");
     expect(shadowInput?.classList.contains("is-invalid")).to.be.true;
   });
+
+  const invalidDateCases = [
+    { mode: "single", dateDigits: [2, 0, 2, 0, 2, 0, 2, 6], description: "20/20/2026 (invalid month)" },
+    { mode: "single", dateDigits: [3, 2, 0, 2, 2, 0, 2, 6], description: "32/02/2026 (invalid day)" },
+    { mode: "single", dateDigits: [3, 0, 0, 2, 2, 0, 2, 6], description: "30/02/2026 (invalid date)" }
+  ];
+
+  invalidDateCases.forEach(({ mode, dateDigits, description }) => {
+    it(`for mode=${mode}, clears input on blur when invalid date ${description} is entered`, async () => {
+      const inputEl = await fixture<DatepickerInput>(
+        html`<sgds-datepicker-input mode=${mode as "single" | "range"} hasFeedback="both"></sgds-datepicker-input>`
+      );
+      const blurHandler = sinon.spy();
+      inputEl.addEventListener("sgds-blur", blurHandler);
+
+      const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
+      expect(inputEl.value).to.equal("");
+      expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+
+      inputEl.focus();
+
+      for (const d of dateDigits) {
+        await sendKeys({ press: `Digit${d}` });
+      }
+
+      await inputEl.updateComplete;
+      expect(inputEl.value).not.to.equal("");
+
+      // Blur the input - this should clear the invalid date
+      inputEl.blur();
+      await inputEl.updateComplete;
+
+      // Verify the input is cleared (shows mask placeholder)
+      expect(inputEl.value).to.equal("DD/MM/YYYY");
+      expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+      expect(blurHandler).to.be.calledOnce;
+    });
+  });
 });
 
 describe("error message", () => {
