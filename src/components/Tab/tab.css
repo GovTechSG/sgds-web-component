@@ -75,6 +75,10 @@
   background-color: var(--sgds-bg-translucent-subtle);
 }
 
+:host([fullWidth][orientation="horizontal"]) .tab {
+  justify-content: center;
+}
+
 .tab {
   display: flex;
   align-items: center;

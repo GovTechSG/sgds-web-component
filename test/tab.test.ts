@@ -160,7 +160,8 @@ describe("<sgds-tab-group>", () => {
   const propsToForwardToChild = [
     { name: "variant", defaultValue: "underlined", changedValue: "solid" },
     { name: "density", defaultValue: "default", changedValue: "compact" },
-    { name: "orientation", defaultValue: "horizontal", changedValue: "vertical" }
+    { name: "orientation", defaultValue: "horizontal", changedValue: "vertical" },
+    { name: "fullWidth", defaultValue: "false", changedValue: "true" }
   ];
   propsToForwardToChild.forEach(({ name, defaultValue, changedValue }) => {
     it(`change of ${name} prop updates its sgds-tab children`, async () => {
