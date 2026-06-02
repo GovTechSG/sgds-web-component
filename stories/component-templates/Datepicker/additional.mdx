@@ -51,3 +51,24 @@ Add `noValidate` to disable SGDS built-in validation, then listen to `sgds-chang
 <Canvas of={DatepickerStories.CustomValidation}>
   <Story of={DatepickerStories.CustomValidation} />
 </Canvas>
+
+## Invalid date auto-clear
+
+When a user enters a **complete but invalid** date (e.g., `20/20/2026` for invalid month, `32/01/2026` for invalid day, or `30/02/2026` for a date that doesn't exist) and then blurs the input field by clicking outside, the datepicker automatically clears the invalid value. This prevents users from accidentally submitting invalid dates and provides a cleaner user experience.
+
+**This behaviour is distinct from form validation.** It is a built-in input sanitisation mechanism that works regardless of whether `noValidate` is applied. Even when you opt out of SGDS constraint validation with `noValidate`, the datepicker will still clear impossible dates on blur.
+
+**Important:** Incomplete dates (e.g., `12/03/202Y` with a missing digit) will remain in the field and show validation errors, allowing users to complete the entry. Only fully-typed but impossible dates are cleared on blur.
+
+The `sgds-invalid` event is emitted when an invalid date is detected. The input value is then cleared on blur. You can detect the clear by checking if the value is empty in your `sgds-blur` handler.
+
+**Examples of invalid dates that will be cleared:**
+
+- `20/20/2026` - Invalid month (month 20 doesn't exist)
+- `32/01/2026` - Invalid day (day 32 doesn't exist in January)
+- `30/02/2026` - Invalid date (February doesn't have 30 days)
+- Dates outside `minDate` or `maxDate` range
+
+<Canvas of={DatepickerStories.InvalidDateClear}>
+  <Story of={DatepickerStories.InvalidDateClear} />
+</Canvas>

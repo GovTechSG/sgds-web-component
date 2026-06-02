@@ -20,7 +20,7 @@
   color: var(--sgds-form-color-subtle);
   display: flex;
   gap: var(--sgds-gap-xs);
-  flex-wrap: wrap;
+  flex-shrink: 0;
 }
 
 .form-control-group.quantity-toggle {

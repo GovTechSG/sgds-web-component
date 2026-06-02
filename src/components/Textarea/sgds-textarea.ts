@@ -21,6 +21,8 @@ import formTextControlStyles from "../../styles/form-text-control.css";
  * @event sgds-input - Emitted when the control receives input and its value changes.
  * @event sgds-focus - Emitted when textarea is in focus.
  * @event sgds-blur - Emitted when textarea loses focus.
+ * @event sgds-invalid - Emitted when the textarea's invalid state is set to true.
+ * @event sgds-valid - Emitted when the textarea's invalid state is set to false.
  */
 export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, formTextControlStyles, textareaStyle];
