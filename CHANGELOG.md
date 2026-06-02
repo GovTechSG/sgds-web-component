@@ -1,3 +1,29 @@
+## v3.20.0 (2026-06-02)
+
+### Feat
+
+- **Stepper**: added sgds-step component and accept slots for description [run-chromatic] (#672)
+- **Stepper**: updating stepper with new state, slots and structure
+- **ComboBox**: support custom validation with noValidate [run-chromatic][skip-cd] (#646)
+- **Datepicker**: support custom validation with noValidate [run-chromatic] (#671)
+- **Datepicker**: custom validation still particpates in FormData
+- **Datepicker**: support custom validation with noValidate and fix alignment
+- **ComboBox**: support custom validation with noValidate
+
+### Fix
+
+- **Datepicker**: validation for invalid date [run-chromatic] (#679)
+- **Datepicker**: validation for invalid date
+- **Input**: long prefix should not wrap to second line [run-chromatic] [skip-cd] (#681)
+- **Input**: long prefix should not wrap to second line
+- **Input**: explicitly set form control fonts [run-chromatic] (#678) [skip-cd]
+- **Input**: explicitly set form control fonts
+
+### Refactor
+
+- **Datepicker**: rename internal events to convention
+- **Datepicker**: ensure sgds-invalid is emitted over sgds-invalid-input
+
 ## v3.19.1 (2026-05-19)
 
 ### Fix
