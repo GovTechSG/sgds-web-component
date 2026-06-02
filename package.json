@@ -112,6 +112,7 @@
     "chalk": "^5.6.2",
     "chromatic": "^15.2.0",
     "comment-parser": "^1.4.1",
+    "commitizen": "^4.3.1",
     "cypress": "^13.6.0",
     "cypress-fail-on-console-error": "^5.0.3",
     "cz-conventional-changelog": "^3.3.0",
