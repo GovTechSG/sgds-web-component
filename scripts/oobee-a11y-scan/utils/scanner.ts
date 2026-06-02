@@ -4,12 +4,6 @@ import { VITE_BASE_URL } from "./config.js";
 
 declare const runA11yScan: (elementsToScan?: string[]) => Promise<any>;
 
-export interface ViolationNode {
-  target: string;
-  html: string;
-  failureSummary: string;
-}
-
 export interface RuleViolation {
   rule: string;
   description: string;
@@ -27,6 +21,12 @@ export interface ScanPageResult {
   mustFixRules: RuleViolation[];
   goodToFixRules: RuleViolation[];
   error?: string;
+}
+
+export interface ViolationNode {
+  target: string;
+  html: string;
+  failureSummary: string;
 }
 
 // axe-core impact levels mapped to Oobee categories

@@ -94,9 +94,7 @@ function printPageResult(result: ScanPageResult, index: number) {
 async function main() {
   const filterArg = process.argv[2];
   const allPages = discoverPlaygroundPages();
-  const pages = filterArg
-    ? allPages.filter(p => p.toLowerCase().includes(filterArg.toLowerCase()))
-    : allPages;
+  const pages = filterArg ? allPages.filter(p => p.toLowerCase().includes(filterArg.toLowerCase())) : allPages;
 
   if (pages.length === 0) {
     console.error(`No playground pages matching "${filterArg}"`);
