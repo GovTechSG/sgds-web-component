@@ -8,8 +8,8 @@ export const Template = args =>
       ?dismissible=${args.dismissible}
       variant=${ifDefined(args.variant)}
       ?show=${args.show}
-      ><sgds-icon slot="icon" name="exclamation-circle-fill" size="md"></sgds-icon>
-      <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+      ><sgds-icon slot="icon" name="exclamation-circle-fill" size="md"></sgds-icon> Description with
+      <a href="#">link</a> and more details here
     </sgds-alert>
   `;
 export const args = {
