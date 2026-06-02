@@ -112,7 +112,7 @@ export class DatepickerInput extends SgdsInput {
     this.mask = IMask(shadowInput, maskOptions);
     this.mask.on("accept", () => {
       this.value = this.mask.masked.value;
-      this.emit("sgds-mask-input-change", { detail: this.value });
+      this.emit("i-sgds-mask-input-change", { detail: this.value });
     });
     /**
      * Validation after date is complete
@@ -138,19 +138,19 @@ export class DatepickerInput extends SgdsInput {
 
     if (invalidDates.length > 0) {
       this.setInvalid(true);
-      return this.emit("sgds-invalid-input");
+      return this.emit("i-sgds-invalid-input");
     }
     if (this.mode === "range" && dateArray.length === 1) {
       this.setInvalid(true);
-      return this.emit("sgds-invalid-input");
+      return this.emit("i-sgds-invalid-input");
     }
     if (invalidDates.length === 0 && dateArray.length > 0) {
       this.setInvalid(false);
-      return this.emit("sgds-selectdates-input", { detail: dateArray });
+      return this.emit("i-sgds-selectdates-input", { detail: dateArray });
     }
     if (dateArray.length === 0 && invalidDates.length === 0) {
       this.setInvalid(false);
-      return this.emit("sgds-empty-input");
+      return this.emit("i-sgds-empty-input");
     }
   };
 

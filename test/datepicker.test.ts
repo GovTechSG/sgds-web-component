@@ -1297,7 +1297,7 @@ describe("datepicker input masking", () => {
         ></sgds-datepicker-input>`
       );
       const invalidHandler = sinon.spy();
-      inputEl.addEventListener("sgds-invalid-input", invalidHandler);
+      inputEl.addEventListener("i-sgds-invalid-input", invalidHandler);
       const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
       expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
       const changeHandler = sinon.spy();
