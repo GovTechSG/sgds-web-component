@@ -24,8 +24,6 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 **Input**
 - Supports both manual text entry and calendar selection
 - Validates format and rejects invalid dates (e.g. 31 Feb)
-- **Auto-clears invalid dates on blur** — when a user types a complete but invalid date (e.g. `20/20/2026`, `32/01/2026`, `30/02/2026`) and then clicks away, the input automatically clears to prevent accidental submission of invalid dates
-- Incomplete dates (e.g. `12/03/202Y` with missing digit) remain in the input as-is — validation only runs when the full date is entered
 
 **Calendar**
 - Opens on input focus or icon click
@@ -49,14 +47,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Edge Cases
 
-- **Invalid manual input** — complete invalid dates (e.g. `20/20/2026`, `30/02/2026`) are automatically cleared on blur; incomplete dates remain in the input (no validation until complete)
 - **Leap years** — ensure 29 Feb is correctly handled
 - **Timezone differences** — be explicit if the date is local or system-based
 - **Range errors** — if end date is before start date, auto-correct or prompt an error
 - **Clearing values** — provide a clear reset/clear option
 - **Pre-filled values** — ensure correct formatting and visibility on initial render
 - **Very long ranges** — provide faster navigation (year dropdown or jump controls)
-- **Partial input** — incomplete dates (e.g. `12/03/202Y`) remain in the input as-is; validation only runs when the full date is entered
 
 ## Quick Decision Guide
 
@@ -200,4 +196,3 @@ Add `noValidate` to disable SGDS built-in validation, then use `setInvalid(bool)
 4. Use `drop="up"` when the datepicker is near the bottom of the viewport so the calendar opens upward.
 5. For custom validation: add `noValidate` to the component, listen to `sgds-change-date`, then call `element.setInvalid(true/false)` and set `element.invalidFeedback`. `hasFeedback` must also be present for the error message to render.
 6. `setInvalid(false)` clears the invalid state — call it when validation passes.
-7. **Invalid date auto-clear**: Complete invalid dates (e.g. `20/20/2026`, `32/01/2026`, `30/02/2026`) are automatically cleared on blur without emitting additional events. Incomplete dates (missing digits) remain in the input without triggering validation. Check `value === ""` or `value === "DD/MM/YYYY"` in a `sgds-blur` handler to detect when auto-clear happens.

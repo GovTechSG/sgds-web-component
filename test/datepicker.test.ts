@@ -1297,7 +1297,7 @@ describe("datepicker input masking", () => {
         ></sgds-datepicker-input>`
       );
       const invalidHandler = sinon.spy();
-      inputEl.addEventListener("sgds-invalid-input", invalidHandler);
+      inputEl.addEventListener("i-sgds-invalid-input", invalidHandler);
       const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
       expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
       const changeHandler = sinon.spy();
@@ -1587,6 +1587,48 @@ describe("datepicker behavour on invalid input", () => {
   //   await elementUpdated(header);
   //   expect(header?.shadowRoot?.querySelector("sgds-button")?.textContent).to.contain("January 2025");
   // });
+
+  it("emits sgds-invalid event when an invalid date 30/20/2026 is entered", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
+    const invalidHandler = sinon.spy();
+    el.addEventListener("sgds-invalid", invalidHandler);
+
+    const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
+    input?.focus();
+    await waitUntil(() => el.shadowRoot?.activeElement === input);
+
+    // Type 30/20/2026 (invalid month 20)
+    const dateDigits = [3, 0, 2, 0, 2, 0, 2, 6];
+    for (const d of dateDigits) {
+      await sendKeys({ press: `Digit${d}` });
+    }
+
+    await elementUpdated(el);
+    expect(invalidHandler).to.have.been.calledOnce;
+  });
+
+  it("clears invalid date 30/30/2026 on blur even with noValidate", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker noValidate></sgds-datepicker>`);
+    const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
+
+    input?.focus();
+    await waitUntil(() => el.shadowRoot?.activeElement === input);
+
+    // Type 30/30/2026 (invalid month 30)
+    const dateDigits = [3, 0, 3, 0, 2, 0, 2, 6];
+    for (const d of dateDigits) {
+      await sendKeys({ press: `Digit${d}` });
+    }
+
+    await elementUpdated(el);
+    expect(input?.value).to.equal("30/30/2026");
+
+    // Blur should clear the invalid date
+    input?.blur();
+    await elementUpdated(el);
+
+    expect(el.value).to.equal("");
+  });
 });
 
 describe("datepicker in form context", () => {
