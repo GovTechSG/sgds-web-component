@@ -79,6 +79,16 @@ export class SelectElement
   /** Marks the component as invalid. Replace the pseudo :invalid selector. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** Programatically sets the invalid state of the component. Pass in boolean value in the argument */
+  public setInvalid(bool: boolean) {
+    this.invalid = bool;
+    if (bool) {
+      this.emit("sgds-invalid");
+    } else {
+      this.emit("sgds-valid");
+    }
+  }
+
   /** The list of items to display in the dropdown.
    * `interface SgdsComboBoxItemData {
    * label: string;
@@ -116,6 +126,7 @@ export class SelectElement
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("blur", async e => {
+      if (this._mixinShouldSkipSgdsValidation()) return;
       const childName = (this.constructor as typeof SelectElement).childName;
       /** If user clicks the menu, we want to keep the input valid */
       const isSelf = (e.relatedTarget as HTMLElement)?.tagName.toLowerCase() === childName;

@@ -2,6 +2,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
     <script type="module" src="../src/index.ts"></script>
+    <script type="module" src="../mocks/stepper.ts"></script>
     <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
     <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
     <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
@@ -18,72 +19,148 @@
   <body>
     <div class="container">
       <div>
-        <h2>Horizontal (default)</h2>
-        <sgds-stepper activeStep="1">
-          <sgds-stepper-item>Step 1</sgds-stepper-item>
-          <sgds-stepper-item>Step 2</sgds-stepper-item>
-          <sgds-stepper-item>Step 3</sgds-stepper-item>
+        <sgds-stepper
+          steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'
+        ></sgds-stepper>
+
+        <h2>Horizontal (default) - Using sgds-step Non-linear and has completed steps</h2>
+        <sgds-stepper
+          activeStep="0"
+          clickable
+          steps='[{"stepHeader":"Personal Details","component":"1 test"},{"stepHeader":"Address and Contact Information","component":"2 test"},{"stepHeader":"Review","component":"3 test"}]'
+        >
+          <sgds-step stepHeader="Step 1">
+            <span>helloworld</span>
+            <span>line 2</span>
+            <span>line 3</span>
+          </sgds-step>
+          <sgds-step stepHeader="Step 2" completed>
+            <span>helloworld</span>
+            <span><sgds-badge>status</sgds-badge></span>
+            <span>helloworld</span>
+          </sgds-step>
+          <sgds-step stepHeader="Step 3" completed>
+            <span>helloworld</span>
+            <span>helloworld</span>
+            <span>helloworld</span>
+          </sgds-step>
         </sgds-stepper>
       </div>
 
       <div>
-        <h2>Vertical</h2>
-        <sgds-stepper orientation="vertical" activeStep="1">
-          <sgds-stepper-item>Step 1</sgds-stepper-item>
-          <sgds-stepper-item>Step 2</sgds-stepper-item>
-          <sgds-stepper-item>Step 3</sgds-stepper-item>
+        <h2>Vertical - Using sgds-step</h2>
+        <sgds-stepper orientation="vertical" activeStep="1" clickable="true">
+          <sgds-step stepHeader="Personal Details">
+            <span>helloworld</span>
+            <span><sgds-badge>status</sgds-badge></span>
+            <span>helloworld</span>
+          </sgds-step>
+          <sgds-step stepHeader="Address Information">
+            <span>helloworld</span>
+            <span>helloworld</span>
+          </sgds-step>
+          <sgds-step stepHeader="Review">
+            <span>helloworld</span>
+            <span>
+              <sgds-link data-clickable>
+                <a href="#" data-clickable>download</a>
+              </sgds-link>
+              this link for a comprehensive make up tutorial for free
+            </span>
+            <sgds-button size="xs" data-clickable>ss</sgds-button>
+          </sgds-step>
         </sgds-stepper>
       </div>
 
       <div>
-        <h2>Clickable Steps</h2>
+        <h2>With Icons - Using sgds-step</h2>
+        <sgds-stepper activeStep="0">
+          <sgds-step stepHeader="Account" iconName="person"> slot </sgds-step>
+          <sgds-step stepHeader="Profile" iconName="users"> slot </sgds-step>
+          <sgds-step stepHeader="Review" iconName="check-circle"> slot </sgds-step>
+        </sgds-stepper>
+      </div>
+
+      <div>
+        <h2>Clickable Steps - Using sgds-step</h2>
         <sgds-stepper activeStep="0" clickable>
-          <sgds-stepper-item>Account</sgds-stepper-item>
-          <sgds-stepper-item>Profile</sgds-stepper-item>
-          <sgds-stepper-item>Review</sgds-stepper-item>
-          <sgds-stepper-item>Submit</sgds-stepper-item>
+          <sgds-step stepHeader="Account"> slot </sgds-step>
+          <sgds-step stepHeader="Profile"> slot </sgds-step>
+          <sgds-step stepHeader="Review"> slot </sgds-step>
+          <sgds-step stepHeader="Submit"> slot </sgds-step>
         </sgds-stepper>
       </div>
 
       <div>
-        <h2>With Navigation Buttons</h2>
-        <sgds-stepper id="nav-stepper" activeStep="0">
-          <sgds-stepper-item>Details</sgds-stepper-item>
-          <sgds-stepper-item>Verification</sgds-stepper-item>
-          <sgds-stepper-item>Confirmation</sgds-stepper-item>
+        <h2>With Slot Content - Using sgds-step</h2>
+        <sgds-stepper activeStep="0">
+          <sgds-step stepHeader="Personal Details">
+            <p style="margin-top: 16px; font-size: 14px; color: #666">Enter your personal information here</p>
+          </sgds-step>
+          <sgds-step stepHeader="Address Information">
+            <p style="margin-top: 16px; font-size: 14px; color: #666">Enter your address details here</p>
+          </sgds-step>
+          <sgds-step stepHeader="Review">
+            <p style="margin-top: 16px; font-size: 14px; color: #666">Review all your information before submitting</p>
+          </sgds-step>
         </sgds-stepper>
+      </div>
+
+      <div>
+        <h2>With Navigation Buttons - Using sgds-step linear</h2>
+        <sgds-stepper orientation="vertical" id="nav-stepper" activeStep="0" clickable linear>
+          <sgds-step stepHeader="Details"> slot </sgds-step>
+          <sgds-step stepHeader="Verification"> slot </sgds-step>
+          <sgds-step stepHeader="Confirmation" disabled> slot </sgds-step>
+        </sgds-stepper>
+
         <div style="display: flex; gap: 8px; margin-top: 16px">
           <sgds-button id="prev-btn" variant="outlined" disabled>Previous</sgds-button>
           <sgds-button id="next-btn">Next</sgds-button>
         </div>
+
         <script>
           const stepper = document.getElementById("nav-stepper");
+          stepper.addEventListener("sgds-arrived", () => {
+            updateButtons();
+          });
+
           const prevBtn = document.getElementById("prev-btn");
           const nextBtn = document.getElementById("next-btn");
           const totalSteps = 3;
 
           function updateButtons() {
             const current = parseInt(stepper.getAttribute("activeStep"));
+
             prevBtn.disabled = current === 0;
             nextBtn.disabled = current === totalSteps - 1;
           }
 
           prevBtn.addEventListener("click", () => {
             const current = parseInt(stepper.getAttribute("activeStep"));
-            if (current > 0) {
-              stepper.setAttribute("activeStep", current - 1);
+
+            stepper.previousStep();
+            setTimeout(() => {
               updateButtons();
-            }
+            }, 200);
           });
 
           nextBtn.addEventListener("click", () => {
             const current = parseInt(stepper.getAttribute("activeStep"));
-            if (current < totalSteps - 1) {
-              stepper.setAttribute("activeStep", current + 1);
+
+            stepper.nextStep();
+            setTimeout(() => {
               updateButtons();
-            }
+            }, 200);
           });
+
+          updateButtons();
         </script>
+      </div>
+
+      <div>
+        <h2>Form Stepper with State Management - Mock Component</h2>
+        <mock-stepper></mock-stepper>
       </div>
     </div>
   </body>

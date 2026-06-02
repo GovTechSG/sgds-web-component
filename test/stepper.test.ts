@@ -46,8 +46,8 @@ describe("sgds-stepper", () => {
     expect(stepperItems?.length).to.equal(3);
   });
   it("should render the correct number of steps when passed in steps prop", async () => {
-    stepMetaData.push({ stepHeader: "Submitted", component: "4 test" });
-    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData}></sgds-stepper> `);
+    const fourSteps = [...stepMetaData, { stepHeader: "Submitted", component: "4 test" }];
+    const el = await fixture(html` <sgds-stepper .steps=${fourSteps}></sgds-stepper> `);
     const stepperItems = el.shadowRoot?.querySelectorAll(".stepper-item");
     expect(stepperItems?.length).to.equal(4);
   });
@@ -375,5 +375,53 @@ describe("sgds-stepper accessibility", () => {
     expect(markers?.[0]).to.have.attribute("aria-disabled", "false");
     expect(markers?.[1]).to.have.attribute("aria-disabled", "true");
     expect(markers?.[2]).to.have.attribute("aria-disabled", "true");
+  });
+});
+
+describe("sgds-stepper with sgds-step child components", () => {
+  it("should render sgds-step children when slotted", async () => {
+    const el = await fixture(html`
+      <sgds-stepper>
+        <sgds-step stepHeader="Personal Details"></sgds-step>
+        <sgds-step stepHeader="Address"></sgds-step>
+        <sgds-step stepHeader="Review"></sgds-step>
+      </sgds-stepper>
+    `);
+    const steps = el.querySelectorAll("sgds-step");
+    expect(steps.length).to.equal(3);
+  });
+
+  it("should not render fallback steps when sgds-step children are slotted", async () => {
+    const el = await fixture(html`
+      <sgds-stepper .steps=${stepMetaData}>
+        <sgds-step stepHeader="Personal Details"></sgds-step>
+        <sgds-step stepHeader="Address"></sgds-step>
+        <sgds-step stepHeader="Review"></sgds-step>
+      </sgds-stepper>
+    `);
+    const shadowSteps = el.shadowRoot?.querySelectorAll(".stepper-item-container");
+    expect(shadowSteps?.length).to.equal(0);
+  });
+
+  it("should set hasDefaultSlot=true when sgds-step children are slotted", async () => {
+    const el = await fixture<SgdsStepper>(html`
+      <sgds-stepper>
+        <sgds-step stepHeader="Personal Details"></sgds-step>
+      </sgds-stepper>
+    `);
+    await el.updateComplete;
+    expect(el.hasDefaultSlot).to.be.true;
+  });
+
+  it("should set hasDefaultSlot=false when no sgds-step children are slotted", async () => {
+    const el = await fixture<SgdsStepper>(html` <sgds-stepper .steps=${stepMetaData}></sgds-stepper> `);
+    await el.updateComplete;
+    expect(el.hasDefaultSlot).to.be.false;
+  });
+
+  it("should render fallback steps when steps prop is provided and no children are slotted", async () => {
+    const el = await fixture(html` <sgds-stepper .steps=${stepMetaData}></sgds-stepper> `);
+    const shadowSteps = el.shadowRoot?.querySelectorAll(".stepper-item-container");
+    expect(shadowSteps?.length).to.equal(3);
   });
 });

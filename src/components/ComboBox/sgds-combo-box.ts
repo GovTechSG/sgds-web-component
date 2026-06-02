@@ -36,6 +36,8 @@ export type { ISgdsComboBoxInputEventDetail };
  * @eventDetail {ISgdsComboBoxInputEventDetail} sgds-input
  * @event sgds-focus -  Emitted when user input is focused.
  * @event sgds-blur -  Emitted when user input is blurred.
+ * @event sgds-invalid - Emitted when the combo box's invalid state is set to true.
+ * @event sgds-valid - Emitted when the combo box's invalid state is set to false.
  */
 export class SgdsComboBox extends SelectElement {
   static styles = [...SelectElement.styles, formTextControlStyle, comboBoxStyle];
@@ -56,6 +58,9 @@ export class SgdsComboBox extends SelectElement {
 
   /** If true, a clear button will be enabled on focus */
   @property({ type: Boolean, reflect: true }) clearable = false;
+
+  /** Disables native and sgds validation for the combo box. */
+  @property({ type: Boolean, reflect: true }) noValidate = false;
 
   /** Enables the asynchronous behaviour of a combo box. When true, filterFunction is ignored and filtering is done remotely. */
   @property({ type: Boolean, reflect: true }) async = false;
@@ -207,6 +212,7 @@ export class SgdsComboBox extends SelectElement {
     }
 
     if (!this._isTouched && this.value === "") return;
+    if (this._mixinShouldSkipSgdsValidation()) return;
     this.invalid = !this._mixinReportValidity();
   }
 
