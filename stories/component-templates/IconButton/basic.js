@@ -6,10 +6,12 @@ export const Template = args => html` <sgds-icon-button
   variant=${ifDefined(args.variant)}
   ?loading=${args.loading}
   size=${ifDefined(args.size)}
+  ariaLabel=${ifDefined(args.ariaLabel)}
 ></sgds-icon-button>`;
 
 export const args = {
-  name: "plus"
+  name: "plus",
+  ariaLabel: "Add"
 };
 
 export const parameters = {};
