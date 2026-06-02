@@ -35,8 +35,12 @@ const ToneTemplate = args => {
         <sgds-button tone="neutral" variant="ghost" ariaLabel="Neutral Ghost">Neutral Ghost</sgds-button>
       </div>
       <div class="d-flex-row" style="padding: 12px; background-color: #333;">
-        <sgds-button tone="fixed-light" variant="primary" ariaLabel="Fixed Light Primary">Fixed Light Primary</sgds-button>
-        <sgds-button tone="fixed-light" variant="outline" ariaLabel="Fixed Light Outline">Fixed Light Outline</sgds-button>
+        <sgds-button tone="fixed-light" variant="primary" ariaLabel="Fixed Light Primary"
+          >Fixed Light Primary</sgds-button
+        >
+        <sgds-button tone="fixed-light" variant="outline" ariaLabel="Fixed Light Outline"
+          >Fixed Light Outline</sgds-button
+        >
         <sgds-button tone="fixed-light" variant="ghost" ariaLabel="Fixed Light Ghost">Fixed Light Ghost</sgds-button>
       </div>
     </div>
@@ -110,7 +114,9 @@ export const Disabled = {
 
 export const ButtonWithIcon = {
   render: () => html`
-    <sgds-button ariaLabel="Leading icon"><sgds-icon name="placeholder" slot="leftIcon"></sgds-icon>Leading icon</sgds-button>
+    <sgds-button ariaLabel="Leading icon"
+      ><sgds-icon name="placeholder" slot="leftIcon"></sgds-icon>Leading icon</sgds-button
+    >
     <sgds-button ariaLabel="Trailing icon">
       <sgds-icon name="placeholder" slot="rightIcon"></sgds-icon>
       Trailing icon
