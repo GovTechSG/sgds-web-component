@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { property, query, state } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
@@ -42,17 +42,8 @@ export class SgdsAccordionItem extends SgdsElement {
   /** Controls the density of the individual accordion item. This value is controlled by sgds-accordion */
   @property({ type: String, reflect: true }) density: AccordionDensity = "default";
 
-  /** @internal */
-  @state() private _headerLabel = "";
-
-  private _handleHeaderSlotChange(e: Event) {
-    const slot = e.target as HTMLSlotElement;
-    const nodes = slot.assignedNodes({ flatten: true });
-    this._headerLabel = nodes
-      .map(n => n.textContent?.trim() ?? "")
-      .join(" ")
-      .trim();
-  }
+  /** The aria-label attribute forwarded to the accordion item button. */
+  @property({ type: String }) ariaLabel = "";
 
   private handleSummaryClick() {
     if (this.open) {
@@ -151,7 +142,6 @@ export class SgdsAccordionItem extends SgdsElement {
     return html`
       <div class="accordion-item">
         <button
-          id="header"
           class=${classMap({
             "accordion-btn": true,
             disabled: this.disabled,
@@ -161,13 +151,13 @@ export class SgdsAccordionItem extends SgdsElement {
           aria-expanded=${this.open ? "true" : "false"}
           aria-disabled=${this.disabled ? "true" : "false"}
           aria-controls="content"
-          aria-label=${ifDefined(this._headerLabel || undefined)}
+          aria-label=${ifDefined(this.ariaLabel || undefined)}
           tabindex=${this.disabled ? "-1" : "0"}
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}
         >
           <slot name="icon"></slot>
-          <slot name="header" @slotchange=${this._handleHeaderSlotChange}></slot>
+          <slot name="header"></slot>
           <div class="accordion-header__trailing">
             <slot name="badge"></slot>
             <slot name="caret">

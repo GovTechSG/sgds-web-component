@@ -31,7 +31,7 @@ export default [
     input: [
       ...getFilesInDirectorySync("./test"),
       ...getFilesInDirectorySync("./test/utils"),
-      ...getFilesInDirectorySync("./test/a11y")
+      ...getFilesInDirectorySync("./test/a11y/axe-core")
     ],
     output: [
       {

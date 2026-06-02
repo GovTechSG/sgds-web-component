@@ -16,9 +16,9 @@ const COLORS = {
 };
 
 function discoverPlaygroundPages(): string[] {
-  const playgroundDir = path.resolve("./playground");
-  const entries = fs.readdirSync(playgroundDir, { withFileTypes: true });
-  return entries.filter(e => e.isFile() && e.name.endsWith(".html")).map(e => `playground/${e.name}`);
+  const oobeeDir = path.resolve("./test/a11y/oobee");
+  const entries = fs.readdirSync(oobeeDir, { withFileTypes: true });
+  return entries.filter(e => e.isFile() && e.name.endsWith(".html")).map(e => `test/a11y/oobee/${e.name}`);
 }
 
 function printPageResult(result: ScanPageResult, index: number) {
@@ -32,7 +32,7 @@ function printPageResult(result: ScanPageResult, index: number) {
     ? `${COLORS.yellow}WARN${COLORS.reset}`
     : `${COLORS.green}PASS${COLORS.reset}`;
 
-  const pageName = result.page.replace("playground/", "").replace(".html", "");
+  const pageName = result.page.replace("test/a11y/oobee/", "").replace(".html", "");
   console.log(
     `  ${status}  ${pageName}  ${COLORS.dim}(mustFix: ${result.mustFix}, goodToFix: ${result.goodToFix}, passed: ${result.passed})${COLORS.reset}`
   );
@@ -42,29 +42,67 @@ function printPageResult(result: ScanPageResult, index: number) {
     return;
   }
 
-  // Print mustFix violations
+  // Print mustFix violations with details
   for (const rule of result.mustFixRules) {
     console.log(
       `         ${COLORS.red}✗${COLORS.reset} ${rule.description} ${COLORS.dim}[${rule.rule}] (${rule.count} occurrences)${COLORS.reset}`
     );
+    if (rule.helpUrl) {
+      console.log(`           ${COLORS.dim}→ ${rule.helpUrl}${COLORS.reset}`);
+    }
+    for (const node of rule.nodes) {
+      console.log(`           ${COLORS.dim}Element:${COLORS.reset} ${node.target}`);
+      if (node.html) {
+        const truncatedHtml = node.html.length > 120 ? node.html.slice(0, 120) + "..." : node.html;
+        console.log(`           ${COLORS.dim}HTML:${COLORS.reset}    ${truncatedHtml}`);
+      }
+      if (node.failureSummary) {
+        const lines = node.failureSummary.split("\n").filter(l => l.trim());
+        for (const line of lines) {
+          console.log(`           ${COLORS.red}${line.trim()}${COLORS.reset}`);
+        }
+      }
+      console.log();
+    }
   }
 
-  // Print goodToFix violations (only first 3 per page to keep output manageable)
-  const goodToFixToShow = result.goodToFixRules.slice(0, 3);
-  for (const rule of goodToFixToShow) {
+  // Print goodToFix violations with details
+  for (const rule of result.goodToFixRules) {
     console.log(
       `         ${COLORS.yellow}!${COLORS.reset} ${rule.description} ${COLORS.dim}[${rule.rule}] (${rule.count} occurrences)${COLORS.reset}`
     );
-  }
-  if (result.goodToFixRules.length > 3) {
-    console.log(
-      `         ${COLORS.dim}... and ${result.goodToFixRules.length - 3} more goodToFix rules${COLORS.reset}`
-    );
+    if (rule.helpUrl) {
+      console.log(`           ${COLORS.dim}→ ${rule.helpUrl}${COLORS.reset}`);
+    }
+    for (const node of rule.nodes) {
+      console.log(`           ${COLORS.dim}Element:${COLORS.reset} ${node.target}`);
+      if (node.html) {
+        const truncatedHtml = node.html.length > 120 ? node.html.slice(0, 120) + "..." : node.html;
+        console.log(`           ${COLORS.dim}HTML:${COLORS.reset}    ${truncatedHtml}`);
+      }
+      if (node.failureSummary) {
+        const lines = node.failureSummary.split("\n").filter(l => l.trim());
+        for (const line of lines) {
+          console.log(`           ${COLORS.yellow}${line.trim()}${COLORS.reset}`);
+        }
+      }
+      console.log();
+    }
   }
 }
 
 async function main() {
-  const pages = discoverPlaygroundPages();
+  const filterArg = process.argv[2];
+  const allPages = discoverPlaygroundPages();
+  const pages = filterArg
+    ? allPages.filter(p => p.toLowerCase().includes(filterArg.toLowerCase()))
+    : allPages;
+
+  if (pages.length === 0) {
+    console.error(`No playground pages matching "${filterArg}"`);
+    process.exit(1);
+  }
+
   console.log(`\n${COLORS.bold}Oobee A11y Scan${COLORS.reset}`);
   console.log(`${COLORS.dim}Scanning ${pages.length} playground pages...${COLORS.reset}\n`);
 

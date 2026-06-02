@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <sgds-stepper
+.steps=${[
+{ stepHeader: "Personal Details", component: "Step 1 content" },
+{ stepHeader: "Address", component: "Step 2 content" },
+{ stepHeader: "Review", component: "Step 3 content" }
+]}
+></sgds-stepper>
+  </body>
+</html>
