@@ -3,50 +3,179 @@
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 
+<style>
+  body { padding: 24px; font-family: sans-serif; }
+  h2 { margin-top: 32px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+  h3 { margin-top: 16px; color: #555; }
+  section { margin-bottom: 16px; }
+</style>
 
-<sgds-input readonly value="This is a readonly input"></sgds-input>
-<br/>
-<sgds-input value="This is a normal input"></sgds-input>
-<br/>
-<sgds-input value="This is a disabled input" disabled></sgds-input>
+<h2>States</h2>
 
-<h2>Password</h2>
-<sgds-input type="password" value="This is a password input" suffix="test" loading>
-    <sgds-icon-button slot="action" name="trash"></sgds-icon-button>
+<h3>Default</h3>
+<sgds-input label="Default" value="Normal input"></sgds-input>
+
+<h3>Disabled</h3>
+<sgds-input label="Disabled" value="Disabled input" disabled></sgds-input>
+
+<h3>Readonly</h3>
+<sgds-input label="Readonly" value="Readonly input" readonly></sgds-input>
+
+<h3>Invalid</h3>
+<sgds-input label="Invalid" value="Bad value" invalid hasFeedback="both" invalidFeedback="This field has an error"></sgds-input>
+
+<h3>Valid</h3>
+<sgds-input label="Valid" value="Good value" valid></sgds-input>
+
+<h2>Prefix / Suffix Permutations</h2>
+
+<h3>Short prefix only</h3>
+<sgds-input label="Amount" prefix="$" value="100"></sgds-input>
+
+<h3>Short suffix only</h3>
+<sgds-input label="Weight" suffix="kg" value="75"></sgds-input>
+
+<h3>Short prefix + short suffix</h3>
+<sgds-input label="Price" prefix="$" suffix=".00" value="50"></sgds-input>
+
+<h3>Long prefix (URL) - THE BUG CASE</h3>
+<sgds-input label="Endpoint" prefix="http://localhost:3000/core-sec/product-management/sample-app/edit" value="test"></sgds-input>
+
+<h3>Long prefix (URL) + readonly</h3>
+<sgds-input label="Endpoint" prefix="http://localhost:3000/core-sec/product-management/sample-app/edit" value="Readonly value" readonly></sgds-input>
+
+<h3>Long prefix + disabled</h3>
+<sgds-input label="Endpoint" prefix="http://localhost:3000/core-sec/product-management/sample-app/edit" value="Disabled" disabled></sgds-input>
+
+<h3>Long suffix</h3>
+<sgds-input label="Domain" suffix="@government.gov.sg" value="user.name"></sgds-input>
+
+<h3>Long prefix + long suffix</h3>
+<sgds-input label="Full URL" prefix="https://api.gov.sg/" suffix="/v2/endpoint" value="service-name"></sgds-input>
+
+<h3>Prefix + suffix + invalid</h3>
+<sgds-input label="Amount" prefix="$" suffix=".00" value="" invalid hasFeedback="both" invalidFeedback="Amount is required"></sgds-input>
+
+<h2>Loading State</h2>
+
+<h3>Loading (no prefix/suffix)</h3>
+<sgds-input label="Lookup" value="Searching..." loading></sgds-input>
+
+<h3>Loading + prefix</h3>
+<sgds-input label="Amount" prefix="$" value="100" loading></sgds-input>
+
+<h3>Loading + suffix</h3>
+<sgds-input label="Weight" suffix="kg" value="75" loading></sgds-input>
+
+<h3>Loading + prefix + suffix</h3>
+<sgds-input label="Price" prefix="$" suffix=".00" value="50" loading></sgds-input>
+
+<h3>Loading + long prefix</h3>
+<sgds-input label="Endpoint" prefix="http://localhost:3000/api" value="loading" loading></sgds-input>
+
+<h2>Action Slot</h2>
+
+<h3>Action button only</h3>
+<sgds-input label="Search" value="query">
+  <sgds-icon-button slot="action" variant="ghost" name="search"></sgds-icon-button>
 </sgds-input>
 
-<br/>
-<h2>Trailing Icon</h2>
-<sgds-input value="This is a normal input" loading ></sgds-input>
-<sgds-input value="This is a normal input" valid></sgds-input>
-<sgds-input value="This is a normal input" valid>
-    <sgds-icon name="trash" slot="trailing-icon"></sgds-icon>
+<h3>Action button + prefix</h3>
+<sgds-input label="URL" prefix="https://" value="example.com">
+  <sgds-icon-button slot="action" variant="ghost" name="link"></sgds-icon-button>
 </sgds-input>
 
+<h3>Action button + suffix</h3>
+<sgds-input label="Email" suffix="@gov.sg" value="user">
+  <sgds-icon-button slot="action" variant="ghost" name="mail"></sgds-icon-button>
+</sgds-input>
 
-  <form novalidate>
-        <sgds-input required hasFeedback="both" ></sgds-input>
-        <sgds-button type="submit">Novalidate </sgds-button>
-      </form>
+<h3>Action button + prefix + suffix</h3>
+<sgds-input label="Price" prefix="$" suffix=".00" value="99">
+  <sgds-icon-button slot="action" variant="ghost" name="check"></sgds-icon-button>
+</sgds-input>
 
-<form>
-    <sgds-input id="no-validation-test" noValidate required hasFeedback="both" ></sgds-input>
-    <sgds-button type="submit">Submit</sgds-button>
-</form>
+<h3>Action button + loading</h3>
+<sgds-input label="Validating" value="checking..." loading>
+  <sgds-icon-button slot="action" variant="ghost" name="refresh-cw"></sgds-icon-button>
+</sgds-input>
 
-<script>
-const handleInput = (e) => {
-        if(!/^[^a-zA-Z0-9]/.test(e.target.value)) {
-            e.target.setInvalid(false)
-        } else {
-            e.target.setInvalid(true)
-            e.target.invalidFeedback = "This is an invalid message";
-        }
-    }
-    const handleChange = (e) => {
-        console.log('change event', e);
-    }
-    document.querySelector("#no-validation-test").addEventListener('sgds-input', handleInput);
-    document.querySelector("#no-validation-test").addEventListener('sgds-change', handleChange);
+<h3>Action button + long prefix + loading</h3>
+<sgds-input label="Full combo" prefix="http://localhost:3000/" value="path" loading>
+  <sgds-icon-button slot="action" variant="ghost" name="copy"></sgds-icon-button>
+</sgds-input>
 
-</script>
+<h2>Password Type</h2>
+
+<h3>Password default</h3>
+<sgds-input type="password" label="Password" value="secret123"></sgds-input>
+
+<h3>Password + action (toggle visibility)</h3>
+<sgds-input type="password" label="Password" value="secret123">
+  <sgds-icon-button slot="action" variant="ghost" name="eye"></sgds-icon-button>
+</sgds-input>
+
+<h3>Password + prefix + action</h3>
+<sgds-input type="password" label="Password" prefix="🔒" value="secret123">
+  <sgds-icon-button slot="action" variant="ghost" name="eye"></sgds-icon-button>
+</sgds-input>
+
+<h2>Number Type</h2>
+
+<h3>Number basic</h3>
+<sgds-input type="number" label="Quantity" value="5" min="0" max="100" step="1"></sgds-input>
+
+<h3>Number + prefix + suffix</h3>
+<sgds-input type="number" label="Temperature" prefix="Min" suffix="°C" value="25"></sgds-input>
+
+<h2>Empty / Placeholder States</h2>
+
+<h3>Empty with placeholder</h3>
+<sgds-input label="Name" placeholder="Enter your name"></sgds-input>
+
+<h3>Empty with placeholder + prefix</h3>
+<sgds-input label="Amount" prefix="$" placeholder="0.00"></sgds-input>
+
+<h3>Empty with placeholder + prefix + suffix</h3>
+<sgds-input label="Range" prefix="Min:" suffix="Max: 100" placeholder="Enter value"></sgds-input>
+
+<h2>Width Constraints</h2>
+
+<h3>Inside a narrow container (200px)</h3>
+<div style="width: 200px; border: 1px dashed #ccc; padding: 8px;">
+  <sgds-input label="Narrow" prefix="$" suffix=".00" value="123"></sgds-input>
+</div>
+
+<h3>Inside a narrow container (200px) + long prefix</h3>
+<div style="width: 200px; border: 1px dashed #ccc; padding: 8px;">
+  <sgds-input label="Narrow + long prefix" prefix="https://api.gov.sg" value="test"></sgds-input>
+</div>
+
+<h3>Inside a narrow container (150px) + action</h3>
+<div style="width: 150px; border: 1px dashed #ccc; padding: 8px;">
+  <sgds-input label="Tiny" prefix="$" value="99">
+    <sgds-icon-button slot="action" variant="ghost" name="check"></sgds-icon-button>
+  </sgds-input>
+</div>
+
+<h2>Validation Feedback Variants</h2>
+
+<h3>hasFeedback="style" (border only)</h3>
+<sgds-input label="Style only" value="bad" invalid hasFeedback="style" invalidFeedback="Error"></sgds-input>
+
+<h3>hasFeedback="text" (message only)</h3>
+<sgds-input label="Text only" value="bad" invalid hasFeedback="text" invalidFeedback="Please fix this error"></sgds-input>
+
+<h3>hasFeedback="both" (border + message)</h3>
+<sgds-input label="Both" value="bad" invalid hasFeedback="both" invalidFeedback="This field is invalid"></sgds-input>
+
+<h3>Invalid + prefix + suffix</h3>
+<sgds-input label="Amount" prefix="$" suffix=".00" value="" invalid hasFeedback="both" invalidFeedback="Amount is required"></sgds-input>
+
+<h2>With Hint Text</h2>
+
+<h3>Hint text + prefix</h3>
+<sgds-input label="NRIC" prefix="S" hintText="Enter last 7 digits and checksum letter" placeholder="1234567A"></sgds-input>
+
+<h3>Hint text + invalid (hint replaced by error)</h3>
+<sgds-input label="Email" hintText="We'll never share your email" value="not-an-email" invalid hasFeedback="both" invalidFeedback="Please enter a valid email"></sgds-input>

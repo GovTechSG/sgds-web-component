@@ -47,14 +47,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Edge Cases
 
-- **Invalid manual input** — handle gracefully with validation and formatting correction
 - **Leap years** — ensure 29 Feb is correctly handled
 - **Timezone differences** — be explicit if the date is local or system-based
 - **Range errors** — if end date is before start date, auto-correct or prompt an error
 - **Clearing values** — provide a clear reset/clear option
 - **Pre-filled values** — ensure correct formatting and visibility on initial render
 - **Very long ranges** — provide faster navigation (year dropdown or jump controls)
-- **Partial input** — avoid aggressive auto-correction that may confuse users
 
 ## Quick Decision Guide
 
