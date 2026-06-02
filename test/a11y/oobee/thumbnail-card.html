@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- Default thumbnail card -->
+    <sgds-thumbnail-card>
+      <img slot="image" src="https://placehold.co/100x100" alt="Thumbnail" />
+      <span slot="title">Thumbnail card title</span>
+      <span slot="description">Thumbnail card description.</span>
+    </sgds-thumbnail-card>
+
+    <!-- No padding -->
+    <sgds-thumbnail-card noPadding>
+      <img slot="image" src="https://placehold.co/100x100" alt="Thumbnail" />
+      <span slot="title">No padding</span>
+      <span slot="description">Card without padding.</span>
+    </sgds-thumbnail-card>
+  </body>
+</html>
