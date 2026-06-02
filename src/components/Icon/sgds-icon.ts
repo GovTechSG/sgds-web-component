@@ -16,6 +16,9 @@ export class SgdsIcon extends SgdsElement {
   /** Specifies a small, medium or large icon, the size is medium by default. */
   @property({ type: String, reflect: true }) size: "xs" | "sm" | "md" | "lg" | "xl" | "2-xl" | "3-xl" = "lg";
 
+  /** An accessible label for the icon. When set, the SVG is treated as informative. When omitted, the SVG is marked as decorative with aria-hidden="true". */
+  @property({ type: String }) ariaLabel: string;
+
   private _getIconByName(name: string) {
     if (!name) return;
 
@@ -27,6 +30,19 @@ export class SgdsIcon extends SgdsElement {
     }
 
     return svg;
+  }
+
+  updated() {
+    const svg = this.shadowRoot?.querySelector("svg");
+    if (!svg) return;
+
+    if (this.ariaLabel) {
+      svg.removeAttribute("aria-hidden");
+      svg.setAttribute("aria-label", this.ariaLabel);
+    } else {
+      svg.removeAttribute("aria-label");
+      svg.setAttribute("aria-hidden", "true");
+    }
   }
 
   render() {
