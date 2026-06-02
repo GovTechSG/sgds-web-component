@@ -157,19 +157,19 @@ const InvalidDateClearTemplate = () => {
 
   const handleChangeDate = e => {
     if (logContent) {
-      logContent.innerHTML += `<div style="color: #0066cc;">sgds-change-date: "${e.target.value}"</div>`;
+      logContent.innerHTML += `<div class="sgds:text-primary-default">sgds-change-date: "${e.target.value}"</div>`;
     }
   };
 
   const handleInvalidInput = () => {
     if (logContent) {
-      logContent.innerHTML += `<div style="color: #d32f2f;">sgds-invalid-input: Invalid date detected</div>`;
+      logContent.innerHTML += `<div class="sgds:text-danger-default">sgds-invalid: Invalid date detected</div>`;
     }
   };
 
   const handleBlur = e => {
     if (logContent && e.target.value === "") {
-      logContent.innerHTML += `<div style="color: #2e7d32;">sgds-blur: Invalid date cleared on blur!</div>`;
+      logContent.innerHTML += `<div class="sgds:text-success-default">sgds-blur: Invalid date cleared on blur!</div>`;
     }
   };
 
@@ -186,12 +186,12 @@ const InvalidDateClearTemplate = () => {
         hintText="Try entering an invalid date like 20/20/2026, then click outside"
         hasFeedback
         @sgds-change-date=${handleChangeDate}
-        @sgds-invalid-input=${handleInvalidInput}
+        @sgds-invalid=${handleInvalidInput}
         @sgds-blur=${handleBlur}
       ></sgds-datepicker>
-      <div id="event-log" style="margin-top: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 4px;">
+      <div id="event-log" class="sgds:mt-md sgds:p-md sgds:bg-alternate sgds:rounded-sm">
         <strong>Event log:</strong>
-        <div id="log-content-invalid" style="font-family: monospace; font-size: 0.875rem;"></div>
+        <div id="log-content-invalid" class="sgds:text-body-sm" style="font-family: monospace;"></div>
       </div>
     </div>
   `;
