@@ -24,7 +24,7 @@ export const Template = ({
       ?menuIsOpen=${menuIsOpen}
       ?disabled=${disabled}
     >
-      <sgds-button slot="toggler" role="button" variant="primary" tone="brand">
+      <sgds-button slot="toggler" variant="primary" tone="brand" ariaLabel="Dropdown">
         Dropdown
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
