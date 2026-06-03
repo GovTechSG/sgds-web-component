@@ -155,35 +155,7 @@ For 3rd-party validation libraries (e.g. Zod) or fully custom logic, disable SGD
 
 ### Option 1 — Disable per component with `noValidate`
 
-Currently supported on **`<sgds-input>`**, **`<sgds-textarea>`**, and **`<sgds-datepicker>`**. Other components are WIP.
-
-```html
-<sgds-datepicker
-  noValidate
-  id="appt-date"
-  name="appointmentDate"
-  label="Appointment Date"
-  hintText="Must be a future date"
-  hasFeedback
-></sgds-datepicker>
-
-<script>
-  const picker = document.getElementById("appt-date");
-
-  picker.addEventListener("sgds-change-date", e => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const selected = new Date(e.target.value.split("/").reverse().join("-"));
-
-    if (selected <= today) {
-      e.target.setInvalid(true);
-      e.target.invalidFeedback = "Please select a future date";
-    } else {
-      e.target.setInvalid(false);
-    }
-  });
-</script>
-```
+Currently supported on **`<sgds-input>`**, **`<sgds-textarea>`**, **`<sgds-combo-box>`** and **`<sgds-datepicker>`. Other components are WIP.
 
 ```html
 <sgds-input

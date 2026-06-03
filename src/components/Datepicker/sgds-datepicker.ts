@@ -193,8 +193,8 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     this.addEventListener("sgds-selectmonth", this._handleSelectMonth);
     this.addEventListener("sgds-selectyear", this._handleSelectYear);
     this.addEventListener("sgds-selectdates", this._handleSelectDatesAndClose);
-    this.addEventListener("sgds-selectdates-input", this._handleSelectDatesInput);
-    this.addEventListener("sgds-empty-input", this._handleEmptyInput);
+    this.addEventListener("i-sgds-selectdates-input", this._handleSelectDatesInput);
+    this.addEventListener("i-sgds-empty-input", this._handleEmptyInput);
     this.addEventListener("keydown", this._handleTab);
     this.addEventListener("sgds-hide", this._handleCloseMenu);
     this.addEventListener("sgds-show", this._handleOpenMenu);
@@ -460,8 +460,8 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
           placeholder=${this.mode === "single" ? "DD/MM/YYYY" : "DD/MM/YYYY - DD/MM/YYYY"}
           mode=${this.mode}
           invalidFeedback=${ifDefined(this.invalidFeedback ? this.invalidFeedback : this._mixinGetValidationMessage())}
-          @sgds-mask-input-change=${this._handleInputMaskChange}
-          @sgds-invalid-input=${this._handleInvalidInput}
+          @i-sgds-mask-input-change=${this._handleInputMaskChange}
+          @i-sgds-invalid-input=${this._handleInvalidInput}
           minDate=${this.minDate}
           maxDate=${this.maxDate}
           label=${this.label}

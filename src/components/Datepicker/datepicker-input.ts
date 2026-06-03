@@ -29,8 +29,34 @@ export class DatepickerInput extends SgdsInput {
   constructor() {
     super();
     this.type = "text";
-    this._handleBlur = () => null;
   }
+
+  protected override _handleBlur() {
+    const dates = this.mask.value.split(" - ");
+    const noEmptyDates = dates.filter(d => d !== this.dateFormat);
+    const dateArray: Date[] | string[] = noEmptyDates.map(date =>
+      setTimeToNoon(parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
+    );
+    const invalidDates = dateArray.filter(
+      date =>
+        !isValid(date) ||
+        isBefore(date, new Date(0, 0, 1)) ||
+        isBefore(date, setTimeToNoon(new Date(this.minDate))) ||
+        isAfter(date, setTimeToNoon(new Date(this.maxDate)))
+    );
+
+    // Only clear if the mask is complete AND there are invalid dates
+    // This clears complete but invalid dates like "20/20/2026"
+    // Incomplete dates remain in the input as-is (validation only runs on complete dates)
+    if (this.mask.masked.isComplete && invalidDates.length > 0 && dateArray.length > 0) {
+      this.value = "";
+      this.mask.value = "";
+      this.setInvalid(false);
+    }
+
+    this.emit("sgds-blur");
+  }
+
   protected override async _handleChange(e: Event) {
     this.value = this.input.value;
     this.emit("sgds-change");
@@ -86,7 +112,7 @@ export class DatepickerInput extends SgdsInput {
     this.mask = IMask(shadowInput, maskOptions);
     this.mask.on("accept", () => {
       this.value = this.mask.masked.value;
-      this.emit("sgds-mask-input-change", { detail: this.value });
+      this.emit("i-sgds-mask-input-change", { detail: this.value });
     });
     /**
      * Validation after date is complete
@@ -112,19 +138,19 @@ export class DatepickerInput extends SgdsInput {
 
     if (invalidDates.length > 0) {
       this.setInvalid(true);
-      return this.emit("sgds-invalid-input");
+      return this.emit("i-sgds-invalid-input");
     }
     if (this.mode === "range" && dateArray.length === 1) {
       this.setInvalid(true);
-      return this.emit("sgds-invalid-input");
+      return this.emit("i-sgds-invalid-input");
     }
     if (invalidDates.length === 0 && dateArray.length > 0) {
       this.setInvalid(false);
-      return this.emit("sgds-selectdates-input", { detail: dateArray });
+      return this.emit("i-sgds-selectdates-input", { detail: dateArray });
     }
     if (dateArray.length === 0 && invalidDates.length === 0) {
       this.setInvalid(false);
-      return this.emit("sgds-empty-input");
+      return this.emit("i-sgds-empty-input");
     }
   };
 
