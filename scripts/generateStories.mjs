@@ -80,13 +80,19 @@ for (const [key, value] of Object.entries(groupedComponents)) {
     .join("");
 
   // Only add in the ArgType table when there is at least one attribute
-  const ArgsType = value.map(component =>
-    component.attributes || component.slots || component.events
-      ? `### ${component.tagName}
-<ArgTypes of="${component.tagName}"/>\n
+  // Sort by tagName length (shorter first) so parent components appear before sub-components
+  const sortedValue = [...value].sort((a, b) => a.tagName.length - b.tagName.length);
+  const ArgsType = sortedValue.map(component => {
+    const deprecatedLabel = component.deprecated ? ` <sgds-badge variant="warning">deprecated</sgds-badge>` : "";
+    const deprecatedNotice = component.deprecated
+      ? `<div class="sb-unstyled sgds:text-label-xs sgds:font-regular sgds:leading-3-xs sgds:tracking-normal sgds:text-fixed-dark">${component.deprecated}</div>\n`
+      : "";
+    return component.attributes || component.slots || component.events
+      ? `### ${component.tagName}${deprecatedLabel}
+${deprecatedNotice}<ArgTypes of="${component.tagName}"/>\n
   `
-      : ""
-  );
+      : "";
+  });
 
   const mdxSource = prettier.format(
     `
