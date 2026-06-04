@@ -147,6 +147,9 @@ importers:
       comment-parser:
         specifier: ^1.4.1
         version: 1.4.1
+      commitizen:
+        specifier: ^4.3.1
+        version: 4.3.1(@types/node@25.0.8)(typescript@5.9.3)
       cypress:
         specifier: ^13.6.0
         version: 13.17.0
@@ -12934,7 +12937,7 @@ snapshots:
 
   '@types/minimatch@6.0.0':
     dependencies:
-      minimatch: 10.1.1
+      minimatch: 10.2.5
 
   '@types/minimist@1.2.5': {}
 
