@@ -14,7 +14,7 @@ const VariantTemplate = args => {
         v => html`
         <sgds-alert variant=${v.variant.toLowerCase()} show title="${v.variant} alert">
           <sgds-icon slot="icon" name=${v.icon} size="md"></sgds-icon>
-          <div> Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          Description with <a href="#">link</a> and more details here
         </sgds-alert>
     </div>    
         `
@@ -36,7 +36,7 @@ const OutlinedVariantTemplate = args => {
         v => html`
         <sgds-alert variant=${v.variant.toLowerCase()} show title="${v.variant} alert" outlined>
           <sgds-icon slot="icon" name=${v.icon} size="md"></sgds-icon>
-          <div> Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+          Description with <a href="#">link</a> and more details here
         </sgds-alert>
     </div>    
         `
@@ -63,7 +63,7 @@ const DismissibleTemplate = args => {
             dismissible
           >
             <sgds-icon slot="icon" name=${v.icon} size="md"></sgds-icon>
-            <div>A dismissible alert</div>
+            A dismissible <a href="#">alert</a> with more info
           </sgds-alert>
         `
       )}
@@ -77,7 +77,7 @@ const DismissibleTemplate = args => {
             dismissible
           >
             <sgds-icon slot="icon" name=${v.icon} size="md"></sgds-icon>
-            <div>A dismissible outlined alert</div>
+            A dismissible outlined <a href="#">alert</a> with more info
           </sgds-alert>
         `
       )}
@@ -87,12 +87,10 @@ const DismissibleTemplate = args => {
 const IconTemplate = args => {
   return html`
     <div class="d-flex-column">
-      <sgds-alert show title="Title">
-        <div>Alert with no leading icon</div>
-      </sgds-alert>
+      <sgds-alert show title="Title"> Alert with no leading <a href="#">icon</a> and extra text </sgds-alert>
       <sgds-alert show title="Title">
         <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
-        <div>Alert with leading icon</div>
+        Alert with leading <a href="#">icon</a> and extra text
       </sgds-alert>
     </div>
   `;
@@ -101,20 +99,16 @@ const IconTemplate = args => {
 const TitleTemplate = args => {
   return html`
     <div class="d-flex-column">
-        <sgds-alert show>
-            <div> Alert with no title</sgds-alert-link></div>
-        </sgds-alert>
-        <sgds-alert show title="Title">
-            <div> Alert with title</sgds-alert-link>
-        </sgds-alert>
+      <sgds-alert show> Alert with no title </sgds-alert>
+      <sgds-alert show title="Title"> Alert with title </sgds-alert>
     </div>
-    `;
+  `;
 };
 
 const LinkTemplate = args => {
   return html`
     <sgds-alert variant="info" show title="Alert with link">
-      <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+      Description with <a href="#">link</a> and more details here
     </sgds-alert>
   `;
 };
@@ -186,7 +180,7 @@ const FilledActionTemplate = args => {
             class="sgds:mb-md"
           >
             <sgds-icon slot="icon" name=${v.icon} size="md"></sgds-icon>
-            <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+            Description with <a href="#">link</a> and more details here
             <sgds-button slot="action" variant="outline" size="sm" tone=${v.tone}>Take Action</sgds-button>
           </sgds-alert>
         `
@@ -215,7 +209,7 @@ const OutlinedActionTemplate = args => {
             class="sgds:mb-md"
           >
             <sgds-icon slot="icon" name=${v.icon} size="md"></sgds-icon>
-            <div>Description with <sgds-alert-link href="#">link</sgds-alert-link></div>
+            Description with <a href="#">link</a> and more details here
             <sgds-button slot="action" variant="outline" size="sm" tone="neutral">Take Action</sgds-button>
           </sgds-alert>
         `

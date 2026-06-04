@@ -46,9 +46,9 @@ const EventsTemplate = () => {
       </div>
 
       <sgds-tab-group id="event-tab-group">
-        <sgds-tab slot="nav" panel="general">General</sgds-tab>
-        <sgds-tab slot="nav" panel="settings">Settings</sgds-tab>
-        <sgds-tab slot="nav" panel="advanced">Advanced</sgds-tab>
+        <sgds-tab slot="nav" panel="general" ariaLabel="General">General</sgds-tab>
+        <sgds-tab slot="nav" panel="settings" ariaLabel="Settings">Settings</sgds-tab>
+        <sgds-tab slot="nav" panel="advanced" ariaLabel="Advanced">Advanced</sgds-tab>
 
         <sgds-tab-panel name="general">
           <p>General tab content. Switch tabs to see the events being triggered.</p>
