@@ -1,3 +1,21 @@
+## v3.21.0 (2026-06-04)
+
+### Feat
+
+- **FileUpload**: new ariaLabel prop for accessibility support (#691)
+- **Icon, Dropdown, Button**: oobee testing support, new ariaLabel for Icon [run-chromatic] (#687)
+- **Tab**: ariaLabel prop for accessibility support (#685)
+- **Tab**: ariaLabel prop for accessibility
+- **Accordion**: ariaLabel added to pass oobee tests [run-chromatic] (#683)
+- **FileUpload**: new ariaLabel prop
+- **Icon**: new ariaLabel prop
+- **Accordion**: passes oobee a11y tester
+
+### Refactor
+
+- **Alert**: favour anchor tag over SgdsAlertLink [skip-cd][run-chromatic] (#684)
+- **alert**: deprecate SgdsAlertLink in favour of a tag for consistency and better a11y and seo
+
 ## v3.20.0 (2026-06-02)
 
 ### Feat
