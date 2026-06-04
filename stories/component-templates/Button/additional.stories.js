@@ -2,10 +2,10 @@ import { html } from "lit";
 
 const VariantTemplate = args => {
   return html`
-    <sgds-button variant="primary">Primary button</sgds-button>
-    <sgds-button variant="outline">Outline button</sgds-button>
-    <sgds-button variant="danger">Danger button</sgds-button>
-    <sgds-button variant="ghost">Ghost button</sgds-button>
+    <sgds-button variant="primary" ariaLabel="Primary button">Primary button</sgds-button>
+    <sgds-button variant="outline" ariaLabel="Outline button">Outline button</sgds-button>
+    <sgds-button variant="danger" ariaLabel="Danger button">Danger button</sgds-button>
+    <sgds-button variant="ghost" ariaLabel="Ghost button">Ghost button</sgds-button>
   `;
 };
 
@@ -20,24 +20,28 @@ const ToneTemplate = args => {
   return html`
     <div class="d-flex-column">
       <div class="d-flex-row">
-        <sgds-button tone="brand" variant="primary">Brand Primary</sgds-button>
-        <sgds-button tone="brand" variant="outline">Brand Outline</sgds-button>
-        <sgds-button tone="brand" variant="ghost">Brand Ghost</sgds-button>
+        <sgds-button tone="brand" variant="primary" ariaLabel="Brand Primary">Brand Primary</sgds-button>
+        <sgds-button tone="brand" variant="outline" ariaLabel="Brand Outline">Brand Outline</sgds-button>
+        <sgds-button tone="brand" variant="ghost" ariaLabel="Brand Ghost">Brand Ghost</sgds-button>
       </div>
       <div class="d-flex-row">
-        <sgds-button tone="danger" variant="primary">Danger Primary</sgds-button>
-        <sgds-button tone="danger" variant="outline">Danger Outline</sgds-button>
-        <sgds-button tone="danger" variant="ghost">Danger Ghost</sgds-button>
+        <sgds-button tone="danger" variant="primary" ariaLabel="Danger Primary">Danger Primary</sgds-button>
+        <sgds-button tone="danger" variant="outline" ariaLabel="Danger Outline">Danger Outline</sgds-button>
+        <sgds-button tone="danger" variant="ghost" ariaLabel="Danger Ghost">Danger Ghost</sgds-button>
       </div>
       <div class="d-flex-row">
-        <sgds-button tone="neutral" variant="primary">Neutral Primary</sgds-button>
-        <sgds-button tone="neutral" variant="outline">Neutral Outline</sgds-button>
-        <sgds-button tone="neutral" variant="ghost">Neutral Ghost</sgds-button>
+        <sgds-button tone="neutral" variant="primary" ariaLabel="Neutral Primary">Neutral Primary</sgds-button>
+        <sgds-button tone="neutral" variant="outline" ariaLabel="Neutral Outline">Neutral Outline</sgds-button>
+        <sgds-button tone="neutral" variant="ghost" ariaLabel="Neutral Ghost">Neutral Ghost</sgds-button>
       </div>
       <div class="d-flex-row" style="padding: 12px; background-color: #333;">
-        <sgds-button tone="fixed-light" variant="primary">Fixed Light Primary</sgds-button>
-        <sgds-button tone="fixed-light" variant="outline">Fixed Light Outline</sgds-button>
-        <sgds-button tone="fixed-light" variant="ghost">Fixed Light Ghost</sgds-button>
+        <sgds-button tone="fixed-light" variant="primary" ariaLabel="Fixed Light Primary"
+          >Fixed Light Primary</sgds-button
+        >
+        <sgds-button tone="fixed-light" variant="outline" ariaLabel="Fixed Light Outline"
+          >Fixed Light Outline</sgds-button
+        >
+        <sgds-button tone="fixed-light" variant="ghost" ariaLabel="Fixed Light Ghost">Fixed Light Ghost</sgds-button>
       </div>
     </div>
   `;
@@ -52,7 +56,7 @@ export const Tone = {
 };
 
 const FullWidthTemplate = () => {
-  return html`<sgds-button fullWidth>Full width button</sgds-button>`;
+  return html`<sgds-button fullWidth ariaLabel="Full width button">Full width button</sgds-button>`;
 };
 
 export const FullWidth = {
@@ -64,10 +68,10 @@ export const FullWidth = {
 };
 
 const SizeTemplate = () => {
-  return html` <sgds-button size="xs"> extra small button </sgds-button>
-    <sgds-button size="sm"> small button </sgds-button>
-    <sgds-button> medium button </sgds-button>
-    <sgds-button size="lg"> large button </sgds-button>`;
+  return html` <sgds-button size="xs" ariaLabel="Extra small button"> Extra small button </sgds-button>
+    <sgds-button size="sm" ariaLabel="Small button"> Small button </sgds-button>
+    <sgds-button ariaLabel="Medium button"> Medium button </sgds-button>
+    <sgds-button size="lg" ariaLabel="Large button"> Large button </sgds-button>`;
 };
 
 export const Sizes = {
@@ -80,10 +84,10 @@ export const Sizes = {
 
 const ActiveTemplate = () => {
   return html`
-    <sgds-button variant="primary" active> Hover / Active </sgds-button>
-    <sgds-button variant="outline" active> Hover / Active </sgds-button>
-    <sgds-button variant="danger" active> Hover / Active </sgds-button>
-    <sgds-button variant="ghost" active> Hover / Active </sgds-button>
+    <sgds-button variant="primary" active ariaLabel="Hover / Active"> Hover / Active </sgds-button>
+    <sgds-button variant="outline" active ariaLabel="Hover / Active"> Hover / Active </sgds-button>
+    <sgds-button variant="danger" active ariaLabel="Hover / Active"> Hover / Active </sgds-button>
+    <sgds-button variant="ghost" active ariaLabel="Hover / Active"> Hover / Active </sgds-button>
   `;
 };
 
@@ -97,10 +101,10 @@ export const Active = {
 
 export const Disabled = {
   render: () => html`
-    <sgds-button variant="primary" disabled> Disabled </sgds-button>
-    <sgds-button variant="outline" disabled> Disabled </sgds-button>
-    <sgds-button variant="ghost" disabled> Disabled </sgds-button>
-    <sgds-button variant="danger" disabled> Disabled </sgds-button>
+    <sgds-button variant="primary" disabled ariaLabel="Disabled"> Disabled </sgds-button>
+    <sgds-button variant="outline" disabled ariaLabel="Disabled"> Disabled </sgds-button>
+    <sgds-button variant="ghost" disabled ariaLabel="Disabled"> Disabled </sgds-button>
+    <sgds-button variant="danger" disabled ariaLabel="Disabled"> Disabled </sgds-button>
   `,
   name: "Disabled state",
   args: {},
@@ -110,8 +114,10 @@ export const Disabled = {
 
 export const ButtonWithIcon = {
   render: () => html`
-    <sgds-button><sgds-icon name="placeholder" slot="leftIcon"></sgds-icon>Leading icon</sgds-button>
-    <sgds-button>
+    <sgds-button ariaLabel="Leading icon"
+      ><sgds-icon name="placeholder" slot="leftIcon"></sgds-icon>Leading icon</sgds-button
+    >
+    <sgds-button ariaLabel="Trailing icon">
       <sgds-icon name="placeholder" slot="rightIcon"></sgds-icon>
       Trailing icon
     </sgds-button>
@@ -126,24 +132,24 @@ export const Loading = {
   render: () => html`
     <div class="d-flex-column">
       <div class="d-flex-row">
-        <sgds-button variant="primary" loading> Loading... </sgds-button>
-        <sgds-button variant="outline" loading> Loading... </sgds-button>
-        <sgds-button variant="ghost" loading> Loading... </sgds-button>
+        <sgds-button variant="primary" loading ariaLabel="Loading"> Loading... </sgds-button>
+        <sgds-button variant="outline" loading ariaLabel="Loading"> Loading... </sgds-button>
+        <sgds-button variant="ghost" loading ariaLabel="Loading"> Loading... </sgds-button>
       </div>
       <div class="d-flex-row">
-        <sgds-button variant="primary" tone="danger" loading> Loading... </sgds-button>
-        <sgds-button variant="outline" tone="danger" loading> Loading... </sgds-button>
-        <sgds-button variant="ghost" tone="danger" loading> Loading... </sgds-button>
+        <sgds-button variant="primary" tone="danger" loading ariaLabel="Loading"> Loading... </sgds-button>
+        <sgds-button variant="outline" tone="danger" loading ariaLabel="Loading"> Loading... </sgds-button>
+        <sgds-button variant="ghost" tone="danger" loading ariaLabel="Loading"> Loading... </sgds-button>
       </div>
       <div class="d-flex-row">
-        <sgds-button variant="primary" tone="neutral" loading> Loading... </sgds-button>
-        <sgds-button variant="outline" tone="neutral" loading> Loading... </sgds-button>
-        <sgds-button variant="ghost" tone="neutral" loading> Loading... </sgds-button>
+        <sgds-button variant="primary" tone="neutral" loading ariaLabel="Loading"> Loading... </sgds-button>
+        <sgds-button variant="outline" tone="neutral" loading ariaLabel="Loading"> Loading... </sgds-button>
+        <sgds-button variant="ghost" tone="neutral" loading ariaLabel="Loading"> Loading... </sgds-button>
       </div>
       <div class="d-flex-row" style="padding: 12px; background-color: #333;">
-        <sgds-button variant="primary" tone="fixed-light" loading> Loading... </sgds-button>
-        <sgds-button variant="outline" tone="fixed-light" loading> Loading... </sgds-button>
-        <sgds-button variant="ghost" tone="fixed-light" loading> Loading... </sgds-button>
+        <sgds-button variant="primary" tone="fixed-light" loading ariaLabel="Loading"> Loading... </sgds-button>
+        <sgds-button variant="outline" tone="fixed-light" loading ariaLabel="Loading"> Loading... </sgds-button>
+        <sgds-button variant="ghost" tone="fixed-light" loading ariaLabel="Loading"> Loading... </sgds-button>
       </div>
     </div>
   `,
