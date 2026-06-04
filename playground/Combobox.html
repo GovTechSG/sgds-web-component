@@ -142,13 +142,14 @@
       <button type="submit">submit</button>
     </form>
 
-    <form>
+    <form >
       <sgds-combo-box multiSelect clearable required hasFeedback>
         <sgds-combo-box-option value="1">Afghanistan</sgds-combo-box-option>
         <sgds-combo-box-option value="2">Zimbabwe</sgds-combo-box-option>
         <sgds-combo-box-option value="3">Zoo</sgds-combo-box-option>
         <sgds-combo-box-option value="4">Zzzbabwe</sgds-combo-box-option>
       </sgds-combo-box>
+      <button type="submit" id="abc">submit</button>
       <button type="reset" id="abc">Reset</button>
 
       <script>
@@ -157,6 +158,82 @@
       </script>
     </form>
   </div>
+  </div>
+
+  <div class="container">
+    <h2>noValidate examples</h2>
+
+    <h4>1. noValidate + required: no error on blur (compare with non-noValidate below)</h4>
+    <div class="flex">
+      <div>
+        <p><strong>With noValidate</strong> — blur without selecting, no error</p>
+        <sgds-combo-box noValidate required hasFeedback label="noValidate required">
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+          <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
+      <div>
+        <p><strong>Without noValidate</strong> — blur without selecting shows error</p>
+        <sgds-combo-box required hasFeedback label="required (no noValidate)">
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+          <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
+    </div>
+
+    <h4>2. noValidate + setInvalid() programmatic control</h4>
+    <sgds-combo-box id="novalidate-setinvalid" noValidate required hasFeedback label="Custom validation"
+      hintText="Cannot start with special characters">
+      <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+    </sgds-combo-box>
+    <div class="flex">
+      <button onclick="document.querySelector('#novalidate-setinvalid').setInvalid(true)">setInvalid(true)</button>
+      <button onclick="document.querySelector('#novalidate-setinvalid').setInvalid(false)">setInvalid(false)</button>
+    </div>
+
+    <h4>3. noValidate + form submission (form submits even when required and empty)</h4>
+    <form id="novalidate-form" onsubmit="event.preventDefault(); alert('Form submitted! Value: ' + new FormData(this).get('fruit'));">
+      <sgds-combo-box noValidate required name="fruit" hasFeedback label="Pick a fruit (noValidate)">
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="apricot">Apricot</sgds-combo-box-option>
+        <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+      </sgds-combo-box>
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </form>
+
+    <h4>4. Form-level novalidate (all children skip validation)</h4>
+    <form novalidate onsubmit="event.preventDefault(); alert('Form submitted! Value: ' + new FormData(this).get('fruit2'));">
+      <sgds-combo-box required name="fruit2" hasFeedback label="Pick a fruit (form novalidate)">
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="apricot">Apricot</sgds-combo-box-option>
+        <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+      </sgds-combo-box>
+      <button type="submit">Submit</button>
+    </form>
+
+    <h4>5. noValidate + multiSelect + setInvalid</h4>
+    <sgds-combo-box id="novalidate-multi" noValidate required multiSelect hasFeedback label="Multi-select custom validation">
+      <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+      <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+      <sgds-combo-box-option value="option4">Durian</sgds-combo-box-option>
+      <sgds-combo-box-option value="option5">Durian</sgds-combo-box-option>
+      <sgds-combo-box-option value="option6">Durian</sgds-combo-box-option>
+      <sgds-combo-box-option value="option7">Durian</sgds-combo-box-option>
+      <sgds-combo-box-option value="option8">Durian</sgds-combo-box-option>
+      <sgds-combo-box-option value="option9">Durian</sgds-combo-box-option>
+      <sgds-combo-box-option value="option10">Durian</sgds-combo-box-option>
+      <sgds-combo-box-option value="option11">Durian</sgds-combo-box-option>
+    </sgds-combo-box>
+    <div class="flex">
+      <button onclick="document.querySelector('#novalidate-multi').setInvalid(true)">setInvalid(true)</button>
+      <button onclick="document.querySelector('#novalidate-multi').setInvalid(false)">setInvalid(false)</button>
+    </div>
   </div>
 </body>
 

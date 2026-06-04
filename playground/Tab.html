@@ -41,9 +41,9 @@
         <h2>Underlined (Default)</h2>
         <div class="demo-container">
           <sgds-tab-group>
-            <sgds-tab slot="nav" panel="tab1">Dashboard</sgds-tab>
-            <sgds-tab slot="nav" panel="tab2">Analytics</sgds-tab>
-            <sgds-tab slot="nav" panel="tab3">Reports</sgds-tab>
+            <sgds-tab slot="nav" panel="tab1" ariaLabel="Dashboard">Dashboard</sgds-tab>
+            <sgds-tab slot="nav" panel="tab2" ariaLabel="Analytics">Analytics</sgds-tab>
+            <sgds-tab slot="nav" panel="tab3" ariaLabel="Reports">Reports</sgds-tab>
             <sgds-tab-panel name="tab1">Welcome to your dashboard</sgds-tab-panel>
             <sgds-tab-panel name="tab2">View your analytics here</sgds-tab-panel>
             <sgds-tab-panel name="tab3">Access your reports</sgds-tab-panel>
@@ -56,15 +56,15 @@
         <h2>Underlined with Leading Icons</h2>
         <div class="demo-container">
           <sgds-tab-group>
-            <sgds-tab slot="nav" panel="icon1">
+            <sgds-tab slot="nav" panel="icon1" ariaLabel="Home">
               <sgds-icon name="house" slot="icon"></sgds-icon>
               Home
             </sgds-tab>
-            <sgds-tab slot="nav" panel="icon2">
+            <sgds-tab slot="nav" panel="icon2" ariaLabel="Analytics">
               <sgds-icon name="bar-chart" slot="icon"></sgds-icon>
               Analytics
             </sgds-tab>
-            <sgds-tab slot="nav" panel="icon3">
+            <sgds-tab slot="nav" panel="icon3" ariaLabel="Settings">
               <sgds-icon name="gear" slot="icon"></sgds-icon>
               Settings
             </sgds-tab>
@@ -80,9 +80,9 @@
         <h2>Solid Variant</h2>
         <div class="demo-container">
           <sgds-tab-group variant="solid">
-            <sgds-tab slot="nav" panel="solid1">Overview</sgds-tab>
-            <sgds-tab slot="nav" panel="solid2">Details</sgds-tab>
-            <sgds-tab slot="nav" panel="solid3">Settings</sgds-tab>
+            <sgds-tab slot="nav" panel="solid1" ariaLabel="Overview">Overview</sgds-tab>
+            <sgds-tab slot="nav" panel="solid2" ariaLabel="Details">Details</sgds-tab>
+            <sgds-tab slot="nav" panel="solid3" ariaLabel="Settings">Settings</sgds-tab>
             <sgds-tab-panel name="solid1">Overview content</sgds-tab-panel>
             <sgds-tab-panel name="solid2">Details content</sgds-tab-panel>
             <sgds-tab-panel name="solid3">Settings content</sgds-tab-panel>
@@ -95,15 +95,15 @@
         <h2>Solid Variant with Leading Icons</h2>
         <div class="demo-container">
           <sgds-tab-group variant="solid">
-            <sgds-tab slot="nav" panel="solid-icon1">
+            <sgds-tab slot="nav" panel="solid-icon1" ariaLabel="Docs">
               <sgds-icon name="file-text" slot="icon"></sgds-icon>
               Docs
             </sgds-tab>
-            <sgds-tab slot="nav" panel="solid-icon2">
+            <sgds-tab slot="nav" panel="solid-icon2" ariaLabel="Code">
               <sgds-icon name="code" slot="icon"></sgds-icon>
               Code
             </sgds-tab>
-            <sgds-tab slot="nav" panel="solid-icon3">
+            <sgds-tab slot="nav" panel="solid-icon3" ariaLabel="Help">
               <sgds-icon name="question-circle" slot="icon"></sgds-icon>
               Help
             </sgds-tab>
@@ -120,9 +120,9 @@
         <div class="demo-container">
           <div>
             <sgds-tab-group orientation="vertical">
-              <sgds-tab slot="nav" panel="vd1">User Accounts</sgds-tab>
-              <sgds-tab slot="nav" panel="vd2">Access Roles</sgds-tab>
-              <sgds-tab slot="nav" panel="vd3">Permissions & Groups</sgds-tab>
+              <sgds-tab slot="nav" panel="vd1" ariaLabel="User Accounts">User Accounts</sgds-tab>
+              <sgds-tab slot="nav" panel="vd2" ariaLabel="Access Roles">Access Roles</sgds-tab>
+              <sgds-tab slot="nav" panel="vd3" ariaLabel="Permissions and Groups">Permissions & Groups</sgds-tab>
               <sgds-tab-panel name="vd1"
                 >Comprehensive user account management dashboard for administrators and team leads. Create new user
                 accounts with customized initial settings and onboarding workflows. Edit existing user profiles to
@@ -162,10 +162,10 @@
         <h2>Compact Density</h2>
         <div class="demo-container">
           <sgds-tab-group density="compact">
-            <sgds-tab slot="nav" panel="c1">Alpha</sgds-tab>
-            <sgds-tab slot="nav" panel="c2">Beta</sgds-tab>
-            <sgds-tab slot="nav" panel="c3">Gamma</sgds-tab>
-            <sgds-tab slot="nav" panel="c4">Delta</sgds-tab>
+            <sgds-tab slot="nav" panel="c1" ariaLabel="Alpha">Alpha</sgds-tab>
+            <sgds-tab slot="nav" panel="c2" ariaLabel="Beta">Beta</sgds-tab>
+            <sgds-tab slot="nav" panel="c3" ariaLabel="Gamma">Gamma</sgds-tab>
+            <sgds-tab slot="nav" panel="c4" ariaLabel="Delta">Delta</sgds-tab>
             <sgds-tab panel="c1">Alpha content</sgds-tab>
             <sgds-tab-panel name="c2">Beta content</sgds-tab-panel>
             <sgds-tab-panel name="c3">Gamma content</sgds-tab-panel>
@@ -179,13 +179,13 @@
         <h2>Compact Density with Icons</h2>
         <div class="demo-container">
           <sgds-tab-group density="compact">
-            <sgds-tab slot="nav" panel="ci1">
+            <sgds-tab slot="nav" panel="ci1" ariaLabel="Phone">
               <sgds-icon name="phone" slot="icon"></sgds-icon>
             </sgds-tab>
-            <sgds-tab slot="nav" panel="ci2">
+            <sgds-tab slot="nav" panel="ci2" ariaLabel="Email">
               <sgds-icon name="envelope" slot="icon"></sgds-icon>
             </sgds-tab>
-            <sgds-tab slot="nav" panel="ci3">
+            <sgds-tab slot="nav" panel="ci3" ariaLabel="Chat">
               <sgds-icon name="chat" slot="icon"></sgds-icon>
             </sgds-tab>
             <sgds-tab-panel name="ci1">Phone contact options</sgds-tab-panel>
@@ -200,9 +200,9 @@
         <h2>Disabled Tab State</h2>
         <div class="demo-container">
           <sgds-tab-group>
-            <sgds-tab slot="nav" panel="e1">Enabled</sgds-tab>
-            <sgds-tab slot="nav" panel="e2" disabled>Disabled</sgds-tab>
-            <sgds-tab slot="nav" panel="e3">Enabled</sgds-tab>
+            <sgds-tab slot="nav" panel="e1" ariaLabel="Enabled">Enabled</sgds-tab>
+            <sgds-tab slot="nav" panel="e2" ariaLabel="Disabled" disabled>Disabled</sgds-tab>
+            <sgds-tab slot="nav" panel="e3" ariaLabel="Enabled">Enabled</sgds-tab>
             <sgds-tab-panel name="e1">This tab is enabled</sgds-tab-panel>
             <sgds-tab-panel name="e2">This tab is disabled and cannot be selected</sgds-tab-panel>
             <sgds-tab-panel name="e3">This tab is also enabled</sgds-tab-panel>
@@ -216,9 +216,9 @@
         <div class="demo-container">
           <div>
             <sgds-tab-group variant="solid" orientation="vertical">
-              <sgds-tab slot="nav" panel="sv1">Section A</sgds-tab>
-              <sgds-tab slot="nav" panel="sv2">Section B</sgds-tab>
-              <sgds-tab slot="nav" panel="sv3">Section C</sgds-tab>
+              <sgds-tab slot="nav" panel="sv1" ariaLabel="Section A">Section A</sgds-tab>
+              <sgds-tab slot="nav" panel="sv2" ariaLabel="Section B">Section B</sgds-tab>
+              <sgds-tab slot="nav" panel="sv3" ariaLabel="Section C">Section C</sgds-tab>
               <sgds-tab-panel name="sv1">Section A content</sgds-tab-panel>
               <sgds-tab-panel name="sv2">Section B content</sgds-tab-panel>
               <sgds-tab-panel name="sv3">Section C content</sgds-tab-panel>
@@ -232,10 +232,10 @@
         <h2>Mixed Enabled and Disabled Tabs</h2>
         <div class="demo-container">
           <sgds-tab-group variant="solid">
-            <sgds-tab slot="nav" panel="m1">Public</sgds-tab>
-            <sgds-tab slot="nav" panel="m2" disabled>Private</sgds-tab>
-            <sgds-tab slot="nav" panel="m3">Shared</sgds-tab>
-            <sgds-tab slot="nav" panel="m4" disabled>Archived</sgds-tab>
+            <sgds-tab slot="nav" panel="m1" ariaLabel="Public">Public</sgds-tab>
+            <sgds-tab slot="nav" panel="m2" ariaLabel="Private" disabled>Private</sgds-tab>
+            <sgds-tab slot="nav" panel="m3" ariaLabel="Shared">Shared</sgds-tab>
+            <sgds-tab slot="nav" panel="m4" ariaLabel="Archived" disabled>Archived</sgds-tab>
             <sgds-tab-panel name="m1">Public content accessible to all</sgds-tab-panel>
             <sgds-tab-panel name="m2">Private content (requires upgrade)</sgds-tab-panel>
             <sgds-tab-panel name="m3">Shared content with collaborators</sgds-tab-panel>

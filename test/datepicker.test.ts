@@ -1297,7 +1297,7 @@ describe("datepicker input masking", () => {
         ></sgds-datepicker-input>`
       );
       const invalidHandler = sinon.spy();
-      inputEl.addEventListener("sgds-invalid-input", invalidHandler);
+      inputEl.addEventListener("i-sgds-invalid-input", invalidHandler);
       const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
       expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
       const changeHandler = sinon.spy();
@@ -1379,6 +1379,44 @@ describe("datepicker input masking", () => {
     await inputEl.updateComplete;
     expect(inputEl.value).to.equal("20/02/2024 - DD/MM/YYYY");
     expect(shadowInput?.classList.contains("is-invalid")).to.be.true;
+  });
+
+  const invalidDateCases = [
+    { mode: "single", dateDigits: [2, 0, 2, 0, 2, 0, 2, 6], description: "20/20/2026 (invalid month)" },
+    { mode: "single", dateDigits: [3, 2, 0, 2, 2, 0, 2, 6], description: "32/02/2026 (invalid day)" },
+    { mode: "single", dateDigits: [3, 0, 0, 2, 2, 0, 2, 6], description: "30/02/2026 (invalid date)" }
+  ];
+
+  invalidDateCases.forEach(({ mode, dateDigits, description }) => {
+    it(`for mode=${mode}, clears input on blur when invalid date ${description} is entered`, async () => {
+      const inputEl = await fixture<DatepickerInput>(
+        html`<sgds-datepicker-input mode=${mode as "single" | "range"} hasFeedback="both"></sgds-datepicker-input>`
+      );
+      const blurHandler = sinon.spy();
+      inputEl.addEventListener("sgds-blur", blurHandler);
+
+      const shadowInput = inputEl?.shadowRoot?.querySelector(".form-control-group");
+      expect(inputEl.value).to.equal("");
+      expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+
+      inputEl.focus();
+
+      for (const d of dateDigits) {
+        await sendKeys({ press: `Digit${d}` });
+      }
+
+      await inputEl.updateComplete;
+      expect(inputEl.value).not.to.equal("");
+
+      // Blur the input - this should clear the invalid date
+      inputEl.blur();
+      await inputEl.updateComplete;
+
+      // Verify the input is cleared (shows mask placeholder)
+      expect(inputEl.value).to.equal("DD/MM/YYYY");
+      expect(shadowInput?.classList.contains("is-invalid")).to.be.false;
+      expect(blurHandler).to.be.calledOnce;
+    });
   });
 });
 
@@ -1549,6 +1587,48 @@ describe("datepicker behavour on invalid input", () => {
   //   await elementUpdated(header);
   //   expect(header?.shadowRoot?.querySelector("sgds-button")?.textContent).to.contain("January 2025");
   // });
+
+  it("emits sgds-invalid event when an invalid date 30/20/2026 is entered", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
+    const invalidHandler = sinon.spy();
+    el.addEventListener("sgds-invalid", invalidHandler);
+
+    const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
+    input?.focus();
+    await waitUntil(() => el.shadowRoot?.activeElement === input);
+
+    // Type 30/20/2026 (invalid month 20)
+    const dateDigits = [3, 0, 2, 0, 2, 0, 2, 6];
+    for (const d of dateDigits) {
+      await sendKeys({ press: `Digit${d}` });
+    }
+
+    await elementUpdated(el);
+    expect(invalidHandler).to.have.been.calledOnce;
+  });
+
+  it("clears invalid date 30/30/2026 on blur even with noValidate", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker noValidate></sgds-datepicker>`);
+    const input = el.shadowRoot?.querySelector<DatepickerInput>("sgds-datepicker-input");
+
+    input?.focus();
+    await waitUntil(() => el.shadowRoot?.activeElement === input);
+
+    // Type 30/30/2026 (invalid month 30)
+    const dateDigits = [3, 0, 3, 0, 2, 0, 2, 6];
+    for (const d of dateDigits) {
+      await sendKeys({ press: `Digit${d}` });
+    }
+
+    await elementUpdated(el);
+    expect(input?.value).to.equal("30/30/2026");
+
+    // Blur should clear the invalid date
+    input?.blur();
+    await elementUpdated(el);
+
+    expect(el.value).to.equal("");
+  });
 });
 
 describe("datepicker in form context", () => {
