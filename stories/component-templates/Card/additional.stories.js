@@ -15,7 +15,9 @@ const StretchedTemplate = () => {
         <h3 slot="title">Stretched link card</h3>
         <span slot="description">stretched link card</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
     </div>
@@ -45,7 +47,9 @@ const DisabledTemplate = () => {
         <h3 slot="title">Disabled card</h3>
         <span slot="description">disabled card</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
     </div>
@@ -75,7 +79,9 @@ const OrientationTemplate = () => {
         <h3 slot="title">Vertical image card</h3>
         <span slot="description">vertical card</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card orientation="horizontal">
@@ -90,7 +96,9 @@ const OrientationTemplate = () => {
         <h3 slot="title">Horizontal image card</h3>
         <span slot="description">horizontal card</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
     </div>
@@ -120,7 +128,9 @@ const ImagePositionTemplate = () => {
         <h3 slot="title">Vertical image card</h3>
         <span slot="description">vertical card with image position set to before the content</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card orientation="vertical" imagePosition="after">
@@ -135,7 +145,9 @@ const ImagePositionTemplate = () => {
         <h3 slot="title">Vertical image card</h3>
         <span slot="description">vertical card with image position set to after the content</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card orientation="horizontal" imagePosition="before">
@@ -150,7 +162,9 @@ const ImagePositionTemplate = () => {
         <h3 slot="title">Horizontal image card</h3>
         <span slot="description">horizontal card with image position set to before the content</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card orientation="horizontal" imagePosition="after">
@@ -165,7 +179,9 @@ const ImagePositionTemplate = () => {
         <h3 slot="title">Horizontal image card</h3>
         <span slot="description">horizontal card with image position set to after the content</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
     </div>
@@ -195,7 +211,9 @@ const ImageAdjustmentTemplate = () => {
         <h3 slot="title">Vertical image card</h3>
         <span slot="description">vertical card with image adjustment set to default</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card orientation="vertical" imageAdjustment="padding around">
@@ -210,7 +228,9 @@ const ImageAdjustmentTemplate = () => {
         <h3 slot="title">Vertical image card</h3>
         <span slot="description">vertical card with image adjustment set to padding around</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card orientation="vertical" imageAdjustment="aspect ratio">
@@ -225,7 +245,9 @@ const ImageAdjustmentTemplate = () => {
         <h3 slot="title">Vertical image card</h3>
         <span slot="description">vertical card with image adjustment set to aspect ratio</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
     </div>
@@ -255,7 +277,9 @@ const HideBorderTemplate = () => {
         <h3 slot="title">Vertical image card</h3>
         <span slot="description">vertical card with no border</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card hideBorder>
@@ -270,7 +294,9 @@ const HideBorderTemplate = () => {
         <h3 slot="title">Vertical image card</h3>
         <span slot="description">vertical card with no border</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card orientation="horizontal" hideBorder>
@@ -285,7 +311,9 @@ const HideBorderTemplate = () => {
         <h3 slot="title">Horizontal image card</h3>
         <span slot="description">horizontal card with no border</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card orientation="horizontal" hideBorder>
@@ -300,7 +328,9 @@ const HideBorderTemplate = () => {
         <h3 slot="title">Horizontal image card</h3>
         <span slot="description">horizontal card with no border</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
     </div>
@@ -330,7 +360,9 @@ const TintedTemplate = () => {
         <h3 slot="title">Vertical image card</h3>
         <span slot="description">vertical card with tinted background</span>
         <sgds-link slot="footer">
-          <a href="https://google.com" aria-label="Go somewhere">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
     </div>
