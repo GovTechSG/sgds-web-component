@@ -39,7 +39,12 @@
   align-items: center;
   width: calc(100% - var(--sgds-icon-size-md, 1.25rem));
   /* deduct 1px from top and bottom padding due to border */
-  padding: calc(var(--sgds-form-padding-y) - var(--sgds-form-border-width-default)) 0; 
+  padding: calc(var(--sgds-form-padding-y) - var(--sgds-form-border-width-default)) 0;
+}
+
+.combobox-input-container .form-control {
+  flex: 1 1 0;
+  min-width: 10ch;
 }
 
 slot[id='default'].d-none::slotted(*),
