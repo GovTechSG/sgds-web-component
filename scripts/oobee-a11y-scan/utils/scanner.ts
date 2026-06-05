@@ -77,39 +77,6 @@ export async function scanPage(
         // Continue scanning even if some components don't resolve
       });
 
-    // Debug: dump full DOM including shadow DOM before scanning
-    const fullDom = await page.evaluate(`
-      (function() {
-        function serializeNode(node, indent) {
-          indent = indent || "";
-          if (node.nodeType === 3) {
-            var text = (node.textContent || "").trim();
-            return text ? indent + text + "\\n" : "";
-          }
-          if (node.nodeType !== 1) return "";
-          var el = node;
-          var tag = el.tagName.toLowerCase();
-          var attrs = Array.from(el.attributes).map(function(a) { return a.name + '="' + a.value + '"'; }).join(" ");
-          var result = indent + "<" + tag + (attrs ? " " + attrs : "") + ">\\n";
-          if (el.shadowRoot) {
-            result += indent + "  #shadow-root\\n";
-            for (var i = 0; i < el.shadowRoot.childNodes.length; i++) {
-              result += serializeNode(el.shadowRoot.childNodes[i], indent + "    ");
-            }
-          }
-          for (var j = 0; j < el.childNodes.length; j++) {
-            result += serializeNode(el.childNodes[j], indent + "  ");
-          }
-          result += indent + "</" + tag + ">\\n";
-          return result;
-        }
-        return serializeNode(document.documentElement, "");
-      })()
-    `);
-    console.log("\n--- DEBUG: Full DOM (including shadow DOM) ---\n");
-    console.log(fullDom);
-    console.log("--- END DEBUG ---\n");
-
     // Inject axe-core and Oobee scan functions
     await page.evaluate(oobeeA11y.getAxeScript());
     await page.evaluate(oobeeA11y.getOobeeFunctions());
