@@ -34,7 +34,7 @@ const Template = () => html`
               >An overview of Singapore's plans for resilient and future-ready digital infrastructure.</span
             >
             <sgds-link slot="footer"
-              ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+              ><a href="#" aria-label="View details">View details <sgds-icon name="arrow-right"></sgds-icon></a
             ></sgds-link>
           </sgds-card>
         </div>
@@ -47,7 +47,7 @@ const Template = () => html`
               >Panellists explore responsible AI adoption frameworks and inter-agency collaboration.</span
             >
             <sgds-link slot="footer"
-              ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+              ><a href="#" aria-label="View details">View details <sgds-icon name="arrow-right"></sgds-icon></a
             ></sgds-link>
           </sgds-card>
         </div>
@@ -60,7 +60,7 @@ const Template = () => html`
               >A deep dive into implementing zero-trust principles across legacy and modern systems.</span
             >
             <sgds-link slot="footer"
-              ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+              ><a href="#" aria-label="View details">View details <sgds-icon name="arrow-right"></sgds-icon></a
             ></sgds-link>
           </sgds-card>
         </div>
@@ -74,7 +74,7 @@ const Template = () => html`
               >Key takeaways from real-world cloud migration projects across the Singapore government.</span
             >
             <sgds-link slot="footer"
-              ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+              ><a href="#" aria-label="View details">View details <sgds-icon name="arrow-right"></sgds-icon></a
             ></sgds-link>
           </sgds-card>
         </div>
@@ -87,7 +87,7 @@ const Template = () => html`
               >Practical frameworks for building effective incident response and recovery strategies.</span
             >
             <sgds-link slot="footer"
-              ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+              ><a href="#" aria-label="View details">View details <sgds-icon name="arrow-right"></sgds-icon></a
             ></sgds-link>
           </sgds-card>
         </div>
@@ -100,7 +100,7 @@ const Template = () => html`
               >How agencies are building cyber talent pipelines and fostering a security-aware culture.</span
             >
             <sgds-link slot="footer"
-              ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+              ><a href="#" aria-label="View details">View details <sgds-icon name="arrow-right"></sgds-icon></a
             ></sgds-link>
           </sgds-card>
         </div>
@@ -114,7 +114,7 @@ const Template = () => html`
               >An opening address on Singapore's whole-of-government approach to digital resilience.</span
             >
             <sgds-link slot="footer"
-              ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+              ><a href="#" aria-label="View details">View details <sgds-icon name="arrow-right"></sgds-icon></a
             ></sgds-link>
           </sgds-card>
         </div>
@@ -127,7 +127,7 @@ const Template = () => html`
               >How people-centred design and agile delivery are shaping the next wave of government technology.</span
             >
             <sgds-link slot="footer"
-              ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+              ><a href="#" aria-label="View details">View details <sgds-icon name="arrow-right"></sgds-icon></a
             ></sgds-link>
           </sgds-card>
         </div>
@@ -140,7 +140,7 @@ const Template = () => html`
               >Using machine learning to continuously monitor systems for policy and regulatory compliance.</span
             >
             <sgds-link slot="footer"
-              ><a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a
+              ><a href="#" aria-label="View details">View details <sgds-icon name="arrow-right"></sgds-icon></a
             ></sgds-link>
           </sgds-card>
         </div>
