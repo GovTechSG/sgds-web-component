@@ -5,6 +5,25 @@
     <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <!-- Default variant with icon-button navigation -->
     <sgds-pagination dataLength="50" itemsPerPage="10"></sgds-pagination>
+
+    <!-- Number variant -->
+    <sgds-pagination variant="number" dataLength="50" itemsPerPage="10"></sgds-pagination>
+
+    <!-- Button variant with icon-button navigation -->
+    <sgds-pagination variant="button" dataLength="30" itemsPerPage="10" navigation="icon-button"></sgds-pagination>
+
+    <!-- Button variant with text button navigation -->
+    <sgds-pagination variant="button" dataLength="30" itemsPerPage="10" navigation="button"></sgds-pagination>
+
+    <!-- Description variant with icon-button navigation -->
+    <sgds-pagination variant="description" dataLength="50" itemsPerPage="10" navigation="icon-button"></sgds-pagination>
+
+    <!-- Description variant with text button navigation -->
+    <sgds-pagination variant="description" dataLength="50" itemsPerPage="10" navigation="button"></sgds-pagination>
+
+    <!-- Small size -->
+    <sgds-pagination size="sm" dataLength="40" itemsPerPage="10"></sgds-pagination>
   </body>
 </html>

@@ -68,6 +68,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   /** Variant of the file upload component: "default" or "drag-and-drop" */
   @property({ type: String, reflect: true }) variant: "default" | "drag-and-drop" = "default";
 
+  /** An accessible label for the file upload button. Defaults to "Choose files" if not set. */
+  @property({ type: String }) ariaLabel = "Choose files";
+
   /** Disables native and sgds validation for the component. Use this when you want to do custom validation */
   @property({ type: Boolean, reflect: true }) noValidate = false;
 
@@ -407,7 +410,14 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         >
           <sgds-icon name="upload" size="lg"></sgds-icon>
           <div class="drag-drop-text">Drag and drop files here</div>
-          <sgds-button size="sm" variant="outline" tone="brand" ?disabled=${this.disabled} @click=${this._handleClick}>
+          <sgds-button
+            size="sm"
+            variant="outline"
+            tone="brand"
+            ?disabled=${this.disabled}
+            @click=${this._handleClick}
+            ariaLabel=${this.ariaLabel}
+          >
             <slot>Choose files</slot>
           </sgds-button>
         </div>
@@ -420,6 +430,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         ?disabled=${this.disabled}
         @click=${this._handleClick}
         @sgds-blur=${this._handleBlur}
+        ariaLabel=${this.ariaLabel}
       >
         <slot>Choose files</slot>
         <sgds-icon slot="rightIcon" name="upload"></sgds-icon>

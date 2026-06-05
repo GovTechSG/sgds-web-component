@@ -12,13 +12,7 @@ export const Template = args =>
         ?tinted=${ifDefined(args.tinted)}
         orientation=${ifDefined(args.orientation)}
       >
-        <img
-          slot="thumbnail"
-          alt="img alternate text goes here"
-          width="64"
-          height="64"
-          src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg"
-        />
+        <img slot="thumbnail" alt="img alternate text goes here" width="64" height="64" src="/logo.png" />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
         <span slot="title">Innovative solutions for you</span>
@@ -34,7 +28,7 @@ export const Template = args =>
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-thumbnail-card>
     </div>

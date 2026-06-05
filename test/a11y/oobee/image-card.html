@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- Default image card -->
+    <sgds-image-card>
+      <img slot="image" src="https://placehold.co/400x200" alt="Placeholder image" />
+      <span slot="title">Image card title</span>
+      <span slot="description">Image card description content.</span>
+    </sgds-image-card>
+
+    <!-- Image position after -->
+    <sgds-image-card imagePosition="after">
+      <img slot="image" src="https://placehold.co/400x200" alt="Placeholder image" />
+      <span slot="title">Image after</span>
+      <span slot="description">Image positioned after content.</span>
+    </sgds-image-card>
+
+    <!-- No padding -->
+    <sgds-image-card noPadding>
+      <img slot="image" src="https://placehold.co/400x200" alt="Placeholder image" />
+      <span slot="title">No padding</span>
+      <span slot="description">Card without padding.</span>
+    </sgds-image-card>
+  </body>
+</html>
