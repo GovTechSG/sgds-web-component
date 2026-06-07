@@ -4,11 +4,42 @@
     <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
     <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
   </head>
+
   <body>
     <sgds-combo-box label="Select a fruit">
-<sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
-<sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
-<sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
-</sgds-combo-box>
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <sgds-combo-box label="Select a fruit" required>
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <sgds-combo-box label="Select a fruit" readonly value="apple">
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <sgds-combo-box label="Select a fruit" hintText="Start typing to filter options">
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <sgds-combo-box label="Select a fruit" invalid hasFeedback invalidFeedback="Please select a fruit">
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <sgds-combo-box label="Select fruits" multiSelect>
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+    </sgds-combo-box>
   </body>
 </html>

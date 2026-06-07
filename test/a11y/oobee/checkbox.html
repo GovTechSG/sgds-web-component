@@ -7,11 +7,25 @@
   <body>
     <sgds-checkbox name="agree" value="yes">I agree to the terms</sgds-checkbox>
 
-    <sgds-checkbox name="agree" value="yes" disabled>Disabled option</sgds-checkbox>
+    <sgds-checkbox name="agree" value="yes" required>I agree to the terms</sgds-checkbox>
+
+    <sgds-checkbox name="agree" value="yes" checked>I agree to the terms</sgds-checkbox>
+
+    <sgds-checkbox name="select-all" value="all" indeterminate>Select all</sgds-checkbox>
 
     <sgds-checkbox-group label="Select options">
-<sgds-checkbox name="options" value="a">Option A</sgds-checkbox>
-<sgds-checkbox name="options" value="b">Option B</sgds-checkbox>
-</sgds-checkbox-group>
+      <sgds-checkbox name="options" value="a">Option A</sgds-checkbox>
+      <sgds-checkbox name="options" value="b">Option B</sgds-checkbox>
+    </sgds-checkbox-group>
+
+    <sgds-checkbox-group label="Select options" hintText="Select at least one option">
+      <sgds-checkbox name="options" value="a">Option A</sgds-checkbox>
+      <sgds-checkbox name="options" value="b">Option B</sgds-checkbox>
+    </sgds-checkbox-group>
+
+    <sgds-checkbox-group label="Select options" invalid hasFeedback invalidFeedback="Please select at least one option">
+      <sgds-checkbox name="options" value="a">Option A</sgds-checkbox>
+      <sgds-checkbox name="options" value="b">Option B</sgds-checkbox>
+    </sgds-checkbox-group>
   </body>
 </html>

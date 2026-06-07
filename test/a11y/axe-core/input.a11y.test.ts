@@ -15,9 +15,41 @@ describe("Input a11y", () => {
     await expect(el).to.be.accessible();
   });
 
-  it("sgds-input disabled should be accessible", async () => {
+  it("sgds-input required should be accessible", async () => {
+    const el = await fixture(html` <sgds-input label="Full name" inputId="required-input" required></sgds-input> `);
+    await expect(el).to.be.accessible();
+  });
+
+  it("sgds-input readonly should be accessible", async () => {
     const el = await fixture(html`
-      <sgds-input label="Disabled field" inputId="disabled-input" disabled></sgds-input>
+      <sgds-input label="Reference ID" inputId="readonly-input" readonly value="REF-12345"></sgds-input>
+    `);
+    await expect(el).to.be.accessible();
+  });
+
+  it("sgds-input invalid with feedback should be accessible", async () => {
+    const el = await fixture(html`
+      <sgds-input
+        label="Email"
+        inputId="invalid-input"
+        invalid
+        hasFeedback="both"
+        invalidFeedback="Please enter a valid email"
+      ></sgds-input>
+    `);
+    await expect(el).to.be.accessible();
+  });
+
+  it("sgds-input type number should be accessible", async () => {
+    const el = await fixture(html`
+      <sgds-input label="Age" inputId="number-input" type="number" min="0" max="120"></sgds-input>
+    `);
+    await expect(el).to.be.accessible();
+  });
+
+  it("sgds-input with prefix and suffix should be accessible", async () => {
+    const el = await fixture(html`
+      <sgds-input label="Amount" inputId="prefix-input" prefix="$" suffix=".00"></sgds-input>
     `);
     await expect(el).to.be.accessible();
   });

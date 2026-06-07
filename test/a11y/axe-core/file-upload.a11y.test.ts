@@ -36,4 +36,25 @@ describe("FileUpload a11y", () => {
     const el = await fixture(html` <sgds-file-upload label="Upload PDF" accept=".pdf"></sgds-file-upload> `);
     await expect(el).to.be.accessible();
   });
+
+  it("with hintText should be accessible", async () => {
+    const el = await fixture(
+      html` <sgds-file-upload label="Upload file" hintText="Maximum file size: 5MB"></sgds-file-upload> `
+    );
+    await expect(el).to.be.accessible();
+  });
+
+  it("invalid with feedback should be accessible", async () => {
+    const el = await fixture(
+      html`
+        <sgds-file-upload
+          label="Upload file"
+          invalid
+          hasFeedback
+          invalidFeedback="Please upload a file"
+        ></sgds-file-upload>
+      `
+    );
+    await expect(el).to.be.accessible();
+  });
 });
