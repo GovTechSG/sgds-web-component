@@ -202,6 +202,15 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
 
   protected _renderInput() {
     const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
+    const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+    const ariaLabelledBy =
+      [
+        this.label ? this._labelId : "",
+        this.hintText ? `${this._controlId}Help` : "",
+        this.invalid && wantFeedbackText ? `${this._controlId}-invalid` : ""
+      ]
+        .filter(Boolean)
+        .join(" ") || undefined;
     return html`
       <div
         class="form-control-group ${classMap({
@@ -236,10 +245,8 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
           @invalid=${() => this.setInvalid(true)}
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
-          aria-describedby=${ifDefined(this.invalid && this.hasFeedback ? `${this._controlId}-invalid` : undefined)}
-          aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
-            ? `${this._controlId}-invalid`
-            : ""}"
+          aria-describedby=${ifDefined(this.invalid && wantFeedbackText ? `${this._controlId}-invalid` : undefined)}
+          aria-labelledby=${ifDefined(ariaLabelledBy)}
         />
         ${this.type === "password" ? this._renderPasswordToggle() : nothing}
         ${this.suffix ? html`<span class="form-control-suffix">${this.suffix}</span>` : nothing}

@@ -6,5 +6,20 @@
   </head>
   <body>
     <sgds-datepicker label="Select date"></sgds-datepicker>
+
+    <sgds-datepicker label="Date of birth" required></sgds-datepicker>
+
+    <sgds-datepicker label="Event date" readonly value="2024-01-15"></sgds-datepicker>
+
+    <sgds-datepicker label="Start date" hintText="Select your preferred start date"></sgds-datepicker>
+
+    <sgds-datepicker
+      label="Select date"
+      invalid
+      hasFeedback
+      invalidFeedback="Please select a valid date"
+    ></sgds-datepicker>
+
+    <sgds-datepicker label="Select date range" mode="range"></sgds-datepicker>
   </body>
 </html>

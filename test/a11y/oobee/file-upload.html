@@ -5,22 +5,20 @@
     <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <!-- Default variant -->
     <sgds-file-upload label="Upload file"></sgds-file-upload>
 
-    <!-- Drag and drop variant -->
     <sgds-file-upload label="Upload document" variant="drag-and-drop"></sgds-file-upload>
 
-    <!-- Multiple files -->
     <sgds-file-upload label="Upload files" multiple></sgds-file-upload>
 
-    <!-- Required -->
     <sgds-file-upload label="Required upload" required></sgds-file-upload>
 
-    <!-- With custom ariaLabel -->
     <sgds-file-upload label="Upload photo" ariaLabel="Upload photo"></sgds-file-upload>
 
-    <!-- With accept filter -->
     <sgds-file-upload label="Upload PDF" accept=".pdf"></sgds-file-upload>
+
+    <sgds-file-upload label="Upload file" hintText="Maximum file size: 5MB"></sgds-file-upload>
+
+    <sgds-file-upload label="Upload file" invalid hasFeedback invalidFeedback="Please upload a file"></sgds-file-upload>
   </body>
 </html>
