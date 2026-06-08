@@ -44,7 +44,7 @@ const Template = () => html`
                 >Supporting description text that explains what this feature offers to the user.</span
               >
               <sgds-link slot="footer">
-                <a href="#">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
+                <a href="#" aria-label="Learn more">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
               </sgds-link>
             </sgds-card>
           </div>
@@ -57,7 +57,7 @@ const Template = () => html`
                 >Supporting description text that explains what this feature offers to the user.</span
               >
               <sgds-link slot="footer">
-                <a href="#">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
+                <a href="#" aria-label="Learn more">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
               </sgds-link>
             </sgds-card>
           </div>
@@ -70,7 +70,7 @@ const Template = () => html`
                 >Supporting description text that explains what this feature offers to the user.</span
               >
               <sgds-link slot="footer">
-                <a href="#">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
+                <a href="#" aria-label="Learn more">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
               </sgds-link>
             </sgds-card>
           </div>

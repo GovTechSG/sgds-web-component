@@ -123,7 +123,7 @@ const Template = () => html`
                 place.</span
               >
               <sgds-link slot="footer">
-                <a href="#">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
+                <a href="#" aria-label="Learn more">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
               </sgds-link>
             </sgds-card>
           </div>
@@ -137,7 +137,7 @@ const Template = () => html`
                 agencies.</span
               >
               <sgds-link slot="footer">
-                <a href="#">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
+                <a href="#" aria-label="Learn more">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
               </sgds-link>
             </sgds-card>
           </div>
@@ -151,7 +151,7 @@ const Template = () => html`
                 needs.</span
               >
               <sgds-link slot="footer">
-                <a href="#">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
+                <a href="#" aria-label="Learn more">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
               </sgds-link>
             </sgds-card>
           </div>
