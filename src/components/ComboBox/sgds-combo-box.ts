@@ -561,6 +561,7 @@ export class SgdsComboBox extends SelectElement {
             class="visually-hidden"
             ?required=${this.required}
             tabindex="-1"
+            aria-hidden="true"
           />`
         : nothing}
     `;
