@@ -5,3 +5,15 @@
 .tab-panel:not(.tab-panel--active) {
   display: none;
 }
+
+:host([tone="inverse"]) .tab-panel {
+  color: var(--sgds-color-inverse);
+}
+
+:host([tone="fixed-dark"]) .tab-panel {
+  color: var(--sgds-color-fixed-dark);
+}
+
+:host([tone="fixed-light"]) .tab-panel {
+  color: var(--sgds-color-fixed-light);
+}

@@ -1,9 +1,92 @@
 import { html } from "lit";
+import { ifDefined } from "lit/directives/if-defined.js";
 
 export const SolidVariant = {
   render: Template.bind({}),
   name: "Solid variant",
   args: { variant: "solid" },
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const LightToneTemplate = ({ tone }) => html`
+  <div class="sgds:p-component-xs">
+    <sgds-tab-group variant="underlined" tone="${ifDefined(tone)}">
+      <sgds-tab slot="nav" panel="home">Home</sgds-tab>
+      <sgds-tab slot="nav" panel="profile">Profile</sgds-tab>
+      <sgds-tab slot="nav" panel="contact">Contact</sgds-tab>
+      <sgds-tab-panel name="home">Home information</sgds-tab-panel>
+      <sgds-tab-panel name="profile">Profile information</sgds-tab-panel>
+      <sgds-tab-panel name="contact">Contact information</sgds-tab-panel>
+    </sgds-tab-group>
+  </div>
+  <div class="sgds:p-component-xs">
+    <sgds-tab-group variant="solid" tone="${ifDefined(tone)}">
+      <sgds-tab slot="nav" panel="home">Home</sgds-tab>
+      <sgds-tab slot="nav" panel="profile">Profile</sgds-tab>
+      <sgds-tab slot="nav" panel="contact">Contact</sgds-tab>
+      <sgds-tab-panel name="home">Home information</sgds-tab-panel>
+      <sgds-tab-panel name="profile">Profile information</sgds-tab-panel>
+      <sgds-tab-panel name="contact">Contact information</sgds-tab-panel>
+    </sgds-tab-group>
+  </div>
+`;
+
+export const DarkToneTemplate = ({ tone }) => html`
+  <div class="sgds:p-component-xs sgds:bg-primary-default">
+    <sgds-tab-group variant="underlined" tone="${ifDefined(tone)}">
+      <sgds-tab slot="nav" panel="home">Home</sgds-tab>
+      <sgds-tab slot="nav" panel="profile">Profile</sgds-tab>
+      <sgds-tab slot="nav" panel="contact">Contact</sgds-tab>
+      <sgds-tab-panel name="home">Home information</sgds-tab-panel>
+      <sgds-tab-panel name="profile">Profile information</sgds-tab-panel>
+      <sgds-tab-panel name="contact">Contact information</sgds-tab-panel>
+    </sgds-tab-group>
+  </div>
+  <div class="sgds:p-component-xs sgds:bg-primary-default">
+    <sgds-tab-group variant="solid" tone="${ifDefined(tone)}">
+      <sgds-tab slot="nav" panel="home">Home</sgds-tab>
+      <sgds-tab slot="nav" panel="profile">Profile</sgds-tab>
+      <sgds-tab slot="nav" panel="contact">Contact</sgds-tab>
+      <sgds-tab-panel name="home">Home information</sgds-tab-panel>
+      <sgds-tab-panel name="profile">Profile information</sgds-tab-panel>
+      <sgds-tab-panel name="contact">Contact information</sgds-tab-panel>
+    </sgds-tab-group>
+  </div>
+`;
+
+export const BrandTone = {
+  render: LightToneTemplate.bind({}),
+  name: "Primary tone",
+  args: { tone: "brand" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const NeutralTone = {
+  render: LightToneTemplate.bind({}),
+  name: "Neutral tone",
+  args: { tone: "neutral" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const FixedDarkTone = {
+  render: DarkToneTemplate.bind({}),
+  name: "Fixed dark tone",
+  args: { tone: "fixed-dark" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const InverseTone = {
+  render: DarkToneTemplate.bind({}),
+  name: "Fixed dark tone",
+  args: { tone: "inverse" },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const FixedLightTone = {
+  render: DarkToneTemplate.bind({}),
+  name: "Fixed dark tone",
+  args: { tone: "fixed-light" },
   parameters: {},
   tags: ["!dev"]
 };

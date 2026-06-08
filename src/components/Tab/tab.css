@@ -12,14 +12,68 @@
   border-radius: var(--sgds-border-radius-md);
 }
 
-:host([variant="solid"][active]) .tab {
+:host([variant="solid"][tone="inverse"]) .tab {
+  background-color: var(--sgds-bg-translucent-inverse);
+}
+
+:host([variant="solid"][tone="fixed-light"]) .tab {
+  background-color: var(--sgds-bg-translucent-fixed-dark);
+}
+
+:host([variant="solid"][active][tone="brand"]) .tab {
   background-color: var(--sgds-primary-surface-default);
+  color: var(--sgds-color-fixed-light);
+}
+
+:host([variant="solid"][active][tone="neutral"]) .tab {
+  background-color: var(--sgds-neutral-surface-default);
+  color: var(--sgds-color-fixed-light);
+}
+
+:host([variant="solid"]:not([active])[tone="inverse"]) .tab {
+  color: var(--sgds-surface-inverse);
+}
+
+:host([variant="solid"][active][tone="inverse"]) .tab {
+  background-color: var(--sgds-surface-inverse);
+  color: var(--sgds-color-inverse);
+}
+
+:host([variant="solid"]:not([active])[tone="fixed-light"]) .tab {
+  color: var(--sgds-color-fixed-light);
+}
+
+:host([variant="solid"][active][tone="fixed-light"]) .tab {
+  background-color: var(--sgds-surface-fixed-light);
+  color: var(--sgds-color-fixed-dark);
+}
+
+:host([variant="solid"]:not([active])[tone="fixed-dark"]) .tab {
+  background-color: var(--sgds-bg-translucent-fixed-light);
+  color: var(--sgds-color-fixed-dark);
+}
+
+:host([variant="solid"][active][tone="fixed-dark"]) .tab {
+  background-color: var(--sgds-surface-fixed-dark);
   color: var(--sgds-color-fixed-light);
 }
 
 :host([variant="solid"]:not([active]):not([disabled])) .tab:focus,
 :host([variant="solid"]:not([active]):not([disabled])) .tab:focus-visible {
   background-color: var(--sgds-bg-translucent);
+}
+:host([variant="solid"][tone="inverse"]:not([active]):not([disabled])) .tab:focus,
+:host([variant="solid"][tone="inverse"]:not([active]):not([disabled])) .tab:focus-visible {
+  background-color: var(--sgds-bg-translucent-inverse-emphasis);
+}
+:host([variant="solid"][tone="fixed-light"]:not([active]):not([disabled])) .tab:focus,
+:host([variant="solid"][tone="fixed-light"]:not([active]):not([disabled])) .tab:focus-visible {
+  background-color: var(--sgds-bg-translucent-fixed-dark-emphasis);
+}
+
+:host([variant="solid"][tone="fixed-dark"]:not([active]):not([disabled])) .tab:focus,
+:host([variant="solid"][tone="fixed-dark"]:not([active]):not([disabled])) .tab:focus-visible {
+  background-color: var(--sgds-bg-translucent-fixed-light-emphasis);
 }
 
 :host([variant="solid"]:not([active]):not([disabled])) .tab:focus-visible {
@@ -31,13 +85,40 @@
   background-color: var(--sgds-bg-translucent);
 }
 
+:host([variant="solid"][tone="inverse"]:not([active]):not([disabled])) .tab:hover {
+  background-color: var(--sgds-bg-translucent-inverse-emphasis);
+
+}
+:host([variant="solid"][tone="fixed-dark"]:not([active]):not([disabled])) .tab:hover {
+  background-color: var(--sgds-bg-translucent-fixed-light-emphasis);
+}
+:host([variant="solid"][tone="fixed-light"]:not([active]):not([disabled])) .tab:hover {
+  background-color: var(--sgds-bg-translucent-fixed-dark-emphasis);
+}
+
 :host([disabled]) .tab {
   opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
 }
 
-:host([variant="underlined"][active]) .tab {
+:host([variant="underlined"][active][tone="brand"]) .tab {
   color: var(--sgds-primary-color-default);
+}
+
+:host([variant="underlined"][active][tone="neutral"]) .tab {
+  color: var(--sgds-neutral-color-default);
+}
+
+:host([variant="underlined"][tone="fixed-dark"]) .tab {
+  color: var(--sgds-color-fixed-dark);
+}
+
+:host([variant="underlined"][tone="inverse"]) .tab {
+  color: var(--sgds-color-inverse);
+}
+
+:host([variant="underlined"][tone="fixed-light"]) .tab {
+  color: var(--sgds-color-fixed-light);
 }
 
 :host([variant="underlined"][orientation="vertical"][active]) .tab::after {
@@ -47,7 +128,6 @@
   right: -1px;
   width: var(--sgds-border-width-4);
   height: 100%;
-  background-color: var(--sgds-primary-surface-default);
 }
 
 :host([variant="underlined"][orientation="horizontal"][active]) .tab::after {
@@ -57,7 +137,26 @@
   left: 0;
   height: var(--sgds-border-width-4);
   width: 100%;
+}
+
+:host([variant="underlined"][active][tone="brand"]) .tab::after {
   background-color: var(--sgds-primary-surface-default);
+}
+
+:host([variant="underlined"][active][tone="neutral"]) .tab::after {
+  background-color: var(--sgds-neutral-surface-default);
+}
+
+:host([variant="underlined"][active][tone="inverse"]) .tab::after {
+  background-color: var(--sgds-color-inverse);
+}
+
+:host([variant="underlined"][active][tone="fixed-dark"]) .tab::after {
+  background-color: var(--sgds-surface-fixed-dark);
+}
+
+:host([variant="underlined"][active][tone="fixed-light"]) .tab::after {
+  background-color: var(--sgds-surface-fixed-light);
 }
 
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:focus,
@@ -71,8 +170,20 @@
   outline-offset: var(--sgds-outline-offset-focus);
 }
 
+:host([variant="underlined"][tone="inverse"]:not([active]):not([disabled])) .tab:focus,
+:host([variant="underlined"][tone="inverse"]:not([active]):not([disabled])) .tab:focus-visible,
+:host([variant="underlined"][tone="fixed-light"]:not([active]):not([disabled])) .tab:focus,
+:host([variant="underlined"][tone="fixed-light"]:not([active]):not([disabled])) .tab:focus-visible {
+  background-color: var(--sgds-bg-translucent);
+}
+
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:hover {
   background-color: var(--sgds-bg-translucent-subtle);
+}
+
+:host([variant="underlined"][tone=inverse]:not([active]):not([disabled])) .tab:hover,
+:host([variant="underlined"][tone=fixed-light]:not([active]):not([disabled])) .tab:hover {
+  background-color: var(--sgds-bg-translucent);
 }
 
 .tab {
