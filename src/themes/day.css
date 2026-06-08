@@ -13,8 +13,11 @@
   --sgds-bg-translucent-subtle: oklch(from var(--sgds-gray-1100) l c h / 0.05);
   --sgds-bg-transparent: transparent;
   --sgds-bg-translucent-inverse: oklch(from var(--sgds-gray-000) l c h / 0.2);
+  --sgds-bg-translucent-inverse-emphasis: oklch(from var(--sgds-gray-000) l c h / 0.5);
   --sgds-bg-translucent-fixed-dark: oklch(from var(--sgds-gray-1100) l c h / 0.2);
+  --sgds-bg-translucent-fixed-dark-emphasis: oklch(from var(--sgds-gray-1100) l c h / 0.5);
   --sgds-bg-translucent-fixed-light: oklch(from var(--sgds-gray-000) l c h / 0.2);
+  --sgds-bg-translucent-fixed-light-emphasis: oklch(from var(--sgds-gray-000) l c h / 0.5);
   --sgds-surface-default: var(--sgds-gray-000);
   --sgds-surface-raised: var(--sgds-gray-100);
   --sgds-surface-inverse: var(--sgds-gray-900);
