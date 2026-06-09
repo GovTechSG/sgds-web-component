@@ -1,0 +1,21 @@
+changelog:
+  categories:
+    - title: Breaking Changes
+      labels:
+        - breaking-change
+        - breaking
+    - title: Features
+      labels:
+        - enhancement
+        - feature
+    - title: Bug Fixes
+      labels:
+        - bug
+        - fix
+    - title: Refactor
+      labels:
+        - refactor
+        - refactoring
+    - title: Other Changes
+      labels:
+        - "*"
