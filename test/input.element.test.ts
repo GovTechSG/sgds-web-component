@@ -136,7 +136,9 @@ describe("sgds-input", () => {
   });
 
   it("aria-describedby excludes invalid-feedback id when hasFeedback is style only", async () => {
-    const el = await fixture<SgdsInput>(html`<sgds-input label="label" hintText="hello" hasFeedback="style"></sgds-input>`);
+    const el = await fixture<SgdsInput>(
+      html`<sgds-input label="label" hintText="hello" hasFeedback="style"></sgds-input>`
+    );
     el.invalid = true;
     await elementUpdated(el);
     const input = el.shadowRoot?.querySelector("input");
