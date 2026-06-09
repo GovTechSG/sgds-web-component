@@ -23,7 +23,9 @@ export const Template = args =>
           >Some quick example text to build on the card title and make up the bulk of the card's content.</span
         >
         <sgds-link slot="footer">
-          <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card>
@@ -38,7 +40,9 @@ export const Template = args =>
           example text to build on the card title and make up the bulk of the card's content.</span
         >
         <sgds-link slot="footer">
-          <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card>
@@ -49,7 +53,9 @@ export const Template = args =>
           >Some quick example text to build on the card title and make up the bulk of the card's content.</span
         >
         <sgds-link slot="footer">
-          <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
       <sgds-card>
@@ -61,7 +67,9 @@ export const Template = args =>
           example text to build on the card title and make up the bulk of the card's content.
         </span>
         <sgds-link slot="footer">
-          <a href="https://google.com">Go somewhere <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
         </sgds-link>
       </sgds-card>
     </div>

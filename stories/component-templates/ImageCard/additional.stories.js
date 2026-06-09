@@ -27,7 +27,7 @@ const StretchedLinkTemplate = () =>
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
     </div>
@@ -77,7 +77,7 @@ const OrientationTemplate = () =>
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
       <sgds-image-card orientation="horizontal">
@@ -105,7 +105,7 @@ const OrientationTemplate = () =>
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
     </div>
@@ -147,7 +147,7 @@ const ImagePositionTemplate = () => {
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
       <sgds-image-card imagePosition="after">
@@ -175,7 +175,7 @@ const ImagePositionTemplate = () => {
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
       <sgds-image-card orientation="horizontal" imagePosition="before">
@@ -203,7 +203,7 @@ const ImagePositionTemplate = () => {
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
       <sgds-image-card orientation="horizontal" imagePosition="after">
@@ -231,7 +231,7 @@ const ImagePositionTemplate = () => {
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
     </div>
@@ -274,7 +274,7 @@ const ImageAdjustmentTemplate = () => {
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
       <sgds-image-card imageAdjustment="padding around">
@@ -302,7 +302,7 @@ const ImageAdjustmentTemplate = () => {
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
       <sgds-image-card imageAdjustment="aspect ratio">
@@ -330,7 +330,7 @@ const ImageAdjustmentTemplate = () => {
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
     </div>
@@ -388,7 +388,7 @@ const NoPaddingTemplate = () =>
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
       <sgds-image-card orientation="horizontal" noPadding>
@@ -415,7 +415,7 @@ const NoPaddingTemplate = () =>
           <sgds-badge variant="neutral" outlined>Design</sgds-badge>
         </div>
         <sgds-link slot="footer">
-          <a href="#">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
+          <a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a>
         </sgds-link>
       </sgds-image-card>
     </div>
