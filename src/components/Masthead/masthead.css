@@ -26,6 +26,7 @@ a:hover {
   line-height: 1.25rem;
   font-size: 0.875rem;
   font-family: "Inter", system-ui, sans-serif;
+  color-scheme: var(--sgds-color-scheme, only light);
 }
 
 .banner {
