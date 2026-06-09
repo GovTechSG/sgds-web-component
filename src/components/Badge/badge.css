@@ -100,7 +100,7 @@ sgds-tooltip {
   line-height: var(--sgds-line-height-3-xs);
   height: var(--sgds-dimension-24, 24px);
   min-width: var(--sgds-dimension-24);
-  max-width: var(--sgds-dimension-192);
+  max-width: var(--sgds-dimension-192, 192px);
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -118,6 +118,9 @@ sgds-tooltip {
 
 .badge-label {
   padding: var(--sgds-padding-none) var(--sgds-padding-3-xs);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .badge-dismissible {
@@ -126,12 +129,6 @@ sgds-tooltip {
 
 .badge-dimissible sgds-close-button {
   --sgds-close-btn-border-radius: var(--sgds-border-radius-sm);
-}
-
-.badge.truncated .badge-label {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
 }
 
 slot::slotted(*) {
