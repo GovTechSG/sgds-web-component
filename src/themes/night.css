@@ -1,6 +1,7 @@
 @import "./root.css";
 :root.sgds-night-theme {
   color-scheme: only dark;
+  --sgds-color-scheme: only dark;
 
   /* Semantic - Default Colors */
   --sgds-bg-default: var(--sgds-gray-1100);
