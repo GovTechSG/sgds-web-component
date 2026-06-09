@@ -1,6 +1,7 @@
 @import "./root.css";
 :root {
   color-scheme: only light;
+  --sgds-color-scheme: only light;
 
   /* Semantic - Default Colors */
   --sgds-bg-default: var(--sgds-gray-000);
