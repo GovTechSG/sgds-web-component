@@ -1,3 +1,23 @@
+## v3.21.1 (2026-06-09)
+
+### Fix
+
+- **Masthead**: use tokenise color scheme to switch between day and night [run-chromatic][skip-cd] (#699)
+- **Masthead**: use tokenise color scheme to switch between day and night
+- **Badge**: truncation is controlled by CSS not JS [run-chromatic] (#677) [skip-cd]
+- **Input**: explicitly set form control fonts
+- **Badge**: truncation is controlled by CSS not JS, tooltip appearance logic only
+- **Input, ComboBox, QuantityToggle**: aria fixes to pass oobee [run-chromatic] (#696) [skip-cd]
+- **ComboBox**: input prematurely expand in height for multiselect [skip-cd] (#695)
+- **ComboBox**: input going to second line prematurely for multiselect
+- **QuantityToggle**: replace role region with aria live assertive
+- **ComboBox**: input for constraint validation should be ariahidden
+
+### Refactor
+
+- **Input**: replace arialabelledby with aria described
+- **Input**: make aria-labelledBy conditional based on presences of feedback or label
+
 ## v3.21.0 (2026-06-04)
 
 ### Feat
