@@ -23,7 +23,7 @@ describe("sgds-input", () => {
           <div class="form-text" id="test-idHelp">hello</div>
         </div>
     `,
-      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
+      { ignoreAttributes: ["id", "for", "aria-describedby"] }
     );
   });
   it("renders with suffix defined", async () => {
@@ -36,13 +36,13 @@ describe("sgds-input", () => {
           <div class="form-control-group">
             <slot name="icon"></slot>
             <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
-            <span class="form-control-suffix">test</span>  
+            <span class="form-control-suffix">test</span>
             <slot name="trailing-icon"></slot>
           </div>
             <slot name="action"></slot>
         </div>
     `,
-      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
+      { ignoreAttributes: ["id", "for", "aria-describedby"] }
     );
   });
   it("renders with prefix defined", async () => {
@@ -63,7 +63,7 @@ describe("sgds-input", () => {
             <slot name="action"></slot>
           </div>
     `,
-      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
+      { ignoreAttributes: ["id", "for", "aria-describedby"] }
     );
   });
   it("renders with spinner when loading=true", async () => {
@@ -89,7 +89,7 @@ describe("sgds-input", () => {
               <slot name="action"></slot>
         </div>
     `,
-      { ignoreAttributes: ["id", "for", "aria-labelledby"] }
+      { ignoreAttributes: ["id", "for", "aria-describedby"] }
     );
   });
 
@@ -101,20 +101,59 @@ describe("sgds-input", () => {
     expect(input?.getAttribute("id")).to.equal(label?.getAttribute("for"));
     expect(hintText?.getAttribute("id")).to.contain(input?.getAttribute("id"));
   });
-  it("input's aria-labelledby points to label id, hint text id and invalid-feedback id", async () => {
+  it("input's aria-describedby points to hint text id and invalid-feedback id", async () => {
     const el = await fixture<SgdsInput>(
       html`<sgds-input label="label" hintText="hello" hasFeedback="both"></sgds-input>`
     );
     const input = el.shadowRoot?.querySelector("input");
-    const label = el.shadowRoot?.querySelector("label");
     const hintText = el.shadowRoot?.querySelector("div.form-text");
-    expect(input?.getAttribute("aria-labelledby")).to.contain(label?.getAttribute("id"));
-    expect(input?.getAttribute("aria-labelledby")).to.contain(hintText?.getAttribute("id"));
+    expect(input?.getAttribute("aria-describedby")).to.contain(hintText?.getAttribute("id"));
 
     el.invalid = true;
     await elementUpdated(el);
     const feedback = el.shadowRoot?.querySelector(".invalid-feedback");
-    expect(input?.getAttribute("aria-labelledby")).to.contain(feedback?.getAttribute("id"));
+    expect(input?.getAttribute("aria-describedby")).to.contain(feedback?.getAttribute("id"));
+  });
+
+  it("aria-describedby includes hint text id when hintText is provided", async () => {
+    const el = await fixture<SgdsInput>(html`<sgds-input hintText="hello"></sgds-input>`);
+    const input = el.shadowRoot?.querySelector("input");
+    const hintText = el.shadowRoot?.querySelector("div.form-text");
+    const ariaDescribedBy = input?.getAttribute("aria-describedby");
+    expect(ariaDescribedBy).to.equal(hintText?.getAttribute("id"));
+  });
+
+  it("aria-describedby is not rendered when no hintText is provided", async () => {
+    const el = await fixture<SgdsInput>(html`<sgds-input label="label"></sgds-input>`);
+    const input = el.shadowRoot?.querySelector("input");
+    expect(input?.hasAttribute("aria-describedby")).to.be.false;
+  });
+
+  it("aria-labelledby is not rendered", async () => {
+    const el = await fixture<SgdsInput>(html`<sgds-input label="label" hintText="hello"></sgds-input>`);
+    const input = el.shadowRoot?.querySelector("input");
+    expect(input?.hasAttribute("aria-labelledby")).to.be.false;
+  });
+
+  it("aria-describedby excludes invalid-feedback id when hasFeedback is style only", async () => {
+    const el = await fixture<SgdsInput>(
+      html`<sgds-input label="label" hintText="hello" hasFeedback="style"></sgds-input>`
+    );
+    el.invalid = true;
+    await elementUpdated(el);
+    const input = el.shadowRoot?.querySelector("input");
+    const ariaDescribedBy = input?.getAttribute("aria-describedby");
+    const hintText = el.shadowRoot?.querySelector("div.form-text");
+    expect(ariaDescribedBy).to.equal(hintText?.getAttribute("id"));
+    expect(ariaDescribedBy).to.not.contain("-invalid");
+  });
+
+  it("aria-describedby is not set when no hintText and hasFeedback is style only", async () => {
+    const el = await fixture<SgdsInput>(html`<sgds-input label="label" hasFeedback="style"></sgds-input>`);
+    el.invalid = true;
+    await elementUpdated(el);
+    const input = el.shadowRoot?.querySelector("input");
+    expect(input?.hasAttribute("aria-describedby")).to.be.false;
   });
 
   it("input's id attribute should contain in .invalid-feedback's id attribute", async () => {

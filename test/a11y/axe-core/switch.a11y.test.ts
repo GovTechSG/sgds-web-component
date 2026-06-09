@@ -8,8 +8,8 @@ describe("Switch a11y", () => {
     await expect(el).to.be.accessible();
   });
 
-  it("sgds-switch disabled should be accessible", async () => {
-    const el = await fixture(html` <sgds-switch disabled>Disabled switch</sgds-switch> `);
+  it("sgds-switch checked should be accessible", async () => {
+    const el = await fixture(html` <sgds-switch checked>Enable notifications</sgds-switch> `);
     await expect(el).to.be.accessible();
   });
 });

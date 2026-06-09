@@ -6,9 +6,39 @@
   </head>
   <body>
     <sgds-radio-group label="Choose an option" name="option">
-<sgds-radio value="a">Option A</sgds-radio>
-<sgds-radio value="b">Option B</sgds-radio>
-<sgds-radio value="c">Option C</sgds-radio>
-</sgds-radio-group>
+      <sgds-radio value="a">Option A</sgds-radio>
+      <sgds-radio value="b">Option B</sgds-radio>
+      <sgds-radio value="c">Option C</sgds-radio>
+    </sgds-radio-group>
+
+    <sgds-radio-group label="Choose an option" name="option-required" required>
+      <sgds-radio value="a">Option A</sgds-radio>
+      <sgds-radio value="b">Option B</sgds-radio>
+      <sgds-radio value="c">Option C</sgds-radio>
+    </sgds-radio-group>
+
+    <sgds-radio-group label="Choose an option" name="option-preselected" value="b">
+      <sgds-radio value="a">Option A</sgds-radio>
+      <sgds-radio value="b">Option B</sgds-radio>
+      <sgds-radio value="c">Option C</sgds-radio>
+    </sgds-radio-group>
+
+    <sgds-radio-group label="Choose an option" name="option-hint" hintText="Select one option only">
+      <sgds-radio value="a">Option A</sgds-radio>
+      <sgds-radio value="b">Option B</sgds-radio>
+      <sgds-radio value="c">Option C</sgds-radio>
+    </sgds-radio-group>
+
+    <sgds-radio-group
+      label="Choose an option"
+      name="option-invalid"
+      invalid
+      hasFeedback
+      invalidFeedback="Please select an option"
+    >
+      <sgds-radio value="a">Option A</sgds-radio>
+      <sgds-radio value="b">Option B</sgds-radio>
+      <sgds-radio value="c">Option C</sgds-radio>
+    </sgds-radio-group>
   </body>
 </html>
