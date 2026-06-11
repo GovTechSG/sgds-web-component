@@ -6,12 +6,21 @@
   </head>
   <body>
     <sgds-tab-group>
-      <sgds-tab slot="nav" ariaLabel="Tab 1">Tab 1</sgds-tab>
-      <sgds-tab slot="nav" ariaLabel="Tab 2">Tab 2</sgds-tab>
-      <sgds-tab slot="nav" ariaLabel="Tab 3">Tab 3</sgds-tab>
-      <sgds-tab-panel>Panel 1 content</sgds-tab-panel>
-      <sgds-tab-panel>Panel 2 content</sgds-tab-panel>
-      <sgds-tab-panel>Panel 3 content</sgds-tab-panel>
+      <sgds-tab slot="nav" panel="npm" ariaLabel="npm">npm</sgds-tab>
+      <sgds-tab slot="nav" panel="pnpm" ariaLabel="pnpm">pnpm</sgds-tab>
+      <sgds-tab slot="nav" panel="yarn" ariaLabel="yarn">yarn</sgds-tab>
+      <sgds-tab-panel name="npm">
+        <p>npm install @govtechsg/sgds-web-component</p>
+        <sgds-button size="xs" variant="ghost" tone="neutral" ariaLabel="Copy code">Copy</sgds-button>
+      </sgds-tab-panel>
+      <sgds-tab-panel name="pnpm">
+        <p>pnpm add @govtechsg/sgds-web-component</p>
+        <sgds-button size="xs" variant="ghost" tone="neutral" ariaLabel="Copy code">Copy</sgds-button>
+      </sgds-tab-panel>
+      <sgds-tab-panel name="yarn">
+        <p>yarn add @govtechsg/sgds-web-component</p>
+        <sgds-button size="xs" variant="ghost" tone="neutral" ariaLabel="Copy code">Copy</sgds-button>
+      </sgds-tab-panel>
     </sgds-tab-group>
   </body>
 </html>
