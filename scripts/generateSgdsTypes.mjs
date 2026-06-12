@@ -194,7 +194,7 @@ function generateReactTypes() {
     if (!modulePath.startsWith("src/components/")) continue;
     if (seen.has(tagName)) continue;
     seen.add(tagName);
-    lines.push(`      "${tagName}": ${toPropsInterface(className)};`);
+    lines.push(`      "${tagName}": React.DetailedHTMLProps<${toPropsInterface(className)}, HTMLElement>;`);
   }
 
   lines.push("    }");
