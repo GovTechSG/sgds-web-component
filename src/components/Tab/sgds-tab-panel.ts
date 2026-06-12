@@ -31,6 +31,7 @@ export class SgdsTabPanel extends SgdsElement {
   @watch("active")
   _handleActiveChange() {
     this.setAttribute("aria-hidden", this.active ? "false" : "true");
+    this.inert = !this.active;
   }
 
   render() {
