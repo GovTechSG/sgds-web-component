@@ -128,6 +128,34 @@ export const ButtonWithIcon = {
   tags: ["!dev"]
 };
 
+const FormSubmitTemplate = () => {
+  return html`
+    <form
+      action=""
+      method="get"
+      @submit=${e => {
+        e.preventDefault();
+        const formData = new FormData(e.target, e.submitter);
+        document.getElementById("form-output").textContent = "Selected: " + formData.get("subject");
+      }}
+    >
+      <p>Choose your favourite subject:</p>
+      <sgds-button name="subject" type="submit" value="fav_HTML" ariaLabel="HTML">HTML</sgds-button>
+      <sgds-button name="subject" type="submit" value="fav_CSS" ariaLabel="CSS">CSS</sgds-button>
+      <sgds-button name="subject" type="submit" value="fav_JS" ariaLabel="JavaScript">JavaScript</sgds-button>
+    </form>
+    <p id="form-output"></p>
+  `;
+};
+
+export const FormSubmitValue = {
+  render: FormSubmitTemplate.bind({}),
+  name: "Form submit with name and value",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
 export const Loading = {
   render: () => html`
     <div class="d-flex-column">
