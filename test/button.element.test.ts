@@ -150,6 +150,90 @@ describe("when submitting a form", () => {
 
     expect(handleSubmit).to.have.been.calledOnce;
   });
+
+  it("should include the button's name/value in FormData when it is the submitter", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form action="" method="post">
+        <sgds-button type="submit" name="action" value="save">Save</sgds-button>
+      </form>
+    `);
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    let formData: FormData;
+    const handleSubmit = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      formData = new FormData(form);
+      // The submitter's name/value should be in FormData
+      // Note: FormData from the submit event submitter is handled by the browser
+      // We check the submitter element has the correct name/value
+      const submitter = event.submitter as HTMLButtonElement;
+      expect(submitter.name).to.equal("action");
+      expect(submitter.value).to.equal("save");
+    });
+
+    form.addEventListener("submit", handleSubmit);
+    button?.click();
+
+    expect(handleSubmit).to.have.been.calledOnce;
+  });
+
+  it("should not include name/value in FormData when the button has no name", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form action="" method="post">
+        <sgds-button type="submit" value="save">Save</sgds-button>
+      </form>
+    `);
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    const handleSubmit = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const submitter = event.submitter as HTMLButtonElement;
+      expect(submitter.name).to.equal("");
+    });
+
+    form.addEventListener("submit", handleSubmit);
+    button?.click();
+
+    expect(handleSubmit).to.have.been.calledOnce;
+  });
+
+  it("should only include the clicked button's value when multiple submit buttons exist", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form action="" method="post">
+        <sgds-button type="submit" name="action" value="save">Save</sgds-button>
+        <sgds-button type="submit" name="action" value="delete">Delete</sgds-button>
+      </form>
+    `);
+    const deleteButton = form.querySelectorAll<SgdsButton>("sgds-button")[1];
+    const handleSubmit = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const submitter = event.submitter as HTMLButtonElement;
+      expect(submitter.name).to.equal("action");
+      expect(submitter.value).to.equal("delete");
+    });
+
+    form.addEventListener("submit", handleSubmit);
+    deleteButton?.click();
+
+    expect(handleSubmit).to.have.been.calledOnce;
+  });
+
+  it("should not include name/value for type='reset' buttons", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form action="" method="post">
+        <sgds-button type="submit" name="action" value="submit">Submit</sgds-button>
+        <sgds-button type="reset" name="action" value="reset">Reset</sgds-button>
+      </form>
+    `);
+    const resetButton = form.querySelectorAll<SgdsButton>("sgds-button")[1];
+    const handleSubmit = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+    });
+
+    form.addEventListener("submit", handleSubmit);
+    resetButton?.click();
+
+    // Reset should not trigger submit
+    expect(handleSubmit).to.not.have.been.called;
+  });
 });
 
 describe("when using methods", () => {

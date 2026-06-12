@@ -52,6 +52,12 @@ export class FormSubmitController implements ReactiveController {
             button.setAttribute(attr, invoker.getAttribute(attr));
           }
         });
+
+        // Forward name/value so the submitter's data is included in FormData
+        if (type === "submit" && invoker.hasAttribute("name")) {
+          button.name = invoker.getAttribute("name");
+          button.value = invoker.getAttribute("value") || "";
+        }
       }
 
       this.form.append(button);
