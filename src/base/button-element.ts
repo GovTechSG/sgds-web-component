@@ -16,7 +16,7 @@ export default class ButtonElement extends SgdsElement {
   /** @internal */
   @query(".btn") protected button: HTMLButtonElement | HTMLLinkElement;
 
-  /** Sets the visual variants such as: `primary`, `outline`, `ghost`. `danger` is @deprecated since v3.5.6 */
+  /** Sets the visual variants such as: `primary`, `outline`, `ghost`. The `danger` value is deprecated since v3.5.6 — use `variant="primary"` with `tone="danger"` instead. */
   @property({ reflect: true }) variant: ButtonVariant = "primary";
 
   /** Sets the visual colour of the button: `brand`, `danger`, `fixed-light`, `neutral` */
