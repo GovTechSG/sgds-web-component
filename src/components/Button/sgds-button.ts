@@ -40,6 +40,12 @@ export class SgdsButton extends ButtonElement {
       return input.closest("form");
     }
   });
+  /** The name of the button, submitted as a name/value pair with form data only when this button is the submitter. Only works with `type="submit"`. Has no effect when the button is rendered as a link (i.e. when `href` is set). */
+  @property({ type: String, reflect: true }) name: string;
+
+  /** The value of the button, submitted as a name/value pair with form data only when this button is the submitter. Only works with `type="submit"`. Has no effect when the button is rendered as a link (i.e. when `href` is set). */
+  @property({ type: String, reflect: true }) value: string;
+
   /** The behavior of the button with default as `type='button', `reset` resets all the controls to their initial values and `submit` submits the form data to the server */
   @property({ type: String, reflect: true }) type: "button" | "submit" | "reset" = "button";
   /**
@@ -118,6 +124,8 @@ export class SgdsButton extends ButtonElement {
         })}"
         ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
         type=${ifDefined(isLink ? undefined : this.type)}
+        name=${ifDefined(isLink ? undefined : this.name)}
+        value=${ifDefined(isLink ? undefined : this.value)}
         href=${ifDefined(isLink ? this.href : undefined)}
         target=${ifDefined(isLink ? this.target : undefined)}
         download=${ifDefined(isLink ? this.download : undefined)}
