@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- Default icon card -->
+    <sgds-icon-card>
+      <sgds-icon name="gear" slot="icon" ariaLabel="Settings"></sgds-icon>
+      <span slot="title">Card title</span>
+      <span slot="description">Card description content goes here.</span>
+    </sgds-icon-card>
+
+    <!-- No padding -->
+    <sgds-icon-card noPadding>
+      <sgds-icon name="star" slot="icon" ariaLabel="Featured"></sgds-icon>
+      <span slot="title">No padding card</span>
+      <span slot="description">Card without padding.</span>
+    </sgds-icon-card>
+  </body>
+</html>

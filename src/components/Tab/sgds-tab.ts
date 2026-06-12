@@ -1,5 +1,6 @@
 import { html } from "lit";
 import { property, query } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import tabStyle from "./tab.css";
 import { watch } from "../../utils/watch";
@@ -25,6 +26,9 @@ export class SgdsTab extends SgdsElement {
   @property({ type: Boolean, reflect: true }) active = false;
   /** When true, sets tab to disabled state */
   @property({ type: Boolean, reflect: true }) disabled = false;
+
+  /** An accessible label for the tab. Use this when the tab's text content does not adequately describe its purpose. */
+  @property({ type: String }) ariaLabel = "";
 
   connectedCallback() {
     super.connectedCallback();
@@ -58,7 +62,12 @@ export class SgdsTab extends SgdsElement {
 
   render() {
     return html`
-      <div data-testid="inner-tab" tabindex=${this.disabled ? "-1" : "0"} class="tab">
+      <div
+        data-testid="inner-tab"
+        tabindex=${this.disabled ? "-1" : "0"}
+        class="tab"
+        aria-label=${ifDefined(this.ariaLabel || undefined)}
+      >
         <slot name="icon"></slot>
         <slot></slot>
       </div>

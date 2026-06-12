@@ -3,9 +3,9 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 export const Template = ({ variant, orientation, density }) => html`
   <sgds-tab-group variant=${ifDefined(variant)} orientation=${ifDefined(orientation)} density=${ifDefined(density)}>
-    <sgds-tab slot="nav" panel="home">Home</sgds-tab>
-    <sgds-tab slot="nav" panel="profile">Profile</sgds-tab>
-    <sgds-tab slot="nav" panel="contact">Contact</sgds-tab>
+    <sgds-tab slot="nav" panel="home" ariaLabel="Home">Home</sgds-tab>
+    <sgds-tab slot="nav" panel="profile" ariaLabel="Profile">Profile</sgds-tab>
+    <sgds-tab slot="nav" panel="contact" ariaLabel="Contact">Contact</sgds-tab>
     <sgds-tab-panel name="home"
       >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
       standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a

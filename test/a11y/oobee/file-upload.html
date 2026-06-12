@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <sgds-file-upload label="Upload file"></sgds-file-upload>
+
+    <sgds-file-upload label="Upload document" variant="drag-and-drop"></sgds-file-upload>
+
+    <sgds-file-upload label="Upload files" multiple></sgds-file-upload>
+
+    <sgds-file-upload label="Required upload" required></sgds-file-upload>
+
+    <sgds-file-upload label="Upload photo" ariaLabel="Upload photo"></sgds-file-upload>
+
+    <sgds-file-upload label="Upload PDF" accept=".pdf"></sgds-file-upload>
+
+    <sgds-file-upload label="Upload file" hintText="Maximum file size: 5MB"></sgds-file-upload>
+
+    <sgds-file-upload label="Upload file" invalid hasFeedback invalidFeedback="Please upload a file"></sgds-file-upload>
+  </body>
+</html>

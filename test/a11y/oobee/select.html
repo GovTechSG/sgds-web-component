@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <sgds-select label="Choose a country">
+      <sgds-select-option value="sg">Singapore</sgds-select-option>
+      <sgds-select-option value="my">Malaysia</sgds-select-option>
+      <sgds-select-option value="id">Indonesia</sgds-select-option>
+    </sgds-select>
+
+    <sgds-select label="Choose a country" required>
+      <sgds-select-option value="sg">Singapore</sgds-select-option>
+      <sgds-select-option value="my">Malaysia</sgds-select-option>
+      <sgds-select-option value="id">Indonesia</sgds-select-option>
+    </sgds-select>
+
+    <sgds-select label="Choose a country" readonly value="sg">
+      <sgds-select-option value="sg">Singapore</sgds-select-option>
+      <sgds-select-option value="my">Malaysia</sgds-select-option>
+      <sgds-select-option value="id">Indonesia</sgds-select-option>
+    </sgds-select>
+
+    <sgds-select label="Choose a country" hintText="Select your country of residence">
+      <sgds-select-option value="sg">Singapore</sgds-select-option>
+      <sgds-select-option value="my">Malaysia</sgds-select-option>
+      <sgds-select-option value="id">Indonesia</sgds-select-option>
+    </sgds-select>
+
+    <sgds-select label="Choose a country" invalid hasFeedback invalidFeedback="Please select a country">
+      <sgds-select-option value="sg">Singapore</sgds-select-option>
+      <sgds-select-option value="my">Malaysia</sgds-select-option>
+      <sgds-select-option value="id">Indonesia</sgds-select-option>
+    </sgds-select>
+  </body>
+</html>

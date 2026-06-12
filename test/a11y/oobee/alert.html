@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <sgds-alert show> This is an alert message. </sgds-alert>
+
+    <sgds-alert show variant="warning">
+      <sgds-icon slot="icon" name="exclamation-triangle"></sgds-icon>
+      Warning alert with icon.
+    </sgds-alert>
+
+    <sgds-alert show> This is an alert with a <a href="https://example.com">link</a> and more text. </sgds-alert>
+  </body>
+</html>

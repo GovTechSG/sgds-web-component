@@ -91,7 +91,6 @@ const DisableValidationByInputTemplate = args => {
           e.target.invalidFeedback = "Bio must be at least 10 characters long";
         }
       });
-
       const comboOne = document.querySelector("sgds-combo-box#custom-validation__combobox-novalidate");
       comboOne.addEventListener("sgds-change", e => {
         if (!e.target.value) {
@@ -177,7 +176,6 @@ const DisableValidationByFormTemplate = args => {
         id="custom-validation__textarea-two-novalidate"
       >
       </sgds-textarea>
-
       <sgds-combo-box
         label="Fruit"
         hinttext="Selection must start with 'A'"
@@ -191,7 +189,6 @@ const DisableValidationByFormTemplate = args => {
         <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
         <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
       </sgds-combo-box>
-
       <sgds-file-upload
         label="Documents"
         hinttext="Max 2 PDF files"
@@ -212,7 +209,6 @@ const DisableValidationByFormTemplate = args => {
         hasFeedback
         id="custom-validation__datepicker-two-novalidate"
       ></sgds-datepicker>
-
       <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>

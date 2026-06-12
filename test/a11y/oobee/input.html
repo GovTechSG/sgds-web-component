@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <sgds-input label="Full name" inputId="name-input"></sgds-input>
+
+    <sgds-input label="Email" inputId="email-input" hintText="Enter your work email"></sgds-input>
+
+    <sgds-input label="Full name" inputId="required-input" required></sgds-input>
+
+    <sgds-input label="Reference ID" inputId="readonly-input" readonly value="REF-12345"></sgds-input>
+
+    <sgds-input
+      label="Email"
+      inputId="invalid-input"
+      invalid
+      hasFeedback="both"
+      invalidFeedback="Please enter a valid email"
+    ></sgds-input>
+
+    <sgds-input label="Age" inputId="number-input" type="number" min="0" max="120"></sgds-input>
+
+    <sgds-input label="Amount" inputId="prefix-input" prefix="$" suffix=".00"></sgds-input>
+
+    <sgds-textarea label="Comments" textareaId="comments-textarea"></sgds-textarea>
+  </body>
+</html>

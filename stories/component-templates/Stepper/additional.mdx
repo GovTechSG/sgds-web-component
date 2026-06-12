@@ -24,11 +24,27 @@ export interface SgdsStepProperties {
   <Story of={StepperStories.StepComponentClickable} />
 </Canvas>
 
+### Custom Icon
+
+Use the `iconName` prop on `<sgds-step>` to replace the default step number with an icon from the SGDS icon set.
+
+<Canvas of={StepperStories.CustomIcon}>
+  <Story of={StepperStories.CustomIcon} />
+</Canvas>
+
+### Step states (active, completed, disabled)
+
+<Canvas of={StepperStories.StepStates}>
+  <Story of={StepperStories.StepStates} />
+</Canvas>
+
 ---
 
 ## Using the Deprecated Steps Property
 
 The `steps` property approach is now deprecated in favor of `sgds-step` child components. However, it remains supported for backwards compatibility.
+
+> **Note:** The legacy `IStepMetaData` (`steps` prop) approach does **not** support newer `sgds-step` capabilities such as slot-based step descriptions/content and related slot interaction patterns. Use `<sgds-step>` children for all new implementations.
 
 ## Pass IStepsMetadata to steps prop
 

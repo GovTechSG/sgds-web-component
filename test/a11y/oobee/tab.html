@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <sgds-tab-group>
+      <sgds-tab slot="nav" panel="npm" ariaLabel="npm">npm</sgds-tab>
+      <sgds-tab slot="nav" panel="pnpm" ariaLabel="pnpm">pnpm</sgds-tab>
+      <sgds-tab slot="nav" panel="yarn" ariaLabel="yarn">yarn</sgds-tab>
+      <sgds-tab-panel name="npm">
+        <p>npm install @govtechsg/sgds-web-component</p>
+        <sgds-button size="xs" variant="ghost" tone="neutral" ariaLabel="Copy code">Copy</sgds-button>
+      </sgds-tab-panel>
+      <sgds-tab-panel name="pnpm">
+        <p>pnpm add @govtechsg/sgds-web-component</p>
+        <sgds-button size="xs" variant="ghost" tone="neutral" ariaLabel="Copy code">Copy</sgds-button>
+      </sgds-tab-panel>
+      <sgds-tab-panel name="yarn">
+        <p>yarn add @govtechsg/sgds-web-component</p>
+        <sgds-button size="xs" variant="ghost" tone="neutral" ariaLabel="Copy code">Copy</sgds-button>
+      </sgds-tab-panel>
+    </sgds-tab-group>
+  </body>
+</html>

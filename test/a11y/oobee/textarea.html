@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- Default -->
+    <sgds-textarea label="Message" placeholder="Type your message..."></sgds-textarea>
+
+    <!-- With character limit -->
+    <sgds-textarea label="Bio" maxlength="200" placeholder="Tell us about yourself..."></sgds-textarea>
+
+    <!-- Required -->
+    <sgds-textarea label="Comments" required></sgds-textarea>
+
+    <!-- With hint text -->
+    <sgds-textarea label="Description" hintText="Maximum 500 characters"></sgds-textarea>
+
+    <!-- Readonly -->
+    <sgds-textarea label="Terms and conditions" readonly value="These are the terms and conditions..."></sgds-textarea>
+
+    <!-- Invalid with feedback -->
+    <sgds-textarea label="Comments" invalid hasFeedback invalidFeedback="This field is required"></sgds-textarea>
+  </body>
+</html>

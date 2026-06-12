@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- Horizontal (default) -->
+    <sgds-stepper id="stepper-horizontal"></sgds-stepper>
+
+    <!-- Vertical orientation -->
+    <sgds-stepper id="stepper-vertical" orientation="vertical"></sgds-stepper>
+
+    <!-- Clickable steps -->
+    <sgds-stepper id="stepper-clickable" clickable></sgds-stepper>
+
+    <!-- Active step at step 2 -->
+    <sgds-stepper id="stepper-active" activeStep="1"></sgds-stepper>
+
+    <script>
+      const steps = [
+        { stepHeader: "Personal Details", component: "Step 1 content" },
+        { stepHeader: "Address", component: "Step 2 content" },
+        { stepHeader: "Review", component: "Step 3 content" }
+      ];
+
+      customElements.whenDefined("sgds-stepper").then(() => {
+        document.getElementById("stepper-horizontal").steps = steps;
+        document.getElementById("stepper-vertical").steps = steps;
+        document.getElementById("stepper-clickable").steps = steps;
+        document.getElementById("stepper-active").steps = steps;
+      });
+    </script>
+  </body>
+</html>

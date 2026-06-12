@@ -3,7 +3,7 @@ import { html } from "lit";
 const SgdsSelectCloseTemplate = args => {
   return html`
     <sgds-dropdown close="default">
-      <sgds-button slot="toggler" role="button" variant="primary" tone="brand">
+      <sgds-button slot="toggler" variant="primary" tone="brand" ariaLabel="Default Close">
         Default Close
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
@@ -13,7 +13,7 @@ const SgdsSelectCloseTemplate = args => {
     </sgds-dropdown>
     <br />
     <sgds-dropdown close="outside">
-      <sgds-button slot="toggler" role="button" variant="primary" tone="brand">
+      <sgds-button slot="toggler" variant="primary" tone="brand" ariaLabel="Close Outside">
         Close Outside
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
@@ -23,7 +23,7 @@ const SgdsSelectCloseTemplate = args => {
     </sgds-dropdown>
     <br />
     <sgds-dropdown close="inside">
-      <sgds-button slot="toggler" role="button" variant="primary" tone="brand">
+      <sgds-button slot="toggler" variant="primary" tone="brand" ariaLabel="Close Inside">
         Close Inside
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
@@ -47,7 +47,7 @@ export const SgdsSelectClose = {
 const SgdsSelectEventTemplate = args => {
   return html`
     <sgds-dropdown id="select-event-dropdown">
-      <sgds-button slot="toggler" role="button" variant="primary" tone="brand">
+      <sgds-button slot="toggler" variant="primary" tone="brand" ariaLabel="Dynamic Text">
         <span id="select-toggler-text">Dynamic Text</span>
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
@@ -81,7 +81,7 @@ export const SgdsSelectEvent = {
 const SgdsSelectDropdownItemTemplate = args => {
   return html`
     <sgds-dropdown close="outside">
-      <sgds-button slot="toggler" role="button" variant="primary" tone="brand">
+      <sgds-button slot="toggler" variant="primary" tone="brand" ariaLabel="Dropdown">
         Dropdown
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>

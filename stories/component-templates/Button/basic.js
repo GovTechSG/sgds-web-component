@@ -18,6 +18,7 @@ export const Template = args =>
       ?formNoValidate=${args.formNoValidate}
       formTarget=${ifDefined(args.formTarget)}
       ?loading=${args.loading}
+      ariaLabel="Button"
     >
       Button
     </sgds-button>

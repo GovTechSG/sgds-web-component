@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { property, query } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
@@ -40,6 +41,9 @@ export class SgdsAccordionItem extends SgdsElement {
 
   /** Controls the density of the individual accordion item. This value is controlled by sgds-accordion */
   @property({ type: String, reflect: true }) density: AccordionDensity = "default";
+
+  /** The aria-label attribute forwarded to the accordion item button. */
+  @property({ type: String }) ariaLabel = "";
 
   private handleSummaryClick() {
     if (this.open) {
@@ -144,10 +148,10 @@ export class SgdsAccordionItem extends SgdsElement {
             collapsed: !this.open
           })}
           ?disabled=${this.disabled}
-          role="button"
           aria-expanded=${this.open ? "true" : "false"}
           aria-disabled=${this.disabled ? "true" : "false"}
           aria-controls="content"
+          aria-label=${ifDefined(this.ariaLabel || undefined)}
           tabindex=${this.disabled ? "-1" : "0"}
           @click=${this.handleSummaryClick}
           @keydown=${this.handleSummaryKeyDown}

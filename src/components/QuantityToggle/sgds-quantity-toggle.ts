@@ -278,7 +278,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
           >
           </sgds-icon-button>
         </div>
-        <div id="announcer" role="region" aria-live="assertive" class="visually-hidden">${this.value}</div>
+        <div id="${this._controlId}-announcer" aria-live="assertive" class="visually-hidden">${this.value}</div>
         ${this._renderFeedback()}
       </div>
     `;
