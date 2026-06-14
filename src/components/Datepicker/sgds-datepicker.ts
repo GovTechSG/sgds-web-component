@@ -492,7 +492,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
           >
           </sgds-icon-button>
         </sgds-datepicker-input>
-        <ul
+        <div
           id=${this.dropdownMenuId}
           class="sgds datepicker dropdown-menu"
           role="dialog"
@@ -517,7 +517,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
             .selectedDate=${this.selectedDateRange}
             .focusedTabIndex=${this.focusedTabIndex}
           ></sgds-datepicker-calendar>
-        </ul>
+        </div>
       </div>
     `;
   }

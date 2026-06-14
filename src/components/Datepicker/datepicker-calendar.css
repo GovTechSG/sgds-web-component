@@ -16,6 +16,11 @@ table {
   grid-template-rows: repeat(4, 2.5rem);
 }
 
+.monthpicker [role="row"],
+.yearpicker [role="row"] {
+  display: contents;
+}
+
 button.month,
 button.year {
   padding: 0;
