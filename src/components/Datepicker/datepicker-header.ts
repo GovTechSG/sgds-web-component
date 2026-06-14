@@ -179,14 +179,14 @@ export class DatepickerHeader extends SgdsElement {
   }
   render() {
     return html`
-      <div class="datepicker-header dropdown-header" role="heading">
+      <div class="datepicker-header dropdown-header">
         <sgds-icon-button
           name="arrow-left"
           size="sm"
           variant="ghost"
           @click="${this.handleClickPrevious}"
           class=${classMap({ invisible: this._removeCaret() })}
-          aria-label=${this._ariaLabelForPrevBtn()}
+          .ariaLabel=${this._ariaLabelForPrevBtn()}
         >
         </sgds-icon-button>
         <sgds-button
@@ -195,6 +195,7 @@ export class DatepickerHeader extends SgdsElement {
           size="sm"
           @click=${this._changeView}
           class=${classMap({ disabled: this.view === "years" })}
+          .ariaLabel=${this._ariaLabelForHeaderBtn()}
           aria-disabled=${this.view === "years" ? "true" : "false"}
           aria-live="polite"
         >
@@ -205,7 +206,7 @@ export class DatepickerHeader extends SgdsElement {
           size="sm"
           variant="ghost"
           @click="${this._handleClickNext}"
-          aria-label=${this._ariaLabelForNextBtn()}
+          .ariaLabel=${this._ariaLabelForNextBtn()}
         >
         </sgds-icon-button>
       </div>

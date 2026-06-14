@@ -5,7 +5,7 @@
     <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <sgds-datepicker label="Select date"></sgds-datepicker>
+    <sgds-datepicker label="Select date" menuIsOpen></sgds-datepicker>
 
     <sgds-datepicker label="Date of birth" required></sgds-datepicker>
 
@@ -21,5 +21,31 @@
     ></sgds-datepicker>
 
     <sgds-datepicker label="Select date range" mode="range"></sgds-datepicker>
+
+    <!-- Month view -->
+    <sgds-datepicker id="month-view" label="Month view" menuIsOpen></sgds-datepicker>
+
+    <!-- Year view -->
+    <sgds-datepicker id="year-view" label="Year view" menuIsOpen></sgds-datepicker>
+
+    <script type="module">
+      customElements.whenDefined("sgds-datepicker").then(() => {
+        setTimeout(() => {
+          const monthPicker = document.getElementById("month-view");
+          const yearPicker = document.getElementById("year-view");
+
+          // Click the header button once to switch to months view
+          const monthHeader = monthPicker.shadowRoot.querySelector("sgds-datepicker-header");
+          const monthHeaderBtn = monthHeader.shadowRoot.querySelector("sgds-button");
+          monthHeaderBtn.click();
+
+          // Click the header button twice to switch to years view
+          const yearHeader = yearPicker.shadowRoot.querySelector("sgds-datepicker-header");
+          const yearHeaderBtn = yearHeader.shadowRoot.querySelector("sgds-button");
+          yearHeaderBtn.click();
+          setTimeout(() => yearHeaderBtn.click(), 50);
+        }, 100);
+      });
+    </script>
   </body>
 </html>
