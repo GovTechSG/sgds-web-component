@@ -299,7 +299,7 @@ export class DatepickerCalendar extends SgdsElement {
   private _focusOnCalendarCell() {
     const targetEl = this._getFocusedTarget();
     if (targetEl) {
-      targetEl.setAttribute("tabindex", "3");
+      targetEl.setAttribute("tabindex", "0");
       targetEl.focus();
       this.emit("sgds-update-focus", { detail: this.focusedDate });
     } else {
@@ -362,11 +362,11 @@ export class DatepickerCalendar extends SgdsElement {
                 disabled: beforeMinDate || afterMinDate
               })}
               @click=${clickHandler}
-              aria-selected=${ifDefined(isSelected ? "true" : undefined)}
-              tabindex=${this.focusedDate === new Date(dateStr) ? "3" : "-1"}
+              aria-selected=${isSelected ? "true" : "false"}
+              tabindex=${this.focusedDate === new Date(dateStr) ? "0" : "-1"}
               ?disabled=${beforeMinDate || afterMinDate}
               aria-disabled=${ifDefined(beforeMinDate || afterMinDate ? "true" : undefined)}
-              role="button"
+              role="gridcell"
             >
               ${day}
             </td>`
@@ -412,33 +412,41 @@ export class DatepickerCalendar extends SgdsElement {
     const year = this.displayDate.getFullYear();
 
     const monthView = html`
-      <div class="monthpicker">
-        ${DatepickerCalendar.MONTHVIEW_LABELS.map((m, idx) => {
-          const isCurrentMonth = idx === TODAY_DATE.getMonth() && year === TODAY_DATE.getFullYear();
-          const time = setTimeToNoon(new Date(year, idx)).getTime();
-          const isFirstSelectedMonth = rangeDates[0].getMonth() === idx;
-          const isFirstSelectedYear = rangeDates[0].getFullYear() === year;
-          const isLastSelectedMonth = rangeDates[rangeDates.length - 1].getMonth() === idx;
-          const isLastSelectedYear = rangeDates[rangeDates.length - 1].getFullYear() === year;
-          const ariaLabel = isCurrentMonth ? `Current month ${m} ${year}` : `${m} ${year}`;
-          return html` <button
-            class=${classMap({
-              active: selectedTime.includes(time),
-              today: isCurrentMonth,
-              month: true,
-              "selected-ends":
-                (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear)
-            })}
-            @click=${() => this._onClickMonth(idx)}
-            data-month=${idx}
-            data-year=${year}
-            tabindex="3"
-            aria-selected=${selectedTime.includes(time)}
-            aria-label=${ariaLabel}
-          >
-            ${m.slice(0, 3)}
-          </button>`;
-        })}
+      <div class="monthpicker" role="grid">
+        ${[0, 1, 2, 3].map(
+          row => html`
+            <div role="row">
+              ${DatepickerCalendar.MONTHVIEW_LABELS.slice(row * 3, row * 3 + 3).map((m, i) => {
+                const idx = row * 3 + i;
+                const isCurrentMonth = idx === TODAY_DATE.getMonth() && year === TODAY_DATE.getFullYear();
+                const time = setTimeToNoon(new Date(year, idx)).getTime();
+                const isFirstSelectedMonth = rangeDates[0].getMonth() === idx;
+                const isFirstSelectedYear = rangeDates[0].getFullYear() === year;
+                const isLastSelectedMonth = rangeDates[rangeDates.length - 1].getMonth() === idx;
+                const isLastSelectedYear = rangeDates[rangeDates.length - 1].getFullYear() === year;
+                const ariaLabel = isCurrentMonth ? `Current month ${m} ${year}` : `${m} ${year}`;
+                return html` <button
+                  role="gridcell"
+                  class=${classMap({
+                    active: selectedTime.includes(time),
+                    today: isCurrentMonth,
+                    month: true,
+                    "selected-ends":
+                      (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear)
+                  })}
+                  @click=${() => this._onClickMonth(idx)}
+                  data-month=${idx}
+                  data-year=${year}
+                  tabindex="0"
+                  aria-selected=${selectedTime.includes(time) ? "true" : "false"}
+                  aria-label=${ariaLabel}
+                >
+                  ${m.slice(0, 3)}
+                </button>`;
+              })}
+            </div>
+          `
+        )}
       </div>
     `;
     return monthView;
@@ -451,29 +459,36 @@ export class DatepickerCalendar extends SgdsElement {
     const yearArray = createYearViewArray(this.displayDate, CURRENT_YEAR);
 
     const yearView = html`
-      <div class="sgds yearpicker">
-        ${yearArray.map(y => {
-          const isFirstSelectedYear = selectedYears[0] === y;
-          const isLastSectedYear = selectedYears[selectedYears.length - 1] === y;
-          return html`
-            <button
-              class=${classMap({
-                active: selectedYears.includes(y),
-                year: true,
-                today: CURRENT_YEAR === y,
-                "selected-ends": isFirstSelectedYear || isLastSectedYear
+      <div class="sgds yearpicker" role="grid">
+        ${[0, 1, 2, 3].map(
+          row => html`
+            <div role="row">
+              ${yearArray.slice(row * 3, row * 3 + 3).map(y => {
+                const isFirstSelectedYear = selectedYears[0] === y;
+                const isLastSectedYear = selectedYears[selectedYears.length - 1] === y;
+                return html`
+                  <button
+                    role="gridcell"
+                    class=${classMap({
+                      active: selectedYears.includes(y),
+                      year: true,
+                      today: CURRENT_YEAR === y,
+                      "selected-ends": isFirstSelectedYear || isLastSectedYear
+                    })}
+                    @click=${() => this._onClickYear(y)}
+                    data-year=${y}
+                    tabindex="0"
+                    ?disabled=${y < 1900}
+                    aria-selected=${selectedYears.includes(y) ? "true" : "false"}
+                    aria-label=${ifDefined(CURRENT_YEAR === y ? `Current year, ${y}` : undefined)}
+                  >
+                    ${y}
+                  </button>
+                `;
               })}
-              @click=${() => this._onClickYear(y)}
-              data-year=${y}
-              tabindex="3"
-              ?disabled=${y < 1900}
-              aria-selected=${selectedYears.includes(y)}
-              aria-label=${ifDefined(CURRENT_YEAR === y ? `Current year, ${y}` : undefined)}
-            >
-              ${y}
-            </button>
-          `;
-        })}
+            </div>
+          `
+        )}
       </div>
     `;
     return yearView;
