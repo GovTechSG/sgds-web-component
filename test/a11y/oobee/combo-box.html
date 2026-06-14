@@ -6,7 +6,7 @@
   </head>
 
   <body>
-    <sgds-combo-box label="Select a fruit">
+    <sgds-combo-box label="Select a fruit" menuIsOpen>
       <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
       <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
       <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
@@ -37,6 +37,13 @@
     </sgds-combo-box>
 
     <sgds-combo-box label="Select fruits" multiSelect>
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <!-- Multi-select menu open state -->
+    <sgds-combo-box label="Select fruits (open)" multiSelect menuIsOpen value="apple">
       <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
       <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
       <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
