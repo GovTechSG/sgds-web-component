@@ -216,7 +216,15 @@ export class SgdsSelect extends SelectElement {
         ${this._renderLabel()}
         <!-- The input -->
         ${this._renderInput()} ${this._renderFeedback()}
-        <div id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" role="menu" aria-label=${this.label || "Options"} ${ref(this.menuRef)}>
+        <div
+          id=${this.dropdownMenuId}
+          class="dropdown-menu"
+          part="menu"
+          tabindex="-1"
+          role="menu"
+          aria-label=${this.label || "Options"}
+          ${ref(this.menuRef)}
+        >
           <slot id="default" class=${classMap({ "is-loading": this.loading })} @slotchange=${this._handleSlotChange}
             >${this._renderMenu()}</slot
           >

@@ -5,6 +5,30 @@
     <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <sgds-progress-bar value="50" ariaLabel="Loading progress"></sgds-progress-bar>
+
+    <!-- Primary variant, no label -->
+    <sgds-progress-bar value="50" ariamin="0" ariamax="100" ariaLabel="Loading progress"></sgds-progress-bar>
+
+    <!-- Primary variant, with visible label -->
+    <sgds-progress-bar value="60" ariamin="0" ariamax="100" ariaLabel="File upload progress" label="60%"></sgds-progress-bar>
+
+    <!-- Neutral variant, no label -->
+    <sgds-progress-bar value="30" ariamin="0" ariamax="100" ariaLabel="Step progress" variant="neutral"></sgds-progress-bar>
+
+    <!-- Neutral variant, with visible label -->
+    <sgds-progress-bar value="75" ariamin="0" ariamax="100" ariaLabel="Download progress" variant="neutral" label="75%"></sgds-progress-bar>
+
+    <!-- Value at 0 (empty) -->
+    <sgds-progress-bar value="0" ariamin="0" ariamax="100" ariaLabel="Not started"></sgds-progress-bar>
+
+    <!-- Value at 100 (full) -->
+    <sgds-progress-bar value="100" ariamin="0" ariamax="100" ariaLabel="Complete" label="100%"></sgds-progress-bar>
+
+    <!-- Custom range (e.g. steps) -->
+    <sgds-progress-bar value="3" ariamin="0" ariamax="5" ariaLabel="Step 3 of 5" label="Step 3 of 5"></sgds-progress-bar>
+
+    <!-- Custom range, neutral variant -->
+    <sgds-progress-bar value="7" ariamin="1" ariamax="10" ariaLabel="Question 7 of 10" variant="neutral" label="7/10"></sgds-progress-bar>
+
   </body>
 </html>
