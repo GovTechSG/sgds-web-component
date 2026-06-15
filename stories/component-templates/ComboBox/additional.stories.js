@@ -489,3 +489,45 @@ export const NoValidate = {
   parameters: {},
   tags: ["!dev"]
 };
+
+const AutocompleteTemplate = () =>
+  html`
+    <div style="display:flex;flex-direction:column;gap:2rem;">
+      <div>
+        <p><strong>autocomplete="on"</strong> (default) — browser may suggest previously entered values</p>
+        <sgds-combo-box
+          autocomplete="on"
+          label="Country"
+          placeholder="Select a country"
+          hintText="Browser autocomplete enabled"
+        >
+          <sgds-combo-box-option value="sg">Singapore</sgds-combo-box-option>
+          <sgds-combo-box-option value="my">Malaysia</sgds-combo-box-option>
+          <sgds-combo-box-option value="th">Thailand</sgds-combo-box-option>
+          <sgds-combo-box-option value="jp">Japan</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
+      <div>
+        <p><strong>autocomplete="off"</strong> — browser autocomplete suppressed</p>
+        <sgds-combo-box
+          autocomplete="off"
+          label="Country"
+          placeholder="Select a country"
+          hintText="Browser autocomplete disabled"
+        >
+          <sgds-combo-box-option value="sg">Singapore</sgds-combo-box-option>
+          <sgds-combo-box-option value="my">Malaysia</sgds-combo-box-option>
+          <sgds-combo-box-option value="th">Thailand</sgds-combo-box-option>
+          <sgds-combo-box-option value="jp">Japan</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
+    </div>
+  `;
+
+export const Autocomplete = {
+  render: AutocompleteTemplate.bind({}),
+  name: "Autocomplete prop",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};

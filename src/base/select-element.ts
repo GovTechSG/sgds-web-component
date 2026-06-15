@@ -79,6 +79,9 @@ export class SelectElement
   /** Marks the component as invalid. Replace the pseudo :invalid selector. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** Controlling of autocomplete behaviour */
+  @property({ type: String, reflect: true }) autocomplete = "on";
+
   /** Programatically sets the invalid state of the component. Pass in boolean value in the argument */
   public setInvalid(bool: boolean) {
     this.invalid = bool;

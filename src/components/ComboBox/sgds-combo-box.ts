@@ -489,6 +489,7 @@ export class SgdsComboBox extends SelectElement {
             aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
               ? `${this._controlId}-invalid`
               : ""}"
+            .autocomplete=${this.autocomplete}
           />
         </div>
 
@@ -570,6 +571,7 @@ export class SgdsComboBox extends SelectElement {
             ?required=${this.required}
             tabindex="-1"
             aria-hidden="true"
+            .autocomplete=${this.autocomplete}
           />`
         : nothing}
     `;

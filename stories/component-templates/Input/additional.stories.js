@@ -152,3 +152,35 @@ export const OverrideInvalidFeedback = {
   parameters: {},
   tags: ["!dev"]
 };
+
+const AutocompleteTemplate = () =>
+  html`
+    <div style="display:flex;flex-direction:column;gap:2rem;">
+      <div>
+        <p><strong>autocomplete="on"</strong> (default) — browser may suggest previously entered values</p>
+        <sgds-input
+          autocomplete="on"
+          label="Email"
+          placeholder="Enter your email"
+          hintText="Browser autocomplete enabled"
+        ></sgds-input>
+      </div>
+      <div>
+        <p><strong>autocomplete="off"</strong> — browser autocomplete suppressed</p>
+        <sgds-input
+          autocomplete="off"
+          label="Email"
+          placeholder="Enter your email"
+          hintText="Browser autocomplete disabled"
+        ></sgds-input>
+      </div>
+    </div>
+  `;
+
+export const Autocomplete = {
+  render: AutocompleteTemplate.bind({}),
+  name: "Autocomplete prop",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
