@@ -96,11 +96,13 @@ describe("<sgds-select>", () => {
             >
             </sgds-icon>
             </div>
-          <ul
+          <div
             class="dropdown-menu"
             id="id-7895-sgds-dropdown-menu-div"
             part="menu"
             tabindex="-1"
+            role="menu"
+            aria-label="Options"
             >
             <slot>
             <sgds-select-option
@@ -118,7 +120,7 @@ describe("<sgds-select>", () => {
               Option 2
             </sgds-select-option>
             </slot>
-          </ul>
+          </div>
         
             `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
