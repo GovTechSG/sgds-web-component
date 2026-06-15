@@ -133,14 +133,16 @@ describe("sgds-combo-box ", () => {
           >
           </sgds-icon>
           </div>
-        <ul
+        <div
           class="dropdown-menu"
           id="id-7895-sgds-dropdown-menu-div"
           part="menu"
           tabindex="-1"
+          role="menu"
+          aria-label="Options"
           >
-              <slot></slot> 
-        </ul>
+              <slot></slot>
+        </div>
           `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
     );
@@ -498,19 +500,19 @@ describe("sgds-combo-box ", () => {
       ><sgds-combo-box-option value="one">One</sgds-combo-box-option>
     </sgds-combo-box>`);
     await waitUntil(() => !el.shadowRoot?.querySelector(".empty-menu"));
-    expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.not.exist;
+    expect(el.shadowRoot?.querySelector("div>.empty-menu")).to.not.exist;
     const input = el.shadowRoot?.querySelector<HTMLInputElement>("input.form-control");
     input?.focus();
 
     await el.updateComplete;
     await sendKeys({ type: "x" });
     await el.updateComplete;
-    expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.exist;
+    expect(el.shadowRoot?.querySelector("div>.empty-menu")).to.exist;
     input?.blur();
     await el.updateComplete;
     input?.click();
-    await waitUntil(() => !el.shadowRoot?.querySelector("ul>.empty-menu"));
-    expect(el.shadowRoot?.querySelector("ul>.empty-menu")).to.not.exist;
+    await waitUntil(() => !el.shadowRoot?.querySelector("div>.empty-menu"));
+    expect(el.shadowRoot?.querySelector("div>.empty-menu")).to.not.exist;
   });
   it("loading menu overrides no options menu ", async () => {
     const el = await fixture<SgdsComboBox>(html`<sgds-combo-box loading menuIsOpen> </sgds-combo-box>`);

@@ -543,14 +543,22 @@ export class SgdsComboBox extends SelectElement {
         <!-- The input -->
         ${this._renderInput(showClearButton)} ${this._renderFeedback()}
 
-        <ul id=${this.dropdownMenuId} class="dropdown-menu" part="menu" tabindex="-1" ${ref(this.menuRef)}>
+        <div
+          id=${this.dropdownMenuId}
+          class="dropdown-menu"
+          part="menu"
+          tabindex="-1"
+          role="menu"
+          aria-label=${this.label || "Options"}
+          ${ref(this.menuRef)}
+        >
           <slot
             id="default"
             class=${classMap({ "d-none": this.loading || this.emptyMenuAsync || this.optionList.length === 0 })}
             @slotchange=${this._handleDefaultSlotChange}
           ></slot>
           ${this._renderFeedbackMenu()}
-        </ul>
+        </div>
       </div>
 
       <!-- Required an input element for constraint validation -->
