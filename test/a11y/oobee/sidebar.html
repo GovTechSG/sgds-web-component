@@ -5,11 +5,149 @@
     <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <h2>Basic sidebar with items only</h2>
     <sgds-sidebar>
-      <sgds-sidebar-item title="Dashboard">
+      <sgds-sidebar-item title="Dashboard" name="dashboard">
         <sgds-icon slot="icon" name="house"></sgds-icon>
       </sgds-sidebar-item>
-      <sgds-sidebar-item title="Settings">
+      <sgds-sidebar-item title="Settings" name="settings">
+        <sgds-icon slot="icon" name="gear"></sgds-icon>
+      </sgds-sidebar-item>
+    </sgds-sidebar>
+
+    <h2>Sidebar with sections</h2>
+    <sgds-sidebar>
+      <sgds-sidebar-section title="Workspace" name="workspace" separator>
+        <sgds-sidebar-item title="Dashboard" name="section-dashboard">
+          <sgds-icon slot="icon" name="house"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item title="Analytics" name="section-analytics">
+          <sgds-icon slot="icon" name="trend-up"></sgds-icon>
+        </sgds-sidebar-item>
+      </sgds-sidebar-section>
+      <sgds-sidebar-section title="System" name="system">
+        <sgds-sidebar-item title="Settings" name="section-settings">
+          <sgds-icon slot="icon" name="gear"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item title="Help" name="section-help">
+          <sgds-icon slot="icon" name="question-circle"></sgds-icon>
+        </sgds-sidebar-item>
+      </sgds-sidebar-section>
+    </sgds-sidebar>
+
+    <h2>Sidebar with collapsible sections</h2>
+    <sgds-sidebar>
+      <sgds-sidebar-section title="Workspace" name="collapsible-workspace" collapsible separator>
+        <sgds-sidebar-item title="Dashboard" name="coll-dashboard">
+          <sgds-icon slot="icon" name="house"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item title="Analytics" name="coll-analytics">
+          <sgds-icon slot="icon" name="trend-up"></sgds-icon>
+        </sgds-sidebar-item>
+      </sgds-sidebar-section>
+      <sgds-sidebar-section title="System" name="collapsible-system" collapsible collapsed>
+        <sgds-sidebar-item title="Settings" name="coll-settings">
+          <sgds-icon slot="icon" name="gear"></sgds-icon>
+        </sgds-sidebar-item>
+      </sgds-sidebar-section>
+    </sgds-sidebar>
+
+    <h2>Sidebar with groups</h2>
+    <sgds-sidebar>
+      <sgds-sidebar-item title="Dashboard" name="group-dashboard">
+        <sgds-icon slot="icon" name="house"></sgds-icon>
+      </sgds-sidebar-item>
+      <sgds-sidebar-group title="Projects" name="group-projects">
+        <sgds-icon slot="icon" name="folder"></sgds-icon>
+        <sgds-sidebar-item title="Active" name="group-active">
+          <sgds-icon slot="icon" name="folder-check"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item title="Archived" name="group-archived">
+          <sgds-icon slot="icon" name="folder-minus"></sgds-icon>
+        </sgds-sidebar-item>
+      </sgds-sidebar-group>
+      <sgds-sidebar-group title="Reports" name="group-reports">
+        <sgds-icon slot="icon" name="file-text"></sgds-icon>
+        <sgds-sidebar-item title="Monthly" name="group-monthly">
+          <sgds-icon slot="icon" name="calendar"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item title="Annual" name="group-annual">
+          <sgds-icon slot="icon" name="calendar-check"></sgds-icon>
+        </sgds-sidebar-item>
+      </sgds-sidebar-group>
+    </sgds-sidebar>
+
+    <h2>Sidebar with sections and groups combined</h2>
+    <sgds-sidebar>
+      <sgds-sidebar-section title="Navigation" name="nav-section" separator>
+        <sgds-sidebar-item title="Home" name="combo-home">
+          <sgds-icon slot="icon" name="house"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-group title="Projects" name="combo-projects">
+          <sgds-icon slot="icon" name="folder"></sgds-icon>
+          <sgds-sidebar-item title="Active" name="combo-active">
+            <sgds-icon slot="icon" name="folder-check"></sgds-icon>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item title="Archived" name="combo-archived">
+            <sgds-icon slot="icon" name="folder-minus"></sgds-icon>
+          </sgds-sidebar-item>
+        </sgds-sidebar-group>
+      </sgds-sidebar-section>
+      <sgds-sidebar-section title="Admin" name="admin-section" collapsible>
+        <sgds-sidebar-group title="Users" name="combo-users">
+          <sgds-icon slot="icon" name="person-plus"></sgds-icon>
+          <sgds-sidebar-item title="All Users" name="combo-all-users">
+            <sgds-icon slot="icon" name="person"></sgds-icon>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item title="Roles" name="combo-roles">
+            <sgds-icon slot="icon" name="shield-tick"></sgds-icon>
+          </sgds-sidebar-item>
+        </sgds-sidebar-group>
+        <sgds-sidebar-item title="Settings" name="combo-settings">
+          <sgds-icon slot="icon" name="gear"></sgds-icon>
+        </sgds-sidebar-item>
+      </sgds-sidebar-section>
+    </sgds-sidebar>
+
+    <h2>Sidebar with group L2 menu open (active item inside group)</h2>
+    <sgds-sidebar active="open-active-item">
+      <sgds-sidebar-item title="Dashboard" name="open-dashboard">
+        <sgds-icon slot="icon" name="house"></sgds-icon>
+      </sgds-sidebar-item>
+      <sgds-sidebar-group title="Projects" name="open-projects">
+        <sgds-icon slot="icon" name="folder"></sgds-icon>
+        <sgds-sidebar-item title="Active" name="open-active-item">
+          <sgds-icon slot="icon" name="folder-check"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item title="Archived" name="open-archived-item">
+          <sgds-icon slot="icon" name="folder-minus"></sgds-icon>
+        </sgds-sidebar-item>
+      </sgds-sidebar-group>
+      <sgds-sidebar-item title="Settings" name="open-settings">
+        <sgds-icon slot="icon" name="gear"></sgds-icon>
+      </sgds-sidebar-item>
+    </sgds-sidebar>
+
+    <h2>Sidebar collapsed</h2>
+    <sgds-sidebar collapsed>
+      <sgds-sidebar-section title="Workspace" name="collapsed-workspace" separator>
+        <sgds-sidebar-item title="Dashboard" name="collapsed-dashboard">
+          <sgds-icon slot="icon" name="house"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item title="Analytics" name="collapsed-analytics">
+          <sgds-icon slot="icon" name="trend-up"></sgds-icon>
+        </sgds-sidebar-item>
+      </sgds-sidebar-section>
+      <sgds-sidebar-group title="Projects" name="collapsed-projects">
+        <sgds-icon slot="icon" name="folder"></sgds-icon>
+        <sgds-sidebar-item title="Active" name="collapsed-active">
+          <sgds-icon slot="icon" name="folder-check"></sgds-icon>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item title="Archived" name="collapsed-archived">
+          <sgds-icon slot="icon" name="folder-minus"></sgds-icon>
+        </sgds-sidebar-item>
+      </sgds-sidebar-group>
+      <sgds-sidebar-item title="Settings" name="collapsed-settings">
         <sgds-icon slot="icon" name="gear"></sgds-icon>
       </sgds-sidebar-item>
     </sgds-sidebar>
