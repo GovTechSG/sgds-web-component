@@ -110,11 +110,11 @@
     </sgds-sidebar>
 
     <h2>Sidebar with group L2 menu open (active item inside group)</h2>
-    <sgds-sidebar active="open-active-item">
+    <sgds-sidebar id="sidebar-l2-open" active="open-active-item">
       <sgds-sidebar-item title="Dashboard" name="open-dashboard">
         <sgds-icon slot="icon" name="house"></sgds-icon>
       </sgds-sidebar-item>
-      <sgds-sidebar-group title="Projects" name="open-projects">
+      <sgds-sidebar-group id="group-l2-open" title="Projects" name="open-projects">
         <sgds-icon slot="icon" name="folder"></sgds-icon>
         <sgds-sidebar-item title="Active" name="open-active-item">
           <sgds-icon slot="icon" name="folder-check"></sgds-icon>
@@ -127,6 +127,14 @@
         <sgds-icon slot="icon" name="gear"></sgds-icon>
       </sgds-sidebar-item>
     </sgds-sidebar>
+    <script>
+      customElements.whenDefined("sgds-sidebar-group").then(() => {
+        const group = document.getElementById("group-l2-open");
+        group.updateComplete.then(() => {
+          group.shadowRoot.querySelector("[role='button']").click();
+        });
+      });
+    </script>
 
     <h2>Sidebar collapsed</h2>
     <sgds-sidebar collapsed>
