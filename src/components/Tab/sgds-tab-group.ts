@@ -33,12 +33,15 @@ export class SgdsTabGroup extends SgdsElement {
   private _tabs: SgdsTab[] = [];
 
   private _panels: SgdsTabPanel[] = [];
-  /** The variant of tabs. Controls the visual styles of all `sgds-tabs` in its slot. It also sets the variant atttribute of `sgds-tab` */
+  /** The variant of tabs. Controls the visual styles of all `sgds-tabs` in its slot. It also sets the variant atttribute of `sgds-tab` and `sgds-tab-panel`. */
   @property({ type: String, reflect: true }) variant: "underlined" | "solid" = "underlined";
-  /** The orientation of tabs. Controls the orientation of all `sgds-tabs` in its slot. It also sets the orientation attribute of `sgds-tab` */
+  /** The orientation of tabs. Controls the orientation of all `sgds-tabs` in its slot. It also sets the orientation attribute of `sgds-tab` and `sgds-tab-panel`. */
   @property({ type: String, reflect: true }) orientation: "horizontal" | "vertical" = "horizontal";
-  /** The density of tabs. Controls the density of all `sgds-tabs` in its slot. It also sets the density attribute of `sgds-tab` */
+  /** The density of tabs. Controls the density of all `sgds-tabs` in its slot. It also sets the density attribute of `sgds-tab` and `sgds-tab-panel`. */
   @property({ type: String, reflect: true }) density: "compact" | "default" = "default";
+  /** The tone of tabs. Controls the tone of all `sgds-tabs` in its slot. It also sets the tone attribute of `sgds-tab` and `sgds-tab-panel`. */
+  @property({ type: String, reflect: true }) tone: "brand" | "neutral" | "inverse" | "fixed-light" | "fixed-dark" =
+    "brand";
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
@@ -223,18 +226,31 @@ export class SgdsTabGroup extends SgdsElement {
   @queryAssignedElements({ slot: "nav", flatten: true })
   private _navSlot: SgdsTab[];
 
+  @queryAssignedElements({ slot: "", flatten: true })
+  private _panelSlot: SgdsTab[];
+
   private _updateTabsAttribute(name: string) {
-    if (!this._navSlot) return;
     const tabs = this._navSlot;
-    tabs.forEach(tab => {
-      tab.setAttribute(name, this[name]);
-    });
+    const panels = this._panelSlot;
+
+    if (tabs) {
+      tabs.forEach(tab => {
+        tab.setAttribute(name, this[name]);
+      });
+    }
+
+    if (panels) {
+      panels.forEach(panel => {
+        panel.setAttribute(name, this[name]);
+      });
+    }
   }
 
   private _handleSlotChange() {
     this._updateTabsAttribute("variant");
     this._updateTabsAttribute("orientation");
     this._updateTabsAttribute("density");
+    this._updateTabsAttribute("tone");
     this._syncTabsAndPanels();
   }
 
@@ -248,6 +264,9 @@ export class SgdsTabGroup extends SgdsElement {
     }
     if (_changedProperties.has("density")) {
       this._updateTabsAttribute("density");
+    }
+    if (_changedProperties.has("tone")) {
+      this._updateTabsAttribute("tone");
     }
   }
 

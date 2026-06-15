@@ -47,15 +47,32 @@ export const Grayscales = () =>
     ColorItem("sgds:bg-transparent", "transparent", "sgds:bg-transparent sgds:border sgds:border-default"),
     ColorItem("sgds:bg-translucent-inverse", "--sgds-bg-translucent-inverse", "sgds:bg-translucent-inverse"),
     ColorItem(
+      "sgds:bg-translucent-inverse-emphasis",
+      "--sgds-bg-translucent-inverse-emphasis",
+      "sgds:bg-translucent-inverse-emphasis"
+    ),
+    ColorItem(
       "sgds:bg-translucent-fixed-dark",
       "--sgds-bg-translucent-fixed-dark",
       "sgds:bg-translucent-fixed-dark",
       "sgds:text-fixed-light"
     ),
     ColorItem(
+      "sgds:bg-translucent-fixed-dark-emphasis",
+      "--sgds-bg-translucent-fixed-dark-emphasis",
+      "sgds:bg-translucent-fixed-dark-emphasis",
+      "sgds:text-fixed-light"
+    ),
+    ColorItem(
       "sgds:bg-translucent-fixed-light",
       "--sgds-bg-translucent-fixed-light",
       "sgds:bg-translucent-fixed-light",
+      "sgds:text-fixed-dark"
+    ),
+    ColorItem(
+      "sgds:bg-translucent-fixed-light-emphasis",
+      "--sgds-bg-translucent-fixed-light-emphasis",
+      "sgds:bg-translucent-fixed-light-emphasis",
       "sgds:text-fixed-dark"
     )
   );

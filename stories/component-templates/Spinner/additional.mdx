@@ -1,18 +1,14 @@
 ## Tone
 
-Spinners come in various tones: brand, neutral, inverse, fixed-light, and fixed-dark.
+Spinners come in various tones: `brand`(default), `neutral`, `inverse`, `fixed-light`, and `fixed-dark`.
 
 <Canvas of={SpinnerStories.Tone}>
   <Story of={SpinnerStories.Tone} />
 </Canvas>
 
-<Canvas of={SpinnerStories.ToneInverseFixedLight}>
-  <Story of={SpinnerStories.ToneInverseFixedLight} parameters={{ backgrounds: { default: "custom-blue" } }} />
-</Canvas>
-
 ## Size
 
-There are three sizes of spinners: extra-small, small, medium(default), large and extra-large.
+There are five sizes of spinners: `xs`, `sm`, `md`(default), `lg`, and `xl`.
 
 <Canvas of={SpinnerStories.Size}>
   <Story of={SpinnerStories.Size} />
@@ -32,4 +28,12 @@ Set the orientation of the label to horizontal with `orientation` prop set to "h
 
 <Canvas of={SpinnerStories.LabelHorizontal}>
   <Story of={SpinnerStories.LabelHorizontal} />
+</Canvas>
+
+## Variant (deprecated)
+
+`variant` has been deprecated in favor of the `tone`.
+
+<Canvas of={SpinnerStories.Variant}>
+  <Story of={SpinnerStories.Variant} />
 </Canvas>
