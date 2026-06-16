@@ -1,0 +1,33 @@
+name: PR Labeler
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  label:
+    runs-on: ubuntu-22.04
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Label PR based on conventional commit title
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          LABEL=""
+
+          if echo "$PR_TITLE" | grep -qiE '^(feat|fix|refactor|docs|chore)(\(.+\))?!:'; then
+            LABEL="breaking-change"
+          elif echo "$PR_TITLE" | grep -qiE '^feat(\(.+\))?:'; then
+            LABEL="feature"
+          elif echo "$PR_TITLE" | grep -qiE '^fix(\(.+\))?:'; then
+            LABEL="fix"
+          elif echo "$PR_TITLE" | grep -qiE '^refactor(\(.+\))?:'; then
+            LABEL="refactor"
+          fi
+
+          if [ -n "$LABEL" ]; then
+            gh pr edit "$PR_NUMBER" --add-label "$LABEL" --repo "${{ github.repository }}"
+          fi
