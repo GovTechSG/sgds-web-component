@@ -101,6 +101,7 @@ export class SgdsTable extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.setAttribute("role", "table");
   }
 
   updated() {
@@ -168,6 +169,7 @@ export class SgdsTable extends SgdsElement {
   render() {
     return html`
       <div
+        role="rowgroup"
         class=${classMap({
           "table-responsive": this.responsive === "always",
           "table-responsive-sm": this.responsive === "sm",
@@ -177,15 +179,13 @@ export class SgdsTable extends SgdsElement {
         })}
         tabindex="0"
       >
-        <div role="table">
-          <slot id="table-slot" class=${classMap({ table: true, "no-border": !this.hasDefaultSlot })}></slot>
+        <slot id="table-slot" class=${classMap({ table: true, "no-border": !this.hasDefaultSlot })}></slot>
 
-          ${!this.hasDefaultSlot
-            ? html`<table class="table">
-                ${this._renderTable()}
-              </table>`
-            : ""}
-        </div>
+        ${!this.hasDefaultSlot
+          ? html`<table class="table">
+              ${this._renderTable()}
+            </table>`
+          : ""}
       </div>
     `;
   }
