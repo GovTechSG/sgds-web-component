@@ -90,12 +90,14 @@ export class SgdsSidebarGroup extends SidebarElement {
   render() {
     return html`
       <div
+        role="button"
         class=${classMap({
           "sidebar-item": true,
           "sidebar-item--collapsed": !this._isOverlay && this._sidebarCollapsed && this._childLevel === 1,
           active: this._selected
         })}
         @click=${() => this._handleClick()}
+        aria-label=${this.title || this.name}
         aria-expanded=${this._showMenu}
         tabindex=${this._childLevel > 2 && !this._showMenu ? -1 : 0}
       >
@@ -107,7 +109,7 @@ export class SgdsSidebarGroup extends SidebarElement {
 
           <span class="sidebar-item-indicator">
             <slot name="indicator"></slot>
-            <sgds-icon aria-label=${this.title || this.name} name=${this._getIcon()} size="sm"></sgds-icon>
+            <sgds-icon name=${this._getIcon()} size="sm"></sgds-icon>
           </span>
         </div>
       </div>
