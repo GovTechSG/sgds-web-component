@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <h1>DOM → Figma</h1>
+    <p class="subtitle">Capture page structure, paste into Figma plugin</p>
+
+    <div class="field">
+      <label>Max Depth</label>
+      <input type="number" id="max-depth" value="15" min="1" max="50">
+      <small>How deep to traverse the DOM tree</small>
+    </div>
+
+    <button id="capture" class="btn-primary">Capture Full Page</button>
+
+    <div id="status" class="status hidden"></div>
+
+    <div id="result" class="result hidden">
+      <div class="stats" id="stats"></div>
+      <button id="copy" class="btn-success">Copy JSON to Clipboard</button>
+      <button id="download" class="btn-secondary">Download JSON</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
