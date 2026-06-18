@@ -8,9 +8,13 @@ var SGDS_COMPONENT_MAP = {
   "sgds-footer": { key: "bebf3b1311b700524579ee0c84abed609def47cd", name: "Footer" },
   "sgds-button": { key: "6f2f3d88022cd929560600e6d9df2016dd542b3c", name: "Button" },
   "sgds-icon-button": { key: "3d6ef97abfa684a4590866cbb603c44b86427f2d", name: "Icon button" },
-  "sgds-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: { "Variant": "default" } },
+  "sgds-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: { Variant: "default" } },
   "sgds-image-card": { key: "4a9e664f1b163b039023ebeebc3bd2e2f16bb256", name: "Image card" },
-  "sgds-thumbnail-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: { "Variant": "thumbnail" } },
+  "sgds-thumbnail-card": {
+    key: "a80a897e32592c4f2d8aebfafffc1d760669b55f",
+    name: "Card",
+    nestedProps: { Variant: "thumbnail" }
+  },
   "sgds-accordion": { key: "ffada43a96f710368e420ffd6087b09ee8894502", name: "Accordion" },
   "sgds-badge": { key: "30f64a9fe1033f49f39d7e77f1b318b0549a852f", name: "Badge" },
   "sgds-alert": { key: "78d35168e3f57033a677c8bce6d5242e1e771ffc", name: "Alert" },
@@ -50,7 +54,7 @@ var SGDS_COMPONENT_MAP = {
   "sgds-toast": { key: "1fba52a6b9e5133c161913561e756e717136329b", name: "Toast" },
   "sgds-tooltip": { key: "", name: "Tooltip" }, // Not available as ComponentSet in library
   "sgds-icon-list": { key: "9a32ab706ce2f0a23d974f5d1487d98e551d3b69", name: "Icon list" },
-  "sgds-icon-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: { "Variant": "icon" } },
+  "sgds-icon-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: { Variant: "icon" } }
 };
 
 // SGDS Tailwind class → Figma variable key mapping
@@ -141,6 +145,314 @@ var ATTR_TO_VARIANT_PROP = {
   state: "State",
   tone: "Tone",
   orientation: "Orientation"
+};
+
+// Declarative slot configuration for each component
+// Maps web component slots → Figma property keys (BOOLEAN toggles, INSTANCE_SWAP, TEXT)
+// Discovered via Figma REST API /v1/files/.../nodes
+var COMPONENT_SLOT_CONFIG = {
+  "sgds-card": {
+    structureName: "Structure",
+    slots: {
+      upper: { booleanKey: "🔷 Upper slot#29055:1", swapKey: "↳ Swap instance (upper)#29055:60", frameName: "[upper slot]" },
+      lower: { booleanKey: "🔷 Lower slot#29055:12", swapKey: "↳ Swap instance (lower)#30708:0", frameName: "[lower slot]" }
+    },
+    textProps: {
+      title: { instanceName: "Card header", key: "↳ Edit text #29055:26" },
+      subtitle: { instanceName: "Card header", key: "↳ Edit text#29055:29", booleanKey: "Subtitle#29055:23" },
+      description: { instanceName: "Card header", key: "↳ Edit text  #30610:3", booleanKey: "Description#30610:0" }
+    },
+    extraBooleans: { tinted: "Tinted#29055:104", footer: "Footer#29055:82" }
+  },
+  "sgds-icon-card": {
+    structureName: "Structure",
+    slots: {
+      upper: { booleanKey: "🔷 Upper slot#29055:1", swapKey: "↳ Swap instance (upper)#29055:60", frameName: "[upper slot]" },
+      lower: { booleanKey: "🔷 Lower slot#29055:12", swapKey: "↳ Swap instance (lower)#30708:0", frameName: "[lower slot]" }
+    },
+    textProps: {
+      title: { instanceName: "Card header", key: "↳ Edit text #29055:26" },
+      subtitle: { instanceName: "Card header", key: "↳ Edit text#29055:29", booleanKey: "Subtitle#29055:23" },
+      description: { instanceName: "Card header", key: "↳ Edit text  #30610:3", booleanKey: "Description#30610:0" }
+    },
+    extraBooleans: { footer: "Footer#29055:82" }
+  },
+  "sgds-thumbnail-card": {
+    structureName: "Structure",
+    slots: {
+      upper: { booleanKey: "🔷 Upper slot#29055:1", swapKey: "↳ Swap instance (upper)#29055:60", frameName: "[upper slot]" },
+      lower: { booleanKey: "🔷 Lower slot#29055:12", swapKey: "↳ Swap instance (lower)#30708:0", frameName: "[lower slot]" }
+    },
+    textProps: {
+      title: { instanceName: "Card header", key: "↳ Edit text #29055:26" },
+      subtitle: { instanceName: "Card header", key: "↳ Edit text#29055:29", booleanKey: "Subtitle#29055:23" },
+      description: { instanceName: "Card header", key: "↳ Edit text  #30610:3", booleanKey: "Description#30610:0" }
+    },
+    extraBooleans: { footer: "Footer#29055:82" }
+  },
+  "sgds-image-card": {
+    structureName: "Card structure",
+    slots: {
+      upper: { booleanKey: "🔷 Upper slot#29125:13", swapKey: "↳ Swap instance (upper)#29125:26", frameName: "[upper slot]" },
+      lower: { booleanKey: "🔷 Lower slot#29125:39", swapKey: "↳ Swap instance (lower)#31095:9", frameName: "[lower slot]" }
+    },
+    textProps: {
+      title: { instanceName: "Card header", key: "↳ Edit text #29055:26" },
+      subtitle: { instanceName: "Card header", key: "↳ Edit text#29055:29", booleanKey: "Subtitle#29055:23" },
+      description: { instanceName: "Card header", key: "↳ Edit text  #30610:3", booleanKey: "Description#30610:0" }
+    },
+    extraBooleans: { footer: "Footer#29125:65" }
+  },
+  "sgds-button": {
+    textProps: {
+      default: { key: "Edit button label#12484:5" }
+    },
+    slots: {
+      leftIcon: { booleanKey: "Leading icon#12484:3", swapKey: "↳ Select icon#17388:71" },
+      rightIcon: { booleanKey: "Trailing icon#12484:1", swapKey: "↳ Select icon #17388:169" }
+    }
+  },
+  "sgds-accordion": {
+    // Accordion items are nested instances named "↳ Accordion N"
+    // Each item has: Edit title (TEXT), Badge (BOOLEAN), Icon (BOOLEAN), badge swap, icon swap
+    itemPattern: "↳ Accordion",
+    itemProps: {
+      title: { key: "Edit title#16551:8" },
+      badge: { booleanKey: "Badge#29585:8", swapKey: "↳ 🔷 Swap instance#16545:8" },
+      icon: { booleanKey: "Icon#29595:24", swapKey: "↳ Select icon#29595:46" }
+    }
+  },
+  "sgds-modal": {
+    // Modal has slot group for custom content, footer buttons as Action 1/2
+    slots: {
+      footer: { instanceName: "wrapper-footer" }
+    },
+    textProps: {}
+  },
+  "sgds-drawer": {
+    // Drawer has footer with Button group containing Button 1/2
+    slots: {
+      footer: { instanceName: "wrapper-footer" }
+    },
+    textProps: {}
+  },
+  "sgds-alert": {
+    slots: {
+      action: { booleanKey: "🔷 Action slot#29246:0", swapKey: "↳ Swap instance#29246:11" }
+    },
+    textProps: {
+      title: { key: "↳ Edit text#15588:34", booleanKey: "Title#15588:17" },
+      description: { key: "Edit description#13094:45" }
+    }
+  },
+  "sgds-footer": {
+    structureName: "Directory",
+    textProps: {
+      title: { key: "↳ Edit text#18383:36", booleanKey: "Site title#28242:10" },
+      description: { key: "↳ Edit text #18383:37", booleanKey: "Site description#28242:11" }
+    },
+    slots: {}
+  },
+  "sgds-input": {
+    slots: {
+      action: { swapKey: "Select icon#17388:218", instanceName: "Icon button" }
+    },
+    textProps: {}
+  },
+  "sgds-dropdown": {
+    structureName: "Menu",
+    slots: {
+      top: { booleanKey: "🔷 Slot top#28035:6", swapKey: "↳ Swap instance#28035:57" },
+      bottom: { booleanKey: "🔷 Slot bottom#28035:74", swapKey: "↳ Swap instance #28035:91" }
+    },
+    textProps: {}
+  },
+  "sgds-description-list": {
+    // Description list items are nested as "List N" instances
+    itemPattern: "List",
+    itemProps: {
+      label: { key: "Edit label#18830:0" },
+      data: { key: "Edit data#18830:6" },
+      slot1: { booleanKey: "🔷 Slot 1#18830:7", swapKey: "↳ Swap instance  #18830:8" },
+      slot2: { booleanKey: "🔷 Slot 2#18830:10", swapKey: "↳ Swap instance #18830:9" }
+    }
+  },
+  "sgds-badge": {
+    textProps: {
+      default: { key: "Edit label#13032:18" }
+    },
+    slots: {}
+  },
+  "sgds-link": {
+    textProps: {
+      default: { key: "Edit link#16010:0" }
+    },
+    slots: {
+      leadingIcon: { booleanKey: "Leading icon#15978:6", swapKey: "↳ Select icon#17388:0" },
+      trailingIcon: { booleanKey: "Trailing icon#15978:15", swapKey: "↳ Select icon #17388:25" }
+    }
+  },
+  "sgds-toast": {
+    textProps: {
+      title: { key: "↳ Edit text#16370:284", booleanKey: "Title#29198:3" },
+      description: { key: "Edit message#16370:290" }
+    },
+    slots: {
+      action: { booleanKey: "Action#16370:296" }
+    }
+  },
+  "sgds-system-banner": {
+    textProps: {
+      default: { key: "Edit message#25212:8" }
+    },
+    slots: {}
+  },
+  "sgds-select": {
+    textProps: {
+      label: { key: "↳ Edit text #16273:0", booleanKey: "Label#16252:5" },
+      placeholder: { key: "↳ Edit text  #16273:12", booleanKey: "Placeholder text#16259:126" },
+      hint: { key: "↳ Edit text   #16273:36", booleanKey: "Hint text#16252:0" }
+    },
+    slots: {}
+  },
+  "sgds-combo-box": {
+    textProps: {
+      label: { key: "↳ Edit text #16273:0", booleanKey: "Label#16252:5" },
+      placeholder: { key: "↳ Edit text  #16273:12", booleanKey: "Placeholder text#16259:126" },
+      hint: { key: "↳ Edit text   #16273:36", booleanKey: "Hint text#16252:0" }
+    },
+    slots: {}
+  },
+  "sgds-textarea": {
+    textProps: {
+      label: { key: "↳ Edit text #16273:0", booleanKey: "Label#16252:5" },
+      placeholder: { key: "↳ Edit text  #16273:12", booleanKey: "Placeholder text#16259:126" },
+      hint: { key: "↳ Edit text   #16273:36", booleanKey: "Hint text#16252:0" }
+    },
+    slots: {}
+  },
+  "sgds-datepicker": {
+    textProps: {
+      label: { key: "↳ Edit text #16273:0", booleanKey: "Label#16252:5" },
+      hint: { key: "↳ Edit text   #16273:36", booleanKey: "Hint text#16252:0" }
+    },
+    slots: {}
+  },
+  "sgds-file-upload": {
+    textProps: {
+      label: { key: "↳ Edit text  #29661:1", booleanKey: "Label#29661:0" },
+      hint: { key: "↳ Edit text #29661:2", booleanKey: "Hint text#29661:3" }
+    },
+    slots: {}
+  },
+  "sgds-checkbox": {
+    textProps: {
+      default: { key: "↳ Edit text#15167:0", booleanKey: "Label#16008:0" }
+    },
+    slots: {}
+  },
+  "sgds-radio": {
+    textProps: {
+      default: { key: "↳ Edit text#15163:0", booleanKey: "Label#16008:16" }
+    },
+    slots: {}
+  },
+  "sgds-switch": {
+    textProps: {
+      default: { key: "↳ Edit text#16008:27", booleanKey: "Label#15380:0" }
+    },
+    slots: {}
+  },
+  "sgds-spinner": {
+    textProps: {
+      default: { key: "↳ Edit text#26271:0", booleanKey: "Label#16158:6" }
+    },
+    slots: {}
+  },
+  "sgds-checkbox-group": {
+    textProps: {
+      label: { key: "↳ Edit text  #15640:6", booleanKey: "Label#15640:9" },
+      hint: { key: "↳ Edit text #15640:7", booleanKey: "Hint text#15640:8" }
+    },
+    slots: {}
+  },
+  "sgds-radio-group": {
+    textProps: {
+      label: { key: "↳ Edit text #15655:51", booleanKey: "Label#15655:31" },
+      hint: { key: "↳ Edit text#15655:46", booleanKey: "Hint text#15655:41" }
+    },
+    slots: {}
+  },
+  "sgds-quantity-toggle": {
+    textProps: {
+      label: { key: "↳ Edit text#16461:94", booleanKey: "Label#16461:83" },
+      hint: { key: "↳ Edit text    #16461:149", booleanKey: "Hint text#16461:66" }
+    },
+    slots: {}
+  },
+  "sgds-pagination": {
+    textProps: {
+      description: { key: "Edit description#16740:0" }
+    },
+    slots: {}
+  },
+  "sgds-icon-list": {
+    // Icon list items are nested as "Icon list N"
+    itemPattern: "Icon list",
+    itemProps: {
+      label: { key: "Edit text#16628:108" },
+      icon: { swapKey: "Select icon#16628:110" }
+    }
+  },
+  "sgds-table-of-contents": {
+    textProps: {
+      header: { key: "Edit header#25146:1" }
+    },
+    slots: {}
+  },
+  "sgds-sidebar": {
+    slots: {
+      upper: { booleanKey: "Upper slot#34629:1", swapKey: "↳ Swap instance#34629:3" },
+      lower: { booleanKey: "Lower slot#34629:2", swapKey: "↳ Swap instance #35957:24" }
+    },
+    textProps: {}
+  },
+  "sgds-mainnav": {
+    slots: {
+      brand: { swapKey: "Product logo#19005:129" },
+      slot: { booleanKey: "🔷 Slot#29312:8" }
+    },
+    textProps: {}
+  },
+  "sgds-tab": {
+    // Tab items are nested as "Tab N"
+    itemPattern: "Tab",
+    itemProps: {
+      label: { key: "Edit tab label#17655:91" },
+      badge: { booleanKey: "Badge#17655:64" }
+    }
+  },
+  "sgds-stepper": {
+    // Stepper items are nested as "↳ Step N"
+    itemPattern: "↳ Step",
+    itemProps: {
+      label: { key: "Label#16203:7" }
+    }
+  },
+  "sgds-icon-button": {
+    slots: {
+      icon: { swapKey: "Select icon#17388:218" }
+    },
+    textProps: {}
+  },
+  "sgds-progress-bar": {
+    textProps: {},
+    slots: {}
+  },
+  "sgds-overflow-menu": {
+    textProps: {},
+    slots: {}
+  }
 };
 
 figma.ui.onmessage = async function (msg) {
@@ -300,15 +612,13 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
 
   parent.appendChild(instance);
 
-  // Apply component-specific content from DOM children
-  if (data.tag === "sgds-card" || data.tag === "sgds-icon-card" || data.tag === "sgds-thumbnail-card") {
-    await applyCardContent(instance, data);
-  }
-  if (data.tag === "sgds-button") {
-    await applyButtonContent(instance, data);
-  }
-  if (data.tag === "sgds-badge") {
-    await applyBadgeContent(instance, data);
+  // Apply slot content using declarative config
+  var slotConfig = COMPONENT_SLOT_CONFIG[data.tag];
+  if (slotConfig) {
+    await applySlotContent(instance, data, slotConfig);
+  } else {
+    // Fallback: try generic text application for components without config
+    await applyComponentText(instance, data);
   }
 
   return instance;
@@ -383,6 +693,134 @@ async function importSlottedComponent(childData) {
   return bestMatch || componentSet.defaultVariant || componentSet.children[0];
 }
 
+// Create a local Figma Component from a non-SGDS DOM element (e.g. styled span)
+// so it can be swapped into an INSTANCE_SWAP slot
+async function createLocalSlotComponent(childData) {
+  var text = childData.text || collectFirstText(childData);
+
+  // Find the styled child (the actual visual element)
+  var styledNode = childData;
+  var styles = childData.styles || {};
+  if (!styles.backgroundColor && childData.children) {
+    for (var i = 0; i < childData.children.length; i++) {
+      var child = childData.children[i];
+      if (child.styles && child.styles.backgroundColor) {
+        styledNode = child;
+        styles = child.styles;
+        if (!text) text = child.text || collectFirstText(child);
+        break;
+      }
+    }
+  }
+
+  // Parse dimensions from sgds: classes (e.g. sgds:w-10 sgds:h-10)
+  // Tailwind v4 spacing base = 4px, so w-10 = 40px
+  var width = 40;
+  var height = 40;
+  var classNames = styledNode.name || childData.name || "";
+  var wMatch = classNames.match(/sgds:w-(\d+)/);
+  var hMatch = classNames.match(/sgds:h-(\d+)/);
+  if (wMatch) width = parseInt(wMatch[1]) * 4; // spacing base = 4px
+  if (hMatch) height = parseInt(hMatch[1]) * 4;
+  // Fallback to DOM dimensions if no class match
+  if (!wMatch) width = styledNode.width || childData.width || 40;
+  if (!hMatch) height = styledNode.height || childData.height || 40;
+
+  // Parse border radius from classes
+  var borderRadius = styles.borderRadius || 0;
+  if (classNames.indexOf("rounded-full") >= 0) {
+    borderRadius = Math.max(width, height); // full circle
+  } else if (classNames.match(/sgds:rounded-/)) {
+    // Could parse specific radius values here
+    borderRadius = styles.borderRadius || 8;
+  }
+
+  // Get text styles from the deepest text node
+  var textStyles = styledNode.textStyles || childData.textStyles || {};
+  if (!textStyles.fontSize && childData.children) {
+    var texts = [];
+    collectTexts(childData, texts);
+    if (texts.length > 0) textStyles = texts[0].textStyles || {};
+  }
+
+  // Create a Component (required for swapComponent / INSTANCE_SWAP)
+  var comp = figma.createComponent();
+  comp.name = "slot: " + (text || "custom");
+  comp.resize(width, height);
+
+  // Apply background color
+  if (styles.backgroundColor) {
+    var bg = styles.backgroundColor;
+    comp.fills = [{
+      type: "SOLID",
+      color: { r: bg.r, g: bg.g, b: bg.b },
+      opacity: bg.a !== undefined ? bg.a : 1
+    }];
+  } else {
+    comp.fills = [];
+  }
+
+  // Apply border radius
+  if (borderRadius > 0) {
+    comp.cornerRadius = Math.min(borderRadius, Math.max(width, height) / 2);
+  }
+
+  // Use auto-layout with HUG sizing (like Badge component)
+  // This prevents the parent slot's auto-layout from stretching it
+  comp.layoutMode = "HORIZONTAL";
+  comp.primaryAxisAlignItems = "CENTER";
+  comp.counterAxisAlignItems = "CENTER";
+  comp.primaryAxisSizingMode = "AUTO"; // HUG
+  comp.counterAxisSizingMode = "AUTO"; // HUG
+
+  // Calculate padding to achieve the desired width/height around the text
+  // For a step number: 40x40 circle with ~20px font → need padding to fill space
+  var fontSize = (textStyles && textStyles.fontSize) || 16;
+  var estTextWidth = fontSize * 0.7; // rough estimate for single char
+  var estTextHeight = fontSize * 1.2;
+  var padX = Math.max(0, Math.round((width - estTextWidth) / 2));
+  var padY = Math.max(0, Math.round((height - estTextHeight) / 2));
+  comp.paddingLeft = padX;
+  comp.paddingRight = padX;
+  comp.paddingTop = padY;
+  comp.paddingBottom = padY;
+
+  // Add text if present
+  if (text) {
+    var fontWeight = (textStyles.fontWeight && parseInt(textStyles.fontWeight) >= 600) ? "Bold" : "Regular";
+    try {
+      await figma.loadFontAsync({ family: "Inter", style: fontWeight });
+    } catch (e) {
+      await figma.loadFontAsync({ family: "Inter", style: "Regular" });
+      fontWeight = "Regular";
+    }
+
+    var textNode = figma.createText();
+    textNode.characters = text;
+    textNode.fontName = { family: "Inter", style: fontWeight };
+    textNode.fontSize = textStyles.fontSize || 16;
+    textNode.textAlignHorizontal = "CENTER";
+    textNode.textAutoResize = "WIDTH_AND_HEIGHT";
+
+    // Text color
+    if (textStyles.color) {
+      textNode.fills = [{
+        type: "SOLID",
+        color: { r: textStyles.color.r, g: textStyles.color.g, b: textStyles.color.b },
+        opacity: textStyles.color.a !== undefined ? textStyles.color.a : 1
+      }];
+    }
+
+    comp.appendChild(textNode);
+  }
+
+  // Move off-screen so it doesn't clutter the canvas
+  comp.x = -9999;
+  comp.y = -9999;
+
+  return comp;
+}
+
 // Swap the placeholder instance inside a named slot container with a target component.
 // Searches for an instance inside the slot frame and calls swapComponent() on it.
 // Returns true if swap was successful.
@@ -434,8 +872,7 @@ function findSwappedInstance(cardInstance, componentSetKey) {
   for (var i = 0; i < allInstances.length; i++) {
     var inst = allInstances[i];
     try {
-      if (inst.mainComponent && inst.mainComponent.parent &&
-          inst.mainComponent.parent.key === componentSetKey) {
+      if (inst.mainComponent && inst.mainComponent.parent && inst.mainComponent.parent.key === componentSetKey) {
         return inst;
       }
     } catch (e) {}
@@ -461,6 +898,289 @@ async function applySlottedComponentText(instance, tag, text) {
     } catch (e) {}
   }
 }
+
+// ============================================================
+// GENERIC SLOT CONTENT APPLIER (config-driven)
+// ============================================================
+
+// Classify DOM children by their slot attribute into a map
+function classifySlots(data) {
+  var result = {};
+  if (!data.children) return result;
+
+  for (var i = 0; i < data.children.length; i++) {
+    var child = data.children[i];
+    var slot = child.slot || "default";
+
+    if (!result[slot]) {
+      result[slot] = child;
+    } else if (Array.isArray(result[slot])) {
+      result[slot].push(child);
+    } else {
+      result[slot] = [result[slot], child];
+    }
+  }
+  return result;
+}
+
+// Generic slot content applier — uses COMPONENT_SLOT_CONFIG to drive behavior
+async function applySlotContent(instance, data, config) {
+  if (!data) return;
+
+  try {
+    await figma.loadFontAsync({ family: "Inter", style: "Semi Bold" });
+    await figma.loadFontAsync({ family: "Inter", style: "Regular" });
+  } catch (e) {}
+
+  // Find structure/target instance if specified
+  var target = instance;
+  if (config.structureName) {
+    var structure = instance.findOne(function (n) {
+      return n.name === config.structureName && n.type === "INSTANCE";
+    });
+    if (structure) target = structure;
+  }
+
+  // Classify children by slot attribute
+  var slotChildren = classifySlots(data);
+
+  // Also check for heuristic fallback (card legacy: children without slot attrs)
+  var hasSlotAttrs = data.children && data.children.some(function (c) { return !!c.slot; });
+
+  // --- Apply INSTANCE_SWAP slots ---
+  if (config.slots) {
+    for (var slotName in config.slots) {
+      var slotConfig = config.slots[slotName];
+      var slotChild = slotChildren[slotName];
+      if (!slotChild) continue;
+      // Handle first item if array
+      if (Array.isArray(slotChild)) slotChild = slotChild[0];
+
+      // Enable slot boolean
+      if (slotConfig.booleanKey) {
+        try { target.setProperties(makeProps(slotConfig.booleanKey, true)); } catch (e) {}
+      }
+
+      // Import and swap the slotted component
+      if (slotChild.tag && isSgdsComponent(slotChild.tag)) {
+        var component = await importSlottedComponent(slotChild);
+        if (component) {
+          // Try swap strategies
+          var swapped = false;
+          if (slotConfig.frameName) {
+            swapped = await swapSlotInstance(instance, slotConfig.frameName, component);
+          }
+          if (!swapped && slotConfig.swapKey) {
+            try {
+              target.setProperties(makeProps(slotConfig.swapKey, component));
+              swapped = true;
+            } catch (e) {}
+          }
+          // Apply text to swapped instance
+          if (swapped) {
+            var label = slotChild.text || collectFirstText(slotChild);
+            if (label) {
+              var swappedInst = findSwappedInstance(instance, SGDS_COMPONENT_MAP[slotChild.tag].key);
+              if (swappedInst) {
+                await applySlottedComponentText(swappedInst, slotChild.tag, label);
+              }
+            }
+          }
+        }
+      } else {
+        // Non-SGDS slot child (e.g. <span> with step number circle)
+        // Create a local Component with HUG sizing (like Badge) so it won't stretch
+        var localComponent = await createLocalSlotComponent(slotChild);
+        if (localComponent) {
+          var slotText = slotChild.text || collectFirstText(slotChild);
+
+          // Enable tinted mode for step number indicators
+          if (slotText && slotText.length <= 2 && config.extraBooleans && config.extraBooleans.tinted) {
+            try { instance.setProperties(makeProps(config.extraBooleans.tinted, true)); } catch (e) {}
+          }
+
+          // Swap it into the slot
+          var swapped = false;
+          if (slotConfig.frameName) {
+            swapped = await swapSlotInstance(instance, slotConfig.frameName, localComponent);
+          }
+          if (!swapped && slotConfig.swapKey) {
+            try {
+              target.setProperties(makeProps(slotConfig.swapKey, localComponent));
+              swapped = true;
+            } catch (e) {}
+          }
+        }
+      }
+    }
+  }
+
+  // --- Apply TEXT properties ---
+  if (config.textProps) {
+    for (var textSlot in config.textProps) {
+      var textConfig = config.textProps[textSlot];
+      var textChild = slotChildren[textSlot];
+      var textValue = "";
+
+      if (textChild) {
+        if (Array.isArray(textChild)) textChild = textChild[0];
+        textValue = textChild.text || collectFirstText(textChild);
+      } else if (textSlot === "default" && data.text) {
+        // For simple components (badge, button) that have direct text
+        textValue = data.text;
+        if (!textValue && data.children) {
+          var texts = [];
+          collectTexts(data, texts);
+          if (texts.length > 0) textValue = texts[0].text;
+        }
+      }
+
+      if (!textValue) continue;
+
+      var textTarget = instance;
+      if (textConfig.instanceName) {
+        var found = instance.findOne(function (n) {
+          return n.name === textConfig.instanceName && n.type === "INSTANCE";
+        });
+        if (found) textTarget = found;
+      } else if (config.structureName && target !== instance) {
+        textTarget = target;
+      }
+
+      var textProps = {};
+      textProps[textConfig.key] = textValue;
+      if (textConfig.booleanKey) textProps[textConfig.booleanKey] = true;
+      try { textTarget.setProperties(textProps); } catch (e) {}
+    }
+  }
+
+  // --- Card-specific: heuristic fallback for legacy JSON without slot attrs ---
+  if ((data.tag === "sgds-card" || data.tag === "sgds-icon-card" || data.tag === "sgds-thumbnail-card") && !hasSlotAttrs) {
+    await applyCardContentHeuristic(instance, data, config, target);
+  }
+
+  // --- Hide footer if no footer slot content ---
+  if (config.extraBooleans && config.extraBooleans.footer) {
+    if (!slotChildren.footer && !slotChildren.link && !hasSlotAttrs) {
+      // Only hide footer if we have slot data and no footer was provided
+      // For heuristic mode, leave as-is (footer is visible by default)
+    } else if (hasSlotAttrs && !slotChildren.footer && !slotChildren.link) {
+      try { target.setProperties(makeProps(config.extraBooleans.footer, false)); } catch (e) {}
+    }
+  }
+
+  // --- Card tinted mode: step number indicator ---
+  if (config.extraBooleans && config.extraBooleans.tinted) {
+    var stepNum = findStepNumber(data);
+    if (stepNum) {
+      try {
+        instance.setProperties(makeProps(config.extraBooleans.tinted, true));
+        if (target !== instance) {
+          var upperBool = config.slots && config.slots.upper && config.slots.upper.booleanKey;
+          if (upperBool) target.setProperties(makeProps(upperBool, true));
+        }
+      } catch (e) {}
+    }
+  }
+}
+
+// Card-specific heuristic: classify by font size/weight when no slot attrs present
+async function applyCardContentHeuristic(instance, data, config, target) {
+  var texts = [];
+  collectTexts(data, texts);
+
+  var title = "";
+  var description = "";
+  var hasBadge = false;
+
+  for (var i = 0; i < texts.length; i++) {
+    var t = texts[i];
+    var fs = (t.textStyles && t.textStyles.fontSize) || 16;
+    var fw = parseInt((t.textStyles && t.textStyles.fontWeight) || "400");
+
+    // Skip step numbers
+    if (t.text.length <= 2 && t.styles && t.styles.backgroundColor) continue;
+
+    if (!title && (fs >= 20 || fw >= 600)) {
+      title = t.text;
+    } else if (!description && fs <= 20 && fw < 600) {
+      description = t.text;
+    }
+  }
+
+  // Check for badge child (upper slot heuristic)
+  if (data.children) {
+    for (var j = 0; j < data.children.length; j++) {
+      var child = data.children[j];
+      if (child.tag === "sgds-badge") {
+        hasBadge = true;
+        // Enable upper slot and swap badge
+        if (config.slots && config.slots.upper) {
+          var upperConfig = config.slots.upper;
+          if (upperConfig.booleanKey) {
+            try { target.setProperties(makeProps(upperConfig.booleanKey, true)); } catch (e) {}
+          }
+          var badgeComponent = await importSlottedComponent(child);
+          if (badgeComponent) {
+            var swapped = false;
+            if (upperConfig.frameName) {
+              swapped = await swapSlotInstance(instance, upperConfig.frameName, badgeComponent);
+            }
+            if (!swapped && upperConfig.swapKey) {
+              try { target.setProperties(makeProps(upperConfig.swapKey, badgeComponent)); swapped = true; } catch (e) {}
+            }
+            if (swapped) {
+              var badgeLabel = child.text || collectFirstText(child);
+              if (badgeLabel) {
+                var badgeInst = findSwappedInstance(instance, SGDS_COMPONENT_MAP["sgds-badge"].key);
+                if (badgeInst) await applySlottedComponentText(badgeInst, "sgds-badge", badgeLabel);
+              }
+            }
+          }
+        }
+        // Skip badge text from title/description
+        if (child.text === title) title = "";
+        break;
+      }
+    }
+  }
+
+  // Apply title/description to card header
+  if (title || description) {
+    var cardHeader = instance.findOne(function (n) {
+      return n.name === "Card header" && n.type === "INSTANCE";
+    });
+    if (cardHeader) {
+      var headerProps = {};
+      if (title && config.textProps.title) headerProps[config.textProps.title.key] = title;
+      if (description && config.textProps.description) headerProps[config.textProps.description.key] = description;
+      if (!description && config.textProps.description && config.textProps.description.booleanKey) {
+        headerProps[config.textProps.description.booleanKey] = false;
+      }
+      if (Object.keys(headerProps).length > 0) {
+        try { cardHeader.setProperties(headerProps); } catch (e) {}
+      }
+    }
+  }
+}
+
+// Find step number (single digit with background color) in card children
+function findStepNumber(data) {
+  if (!data.children) return null;
+  for (var i = 0; i < data.children.length; i++) {
+    var child = data.children[i];
+    if (child.text && child.text.length <= 2 && child.styles && child.styles.backgroundColor) {
+      return child.text;
+    }
+    var found = findStepNumber(child);
+    if (found) return found;
+  }
+  return null;
+}
+
+// ============================================================
+// LEGACY APPLIERS (kept for reference, replaced by generic)
+// ============================================================
 
 // Generic: apply DOM text to any SGDS component's TEXT properties
 async function applyComponentText(instance, data) {
@@ -638,9 +1358,11 @@ async function applyCardContent(instance, data) {
           for (var si = 0; si < allInstances.length; si++) {
             var candidate = allInstances[si];
             // Look for placeholder instances (default swap targets from library)
-            if (candidate.name.toLowerCase().indexOf("swap") >= 0 ||
-                candidate.name.toLowerCase().indexOf("slot") >= 0 ||
-                candidate.name.toLowerCase().indexOf("placeholder") >= 0) {
+            if (
+              candidate.name.toLowerCase().indexOf("swap") >= 0 ||
+              candidate.name.toLowerCase().indexOf("slot") >= 0 ||
+              candidate.name.toLowerCase().indexOf("placeholder") >= 0
+            ) {
               try {
                 candidate.swapComponent(slotComponent);
                 swapped = true;
@@ -682,7 +1404,9 @@ async function applyCardContent(instance, data) {
     }
     if (!slotData.description) headerProps["Description#30610:0"] = false;
     if (Object.keys(headerProps).length > 0) {
-      try { cardHeader.setProperties(headerProps); } catch (e) {}
+      try {
+        cardHeader.setProperties(headerProps);
+      } catch (e) {}
     }
   }
 
@@ -741,7 +1465,9 @@ async function applyCardContent(instance, data) {
 
   // --- Footer: hide if no footer content ---
   if (!slotData.hasFooter && structure) {
-    try { structure.setProperties({ "Footer#29055:82": false }); } catch (e) {}
+    try {
+      structure.setProperties({ "Footer#29055:82": false });
+    } catch (e) {}
   }
 }
 
@@ -762,7 +1488,9 @@ function classifyCardSlots(data) {
 
   if (!data.children) return result;
 
-  var hasSlotAttrs = data.children.some(function (c) { return !!c.slot; });
+  var hasSlotAttrs = data.children.some(function (c) {
+    return !!c.slot;
+  });
 
   if (hasSlotAttrs) {
     // --- Slot-based classification (reliable) ---
@@ -823,7 +1551,12 @@ function classifyCardSlots(data) {
           if (grandchild.tag === "sgds-badge") {
             result.upperContent = grandchild;
           }
-          if (grandchild.text && grandchild.text.length <= 2 && grandchild.styles && grandchild.styles.backgroundColor) {
+          if (
+            grandchild.text &&
+            grandchild.text.length <= 2 &&
+            grandchild.styles &&
+            grandchild.styles.backgroundColor
+          ) {
             result.stepNumber = grandchild.text;
           }
         }
@@ -866,7 +1599,6 @@ function collectFirstText(node) {
   }
   return "";
 }
-
 
 // Add a small annotation badge to SGDS component frames
 async function addComponentAnnotation(frame, tag) {
