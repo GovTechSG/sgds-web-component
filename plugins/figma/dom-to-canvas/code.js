@@ -8,50 +8,49 @@ var SGDS_COMPONENT_MAP = {
   "sgds-footer": { key: "bebf3b1311b700524579ee0c84abed609def47cd", name: "Footer" },
   "sgds-button": { key: "6f2f3d88022cd929560600e6d9df2016dd542b3c", name: "Button" },
   "sgds-icon-button": { key: "3d6ef97abfa684a4590866cbb603c44b86427f2d", name: "Icon button" },
-  "sgds-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card" },
+  "sgds-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: { "Variant": "default" } },
   "sgds-image-card": { key: "4a9e664f1b163b039023ebeebc3bd2e2f16bb256", name: "Image card" },
-  "sgds-thumbnail-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card" },
+  "sgds-thumbnail-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: { "Variant": "thumbnail" } },
   "sgds-accordion": { key: "ffada43a96f710368e420ffd6087b09ee8894502", name: "Accordion" },
   "sgds-badge": { key: "30f64a9fe1033f49f39d7e77f1b318b0549a852f", name: "Badge" },
   "sgds-alert": { key: "78d35168e3f57033a677c8bce6d5242e1e771ffc", name: "Alert" },
-  "sgds-breadcrumb": { key: "", name: "Breadcrumb" },
+  "sgds-breadcrumb": { key: "0fe6194b637fc81281ba384c7cb7595e36e2aa23", name: "Breadcrumb" },
   "sgds-checkbox": { key: "cfd682cb134b8cba84738cabe537e7f4973a97af", name: "Checkbox" },
   "sgds-checkbox-group": { key: "a8736f77a9aa8db166ba3e6a2af36ea62f231796", name: "Checkbox group" },
   "sgds-close-button": { key: "dfa571631b0ed13939f6bc803b89d0cb7b866734", name: "Close button" },
-  "sgds-combo-box": { key: "", name: "Combo box" },
+  "sgds-combo-box": { key: "402b7c27be729d83b27dc56b20ed4012bb7894b5", name: "Combobox" },
   "sgds-datepicker": { key: "22707078ef36a68de4d1d59b52d1e774523b3d9e", name: "Date picker" },
-  "sgds-description-list": { key: "", name: "Description list" },
+  "sgds-description-list": { key: "f737ee7ccde2b947ccb0873fbe0373c38968e5e5", name: "Description list" },
   "sgds-divider": { key: "0fa48002f60b73b5c40cc5f9960a0d33fa9aede2", name: "Divider" },
   "sgds-drawer": { key: "286077554b9c670410265a4efddc044d2f79c830", name: "Drawer" },
   "sgds-dropdown": { key: "8abe77a377974f59945df172f56b462c09d930d2", name: "Dropdown" },
-  "sgds-file-upload": { key: "", name: "File upload" },
+  "sgds-file-upload": { key: "c4be285d559cc8e7d1e5022d6246fbd4afad08dd", name: "File upload" },
   "sgds-input": { key: "2ef894eecddfbaad424e24480aaaa70c6232d579", name: "Input" },
-  "sgds-link": { key: "", name: "Link" },
+  "sgds-link": { key: "be078ab26a178669da5e19be495a97951e14f5f4", name: "Link" },
   "sgds-modal": { key: "b22aedc5141b82416d7943e46a78598d44e4423f", name: "Modal" },
-  "sgds-overflow-menu": { key: "", name: "Overflow menu" },
+  "sgds-overflow-menu": { key: "4f6abe52cb03aad3e9201d579a1b9a42ee0b2f96", name: "Overflow menu" },
   "sgds-pagination": { key: "9e6f67ae6f0a3d36e74371b7e0121a90617f3437", name: "Pagination" },
-  "sgds-progress-bar": { key: "", name: "Progress bar" },
+  "sgds-progress-bar": { key: "7343e7e18d316aaf3a076f67474c394a69106130", name: "Progress bar" },
   "sgds-quantity-toggle": { key: "7a8181de949074a2d44261aa6d6387381ff7fafd", name: "Quantity toggle" },
   "sgds-radio": { key: "529c74d47e2706156c625441dee324962caf32a9", name: "Radio" },
   "sgds-radio-group": { key: "1bc0266f520ffce648079e4137dedee58896ff57", name: "Radio group" },
   "sgds-select": { key: "76689841e9a0e34127817f173746ff90ad4f6d01", name: "Select" },
-  "sgds-sidebar": { key: "", name: "Sidebar" },
-  "sgds-sidenav": { key: "", name: "Sidenav" },
-  "sgds-skeleton": { key: "", name: "Skeleton" },
-  "sgds-spinner": { key: "", name: "Spinner" },
+  "sgds-sidebar": { key: "f82b74ef96b1fba2824eb1b42773e614d1912b61", name: "Sidebar" },
+  "sgds-sidenav": { key: "fe7d7f7bb4bad60bf90236bdefad2d621794aea1", name: "Side navigation" },
+  "sgds-skeleton": { key: "e637146dfde782038c230e94e2b50905588a32a8", name: "Skeleton" },
+  "sgds-spinner": { key: "57f93a97c6752fe191c5baaae85fcd94af48fb6c", name: "Spinner" },
   "sgds-stepper": { key: "f2d7340d4a7cae5305c275cdf4536a881006adaa", name: "Stepper" },
-  "sgds-subnav": { key: "", name: "Subnav" },
+  "sgds-subnav": { key: "f224ffd722edb29ae69e98f57adc236a30e4ab60", name: "Sub nav" },
   "sgds-switch": { key: "4feb4a7ce800cc003834a757142e2fae22b407cb", name: "Switch" },
   "sgds-system-banner": { key: "8964354f90723ab11cfecac907643c00b8671489", name: "System banner" },
-  "sgds-tab": { key: "", name: "Tab" },
+  "sgds-tab": { key: "84c758d53a47383d98f776a64e12c5e34b3a3042", name: "Tab" },
   "sgds-table": { key: "3e453c92dfce98aa59f3fdf54743848ba1928478", name: "Table" },
   "sgds-table-of-contents": { key: "71c683805758b4fd9be63158a990cac4f9b1cc08", name: "Table of contents" },
   "sgds-textarea": { key: "8309f3c597191757e791ee07827c6d91462e5312", name: "Text area" },
   "sgds-toast": { key: "1fba52a6b9e5133c161913561e756e717136329b", name: "Toast" },
-  "sgds-tooltip": { key: "", name: "Tooltip" },
+  "sgds-tooltip": { key: "", name: "Tooltip" }, // Not available as ComponentSet in library
   "sgds-icon-list": { key: "9a32ab706ce2f0a23d974f5d1487d98e551d3b69", name: "Icon list" },
-  "sgds-icon-card": { key: "", name: "Icon card" },
-  "sgds-overflow-menu": { key: "4f6abe52cb03aad3e9201d579a1b9a42ee0b2f96", name: "Overflow menu" }
+  "sgds-icon-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: { "Variant": "icon" } },
 };
 
 // SGDS Tailwind class → Figma variable key mapping
@@ -131,6 +130,18 @@ var importedVariables = {};
 
 // Cache for imported component sets
 var importedComponents = {};
+
+// Attribute-to-Figma variant property name mapping
+// Maps DOM attribute names to Figma variant property names with capitalization
+var ATTR_TO_VARIANT_PROP = {
+  variant: "Variant",
+  outlined: "Outlined",
+  dismissible: "Dismissible",
+  size: "Size",
+  state: "State",
+  tone: "Tone",
+  orientation: "Orientation"
+};
 
 figma.ui.onmessage = async function (msg) {
   if (msg.type === "import") {
@@ -254,6 +265,18 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   var variant = componentSet.defaultVariant || componentSet.children[0];
   var instance = variant.createInstance();
 
+  // Apply nested component properties (e.g. Structure.Variant = "thumbnail")
+  if (mapping.nestedProps) {
+    try {
+      var structure = instance.findOne(function (n) {
+        return n.name === "Structure" && n.type === "INSTANCE";
+      });
+      if (structure) {
+        structure.setProperties(mapping.nestedProps);
+      }
+    } catch (e) {}
+  }
+
   instance.name = mapping.name;
 
   var posX = (data.x || 0) - parentX;
@@ -278,7 +301,7 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   parent.appendChild(instance);
 
   // Apply component-specific content from DOM children
-  if (data.tag === "sgds-card") {
+  if (data.tag === "sgds-card" || data.tag === "sgds-icon-card" || data.tag === "sgds-thumbnail-card") {
     await applyCardContent(instance, data);
   }
   if (data.tag === "sgds-button") {
@@ -289,6 +312,154 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   }
 
   return instance;
+}
+
+// Import a slotted component and return the correct variant Component node
+// for use with INSTANCE_SWAP properties.
+// Returns the Component node (variant child of ComponentSet), not an Instance.
+async function importSlottedComponent(childData) {
+  var tag = childData.tag;
+  var mapping = SGDS_COMPONENT_MAP[tag];
+  if (!mapping || !mapping.key) return null;
+
+  // Import ComponentSet if not cached
+  if (!importedComponents[tag]) {
+    try {
+      var componentSet = await figma.importComponentSetByKeyAsync(mapping.key);
+      importedComponents[tag] = componentSet;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  var componentSet = importedComponents[tag];
+  var attrs = childData.attrs || {};
+
+  // Build variant property criteria from DOM attrs
+  var criteria = {};
+  for (var attrName in attrs) {
+    var propName = ATTR_TO_VARIANT_PROP[attrName];
+    if (propName) {
+      var value = attrs[attrName];
+      // Boolean attrs: true → "True", false/absent → "False"
+      if (value === true || value === "") {
+        criteria[propName] = "True";
+      } else if (value === false || value === "false") {
+        criteria[propName] = "False";
+      } else {
+        criteria[propName] = value;
+      }
+    }
+  }
+
+  // Find the matching variant child
+  var bestMatch = null;
+  var bestScore = -1;
+
+  for (var i = 0; i < componentSet.children.length; i++) {
+    var variant = componentSet.children[i];
+    var variantProps = variant.variantProperties || {};
+    var score = 0;
+    var mismatch = false;
+
+    for (var prop in criteria) {
+      if (variantProps[prop] !== undefined) {
+        if (variantProps[prop] === criteria[prop]) {
+          score++;
+        } else {
+          mismatch = true;
+          break;
+        }
+      }
+    }
+
+    if (!mismatch && score > bestScore) {
+      bestScore = score;
+      bestMatch = variant;
+    }
+  }
+
+  // Return the Component node (variant) — fallback to default
+  return bestMatch || componentSet.defaultVariant || componentSet.children[0];
+}
+
+// Swap the placeholder instance inside a named slot container with a target component.
+// Searches for an instance inside the slot frame and calls swapComponent() on it.
+// Returns true if swap was successful.
+async function swapSlotInstance(cardInstance, slotFrameName, targetComponent) {
+  // Strategy 1: Find the slot frame by name, then find the INSTANCE inside it
+  var slotFrame = cardInstance.findOne(function (n) {
+    return n.name === slotFrameName;
+  });
+  if (slotFrame) {
+    var placeholder = null;
+    if (slotFrame.type === "INSTANCE") {
+      placeholder = slotFrame;
+    } else if (slotFrame.children) {
+      for (var i = 0; i < slotFrame.children.length; i++) {
+        if (slotFrame.children[i].type === "INSTANCE") {
+          placeholder = slotFrame.children[i];
+          break;
+        }
+      }
+    }
+    if (placeholder) {
+      try {
+        placeholder.swapComponent(targetComponent);
+        return true;
+      } catch (e) {}
+    }
+  }
+
+  // Strategy 2: Find any instance whose name contains "slot" in the card-media area
+  var mediaFrame = cardInstance.findOne(function (n) {
+    return n.name === "card-media" || n.name === "Card media";
+  });
+  if (mediaFrame) {
+    var instances = mediaFrame.findAllWithCriteria({ types: ["INSTANCE"] });
+    if (instances.length > 0) {
+      try {
+        instances[0].swapComponent(targetComponent);
+        return true;
+      } catch (e) {}
+    }
+  }
+
+  return false;
+}
+
+// Find a swapped instance by checking mainComponent's parent key
+function findSwappedInstance(cardInstance, componentSetKey) {
+  var allInstances = cardInstance.findAllWithCriteria({ types: ["INSTANCE"] });
+  for (var i = 0; i < allInstances.length; i++) {
+    var inst = allInstances[i];
+    try {
+      if (inst.mainComponent && inst.mainComponent.parent &&
+          inst.mainComponent.parent.key === componentSetKey) {
+        return inst;
+      }
+    } catch (e) {}
+  }
+  return null;
+}
+
+// Component-specific text property keys for setting label/content after instance swap
+var COMPONENT_TEXT_PROPS = {
+  "sgds-badge": "Edit label#13032:18",
+  "sgds-button": "Edit button label#12484:5"
+};
+
+// Apply text to a slotted component instance after it's been swapped in
+async function applySlottedComponentText(instance, tag, text) {
+  var textPropKey = COMPONENT_TEXT_PROPS[tag];
+  if (textPropKey && text) {
+    try {
+      await figma.loadFontAsync({ family: "Inter", style: "Semi Bold" });
+      var props = {};
+      props[textPropKey] = text;
+      instance.setProperties(props);
+    } catch (e) {}
+  }
 }
 
 // Generic: apply DOM text to any SGDS component's TEXT properties
@@ -404,57 +575,124 @@ function getTextProperties(instance) {
   return results;
 }
 
-// Extract text from sgds-card children and set on Figma Card instance
+// Extract content from sgds-card children and map to Figma Card slots/properties
+// Figma Card property keys (from API inspection):
+//   Structure instance:
+//     "🔷 Upper slot#29055:1" (BOOLEAN) — show/hide upper slot
+//     "🔷 Lower slot#29055:12" (BOOLEAN) — show/hide lower slot
+//     "↳ Edit text#29055:49" (TEXT) — secondary text
+//     "Footer#29055:82" (BOOLEAN) — show/hide footer
+//   Card header instance (inside Structure):
+//     "↳ Edit text #29055:26" (TEXT) — title
+//     "↳ Edit text  #30610:3" (TEXT) — description
+//     "↳ Edit text#29055:29" (TEXT) — subtitle
+//     "Subtitle#29055:23" (BOOLEAN) — show/hide subtitle
+//     "Description#30610:0" (BOOLEAN) — show/hide description
+//   Top-level:
+//     "Tinted#29055:104" (BOOLEAN) — tinted background
 async function applyCardContent(instance, data) {
   if (!data.children) return;
 
-  // Flatten all text nodes from card children to find title + description
-  var texts = [];
-  collectTexts(data, texts);
+  try {
+    await figma.loadFontAsync({ family: "Inter", style: "Semi Bold" });
+    await figma.loadFontAsync({ family: "Inter", style: "Regular" });
+  } catch (e) {}
 
-  // Heuristic: find title (larger font / bold) and description (smaller / regular)
-  var title = "";
-  var description = "";
+  // Classify children by slot role
+  var slotData = classifyCardSlots(data);
 
-  for (var i = 0; i < texts.length; i++) {
-    var t = texts[i];
-    var fs = (t.textStyles && t.textStyles.fontSize) || 16;
-    var fw = (t.textStyles && t.textStyles.fontWeight) || "400";
+  // Find the Structure instance
+  var structure = instance.findOne(function (n) {
+    return n.name === "Structure" && n.type === "INSTANCE";
+  });
 
-    // Skip numbered step indicators (single digit text with bg color = step number)
-    if (t.text.length <= 2 && t.styles && t.styles.backgroundColor) continue;
+  // --- Upper slot: insert slotted component (e.g. sgds-badge) ---
+  if (slotData.upperContent && structure) {
+    try {
+      structure.setProperties({ "🔷 Upper slot#29055:1": true });
+    } catch (e) {
+      figma.ui.postMessage({ type: "debug", message: "Failed to enable upper slot: " + e.message });
+    }
 
-    // Title: larger font or semibold/bold, not yet assigned
-    if (!title && (fs >= 20 || parseInt(fw) >= 600)) {
-      title = t.text;
-    } else if (!description && fs <= 20 && parseInt(fw) < 600) {
-      description = t.text;
+    // Import and swap the slotted component into the upper slot
+    var upperChild = slotData.upperContent;
+    if (upperChild.tag && isSgdsComponent(upperChild.tag)) {
+      var slotComponent = await importSlottedComponent(upperChild);
+      if (slotComponent) {
+        // Strategy 1: Find the placeholder instance in the slot and swap it
+        var swapped = await swapSlotInstance(instance, "[upper slot]", slotComponent);
+
+        // Strategy 2: Try via Structure's exposed INSTANCE_SWAP property
+        if (!swapped) {
+          try {
+            structure.setProperties({ "↳ Swap instance (upper)#29055:60": slotComponent });
+            swapped = true;
+          } catch (e2) {
+            figma.ui.postMessage({ type: "debug", message: "setProperties swap failed: " + e2.message });
+          }
+        }
+
+        // Strategy 3: Find any INSTANCE inside the card-media/upper area and swap it
+        if (!swapped) {
+          var allInstances = instance.findAllWithCriteria({ types: ["INSTANCE"] });
+          for (var si = 0; si < allInstances.length; si++) {
+            var candidate = allInstances[si];
+            // Look for placeholder instances (default swap targets from library)
+            if (candidate.name.toLowerCase().indexOf("swap") >= 0 ||
+                candidate.name.toLowerCase().indexOf("slot") >= 0 ||
+                candidate.name.toLowerCase().indexOf("placeholder") >= 0) {
+              try {
+                candidate.swapComponent(slotComponent);
+                swapped = true;
+                break;
+              } catch (e3) {}
+            }
+          }
+        }
+
+        // Apply text label to the swapped badge instance
+        if (swapped) {
+          var label = upperChild.text || collectFirstText(upperChild);
+          if (label) {
+            var badgeInstance = findSwappedInstance(instance, SGDS_COMPONENT_MAP[upperChild.tag].key);
+            if (badgeInstance) {
+              await applySlottedComponentText(badgeInstance, upperChild.tag, label);
+            }
+          }
+        } else {
+          figma.ui.postMessage({ type: "debug", message: "Could not swap badge into upper slot for card" });
+        }
+      } else {
+        figma.ui.postMessage({ type: "debug", message: "importSlottedComponent returned null for " + upperChild.tag });
+      }
     }
   }
 
-  // Set Card header properties
-  if (title || description) {
-    try {
-      await figma.loadFontAsync({ family: "Inter", style: "Semi Bold" });
-      await figma.loadFontAsync({ family: "Inter", style: "Regular" });
-
-      var cardHeader = instance.findOne(function (n) {
-        return n.name === "Card header" && n.type === "INSTANCE";
-      });
-      if (cardHeader) {
-        var props = {};
-        if (title) props["↳ Edit text #29055:26"] = title;
-        if (description) props["↳ Edit text  #30610:3"] = description;
-        cardHeader.setProperties(props);
-      }
-    } catch (e) {}
+  // --- Title, Description, Subtitle on Card header ---
+  var cardHeader = instance.findOne(function (n) {
+    return n.name === "Card header" && n.type === "INSTANCE";
+  });
+  if (cardHeader) {
+    var headerProps = {};
+    if (slotData.title) headerProps["↳ Edit text #29055:26"] = slotData.title;
+    if (slotData.description) headerProps["↳ Edit text  #30610:3"] = slotData.description;
+    if (slotData.subtitle) {
+      headerProps["↳ Edit text#29055:29"] = slotData.subtitle;
+      headerProps["Subtitle#29055:23"] = true;
+    }
+    if (!slotData.description) headerProps["Description#30610:0"] = false;
+    if (Object.keys(headerProps).length > 0) {
+      try { cardHeader.setProperties(headerProps); } catch (e) {}
+    }
   }
 
-  // Enable Tinted + upper slot if card has a step number
-  var stepNum = findStepNumber(data);
-  if (stepNum) {
+  // --- Tinted + step number in upper slot ---
+  if (slotData.stepNumber) {
     try {
       instance.setProperties({ "Tinted#29055:104": true });
+      if (structure) {
+        structure.setProperties({ "🔷 Upper slot#29055:1": true });
+      }
       var upperSlot = instance.findOne(function (n) {
         return n.name === "[upper slot]";
       });
@@ -465,27 +703,170 @@ async function applyCardContent(instance, data) {
         });
         if (descInSlot) {
           await figma.loadFontAsync({ family: "Inter", style: "Regular" });
-          descInSlot.characters = stepNum;
+          descInSlot.characters = slotData.stepNumber;
         }
       }
     } catch (e) {}
   }
+
+  // --- Lower slot: insert slotted component ---
+  if (slotData.lowerContent && structure) {
+    try {
+      structure.setProperties({ "🔷 Lower slot#29055:12": true });
+
+      var lowerChild = slotData.lowerContent;
+      if (lowerChild.tag && isSgdsComponent(lowerChild.tag)) {
+        var lowerComponent = await importSlottedComponent(lowerChild);
+        if (lowerComponent) {
+          var lowerSwapped = await swapSlotInstance(instance, "[lower slot]", lowerComponent);
+          if (!lowerSwapped) {
+            try {
+              structure.setProperties({ "↳ Swap instance (lower)#30708:0": lowerComponent });
+              lowerSwapped = true;
+            } catch (e2) {}
+          }
+          if (lowerSwapped) {
+            var lowerLabel = lowerChild.text || collectFirstText(lowerChild);
+            if (lowerLabel) {
+              var lowerBadgeInstance = findSwappedInstance(instance, SGDS_COMPONENT_MAP[lowerChild.tag].key);
+              if (lowerBadgeInstance) {
+                await applySlottedComponentText(lowerBadgeInstance, lowerChild.tag, lowerLabel);
+              }
+            }
+          }
+        }
+      }
+    } catch (e) {}
+  }
+
+  // --- Footer: hide if no footer content ---
+  if (!slotData.hasFooter && structure) {
+    try { structure.setProperties({ "Footer#29055:82": false }); } catch (e) {}
+  }
 }
 
-// Find step number indicator in card children (single digit with background color)
-function findStepNumber(data) {
-  if (!data.children) return null;
-  for (var i = 0; i < data.children.length; i++) {
-    var child = data.children[i];
-    if (child.text && child.text.length <= 2 && child.styles && child.styles.backgroundColor) {
-      return child.text;
+// Classify card DOM children into slot roles
+// Uses the `slot` attribute when available (from Chrome extension capture),
+// falls back to heuristics (tag/font analysis) for legacy JSON without slot data.
+function classifyCardSlots(data) {
+  var result = {
+    title: "",
+    subtitle: "",
+    description: "",
+    upperContent: null,
+    lowerContent: null,
+    footerContent: null,
+    stepNumber: null,
+    hasFooter: false
+  };
+
+  if (!data.children) return result;
+
+  var hasSlotAttrs = data.children.some(function (c) { return !!c.slot; });
+
+  if (hasSlotAttrs) {
+    // --- Slot-based classification (reliable) ---
+    for (var i = 0; i < data.children.length; i++) {
+      var child = data.children[i];
+      var slot = child.slot || "";
+
+      switch (slot) {
+        case "upper":
+          result.upperContent = child;
+          break;
+        case "title":
+          result.title = child.text || collectFirstText(child);
+          break;
+        case "subtitle":
+          result.subtitle = child.text || collectFirstText(child);
+          break;
+        case "description":
+          result.description = child.text || collectFirstText(child);
+          break;
+        case "lower":
+          result.lowerContent = child;
+          break;
+        case "footer":
+        case "link":
+          result.footerContent = child;
+          result.hasFooter = true;
+          break;
+        default:
+          // Default slot — check for step numbers or other content
+          if (child.text && child.text.length <= 2 && child.styles && child.styles.backgroundColor) {
+            result.stepNumber = child.text;
+          }
+          break;
+      }
     }
-    // Recurse
-    var found = findStepNumber(child);
-    if (found) return found;
+  } else {
+    // --- Heuristic fallback (legacy JSON without slot attrs) ---
+    for (var i = 0; i < data.children.length; i++) {
+      var child = data.children[i];
+
+      // sgds-badge in card = upper slot content
+      if (child.tag === "sgds-badge") {
+        result.upperContent = child;
+        continue;
+      }
+
+      // Step number: single digit with background color (circular badge)
+      if (child.text && child.text.length <= 2 && child.styles && child.styles.backgroundColor) {
+        result.stepNumber = child.text;
+        continue;
+      }
+
+      // Recurse into wrapper elements to find badge/step
+      if (child.children) {
+        for (var j = 0; j < child.children.length; j++) {
+          var grandchild = child.children[j];
+          if (grandchild.tag === "sgds-badge") {
+            result.upperContent = grandchild;
+          }
+          if (grandchild.text && grandchild.text.length <= 2 && grandchild.styles && grandchild.styles.backgroundColor) {
+            result.stepNumber = grandchild.text;
+          }
+        }
+      }
+    }
+
+    // Collect text nodes and classify by font properties
+    var texts = [];
+    collectTexts(data, texts);
+
+    for (var t = 0; t < texts.length; t++) {
+      var node = texts[t];
+      var fs = (node.textStyles && node.textStyles.fontSize) || 16;
+      var fw = parseInt((node.textStyles && node.textStyles.fontWeight) || "400");
+
+      // Skip step number text
+      if (node.text.length <= 2 && result.stepNumber === node.text) continue;
+      // Skip badge text
+      if (result.upperContent && node.text === (result.upperContent.text || "")) continue;
+
+      if (!result.title && (fs >= 20 || fw >= 600)) {
+        result.title = node.text;
+      } else if (!result.description && fs <= 20 && fw < 600) {
+        result.description = node.text;
+      }
+    }
   }
-  return null;
+
+  return result;
 }
+
+// Helper: get first text content from a node tree
+function collectFirstText(node) {
+  if (node.text) return node.text;
+  if (node.children) {
+    for (var i = 0; i < node.children.length; i++) {
+      var t = collectFirstText(node.children[i]);
+      if (t) return t;
+    }
+  }
+  return "";
+}
+
 
 // Add a small annotation badge to SGDS component frames
 async function addComponentAnnotation(frame, tag) {

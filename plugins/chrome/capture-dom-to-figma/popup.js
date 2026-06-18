@@ -156,9 +156,10 @@ function captureDom(maxDepth) {
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
 
+    const tag = el.tagName.toLowerCase();
     const node = {
       type: "element",
-      tag: el.tagName.toLowerCase(),
+      tag: tag,
       name: getNodeName(el),
       x: Math.round(rect.left + scrollX),
       y: Math.round(rect.top + scrollY),
@@ -166,6 +167,22 @@ function captureDom(maxDepth) {
       height: Math.round(rect.height),
       styles: {}
     };
+
+    // Capture slot attribute (critical for SGDS component slot mapping)
+    const slotAttr = el.getAttribute("slot");
+    if (slotAttr) node.slot = slotAttr;
+
+    // Capture component attributes/props for SGDS custom elements
+    if (tag.startsWith("sgds-")) {
+      const attrs = {};
+      for (const attr of el.attributes) {
+        // Skip internal/framework attrs, class (already in name), style, slot (captured above)
+        if (["class", "style", "slot", "id"].includes(attr.name)) continue;
+        if (attr.name.startsWith("data-v-")) continue; // Vue scoped
+        attrs[attr.name] = attr.value === "" ? true : attr.value;
+      }
+      if (Object.keys(attrs).length > 0) node.attrs = attrs;
+    }
 
     // Skip zero-size elements
     if (node.width === 0 || node.height === 0) return null;

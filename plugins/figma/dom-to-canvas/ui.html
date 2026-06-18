@@ -90,6 +90,11 @@
         importBtn.disabled = false;
         setStatus('Error: ' + msg.message, 'error');
       }
+      if (msg.type === 'debug') {
+        console.log('[DOM-to-Canvas]', msg.message);
+        const prev = statusEl.textContent;
+        setStatus(prev + ' | DBG: ' + msg.message);
+      }
     };
 
     function setStatus(msg, type) {
