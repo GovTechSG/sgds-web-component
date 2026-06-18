@@ -1,15 +1,17 @@
 import { html } from "lit";
 
-const ToneTemplate = () => html`
+const VariantTemplate = () => html`
   <sgds-spinner variant="primary"></sgds-spinner>
   <sgds-spinner variant="neutral"></sgds-spinner>
-  <sgds-spinner tone="brand"></sgds-spinner>
-  <sgds-spinner tone="neutral"></sgds-spinner>
-  <sgds-spinner tone="fixed-dark"></sgds-spinner>
 `;
 
-const ToneInverseAndFixedLightTemplate = () => html`
-  <div style="padding: 12px; background-color: #222;">
+const ToneTemplate = () => html`
+  <div class="sgds:p-component-xs">
+    <sgds-spinner tone="brand"></sgds-spinner>
+    <sgds-spinner tone="neutral"></sgds-spinner>
+    <sgds-spinner tone="fixed-dark"></sgds-spinner>
+  </div>
+  <div class="sgds:p-component-xs sgds:bg-surface-fixed-dark">
     <sgds-spinner tone="inverse"></sgds-spinner>
     <sgds-spinner tone="fixed-light"></sgds-spinner>
   </div>
@@ -22,6 +24,14 @@ const SizeTemplate = () => html`
   <sgds-spinner size="xl"></sgds-spinner>
 `;
 
+export const Variant = {
+  render: VariantTemplate.bind({}),
+  name: "Variant",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
 export const Tone = {
   render: ToneTemplate.bind({}),
   name: "Tone",
@@ -29,13 +39,6 @@ export const Tone = {
   parameters: {
     backgrounds: { default: "custom-blue" }
   },
-  tags: ["!dev"]
-};
-export const ToneInverseFixedLight = {
-  render: ToneInverseAndFixedLightTemplate.bind({}),
-  name: "Tone - inverse and fixed light",
-  args: {},
-  parameters: {},
   tags: ["!dev"]
 };
 
