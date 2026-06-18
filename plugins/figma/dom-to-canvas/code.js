@@ -153,13 +153,13 @@ var ATTR_VALUE_MAP = {
   "fixed-light": "fixed light (white)",
   "fixed-dark": "fixed dark",
   // Variant values
-  "outline": "outline (secondary)",
-  "ghost": "ghost (tertiary)",
+  outline: "outline (secondary)",
+  ghost: "ghost (tertiary)",
   // Size values (Figma appends "(default)" to md)
-  "md": "md (default)",
+  md: "md (default)",
   // Boolean-like
-  "true": "True",
-  "false": "False"
+  true: "True",
+  false: "False"
 };
 
 // Declarative slot configuration for each component
@@ -185,7 +185,12 @@ var COMPONENT_SLOT_CONFIG = {
       subtitle: { instanceName: "Card header", key: "↳ Edit text#29055:29", booleanKey: "Subtitle#29055:23" },
       description: { instanceName: "Card header", key: "↳ Edit text  #30610:3", booleanKey: "Description#30610:0" }
     },
-    extraBooleans: { tinted: "Tinted#29055:104", footer: "Footer#29055:82", secondaryText: "Secondary text#29055:38", subtitle: "Subtitle#29055:23" }
+    extraBooleans: {
+      tinted: "Tinted#29055:104",
+      footer: "Footer#29055:82",
+      secondaryText: "Secondary text#29055:38",
+      subtitle: "Subtitle#29055:23"
+    }
   },
   "sgds-icon-card": {
     structureName: "Structure",
@@ -262,11 +267,14 @@ var COMPONENT_SLOT_CONFIG = {
   "sgds-accordion": {
     // Accordion items are nested instances named "↳ Accordion N"
     // Each item has: Edit title (TEXT), Badge (BOOLEAN), Icon (BOOLEAN), badge swap, icon swap
+    // DOM variant="border" → Figma Border=True; density → Density
+    attrOverrides: { variant: { prop: "Border", values: { "border": "True", "default": "False" } } },
     itemPattern: "↳ Accordion",
     itemProps: {
       title: { key: "Edit title#16551:8" },
       badge: { booleanKey: "Badge#29585:8", swapKey: "↳ 🔷 Swap instance#16545:8" },
-      icon: { booleanKey: "Icon#29595:24", swapKey: "↳ Select icon#29595:46" }
+      icon: { booleanKey: "Icon#29595:24", swapKey: "↳ Select icon#29595:46" },
+      content: { swapKey: "↳ 🔷 Swap instance#16545:8" }
     }
   },
   "sgds-modal": {
@@ -625,9 +633,20 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   // Pick the variant that best matches the DOM attrs (variant, tone, size, etc.)
   var variant = null;
   var attrs = data.attrs || {};
+  var slotConfig = COMPONENT_SLOT_CONFIG[data.tag];
   if (Object.keys(attrs).length > 0) {
     var criteria = {};
     for (var attrName in attrs) {
+      // Check for component-specific attr overrides (e.g. accordion variant→Border)
+      if (slotConfig && slotConfig.attrOverrides && slotConfig.attrOverrides[attrName]) {
+        var override = slotConfig.attrOverrides[attrName];
+        var mappedValue = override.values[attrs[attrName]];
+        if (mappedValue) {
+          criteria[override.prop] = mappedValue;
+        }
+        continue;
+      }
+
       var propName = ATTR_TO_VARIANT_PROP[attrName];
       if (propName) {
         var value = attrs[attrName];
@@ -704,9 +723,18 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   // Small interactive components should keep their native Figma dimensions
   // (their variant size=sm/md/lg determines their size)
   var NO_RESIZE_TAGS = [
-    "sgds-button", "sgds-badge", "sgds-link", "sgds-icon-button",
-    "sgds-close-button", "sgds-spinner", "sgds-switch", "sgds-checkbox",
-    "sgds-radio", "sgds-divider", "sgds-skeleton", "sgds-tooltip"
+    "sgds-button",
+    "sgds-badge",
+    "sgds-link",
+    "sgds-icon-button",
+    "sgds-close-button",
+    "sgds-spinner",
+    "sgds-switch",
+    "sgds-checkbox",
+    "sgds-radio",
+    "sgds-divider",
+    "sgds-skeleton",
+    "sgds-tooltip"
   ];
 
   var shouldResize = NO_RESIZE_TAGS.indexOf(data.tag) < 0;
@@ -1195,15 +1223,21 @@ async function applySlotContent(instance, data, config) {
   if (config.extraBooleans && hasSlotAttrs) {
     // Hide footer if no footer/link slot content
     if (config.extraBooleans.footer && !slotChildren.footer && !slotChildren.link) {
-      try { target.setProperties(makeProps(config.extraBooleans.footer, false)); } catch (e) {}
+      try {
+        target.setProperties(makeProps(config.extraBooleans.footer, false));
+      } catch (e) {}
     }
     // Hide secondary text if not provided
     if (config.extraBooleans.secondaryText && !slotChildren.secondaryText) {
-      try { target.setProperties(makeProps(config.extraBooleans.secondaryText, false)); } catch (e) {}
+      try {
+        target.setProperties(makeProps(config.extraBooleans.secondaryText, false));
+      } catch (e) {}
     }
     // Hide subtitle if not provided
     if (config.extraBooleans.subtitle && !slotChildren.subtitle) {
-      try { target.setProperties(makeProps(config.extraBooleans.subtitle, false)); } catch (e) {}
+      try {
+        target.setProperties(makeProps(config.extraBooleans.subtitle, false));
+      } catch (e) {}
     }
   }
 
@@ -1218,6 +1252,102 @@ async function applySlotContent(instance, data, config) {
           if (upperBool) target.setProperties(makeProps(upperBool, true));
         }
       } catch (e) {}
+    }
+  }
+
+  // --- Item pattern: map repeated children to numbered nested instances ---
+  // Used by Accordion (↳ Accordion 1..N), Icon List (Icon list 1..N), etc.
+  if (config.itemPattern && config.itemProps && data.children) {
+    await applyItemPattern(instance, data, config);
+  }
+}
+
+// Apply content to repeated item instances (accordion items, icon list items, etc.)
+async function applyItemPattern(instance, data, config) {
+  if (!data.children) return;
+
+  try {
+    await figma.loadFontAsync({ family: "Inter", style: "Semi Bold" });
+    await figma.loadFontAsync({ family: "Inter", style: "Regular" });
+  } catch (e) {}
+
+  // Collect item children (e.g. sgds-accordion-item elements)
+  var items = [];
+  for (var i = 0; i < data.children.length; i++) {
+    var child = data.children[i];
+    // Include direct element children that have slots or are accordion-items
+    if (child.type === "element" && child.children) {
+      items.push(child);
+    } else if (child.tag && child.tag.indexOf("-item") >= 0) {
+      items.push(child);
+    }
+  }
+
+  // Find numbered instances in the Figma component (e.g. "↳ Accordion 1", "↳ Accordion 2")
+  var pattern = config.itemPattern;
+  var allInstances = instance.findAllWithCriteria({ types: ["INSTANCE"] });
+  var numberedInstances = [];
+  for (var ni = 0; ni < allInstances.length; ni++) {
+    var inst = allInstances[ni];
+    if (inst.name.indexOf(pattern) >= 0 && inst.parent && inst.parent.id === instance.id) {
+      numberedInstances.push(inst);
+    }
+  }
+
+  // Sort by name (Accordion 1, Accordion 2, etc.)
+  numberedInstances.sort(function (a, b) {
+    var numA = parseInt(a.name.replace(/\D/g, "")) || 0;
+    var numB = parseInt(b.name.replace(/\D/g, "")) || 0;
+    return numA - numB;
+  });
+
+  // Map each DOM item to its corresponding Figma instance
+  for (var idx = 0; idx < items.length && idx < numberedInstances.length; idx++) {
+    var itemData = items[idx];
+    var itemInstance = numberedInstances[idx];
+
+    // Classify the item's slot children
+    var itemSlots = classifySlots(itemData);
+
+    // Apply title/header text
+    if (config.itemProps.title || config.itemProps.label) {
+      var titleConfig = config.itemProps.title || config.itemProps.label;
+      var headerChild = itemSlots.header || itemSlots.title || itemSlots["default"];
+      var headerText = "";
+      if (headerChild) {
+        if (Array.isArray(headerChild)) headerChild = headerChild[0];
+        headerText = headerChild.text || collectFirstText(headerChild);
+      }
+      if (headerText) {
+        try { itemInstance.setProperties(makeProps(titleConfig.key, headerText)); } catch (e) {}
+      }
+    }
+
+    // Apply expand/open state
+    var itemAttrs = itemData.attrs || {};
+    if (itemAttrs.open !== undefined || itemAttrs.open === true || itemAttrs.open === "") {
+      try { itemInstance.setProperties({ Expand: "True" }); } catch (e) {}
+    }
+
+    // Apply badge slot
+    if (config.itemProps.badge && itemSlots.badge) {
+      var badgeChild = Array.isArray(itemSlots.badge) ? itemSlots.badge[0] : itemSlots.badge;
+      if (badgeChild.tag && isSgdsComponent(badgeChild.tag)) {
+        try {
+          itemInstance.setProperties(makeProps(config.itemProps.badge.booleanKey, true));
+          var badgeComp = await importSlottedComponent(badgeChild);
+          if (badgeComp) {
+            itemInstance.setProperties(makeProps(config.itemProps.badge.swapKey, badgeComp));
+          }
+        } catch (e) {}
+      }
+    }
+
+    // Apply content slot (swap instance for expanded content)
+    if (config.itemProps.content && itemSlots.content) {
+      // Content slot is where expanded accordion body goes
+      // For now, we can't easily represent rich HTML content in a swap instance
+      // The Figma accordion item shows/hides content based on Expand state
     }
   }
 }
