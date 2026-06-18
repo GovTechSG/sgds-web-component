@@ -327,7 +327,7 @@ function captureDom(maxDepth) {
         "rgb(117, 59, 189)": { agency: "gt", color: "purple" },
         "#753bbd": { agency: "gt", color: "purple" },
         "rgb(196, 69, 0)": { agency: "gt", color: "orange" },
-        "#c44500": { agency: "gt", color: "orange" },
+        "#c44500": { agency: "gt", color: "orange" }
       };
 
       if (primaryBg && THEME_COLORS[primaryBg]) {

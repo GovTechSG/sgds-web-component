@@ -268,7 +268,7 @@ var COMPONENT_SLOT_CONFIG = {
     // Accordion items are nested instances named "↳ Accordion N"
     // Each item has: Edit title (TEXT), Badge (BOOLEAN), Icon (BOOLEAN), badge swap, icon swap
     // DOM variant="border" → Figma Border=True; density → Density
-    attrOverrides: { variant: { prop: "Border", values: { "border": "True", "default": "False" } } },
+    attrOverrides: { variant: { prop: "Border", values: { border: "True", default: "False" } } },
     itemPattern: "↳ Accordion",
     itemProps: {
       title: { key: "Edit title#16551:8" },
@@ -1319,14 +1319,18 @@ async function applyItemPattern(instance, data, config) {
         headerText = headerChild.text || collectFirstText(headerChild);
       }
       if (headerText) {
-        try { itemInstance.setProperties(makeProps(titleConfig.key, headerText)); } catch (e) {}
+        try {
+          itemInstance.setProperties(makeProps(titleConfig.key, headerText));
+        } catch (e) {}
       }
     }
 
     // Apply expand/open state
     var itemAttrs = itemData.attrs || {};
     if (itemAttrs.open !== undefined || itemAttrs.open === true || itemAttrs.open === "") {
-      try { itemInstance.setProperties({ Expand: "True" }); } catch (e) {}
+      try {
+        itemInstance.setProperties({ Expand: "True" });
+      } catch (e) {}
     }
 
     // Apply badge slot
