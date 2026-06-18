@@ -53,6 +53,13 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
       this._mixinValidate(this.input);
     }
 
+    updated(changedProperties: PropertyValueMap<this>) {
+      super.updated(changedProperties);
+      if (changedProperties.has("value")) {
+        this._mixinSetFormValue();
+      }
+    }
+
     /**
      * Native lifecycle of Form-Associated Custom Element Callbacks
      */
