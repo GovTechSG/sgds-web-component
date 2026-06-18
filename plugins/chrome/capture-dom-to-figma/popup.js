@@ -1,21 +1,21 @@
-const captureBtn = document.getElementById('capture');
-const statusEl = document.getElementById('status');
-const resultEl = document.getElementById('result');
-const statsEl = document.getElementById('stats');
-const copyBtn = document.getElementById('copy');
-const downloadBtn = document.getElementById('download');
-const maxDepthInput = document.getElementById('max-depth');
+const captureBtn = document.getElementById("capture");
+const statusEl = document.getElementById("status");
+const resultEl = document.getElementById("result");
+const statsEl = document.getElementById("stats");
+const copyBtn = document.getElementById("copy");
+const downloadBtn = document.getElementById("download");
+const maxDepthInput = document.getElementById("max-depth");
 
 let capturedData = null;
 
-captureBtn.addEventListener('click', capture);
-copyBtn.addEventListener('click', copyToClipboard);
-downloadBtn.addEventListener('click', downloadJson);
+captureBtn.addEventListener("click", capture);
+copyBtn.addEventListener("click", copyToClipboard);
+downloadBtn.addEventListener("click", downloadJson);
 
 async function capture() {
   captureBtn.disabled = true;
-  resultEl.classList.add('hidden');
-  showStatus('Capturing page DOM...', 'loading');
+  resultEl.classList.add("hidden");
+  showStatus("Capturing page DOM...", "loading");
 
   try {
     const maxDepth = parseInt(maxDepthInput.value) || 15;
@@ -29,14 +29,14 @@ async function capture() {
 
     capturedData = results[0]?.result;
 
-    if (!capturedData) throw new Error('No data returned');
+    if (!capturedData) throw new Error("No data returned");
 
     const nodeCount = countNodes(capturedData);
     statsEl.textContent = `Captured: ${nodeCount} nodes | Page: ${capturedData.width}x${capturedData.height}px`;
-    resultEl.classList.remove('hidden');
-    showStatus('Capture complete!', 'success');
+    resultEl.classList.remove("hidden");
+    showStatus("Capture complete!", "success");
   } catch (err) {
-    showStatus(`Error: ${err.message}`, 'error');
+    showStatus(`Error: ${err.message}`, "error");
   } finally {
     captureBtn.disabled = false;
   }
@@ -46,15 +46,15 @@ async function copyToClipboard() {
   if (!capturedData) return;
   const json = JSON.stringify(capturedData);
   await navigator.clipboard.writeText(json);
-  showStatus(`Copied! (${(json.length / 1024).toFixed(0)} KB)`, 'success');
+  showStatus(`Copied! (${(json.length / 1024).toFixed(0)} KB)`, "success");
 }
 
 function downloadJson() {
   if (!capturedData) return;
   const json = JSON.stringify(capturedData, null, 2);
-  const blob = new Blob([json], { type: 'application/json' });
+  const blob = new Blob([json], { type: "application/json" });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
   a.download = `dom-capture-${Date.now()}.json`;
   a.click();
@@ -72,21 +72,26 @@ function countNodes(node) {
 function showStatus(msg, type) {
   statusEl.textContent = msg;
   statusEl.className = `status ${type}`;
-  statusEl.classList.remove('hidden');
-  if (type === 'success') setTimeout(() => statusEl.classList.add('hidden'), 4000);
+  statusEl.classList.remove("hidden");
+  if (type === "success") setTimeout(() => statusEl.classList.add("hidden"), 4000);
 }
 
 // This function runs in the PAGE context
 function captureDom(maxDepth) {
   function rgbToHex(r, g, b) {
-    return '#' + [r, g, b].map(x => {
-      const hex = parseInt(x).toString(16);
-      return hex.length === 1 ? '0' + hex : hex;
-    }).join('');
+    return (
+      "#" +
+      [r, g, b]
+        .map(x => {
+          const hex = parseInt(x).toString(16);
+          return hex.length === 1 ? "0" + hex : hex;
+        })
+        .join("")
+    );
   }
 
   function parseColor(color) {
-    if (!color || color === 'transparent' || color === 'rgba(0, 0, 0, 0)') return null;
+    if (!color || color === "transparent" || color === "rgba(0, 0, 0, 0)") return null;
     const match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
     if (match) {
       return {
@@ -101,7 +106,7 @@ function captureDom(maxDepth) {
   }
 
   function parseShadow(shadow) {
-    if (!shadow || shadow === 'none') return null;
+    if (!shadow || shadow === "none") return null;
     const match = shadow.match(/([\d.]+)px\s+([\d.]+)px\s+([\d.]+)px\s+(?:([\d.]+)px\s+)?(.+)/);
     if (match) {
       return {
@@ -117,7 +122,7 @@ function captureDom(maxDepth) {
 
   function getNodeName(el) {
     if (el.id) return el.id;
-    if (el.className && typeof el.className === 'string') {
+    if (el.className && typeof el.className === "string") {
       // Keep ALL classes — the plugin needs them for token parsing (bg, spacing, flex, etc.)
       const cls = el.className.trim();
       if (cls) return cls;
@@ -126,9 +131,9 @@ function captureDom(maxDepth) {
   }
 
   function isVisible(el, style) {
-    if (style.display === 'none') return false;
-    if (style.visibility === 'hidden') return false;
-    if (style.opacity === '0') return false;
+    if (style.display === "none") return false;
+    if (style.visibility === "hidden") return false;
+    if (style.opacity === "0") return false;
     if (el.offsetWidth === 0 && el.offsetHeight === 0) return false;
     return true;
   }
@@ -138,11 +143,11 @@ function captureDom(maxDepth) {
     if (el.nodeType === Node.TEXT_NODE) {
       const text = el.textContent.trim();
       if (!text) return null;
-      return { type: 'text', text };
+      return { type: "text", text };
     }
 
     if (el.nodeType !== Node.ELEMENT_NODE) return null;
-    if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'META', 'LINK', 'HEAD'].includes(el.tagName)) return null;
+    if (["SCRIPT", "STYLE", "NOSCRIPT", "META", "LINK", "HEAD"].includes(el.tagName)) return null;
 
     const style = getComputedStyle(el);
     if (!isVisible(el, style)) return null;
@@ -152,7 +157,7 @@ function captureDom(maxDepth) {
     const scrollY = window.scrollY;
 
     const node = {
-      type: 'element',
+      type: "element",
       tag: el.tagName.toLowerCase(),
       name: getNodeName(el),
       x: Math.round(rect.left + scrollX),
@@ -170,7 +175,7 @@ function captureDom(maxDepth) {
     if (bg) node.styles.backgroundColor = bg;
 
     // Background image
-    if (style.backgroundImage && style.backgroundImage !== 'none') {
+    if (style.backgroundImage && style.backgroundImage !== "none") {
       const urlMatch = style.backgroundImage.match(/url\(["']?(.+?)["']?\)/);
       if (urlMatch) node.styles.backgroundImage = urlMatch[1];
     }
@@ -198,11 +203,11 @@ function captureDom(maxDepth) {
     if (opacity < 1) node.styles.opacity = opacity;
 
     // Overflow (for clipping)
-    if (style.overflow === 'hidden') node.styles.clipContent = true;
+    if (style.overflow === "hidden") node.styles.clipContent = true;
 
     // Images
-    if (el.tagName === 'IMG' && el.src) {
-      node.type = 'image';
+    if (el.tagName === "IMG" && el.src) {
+      node.type = "image";
       node.imageSrc = el.src;
     }
 
@@ -210,14 +215,14 @@ function captureDom(maxDepth) {
     const directText = Array.from(el.childNodes)
       .filter(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim())
       .map(n => n.textContent.trim())
-      .join(' ');
+      .join(" ");
 
     if (directText && el.children.length === 0) {
-      node.type = 'text';
+      node.type = "text";
       node.text = directText;
       node.textStyles = {
         fontSize: parseFloat(style.fontSize),
-        fontFamily: style.fontFamily.split(',')[0].replace(/["']/g, '').trim(),
+        fontFamily: style.fontFamily.split(",")[0].replace(/["']/g, "").trim(),
         fontWeight: style.fontWeight,
         color: parseColor(style.color),
         lineHeight: parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.2,
@@ -227,7 +232,7 @@ function captureDom(maxDepth) {
     }
 
     // Children
-    if (el.children.length > 0 && node.type !== 'text') {
+    if (el.children.length > 0 && node.type !== "text") {
       node.children = [];
       for (const child of el.children) {
         const childNode = captureNode(child, depth + 1);
