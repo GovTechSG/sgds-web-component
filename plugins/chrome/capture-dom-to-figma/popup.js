@@ -272,5 +272,71 @@ function captureDom(maxDepth) {
   root.title = document.title;
   root.url = window.location.href;
 
+  // Detect SGDS theme from stylesheets
+  // Looks for imports like @govtechsg/sgds-web-component/themes/gt/pink.css
+  root.theme = null;
+  try {
+    for (const sheet of document.styleSheets) {
+      const href = sheet.href || "";
+      // Match theme path: /themes/{agency}/{color}.css
+      const themeMatch = href.match(/themes\/([a-z]+)\/([a-z]+)\.css/);
+      if (themeMatch) {
+        root.theme = { agency: themeMatch[1], color: themeMatch[2] };
+        break;
+      }
+    }
+    // Also check <link> tags directly (for cases where styleSheets API doesn't expose href)
+    if (!root.theme) {
+      const links = document.querySelectorAll('link[rel="stylesheet"]');
+      for (const link of links) {
+        const themeMatch = link.href.match(/themes\/([a-z]+)\/([a-z]+)\.css/);
+        if (themeMatch) {
+          root.theme = { agency: themeMatch[1], color: themeMatch[2] };
+          break;
+        }
+      }
+    }
+    // Check inline <style> imports (@import url(...themes/...))
+    if (!root.theme) {
+      const styles = document.querySelectorAll("style");
+      for (const style of styles) {
+        const themeMatch = style.textContent.match(/themes\/([a-z]+)\/([a-z]+)\.css/);
+        if (themeMatch) {
+          root.theme = { agency: themeMatch[1], color: themeMatch[2] };
+          break;
+        }
+      }
+    }
+
+    // Fallback: detect theme from computed CSS custom property values
+    // Each SGDS theme has a unique --sgds-primary-bg-default value
+    if (!root.theme) {
+      const rootStyles = getComputedStyle(document.documentElement);
+      const primaryBg = rootStyles.getPropertyValue("--sgds-primary-bg-default").trim();
+      const primaryColor = rootStyles.getPropertyValue("--sgds-primary-color-default").trim();
+
+      // Known theme primary colors (from theme CSS files)
+      const THEME_COLORS = {
+        // GT themes
+        "rgb(153, 31, 82)": { agency: "gt", color: "pink" },
+        "#991f52": { agency: "gt", color: "pink" },
+        "rgb(0, 107, 84)": { agency: "gt", color: "green" },
+        "#006b54": { agency: "gt", color: "green" },
+        "rgb(31, 105, 255)": { agency: "gt", color: "blue" },
+        "#1f69ff": { agency: "gt", color: "blue" },
+        "rgb(117, 59, 189)": { agency: "gt", color: "purple" },
+        "#753bbd": { agency: "gt", color: "purple" },
+        "rgb(196, 69, 0)": { agency: "gt", color: "orange" },
+        "#c44500": { agency: "gt", color: "orange" },
+      };
+
+      if (primaryBg && THEME_COLORS[primaryBg]) {
+        root.theme = THEME_COLORS[primaryBg];
+      } else if (primaryColor && THEME_COLORS[primaryColor]) {
+        root.theme = THEME_COLORS[primaryColor];
+      }
+    }
+  } catch (e) {}
+
   return root;
 }
