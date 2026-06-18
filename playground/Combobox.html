@@ -281,6 +281,41 @@
       <button onclick="document.querySelector('#novalidate-multi').setInvalid(false)">setInvalid(false)</button>
     </div>
   </div>
+
+  <div class="container">
+    <h2>Autocomplete examples</h2>
+
+    <div class="small-container" style="display: flex; flex-direction: column; gap: 2rem;">
+      <div>
+        <p><strong>autocomplete="on"</strong> (default) — browser may suggest previously entered values</p>
+        <sgds-combo-box
+          autocomplete="on"
+          label="ComboBox"
+          placeholder="Enter value"
+          hintText="Browser autocomplete enabled"
+          name="name"
+        >
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+          <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
+      <div>
+        <p><strong>autocomplete="off"</strong> — browser autocomplete suppressed</p>
+        <sgds-combo-box
+          autocomplete="off"
+          label="ComboBox"
+          placeholder="Enter value"
+          hintText="Browser autocomplete disabled"
+          name="name"
+        >
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+          <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

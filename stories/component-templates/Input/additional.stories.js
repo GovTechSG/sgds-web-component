@@ -159,18 +159,20 @@ const AutocompleteTemplate = () =>
       <div>
         <p><strong>autocomplete="on"</strong> (default) — browser may suggest previously entered values</p>
         <sgds-input
+          name="name"
           autocomplete="on"
-          label="Email"
-          placeholder="Enter your email"
+          label="Name"
+          placeholder="Enter your name"
           hintText="Browser autocomplete enabled"
         ></sgds-input>
       </div>
       <div>
         <p><strong>autocomplete="off"</strong> — browser autocomplete suppressed</p>
         <sgds-input
+          name="name"
           autocomplete="off"
-          label="Email"
-          placeholder="Enter your email"
+          label="Name"
+          placeholder="Enter your name"
           hintText="Browser autocomplete disabled"
         ></sgds-input>
       </div>
