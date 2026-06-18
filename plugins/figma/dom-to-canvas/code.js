@@ -154,8 +154,16 @@ var COMPONENT_SLOT_CONFIG = {
   "sgds-card": {
     structureName: "Structure",
     slots: {
-      upper: { booleanKey: "🔷 Upper slot#29055:1", swapKey: "↳ Swap instance (upper)#29055:60", frameName: "[upper slot]" },
-      lower: { booleanKey: "🔷 Lower slot#29055:12", swapKey: "↳ Swap instance (lower)#30708:0", frameName: "[lower slot]" }
+      upper: {
+        booleanKey: "🔷 Upper slot#29055:1",
+        swapKey: "↳ Swap instance (upper)#29055:60",
+        frameName: "[upper slot]"
+      },
+      lower: {
+        booleanKey: "🔷 Lower slot#29055:12",
+        swapKey: "↳ Swap instance (lower)#30708:0",
+        frameName: "[lower slot]"
+      }
     },
     textProps: {
       title: { instanceName: "Card header", key: "↳ Edit text #29055:26" },
@@ -167,8 +175,16 @@ var COMPONENT_SLOT_CONFIG = {
   "sgds-icon-card": {
     structureName: "Structure",
     slots: {
-      upper: { booleanKey: "🔷 Upper slot#29055:1", swapKey: "↳ Swap instance (upper)#29055:60", frameName: "[upper slot]" },
-      lower: { booleanKey: "🔷 Lower slot#29055:12", swapKey: "↳ Swap instance (lower)#30708:0", frameName: "[lower slot]" }
+      upper: {
+        booleanKey: "🔷 Upper slot#29055:1",
+        swapKey: "↳ Swap instance (upper)#29055:60",
+        frameName: "[upper slot]"
+      },
+      lower: {
+        booleanKey: "🔷 Lower slot#29055:12",
+        swapKey: "↳ Swap instance (lower)#30708:0",
+        frameName: "[lower slot]"
+      }
     },
     textProps: {
       title: { instanceName: "Card header", key: "↳ Edit text #29055:26" },
@@ -180,8 +196,16 @@ var COMPONENT_SLOT_CONFIG = {
   "sgds-thumbnail-card": {
     structureName: "Structure",
     slots: {
-      upper: { booleanKey: "🔷 Upper slot#29055:1", swapKey: "↳ Swap instance (upper)#29055:60", frameName: "[upper slot]" },
-      lower: { booleanKey: "🔷 Lower slot#29055:12", swapKey: "↳ Swap instance (lower)#30708:0", frameName: "[lower slot]" }
+      upper: {
+        booleanKey: "🔷 Upper slot#29055:1",
+        swapKey: "↳ Swap instance (upper)#29055:60",
+        frameName: "[upper slot]"
+      },
+      lower: {
+        booleanKey: "🔷 Lower slot#29055:12",
+        swapKey: "↳ Swap instance (lower)#30708:0",
+        frameName: "[lower slot]"
+      }
     },
     textProps: {
       title: { instanceName: "Card header", key: "↳ Edit text #29055:26" },
@@ -193,8 +217,16 @@ var COMPONENT_SLOT_CONFIG = {
   "sgds-image-card": {
     structureName: "Card structure",
     slots: {
-      upper: { booleanKey: "🔷 Upper slot#29125:13", swapKey: "↳ Swap instance (upper)#29125:26", frameName: "[upper slot]" },
-      lower: { booleanKey: "🔷 Lower slot#29125:39", swapKey: "↳ Swap instance (lower)#31095:9", frameName: "[lower slot]" }
+      upper: {
+        booleanKey: "🔷 Upper slot#29125:13",
+        swapKey: "↳ Swap instance (upper)#29125:26",
+        frameName: "[upper slot]"
+      },
+      lower: {
+        booleanKey: "🔷 Lower slot#29125:39",
+        swapKey: "↳ Swap instance (lower)#31095:9",
+        frameName: "[lower slot]"
+      }
     },
     textProps: {
       title: { instanceName: "Card header", key: "↳ Edit text #29055:26" },
@@ -751,11 +783,13 @@ async function createLocalSlotComponent(childData) {
   // Apply background color
   if (styles.backgroundColor) {
     var bg = styles.backgroundColor;
-    comp.fills = [{
-      type: "SOLID",
-      color: { r: bg.r, g: bg.g, b: bg.b },
-      opacity: bg.a !== undefined ? bg.a : 1
-    }];
+    comp.fills = [
+      {
+        type: "SOLID",
+        color: { r: bg.r, g: bg.g, b: bg.b },
+        opacity: bg.a !== undefined ? bg.a : 1
+      }
+    ];
   } else {
     comp.fills = [];
   }
@@ -787,7 +821,7 @@ async function createLocalSlotComponent(childData) {
 
   // Add text if present
   if (text) {
-    var fontWeight = (textStyles.fontWeight && parseInt(textStyles.fontWeight) >= 600) ? "Bold" : "Regular";
+    var fontWeight = textStyles.fontWeight && parseInt(textStyles.fontWeight) >= 600 ? "Bold" : "Regular";
     try {
       await figma.loadFontAsync({ family: "Inter", style: fontWeight });
     } catch (e) {
@@ -804,11 +838,13 @@ async function createLocalSlotComponent(childData) {
 
     // Text color
     if (textStyles.color) {
-      textNode.fills = [{
-        type: "SOLID",
-        color: { r: textStyles.color.r, g: textStyles.color.g, b: textStyles.color.b },
-        opacity: textStyles.color.a !== undefined ? textStyles.color.a : 1
-      }];
+      textNode.fills = [
+        {
+          type: "SOLID",
+          color: { r: textStyles.color.r, g: textStyles.color.g, b: textStyles.color.b },
+          opacity: textStyles.color.a !== undefined ? textStyles.color.a : 1
+        }
+      ];
     }
 
     comp.appendChild(textNode);
@@ -945,7 +981,11 @@ async function applySlotContent(instance, data, config) {
   var slotChildren = classifySlots(data);
 
   // Also check for heuristic fallback (card legacy: children without slot attrs)
-  var hasSlotAttrs = data.children && data.children.some(function (c) { return !!c.slot; });
+  var hasSlotAttrs =
+    data.children &&
+    data.children.some(function (c) {
+      return !!c.slot;
+    });
 
   // --- Apply INSTANCE_SWAP slots ---
   if (config.slots) {
@@ -958,7 +998,9 @@ async function applySlotContent(instance, data, config) {
 
       // Enable slot boolean
       if (slotConfig.booleanKey) {
-        try { target.setProperties(makeProps(slotConfig.booleanKey, true)); } catch (e) {}
+        try {
+          target.setProperties(makeProps(slotConfig.booleanKey, true));
+        } catch (e) {}
       }
 
       // Import and swap the slotted component
@@ -996,7 +1038,9 @@ async function applySlotContent(instance, data, config) {
 
           // Enable tinted mode for step number indicators
           if (slotText && slotText.length <= 2 && config.extraBooleans && config.extraBooleans.tinted) {
-            try { instance.setProperties(makeProps(config.extraBooleans.tinted, true)); } catch (e) {}
+            try {
+              instance.setProperties(makeProps(config.extraBooleans.tinted, true));
+            } catch (e) {}
           }
 
           // Swap it into the slot
@@ -1050,12 +1094,17 @@ async function applySlotContent(instance, data, config) {
       var textProps = {};
       textProps[textConfig.key] = textValue;
       if (textConfig.booleanKey) textProps[textConfig.booleanKey] = true;
-      try { textTarget.setProperties(textProps); } catch (e) {}
+      try {
+        textTarget.setProperties(textProps);
+      } catch (e) {}
     }
   }
 
   // --- Card-specific: heuristic fallback for legacy JSON without slot attrs ---
-  if ((data.tag === "sgds-card" || data.tag === "sgds-icon-card" || data.tag === "sgds-thumbnail-card") && !hasSlotAttrs) {
+  if (
+    (data.tag === "sgds-card" || data.tag === "sgds-icon-card" || data.tag === "sgds-thumbnail-card") &&
+    !hasSlotAttrs
+  ) {
     await applyCardContentHeuristic(instance, data, config, target);
   }
 
@@ -1065,7 +1114,9 @@ async function applySlotContent(instance, data, config) {
       // Only hide footer if we have slot data and no footer was provided
       // For heuristic mode, leave as-is (footer is visible by default)
     } else if (hasSlotAttrs && !slotChildren.footer && !slotChildren.link) {
-      try { target.setProperties(makeProps(config.extraBooleans.footer, false)); } catch (e) {}
+      try {
+        target.setProperties(makeProps(config.extraBooleans.footer, false));
+      } catch (e) {}
     }
   }
 
@@ -1118,7 +1169,9 @@ async function applyCardContentHeuristic(instance, data, config, target) {
         if (config.slots && config.slots.upper) {
           var upperConfig = config.slots.upper;
           if (upperConfig.booleanKey) {
-            try { target.setProperties(makeProps(upperConfig.booleanKey, true)); } catch (e) {}
+            try {
+              target.setProperties(makeProps(upperConfig.booleanKey, true));
+            } catch (e) {}
           }
           var badgeComponent = await importSlottedComponent(child);
           if (badgeComponent) {
@@ -1127,7 +1180,10 @@ async function applyCardContentHeuristic(instance, data, config, target) {
               swapped = await swapSlotInstance(instance, upperConfig.frameName, badgeComponent);
             }
             if (!swapped && upperConfig.swapKey) {
-              try { target.setProperties(makeProps(upperConfig.swapKey, badgeComponent)); swapped = true; } catch (e) {}
+              try {
+                target.setProperties(makeProps(upperConfig.swapKey, badgeComponent));
+                swapped = true;
+              } catch (e) {}
             }
             if (swapped) {
               var badgeLabel = child.text || collectFirstText(child);
@@ -1158,7 +1214,9 @@ async function applyCardContentHeuristic(instance, data, config, target) {
         headerProps[config.textProps.description.booleanKey] = false;
       }
       if (Object.keys(headerProps).length > 0) {
-        try { cardHeader.setProperties(headerProps); } catch (e) {}
+        try {
+          cardHeader.setProperties(headerProps);
+        } catch (e) {}
       }
     }
   }
@@ -1808,7 +1866,21 @@ async function createFrameNode(data, parent, parentX, parentY) {
   var boundToVariable = await applyTokenBindings(frame, data);
 
   if (!boundToVariable) {
-    if (styles.backgroundColor) {
+    if (styles.backgroundImage) {
+      // Load background image from URL
+      try {
+        var bgImage = await figma.createImageAsync(styles.backgroundImage);
+        frame.fills = [{ type: "IMAGE", imageHash: bgImage.hash, scaleMode: "FILL" }];
+      } catch (e) {
+        // Fallback to solid color or empty
+        if (styles.backgroundColor) {
+          var bg2 = styles.backgroundColor;
+          frame.fills = [{ type: "SOLID", color: { r: bg2.r, g: bg2.g, b: bg2.b }, opacity: bg2.a !== undefined ? bg2.a : 1 }];
+        } else {
+          frame.fills = [{ type: "SOLID", color: { r: 0.85, g: 0.85, b: 0.85 } }];
+        }
+      }
+    } else if (styles.backgroundColor) {
       var bg = styles.backgroundColor;
       frame.fills = [
         {
@@ -2117,7 +2189,7 @@ async function createTextNode(data, parent, parentX, parentY) {
   return textNode;
 }
 
-function createImageNode(data, parent, parentX, parentY) {
+async function createImageNode(data, parent, parentX, parentY) {
   var rect = figma.createRectangle();
   rect.name = data.name || "image";
 
@@ -2125,7 +2197,20 @@ function createImageNode(data, parent, parentX, parentY) {
   rect.y = (data.y || 0) - parentY;
   rect.resize(Math.max(data.width || 100, 1), Math.max(data.height || 100, 1));
 
-  rect.fills = [{ type: "SOLID", color: { r: 0.85, g: 0.85, b: 0.85 } }];
+  // Try to load actual image from URL
+  var imageLoaded = false;
+  if (data.imageSrc) {
+    try {
+      var image = await figma.createImageAsync(data.imageSrc);
+      rect.fills = [{ type: "IMAGE", imageHash: image.hash, scaleMode: "FILL" }];
+      imageLoaded = true;
+    } catch (e) {}
+  }
+
+  // Fallback to grey placeholder if image load failed
+  if (!imageLoaded) {
+    rect.fills = [{ type: "SOLID", color: { r: 0.85, g: 0.85, b: 0.85 } }];
+  }
 
   var styles = data.styles || {};
   if (styles.borderRadius) {
