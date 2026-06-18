@@ -147,6 +147,21 @@ var ATTR_TO_VARIANT_PROP = {
   orientation: "Orientation"
 };
 
+// Maps DOM attribute values → Figma variant option values (where naming differs)
+var ATTR_VALUE_MAP = {
+  // Tone values
+  "fixed-light": "fixed light (white)",
+  "fixed-dark": "fixed dark",
+  // Variant values
+  "outline": "outline (secondary)",
+  "ghost": "ghost (tertiary)",
+  // Size values (Figma appends "(default)" to md)
+  "md": "md (default)",
+  // Boolean-like
+  "true": "True",
+  "false": "False"
+};
+
 // Declarative slot configuration for each component
 // Maps web component slots → Figma property keys (BOOLEAN toggles, INSTANCE_SWAP, TEXT)
 // Discovered via Figma REST API /v1/files/.../nodes
@@ -170,7 +185,7 @@ var COMPONENT_SLOT_CONFIG = {
       subtitle: { instanceName: "Card header", key: "↳ Edit text#29055:29", booleanKey: "Subtitle#29055:23" },
       description: { instanceName: "Card header", key: "↳ Edit text  #30610:3", booleanKey: "Description#30610:0" }
     },
-    extraBooleans: { tinted: "Tinted#29055:104", footer: "Footer#29055:82" }
+    extraBooleans: { tinted: "Tinted#29055:104", footer: "Footer#29055:82", secondaryText: "Secondary text#29055:38", subtitle: "Subtitle#29055:23" }
   },
   "sgds-icon-card": {
     structureName: "Structure",
@@ -606,7 +621,58 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   }
 
   var componentSet = importedComponents[data.tag];
-  var variant = componentSet.defaultVariant || componentSet.children[0];
+
+  // Pick the variant that best matches the DOM attrs (variant, tone, size, etc.)
+  var variant = null;
+  var attrs = data.attrs || {};
+  if (Object.keys(attrs).length > 0) {
+    var criteria = {};
+    for (var attrName in attrs) {
+      var propName = ATTR_TO_VARIANT_PROP[attrName];
+      if (propName) {
+        var value = attrs[attrName];
+        if (value === true || value === "") {
+          criteria[propName] = "True";
+        } else if (value === false || value === "false") {
+          criteria[propName] = "False";
+        } else {
+          // Map code values to Figma values (e.g. "fixed-light" → "fixed light (white)")
+          criteria[propName] = ATTR_VALUE_MAP[value] || value;
+        }
+      }
+    }
+
+    if (Object.keys(criteria).length > 0) {
+      var bestScore = -1;
+      for (var vi = 0; vi < componentSet.children.length; vi++) {
+        var candidate = componentSet.children[vi];
+        var variantProps = candidate.variantProperties || {};
+        var score = 0;
+        var mismatch = false;
+
+        for (var prop in criteria) {
+          if (variantProps[prop] !== undefined) {
+            if (variantProps[prop] === criteria[prop]) {
+              score++;
+            } else {
+              mismatch = true;
+              break;
+            }
+          }
+        }
+
+        if (!mismatch && score > bestScore) {
+          bestScore = score;
+          variant = candidate;
+        }
+      }
+    }
+  }
+
+  if (!variant) {
+    variant = componentSet.defaultVariant || componentSet.children[0];
+  }
+
   var instance = variant.createInstance();
 
   // Apply nested component properties (e.g. Structure.Variant = "thumbnail")
@@ -635,11 +701,27 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   instance.x = posX;
   instance.y = posY;
 
-  // Resize to match DOM dimensions
-  if (data.width && data.width > 0 && data.height && data.height > 0) {
-    instance.resize(data.width, data.height);
-  } else if (data.width && data.width > 0) {
-    instance.resize(data.width, instance.height);
+  // Small interactive components should keep their native Figma dimensions
+  // (their variant size=sm/md/lg determines their size)
+  var NO_RESIZE_TAGS = [
+    "sgds-button", "sgds-badge", "sgds-link", "sgds-icon-button",
+    "sgds-close-button", "sgds-spinner", "sgds-switch", "sgds-checkbox",
+    "sgds-radio", "sgds-divider", "sgds-skeleton", "sgds-tooltip"
+  ];
+
+  var shouldResize = NO_RESIZE_TAGS.indexOf(data.tag) < 0;
+
+  if (shouldResize && data.width && data.width > 0) {
+    var nodeClasses = data.name || "";
+    var hasFullHeight = nodeClasses.indexOf("sgds:h-full") >= 0;
+
+    if (hasFullHeight && data.height && data.height > 0) {
+      // h-full: use DOM height (items-stretch makes siblings equal height)
+      instance.resize(data.width, data.height);
+    } else {
+      // Resize width only, keep component's native height
+      instance.resize(data.width, instance.height);
+    }
   }
 
   parent.appendChild(instance);
@@ -689,7 +771,8 @@ async function importSlottedComponent(childData) {
       } else if (value === false || value === "false") {
         criteria[propName] = "False";
       } else {
-        criteria[propName] = value;
+        // Map code values to Figma values
+        criteria[propName] = ATTR_VALUE_MAP[value] || value;
       }
     }
   }
@@ -1108,15 +1191,19 @@ async function applySlotContent(instance, data, config) {
     await applyCardContentHeuristic(instance, data, config, target);
   }
 
-  // --- Hide footer if no footer slot content ---
-  if (config.extraBooleans && config.extraBooleans.footer) {
-    if (!slotChildren.footer && !slotChildren.link && !hasSlotAttrs) {
-      // Only hide footer if we have slot data and no footer was provided
-      // For heuristic mode, leave as-is (footer is visible by default)
-    } else if (hasSlotAttrs && !slotChildren.footer && !slotChildren.link) {
-      try {
-        target.setProperties(makeProps(config.extraBooleans.footer, false));
-      } catch (e) {}
+  // --- Hide unused default-visible sections when slot data is available ---
+  if (config.extraBooleans && hasSlotAttrs) {
+    // Hide footer if no footer/link slot content
+    if (config.extraBooleans.footer && !slotChildren.footer && !slotChildren.link) {
+      try { target.setProperties(makeProps(config.extraBooleans.footer, false)); } catch (e) {}
+    }
+    // Hide secondary text if not provided
+    if (config.extraBooleans.secondaryText && !slotChildren.secondaryText) {
+      try { target.setProperties(makeProps(config.extraBooleans.secondaryText, false)); } catch (e) {}
+    }
+    // Hide subtitle if not provided
+    if (config.extraBooleans.subtitle && !slotChildren.subtitle) {
+      try { target.setProperties(makeProps(config.extraBooleans.subtitle, false)); } catch (e) {}
     }
   }
 
@@ -1875,7 +1962,9 @@ async function createFrameNode(data, parent, parentX, parentY) {
         // Fallback to solid color or empty
         if (styles.backgroundColor) {
           var bg2 = styles.backgroundColor;
-          frame.fills = [{ type: "SOLID", color: { r: bg2.r, g: bg2.g, b: bg2.b }, opacity: bg2.a !== undefined ? bg2.a : 1 }];
+          frame.fills = [
+            { type: "SOLID", color: { r: bg2.r, g: bg2.g, b: bg2.b }, opacity: bg2.a !== undefined ? bg2.a : 1 }
+          ];
         } else {
           frame.fills = [{ type: "SOLID", color: { r: 0.85, g: 0.85, b: 0.85 } }];
         }
