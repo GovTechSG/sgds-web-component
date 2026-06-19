@@ -62,6 +62,14 @@ Add `disabled` prop to the button to apply the disabled state
   <Story of={ButtonStories.Disabled} />
 </Canvas>
 
+## Form submit with name and value
+
+Set `name` and `value` on a submit button to include its value in FormData when clicked. This is useful when a form has multiple submit buttons and you need to identify which one was pressed. Only the clicked button's name/value pair is submitted.
+
+<Canvas of={ButtonStories.FormSubmitValue}>
+  <Story of={ButtonStories.FormSubmitValue} />
+</Canvas>
+
 ## Loading state
 
 To set a button's loading state, set the component's `loading` prop. When loading is true, it shows a spinner and the slotted content gets overridden.

@@ -1,6 +1,6 @@
 name: Publish Latest
 permissions:
-  contents: read
+  contents: write
   
 on:
   push:
@@ -39,3 +39,14 @@ jobs:
         if: "!contains(env.NPM_TAG, 'rc')"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  release:
+    needs: publish
+    if: "!contains(github.ref_name, 'rc')"
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "${{ github.ref_name }}" --generate-notes --title "${{ github.ref_name }}"
