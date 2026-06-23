@@ -30,7 +30,7 @@
   <div class="container">
     <div class="small-container"></div>
      <sgds-combo-box required hasFeedback multiselect clearable id="combobox-example" label="Items"
-          value="option1;option2" placeholder="ComboBox">
+          value="option1;option2" placeholder="ComboBox" name="status" autocomplete="off">
           <sgds-combo-box-option disabled value="option1">Apple</sgds-combo-box-option>
           <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
           <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
@@ -279,6 +279,41 @@
     <div class="flex">
       <button onclick="document.querySelector('#novalidate-multi').setInvalid(true)">setInvalid(true)</button>
       <button onclick="document.querySelector('#novalidate-multi').setInvalid(false)">setInvalid(false)</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Autocomplete examples</h2>
+
+    <div class="small-container" style="display: flex; flex-direction: column; gap: 2rem;">
+      <div>
+        <p><strong>autocomplete="on"</strong> (default) — browser may suggest previously entered values</p>
+        <sgds-combo-box
+          autocomplete="on"
+          label="ComboBox"
+          placeholder="Enter value"
+          hintText="Browser autocomplete enabled"
+          name="name"
+        >
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+          <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
+      <div>
+        <p><strong>autocomplete="off"</strong> — browser autocomplete suppressed</p>
+        <sgds-combo-box
+          autocomplete="off"
+          label="ComboBox"
+          placeholder="Enter value"
+          hintText="Browser autocomplete disabled"
+          name="name"
+        >
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+          <sgds-combo-box-option value="option2">Apricot</sgds-combo-box-option>
+          <sgds-combo-box-option value="option3">Durian</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
     </div>
   </div>
 </body>
