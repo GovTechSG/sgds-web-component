@@ -4,8 +4,7 @@ export const SelectDefaultSlot = {
   render: Template.bind({}),
   name: "Populating menu list with default slot",
   args: { ...args, thirdOptionDisabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const SelectMenuListProp = () => {
@@ -228,14 +227,12 @@ export const SelectMenuList = {
   render: SelectMenuListProp.bind({}),
   name: "Populating menu list with property",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const SelectLoading = {
   render: Template.bind({}),
   name: "Loading state",
   args: { ...args, loading: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

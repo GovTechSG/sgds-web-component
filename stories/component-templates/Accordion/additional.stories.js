@@ -4,40 +4,35 @@ export const BorderVariant = {
   render: Template.bind({}),
   name: "Border variant",
   args: { variant: "border" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const DensityVariant = {
   render: Template.bind({}),
   name: "Compact density",
   args: { density: "compact" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const SpaciousDensity = {
   render: Template.bind({}),
   name: "Spacious density",
   args: { density: "spacious" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const AllowMultiple = {
   render: Template.bind({}),
   name: "Allow multiple active accordion",
   args: { allowMultiple: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled state",
   args: { disabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const LeadingIconTemplate = iconSize => html`
@@ -70,8 +65,7 @@ export const LeadingIconSlot = {
   render: LeadingIconTemplate.bind({}),
   name: "Icon slot",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const BadgeTemplate = args => html`
@@ -103,6 +97,5 @@ export const BadgeSlot = {
   render: BadgeTemplate.bind({}),
   name: "Badge slot",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

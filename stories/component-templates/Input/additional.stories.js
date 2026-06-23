@@ -50,62 +50,54 @@ export const PasswordInput = {
   render: Template.bind({}),
   name: "Password",
   args: { ...args, type: "password" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const DisabledInput = {
   render: Template.bind({}),
   name: "Disabled",
   args: { ...args, disabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const InvalidInput = {
   render: Template.bind({}),
   name: "Invalid",
   args: { ...args, hasFeedback: true, invalid: true, invalidFeedback: "Invalid input detected" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const ValidInput = {
   render: Template.bind({}),
   name: "Valid",
   args: { ...args, hasFeedback: true, valid: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const LoadingInput = {
   render: Template.bind({}),
   name: "Loading",
   args: { ...args, hasFeedback: true, loading: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const ReadonlyInput = {
   render: Template.bind({}),
   name: "Read only",
   args: { ...args, readonly: true, value: "readonly input" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const PrefixInput = {
   render: Template.bind({}),
   name: "With prefix",
   args: { ...args, prefix: "prefix" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const SuffixInput = {
   render: Template.bind({}),
   name: "With suffix",
   args: { ...args, suffix: "suffix" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const LeadingIcon = {
@@ -114,8 +106,7 @@ export const LeadingIcon = {
   args: {
     ...args
   },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const TrailingIcon = {
   render: TrailingIconTemplate.bind({}),
@@ -123,8 +114,7 @@ export const TrailingIcon = {
   args: {
     ...args
   },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Action = {
@@ -133,24 +123,21 @@ export const Action = {
   args: {
     ...args
   },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const InputValidation = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplate.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const AutocompleteTemplate = () =>
@@ -183,6 +170,5 @@ export const Autocomplete = {
   render: AutocompleteTemplate.bind({}),
   name: "Autocomplete prop",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
