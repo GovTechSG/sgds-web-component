@@ -66,51 +66,44 @@ export const Indeterminate = {
   render: Template.bind({}),
   name: "Indeterminate",
   args: { ...args, indeterminate: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled",
   args: { ...args, disabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const Invalid = {
   render: InvalidTemplate.bind({}),
   name: "Invalid states",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 export const InvalidGroup = {
   render: InvalidGroupTemplate.bind({}),
   name: "Invalid CheckboxGroup",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 export const Validation = {
   render: ValidationTemplateGroup.bind({}),
   name: "Validation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const ValidationSingle = {
   render: ValidationTemplateSingle.bind({}),
   name: "Validation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplateGroup.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };

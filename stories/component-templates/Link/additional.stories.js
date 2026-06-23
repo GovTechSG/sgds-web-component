@@ -19,8 +19,7 @@ export const Tones = {
   render: ToneTemplate.bind({}),
   name: "Tone",
   args: { ...args },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const VariantTemplate = () => {
@@ -41,8 +40,7 @@ export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variant",
   args: { ...args },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const SizeTemplate = () => {
@@ -68,8 +66,7 @@ export const Size = {
   render: SizeTemplate.bind({}),
   name: "Sizes",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const ExternalLinkTemplate = () => {
@@ -95,8 +92,7 @@ export const ExternalLink = {
   render: ExternalLinkTemplate.bind({}),
   name: "Target _blank",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const WithIconTemplate = () => {
@@ -116,21 +112,18 @@ export const Icon = {
   render: WithIconTemplate.bind({}),
   name: "Icons",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled",
   args: { disabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 export const Active = {
   render: Template.bind({}),
   name: "Active",
   args: { active: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };

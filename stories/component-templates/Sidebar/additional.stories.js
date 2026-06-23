@@ -257,7 +257,7 @@ export const Default = {
       story: {
         inline: false,
         height: 440
-      }
+      , controls: { disable: true } }
     }
   }
 };
@@ -277,7 +277,7 @@ export const MultiLevel = {
       story: {
         inline: false,
         height: 440
-      }
+      , controls: { disable: true } }
     }
   }
 };
@@ -297,7 +297,7 @@ export const Overlay = {
       story: {
         inline: false,
         height: 440
-      }
+      , controls: { disable: true } }
     },
     argTypes: {
       attributes: true
@@ -320,7 +320,7 @@ export const Dynamic = {
       story: {
         inline: false,
         height: 440
-      }
+      , controls: { disable: true } }
     }
   }
 };
@@ -340,8 +340,7 @@ export const LinkedItems = {
       story: {
         inline: false,
         height: 440
-      }
+      , controls: { disable: true } }
     }
-  },
-  tags: ["!dev"]
+  }
 };

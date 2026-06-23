@@ -28,8 +28,7 @@ export const Stretched = {
   render: StretchedTemplate.bind({}),
   name: "Stretched link",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const DisabledTemplate = () => {
@@ -60,8 +59,7 @@ export const Disabled = {
   render: DisabledTemplate.bind({}),
   name: "Disabled state",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const OrientationTemplate = () => {
@@ -109,8 +107,7 @@ export const Orientation = {
   render: OrientationTemplate.bind({}),
   name: "Orientation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const ImagePositionTemplate = () => {
@@ -192,8 +189,7 @@ export const ImagePosition = {
   render: ImagePositionTemplate.bind({}),
   name: "Image position",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const ImageAdjustmentTemplate = () => {
@@ -258,8 +254,7 @@ export const ImageAdjustment = {
   render: ImageAdjustmentTemplate.bind({}),
   name: "Image adjustment",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const HideBorderTemplate = () => {
@@ -341,8 +336,7 @@ export const HideBorder = {
   render: HideBorderTemplate.bind({}),
   name: "Hide border",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const TintedTemplate = () => {
@@ -373,8 +367,7 @@ export const Tinted = {
   render: TintedTemplate.bind({}),
   name: "Tinted",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const OverflowMenuTemplate = () => {
@@ -412,6 +405,5 @@ export const OverflowMenu = {
   render: OverflowMenuTemplate.bind({}),
   name: "Overflow menu",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };

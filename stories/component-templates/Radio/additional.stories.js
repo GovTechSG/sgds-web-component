@@ -24,38 +24,33 @@ export const Validation = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplate.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const Invalid = {
   render: Template.bind({}),
   name: "Invalid styles",
   args: { ...args, hasFeedback: true, invalidFeedback: "Feedback", invalid: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled",
   args: { ...args, disabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const Autofocus = {
   render: Template.bind({}),
   name: "Autofocus",
   args: { ...args, autofocus: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };

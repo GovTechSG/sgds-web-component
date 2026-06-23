@@ -111,7 +111,7 @@ export const SmallSize = {
     docs: {
       story: {
         height: "700px"
-      }
+      , controls: { disable: true } }
     }
   }
 };
@@ -124,7 +124,7 @@ export const MediumSize = {
     docs: {
       story: {
         height: "700px"
-      }
+      , controls: { disable: true } }
     }
   }
 };
@@ -137,7 +137,7 @@ export const LargeSize = {
     docs: {
       story: {
         height: "700px"
-      }
+      , controls: { disable: true } }
     }
   }
 };
@@ -150,7 +150,7 @@ export const ExtraLargeSize = {
     docs: {
       story: {
         height: "700px"
-      }
+      , controls: { disable: true } }
     }
   }
 };
@@ -163,7 +163,7 @@ export const FullscreenSize = {
     docs: {
       story: {
         height: "700px"
-      }
+      , controls: { disable: true } }
     }
   }
 };
@@ -177,7 +177,7 @@ export const LongContent = {
     docs: {
       story: {
         height: "700px"
-      }
+      , controls: { disable: true } }
     }
   }
 };
@@ -191,7 +191,7 @@ export const noAnimation = {
     docs: {
       story: {
         height: "700px"
-      }
+      , controls: { disable: true } }
     }
   }
 };
@@ -201,7 +201,7 @@ export const PreventClose = {
   name: "Prevent close",
   args: {},
   parameters: {
-    chromatic: { disableSnapshot: true },
+    chromatic: { disableSnapshot: true , controls: { disable: true } },
     layout: "fullscreen",
     docs: {
       story: {
@@ -234,7 +234,7 @@ export const NoCloseButton = {
     docs: {
       story: {
         height: "700px"
-      }
+      , controls: { disable: true } }
     }
   }
 };

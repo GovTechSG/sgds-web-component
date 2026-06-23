@@ -72,7 +72,7 @@ export const Extended = {
   render: ExtendedTemplate.bind({}),
   name: "Extended",
   args: {},
-  parameters: { layout: "fullscreen" },
+  parameters: { layout: "fullscreen" , controls: { disable: true } },
   tags: []
 };
 
@@ -88,6 +88,6 @@ export const NeutralToneExtended = {
   render: ExtendedTemplate.bind({}),
   name: "Neutral Tone Extended",
   args: { tone: "neutral" },
-  parameters: { layout: "fullscreen" },
+  parameters: { layout: "fullscreen" , controls: { disable: true } },
   tags: []
 };

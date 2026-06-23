@@ -31,13 +31,11 @@ export const Sheen = {
   render: SheenTemplate.bind({}),
   name: "Sheen",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 export const Rows = {
   render: RowsTemplate.bind({}),
   name: "Rows",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };

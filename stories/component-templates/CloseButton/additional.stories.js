@@ -25,30 +25,26 @@ export const Sizes = {
   render: SizeTemplate,
   name: "Sizes",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const ToneDefault = {
   render: ToneDefaultTemplate,
   name: "Tone: default",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const ToneFixedDark = {
   render: ToneFixedDarkTemplate,
   name: "Tone: fixed-dark",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const ToneFixedLight = {
   render: ToneFixedLightTemplate,
   name: "Tone: fixed-light",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };

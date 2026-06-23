@@ -22,8 +22,7 @@ export const Overflow = {
     docs: {
       story: {
         height: "500px"
-      }
+      , controls: { disable: true } }
     }
-  },
-  tags: ["!dev"]
+  }
 };

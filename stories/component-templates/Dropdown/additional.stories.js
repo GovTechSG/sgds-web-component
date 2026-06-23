@@ -39,9 +39,8 @@ export const SgdsSelectClose = {
   name: "sgds-select close",
   args: {},
   parameters: {
-    chromatic: { disableSnapshot: true }
-  },
-  tags: ["!dev"]
+    chromatic: { disableSnapshot: true , controls: { disable: true } }
+  }
 };
 
 const SgdsSelectEventTemplate = args => {
@@ -73,9 +72,8 @@ export const SgdsSelectEvent = {
   name: "sgds-select event",
   args: {},
   parameters: {
-    chromatic: { disableSnapshot: true }
-  },
-  tags: ["!dev"]
+    chromatic: { disableSnapshot: true , controls: { disable: true } }
+  }
 };
 
 const SgdsSelectDropdownItemTemplate = args => {
@@ -148,7 +146,6 @@ export const SgdsSelectDropdownItem = {
   name: "sgds-dropdown-item customisation",
   args: {},
   parameters: {
-    chromatic: { disableSnapshot: true }
-  },
-  tags: ["!dev"]
+    chromatic: { disableSnapshot: true , controls: { disable: true } }
+  }
 };

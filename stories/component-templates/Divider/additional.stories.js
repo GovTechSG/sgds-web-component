@@ -28,13 +28,11 @@ export const Orientation = {
   render: OrientationTeamplate.bind({}),
   name: "Vertical",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 export const Thickness = {
   render: ThicknessTemplate.bind({}),
   name: "Thickness",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };

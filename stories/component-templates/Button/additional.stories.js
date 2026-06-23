@@ -13,8 +13,7 @@ export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variants",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 const ToneTemplate = args => {
   return html`
@@ -51,8 +50,7 @@ export const Tone = {
   render: ToneTemplate.bind({}),
   name: "Tone",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const FullWidthTemplate = () => {
@@ -63,8 +61,7 @@ export const FullWidth = {
   render: FullWidthTemplate.bind({}),
   name: "Full width",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const SizeTemplate = () => {
@@ -78,8 +75,7 @@ export const Sizes = {
   render: SizeTemplate.bind({}),
   name: "Sizes",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const ActiveTemplate = () => {
@@ -95,8 +91,7 @@ export const Active = {
   render: ActiveTemplate.bind({}),
   name: "Hover / Active state",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const Disabled = {
@@ -108,8 +103,7 @@ export const Disabled = {
   `,
   name: "Disabled state",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const ButtonWithIcon = {
@@ -124,8 +118,7 @@ export const ButtonWithIcon = {
   `,
   name: "Button with icon",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 const FormSubmitTemplate = () => {
@@ -152,8 +145,7 @@ export const FormSubmitValue = {
   render: FormSubmitTemplate.bind({}),
   name: "Form submit with name and value",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
 
 export const Loading = {
@@ -183,6 +175,5 @@ export const Loading = {
   `,
   name: "Loading state",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: { controls: { disable: true } }
 };
