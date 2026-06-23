@@ -2130,7 +2130,41 @@ async function createFrameNode(data, parent, parentX, parentY) {
         opacity: bc.a !== undefined ? bc.a : 1
       }
     ];
-    frame.strokeWeight = styles.border.width;
+
+    // Parse border-style to determine which sides have borders
+    // Format: "solid none none" or "solid none none none" (top right bottom left)
+    var borderStyle = styles.border.style || "solid";
+    var sides = borderStyle.split(/\s+/);
+    var bw = styles.border.width;
+
+    if (sides.length === 1 && sides[0] === "solid") {
+      // All sides
+      frame.strokeWeight = bw;
+    } else {
+      // Individual sides: resolve CSS shorthand (1=all, 2=TB/RL, 3=T/RL/B, 4=T/R/B/L)
+      var top, right, bottom, left;
+      if (sides.length === 2) {
+        top = sides[0];
+        right = sides[1];
+        bottom = sides[0];
+        left = sides[1];
+      } else if (sides.length === 3) {
+        top = sides[0];
+        right = sides[1];
+        bottom = sides[2];
+        left = sides[1];
+      } else {
+        top = sides[0];
+        right = sides[1];
+        bottom = sides[2];
+        left = sides[3] || sides[1];
+      }
+
+      frame.strokeTopWeight = top !== "none" && top !== "0" ? bw : 0;
+      frame.strokeRightWeight = right !== "none" && right !== "0" ? bw : 0;
+      frame.strokeBottomWeight = bottom !== "none" && bottom !== "0" ? bw : 0;
+      frame.strokeLeftWeight = left !== "none" && left !== "0" ? bw : 0;
+    }
   }
 
   if (styles.boxShadow) {
