@@ -7,7 +7,7 @@ export const PaginationWithAPI = {
   render: MockPaginationTemplate.bind({}),
   name: "API example",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const PaginationSizes = {
@@ -17,7 +17,7 @@ export const PaginationSizes = {
   `,
   name: "Sizes",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const PaginationVariants = {
@@ -29,7 +29,7 @@ export const PaginationVariants = {
   `,
   name: "Variants",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Navigation = {
@@ -39,5 +39,5 @@ export const Navigation = {
   `,
   name: "Navigation button type",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

@@ -4,32 +4,32 @@ export const SolidVariant = {
   render: Template.bind({}),
   name: "Solid variant",
   args: { variant: "solid" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const UnderlinedDensityCompact = {
   render: Template.bind({}),
   name: "Compact density for underlined tabs",
   args: { density: "compact" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const SolidDensityCompact = {
   render: Template.bind({}),
   name: "Compact density for solid tabs",
   args: { density: "compact", variant: "solid" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const OrientationUnderlined = {
   render: Template.bind({}),
   name: "Vertical orientation for underlined tabs",
   args: { orientation: "vertical" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const OrientationSolid = {
   render: Template.bind({}),
   name: "Vertical orientation for solid tabs",
   args: { orientation: "vertical", variant: "solid" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const EventsTemplate = () => {
@@ -95,6 +95,6 @@ export const Events = {
   name: "Tab events",
   args: {},
   parameters: {
-    chromatic: { disableSnapshot: true, selectedPanel: "storybook/docs/panel" }
+    chromatic: { disableSnapshot: true }
   }
 };

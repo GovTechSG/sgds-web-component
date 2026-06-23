@@ -31,11 +31,11 @@ export const Sheen = {
   render: SheenTemplate.bind({}),
   name: "Sheen",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const Rows = {
   render: RowsTemplate.bind({}),
   name: "Rows",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

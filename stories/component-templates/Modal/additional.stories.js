@@ -208,7 +208,7 @@ export const PreventClose = {
   name: "Prevent close",
   args: {},
   parameters: {
-    chromatic: { disableSnapshot: true, selectedPanel: "storybook/docs/panel" },
+    chromatic: { disableSnapshot: true },
     layout: "fullscreen",
     docs: {
       story: {

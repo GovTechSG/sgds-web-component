@@ -39,12 +39,12 @@ export const Placement = {
   render: PlacementTemplate.bind({}),
   name: "Placement",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Trigger = {
   render: TriggerTemplate.bind({}),
   name: "Trigger",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

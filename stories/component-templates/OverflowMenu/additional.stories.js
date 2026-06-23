@@ -14,11 +14,11 @@ export const SmallSize = {
   render: SizeTemplate.bind({}),
   name: "Small size",
   args: { size: "sm" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const MediumSize = {
   render: SizeTemplate.bind({}),
   name: "Medium size",
   args: { size: "md" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

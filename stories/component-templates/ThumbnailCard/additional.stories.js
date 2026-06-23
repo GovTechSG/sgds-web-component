@@ -4,14 +4,14 @@ export const Stretched = {
   render: Template.bind({}),
   name: "Stretched link",
   args: { ...args, stretchedLink: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled state",
   args: { ...args, disabled: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const OrientationTemplate = () =>
@@ -64,21 +64,21 @@ export const Orientation = {
   render: OrientationTemplate.bind({}),
   name: "Orientation",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const HideBorder = {
   render: Template.bind({}),
   name: "Hide border",
   args: { ...args, hideBorder: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Tinted = {
   render: Template.bind({}),
   name: "Tinted",
   args: { ...args, tinted: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const NoPaddingTemplate = () =>
@@ -131,5 +131,5 @@ export const NoPadding = {
   render: NoPaddingTemplate.bind({}),
   name: "No padding",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

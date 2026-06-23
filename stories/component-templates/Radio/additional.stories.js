@@ -24,33 +24,33 @@ export const Validation = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplate.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Invalid = {
   render: Template.bind({}),
   name: "Invalid styles",
   args: { ...args, hasFeedback: true, invalidFeedback: "Feedback", invalid: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled",
   args: { ...args, disabled: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Autofocus = {
   render: Template.bind({}),
   name: "Autofocus",
   args: { ...args, autofocus: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

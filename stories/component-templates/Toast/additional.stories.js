@@ -24,31 +24,31 @@ export const InfoVariant = {
   render: VariantTemplate.bind({}),
   name: "Variant info",
   args: { variant: "info" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const SuccessVariant = {
   render: VariantTemplate.bind({}),
   name: "Variant success",
   args: { variant: "success" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const DangerVariant = {
   render: VariantTemplate.bind({}),
   name: "Variant danger",
   args: { variant: "danger" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const WarningVariant = {
   render: VariantTemplate.bind({}),
   name: "Variant warning",
   args: { variant: "warning" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const NeutralVariant = {
   render: VariantTemplate.bind({}),
   name: "Variant neutral",
   args: { variant: "neutral" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const DismissibleTemplate = args =>
@@ -71,7 +71,7 @@ export const Dismissible = {
   render: DismissibleTemplate.bind({}),
   name: "Dismissible",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const PositionTemplate = args =>
@@ -102,31 +102,31 @@ export const TopCenter = {
   render: PositionTemplate.bind({}),
   name: "Top center",
   args: { ...args, position: "top-center" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const TopEnd = {
   render: PositionTemplate.bind({}),
   name: "Top end",
   args: { ...args, position: "top-end" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const BottomStart = {
   render: PositionTemplate.bind({}),
   name: "Bottom start",
   args: { ...args, position: "bottom-start" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const BottomCenter = {
   render: PositionTemplate.bind({}),
   name: "Bottom center",
   args: { ...args, position: "bottom-center" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const BottomEnd = {
   render: PositionTemplate.bind({}),
   name: "Bottom end",
   args: { ...args, position: "bottom-end" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const StackingTemplate = () =>
@@ -151,5 +151,5 @@ export const Stacking = {
   render: StackingTemplate.bind({}),
   name: "Stacking the toasts",
   args: { position: "bottom-end" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

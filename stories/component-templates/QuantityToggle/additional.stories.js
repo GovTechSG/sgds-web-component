@@ -23,26 +23,26 @@ export const DisabledQT = {
   render: Template.bind({}),
   name: "Disabled",
   args: { ...args, disabled: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const InvalidQT = {
   render: Template.bind({}),
   name: "Invalid",
   args: { ...args, hasFeedback: "both", invalid: true, invalidFeedback: "Invalid QT detected" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const QTValidation = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplate.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

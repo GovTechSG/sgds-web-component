@@ -26,5 +26,5 @@ export const Sizes = {
   render: SizeTemplate.bind({}),
   name: "Sizes",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

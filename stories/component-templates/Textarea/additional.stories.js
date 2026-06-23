@@ -36,25 +36,25 @@ export const Validation = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const OverrideInvalidFeedback = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: { invalidFeedback: "Custom error message" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const DefaultValue = {
   render: DefaultValueTemplate.bind({}),
   name: "Default Value",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled",
   args: { ...args, disabled: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

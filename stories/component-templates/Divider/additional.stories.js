@@ -28,11 +28,11 @@ export const Orientation = {
   render: OrientationTeamplate.bind({}),
   name: "Vertical",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const Thickness = {
   render: ThicknessTemplate.bind({}),
   name: "Thickness",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

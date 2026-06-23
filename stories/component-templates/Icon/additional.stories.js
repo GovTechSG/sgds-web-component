@@ -22,12 +22,12 @@ export const Size = {
   render: SizeTemplate.bind({}),
   name: "Size",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Color = {
   render: ColorTemplate.bind({}),
   name: "Color",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

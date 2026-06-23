@@ -50,54 +50,54 @@ export const PasswordInput = {
   render: Template.bind({}),
   name: "Password",
   args: { ...args, type: "password" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const DisabledInput = {
   render: Template.bind({}),
   name: "Disabled",
   args: { ...args, disabled: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const InvalidInput = {
   render: Template.bind({}),
   name: "Invalid",
   args: { ...args, hasFeedback: true, invalid: true, invalidFeedback: "Invalid input detected" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const ValidInput = {
   render: Template.bind({}),
   name: "Valid",
   args: { ...args, hasFeedback: true, valid: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const LoadingInput = {
   render: Template.bind({}),
   name: "Loading",
   args: { ...args, hasFeedback: true, loading: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const ReadonlyInput = {
   render: Template.bind({}),
   name: "Read only",
   args: { ...args, readonly: true, value: "readonly input" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const PrefixInput = {
   render: Template.bind({}),
   name: "With prefix",
   args: { ...args, prefix: "prefix" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const SuffixInput = {
   render: Template.bind({}),
   name: "With suffix",
   args: { ...args, suffix: "suffix" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const LeadingIcon = {
@@ -106,7 +106,7 @@ export const LeadingIcon = {
   args: {
     ...args
   },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 export const TrailingIcon = {
   render: TrailingIconTemplate.bind({}),
@@ -114,7 +114,7 @@ export const TrailingIcon = {
   args: {
     ...args
   },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Action = {
@@ -123,21 +123,21 @@ export const Action = {
   args: {
     ...args
   },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const InputValidation = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplate.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const AutocompleteTemplate = () =>
@@ -170,5 +170,5 @@ export const Autocomplete = {
   render: AutocompleteTemplate.bind({}),
   name: "Autocomplete prop",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

@@ -69,28 +69,28 @@ export const Orientation = {
   render: Template.bind({}),
   name: "Orientation",
   args: { ...args, orientation: "vertical" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Clickable = {
   render: ClickableTemplate.bind({}),
   name: "Clickable",
   args,
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const StepComponent = {
   render: StepComponentTemplate.bind({}),
   name: "With sgds-step Children",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const StepComponentClickable = {
   render: StepComponentClickableTemplate.bind({}),
   name: "With sgds-step Children (Clickable)",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const StepStatesTemplate = () => html`
@@ -111,7 +111,7 @@ export const StepStates = {
   render: StepStatesTemplate.bind({}),
   name: "Step States",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const SlottedClickableTemplate = () => html`
@@ -138,7 +138,7 @@ export const SlottedClickable = {
   render: SlottedClickableTemplate.bind({}),
   name: "Slotted Clickable Items",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const CustomIconTemplate = () => html`
@@ -159,7 +159,7 @@ export const CustomIcon = {
   render: CustomIconTemplate.bind({}),
   name: "Custom Icon",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const MockStepperTemplate = () => html`<mock-stepper></mock-stepper>`;
@@ -168,5 +168,5 @@ export const StepperExample = {
   render: MockStepperTemplate.bind({}),
   name: "Stepper example",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };

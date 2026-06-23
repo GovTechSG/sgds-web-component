@@ -8,7 +8,7 @@ export const DragAndDrop = {
   render: Template.bind({}),
   name: "Drag and Drop",
   args: { variant: "drag-and-drop", multiple: true },
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -24,7 +24,7 @@ export const ValidationDefaultInvalid = {
     invalid: true,
     invalidFeedback: "Please upload at least one file"
   },
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -38,7 +38,7 @@ export const ValidationDragDropInvalid = {
     invalid: true,
     invalidFeedback: "Please upload at least one file"
   },
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -72,7 +72,7 @@ export const UploadingStateDefault = {
   render: UploadingStateDefaultTemplate.bind({}),
   name: "Uploading State",
   args: {},
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -106,7 +106,7 @@ export const UploadingStateDragDrop = {
   render: UploadingStateDragDropTemplate.bind({}),
   name: "Uploading State - Drag and Drop",
   args: {},
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -145,7 +145,7 @@ export const ErrorStateDefault = {
   render: ErrorStateDefaultTemplate.bind({}),
   name: "Error State",
   args: {},
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -184,7 +184,7 @@ export const ErrorStateDragDrop = {
   render: ErrorStateDragDropTemplate.bind({}),
   name: "Error State - Drag and Drop",
   args: {},
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -222,7 +222,7 @@ export const SuccessStateDefault = {
   render: SuccessStateDefaultTemplate.bind({}),
   name: "Success State",
   args: {},
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -260,7 +260,7 @@ export const SuccessStateDragDrop = {
   render: SuccessStateDragDropTemplate.bind({}),
   name: "Success State - Drag and Drop",
   args: {},
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -309,7 +309,7 @@ export const SgdsAddFiles = {
   render: SgdsAddFilesTemplate.bind({}),
   name: "Event: sgds-add-files",
   args: { multiple: true },
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -358,7 +358,7 @@ export const SgdsRemoveFile = {
   render: SgdsRemoveFileTemplate.bind({}),
   name: "Event: sgds-remove-file",
   args: { multiple: true },
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -409,7 +409,7 @@ export const SgdsChange = {
   render: SgdsChangeTemplate.bind({}),
   name: "Event: sgds-change",
   args: { multiple: true },
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -470,7 +470,7 @@ export const UploadToServer = {
   render: UploadToServerTemplate.bind({}),
   name: "Upload to Server",
   args: { multiple: true },
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };
 
@@ -546,6 +546,6 @@ export const CustomValidation = {
   render: CustomValidationTemplate.bind({}),
   name: "Custom Validation with noValidate",
   args: { required: true, hasFeedback: true, noValidate: true, multiple: true },
-  parameters: { layout: "padded", selectedPanel: "storybook/docs/panel" },
+  parameters: { layout: "padded" },
   tags: []
 };

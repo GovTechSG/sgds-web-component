@@ -61,6 +61,7 @@ export const parameters = {
     disable: true,
     expanded: true
   },
+  selectedPanel: "storybook/docs/panel",
   options: {
     storySort: {
       order: [

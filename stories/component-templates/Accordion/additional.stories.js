@@ -4,35 +4,35 @@ export const BorderVariant = {
   render: Template.bind({}),
   name: "Border variant",
   args: { variant: "border" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const DensityVariant = {
   render: Template.bind({}),
   name: "Compact density",
   args: { density: "compact" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const SpaciousDensity = {
   render: Template.bind({}),
   name: "Spacious density",
   args: { density: "spacious" },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const AllowMultiple = {
   render: Template.bind({}),
   name: "Allow multiple active accordion",
   args: { allowMultiple: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled state",
   args: { disabled: true },
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const LeadingIconTemplate = iconSize => html`
@@ -65,7 +65,7 @@ export const LeadingIconSlot = {
   render: LeadingIconTemplate.bind({}),
   name: "Icon slot",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
 
 const BadgeTemplate = args => html`
@@ -97,5 +97,5 @@ export const BadgeSlot = {
   render: BadgeTemplate.bind({}),
   name: "Badge slot",
   args: {},
-  parameters: { selectedPanel: "storybook/docs/panel" }
+  parameters: {}
 };
