@@ -50,33 +50,33 @@ export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variants",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const OutlinedVariants = {
   render: OutlinedVariantTemplate.bind({}),
   name: "Outlined variants",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const Dismissible = {
   render: DismissibleTemplate.bind({}),
   name: "Dismissible",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const WithIcon = {
   render: IconTemplate.bind({}),
   name: "Icon",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const WithTruncation = {
   render: TruncationTemplate.bind({}),
   name: "Truncation",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

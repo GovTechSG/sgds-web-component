@@ -32,17 +32,17 @@ export const Sizes = {
   render: SizeTemplate.bind({}),
   name: "Sizes",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const Label = {
   render: LabelTemplate.bind({}),
   name: "Labels",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const Icon = {
   render: IconTemplate.bind({}),
   name: "Icon",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

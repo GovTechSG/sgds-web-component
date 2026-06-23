@@ -25,26 +25,26 @@ export const Sizes = {
   render: SizeTemplate,
   name: "Sizes",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const ToneDefault = {
   render: ToneDefaultTemplate,
   name: "Tone: default",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const ToneFixedDark = {
   render: ToneFixedDarkTemplate,
   name: "Tone: fixed-dark",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const ToneFixedLight = {
   render: ToneFixedLightTemplate,
   name: "Tone: fixed-light",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

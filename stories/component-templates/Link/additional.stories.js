@@ -19,7 +19,7 @@ export const Tones = {
   render: ToneTemplate.bind({}),
   name: "Tone",
   args: { ...args },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const VariantTemplate = () => {
@@ -40,7 +40,7 @@ export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variant",
   args: { ...args },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const SizeTemplate = () => {
@@ -66,7 +66,7 @@ export const Size = {
   render: SizeTemplate.bind({}),
   name: "Sizes",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const ExternalLinkTemplate = () => {
@@ -92,7 +92,7 @@ export const ExternalLink = {
   render: ExternalLinkTemplate.bind({}),
   name: "Target _blank",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const WithIconTemplate = () => {
@@ -112,18 +112,18 @@ export const Icon = {
   render: WithIconTemplate.bind({}),
   name: "Icons",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled",
   args: { disabled: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const Active = {
   render: Template.bind({}),
   name: "Active",
   args: { active: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

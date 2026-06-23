@@ -117,42 +117,42 @@ export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variants",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const OutlinedVariants = {
   render: OutlinedVariantTemplate.bind({}),
   name: "Outlined variants",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const Dismissible = {
   render: DismissibleTemplate.bind({}),
   name: "Dismissible",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const WithIcon = {
   render: IconTemplate.bind({}),
   name: "Icon",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const WithTitle = {
   render: TitleTemplate.bind({}),
   name: "Title",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const WithLink = {
   render: LinkTemplate.bind({}),
   name: "Link",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const FilledActionTemplate = args => {
@@ -216,12 +216,12 @@ export const FilledWithAction = {
   render: FilledActionTemplate.bind({}),
   name: "Filled with action",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const OutlinedWithAction = {
   render: OutlinedActionTemplate.bind({}),
   name: "Outlined with action",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

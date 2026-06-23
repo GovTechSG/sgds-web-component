@@ -175,7 +175,7 @@ ${methodsMeta
       render: Template.bind({}),
       name: "Basic",
       args,
-      parameters,
+      parameters: { ...parameters, controls: { disable: false }, selectedPanel: "addon-controls" },
       ...(play ? { play } : {}),
     }
   `;

@@ -7,7 +7,7 @@ export const ComboBoxMultiSelect = {
   render: Template.bind({}),
   name: "MultiSelect",
   args: { ...args, multiSelect: true, id: "multiselect-combobox-example" },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const DefaultFilter = () => {
@@ -37,7 +37,7 @@ export const ComboBoxDefaultFilter = {
   render: DefaultFilter.bind({}),
   name: "ComboBox with default filter",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const CustomFilter = () => {
@@ -79,14 +79,14 @@ export const ComboBoxCustomFilter = {
   render: CustomFilter.bind({}),
   name: "ComboBox with custom filter",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const ComboBoxDefaultSlot = {
   render: Template.bind({}),
   name: "Populating menu list with default slot",
   args: { ...args, thirdOptionDisabled: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const ComboBoxMenuListProp = () => {
@@ -309,7 +309,7 @@ export const ComboBoxMenuList = {
   render: ComboBoxMenuListProp.bind({}),
   name: "Populating menu list with property",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const ComboBoxMenuListClearableProp = () => {
@@ -332,7 +332,7 @@ export const ComboBoxMenuListClearable = {
   render: ComboBoxMenuListClearableProp.bind({}),
   name: "Populating menu list with clearable property",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const AccessDisplayValueTemplate = () => {
@@ -361,14 +361,14 @@ export const AccessDisplayValue = {
   render: AccessDisplayValueTemplate.bind({}),
   name: "Accessing display value of ComboBox's input",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const Loading = {
   render: Template.bind({}),
   name: "Loading state",
   args: { ...args, loading: true, id: "loading-combobox-example" },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const AsyncComboboxTemplate = () => {
@@ -384,7 +384,7 @@ export const AsyncCombobox = {
   render: AsyncComboboxTemplate.bind({}),
   name: "Asynchronous ComboBox",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const ValidationTemplate = args =>
@@ -414,14 +414,14 @@ export const Validation = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplate.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const NoValidateTemplate = () => {
@@ -475,7 +475,7 @@ export const NoValidate = {
   render: NoValidateTemplate.bind({}),
   name: "Custom Validation with noValidate",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const AutocompleteTemplate = () =>
@@ -518,5 +518,5 @@ export const Autocomplete = {
   render: AutocompleteTemplate.bind({}),
   name: "Autocomplete prop",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

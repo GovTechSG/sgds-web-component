@@ -27,33 +27,33 @@ export const Tone = {
   name: "Tone",
   args: {},
   parameters: {
-    backgrounds: { default: "custom-blue", controls: { disable: true } }
+    backgrounds: { default: "custom-blue", selectedPanel: "storybook/docs/panel" }
   }
 };
 export const ToneInverseFixedLight = {
   render: ToneInverseAndFixedLightTemplate.bind({}),
   name: "Tone - inverse and fixed light",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const Size = {
   render: SizeTemplate.bind({}),
   name: "Size",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const Label = {
   render: Template.bind({}),
   name: "Label",
   args: { label: "Label" },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const LabelHorizontal = {
   render: Template.bind({}),
   name: "Label - Horizontal",
   args: { label: "Label", orientation: "horizontal" },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

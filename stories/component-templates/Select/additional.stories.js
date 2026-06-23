@@ -4,7 +4,7 @@ export const SelectDefaultSlot = {
   render: Template.bind({}),
   name: "Populating menu list with default slot",
   args: { ...args, thirdOptionDisabled: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const SelectMenuListProp = () => {
@@ -227,12 +227,12 @@ export const SelectMenuList = {
   render: SelectMenuListProp.bind({}),
   name: "Populating menu list with property",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const SelectLoading = {
   render: Template.bind({}),
   name: "Loading state",
   args: { ...args, loading: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

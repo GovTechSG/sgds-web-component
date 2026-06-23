@@ -12,7 +12,7 @@ export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variants",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const ToneTemplate = args => {
@@ -46,7 +46,7 @@ export const Tone = {
   render: ToneTemplate.bind({}),
   name: "Tone",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const SizeTemplate = () => {
@@ -60,7 +60,7 @@ export const Sizes = {
   render: SizeTemplate.bind({}),
   name: "Sizes",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const ActiveTemplate = () => {
@@ -76,7 +76,7 @@ export const Active = {
   render: ActiveTemplate.bind({}),
   name: "Hover / Active state",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const Disabled = {
@@ -87,7 +87,7 @@ export const Disabled = {
   `,
   name: "Disabled state",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const Loading = {
@@ -117,5 +117,5 @@ export const Loading = {
   `,
   name: "Loading state",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

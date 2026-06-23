@@ -6,7 +6,7 @@ export const RangeSelection = {
   render: RangeTemplate.bind({}),
   name: "Range selection",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const FlipTemplate = args =>
@@ -20,7 +20,7 @@ export const Flip = {
   render: FlipTemplate.bind({}),
   name: "Flip",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const ModeTemplate = args => {
@@ -37,13 +37,13 @@ export const SingleMode = {
   render: ModeTemplate.bind({}),
   name: "Initial value for single mode",
   args: { value: "23/05/2023", mode: "single" },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const RangeMode = {
   render: ModeTemplate.bind({}),
   name: "Initial value for range mode",
   args: { value: "23/05/2023 - 15/12/2023", mode: "range" },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const MinMaxTemplate = args => {
@@ -68,7 +68,7 @@ export const MinMax = {
   render: MinMaxTemplate.bind({}),
   name: "Min and max date",
   args: { displayDate: new Date(2023, 5, 10) },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const FormSubmissionTemplate = args => {
@@ -107,7 +107,7 @@ export const FormSubmission = {
   render: FormSubmissionTemplate.bind({}),
   name: "Form submission",
   args: { displayDate: new Date(2023, 5, 10) },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const CustomValidationTemplate = () => html`
@@ -142,7 +142,7 @@ export const CustomValidation = {
   render: CustomValidationTemplate.bind({}),
   name: "Custom validation",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const InvalidDateClearTemplate = () => {
@@ -194,5 +194,5 @@ export const InvalidDateClear = {
   render: InvalidDateClearTemplate.bind({}),
   name: "Invalid date auto-clear",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

@@ -69,28 +69,28 @@ export const Orientation = {
   render: Template.bind({}),
   name: "Orientation",
   args: { ...args, orientation: "vertical" },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const Clickable = {
   render: ClickableTemplate.bind({}),
   name: "Clickable",
   args,
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const StepComponent = {
   render: StepComponentTemplate.bind({}),
   name: "With sgds-step Children",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const StepComponentClickable = {
   render: StepComponentClickableTemplate.bind({}),
   name: "With sgds-step Children (Clickable)",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const StepStatesTemplate = () => html`
@@ -111,7 +111,7 @@ export const StepStates = {
   render: StepStatesTemplate.bind({}),
   name: "Step States",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const SlottedClickableTemplate = () => html`
@@ -138,7 +138,7 @@ export const SlottedClickable = {
   render: SlottedClickableTemplate.bind({}),
   name: "Slotted Clickable Items",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const CustomIconTemplate = () => html`
@@ -159,7 +159,7 @@ export const CustomIcon = {
   render: CustomIconTemplate.bind({}),
   name: "Custom Icon",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const MockStepperTemplate = () => html`<mock-stepper></mock-stepper>`;
@@ -168,5 +168,5 @@ export const StepperExample = {
   render: MockStepperTemplate.bind({}),
   name: "Stepper example",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

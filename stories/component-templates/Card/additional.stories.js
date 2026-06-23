@@ -28,7 +28,7 @@ export const Stretched = {
   render: StretchedTemplate.bind({}),
   name: "Stretched link",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const DisabledTemplate = () => {
@@ -59,7 +59,7 @@ export const Disabled = {
   render: DisabledTemplate.bind({}),
   name: "Disabled state",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const OrientationTemplate = () => {
@@ -107,7 +107,7 @@ export const Orientation = {
   render: OrientationTemplate.bind({}),
   name: "Orientation",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const ImagePositionTemplate = () => {
@@ -189,7 +189,7 @@ export const ImagePosition = {
   render: ImagePositionTemplate.bind({}),
   name: "Image position",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const ImageAdjustmentTemplate = () => {
@@ -254,7 +254,7 @@ export const ImageAdjustment = {
   render: ImageAdjustmentTemplate.bind({}),
   name: "Image adjustment",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const HideBorderTemplate = () => {
@@ -336,7 +336,7 @@ export const HideBorder = {
   render: HideBorderTemplate.bind({}),
   name: "Hide border",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const TintedTemplate = () => {
@@ -367,7 +367,7 @@ export const Tinted = {
   render: TintedTemplate.bind({}),
   name: "Tinted",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 const OverflowMenuTemplate = () => {
@@ -405,5 +405,5 @@ export const OverflowMenu = {
   render: OverflowMenuTemplate.bind({}),
   name: "Overflow menu",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

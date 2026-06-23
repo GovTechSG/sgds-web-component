@@ -66,44 +66,44 @@ export const Indeterminate = {
   render: Template.bind({}),
   name: "Indeterminate",
   args: { ...args, indeterminate: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled",
   args: { ...args, disabled: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const Invalid = {
   render: InvalidTemplate.bind({}),
   name: "Invalid states",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const InvalidGroup = {
   render: InvalidGroupTemplate.bind({}),
   name: "Invalid CheckboxGroup",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const Validation = {
   render: ValidationTemplateGroup.bind({}),
   name: "Validation",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const ValidationSingle = {
   render: ValidationTemplateSingle.bind({}),
   name: "Validation",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplateGroup.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };

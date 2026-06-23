@@ -93,56 +93,56 @@ export const SidenavItemAsLink = {
   render: SidenavItemAsLinkTemplate.bind({}),
   name: "SidenavItem as first level link",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const SidenavItemAsMenu = {
   render: SidenavItemAsMenuTemplate.bind({}),
   name: "SidenavItem as menu",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const EmbeddedMenu = {
   render: EmbeddedMenuTemplate.bind({}),
   name: "SidenavItem as an embedded menu",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 
 export const IconsOnFirstLevel = {
   render: IconTemplate.bind({}),
   name: "Icons",
   args: {},
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const ActiveLinkState = {
   render: Template.bind({}),
   name: "Active sidenav link",
   args: { ...args, activeSNL: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const ActiveaSidenavItemAsLinkState = {
   render: Template.bind({}),
   name: "Active sidenav item as a link",
   args: { ...args, activeSNIAsLink: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const ActiveaSidenavItemAsMenu = {
   render: Template.bind({}),
   name: "Active sidenav item as a menu",
   args: { ...args, active: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const DisabledItem = {
   render: DisabledTemplate.bind({}),
   name: "Disabled sidenav item",
   args: { ...args, active: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
 export const DisabledLink = {
   render: DisabledLinkTemplate.bind({}),
   name: "Disabled sidenav link",
   args: { ...args, active: true },
-  parameters: { controls: { disable: true } }
+  parameters: { selectedPanel: "storybook/docs/panel" }
 };
