@@ -1,0 +1,12 @@
+{
+  "name": "@govtechsg/sgds-stencil-poc/hydrate",
+  "description": "sgds component hydration app.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./index.js",
+      "import": "./index.mjs"
+    }
+  }
+}

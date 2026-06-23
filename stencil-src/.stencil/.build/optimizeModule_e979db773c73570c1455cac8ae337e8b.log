@@ -1,0 +1,1 @@
+import{S as s,d as o}from"./sgds-spinner2.js";const r=s,n=o;export{r as SgdsSpinner,n as defineCustomElement}

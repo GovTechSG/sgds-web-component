@@ -1,0 +1,32 @@
+:host {
+  display: inline-block;
+}
+
+:host([fullWidth]),
+:host([fullWidth]) .btn {
+  width: 100%;
+}
+
+:host([fullWidth]) .btn.has-left-icon {
+  justify-content: flex-start;
+}
+
+:host([fullWidth]) .btn.has-right-icon {
+  justify-content: space-between;
+}
+
+:host([fullWidth]) .btn.has-left-icon.has-right-icon {
+  justify-content: center;
+}
+
+.btn span {
+  padding: 0px var(--sgds-padding-2-xs);
+}
+
+.btn.no-icon {
+  gap: var(--sgds-gap-none);
+}
+
+.loading {
+  cursor: default;
+}

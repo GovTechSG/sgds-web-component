@@ -111,6 +111,18 @@ export class SgdsBadge extends SgdsElement {
     }
   }
 
+  firstUpdated() {
+    // When using Declarative Shadow DOM (e.g. VitePress SSR) without Lit's hydration support,
+    // slotchange may not fire because slot content is already assigned during HTML parsing.
+    // Manually read slot content to ensure truncation check runs.
+    if (!this.text) {
+      const slot = this.shadowRoot.querySelector("slot:not([name])") as HTMLSlotElement;
+      const text = slot ? getTextContent(slot) : "";
+      // Fallback to host textContent if assignedNodes is empty (DSD without slot assignment)
+      this.text = text || this.textContent?.trim() || "";
+    }
+  }
+
   private _handleLabelSlotChange(e: Event) {
     this.text = getTextContent(e.target as HTMLSlotElement);
     return;

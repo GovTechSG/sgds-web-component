@@ -1,0 +1,38 @@
+<!doctype html><html dir="ltr" lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"> <title>SGDS Stencil POC - Button</title> <script type="module" src="/build/sgds.esm.js" data-stencil></script> <script nomodule="" src="/build/sgds.js" data-stencil></script> <style>body {
+        font-family: "Inter", system-ui, sans-serif;
+        padding: 2rem;
+        background: #f8f9fa;
+      }
+      section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+      h2 {
+        margin-top: 0;
+        font-size: 1.25rem;
+        color: #333;
+      }
+      .row {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .dark-bg {
+        background: #1a1a1a;
+        padding: 1rem;
+        border-radius: 4px;
+      }</style> </head> <body> <h1>SGDS Button - Stencil POC</h1> <section> <h2>Variants (tone=brand)</h2> <div class="row"> <sgds-button variant="primary">Primary</sgds-button> <sgds-button variant="outline">Outline</sgds-button> <sgds-button variant="ghost">Ghost</sgds-button> </div> </section> <section> <h2>Tones (variant=primary)</h2> <div class="row"> <sgds-button tone="brand">Brand</sgds-button> <sgds-button tone="danger">Danger</sgds-button> <sgds-button tone="neutral">Neutral</sgds-button> </div> <div class="row dark-bg"> <sgds-button tone="fixed-light">Fixed Light</sgds-button> </div> </section> <section> <h2>Sizes</h2> <div class="row"> <sgds-button size="xs">XS</sgds-button> <sgds-button size="sm">SM</sgds-button> <sgds-button size="md">MD</sgds-button> <sgds-button size="lg">LG</sgds-button> </div> </section> <section> <h2>States</h2> <div class="row"> <sgds-button disabled="">Disabled</sgds-button> <sgds-button active="">Active</sgds-button> <sgds-button loading="">Loading</sgds-button> <sgds-button loading="" size="sm">Loading SM</sgds-button> </div> </section> <section> <h2>With Icons</h2> <div class="row"> <sgds-button> <svg slot="leftIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path> </svg> Left Icon </sgds-button> <sgds-button> Right Icon <svg slot="rightIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path> </svg> </sgds-button> </div> </section> <section> <h2>Link Mode (href)</h2> <div class="row"> <sgds-button href="https://example.com">Link Button</sgds-button> <sgds-button href="https://example.com" target="_blank">External Link</sgds-button> </div> </section> <section> <h2>Full Width</h2> <sgds-button fullwidth="">Full Width Button</sgds-button> </section> <section> <h2>Form Submission</h2> <form id="test-form" onsubmit="event.preventDefault(); document.getElementById('form-result').textContent = 'Form submitted!';"> <input type="text" name="test" placeholder="Type something..." style="margin-right: 0.5rem; padding: 0.5rem;"> <sgds-button type="submit">Submit</sgds-button> <sgds-button type="reset" variant="outline">Reset</sgds-button> </form> <p id="form-result" style="margin-top: 0.5rem; color: green;"></p> <h3 style="margin-top: 1rem;">Form via attribute (button outside form)</h3> <form id="external-form" onsubmit="event.preventDefault(); document.getElementById('external-result').textContent = 'External form submitted!';"> <input type="text" name="external" placeholder="External form input..." style="padding: 0.5rem;"> </form> <sgds-button type="submit" form="external-form">Submit External Form</sgds-button> <p id="external-result" style="margin-top: 0.5rem; color: green;"></p> </section> <script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  // auto-unregister service worker during dev mode
+  navigator.serviceWorker.getRegistration().then(function(registration) {
+    if (registration) {
+      registration.unregister().then(function() { location.reload(true) });
+    }
+  });
+}
+</script></body></html>

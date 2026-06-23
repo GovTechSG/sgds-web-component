@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stencil POC - sgds-button & sgds-spinner</title>
+
+  <!-- SGDS Theme tokens (provides --sgds-* CSS custom properties) -->
+  <link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+
+  <!-- Stencil components (ESM from dist) -->
+  <script type="module" src="../../stencil-src/dist/sgds/sgds.esm.js"></script>
+
+  <style>
+    body {
+      font-family: var(--sgds-font-family-brand, "Inter", system-ui, sans-serif);
+      padding: 2rem;
+      background: var(--sgds-bg-default, #f8f9fa);
+      color: var(--sgds-body-color-default, #1a1a1a);
+    }
+    section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--sgds-surface-default, white);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    h1 { margin-top: 0; }
+    h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+    }
+    .row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .dark-bg {
+      background: #06402b;
+      padding: 1rem;
+      border-radius: 4px;
+    }
+    .label {
+      font-size: 0.75rem;
+      color: var(--sgds-color-muted);
+      margin-bottom: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Stencil POC — sgds-button & sgds-spinner</h1>
+  <p>These components are rendered from <code>stencil-src/dist/</code> using the Stencil build output.</p>
+
+  <!-- SPINNER -->
+  <section>
+    <h2>Spinner</h2>
+    <div class="row">
+      <div>
+        <div class="label">xs</div>
+        <sgds-spinner size="xs"></sgds-spinner>
+      </div>
+      <div>
+        <div class="label">sm</div>
+        <sgds-spinner size="sm"></sgds-spinner>
+      </div>
+      <div>
+        <div class="label">md (default)</div>
+        <sgds-spinner></sgds-spinner>
+      </div>
+      <div>
+        <div class="label">lg</div>
+        <sgds-spinner size="lg"></sgds-spinner>
+      </div>
+      <div>
+        <div class="label">xl</div>
+        <sgds-spinner size="xl"></sgds-spinner>
+      </div>
+    </div>
+    <div class="row">
+      <sgds-spinner label="Loading..." orientation="horizontal"></sgds-spinner>
+    </div>
+  </section>
+
+  <!-- BUTTON VARIANTS -->
+  <section>
+    <h2>Variants (tone=brand)</h2>
+    <div class="row">
+      <sgds-button variant="primary">Primary</sgds-button>
+      <sgds-button variant="outline">Outline</sgds-button>
+      <sgds-button variant="ghost">Ghost</sgds-button>
+    </div>
+  </section>
+
+  <!-- BUTTON TONES -->
+  <section>
+    <h2>Tones (variant=primary)</h2>
+    <div class="row">
+      <sgds-button tone="brand">Brand</sgds-button>
+      <sgds-button tone="danger">Danger</sgds-button>
+      <sgds-button tone="neutral">Neutral</sgds-button>
+    </div>
+    <div class="row dark-bg">
+      <sgds-button tone="fixed-light">Fixed Light</sgds-button>
+      <sgds-button variant="outline" tone="fixed-light">Outline Fixed Light</sgds-button>
+      <sgds-button variant="ghost" tone="fixed-light">Ghost Fixed Light</sgds-button>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section>
+    <h2>Sizes</h2>
+    <div class="row">
+      <sgds-button size="xs">XS Button</sgds-button>
+      <sgds-button size="sm">SM Button</sgds-button>
+      <sgds-button size="md">MD Button</sgds-button>
+      <sgds-button size="lg">LG Button</sgds-button>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section>
+    <h2>States</h2>
+    <div class="row">
+      <sgds-button disabled>Disabled</sgds-button>
+      <sgds-button active>Active</sgds-button>
+      <sgds-button loading>Loading</sgds-button>
+      <sgds-button loading size="sm" variant="outline">Loading SM Outline</sgds-button>
+      <sgds-button loading tone="neutral">Loading Neutral</sgds-button>
+    </div>
+  </section>
+
+  <!-- ICONS -->
+  <section>
+    <h2>With Icons</h2>
+    <div class="row">
+      <sgds-button>
+        <svg slot="leftIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+        Left Icon
+      </sgds-button>
+      <sgds-button variant="outline">
+        Right Icon
+        <svg slot="rightIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      </sgds-button>
+      <sgds-button variant="ghost">
+        <svg slot="leftIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+        Both Icons
+        <svg slot="rightIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      </sgds-button>
+    </div>
+  </section>
+
+  <!-- LINK MODE -->
+  <section>
+    <h2>Link Mode (href)</h2>
+    <div class="row">
+      <sgds-button href="https://example.com">Link Button</sgds-button>
+      <sgds-button href="https://example.com" target="_blank">External Link</sgds-button>
+      <sgds-button href="https://example.com" download="file.pdf">Download</sgds-button>
+    </div>
+  </section>
+
+  <!-- FULL WIDTH -->
+  <section>
+    <h2>Full Width</h2>
+    <sgds-button fullWidth>Full Width Primary</sgds-button>
+    <br /><br />
+    <sgds-button fullWidth variant="outline">Full Width Outline</sgds-button>
+    <br /><br />
+    <sgds-button fullWidth>
+      <svg slot="leftIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+      </svg>
+      Full Width with Left Icon
+    </sgds-button>
+  </section>
+
+  <!-- FORM -->
+  <section>
+    <h2>Form Submission</h2>
+    <form id="test-form" onsubmit="event.preventDefault(); document.getElementById('form-result').textContent = 'Form submitted at ' + new Date().toLocaleTimeString();">
+      <input type="text" name="test" placeholder="Type something..." style="padding: 0.5rem; margin-right: 0.5rem; border: 1px solid #ccc; border-radius: 4px;" />
+      <sgds-button type="submit">Submit</sgds-button>
+      <sgds-button type="reset" variant="outline">Reset</sgds-button>
+    </form>
+    <p id="form-result" style="margin-top: 0.5rem; color: green; font-size: 0.875rem;"></p>
+
+    <h3 style="margin-top: 1.5rem; font-size: 1rem;">Button outside form (form attribute)</h3>
+    <form id="external-form" onsubmit="event.preventDefault(); document.getElementById('external-result').textContent = 'External form submitted at ' + new Date().toLocaleTimeString();">
+      <input type="text" name="external" placeholder="External form input..." style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;" />
+    </form>
+    <div style="margin-top: 0.5rem;">
+      <sgds-button type="submit" form="external-form">Submit External Form</sgds-button>
+    </div>
+    <p id="external-result" style="margin-top: 0.5rem; color: green; font-size: 0.875rem;"></p>
+  </section>
+
+  <!-- OUTLINE ALL TONES -->
+  <section>
+    <h2>Outline - All Tones</h2>
+    <div class="row">
+      <sgds-button variant="outline" tone="brand">Brand</sgds-button>
+      <sgds-button variant="outline" tone="danger">Danger</sgds-button>
+      <sgds-button variant="outline" tone="neutral">Neutral</sgds-button>
+    </div>
+  </section>
+
+  <!-- GHOST ALL TONES -->
+  <section>
+    <h2>Ghost - All Tones</h2>
+    <div class="row">
+      <sgds-button variant="ghost" tone="brand">Brand</sgds-button>
+      <sgds-button variant="ghost" tone="danger">Danger</sgds-button>
+      <sgds-button variant="ghost" tone="neutral">Neutral</sgds-button>
+    </div>
+  </section>
+</body>
+</html>

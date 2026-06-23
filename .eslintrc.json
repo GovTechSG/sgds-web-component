@@ -30,6 +30,7 @@
     "cypress",
     "cypress.config.ts",
     "**/*/icon-registry.ts",
-    "**/*.json"
+    "**/*.json",
+    "stencil-src"
   ]
 }

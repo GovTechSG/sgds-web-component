@@ -1,0 +1,32 @@
+{
+  "name": "@govtechsg/sgds-stencil-poc",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Stencil POC for SGDS web components with SSR support",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "files": [
+    "dist/",
+    "hydrate/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec",
+    "test:watch": "stencil test --spec --watchAll",
+    "generate": "stencil generate"
+  },
+  "devDependencies": {
+    "@stencil/core": "^4.22.0",
+    "@stencil/vitest": "^1.11.6",
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "jest-cli": "^29.7.0",
+    "typescript": "~5.5.0",
+    "vitest": "^4.1.6"
+  }
+}
