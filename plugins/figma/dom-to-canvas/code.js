@@ -144,7 +144,8 @@ var ATTR_TO_VARIANT_PROP = {
   size: "Size",
   state: "State",
   tone: "Tone",
-  orientation: "Orientation"
+  orientation: "Orientation",
+  density: "Density"
 };
 
 // Maps DOM attribute values → Figma variant option values (where naming differs)
@@ -267,14 +268,17 @@ var COMPONENT_SLOT_CONFIG = {
   "sgds-accordion": {
     // Accordion items are nested instances named "↳ Accordion N"
     // Each item has: Edit title (TEXT), Badge (BOOLEAN), Icon (BOOLEAN), badge swap, icon swap
-    // DOM variant="border" → Figma Border=True; density → Density
-    attrOverrides: { variant: { prop: "Border", values: { border: "True", default: "False" } } },
+    // DOM variant="border" → Figma Border=True; density → Density; No. of item from children count
+    attrOverrides: {
+      variant: { prop: "Border", values: { border: "True", default: "False" } }
+    },
     itemPattern: "↳ Accordion",
     itemProps: {
       title: { key: "Edit title#16551:8" },
       badge: { booleanKey: "Badge#29585:8", swapKey: "↳ 🔷 Swap instance#16545:8" },
       icon: { booleanKey: "Icon#29595:24", swapKey: "↳ Select icon#29595:46" },
-      content: { swapKey: "↳ 🔷 Swap instance#16545:8" }
+      content: { swapKey: "↳ 🔷 Swap instance#16545:8" },
+      disabled: { variantProp: "State", variantValue: "disabled" }
     }
   },
   "sgds-modal": {
@@ -654,6 +658,16 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
       }
     }
 
+    // Accordion: derive "No. of item" from children count
+    if (data.tag === "sgds-accordion" && data.children) {
+      var itemCount = data.children.filter(function (c) {
+        return c.tag === "sgds-accordion-item";
+      }).length;
+      if (itemCount > 0) {
+        criteria["No. of item"] = String(itemCount);
+      }
+    }
+
     if (Object.keys(criteria).length > 0) {
       var bestScore = -1;
       for (var vi = 0; vi < componentSet.children.length; vi++) {
@@ -703,7 +717,6 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
 
   var posX = (data.x || 0) - parentX;
   var posY = (data.y || 0) - parentY;
-
 
   // Mainnav: store sibling tags and always hide the nested banner
   // (Official Government Banner is a separate component — sgds-masthead handles it)
@@ -1388,8 +1401,27 @@ async function applyMainnavContent(instance, data, config) {
   });
 
   // Debug: dump all instance properties for the mainnav
-  figma.ui.postMessage({ type: "debug", message: "Mainnav: " + navItems.length + " DOM nav items, " + navInstances.length + " Figma 'Nav N' instances, " + endSlotChildren.length + " end slot children" });
-  figma.ui.postMessage({ type: "debug", message: "Mainnav instance names: " + allInstances.map(function(x) { return x.name; }).join(", ") });
+  figma.ui.postMessage({
+    type: "debug",
+    message:
+      "Mainnav: " +
+      navItems.length +
+      " DOM nav items, " +
+      navInstances.length +
+      " Figma 'Nav N' instances, " +
+      endSlotChildren.length +
+      " end slot children"
+  });
+  figma.ui.postMessage({
+    type: "debug",
+    message:
+      "Mainnav instance names: " +
+      allInstances
+        .map(function (x) {
+          return x.name;
+        })
+        .join(", ")
+  });
   // Log all component properties of the mainnav itself
   var mainProps = instance.componentProperties || {};
   var propDump = [];
@@ -1470,9 +1502,7 @@ async function applyMainnavContent(instance, data, config) {
     // 2 items → first to Action on left, second to Action on right
     var actionSlots;
     if (endSlotChildren.length === 1) {
-      actionSlots = [
-        { booleanKey: "Action on right#29312:0", instanceName: "Action on right" }
-      ];
+      actionSlots = [{ booleanKey: "Action on right#29312:0", instanceName: "Action on right" }];
     } else {
       actionSlots = [
         { booleanKey: "Action on left#29312:4", instanceName: "Action on left" },
@@ -1589,6 +1619,14 @@ async function applyItemPattern(instance, data, config) {
     if (itemAttrs.open !== undefined || itemAttrs.open === true || itemAttrs.open === "") {
       try {
         itemInstance.setProperties({ Expand: "True" });
+      } catch (e) {}
+    }
+
+    // Apply disabled state (variantProp on item instance)
+    if (config.itemProps.disabled && (itemAttrs.disabled === true || itemAttrs.disabled === "")) {
+      var disabledConfig = config.itemProps.disabled;
+      try {
+        itemInstance.setProperties(makeProps(disabledConfig.variantProp, disabledConfig.variantValue));
       } catch (e) {}
     }
 
