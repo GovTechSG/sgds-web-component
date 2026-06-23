@@ -77,6 +77,9 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   /** Makes the input readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
 
+  /** Controlling of autocomplete behaviour */
+  @property({ type: String, reflect: true }) autocomplete = "on";
+
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
    * implied, allowing any numeric value. Only applies to number input types.
@@ -245,6 +248,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
           @focus=${this._handleFocus}
           @blur=${this._handleBlur}
           aria-describedby=${ifDefined(ariaDescribedBy)}
+          .autocomplete=${this.autocomplete}
         />
         ${this.type === "password" ? this._renderPasswordToggle() : nothing}
         ${this.suffix ? html`<span class="form-control-suffix">${this.suffix}</span>` : nothing}

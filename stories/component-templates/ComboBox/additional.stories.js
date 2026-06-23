@@ -489,3 +489,47 @@ export const NoValidate = {
   parameters: {},
   tags: ["!dev"]
 };
+
+const AutocompleteTemplate = () =>
+  html`
+    <div style="display:flex;flex-direction:column;gap:2rem;">
+      <div>
+        <p><strong>autocomplete="on"</strong> (default) — browser may suggest previously entered values</p>
+        <sgds-combo-box
+          name="name"
+          autocomplete="on"
+          label="Name"
+          placeholder="Select a user"
+          hintText="Browser autocomplete enabled"
+        >
+          <sgds-combo-box-option value="adamn">Adamn</sgds-combo-box-option>
+          <sgds-combo-box-option value="judy">Judy</sgds-combo-box-option>
+          <sgds-combo-box-option value="benedict">Benedict</sgds-combo-box-option>
+          <sgds-combo-box-option value="kelvin">Kelvin</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
+      <div>
+        <p><strong>autocomplete="off"</strong> — browser autocomplete suppressed</p>
+        <sgds-combo-box
+          name="name"
+          autocomplete="off"
+          label="Name"
+          placeholder="Select a user"
+          hintText="Browser autocomplete disabled"
+        >
+          <sgds-combo-box-option value="adamn">Adamn</sgds-combo-box-option>
+          <sgds-combo-box-option value="judy">Judy</sgds-combo-box-option>
+          <sgds-combo-box-option value="benedict">Benedict</sgds-combo-box-option>
+          <sgds-combo-box-option value="kelvin">Kelvin</sgds-combo-box-option>
+        </sgds-combo-box>
+      </div>
+    </div>
+  `;
+
+export const Autocomplete = {
+  render: AutocompleteTemplate.bind({}),
+  name: "Autocomplete prop",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};

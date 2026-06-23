@@ -123,6 +123,7 @@ describe("sgds-combo-box ", () => {
           <div class="combobox-input-container">
             <input
               aria-invalid="false"
+              autocomplete="on"
                 class="form-control"
               type="text"
             >

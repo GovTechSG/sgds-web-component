@@ -129,7 +129,7 @@
           for (const file of rootFiles) {
             const item = document.createElement("sgds-dropdown-item");
             const link = document.createElement("a");
-            link.href = file.url;
+            link.href = `./${file.url}`;
             link.textContent = file.title;
             item.appendChild(link);
             dropdown.appendChild(item);
@@ -302,7 +302,17 @@
           }, {});
 
           // Sort categories by appearance order
-          const categoryOrder = [null, "pattern", "blocks", "templates", "layouts", "patterns", "typography", "utility", "css"];
+          const categoryOrder = [
+            null,
+            "pattern",
+            "blocks",
+            "templates",
+            "layouts",
+            "patterns",
+            "typography",
+            "utility",
+            "css"
+          ];
 
           const sortedCategories = categoryOrder.filter(cat => groupedByFolder[cat]);
 

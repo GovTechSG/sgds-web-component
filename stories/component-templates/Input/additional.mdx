@@ -1,12 +1,12 @@
-## Password 
+## Password
 
-With the `type` prop set to `password`, a eye icon appears to allow unmasking of sensitive content in the input. 
+With the `type` prop set to `password`, a eye icon appears to allow unmasking of sensitive content in the input.
 
 <Canvas of={InputStories.PasswordInput}>
   <Story of={InputStories.PasswordInput} />
 </Canvas>
 
-## Disabled 
+## Disabled
 
 Add `disabled` prop to disabled the input
 
@@ -14,16 +14,16 @@ Add `disabled` prop to disabled the input
   <Story of={InputStories.DisabledInput} />
 </Canvas>
 
-## Invalid 
+## Invalid
 
-Add `hasFeedback` and `invalid` prop to visually enable invalid style of input. 
+Add `hasFeedback` and `invalid` prop to visually enable invalid style of input.
 Set invalid message with `invalidFeedback` prop
 
 <Canvas of={InputStories.InvalidInput}>
   <Story of={InputStories.InvalidInput} />
 </Canvas>
 
-## Valid 
+## Valid
 
 Add `hasFeedback` and `valid` prop to visually enable valid style of input
 
@@ -31,7 +31,7 @@ Add `hasFeedback` and `valid` prop to visually enable valid style of input
   <Story of={InputStories.ValidInput} />
 </Canvas>
 
-## Loading  
+## Loading
 
 Add `loading` prop to visually enable loading icon in input
 
@@ -39,7 +39,7 @@ Add `loading` prop to visually enable loading icon in input
   <Story of={InputStories.LoadingInput} />
 </Canvas>
 
-## Read only  
+## Read only
 
 Add `readonly` prop for a readonly input
 
@@ -47,7 +47,7 @@ Add `readonly` prop for a readonly input
   <Story of={InputStories.ReadonlyInput} />
 </Canvas>
 
-## Prefix and suffix 
+## Prefix and suffix
 
 Use the string type `prefix` or `suffix` prop to add more indication and meaning to the input value
 
@@ -59,9 +59,9 @@ Use the string type `prefix` or `suffix` prop to add more indication and meaning
   <Story of={InputStories.SuffixInput} />
 </Canvas>
 
-## Leading and trailing icons 
+## Leading and trailing icons
 
-Icon slots are meant to insert icons for visual and descriptive purposes. It is not intended for call to action. 
+Icon slots are meant to insert icons for visual and descriptive purposes. It is not intended for call to action.
 
 <Canvas of={InputStories.LeadingIcon}>
   <Story of={InputStories.LeadingIcon} />
@@ -81,26 +81,36 @@ Add call to action items in the `action` slot. It is recommended to use `<sgds-i
   <Story of={InputStories.Action} />
 </Canvas>
 
-## Validation 
+## Validation
 
-HTML form constraint validation is built-in. By default, there is no need to control the `invalid` prop to enable constraint validations. 
+HTML form constraint validation is built-in. By default, there is no need to control the `invalid` prop to enable constraint validations.
 
 - To enable invalid styles and feedback message set `hasFeedback="both"`
 - To enable invalid styles only, set `hasFeedback="style"`
 - To enable feedback message only, set `hasFeedback="text"`
 
-In this example, `hasFeedback` is set to `both`. Press submit to show constraint validation behaviour for `required` and `minlength=5`. 
+In this example, `hasFeedback` is set to `both`. Press submit to show constraint validation behaviour for `required` and `minlength=5`.
 Resetting the form, reset's the validity and the value of the input to its initial default value.
 
 <Canvas of={InputStories.InputValidation}>
   <Story of={InputStories.InputValidation} />
 </Canvas>
 
-### Overriding the invalid feedback message 
+### Overriding the invalid feedback message
 
-By default, the invalid feedback reflected is based on the browser's native error message based on the ValidityState.  To override the default message, 
-use `invalidFeedback` prop. 
+By default, the invalid feedback reflected is based on the browser's native error message based on the ValidityState. To override the default message,
+use `invalidFeedback` prop.
 
 <Canvas of={InputStories.OverrideInvalidFeedback}>
   <Story of={InputStories.OverrideInvalidFeedback} />
+</Canvas>
+
+## Autocomplete
+
+Use the `autocomplete` prop to control browser autocomplete behaviour on the input. It accepts any valid HTML `autocomplete` attribute value.
+
+Set `autocomplete="on"` (default) to allow the browser to suggest previously entered values. Set `autocomplete="off"` to suppress browser suggestions.
+
+<Canvas of={InputStories.Autocomplete}>
+  <Story of={InputStories.Autocomplete} />
 </Canvas>

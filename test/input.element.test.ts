@@ -15,7 +15,7 @@ describe("sgds-input", () => {
            <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
             <slot name="trailing-icon"></slot>
           </div>
           <slot name="action"></slot>
@@ -35,7 +35,7 @@ describe("sgds-input", () => {
         <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
             <span class="form-control-suffix">test</span>
             <slot name="trailing-icon"></slot>
           </div>
@@ -57,7 +57,7 @@ describe("sgds-input", () => {
             <span class="form-control-prefix">
               test
             </span>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
             <slot name="trailing-icon"></slot>
           </div>
             <slot name="action"></slot>
@@ -75,7 +75,7 @@ describe("sgds-input", () => {
           <div class="form-control-row">
             <div class="form-control-group">
               <slot name="icon"></slot>
-              <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+              <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
               <slot name="trailing-icon">
               <sgds-spinner
                 size="sm"
