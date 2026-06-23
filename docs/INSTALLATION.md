@@ -57,7 +57,7 @@ This method registers all SGDS elements up front in the Custom Elements Registry
 <link href='https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.22.0/css/sgds.css' rel='stylesheet' type='text/css' />
 
 // it is recommended to load a particular version when using cdn e.g. https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@1.0.2
-<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.22.0" async crossorigin="anonymous" integrity="sha384-WbHc3VloPtEmncz7R/X4mNQFJjfGvRfOT3ZzHowp1XqQOWQcMoOBOHShxGvh+chP"></script>
+<script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.22.0" async crossorigin="anonymous" integrity="sha384-3pcRUgrftJ8kEnqTtBst8SvBE+BaJTBMXeuQbsAAauYxE5iLvsrSkw57C5a4MjdV"></script>
 
 //or load a single component e.g. Masthead
 <script src="https://cdn.jsdelivr.net/npm/@govtechsg/sgds-web-component@3.22.0/components/Masthead/index.umd.min.js" async crossorigin="anonymous" integrity="sha384-vvllpLfJY3jG+vowUWZOJHnvtDTTdaSUOYGbiozHEq4+HESmYu0i/b2r616QoDly"></script>
