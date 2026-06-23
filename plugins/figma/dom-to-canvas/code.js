@@ -293,7 +293,7 @@ var COMPONENT_SLOT_CONFIG = {
   },
   "sgds-alert": {
     slots: {
-      action: { booleanKey: "🔷 Action slot#29246:0", swapKey: "↳ Swap instance#29246:11" }
+      action: { booleanKey: "🔷 Action slot#29246:0", instanceName: ".slot" }
     },
     textProps: {
       title: { key: "↳ Edit text#15588:34", booleanKey: "Title#15588:17" },
@@ -475,7 +475,7 @@ var COMPONENT_SLOT_CONFIG = {
   "sgds-mainnav": {
     slots: {
       brand: { swapKey: "Product logo#19005:129" },
-      slot: { booleanKey: "🔷 Slot#29312:8" }
+      end: { booleanKey: "🔷 Slot#29312:8" }
     },
     textProps: {}
   },
@@ -603,14 +603,7 @@ function isSgdsComponent(tag) {
 }
 
 // Check if sgds-masthead should be skipped (Main Nav component already includes it)
-function shouldSkipMasthead(data, parent) {
-  if (data.tag !== "sgds-masthead") return false;
-  // If sgds-mainnav is a sibling, skip masthead since Main Nav includes it
-  if (parent && parent._childTags) {
-    return parent._childTags.indexOf("sgds-mainnav") >= 0;
-  }
-  return false;
-}
+// (shouldSkipMasthead removed — masthead is always created separately)
 
 // Import and create an SGDS component instance
 async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) {
@@ -711,10 +704,15 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   var posX = (data.x || 0) - parentX;
   var posY = (data.y || 0) - parentY;
 
-  // If this is sgds-mainnav and sgds-masthead was skipped (because Main Nav includes it),
-  // position at y:0 since the component renders its own banner
-  if (data.tag === "sgds-mainnav" && siblingTags && siblingTags.indexOf("sgds-masthead") >= 0) {
-    posY = 0;
+
+  // Mainnav: store sibling tags and always hide the nested banner
+  // (Official Government Banner is a separate component — sgds-masthead handles it)
+  if (data.tag === "sgds-mainnav") {
+    data._siblingTags = siblingTags || [];
+    var banner = instance.findOne(function (n) {
+      return n.name === "Official Government Banner" && n.type === "INSTANCE";
+    });
+    if (banner) banner.visible = false;
   }
 
   instance.x = posX;
@@ -1034,7 +1032,7 @@ var COMPONENT_TEXT_PROPS = {
 };
 
 // Apply text to a slotted component instance after it's been swapped in
-async function applySlottedComponentText(instance, tag, text) {
+async function applySlottedComponentText(instance, tag, text, childData) {
   var textPropKey = COMPONENT_TEXT_PROPS[tag];
   if (textPropKey && text) {
     try {
@@ -1043,6 +1041,38 @@ async function applySlottedComponentText(instance, tag, text) {
       props[textPropKey] = text;
       instance.setProperties(props);
     } catch (e) {}
+  }
+
+  // Badge: hide icon if no sgds-icon child with slot="icon" in the DOM
+  if (tag === "sgds-badge" && instance) {
+    var hasIcon = false;
+    if (childData && childData.children) {
+      for (var bi = 0; bi < childData.children.length; bi++) {
+        var bc = childData.children[bi];
+        if (bc.tag === "sgds-icon" && bc.slot === "icon") {
+          hasIcon = true;
+          break;
+        }
+      }
+    }
+    if (!hasIcon) {
+      try {
+        // Find the icon boolean property key (e.g. "Icon#xxxxx:x")
+        var badgeProps = instance.componentProperties || {};
+        var iconKey = null;
+        for (var bpk in badgeProps) {
+          if (bpk.indexOf("Icon") === 0 && badgeProps[bpk].type === "BOOLEAN") {
+            iconKey = bpk;
+            break;
+          }
+        }
+        if (iconKey) {
+          var iconProps = {};
+          iconProps[iconKey] = false;
+          instance.setProperties(iconProps);
+        }
+      } catch (e) {}
+    }
   }
 }
 
@@ -1101,6 +1131,9 @@ async function applySlotContent(instance, data, config) {
   // --- Apply INSTANCE_SWAP slots ---
   if (config.slots) {
     for (var slotName in config.slots) {
+      // Skip mainnav slots — handled by applyMainnavContent
+      if (data.tag === "sgds-mainnav" && (slotName === "end" || slotName === "brand")) continue;
+
       var slotConfig = config.slots[slotName];
       var slotChild = slotChildren[slotName];
       if (!slotChild) continue;
@@ -1123,6 +1156,24 @@ async function applySlotContent(instance, data, config) {
           if (slotConfig.frameName) {
             swapped = await swapSlotInstance(instance, slotConfig.frameName, component);
           }
+          if (!swapped && slotConfig.instanceName) {
+            // Find nested instance by name and swapComponent directly
+            var slotInstance = instance.findOne(function (n) {
+              return n.name === slotConfig.instanceName && n.type === "INSTANCE";
+            });
+            if (!slotInstance) {
+              // Fallback: search for any instance whose name contains the slot name
+              slotInstance = instance.findOne(function (n) {
+                return n.type === "INSTANCE" && n.name.toLowerCase().indexOf("action") >= 0;
+              });
+            }
+            if (slotInstance) {
+              try {
+                slotInstance.swapComponent(component);
+                swapped = true;
+              } catch (e) {}
+            }
+          }
           if (!swapped && slotConfig.swapKey) {
             try {
               target.setProperties(makeProps(slotConfig.swapKey, component));
@@ -1135,7 +1186,7 @@ async function applySlotContent(instance, data, config) {
             if (label) {
               var swappedInst = findSwappedInstance(instance, SGDS_COMPONENT_MAP[slotChild.tag].key);
               if (swappedInst) {
-                await applySlottedComponentText(swappedInst, slotChild.tag, label);
+                await applySlottedComponentText(swappedInst, slotChild.tag, label, slotChild);
               }
             }
           }
@@ -1260,6 +1311,214 @@ async function applySlotContent(instance, data, config) {
   if (config.itemPattern && config.itemProps && data.children) {
     await applyItemPattern(instance, data, config);
   }
+
+  // --- Mainnav-specific: nav items, end slot, brand ---
+  if (data.tag === "sgds-mainnav" && data.children) {
+    await applyMainnavContent(instance, data, config);
+  }
+}
+
+// Apply mainnav-specific content: nav item labels, end slot, submenu booleans
+async function applyMainnavContent(instance, data, config) {
+  if (!data.children) return;
+
+  try {
+    await figma.loadFontAsync({ family: "Inter", style: "Semi Bold" });
+    await figma.loadFontAsync({ family: "Inter", style: "Regular" });
+  } catch (e) {}
+
+  // Separate children: brand, nav items, end slot
+  var navItems = [];
+  var endSlotChildren = [];
+  var brandChild = null;
+  for (var i = 0; i < data.children.length; i++) {
+    var child = data.children[i];
+    if (child.slot === "end") {
+      endSlotChildren.push(child);
+    } else if (child.slot === "brand") {
+      brandChild = child;
+    } else if (child.tag === "sgds-mainnav-item" || child.tag === "sgds-mainnav-dropdown") {
+      navItems.push(child);
+    }
+  }
+
+  // --- Brand slot: create image component and swap into Product logo ---
+  if (brandChild && brandChild.type === "image" && brandChild.imageSrc) {
+    try {
+      var logoImage = await figma.createImageAsync(brandChild.imageSrc);
+      var logoComp = figma.createComponent();
+      logoComp.name = "Brand Logo";
+      logoComp.resize(brandChild.width || 130, brandChild.height || 40);
+      logoComp.fills = [{ type: "IMAGE", imageHash: logoImage.hash, scaleMode: "FIT" }];
+
+      // Find the "Link" instance (Product logo) and swapComponent
+      var logoTarget = instance.findOne(function (n) {
+        return n.name === "Link" && n.type === "INSTANCE";
+      });
+      if (logoTarget) {
+        logoTarget.swapComponent(logoComp);
+      } else {
+        figma.ui.postMessage({ type: "debug", message: "Brand logo: 'Link' instance not found" });
+        logoComp.remove();
+      }
+    } catch (e) {
+      figma.ui.postMessage({ type: "debug", message: "Brand logo failed: " + e.message });
+    }
+  }
+
+  // Official Government Banner visibility is handled in createSgdsComponent (immediate hide)
+
+  // --- Nav items: find "Nav N" instances and apply labels ---
+  // Search all nested instances — Nav items may be deeply nested in the component tree
+  var allInstances = instance.findAllWithCriteria({ types: ["INSTANCE"] });
+  var navInstances = [];
+  for (var ni = 0; ni < allInstances.length; ni++) {
+    var inst = allInstances[ni];
+    // Match instances named "↳ Nav N" (e.g. "↳ Nav 1", "↳ Nav 2") anywhere in tree
+    if (/^↳ Nav \d+$/.test(inst.name)) {
+      navInstances.push(inst);
+    }
+  }
+
+  // Sort by number
+  navInstances.sort(function (a, b) {
+    var numA = parseInt(a.name.replace(/\D/g, "")) || 0;
+    var numB = parseInt(b.name.replace(/\D/g, "")) || 0;
+    return numA - numB;
+  });
+
+  // Debug: dump all instance properties for the mainnav
+  figma.ui.postMessage({ type: "debug", message: "Mainnav: " + navItems.length + " DOM nav items, " + navInstances.length + " Figma 'Nav N' instances, " + endSlotChildren.length + " end slot children" });
+  figma.ui.postMessage({ type: "debug", message: "Mainnav instance names: " + allInstances.map(function(x) { return x.name; }).join(", ") });
+  // Log all component properties of the mainnav itself
+  var mainProps = instance.componentProperties || {};
+  var propDump = [];
+  for (var dpk in mainProps) {
+    propDump.push(dpk + " (" + mainProps[dpk].type + ")");
+  }
+  figma.ui.postMessage({ type: "debug", message: "Mainnav props: " + propDump.join(" | ") });
+  // Log properties of first Nav instance
+  if (navInstances.length > 0) {
+    var navPropDump = [];
+    var nav1Props = navInstances[0].componentProperties || {};
+    for (var npk in nav1Props) {
+      navPropDump.push(npk + " (" + nav1Props[npk].type + ")");
+    }
+    figma.ui.postMessage({ type: "debug", message: "Nav 1 props: " + navPropDump.join(" | ") });
+  }
+
+  // Apply labels and submenu booleans
+  for (var idx = 0; idx < navItems.length && idx < navInstances.length; idx++) {
+    var navItem = navItems[idx];
+    var navInstance = navInstances[idx];
+
+    // Extract label text
+    var labelText = "";
+    if (navItem.tag === "sgds-mainnav-item") {
+      // Get text from <a> child or direct text
+      labelText = navItem.text || collectFirstText(navItem);
+    } else if (navItem.tag === "sgds-mainnav-dropdown") {
+      // Get text from <span slot="toggler"> or first text
+      if (navItem.children) {
+        for (var ti = 0; ti < navItem.children.length; ti++) {
+          var togglerChild = navItem.children[ti];
+          if (togglerChild.slot === "toggler") {
+            labelText = togglerChild.text || collectFirstText(togglerChild);
+            break;
+          }
+        }
+      }
+      if (!labelText) labelText = collectFirstText(navItem);
+    }
+
+    // Set label text
+    if (labelText) {
+      try {
+        navInstance.setProperties({ "Edit nav label#18455:44": labelText });
+      } catch (e) {}
+    }
+
+    // Set submenu boolean for dropdowns
+    if (navItem.tag === "sgds-mainnav-dropdown") {
+      try {
+        navInstance.setProperties({ "Submenu#18409:25": true });
+      } catch (e) {}
+    }
+  }
+
+  // Hide unused nav instances
+  for (var hi = navItems.length; hi < navInstances.length; hi++) {
+    navInstances[hi].visible = false;
+  }
+
+  // --- End slot (slot="end"): toggle 🔷 Slot boolean ---
+  if (endSlotChildren.length === 0) {
+    // No end slot in DOM — explicitly hide the Slot area in Figma
+    try {
+      instance.setProperties({ "🔷 Slot#29312:8": false });
+    } catch (e) {}
+  }
+
+  if (endSlotChildren.length > 0) {
+    // Enable the Slot boolean
+    try {
+      instance.setProperties({ "🔷 Slot#29312:8": true });
+    } catch (e) {}
+
+    // Determine action slot assignment:
+    // 1 item → Action on right only
+    // 2 items → first to Action on left, second to Action on right
+    var actionSlots;
+    if (endSlotChildren.length === 1) {
+      actionSlots = [
+        { booleanKey: "Action on right#29312:0", instanceName: "Action on right" }
+      ];
+    } else {
+      actionSlots = [
+        { booleanKey: "Action on left#29312:4", instanceName: "Action on left" },
+        { booleanKey: "Action on right#29312:0", instanceName: "Action on right" }
+      ];
+    }
+
+    for (var ei = 0; ei < endSlotChildren.length && ei < actionSlots.length; ei++) {
+      var endChild = endSlotChildren[ei];
+      var actionSlot = actionSlots[ei];
+
+      // Enable the action boolean
+      try {
+        instance.setProperties(makeProps(actionSlot.booleanKey, true));
+      } catch (e) {}
+
+      // TODO: sgds-mainnav-item and sgds-mainnav-dropdown in slot="end" cannot be
+      // swapped into the Slot area — Figma library limitation (nav menus are not
+      // sub-components). Only sgds-button/sgds-icon-button can be swapped.
+      if (endChild.tag === "sgds-mainnav-item" || endChild.tag === "sgds-mainnav-dropdown") {
+        // Skip — not supported by Figma library
+      } else if (endChild.tag && isSgdsComponent(endChild.tag)) {
+        // SGDS component end slot (e.g. sgds-button): swap via swapComponent on action instance
+        var endComponent = await importSlottedComponent(endChild);
+        if (endComponent) {
+          // Find the action instance node and swapComponent on it
+          var actionInstance = instance.findOne(function (n) {
+            return n.name === actionSlot.instanceName && n.type === "INSTANCE";
+          });
+          if (actionInstance) {
+            try {
+              actionInstance.swapComponent(endComponent);
+            } catch (e) {
+              figma.ui.postMessage({ type: "debug", message: "End slot swapComponent failed: " + e.message });
+            }
+
+            // Apply text to the swapped instance
+            var endLabel = endChild.text || collectFirstText(endChild);
+            if (endLabel) {
+              await applySlottedComponentText(actionInstance, endChild.tag, endLabel, endChild);
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 // Apply content to repeated item instances (accordion items, icon list items, etc.)
@@ -1354,6 +1613,11 @@ async function applyItemPattern(instance, data, config) {
       // The Figma accordion item shows/hides content based on Expand state
     }
   }
+
+  // Hide unused instances beyond the DOM item count
+  for (var hi = items.length; hi < numberedInstances.length; hi++) {
+    numberedInstances[hi].visible = false;
+  }
 }
 
 // Card-specific heuristic: classify by font size/weight when no slot attrs present
@@ -1410,7 +1674,7 @@ async function applyCardContentHeuristic(instance, data, config, target) {
               var badgeLabel = child.text || collectFirstText(child);
               if (badgeLabel) {
                 var badgeInst = findSwappedInstance(instance, SGDS_COMPONENT_MAP["sgds-badge"].key);
-                if (badgeInst) await applySlottedComponentText(badgeInst, "sgds-badge", badgeLabel);
+                if (badgeInst) await applySlottedComponentText(badgeInst, "sgds-badge", badgeLabel, child);
               }
             }
           }
@@ -1657,7 +1921,7 @@ async function applyCardContent(instance, data) {
           if (label) {
             var badgeInstance = findSwappedInstance(instance, SGDS_COMPONENT_MAP[upperChild.tag].key);
             if (badgeInstance) {
-              await applySlottedComponentText(badgeInstance, upperChild.tag, label);
+              await applySlottedComponentText(badgeInstance, upperChild.tag, label, upperChild);
             }
           }
         } else {
@@ -1733,7 +1997,7 @@ async function applyCardContent(instance, data) {
             if (lowerLabel) {
               var lowerBadgeInstance = findSwappedInstance(instance, SGDS_COMPONENT_MAP[lowerChild.tag].key);
               if (lowerBadgeInstance) {
-                await applySlottedComponentText(lowerBadgeInstance, lowerChild.tag, lowerLabel);
+                await applySlottedComponentText(lowerBadgeInstance, lowerChild.tag, lowerLabel, lowerChild);
               }
             }
           }
@@ -1960,10 +2224,8 @@ async function applyBadgeContent(instance, data) {
 async function createNode(data, parent, parentX, parentY, siblingTags) {
   if (!data || !data.type) return null;
 
-  // Skip sgds-masthead if sgds-mainnav is a sibling (Main Nav already includes banner)
-  if (data.tag === "sgds-masthead" && siblingTags && siblingTags.indexOf("sgds-mainnav") >= 0) {
-    return null;
-  }
+  // sgds-masthead is always created as a separate component instance if present in DOM
+  // (the nested banner inside Main Nav is always hidden)
 
   // Skip overlay elements — apply as fill on parent instead of creating child frame
   // Overlays are position:absolute in CSS and same size as parent (they shouldn't be in auto-layout)
