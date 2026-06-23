@@ -45,8 +45,9 @@ export const Placement = {
   parameters: {
     docs: {
       story: {
-        height: "500px"
-      , controls: { disable: true } }
+        height: "500px",
+        controls: { disable: true }
+      }
     }
   }
 };
@@ -96,8 +97,9 @@ export const Sizes = {
   parameters: {
     docs: {
       story: {
-        height: "500px"
-      , controls: { disable: true } }
+        height: "500px",
+        controls: { disable: true }
+      }
     }
   }
 };

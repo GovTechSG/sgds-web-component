@@ -21,8 +21,9 @@ export const Overflow = {
   parameters: {
     docs: {
       story: {
-        height: "500px"
-      , controls: { disable: true } }
+        height: "500px",
+        controls: { disable: true }
+      }
     }
   }
 };

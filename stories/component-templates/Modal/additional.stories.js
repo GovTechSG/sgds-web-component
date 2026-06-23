@@ -110,8 +110,9 @@ export const SmallSize = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
-      , controls: { disable: true } }
+        height: "700px",
+        controls: { disable: true }
+      }
     }
   }
 };
@@ -123,8 +124,9 @@ export const MediumSize = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
-      , controls: { disable: true } }
+        height: "700px",
+        controls: { disable: true }
+      }
     }
   }
 };
@@ -136,8 +138,9 @@ export const LargeSize = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
-      , controls: { disable: true } }
+        height: "700px",
+        controls: { disable: true }
+      }
     }
   }
 };
@@ -149,8 +152,9 @@ export const ExtraLargeSize = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
-      , controls: { disable: true } }
+        height: "700px",
+        controls: { disable: true }
+      }
     }
   }
 };
@@ -162,8 +166,9 @@ export const FullscreenSize = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
-      , controls: { disable: true } }
+        height: "700px",
+        controls: { disable: true }
+      }
     }
   }
 };
@@ -176,8 +181,9 @@ export const LongContent = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
-      , controls: { disable: true } }
+        height: "700px",
+        controls: { disable: true }
+      }
     }
   }
 };
@@ -190,8 +196,9 @@ export const noAnimation = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
-      , controls: { disable: true } }
+        height: "700px",
+        controls: { disable: true }
+      }
     }
   }
 };
@@ -201,7 +208,7 @@ export const PreventClose = {
   name: "Prevent close",
   args: {},
   parameters: {
-    chromatic: { disableSnapshot: true , controls: { disable: true } },
+    chromatic: { disableSnapshot: true, controls: { disable: true } },
     layout: "fullscreen",
     docs: {
       story: {
@@ -233,8 +240,9 @@ export const NoCloseButton = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
-      , controls: { disable: true } }
+        height: "700px",
+        controls: { disable: true }
+      }
     }
   }
 };

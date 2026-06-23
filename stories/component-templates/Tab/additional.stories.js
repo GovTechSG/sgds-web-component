@@ -95,6 +95,6 @@ export const Events = {
   name: "Tab events",
   args: {},
   parameters: {
-    chromatic: { disableSnapshot: true , controls: { disable: true } }
+    chromatic: { disableSnapshot: true, controls: { disable: true } }
   }
 };

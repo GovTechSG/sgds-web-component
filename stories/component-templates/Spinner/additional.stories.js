@@ -27,7 +27,7 @@ export const Tone = {
   name: "Tone",
   args: {},
   parameters: {
-    backgrounds: { default: "custom-blue" , controls: { disable: true } }
+    backgrounds: { default: "custom-blue", controls: { disable: true } }
   }
 };
 export const ToneInverseFixedLight = {
