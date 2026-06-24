@@ -40,8 +40,7 @@ export const SgdsSelectClose = {
   args: {},
   parameters: {
     chromatic: { disableSnapshot: true }
-  },
-  tags: ["!dev"]
+  }
 };
 
 const SgdsSelectEventTemplate = args => {
@@ -74,8 +73,7 @@ export const SgdsSelectEvent = {
   args: {},
   parameters: {
     chromatic: { disableSnapshot: true }
-  },
-  tags: ["!dev"]
+  }
 };
 
 const SgdsSelectDropdownItemTemplate = args => {
@@ -149,6 +147,5 @@ export const SgdsSelectDropdownItem = {
   args: {},
   parameters: {
     chromatic: { disableSnapshot: true }
-  },
-  tags: ["!dev"]
+  }
 };

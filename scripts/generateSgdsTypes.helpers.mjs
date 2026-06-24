@@ -18,9 +18,15 @@ export function toPropsInterface(className) {
   return `${className}Props`;
 }
 
-/** React: "sgds-input" → `"onsgds-input"` */
+/** React: "sgds-input" → `"onsgds-input"` (kebab-case, for React 19 intrinsic elements) */
 export function toReactEventPropKey(eventName) {
   return `"on${eventName}"`;
+}
+
+/** React: "sgds-change" → `onSgdsChange` (camelCase, for @lit/react wrapper components) */
+export function toCamelCaseEventPropKey(eventName) {
+  const camel = eventName.replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+  return `on${camel.charAt(0).toUpperCase()}${camel.slice(1)}`;
 }
 
 /** Returns true when a CEM member should appear as a prop in the generated interface. */

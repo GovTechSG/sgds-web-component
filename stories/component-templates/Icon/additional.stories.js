@@ -22,14 +22,12 @@ export const Size = {
   render: SizeTemplate.bind({}),
   name: "Size",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Color = {
   render: ColorTemplate.bind({}),
   name: "Color",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

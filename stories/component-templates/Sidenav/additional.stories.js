@@ -93,65 +93,56 @@ export const SidenavItemAsLink = {
   render: SidenavItemAsLinkTemplate.bind({}),
   name: "SidenavItem as first level link",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const SidenavItemAsMenu = {
   render: SidenavItemAsMenuTemplate.bind({}),
   name: "SidenavItem as menu",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const EmbeddedMenu = {
   render: EmbeddedMenuTemplate.bind({}),
   name: "SidenavItem as an embedded menu",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const IconsOnFirstLevel = {
   render: IconTemplate.bind({}),
   name: "Icons",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const ActiveLinkState = {
   render: Template.bind({}),
   name: "Active sidenav link",
   args: { ...args, activeSNL: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const ActiveaSidenavItemAsLinkState = {
   render: Template.bind({}),
   name: "Active sidenav item as a link",
   args: { ...args, activeSNIAsLink: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const ActiveaSidenavItemAsMenu = {
   render: Template.bind({}),
   name: "Active sidenav item as a menu",
   args: { ...args, active: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const DisabledItem = {
   render: DisabledTemplate.bind({}),
   name: "Disabled sidenav item",
   args: { ...args, active: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const DisabledLink = {
   render: DisabledLinkTemplate.bind({}),
   name: "Disabled sidenav link",
   args: { ...args, active: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

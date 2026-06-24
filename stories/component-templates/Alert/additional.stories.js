@@ -117,48 +117,42 @@ export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variants",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const OutlinedVariants = {
   render: OutlinedVariantTemplate.bind({}),
   name: "Outlined variants",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Dismissible = {
   render: DismissibleTemplate.bind({}),
   name: "Dismissible",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const WithIcon = {
   render: IconTemplate.bind({}),
   name: "Icon",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const WithTitle = {
   render: TitleTemplate.bind({}),
   name: "Title",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const WithLink = {
   render: LinkTemplate.bind({}),
   name: "Link",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const FilledActionTemplate = args => {
@@ -222,14 +216,12 @@ export const FilledWithAction = {
   render: FilledActionTemplate.bind({}),
   name: "Filled with action",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const OutlinedWithAction = {
   render: OutlinedActionTemplate.bind({}),
   name: "Outlined with action",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
