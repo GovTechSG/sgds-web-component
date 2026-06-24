@@ -1,3 +1,12 @@
+## v3.22.1 (2026-06-24)
+
+### Fix
+
+- **Card**: only stretchedLink cards get hover effects [skip-cd][run-chromatic] (#718)
+- **React**: recommendations for react ssr users and types definition to support camelCase events  (#717)
+- **React**: recommendations for react ssr users and types definition to support camelCase evetns
+- **Card**: only stretchedLink cards get hover effects
+
 ## v3.22.0 (2026-06-23)
 
 ### Feat
