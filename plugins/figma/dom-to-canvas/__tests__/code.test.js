@@ -16,9 +16,12 @@ const configEnd = codeJs.indexOf("figma.ui.onmessage");
 const configSection = codeJs.substring(0, configEnd);
 
 // Eval into global scope (var in eval creates globals in non-strict mode)
-const evalFn = new Function(configSection + `
+const evalFn = new Function(
+  configSection +
+    `
   return { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG };
-`);
+`
+);
 const { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG } = evalFn();
 
 // Extract classifySlots function from code.js
@@ -43,7 +46,11 @@ function buildVariantCriteria(data) {
     if (propName) {
       const value = attrs[attrName];
       if (value === true || value === "") {
-        criteria[propName] = "True";
+        // Only map to "True" for genuinely boolean Figma props
+        const BOOLEAN_FIGMA_PROPS = ["Outlined", "Dismissible"];
+        if (BOOLEAN_FIGMA_PROPS.indexOf(propName) >= 0) {
+          criteria[propName] = "True";
+        }
       } else if (value === false || value === "false") {
         criteria[propName] = "False";
       } else {
@@ -58,7 +65,7 @@ function buildVariantCriteria(data) {
 
   if (slotConfig && slotConfig.childCountVariant && data.children) {
     const ccv = slotConfig.childCountVariant;
-    const count = data.children.filter((c) => c.tag === ccv.childTag).length;
+    const count = data.children.filter(c => c.tag === ccv.childTag).length;
     if (count > 0) criteria[ccv.prop] = String(count);
   }
 
@@ -83,10 +90,7 @@ function resolveTextProp(data, textSlot, textConfig) {
     textValue = typeof attrVal === "string" && attrVal ? attrVal : "";
   } else if (textSlot === "default") {
     const defaultChildren = Array.isArray(textChild) ? textChild : textChild ? [textChild] : [];
-    const finalChildren =
-      defaultChildren.length > 0
-        ? defaultChildren
-        : (data.children || []).filter((c) => !c.slot);
+    const finalChildren = defaultChildren.length > 0 ? defaultChildren : (data.children || []).filter(c => !c.slot);
     if (finalChildren.length > 0) {
       const segments = [];
       let cursor = 0;
@@ -122,7 +126,17 @@ function resolveTextProp(data, textSlot, textConfig) {
 
 describe("ATTR_TO_VARIANT_PROP", () => {
   it("contains all expected DOM attribute keys", () => {
-    const expected = ["variant", "size", "tone", "density", "orientation", "thickness", "outlined", "dismissible", "state"];
+    const expected = [
+      "variant",
+      "size",
+      "tone",
+      "density",
+      "orientation",
+      "thickness",
+      "outlined",
+      "dismissible",
+      "state"
+    ];
     for (const key of expected) {
       assert.ok(ATTR_TO_VARIANT_PROP[key], `Missing key: ${key}`);
     }
@@ -169,7 +183,11 @@ describe("Variant matching (buildVariantCriteria)", () => {
   });
 
   it("button: ghost + fixed-light + sm", () => {
-    const r = buildVariantCriteria({ tag: "sgds-button", attrs: { variant: "ghost", tone: "fixed-light", size: "sm" }, children: [] });
+    const r = buildVariantCriteria({
+      tag: "sgds-button",
+      attrs: { variant: "ghost", tone: "fixed-light", size: "sm" },
+      children: []
+    });
     assert.equal(r.Variant, "ghost (tertiary)");
     assert.equal(r.Tone, "fixed light (white)");
     assert.equal(r.Size, "sm");
@@ -186,7 +204,11 @@ describe("Variant matching (buildVariantCriteria)", () => {
   });
 
   it("accordion: attrOverrides (variant=border → Border=True)", () => {
-    const r = buildVariantCriteria({ tag: "sgds-accordion", attrs: { variant: "border", density: "compact" }, children: [] });
+    const r = buildVariantCriteria({
+      tag: "sgds-accordion",
+      attrs: { variant: "border", density: "compact" },
+      children: []
+    });
     assert.equal(r.Border, "True");
     assert.equal(r.Density, "compact");
     assert.equal(r.Variant, undefined);
@@ -199,9 +221,32 @@ describe("Variant matching (buildVariantCriteria)", () => {
   });
 
   it("divider: thickness + orientation", () => {
-    const r = buildVariantCriteria({ tag: "sgds-divider", attrs: { thickness: "thin", orientation: "vertical" }, children: [] });
+    const r = buildVariantCriteria({
+      tag: "sgds-divider",
+      attrs: { thickness: "thin", orientation: "vertical" },
+      children: []
+    });
     assert.equal(r.Thickness, "thin (default)");
     assert.equal(r.Orientation, "vertical");
+  });
+
+  it("enum props with boolean true (attr present without value) → skipped, not mapped to True", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-accordion",
+      attrs: { variant: true, density: true },
+      children: [
+        { tag: "sgds-accordion-item" },
+        { tag: "sgds-accordion-item" },
+        { tag: "sgds-accordion-item" },
+      ],
+    });
+    // density=true should NOT produce Density:"True" — it should be skipped
+    assert.equal(r.Density, undefined);
+    // variant=true goes through attrOverrides but finds no match → should not produce any variant criteria
+    assert.equal(r.Variant, undefined);
+    assert.equal(r.Border, undefined);
+    // childCountVariant should still work
+    assert.equal(r["No. of item"], "3");
   });
 
   it("boolean defaults: absent dismissible/outlined → False", () => {
@@ -214,30 +259,42 @@ describe("Variant matching (buildVariantCriteria)", () => {
 describe("childCountVariant", () => {
   it("accordion: 3 items → No. of item = 3", () => {
     const r = buildVariantCriteria({
-      tag: "sgds-accordion", attrs: { variant: "default" },
-      children: [{ tag: "sgds-accordion-item" }, { tag: "sgds-accordion-item" }, { tag: "sgds-accordion-item" }],
+      tag: "sgds-accordion",
+      attrs: { variant: "default" },
+      children: [{ tag: "sgds-accordion-item" }, { tag: "sgds-accordion-item" }, { tag: "sgds-accordion-item" }]
     });
     assert.equal(r["No. of item"], "3");
   });
 
   it("breadcrumb: 4 items → No. of link = 4", () => {
     const r = buildVariantCriteria({
-      tag: "sgds-breadcrumb", attrs: {},
-      children: [{ tag: "sgds-breadcrumb-item" }, { tag: "sgds-breadcrumb-item" }, { tag: "sgds-breadcrumb-item" }, { tag: "sgds-breadcrumb-item" }],
+      tag: "sgds-breadcrumb",
+      attrs: {},
+      children: [
+        { tag: "sgds-breadcrumb-item" },
+        { tag: "sgds-breadcrumb-item" },
+        { tag: "sgds-breadcrumb-item" },
+        { tag: "sgds-breadcrumb-item" }
+      ]
     });
     assert.equal(r["No. of link"], "4");
   });
 
   it("stepper: 5 items → No. of step = 5", () => {
     const r = buildVariantCriteria({
-      tag: "sgds-stepper", attrs: {},
-      children: Array(5).fill({ tag: "sgds-stepper-item" }),
+      tag: "sgds-stepper",
+      attrs: {},
+      children: Array(5).fill({ tag: "sgds-stepper-item" })
     });
     assert.equal(r["No. of step"], "5");
   });
 
   it("component without childCountVariant adds no extra criteria", () => {
-    const r = buildVariantCriteria({ tag: "sgds-button", attrs: { variant: "primary" }, children: [{ tag: "sgds-icon" }] });
+    const r = buildVariantCriteria({
+      tag: "sgds-button",
+      attrs: { variant: "primary" },
+      children: [{ tag: "sgds-icon" }]
+    });
     assert.equal(r["No. of item"], undefined);
     assert.equal(r["No. of link"], undefined);
   });
@@ -245,25 +302,26 @@ describe("childCountVariant", () => {
 
 describe("Text property resolution", () => {
   it("source attr:title with string → returns the string", () => {
-    const { textValue } = resolveTextProp(
-      { tag: "sgds-alert", attrs: { title: "My Title" }, children: [] },
-      "title", { key: "t", source: "attr:title" }
-    );
+    const { textValue } = resolveTextProp({ tag: "sgds-alert", attrs: { title: "My Title" }, children: [] }, "title", {
+      key: "t",
+      source: "attr:title"
+    });
     assert.equal(textValue, "My Title");
   });
 
   it("source attr:title with boolean true → returns empty", () => {
-    const { textValue } = resolveTextProp(
-      { tag: "sgds-alert", attrs: { title: true }, children: [] },
-      "title", { key: "t", source: "attr:title" }
-    );
+    const { textValue } = resolveTextProp({ tag: "sgds-alert", attrs: { title: true }, children: [] }, "title", {
+      key: "t",
+      source: "attr:title"
+    });
     assert.equal(textValue, "");
   });
 
   it("default slot with single text child → no underline", () => {
     const { textValue, underlineRanges } = resolveTextProp(
       { tag: "sgds-alert", attrs: {}, children: [{ tag: "#text", text: "Hello world" }] },
-      "default", { key: "t" }
+      "default",
+      { key: "t" }
     );
     assert.equal(textValue, "Hello world");
     assert.equal(underlineRanges.length, 0);
@@ -272,7 +330,8 @@ describe("Text property resolution", () => {
   it("default slot with <a> child → underline range", () => {
     const { textValue, underlineRanges } = resolveTextProp(
       { tag: "sgds-alert", attrs: {}, children: [{ tag: "a", text: "click me" }] },
-      "default", { key: "t" }
+      "default",
+      { key: "t" }
     );
     assert.equal(textValue, "click me");
     assert.deepEqual(underlineRanges, [{ start: 0, end: 8 }]);
@@ -281,14 +340,16 @@ describe("Text property resolution", () => {
   it("default slot mixed content [#text, a, #text] → correct underline offset", () => {
     const { textValue, underlineRanges } = resolveTextProp(
       {
-        tag: "sgds-alert", attrs: {},
+        tag: "sgds-alert",
+        attrs: {},
         children: [
           { tag: "#text", text: "Alert with no leading" },
           { tag: "a", text: "icon" },
-          { tag: "#text", text: "and extra text" },
-        ],
+          { tag: "#text", text: "and extra text" }
+        ]
       },
-      "default", { key: "t" }
+      "default",
+      { key: "t" }
     );
     assert.equal(textValue, "Alert with no leading icon and extra text");
     assert.deepEqual(underlineRanges, [{ start: 22, end: 26 }]);
@@ -297,13 +358,15 @@ describe("Text property resolution", () => {
   it("named slot (header) → returns text from that slot child", () => {
     const { textValue } = resolveTextProp(
       {
-        tag: "sgds-accordion-item", attrs: {},
+        tag: "sgds-accordion-item",
+        attrs: {},
         children: [
           { tag: "div", slot: "header", text: "Accordion title" },
-          { tag: "div", slot: "content", text: "Body" },
-        ],
+          { tag: "div", slot: "content", text: "Body" }
+        ]
       },
-      "header", { key: "t" }
+      "header",
+      { key: "t" }
     );
     assert.equal(textValue, "Accordion title");
   });
@@ -322,18 +385,18 @@ describe("Slot boolean toggling logic", () => {
   });
 
   it("title attr string → text resolves non-empty (boolean enabled)", () => {
-    const { textValue } = resolveTextProp(
-      { tag: "sgds-alert", attrs: { title: "Title" }, children: [] },
-      "title", { key: "t", source: "attr:title" }
-    );
+    const { textValue } = resolveTextProp({ tag: "sgds-alert", attrs: { title: "Title" }, children: [] }, "title", {
+      key: "t",
+      source: "attr:title"
+    });
     assert.ok(textValue);
   });
 
   it("title attr boolean → text resolves empty (boolean disabled)", () => {
-    const { textValue } = resolveTextProp(
-      { tag: "sgds-alert", attrs: { title: true }, children: [] },
-      "title", { key: "t", source: "attr:title" }
-    );
+    const { textValue } = resolveTextProp({ tag: "sgds-alert", attrs: { title: true }, children: [] }, "title", {
+      key: "t",
+      source: "attr:title"
+    });
     assert.equal(textValue, "");
   });
 });
@@ -393,8 +456,8 @@ describe("classifySlots", () => {
       children: [
         { tag: "sgds-icon", slot: "icon" },
         { tag: "div", slot: "header", text: "Title" },
-        { tag: "div", slot: "content", text: "Body" },
-      ],
+        { tag: "div", slot: "content", text: "Body" }
+      ]
     });
     assert.ok(r.icon);
     assert.ok(r.header);
@@ -403,7 +466,12 @@ describe("classifySlots", () => {
   });
 
   it("children without slot → grouped under default", () => {
-    const r = classifySlots({ children: [{ tag: "a", text: "link" }, { tag: "#text", text: "plain" }] });
+    const r = classifySlots({
+      children: [
+        { tag: "a", text: "link" },
+        { tag: "#text", text: "plain" }
+      ]
+    });
     assert.ok(r.default);
     assert.equal(r.icon, undefined);
   });
@@ -412,8 +480,8 @@ describe("classifySlots", () => {
     const r = classifySlots({
       children: [
         { tag: "div", slot: "action", text: "Action 1" },
-        { tag: "div", slot: "action", text: "Action 2" },
-      ],
+        { tag: "div", slot: "action", text: "Action 2" }
+      ]
     });
     assert.ok(Array.isArray(r.action));
     assert.equal(r.action.length, 2);
