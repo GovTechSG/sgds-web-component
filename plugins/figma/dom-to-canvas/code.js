@@ -2876,9 +2876,12 @@ async function applySpacing(frame, name) {
       if (pyKey) {
         var pyVar = await importVariable(pyKey);
         if (pyVar) {
-          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
-          frame.setBoundVariable("paddingTop", pyVar);
-          frame.setBoundVariable("paddingBottom", pyVar);
+          // Only bind padding if auto-layout is already enabled (from flex classes)
+          // Otherwise set raw values — auto-layout would break absolute positioning
+          if (frame.layoutMode !== "NONE") {
+            frame.setBoundVariable("paddingTop", pyVar);
+            frame.setBoundVariable("paddingBottom", pyVar);
+          }
         }
       }
       continue;
@@ -2891,9 +2894,10 @@ async function applySpacing(frame, name) {
       if (pxKey) {
         var pxVar = await importVariable(pxKey);
         if (pxVar) {
-          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
-          frame.setBoundVariable("paddingLeft", pxVar);
-          frame.setBoundVariable("paddingRight", pxVar);
+          if (frame.layoutMode !== "NONE") {
+            frame.setBoundVariable("paddingLeft", pxVar);
+            frame.setBoundVariable("paddingRight", pxVar);
+          }
         }
       }
       continue;
@@ -2905,8 +2909,7 @@ async function applySpacing(frame, name) {
       var pKey = resolveSpacingKey(pMatch[1], "padding");
       if (pKey) {
         var pVar = await importVariable(pKey);
-        if (pVar) {
-          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
+        if (pVar && frame.layoutMode !== "NONE") {
           frame.setBoundVariable("paddingTop", pVar);
           frame.setBoundVariable("paddingBottom", pVar);
           frame.setBoundVariable("paddingLeft", pVar);
@@ -2922,8 +2925,7 @@ async function applySpacing(frame, name) {
       var ptKey = resolveSpacingKey(ptMatch[1], "padding");
       if (ptKey) {
         var ptVar = await importVariable(ptKey);
-        if (ptVar) {
-          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
+        if (ptVar && frame.layoutMode !== "NONE") {
           frame.setBoundVariable("paddingTop", ptVar);
         }
       }
@@ -2936,8 +2938,7 @@ async function applySpacing(frame, name) {
       var pbKey = resolveSpacingKey(pbMatch[1], "padding");
       if (pbKey) {
         var pbVar = await importVariable(pbKey);
-        if (pbVar) {
-          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
+        if (pbVar && frame.layoutMode !== "NONE") {
           frame.setBoundVariable("paddingBottom", pbVar);
         }
       }
@@ -2951,8 +2952,7 @@ async function applySpacing(frame, name) {
       var mbKey = resolveSpacingKey(mbMatch[1], "padding");
       if (mbKey) {
         var mbVar = await importVariable(mbKey);
-        if (mbVar) {
-          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
+        if (mbVar && frame.layoutMode !== "NONE") {
           frame.setBoundVariable("paddingBottom", mbVar);
         }
       }
@@ -2964,8 +2964,7 @@ async function applySpacing(frame, name) {
       var mtKey = resolveSpacingKey(mtMatch[1], "padding");
       if (mtKey) {
         var mtVar = await importVariable(mtKey);
-        if (mtVar) {
-          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
+        if (mtVar && frame.layoutMode !== "NONE") {
           frame.setBoundVariable("paddingTop", mtVar);
         }
       }
