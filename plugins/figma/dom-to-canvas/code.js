@@ -2864,8 +2864,12 @@ async function applySpacing(frame, name) {
       if (gapKey) {
         var gapVar = await importVariable(gapKey);
         if (gapVar) {
-          // Need auto-layout for gap
-          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
+          // Need auto-layout for gap — default to HORIZONTAL (CSS flex default is row)
+          if (frame.layoutMode === "NONE") {
+            frame.layoutMode = hasFlex ? "HORIZONTAL" : "VERTICAL";
+            frame.primaryAxisSizingMode = "FIXED";
+            frame.counterAxisSizingMode = "FIXED";
+          }
           frame.setBoundVariable("itemSpacing", gapVar);
         }
       }
