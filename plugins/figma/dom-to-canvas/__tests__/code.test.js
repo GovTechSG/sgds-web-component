@@ -19,10 +19,10 @@ const configSection = codeJs.substring(0, configEnd);
 const evalFn = new Function(
   configSection +
     `
-  return { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG };
+  return { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG, SGDS_SPACING_MAP };
 `
 );
-const { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG } = evalFn();
+const { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG, SGDS_SPACING_MAP } = evalFn();
 
 // Extract classifySlots function from code.js
 const classifySlotsMatch = codeJs.match(/function classifySlots\(data\) \{[\s\S]*?\n\}/);
@@ -234,11 +234,7 @@ describe("Variant matching (buildVariantCriteria)", () => {
     const r = buildVariantCriteria({
       tag: "sgds-accordion",
       attrs: { variant: true, density: true },
-      children: [
-        { tag: "sgds-accordion-item" },
-        { tag: "sgds-accordion-item" },
-        { tag: "sgds-accordion-item" },
-      ],
+      children: [{ tag: "sgds-accordion-item" }, { tag: "sgds-accordion-item" }, { tag: "sgds-accordion-item" }]
     });
     // density=true should NOT produce Density:"True" — it should be skipped
     assert.equal(r.Density, undefined);
@@ -490,5 +486,146 @@ describe("classifySlots", () => {
   it("returns empty object for no children", () => {
     const r = classifySlots({ children: null });
     assert.deepEqual(r, {});
+  });
+});
+
+// =========================================================================
+// 9. SGDS_SPACING_MAP completeness
+// =========================================================================
+describe("SGDS_SPACING_MAP", () => {
+  it("has at least 60 entries", () => {
+    assert.ok(Object.keys(SGDS_SPACING_MAP).length >= 60);
+  });
+
+  it("contains semantic gap tokens (none, xs, sm, md, lg, xl)", () => {
+    assert.ok(SGDS_SPACING_MAP["none"]);
+    assert.ok(SGDS_SPACING_MAP["xs"]);
+    assert.ok(SGDS_SPACING_MAP["sm"]);
+    assert.ok(SGDS_SPACING_MAP["md"]);
+    assert.ok(SGDS_SPACING_MAP["lg"]);
+    assert.ok(SGDS_SPACING_MAP["xl"]);
+  });
+
+  it("contains layout padding tokens", () => {
+    assert.ok(SGDS_SPACING_MAP["layout-xs"]);
+    assert.ok(SGDS_SPACING_MAP["layout-sm"]);
+    assert.ok(SGDS_SPACING_MAP["layout-md"]);
+    assert.ok(SGDS_SPACING_MAP["layout-lg"]);
+    assert.ok(SGDS_SPACING_MAP["layout-xl"]);
+  });
+
+  it("contains layout gap tokens", () => {
+    assert.ok(SGDS_SPACING_MAP["layout-gap-xs"]);
+    assert.ok(SGDS_SPACING_MAP["layout-gap-sm"]);
+    assert.ok(SGDS_SPACING_MAP["layout-gap-md"]);
+    assert.ok(SGDS_SPACING_MAP["layout-gap-lg"]);
+    assert.ok(SGDS_SPACING_MAP["layout-gap-xl"]);
+  });
+
+  it("contains component gap tokens", () => {
+    assert.ok(SGDS_SPACING_MAP["component-gap-xs"]);
+    assert.ok(SGDS_SPACING_MAP["component-gap-sm"]);
+    assert.ok(SGDS_SPACING_MAP["component-gap-md"]);
+    assert.ok(SGDS_SPACING_MAP["component-gap-lg"]);
+    assert.ok(SGDS_SPACING_MAP["component-gap-xl"]);
+  });
+
+  it("contains component padding tokens", () => {
+    assert.ok(SGDS_SPACING_MAP["component-xs"]);
+    assert.ok(SGDS_SPACING_MAP["component-md"]);
+    assert.ok(SGDS_SPACING_MAP["component-xl"]);
+  });
+
+  it("contains text gap tokens", () => {
+    assert.ok(SGDS_SPACING_MAP["text-gap-xs"]);
+    assert.ok(SGDS_SPACING_MAP["text-gap-sm"]);
+    assert.ok(SGDS_SPACING_MAP["text-gap-md"]);
+    assert.ok(SGDS_SPACING_MAP["text-gap-lg"]);
+  });
+
+  it("contains semantic padding tokens", () => {
+    assert.ok(SGDS_SPACING_MAP["padding-xs"]);
+    assert.ok(SGDS_SPACING_MAP["padding-sm"]);
+    assert.ok(SGDS_SPACING_MAP["padding-md"]);
+    assert.ok(SGDS_SPACING_MAP["padding-lg"]);
+    assert.ok(SGDS_SPACING_MAP["padding-xl"]);
+  });
+
+  it("contains spacer primitives", () => {
+    assert.ok(SGDS_SPACING_MAP["spacer-0"]);
+    assert.ok(SGDS_SPACING_MAP["spacer-4"]);
+    assert.ok(SGDS_SPACING_MAP["spacer-8"]);
+    assert.ok(SGDS_SPACING_MAP["spacer-12"]);
+  });
+
+  it("all values are non-empty hex strings (variable keys)", () => {
+    for (const [token, key] of Object.entries(SGDS_SPACING_MAP)) {
+      assert.ok(typeof key === "string" && key.length > 20, `${token}: key should be a long hex string`);
+    }
+  });
+});
+
+// =========================================================================
+// 10. Spacing resolution (resolveSpacingKey)
+// =========================================================================
+describe("Spacing resolution (resolveSpacingKey)", () => {
+  // Replicate resolveSpacingKey logic with SGDS_SPACING_MAP in closure
+  const resolveSpacingKey = new Function(
+    "SGDS_SPACING_MAP",
+    `return function resolveSpacingKey(token, context) {
+      if (context === "gap") {
+        var parts = token.match(/^(.+)-([a-z0-9-]+)$/);
+        if (parts) {
+          var gapKey = parts[1] + "-gap-" + parts[2];
+          if (SGDS_SPACING_MAP[gapKey]) return SGDS_SPACING_MAP[gapKey];
+        }
+      }
+      if (context === "padding" && SGDS_SPACING_MAP["padding-" + token]) {
+        return SGDS_SPACING_MAP["padding-" + token];
+      }
+      if (SGDS_SPACING_MAP[token]) return SGDS_SPACING_MAP[token];
+      if (SGDS_SPACING_MAP["layout-" + token]) return SGDS_SPACING_MAP["layout-" + token];
+      return null;
+    }`
+  )(SGDS_SPACING_MAP);
+
+  it("direct match: sm → key", () => {
+    assert.ok(resolveSpacingKey("sm", "gap"));
+    assert.equal(resolveSpacingKey("sm", "gap"), SGDS_SPACING_MAP["sm"]);
+  });
+
+  it("layout padding: layout-md → key", () => {
+    assert.ok(resolveSpacingKey("layout-md", "padding"));
+    assert.equal(resolveSpacingKey("layout-md", "padding"), SGDS_SPACING_MAP["layout-md"]);
+  });
+
+  it("layout gap context: layout-sm → layout-gap-sm key", () => {
+    // sgds:gap-layout-sm → gapMatch[1] = "layout-sm" → context "gap" → tries "layout-gap-sm"
+    assert.ok(resolveSpacingKey("layout-sm", "gap"));
+    assert.equal(resolveSpacingKey("layout-sm", "gap"), SGDS_SPACING_MAP["layout-gap-sm"]);
+  });
+
+  it("component gap context: component-md → component-gap-md key", () => {
+    assert.ok(resolveSpacingKey("component-md", "gap"));
+    assert.equal(resolveSpacingKey("component-md", "gap"), SGDS_SPACING_MAP["component-gap-md"]);
+  });
+
+  it("text gap context: text-xs → text-gap-xs key", () => {
+    assert.ok(resolveSpacingKey("text-xs", "gap"));
+    assert.equal(resolveSpacingKey("text-xs", "gap"), SGDS_SPACING_MAP["text-gap-xs"]);
+  });
+
+  it("padding context: sm → padding-sm key", () => {
+    assert.ok(resolveSpacingKey("sm", "padding"));
+    assert.equal(resolveSpacingKey("sm", "padding"), SGDS_SPACING_MAP["padding-sm"]);
+  });
+
+  it("component padding: component-md → key (direct match)", () => {
+    assert.ok(resolveSpacingKey("component-md", "padding"));
+    assert.equal(resolveSpacingKey("component-md", "padding"), SGDS_SPACING_MAP["component-md"]);
+  });
+
+  it("unknown token → null", () => {
+    assert.equal(resolveSpacingKey("nonexistent-token", "gap"), null);
   });
 });

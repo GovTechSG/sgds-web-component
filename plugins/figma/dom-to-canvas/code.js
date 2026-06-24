@@ -105,28 +105,81 @@ var SGDS_VARIABLE_MAP = {
 // SGDS spacing class → Figma variable key mapping (FLOAT variables)
 // Tailwind: sgds:py-layout-md → Figma variable: sgds/layout/padding/md
 // Tailwind: sgds:gap-sm → Figma variable: sgds/gap/sm
+// Tailwind: sgds:p-component-md → Figma variable: sgds/component/padding/md
 // Margins converted to padding (Figma has no margins)
+// Auto-generated from discovered-variables.json
 var SGDS_SPACING_MAP = {
-  // Layout padding (larger, section-level)
+  // Semantic gap (sgds:gap-sm, sgds:gap-md, etc.)
+  none: "212274a9abebb673b6a9649d7126ba4f7ad2944b",
+  "2-xs": "cad747ca34b8c681dff900870f88dace27a989b3",
+  xs: "bfe07fc0dea91255cf262edc2166751e45a7087f",
+  sm: "2f173ba36517121bfcd695f8a0d4dc6394a8b534",
+  md: "c4283dcbcc426b5dcb4c45c4a211233755c0f833",
+  lg: "92b139a8540ede45588e18e28d77fad933b0f66f",
+  xl: "a09702e317b7ccfd57023b53c1d93f19e9ca7e0f",
+  "2-xl": "2e44ffd75b2ca25a5fbcb26ecd395ed403d5735f",
+  "3-xl": "101fc751c3d7b73b2a461757c8a3df207eb5e4c0",
+  "4-xl": "183f33b0d0554db81ccc29bc1683474f8ed81e85",
+  // Layout padding (sgds:py-layout-md, sgds:px-layout-sm)
   "layout-xs": "89c9ad2f370845cbbba2c434f07333d9fea0f7ab",
   "layout-sm": "d5b2aa0b802469f8b4ed42f2781d1fec15d9a915",
   "layout-md": "37ec013797e155db991a48db7f514a0851c17cf9",
   "layout-lg": "9e52b034963065e9384655b15af866cba3754093",
   "layout-xl": "f1b8a67b1b07e04c8964e1b85f73c1f5bbefb426",
-  // Layout gap
+  // Layout gap (sgds:gap-layout-sm, sgds:gap-layout-md)
   "layout-gap-2-xs": "2acc288eaad399a10c49dc50485cbcca972bb3a1",
   "layout-gap-xs": "e41563056d916eeccf13707fa3ae5d821cc91994",
   "layout-gap-sm": "264a182d25512a99f28631977728b56bd05bff34",
   "layout-gap-md": "f24863bda1524075c9bf13c4f27f3b9e86c91f5d",
   "layout-gap-lg": "cac0599410256b10fc64c68b6788aacebdd3e22c",
   "layout-gap-xl": "e059ad27d69c72d22b384d34214acb43a619deff",
-  // Semantic gap (component-level spacing)
-  none: "212274a9abebb673b6a9649d7126ba4f7ad2944b",
-  xs: "bfe07fc0dea91255cf262edc2166751e45a7087f",
-  sm: "2f173ba36517121bfcd695f8a0d4dc6394a8b534",
-  md: "c4283dcbcc426b5dcb4c45c4a211233755c0f833",
-  lg: "92b139a8540ede45588e18e28d77fad933b0f66f",
-  xl: "a09702e317b7ccfd57023b53c1d93f19e9ca7e0f"
+  // Component gap (sgds:gap-component-sm, sgds:gap-component-md)
+  "component-gap-xs": "a3c1cd4e3d5e7c0db42a02c699258b57c9c470b1",
+  "component-gap-sm": "20dde083c5af77bafbb74752d33cdb64ea7ea970",
+  "component-gap-md": "9bd62772f15986afa0a1a870b88fd3589cf8af55",
+  "component-gap-lg": "673be2a683dced8e5afc8abe7f4250fa732635df",
+  "component-gap-xl": "b50f7ff4208106d76bb4bca2cd6564734ac14dbe",
+  // Component padding (sgds:p-component-md, sgds:py-component-sm)
+  "component-xs": "61cd81342828d16edb505e7a88c60a699fc36c0a",
+  "component-sm": "ece50971976b6fdb672ef0a09c295f693e10679f",
+  "component-md": "070faca64c8f7a23151ff49bb0f1bf0e6b8a8121",
+  "component-lg": "881194efc44380a7644913e361df20431e439391",
+  "component-xl": "16b156c2772b6b7b9d2a81e86a5d7984e45f57fb",
+  // Text gap (sgds:gap-text-xs, sgds:gap-text-md)
+  "text-gap-2-xs": "59e561862f412e72a426e77f58db6f3a0bec4a91",
+  "text-gap-xs": "c9d442584c66372516b613d947efea6201d995e2",
+  "text-gap-sm": "266a8e83d2cdb224d84b7f53303a14053061b391",
+  "text-gap-md": "a74a8c0ee3a3eb79304e7b1ea46e6c12439e3a09",
+  "text-gap-lg": "cb398364c6d30a4b32441e56c9ba6a9372816e62",
+  "text-gap-xl": "8a948572fd6d74000e61465f40e8826ced0144f7",
+  "text-gap-2-xl": "f669a2ee794ed7fe6bd709ce649fa87b85eadee3",
+  // Semantic padding (sgds:p-sm, sgds:py-md, sgds:px-lg)
+  "padding-none": "c349b483ef1d49e88a6e9a17fe3964f3973930a9",
+  "padding-3-xs": "a66473d4c64303a90657f010e6a9f20e78c619fd",
+  "padding-2-xs": "6ffdc2f1c26bc71908e3dd349c4905175659864b",
+  "padding-xs": "73bb0ccd65615eee799107b88a6300f70501ce16",
+  "padding-sm": "122686f5410aff3018f3c5714a8056265434bd2a",
+  "padding-md": "27a2030ae67fc679c547ae4d17333a3b8680976a",
+  "padding-lg": "18729a33a77af7da950bc267aab139ef92980976",
+  "padding-xl": "8f2bf1cecd2a572b19d7054b8894e9efea987672",
+  "padding-2-xl": "a125b678eef3ff4ef1cf4716f8613e540e6b9d0f",
+  "padding-3-xl": "78deb1ca7687d7ae424b8f21329e3644c4a87032",
+  "padding-4-xl": "3bc5c919d6c80331c66abc8d278fa4552af7f3e7",
+  "padding-5-xl": "f7d56e82cf6e6ee6829f106510e1edc6720d340d",
+  // Spacer (primitive scale, for sgds:p-[spacer] raw fallback)
+  "spacer-0": "cfab713e324cbb9db542be9f1204d60d675f9d1d",
+  "spacer-1": "5e54bc5c52fd275d393ce296cf39c03d6b2b08b9",
+  "spacer-2": "364e2eae79d663270a6a322dd727b997f46349d3",
+  "spacer-3": "2ad3ba1dc5ae58276e0e3bd3252bdcf5f9410c76",
+  "spacer-4": "c69350a0a844f2d14a42d5245a243662f372b507",
+  "spacer-5": "bdff4ee16802d4966e34c38f4dbfcb8784874e05",
+  "spacer-6": "92c1cf3f93042d26d93ce8a5f33474b7031327bd",
+  "spacer-7": "d101639c8167d0a9f270b56a6cb257120931a08a",
+  "spacer-8": "e3764dbde577a08e81bf22ca130bfdc75d3c28ac",
+  "spacer-9": "3dbf992f2e11ccd8c4d8c3649532e3a653a783ac",
+  "spacer-10": "394eb8bf269f9958c7b0b7c10b23feca1b19b6f7",
+  "spacer-11": "f6cb6ede05913b2647b327953061eeec95a3330b",
+  "spacer-12": "bdb74b2a0055a2954cc63a0ddbcf12819a74414f"
 };
 
 // Cache for imported variables
@@ -2769,6 +2822,9 @@ async function createFrameNode(data, parent, parentX, parentY) {
     }
   }
 
+  // Apply spacing utilities (gap, padding) from sgds: classes
+  await applySpacing(frame, data.name);
+
   return frame;
 }
 
@@ -2776,8 +2832,23 @@ async function createFrameNode(data, parent, parentX, parentY) {
 async function applySpacing(frame, name) {
   if (!name) return;
 
-  // Parse all sgds: spacing classes
+  // Determine flex direction from class names first
   var classes = name.split(/\s+/);
+  var hasFlexCol = classes.indexOf("sgds:flex-col") >= 0;
+  var hasFlexRow = classes.indexOf("sgds:flex-row") >= 0 || classes.indexOf("sgds:flex") >= 0;
+
+  // Set layout mode based on flex direction (before spacing is applied)
+  if (hasFlexCol) {
+    frame.layoutMode = "VERTICAL";
+    frame.primaryAxisSizingMode = "AUTO";
+    frame.counterAxisSizingMode = "FIXED";
+  } else if (hasFlexRow) {
+    frame.layoutMode = "HORIZONTAL";
+    frame.primaryAxisSizingMode = "AUTO";
+    frame.counterAxisSizingMode = "FIXED";
+  }
+
+  // Parse all sgds: spacing classes
   for (var i = 0; i < classes.length; i++) {
     var cls = classes[i];
     if (cls.indexOf("sgds:") !== 0) continue;
@@ -2786,7 +2857,7 @@ async function applySpacing(frame, name) {
     // Gap: sgds:gap-sm, sgds:gap-layout-md
     var gapMatch = token.match(/^gap-(.+)$/);
     if (gapMatch) {
-      var gapKey = resolveSpacingKey(gapMatch[1]);
+      var gapKey = resolveSpacingKey(gapMatch[1], "gap");
       if (gapKey) {
         var gapVar = await importVariable(gapKey);
         if (gapVar) {
@@ -2801,7 +2872,7 @@ async function applySpacing(frame, name) {
     // Padding Y: sgds:py-layout-md, sgds:py-xl
     var pyMatch = token.match(/^py-(.+)$/);
     if (pyMatch) {
-      var pyKey = resolveSpacingKey(pyMatch[1]);
+      var pyKey = resolveSpacingKey(pyMatch[1], "padding");
       if (pyKey) {
         var pyVar = await importVariable(pyKey);
         if (pyVar) {
@@ -2816,7 +2887,7 @@ async function applySpacing(frame, name) {
     // Padding X: sgds:px-layout-lg, sgds:px-xl
     var pxMatch = token.match(/^px-(.+)$/);
     if (pxMatch) {
-      var pxKey = resolveSpacingKey(pxMatch[1]);
+      var pxKey = resolveSpacingKey(pxMatch[1], "padding");
       if (pxKey) {
         var pxVar = await importVariable(pxKey);
         if (pxVar) {
@@ -2831,7 +2902,7 @@ async function applySpacing(frame, name) {
     // Padding all: sgds:p-xl
     var pMatch = token.match(/^p-(.+)$/);
     if (pMatch && !token.match(/^p[xytblr]-/)) {
-      var pKey = resolveSpacingKey(pMatch[1]);
+      var pKey = resolveSpacingKey(pMatch[1], "padding");
       if (pKey) {
         var pVar = await importVariable(pKey);
         if (pVar) {
@@ -2848,7 +2919,7 @@ async function applySpacing(frame, name) {
     // Padding top: sgds:pt-*
     var ptMatch = token.match(/^pt-(.+)$/);
     if (ptMatch) {
-      var ptKey = resolveSpacingKey(ptMatch[1]);
+      var ptKey = resolveSpacingKey(ptMatch[1], "padding");
       if (ptKey) {
         var ptVar = await importVariable(ptKey);
         if (ptVar) {
@@ -2862,7 +2933,7 @@ async function applySpacing(frame, name) {
     // Padding bottom: sgds:pb-*
     var pbMatch = token.match(/^pb-(.+)$/);
     if (pbMatch) {
-      var pbKey = resolveSpacingKey(pbMatch[1]);
+      var pbKey = resolveSpacingKey(pbMatch[1], "padding");
       if (pbKey) {
         var pbVar = await importVariable(pbKey);
         if (pbVar) {
@@ -2877,7 +2948,7 @@ async function applySpacing(frame, name) {
     // sgds:mb-xl → paddingBottom, sgds:mt-lg → paddingTop
     var mbMatch = token.match(/^mb-(.+)$/);
     if (mbMatch) {
-      var mbKey = resolveSpacingKey(mbMatch[1]);
+      var mbKey = resolveSpacingKey(mbMatch[1], "padding");
       if (mbKey) {
         var mbVar = await importVariable(mbKey);
         if (mbVar) {
@@ -2890,7 +2961,7 @@ async function applySpacing(frame, name) {
 
     var mtMatch = token.match(/^mt-(.+)$/);
     if (mtMatch) {
-      var mtKey = resolveSpacingKey(mtMatch[1]);
+      var mtKey = resolveSpacingKey(mtMatch[1], "padding");
       if (mtKey) {
         var mtVar = await importVariable(mtKey);
         if (mtVar) {
@@ -2930,12 +3001,32 @@ function parseColSpan(name) {
 }
 
 // Resolve a spacing token to a variable key
-// e.g. "layout-md" → layout padding md key, "sm" → semantic gap sm key
-function resolveSpacingKey(token) {
-  // Direct match: "sm", "md", "xl", "layout-md"
+// Called with the token AFTER prefix stripping:
+//   sgds:gap-layout-sm → resolveSpacingKey("layout-sm", "gap")
+//   sgds:py-layout-md → resolveSpacingKey("layout-md", "padding")
+//   sgds:gap-sm → resolveSpacingKey("sm", "gap")
+//   sgds:p-component-md → resolveSpacingKey("component-md", "padding")
+function resolveSpacingKey(token, context) {
+  // Context-aware resolution: check context-specific keys FIRST
+
+  // Gap context: "layout-sm" → try "layout-gap-sm" before direct match
+  if (context === "gap") {
+    var parts = token.match(/^(.+)-([a-z0-9-]+)$/);
+    if (parts) {
+      var gapKey = parts[1] + "-gap-" + parts[2];
+      if (SGDS_SPACING_MAP[gapKey]) return SGDS_SPACING_MAP[gapKey];
+    }
+  }
+
+  // Padding context: try "padding-" prefix for bare tokens (sm, md, etc.)
+  if (context === "padding" && SGDS_SPACING_MAP["padding-" + token]) {
+    return SGDS_SPACING_MAP["padding-" + token];
+  }
+
+  // Direct match: "sm", "md", "xl", "layout-md", "component-md"
   if (SGDS_SPACING_MAP[token]) return SGDS_SPACING_MAP[token];
 
-  // "layout-md" for padding context
+  // Fallback: try "layout-" prefix
   if (SGDS_SPACING_MAP["layout-" + token]) return SGDS_SPACING_MAP["layout-" + token];
 
   return null;

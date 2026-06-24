@@ -363,6 +363,47 @@ async function main() {
     }
   }
 
+  // --- Step 9: Discover design token variables (spacing, colors) ---
+  console.log("Fetching design token variables...");
+  try {
+    const varsData = await figmaGet(`/files/${FILE_ID}/variables/local`);
+    const variables = varsData.meta?.variables || {};
+    const collections = varsData.meta?.variableCollections || {};
+
+    // Filter for SGDS variables (FLOAT for spacing, COLOR for fills)
+    const spacingVars = {};
+    const colorVars = {};
+
+    for (const [id, variable] of Object.entries(variables)) {
+      const name = variable.name || "";
+      const key = variable.key || "";
+      const type = variable.resolvedType;
+
+      // Only include variables with "sgds" in their path or from sgds collections
+      if (!name.toLowerCase().includes("sgds") && !name.includes("/")) continue;
+
+      if (type === "FLOAT") {
+        spacingVars[name] = { key, id, scopes: variable.scopes || [] };
+      } else if (type === "COLOR") {
+        colorVars[name] = { key, id, scopes: variable.scopes || [] };
+      }
+    }
+
+    console.log(`  Found ${Object.keys(spacingVars).length} FLOAT variables (spacing/sizing)`);
+    console.log(`  Found ${Object.keys(colorVars).length} COLOR variables`);
+
+    // Write variables to separate file for reference
+    const varsPath = resolve(__dirname, "discovered-variables.json");
+    writeFileSync(
+      varsPath,
+      JSON.stringify({ spacing: spacingVars, colors: colorVars, collections }, null, 2)
+    );
+    console.log(`  Written: ${varsPath}\n`);
+  } catch (e) {
+    console.log(`  Warning: Could not fetch variables: ${e.message}`);
+    console.log(`  (This requires Figma Enterprise or file-level variables)\n`);
+  }
+
   // --- Output JSON ---
   const jsonPath = resolve(__dirname, "discovered-props.json");
   writeFileSync(jsonPath, JSON.stringify(results, null, 2));
