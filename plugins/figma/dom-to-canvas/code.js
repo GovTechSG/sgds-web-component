@@ -2835,11 +2835,12 @@ async function applySpacing(frame, name) {
   // Determine flex direction from class names first
   var classes = name.split(/\s+/);
   var hasFlexCol = classes.indexOf("sgds:flex-col") >= 0;
-  var hasFlexRow = classes.indexOf("sgds:flex-row") >= 0 || classes.indexOf("sgds:flex") >= 0;
+  var hasFlexRow = classes.indexOf("sgds:flex-row") >= 0;
+  var hasFlex = classes.indexOf("sgds:flex") >= 0;
 
-  // Set layout mode based on flex direction (before spacing is applied)
-  // Use FIXED sizing to preserve DOM dimensions — auto-layout arranges children
-  // but the frame keeps its captured width/height
+  // Set layout mode based on explicit flex direction only
+  // sgds:flex alone does NOT set direction — only sgds:flex-col or sgds:flex-row do
+  // Use FIXED sizing to preserve DOM dimensions
   if (hasFlexCol) {
     frame.layoutMode = "VERTICAL";
     frame.primaryAxisSizingMode = "FIXED";
