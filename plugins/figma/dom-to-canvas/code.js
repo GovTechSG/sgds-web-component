@@ -2829,11 +2829,33 @@ async function createFrameNode(data, parent, parentX, parentY) {
 }
 
 // Check if auto-layout is already enabled (from flex classes or gap).
-// Padding tokens can only be applied on auto-layout frames.
-// Non-flex frames keep absolute positioning — their visual layout is
-// already correct from DOM x/y/width/height coordinates.
 function hasAutoLayout(frame) {
   return frame.layoutMode !== "NONE";
+}
+
+// Like a designer pressing Shift+A: enable auto-layout and configure children
+// to fill the container width (for vertical) or height (for horizontal).
+// Only call this on frames where the class name indicates flex/layout intent.
+function applyAutoLayoutLikeDesigner(frame, direction) {
+  if (frame.layoutMode !== "NONE") return; // Already set by flex classes
+
+  frame.layoutMode = direction || "VERTICAL";
+  frame.primaryAxisSizingMode = "FIXED";
+  frame.counterAxisSizingMode = "FIXED";
+  frame.itemSpacing = 0; // Start with 0, token will override
+
+  // Set children to FILL on the counter axis (like a designer would)
+  if (frame.children) {
+    for (var ci = 0; ci < frame.children.length; ci++) {
+      try {
+        if (direction === "HORIZONTAL") {
+          frame.children[ci].layoutSizingVertical = "FILL";
+        } else {
+          frame.children[ci].layoutSizingHorizontal = "FILL";
+        }
+      } catch (e) {}
+    }
+  }
 }
 
 // Parse spacing classes and apply padding/gap with variable bindings
@@ -2891,10 +2913,9 @@ async function applySpacing(frame, name) {
       if (pyKey) {
         var pyVar = await importVariable(pyKey);
         if (pyVar) {
-          if (hasAutoLayout(frame)) {
-            frame.setBoundVariable("paddingTop", pyVar);
-            frame.setBoundVariable("paddingBottom", pyVar);
-          }
+          if (!hasAutoLayout(frame)) applyAutoLayoutLikeDesigner(frame, "VERTICAL");
+          frame.setBoundVariable("paddingTop", pyVar);
+          frame.setBoundVariable("paddingBottom", pyVar);
         }
       }
       continue;
@@ -2907,10 +2928,9 @@ async function applySpacing(frame, name) {
       if (pxKey) {
         var pxVar = await importVariable(pxKey);
         if (pxVar) {
-          if (hasAutoLayout(frame)) {
-            frame.setBoundVariable("paddingLeft", pxVar);
-            frame.setBoundVariable("paddingRight", pxVar);
-          }
+          if (!hasAutoLayout(frame)) applyAutoLayoutLikeDesigner(frame, "VERTICAL");
+          frame.setBoundVariable("paddingLeft", pxVar);
+          frame.setBoundVariable("paddingRight", pxVar);
         }
       }
       continue;
@@ -2922,7 +2942,8 @@ async function applySpacing(frame, name) {
       var pKey = resolveSpacingKey(pMatch[1], "padding");
       if (pKey) {
         var pVar = await importVariable(pKey);
-        if (pVar && hasAutoLayout(frame)) {
+        if (pVar) {
+          if (!hasAutoLayout(frame)) applyAutoLayoutLikeDesigner(frame, "VERTICAL");
           frame.setBoundVariable("paddingTop", pVar);
           frame.setBoundVariable("paddingBottom", pVar);
           frame.setBoundVariable("paddingLeft", pVar);
@@ -2938,7 +2959,8 @@ async function applySpacing(frame, name) {
       var ptKey = resolveSpacingKey(ptMatch[1], "padding");
       if (ptKey) {
         var ptVar = await importVariable(ptKey);
-        if (ptVar && hasAutoLayout(frame)) {
+        if (ptVar) {
+          if (!hasAutoLayout(frame)) applyAutoLayoutLikeDesigner(frame, "VERTICAL");
           frame.setBoundVariable("paddingTop", ptVar);
         }
       }
@@ -2951,7 +2973,8 @@ async function applySpacing(frame, name) {
       var pbKey = resolveSpacingKey(pbMatch[1], "padding");
       if (pbKey) {
         var pbVar = await importVariable(pbKey);
-        if (pbVar && hasAutoLayout(frame)) {
+        if (pbVar) {
+          if (!hasAutoLayout(frame)) applyAutoLayoutLikeDesigner(frame, "VERTICAL");
           frame.setBoundVariable("paddingBottom", pbVar);
         }
       }
@@ -2965,7 +2988,8 @@ async function applySpacing(frame, name) {
       var mbKey = resolveSpacingKey(mbMatch[1], "padding");
       if (mbKey) {
         var mbVar = await importVariable(mbKey);
-        if (mbVar && hasAutoLayout(frame)) {
+        if (mbVar) {
+          if (!hasAutoLayout(frame)) applyAutoLayoutLikeDesigner(frame, "VERTICAL");
           frame.setBoundVariable("paddingBottom", mbVar);
         }
       }
@@ -2977,7 +3001,8 @@ async function applySpacing(frame, name) {
       var mtKey = resolveSpacingKey(mtMatch[1], "padding");
       if (mtKey) {
         var mtVar = await importVariable(mtKey);
-        if (mtVar && hasAutoLayout(frame)) {
+        if (mtVar) {
+          if (!hasAutoLayout(frame)) applyAutoLayoutLikeDesigner(frame, "VERTICAL");
           frame.setBoundVariable("paddingTop", mtVar);
         }
       }
