@@ -1,0 +1,209 @@
+{
+  "_comment": "Manual overrides for cases that cannot be auto-detected from Figma/DOM schema alone",
+
+  "attrOverrides": {
+    "sgds-accordion": {
+      "variant": { "prop": "Border", "values": { "border": "True", "default": "False" } }
+    },
+    "sgds-card": {
+      "hideBorder": { "prop": "Border", "values": { "true": "False", "false": "True" } },
+      "disabled": { "prop": "State", "values": { "true": "disabled" } }
+    },
+    "sgds-image-card": {
+      "hideBorder": { "prop": "Border", "values": { "true": "False", "false": "True" } },
+      "disabled": { "prop": "State", "values": { "true": "disabled" } }
+    }
+  },
+
+  "valueOverrides": {
+    "_comment": "Component-specific variant value mappings where the global ATTR_VALUE_MAP would be wrong",
+    "sgds-close-button": {
+      "fixed-light": "fixed light",
+      "fixed-dark": "fixed dark"
+    },
+    "sgds-link": {
+      "fixed-dark": "fixed dark (black)"
+    }
+  },
+
+  "slotMapping": {
+    "_comment": "Maps DOM slot names to Figma boolean/instance pairs. instanceName is the nested instance to swapComponent() on.",
+    "sgds-alert": {
+      "action": { "booleanKey": "🔷 Action slot#29246:0", "instanceName": ".slot" }
+    },
+    "sgds-drawer": {
+      "default": { "booleanKey": "🔷 Slot#25042:9", "instanceName": ".slot" }
+    },
+    "sgds-modal": {
+      "default": { "booleanKey": "🔷 Slot#28535:105", "instanceName": "[slot group]" }
+    }
+  },
+
+  "textMapping": {
+    "_comment": "Maps DOM content/attrs to Figma text properties. 'source' indicates where to get the value from.",
+    "sgds-alert": {
+      "title": { "key": "↳ Edit text#15588:34", "booleanKey": "Title#15588:17", "source": "attr:title" },
+      "description": { "key": "Edit description#13094:45", "source": "slot:default" }
+    },
+    "sgds-toast": {
+      "title": { "key": "↳ Edit text#16370:284", "booleanKey": "Title#29198:3", "source": "attr:title" },
+      "description": { "key": "Edit message#16370:290", "source": "slot:default" }
+    },
+    "sgds-button": {
+      "label": { "key": "Edit button label#12484:5", "source": "text" }
+    },
+    "sgds-badge": {
+      "label": { "key": "Edit label#13032:18", "source": "text" }
+    },
+    "sgds-link": {
+      "label": { "key": "Edit link#16010:0", "source": "text" }
+    },
+    "sgds-spinner": {
+      "label": { "key": "↳ Edit text#26271:0", "booleanKey": "Label#16158:6", "source": "text" }
+    },
+    "sgds-checkbox": {
+      "label": { "key": "↳ Edit text#15167:0", "booleanKey": "Label#16008:0", "source": "text" }
+    },
+    "sgds-radio": {
+      "label": { "key": "↳ Edit text#15163:0", "booleanKey": "Label#16008:16", "source": "text" }
+    },
+    "sgds-switch": {
+      "label": { "key": "↳ Edit text#16008:27", "booleanKey": "Label#15380:0", "source": "text" }
+    },
+    "sgds-pagination": {
+      "description": { "key": "Edit description#16740:0", "source": "text" }
+    },
+    "sgds-table-of-contents": {
+      "header": { "key": "Edit header#25146:1", "source": "text" }
+    },
+    "sgds-input": {
+      "label": { "key": "↳ Edit text #16273:0", "booleanKey": "Label#16252:5", "source": "attr:label" },
+      "placeholder": { "key": "↳ Edit text  #16273:12", "booleanKey": "Placeholder text#16259:126", "source": "attr:placeholder" },
+      "hint": { "key": "↳ Edit text   #16273:36", "booleanKey": "Hint text#16252:0", "source": "attr:hintText" }
+    },
+    "sgds-select": {
+      "label": { "key": "↳ Edit text #16273:0", "booleanKey": "Label#16252:5", "source": "attr:label" },
+      "placeholder": { "key": "↳ Edit text  #16273:12", "booleanKey": "Placeholder text#16259:126", "source": "attr:placeholder" },
+      "hint": { "key": "↳ Edit text   #16273:36", "booleanKey": "Hint text#16252:0", "source": "attr:hintText" }
+    },
+    "sgds-combo-box": {
+      "label": { "key": "↳ Edit text #16273:0", "booleanKey": "Label#16252:5", "source": "attr:label" },
+      "placeholder": { "key": "↳ Edit text  #16273:12", "booleanKey": "Placeholder text#16259:126", "source": "attr:placeholder" },
+      "hint": { "key": "↳ Edit text   #16273:36", "booleanKey": "Hint text#16252:0", "source": "attr:hintText" }
+    },
+    "sgds-textarea": {
+      "label": { "key": "↳ Edit text #16273:0", "booleanKey": "Label#16252:5", "source": "attr:label" },
+      "placeholder": { "key": "↳ Edit text  #16273:12", "booleanKey": "Placeholder text#16259:126", "source": "attr:placeholder" },
+      "hint": { "key": "↳ Edit text   #16273:36", "booleanKey": "Hint text#16252:0", "source": "attr:hintText" }
+    },
+    "sgds-datepicker": {
+      "label": { "key": "↳ Edit text #16273:0", "booleanKey": "Label#16252:5", "source": "attr:label" },
+      "hint": { "key": "↳ Edit text   #16273:36", "booleanKey": "Hint text#16252:0", "source": "attr:hintText" }
+    },
+    "sgds-file-upload": {
+      "label": { "key": "↳ Edit text  #29661:1", "booleanKey": "Label#29661:0", "source": "attr:label" },
+      "hint": { "key": "↳ Edit text #29661:2", "booleanKey": "Hint text#29661:3", "source": "attr:hintText" }
+    },
+    "sgds-checkbox-group": {
+      "label": { "key": "↳ Edit text  #15640:6", "booleanKey": "Label#15640:9", "source": "attr:label" },
+      "hint": { "key": "↳ Edit text #15640:7", "booleanKey": "Hint text#15640:8", "source": "attr:hintText" }
+    },
+    "sgds-radio-group": {
+      "label": { "key": "↳ Edit text #15655:51", "booleanKey": "Label#15655:31", "source": "attr:label" },
+      "hint": { "key": "↳ Edit text#15655:46", "booleanKey": "Hint text#15655:41", "source": "attr:hintText" }
+    },
+    "sgds-quantity-toggle": {
+      "label": { "key": "↳ Edit text#16461:94", "booleanKey": "Label#16461:83", "source": "attr:label" },
+      "hint": { "key": "↳ Edit text    #16461:149", "booleanKey": "Hint text#16461:66", "source": "attr:hintText" }
+    }
+  },
+
+  "iconSlots": {
+    "_comment": "Maps icon slot to Figma boolean + instanceSwap keys",
+    "sgds-button": {
+      "leftIcon": { "booleanKey": "Leading icon#12484:3", "swapKey": "↳ Select icon#17388:71" },
+      "rightIcon": { "booleanKey": "Trailing icon#12484:1", "swapKey": "↳ Select icon #17388:169" }
+    },
+    "sgds-link": {
+      "leadingIcon": { "booleanKey": "Leading icon#15978:6", "swapKey": "↳ Select icon#17388:0" },
+      "trailingIcon": { "booleanKey": "Trailing icon#15978:15", "swapKey": "↳ Select icon #17388:25" }
+    },
+    "sgds-icon-button": {
+      "icon": { "swapKey": "Select icon#17388:218" }
+    },
+    "sgds-input": {
+      "icon": { "swapKey": "↳ Select icon#16259:56" }
+    }
+  },
+
+  "itemPatterns": {
+    "_comment": "Item pattern configs for repeating nested instances",
+    "sgds-accordion": {
+      "pattern": "↳ Accordion",
+      "childTag": "sgds-accordion-item",
+      "childCountVariant": "No. of item",
+      "itemProps": {
+        "title": { "key": "Edit title#16551:8", "source": "slot:header" },
+        "badge": { "booleanKey": "Badge#29585:8", "swapKey": "↳ 🔷 Swap instance#16545:8" },
+        "icon": { "booleanKey": "Icon#29595:24", "swapKey": "↳ Select icon#29595:46" },
+        "disabled": { "variantProp": "State", "variantValue": "disabled" },
+        "open": { "variantProp": "Expand", "variantValue": "True" }
+      }
+    },
+    "sgds-stepper": {
+      "pattern": "↳ Step",
+      "childTag": "sgds-stepper-item",
+      "childCountVariant": "No. of step",
+      "itemProps": {
+        "label": { "key": "Edit title#16551:8", "source": "slot:default" }
+      }
+    },
+    "sgds-icon-list": {
+      "pattern": "Icon list",
+      "childTag": "sgds-icon-list-item",
+      "childCountVariant": "No. of list",
+      "itemProps": {
+        "label": { "key": "Edit label#16905:74", "source": "text" },
+        "data": { "key": "Edit data#16905:73", "source": "slot:data" }
+      }
+    },
+    "sgds-breadcrumb": {
+      "pattern": "Breadcrumb",
+      "childTag": "sgds-breadcrumb-item",
+      "childCountVariant": "No. of link",
+      "itemProps": {}
+    },
+    "sgds-description-list": {
+      "pattern": "List",
+      "childTag": "sgds-description-list-item",
+      "childCountVariant": "No. of lists",
+      "itemProps": {}
+    },
+    "sgds-sidenav": {
+      "pattern": "Sidenav item",
+      "childTag": "sgds-sidenav-item",
+      "childCountVariant": "No. of item",
+      "itemProps": {}
+    }
+  },
+
+  "structureNames": {
+    "_comment": "Components where slot props live on a nested 'Structure' instance",
+    "sgds-card": "Structure",
+    "sgds-image-card": "Card structure",
+    "sgds-dropdown": "Menu",
+    "sgds-footer": "Directory"
+  },
+
+  "cardSlots": {
+    "_comment": "Card-family slot configurations (on nested Structure instance)",
+    "sgds-card": {
+      "upper": { "booleanKey": "🔷 Upper slot#29055:1", "swapKey": "↳ Swap instance (upper)#29055:60", "frameName": "[upper slot]" },
+      "lower": { "booleanKey": "🔷 Lower slot#29055:12", "swapKey": "↳ Swap instance (lower)#30708:0", "frameName": "[lower slot]" }
+    },
+    "sgds-image-card": {
+      "upper": { "booleanKey": "🔷 Upper slot#29125:13", "swapKey": "↳ Swap instance (upper)#29125:26" },
+      "lower": { "booleanKey": "🔷 Lower slot#29125:39", "swapKey": "↳ Swap instance (lower)#31095:9" }
+    }
+  }
+}

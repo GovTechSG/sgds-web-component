@@ -145,7 +145,8 @@ var ATTR_TO_VARIANT_PROP = {
   state: "State",
   tone: "Tone",
   orientation: "Orientation",
-  density: "Density"
+  density: "Density",
+  thickness: "Thickness"
 };
 
 // Maps DOM attribute values → Figma variant option values (where naming differs)
@@ -158,6 +159,8 @@ var ATTR_VALUE_MAP = {
   ghost: "ghost (tertiary)",
   // Size values (Figma appends "(default)" to md)
   md: "md (default)",
+  // Thickness values (Figma appends "(default)" to thin)
+  thin: "thin (default)",
   // Boolean-like
   true: "True",
   false: "False"
@@ -168,6 +171,10 @@ var ATTR_VALUE_MAP = {
 // Discovered via Figma REST API /v1/files/.../nodes
 var COMPONENT_SLOT_CONFIG = {
   "sgds-card": {
+    attrOverrides: {
+      hideBorder: { prop: "Border", values: { "true": "False", "false": "True" } },
+      disabled: { prop: "State", values: { "true": "disabled" } }
+    },
     structureName: "Structure",
     slots: {
       upper: {
@@ -236,6 +243,10 @@ var COMPONENT_SLOT_CONFIG = {
     extraBooleans: { footer: "Footer#29055:82" }
   },
   "sgds-image-card": {
+    attrOverrides: {
+      hideBorder: { prop: "Border", values: { "true": "False", "false": "True" } },
+      disabled: { prop: "State", values: { "true": "disabled" } }
+    },
     structureName: "Card structure",
     slots: {
       upper: {
@@ -277,9 +288,21 @@ var COMPONENT_SLOT_CONFIG = {
       title: { key: "Edit title#16551:8" },
       badge: { booleanKey: "Badge#29585:8", swapKey: "↳ 🔷 Swap instance#16545:8" },
       icon: { booleanKey: "Icon#29595:24", swapKey: "↳ Select icon#29595:46" },
-      content: { swapKey: "↳ 🔷 Swap instance#16545:8" },
-      disabled: { variantProp: "State", variantValue: "disabled" }
-    }
+      content: { autoDiscover: true },
+      disabled: { variantProp: "State", variantValue: "disabled" },
+      open: { variantProp: "Expand", variantValue: "True" }
+    },
+    childCountVariant: { prop: "No. of item", childTag: "sgds-accordion-item" }
+  },
+  "sgds-breadcrumb": {
+    itemPattern: "Link",
+    itemProps: {},
+    childCountVariant: { prop: "No. of link", childTag: "sgds-breadcrumb-item" }
+  },
+  "sgds-sidenav": {
+    itemPattern: "Main menu -",
+    itemProps: {},
+    childCountVariant: { prop: "No. of item", childTag: "sgds-sidenav-item" }
   },
   "sgds-modal": {
     // Modal has slot group for custom content, footer buttons as Action 1/2
@@ -297,11 +320,12 @@ var COMPONENT_SLOT_CONFIG = {
   },
   "sgds-alert": {
     slots: {
+      icon: { booleanKey: "With icon#13094:43" },
       action: { booleanKey: "🔷 Action slot#29246:0", instanceName: ".slot" }
     },
     textProps: {
-      title: { key: "↳ Edit text#15588:34", booleanKey: "Title#15588:17" },
-      description: { key: "Edit description#13094:45" }
+      title: { key: "↳ Edit text#15588:34", booleanKey: "Title#15588:17", source: "attr:title" },
+      default: { key: "Edit description#13094:45" }
     }
   },
   "sgds-footer": {
@@ -334,7 +358,8 @@ var COMPONENT_SLOT_CONFIG = {
       data: { key: "Edit data#18830:6" },
       slot1: { booleanKey: "🔷 Slot 1#18830:7", swapKey: "↳ Swap instance  #18830:8" },
       slot2: { booleanKey: "🔷 Slot 2#18830:10", swapKey: "↳ Swap instance #18830:9" }
-    }
+    },
+    childCountVariant: { prop: "No. of lists", childTag: "sgds-description-list-item" }
   },
   "sgds-badge": {
     textProps: {
@@ -343,6 +368,9 @@ var COMPONENT_SLOT_CONFIG = {
     slots: {}
   },
   "sgds-link": {
+    valueOverrides: {
+      "fixed-dark": "fixed dark (black)"
+    },
     textProps: {
       default: { key: "Edit link#16010:0" }
     },
@@ -461,7 +489,8 @@ var COMPONENT_SLOT_CONFIG = {
     itemProps: {
       label: { key: "Edit text#16628:108" },
       icon: { swapKey: "Select icon#16628:110" }
-    }
+    },
+    childCountVariant: { prop: "No. of list", childTag: "sgds-icon-list-item" }
   },
   "sgds-table-of-contents": {
     textProps: {
@@ -496,7 +525,8 @@ var COMPONENT_SLOT_CONFIG = {
     itemPattern: "↳ Step",
     itemProps: {
       label: { key: "Label#16203:7" }
-    }
+    },
+    childCountVariant: { prop: "No. of step", childTag: "sgds-stepper-item" }
   },
   "sgds-icon-button": {
     slots: {
@@ -511,6 +541,12 @@ var COMPONENT_SLOT_CONFIG = {
   "sgds-overflow-menu": {
     textProps: {},
     slots: {}
+  },
+  "sgds-close-button": {
+    valueOverrides: {
+      "fixed-light": "fixed light",
+      "fixed-dark": "fixed dark"
+    }
   }
 };
 
@@ -652,19 +688,31 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
         } else if (value === false || value === "false") {
           criteria[propName] = "False";
         } else {
-          // Map code values to Figma values (e.g. "fixed-light" → "fixed light (white)")
-          criteria[propName] = ATTR_VALUE_MAP[value] || value;
+          // Check per-component value overrides first, then global map
+          var mapped = (slotConfig && slotConfig.valueOverrides && slotConfig.valueOverrides[value]) || ATTR_VALUE_MAP[value] || value;
+          criteria[propName] = mapped;
         }
       }
     }
 
-    // Accordion: derive "No. of item" from children count
-    if (data.tag === "sgds-accordion" && data.children) {
+    // Generic childCountVariant: derive item count from children
+    if (slotConfig && slotConfig.childCountVariant && data.children) {
+      var ccv = slotConfig.childCountVariant;
       var itemCount = data.children.filter(function (c) {
-        return c.tag === "sgds-accordion-item";
+        return c.tag === ccv.childTag;
       }).length;
       if (itemCount > 0) {
-        criteria["No. of item"] = String(itemCount);
+        criteria[ccv.prop] = String(itemCount);
+      }
+    }
+
+    // Boolean variant props: if absent from DOM attrs, explicitly set to "False"
+    // This ensures Figma doesn't default to "True" when the DOM doesn't define it
+    var BOOLEAN_VARIANT_PROPS = ["Outlined", "Dismissible"];
+    for (var bvi = 0; bvi < BOOLEAN_VARIANT_PROPS.length; bvi++) {
+      var bvp = BOOLEAN_VARIANT_PROPS[bvi];
+      if (!criteria[bvp]) {
+        criteria[bvp] = "False";
       }
     }
 
@@ -799,8 +847,19 @@ async function importSlottedComponent(childData) {
   var attrs = childData.attrs || {};
 
   // Build variant property criteria from DOM attrs
+  var slotConfig = COMPONENT_SLOT_CONFIG[tag];
   var criteria = {};
   for (var attrName in attrs) {
+    // Check component-specific attr overrides
+    if (slotConfig && slotConfig.attrOverrides && slotConfig.attrOverrides[attrName]) {
+      var override = slotConfig.attrOverrides[attrName];
+      var mappedValue = override.values[attrs[attrName]];
+      if (mappedValue) {
+        criteria[override.prop] = mappedValue;
+      }
+      continue;
+    }
+
     var propName = ATTR_TO_VARIANT_PROP[attrName];
     if (propName) {
       var value = attrs[attrName];
@@ -810,8 +869,9 @@ async function importSlottedComponent(childData) {
       } else if (value === false || value === "false") {
         criteria[propName] = "False";
       } else {
-        // Map code values to Figma values
-        criteria[propName] = ATTR_VALUE_MAP[value] || value;
+        // Check per-component value overrides first, then global map
+        var mapped = (slotConfig && slotConfig.valueOverrides && slotConfig.valueOverrides[value]) || ATTR_VALUE_MAP[value] || value;
+        criteria[propName] = mapped;
       }
     }
   }
@@ -1149,7 +1209,16 @@ async function applySlotContent(instance, data, config) {
 
       var slotConfig = config.slots[slotName];
       var slotChild = slotChildren[slotName];
-      if (!slotChild) continue;
+      if (!slotChild) {
+        // Explicitly disable boolean when slot content is absent
+        // (Figma defaults may have this enabled, e.g. Alert "With icon" defaults to true)
+        if (slotConfig.booleanKey) {
+          try {
+            target.setProperties(makeProps(slotConfig.booleanKey, false));
+          } catch (e) {}
+        }
+        continue;
+      }
       // Handle first item if array
       if (Array.isArray(slotChild)) slotChild = slotChild[0];
 
@@ -1240,21 +1309,62 @@ async function applySlotContent(instance, data, config) {
       var textConfig = config.textProps[textSlot];
       var textChild = slotChildren[textSlot];
       var textValue = "";
+      var underlineRanges = []; // Track ranges from <a> tags for underline
 
-      if (textChild) {
+      // Priority 1: source: "attr:xxx" — read from DOM attributes
+      if (textConfig.source && textConfig.source.indexOf("attr:") === 0) {
+        var attrKey = textConfig.source.substring(5);
+        var attrVal = data.attrs && data.attrs[attrKey];
+        // Only use string values — boolean true means attr present without value (no text)
+        textValue = (typeof attrVal === "string" && attrVal) ? attrVal : "";
+      } else if (textSlot === "default") {
+        // Default slot: collect text from ALL unslotted children (text nodes + elements)
+        // This handles mixed content like: "Alert with no leading <a>icon</a> and extra text"
+        var defaultChildren = Array.isArray(textChild) ? textChild : (textChild ? [textChild] : []);
+        if (defaultChildren.length === 0 && data.children) {
+          defaultChildren = data.children.filter(function (c) { return !c.slot; });
+        }
+        if (defaultChildren.length > 0) {
+          var segments = [];
+          var cursor = 0;
+          for (var ui = 0; ui < defaultChildren.length; ui++) {
+            var child = defaultChildren[ui];
+            var t = child.text || collectFirstText(child);
+            if (t) {
+              if (segments.length > 0) { cursor += 1; } // space separator
+              // Track anchor ranges for underline
+              if (child.tag === "a") {
+                underlineRanges.push({ start: cursor, end: cursor + t.length });
+              }
+              segments.push(t);
+              cursor += t.length;
+            }
+          }
+          if (segments.length > 0) textValue = segments.join(" ");
+        } else {
+          textValue = data.text || "";
+        }
+      } else if (textChild) {
         if (Array.isArray(textChild)) textChild = textChild[0];
         textValue = textChild.text || collectFirstText(textChild);
-      } else if (textSlot === "default" && data.text) {
-        // For simple components (badge, button) that have direct text
-        textValue = data.text;
-        if (!textValue && data.children) {
-          var texts = [];
-          collectTexts(data, texts);
-          if (texts.length > 0) textValue = texts[0].text;
+        // If the slot child is an anchor, underline it all
+        if (textChild.tag === "a" && textValue) {
+          underlineRanges.push({ start: 0, end: textValue.length });
         }
       }
 
-      if (!textValue) continue;
+      if (!textValue) {
+        // Explicitly disable the boolean when text content is absent
+        // (Figma defaults may have it enabled, e.g. Title defaults to true)
+        if (textConfig.booleanKey) {
+          try {
+            var disableTarget = instance;
+            if (config.structureName && target !== instance) disableTarget = target;
+            disableTarget.setProperties(makeProps(textConfig.booleanKey, false));
+          } catch (e) {}
+        }
+        continue;
+      }
 
       var textTarget = instance;
       if (textConfig.instanceName) {
@@ -1272,6 +1382,24 @@ async function applySlotContent(instance, data, config) {
       try {
         textTarget.setProperties(textProps);
       } catch (e) {}
+
+      // Apply underline decoration to anchor text ranges
+      if (underlineRanges.length > 0) {
+        try {
+          // Find the text node that received the property value
+          var textNodes = textTarget.findAll(function (n) {
+            return n.type === "TEXT" && n.characters === textValue;
+          });
+          if (textNodes.length > 0) {
+            var textNode = textNodes[0];
+            await figma.loadFontAsync(textNode.fontName);
+            for (var ur = 0; ur < underlineRanges.length; ur++) {
+              var range = underlineRanges[ur];
+              textNode.setRangeTextDecoration(range.start, range.end, "UNDERLINE");
+            }
+          }
+        } catch (e) {}
+      }
     }
   }
 
@@ -1578,8 +1706,13 @@ async function applyItemPattern(instance, data, config) {
   var numberedInstances = [];
   for (var ni = 0; ni < allInstances.length; ni++) {
     var inst = allInstances[ni];
-    if (inst.name.indexOf(pattern) >= 0 && inst.parent && inst.parent.id === instance.id) {
-      numberedInstances.push(inst);
+    // Match by pattern name; allow direct children or one level deep (inside a frame)
+    if (inst.name.indexOf(pattern) >= 0) {
+      var isDirectOrNear = inst.parent && (inst.parent.id === instance.id ||
+        (inst.parent.parent && inst.parent.parent.id === instance.id));
+      if (isDirectOrNear) {
+        numberedInstances.push(inst);
+      }
     }
   }
 
@@ -1616,9 +1749,13 @@ async function applyItemPattern(instance, data, config) {
 
     // Apply expand/open state
     var itemAttrs = itemData.attrs || {};
-    if (itemAttrs.open !== undefined || itemAttrs.open === true || itemAttrs.open === "") {
+    if (itemAttrs.open === true || itemAttrs.open === "" || itemAttrs.open === "true") {
       try {
         itemInstance.setProperties({ Expand: "True" });
+      } catch (e) {}
+    } else {
+      try {
+        itemInstance.setProperties({ Expand: "False" });
       } catch (e) {}
     }
 
@@ -1627,6 +1764,29 @@ async function applyItemPattern(instance, data, config) {
       var disabledConfig = config.itemProps.disabled;
       try {
         itemInstance.setProperties(makeProps(disabledConfig.variantProp, disabledConfig.variantValue));
+      } catch (e) {}
+    }
+
+    // Apply icon slot
+    if (config.itemProps.icon && itemSlots.icon) {
+      var iconChild = Array.isArray(itemSlots.icon) ? itemSlots.icon[0] : itemSlots.icon;
+      try {
+        // Enable icon boolean
+        if (config.itemProps.icon.booleanKey) {
+          itemInstance.setProperties(makeProps(config.itemProps.icon.booleanKey, true));
+        }
+        // Swap icon instance if it's an SGDS component
+        if (iconChild.tag && isSgdsComponent(iconChild.tag) && config.itemProps.icon.swapKey) {
+          var iconComp = await importSlottedComponent(iconChild);
+          if (iconComp) {
+            itemInstance.setProperties(makeProps(config.itemProps.icon.swapKey, iconComp));
+          }
+        }
+      } catch (e) {}
+    } else if (config.itemProps.icon && config.itemProps.icon.booleanKey) {
+      // Explicitly disable icon when not present
+      try {
+        itemInstance.setProperties(makeProps(config.itemProps.icon.booleanKey, false));
       } catch (e) {}
     }
 
@@ -1642,13 +1802,95 @@ async function applyItemPattern(instance, data, config) {
           }
         } catch (e) {}
       }
+    } else if (config.itemProps.badge && config.itemProps.badge.booleanKey) {
+      // Explicitly disable badge when not present
+      try {
+        itemInstance.setProperties(makeProps(config.itemProps.badge.booleanKey, false));
+      } catch (e) {}
     }
 
-    // Apply content slot (swap instance for expanded content)
+    // Apply content slot — find the .slot instance in the accordion body and swap/edit it
     if (config.itemProps.content && itemSlots.content) {
-      // Content slot is where expanded accordion body goes
-      // For now, we can't easily represent rich HTML content in a swap instance
-      // The Figma accordion item shows/hides content based on Expand state
+      var contentChild = Array.isArray(itemSlots.content) ? itemSlots.content[0] : itemSlots.content;
+      var contentText = contentChild.text || collectFirstText(contentChild);
+      if (contentText) {
+        try {
+          // Strategy 1: Try setProperties with discovered swap key
+          var swapKey = config.itemProps.content.swapKey;
+          if (!swapKey) {
+            // Auto-discover from instance componentProperties
+            var itemCProps = itemInstance.componentProperties || {};
+            for (var pk in itemCProps) {
+              if (itemCProps[pk].type === "INSTANCE_SWAP" && (pk.indexOf("Swap") >= 0 || pk.indexOf("slot") >= 0)) {
+                swapKey = pk;
+                break;
+              }
+            }
+          }
+
+          var swapped = false;
+          if (swapKey) {
+            var textComp = figma.createComponent();
+            textComp.name = "slot: content";
+            textComp.layoutMode = "VERTICAL";
+            textComp.primaryAxisSizingMode = "AUTO";
+            textComp.counterAxisSizingMode = "AUTO";
+            textComp.fills = [];
+            var contentTextNode = figma.createText();
+            contentTextNode.characters = contentText;
+            contentTextNode.fontName = { family: "Inter", style: "Regular" };
+            contentTextNode.fontSize = 16;
+            contentTextNode.textAutoResize = "WIDTH_AND_HEIGHT";
+            textComp.appendChild(contentTextNode);
+            textComp.x = -9999;
+            textComp.y = -9999;
+            try {
+              itemInstance.setProperties(makeProps(swapKey, textComp));
+              swapped = true;
+            } catch (e2) {}
+          }
+
+          // Strategy 2: Find the .slot instance inside the body and swapComponent
+          if (!swapped) {
+            var slotInst = itemInstance.findOne(function (n) {
+              return n.type === "INSTANCE" && (n.name === ".slot" || n.name.indexOf("slot") >= 0 || n.name.indexOf("Slot") >= 0);
+            });
+            if (slotInst) {
+              var textComp2 = figma.createComponent();
+              textComp2.name = "slot: content";
+              textComp2.layoutMode = "VERTICAL";
+              textComp2.primaryAxisSizingMode = "AUTO";
+              textComp2.counterAxisSizingMode = "AUTO";
+              textComp2.fills = [];
+              var ctn2 = figma.createText();
+              ctn2.characters = contentText;
+              ctn2.fontName = { family: "Inter", style: "Regular" };
+              ctn2.fontSize = 16;
+              ctn2.textAutoResize = "WIDTH_AND_HEIGHT";
+              textComp2.appendChild(ctn2);
+              textComp2.x = -9999;
+              textComp2.y = -9999;
+              slotInst.swapComponent(textComp2);
+              swapped = true;
+            }
+          }
+
+          // Strategy 3: Find any text node in the body area and set its characters
+          if (!swapped) {
+            var allTexts = itemInstance.findAll(function (n) { return n.type === "TEXT"; });
+            for (var ati = 0; ati < allTexts.length; ati++) {
+              var atNode = allTexts[ati];
+              // Skip title text — look for body/content text (usually has Lorem or longer default)
+              if (atNode.characters && atNode.characters.length > 30) {
+                await figma.loadFontAsync(atNode.fontName);
+                atNode.characters = contentText;
+                swapped = true;
+                break;
+              }
+            }
+          }
+        } catch (e) {}
+      }
     }
   }
 

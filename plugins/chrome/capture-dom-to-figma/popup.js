@@ -248,12 +248,46 @@ function captureDom(maxDepth) {
       };
     }
 
-    // Children
+    // Children — use childNodes to capture interleaved text nodes and elements
     if (el.children.length > 0 && node.type !== "text") {
       node.children = [];
-      for (const child of el.children) {
-        const childNode = captureNode(child, depth + 1);
-        if (childNode) node.children.push(childNode);
+      // Check if there are mixed text nodes + elements (e.g. "Description with <a>link</a>")
+      const hasTextSiblings = Array.from(el.childNodes).some(
+        n => n.nodeType === Node.TEXT_NODE && n.textContent.trim()
+      );
+
+      if (hasTextSiblings) {
+        // Mixed content: iterate childNodes to preserve text + element order
+        for (const childNode of el.childNodes) {
+          if (childNode.nodeType === Node.TEXT_NODE) {
+            const text = childNode.textContent.trim();
+            if (text) {
+              node.children.push({
+                type: "text",
+                tag: "#text",
+                text: text,
+                textStyles: {
+                  fontSize: parseFloat(style.fontSize),
+                  fontFamily: style.fontFamily.split(",")[0].replace(/["']/g, "").trim(),
+                  fontWeight: style.fontWeight,
+                  color: parseColor(style.color),
+                  lineHeight: parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.2,
+                  textAlign: style.textAlign,
+                  letterSpacing: parseFloat(style.letterSpacing) || 0
+                }
+              });
+            }
+          } else if (childNode.nodeType === Node.ELEMENT_NODE) {
+            const captured = captureNode(childNode, depth + 1);
+            if (captured) node.children.push(captured);
+          }
+        }
+      } else {
+        // No text siblings: only elements (original behavior)
+        for (const child of el.children) {
+          const childNode = captureNode(child, depth + 1);
+          if (childNode) node.children.push(childNode);
+        }
       }
       if (node.children.length === 0) delete node.children;
     }
