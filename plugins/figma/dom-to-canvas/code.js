@@ -2828,24 +2828,12 @@ async function createFrameNode(data, parent, parentX, parentY) {
   return frame;
 }
 
-// Enable auto-layout on a frame while preserving child positions.
-// If auto-layout was not already set (by flex classes), enable it as VERTICAL
-// and mark all existing children as absolutely positioned so they don't rearrange.
-function ensureAutoLayout(frame) {
-  if (frame.layoutMode !== "NONE") return; // Already has auto-layout
-
-  frame.layoutMode = "VERTICAL";
-  frame.primaryAxisSizingMode = "FIXED";
-  frame.counterAxisSizingMode = "FIXED";
-
-  // Preserve child positions by making them absolute within the auto-layout frame
-  if (frame.children) {
-    for (var ci = 0; ci < frame.children.length; ci++) {
-      try {
-        frame.children[ci].layoutPositioning = "ABSOLUTE";
-      } catch (e) {}
-    }
-  }
+// Check if auto-layout is already enabled (from flex classes or gap).
+// Padding tokens can only be applied on auto-layout frames.
+// Non-flex frames keep absolute positioning — their visual layout is
+// already correct from DOM x/y/width/height coordinates.
+function hasAutoLayout(frame) {
+  return frame.layoutMode !== "NONE";
 }
 
 // Parse spacing classes and apply padding/gap with variable bindings
@@ -2903,9 +2891,10 @@ async function applySpacing(frame, name) {
       if (pyKey) {
         var pyVar = await importVariable(pyKey);
         if (pyVar) {
-          ensureAutoLayout(frame);
-          frame.setBoundVariable("paddingTop", pyVar);
-          frame.setBoundVariable("paddingBottom", pyVar);
+          if (hasAutoLayout(frame)) {
+            frame.setBoundVariable("paddingTop", pyVar);
+            frame.setBoundVariable("paddingBottom", pyVar);
+          }
         }
       }
       continue;
@@ -2918,9 +2907,10 @@ async function applySpacing(frame, name) {
       if (pxKey) {
         var pxVar = await importVariable(pxKey);
         if (pxVar) {
-          ensureAutoLayout(frame);
-          frame.setBoundVariable("paddingLeft", pxVar);
-          frame.setBoundVariable("paddingRight", pxVar);
+          if (hasAutoLayout(frame)) {
+            frame.setBoundVariable("paddingLeft", pxVar);
+            frame.setBoundVariable("paddingRight", pxVar);
+          }
         }
       }
       continue;
@@ -2932,8 +2922,7 @@ async function applySpacing(frame, name) {
       var pKey = resolveSpacingKey(pMatch[1], "padding");
       if (pKey) {
         var pVar = await importVariable(pKey);
-        if (pVar) {
-          ensureAutoLayout(frame);
+        if (pVar && hasAutoLayout(frame)) {
           frame.setBoundVariable("paddingTop", pVar);
           frame.setBoundVariable("paddingBottom", pVar);
           frame.setBoundVariable("paddingLeft", pVar);
@@ -2949,8 +2938,7 @@ async function applySpacing(frame, name) {
       var ptKey = resolveSpacingKey(ptMatch[1], "padding");
       if (ptKey) {
         var ptVar = await importVariable(ptKey);
-        if (ptVar) {
-          ensureAutoLayout(frame);
+        if (ptVar && hasAutoLayout(frame)) {
           frame.setBoundVariable("paddingTop", ptVar);
         }
       }
@@ -2963,8 +2951,7 @@ async function applySpacing(frame, name) {
       var pbKey = resolveSpacingKey(pbMatch[1], "padding");
       if (pbKey) {
         var pbVar = await importVariable(pbKey);
-        if (pbVar) {
-          ensureAutoLayout(frame);
+        if (pbVar && hasAutoLayout(frame)) {
           frame.setBoundVariable("paddingBottom", pbVar);
         }
       }
@@ -2978,8 +2965,7 @@ async function applySpacing(frame, name) {
       var mbKey = resolveSpacingKey(mbMatch[1], "padding");
       if (mbKey) {
         var mbVar = await importVariable(mbKey);
-        if (mbVar) {
-          ensureAutoLayout(frame);
+        if (mbVar && hasAutoLayout(frame)) {
           frame.setBoundVariable("paddingBottom", mbVar);
         }
       }
@@ -2991,8 +2977,7 @@ async function applySpacing(frame, name) {
       var mtKey = resolveSpacingKey(mtMatch[1], "padding");
       if (mtKey) {
         var mtVar = await importVariable(mtKey);
-        if (mtVar) {
-          ensureAutoLayout(frame);
+        if (mtVar && hasAutoLayout(frame)) {
           frame.setBoundVariable("paddingTop", mtVar);
         }
       }
