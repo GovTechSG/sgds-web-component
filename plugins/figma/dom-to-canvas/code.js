@@ -166,7 +166,7 @@ var SGDS_SPACING_MAP = {
   "padding-3-xl": "78deb1ca7687d7ae424b8f21329e3644c4a87032",
   "padding-4-xl": "3bc5c919d6c80331c66abc8d278fa4552af7f3e7",
   "padding-5-xl": "f7d56e82cf6e6ee6829f106510e1edc6720d340d",
-  // Spacer (primitive scale, for sgds:p-[spacer] raw fallback)
+  // Spacer (primitive scale)
   "spacer-0": "cfab713e324cbb9db542be9f1204d60d675f9d1d",
   "spacer-1": "5e54bc5c52fd275d393ce296cf39c03d6b2b08b9",
   "spacer-2": "364e2eae79d663270a6a322dd727b997f46349d3",
@@ -2822,44 +2822,15 @@ async function createFrameNode(data, parent, parentX, parentY) {
     }
   }
 
-  // Apply spacing utilities (gap, padding) from sgds: classes
-  await applySpacing(frame, data.name);
-
   return frame;
-}
-
-// Check if auto-layout is already enabled (from flex classes or gap).
-// Padding tokens can only be applied on auto-layout frames.
-// Non-flex frames keep absolute positioning — their visual layout is
-// already correct from DOM x/y/width/height coordinates.
-function hasAutoLayout(frame) {
-  return frame.layoutMode !== "NONE";
 }
 
 // Parse spacing classes and apply padding/gap with variable bindings
 async function applySpacing(frame, name) {
   if (!name) return;
 
-  // Determine flex direction from class names first
-  var classes = name.split(/\s+/);
-  var hasFlexCol = classes.indexOf("sgds:flex-col") >= 0;
-  var hasFlexRow = classes.indexOf("sgds:flex-row") >= 0;
-  var hasFlex = classes.indexOf("sgds:flex") >= 0;
-
-  // Set layout mode based on explicit flex direction only
-  // sgds:flex alone does NOT set direction — only sgds:flex-col or sgds:flex-row do
-  // Use FIXED sizing to preserve DOM dimensions
-  if (hasFlexCol) {
-    frame.layoutMode = "VERTICAL";
-    frame.primaryAxisSizingMode = "FIXED";
-    frame.counterAxisSizingMode = "FIXED";
-  } else if (hasFlexRow) {
-    frame.layoutMode = "HORIZONTAL";
-    frame.primaryAxisSizingMode = "FIXED";
-    frame.counterAxisSizingMode = "FIXED";
-  }
-
   // Parse all sgds: spacing classes
+  var classes = name.split(/\s+/);
   for (var i = 0; i < classes.length; i++) {
     var cls = classes[i];
     if (cls.indexOf("sgds:") !== 0) continue;
@@ -2868,16 +2839,12 @@ async function applySpacing(frame, name) {
     // Gap: sgds:gap-sm, sgds:gap-layout-md
     var gapMatch = token.match(/^gap-(.+)$/);
     if (gapMatch) {
-      var gapKey = resolveSpacingKey(gapMatch[1], "gap");
+      var gapKey = resolveSpacingKey(gapMatch[1]);
       if (gapKey) {
         var gapVar = await importVariable(gapKey);
         if (gapVar) {
-          // Need auto-layout for gap — default to HORIZONTAL (CSS flex default is row)
-          if (frame.layoutMode === "NONE") {
-            frame.layoutMode = hasFlex ? "HORIZONTAL" : "VERTICAL";
-            frame.primaryAxisSizingMode = "FIXED";
-            frame.counterAxisSizingMode = "FIXED";
-          }
+          // Need auto-layout for gap
+          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
           frame.setBoundVariable("itemSpacing", gapVar);
         }
       }
@@ -2887,14 +2854,13 @@ async function applySpacing(frame, name) {
     // Padding Y: sgds:py-layout-md, sgds:py-xl
     var pyMatch = token.match(/^py-(.+)$/);
     if (pyMatch) {
-      var pyKey = resolveSpacingKey(pyMatch[1], "padding");
+      var pyKey = resolveSpacingKey(pyMatch[1]);
       if (pyKey) {
         var pyVar = await importVariable(pyKey);
         if (pyVar) {
-          if (hasAutoLayout(frame)) {
-            frame.setBoundVariable("paddingTop", pyVar);
-            frame.setBoundVariable("paddingBottom", pyVar);
-          }
+          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
+          frame.setBoundVariable("paddingTop", pyVar);
+          frame.setBoundVariable("paddingBottom", pyVar);
         }
       }
       continue;
@@ -2903,14 +2869,13 @@ async function applySpacing(frame, name) {
     // Padding X: sgds:px-layout-lg, sgds:px-xl
     var pxMatch = token.match(/^px-(.+)$/);
     if (pxMatch) {
-      var pxKey = resolveSpacingKey(pxMatch[1], "padding");
+      var pxKey = resolveSpacingKey(pxMatch[1]);
       if (pxKey) {
         var pxVar = await importVariable(pxKey);
         if (pxVar) {
-          if (hasAutoLayout(frame)) {
-            frame.setBoundVariable("paddingLeft", pxVar);
-            frame.setBoundVariable("paddingRight", pxVar);
-          }
+          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
+          frame.setBoundVariable("paddingLeft", pxVar);
+          frame.setBoundVariable("paddingRight", pxVar);
         }
       }
       continue;
@@ -2919,10 +2884,11 @@ async function applySpacing(frame, name) {
     // Padding all: sgds:p-xl
     var pMatch = token.match(/^p-(.+)$/);
     if (pMatch && !token.match(/^p[xytblr]-/)) {
-      var pKey = resolveSpacingKey(pMatch[1], "padding");
+      var pKey = resolveSpacingKey(pMatch[1]);
       if (pKey) {
         var pVar = await importVariable(pKey);
-        if (pVar && hasAutoLayout(frame)) {
+        if (pVar) {
+          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
           frame.setBoundVariable("paddingTop", pVar);
           frame.setBoundVariable("paddingBottom", pVar);
           frame.setBoundVariable("paddingLeft", pVar);
@@ -2935,10 +2901,11 @@ async function applySpacing(frame, name) {
     // Padding top: sgds:pt-*
     var ptMatch = token.match(/^pt-(.+)$/);
     if (ptMatch) {
-      var ptKey = resolveSpacingKey(ptMatch[1], "padding");
+      var ptKey = resolveSpacingKey(ptMatch[1]);
       if (ptKey) {
         var ptVar = await importVariable(ptKey);
-        if (ptVar && hasAutoLayout(frame)) {
+        if (ptVar) {
+          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
           frame.setBoundVariable("paddingTop", ptVar);
         }
       }
@@ -2948,10 +2915,11 @@ async function applySpacing(frame, name) {
     // Padding bottom: sgds:pb-*
     var pbMatch = token.match(/^pb-(.+)$/);
     if (pbMatch) {
-      var pbKey = resolveSpacingKey(pbMatch[1], "padding");
+      var pbKey = resolveSpacingKey(pbMatch[1]);
       if (pbKey) {
         var pbVar = await importVariable(pbKey);
-        if (pbVar && hasAutoLayout(frame)) {
+        if (pbVar) {
+          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
           frame.setBoundVariable("paddingBottom", pbVar);
         }
       }
@@ -2962,10 +2930,11 @@ async function applySpacing(frame, name) {
     // sgds:mb-xl → paddingBottom, sgds:mt-lg → paddingTop
     var mbMatch = token.match(/^mb-(.+)$/);
     if (mbMatch) {
-      var mbKey = resolveSpacingKey(mbMatch[1], "padding");
+      var mbKey = resolveSpacingKey(mbMatch[1]);
       if (mbKey) {
         var mbVar = await importVariable(mbKey);
-        if (mbVar && hasAutoLayout(frame)) {
+        if (mbVar) {
+          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
           frame.setBoundVariable("paddingBottom", mbVar);
         }
       }
@@ -2974,10 +2943,11 @@ async function applySpacing(frame, name) {
 
     var mtMatch = token.match(/^mt-(.+)$/);
     if (mtMatch) {
-      var mtKey = resolveSpacingKey(mtMatch[1], "padding");
+      var mtKey = resolveSpacingKey(mtMatch[1]);
       if (mtKey) {
         var mtVar = await importVariable(mtKey);
-        if (mtVar && hasAutoLayout(frame)) {
+        if (mtVar) {
+          if (frame.layoutMode === "NONE") frame.layoutMode = "VERTICAL";
           frame.setBoundVariable("paddingTop", mtVar);
         }
       }
@@ -3013,32 +2983,12 @@ function parseColSpan(name) {
 }
 
 // Resolve a spacing token to a variable key
-// Called with the token AFTER prefix stripping:
-//   sgds:gap-layout-sm → resolveSpacingKey("layout-sm", "gap")
-//   sgds:py-layout-md → resolveSpacingKey("layout-md", "padding")
-//   sgds:gap-sm → resolveSpacingKey("sm", "gap")
-//   sgds:p-component-md → resolveSpacingKey("component-md", "padding")
-function resolveSpacingKey(token, context) {
-  // Context-aware resolution: check context-specific keys FIRST
-
-  // Gap context: "layout-sm" → try "layout-gap-sm" before direct match
-  if (context === "gap") {
-    var parts = token.match(/^(.+)-([a-z0-9-]+)$/);
-    if (parts) {
-      var gapKey = parts[1] + "-gap-" + parts[2];
-      if (SGDS_SPACING_MAP[gapKey]) return SGDS_SPACING_MAP[gapKey];
-    }
-  }
-
-  // Padding context: try "padding-" prefix for bare tokens (sm, md, etc.)
-  if (context === "padding" && SGDS_SPACING_MAP["padding-" + token]) {
-    return SGDS_SPACING_MAP["padding-" + token];
-  }
-
-  // Direct match: "sm", "md", "xl", "layout-md", "component-md"
+// e.g. "layout-md" → layout padding md key, "sm" → semantic gap sm key
+function resolveSpacingKey(token) {
+  // Direct match: "sm", "md", "xl", "layout-md"
   if (SGDS_SPACING_MAP[token]) return SGDS_SPACING_MAP[token];
 
-  // Fallback: try "layout-" prefix
+  // "layout-md" for padding context
   if (SGDS_SPACING_MAP["layout-" + token]) return SGDS_SPACING_MAP["layout-" + token];
 
   return null;
