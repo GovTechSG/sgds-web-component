@@ -2838,13 +2838,15 @@ async function applySpacing(frame, name) {
   var hasFlexRow = classes.indexOf("sgds:flex-row") >= 0 || classes.indexOf("sgds:flex") >= 0;
 
   // Set layout mode based on flex direction (before spacing is applied)
+  // Use FIXED sizing to preserve DOM dimensions — auto-layout arranges children
+  // but the frame keeps its captured width/height
   if (hasFlexCol) {
     frame.layoutMode = "VERTICAL";
-    frame.primaryAxisSizingMode = "AUTO";
+    frame.primaryAxisSizingMode = "FIXED";
     frame.counterAxisSizingMode = "FIXED";
   } else if (hasFlexRow) {
     frame.layoutMode = "HORIZONTAL";
-    frame.primaryAxisSizingMode = "AUTO";
+    frame.primaryAxisSizingMode = "FIXED";
     frame.counterAxisSizingMode = "FIXED";
   }
 
