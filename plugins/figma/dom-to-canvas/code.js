@@ -172,8 +172,8 @@ var ATTR_VALUE_MAP = {
 var COMPONENT_SLOT_CONFIG = {
   "sgds-card": {
     attrOverrides: {
-      hideBorder: { prop: "Border", values: { "true": "False", "false": "True" } },
-      disabled: { prop: "State", values: { "true": "disabled" } }
+      hideBorder: { prop: "Border", values: { true: "False", false: "True" } },
+      disabled: { prop: "State", values: { true: "disabled" } }
     },
     structureName: "Structure",
     slots: {
@@ -244,8 +244,8 @@ var COMPONENT_SLOT_CONFIG = {
   },
   "sgds-image-card": {
     attrOverrides: {
-      hideBorder: { prop: "Border", values: { "true": "False", "false": "True" } },
-      disabled: { prop: "State", values: { "true": "disabled" } }
+      hideBorder: { prop: "Border", values: { true: "False", false: "True" } },
+      disabled: { prop: "State", values: { true: "disabled" } }
     },
     structureName: "Card structure",
     slots: {
@@ -684,12 +684,22 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
       if (propName) {
         var value = attrs[attrName];
         if (value === true || value === "") {
-          criteria[propName] = "True";
+          // Only map to "True" for genuinely boolean Figma props (True/False values)
+          // For enum props (Density, Size, Tone, etc.), boolean true means attr present
+          // without a value — skip it (no useful mapping)
+          var BOOLEAN_FIGMA_PROPS = ["Outlined", "Dismissible"];
+          if (BOOLEAN_FIGMA_PROPS.indexOf(propName) >= 0) {
+            criteria[propName] = "True";
+          }
+          // else: skip — enum prop with no value
         } else if (value === false || value === "false") {
           criteria[propName] = "False";
         } else {
           // Check per-component value overrides first, then global map
-          var mapped = (slotConfig && slotConfig.valueOverrides && slotConfig.valueOverrides[value]) || ATTR_VALUE_MAP[value] || value;
+          var mapped =
+            (slotConfig && slotConfig.valueOverrides && slotConfig.valueOverrides[value]) ||
+            ATTR_VALUE_MAP[value] ||
+            value;
           criteria[propName] = mapped;
         }
       }
@@ -870,7 +880,10 @@ async function importSlottedComponent(childData) {
         criteria[propName] = "False";
       } else {
         // Check per-component value overrides first, then global map
-        var mapped = (slotConfig && slotConfig.valueOverrides && slotConfig.valueOverrides[value]) || ATTR_VALUE_MAP[value] || value;
+        var mapped =
+          (slotConfig && slotConfig.valueOverrides && slotConfig.valueOverrides[value]) ||
+          ATTR_VALUE_MAP[value] ||
+          value;
         criteria[propName] = mapped;
       }
     }
@@ -1316,13 +1329,15 @@ async function applySlotContent(instance, data, config) {
         var attrKey = textConfig.source.substring(5);
         var attrVal = data.attrs && data.attrs[attrKey];
         // Only use string values — boolean true means attr present without value (no text)
-        textValue = (typeof attrVal === "string" && attrVal) ? attrVal : "";
+        textValue = typeof attrVal === "string" && attrVal ? attrVal : "";
       } else if (textSlot === "default") {
         // Default slot: collect text from ALL unslotted children (text nodes + elements)
         // This handles mixed content like: "Alert with no leading <a>icon</a> and extra text"
-        var defaultChildren = Array.isArray(textChild) ? textChild : (textChild ? [textChild] : []);
+        var defaultChildren = Array.isArray(textChild) ? textChild : textChild ? [textChild] : [];
         if (defaultChildren.length === 0 && data.children) {
-          defaultChildren = data.children.filter(function (c) { return !c.slot; });
+          defaultChildren = data.children.filter(function (c) {
+            return !c.slot;
+          });
         }
         if (defaultChildren.length > 0) {
           var segments = [];
@@ -1331,7 +1346,9 @@ async function applySlotContent(instance, data, config) {
             var child = defaultChildren[ui];
             var t = child.text || collectFirstText(child);
             if (t) {
-              if (segments.length > 0) { cursor += 1; } // space separator
+              if (segments.length > 0) {
+                cursor += 1;
+              } // space separator
               // Track anchor ranges for underline
               if (child.tag === "a") {
                 underlineRanges.push({ start: cursor, end: cursor + t.length });
@@ -1708,8 +1725,9 @@ async function applyItemPattern(instance, data, config) {
     var inst = allInstances[ni];
     // Match by pattern name; allow direct children or one level deep (inside a frame)
     if (inst.name.indexOf(pattern) >= 0) {
-      var isDirectOrNear = inst.parent && (inst.parent.id === instance.id ||
-        (inst.parent.parent && inst.parent.parent.id === instance.id));
+      var isDirectOrNear =
+        inst.parent &&
+        (inst.parent.id === instance.id || (inst.parent.parent && inst.parent.parent.id === instance.id));
       if (isDirectOrNear) {
         numberedInstances.push(inst);
       }
@@ -1853,7 +1871,10 @@ async function applyItemPattern(instance, data, config) {
           // Strategy 2: Find the .slot instance inside the body and swapComponent
           if (!swapped) {
             var slotInst = itemInstance.findOne(function (n) {
-              return n.type === "INSTANCE" && (n.name === ".slot" || n.name.indexOf("slot") >= 0 || n.name.indexOf("Slot") >= 0);
+              return (
+                n.type === "INSTANCE" &&
+                (n.name === ".slot" || n.name.indexOf("slot") >= 0 || n.name.indexOf("Slot") >= 0)
+              );
             });
             if (slotInst) {
               var textComp2 = figma.createComponent();
@@ -1877,7 +1898,9 @@ async function applyItemPattern(instance, data, config) {
 
           // Strategy 3: Find any text node in the body area and set its characters
           if (!swapped) {
-            var allTexts = itemInstance.findAll(function (n) { return n.type === "TEXT"; });
+            var allTexts = itemInstance.findAll(function (n) {
+              return n.type === "TEXT";
+            });
             for (var ati = 0; ati < allTexts.length; ati++) {
               var atNode = allTexts[ati];
               // Skip title text — look for body/content text (usually has Lorem or longer default)
