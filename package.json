@@ -20,6 +20,7 @@
     "write:component": "plop",
     "test": "rm -rf test-outdir && rollup --config rollup.test.config.js && web-test-runner",
     "test:scripts": "wtr scripts/**/__tests__/**/*.test.{js,ts} --node-resolve",
+    "test:plugins": "node --test plugins/figma/dom-to-canvas/__tests__/code.test.js",
     "prepare": "husky install",
     "concat:stories": "gulp concat-stories-js && gulp concat-storybook-mdx",
     "update:docs": "gulp replace-version-and-sri",
