@@ -38,6 +38,7 @@ export type { ISgdsComboBoxInputEventDetail };
  * @event sgds-blur -  Emitted when user input is blurred.
  * @event sgds-invalid - Emitted when the combo box's invalid state is set to true.
  * @event sgds-valid - Emitted when the combo box's invalid state is set to false.
+ * @event sgds-scroll-end - Emitted once when the menu is scrolled to within `scrollBottomOffset` pixels of the bottom. Resets when the user scrolls back up.
  */
 export class SgdsComboBox extends SelectElement {
   static styles = [...SelectElement.styles, formTextControlStyle, comboBoxStyle];
@@ -427,9 +428,13 @@ export class SgdsComboBox extends SelectElement {
     }
   }
 
-  // For scrolling to bottom of the menu
+  /**
+   * Handles scroll events on the menu. Emits `sgds-scroll-end` once when the
+   * scroll position reaches within `scrollBottomOffset` pixels of the bottom.
+   * The event is suppressed until the user scrolls back up, preventing repeated
+   * emissions while the menu stays at the bottom.
+   */
   private async _handleScroll(e: MouseEvent) {
-    // To handle scrolling
     const ele = e.target as HTMLElement;
     if (ele) {
       const endOfScroll = ele.scrollHeight - ele.clientHeight;
