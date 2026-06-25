@@ -23,3 +23,63 @@ Populate menu list of the select with `menuList` property.
 <Canvas of={SelectStories.SelectMenuList}>
   <Story of={SelectStories.SelectMenuList} />
 </Canvas>
+
+## Custom Validation with `noValidate`
+
+Set `noValidate` to disable built-in constraint validation. Use `setInvalid(bool)` and `invalidFeedback` to control the validation state programmatically via event listeners.
+
+<Canvas of={SelectStories.NoValidate}>
+  <Story of={SelectStories.NoValidate} />
+</Canvas>
+
+**HTML** — add `noValidate` and `hasFeedback` to the element:
+
+```html
+<form id="my-form">
+  <sgds-select
+    id="my-select"
+    noValidate
+    hasFeedback
+    label="Fruit"
+    hintText="Must select a fruit starting with 'A'"
+    placeholder="Select a fruit"
+  >
+    <sgds-select-option value="apple">Apple</sgds-select-option>
+    <sgds-select-option value="apricot">Apricot</sgds-select-option>
+    <sgds-select-option value="banana">Banana</sgds-select-option>
+  </sgds-select>
+  <button type="submit">Submit</button>
+</form>
+```
+
+**JavaScript** — validate format on `sgds-change`, check required on submit:
+
+```js
+const select = document.querySelector("#my-select");
+const form = document.querySelector("#my-form");
+
+select.addEventListener("sgds-change", e => {
+  if (!e.target.value) {
+    // Value cleared (e.g. on reset) — remove any previous error
+    e.target.setInvalid(false);
+    return;
+  }
+  if (!e.target.value.startsWith("a")) {
+    e.target.setInvalid(true);
+    e.target.invalidFeedback = "Custom feedback: selection must start with 'A'";
+  } else {
+    e.target.setInvalid(false);
+  }
+});
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  if (!select.value) {
+    select.setInvalid(true);
+    select.invalidFeedback = "Custom feedback: select an option";
+    return;
+  }
+  if (select.invalid) return;
+  // handle valid submission
+});
+```
