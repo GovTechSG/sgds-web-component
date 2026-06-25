@@ -13,7 +13,12 @@ export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen
       <sgds-mainnav-item>
         <a href="#">About</a>
       </sgds-mainnav-item>
-      <sgds-mainnav-dropdown ?active=${active} ?menuIsOpen=${menuIsOpen} close=${ifDefined(close)}>
+      <sgds-mainnav-dropdown
+        ?active=${active}
+        ?menuIsOpen=${menuIsOpen}
+        close=${ifDefined(close)}
+        ariaLabel="Dropdown menu"
+      >
         <span slot="toggler">Dropdown</span>
         <sgds-dropdown-item><a href="https://google.com">Item 1</a></sgds-dropdown-item>
         <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
