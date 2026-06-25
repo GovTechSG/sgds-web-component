@@ -7,7 +7,7 @@ const handleInput = e => {};
 
 const DisableValidationByInputTemplate = args => {
   return html`
-    <form id="custom-validation-form" class="d-flex-column">
+    <form id="custom-validation-form" class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
       <sgds-input
         noValidate
         label="Keys"
@@ -64,7 +64,23 @@ const DisableValidationByInputTemplate = args => {
         hasFeedback
         id="custom-validation__datepicker-novalidate"
       ></sgds-datepicker>
-      <sgds-button type="submit">Submit</sgds-button>
+      <sgds-checkbox-group
+        noValidate
+        required
+        label="Interests"
+        hintText="Select at least one interest"
+        name="checkbox-interests"
+        hasFeedback
+        id="custom-validation__checkbox-novalidate"
+      >
+        <sgds-checkbox value="sports">Sports</sgds-checkbox>
+        <sgds-checkbox value="music">Music</sgds-checkbox>
+        <sgds-checkbox value="reading">Reading</sgds-checkbox>
+      </sgds-checkbox-group>
+      <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
+        <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+        <sgds-button type="submit">Submit</sgds-button>
+      </div>
     </form>
     <script>
       const formOne = document.getElementById("custom-validation-form");
@@ -148,12 +164,22 @@ const DisableValidationByInputTemplate = args => {
           e.target.setInvalid(false);
         }
       });
+
+      const checkboxGroupOne = document.querySelector("sgds-checkbox-group#custom-validation__checkbox-novalidate");
+      checkboxGroupOne.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select at least one interest";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
     </script>
   `;
 };
 const DisableValidationByFormTemplate = args => {
   return html`
-    <form id="custom-validation-form_novalidate" class="d-flex-column" novalidate>
+    <form id="custom-validation-form_novalidate" class="sgds:flex sgds:flex-col sgds:gap-layout-xs" novalidate>
       <sgds-input
         label="Keys"
         hinttext="Keys cannot start with special characters like @, #, $"
@@ -204,7 +230,22 @@ const DisableValidationByFormTemplate = args => {
         hasFeedback
         id="custom-validation__datepicker-two-novalidate"
       ></sgds-datepicker>
-      <sgds-button type="submit">Submit</sgds-button>
+      <sgds-checkbox-group
+        required
+        label="Interests"
+        hintText="Select at least one interest"
+        name="checkbox-interests"
+        hasFeedback
+        id="custom-validation__checkbox-two-novalidate"
+      >
+        <sgds-checkbox value="sports">Sports</sgds-checkbox>
+        <sgds-checkbox value="music">Music</sgds-checkbox>
+        <sgds-checkbox value="reading">Reading</sgds-checkbox>
+      </sgds-checkbox-group>
+      <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
+        <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+        <sgds-button type="submit">Submit</sgds-button>
+      </div>
     </form>
     <script>
       const formTwo = document.getElementById("custom-validation-form_novalidate");
@@ -287,6 +328,16 @@ const DisableValidationByFormTemplate = args => {
         if (selected <= today) {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Please select a future date";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+
+      const checkboxGroupTwo = document.getElementById("custom-validation__checkbox-two-novalidate");
+      checkboxGroupTwo.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select at least one interest";
         } else {
           e.target.setInvalid(false);
         }
