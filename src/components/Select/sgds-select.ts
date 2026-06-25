@@ -1,5 +1,5 @@
 import { html, nothing, PropertyValueMap } from "lit";
-import { queryAssignedElements } from "lit/decorators.js";
+import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { ref } from "lit/directives/ref.js";
@@ -17,6 +17,8 @@ import SgdsSpinner from "../Spinner/sgds-spinner";
  * @event sgds-change - Emitted when the select value changes.
  * @event sgds-focus -  Emitted when user input is focused.
  * @event sgds-blur -  Emitted when user input is blurred.
+ * @event sgds-invalid - Emitted when the select's invalid state is set to true.
+ * @event sgds-valid - Emitted when the select's invalid state is set to false.
  *
  * @slot default - slot for sgds-select-option passed into select's menu
  */
@@ -29,6 +31,9 @@ export class SgdsSelect extends SelectElement {
     "sgds-spinner": SgdsSpinner,
     [SgdsSelect.childName]: SgdsSelectOption
   };
+  /** Disables native and sgds validation for the select. */
+  @property({ type: Boolean, reflect: true }) noValidate = false;
+
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("sgds-hide", async () => {
@@ -53,7 +58,7 @@ export class SgdsSelect extends SelectElement {
     const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
 
     assignedElements.forEach(el =>
-      el.addEventListener("click", (e: MouseEvent) => {
+      el.addEventListener("click", (e: Event) => {
         const option = e.target as SgdsSelectOption;
         if (option.disabled) return;
         this._handleItemSelected(e);
@@ -102,6 +107,7 @@ export class SgdsSelect extends SelectElement {
 
     this._updateDisplayValue();
     if (!this._isTouched && this.value === "") return;
+    if (this._mixinShouldSkipSgdsValidation()) return;
 
     this.invalid = !this._mixinReportValidity();
   }

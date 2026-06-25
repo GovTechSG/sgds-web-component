@@ -51,6 +51,56 @@
   <sgds-select-option value="3">Option 3</sgds-select-option>
  </sgds-select>
 
+  <h2>Custom Validation with noValidate</h2>
+  <p>Set <code>noValidate</code> to disable built-in constraint validation. Use <code>setInvalid(bool)</code> and <code>invalidFeedback</code> to control the state programmatically.</p>
+  <form id="custom-validation-form">
+    <sgds-select
+      id="custom-validation-select"
+      noValidate
+      hasFeedback
+      label="Fruit"
+      hintText="Must select a fruit starting with 'A'"
+      placeholder="Select a fruit"
+    >
+      <sgds-select-option value="apple">Apple</sgds-select-option>
+      <sgds-select-option value="apricot">Apricot</sgds-select-option>
+      <sgds-select-option value="banana">Banana</sgds-select-option>
+      <sgds-select-option value="durian">Durian</sgds-select-option>
+    </sgds-select>
+    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </div>
+  </form>
+  <script type="module">
+    const select = document.querySelector("#custom-validation-select");
+    const form = document.querySelector("#custom-validation-form");
+
+    select.addEventListener("sgds-change", e => {
+      if (!e.target.value) {
+        e.target.setInvalid(false);
+        return;
+      }
+      if (!e.target.value.startsWith("a")) {
+        e.target.setInvalid(true);
+        e.target.invalidFeedback = "Custom feedback: selection must start with 'A'";
+      } else {
+        e.target.setInvalid(false);
+      }
+    });
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      if (!select.value) {
+        select.setInvalid(true);
+        select.invalidFeedback = "Custom feedback: select an option";
+        return;
+      }
+      if (select.invalid) return;
+      alert("Submitted: " + select.value);
+    });
+  </script>
+
   <!-- <sgds-select
     label="Using slots with some disabled options"
     hinttext="Select an option"
