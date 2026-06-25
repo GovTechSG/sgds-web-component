@@ -520,3 +520,58 @@ export const Autocomplete = {
   args: {},
   parameters: {}
 };
+
+const ScrollEndTemplate = () => {
+  return html`
+    <div style="display:flex;flex-direction:column;gap:2rem;margin-bottom:3rem">
+      <div>
+        <p><strong>Scroll to bottom (sgds-scroll-end)</strong>: <span id="scroll-end-output"></span></p>
+
+        <sgds-combo-box
+          id="scroll-end-combobox-example"
+          label="Countries"
+          placeholder="Scroll to the bottom"
+          scrollBottomOffset="50"
+        >
+          <sgds-combo-box-option value="afghanistan">Afghanistan</sgds-combo-box-option>
+          <sgds-combo-box-option value="albania">Albania</sgds-combo-box-option>
+          <sgds-combo-box-option value="algeria">Algeria</sgds-combo-box-option>
+          <sgds-combo-box-option value="andorra">Andorra</sgds-combo-box-option>
+          <sgds-combo-box-option value="angola">Angola</sgds-combo-box-option>
+          <sgds-combo-box-option value="argentina">Argentina</sgds-combo-box-option>
+          <sgds-combo-box-option value="armenia">Armenia</sgds-combo-box-option>
+          <sgds-combo-box-option value="australia">Australia</sgds-combo-box-option>
+          <sgds-combo-box-option value="austria">Austria</sgds-combo-box-option>
+          <sgds-combo-box-option value="azerbaijan">Azerbaijan</sgds-combo-box-option>
+          <sgds-combo-box-option value="bahamas">Bahamas</sgds-combo-box-option>
+          <sgds-combo-box-option value="bahrain">Bahrain</sgds-combo-box-option>
+          <sgds-combo-box-option value="bangladesh">Bangladesh</sgds-combo-box-option>
+          <sgds-combo-box-option value="belgium">Belgium</sgds-combo-box-option>
+          <sgds-combo-box-option value="brazil">Brazil</sgds-combo-box-option>
+          <sgds-combo-box-option value="canada">Canada</sgds-combo-box-option>
+          <sgds-combo-box-option value="chile">Chile</sgds-combo-box-option>
+          <sgds-combo-box-option value="china">China</sgds-combo-box-option>
+          <sgds-combo-box-option value="colombia">Colombia</sgds-combo-box-option>
+          <sgds-combo-box-option value="denmark">Denmark</sgds-combo-box-option>
+        </sgds-combo-box>
+
+        <script>
+          const scrollEndCombo = document.querySelector("#scroll-end-combobox-example");
+          const scrollEndOutput = document.querySelector("#scroll-end-output");
+          let scrollEndCount = 0;
+          scrollEndCombo.addEventListener("sgds-scroll-end", () => {
+            scrollEndCount++;
+            scrollEndOutput.textContent = "sgds-scroll-end fired — bottom of menu reached (x" + scrollEndCount + ")";
+          });
+        </script>
+      </div>
+    </div>
+  `;
+};
+
+export const ScrollEnd = {
+  render: ScrollEndTemplate.bind({}),
+  name: "Scroll to bottom (sgds-scroll-end)",
+  args: {},
+  parameters: {}
+};

@@ -68,6 +68,9 @@ export class SgdsComboBox extends SelectElement {
   /** When filtering remotely and there are no results, set this to true to enable no options feedback on the menu. Applicable for async combo box only. */
   @property({ type: Boolean, reflect: true }) emptyMenuAsync = false;
 
+  /** Number of pixels from the bottom of the menu at which the sgds-scroll-end event fires. */
+  @property({ type: Number, reflect: true }) scrollBottomOffset = 0;
+
   /** The function used to filter the menu list, given the user's input value. */
   @property()
   filterFunction: (inputValue: string, item: SgdsComboBoxOptionData) => boolean = (inputValue, item) => {
@@ -84,6 +87,9 @@ export class SgdsComboBox extends SelectElement {
 
   // Used to show and hide the clear button
   @state() protected isFocused = false;
+
+  // Used to determine if the scroll reached the end with offset
+  @state() protected isScrollEnd = false;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -421,6 +427,25 @@ export class SgdsComboBox extends SelectElement {
     }
   }
 
+  // For scrolling to bottom of the menu
+  private async _handleScroll(e: MouseEvent) {
+    // To handle scrolling
+    const ele = e.target as HTMLElement;
+    if (ele) {
+      const endOfScroll = ele.scrollHeight - ele.clientHeight;
+      const offset = Math.max(0, this.scrollBottomOffset);
+
+      if (ele.scrollTop >= endOfScroll - offset) {
+        if (!this.isScrollEnd) {
+          this.emit("sgds-scroll-end");
+        }
+        this.isScrollEnd = true;
+      } else {
+        this.isScrollEnd = false;
+      }
+    }
+  }
+
   /** Template for the suffix icon */
   protected suffixIconTemplate: TemplateResult = html`<sgds-icon
     name=${this.menuIsOpen ? "chevron-up" : "chevron-down"}
@@ -552,6 +577,7 @@ export class SgdsComboBox extends SelectElement {
           role="menu"
           aria-label=${this.label || "Options"}
           ${ref(this.menuRef)}
+          @scroll=${this._handleScroll}
         >
           <slot
             id="default"

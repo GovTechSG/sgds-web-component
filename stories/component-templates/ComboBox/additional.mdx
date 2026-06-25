@@ -171,3 +171,13 @@ Set `noValidate` to disable built-in constraint validation. Use `setInvalid(bool
 <Canvas of={ComboBoxStories.NoValidate}>
   <Story of={ComboBoxStories.NoValidate} />
 </Canvas>
+
+## Scroll to bottom detection
+
+Use `scrollBottomOffset` (number, default `0`) to configure how many pixels before the bottom of the menu the `sgds-scroll-end` event fires. This is useful for implementing infinite scroll or lazy-loading more options as the user scrolls toward the end of the list.
+
+Set `scrollBottomOffset` to a positive number (e.g. `50`) to fire the event slightly before the very bottom, giving time to fetch and append new options before the user reaches the end. Negative values are treated as `0`.
+
+<Canvas of={ComboBoxStories.ScrollEnd}>
+  <Story of={ComboBoxStories.ScrollEnd} />
+</Canvas>

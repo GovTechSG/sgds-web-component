@@ -44,6 +44,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - **Empty async menu**: use `emptyMenuAsync` to show an open (empty) menu immediately when in async mode before the user types.
 - **Programmatic control**: `menuIsOpen` lets you open or close the dropdown from JavaScript without user interaction.
 - **Positioning**: `floatingOpts` passes options directly to Floating UI for advanced dropdown placement — use only when default positioning is insufficient.
+- **Infinite scroll / lazy load**: set `scrollBottomOffset` (number, pixels) to fire `sgds-scroll-end` before the user reaches the very bottom of the menu. Listen to `sgds-scroll-end` to load and append more `<sgds-combo-box-option>` elements. A positive offset (e.g. `20`) gives time to fetch data before the user hits the end.
 
 ## Edge Cases
 
@@ -77,6 +78,8 @@ For detailed form pattern guidance (when to pair fields, spacing, responsive beh
 **Show a clear button?** → Add `clearable`
 
 **Full-width selected badges?** → Add `badgeFullWidth`
+
+**Infinite scroll / lazy-load more options?** → Set `scrollBottomOffset` and listen to `sgds-scroll-end`
 
 ```html
 <!-- Basic single-select combo box -->
@@ -154,6 +157,7 @@ For detailed form pattern guidance (when to pair fields, spacing, responsive beh
 | `emptyMenuAsync` | boolean | `false` | Shows an empty menu on open when in async mode |
 | `menuIsOpen` | boolean | `false` | Programmatically controls the dropdown menu open state |
 | `autocomplete` | string | `"off"` | Controls browser autocomplete behavior — typically set to `"off"` to prevent browser autofill interference with the dropdown list |
+| `scrollBottomOffset` | number | `0` | Pixels before the bottom of the menu at which `sgds-scroll-end` fires — must be non-negative; negative values are treated as `0` |
 | `filterFunction` | `(inputValue: string, item) => boolean` | contains filter | Custom filter function (ignored when `async` is true) |
 | `floatingOpts` | object | — | Options for Floating UI positioning (advanced) |
 
@@ -180,6 +184,7 @@ For detailed form pattern guidance (when to pair fields, spacing, responsive beh
 | `sgds-input` | `{ displayValue: string }` | User types into the input field |
 | `sgds-focus` | — | Input gains focus |
 | `sgds-blur` | — | Input loses focus |
+| `sgds-scroll-end` | — | Menu scroll position reaches the bottom (within `scrollBottomOffset` pixels) — use to trigger lazy loading |
 
 ---
 
@@ -189,4 +194,5 @@ For detailed form pattern guidance (when to pair fields, spacing, responsive beh
 3. Use `clearable` to let users reset the selection without form submission.
 4. `filterFunction` must be set as a JS property (`.filterFunction = (input, item) => ...`), not as an HTML attribute.
 5. `<sgds-combo-box>` does **not** have `hasFeedback` or `invalidFeedback` attributes — unlike all other SGDS form components. Validation relies entirely on the browser-native `required` constraint. Do not add these attributes.
-6. **Boolean attribute handling**: For single-select, omit the `multiSelect` attribute entirely. For multi-select, include `multiSelect` with no value (HTML5 boolean) or `multiSelect="true"`. Do **NOT** use `multiSelect="false"` for single-select — in HTML, any attribute presence (even with value "false") is truthy. Omit the attribute for false.
+6. **Infinite scroll**: set `scrollBottomOffset` (number of pixels) and listen to `sgds-scroll-end` to append more `<sgds-combo-box-option>` elements before the user reaches the end of the list. The event fires once per scroll-to-bottom gesture and resets when the user scrolls back up.
+7. **Boolean attribute handling**: For single-select, omit the `multiSelect` attribute entirely. For multi-select, include `multiSelect` with no value (HTML5 boolean) or `multiSelect="true"`. Do **NOT** use `multiSelect="false"` for single-select — in HTML, any attribute presence (even with value "false") is truthy. Omit the attribute for false.
