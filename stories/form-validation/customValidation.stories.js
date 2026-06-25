@@ -89,13 +89,17 @@ const DisableValidationByInputTemplate = args => {
       const formOne = document.getElementById("custom-validation-form");
       formOne.addEventListener("submit", e => {
         e.preventDefault();
-        const components = formOne.querySelectorAll("sgds-input, sgds-textarea, sgds-combo-box, sgds-select, sgds-file-upload, sgds-datepicker");
+        const components = formOne.querySelectorAll(
+          "sgds-input, sgds-textarea, sgds-combo-box, sgds-select, sgds-file-upload, sgds-datepicker"
+        );
         let hasInvalid = false;
         components.forEach(c => {
           if (c.invalid) hasInvalid = true;
         });
         if (hasInvalid) return;
-        alert("Form submitted successfully despite empty required fields — constraint validation was disabled by the noValidate property.");
+        alert(
+          "Form submitted successfully despite empty required fields — constraint validation was disabled by the noValidate property."
+        );
       });
 
       const inputOne = document.querySelector("sgds-input#custom-validation__input-novalidate");
@@ -266,7 +270,9 @@ const DisableValidationByFormTemplate = args => {
       const formTwo = document.getElementById("custom-validation-form_novalidate");
       formTwo.addEventListener("submit", e => {
         e.preventDefault();
-        alert("Form submitted successfully despite empty required fields — constraint validation was disabled by the noValidate property.");
+        alert(
+          "Form submitted successfully despite empty required fields — constraint validation was disabled by the noValidate property."
+        );
       });
 
       const inputTwo = document.getElementById("custom-validation__input-two-novalidate");
