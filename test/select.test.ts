@@ -507,6 +507,233 @@ describe("select >> when submitting a form", () => {
   });
 });
 
+describe("noValidate disables native and sgds validation behaviours", () => {
+  it("should override required and allow form submission when noValidate is set", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-select noValidate required>
+          <sgds-select-option value="option1">Apple</sgds-select-option>
+          <sgds-select-option value="option2">Apricot</sgds-select-option>
+        </sgds-select>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector<SgdsButton>("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("with noValidate, invalid state does not appear on blur when required and empty", async () => {
+    const el = await fixture<SgdsSelect>(html`
+      <sgds-select noValidate hasFeedback required>
+        <sgds-select-option value="option1">Apple</sgds-select-option>
+        <sgds-select-option value="option2">Apricot</sgds-select-option>
+      </sgds-select>
+    `);
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+    el.blur();
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+  });
+
+  it("with noValidate, setInvalid(true) still works for programmatic control", async () => {
+    const el = await fixture<SgdsSelect>(html`
+      <sgds-select noValidate required>
+        <sgds-select-option value="option1">Apple</sgds-select-option>
+        <sgds-select-option value="option2">Apricot</sgds-select-option>
+      </sgds-select>
+    `);
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+  });
+
+  it("with noValidate, programmatic setInvalid(true) persists after blur", async () => {
+    const el = await fixture<SgdsSelect>(html`
+      <sgds-select noValidate required>
+        <sgds-select-option value="option1">Apple</sgds-select-option>
+        <sgds-select-option value="option2">Apricot</sgds-select-option>
+      </sgds-select>
+    `);
+    el.setInvalid(true);
+    await el.updateComplete;
+
+    const input = el.shadowRoot?.querySelector("input");
+    input?.focus();
+    el.blur();
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+  });
+
+  it("should still populate FormData when noValidate is enabled", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-select noValidate name="select-field" value="option1">
+          <sgds-select-option value="option1">Apple</sgds-select-option>
+          <sgds-select-option value="option2">Apricot</sgds-select-option>
+        </sgds-select>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const select = form.querySelector<SgdsSelect>("sgds-select");
+    await waitUntil(() => select?.value === "option1");
+
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      expect(formData.get("select-field")).to.equal("option1");
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+});
+
+describe("form novalidate for sgds-select", () => {
+  it("when form has novalidate, form submission proceeds even when select is required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-select required>
+          <sgds-select-option value="option1">Apple</sgds-select-option>
+          <sgds-select-option value="option2">Apricot</sgds-select-option>
+        </sgds-select>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(true);
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("when form has novalidate, select does not show invalid state on blur", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-select required hasFeedback>
+          <sgds-select-option value="option1">Apple</sgds-select-option>
+          <sgds-select-option value="option2">Apricot</sgds-select-option>
+        </sgds-select>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const select = form.querySelector<SgdsSelect>("sgds-select");
+    const input = select?.shadowRoot?.querySelector("input");
+    input?.focus();
+    select?.blur();
+    await select?.updateComplete;
+    expect(select?.invalid).to.be.false;
+  });
+});
+
+describe("reset clears invalid state when noValidate is true", () => {
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-select noValidate name="test">
+          <sgds-select-option value="option1">Apple</sgds-select-option>
+        </sgds-select>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const select = form.querySelector<SgdsSelect>("sgds-select");
+    select?.setInvalid(true);
+    await select?.updateComplete;
+    expect(select?.invalid).to.be.true;
+
+    setTimeout(() => form.querySelector<SgdsButton>("sgds-button")?.click());
+    await waitUntil(() => select?.invalid === false);
+    expect(select?.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-select name="test">
+          <sgds-select-option value="option1">Apple</sgds-select-option>
+        </sgds-select>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const select = form.querySelector<SgdsSelect>("sgds-select");
+    select?.setInvalid(true);
+    await select?.updateComplete;
+    expect(select?.invalid).to.be.true;
+
+    setTimeout(() => form.querySelector<SgdsButton>("sgds-button")?.click());
+    await waitUntil(() => select?.invalid === false);
+    expect(select?.invalid).to.be.false;
+  });
+});
+
+describe("setInvalid emits sgds-invalid and sgds-valid events", () => {
+  it("setInvalid(true) emits sgds-invalid event", async () => {
+    const el = await fixture<SgdsSelect>(html`
+      <sgds-select noValidate>
+        <sgds-select-option value="option1">Apple</sgds-select-option>
+        <sgds-select-option value="option2">Apricot</sgds-select-option>
+      </sgds-select>
+    `);
+    const handler = sinon.spy();
+    el.addEventListener("sgds-invalid", handler);
+
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("setInvalid(false) emits sgds-valid event", async () => {
+    const el = await fixture<SgdsSelect>(html`
+      <sgds-select noValidate>
+        <sgds-select-option value="option1">Apple</sgds-select-option>
+        <sgds-select-option value="option2">Apricot</sgds-select-option>
+      </sgds-select>
+    `);
+    const handler = sinon.spy();
+    el.addEventListener("sgds-valid", handler);
+
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("setInvalid(true) followed by setInvalid(false) emits both events in order", async () => {
+    const el = await fixture<SgdsSelect>(html`
+      <sgds-select noValidate>
+        <sgds-select-option value="option1">Apple</sgds-select-option>
+        <sgds-select-option value="option2">Apricot</sgds-select-option>
+      </sgds-select>
+    `);
+    const invalidHandler = sinon.spy();
+    const validHandler = sinon.spy();
+    el.addEventListener("sgds-invalid", invalidHandler);
+    el.addEventListener("sgds-valid", validHandler);
+
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(invalidHandler).to.have.been.calledOnce;
+    expect(validHandler).not.to.have.been.called;
+
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(validHandler).to.have.been.calledOnce;
+  });
+});
+
 describe("sgds-select-option (default)", () => {
   it("matches shadowDom semantically", async () => {
     const el = await fixture<SgdsSelectOption>(html`<sgds-select-option></sgds-select-option>`);

@@ -360,6 +360,42 @@ describe("noValidate disables native and sgds validation behaviours", () => {
   });
 });
 
+describe("reset clears invalid state when noValidate is true", () => {
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-textarea noValidate name="test"></sgds-textarea>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const textarea = form.querySelector<SgdsTextarea>("sgds-textarea");
+    textarea?.setInvalid(true);
+    await textarea?.updateComplete;
+    expect(textarea?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => textarea?.invalid === false);
+    expect(textarea?.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-textarea name="test"></sgds-textarea>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const textarea = form.querySelector<SgdsTextarea>("sgds-textarea");
+    textarea?.setInvalid(true);
+    await textarea?.updateComplete;
+    expect(textarea?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => textarea?.invalid === false);
+    expect(textarea?.invalid).to.be.false;
+  });
+});
+
 describe("form novalidate", () => {
   it("when form has novalidate, form submission proceeds even when textarea is required", async () => {
     const form = await fixture<HTMLFormElement>(html`

@@ -61,7 +61,7 @@ describe("sgds-datepicker", () => {
   //   expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("true");
 
   //   resetButton?.click();
-  //   await waitUntil(() => !menuEl?.classList.contains("show"));
+  //   await waitUntil(() => ?menuEl?.classList.contains("show"));
 
   //   expect(menuEl?.classList.contains("show")).to.be.false;
   //   expect(calendarBtnEl?.getAttribute("aria-expanded")).to.be.equal("false");
@@ -1828,6 +1828,42 @@ describe("datepicker noValidate and setInvalid", () => {
 
     const formData = new FormData(form);
     expect(formData.get("apptDate")).to.contain("01");
+  });
+});
+
+describe("reset clears invalid state when noValidate is true", () => {
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-datepicker noValidate name="test"></sgds-datepicker>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const datepicker = form.querySelector("sgds-datepicker") as SgdsDatepicker;
+    datepicker.setInvalid(true);
+    await datepicker.updateComplete;
+    expect(datepicker.invalid).to.be.true;
+
+    form.querySelector("sgds-button")?.click();
+    await waitUntil(() => datepicker.invalid === false);
+    expect(datepicker.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-datepicker name="test"></sgds-datepicker>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const datepicker = form.querySelector("sgds-datepicker") as SgdsDatepicker;
+    datepicker.setInvalid(true);
+    await datepicker.updateComplete;
+    expect(datepicker.invalid).to.be.true;
+
+    form.querySelector("sgds-button")?.click();
+    await waitUntil(() => datepicker.invalid === false);
+    expect(datepicker.invalid).to.be.false;
   });
 });
 
