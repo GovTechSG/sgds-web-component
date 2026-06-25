@@ -6,8 +6,7 @@ export const RangeSelection = {
   render: RangeTemplate.bind({}),
   name: "Range selection",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const FlipTemplate = args =>
@@ -21,8 +20,7 @@ export const Flip = {
   render: FlipTemplate.bind({}),
   name: "Flip",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const ModeTemplate = args => {
@@ -39,15 +37,13 @@ export const SingleMode = {
   render: ModeTemplate.bind({}),
   name: "Initial value for single mode",
   args: { value: "23/05/2023", mode: "single" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const RangeMode = {
   render: ModeTemplate.bind({}),
   name: "Initial value for range mode",
   args: { value: "23/05/2023 - 15/12/2023", mode: "range" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const MinMaxTemplate = args => {
@@ -72,8 +68,7 @@ export const MinMax = {
   render: MinMaxTemplate.bind({}),
   name: "Min and max date",
   args: { displayDate: new Date(2023, 5, 10) },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const FormSubmissionTemplate = args => {
@@ -112,8 +107,7 @@ export const FormSubmission = {
   render: FormSubmissionTemplate.bind({}),
   name: "Form submission",
   args: { displayDate: new Date(2023, 5, 10) },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const CustomValidationTemplate = () => html`
@@ -148,8 +142,7 @@ export const CustomValidation = {
   render: CustomValidationTemplate.bind({}),
   name: "Custom validation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const InvalidDateClearTemplate = () => {
@@ -201,6 +194,5 @@ export const InvalidDateClear = {
   render: InvalidDateClearTemplate.bind({}),
   name: "Invalid date auto-clear",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

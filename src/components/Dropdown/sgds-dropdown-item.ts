@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import SgdsIcon from "../Icon/sgds-icon";
 import dropdownItemStyle from "./dropdown-item.css";
@@ -26,6 +27,10 @@ export class SgdsDropdownItem extends SgdsElement {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /** Forwards aria-label to the inner clickable element for accessibility */
+  @property({ type: String })
+  ariaLabel = "";
+
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("keydown", (e: KeyboardEvent) => {
@@ -45,6 +50,7 @@ export class SgdsDropdownItem extends SgdsElement {
           active: this.active
         })}"
         tabindex=${this.disabled ? "-1" : "0"}
+        aria-label=${ifDefined(this.ariaLabel || undefined)}
       >
         <slot></slot>
       </div>

@@ -56,10 +56,12 @@ export const parameters = {
       "2-xl": { name: "2-xl desktop", styles: { width: "1440px", height: "1117px" } }
     }
   },
+  actions: { disable: true },
   controls: {
-    //  disable: true,
+    disable: true,
     expanded: true
   },
+  selectedPanel: "storybook/docs/panel",
   options: {
     storySort: {
       order: [

@@ -7,8 +7,7 @@ export const ComboBoxMultiSelect = {
   render: Template.bind({}),
   name: "MultiSelect",
   args: { ...args, multiSelect: true, id: "multiselect-combobox-example" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const DefaultFilter = () => {
@@ -38,8 +37,7 @@ export const ComboBoxDefaultFilter = {
   render: DefaultFilter.bind({}),
   name: "ComboBox with default filter",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const CustomFilter = () => {
@@ -81,16 +79,14 @@ export const ComboBoxCustomFilter = {
   render: CustomFilter.bind({}),
   name: "ComboBox with custom filter",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const ComboBoxDefaultSlot = {
   render: Template.bind({}),
   name: "Populating menu list with default slot",
   args: { ...args, thirdOptionDisabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const ComboBoxMenuListProp = () => {
@@ -313,8 +309,7 @@ export const ComboBoxMenuList = {
   render: ComboBoxMenuListProp.bind({}),
   name: "Populating menu list with property",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const ComboBoxMenuListClearableProp = () => {
@@ -337,8 +332,7 @@ export const ComboBoxMenuListClearable = {
   render: ComboBoxMenuListClearableProp.bind({}),
   name: "Populating menu list with clearable property",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const AccessDisplayValueTemplate = () => {
@@ -367,16 +361,14 @@ export const AccessDisplayValue = {
   render: AccessDisplayValueTemplate.bind({}),
   name: "Accessing display value of ComboBox's input",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Loading = {
   render: Template.bind({}),
   name: "Loading state",
   args: { ...args, loading: true, id: "loading-combobox-example" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const AsyncComboboxTemplate = () => {
@@ -392,8 +384,7 @@ export const AsyncCombobox = {
   render: AsyncComboboxTemplate.bind({}),
   name: "Asynchronous ComboBox",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const ValidationTemplate = args =>
@@ -423,16 +414,14 @@ export const Validation = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplate.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const NoValidateTemplate = () => {
@@ -486,8 +475,7 @@ export const NoValidate = {
   render: NoValidateTemplate.bind({}),
   name: "Custom Validation with noValidate",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const AutocompleteTemplate = () =>
@@ -530,6 +518,5 @@ export const Autocomplete = {
   render: AutocompleteTemplate.bind({}),
   name: "Autocomplete prop",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

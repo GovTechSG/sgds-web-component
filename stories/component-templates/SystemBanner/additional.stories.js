@@ -37,16 +37,14 @@ export const Dismissible = {
     dismissible: true,
     show: true
   },
-  parameters,
-  tags: ["!dev"]
+  parameters
 };
 
 export const ShowMore = {
   render: ShowMoreHookTemplate.bind({}),
   name: "Show more",
   args: {},
-  parameters,
-  tags: ["!dev"]
+  parameters
 };
 
 export const NoClampAction = {
@@ -56,8 +54,7 @@ export const NoClampAction = {
     show: true,
     noClampAction: true
   },
-  parameters,
-  tags: ["!dev"]
+  parameters
 };
 export const Fluid = {
   render: Template.bind({}),
@@ -98,6 +95,5 @@ export const BadgeSlot = {
   render: BadgeSlotTemplate.bind({}),
   name: "Badge slot",
   args: {},
-  parameters,
-  tags: ["!dev"]
+  parameters
 };
