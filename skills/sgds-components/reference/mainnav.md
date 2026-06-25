@@ -95,8 +95,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
   <!-- Dropdown nav item -->
   <sgds-mainnav-dropdown>
     <span slot="toggler">Resources</span>
-    <sgds-dropdown-item><a href="/docs">Documentation</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="/faq">FAQ</a></sgds-dropdown-item>
+    <sgds-dropdown-item ariaLabel="Documentation"><a href="/docs">Documentation</a></sgds-dropdown-item>
+    <sgds-dropdown-item ariaLabel="FAQ"><a href="/faq">FAQ</a></sgds-dropdown-item>
   </sgds-mainnav-dropdown>
 
   <!-- Right-aligned items (end slot) -->
