@@ -28,19 +28,19 @@ export const Template = ({
         Dropdown
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
-      <sgds-dropdown-item ?disabled=${disabled} ?active=${active} target=${ifDefined(target)}>
+      <sgds-dropdown-item ariaLabel="item #1" ?disabled=${disabled} ?active=${active} target=${ifDefined(target)}>
         <a href=${ifDefined(href)}>item #1 (argsTable controlled) </a>
       </sgds-dropdown-item>
-      <sgds-dropdown-item><a href="https://google.com">item #2</a></sgds-dropdown-item>
-      <sgds-dropdown-item disabled>item #3</sgds-dropdown-item>
-      <sgds-dropdown-item>item #4</sgds-dropdown-item>
-      <sgds-dropdown-item>item #5</sgds-dropdown-item>
-      <sgds-dropdown-item>item #6</sgds-dropdown-item>
-      <sgds-dropdown-item>item #7</sgds-dropdown-item>
-      <sgds-dropdown-item>item #8</sgds-dropdown-item>
-      <sgds-dropdown-item>item #9</sgds-dropdown-item>
-      <sgds-dropdown-item>item #10</sgds-dropdown-item>
-      <sgds-dropdown-item>item #11</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #2"><a href="https://google.com">item #2</a></sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #3" disabled>item #3</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #4">item #4</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #5">item #5</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #6">item #6</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #7">item #7</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #8">item #8</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #9">item #9</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #10">item #10</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #11">item #11</sgds-dropdown-item>
     </sgds-dropdown>
   `;
 };
