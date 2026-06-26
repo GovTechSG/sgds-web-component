@@ -1,17 +1,21 @@
-import { html } from "lit";
+import { nothing } from "lit";
 import SgdsElement from "../../base/sgds-element";
-import styles from "./data-table.css";
+import { property } from "lit/decorators.js";
 
 /**
- * @summary Table cell for use inside a data table row.
+ * @summary Data container for a table cell. Rendered as a `<td>` by the parent `sgds-data-table-row`.
  *
- * @slot default - Insert any elements to be rendered as the cell's content.
+ * @slot default - Content to display inside the cell.
  */
 export class SgdsDataTableCell extends SgdsElement {
-  static styles = [...SgdsElement.styles, styles];
+  /** Number of columns this cell spans. */
+  @property({ type: Number, reflect: true }) colspan: number | undefined;
+
+  /** Number of rows this cell spans. */
+  @property({ type: Number, reflect: true }) rowspan: number | undefined;
 
   render() {
-    return html`<div class="data-table-cell"><slot></slot></div>`;
+    return nothing;
   }
 }
 

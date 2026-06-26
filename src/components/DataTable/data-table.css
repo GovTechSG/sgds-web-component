@@ -38,15 +38,14 @@
 
 /* hover / expanded states — set CSS custom property on the row host,
    cells inherit it across the shadow boundary */
-:host(sgds-data-table-row[hovered]) slot {
-  background-color: var(--sgds-surface-raised);
+tr:hover {
+  background-color: var(--sgds-bg-translucent-subtle);
   transition: background-color 0.15s ease;
 }
 
 /* ── sgds-data-table-cell / sgds-data-table-head ─────────────── */
-:host(sgds-data-table-cell),
-:host(sgds-data-table-head) {
-  display: table-cell;
+td,
+th {
   vertical-align: middle;
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
@@ -64,7 +63,7 @@
 }
 
 /* control cell variants — applied as classes on the host */
-:host(.control-cell) {
+.control-cell {
   width: var(--sgds-dimension-56);
 }
 
