@@ -12,6 +12,8 @@ import checkboxGroupStyles from "./checkbox-group.css";
  * @summary CheckboxGroup is a form component for multiselection of checkboxes.
  *
  * @event sgds-change - Emitted when the value of the CheckboxGroup changes. This happens when checkboxes are checked or unchecked.
+ * @event sgds-invalid - Emitted when the checkbox group's invalid state is set to true.
+ * @event sgds-valid - Emitted when the checkbox group's invalid state is set to false.
  *
  * @slot default - Pass in `sgds-checkbox` into the default slot
  * @slot invalidIcon - The slot for invalid icon
@@ -40,11 +42,15 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   /** Makes the checkbox group a required field. Only available for when multiselect is true */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Disables native and sgds validation for the checkbox group. */
+  @property({ type: Boolean, reflect: true }) noValidate = false;
+
   /** Consolidates the values of its child checked checkboxes into a single string with semi-colon delimiter. Only available when required is true  */
   @property({ reflect: true }) value = "";
 
   @state() private _isTouched = false;
 
+  /** @internal */
   @defaultValue()
   defaultValue = "";
 
@@ -143,6 +149,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (this._isTouched) {
       this.invalid = !this.input.checkValidity();
       this._updateInvalid();
