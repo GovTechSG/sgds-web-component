@@ -20,7 +20,7 @@ fieldset {
 .label-hint-container .form-label {
   color: var(--sgds-form-color-default);
   font-size: var(--sgds-font-size-label-md);
-  font-weight: var(--sgds-font-weight-regular);
+  font-weight: var(--sgds-font-weight-semibold);
 }
 
 .checkbox-container {

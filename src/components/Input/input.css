@@ -18,6 +18,7 @@
 .form-control-prefix,
 .form-control-suffix {
   color: var(--sgds-form-color-subtle);
+  font-weight: var(--sgds-font-weight-semibold);
   display: flex;
   gap: var(--sgds-gap-xs);
   flex-shrink: 0;
