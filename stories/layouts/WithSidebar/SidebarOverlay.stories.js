@@ -53,12 +53,12 @@ const Template = () => html`
       <sgds-masthead fluid></sgds-masthead>
       <sgds-mainnav fluid>
         <strong slot="brand">My App</strong>
-        <sgds-mainnav-dropdown>
+        <sgds-mainnav-dropdown ariaLabel="Workspace menu">
           <span slot="toggler">Workspace</span>
           <sgds-dropdown-item ariaLabel="Dashboard"><a href="#">Dashboard</a></sgds-dropdown-item>
           <sgds-dropdown-item ariaLabel="Analytics"><a href="#">Analytics</a></sgds-dropdown-item>
         </sgds-mainnav-dropdown>
-        <sgds-mainnav-dropdown>
+        <sgds-mainnav-dropdown ariaLabel="Manage menu">
           <span slot="toggler">Manage</span>
           <sgds-dropdown-item ariaLabel="Team"><a href="#">Team</a></sgds-dropdown-item>
           <sgds-dropdown-item ariaLabel="Reports"><a href="#">Reports</a></sgds-dropdown-item>
