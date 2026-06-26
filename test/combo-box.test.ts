@@ -1882,6 +1882,46 @@ describe("noValidate disables native and sgds validation behaviours", () => {
   });
 });
 
+describe("reset clears invalid state when noValidate is true", () => {
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-combo-box noValidate name="test">
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const comboBox = form.querySelector<SgdsComboBox>("sgds-combo-box");
+    comboBox?.setInvalid(true);
+    await comboBox?.updateComplete;
+    expect(comboBox?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => comboBox?.invalid === false);
+    expect(comboBox?.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-combo-box name="test">
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const comboBox = form.querySelector<SgdsComboBox>("sgds-combo-box");
+    comboBox?.setInvalid(true);
+    await comboBox?.updateComplete;
+    expect(comboBox?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => comboBox?.invalid === false);
+    expect(comboBox?.invalid).to.be.false;
+  });
+});
+
 describe("form novalidate for combo-box", () => {
   it("when form has novalidate, form submission proceeds even when combo-box is required", async () => {
     const form = await fixture<HTMLFormElement>(html`

@@ -31,9 +31,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     connectedCallback(): void {
       super.connectedCallback();
 
-      if (this._mixinShouldSkipSgdsValidation()) return;
-
-      /** Idempotency guarantee */
+      /** Idempotency guarantee — always create so reset can clear validity even with noValidate */
       this.inputValidationController ??= new InputValidationController(this);
     }
     async firstUpdated(changedProperties: PropertyValueMap<this>) {
@@ -92,18 +90,18 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     }
     /**
      * During form resetting,
-     * 1. ValidityState is reset
-     * 2. invalid reactive prop is updated after the reset
-     * 3. Revalidates the ValidityState (but do not update invalid prop)
-     * to prepare for the next validity check
-     * 4. Reset touched state to false for a pristine form
+     * 1. ValidityState is reset (always, regardless of noValidate)
+     * 2. invalid reactive prop is updated after the reset (always)
+     * 3. Reset touched state to false for a pristine form (always)
+     * 4. Revalidates the ValidityState (but do not update invalid prop)
+     * to prepare for the next validity check (skipped when noValidate)
      */
     _mixinResetValidity(input: HTMLInputElement | SgdsInput | HTMLTextAreaElement) {
-      if (this._mixinShouldSkipSgdsValidation()) return;
       this.inputValidationController.resetValidity();
       this.inputValidationController.updateInvalidState();
-      this.inputValidationController.validateInput(input);
       this._isTouched ? (this._isTouched = false) : null;
+      if (this._mixinShouldSkipSgdsValidation()) return;
+      this.inputValidationController.validateInput(input);
     }
 
     _mixinValidate(input: HTMLInputElement | SgdsInput | HTMLTextAreaElement) {
