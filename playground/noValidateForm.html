@@ -55,6 +55,31 @@
         id="custom-bio-textarea"
       ></sgds-textarea>
 
+      <sgds-checkbox-group
+        noValidate
+        required
+        label="Interests"
+        hintText="Select at least one interest"
+        name="interests"
+        hasFeedback
+        id="custom-interests-checkbox-group"
+      >
+        <sgds-checkbox value="sports">Sports</sgds-checkbox>
+        <sgds-checkbox value="music">Music</sgds-checkbox>
+        <sgds-checkbox value="reading">Reading</sgds-checkbox>
+      </sgds-checkbox-group>
+
+      <sgds-checkbox
+        noValidate
+        required
+        hasFeedback="both"
+        name="terms"
+        value="agreed"
+        id="custom-terms-checkbox"
+      >
+        I agree to the Terms and Conditions
+      </sgds-checkbox>
+
       <sgds-button type="submit">Submit</sgds-button>
       <sgds-button type="reset" variant="ghost">Reset</sgds-button>
     </form>
@@ -90,7 +115,28 @@
         placeholder="Enter notes"
       ></sgds-textarea>
 
+      <sgds-checkbox-group
+        required
+        label="Preferences"
+        hintText="This required validation is disabled by form novalidate"
+        name="preferences"
+        hasFeedback
+      >
+        <sgds-checkbox value="newsletter">Newsletter</sgds-checkbox>
+        <sgds-checkbox value="updates">Product updates</sgds-checkbox>
+      </sgds-checkbox-group>
+
+      <sgds-checkbox
+        required
+        hasFeedback="both"
+        name="consent"
+        value="yes"
+      >
+        I consent to data collection (required but validation disabled)
+      </sgds-checkbox>
+
       <sgds-button type="submit">Submit (No Validation)</sgds-button>
+      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
     </form>
 
     <script>
@@ -121,57 +167,66 @@
         }
       });
 
-      bioTextarea.addEventListener("sgds-input", e => {
-        const value = e.target.value;
-        // Bio must be at least 10 characters
-        if (!value || value.length >= 10) {
-          e.target.setInvalid(false);
-        } else {
+        bioTextarea.addEventListener("sgds-input", e => {
+          const value = e.target.value;
+          // Bio must be at least 10 characters
+          if (!value || value.length >= 10) {
+            e.target.setInvalid(false);
+          } else {
+            e.target.setInvalid(true);
+            e.target.invalidFeedback = "Bio must be at least 10 characters long";
+          }
+        });
+
+      const interestsGroup = document.getElementById("custom-interests-checkbox-group");
+      interestsGroup.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
           e.target.setInvalid(true);
-          e.target.invalidFeedback = "Bio must be at least 10 characters long";
+          e.target.invalidFeedback = "Please select at least one interest";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+
+      const termsCheckbox = document.getElementById("custom-terms-checkbox");
+      termsCheckbox.addEventListener("sgds-change", e => {
+        if (!e.target.checked) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "You must agree to the terms";
+        } else {
+          e.target.setInvalid(false);
         }
       });
 
       document.getElementById("custom-validation-form").addEventListener("submit", e => {
         e.preventDefault();
+
+        // Validate checkbox group on submit
+        if (!interestsGroup.value) {
+          interestsGroup.setInvalid(true);
+          interestsGroup.invalidFeedback = "Please select at least one interest";
+        }
+        // Validate standalone checkbox on submit
+        if (!termsCheckbox.checked) {
+          termsCheckbox.setInvalid(true);
+          termsCheckbox.invalidFeedback = "You must agree to the terms";
+        }
+
+        // Check if any field is invalid
+        const components = e.target.querySelectorAll("sgds-input, sgds-textarea, sgds-checkbox-group, sgds-checkbox");
+        const hasInvalid = Array.from(components).some(c => c.invalid);
+        if (hasInvalid) return;
+
         const formData = new FormData(e.target);
         const formDataObj = Object.fromEntries(formData);
         console.log("Custom validation form submitted");
         console.log("FormData entries:", formDataObj);
-        console.log("Username value:", usernameInput.value);
-        console.log("Age value:", ageInput.value);
-        console.log("Bio value:", bioTextarea.value);
-        alert(
-          `Form submitted!\nUsername: ${formDataObj.username || "empty"}\nAge: ${formDataObj.age || "empty"}\nBio: ${
-            formDataObj.bio || "empty"
-          }\nCheck console for details.`
-        );
+        alert("Form submitted successfully despite required fields — constraint validation was disabled by the noValidate property.");
       });
 
       document.getElementById("no-validation-form").addEventListener("submit", e => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const formDataObj = Object.fromEntries(formData);
-        console.log("No validation form submitted");
-        console.log("FormData entries:", formDataObj);
-        alert(
-          `Form submitted without validation!\nEmail: ${formDataObj.email || "empty"}\nPhone: ${
-            formDataObj.phone || "empty"
-          }\nNotes: ${formDataObj.notes || "empty"}\nCheck console for details.`
-        );
-      });
-
-      // Debug: Log when inputs change
-      usernameInput.addEventListener("sgds-change", e => {
-        console.log("Username changed:", e.target.value);
-      });
-
-      ageInput.addEventListener("sgds-change", e => {
-        console.log("Age changed:", e.target.value);
-      });
-
-      bioTextarea.addEventListener("sgds-change", e => {
-        console.log("Bio changed:", e.target.value);
+        alert("Form submitted successfully despite required fields — constraint validation was disabled by the form novalidate attribute.");
       });
     </script>
   </body>
