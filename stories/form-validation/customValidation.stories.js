@@ -100,6 +100,20 @@ const DisableValidationByInputTemplate = args => {
         <sgds-button type="reset" variant="ghost">Reset</sgds-button>
         <sgds-button type="submit">Submit</sgds-button>
       </div>
+      <sgds-radio-group
+        noValidate
+        required
+        label="Gender"
+        hintText="Please select a gender"
+        name="radio-gender"
+        hasFeedback
+        id="custom-validation__radio-novalidate"
+      >
+        <sgds-radio value="male">Male</sgds-radio>
+        <sgds-radio value="female">Female</sgds-radio>
+        <sgds-radio value="other">Other</sgds-radio>
+      </sgds-radio-group>
+      <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
       const formOne = document.getElementById("custom-validation-form");
@@ -216,6 +230,15 @@ const DisableValidationByInputTemplate = args => {
           e.target.setInvalid(false);
         }
       });
+      const radioOne = document.querySelector("sgds-radio-group#custom-validation__radio-novalidate");
+      radioOne.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a gender";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
     </script>
   `;
 };
@@ -306,6 +329,19 @@ const DisableValidationByFormTemplate = args => {
         <sgds-button type="reset" variant="ghost">Reset</sgds-button>
         <sgds-button type="submit">Submit</sgds-button>
       </div>
+      <sgds-radio-group
+        required
+        label="Gender"
+        hintText="Please select a gender"
+        name="radio-gender"
+        hasFeedback
+        id="custom-validation__radio-two-novalidate"
+      >
+        <sgds-radio value="male">Male</sgds-radio>
+        <sgds-radio value="female">Female</sgds-radio>
+        <sgds-radio value="other">Other</sgds-radio>
+      </sgds-radio-group>
+      <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
       const formTwo = document.getElementById("custom-validation-form_novalidate");
@@ -411,6 +447,15 @@ const DisableValidationByFormTemplate = args => {
         if (!e.target.value) {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Please select at least one interest";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+      const radioTwo = document.getElementById("custom-validation__radio-two-novalidate");
+      radioTwo.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a gender";
         } else {
           e.target.setInvalid(false);
         }
