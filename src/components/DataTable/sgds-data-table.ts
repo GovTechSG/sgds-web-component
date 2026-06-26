@@ -1,4 +1,4 @@
-import { css, html } from "lit";
+import { css, html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import tableStyle from "./data-table.css";
@@ -10,6 +10,7 @@ import SgdsDataTableHead from "./sgds-data-table-head";
 
 /**
  * @event sgds-row-select - Emitted when row checkboxes change. Detail: `{ selected: rowData[] }`
+ * @event sgds-sort - Re-emitted from `sgds-data-table-head` when a sortable column header is clicked. Detail: `{ key: string; direction: "ascending" | "descending" | "none" }`
  */
 export class SgdsDataTable extends SgdsElement {
   static styles = [
@@ -40,6 +41,19 @@ export class SgdsDataTable extends SgdsElement {
 
   /** Number of rows per page. */
   @property({ type: Number }) itemsPerPage = 5;
+
+  /** Number of rows per page. */
+  @property({ type: String }) footerText = "";
+
+  /** Number of rows per page. */
+  @property({ type: Boolean }) hideFooter = false;
+
+  /**
+   * Pagination mode. `client` (default) slices rows and renders pagination controls.
+   * `server` renders all slotted rows as-is — the caller is responsible for passing
+   * the correct page of data and handling `sgds-page-change` externally.
+   */
+  @property({ type: String }) mode: "client" | "server" = "client";
 
   @state() private tableRows: SgdsDataTableRow[] = [];
   @state() private headerRows: SgdsDataTableRow[] = [];
@@ -73,7 +87,7 @@ export class SgdsDataTable extends SgdsElement {
 
     const handler: EventListener = (e: Event) => {
       const { checked } = (e as CustomEvent<{ checked: boolean }>).detail;
-      if (row.isHeaderRow) {
+      if (this.headerRows.includes(row)) {
         this.tableRows.forEach(r => {
           if (r.checkbox) r.checkbox.checked = checked;
         });
@@ -91,18 +105,37 @@ export class SgdsDataTable extends SgdsElement {
     const hasExpandable = this.tableRows.some(r => r.expandable);
 
     this.headerRows.forEach(row => {
-      row.isHeaderRow = true;
       row.showCheckbox = this.multiSelect;
       row.showExpandPlaceholder = hasExpandable;
       if (this.multiSelect) this._attachRowListener(row);
     });
 
     this.tableRows.forEach(row => {
-      row.isHeaderRow = false;
       row.showCheckbox = this.multiSelect;
       row.showExpandPlaceholder = !row.expandable && hasExpandable;
       if (this.multiSelect) this._attachRowListener(row);
     });
+  }
+
+  private _handleSort(e: Event) {
+    const { key, direction } = (e as CustomEvent<{ key: string; direction: string }>).detail;
+    if (direction === "none") {
+      this._updateVisibleRows();
+      return;
+    }
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const pageRows = this.tableRows.slice(start, start + this.itemsPerPage);
+    const sorted = [...pageRows].sort((a, b) => {
+      const aVal = String(a.rowData?.[key] ?? "");
+      const bVal = String(b.rowData?.[key] ?? "");
+      const cmp = aVal.localeCompare(bVal, undefined, { numeric: true, sensitivity: "base" });
+      return direction === "ascending" ? cmp : -cmp;
+    });
+    // Re-order the visible rows in the DOM to match sorted order
+    const parent = pageRows[0]?.parentElement;
+    if (!parent) return;
+    sorted.forEach(row => parent.appendChild(row));
+    this._updateVisibleRows();
   }
 
   private _handleSlotChange(e: Event) {
@@ -124,13 +157,23 @@ export class SgdsDataTable extends SgdsElement {
   }
 
   private _updateVisibleRows() {
+    if (this.mode === "server") {
+      this.tableRows.forEach(row => (row.style.display = ""));
+      return;
+    }
+    const total = this.dataLength || this.tableRows.length;
+    const lastPage = Math.max(1, Math.ceil(total / this.itemsPerPage));
+    if (this.currentPage > lastPage) {
+      this.currentPage = lastPage;
+      return;
+    }
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const visible = new Set(this.tableRows.slice(start, start + this.itemsPerPage));
-    this.tableRows.forEach(row => (row.hidden = !visible.has(row)));
+    this.tableRows.forEach(row => (row.style.display = visible.has(row) ? "" : "none"));
   }
 
   updated(changed: Map<string, unknown>) {
-    if (changed.has("currentPage") || changed.has("itemsPerPage")) {
+    if (changed.has("currentPage") || changed.has("itemsPerPage") || changed.has("mode")) {
       this._updateVisibleRows();
     }
     if (changed.has("multiSelect")) {
@@ -146,20 +189,25 @@ export class SgdsDataTable extends SgdsElement {
     return html`
       <div class="data-table">
         <div>
-          <slot @slotchange=${this._handleSlotChange} class="table"></slot>
+          <slot @slotchange=${this._handleSlotChange} @sgds-sort=${this._handleSort} class="table"></slot>
         </div>
-        <div class="footer">
-          <span>Showing ${start + 1} to ${end} of ${total} results</span>
-          <sgds-pagination
-            .dataLength=${total}
-            .currentPage=${this.currentPage}
-            .itemsPerPage=${this.itemsPerPage}
-            size="sm"
-            @sgds-page-change=${(e: CustomEvent<ISgdsPaginationPageChangeEventDetail>) => {
-              this.currentPage = e.detail.currentPage;
-            }}
-          ></sgds-pagination>
-        </div>
+
+        ${this.hideFooter
+          ? nothing
+          : html`<div class="footer">
+              ${this.footerText || html`<span>Showing ${start + 1} to ${end} of ${total} results</span>`}
+              ${this.mode === "server"
+                ? nothing
+                : html`<sgds-pagination
+                    .dataLength=${total}
+                    .currentPage=${this.currentPage}
+                    .itemsPerPage=${this.itemsPerPage}
+                    size="sm"
+                    @sgds-page-change=${(e: CustomEvent<ISgdsPaginationPageChangeEventDetail>) => {
+                      this.currentPage = e.detail.currentPage;
+                    }}
+                  ></sgds-pagination>`}
+            </div>`}
       </div>
     `;
   }

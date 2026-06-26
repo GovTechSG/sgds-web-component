@@ -2,11 +2,12 @@ import { SgdsDataTable } from "./sgds-data-table";
 import SgdsDataTableRow from "./sgds-data-table-row";
 import SgdsDataTableCell from "./sgds-data-table-cell";
 import SgdsDataTableHead from "./sgds-data-table-head";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-data-table", SgdsDataTable);
-customElements.define("sgds-data-table-row", SgdsDataTableRow);
-customElements.define("sgds-data-table-cell", SgdsDataTableCell);
-customElements.define("sgds-data-table-head", SgdsDataTableHead);
+register("sgds-data-table", SgdsDataTable);
+register("sgds-data-table-row", SgdsDataTableRow);
+register("sgds-data-table-cell", SgdsDataTableCell);
+register("sgds-data-table-head", SgdsDataTableHead);
 
 declare global {
   interface HTMLElementTagNameMap {
