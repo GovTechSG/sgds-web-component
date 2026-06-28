@@ -4,12 +4,7 @@
     "name": "Skeleton",
     "nodeId": "16625:26165",
     "variantProperties": {
-      "Variant": [
-        "circle",
-        "rectangle",
-        "square",
-        "text"
-      ]
+      "Variant": ["circle", "rectangle", "square", "text"]
     },
     "componentProperties": {
       "boolean": {
@@ -37,15 +32,8 @@
     "name": "Divider",
     "nodeId": "16625:26220",
     "variantProperties": {
-      "Orientation": [
-        "horizontal",
-        "vertical"
-      ],
-      "Thickness": [
-        "thick",
-        "thicker",
-        "thin (default)"
-      ]
+      "Orientation": ["horizontal", "vertical"],
+      "Thickness": ["thick", "thicker", "thin (default)"]
     },
     "componentProperties": {
       "boolean": {},
@@ -60,35 +48,11 @@
     "name": "Full width button",
     "nodeId": "16367:5352",
     "variantProperties": {
-      "Variant": [
-        "ghost (tertiary)",
-        "outlined (secondary)",
-        "primary"
-      ],
-      "Tone": [
-        "brand",
-        "danger",
-        "fixed light (white)",
-        "neutral"
-      ],
-      "Size": [
-        "lg",
-        "md (default)",
-        "sm",
-        "xs"
-      ],
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover/active",
-        "loading"
-      ],
-      "Icon": [
-        "leading",
-        "trailing",
-        "without"
-      ]
+      "Variant": ["ghost (tertiary)", "outlined (secondary)", "primary"],
+      "Tone": ["brand", "danger", "fixed light (white)", "neutral"],
+      "Size": ["lg", "md (default)", "sm", "xs"],
+      "State": ["default", "disabled", "focus", "hover/active", "loading"],
+      "Icon": ["leading", "trailing", "without"]
     },
     "componentProperties": {
       "boolean": {},
@@ -2757,26 +2721,9 @@
     "name": "Description list",
     "nodeId": "18830:39518",
     "variantProperties": {
-      "No. of lists": [
-        "1",
-        "10",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9"
-      ],
-      "Border": [
-        "False",
-        "True"
-      ],
-      "Stack data": [
-        "False",
-        "True"
-      ]
+      "No. of lists": ["1", "10", "2", "3", "4", "5", "6", "7", "8", "9"],
+      "Border": ["False", "True"],
+      "Stack data": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -10409,15 +10356,8 @@
     "name": "Drawer",
     "nodeId": "25042:171852",
     "variantProperties": {
-      "Size": [
-        "large",
-        "medium",
-        "small (default)"
-      ],
-      "Mobile": [
-        "False",
-        "True"
-      ]
+      "Size": ["large", "medium", "small (default)"],
+      "Mobile": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -10609,21 +10549,8 @@
     "name": "Icon list",
     "nodeId": "16628:27989",
     "variantProperties": {
-      "No. of list": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8"
-      ],
-      "Size": [
-        "lg",
-        "md (default)",
-        "sm"
-      ]
+      "No. of list": ["1", "2", "3", "4", "5", "6", "7", "8"],
+      "Size": ["lg", "md (default)", "sm"]
     },
     "componentProperties": {
       "boolean": {},
@@ -12276,20 +12203,9 @@
     "name": "Close button",
     "nodeId": "15447:7469",
     "variantProperties": {
-      "Variant": [
-        "default",
-        "fixed dark",
-        "fixed light"
-      ],
-      "Size": [
-        "md",
-        "sm"
-      ],
-      "State": [
-        "default",
-        "focus",
-        "hover"
-      ]
+      "Variant": ["default", "fixed dark", "fixed light"],
+      "Size": ["md", "sm"],
+      "State": ["default", "focus", "hover"]
     },
     "componentProperties": {
       "boolean": {},
@@ -12395,17 +12311,8 @@
     "name": "Alert",
     "nodeId": "17388:15960",
     "variantProperties": {
-      "Variant": [
-        "danger",
-        "info",
-        "neutral",
-        "success",
-        "warning"
-      ],
-      "Outlined": [
-        "False",
-        "True"
-      ]
+      "Variant": ["danger", "info", "neutral", "success", "warning"],
+      "Outlined": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -12741,23 +12648,10 @@
     "name": "Pagination",
     "nodeId": "16568:1594",
     "variantProperties": {
-      "Variant": [
-        "button only",
-        "default",
-        "description"
-      ],
-      "Size": [
-        "md (default)",
-        "sm"
-      ],
-      "7 pages or less": [
-        "False",
-        "True"
-      ],
-      "Navigation type": [
-        "Button",
-        "Icon button"
-      ]
+      "Variant": ["button only", "default", "description"],
+      "Size": ["md (default)", "sm"],
+      "7 pages or less": ["False", "True"],
+      "Navigation type": ["Button", "Icon button"]
     },
     "componentProperties": {
       "boolean": {
@@ -13989,21 +13883,8 @@
     "name": "Select",
     "nodeId": "28033:5595",
     "variantProperties": {
-      "State": [
-        "active",
-        "default",
-        "disabled",
-        "empty",
-        "focus",
-        "hover",
-        "invalid",
-        "loading",
-        "read-only"
-      ],
-      "Filled": [
-        "False",
-        "True"
-      ]
+      "State": ["active", "default", "disabled", "empty", "focus", "hover", "invalid", "loading", "read-only"],
+      "Filled": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -14652,13 +14533,7 @@
     "name": "Toast",
     "nodeId": "16367:5008",
     "variantProperties": {
-      "Variant": [
-        "danger",
-        "info",
-        "neutral",
-        "success",
-        "warning"
-      ]
+      "Variant": ["danger", "info", "neutral", "success", "warning"]
     },
     "componentProperties": {
       "boolean": {
@@ -15006,16 +14881,8 @@
     "name": "Dropdown",
     "nodeId": "16129:8750",
     "variantProperties": {
-      "Trigger": [
-        "button",
-        "icon button"
-      ],
-      "Menu position": [
-        "bottom left",
-        "bottom right",
-        "top left",
-        "top right"
-      ]
+      "Trigger": ["button", "icon button"],
+      "Menu position": ["bottom left", "bottom right", "top left", "top right"]
     },
     "componentProperties": {
       "boolean": {},
@@ -15591,25 +15458,9 @@
     "name": "Badge",
     "nodeId": "17398:21341",
     "variantProperties": {
-      "Variant": [
-        "accent",
-        "cyan",
-        "danger",
-        "neutral",
-        "primary",
-        "purple",
-        "success",
-        "warning",
-        "white"
-      ],
-      "Outlined": [
-        "False",
-        "True"
-      ],
-      "Dismissible": [
-        "False",
-        "True"
-      ]
+      "Variant": ["accent", "cyan", "danger", "neutral", "primary", "purple", "success", "warning", "white"],
+      "Outlined": ["False", "True"],
+      "Dismissible": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -16070,28 +15921,10 @@
     "name": "Combobox",
     "nodeId": "16429:8376",
     "variantProperties": {
-      "State": [
-        "default",
-        "disabled",
-        "empty",
-        "focus",
-        "hover",
-        "invalid",
-        "loading",
-        "read-only"
-      ],
-      "Multiselect": [
-        "False",
-        "True"
-      ],
-      "Expand": [
-        "False",
-        "True"
-      ],
-      "Filled": [
-        "False",
-        "True"
-      ]
+      "State": ["default", "disabled", "empty", "focus", "hover", "invalid", "loading", "read-only"],
+      "Multiselect": ["False", "True"],
+      "Expand": ["False", "True"],
+      "Filled": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -17162,16 +16995,8 @@
     "name": "Overflow menu",
     "nodeId": "23142:15941",
     "variantProperties": {
-      "Size": [
-        "md",
-        "sm"
-      ],
-      "State": [
-        "active",
-        "default",
-        "focus",
-        "hover"
-      ]
+      "Size": ["md", "sm"],
+      "State": ["active", "default", "focus", "hover"]
     },
     "componentProperties": {
       "boolean": {},
@@ -17297,10 +17122,7 @@
     "name": "File upload",
     "nodeId": "29661:4221",
     "variantProperties": {
-      "Variant": [
-        "default",
-        "drag and drop"
-      ]
+      "Variant": ["default", "drag and drop"]
     },
     "componentProperties": {
       "boolean": {
@@ -17445,15 +17267,8 @@
     "name": "Sidebar",
     "nodeId": "34629:12110",
     "variantProperties": {
-      "Collapse": [
-        "False",
-        "True"
-      ],
-      "Variant": [
-        "collapsible",
-        "overlay",
-        "persistent"
-      ]
+      "Collapse": ["False", "True"],
+      "Variant": ["collapsible", "overlay", "persistent"]
     },
     "componentProperties": {
       "boolean": {
@@ -17836,16 +17651,8 @@
     "name": "Modal",
     "nodeId": "18961:64152",
     "variantProperties": {
-      "Size": [
-        "lg",
-        "md (default)",
-        "sm",
-        "xl"
-      ],
-      "Mobile": [
-        "False",
-        "True"
-      ]
+      "Size": ["lg", "md (default)", "sm", "xl"],
+      "Mobile": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -18610,18 +18417,7 @@
     "name": "Table of contents",
     "nodeId": "25146:39298",
     "variantProperties": {
-      "No. of link": [
-        "1",
-        "10",
-        "2",
-        "3",
-        "4",
-        "5 (default)",
-        "6",
-        "7",
-        "8",
-        "9"
-      ]
+      "No. of link": ["1", "10", "2", "3", "4", "5 (default)", "6", "7", "8", "9"]
     },
     "componentProperties": {
       "boolean": {},
@@ -20827,22 +20623,9 @@
     "name": "Text area",
     "nodeId": "16274:3683",
     "variantProperties": {
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover",
-        "invalid",
-        "read-only"
-      ],
-      "Auto resize": [
-        "False",
-        "True"
-      ],
-      "Filled": [
-        "False",
-        "True"
-      ]
+      "State": ["default", "disabled", "focus", "hover", "invalid", "read-only"],
+      "Auto resize": ["False", "True"],
+      "Filled": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -20913,22 +20696,8 @@
     "name": "Side navigation",
     "nodeId": "23250:66331",
     "variantProperties": {
-      "No. of item": [
-        "1",
-        "10",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9"
-      ],
-      "With icon": [
-        "False",
-        "True"
-      ]
+      "No. of item": ["1", "10", "2", "3", "4", "5", "6", "7", "8", "9"],
+      "With icon": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {},
@@ -23275,18 +23044,8 @@
     "name": "Footer",
     "nodeId": "18383:8176",
     "variantProperties": {
-      "Screen size": [
-        "1024 to 1279",
-        "1280 to 1439",
-        "1440 and above",
-        "511 and below",
-        "512 to 767",
-        "768 to 1023"
-      ],
-      "hasSidebar": [
-        "False",
-        "True"
-      ]
+      "Screen size": ["1024 to 1279", "1280 to 1439", "1440 and above", "511 and below", "512 to 767", "768 to 1023"],
+      "hasSidebar": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -23630,14 +23389,8 @@
     "name": "Official Government Banner",
     "nodeId": "18336:11145",
     "variantProperties": {
-      "Mobile": [
-        "False",
-        "True"
-      ],
-      "Expand": [
-        "False",
-        "True"
-      ]
+      "Mobile": ["False", "True"],
+      "Expand": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {},
@@ -23849,25 +23602,9 @@
     "name": "Link",
     "nodeId": "15978:5556",
     "variantProperties": {
-      "Tone": [
-        "danger",
-        "default",
-        "fixed dark (black)",
-        "fixed light (white)",
-        "neutral"
-      ],
-      "Size": [
-        "lg",
-        "md (default)",
-        "sm",
-        "xs"
-      ],
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover"
-      ]
+      "Tone": ["danger", "default", "fixed dark (black)", "fixed light (white)", "neutral"],
+      "Size": ["lg", "md (default)", "sm", "xs"],
+      "State": ["default", "disabled", "focus", "hover"]
     },
     "componentProperties": {
       "boolean": {
@@ -24703,30 +24440,10 @@
     "name": "Icon button",
     "nodeId": "15842:6722",
     "variantProperties": {
-      "Variant": [
-        "ghost (tertiary)",
-        "outline (secondary)",
-        "primary"
-      ],
-      "Tone": [
-        "danger",
-        "fixed light (white)",
-        "neutral",
-        "primary (brand)"
-      ],
-      "Size": [
-        "lg",
-        "md (default)",
-        "sm",
-        "xs"
-      ],
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover/active",
-        "loading"
-      ]
+      "Variant": ["ghost (tertiary)", "outline (secondary)", "primary"],
+      "Tone": ["danger", "fixed light (white)", "neutral", "primary (brand)"],
+      "Size": ["lg", "md (default)", "sm", "xs"],
+      "State": ["default", "disabled", "focus", "hover/active", "loading"]
     },
     "componentProperties": {
       "boolean": {},
@@ -26427,20 +26144,8 @@
     "name": "Table",
     "nodeId": "22917:7170",
     "variantProperties": {
-      "No. of column": [
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8"
-      ],
-      "Header position": [
-        "both",
-        "horizontal",
-        "vertical"
-      ]
+      "No. of column": ["2", "3", "4", "5", "6", "7", "8"],
+      "Header position": ["both", "horizontal", "vertical"]
     },
     "componentProperties": {
       "boolean": {
@@ -26845,23 +26550,9 @@
     "name": "Date picker",
     "nodeId": "16578:10258",
     "variantProperties": {
-      "State": [
-        "active",
-        "default",
-        "disabled",
-        "focus",
-        "hover",
-        "invalid",
-        "read-only"
-      ],
-      "Filled": [
-        "False",
-        "True"
-      ],
-      "Range": [
-        "False",
-        "True"
-      ]
+      "State": ["active", "default", "disabled", "focus", "hover", "invalid", "read-only"],
+      "Filled": ["False", "True"],
+      "Range": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -28266,16 +27957,8 @@
     "name": "Breadcrumb",
     "nodeId": "24496:82674",
     "variantProperties": {
-      "No. of link": [
-        "2",
-        "3",
-        "4",
-        "5"
-      ],
-      "Overflow": [
-        "False",
-        "True"
-      ]
+      "No. of link": ["2", "3", "4", "5"],
+      "Overflow": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {},
@@ -28663,17 +28346,8 @@
     "name": "Radio",
     "nodeId": "15250:4853",
     "variantProperties": {
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover",
-        "invalid"
-      ],
-      "Selection": [
-        "selected",
-        "unselected"
-      ]
+      "State": ["default", "disabled", "focus", "hover", "invalid"],
+      "Selection": ["selected", "unselected"]
     },
     "componentProperties": {
       "boolean": {
@@ -28696,18 +28370,8 @@
     "name": "Sub nav",
     "nodeId": "27781:1134",
     "variantProperties": {
-      "Screen size": [
-        "1024 to 1279",
-        "1280 to 1439",
-        "1440 and above",
-        "511 and below",
-        "512 to 767",
-        "768 to 1023"
-      ],
-      "Expand": [
-        "False",
-        "True"
-      ]
+      "Screen size": ["1024 to 1279", "1280 to 1439", "1440 and above", "511 and below", "512 to 767", "768 to 1023"],
+      "Expand": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -29600,20 +29264,9 @@
     "name": "Image card",
     "nodeId": "18849:5932",
     "variantProperties": {
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover"
-      ],
-      "Border": [
-        "False",
-        "True"
-      ],
-      "Padding": [
-        "False",
-        "True"
-      ]
+      "State": ["default", "disabled", "focus", "hover"],
+      "Border": ["False", "True"],
+      "Padding": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -30128,17 +29781,8 @@
     "name": "Progress bar",
     "nodeId": "16158:2536",
     "variantProperties": {
-      "Variant": [
-        "neutral",
-        "primary (default)"
-      ],
-      "Progress": [
-        "0%",
-        "100%",
-        "25%",
-        "50%",
-        "75%"
-      ]
+      "Variant": ["neutral", "primary (default)"],
+      "Progress": ["0%", "100%", "25%", "50%", "75%"]
     },
     "componentProperties": {
       "boolean": {
@@ -30603,18 +30247,8 @@
     "name": "Checkbox",
     "nodeId": "15250:8047",
     "variantProperties": {
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover",
-        "invalid"
-      ],
-      "Selection": [
-        "indeterminate",
-        "selected",
-        "unselected"
-      ]
+      "State": ["default", "disabled", "focus", "hover", "invalid"],
+      "Selection": ["indeterminate", "selected", "unselected"]
     },
     "componentProperties": {
       "boolean": {
@@ -30637,20 +30271,9 @@
     "name": "Card",
     "nodeId": "29055:82038",
     "variantProperties": {
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover"
-      ],
-      "Border": [
-        "False",
-        "True"
-      ],
-      "Padding": [
-        "False",
-        "True"
-      ]
+      "State": ["default", "disabled", "focus", "hover"],
+      "Border": ["False", "True"],
+      "Padding": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -31129,30 +30752,10 @@
     "name": "Button",
     "nodeId": "12484:10158",
     "variantProperties": {
-      "Variant": [
-        "ghost (tertiary)",
-        "outline (secondary)",
-        "primary"
-      ],
-      "Tone": [
-        "brand",
-        "danger",
-        "fixed light (white)",
-        "neutral"
-      ],
-      "Size": [
-        "lg",
-        "md (default)",
-        "sm",
-        "xs"
-      ],
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover/active",
-        "loading"
-      ]
+      "Variant": ["ghost (tertiary)", "outline (secondary)", "primary"],
+      "Tone": ["brand", "danger", "fixed light (white)", "neutral"],
+      "Size": ["lg", "md (default)", "sm", "xs"],
+      "State": ["default", "disabled", "focus", "hover/active", "loading"]
     },
     "componentProperties": {
       "boolean": {
@@ -33828,22 +33431,10 @@
     "name": "Tab",
     "nodeId": "17655:24286",
     "variantProperties": {
-      "Variant": [
-        "solid",
-        "underlined"
-      ],
-      "Density": [
-        "compact",
-        "default"
-      ],
-      "Orientation": [
-        "horizontal",
-        "vertical"
-      ],
-      "Leading icon": [
-        "False",
-        "True"
-      ]
+      "Variant": ["solid", "underlined"],
+      "Density": ["compact", "default"],
+      "Orientation": ["horizontal", "vertical"],
+      "Leading icon": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {},
@@ -34035,19 +33626,8 @@
     "name": "Radio group",
     "nodeId": "15104:4136",
     "variantProperties": {
-      "No. of option": [
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8"
-      ],
-      "Invalid": [
-        "False",
-        "True"
-      ]
+      "No. of option": ["2", "3", "4", "5", "6", "7", "8"],
+      "Invalid": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -35750,25 +35330,10 @@
     "name": "Switch",
     "nodeId": "14276:39616",
     "variantProperties": {
-      "Size": [
-        "lg",
-        "md (default)",
-        "sm"
-      ],
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover"
-      ],
-      "Selection": [
-        "selected",
-        "unselected"
-      ],
-      "Label position": [
-        "left",
-        "right (default)"
-      ]
+      "Size": ["lg", "md (default)", "sm"],
+      "State": ["default", "disabled", "focus", "hover"],
+      "Selection": ["selected", "unselected"],
+      "Label position": ["left", "right (default)"]
     },
     "componentProperties": {
       "boolean": {
@@ -35794,10 +35359,7 @@
     "name": "Spinner",
     "nodeId": "16158:5523",
     "variantProperties": {
-      "Orientation": [
-        "horizontal",
-        "vertical"
-      ]
+      "Orientation": ["horizontal", "vertical"]
     },
     "componentProperties": {
       "boolean": {
@@ -35851,20 +35413,8 @@
     "name": "Input",
     "nodeId": "16252:3983",
     "variantProperties": {
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover",
-        "invalid",
-        "loading",
-        "read-only",
-        "valid"
-      ],
-      "Filled": [
-        "False",
-        "True"
-      ]
+      "State": ["default", "disabled", "focus", "hover", "invalid", "loading", "read-only", "valid"],
+      "Filled": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -36483,18 +36033,8 @@
     "name": "Quantity toggle",
     "nodeId": "16461:6062",
     "variantProperties": {
-      "State": [
-        "default",
-        "disabled",
-        "focus",
-        "hover",
-        "invalid",
-        "read-only"
-      ],
-      "Filled": [
-        "False",
-        "True"
-      ]
+      "State": ["default", "disabled", "focus", "hover", "invalid", "read-only"],
+      "Filled": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -37086,25 +36626,10 @@
     "name": "Stepper",
     "nodeId": "16188:9303",
     "variantProperties": {
-      "No. of step": [
-        "2",
-        "3",
-        "4 (default)",
-        "5",
-        "6"
-      ],
-      "Variant": [
-        "icon",
-        "number"
-      ],
-      "Orientation": [
-        "horizontal",
-        "vertical"
-      ],
-      "Clickable": [
-        "False",
-        "True"
-      ]
+      "No. of step": ["2", "3", "4 (default)", "5", "6"],
+      "Variant": ["icon", "number"],
+      "Orientation": ["horizontal", "vertical"],
+      "Clickable": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {},
@@ -42270,20 +41795,8 @@
     "name": "Checkbox group",
     "nodeId": "15250:4753",
     "variantProperties": {
-      "No. of option": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8"
-      ],
-      "Invalid": [
-        "False",
-        "True"
-      ]
+      "No. of option": ["1", "2", "3", "4", "5", "6", "7", "8"],
+      "Invalid": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {
@@ -44037,25 +43550,9 @@
     "name": "Accordion",
     "nodeId": "16543:111224",
     "variantProperties": {
-      "No. of item": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8"
-      ],
-      "Density": [
-        "compact",
-        "default",
-        "spacious"
-      ],
-      "Border": [
-        "False",
-        "True"
-      ]
+      "No. of item": ["1", "2", "3", "4", "5", "6", "7", "8"],
+      "Density": ["compact", "default", "spacious"],
+      "Border": ["False", "True"]
     },
     "componentProperties": {
       "boolean": {},
