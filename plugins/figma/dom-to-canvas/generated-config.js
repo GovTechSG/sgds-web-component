@@ -46,7 +46,7 @@ var SGDS_COMPONENT_MAP = {
   "sgds-quantity-toggle": { key: "7a8181de949074a2d44261aa6d6387381ff7fafd", name: "Quantity toggle" },
   "sgds-stepper": { key: "f2d7340d4a7cae5305c275cdf4536a881006adaa", name: "Stepper" },
   "sgds-checkbox-group": { key: "a8736f77a9aa8db166ba3e6a2af36ea62f231796", name: "Checkbox group" },
-  "sgds-accordion": { key: "ffada43a96f710368e420ffd6087b09ee8894502", name: "Accordion" },
+  "sgds-accordion": { key: "ffada43a96f710368e420ffd6087b09ee8894502", name: "Accordion" }
 };
 
 // All variant property names found across components:
@@ -720,5 +720,5 @@ var COMPONENT_SLOT_CONFIG = {
     // Item patterns: "↳ Accordion" (x216)
     slots: {},
     textProps: {}
-  },
+  }
 };

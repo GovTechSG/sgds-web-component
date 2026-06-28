@@ -322,6 +322,11 @@ var COMPONENT_SLOT_CONFIG = {
     extraBooleans: { footer: "Footer#29125:65" }
   },
   "sgds-button": {
+    attrOverrides: {
+      active: { prop: "State", values: { true: "hover/active", "": "hover/active" } },
+      disabled: { prop: "State", values: { true: "disabled", "": "disabled" } },
+      loading: { prop: "State", values: { true: "loading", "": "loading" } }
+    },
     textProps: {
       default: { key: "Edit button label#12484:5" }
     },
@@ -331,8 +336,13 @@ var COMPONENT_SLOT_CONFIG = {
     }
   },
   "sgds-button-fullwidth": {
+    attrOverrides: {
+      active: { prop: "State", values: { true: "hover/active", "": "hover/active" } },
+      disabled: { prop: "State", values: { true: "disabled", "": "disabled" } },
+      loading: { prop: "State", values: { true: "loading", "": "loading" } }
+    },
     valueOverrides: {
-      "outline": "outlined (secondary)"
+      outline: "outlined (secondary)"
     },
     textProps: {
       default: { key: "Edit button label#12484:5" }
@@ -624,10 +634,20 @@ var COMPONENT_SLOT_CONFIG = {
 // e.g. sgds-button with fullWidth → sgds-button-fullwidth
 function resolveComponentMapping(data) {
   var attrs = data.attrs || {};
-  var fw = attrs.fullWidth !== undefined ? attrs.fullWidth : attrs.fullwidth;
-  if (data.tag === "sgds-button" && (fw === true || fw === "" || fw === "true")) {
-    return SGDS_COMPONENT_MAP["sgds-button-fullwidth"];
+  // sgds-card with a slot="image" child → use Image Card
+  // sgds-card with a slot="icon" child → use Icon Card (Card with Variant="icon")
+  if (data.tag === "sgds-card" && data.children) {
+    for (var ci = 0; ci < data.children.length; ci++) {
+      if (data.children[ci].slot === "image") {
+        return SGDS_COMPONENT_MAP["sgds-image-card"];
+      }
+      if (data.children[ci].slot === "icon") {
+        return SGDS_COMPONENT_MAP["sgds-icon-card"];
+      }
+    }
   }
+  // sgds-button with fullWidth: still returns regular button mapping
+  // (swap to fullwidth happens after instance creation)
   return SGDS_COMPONENT_MAP[data.tag];
 }
 
@@ -728,29 +748,37 @@ function isSgdsComponent(tag) {
 
 // Import and create an SGDS component instance
 async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) {
-  var mapping = SGDS_COMPONENT_MAP[data.tag];
+  var mapping = resolveComponentMapping(data);
   if (!mapping || !mapping.key) return null;
 
-  // Import if not cached
-  if (!importedComponents[data.tag]) {
+  // Import if not cached (use key to distinguish e.g. card vs image-card)
+  var cacheKey = mapping.key;
+  if (!importedComponents[cacheKey]) {
     try {
       var componentSet = await figma.importComponentSetByKeyAsync(mapping.key);
-      importedComponents[data.tag] = componentSet;
+      importedComponents[cacheKey] = componentSet;
     } catch (e) {
       // If import fails, fall back to frame
       return null;
     }
   }
 
-  var componentSet = importedComponents[data.tag];
+  var componentSet = importedComponents[cacheKey];
 
   // Pick the variant that best matches the DOM attrs (variant, tone, size, etc.)
   var variant = null;
   var attrs = data.attrs || {};
   // Resolve config tag (e.g. sgds-button with fullWidth → sgds-button-fullwidth)
   var fwAttr = attrs.fullWidth !== undefined ? attrs.fullWidth : attrs.fullwidth;
-  var configTag = (data.tag === "sgds-button" && (fwAttr === true || fwAttr === "" || fwAttr === "true"))
-    ? "sgds-button-fullwidth" : data.tag;
+  var configTag = data.tag;
+  if (data.tag === "sgds-button" && (fwAttr === true || fwAttr === "" || fwAttr === "true")) {
+    configTag = "sgds-button-fullwidth";
+  } else if (data.tag === "sgds-card" && data.children) {
+    for (var cti = 0; cti < data.children.length; cti++) {
+      if (data.children[cti].slot === "image") { configTag = "sgds-image-card"; break; }
+      if (data.children[cti].slot === "icon") { configTag = "sgds-icon-card"; break; }
+    }
+  }
   var slotConfig = COMPONENT_SLOT_CONFIG[configTag];
   var criteria = {};
   if (Object.keys(attrs).length > 0) {

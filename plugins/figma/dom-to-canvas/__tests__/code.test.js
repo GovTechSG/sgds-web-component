@@ -22,7 +22,14 @@ const evalFn = new Function(
   return { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG, SGDS_SPACING_MAP, resolveComponentMapping };
 `
 );
-const { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG, SGDS_SPACING_MAP, resolveComponentMapping } = evalFn();
+const {
+  SGDS_COMPONENT_MAP,
+  ATTR_TO_VARIANT_PROP,
+  ATTR_VALUE_MAP,
+  COMPONENT_SLOT_CONFIG,
+  SGDS_SPACING_MAP,
+  resolveComponentMapping
+} = evalFn();
 
 // Extract classifySlots function from code.js
 const classifySlotsMatch = codeJs.match(/function classifySlots\(data\) \{[\s\S]*?\n\}/);
@@ -210,6 +217,34 @@ describe("Variant matching (buildVariantCriteria)", () => {
     assert.equal(r.Variant, "ghost (tertiary)");
     assert.equal(r.Tone, "fixed light (white)");
     assert.equal(r.Size, "sm");
+  });
+
+  it("button: active attr → State = hover/active", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-button",
+      attrs: { variant: "primary", active: true },
+      children: []
+    });
+    assert.equal(r.State, "hover/active");
+    assert.equal(r.Variant, "primary");
+  });
+
+  it("button: disabled attr → State = disabled", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-button",
+      attrs: { variant: "primary", disabled: true },
+      children: []
+    });
+    assert.equal(r.State, "disabled");
+  });
+
+  it("button: loading attr → State = loading", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-button",
+      attrs: { variant: "primary", loading: true },
+      children: []
+    });
+    assert.equal(r.State, "loading");
   });
 
   it("close-button: valueOverrides (fixed-light → fixed light)", () => {
@@ -454,7 +489,11 @@ describe("Breadcrumb itemProps configuration", () => {
         { tag: "sgds-breadcrumb-item", children: [{ tag: "a", text: "Home" }] },
         { tag: "sgds-breadcrumb-item", attrs: { class: "overflow-menu" }, children: [{ tag: "sgds-overflow-menu" }] },
         { tag: "sgds-breadcrumb-item", children: [{ tag: "a", text: "Link-3" }] },
-        { tag: "sgds-breadcrumb-item", attrs: { active: true, "aria-current": "page" }, children: [{ tag: "a", text: "Link-4" }] }
+        {
+          tag: "sgds-breadcrumb-item",
+          attrs: { active: true, "aria-current": "page" },
+          children: [{ tag: "a", text: "Link-4" }]
+        }
       ]
     });
     assert.equal(r["No. of link"], "4");
@@ -483,7 +522,11 @@ describe("Breadcrumb itemProps configuration", () => {
       children: [{ tag: "a", text: "Home" }]
     };
     const itemSlots = classifySlots(itemData);
-    const defaultChildren = itemSlots["default"] ? (Array.isArray(itemSlots["default"]) ? itemSlots["default"] : [itemSlots["default"]]) : itemData.children || [];
+    const defaultChildren = itemSlots["default"]
+      ? Array.isArray(itemSlots["default"])
+        ? itemSlots["default"]
+        : [itemSlots["default"]]
+      : itemData.children || [];
     const textChild = defaultChildren[0];
     assert.equal(textChild.text, "Home");
   });
@@ -492,7 +535,11 @@ describe("Breadcrumb itemProps configuration", () => {
     const items = [
       { tag: "sgds-breadcrumb-item", attrs: {}, children: [{ tag: "a", text: "Home" }] },
       { tag: "sgds-breadcrumb-item", attrs: {}, children: [{ tag: "a", text: "About" }] },
-      { tag: "sgds-breadcrumb-item", attrs: { active: true, "aria-current": "page" }, children: [{ tag: "a", text: "Contacts" }] }
+      {
+        tag: "sgds-breadcrumb-item",
+        attrs: { active: true, "aria-current": "page" },
+        children: [{ tag: "a", text: "Contacts" }]
+      }
     ];
     const cfg = COMPONENT_SLOT_CONFIG["sgds-breadcrumb"];
     // The last item should have active=true in attrs, which the state itemProp maps to State="active"
@@ -745,19 +792,43 @@ describe("Component resolution with fullWidth", () => {
     assert.equal(fullwidthMapping.name, "Full width button");
   });
 
-  it("resolveComponentMapping returns fullwidth mapping when fullWidth attr present", () => {
+  it("resolveComponentMapping returns regular button mapping even with fullWidth (swap handles it)", () => {
     const result = resolveComponentMapping({ tag: "sgds-button", attrs: { fullWidth: true } });
-    assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-button-fullwidth"].key);
-  });
-
-  it("resolveComponentMapping returns fullwidth mapping when lowercase fullwidth attr present", () => {
-    const result = resolveComponentMapping({ tag: "sgds-button", attrs: { fullwidth: true } });
-    assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-button-fullwidth"].key);
-  });
-
-  it("resolveComponentMapping returns normal button mapping without fullWidth", () => {
-    const result = resolveComponentMapping({ tag: "sgds-button", attrs: { variant: "primary" } });
     assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-button"].key);
+  });
+
+  it("resolveComponentMapping returns image-card mapping when sgds-card has slot=image child", () => {
+    const result = resolveComponentMapping({
+      tag: "sgds-card",
+      attrs: {},
+      children: [
+        { tag: "img", slot: "image" },
+        { tag: "div", slot: "default" }
+      ]
+    });
+    assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-image-card"].key);
+  });
+
+  it("resolveComponentMapping returns icon-card mapping when sgds-card has slot=icon child", () => {
+    const result = resolveComponentMapping({
+      tag: "sgds-card",
+      attrs: {},
+      children: [
+        { tag: "sgds-icon", slot: "icon" },
+        { tag: "div", slot: "default" }
+      ]
+    });
+    assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-icon-card"].key);
+    assert.deepEqual(result.nestedProps, { Variant: "icon" });
+  });
+
+  it("resolveComponentMapping returns regular card mapping without slot=image/icon child", () => {
+    const result = resolveComponentMapping({
+      tag: "sgds-card",
+      attrs: {},
+      children: [{ tag: "div", slot: "default" }]
+    });
+    assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-card"].key);
   });
 
   it("resolveComponentMapping returns normal mapping for non-button components", () => {
