@@ -78,22 +78,38 @@
     },
     "sgds-input": {
       "label": { "key": "↳ Edit text #16273:0", "booleanKey": "Label#16252:5", "source": "attr:label" },
-      "placeholder": { "key": "↳ Edit text  #16273:12", "booleanKey": "Placeholder text#16259:126", "source": "attr:placeholder" },
+      "placeholder": {
+        "key": "↳ Edit text  #16273:12",
+        "booleanKey": "Placeholder text#16259:126",
+        "source": "attr:placeholder"
+      },
       "hint": { "key": "↳ Edit text   #16273:36", "booleanKey": "Hint text#16252:0", "source": "attr:hintText" }
     },
     "sgds-select": {
       "label": { "key": "↳ Edit text #16273:0", "booleanKey": "Label#16252:5", "source": "attr:label" },
-      "placeholder": { "key": "↳ Edit text  #16273:12", "booleanKey": "Placeholder text#16259:126", "source": "attr:placeholder" },
+      "placeholder": {
+        "key": "↳ Edit text  #16273:12",
+        "booleanKey": "Placeholder text#16259:126",
+        "source": "attr:placeholder"
+      },
       "hint": { "key": "↳ Edit text   #16273:36", "booleanKey": "Hint text#16252:0", "source": "attr:hintText" }
     },
     "sgds-combo-box": {
       "label": { "key": "↳ Edit text #16273:0", "booleanKey": "Label#16252:5", "source": "attr:label" },
-      "placeholder": { "key": "↳ Edit text  #16273:12", "booleanKey": "Placeholder text#16259:126", "source": "attr:placeholder" },
+      "placeholder": {
+        "key": "↳ Edit text  #16273:12",
+        "booleanKey": "Placeholder text#16259:126",
+        "source": "attr:placeholder"
+      },
       "hint": { "key": "↳ Edit text   #16273:36", "booleanKey": "Hint text#16252:0", "source": "attr:hintText" }
     },
     "sgds-textarea": {
       "label": { "key": "↳ Edit text #16273:0", "booleanKey": "Label#16252:5", "source": "attr:label" },
-      "placeholder": { "key": "↳ Edit text  #16273:12", "booleanKey": "Placeholder text#16259:126", "source": "attr:placeholder" },
+      "placeholder": {
+        "key": "↳ Edit text  #16273:12",
+        "booleanKey": "Placeholder text#16259:126",
+        "source": "attr:placeholder"
+      },
       "hint": { "key": "↳ Edit text   #16273:36", "booleanKey": "Hint text#16252:0", "source": "attr:hintText" }
     },
     "sgds-datepicker": {
@@ -171,7 +187,10 @@
       "pattern": "Breadcrumb",
       "childTag": "sgds-breadcrumb-item",
       "childCountVariant": "No. of link",
-      "itemProps": {}
+      "itemProps": {
+        "label": { "key": "Edit link#16129:0" },
+        "state": { "prop": "State", "activeValue": "active", "defaultValue": "default" }
+      }
     },
     "sgds-description-list": {
       "pattern": "List",
@@ -198,8 +217,16 @@
   "cardSlots": {
     "_comment": "Card-family slot configurations (on nested Structure instance)",
     "sgds-card": {
-      "upper": { "booleanKey": "🔷 Upper slot#29055:1", "swapKey": "↳ Swap instance (upper)#29055:60", "frameName": "[upper slot]" },
-      "lower": { "booleanKey": "🔷 Lower slot#29055:12", "swapKey": "↳ Swap instance (lower)#30708:0", "frameName": "[lower slot]" }
+      "upper": {
+        "booleanKey": "🔷 Upper slot#29055:1",
+        "swapKey": "↳ Swap instance (upper)#29055:60",
+        "frameName": "[upper slot]"
+      },
+      "lower": {
+        "booleanKey": "🔷 Lower slot#29055:12",
+        "swapKey": "↳ Swap instance (lower)#30708:0",
+        "frameName": "[lower slot]"
+      }
     },
     "sgds-image-card": {
       "upper": { "booleanKey": "🔷 Upper slot#29125:13", "swapKey": "↳ Swap instance (upper)#29125:26" },

@@ -1,10 +1,11 @@
-// Auto-generated from Figma REST API — 2026-06-24
+// Auto-generated from Figma REST API — 2026-06-27
 // Run: node plugins/figma/dom-to-canvas/discover-props.mjs
 // Do not edit manually — re-run the script to update.
 
 var SGDS_COMPONENT_MAP = {
   "sgds-skeleton": { key: "e637146dfde782038c230e94e2b50905588a32a8", name: "Skeleton" },
   "sgds-divider": { key: "0fa48002f60b73b5c40cc5f9960a0d33fa9aede2", name: "Divider" },
+  "sgds-button-fullwidth": { key: "2f7bc66011c005ba56f2a80f400f63875ea3e518", name: "Full width button" },
   "sgds-description-list": { key: "f737ee7ccde2b947ccb0873fbe0373c38968e5e5", name: "Description list" },
   "sgds-drawer": { key: "286077554b9c670410265a4efddc044d2f79c830", name: "Drawer" },
   "sgds-icon-list": { key: "9a32ab706ce2f0a23d974f5d1487d98e551d3b69", name: "Icon list" },
@@ -49,7 +50,7 @@ var SGDS_COMPONENT_MAP = {
 };
 
 // All variant property names found across components:
-// 7 pages or less, Auto resize, Border, Clickable, Collapse, Density, Dismissible, Expand, Filled, Header position, Invalid, Label position, Leading icon, Menu position, Mobile, Multiselect, Navigation type, No. of column, No. of item, No. of link, No. of list, No. of lists, No. of option, No. of step, Orientation, Outlined, Overflow, Padding, Progress, Range, Screen size, Selection, Size, Stack data, State, Thickness, Tone, Trigger, Variant, With icon, hasSidebar
+// 7 pages or less, Auto resize, Border, Clickable, Collapse, Density, Dismissible, Expand, Filled, Header position, Icon, Invalid, Label position, Leading icon, Menu position, Mobile, Multiselect, Navigation type, No. of column, No. of item, No. of link, No. of list, No. of lists, No. of option, No. of step, Orientation, Outlined, Overflow, Padding, Progress, Range, Screen size, Selection, Size, Stack data, State, Thickness, Tone, Trigger, Variant, With icon, hasSidebar
 var ATTR_TO_VARIANT_PROP = {
   // "7-pages-or-less": "7 pages or less",  // found in: sgds-pagination
   // "auto-resize": "Auto resize",  // found in: sgds-textarea
@@ -61,6 +62,7 @@ var ATTR_TO_VARIANT_PROP = {
   // "expand": "Expand",  // found in: sgds-combo-box, sgds-masthead, sgds-subnav
   // "filled": "Filled",  // found in: sgds-select, sgds-combo-box, sgds-textarea, sgds-datepicker, sgds-input, sgds-quantity-toggle
   // "header-position": "Header position",  // found in: sgds-table
+  // "icon": "Icon",  // found in: sgds-button-fullwidth
   // "invalid": "Invalid",  // found in: sgds-radio-group, sgds-checkbox-group
   // "label-position": "Label position",  // found in: sgds-switch
   // "leading-icon": "Leading icon",  // found in: sgds-tab
@@ -83,13 +85,13 @@ var ATTR_TO_VARIANT_PROP = {
   // "range": "Range",  // found in: sgds-datepicker
   // "screen-size": "Screen size",  // found in: sgds-footer, sgds-subnav
   // "selection": "Selection",  // found in: sgds-radio, sgds-checkbox, sgds-switch
-  // "size": "Size",  // found in: sgds-drawer, sgds-icon-list, sgds-close-button, sgds-pagination, sgds-overflow-menu, sgds-modal, sgds-link, sgds-icon-button, sgds-button, sgds-switch
+  // "size": "Size",  // found in: sgds-button-fullwidth, sgds-drawer, sgds-icon-list, sgds-close-button, sgds-pagination, sgds-overflow-menu, sgds-modal, sgds-link, sgds-icon-button, sgds-button, sgds-switch
   // "stack-data": "Stack data",  // found in: sgds-description-list
-  // "state": "State",  // found in: sgds-close-button, sgds-select, sgds-combo-box, sgds-overflow-menu, sgds-textarea, sgds-link, sgds-icon-button, sgds-datepicker, sgds-radio, sgds-image-card, sgds-checkbox, sgds-card, sgds-button, sgds-switch, sgds-input, sgds-quantity-toggle
+  // "state": "State",  // found in: sgds-button-fullwidth, sgds-close-button, sgds-select, sgds-combo-box, sgds-overflow-menu, sgds-textarea, sgds-link, sgds-icon-button, sgds-datepicker, sgds-radio, sgds-image-card, sgds-checkbox, sgds-card, sgds-button, sgds-switch, sgds-input, sgds-quantity-toggle
   // "thickness": "Thickness",  // found in: sgds-divider
-  // "tone": "Tone",  // found in: sgds-link, sgds-icon-button, sgds-button
+  // "tone": "Tone",  // found in: sgds-button-fullwidth, sgds-link, sgds-icon-button, sgds-button
   // "trigger": "Trigger",  // found in: sgds-dropdown
-  // "variant": "Variant",  // found in: sgds-skeleton, sgds-close-button, sgds-alert, sgds-pagination, sgds-toast, sgds-badge, sgds-file-upload, sgds-sidebar, sgds-icon-button, sgds-progress-bar, sgds-button, sgds-tab, sgds-stepper
+  // "variant": "Variant",  // found in: sgds-skeleton, sgds-button-fullwidth, sgds-close-button, sgds-alert, sgds-pagination, sgds-toast, sgds-badge, sgds-file-upload, sgds-sidebar, sgds-icon-button, sgds-progress-bar, sgds-button, sgds-tab, sgds-stepper
   // "with-icon": "With icon",  // found in: sgds-sidenav
   // "hassidebar": "hasSidebar",  // found in: sgds-footer
 };
@@ -106,6 +108,7 @@ var ATTR_VALUE_MAP = {
   // "Icon button"
   // "md (default)"
   // "outline (secondary)"
+  // "outlined (secondary)"
   // "primary (brand)"
   // "primary (default)"
   // "right (default)"
@@ -130,6 +133,22 @@ var COMPONENT_SLOT_CONFIG = {
     // Variant properties: Orientation, Thickness
     //   Orientation: ["horizontal", "vertical"]
     //   Thickness: ["thick", "thicker", "thin (default)"]
+    slots: {},
+    textProps: {}
+  },
+  "sgds-button-fullwidth": {
+    // Variant properties: Variant, Tone, Size, State, Icon
+    //   Variant: ["ghost (tertiary)", "outlined (secondary)", "primary"]
+    //   Tone: ["brand", "danger", "fixed light (white)", "neutral"]
+    //   Size: ["lg", "md (default)", "sm", "xs"]
+    //   State: ["default", "disabled", "focus", "hover/active", "loading"]
+    //   Icon: ["leading", "trailing", "without"]
+    // Text:
+    //   "Edit button label#12484:5" (default: "Button label")
+    // Instance swaps:
+    //   "↳ Select icon#16370:0"
+    //   "↳ Select icon #16370:162"
+    // Nested instances: "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "trailing-icon", "Sub component / spinner only", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "Sub component / spinner only", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "Sub component / spinner only", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "Sub component / spinner only", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "Sub component / spinner only", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "Sub component / spinner only", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "leading-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "trailing-icon", "Sub component / spinner only", "Sub component / spinner only", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon", "leading-icon", "leading-icon", "trailing-icon", "trailing-icon"
     slots: {},
     textProps: {}
   },
