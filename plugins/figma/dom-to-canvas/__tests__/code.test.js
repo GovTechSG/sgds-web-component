@@ -19,10 +19,10 @@ const configSection = codeJs.substring(0, configEnd);
 const evalFn = new Function(
   configSection +
     `
-  return { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG, SGDS_SPACING_MAP };
+  return { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG, SGDS_SPACING_MAP, resolveComponentMapping };
 `
 );
-const { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG, SGDS_SPACING_MAP } = evalFn();
+const { SGDS_COMPONENT_MAP, ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG, SGDS_SPACING_MAP, resolveComponentMapping } = evalFn();
 
 // Extract classifySlots function from code.js
 const classifySlotsMatch = codeJs.match(/function classifySlots\(data\) \{[\s\S]*?\n\}/);
@@ -67,6 +67,25 @@ function buildVariantCriteria(data) {
     const ccv = slotConfig.childCountVariant;
     const count = data.children.filter(c => c.tag === ccv.childTag).length;
     if (count > 0) criteria[ccv.prop] = String(count);
+
+    if (slotConfig.overflowVariant) {
+      const ov = slotConfig.overflowVariant;
+      // Detect overflow from presence of overflow-menu child containing sgds-overflow-menu
+      var hasOverflow = false;
+      for (var oi = 0; oi < data.children.length; oi++) {
+        var oc = data.children[oi];
+        if (oc.children) {
+          for (var oci = 0; oci < oc.children.length; oci++) {
+            if (oc.children[oci].tag === "sgds-overflow-menu") {
+              hasOverflow = true;
+              break;
+            }
+          }
+        }
+        if (hasOverflow) break;
+      }
+      criteria[ov.prop] = hasOverflow ? "True" : "False";
+    }
   }
 
   const BOOLEAN_VARIANT_PROPS = ["Outlined", "Dismissible"];
@@ -397,9 +416,96 @@ describe("Slot boolean toggling logic", () => {
   });
 });
 
+describe("Breadcrumb itemProps configuration", () => {
+  it("breadcrumb itemProps has label with correct text key", () => {
+    const cfg = COMPONENT_SLOT_CONFIG["sgds-breadcrumb"];
+    assert.ok(cfg.itemProps.label, "breadcrumb should have label itemProp");
+    assert.equal(cfg.itemProps.label.key, "Edit link#16129:0");
+  });
+
+  it("breadcrumb itemProps has state mapping for active items", () => {
+    const cfg = COMPONENT_SLOT_CONFIG["sgds-breadcrumb"];
+    assert.ok(cfg.itemProps.state, "breadcrumb should have state itemProp");
+    assert.equal(cfg.itemProps.state.prop, "State");
+    assert.equal(cfg.itemProps.state.activeValue, "active");
+    assert.equal(cfg.itemProps.state.defaultValue, "default");
+  });
+
+  it("breadcrumb with 3 items → No. of link = 3, Overflow = False", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-breadcrumb",
+      attrs: {},
+      children: [
+        { tag: "sgds-breadcrumb-item", children: [{ tag: "a", text: "Home" }] },
+        { tag: "sgds-breadcrumb-item", children: [{ tag: "a", text: "About" }] },
+        { tag: "sgds-breadcrumb-item", attrs: { active: true }, children: [{ tag: "a", text: "Contacts" }] }
+      ]
+    });
+    assert.equal(r["No. of link"], "3");
+    assert.equal(r["Overflow"], "False");
+  });
+
+  it("breadcrumb with overflow-menu item → Overflow = True, No. of link = 4", () => {
+    // Shadow DOM rendered structure: Home, overflow-menu, Link-3, Link-4
+    const r = buildVariantCriteria({
+      tag: "sgds-breadcrumb",
+      attrs: {},
+      children: [
+        { tag: "sgds-breadcrumb-item", children: [{ tag: "a", text: "Home" }] },
+        { tag: "sgds-breadcrumb-item", attrs: { class: "overflow-menu" }, children: [{ tag: "sgds-overflow-menu" }] },
+        { tag: "sgds-breadcrumb-item", children: [{ tag: "a", text: "Link-3" }] },
+        { tag: "sgds-breadcrumb-item", attrs: { active: true, "aria-current": "page" }, children: [{ tag: "a", text: "Link-4" }] }
+      ]
+    });
+    assert.equal(r["No. of link"], "4");
+    assert.equal(r["Overflow"], "True");
+  });
+
+  it("breadcrumb without overflow-menu item → Overflow = False", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-breadcrumb",
+      attrs: {},
+      children: [
+        { tag: "sgds-breadcrumb-item", children: [{ tag: "a", text: "Home" }] },
+        { tag: "sgds-breadcrumb-item", children: [{ tag: "a", text: "About" }] },
+        { tag: "sgds-breadcrumb-item", children: [{ tag: "a", text: "Link-3" }] },
+        { tag: "sgds-breadcrumb-item", attrs: { active: true }, children: [{ tag: "a", text: "Link-4" }] }
+      ]
+    });
+    assert.equal(r["No. of link"], "4");
+    assert.equal(r["Overflow"], "False");
+  });
+
+  it("breadcrumb item text resolves from nested <a> child", () => {
+    const itemData = {
+      tag: "sgds-breadcrumb-item",
+      attrs: {},
+      children: [{ tag: "a", text: "Home" }]
+    };
+    const itemSlots = classifySlots(itemData);
+    const defaultChildren = itemSlots["default"] ? (Array.isArray(itemSlots["default"]) ? itemSlots["default"] : [itemSlots["default"]]) : itemData.children || [];
+    const textChild = defaultChildren[0];
+    assert.equal(textChild.text, "Home");
+  });
+
+  it("breadcrumb last item with active attr should be identified as active", () => {
+    const items = [
+      { tag: "sgds-breadcrumb-item", attrs: {}, children: [{ tag: "a", text: "Home" }] },
+      { tag: "sgds-breadcrumb-item", attrs: {}, children: [{ tag: "a", text: "About" }] },
+      { tag: "sgds-breadcrumb-item", attrs: { active: true, "aria-current": "page" }, children: [{ tag: "a", text: "Contacts" }] }
+    ];
+    const cfg = COMPONENT_SLOT_CONFIG["sgds-breadcrumb"];
+    // The last item should have active=true in attrs, which the state itemProp maps to State="active"
+    const lastItem = items[2];
+    const isActive = lastItem.attrs.active === true || lastItem.attrs.active === "" || lastItem.attrs.active === "true";
+    assert.ok(isActive, "last item should be detected as active");
+    assert.equal(cfg.itemProps.state.activeValue, "active");
+  });
+});
+
 describe("COMPONENT_SLOT_CONFIG completeness", () => {
-  it("has 42 configured components", () => {
-    assert.equal(Object.keys(COMPONENT_SLOT_CONFIG).length, 42);
+  it("has 43 configured components", () => {
+    assert.equal(Object.keys(COMPONENT_SLOT_CONFIG).length, 43);
   });
 
   it("childCountVariant entries have valid prop and childTag", () => {
@@ -627,5 +733,35 @@ describe("Spacing resolution (resolveSpacingKey)", () => {
 
   it("unknown token → null", () => {
     assert.equal(resolveSpacingKey("nonexistent-token", "gap"), null);
+  });
+});
+
+describe("Component resolution with fullWidth", () => {
+  it("sgds-button with fullWidth attr resolves to sgds-button-fullwidth key", () => {
+    const mapping = SGDS_COMPONENT_MAP["sgds-button"];
+    const fullwidthMapping = SGDS_COMPONENT_MAP["sgds-button-fullwidth"];
+    assert.ok(fullwidthMapping, "sgds-button-fullwidth should exist in SGDS_COMPONENT_MAP");
+    assert.notEqual(mapping.key, fullwidthMapping.key, "fullwidth button should have different key");
+    assert.equal(fullwidthMapping.name, "Full width button");
+  });
+
+  it("resolveComponentMapping returns fullwidth mapping when fullWidth attr present", () => {
+    const result = resolveComponentMapping({ tag: "sgds-button", attrs: { fullWidth: true } });
+    assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-button-fullwidth"].key);
+  });
+
+  it("resolveComponentMapping returns fullwidth mapping when lowercase fullwidth attr present", () => {
+    const result = resolveComponentMapping({ tag: "sgds-button", attrs: { fullwidth: true } });
+    assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-button-fullwidth"].key);
+  });
+
+  it("resolveComponentMapping returns normal button mapping without fullWidth", () => {
+    const result = resolveComponentMapping({ tag: "sgds-button", attrs: { variant: "primary" } });
+    assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-button"].key);
+  });
+
+  it("resolveComponentMapping returns normal mapping for non-button components", () => {
+    const result = resolveComponentMapping({ tag: "sgds-alert", attrs: { variant: "info" } });
+    assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-alert"].key);
   });
 });

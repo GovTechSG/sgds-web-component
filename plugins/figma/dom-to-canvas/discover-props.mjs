@@ -72,6 +72,7 @@ const FIGMA_NAME_TO_TAG = {
   "Main Nav": "sgds-mainnav",
   Footer: "sgds-footer",
   Button: "sgds-button",
+  "Full width button": "sgds-button-fullwidth",
   "Icon button": "sgds-icon-button",
   Card: "sgds-card",
   "Image card": "sgds-image-card",

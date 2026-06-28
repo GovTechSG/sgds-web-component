@@ -7,6 +7,7 @@ var SGDS_COMPONENT_MAP = {
   "sgds-mainnav": { key: "357c4643c3d7937f0da2298e4c383b2ee7e82ca5", name: "Main Nav" },
   "sgds-footer": { key: "bebf3b1311b700524579ee0c84abed609def47cd", name: "Footer" },
   "sgds-button": { key: "6f2f3d88022cd929560600e6d9df2016dd542b3c", name: "Button" },
+  "sgds-button-fullwidth": { key: "2f7bc66011c005ba56f2a80f400f63875ea3e518", name: "Full width button" },
   "sgds-icon-button": { key: "3d6ef97abfa684a4590866cbb603c44b86427f2d", name: "Icon button" },
   "sgds-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: { Variant: "default" } },
   "sgds-image-card": { key: "4a9e664f1b163b039023ebeebc3bd2e2f16bb256", name: "Image card" },
@@ -329,6 +330,18 @@ var COMPONENT_SLOT_CONFIG = {
       rightIcon: { booleanKey: "Trailing icon#12484:1", swapKey: "↳ Select icon #17388:169" }
     }
   },
+  "sgds-button-fullwidth": {
+    valueOverrides: {
+      "outline": "outlined (secondary)"
+    },
+    textProps: {
+      default: { key: "Edit button label#12484:5" }
+    },
+    slots: {
+      leftIcon: { swapKey: "↳ Select icon#16370:0" },
+      rightIcon: { swapKey: "↳ Select icon #16370:162" }
+    }
+  },
   "sgds-accordion": {
     // Accordion items are nested instances named "↳ Accordion N"
     // Each item has: Edit title (TEXT), Badge (BOOLEAN), Icon (BOOLEAN), badge swap, icon swap
@@ -349,8 +362,12 @@ var COMPONENT_SLOT_CONFIG = {
   },
   "sgds-breadcrumb": {
     itemPattern: "Link",
-    itemProps: {},
-    childCountVariant: { prop: "No. of link", childTag: "sgds-breadcrumb-item" }
+    itemProps: {
+      label: { key: "Edit link#16129:0" },
+      state: { prop: "State", activeValue: "active", defaultValue: "default" }
+    },
+    childCountVariant: { prop: "No. of link", childTag: "sgds-breadcrumb-item" },
+    overflowVariant: { prop: "Overflow" }
   },
   "sgds-sidenav": {
     itemPattern: "Main menu -",
@@ -603,6 +620,17 @@ var COMPONENT_SLOT_CONFIG = {
   }
 };
 
+// Resolve the correct component mapping, handling attribute-based overrides
+// e.g. sgds-button with fullWidth → sgds-button-fullwidth
+function resolveComponentMapping(data) {
+  var attrs = data.attrs || {};
+  var fw = attrs.fullWidth !== undefined ? attrs.fullWidth : attrs.fullwidth;
+  if (data.tag === "sgds-button" && (fw === true || fw === "" || fw === "true")) {
+    return SGDS_COMPONENT_MAP["sgds-button-fullwidth"];
+  }
+  return SGDS_COMPONENT_MAP[data.tag];
+}
+
 figma.ui.onmessage = async function (msg) {
   if (msg.type === "import") {
     try {
@@ -719,9 +747,13 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   // Pick the variant that best matches the DOM attrs (variant, tone, size, etc.)
   var variant = null;
   var attrs = data.attrs || {};
-  var slotConfig = COMPONENT_SLOT_CONFIG[data.tag];
+  // Resolve config tag (e.g. sgds-button with fullWidth → sgds-button-fullwidth)
+  var fwAttr = attrs.fullWidth !== undefined ? attrs.fullWidth : attrs.fullwidth;
+  var configTag = (data.tag === "sgds-button" && (fwAttr === true || fwAttr === "" || fwAttr === "true"))
+    ? "sgds-button-fullwidth" : data.tag;
+  var slotConfig = COMPONENT_SLOT_CONFIG[configTag];
+  var criteria = {};
   if (Object.keys(attrs).length > 0) {
-    var criteria = {};
     for (var attrName in attrs) {
       // Check for component-specific attr overrides (e.g. accordion variant→Border)
       if (slotConfig && slotConfig.attrOverrides && slotConfig.attrOverrides[attrName]) {
@@ -758,17 +790,6 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
       }
     }
 
-    // Generic childCountVariant: derive item count from children
-    if (slotConfig && slotConfig.childCountVariant && data.children) {
-      var ccv = slotConfig.childCountVariant;
-      var itemCount = data.children.filter(function (c) {
-        return c.tag === ccv.childTag;
-      }).length;
-      if (itemCount > 0) {
-        criteria[ccv.prop] = String(itemCount);
-      }
-    }
-
     // Boolean variant props: if absent from DOM attrs, explicitly set to "False"
     // This ensures Figma doesn't default to "True" when the DOM doesn't define it
     var BOOLEAN_VARIANT_PROPS = ["Outlined", "Dismissible"];
@@ -778,30 +799,60 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
         criteria[bvp] = "False";
       }
     }
+  }
 
-    if (Object.keys(criteria).length > 0) {
-      var bestScore = -1;
-      for (var vi = 0; vi < componentSet.children.length; vi++) {
-        var candidate = componentSet.children[vi];
-        var variantProps = candidate.variantProperties || {};
-        var score = 0;
-        var mismatch = false;
+  // childCountVariant + overflowVariant: runs regardless of attrs
+  if (slotConfig && slotConfig.childCountVariant && data.children) {
+    var ccv = slotConfig.childCountVariant;
+    var itemCount = data.children.filter(function (c) {
+      return c.tag === ccv.childTag;
+    }).length;
+    if (itemCount > 0) {
+      criteria[ccv.prop] = String(itemCount);
+    }
 
-        for (var prop in criteria) {
-          if (variantProps[prop] !== undefined) {
-            if (variantProps[prop] === criteria[prop]) {
-              score++;
-            } else {
-              mismatch = true;
+    // Overflow variant: detect from presence of sgds-overflow-menu in children
+    if (slotConfig.overflowVariant) {
+      var ov = slotConfig.overflowVariant;
+      var hasOverflow = false;
+      for (var oi = 0; oi < data.children.length; oi++) {
+        var oc = data.children[oi];
+        if (oc.children) {
+          for (var oci = 0; oci < oc.children.length; oci++) {
+            if (oc.children[oci].tag === "sgds-overflow-menu") {
+              hasOverflow = true;
               break;
             }
           }
         }
+        if (hasOverflow) break;
+      }
+      criteria[ov.prop] = hasOverflow ? "True" : "False";
+    }
+  }
 
-        if (!mismatch && score > bestScore) {
-          bestScore = score;
-          variant = candidate;
+  if (Object.keys(criteria).length > 0) {
+    var bestScore = -1;
+    for (var vi = 0; vi < componentSet.children.length; vi++) {
+      var candidate = componentSet.children[vi];
+      var variantProps = candidate.variantProperties || {};
+      var score = 0;
+      var mismatch = false;
+
+      for (var prop in criteria) {
+        if (variantProps[prop] !== undefined) {
+          if (variantProps[prop] === criteria[prop]) {
+            score++;
+          } else {
+            mismatch = true;
+            break;
+          }
         }
+      }
+
+      if (!mismatch && score > bestScore) {
+        bestScore = score;
+        variant = candidate;
       }
     }
   }
@@ -811,6 +862,51 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   }
 
   var instance = variant.createInstance();
+
+  // Swap to Full width button if fullWidth attribute is present
+  if (configTag === "sgds-button-fullwidth") {
+    var fwMapping = SGDS_COMPONENT_MAP["sgds-button-fullwidth"];
+    if (fwMapping && fwMapping.key) {
+      if (!importedComponents["sgds-button-fullwidth"]) {
+        try {
+          var fwSet = await figma.importComponentSetByKeyAsync(fwMapping.key);
+          importedComponents["sgds-button-fullwidth"] = fwSet;
+        } catch (e) {}
+      }
+      var fwComponentSet = importedComponents["sgds-button-fullwidth"];
+      if (fwComponentSet) {
+        // Find matching variant in full width button set
+        var fwVariant = null;
+        var fwBestScore = -1;
+        for (var fwi = 0; fwi < fwComponentSet.children.length; fwi++) {
+          var fwCandidate = fwComponentSet.children[fwi];
+          var fwProps = fwCandidate.variantProperties || {};
+          var fwScore = 0;
+          var fwMismatch = false;
+          for (var fwProp in criteria) {
+            if (fwProps[fwProp] !== undefined) {
+              if (fwProps[fwProp] === criteria[fwProp]) {
+                fwScore++;
+              } else {
+                fwMismatch = true;
+                break;
+              }
+            }
+          }
+          if (!fwMismatch && fwScore > fwBestScore) {
+            fwBestScore = fwScore;
+            fwVariant = fwCandidate;
+          }
+        }
+        if (!fwVariant) {
+          fwVariant = fwComponentSet.defaultVariant || fwComponentSet.children[0];
+        }
+        try {
+          instance.swapComponent(fwVariant);
+        } catch (e) {}
+      }
+    }
+  }
 
   // Apply nested component properties (e.g. Structure.Variant = "thumbnail")
   if (mapping.nestedProps) {
@@ -859,7 +955,7 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
     "sgds-tooltip"
   ];
 
-  var shouldResize = NO_RESIZE_TAGS.indexOf(data.tag) < 0;
+  var shouldResize = NO_RESIZE_TAGS.indexOf(data.tag) < 0 || configTag === "sgds-button-fullwidth";
 
   if (shouldResize && data.width && data.width > 0) {
     var nodeClasses = data.name || "";
@@ -877,9 +973,9 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   parent.appendChild(instance);
 
   // Apply slot content using declarative config
-  var slotConfig = COMPONENT_SLOT_CONFIG[data.tag];
-  if (slotConfig) {
-    await applySlotContent(instance, data, slotConfig);
+  var slotConfig2 = COMPONENT_SLOT_CONFIG[configTag];
+  if (slotConfig2) {
+    await applySlotContent(instance, data, slotConfig2);
   } else {
     // Fallback: try generic text application for components without config
     await applyComponentText(instance, data);
@@ -1877,6 +1973,16 @@ async function applyItemPattern(instance, data, config) {
       // Explicitly disable badge when not present
       try {
         itemInstance.setProperties(makeProps(config.itemProps.badge.booleanKey, false));
+      } catch (e) {}
+    }
+
+    // Apply state variant (e.g. breadcrumb active item)
+    if (config.itemProps.state) {
+      var stateConfig = config.itemProps.state;
+      var isActive = itemAttrs.active === true || itemAttrs.active === "" || itemAttrs.active === "true";
+      var stateValue = isActive ? stateConfig.activeValue : stateConfig.defaultValue;
+      try {
+        itemInstance.setProperties(makeProps(stateConfig.prop, stateValue));
       } catch (e) {}
     }
 
