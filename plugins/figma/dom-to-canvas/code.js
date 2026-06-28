@@ -279,9 +279,15 @@ var COMPONENT_SLOT_CONFIG = {
     structureName: "Structure",
     slots: {
       upper: {
-        booleanKey: "🔷 Upper slot#29055:1",
-        swapKey: "↳ Swap instance (upper)#29055:60",
-        frameName: "[upper slot]"
+        // Badge in thumbnail-card toggles Badge#30668:7 on the "Thumbnail" nested instance
+        nestedInstanceName: "Thumbnail",
+        booleanKey: "Badge#30668:7"
+      },
+      default: {
+        // Default slot (children without slot attr) → swap into Card header's default slot
+        nestedInstanceName: "Card header",
+        booleanKey: "🔷 Default slot#29055:32",
+        swapKey: "↳ Swap instance#29055:35"
       },
       lower: {
         booleanKey: "🔷 Lower slot#29055:12",
@@ -775,8 +781,14 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
     configTag = "sgds-button-fullwidth";
   } else if (data.tag === "sgds-card" && data.children) {
     for (var cti = 0; cti < data.children.length; cti++) {
-      if (data.children[cti].slot === "image") { configTag = "sgds-image-card"; break; }
-      if (data.children[cti].slot === "icon") { configTag = "sgds-icon-card"; break; }
+      if (data.children[cti].slot === "image") {
+        configTag = "sgds-image-card";
+        break;
+      }
+      if (data.children[cti].slot === "icon") {
+        configTag = "sgds-icon-card";
+        break;
+      }
     }
   }
   var slotConfig = COMPONENT_SLOT_CONFIG[configTag];
@@ -1291,28 +1303,81 @@ function findSwappedInstance(cardInstance, componentSetKey) {
 // Component-specific text property keys for setting label/content after instance swap
 var COMPONENT_TEXT_PROPS = {
   "sgds-badge": "Edit label#13032:18",
-  "sgds-button": "Edit button label#12484:5"
+  "sgds-button": "Edit button label#12484:5",
+  "sgds-link": "Edit link#16010:0"
 };
 
-// Apply text to a slotted component instance after it's been swapped in
-async function applySlottedComponentText(instance, tag, text, childData) {
+// Apply ALL component content rules to a slotted instance.
+// This is the single source of truth: text, variant, tone, size, booleans, icon visibility.
+// Reuses ATTR_TO_VARIANT_PROP, ATTR_VALUE_MAP, COMPONENT_SLOT_CONFIG — same as createSgdsComponent.
+async function applySlottedComponentContent(instance, tag, childData) {
+  if (!instance) return;
+  var text = (childData && childData.text) || collectFirstText(childData);
+  var attrs = (childData && childData.attrs) || {};
+  var slotConfig = COMPONENT_SLOT_CONFIG[tag];
+
+  // 1. Apply text
   var textPropKey = COMPONENT_TEXT_PROPS[tag];
   if (textPropKey && text) {
     try {
       await figma.loadFontAsync({ family: "Inter", style: "Semi Bold" });
-      var props = {};
-      props[textPropKey] = text;
-      instance.setProperties(props);
+      instance.setProperties(makeProps(textPropKey, text));
     } catch (e) {}
   }
 
-  // Badge: hide icon if no sgds-icon child with slot="icon" in the DOM
-  if (tag === "sgds-badge" && instance) {
+  // 2. Apply variant-mappable attributes (variant, tone, size, orientation, etc.)
+  for (var attrName in attrs) {
+    // Check component-specific attrOverrides first
+    if (slotConfig && slotConfig.attrOverrides && slotConfig.attrOverrides[attrName]) {
+      var override = slotConfig.attrOverrides[attrName];
+      var mappedVal = override.values[attrs[attrName]];
+      if (mappedVal) {
+        try { instance.setProperties(makeProps(override.prop, mappedVal)); } catch (e) {}
+      }
+      continue;
+    }
+    var propName = ATTR_TO_VARIANT_PROP[attrName];
+    if (propName) {
+      var value = attrs[attrName];
+      // Boolean-like Figma variant props (Outlined, Dismissible) use "True"/"False" strings
+      var BOOLEAN_VARIANT_PROPS = ["Outlined", "Dismissible"];
+      if (BOOLEAN_VARIANT_PROPS.indexOf(propName) >= 0) {
+        if (value === true || value === "" || value === "true") {
+          try { instance.setProperties(makeProps(propName, "True")); } catch (e) {}
+        } else {
+          try { instance.setProperties(makeProps(propName, "False")); } catch (e) {}
+        }
+        continue;
+      }
+      // Skip plain boolean values for enum variant props (size, tone, etc.)
+      if (value === true || value === "" || value === false || value === "false") continue;
+      var mapped = (slotConfig && slotConfig.valueOverrides && slotConfig.valueOverrides[value]) ||
+        ATTR_VALUE_MAP[value] || value;
+      try { instance.setProperties(makeProps(propName, mapped)); } catch (e) {}
+    }
+  }
+
+  // 3. Explicitly set boolean variant props to "False" when absent from DOM attrs
+  var BOOL_VARIANT_DEFAULTS = ["Outlined", "Dismissible"];
+  for (var bdi = 0; bdi < BOOL_VARIANT_DEFAULTS.length; bdi++) {
+    var bvp = BOOL_VARIANT_DEFAULTS[bdi];
+    // Find which attr maps to this prop
+    var attrForProp = null;
+    for (var ak in ATTR_TO_VARIANT_PROP) {
+      if (ATTR_TO_VARIANT_PROP[ak] === bvp) { attrForProp = ak; break; }
+    }
+    // If attr is absent, explicitly set to "False"
+    if (attrForProp && attrs[attrForProp] === undefined) {
+      try { instance.setProperties(makeProps(bvp, "False")); } catch (e) {}
+    }
+  }
+
+  // 4. Badge-specific: hide icon if no sgds-icon child with slot="icon"
+  if (tag === "sgds-badge") {
     var hasIcon = false;
     if (childData && childData.children) {
-      for (var bi = 0; bi < childData.children.length; bi++) {
-        var bc = childData.children[bi];
-        if (bc.tag === "sgds-icon" && bc.slot === "icon") {
+      for (var i = 0; i < childData.children.length; i++) {
+        if (childData.children[i].tag === "sgds-icon" && childData.children[i].slot === "icon") {
           hasIcon = true;
           break;
         }
@@ -1320,23 +1385,22 @@ async function applySlottedComponentText(instance, tag, text, childData) {
     }
     if (!hasIcon) {
       try {
-        // Find the icon boolean property key (e.g. "Icon#xxxxx:x")
-        var badgeProps = instance.componentProperties || {};
-        var iconKey = null;
-        for (var bpk in badgeProps) {
-          if (bpk.indexOf("Icon") === 0 && badgeProps[bpk].type === "BOOLEAN") {
-            iconKey = bpk;
+        var bProps = instance.componentProperties || {};
+        for (var bk in bProps) {
+          if (bk.indexOf("Icon") === 0 && bProps[bk].type === "BOOLEAN") {
+            instance.setProperties(makeProps(bk, false));
             break;
           }
-        }
-        if (iconKey) {
-          var iconProps = {};
-          iconProps[iconKey] = false;
-          instance.setProperties(iconProps);
         }
       } catch (e) {}
     }
   }
+}
+
+// Legacy wrapper: old callers pass (instance, tag, text, childData)
+// Routes to applySlottedComponentContent which handles everything
+async function applySlottedComponentText(instance, tag, text, childData) {
+  await applySlottedComponentContent(instance, tag, childData || {});
 }
 
 // ============================================================
@@ -1401,10 +1465,18 @@ async function applySlotContent(instance, data, config) {
       var slotChild = slotChildren[slotName];
       if (!slotChild) {
         // Explicitly disable boolean when slot content is absent
-        // (Figma defaults may have this enabled, e.g. Alert "With icon" defaults to true)
         if (slotConfig.booleanKey) {
           try {
-            target.setProperties(makeProps(slotConfig.booleanKey, false));
+            if (slotConfig.nestedInstanceName) {
+              var nestedInstOff = instance.findOne(function (n) {
+                return n.name === slotConfig.nestedInstanceName && n.type === "INSTANCE";
+              });
+              if (nestedInstOff) {
+                nestedInstOff.setProperties(makeProps(slotConfig.booleanKey, false));
+              }
+            } else {
+              target.setProperties(makeProps(slotConfig.booleanKey, false));
+            }
           } catch (e) {}
         }
         continue;
@@ -1412,10 +1484,58 @@ async function applySlotContent(instance, data, config) {
       // Handle first item if array
       if (Array.isArray(slotChild)) slotChild = slotChild[0];
 
-      // Enable slot boolean
+      // Enable slot boolean (on nested instance if specified, otherwise on target)
       if (slotConfig.booleanKey) {
         try {
-          target.setProperties(makeProps(slotConfig.booleanKey, true));
+          if (slotConfig.nestedInstanceName) {
+            var nestedInst = instance.findOne(function (n) {
+              return n.name === slotConfig.nestedInstanceName && n.type === "INSTANCE";
+            });
+            if (nestedInst) {
+              nestedInst.setProperties(makeProps(slotConfig.booleanKey, true));
+              // Apply component content to the nested instance's child (e.g. badge in Thumbnail)
+              if (!slotConfig.swapKey && slotChild.tag && isSgdsComponent(slotChild.tag)) {
+                var componentName = slotChild.tag.replace("sgds-", "");
+                // Find the deepest instance that has component-specific text props (e.g. "Badge 1" not "Badge group")
+                var allNested = nestedInst.findAllWithCriteria({ types: ["INSTANCE"] });
+                var childInst = null;
+                for (var ani = 0; ani < allNested.length; ani++) {
+                  var cp = allNested[ani].componentProperties || {};
+                  var textKey = COMPONENT_TEXT_PROPS[slotChild.tag];
+                  if (textKey && cp[textKey]) {
+                    childInst = allNested[ani];
+                    break;
+                  }
+                }
+                // Fallback: find by name pattern (e.g. "Badge 1")
+                if (!childInst) {
+                  for (var ani2 = 0; ani2 < allNested.length; ani2++) {
+                    var instName = allNested[ani2].name.toLowerCase();
+                    if (instName.indexOf(componentName) >= 0 && instName.indexOf("group") < 0) {
+                      childInst = allNested[ani2];
+                      break;
+                    }
+                  }
+                }
+                if (childInst) {
+                  await applySlottedComponentContent(childInst, slotChild.tag, slotChild);
+                }
+                continue;
+              }
+              // For nested slots with swapKey, swap the component into the nested instance
+              if (slotConfig.swapKey && slotChild.tag && isSgdsComponent(slotChild.tag)) {
+                var nestedComponent = await importSlottedComponent(slotChild);
+                if (nestedComponent) {
+                  try {
+                    nestedInst.setProperties(makeProps(slotConfig.swapKey, nestedComponent.id));
+                  } catch (e) {}
+                }
+                continue;
+              }
+            }
+          } else {
+            target.setProperties(makeProps(slotConfig.booleanKey, true));
+          }
         } catch (e) {}
       }
 
@@ -1448,17 +1568,17 @@ async function applySlotContent(instance, data, config) {
           }
           if (!swapped && slotConfig.swapKey) {
             try {
-              target.setProperties(makeProps(slotConfig.swapKey, component));
+              target.setProperties(makeProps(slotConfig.swapKey, component.id));
               swapped = true;
             } catch (e) {}
           }
-          // Apply text to swapped instance
+          // Apply component content to swapped instance
           if (swapped) {
             var label = slotChild.text || collectFirstText(slotChild);
             if (label) {
               var swappedInst = findSwappedInstance(instance, SGDS_COMPONENT_MAP[slotChild.tag].key);
               if (swappedInst) {
-                await applySlottedComponentText(swappedInst, slotChild.tag, label, slotChild);
+                await applySlottedComponentContent(swappedInst, slotChild.tag, slotChild);
               }
             }
           }
@@ -1484,7 +1604,7 @@ async function applySlotContent(instance, data, config) {
           }
           if (!swapped && slotConfig.swapKey) {
             try {
-              target.setProperties(makeProps(slotConfig.swapKey, localComponent));
+              target.setProperties(makeProps(slotConfig.swapKey, localComponent.id));
               swapped = true;
             } catch (e) {}
           }
@@ -1974,7 +2094,7 @@ async function applyItemPattern(instance, data, config) {
         if (iconChild.tag && isSgdsComponent(iconChild.tag) && config.itemProps.icon.swapKey) {
           var iconComp = await importSlottedComponent(iconChild);
           if (iconComp) {
-            itemInstance.setProperties(makeProps(config.itemProps.icon.swapKey, iconComp));
+            itemInstance.setProperties(makeProps(config.itemProps.icon.swapKey, iconComp.id));
           }
         }
       } catch (e) {}
@@ -1993,7 +2113,7 @@ async function applyItemPattern(instance, data, config) {
           itemInstance.setProperties(makeProps(config.itemProps.badge.booleanKey, true));
           var badgeComp = await importSlottedComponent(badgeChild);
           if (badgeComp) {
-            itemInstance.setProperties(makeProps(config.itemProps.badge.swapKey, badgeComp));
+            itemInstance.setProperties(makeProps(config.itemProps.badge.swapKey, badgeComp.id));
           }
         } catch (e) {}
       }
@@ -2050,7 +2170,7 @@ async function applyItemPattern(instance, data, config) {
             textComp.x = -9999;
             textComp.y = -9999;
             try {
-              itemInstance.setProperties(makeProps(swapKey, textComp));
+              itemInstance.setProperties(makeProps(swapKey, textComp.id));
               swapped = true;
             } catch (e2) {}
           }
@@ -2156,7 +2276,7 @@ async function applyCardContentHeuristic(instance, data, config, target) {
             }
             if (!swapped && upperConfig.swapKey) {
               try {
-                target.setProperties(makeProps(upperConfig.swapKey, badgeComponent));
+                target.setProperties(makeProps(upperConfig.swapKey, badgeComponent.id));
                 swapped = true;
               } catch (e) {}
             }
