@@ -32,6 +32,7 @@ test/skills/*
 # Oobee a11y scan results
 results/
 a11y-failures.log
-**/.pnpm*
-
+**/.pnpm/*
+plugins/figma/dom-to-canvas/__fixtures__/
+plugins/figma/dom-to-canvas/manual-overrides.draft.json
 docs/INSTALLATION.md
