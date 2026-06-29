@@ -42,7 +42,7 @@ export class CardElement extends SgdsElement {
   }
 
   protected _forwardAnchorAttributes(anchor: HTMLAnchorElement | null) {
-    const SKIP = new Set(["class", "style", "id"]);
+    const SKIP = new Set(["class", "style", "id", "slot", "tabindex"]);
     if (
       !anchor?.href ||
       anchor.href.startsWith("javascript:") ||
