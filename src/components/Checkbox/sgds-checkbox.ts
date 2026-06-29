@@ -22,6 +22,8 @@ import formCheckStyles from "../../styles/form-check.css";
  * @event sgds-focus - Emitted when input is in focus.
  * @event sgds-check - Emitted when checkbox is checked
  * @event sgds-uncheck - Emitted when checkbox is unchecked
+ * @event sgds-invalid - Emitted when the checkbox's invalid state is set to true.
+ * @event sgds-valid - Emitted when the checkbox's invalid state is set to false.
  */
 export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, formCheckStyles, checkboxStyle];
@@ -40,7 +42,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
   @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
 
-  /** Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
+  /** @internal Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")
   defaultChecked = false;
 
@@ -49,6 +51,9 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
 
   /** Makes the checkbox a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
+
+  /** Disables native and sgds validation for the checkbox. */
+  @property({ type: Boolean, reflect: true }) noValidate = false;
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
@@ -113,6 +118,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (this._isTouched) {
       this.invalid = !this.input.checkValidity();
     }
