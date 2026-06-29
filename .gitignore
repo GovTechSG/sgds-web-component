@@ -32,3 +32,5 @@ test/skills/*
 results/
 a11y-failures.log
 **/.pnpm/*
+plugins/figma/dom-to-canvas/__fixtures__/
+plugins/figma/dom-to-canvas/manual-overrides.draft.json
