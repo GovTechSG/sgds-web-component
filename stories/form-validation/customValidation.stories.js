@@ -64,6 +64,19 @@ const DisableValidationByInputTemplate = args => {
         hasFeedback
         id="custom-validation__datepicker-novalidate"
       ></sgds-datepicker>
+      <sgds-radio-group
+        noValidate
+        required
+        label="Gender"
+        hintText="Please select a gender"
+        name="radio-gender"
+        hasFeedback
+        id="custom-validation__radio-novalidate"
+      >
+        <sgds-radio value="male">Male</sgds-radio>
+        <sgds-radio value="female">Female</sgds-radio>
+        <sgds-radio value="other">Other</sgds-radio>
+      </sgds-radio-group>
       <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
@@ -148,6 +161,16 @@ const DisableValidationByInputTemplate = args => {
           e.target.setInvalid(false);
         }
       });
+
+      const radioOne = document.querySelector("sgds-radio-group#custom-validation__radio-novalidate");
+      radioOne.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a gender";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
     </script>
   `;
 };
@@ -204,6 +227,18 @@ const DisableValidationByFormTemplate = args => {
         hasFeedback
         id="custom-validation__datepicker-two-novalidate"
       ></sgds-datepicker>
+      <sgds-radio-group
+        required
+        label="Gender"
+        hintText="Please select a gender"
+        name="radio-gender"
+        hasFeedback
+        id="custom-validation__radio-two-novalidate"
+      >
+        <sgds-radio value="male">Male</sgds-radio>
+        <sgds-radio value="female">Female</sgds-radio>
+        <sgds-radio value="other">Other</sgds-radio>
+      </sgds-radio-group>
       <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
@@ -287,6 +322,16 @@ const DisableValidationByFormTemplate = args => {
         if (selected <= today) {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Please select a future date";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+
+      const radioTwo = document.getElementById("custom-validation__radio-two-novalidate");
+      radioTwo.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a gender";
         } else {
           e.target.setInvalid(false);
         }

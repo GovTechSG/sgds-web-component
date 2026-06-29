@@ -55,6 +55,20 @@
         id="custom-bio-textarea"
       ></sgds-textarea>
 
+      <sgds-radio-group
+        noValidate
+        required
+        label="Gender"
+        hintText="Please select a gender"
+        name="gender"
+        hasFeedback
+        id="custom-gender-radio"
+      >
+        <sgds-radio value="male">Male</sgds-radio>
+        <sgds-radio value="female">Female</sgds-radio>
+        <sgds-radio value="other">Other</sgds-radio>
+      </sgds-radio-group>
+
       <sgds-button type="submit">Submit</sgds-button>
       <sgds-button type="reset" variant="ghost">Reset</sgds-button>
     </form>
@@ -90,7 +104,20 @@
         placeholder="Enter notes"
       ></sgds-textarea>
 
+      <sgds-radio-group
+        required
+        label="Priority"
+        hintText="This required validation is disabled by form novalidate"
+        name="priority"
+        hasFeedback
+      >
+        <sgds-radio value="low">Low</sgds-radio>
+        <sgds-radio value="medium">Medium</sgds-radio>
+        <sgds-radio value="high">High</sgds-radio>
+      </sgds-radio-group>
+
       <sgds-button type="submit">Submit (No Validation)</sgds-button>
+      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
     </form>
 
     <script>
@@ -132,6 +159,16 @@
         }
       });
 
+      const genderRadio = document.getElementById("custom-gender-radio");
+      genderRadio.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a gender";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+
       document.getElementById("custom-validation-form").addEventListener("submit", e => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -157,7 +194,7 @@
         alert(
           `Form submitted without validation!\nEmail: ${formDataObj.email || "empty"}\nPhone: ${
             formDataObj.phone || "empty"
-          }\nNotes: ${formDataObj.notes || "empty"}\nCheck console for details.`
+          }\nNotes: ${formDataObj.notes || "empty"}\nPriority: ${formDataObj.priority || "empty"}\nCheck console for details.`
         );
       });
 

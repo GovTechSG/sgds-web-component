@@ -46,13 +46,15 @@
 
       <div>
         <h2>Required Validation</h2>
-        <form>
+        <form class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
           <sgds-radio-group label="Agreement" name="agreement" required hasFeedback>
             <sgds-radio value="yes">I agree</sgds-radio>
             <sgds-radio value="no">I disagree</sgds-radio>
           </sgds-radio-group>
-          <br />
-          <sgds-button type="submit">Submit</sgds-button>
+          <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
+            <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+            <sgds-button type="submit">Submit</sgds-button>
+          </div>
         </form>
       </div>
 
@@ -63,9 +65,53 @@
           <sgds-radio value="sms">SMS</sgds-radio>
           <sgds-radio value="push">Push Notification</sgds-radio>
         </sgds-radio-group>
-        <p style="margin-top: 12px; font-size: 0.875rem; color: #666;">
-          When checking a radio, it automatically receives focus for better keyboard navigation.
-        </p>
+      </div>
+
+      <div>
+        <h2>Custom Validation with noValidate</h2>
+        <form id="custom-validation-radio-form" class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+          <sgds-radio-group
+            noValidate
+            required
+            label="Gender"
+            hintText="Please select a gender"
+            name="gender"
+            hasFeedback
+            id="custom-validation-radio-group"
+          >
+            <sgds-radio value="male">Male</sgds-radio>
+            <sgds-radio value="female">Female</sgds-radio>
+            <sgds-radio value="other">Other</sgds-radio>
+          </sgds-radio-group>
+          <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
+            <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+            <sgds-button type="submit">Submit</sgds-button>
+          </div>
+        </form>
+        <script>
+          const radioGroup = document.getElementById("custom-validation-radio-group");
+          const radioForm = document.getElementById("custom-validation-radio-form");
+
+          radioGroup.addEventListener("sgds-change", e => {
+            if (!e.target.value) {
+              e.target.setInvalid(true);
+              e.target.invalidFeedback = "Please select a gender";
+            } else {
+              e.target.setInvalid(false);
+            }
+          });
+
+          radioForm.addEventListener("submit", e => {
+            e.preventDefault();
+            if (!radioGroup.value) {
+              radioGroup.setInvalid(true);
+              radioGroup.invalidFeedback = "Please select a gender";
+              return;
+            }
+            if (radioGroup.invalid) return;
+            alert("Form submitted successfully despite required field — constraint validation was disabled by the noValidate property.");
+          });
+        </script>
       </div>
     </div>
   </body>
