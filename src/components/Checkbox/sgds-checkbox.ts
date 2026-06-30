@@ -9,6 +9,7 @@ import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsFormControl } from "../../utils/formSubmitController";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
+import { HasSlotController } from "../../utils/slot";
 import checkboxStyle from "./checkbox.css";
 import formCheckStyles from "../../styles/form-check.css";
 
@@ -27,6 +28,8 @@ import formCheckStyles from "../../styles/form-check.css";
  */
 export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
   static styles = [...FormControlElement.styles, formCheckStyles, checkboxStyle];
+
+  private readonly hasSlotController = new HasSlotController(this, "[default]");
 
   /**@internal */
   static dependencies = {
@@ -183,6 +186,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   render() {
     const displayFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
     const displayFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
+    const hasDefaultSlot = this.hasSlotController.test("[default]");
 
     return html`
       <div class="form-check">
@@ -208,7 +212,9 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
           @blur=${this._handleBlur}
           @focus=${this._handleFocus}
         />
-        <label for="${this._controlId}" class="form-check-label" id="${this._labelId}"><slot></slot></label>
+        ${hasDefaultSlot
+          ? html`<label for="${this._controlId}" class="form-check-label" id="${this._labelId}"><slot></slot></label>`
+          : nothing}
       </div>
       ${displayFeedbackText && this.invalid
         ? html`

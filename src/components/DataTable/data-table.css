@@ -31,6 +31,23 @@
   padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--sgds-dimension-128);
+  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+  border-top: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}
+
+.loading .loading-menu {
+  display: flex;
+  gap: var(--sgds-gap-xs);
+  align-items: center;
+  color: var(--sgds-text-color-subtle);
+  pointer-events: none;
+}
+
 /* ── sgds-data-table-row ──────────────────────────────────────── */
 :host(sgds-data-table-row) slot {
   display: table-row;
@@ -60,6 +77,17 @@ th {
 
 .data-table-head {
   font-weight: var(--sgds-font-weight-semibold);
+  gap: var(--sgds-gap-2-xs);
+}
+
+.data-table-head.align-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.data-table-cell.align-right {
+  justify-content: flex-end;
+  text-align: right;
 }
 
 /* control cell variants — applied as classes on the host */
