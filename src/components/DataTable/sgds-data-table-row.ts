@@ -23,7 +23,7 @@ import { SgdsIcon } from "../Icon/sgds-icon";
  * @event sgds-after-show - Emitted after the expandable row open animation completes.
  * @event sgds-hide - Emitted when the expandable row begins to close.
  * @event sgds-after-hide - Emitted after the expandable row close animation completes.
- * @event sgds-row-checkbox-change - Emitted when the row checkbox changes. Detail: `{ checked: boolean }`
+ * @event i-sgds-change - Emitted when the row checkbox changes. Detail: `{ checked: boolean }`
  */
 export class SgdsDataTableRow extends SgdsElement {
   static styles = [...SgdsElement.styles, tableRowStyle];
@@ -56,6 +56,9 @@ export class SgdsDataTableRow extends SgdsElement {
 
   /** When true, the expandable content area is open. */
   @property({ type: Boolean, reflect: true }) expanded = false;
+
+  /** @internal — per-column alignment injected by `sgds-data-table` from header cells. */
+  @property({ attribute: false }) columnAlignments: Array<"left" | "right"> = [];
 
   @queryAssignedElements({ flatten: true })
   private _assignedCells!: Array<SgdsDataTableCell | SgdsDataTableHead>;
@@ -125,14 +128,14 @@ export class SgdsDataTableRow extends SgdsElement {
   }
 
   private _onCheckboxChange(e: CustomEvent) {
-    this.emit("sgds-row-checkbox-change", { detail: { checked: (e.target as SgdsCheckbox).checked } });
+    this.emit("i-sgds-change", { detail: { checked: (e.target as SgdsCheckbox).checked } });
   }
 
   private _toggleExpand() {
     this.expanded ? this.hide() : this.show();
   }
 
-  private _renderCell(el: SgdsDataTableCell | SgdsDataTableHead) {
+  private _renderCell(el: SgdsDataTableCell | SgdsDataTableHead, columnIndex: number) {
     const children = Array.from(el.childNodes).map(n => n.cloneNode(true));
 
     if (el instanceof SgdsDataTableHead) {
@@ -145,24 +148,16 @@ export class SgdsDataTableRow extends SgdsElement {
         ?data-sortable=${el.sortable}
         @click=${el.sortable ? () => el.handleSortClick() : nothing}
       >
-        <div class="data-table-head">
+        <div class="data-table-head ${el.textAlign === "right" ? "align-right" : "align-left"}">
           ${children}
-          ${el.sortable
-            ? html`<sgds-icon
-                name=${el.ariasort === "ascending"
-                  ? "arrow-up"
-                  : el.ariasort === "descending"
-                  ? "arrow-down"
-                  : "chevron-selector-vertical"}
-                size="md"
-              ></sgds-icon>`
-            : nothing}
+          ${el.sortable ? html`<sgds-icon name="chevron-selector-vertical" size="sm"></sgds-icon>` : nothing}
         </div>
       </th>`;
     }
 
+    const cellAlignment = this.columnAlignments[columnIndex] ?? "left";
     return html`<td colspan=${ifDefined(el.colspan)} rowspan=${ifDefined(el.rowspan)}>
-      <div class="data-table-cell">${children}</div>
+      <div class="data-table-cell ${cellAlignment === "right" ? "align-right" : "align-left"}">${children}</div>
     </td>`;
   }
 
@@ -194,13 +189,13 @@ export class SgdsDataTableRow extends SgdsElement {
     return html`
       <tr>
         <td hidden style="display:none"><slot @slotchange=${this._onSlotChange}></slot></td>
-        ${this.showCheckbox ? this._renderCheckboxCell() : nothing}
         ${this.expandable
           ? this._renderExpandCell()
           : this.showExpandPlaceholder
           ? this._renderExpandPlaceholder()
           : nothing}
-        ${cells.map(el => this._renderCell(el))}
+        ${this.showCheckbox ? this._renderCheckboxCell() : nothing}
+        ${cells.map((el, index) => this._renderCell(el, index))}
       </tr>
 
       ${this.expandable
