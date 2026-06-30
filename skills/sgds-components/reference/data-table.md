@@ -1,0 +1,146 @@
+# SGDS Data Table Component Skill
+
+`<sgds-data-table>` displays structured tabular data using composed row, header, and cell elements.
+It supports client-side pagination, server-driven pagination, sortable headers, row selection, expandable rows, and server loading state.
+
+## Usage Guideline
+
+### When to use
+
+- When your data needs table semantics with SGDS-consistent interactions and styling.
+- When you need sortable columns based on slotted cells or rowData keys.
+- When you need server-driven paging with loading feedback.
+- When rows require selection (checkboxes) or expandable detail panels.
+
+### When NOT to use
+
+- For very simple key-value presentation with no tabular interactions.
+- For dense data visualisation where charts are more appropriate.
+
+## Quick Decision Guide
+
+- Static list with local pagination and sorting: use `mode="client"` (default).
+- Data from API with backend pagination: use `mode="server"` and listen to `sgds-page-change`.
+- Need loading indicator while fetching server data: set `isLoading` to `true`.
+- Need numeric columns aligned right: set `textAlign="right"` on the corresponding `sgds-data-table-head`.
+
+```html
+<sgds-data-table dataLength="3" itemsPerPage="5" currentPage="1">
+  <sgds-data-table-row>
+    <sgds-data-table-head sortable sortKey="id">ID</sgds-data-table-head>
+    <sgds-data-table-head sortable sortKey="name">Name</sgds-data-table-head>
+    <sgds-data-table-head textAlign="right">Amount</sgds-data-table-head>
+  </sgds-data-table-row>
+  <sgds-data-table-row>
+    <sgds-data-table-cell>1</sgds-data-table-cell>
+    <sgds-data-table-cell>Amy</sgds-data-table-cell>
+    <sgds-data-table-cell>125.00</sgds-data-table-cell>
+  </sgds-data-table-row>
+</sgds-data-table>
+```
+
+## API Summary
+
+### `<sgds-data-table>`
+
+| Attribute | Type | Default | Purpose |
+| --- | --- | --- | --- |
+| `multiSelect` | boolean | `false` | Shows a checkbox column for row selection |
+| `dataLength` | number | `0` | Total number of rows (especially for server mode) |
+| `currentPage` | number | `1` | Current page number |
+| `itemsPerPage` | number | `5` | Rows per page |
+| `footerText` | string | `""` | Replaces default summary text in footer |
+| `hideFooter` | boolean | `false` | Hides summary and pagination footer |
+| `mode` | `"client" \| "server"` | `"client"` | Pagination mode |
+| `isLoading` | boolean | `false` | Shows loading state in server mode |
+
+### `<sgds-data-table-head>`
+
+| Attribute | Type | Default | Purpose |
+| --- | --- | --- | --- |
+| `sortable` | boolean | `true` | Enables sort toggle on click |
+| `sortKey` | string | `""` | Row data key used for sorting |
+| `textAlign` | `"left" \| "right"` | `"left"` | Alignment for header and same body column |
+| `width` | string | — | Column width |
+| `colspan` | number | — | Number of columns spanned |
+| `rowspan` | number | — | Number of rows spanned |
+
+## Slots
+
+### Data Table Slots
+
+| Slot | Purpose |
+| --- | --- |
+| default | Accepts `sgds-data-table-row` entries for header and body rows |
+
+### Data Table Row Slots
+
+| Slot | Purpose |
+| --- | --- |
+| default | Accepts `sgds-data-table-head` and `sgds-data-table-cell` |
+| `expandable-content` | Content displayed in expanded detail row |
+
+## Events
+
+| Event | When |
+| --- | --- |
+| `sgds-page-change` | Pagination page changes |
+| `sgds-row-select` | Selection state changes for row checkboxes |
+| `sgds-sort` | A sortable header changes sort direction |
+| `sgds-show` | Expandable row starts opening |
+| `sgds-after-show` | Expandable row finishes opening |
+| `sgds-hide` | Expandable row starts closing |
+| `sgds-after-hide` | Expandable row finishes closing |
+
+## Server Mode Example
+
+```html
+<sgds-data-table id="users-table" mode="server" dataLength="100" itemsPerPage="10" currentPage="1">
+  <sgds-data-table-row>
+    <sgds-data-table-head>ID</sgds-data-table-head>
+    <sgds-data-table-head>Name</sgds-data-table-head>
+  </sgds-data-table-row>
+</sgds-data-table>
+
+<script type="module">
+  const table = document.getElementById("users-table");
+
+  async function loadPage(page) {
+    table.isLoading = true;
+    try {
+      const response = await fetch(`/api/users?page=${page}`);
+      const { total, rows } = await response.json();
+      table.dataLength = total;
+
+      const headerRow = table.querySelector("sgds-data-table-row");
+      table.innerHTML = `${headerRow.outerHTML}${rows
+        .map(
+          row => `
+          <sgds-data-table-row>
+            <sgds-data-table-cell>${row.id}</sgds-data-table-cell>
+            <sgds-data-table-cell>${row.name}</sgds-data-table-cell>
+          </sgds-data-table-row>`
+        )
+        .join("")}`;
+    } finally {
+      table.isLoading = false;
+    }
+  }
+
+  table.addEventListener("sgds-page-change", () => {
+    loadPage(Number(table.currentPage || 1));
+  });
+
+  loadPage(1);
+</script>
+```
+
+---
+
+**For AI agents**:
+
+1. Always provide `dataLength`, `currentPage`, and `itemsPerPage` together for predictable pagination.
+2. In server mode, manage `isLoading` around fetch calls and update row markup externally.
+3. Use `textAlign` on header cells only; body alignment is inherited by column.
+4. Keep non-sortable control columns (expand/checkbox) unsortable.
+5. Prefer setting `sortKey` when rowData is provided for stable sorting behavior.

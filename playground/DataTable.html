@@ -272,6 +272,111 @@
   </sgds-data-table>
 </div>
 
+<!-- Custom footer text -->
+<div class="container">
+  <h3>Custom Footer Text (footerText)</h3>
+  <sgds-data-table currentPage="1" dataLength="4" itemsPerPage="2" footerText="Showing records fetched from API cache">
+    <sgds-data-table-row>
+      <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>Name</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Amy</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Cara</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell>Dan</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Hide footer -->
+<div class="container">
+  <h3>Hide Footer (hideFooter)</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" hideFooter>
+    <sgds-data-table-row>
+      <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>Status</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1001</sgds-data-table-cell>
+      <sgds-data-table-cell>Pending</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1002</sgds-data-table-cell>
+      <sgds-data-table-cell>Approved</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1003</sgds-data-table-cell>
+      <sgds-data-table-cell>Rejected</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Server mode -->
+<div class="container">
+  <h3>Server Mode (mode="server")</h3>
+  <sgds-data-table id="server-table" currentPage="1" dataLength="50" itemsPerPage="10" mode="server" isLoading>
+    <sgds-data-table-row>
+      <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>Name</sgds-data-table-head>
+      <sgds-data-table-head>Region</sgds-data-table-head>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Header props: sortable, sortKey, width, colspan, rowspan, textAlign -->
+<div class="container">
+  <h3>Header Props (sortable, sortKey, width, colspan, rowspan, textAlign)</h3>
+  <sgds-data-table currentPage="1" dataLength="4" itemsPerPage="4">
+    <sgds-data-table-row>
+      <sgds-data-table-head rowspan="2" width="88">ID</sgds-data-table-head>
+      <sgds-data-table-head colspan="2">Profile</sgds-data-table-head>
+      <sgds-data-table-head rowspan="2" sortable sortKey="score" width="120" textAlign="right"
+        >Score</sgds-data-table-head
+      >
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-head sortable sortKey="name">Name</sgds-data-table-head>
+      <sgds-data-table-head sortable sortKey="role">Role</sgds-data-table-head>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row id="sort-row-1">
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Lina</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+      <sgds-data-table-cell>82</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="sort-row-2">
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Adam</sgds-data-table-cell>
+      <sgds-data-table-cell>Designer</sgds-data-table-cell>
+      <sgds-data-table-cell>90</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="sort-row-3">
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Nora</sgds-data-table-cell>
+      <sgds-data-table-cell>Manager</sgds-data-table-cell>
+      <sgds-data-table-cell>75</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="sort-row-4">
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+      <sgds-data-table-cell>88</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
 <script type="module">
   // Set rowData on multi-select rows
   document.getElementById("ms-row-1").rowData = { id: 1, name: "John Doe" };
@@ -282,4 +387,72 @@
   document.getElementById("ems-row-1").rowData = { id: 1, name: "John Doe" };
   document.getElementById("ems-row-2").rowData = { id: 2, name: "Jane Doe" };
   document.getElementById("ems-row-3").rowData = { id: 3, name: "Bob Smith" };
+
+  // Set rowData for sortable table head demo (sortKey)
+  document.getElementById("sort-row-1").rowData = { id: 1, name: "Lina", role: "Engineer", score: 82 };
+  document.getElementById("sort-row-2").rowData = { id: 2, name: "Adam", role: "Designer", score: 90 };
+  document.getElementById("sort-row-3").rowData = { id: 3, name: "Nora", role: "Manager", score: 75 };
+  document.getElementById("sort-row-4").rowData = { id: 4, name: "Ben", role: "Engineer", score: 88 };
+
+  // Mock API-driven pagination demo for server mode table
+  const serverTable = document.getElementById("server-table");
+  const totalRows = 50;
+  const regions = ["North", "South", "East", "West", "Central"];
+
+  const mockApi = ({ page, itemsPerPage }) => {
+    const start = (page - 1) * itemsPerPage;
+    const end = Math.min(start + itemsPerPage, totalRows);
+
+    const rows = Array.from({ length: Math.max(0, end - start) }, (_, index) => {
+      const id = start + index + 1;
+      return {
+        id,
+        name: `Citizen ${id}`,
+        region: regions[id % regions.length]
+      };
+    });
+
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve({ total: totalRows, rows });
+      }, 350);
+    });
+  };
+
+  const renderServerRows = rows => {
+    const headerRow = serverTable.querySelector("sgds-data-table-row");
+    if (!headerRow) return;
+
+    const bodyMarkup = rows
+      .map(
+        row => `
+      <sgds-data-table-row>
+        <sgds-data-table-cell>${row.id}</sgds-data-table-cell>
+        <sgds-data-table-cell>${row.name}</sgds-data-table-cell>
+        <sgds-data-table-cell>${row.region}</sgds-data-table-cell>
+      </sgds-data-table-row>`
+      )
+      .join("");
+
+    serverTable.innerHTML = `${headerRow.outerHTML}${bodyMarkup}`;
+  };
+
+  const loadServerPage = async page => {
+    const itemsPerPage = Number(serverTable.itemsPerPage || 10);
+    serverTable.isLoading = true;
+
+    try {
+      const response = await mockApi({ page, itemsPerPage });
+      serverTable.dataLength = response.total;
+      renderServerRows(response.rows);
+    } finally {
+      serverTable.isLoading = false;
+    }
+  };
+
+  serverTable.addEventListener("sgds-page-change", async () => {
+    await loadServerPage(Number(serverTable.currentPage || 1));
+  });
+
+  loadServerPage(1);
 </script>
