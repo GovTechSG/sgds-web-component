@@ -29,9 +29,14 @@ export default class FormControlElement extends SgdsElement {
 
   /** Programatically sets the invalid state of the input. Pass in boolean value in the argument */
   public setInvalid(bool: boolean) {
+    const wasInvalid = this.invalid;
     this.invalid = bool;
     if (bool) {
       this.emit("sgds-invalid");
+      if (!wasInvalid) {
+        this.focus();
+        this.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
     } else {
       this.emit("sgds-valid");
     }
