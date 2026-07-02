@@ -49,6 +49,22 @@ By default, tabs are presented horizontally. Set `orientation` to `vertical` for
   <Story of={TabStories.OrientationSolid} />
 </Canvas>
 
+## Full Width
+
+Tabs can be set to fill the full width of its container by setting the `fullWidth` attribute to `true`. The `fullWidth` attribute only takes effect if the `orientation` attribute is also set to `horizontal`.
+
+### Underlined tabs (default)
+
+<Canvas of={TabStories.UnderlinedFullWidth}>
+  <Story of={TabStories.UnderlinedFullWidth} />
+</Canvas>
+
+### Solid tabs
+
+<Canvas of={TabStories.SolidFullWidth}>
+  <Story of={TabStories.SolidFullWidth} />
+</Canvas>
+
 ## Tab events
 
 The `sgds-tab-group` component emits custom events when tabs are shown or hidden, allowing you to perform side effects and track which tab is currently active.

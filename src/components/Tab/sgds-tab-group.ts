@@ -39,6 +39,8 @@ export class SgdsTabGroup extends SgdsElement {
   @property({ type: String, reflect: true }) orientation: "horizontal" | "vertical" = "horizontal";
   /** The density of tabs. Controls the density of all `sgds-tabs` in its slot. It also sets the density attribute of `sgds-tab` */
   @property({ type: String, reflect: true }) density: "compact" | "default" = "default";
+  /** When set, all `sgds-tabs` in its slot will be in full width. Only takes effect when `orientation` is set to `horizontal` */
+  @property({ type: Boolean, reflect: true }) fullWidth = false;
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
@@ -235,6 +237,7 @@ export class SgdsTabGroup extends SgdsElement {
     this._updateTabsAttribute("variant");
     this._updateTabsAttribute("orientation");
     this._updateTabsAttribute("density");
+    this._updateTabsAttribute("fullWidth");
     this._syncTabsAndPanels();
   }
 
@@ -248,6 +251,9 @@ export class SgdsTabGroup extends SgdsElement {
     }
     if (_changedProperties.has("density")) {
       this._updateTabsAttribute("density");
+    }
+    if (_changedProperties.has("fullWidth")) {
+      this._updateTabsAttribute("fullWidth");
     }
   }
 
