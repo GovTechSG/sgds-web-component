@@ -2197,11 +2197,14 @@ describe("reset does not emit sgds-change for combo-box", () => {
     `);
     await el.updateComplete;
 
+    // Wait for async initialization to set active on options
+    const option1 = el.querySelector<SgdsComboBoxOption>('sgds-combo-box-option[value="1"]')!;
+    await waitUntil(() => option1.active, "option1 should be active after initialization");
+
     const changeHandler = sinon.spy();
     el.addEventListener("sgds-change", changeHandler);
 
     // Unselect option 1
-    const option1 = el.querySelector<SgdsComboBoxOption>('sgds-combo-box-option[value="1"]')!;
     option1.click();
     await el.updateComplete;
 
