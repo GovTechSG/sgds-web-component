@@ -1025,3 +1025,66 @@ describe("reset clears invalid state when noValidate is true for checkbox-group"
     expect(group?.invalid).to.be.false;
   });
 });
+
+describe("FormData is correct when sgds-change fires for checkbox-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("FormData should reflect the updated value inside sgds-change listener", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group name="colors" value="">
+          <sgds-checkbox value="red">Red</sgds-checkbox>
+          <sgds-checkbox value="blue">Blue</sgds-checkbox>
+        </sgds-checkbox-group>
+      </form>
+    `);
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group")!;
+    await group.updateComplete;
+
+    let formDataValue: string | null = null;
+    group.addEventListener("sgds-change", () => {
+      const formData = new FormData(form);
+      formDataValue = formData.get("colors") as string;
+    });
+
+    // Simulate user clicking "red" checkbox
+    const redCheckbox = group.querySelector<SgdsCheckbox>('sgds-checkbox[value="red"]')!;
+    redCheckbox.click();
+    await group.updateComplete;
+
+    expect(formDataValue).to.equal("red");
+  });
+});
+
+describe("reset does not emit sgds-change for checkbox-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("should not emit sgds-change when form is reset", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group noValidate name="test" value="a">
+          <sgds-checkbox value="a">A</sgds-checkbox>
+          <sgds-checkbox value="b">B</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group")!;
+    await group.updateComplete;
+
+    // Check "b" to change the value from default
+    const bCheckbox = group.querySelector<SgdsCheckbox>('sgds-checkbox[value="b"]')!;
+    bCheckbox.click();
+    await group.updateComplete;
+
+    const changeHandler = Sinon.spy();
+    group.addEventListener("sgds-change", changeHandler);
+
+    // Reset the form
+    setTimeout(() => form.querySelector<SgdsButton>("sgds-button")?.click());
+    await waitUntil(() => group.value === "a");
+    await group.updateComplete;
+
+    expect(changeHandler).to.not.have.been.called;
+  });
+});

@@ -51,7 +51,6 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
 
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
-    this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
     this._updateCheckedRadio();
   }
   @watch("invalid", { waitUntilFirstUpdate: true })
@@ -114,6 +113,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
     }
 
     this.value = target.value;
+    this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
 
     this._updateInputValue();
 
@@ -155,6 +155,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
     });
 
     this.value = radios[index].value;
+    this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
     this._updateInputValue();
     radios[index].checked = true;
     radios[index].tabIndex = 0;

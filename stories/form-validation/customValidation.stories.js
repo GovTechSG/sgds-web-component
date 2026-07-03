@@ -83,6 +83,19 @@ const DisableValidationByInputTemplate = args => {
         hasFeedback
         id="custom-validation__datepicker-novalidate"
       ></sgds-datepicker>
+      <sgds-radio-group
+        noValidate
+        required
+        label="Gender"
+        hintText="Please select a gender"
+        name="radio-gender"
+        hasFeedback
+        id="custom-validation__radio-novalidate"
+      >
+        <sgds-radio value="male">Male</sgds-radio>
+        <sgds-radio value="female">Female</sgds-radio>
+        <sgds-radio value="other">Other</sgds-radio>
+      </sgds-radio-group>
       <sgds-checkbox-group
         noValidate
         required
@@ -226,7 +239,7 @@ const DisableValidationByInputTemplate = args => {
         if (!e.target.value) {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Please select at least one interest";
-           } else {
+        } else {
           e.target.setInvalid(false);
         }
       });
@@ -314,6 +327,19 @@ const DisableValidationByFormTemplate = args => {
         hasFeedback
         id="custom-validation__datepicker-two-novalidate"
       ></sgds-datepicker>
+      <sgds-radio-group
+        required
+        label="Gender"
+        hintText="Please select a gender"
+        name="radio-gender"
+        hasFeedback
+        id="custom-validation__radio-two-novalidate"
+      >
+        <sgds-radio value="male">Male</sgds-radio>
+        <sgds-radio value="female">Female</sgds-radio>
+        <sgds-radio value="other">Other</sgds-radio>
+      </sgds-radio-group>
+      <sgds-button type="submit">Submit</sgds-button>
       <sgds-checkbox-group
         required
         label="Interests"
@@ -449,7 +475,7 @@ const DisableValidationByFormTemplate = args => {
         if (!e.target.value) {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Please select at least one interest";
-           } else {
+        } else {
           e.target.setInvalid(false);
         }
       });
@@ -458,6 +484,15 @@ const DisableValidationByFormTemplate = args => {
         if (!e.target.value) {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Please select a gender";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+      const checkboxGroupTwo = document.getElementById("custom-validation__checkbox-two-novalidate");
+      checkboxGroupTwo.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select at least one interest";
         } else {
           e.target.setInvalid(false);
         }
