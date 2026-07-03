@@ -1,6 +1,7 @@
 .form-label {
   margin-bottom: 0;
   color: var(--sgds-form-color-default);
+  font-weight: var(--sgds-font-weight-semibold);
 }
 
 .form-label.disabled {
