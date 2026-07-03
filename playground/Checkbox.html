@@ -61,6 +61,83 @@
           <sgds-checkbox value="c">Option C</sgds-checkbox>
         </sgds-checkbox-group>
       </div>
+      <div>
+        <h2>Custom Validation with noValidate (Checkbox Group)</h2>
+        <form id="custom-validation-checkbox-form">
+          <sgds-checkbox-group
+            noValidate
+            required
+            label="Interests"
+            hintText="Select at least one interest"
+            name="interests"
+            hasFeedback
+            id="custom-validation-checkbox-group"
+          >
+            <sgds-checkbox value="sports">Sports</sgds-checkbox>
+            <sgds-checkbox value="music">Music</sgds-checkbox>
+            <sgds-checkbox value="reading">Reading</sgds-checkbox>
+          </sgds-checkbox-group>
+          <sgds-button type="submit">Submit</sgds-button>
+          <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+        </form>
+        <script>
+          const checkboxGroup = document.getElementById("custom-validation-checkbox-group");
+          const checkboxForm = document.getElementById("custom-validation-checkbox-form");
+
+          checkboxGroup.addEventListener("sgds-change", e => {
+            if (!e.target.value) {
+              e.target.setInvalid(true);
+              e.target.invalidFeedback = "Please select at least one interest";
+            } else {
+              e.target.setInvalid(false);
+            }
+          });
+
+          checkboxForm.addEventListener("submit", e => {
+            e.preventDefault();
+            if (!checkboxGroup.value) {
+              checkboxGroup.setInvalid(true);
+              checkboxGroup.invalidFeedback = "Please select at least one interest";
+              return;
+            }
+            if (checkboxGroup.invalid) return;
+            alert("Form submitted successfully despite required field — constraint validation was disabled by the noValidate property.");
+          });
+        </script>
+      </div>
+
+      <div>
+        <h2>Custom Validation with noValidate (Standalone Checkbox)</h2>
+        <form id="custom-validation-standalone-form">
+          <sgds-checkbox
+            noValidate
+            required
+            hasFeedback="both"
+            name="terms"
+            value="agreed"
+            id="custom-validation-standalone-checkbox"
+          >
+            I agree to the Terms and Conditions
+          </sgds-checkbox>
+          <sgds-button type="submit">Submit</sgds-button>
+          <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+        </form>
+        <script>
+          const standaloneCheckbox = document.getElementById("custom-validation-standalone-checkbox");
+          const standaloneForm = document.getElementById("custom-validation-standalone-form");
+
+          standaloneForm.addEventListener("submit", e => {
+            e.preventDefault();
+            if (!standaloneCheckbox.checked) {
+              standaloneCheckbox.setInvalid(true);
+              standaloneCheckbox.invalidFeedback = "You must agree to the terms";
+              return;
+            }
+            standaloneCheckbox.setInvalid(false);
+            alert("Form submitted successfully despite required field — constraint validation was disabled by the noValidate property.");
+          });
+        </script>
+      </div>
     </div>
   </body>
 </html>
