@@ -473,6 +473,38 @@ describe("reset clears invalid state when noValidate is true for radio-group", (
   });
 });
 
+describe("reset does not emit sgds-change for radio-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("should not emit sgds-change when form is reset", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-radio-group noValidate name="test" value="a">
+          <sgds-radio value="a">A</sgds-radio>
+          <sgds-radio value="b">B</sgds-radio>
+        </sgds-radio-group>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const radioGroup = form.querySelector<SgdsRadioGroup>("sgds-radio-group")!;
+    await radioGroup.updateComplete;
+
+    // Change value to "b" first
+    radioGroup.value = "b";
+    await radioGroup.updateComplete;
+
+    const changeHandler = sinon.spy();
+    radioGroup.addEventListener("sgds-change", changeHandler);
+
+    // Reset the form
+    changeHandler.resetHistory();
+    setTimeout(() => form.querySelector<SgdsButton>("sgds-button")?.click());
+    await waitUntil(() => radioGroup.value === "a");
+
+    expect(changeHandler).to.not.have.been.called;
+  });
+});
+
 describe("setInvalid emits sgds-invalid and sgds-valid events for radio-group", () => {
   afterEach(() => fixtureCleanup());
 
