@@ -60,14 +60,14 @@ const InvalidTemplate = () =>
 const InvalidGroupTemplate = () =>
   html`
     <sgds-checkbox-group invalid hasFeedback label="CheckboxGroup label" invalidFeedback="custom feedback message">
-      <sgds-checkbox>Invalid</sgds-checkbox>
-      <sgds-checkbox checked>Invalid and checked</sgds-checkbox>
-      <sgds-checkbox indeterminate>Invalid and indeterminate</sgds-checkbox>
+      <sgds-checkbox>Option A </sgds-checkbox>
+      <sgds-checkbox>Option B </sgds-checkbox>
+      <sgds-checkbox>Option C</sgds-checkbox>
     </sgds-checkbox-group>
   `;
 
 export const Indeterminate = {
-  render: Template.bind({}),
+  render: Template.bind({}),  
   name: "Indeterminate",
   args: { ...args, indeterminate: true },
   parameters: {}
