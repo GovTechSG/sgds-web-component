@@ -3,6 +3,7 @@ import { consume } from "@lit/context";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { SgdsMainnav } from "./sgds-mainnav";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { offset } from "@floating-ui/dom";
 import genId from "../../utils/generateId";
 import dropdownStyle from "../Dropdown/dropdown.css";
@@ -61,6 +62,12 @@ export class SgdsMainnavDropdown extends SgdsElement {
   /** When true,  applies active styles on the dropdown button */
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * Accessible label for the dropdown's toggle button. Forwarded to the button's aria-label attribute.
+   */
+  @property({ type: String })
+  ariaLabel: string;
 
   /** @internal */
   @queryAssignedElements({ slot: "toggler" }) private togglerNodes!: HTMLElement[];
@@ -271,6 +278,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
           disabled: this.disabled
         })}"
         aria-disabled=${this.disabled ? "true" : "false"}
+        aria-label=${ifDefined(this.ariaLabel)}
         tabindex=${this.disabled ? "-1" : "0"}
         role="button"
         @click=${this._openMenu}
@@ -301,6 +309,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
           disabled: this.disabled
         })}"
         aria-disabled=${this.disabled ? "true" : "false"}
+        aria-label=${ifDefined(this.ariaLabel)}
         id=${this.togglerId}
         tabindex=${this.disabled ? "-1" : "0"}
         role="button"

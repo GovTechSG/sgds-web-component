@@ -6,9 +6,38 @@
   </head>
   <body>
     <sgds-overflow-menu>
-      <sgds-dropdown-item>View</sgds-dropdown-item>
-      <sgds-dropdown-item>Edit</sgds-dropdown-item>
-      <sgds-dropdown-item>Delete</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="View">View</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Edit">Edit</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Delete">Delete</sgds-dropdown-item>
     </sgds-overflow-menu>
+    <script>
+      async function openOverflowMenu() {
+        // Wait for both custom elements to be defined
+        await customElements.whenDefined("sgds-overflow-menu");
+        await customElements.whenDefined("sgds-dropdown");
+
+        const menu = document.querySelector("sgds-overflow-menu");
+        await menu.updateComplete;
+
+        // 1. Mark container as active
+        menu.classList.add("portal-demo-overflow-active");
+
+        // 2. Reach into shadow DOM to find the nested sgds-dropdown
+        const dropdown = menu.shadowRoot.querySelector("sgds-dropdown");
+        await dropdown.updateComplete;
+
+        // 3. Inject shadow styles to force the menu visible
+        const style = document.createElement("style");
+        style.textContent = `:host([menuisopen]) .dropdown-menu { display: block !important; position: relative !important; }`;
+        dropdown.shadowRoot.appendChild(style);
+
+        // 4. Programmatically show the menu
+        dropdown.showMenu();
+
+        // 5. Disable close behavior
+        dropdown.hideMenu = () => {};
+      }
+      openOverflowMenu();
+    </script>
   </body>
 </html>

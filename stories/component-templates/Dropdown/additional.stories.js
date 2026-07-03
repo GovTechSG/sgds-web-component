@@ -7,9 +7,9 @@ const SgdsSelectCloseTemplate = args => {
         Default Close
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
-      <sgds-dropdown-item>Item #1</sgds-dropdown-item>
-      <sgds-dropdown-item>Item #2</sgds-dropdown-item>
-      <sgds-dropdown-item>Item #3</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #1">Item #1</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #2">Item #2</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #3">Item #3</sgds-dropdown-item>
     </sgds-dropdown>
     <br />
     <sgds-dropdown close="outside">
@@ -17,9 +17,9 @@ const SgdsSelectCloseTemplate = args => {
         Close Outside
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
-      <sgds-dropdown-item>Item #1</sgds-dropdown-item>
-      <sgds-dropdown-item>Item #2</sgds-dropdown-item>
-      <sgds-dropdown-item>Item #3</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #1">Item #1</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #2">Item #2</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #3">Item #3</sgds-dropdown-item>
     </sgds-dropdown>
     <br />
     <sgds-dropdown close="inside">
@@ -27,9 +27,9 @@ const SgdsSelectCloseTemplate = args => {
         Close Inside
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
-      <sgds-dropdown-item>Item #1</sgds-dropdown-item>
-      <sgds-dropdown-item>Item #2</sgds-dropdown-item>
-      <sgds-dropdown-item>Item #3</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #1">Item #1</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #2">Item #2</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #3">Item #3</sgds-dropdown-item>
     </sgds-dropdown>
   `;
 };
@@ -50,10 +50,10 @@ const SgdsSelectEventTemplate = args => {
         <span id="select-toggler-text">Dynamic Text</span>
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
-      <sgds-dropdown-item>Item #1</sgds-dropdown-item>
-      <sgds-dropdown-item>Item #2</sgds-dropdown-item>
-      <sgds-dropdown-item>Item #3</sgds-dropdown-item>
-      <sgds-dropdown-item disabled>item #4 (disabled)</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #1">Item #1</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #2">Item #2</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #3">Item #3</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="item #4" disabled>item #4 (disabled)</sgds-dropdown-item>
     </sgds-dropdown>
 
     <script>
@@ -83,7 +83,7 @@ const SgdsSelectDropdownItemTemplate = args => {
         Dropdown
         <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
       </sgds-button>
-      <sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Label">
         <div class="sgds:grow sgds:items-center">
           <sgds-icon name="placeholder" size="2-xl"></sgds-icon>
           <div class="sgds:flex sgds:flex-col sgds:gap-text-2-xs">
@@ -95,7 +95,7 @@ const SgdsSelectDropdownItemTemplate = args => {
           <sgds-icon name="placeholder"></sgds-icon>
         </div>
       </sgds-dropdown-item>
-      <sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Label">
         <div class="sgds:grow sgds:items-center">
           <sgds-icon name="placeholder"></sgds-icon>
           <span class="sgds:text-label-sm sgds:leading-2-xs sgds:font-regular sgds:tracking-normal sgds:grow"
@@ -106,7 +106,7 @@ const SgdsSelectDropdownItemTemplate = args => {
           >
         </div>
       </sgds-dropdown-item>
-      <sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Label">
         <div class="sgds:grow sgds:items-center sgds:justify-between">
           <div class="sgds:flex sgds:flex-col sgds:gap-text-2-xs">
             <span class="sgds:text-label-sm sgds:leading-2-xs sgds:font-regular sgds:tracking-normal">Label</span>
@@ -117,7 +117,7 @@ const SgdsSelectDropdownItemTemplate = args => {
           <sgds-badge variant="white" outlined>Badge</sgds-badge>
         </div>
       </sgds-dropdown-item>
-      <sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Label">
         <div class="sgds:grow sgds:items-center">
           <sgds-icon name="placeholder"></sgds-icon>
           <span class="sgds:text-label-sm sgds:leading-2-xs sgds:font-regular sgds:tracking-normal sgds:grow"
@@ -126,7 +126,7 @@ const SgdsSelectDropdownItemTemplate = args => {
           <sgds-switch size="sm"></sgds-switch>
         </div>
       </sgds-dropdown-item>
-      <sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Label">
         <div class="sgds:grow sgds:items-center sgds:justify-between">
           <div class="sgds:flex sgds:flex-col sgds:gap-text-2-xs">
             <span class="sgds:text-label-sm sgds:leading-2-xs sgds:font-regular sgds:tracking-normal">Label</span>
