@@ -59,7 +59,6 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   @state()
   private _blurredCheckboxes = new Set<SgdsCheckbox>();
 
-
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener("sgds-check", (e: CustomEvent) => {
