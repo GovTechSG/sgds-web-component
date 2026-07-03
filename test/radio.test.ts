@@ -3,7 +3,8 @@ import { assert, elementUpdated, expect, fixture, fixtureCleanup, triggerFocusFo
 import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import sinon from "sinon";
-import { SgdsButton, SgdsRadio, SgdsRadioGroup } from "../src/components";
+import type { SgdsButton } from "../src/components";
+import { SgdsRadio, SgdsRadioGroup } from "../src/components";
 
 describe("<sgds-radio>", () => {
   afterEach(() => fixtureCleanup());
@@ -304,6 +305,235 @@ describe("<sgds-radio-group>", () => {
     await el.updateComplete;
     const radios = el.querySelectorAll("sgds-radio");
     radios.forEach(r => expect(r.disabled).to.be.true);
+  });
+});
+
+describe("noValidate disables native and sgds validation behaviours", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("should override required and allow form submission when noValidate is set", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-radio-group noValidate required hasFeedback>
+          <sgds-radio value="a">A</sgds-radio>
+          <sgds-radio value="b">B</sgds-radio>
+        </sgds-radio-group>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("with noValidate, invalid state does not appear on blur when required and empty", async () => {
+    const el = await fixture<SgdsRadioGroup>(html`
+      <sgds-radio-group noValidate hasFeedback required>
+        <sgds-radio value="a">A</sgds-radio>
+        <sgds-radio value="b">B</sgds-radio>
+      </sgds-radio-group>
+    `);
+    el.dispatchEvent(new Event("sgds-blur"));
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+  });
+
+  it("with noValidate, setInvalid(true) still works for programmatic control", async () => {
+    const el = await fixture<SgdsRadioGroup>(html`
+      <sgds-radio-group noValidate required hasFeedback>
+        <sgds-radio value="a">A</sgds-radio>
+        <sgds-radio value="b">B</sgds-radio>
+      </sgds-radio-group>
+    `);
+    el.setInvalid(true);
+    el.invalidFeedback = "Please select an option";
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+  });
+
+  it("with noValidate, programmatic setInvalid(true) persists after blur", async () => {
+    const el = await fixture<SgdsRadioGroup>(html`
+      <sgds-radio-group noValidate required hasFeedback>
+        <sgds-radio value="a">A</sgds-radio>
+        <sgds-radio value="b">B</sgds-radio>
+      </sgds-radio-group>
+    `);
+    el.setInvalid(true);
+    await el.updateComplete;
+    el.dispatchEvent(new Event("sgds-blur"));
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+  });
+
+  it("should still populate FormData when noValidate is enabled", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-radio-group noValidate name="radio-field" value="a">
+          <sgds-radio value="a">A</sgds-radio>
+          <sgds-radio value="b">B</sgds-radio>
+        </sgds-radio-group>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      expect(formData.get("radio-field")).to.equal("a");
+    });
+
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+});
+
+describe("form novalidate for sgds-radio-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("when form has novalidate, form submission proceeds even when radio-group is required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-radio-group required>
+          <sgds-radio value="a">A</sgds-radio>
+          <sgds-radio value="b">B</sgds-radio>
+        </sgds-radio-group>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("when form has novalidate, radio-group does not show invalid state on blur", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-radio-group required hasFeedback>
+          <sgds-radio value="a">A</sgds-radio>
+          <sgds-radio value="b">B</sgds-radio>
+        </sgds-radio-group>
+      </form>
+    `);
+    const radioGroup = form.querySelector<SgdsRadioGroup>("sgds-radio-group");
+    radioGroup?.dispatchEvent(new Event("sgds-blur"));
+    await radioGroup?.updateComplete;
+    expect(radioGroup?.invalid).to.be.false;
+  });
+});
+
+describe("reset clears invalid state when noValidate is true for radio-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-radio-group noValidate name="test">
+          <sgds-radio value="a">A</sgds-radio>
+          <sgds-radio value="b">B</sgds-radio>
+        </sgds-radio-group>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const radioGroup = form.querySelector<SgdsRadioGroup>("sgds-radio-group");
+    radioGroup?.setInvalid(true);
+    await radioGroup?.updateComplete;
+    expect(radioGroup?.invalid).to.be.true;
+
+    setTimeout(() => form.querySelector<SgdsButton>("sgds-button")?.click());
+    await waitUntil(() => radioGroup?.invalid === false);
+    expect(radioGroup?.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-radio-group name="test">
+          <sgds-radio value="a">A</sgds-radio>
+          <sgds-radio value="b">B</sgds-radio>
+        </sgds-radio-group>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const radioGroup = form.querySelector<SgdsRadioGroup>("sgds-radio-group");
+    radioGroup?.setInvalid(true);
+    await radioGroup?.updateComplete;
+    expect(radioGroup?.invalid).to.be.true;
+
+    setTimeout(() => form.querySelector<SgdsButton>("sgds-button")?.click());
+    await waitUntil(() => radioGroup?.invalid === false);
+    expect(radioGroup?.invalid).to.be.false;
+  });
+});
+
+describe("reset does not emit sgds-change for radio-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("should not emit sgds-change when form is reset", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-radio-group noValidate name="test" value="a">
+          <sgds-radio value="a">A</sgds-radio>
+          <sgds-radio value="b">B</sgds-radio>
+        </sgds-radio-group>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const radioGroup = form.querySelector<SgdsRadioGroup>("sgds-radio-group")!;
+    await radioGroup.updateComplete;
+
+    // Change value to "b" first
+    radioGroup.value = "b";
+    await radioGroup.updateComplete;
+
+    const changeHandler = sinon.spy();
+    radioGroup.addEventListener("sgds-change", changeHandler);
+
+    // Reset the form
+    changeHandler.resetHistory();
+    setTimeout(() => form.querySelector<SgdsButton>("sgds-button")?.click());
+    await waitUntil(() => radioGroup.value === "a");
+
+    expect(changeHandler).to.not.have.been.called;
+  });
+});
+
+describe("setInvalid emits sgds-invalid and sgds-valid events for radio-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("setInvalid(true) emits sgds-invalid event", async () => {
+    const el = await fixture<SgdsRadioGroup>(html`
+      <sgds-radio-group noValidate>
+        <sgds-radio value="a">A</sgds-radio>
+        <sgds-radio value="b">B</sgds-radio>
+      </sgds-radio-group>
+    `);
+    const handler = sinon.spy();
+    el.addEventListener("sgds-invalid", handler);
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("setInvalid(false) emits sgds-valid event", async () => {
+    const el = await fixture<SgdsRadioGroup>(html`
+      <sgds-radio-group noValidate>
+        <sgds-radio value="a">A</sgds-radio>
+        <sgds-radio value="b">B</sgds-radio>
+      </sgds-radio-group>
+    `);
+    const handler = sinon.spy();
+    el.addEventListener("sgds-valid", handler);
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
   });
 });
 

@@ -4,9 +4,9 @@ import { userEvent } from "@storybook/test";
 
 export const Template = args => html`
   <sgds-overflow-menu size=${ifDefined(args.size)}>
-    <sgds-dropdown-item>View</sgds-dropdown-item>
-    <sgds-dropdown-item>Edit</sgds-dropdown-item>
-    <sgds-dropdown-item>Delete</sgds-dropdown-item>
+    <sgds-dropdown-item ariaLabel="View">View</sgds-dropdown-item>
+    <sgds-dropdown-item ariaLabel="Edit">Edit</sgds-dropdown-item>
+    <sgds-dropdown-item ariaLabel="Delete">Delete</sgds-dropdown-item>
   </sgds-overflow-menu>
 `;
 

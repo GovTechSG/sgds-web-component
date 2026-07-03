@@ -3,24 +3,28 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 const ValidationTemplateGroup = args =>
   html`
-    <form>
+    <form class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
       <sgds-checkbox-group required hasFeedback id="sameid">
         <sgds-checkbox value="he">he</sgds-checkbox>
         <sgds-checkbox value="him">him</sgds-checkbox>
       </sgds-checkbox-group>
 
-      <sgds-button type="submit">Submit</sgds-button>
-      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+      <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
+        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+      </div>
     </form>
   `;
 
 const ValidationTemplateSingle = args =>
   html`
-    <form>
+    <form class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
       <sgds-checkbox value="marketing" required hasFeedback="both">I acknowledge to receive marketing...</sgds-checkbox>
       <sgds-checkbox value="subcribe" hasFeedback="both">I agree to subscribe to...</sgds-checkbox>
-      <sgds-button type="submit">Submit</sgds-button>
-      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+      <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
+        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+      </div>
     </form>
   `;
 
@@ -89,14 +93,14 @@ export const InvalidGroup = {
 };
 export const Validation = {
   render: ValidationTemplateGroup.bind({}),
-  name: "Validation",
+  name: "Validation for CheckboxGroup",
   args: {},
   parameters: {}
 };
 
 export const ValidationSingle = {
   render: ValidationTemplateSingle.bind({}),
-  name: "Validation",
+  name: "Validation for standalone Checkbox",
   args: {},
   parameters: {}
 };

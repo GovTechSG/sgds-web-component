@@ -376,9 +376,9 @@ const OverflowMenuTemplate = () => {
       <sgds-card>
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <sgds-overflow-menu slot="menu">
-          <sgds-dropdown-item>View</sgds-dropdown-item>
-          <sgds-dropdown-item>Edit</sgds-dropdown-item>
-          <sgds-dropdown-item>Delete</sgds-dropdown-item>
+          <sgds-dropdown-item ariaLabel="View">View</sgds-dropdown-item>
+          <sgds-dropdown-item ariaLabel="Edit">Edit</sgds-dropdown-item>
+          <sgds-dropdown-item ariaLabel="Delete">Delete</sgds-dropdown-item>
         </sgds-overflow-menu>
         <span slot="subtitle">EVENTS</span>
         <span slot="title">Innovative solutions for you</span>
