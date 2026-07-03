@@ -51,12 +51,6 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
 
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
-    if (this._isResetting) {
-      this._isResetting = false;
-      this._updateCheckedRadio();
-      return;
-    }
-    this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
     this._updateCheckedRadio();
   }
   @watch("invalid", { waitUntilFirstUpdate: true })
@@ -65,14 +59,11 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
   }
 
   @state() private _isTouched = false;
-
-  private _isResetting = false;
   /**
    * radio requries a custom _mixinResetFormControl as the update of input value
    * requires to fire a reset event manually
    * */
   private _mixinResetFormControl() {
-    this._isResetting = true;
     this.value = this.input.value = this.defaultValue;
     this._updateInputValue("reset");
     this._mixinResetValidity(this.input);
@@ -122,6 +113,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
     }
 
     this.value = target.value;
+    this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
 
     this._updateInputValue();
 
@@ -163,6 +155,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
     });
 
     this.value = radios[index].value;
+    this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
     this._updateInputValue();
     radios[index].checked = true;
     radios[index].tabIndex = 0;
