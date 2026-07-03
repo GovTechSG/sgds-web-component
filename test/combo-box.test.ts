@@ -171,20 +171,19 @@ describe("sgds-combo-box ", () => {
     expect(el.menuIsOpen).to.be.false;
   });
 
-  it("should emit sgds-select event when combobox value is updated", async () => {
-    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box
-      .menuList=${[
-        { label: "Option 1", value: "option1" },
-        { label: "Option 2", value: "option2" }
-      ]}
-    ></sgds-combo-box>`);
+  it("should emit sgds-select event when combobox option is selected by user", async () => {
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box>
+      <sgds-combo-box-option value="option1">Option 1</sgds-combo-box-option>
+      <sgds-combo-box-option value="option2">Option 2</sgds-combo-box-option>
+    </sgds-combo-box>`);
     const selectHandler = sinon.spy();
     el?.addEventListener("sgds-select", selectHandler);
 
     expect(el.value).to.equal("");
-    el.value = "option1";
+    const option1 = el.querySelector<SgdsComboBoxOption>('sgds-combo-box-option[value="option1"]')!;
+    option1.click();
+    await el.updateComplete;
 
-    await waitUntil(() => selectHandler.calledOnce);
     expect(selectHandler).to.have.been.calledOnce;
   });
 
@@ -199,20 +198,19 @@ describe("sgds-combo-box ", () => {
     expect(event.detail).to.deep.equal({ displayValue: "A" });
   });
 
-  it("should emit sgds-change event when combobox value changes", async () => {
-    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box
-      .menuList=${[
-        { label: "Option 1", value: "option1" },
-        { label: "Option 2", value: "option2" }
-      ]}
-    ></sgds-combo-box>`);
+  it("should emit sgds-change event when combobox option is selected by user", async () => {
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box>
+      <sgds-combo-box-option value="option1">Option 1</sgds-combo-box-option>
+      <sgds-combo-box-option value="option2">Option 2</sgds-combo-box-option>
+    </sgds-combo-box>`);
     const changeHandler = sinon.spy();
     el?.addEventListener("sgds-change", changeHandler);
 
     expect(el.value).to.equal("");
-    el.value = "option1";
+    const option1 = el.querySelector<SgdsComboBoxOption>('sgds-combo-box-option[value="option1"]')!;
+    option1.click();
+    await el.updateComplete;
 
-    await waitUntil(() => changeHandler.calledOnce);
     expect(changeHandler).to.have.been.calledOnce;
   });
 
@@ -2103,5 +2101,111 @@ describe("sgds-scroll-end event", () => {
     await el.updateComplete;
 
     expect(handler).to.have.been.calledOnce;
+  });
+});
+
+describe("reset does not emit sgds-change for combo-box", () => {
+  it("should not emit sgds-change when form is reset (single select)", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-combo-box value="1">
+          <sgds-combo-box-option value="1">One</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">Two</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const combobox = form.querySelector<SgdsComboBox>("sgds-combo-box")!;
+    await combobox.updateComplete;
+
+    // Select a different option to change value
+    const option2 = combobox.querySelector<SgdsComboBoxOption>('sgds-combo-box-option[value="2"]')!;
+    option2.click();
+    await combobox.updateComplete;
+    expect(combobox.value).to.equal("2");
+
+    const changeHandler = sinon.spy();
+    combobox.addEventListener("sgds-change", changeHandler);
+
+    // Reset the form
+    const resetButton = form.querySelector<SgdsButton>("sgds-button[type='reset']")!;
+    resetButton.click();
+    await combobox.updateComplete;
+    await waitUntil(() => combobox.value === "1");
+
+    expect(changeHandler).to.not.have.been.called;
+  });
+
+  it("should not emit sgds-change when form is reset (multi select)", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-combo-box value="1" multiSelect>
+          <sgds-combo-box-option value="1">One</sgds-combo-box-option>
+          <sgds-combo-box-option value="2">Two</sgds-combo-box-option>
+          <sgds-combo-box-option value="3">Three</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const combobox = form.querySelector<SgdsComboBox>("sgds-combo-box")!;
+    await combobox.updateComplete;
+
+    // Select an additional option to change value
+    const option2 = combobox.querySelector<SgdsComboBoxOption>('sgds-combo-box-option[value="2"]')!;
+    option2.click();
+    await combobox.updateComplete;
+    expect(combobox.value).to.equal("1;2");
+
+    const changeHandler = sinon.spy();
+    combobox.addEventListener("sgds-change", changeHandler);
+
+    // Reset the form
+    const resetButton = form.querySelector<SgdsButton>("sgds-button[type='reset']")!;
+    resetButton.click();
+    await combobox.updateComplete;
+    await waitUntil(() => combobox.value === "1");
+
+    expect(changeHandler).to.not.have.been.called;
+  });
+
+  it("should emit sgds-change when user selects option in multi select", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box multiSelect>
+        <sgds-combo-box-option value="1">One</sgds-combo-box-option>
+        <sgds-combo-box-option value="2">Two</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+
+    const changeHandler = sinon.spy();
+    el.addEventListener("sgds-change", changeHandler);
+
+    const option1 = el.querySelector<SgdsComboBoxOption>('sgds-combo-box-option[value="1"]')!;
+    option1.click();
+    await el.updateComplete;
+
+    expect(changeHandler).to.have.been.calledOnce;
+    expect(el.value).to.equal("1");
+  });
+
+  it("should emit sgds-change when user unselects option in multi select", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box value="1;2" multiSelect>
+        <sgds-combo-box-option value="1">One</sgds-combo-box-option>
+        <sgds-combo-box-option value="2">Two</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+
+    const changeHandler = sinon.spy();
+    el.addEventListener("sgds-change", changeHandler);
+
+    // Unselect option 1
+    const option1 = el.querySelector<SgdsComboBoxOption>('sgds-combo-box-option[value="1"]')!;
+    option1.click();
+    await el.updateComplete;
+
+    expect(changeHandler).to.have.been.calledOnce;
+    expect(el.value).to.equal("2");
   });
 });
