@@ -100,6 +100,13 @@ function buildVariantCriteria(data) {
     if (!criteria[bvp]) criteria[bvp] = "False";
   }
 
+  // Fixed criteria: always merge these variant values
+  if (slotConfig && slotConfig.fixedCriteria) {
+    for (const fk in slotConfig.fixedCriteria) {
+      criteria[fk] = slotConfig.fixedCriteria[fk];
+    }
+  }
+
   return criteria;
 }
 
@@ -247,8 +254,8 @@ describe("Variant matching (buildVariantCriteria)", () => {
     assert.equal(r.State, "loading");
   });
 
-  it("close-button: valueOverrides (fixed-light → fixed light)", () => {
-    const r = buildVariantCriteria({ tag: "sgds-close-button", attrs: { variant: "fixed-light" }, children: [] });
+  it("close-button: attrOverrides tone → Variant (fixed-light → fixed light)", () => {
+    const r = buildVariantCriteria({ tag: "sgds-close-button", attrs: { tone: "fixed-light" }, children: [] });
     assert.equal(r.Variant, "fixed light");
   });
 
@@ -834,5 +841,197 @@ describe("Component resolution with fullWidth", () => {
   it("resolveComponentMapping returns normal mapping for non-button components", () => {
     const result = resolveComponentMapping({ tag: "sgds-alert", attrs: { variant: "info" } });
     assert.equal(result.key, SGDS_COMPONENT_MAP["sgds-alert"].key);
+  });
+});
+
+// =============================================================================
+// CHECKBOX / RADIO GROUP MAPPING
+// =============================================================================
+
+describe("sgds-checkbox → Checkbox group mapping", () => {
+  it("standalone sgds-checkbox uses checkbox-group component key", () => {
+    assert.equal(SGDS_COMPONENT_MAP["sgds-checkbox"].key, SGDS_COMPONENT_MAP["sgds-checkbox-group"].key);
+  });
+
+  it("standalone sgds-radio uses radio-group component key", () => {
+    assert.equal(SGDS_COMPONENT_MAP["sgds-radio"].key, SGDS_COMPONENT_MAP["sgds-radio-group"].key);
+  });
+
+  it("standalone checkbox has fixedCriteria No. of option = 1", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-checkbox"];
+    assert.deepEqual(config.fixedCriteria, { "No. of option": "1" });
+  });
+
+  it("standalone checkbox has forcedBooleans to hide label and hint", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-checkbox"];
+    assert.equal(config.forcedBooleans["Label#15640:9"], false);
+    assert.equal(config.forcedBooleans["Hint text#15640:8"], false);
+  });
+
+  it("standalone checkbox: invalid=true → Invalid: True via attrOverrides", () => {
+    const r = buildVariantCriteria({ tag: "sgds-checkbox", attrs: { invalid: true } });
+    assert.equal(r["Invalid"], "True");
+    assert.equal(r["No. of option"], "1");
+  });
+
+  it("standalone checkbox: no invalid → no Invalid in criteria (defaults to False)", () => {
+    const r = buildVariantCriteria({ tag: "sgds-checkbox", attrs: {} });
+    assert.equal(r["Invalid"], undefined);
+    assert.equal(r["No. of option"], "1");
+  });
+
+  it("standalone radio has fixedCriteria No. of option = 1", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-radio"];
+    assert.deepEqual(config.fixedCriteria, { "No. of option": "1" });
+  });
+});
+
+describe("sgds-checkbox-group variant criteria", () => {
+  it("3 checkbox children → No. of option = 3", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-checkbox-group",
+      attrs: { label: "Group Label" },
+      children: [
+        { tag: "sgds-checkbox", text: "A" },
+        { tag: "sgds-checkbox", text: "B" },
+        { tag: "sgds-checkbox", text: "C" }
+      ]
+    });
+    assert.equal(r["No. of option"], "3");
+  });
+
+  it("invalid=true → Invalid: True", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-checkbox-group",
+      attrs: { invalid: true, label: "Group" },
+      children: [{ tag: "sgds-checkbox" }]
+    });
+    assert.equal(r["Invalid"], "True");
+  });
+
+  it("no invalid attr → no Invalid in criteria", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-checkbox-group",
+      attrs: { label: "Group" },
+      children: [{ tag: "sgds-checkbox" }]
+    });
+    assert.equal(r["Invalid"], undefined);
+  });
+});
+
+describe("sgds-radio-group variant criteria", () => {
+  it("2 radio children → No. of option = 2", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-radio-group",
+      attrs: { label: "Group" },
+      children: [{ tag: "sgds-radio" }, { tag: "sgds-radio" }]
+    });
+    assert.equal(r["No. of option"], "2");
+  });
+
+  it("invalid=true → Invalid: True", () => {
+    const r = buildVariantCriteria({
+      tag: "sgds-radio-group",
+      attrs: { invalid: true },
+      children: [{ tag: "sgds-radio" }]
+    });
+    assert.equal(r["Invalid"], "True");
+  });
+});
+
+describe("sgds-checkbox-group text property resolution", () => {
+  it("label from attr:label", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-checkbox-group"];
+    const { textValue } = resolveTextProp(
+      { tag: "sgds-checkbox-group", attrs: { label: "My Label" }, children: [] },
+      "label",
+      config.textProps.label
+    );
+    assert.equal(textValue, "My Label");
+  });
+
+  it("hinttext from attr:hinttext (string)", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-checkbox-group"];
+    const { textValue } = resolveTextProp(
+      { tag: "sgds-checkbox-group", attrs: { hinttext: "Check one" }, children: [] },
+      "hint",
+      config.textProps.hint
+    );
+    assert.equal(textValue, "Check one");
+  });
+
+  it("hinttext boolean true → empty (no text)", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-checkbox-group"];
+    const { textValue } = resolveTextProp(
+      { tag: "sgds-checkbox-group", attrs: { hinttext: true }, children: [] },
+      "hint",
+      config.textProps.hint
+    );
+    assert.equal(textValue, "");
+  });
+
+  it("invalidfeedback from attr:invalidfeedback", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-checkbox-group"];
+    const { textValue } = resolveTextProp(
+      { tag: "sgds-checkbox-group", attrs: { invalidfeedback: "Please check one" }, children: [] },
+      "feedback",
+      config.textProps.feedback
+    );
+    assert.equal(textValue, "Please check one");
+  });
+});
+
+describe("sgds-checkbox-group itemProps config", () => {
+  it("has itemPattern ↳ Option", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-checkbox-group"];
+    assert.equal(config.itemPattern, "↳ Option");
+  });
+
+  it("has label itemProp with correct key", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-checkbox-group"];
+    assert.equal(config.itemProps.label.key, "↳ Edit text#15167:0");
+  });
+
+  it("has selection itemProp with checked/indeterminate/unselected", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-checkbox-group"];
+    assert.equal(config.itemProps.selection.prop, "Selection");
+    assert.equal(config.itemProps.selection.checkedValue, "selected");
+    assert.equal(config.itemProps.selection.indeterminateValue, "indeterminate");
+    assert.equal(config.itemProps.selection.uncheckedValue, "unselected");
+  });
+
+  it("has state itemProp with disabled/invalid/default", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-checkbox-group"];
+    assert.equal(config.itemProps.state.prop, "State");
+    assert.equal(config.itemProps.state.disabledValue, "disabled");
+    assert.equal(config.itemProps.state.invalidValue, "invalid");
+    assert.equal(config.itemProps.state.defaultValue, "default");
+  });
+});
+
+describe("sgds-radio-group itemProps config", () => {
+  it("has itemPattern ↳ Option", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-radio-group"];
+    assert.equal(config.itemPattern, "↳ Option");
+  });
+
+  it("has label itemProp with radio text key", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-radio-group"];
+    assert.equal(config.itemProps.label.key, "↳ Edit text#15163:0");
+  });
+
+  it("has selection itemProp with checked/unselected", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-radio-group"];
+    assert.equal(config.itemProps.selection.prop, "Selection");
+    assert.equal(config.itemProps.selection.checkedValue, "selected");
+    assert.equal(config.itemProps.selection.uncheckedValue, "unselected");
+  });
+
+  it("has state itemProp with disabled/invalid/default", () => {
+    const config = COMPONENT_SLOT_CONFIG["sgds-radio-group"];
+    assert.equal(config.itemProps.state.prop, "State");
+    assert.equal(config.itemProps.state.disabledValue, "disabled");
+    assert.equal(config.itemProps.state.invalidValue, "invalid");
+    assert.equal(config.itemProps.state.defaultValue, "default");
   });
 });

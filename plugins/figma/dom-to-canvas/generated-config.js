@@ -49,8 +49,12 @@ var SGDS_COMPONENT_MAP = {
   "sgds-stepper": { key: "f2d7340d4a7cae5305c275cdf4536a881006adaa", name: "Stepper" },
   "sgds-checkbox-group": { key: "a8736f77a9aa8db166ba3e6a2af36ea62f231796", name: "Checkbox group" },
   "sgds-accordion": { key: "ffada43a96f710368e420ffd6087b09ee8894502", name: "Accordion" },
-  "sgds-thumbnail-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: {"Variant":"thumbnail"} },
-  "sgds-icon-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: {"Variant":"icon"} },
+  "sgds-thumbnail-card": {
+    key: "a80a897e32592c4f2d8aebfafffc1d760669b55f",
+    name: "Card",
+    nestedProps: { Variant: "thumbnail" }
+  },
+  "sgds-icon-card": { key: "a80a897e32592c4f2d8aebfafffc1d760669b55f", name: "Card", nestedProps: { Variant: "icon" } }
 };
 
 var ATTR_TO_VARIANT_PROP = {
@@ -62,576 +66,609 @@ var ATTR_TO_VARIANT_PROP = {
   state: "State",
   outlined: "Outlined",
   dismissible: "Dismissible",
-  density: "Density",
+  density: "Density"
 };
 
 var ATTR_VALUE_MAP = {
-  "true": "True",
-  "false": "False",
-  "md": "md (default)",
+  true: "True",
+  false: "False",
+  md: "md (default)",
   "fixed-light": "fixed light (white)",
   "fixed-dark": "fixed dark",
-  "outline": "outline (secondary)",
-  "ghost": "ghost (tertiary)",
-  "thin": "thin (default)",
+  outline: "outline (secondary)",
+  ghost: "ghost (tertiary)",
+  thin: "thin (default)"
 };
 
 var COMPONENT_SLOT_CONFIG = {
   "sgds-button-fullwidth": {
-      "textProps": {
-          "label": {
-              "key": "Edit button label#12484:5",
-              "source": "text"
-          }
+    textProps: {
+      label: {
+        key: "Edit button label#12484:5",
+        source: "text"
       }
+    }
   },
   "sgds-description-list": {
-      "itemPattern": "List",
-      "itemProps": {},
-      "childCountVariant": {
-          "prop": "No. of lists",
-          "childTag": "sgds-description-list-item"
-      }
+    itemPattern: "List",
+    itemProps: {},
+    childCountVariant: {
+      prop: "No. of lists",
+      childTag: "sgds-description-list-item"
+    }
   },
   "sgds-drawer": {
-      "slots": {
-          "default": {
-              "booleanKey": "🔷 Slot#25042:9",
-              "instanceName": ".slot"
-          }
+    slots: {
+      default: {
+        booleanKey: "🔷 Slot#25042:9",
+        instanceName: ".slot"
       }
+    }
   },
   "sgds-icon-list": {
-      "itemPattern": "Icon list",
-      "itemProps": {
-          "label": {
-              "key": "Edit label#16905:74",
-              "source": "text"
-          },
-          "data": {
-              "key": "Edit data#16905:73",
-              "source": "slot:data"
-          }
+    itemPattern: "Icon list",
+    itemProps: {
+      label: {
+        key: "Edit label#16905:74",
+        source: "text"
       },
-      "childCountVariant": {
-          "prop": "No. of list",
-          "childTag": "sgds-icon-list-item"
+      data: {
+        key: "Edit data#16905:73",
+        source: "slot:data"
       }
+    },
+    childCountVariant: {
+      prop: "No. of list",
+      childTag: "sgds-icon-list-item"
+    }
   },
   "sgds-close-button": {
-      "valueOverrides": {
-          "fixed-light": "fixed light",
-          "fixed-dark": "fixed dark"
-      }
+    valueOverrides: {
+      "fixed-light": "fixed light",
+      "fixed-dark": "fixed dark"
+    }
   },
   "sgds-alert": {
-      "slots": {
-          "action": {
-              "booleanKey": "🔷 Action slot#29246:0",
-              "instanceName": ".slot"
-          }
-      },
-      "textProps": {
-          "title": {
-              "key": "↳ Edit text#15588:34",
-              "booleanKey": "Title#15588:17",
-              "source": "attr:title"
-          },
-          "description": {
-              "key": "Edit description#13094:45",
-              "source": "slot:default"
-          }
+    slots: {
+      action: {
+        booleanKey: "🔷 Action slot#29246:0",
+        instanceName: ".slot"
       }
+    },
+    textProps: {
+      title: {
+        key: "↳ Edit text#15588:34",
+        booleanKey: "Title#15588:17",
+        source: "attr:title"
+      },
+      description: {
+        key: "Edit description#13094:45",
+        source: "slot:default"
+      }
+    }
   },
   "sgds-pagination": {
-      "textProps": {
-          "description": {
-              "key": "Edit description#16740:0",
-              "source": "text"
-          }
+    textProps: {
+      description: {
+        key: "Edit description#16740:0",
+        source: "text"
       }
+    }
   },
   "sgds-select": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text #16273:0",
-              "booleanKey": "Label#16252:5",
-              "source": "attr:label"
-          },
-          "placeholder": {
-              "key": "↳ Edit text  #16273:12",
-              "booleanKey": "Placeholder text#16259:126",
-              "source": "attr:placeholder"
-          },
-          "hint": {
-              "key": "↳ Edit text   #16273:36",
-              "booleanKey": "Hint text#16252:0",
-              "source": "attr:hintText"
-          }
+    textProps: {
+      label: {
+        key: "↳ Edit text #16273:0",
+        booleanKey: "Label#16252:5",
+        source: "attr:label"
+      },
+      placeholder: {
+        key: "↳ Edit text  #16273:12",
+        booleanKey: "Placeholder text#16259:126",
+        source: "attr:placeholder"
+      },
+      hint: {
+        key: "↳ Edit text   #16273:36",
+        booleanKey: "Hint text#16252:0",
+        source: "attr:hintText"
       }
+    }
   },
   "sgds-toast": {
-      "textProps": {
-          "title": {
-              "key": "↳ Edit text#16370:284",
-              "booleanKey": "Title#29198:3",
-              "source": "attr:title"
-          },
-          "description": {
-              "key": "Edit message#16370:290",
-              "source": "slot:default"
-          }
+    textProps: {
+      title: {
+        key: "↳ Edit text#16370:284",
+        booleanKey: "Title#29198:3",
+        source: "attr:title"
+      },
+      description: {
+        key: "Edit message#16370:290",
+        source: "slot:default"
       }
+    }
   },
   "sgds-dropdown": {
-      "structureName": "Menu"
+    structureName: "Menu"
   },
   "sgds-badge": {
-      "textProps": {
-          "label": {
-              "key": "Edit label#13032:18",
-              "source": "text"
-          }
+    textProps: {
+      label: {
+        key: "Edit label#13032:18",
+        source: "text"
       }
+    }
   },
   "sgds-combo-box": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text #16273:0",
-              "booleanKey": "Label#16252:5",
-              "source": "attr:label"
-          },
-          "placeholder": {
-              "key": "↳ Edit text  #16273:12",
-              "booleanKey": "Placeholder text#16259:126",
-              "source": "attr:placeholder"
-          },
-          "hint": {
-              "key": "↳ Edit text   #16273:36",
-              "booleanKey": "Hint text#16252:0",
-              "source": "attr:hintText"
-          }
+    textProps: {
+      label: {
+        key: "↳ Edit text #16273:0",
+        booleanKey: "Label#16252:5",
+        source: "attr:label"
+      },
+      placeholder: {
+        key: "↳ Edit text  #16273:12",
+        booleanKey: "Placeholder text#16259:126",
+        source: "attr:placeholder"
+      },
+      hint: {
+        key: "↳ Edit text   #16273:36",
+        booleanKey: "Hint text#16252:0",
+        source: "attr:hintText"
       }
+    }
   },
   "sgds-overflow-menu": {
-      "slots": {
-          "bottom": {
-              "booleanKey": "🔷 Slot bottom#28035:74"
-          },
-          "top": {
-              "booleanKey": "🔷 Slot top#28035:6"
-          }
+    slots: {
+      bottom: {
+        booleanKey: "🔷 Slot bottom#28035:74"
+      },
+      top: {
+        booleanKey: "🔷 Slot top#28035:6"
       }
+    }
   },
   "sgds-file-upload": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text  #29661:1",
-              "booleanKey": "Label#29661:0",
-              "source": "attr:label"
-          },
-          "hint": {
-              "key": "↳ Edit text #29661:2",
-              "booleanKey": "Hint text#29661:3",
-              "source": "attr:hintText"
-          }
+    textProps: {
+      label: {
+        key: "↳ Edit text  #29661:1",
+        booleanKey: "Label#29661:0",
+        source: "attr:label"
+      },
+      hint: {
+        key: "↳ Edit text #29661:2",
+        booleanKey: "Hint text#29661:3",
+        source: "attr:hintText"
       }
+    }
   },
   "sgds-sidebar": {
-      "itemPattern": ".sidebar-l",
-      "itemProps": {}
+    itemPattern: ".sidebar-l",
+    itemProps: {}
   },
   "sgds-modal": {
-      "slots": {
-          "default": {
-              "booleanKey": "🔷 Slot#28535:105",
-              "instanceName": "[slot group]"
-          }
+    slots: {
+      default: {
+        booleanKey: "🔷 Slot#28535:105",
+        instanceName: "[slot group]"
       }
+    }
   },
   "sgds-table-of-contents": {
-      "textProps": {
-          "header": {
-              "key": "Edit header#25146:1",
-              "source": "text"
-          }
+    textProps: {
+      header: {
+        key: "Edit header#25146:1",
+        source: "text"
       }
+    }
   },
   "sgds-textarea": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text #16273:0",
-              "booleanKey": "Label#16252:5",
-              "source": "attr:label"
-          },
-          "placeholder": {
-              "key": "↳ Edit text  #16273:12",
-              "booleanKey": "Placeholder text#16259:126",
-              "source": "attr:placeholder"
-          },
-          "hint": {
-              "key": "↳ Edit text   #16273:36",
-              "booleanKey": "Hint text#16252:0",
-              "source": "attr:hintText"
-          }
+    textProps: {
+      label: {
+        key: "↳ Edit text #16273:0",
+        booleanKey: "Label#16252:5",
+        source: "attr:label"
+      },
+      placeholder: {
+        key: "↳ Edit text  #16273:12",
+        booleanKey: "Placeholder text#16259:126",
+        source: "attr:placeholder"
+      },
+      hint: {
+        key: "↳ Edit text   #16273:36",
+        booleanKey: "Hint text#16252:0",
+        source: "attr:hintText"
       }
+    }
   },
   "sgds-sidenav": {
-      "itemPattern": "Sidenav item",
-      "itemProps": {},
-      "childCountVariant": {
-          "prop": "No. of item",
-          "childTag": "sgds-sidenav-item"
-      }
+    itemPattern: "Sidenav item",
+    itemProps: {},
+    childCountVariant: {
+      prop: "No. of item",
+      childTag: "sgds-sidenav-item"
+    }
   },
   "sgds-footer": {
-      "structureName": "Directory"
+    structureName: "Directory"
   },
   "sgds-masthead": {
-      "slots": {
-          "trailingIcon": {
-              "booleanKey": "Trailing icon#15978:15",
-              "swapKey": "↳ Select icon #17388:25"
-          },
-          "leadingIcon": {
-              "booleanKey": "Leading icon#15978:6",
-              "swapKey": "↳ Select icon#17388:0"
-          }
+    slots: {
+      trailingIcon: {
+        booleanKey: "Trailing icon#15978:15",
+        swapKey: "↳ Select icon #17388:25"
       },
-      "textProps": {
-          "label": {
-              "key": "Edit link#16010:0",
-              "source": "text"
-          }
+      leadingIcon: {
+        booleanKey: "Leading icon#15978:6",
+        swapKey: "↳ Select icon#17388:0"
       }
+    },
+    textProps: {
+      label: {
+        key: "Edit link#16010:0",
+        source: "text"
+      }
+    }
   },
   "sgds-link": {
-      "slots": {
-          "leadingIcon": {
-              "booleanKey": "Leading icon#15978:6",
-              "swapKey": "↳ Select icon#17388:0"
-          },
-          "trailingIcon": {
-              "booleanKey": "Trailing icon#15978:15",
-              "swapKey": "↳ Select icon #17388:25"
-          }
+    slots: {
+      leadingIcon: {
+        booleanKey: "Leading icon#15978:6",
+        swapKey: "↳ Select icon#17388:0"
       },
-      "textProps": {
-          "label": {
-              "key": "Edit link#16010:0",
-              "source": "text"
-          }
-      },
-      "valueOverrides": {
-          "fixed-dark": "fixed dark (black)"
+      trailingIcon: {
+        booleanKey: "Trailing icon#15978:15",
+        swapKey: "↳ Select icon #17388:25"
       }
+    },
+    textProps: {
+      label: {
+        key: "Edit link#16010:0",
+        source: "text"
+      }
+    },
+    valueOverrides: {
+      "fixed-dark": "fixed dark (black)"
+    }
   },
   "sgds-icon-button": {
-      "slots": {
-          "icon": {
-              "swapKey": "Select icon#17388:218"
-          }
+    slots: {
+      icon: {
+        swapKey: "Select icon#17388:218"
       }
+    }
   },
   "sgds-datepicker": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text #16273:0",
-              "booleanKey": "Label#16252:5",
-              "source": "attr:label"
-          },
-          "hint": {
-              "key": "↳ Edit text   #16273:36",
-              "booleanKey": "Hint text#16252:0",
-              "source": "attr:hintText"
-          }
+    textProps: {
+      label: {
+        key: "↳ Edit text #16273:0",
+        booleanKey: "Label#16252:5",
+        source: "attr:label"
+      },
+      hint: {
+        key: "↳ Edit text   #16273:36",
+        booleanKey: "Hint text#16252:0",
+        source: "attr:hintText"
       }
+    }
   },
   "sgds-breadcrumb": {
-      "itemPattern": "Breadcrumb",
-      "itemProps": {
-          "label": {
-              "key": "Edit link#16129:0"
-          },
-          "state": {
-              "prop": "State",
-              "activeValue": "active",
-              "defaultValue": "default"
-          }
+    itemPattern: "Breadcrumb",
+    itemProps: {
+      label: {
+        key: "Edit link#16129:0"
       },
-      "childCountVariant": {
-          "prop": "No. of link",
-          "childTag": "sgds-breadcrumb-item"
+      state: {
+        prop: "State",
+        activeValue: "active",
+        defaultValue: "default"
       }
+    },
+    childCountVariant: {
+      prop: "No. of link",
+      childTag: "sgds-breadcrumb-item"
+    }
   },
   "sgds-radio": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text#15163:0",
-              "booleanKey": "Label#16008:16",
-              "source": "text"
-          }
+    textProps: {
+      label: {
+        key: "↳ Edit text#15163:0",
+        booleanKey: "Label#16008:16",
+        source: "text"
       }
+    }
   },
   "sgds-subnav": {
-      "slots": {
-          "leadingIcon": {
-              "booleanKey": "Leading icon#12484:3",
-              "swapKey": "↳ Select icon#16370:0"
-          },
-          "trailingIcon": {
-              "booleanKey": "Trailing icon#12484:1",
-              "swapKey": "↳ Select icon #16370:162"
-          }
+    slots: {
+      leadingIcon: {
+        booleanKey: "Leading icon#12484:3",
+        swapKey: "↳ Select icon#16370:0"
       },
-      "textProps": {
-          "title": {
-              "key": "Edit header#27781:3",
-              "source": "attr:title"
-          },
-          "label": {
-              "key": "Edit button label#12484:5",
-              "source": "text"
-          }
-      },
-      "itemPattern": "Button",
-      "itemProps": {
-          "label": {
-              "key": "Edit button label#12484:5"
-          },
-          "state": {
-              "prop": "State",
-              "activeValue": "active",
-              "defaultValue": "default"
-          }
+      trailingIcon: {
+        booleanKey: "Trailing icon#12484:1",
+        swapKey: "↳ Select icon #16370:162"
       }
+    },
+    textProps: {
+      title: {
+        key: "Edit header#27781:3",
+        source: "attr:title"
+      },
+      label: {
+        key: "Edit button label#12484:5",
+        source: "text"
+      }
+    },
+    itemPattern: "Button",
+    itemProps: {
+      label: {
+        key: "Edit button label#12484:5"
+      },
+      state: {
+        prop: "State",
+        activeValue: "active",
+        defaultValue: "default"
+      }
+    }
   },
   "sgds-image-card": {
-      "attrOverrides": {
-          "hideBorder": {
-              "prop": "Border",
-              "values": {
-                  "true": "False",
-                  "false": "True"
-              }
-          },
-          "disabled": {
-              "prop": "State",
-              "values": {
-                  "true": "disabled"
-              }
-          }
+    attrOverrides: {
+      hideBorder: {
+        prop: "Border",
+        values: {
+          true: "False",
+          false: "True"
+        }
       },
-      "structureName": "Card structure",
-      "slots": {
-          "upper": {
-              "booleanKey": "🔷 Upper slot#29125:13",
-              "swapKey": "↳ Swap instance (upper)#29125:26"
-          },
-          "lower": {
-              "booleanKey": "🔷 Lower slot#29125:39",
-              "swapKey": "↳ Swap instance (lower)#31095:9"
-          }
+      disabled: {
+        prop: "State",
+        values: {
+          true: "disabled"
+        }
       }
+    },
+    structureName: "Card structure",
+    slots: {
+      upper: {
+        booleanKey: "🔷 Upper slot#29125:13",
+        swapKey: "↳ Swap instance (upper)#29125:26"
+      },
+      lower: {
+        booleanKey: "🔷 Lower slot#29125:39",
+        swapKey: "↳ Swap instance (lower)#31095:9"
+      }
+    }
   },
   "sgds-progress-bar": {
-      "itemPattern": "1",
-      "itemProps": {}
+    itemPattern: "1",
+    itemProps: {}
   },
   "sgds-checkbox": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text#15167:0",
-              "booleanKey": "Label#16008:0",
-              "source": "text"
-          }
+    textProps: {
+      label: {
+        key: "↳ Edit text#15167:0",
+        booleanKey: "Label#16008:0",
+        source: "text"
       }
+    }
   },
   "sgds-card": {
-      "attrOverrides": {
-          "hideBorder": {
-              "prop": "Border",
-              "values": {
-                  "true": "False",
-                  "false": "True"
-              }
-          },
-          "disabled": {
-              "prop": "State",
-              "values": {
-                  "true": "disabled"
-              }
-          }
+    attrOverrides: {
+      hideBorder: {
+        prop: "Border",
+        values: {
+          true: "False",
+          false: "True"
+        }
       },
-      "structureName": "Structure",
-      "slots": {
-          "upper": {
-              "booleanKey": "🔷 Upper slot#29055:1",
-              "swapKey": "↳ Swap instance (upper)#29055:60",
-              "frameName": "[upper slot]"
-          },
-          "lower": {
-              "booleanKey": "🔷 Lower slot#29055:12",
-              "swapKey": "↳ Swap instance (lower)#30708:0",
-              "frameName": "[lower slot]"
-          }
+      disabled: {
+        prop: "State",
+        values: {
+          true: "disabled"
+        }
       }
+    },
+    structureName: "Structure",
+    slots: {
+      upper: {
+        booleanKey: "🔷 Upper slot#29055:1",
+        swapKey: "↳ Swap instance (upper)#29055:60",
+        frameName: "[upper slot]"
+      },
+      lower: {
+        booleanKey: "🔷 Lower slot#29055:12",
+        swapKey: "↳ Swap instance (lower)#30708:0",
+        frameName: "[lower slot]"
+      }
+    }
   },
   "sgds-button": {
-      "slots": {
-          "leftIcon": {
-              "booleanKey": "Leading icon#12484:3",
-              "swapKey": "↳ Select icon#17388:71"
-          },
-          "rightIcon": {
-              "booleanKey": "Trailing icon#12484:1",
-              "swapKey": "↳ Select icon #17388:169"
-          }
+    slots: {
+      leftIcon: {
+        booleanKey: "Leading icon#12484:3",
+        swapKey: "↳ Select icon#17388:71"
       },
-      "textProps": {
-          "label": {
-              "key": "Edit button label#12484:5",
-              "source": "text"
-          }
+      rightIcon: {
+        booleanKey: "Trailing icon#12484:1",
+        swapKey: "↳ Select icon #17388:169"
       }
+    },
+    textProps: {
+      label: {
+        key: "Edit button label#12484:5",
+        source: "text"
+      }
+    }
   },
   "sgds-radio-group": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text #15655:51",
-              "booleanKey": "Label#15655:31",
-              "source": "attr:label"
-          },
-          "hint": {
-              "key": "↳ Edit text#15655:46",
-              "booleanKey": "Hint text#15655:41",
-              "source": "attr:hintText"
-          }
+    attrOverrides: {
+      invalid: {
+        prop: "Invalid",
+        values: { true: "True", "": "True" },
+        defaultValue: "False"
       }
+    },
+    textProps: {
+      label: {
+        key: "↳ Edit text #15655:51",
+        booleanKey: "Label#15655:31",
+        source: "attr:label"
+      },
+      hint: {
+        key: "↳ Edit text#15655:46",
+        booleanKey: "Hint text#15655:41",
+        source: "attr:hintText"
+      },
+      feedback: {
+        key: "↳ Edit text  #15956:0",
+        source: "attr:invalidfeedback"
+      }
+    },
+    itemPattern: "↳ Option",
+    itemProps: {
+      label: { key: "↳ Edit text#15163:0" },
+      selection: { prop: "Selection", checkedValue: "selected", uncheckedValue: "unselected" }
+    },
+    childCountVariant: { prop: "No. of option", childTag: "sgds-radio" }
   },
   "sgds-switch": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text#16008:27",
-              "booleanKey": "Label#15380:0",
-              "source": "text"
-          }
+    textProps: {
+      label: {
+        key: "↳ Edit text#16008:27",
+        booleanKey: "Label#15380:0",
+        source: "text"
       }
+    }
   },
   "sgds-spinner": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text#26271:0",
-              "booleanKey": "Label#16158:6",
-              "source": "text"
-          }
+    textProps: {
+      label: {
+        key: "↳ Edit text#26271:0",
+        booleanKey: "Label#16158:6",
+        source: "text"
       }
+    }
   },
   "sgds-input": {
-      "slots": {
-          "icon": {
-              "swapKey": "↳ Select icon#16259:56"
-          }
-      },
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text #16273:0",
-              "booleanKey": "Label#16252:5",
-              "source": "attr:label"
-          },
-          "placeholder": {
-              "key": "↳ Edit text  #16273:12",
-              "booleanKey": "Placeholder text#16259:126",
-              "source": "attr:placeholder"
-          },
-          "hint": {
-              "key": "↳ Edit text   #16273:36",
-              "booleanKey": "Hint text#16252:0",
-              "source": "attr:hintText"
-          }
+    slots: {
+      icon: {
+        swapKey: "↳ Select icon#16259:56"
       }
+    },
+    textProps: {
+      label: {
+        key: "↳ Edit text #16273:0",
+        booleanKey: "Label#16252:5",
+        source: "attr:label"
+      },
+      placeholder: {
+        key: "↳ Edit text  #16273:12",
+        booleanKey: "Placeholder text#16259:126",
+        source: "attr:placeholder"
+      },
+      hint: {
+        key: "↳ Edit text   #16273:36",
+        booleanKey: "Hint text#16252:0",
+        source: "attr:hintText"
+      }
+    }
   },
   "sgds-quantity-toggle": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text#16461:94",
-              "booleanKey": "Label#16461:83",
-              "source": "attr:label"
-          },
-          "hint": {
-              "key": "↳ Edit text    #16461:149",
-              "booleanKey": "Hint text#16461:66",
-              "source": "attr:hintText"
-          }
+    textProps: {
+      label: {
+        key: "↳ Edit text#16461:94",
+        booleanKey: "Label#16461:83",
+        source: "attr:label"
+      },
+      hint: {
+        key: "↳ Edit text    #16461:149",
+        booleanKey: "Hint text#16461:66",
+        source: "attr:hintText"
       }
+    }
   },
   "sgds-stepper": {
-      "itemPattern": "↳ Step",
-      "itemProps": {
-          "label": {
-              "key": "Edit title#16551:8",
-              "source": "slot:default"
-          }
-      },
-      "childCountVariant": {
-          "prop": "No. of step",
-          "childTag": "sgds-stepper-item"
+    itemPattern: "↳ Step",
+    itemProps: {
+      label: {
+        key: "Edit title#16551:8",
+        source: "slot:default"
       }
+    },
+    childCountVariant: {
+      prop: "No. of step",
+      childTag: "sgds-stepper-item"
+    }
   },
   "sgds-checkbox-group": {
-      "textProps": {
-          "label": {
-              "key": "↳ Edit text  #15640:6",
-              "booleanKey": "Label#15640:9",
-              "source": "attr:label"
-          },
-          "hint": {
-              "key": "↳ Edit text #15640:7",
-              "booleanKey": "Hint text#15640:8",
-              "source": "attr:hintText"
-          }
+    attrOverrides: {
+      invalid: {
+        prop: "Invalid",
+        values: { true: "True", "": "True" },
+        defaultValue: "False"
       }
+    },
+    textProps: {
+      label: {
+        key: "↳ Edit text  #15640:6",
+        booleanKey: "Label#15640:9",
+        source: "attr:label"
+      },
+      hint: {
+        key: "↳ Edit text #15640:7",
+        booleanKey: "Hint text#15640:8",
+        source: "attr:hintText"
+      },
+      feedback: {
+        key: "↳ Edit text#15868:37",
+        source: "attr:invalidfeedback"
+      }
+    },
+    itemPattern: "↳ Option",
+    itemProps: {
+      label: { key: "↳ Edit text#15167:0" },
+      selection: { prop: "Selection", checkedValue: "selected", uncheckedValue: "unselected" }
+    },
+    childCountVariant: { prop: "No. of option", childTag: "sgds-checkbox" }
   },
   "sgds-accordion": {
-      "attrOverrides": {
-          "variant": {
-              "prop": "Border",
-              "values": {
-                  "border": "True",
-                  "default": "False"
-              }
-          }
-      },
-      "itemPattern": "↳ Accordion",
-      "itemProps": {
-          "title": {
-              "key": "Edit title#16551:8",
-              "source": "slot:header"
-          },
-          "badge": {
-              "booleanKey": "Badge#29585:8",
-              "swapKey": "↳ 🔷 Swap instance#16545:8"
-          },
-          "icon": {
-              "booleanKey": "Icon#29595:24",
-              "swapKey": "↳ Select icon#29595:46"
-          },
-          "disabled": {
-              "variantProp": "State",
-              "variantValue": "disabled"
-          },
-          "open": {
-              "variantProp": "Expand",
-              "variantValue": "True"
-          }
-      },
-      "childCountVariant": {
-          "prop": "No. of item",
-          "childTag": "sgds-accordion-item"
+    attrOverrides: {
+      variant: {
+        prop: "Border",
+        values: {
+          border: "True",
+          default: "False"
+        }
       }
-  },
+    },
+    itemPattern: "↳ Accordion",
+    itemProps: {
+      title: {
+        key: "Edit title#16551:8",
+        source: "slot:header"
+      },
+      badge: {
+        booleanKey: "Badge#29585:8",
+        swapKey: "↳ 🔷 Swap instance#16545:8"
+      },
+      icon: {
+        booleanKey: "Icon#29595:24",
+        swapKey: "↳ Select icon#29595:46"
+      },
+      disabled: {
+        variantProp: "State",
+        variantValue: "disabled"
+      },
+      open: {
+        variantProp: "Expand",
+        variantValue: "True"
+      }
+    },
+    childCountVariant: {
+      prop: "No. of item",
+      childTag: "sgds-accordion-item"
+    }
+  }
 };
-
 
 // =============================================================================
 // FIGMA PROPERTY REFERENCE (from discovered-props.json)
