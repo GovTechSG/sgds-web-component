@@ -695,6 +695,42 @@ describe("noValidate disables native and sgds validation behaviours", async () =
   });
 });
 
+describe("reset clears invalid state when noValidate is true", () => {
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate name="test"></sgds-input>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    input?.setInvalid(true);
+    await input?.updateComplete;
+    expect(input?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => input?.invalid === false);
+    expect(input?.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-input name="test"></sgds-input>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    input?.setInvalid(true);
+    await input?.updateComplete;
+    expect(input?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => input?.invalid === false);
+    expect(input?.invalid).to.be.false;
+  });
+});
+
 describe("form novalidate", () => {
   it("when form has novalidate, form submission proceeds even when input is required", async () => {
     const form = await fixture<HTMLFormElement>(html`

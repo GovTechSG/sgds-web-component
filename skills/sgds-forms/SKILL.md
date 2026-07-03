@@ -26,7 +26,7 @@ All form components must be placed inside a `<form>` element and given a `name` 
 
 **Read submitted field values?** → Use `new FormData(event.target)` in the submit handler
 
-**Disable SGDS validation per component?** → `noValidate` prop on `<sgds-input>` or `<sgds-textarea>` (others WIP)
+**Disable SGDS validation per component?** → `noValidate` prop on `<sgds-input>`, `<sgds-textarea>`, `<sgds-combo-box>`, `<sgds-select>`, `<sgds-datepicker>`, or `<sgds-file-upload>`
 
 **Disable SGDS validation for the whole form?** → `novalidate` on the `<form>` element
 

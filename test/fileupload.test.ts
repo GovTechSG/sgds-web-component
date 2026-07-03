@@ -1424,6 +1424,42 @@ describe("noValidate disables native and sgds validation behaviours", () => {
   });
 });
 
+describe("reset clears invalid state when noValidate is true", () => {
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-file-upload noValidate name="test"></sgds-file-upload>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const upload = form.querySelector<SgdsFileUpload>("sgds-file-upload");
+    upload?.setInvalid(true);
+    await upload?.updateComplete;
+    expect(upload?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => upload?.invalid === false);
+    expect(upload?.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-file-upload name="test"></sgds-file-upload>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const upload = form.querySelector<SgdsFileUpload>("sgds-file-upload");
+    upload?.setInvalid(true);
+    await upload?.updateComplete;
+    expect(upload?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => upload?.invalid === false);
+    expect(upload?.invalid).to.be.false;
+  });
+});
+
 describe("form novalidate disables sgds validation on all children", () => {
   it("form novalidate prevents required validation from blocking submission", async () => {
     const form = await fixture<HTMLFormElement>(html`

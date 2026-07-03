@@ -145,6 +145,12 @@ export class SelectElement
     return this._mixinReportValidity();
   }
   /**
+   * Sets the validity state of the element
+   */
+  public setValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void {
+    return this._mixinSetValidity(flags, message, anchor);
+  }
+  /**
    * Checks for validity without any native error popup message
    */
   public checkValidity(): boolean {
