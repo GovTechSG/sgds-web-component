@@ -18,6 +18,8 @@ export type { ISgdsRadioGroupChangeEventDetail };
  *
  * @event sgds-change - Emitted when the radio group's selected value changes.
  * @eventDetail {ISgdsRadioGroupChangeEventDetail} sgds-change
+ * @event sgds-invalid - Emitted when the radio group's invalid state is set to true.
+ * @event sgds-valid - Emitted when the radio group's invalid state is set to false.
  *
  */
 export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
@@ -41,12 +43,14 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
   /** Makes the input as a required field. */
   @property({ type: Boolean, reflect: true }) required = false;
 
+  /** Disables native and sgds validation for the radio group. */
+  @property({ type: Boolean, reflect: true }) noValidate = false;
+
   /** Automatically focuses the selected radio input in the group when it becomes checked. */
   @property({ type: Boolean, reflect: true }) autofocus = false;
 
   @watch("value", { waitUntilFirstUpdate: true })
   _handleValueChange() {
-    this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
     this._updateCheckedRadio();
   }
   @watch("invalid", { waitUntilFirstUpdate: true })
@@ -109,6 +113,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
     }
 
     this.value = target.value;
+    this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
 
     this._updateInputValue();
 
@@ -150,6 +155,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
     });
 
     this.value = radios[index].value;
+    this.emit<ISgdsRadioGroupChangeEventDetail>("sgds-change", { detail: { value: this.value } });
     this._updateInputValue();
     radios[index].checked = true;
     radios[index].tabIndex = 0;
@@ -210,6 +216,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
 
   @watch("_isTouched", { waitUntilFirstUpdate: true })
   _handleIsTouched() {
+    if (this._mixinShouldSkipSgdsValidation()) return;
     if (this._isTouched) {
       this.invalid = !this.input.checkValidity();
     }
