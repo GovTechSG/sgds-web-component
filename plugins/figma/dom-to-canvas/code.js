@@ -20,7 +20,7 @@ var SGDS_COMPONENT_MAP = {
   "sgds-badge": { key: "30f64a9fe1033f49f39d7e77f1b318b0549a852f", name: "Badge" },
   "sgds-alert": { key: "78d35168e3f57033a677c8bce6d5242e1e771ffc", name: "Alert" },
   "sgds-breadcrumb": { key: "0fe6194b637fc81281ba384c7cb7595e36e2aa23", name: "Breadcrumb" },
-  "sgds-checkbox": { key: "cfd682cb134b8cba84738cabe537e7f4973a97af", name: "Checkbox" },
+  "sgds-checkbox": { key: "a8736f77a9aa8db166ba3e6a2af36ea62f231796", name: "Checkbox group" },
   "sgds-checkbox-group": { key: "a8736f77a9aa8db166ba3e6a2af36ea62f231796", name: "Checkbox group" },
   "sgds-close-button": { key: "dfa571631b0ed13939f6bc803b89d0cb7b866734", name: "Close button" },
   "sgds-combo-box": { key: "402b7c27be729d83b27dc56b20ed4012bb7894b5", name: "Combobox" },
@@ -37,7 +37,7 @@ var SGDS_COMPONENT_MAP = {
   "sgds-pagination": { key: "9e6f67ae6f0a3d36e74371b7e0121a90617f3437", name: "Pagination" },
   "sgds-progress-bar": { key: "7343e7e18d316aaf3a076f67474c394a69106130", name: "Progress bar" },
   "sgds-quantity-toggle": { key: "7a8181de949074a2d44261aa6d6387381ff7fafd", name: "Quantity toggle" },
-  "sgds-radio": { key: "529c74d47e2706156c625441dee324962caf32a9", name: "Radio" },
+  "sgds-radio": { key: "1bc0266f520ffce648079e4137dedee58896ff57", name: "Radio group" },
   "sgds-radio-group": { key: "1bc0266f520ffce648079e4137dedee58896ff57", name: "Radio group" },
   "sgds-select": { key: "76689841e9a0e34127817f173746ff90ad4f6d01", name: "Select" },
   "sgds-sidebar": { key: "f82b74ef96b1fba2824eb1b42773e614d1912b61", name: "Sidebar" },
@@ -489,12 +489,24 @@ var COMPONENT_SLOT_CONFIG = {
     slots: {}
   },
   "sgds-combo-box": {
-    textProps: {
-      label: { key: "↳ Edit text #16273:0", booleanKey: "Label#16252:5" },
-      placeholder: { key: "↳ Edit text  #16273:12", booleanKey: "Placeholder text#16259:126" },
-      hint: { key: "↳ Edit text   #16273:36", booleanKey: "Hint text#16252:0" }
+    attrOverrides: {
+      menuisopen: { prop: "Expand", values: { true: "True", "": "True" } },
+      multiselect: { prop: "Multiselect", values: { true: "True", "": "True" } }
     },
-    slots: {}
+    fixedCriteria: { Multiselect: "False" },
+    textProps: {
+      label: { key: "↳ Edit text #16273:0", booleanKey: "Label#16252:5", source: "attr:label" },
+      placeholder: {
+        key: "↳ Edit text  #16273:12",
+        booleanKey: "Placeholder text#16259:126",
+        source: "attr:placeholder"
+      },
+      hint: { key: "↳ Edit text   #16273:36", booleanKey: "Hint text#16252:0", source: "attr:hinttext" }
+    },
+    slots: {},
+    menuItemPattern: "Option",
+    menuItemChildTag: "sgds-combo-box-option",
+    menuItemTextKey: "Edit option label#16417:0"
   },
   "sgds-textarea": {
     textProps: {
@@ -519,15 +531,38 @@ var COMPONENT_SLOT_CONFIG = {
     slots: {}
   },
   "sgds-checkbox": {
-    textProps: {
-      default: { key: "↳ Edit text#15167:0", booleanKey: "Label#16008:0" }
+    attrOverrides: {
+      invalid: { prop: "Invalid", values: { true: "True", "": "True" } }
     },
+    fixedCriteria: { "No. of option": "1" },
+    forcedBooleans: { "Label#15640:9": false, "Hint text#15640:8": false },
+    itemPattern: "↳ Option",
+    itemProps: {
+      label: { key: "↳ Edit text#15167:0" },
+      selection: {
+        prop: "Selection",
+        checkedValue: "selected",
+        indeterminateValue: "indeterminate",
+        uncheckedValue: "unselected"
+      },
+      state: { prop: "State", disabledValue: "disabled", invalidValue: "invalid", defaultValue: "default" }
+    },
+    textProps: {},
     slots: {}
   },
   "sgds-radio": {
-    textProps: {
-      default: { key: "↳ Edit text#15163:0", booleanKey: "Label#16008:16" }
+    attrOverrides: {
+      invalid: { prop: "Invalid", values: { true: "True", "": "True" } }
     },
+    fixedCriteria: { "No. of option": "1" },
+    forcedBooleans: { "Label#15655:31": false, "Hint text#15655:41": false },
+    itemPattern: "↳ Option",
+    itemProps: {
+      label: { key: "↳ Edit text#15163:0" },
+      selection: { prop: "Selection", checkedValue: "selected", uncheckedValue: "unselected" },
+      state: { prop: "State", disabledValue: "disabled", invalidValue: "invalid", defaultValue: "default" }
+    },
+    textProps: {},
     slots: {}
   },
   "sgds-switch": {
@@ -543,18 +578,45 @@ var COMPONENT_SLOT_CONFIG = {
     slots: {}
   },
   "sgds-checkbox-group": {
-    textProps: {
-      label: { key: "↳ Edit text  #15640:6", booleanKey: "Label#15640:9" },
-      hint: { key: "↳ Edit text #15640:7", booleanKey: "Hint text#15640:8" }
+    attrOverrides: {
+      invalid: { prop: "Invalid", values: { true: "True", "": "True" }, defaultValue: "False" }
     },
-    slots: {}
+    textProps: {
+      label: { key: "↳ Edit text  #15640:6", booleanKey: "Label#15640:9", source: "attr:label" },
+      hint: { key: "↳ Edit text #15640:7", booleanKey: "Hint text#15640:8", source: "attr:hinttext" },
+      feedback: { key: "↳ Edit text#15868:37", source: "attr:invalidfeedback" }
+    },
+    slots: {},
+    itemPattern: "↳ Option",
+    itemProps: {
+      label: { key: "↳ Edit text#15167:0" },
+      selection: {
+        prop: "Selection",
+        checkedValue: "selected",
+        indeterminateValue: "indeterminate",
+        uncheckedValue: "unselected"
+      },
+      state: { prop: "State", disabledValue: "disabled", invalidValue: "invalid", defaultValue: "default" }
+    },
+    childCountVariant: { prop: "No. of option", childTag: "sgds-checkbox" }
   },
   "sgds-radio-group": {
-    textProps: {
-      label: { key: "↳ Edit text #15655:51", booleanKey: "Label#15655:31" },
-      hint: { key: "↳ Edit text#15655:46", booleanKey: "Hint text#15655:41" }
+    attrOverrides: {
+      invalid: { prop: "Invalid", values: { true: "True", "": "True" }, defaultValue: "False" }
     },
-    slots: {}
+    textProps: {
+      label: { key: "↳ Edit text #15655:51", booleanKey: "Label#15655:31", source: "attr:label" },
+      hint: { key: "↳ Edit text#15655:46", booleanKey: "Hint text#15655:41", source: "attr:hinttext" },
+      feedback: { key: "↳ Edit text  #15956:0", source: "attr:invalidfeedback" }
+    },
+    slots: {},
+    itemPattern: "↳ Option",
+    itemProps: {
+      label: { key: "↳ Edit text#15163:0" },
+      selection: { prop: "Selection", checkedValue: "selected", uncheckedValue: "unselected" },
+      state: { prop: "State", disabledValue: "disabled", invalidValue: "invalid", defaultValue: "default" }
+    },
+    childCountVariant: { prop: "No. of option", childTag: "sgds-radio" }
   },
   "sgds-quantity-toggle": {
     textProps: {
@@ -629,9 +691,15 @@ var COMPONENT_SLOT_CONFIG = {
     slots: {}
   },
   "sgds-close-button": {
+    attrOverrides: {
+      tone: {
+        prop: "Variant",
+        values: { "fixed-light": "fixed light", "fixed-dark": "fixed dark", default: "default" }
+      }
+    },
     valueOverrides: {
-      "fixed-light": "fixed light",
-      "fixed-dark": "fixed dark"
+      md: "md",
+      sm: "sm"
     }
   }
 };
@@ -841,6 +909,15 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
     }
   }
 
+  // Fixed criteria: set default variant values if not already set by attrOverrides
+  if (slotConfig && slotConfig.fixedCriteria) {
+    for (var fk in slotConfig.fixedCriteria) {
+      if (!criteria[fk]) {
+        criteria[fk] = slotConfig.fixedCriteria[fk];
+      }
+    }
+  }
+
   // childCountVariant + overflowVariant: runs regardless of attrs
   if (slotConfig && slotConfig.childCountVariant && data.children) {
     var ccv = slotConfig.childCountVariant;
@@ -960,6 +1037,13 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
     } catch (e) {}
   }
 
+  // Forced booleans: always set these boolean props (e.g. hide label/hint for standalone checkbox)
+  if (slotConfig && slotConfig.forcedBooleans) {
+    try {
+      instance.setProperties(slotConfig.forcedBooleans);
+    } catch (e) {}
+  }
+
   instance.name = mapping.name;
 
   var posX = (data.x || 0) - parentX;
@@ -988,8 +1072,6 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
     "sgds-close-button",
     "sgds-spinner",
     "sgds-switch",
-    "sgds-checkbox",
-    "sgds-radio",
     "sgds-divider",
     "sgds-skeleton",
     "sgds-tooltip"
@@ -1332,7 +1414,9 @@ async function applySlottedComponentContent(instance, tag, childData) {
       var override = slotConfig.attrOverrides[attrName];
       var mappedVal = override.values[attrs[attrName]];
       if (mappedVal) {
-        try { instance.setProperties(makeProps(override.prop, mappedVal)); } catch (e) {}
+        try {
+          instance.setProperties(makeProps(override.prop, mappedVal));
+        } catch (e) {}
       }
       continue;
     }
@@ -1343,17 +1427,23 @@ async function applySlottedComponentContent(instance, tag, childData) {
       var BOOLEAN_VARIANT_PROPS = ["Outlined", "Dismissible"];
       if (BOOLEAN_VARIANT_PROPS.indexOf(propName) >= 0) {
         if (value === true || value === "" || value === "true") {
-          try { instance.setProperties(makeProps(propName, "True")); } catch (e) {}
+          try {
+            instance.setProperties(makeProps(propName, "True"));
+          } catch (e) {}
         } else {
-          try { instance.setProperties(makeProps(propName, "False")); } catch (e) {}
+          try {
+            instance.setProperties(makeProps(propName, "False"));
+          } catch (e) {}
         }
         continue;
       }
       // Skip plain boolean values for enum variant props (size, tone, etc.)
       if (value === true || value === "" || value === false || value === "false") continue;
-      var mapped = (slotConfig && slotConfig.valueOverrides && slotConfig.valueOverrides[value]) ||
-        ATTR_VALUE_MAP[value] || value;
-      try { instance.setProperties(makeProps(propName, mapped)); } catch (e) {}
+      var mapped =
+        (slotConfig && slotConfig.valueOverrides && slotConfig.valueOverrides[value]) || ATTR_VALUE_MAP[value] || value;
+      try {
+        instance.setProperties(makeProps(propName, mapped));
+      } catch (e) {}
     }
   }
 
@@ -1364,11 +1454,16 @@ async function applySlottedComponentContent(instance, tag, childData) {
     // Find which attr maps to this prop
     var attrForProp = null;
     for (var ak in ATTR_TO_VARIANT_PROP) {
-      if (ATTR_TO_VARIANT_PROP[ak] === bvp) { attrForProp = ak; break; }
+      if (ATTR_TO_VARIANT_PROP[ak] === bvp) {
+        attrForProp = ak;
+        break;
+      }
     }
     // If attr is absent, explicitly set to "False"
     if (attrForProp && attrs[attrForProp] === undefined) {
-      try { instance.setProperties(makeProps(bvp, "False")); } catch (e) {}
+      try {
+        instance.setProperties(makeProps(bvp, "False"));
+      } catch (e) {}
     }
   }
 
@@ -1763,8 +1858,46 @@ async function applySlotContent(instance, data, config) {
 
   // --- Item pattern: map repeated children to numbered nested instances ---
   // Used by Accordion (↳ Accordion 1..N), Icon List (Icon list 1..N), etc.
-  if (config.itemPattern && config.itemProps && data.children) {
+  // Also handles standalone checkbox/radio (self as single item when no children)
+  if (config.itemPattern && config.itemProps && (data.children || config.fixedCriteria)) {
     await applyItemPattern(instance, data, config);
+  }
+
+  // --- Menu item labels: combobox/select option text ---
+  if (config.menuItemPattern && config.menuItemChildTag && data.children) {
+    try {
+      await figma.loadFontAsync({ family: "Inter", style: "Regular" });
+      // Find the "Menu" nested instance
+      var menuInst = instance.findOne(function (n) {
+        return n.name === "Menu" && n.type === "INSTANCE";
+      });
+      if (menuInst) {
+        // Find option INSTANCES inside the menu (named "Option 1", "Option 2", etc.)
+        var optionInstances = menuInst.findAll(function (n) {
+          return n.type === "INSTANCE" && n.name.indexOf(config.menuItemPattern) >= 0;
+        });
+        // Sort by vertical position
+        optionInstances.sort(function (a, b) {
+          return a.y - b.y;
+        });
+
+        // Collect DOM option children
+        var optionChildren = data.children.filter(function (c) {
+          return c.tag === config.menuItemChildTag;
+        });
+
+        // Set option label text using the configured key
+        var optTextKey = config.menuItemTextKey;
+        for (var oi = 0; oi < optionChildren.length && oi < optionInstances.length; oi++) {
+          var optText = optionChildren[oi].text;
+          if (optText && optTextKey) {
+            try {
+              optionInstances[oi].setProperties(makeProps(optTextKey, optText));
+            } catch (e) {}
+          }
+        }
+      }
+    } catch (e) {}
   }
 
   // --- Mainnav-specific: nav items, end slot, brand ---
@@ -1995,23 +2128,32 @@ async function applyMainnavContent(instance, data, config) {
 
 // Apply content to repeated item instances (accordion items, icon list items, etc.)
 async function applyItemPattern(instance, data, config) {
-  if (!data.children) return;
-
   try {
     await figma.loadFontAsync({ family: "Inter", style: "Semi Bold" });
     await figma.loadFontAsync({ family: "Inter", style: "Regular" });
   } catch (e) {}
 
-  // Collect item children (e.g. sgds-accordion-item elements)
+  // Collect item children (e.g. sgds-accordion-item elements, or sgds-checkbox in a group)
+  // For standalone checkbox/radio (no children), treat the element itself as the single item
+  var childTag = config.childCountVariant ? config.childCountVariant.childTag : null;
   var items = [];
-  for (var i = 0; i < data.children.length; i++) {
-    var child = data.children[i];
-    // Include direct element children that have slots or are accordion-items
-    if (child.type === "element" && child.children) {
-      items.push(child);
-    } else if (child.tag && child.tag.indexOf("-item") >= 0) {
-      items.push(child);
+  if (data.children) {
+    for (var i = 0; i < data.children.length; i++) {
+      var child = data.children[i];
+      // Match by childTag (e.g. sgds-checkbox inside sgds-checkbox-group)
+      if (childTag && child.tag === childTag) {
+        items.push(child);
+        // Include direct element children that have slots or are accordion-items
+      } else if (!childTag && child.type === "element" && child.children) {
+        items.push(child);
+      } else if (!childTag && child.tag && child.tag.indexOf("-item") >= 0) {
+        items.push(child);
+      }
     }
+  }
+  // Self-as-item: standalone checkbox/radio with fixedCriteria and no children
+  if (items.length === 0 && config.fixedCriteria) {
+    items.push(data);
   }
 
   // Find numbered instances in the Figma component (e.g. "↳ Accordion 1", "↳ Accordion 2")
@@ -2045,6 +2187,7 @@ async function applyItemPattern(instance, data, config) {
 
     // Classify the item's slot children
     var itemSlots = classifySlots(itemData);
+    var itemAttrs = itemData.attrs || {};
 
     // Apply title/header text
     if (config.itemProps.title || config.itemProps.label) {
@@ -2055,6 +2198,10 @@ async function applyItemPattern(instance, data, config) {
         if (Array.isArray(headerChild)) headerChild = headerChild[0];
         headerText = headerChild.text || collectFirstText(headerChild);
       }
+      // Fallback: use itemData.text directly (e.g. sgds-checkbox/radio text nodes)
+      if (!headerText && itemData.text) {
+        headerText = itemData.text;
+      }
       if (headerText) {
         try {
           itemInstance.setProperties(makeProps(titleConfig.key, headerText));
@@ -2062,8 +2209,50 @@ async function applyItemPattern(instance, data, config) {
       }
     }
 
+    // Apply selection + state on nested option instances
+    if (config.itemProps.selection || config.itemProps.state) {
+      // Resolve desired Selection value
+      var desiredSelection = null;
+      if (config.itemProps.selection) {
+        var selConfig = config.itemProps.selection;
+        var isIndeterminate = itemAttrs.indeterminate === true || itemAttrs.indeterminate === "";
+        var isChecked = itemAttrs.checked === true || itemAttrs.checked === "" || itemAttrs.checked === "true";
+        if (isIndeterminate && selConfig.indeterminateValue) {
+          desiredSelection = selConfig.indeterminateValue;
+        } else if (isChecked) {
+          desiredSelection = selConfig.checkedValue;
+        } else {
+          desiredSelection = selConfig.uncheckedValue;
+        }
+      }
+
+      // Resolve desired State value
+      var desiredState = null;
+      if (config.itemProps.state) {
+        var stConfig = config.itemProps.state;
+        if (itemAttrs.disabled === true || itemAttrs.disabled === "") {
+          desiredState = stConfig.disabledValue;
+        } else if (itemAttrs.invalid === true || itemAttrs.invalid === "") {
+          desiredState = stConfig.invalidValue;
+        } else {
+          desiredState = stConfig.defaultValue;
+        }
+      }
+
+      // Set State and Selection separately on the nested option instance
+      if (desiredState) {
+        try {
+          itemInstance.setProperties(makeProps("State", desiredState));
+        } catch (e) {}
+      }
+      if (desiredSelection) {
+        try {
+          itemInstance.setProperties(makeProps("Selection", desiredSelection));
+        } catch (e) {}
+      }
+    }
+
     // Apply expand/open state
-    var itemAttrs = itemData.attrs || {};
     if (itemAttrs.open === true || itemAttrs.open === "" || itemAttrs.open === "true") {
       try {
         itemInstance.setProperties({ Expand: "True" });
@@ -2124,8 +2313,8 @@ async function applyItemPattern(instance, data, config) {
       } catch (e) {}
     }
 
-    // Apply state variant (e.g. breadcrumb active item)
-    if (config.itemProps.state) {
+    // Apply state variant (e.g. breadcrumb active item — only for configs with activeValue)
+    if (config.itemProps.state && config.itemProps.state.activeValue) {
       var stateConfig = config.itemProps.state;
       var isActive = itemAttrs.active === true || itemAttrs.active === "" || itemAttrs.active === "true";
       var stateValue = isActive ? stateConfig.activeValue : stateConfig.defaultValue;

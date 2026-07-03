@@ -474,6 +474,38 @@
       "childTag": "sgds-progress-bar-item",
       "childCountVariant": null,
       "itemProps": {}
+    },
+    "sgds-checkbox-group": {
+      "pattern": "↳ Option",
+      "childTag": "sgds-checkbox",
+      "childCountVariant": "No. of option",
+      "itemProps": {
+        "label": {
+          "key": "↳ Edit text#15167:0",
+          "source": "text"
+        },
+        "selection": {
+          "prop": "Selection",
+          "checkedValue": "selected",
+          "uncheckedValue": "unselected"
+        }
+      }
+    },
+    "sgds-radio-group": {
+      "pattern": "↳ Option",
+      "childTag": "sgds-radio",
+      "childCountVariant": "No. of option",
+      "itemProps": {
+        "label": {
+          "key": "↳ Edit text#15163:0",
+          "source": "text"
+        },
+        "selection": {
+          "prop": "Selection",
+          "checkedValue": "selected",
+          "uncheckedValue": "unselected"
+        }
+      }
     }
   },
   "structureNames": {
