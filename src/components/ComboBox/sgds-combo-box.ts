@@ -195,13 +195,7 @@ export class SgdsComboBox extends SelectElement {
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
-    // when value change, always emit a change event
-    this.emit("sgds-change");
     this.options.forEach(o => o.removeAttribute("hidden"));
-
-    if (this.value) {
-      this.emit("sgds-select");
-    }
 
     const sgdsInput = await this._input;
     this._mixinSetFormValue();
@@ -221,6 +215,15 @@ export class SgdsComboBox extends SelectElement {
     if (!this._isTouched && this.value === "") return;
     if (this._mixinShouldSkipSgdsValidation()) return;
     this.invalid = !this._mixinReportValidity();
+  }
+
+  /** Emits sgds-change and sgds-select events. Call after setting this.value from user interaction. */
+  private _emitChangeEvents() {
+    this._mixinSetFormValue();
+    this.emit("sgds-change");
+    if (this.value) {
+      this.emit("sgds-select");
+    }
   }
 
   @watch("optionList", { waitUntilFirstUpdate: true })
@@ -271,6 +274,7 @@ export class SgdsComboBox extends SelectElement {
       this.selectedItems = [];
       this.value = this.selectedItems.join(";");
       this.options.forEach(o => (o.active = false));
+      this._emitChangeEvents();
     }
     // There is a race condition in certain situations where this.optionList is not fully updated during slotchange
     // Hence instead of using this.optionList, we have to perform a query on the <sgds-combo-box-option> elements
@@ -325,6 +329,7 @@ export class SgdsComboBox extends SelectElement {
         this.hideMenu();
       }
     }
+    this._emitChangeEvents();
   }
 
   private _handleItemUnselect(e: Event) {
@@ -341,6 +346,7 @@ export class SgdsComboBox extends SelectElement {
 
     this.selectedItems = this.selectedItems.filter(i => i.value !== foundItem.value);
     this.value = this.selectedItems.map(i => i.value).join(";");
+    this._emitChangeEvents();
   }
 
   private async _handleBadgeDismissed(e: CustomEvent, item: SgdsComboBoxOptionData) {
@@ -349,6 +355,7 @@ export class SgdsComboBox extends SelectElement {
     this.options?.forEach(o => (o.value === removedValue ? (o.active = false) : null));
     this.selectedItems = this.selectedItems.filter(i => i.value !== item.value);
     this.value = this.selectedItems.map(i => i.value).join(";");
+    this._emitChangeEvents();
   }
 
   private async _handleMultiSelectKeyDown(e: KeyboardEvent) {
@@ -363,6 +370,7 @@ export class SgdsComboBox extends SelectElement {
         this.options?.forEach(o => (o.value === removedValue ? (o.active = false) : null));
         this.selectedItems = this.selectedItems.slice(0, -1);
         this.value = this.selectedItems.map(i => i.value).join(";");
+        this._emitChangeEvents();
       }
     }
   }
@@ -395,6 +403,7 @@ export class SgdsComboBox extends SelectElement {
   protected async _handleClear() {
     this.value = this.displayValue = "";
     this.options?.forEach(o => (o.active = false));
+    this._emitChangeEvents();
 
     const sgdsInput = await this._input;
     sgdsInput.focus();
