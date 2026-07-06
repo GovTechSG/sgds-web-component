@@ -10,6 +10,9 @@ export const Template = args => {
         ?hasFeedback=${args.hasFeedback}
         hintText=${ifDefined(args.hintText)}
         ?required=${args.required}
+        ?disabled=${args.disabled}
+        name=${ifDefined(args.name)}
+        ?invalid=${args.invalid}
       >
         <sgds-checkbox value="watermelon">Watermelon</sgds-checkbox>
         <sgds-checkbox value="apple">Apple</sgds-checkbox>

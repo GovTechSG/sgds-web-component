@@ -225,7 +225,7 @@ const DisableValidationByInputTemplate = args => {
         if (!e.target.value) {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Please select a gender";
-             } else {
+        } else {
           e.target.setInvalid(false);
         }
       });
@@ -446,7 +446,7 @@ const DisableValidationByFormTemplate = args => {
         if (!e.target.value) {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Please select a gender";
-           } else {
+        } else {
           e.target.setInvalid(false);
         }
       });
