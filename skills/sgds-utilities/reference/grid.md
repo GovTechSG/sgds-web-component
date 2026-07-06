@@ -96,7 +96,7 @@ Use when content sits alongside a sticky sidebar (i.e. the Sidebar App Layout fr
 | LG (1024px+) | 840px |
 | XL (1280px+) | 888px |
 | 2-XL (1440px+) | 1024px |
-| 3-XL (1680px+) | `min(1680px, calc(100% - 96px))` |
+| 3-XL (1680px+) | 1296px |
 
 ### Sidebar Behaviour
 

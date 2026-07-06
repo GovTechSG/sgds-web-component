@@ -174,7 +174,7 @@
 
 @media (min-width: 1680px) {  /* sgds-breakpoint-sbar-3-xl */
   .sgds-container-sidebar {
-    max-width: min(var(--sgds-dimension-1680), calc(100% - 96px)); /* 1680px cap or 48px outer margins, whichever is smaller */
+    max-width: var(--sgds-dimension-1296); /* 1296px cap or 48px outer margins, whichever is smaller */
   }
 
   .sgds-col-3-xl-1 { grid-column: span 1; }
