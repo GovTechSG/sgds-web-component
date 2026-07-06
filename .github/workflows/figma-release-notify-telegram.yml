@@ -5,6 +5,9 @@ on:
     - cron: "23 1 * * 1" # Every Monday at 9:23am SGT (UTC+8)
   workflow_dispatch: # Allow manual trigger
 
+permissions:
+  contents: read
+
 jobs:
   check-figma-versions:
     runs-on: ubuntu-latest
