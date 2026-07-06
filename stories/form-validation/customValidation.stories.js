@@ -234,6 +234,15 @@ const DisableValidationByInputTemplate = args => {
         }
       });
 
+      const radioOne = document.querySelector("sgds-radio-group#custom-validation__radio-novalidate");
+      radioOne.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a gender";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
       const checkboxGroupOne = document.querySelector("sgds-checkbox-group#custom-validation__checkbox-novalidate");
       checkboxGroupOne.addEventListener("sgds-change", e => {
         if (!e.target.value) {
