@@ -14,7 +14,7 @@ export class SgdsSelectOption extends OptionElement {
   };
 
   protected _renderItemContent = () => {
-    return html`<div class="normal-item-content">
+    return html`<div class="normal-item-content" role="presentation">
       <slot></slot>
       ${this.active ? html` <sgds-icon name="check"></sgds-icon> ` : nothing}
     </div>`;
