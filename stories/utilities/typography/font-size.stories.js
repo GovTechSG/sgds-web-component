@@ -99,6 +99,26 @@ const RESPONSIVE_FONT_SIZES = {
       responsive: "18px / 20px / 20px"
     }
   ],
+  list: [
+    {
+      name: "List SM",
+      class: "sgds:text-list-sm",
+      variable: "--sgds-font-size-list-sm",
+      responsive: "14px / 14px / 14px"
+    },
+    {
+      name: "List MD",
+      class: "sgds:text-list-md",
+      variable: "--sgds-font-size-list-md",
+      responsive: "16px / 16px / 16px"
+    },
+    {
+      name: "List LG",
+      class: "sgds:text-list-lg",
+      variable: "--sgds-font-size-list-lg",
+      responsive: "18px / 20px / 20px"
+    }
+  ],
   label: [
     {
       name: "Label XS",
@@ -284,6 +304,152 @@ export const BodySizes = () => html`
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     ${RESPONSIVE_FONT_SIZES.body.map(item => ResponsiveFontSizeTableRow(item))}
+  </sgds-table>
+`;
+
+export const ListSizes = () => html`
+  <sgds-table>
+    <sgds-table-row>
+      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+      <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Sizes (Mobile / Tablet / Desktop)</sgds-table-head>
+      <sgds-table-head>Preview</sgds-table-head>
+    </sgds-table-row>
+    ${ResponsiveFontSizeTableRow(
+      RESPONSIVE_FONT_SIZES.list[2],
+      () => html`
+        <div class="sgds:flex sgds:gap-2-xl">
+          <ul class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal">
+            <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">
+              First item
+            </li>
+            <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">
+              Second item
+              <ul class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal">
+                <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">
+                  Sub item one
+                </li>
+                <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:mt-list-lg">
+                  Sub item two
+                </li>
+              </ul>
+            </li>
+            <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:mt-list-lg">
+              Third item
+            </li>
+          </ul>
+          <ol class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal">
+            <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">
+              First item
+            </li>
+            <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">
+              Second item
+              <ol class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal">
+                <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">
+                  Sub item one
+                </li>
+                <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:mt-list-lg">
+                  Sub item two
+                </li>
+              </ol>
+            </li>
+            <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:mt-list-lg">
+              Third item
+            </li>
+          </ol>
+        </div>
+      `
+    )}
+    ${ResponsiveFontSizeTableRow(
+      RESPONSIVE_FONT_SIZES.list[1],
+      () => html`
+        <div class="sgds:flex sgds:gap-2-xl">
+          <ul class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal">
+            <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">
+              First item
+            </li>
+            <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">
+              Second item
+              <ul class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal">
+                <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">
+                  Sub item one
+                </li>
+                <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:mt-list-md">
+                  Sub item two
+                </li>
+              </ul>
+            </li>
+            <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:mt-list-md">
+              Third item
+            </li>
+          </ul>
+          <ol class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal">
+            <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">
+              First item
+            </li>
+            <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">
+              Second item
+              <ol class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal">
+                <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">
+                  Sub item one
+                </li>
+                <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:mt-list-md">
+                  Sub item two
+                </li>
+              </ol>
+            </li>
+            <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:mt-list-md">
+              Third item
+            </li>
+          </ol>
+        </div>
+      `
+    )}
+    ${ResponsiveFontSizeTableRow(
+      RESPONSIVE_FONT_SIZES.list[0],
+      () => html`
+        <div class="sgds:flex sgds:gap-2-xl">
+          <ul class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal">
+            <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">
+              First item
+            </li>
+            <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">
+              Second item
+              <ul class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal">
+                <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">
+                  Sub item one
+                </li>
+                <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:mt-list-sm">
+                  Sub item two
+                </li>
+              </ul>
+            </li>
+            <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:mt-list-sm">
+              Third item
+            </li>
+          </ul>
+          <ol class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal">
+            <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">
+              First item
+            </li>
+            <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">
+              Second item
+              <ol class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal">
+                <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">
+                  Sub item one
+                </li>
+                <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:mt-list-sm">
+                  Sub item two
+                </li>
+              </ol>
+            </li>
+            <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:mt-list-sm">
+              Third item
+            </li>
+          </ol>
+        </div>
+      `
+    )}
   </sgds-table>
 `;
 

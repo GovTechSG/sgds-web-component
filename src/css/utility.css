@@ -285,6 +285,9 @@
   --text-body-sm: var(--sgds-font-size-body-sm);
   --text-body-md: var(--sgds-font-size-body-md);
   --text-body-lg: var(--sgds-font-size-body-lg);
+  --text-list-sm: var(--sgds-font-size-list-sm);
+  --text-list-md: var(--sgds-font-size-list-md);
+  --text-list-lg: var(--sgds-font-size-list-lg);
   --text-label-xs: var(--sgds-font-size-label-xs);
   --text-label-sm: var(--sgds-font-size-label-sm);
   --text-label-md: var(--sgds-font-size-label-md);
@@ -432,6 +435,11 @@
   --margin-paragraph-md: var(--sgds-paragraph-spacing-md);
   --margin-paragraph-lg: var(--sgds-paragraph-spacing-lg);
   --margin-paragraph-xl: var(--sgds-paragraph-spacing-xl);
+
+  /* List Spacing */
+  --margin-list-sm: var(--sgds-list-spacing-sm);
+  --margin-list-md: var(--sgds-list-spacing-md);
+  --margin-list-lg: var(--sgds-list-spacing-lg);
 
   /* Z-Index - Primitive */
   --z-0: var(--sgds-z-index-0);

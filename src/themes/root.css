@@ -224,6 +224,11 @@
   --sgds-paragraph-spacing-lg: 1.5rem;
   --sgds-paragraph-spacing-xl: 2rem;
 
+  /* Primitive - List Spacing */
+  --sgds-list-spacing-sm: 0.5rem;
+  --sgds-list-spacing-md: 0.75rem;
+  --sgds-list-spacing-lg: 1rem;
+
   /* Primitive - Spacer */
   --sgds-spacer-0: 0rem;
   --sgds-spacer-1: 0.125rem;
