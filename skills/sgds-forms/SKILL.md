@@ -155,7 +155,7 @@ For 3rd-party validation libraries (e.g. Zod) or fully custom logic, disable SGD
 
 ### Option 1 — Disable per component with `noValidate`
 
-Currently supported on **`<sgds-input>`**, **`<sgds-textarea>`**, **`<sgds-combo-box>`**, **`<sgds-datepicker>`**, **`<sgds-file-upload>`**, **`<sgds-select>`**, **`<sgds-radio-group>`**, **`<sgds-checkbox>`**, and **`<sgds-checkbox-group>`**. Other components are WIP.
+Currently supported on **`<sgds-input>`**, **`<sgds-textarea>`**, **`<sgds-combo-box>`**, **`<sgds-datepicker>`**, **`<sgds-file-upload>`**, **`<sgds-select>`**, and **`<sgds-radio-group>`, **`<sgds-checkbox>`**, and **`<sgds-checkbox-group>`**. Other components are WIP.
 
 ```html
 <sgds-input

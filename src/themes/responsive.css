@@ -25,6 +25,11 @@
   --sgds-font-size-label-md: var(--sgds-font-size-16);
   --sgds-font-size-label-lg: var(--sgds-font-size-18);
 
+  /* Font Size - List */
+  --sgds-font-size-list-sm: var(--sgds-font-size-14);
+  --sgds-font-size-list-md: var(--sgds-font-size-16);
+  --sgds-font-size-list-lg: var(--sgds-font-size-18);
+
   /* Font Size - Caption */
   --sgds-font-size-caption-md: var(--sgds-font-size-14);
 
@@ -117,6 +122,11 @@
     --sgds-font-size-label-sm: var(--sgds-font-size-14);
     --sgds-font-size-label-md: var(--sgds-font-size-16);
     --sgds-font-size-label-lg: var(--sgds-font-size-20);
+
+    /* Font Size - List */
+    --sgds-font-size-list-sm: var(--sgds-font-size-14);
+    --sgds-font-size-list-md: var(--sgds-font-size-16);
+    --sgds-font-size-list-lg: var(--sgds-font-size-20);
 
     /* Font Size - Caption */
     --sgds-font-size-caption-md: var(--sgds-font-size-14);
@@ -211,6 +221,11 @@
     --sgds-font-size-label-sm: var(--sgds-font-size-14);
     --sgds-font-size-label-md: var(--sgds-font-size-16);
     --sgds-font-size-label-lg: var(--sgds-font-size-20);
+
+    /* Font Size - List */
+    --sgds-font-size-list-sm: var(--sgds-font-size-14);
+    --sgds-font-size-list-md: var(--sgds-font-size-16);
+    --sgds-font-size-list-lg: var(--sgds-font-size-20);
 
     /* Font Size - Caption */
     --sgds-font-size-caption-md: var(--sgds-font-size-14);

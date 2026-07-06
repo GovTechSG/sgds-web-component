@@ -27,28 +27,34 @@ label {
 ol,
 ul {
   font-family: var(--sgds-font-family-brand);
-  font-size: var(--sgds-font-size-body-md);
+  font-size: var(--sgds-font-size-list-md);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-xs);
   list-style-position: outside;
   padding-left: var(--sgds-padding-2-xl);
-  margin-top: var(--sgds-margin-xs);
+  margin-top: var(--sgds-margin-none);
+  margin-bottom: var(--sgds-paragraph-spacing-lg);
 }
 
 li {
   font-family: var(--sgds-font-family-brand);
-  font-size: var(--sgds-font-size-body-md);
+  font-size: var(--sgds-font-size-list-md);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-xs);
   list-style-position: outside;
-  margin-top: var(--sgds-margin-xs);
+  margin-top: var(--sgds-list-spacing-md);
+}
+li:last-child {
+  margin-bottom: var(--sgds-margin-none);
 }
 li > ol {
   list-style-type: lower-alpha;
+  margin-bottom: var(--sgds-list-spacing-md);
 }
 li > ul {
   list-style-type: disc;
-}
+  margin-bottom: var(--sgds-list-spacing-md);
+}   
 
 /* HEADINGS */
 h1,
@@ -124,7 +130,7 @@ caption {
 p {
   font-size: var(--sgds-font-size-body-md);
   font-weight: var(--sgds-font-weight-regular);
-  margin-bottom: var(--sgds-paragraph-spacing-xl);
+  margin-bottom: var(--sgds-paragraph-spacing-lg);
   font-family: var(--sgds-font-family-brand);
   line-height: var(--sgds-line-height-xs);
   letter-spacing: var(--sgds-letter-spacing-normal);
