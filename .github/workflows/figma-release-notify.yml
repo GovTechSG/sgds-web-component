@@ -1,0 +1,48 @@
+name: Notify Telegram on Figma Library Update
+
+on:
+  schedule:
+    - cron: "23 1 * * 1" # Every Monday at 9:23am SGT (UTC+8)
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  check-figma-versions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for new Figma library versions
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          FIGMA_FILE_KEY: ${{ secrets.FIGMA_FILE_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_TOPIC_ID: ${{ secrets.TELEGRAM_TOPIC_ID }}
+        run: |
+          # Fetch version history from Figma
+          RESPONSE=$(curl -s -H "X-Figma-Token: ${FIGMA_TOKEN}" \
+            "https://api.figma.com/v1/files/${FIGMA_FILE_KEY}/versions")
+
+          # Get versions from the last 7 days
+          SINCE=$(date -u -d "7 days ago" +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-7d +%Y-%m-%dT%H:%M:%SZ)
+
+          # Parse versions newer than $SINCE and format message
+          MESSAGE=$(echo "$RESPONSE" | jq -r --arg since "$SINCE" '
+            .versions
+            | map(select(.created_at > $since))
+            | if length == 0 then empty
+              else
+                "📐 *SGDS Figma Library Updates (last 7 days)*\n\n" +
+                (map("• *" + .label + "* — " + (.description // "no description") + "\n  _by " + .user.handle + " on " + (.created_at | split("T")[0]) + "_") | join("\n\n"))
+              end
+          ')
+
+          # Send to Telegram if there are new versions
+          if [ -n "$MESSAGE" ]; then
+            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              -d chat_id="${TELEGRAM_CHAT_ID}" \
+              -d message_thread_id="${TELEGRAM_TOPIC_ID}" \
+              -d parse_mode="Markdown" \
+              -d text="${MESSAGE}"
+            echo "Notification sent."
+          else
+            echo "No new versions in the last 7 days."
+          fi
