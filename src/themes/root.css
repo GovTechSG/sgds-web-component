@@ -131,7 +131,7 @@
   --sgds-breakpoint-sbar-lg: var(--sgds-dimension-1024);
   --sgds-breakpoint-sbar-xl: var(--sgds-dimension-1280);
   --sgds-breakpoint-sbar-2-xl: var(--sgds-dimension-1440);
-  --sgds-breakpoint-sbar-3-xl: var(--sgds-dimension-1600);
+  --sgds-breakpoint-sbar-3-xl: var(--sgds-dimension-1680);
 
   /* Primitive - Font Family */
   --sgds-font-family-brand: "Inter", system-ui, sans-serif;
@@ -301,7 +301,7 @@
   --sgds-dimension-1280: 1280px;
   --sgds-dimension-1312: 1312px;
   --sgds-dimension-1440: 1440px;
-  --sgds-dimension-1600: 1600px;
+  --sgds-dimension-1680: 1680px;
 
   /* Semantic - Padding */
   --sgds-padding-none: var(--sgds-spacer-0);
