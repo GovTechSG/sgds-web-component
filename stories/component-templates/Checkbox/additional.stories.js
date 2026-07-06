@@ -67,7 +67,7 @@ const InvalidGroupTemplate = () =>
   `;
 
 export const Indeterminate = {
-  render: Template.bind({}),  
+  render: Template.bind({}),
   name: "Indeterminate",
   args: { ...args, indeterminate: true },
   parameters: {}
