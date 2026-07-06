@@ -256,7 +256,8 @@ export const Default = {
     docs: {
       story: {
         inline: false,
-        height: 440
+        height: 440,
+        controls: { disable: true }
       }
     }
   }
@@ -276,7 +277,8 @@ export const MultiLevel = {
     docs: {
       story: {
         inline: false,
-        height: 440
+        height: 440,
+        controls: { disable: true }
       }
     }
   }
@@ -296,7 +298,8 @@ export const Overlay = {
     docs: {
       story: {
         inline: false,
-        height: 440
+        height: 440,
+        controls: { disable: true }
       }
     },
     argTypes: {
@@ -319,7 +322,8 @@ export const Dynamic = {
     docs: {
       story: {
         inline: false,
-        height: 440
+        height: 440,
+        controls: { disable: true }
       }
     }
   }
@@ -339,9 +343,9 @@ export const LinkedItems = {
     docs: {
       story: {
         inline: false,
-        height: 440
+        height: 440,
+        controls: { disable: true }
       }
     }
-  },
-  tags: ["!dev"]
+  }
 };

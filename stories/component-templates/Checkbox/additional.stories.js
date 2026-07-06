@@ -3,24 +3,28 @@ import { ifDefined } from "lit/directives/if-defined.js";
 
 const ValidationTemplateGroup = args =>
   html`
-    <form>
+    <form class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
       <sgds-checkbox-group required hasFeedback id="sameid">
         <sgds-checkbox value="he">he</sgds-checkbox>
         <sgds-checkbox value="him">him</sgds-checkbox>
       </sgds-checkbox-group>
 
-      <sgds-button type="submit">Submit</sgds-button>
-      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+      <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
+        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+      </div>
     </form>
   `;
 
 const ValidationTemplateSingle = args =>
   html`
-    <form>
+    <form class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
       <sgds-checkbox value="marketing" required hasFeedback="both">I acknowledge to receive marketing...</sgds-checkbox>
       <sgds-checkbox value="subcribe" hasFeedback="both">I agree to subscribe to...</sgds-checkbox>
-      <sgds-button type="submit">Submit</sgds-button>
-      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+      <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
+        <sgds-button type="submit">Submit</sgds-button>
+        <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+      </div>
     </form>
   `;
 
@@ -66,51 +70,44 @@ export const Indeterminate = {
   render: Template.bind({}),
   name: "Indeterminate",
   args: { ...args, indeterminate: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled",
   args: { ...args, disabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Invalid = {
   render: InvalidTemplate.bind({}),
   name: "Invalid states",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const InvalidGroup = {
   render: InvalidGroupTemplate.bind({}),
   name: "Invalid CheckboxGroup",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const Validation = {
   render: ValidationTemplateGroup.bind({}),
-  name: "Validation",
+  name: "Validation for CheckboxGroup",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const ValidationSingle = {
   render: ValidationTemplateSingle.bind({}),
-  name: "Validation",
+  name: "Validation for standalone Checkbox",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const OverrideInvalidFeedback = {
   render: ValidationTemplateGroup.bind({}),
   name: "Override default invalid feedback",
   args: { invalidFeedback: "Custom error message" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

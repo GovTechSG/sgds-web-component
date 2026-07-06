@@ -32,20 +32,17 @@ export const Sizes = {
   render: SizeTemplate.bind({}),
   name: "Sizes",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const Label = {
   render: LabelTemplate.bind({}),
   name: "Labels",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const Icon = {
   render: IconTemplate.bind({}),
   name: "Icon",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

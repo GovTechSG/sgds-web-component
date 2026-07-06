@@ -110,7 +110,8 @@ export const SmallSize = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
+        height: "700px",
+        controls: { disable: true }
       }
     }
   }
@@ -123,7 +124,8 @@ export const MediumSize = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
+        height: "700px",
+        controls: { disable: true }
       }
     }
   }
@@ -136,7 +138,8 @@ export const LargeSize = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
+        height: "700px",
+        controls: { disable: true }
       }
     }
   }
@@ -149,7 +152,8 @@ export const ExtraLargeSize = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
+        height: "700px",
+        controls: { disable: true }
       }
     }
   }
@@ -162,7 +166,8 @@ export const FullscreenSize = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
+        height: "700px",
+        controls: { disable: true }
       }
     }
   }
@@ -176,7 +181,8 @@ export const LongContent = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
+        height: "700px",
+        controls: { disable: true }
       }
     }
   }
@@ -190,7 +196,8 @@ export const noAnimation = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
+        height: "700px",
+        controls: { disable: true }
       }
     }
   }
@@ -233,7 +240,8 @@ export const NoCloseButton = {
     layout: "fullscreen",
     docs: {
       story: {
-        height: "700px"
+        height: "700px",
+        controls: { disable: true }
       }
     }
   }

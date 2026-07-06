@@ -121,6 +121,7 @@
 
         if (rootFiles.length > 0) {
           const dropdown = document.createElement("sgds-mainnav-dropdown");
+          dropdown.setAttribute("ariaLabel", "Components menu");
           const toggler = document.createElement("span");
           toggler.setAttribute("slot", "toggler");
           toggler.textContent = "Components";
@@ -129,7 +130,7 @@
           for (const file of rootFiles) {
             const item = document.createElement("sgds-dropdown-item");
             const link = document.createElement("a");
-            link.href = file.url;
+            link.href = `./${file.url}`;
             link.textContent = file.title;
             item.appendChild(link);
             dropdown.appendChild(item);
@@ -145,9 +146,11 @@
           if (!folderFiles || folderFiles.length === 0) continue;
 
           const dropdown = document.createElement("sgds-mainnav-dropdown");
+          const folderLabel = folder.charAt(0).toUpperCase() + folder.slice(1);
+          dropdown.setAttribute("ariaLabel", `${folderLabel} menu`);
           const toggler = document.createElement("span");
           toggler.setAttribute("slot", "toggler");
-          toggler.textContent = folder.charAt(0).toUpperCase() + folder.slice(1);
+          toggler.textContent = folderLabel;
           dropdown.appendChild(toggler);
 
           for (const file of folderFiles) {
@@ -302,7 +305,17 @@
           }, {});
 
           // Sort categories by appearance order
-          const categoryOrder = [null, "pattern", "blocks", "templates", "layouts", "patterns", "typography", "utility", "css"];
+          const categoryOrder = [
+            null,
+            "pattern",
+            "blocks",
+            "templates",
+            "layouts",
+            "patterns",
+            "typography",
+            "utility",
+            "css"
+          ];
 
           const sortedCategories = categoryOrder.filter(cat => groupedByFolder[cat]);
 

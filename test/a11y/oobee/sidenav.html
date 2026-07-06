@@ -5,12 +5,188 @@
     <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <!-- 1. SidenavItem as a direct link (link type) -->
+    <h2>SidenavItem as Link</h2>
     <sgds-sidenav>
       <sgds-sidenav-item>
-        <a href="#">Link 1</a>
+        <a href="#">Item as a link</a>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+
+    <!-- 2. SidenavItem as a menu (menu type with child links) -->
+    <h2>SidenavItem as Menu</h2>
+    <sgds-sidenav>
+      <sgds-sidenav-item ariaLabel="SidenavItem as menu">
+        <span slot="title">SidenavItem as menu</span>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink 1</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink 2</a>
+        </sgds-sidenav-link>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+
+    <!-- 3. Embedded menu (3-level nesting: L1 → L2 → L3) -->
+    <h2>Embedded Menu (L3 Nesting)</h2>
+    <sgds-sidenav>
+      <sgds-sidenav-item ariaLabel="SidenavItem L1">
+        <span slot="title">SidenavItem L1</span>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink 1 L2</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink 2 L2</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-item ariaLabel="SidenavItem L2">
+          <span slot="title">SidenavItem L2</span>
+          <sgds-sidenav-link>
+            <a href="#">SidenavLink 1 L3</a>
+          </sgds-sidenav-link>
+          <sgds-sidenav-link>
+            <a href="#">SidenavLink 2 L3</a>
+          </sgds-sidenav-link>
+        </sgds-sidenav-item>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+
+    <!-- 4. Icons on first level (menu type with icon) -->
+    <h2>Icons on First Level</h2>
+    <sgds-sidenav>
+      <sgds-sidenav-item ariaLabel="SidenavItem L1">
+        <span slot="title">SidenavItem L1</span>
+        <sgds-icon slot="icon" name="placeholder"></sgds-icon>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink 1 L2</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink 2 L2</a>
+        </sgds-sidenav-link>
       </sgds-sidenav-item>
       <sgds-sidenav-item>
-        <a href="#">Link 2</a>
+        <a href="#"><sgds-icon name="placeholder"></sgds-icon> SidenavItem L1 (link)</a>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+
+    <!-- 5. Active sidenav link -->
+    <h2>Active SidenavLink</h2>
+    <sgds-sidenav>
+      <sgds-sidenav-item ariaLabel="SideNavItem L1 label">
+        <span slot="title">SideNavItem L1 label (menu)</span>
+        <sgds-sidenav-link active>
+          <a href="#">SidenavLink L2 label (active)</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink L2 label</a>
+        </sgds-sidenav-link>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+
+    <!-- 6. Active SidenavItem as a link -->
+    <h2>Active SidenavItem as Link</h2>
+    <sgds-sidenav>
+      <sgds-sidenav-item ariaLabel="SideNavItem L1 label">
+        <span slot="title">SideNavItem L1 label (menu)</span>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink L2 label</a>
+        </sgds-sidenav-link>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item active>
+        <a href="#">SidenavItem L1 label (link, active)</a>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+
+    <!-- 7. Active SidenavItem as a menu (auto-opens) -->
+    <h2>Active SidenavItem as Menu</h2>
+    <sgds-sidenav>
+      <sgds-sidenav-item active ariaLabel="SideNavItem L1 label active">
+        <span slot="title">SideNavItem L1 label (menu, active)</span>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink L2 label</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink L2 label</a>
+        </sgds-sidenav-link>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item ariaLabel="SideNavItem L1 label">
+        <span slot="title">SideNavItem L1 label (menu)</span>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink L2 label</a>
+        </sgds-sidenav-link>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+
+    <!-- 8. Sticky sidenav -->
+    <h2>Sticky Sidenav</h2>
+    <div style="height: 300px; overflow: auto;">
+      <sgds-sidenav sticky>
+        <sgds-sidenav-item active ariaLabel="Active Section">
+          <span slot="title">Active Section</span>
+          <sgds-sidenav-link active>
+            <a href="#">Current Page</a>
+          </sgds-sidenav-link>
+          <sgds-sidenav-link>
+            <a href="#">Other Page</a>
+          </sgds-sidenav-link>
+        </sgds-sidenav-item>
+        <sgds-sidenav-item>
+          <a href="#">Direct Link</a>
+        </sgds-sidenav-item>
+      </sgds-sidenav>
+    </div>
+
+    <!-- 12. Multiple items: mixed menu and link types -->
+    <h2>Mixed Menu and Link Types</h2>
+    <sgds-sidenav>
+      <sgds-sidenav-item ariaLabel="Getting Started">
+        <span slot="title">Getting Started</span>
+        <sgds-sidenav-link active>
+          <a href="#">Overview</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">Installation</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link disabled>
+          <a href="#">Migration</a>
+        </sgds-sidenav-link>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item ariaLabel="Components">
+        <span slot="title">Components</span>
+        <sgds-sidenav-link>
+          <a href="#">Buttons</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-item ariaLabel="Forms">
+          <span slot="title">Forms</span>
+          <sgds-sidenav-link>
+            <a href="#">Input</a>
+          </sgds-sidenav-link>
+          <sgds-sidenav-link>
+            <a href="#">Select</a>
+          </sgds-sidenav-link>
+        </sgds-sidenav-item>
+      </sgds-sidenav-item>
+      <sgds-sidenav-item>
+        <a href="#">Changelog</a>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+
+    <!-- 13. Active link within embedded L3 menu -->
+    <h2>Active Link in L3 Nesting</h2>
+    <sgds-sidenav>
+      <sgds-sidenav-item active ariaLabel="SidenavItem L1">
+        <span slot="title">SidenavItem L1</span>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink 1 L2</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-item ariaLabel="SidenavItem L2">
+          <span slot="title">SidenavItem L2</span>
+          <sgds-sidenav-link>
+            <a href="#">SidenavLink 1 L3</a>
+          </sgds-sidenav-link>
+          <sgds-sidenav-link active>
+            <a href="#">SidenavLink 2 L3 (active)</a>
+          </sgds-sidenav-link>
+        </sgds-sidenav-item>
       </sgds-sidenav-item>
     </sgds-sidenav>
   </body>

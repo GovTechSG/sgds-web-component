@@ -170,6 +170,7 @@
 :host([disabled]) .nav-link::slotted(a),
 .nav-link::slotted(a[disabled]) {
   text-decoration: none !important;
+  pointer-events: none;
 }
 @media (prefers-reduced-motion: reduce) {
   :host(:not([active])) .nav-link::slotted(a:not(:hover)),

@@ -1,3 +1,39 @@
+## v3.22.1 (2026-06-24)
+
+### Fix
+
+- **Card**: only stretchedLink cards get hover effects [skip-cd][run-chromatic] (#718)
+- **React**: recommendations for react ssr users and types definition to support camelCase events  (#717)
+- **React**: recommendations for react ssr users and types definition to support camelCase evetns
+- **Card**: only stretchedLink cards get hover effects
+
+## v3.22.0 (2026-06-23)
+
+### Feat
+
+- **Combobox, Input**: added autocomplete prop [run-chromatic] (#710)
+- **Combobox, Input**: added stories and new prop autocomplete
+- **Input**: added new autocomplete prop for input and combobox
+- **Button**: value and name prop for form use case [run-chromatic][skip-cd] (#704)
+- **Button**: add name and value prop for form case
+
+### Fix
+
+- **Link**: add pointer-events: none to a tag when sgds-link is disabled (#715)
+- **Link**: add pointer-events: none to a tag when sgds-link is disabled
+- **react**: types definition to include detailedhtmlprops[skip-cd] (#703)
+- **react**: types definition to include detailedhtmlprops
+- **Table**: resolve aria-required-children violation on role="table" [skip-cd][run-chromatic] (#709)
+- **Table**: resolve aria-required-children violation on role="table" [run-chromatic][skip-cd]
+- **Datepicker**: accessibility violations on calendar and calendar header [run-chromatic][skip-cd] (#706)
+- **Datepicker**: accessibility violations flagged by oobee after calendar opens
+- **Sidebar**: accessibility violations from oobee testing [run-chromatic][skip-cd] (#707)
+- **SidebarGroup**: aria fixes form oobee violatiosn
+- **Select, ComboBox**: accessibility violations after menuIsOpen from oobee [skip-cd][run-chromatic] (#705)
+- **Select, ComboBox**: accessibility violations when menuIsOpen
+- **TabPanel**: add inert attr to prevent interactive elements from being reachable when panel hidden [skip-cd] (#701)
+- **TabPanel**: add inert attr to prevent interactive elements from being reachable when panel hidden
+
 ## v3.21.1 (2026-06-09)
 
 ### Fix

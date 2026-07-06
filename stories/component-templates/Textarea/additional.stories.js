@@ -36,29 +36,25 @@ export const Validation = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const OverrideInvalidFeedback = {
   render: ValidationTemplate.bind({}),
   name: "Validation",
   args: { invalidFeedback: "Custom error message" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const DefaultValue = {
   render: DefaultValueTemplate.bind({}),
   name: "Default Value",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled",
   args: { ...args, disabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

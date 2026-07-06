@@ -1,7 +1,8 @@
-import { assert, elementUpdated, expect, fixture, html, waitUntil } from "@open-wc/testing";
+import { assert, elementUpdated, expect, fixture, fixtureCleanup, html, waitUntil } from "@open-wc/testing";
 import { sendKeys } from "@web/test-runner-commands";
 import Sinon from "sinon";
-import { SgdsButton, SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
+import type { SgdsButton } from "../src/components";
+import { SgdsCheckbox, SgdsCheckboxGroup } from "../src/components";
 import "./sgds-web-component";
 
 describe("<sgds-checkbox>", () => {
@@ -827,5 +828,263 @@ describe("sgds-checkbox-group", () => {
     await waitUntil(() => group?.invalid);
     // await elementUpdated(group!);
     expect(group?.invalid).to.be.true;
+  });
+});
+
+describe("noValidate disables native and sgds validation for standalone checkbox", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("should override required and allow form submission when noValidate is set", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox noValidate required value="terms">I agree</sgds-checkbox>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = Sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("with noValidate, invalid state does not appear on blur when required and unchecked", async () => {
+    const el = await fixture<SgdsCheckbox>(html`
+      <sgds-checkbox noValidate hasFeedback="both" required value="terms">I agree</sgds-checkbox>
+    `);
+    el.input.focus();
+    el.input.blur();
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+  });
+
+  it("with noValidate, setInvalid(true) still works for programmatic control", async () => {
+    const el = await fixture<SgdsCheckbox>(html`
+      <sgds-checkbox noValidate required hasFeedback="both" value="terms">I agree</sgds-checkbox>
+    `);
+    el.setInvalid(true);
+    el.invalidFeedback = "You must agree to the terms";
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+  });
+
+  it("setInvalid(true) emits sgds-invalid event", async () => {
+    const el = await fixture<SgdsCheckbox>(html` <sgds-checkbox noValidate value="terms">I agree</sgds-checkbox> `);
+    const handler = Sinon.spy();
+    el.addEventListener("sgds-invalid", handler);
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("setInvalid(false) emits sgds-valid event", async () => {
+    const el = await fixture<SgdsCheckbox>(html` <sgds-checkbox noValidate value="terms">I agree</sgds-checkbox> `);
+    const handler = Sinon.spy();
+    el.addEventListener("sgds-valid", handler);
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+});
+
+describe("noValidate disables native and sgds validation for checkbox-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("should override required and allow form submission when noValidate is set", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group noValidate required hasFeedback>
+          <sgds-checkbox value="a">A</sgds-checkbox>
+          <sgds-checkbox value="b">B</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = Sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("with noValidate, invalid state does not appear after all checkboxes blurred", async () => {
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group noValidate hasFeedback required>
+        <sgds-checkbox value="a">A</sgds-checkbox>
+        <sgds-checkbox value="b">B</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    const checkboxes = el.querySelectorAll("sgds-checkbox");
+    checkboxes.forEach(cb => cb.dispatchEvent(new Event("sgds-blur", { bubbles: true })));
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+  });
+
+  it("with noValidate, setInvalid(true) still works for programmatic control", async () => {
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group noValidate required hasFeedback>
+        <sgds-checkbox value="a">A</sgds-checkbox>
+        <sgds-checkbox value="b">B</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    el.setInvalid(true);
+    el.invalidFeedback = "Please select at least one option";
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+  });
+
+  it("setInvalid(true) emits sgds-invalid event", async () => {
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group noValidate>
+        <sgds-checkbox value="a">A</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    const handler = Sinon.spy();
+    el.addEventListener("sgds-invalid", handler);
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("setInvalid(false) emits sgds-valid event", async () => {
+    const el = await fixture<SgdsCheckboxGroup>(html`
+      <sgds-checkbox-group noValidate>
+        <sgds-checkbox value="a">A</sgds-checkbox>
+      </sgds-checkbox-group>
+    `);
+    const handler = Sinon.spy();
+    el.addEventListener("sgds-valid", handler);
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+});
+
+describe("form novalidate for checkbox-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("when form has novalidate, form submission proceeds even when checkbox-group is required", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-checkbox-group required>
+          <sgds-checkbox value="a">A</sgds-checkbox>
+          <sgds-checkbox value="b">B</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="submit"></sgds-button>
+      </form>
+    `);
+    const submitButton = form.querySelector<SgdsButton>("sgds-button");
+    const submitHandler = Sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+    submitButton?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+});
+
+describe("reset clears invalid state when noValidate is true for checkbox-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group noValidate name="test">
+          <sgds-checkbox value="a">A</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group");
+    group?.setInvalid(true);
+    await group?.updateComplete;
+    expect(group?.invalid).to.be.true;
+
+    setTimeout(() => form.querySelector<SgdsButton>("sgds-button")?.click());
+    await waitUntil(() => group?.invalid === false);
+    expect(group?.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-checkbox-group name="test">
+          <sgds-checkbox value="a">A</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group");
+    group?.setInvalid(true);
+    await group?.updateComplete;
+    expect(group?.invalid).to.be.true;
+
+    setTimeout(() => form.querySelector<SgdsButton>("sgds-button")?.click());
+    await waitUntil(() => group?.invalid === false);
+    expect(group?.invalid).to.be.false;
+  });
+});
+
+describe("FormData is correct when sgds-change fires for checkbox-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("FormData should reflect the updated value inside sgds-change listener", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group name="colors" value="">
+          <sgds-checkbox value="red">Red</sgds-checkbox>
+          <sgds-checkbox value="blue">Blue</sgds-checkbox>
+        </sgds-checkbox-group>
+      </form>
+    `);
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group")!;
+    await group.updateComplete;
+
+    let formDataValue: string | null = null;
+    group.addEventListener("sgds-change", () => {
+      const formData = new FormData(form);
+      formDataValue = formData.get("colors") as string;
+    });
+
+    // Simulate user clicking "red" checkbox
+    const redCheckbox = group.querySelector<SgdsCheckbox>('sgds-checkbox[value="red"]')!;
+    redCheckbox.click();
+    await group.updateComplete;
+
+    expect(formDataValue).to.equal("red");
+  });
+});
+
+describe("reset does not emit sgds-change for checkbox-group", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("should not emit sgds-change when form is reset", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox-group noValidate name="test" value="a">
+          <sgds-checkbox value="a">A</sgds-checkbox>
+          <sgds-checkbox value="b">B</sgds-checkbox>
+        </sgds-checkbox-group>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const group = form.querySelector<SgdsCheckboxGroup>("sgds-checkbox-group")!;
+    await group.updateComplete;
+
+    // Check "b" to change the value from default
+    const bCheckbox = group.querySelector<SgdsCheckbox>('sgds-checkbox[value="b"]')!;
+    bCheckbox.click();
+    await group.updateComplete;
+
+    const changeHandler = Sinon.spy();
+    group.addEventListener("sgds-change", changeHandler);
+
+    // Reset the form
+    setTimeout(() => form.querySelector<SgdsButton>("sgds-button")?.click());
+    await waitUntil(() => group.value === "a");
+    await group.updateComplete;
+
+    expect(changeHandler).to.not.have.been.called;
   });
 });

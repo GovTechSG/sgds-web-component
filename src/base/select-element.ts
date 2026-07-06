@@ -79,6 +79,9 @@ export class SelectElement
   /** Marks the component as invalid. Replace the pseudo :invalid selector. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** Controlling of autocomplete behaviour */
+  @property({ type: String, reflect: true }) autocomplete = "on";
+
   /** Programatically sets the invalid state of the component. Pass in boolean value in the argument */
   public setInvalid(bool: boolean) {
     this.invalid = bool;
@@ -140,6 +143,12 @@ export class SelectElement
    */
   public reportValidity(): boolean {
     return this._mixinReportValidity();
+  }
+  /**
+   * Sets the validity state of the element
+   */
+  public setValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void {
+    return this._mixinSetValidity(flags, message, anchor);
   }
   /**
    * Checks for validity without any native error popup message

@@ -50,38 +50,33 @@ export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variants",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const OutlinedVariants = {
   render: OutlinedVariantTemplate.bind({}),
   name: "Outlined variants",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Dismissible = {
   render: DismissibleTemplate.bind({}),
   name: "Dismissible",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const WithIcon = {
   render: IconTemplate.bind({}),
   name: "Icon",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const WithTruncation = {
   render: TruncationTemplate.bind({}),
   name: "Truncation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

@@ -28,8 +28,7 @@ export const Stretched = {
   render: StretchedTemplate.bind({}),
   name: "Stretched link",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const DisabledTemplate = () => {
@@ -60,8 +59,7 @@ export const Disabled = {
   render: DisabledTemplate.bind({}),
   name: "Disabled state",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const OrientationTemplate = () => {
@@ -109,8 +107,7 @@ export const Orientation = {
   render: OrientationTemplate.bind({}),
   name: "Orientation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const ImagePositionTemplate = () => {
@@ -192,8 +189,7 @@ export const ImagePosition = {
   render: ImagePositionTemplate.bind({}),
   name: "Image position",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const ImageAdjustmentTemplate = () => {
@@ -258,8 +254,7 @@ export const ImageAdjustment = {
   render: ImageAdjustmentTemplate.bind({}),
   name: "Image adjustment",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const HideBorderTemplate = () => {
@@ -341,8 +336,7 @@ export const HideBorder = {
   render: HideBorderTemplate.bind({}),
   name: "Hide border",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const TintedTemplate = () => {
@@ -373,8 +367,7 @@ export const Tinted = {
   render: TintedTemplate.bind({}),
   name: "Tinted",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const OverflowMenuTemplate = () => {
@@ -383,9 +376,9 @@ const OverflowMenuTemplate = () => {
       <sgds-card>
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <sgds-overflow-menu slot="menu">
-          <sgds-dropdown-item>View</sgds-dropdown-item>
-          <sgds-dropdown-item>Edit</sgds-dropdown-item>
-          <sgds-dropdown-item>Delete</sgds-dropdown-item>
+          <sgds-dropdown-item ariaLabel="View">View</sgds-dropdown-item>
+          <sgds-dropdown-item ariaLabel="Edit">Edit</sgds-dropdown-item>
+          <sgds-dropdown-item ariaLabel="Delete">Delete</sgds-dropdown-item>
         </sgds-overflow-menu>
         <span slot="subtitle">EVENTS</span>
         <span slot="title">Innovative solutions for you</span>
@@ -412,6 +405,5 @@ export const OverflowMenu = {
   render: OverflowMenuTemplate.bind({}),
   name: "Overflow menu",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

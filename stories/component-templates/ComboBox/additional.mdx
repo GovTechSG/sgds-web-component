@@ -109,7 +109,7 @@ comboBox.filterFunction = (inputValue, menuItem) => {
 
 ## Access input's display value via custom event: sgds-input
 
-Hook onto the custom event: `sgds-input` to obtain the display value of the input 
+Hook onto the custom event: `sgds-input` to obtain the display value of the input
 
 <Canvas of={ComboBoxStories.AccessDisplayValue}>
   <Story of={ComboBoxStories.AccessDisplayValue} />
@@ -118,13 +118,11 @@ Hook onto the custom event: `sgds-input` to obtain the display value of the inpu
 ### Types
 
 ```ts
-
-import type { ISgdsComboBoxInputEventDetail } from '@govtechsg/sgds-web-component/components/ComboBox/sgds-combo-box';
+import type { ISgdsComboBoxInputEventDetail } from "@govtechsg/sgds-web-component/components/ComboBox/sgds-combo-box";
 
 const inputHandler = (e: CustomEvent<ISgdsComboBoxInputEventDetail>) => {
-  const displayValue = e.detail.displayValue
-}
-
+  const displayValue = e.detail.displayValue;
+};
 ```
 
 ## Asynchronous ComboBox
@@ -132,10 +130,9 @@ const inputHandler = (e: CustomEvent<ISgdsComboBoxInputEventDetail>) => {
 Asynchronous ComboBox search is for filtering remotely via an API request. The filtering is done through the response of API requests.
 Set the `async` attribute to true. You can then hook onto the `sgds-input` event to listen for input changes and make API requests accordingly.
 
-
-  - Use `loading` property to show loading spinner while waiting for API response.
-  - Use `emptyMenuAsync` property to show "No options" when there are no results from the API response.
-  - Populate the combo box options based on the API response.
+- Use `loading` property to show loading spinner while waiting for API response.
+- Use `emptyMenuAsync` property to show "No options" when there are no results from the API response.
+- Populate the combo box options based on the API response.
 
 <Canvas of={ComboBoxStories.AsyncCombobox}>
   <Story of={ComboBoxStories.AsyncCombobox} />
@@ -147,6 +144,16 @@ Set `required` and `hasFeedback` to enable constraint validation with feedback s
 
 <Canvas of={ComboBoxStories.Validation}>
   <Story of={ComboBoxStories.Validation} />
+</Canvas>
+
+## Autocomplete
+
+Use the `autocomplete` prop to control browser autocomplete behaviour on the combo box input. It accepts any valid HTML `autocomplete` attribute value.
+
+Set `autocomplete="on"` (default) to allow the browser to suggest previously entered values. Set `autocomplete="off"` to suppress browser suggestions.
+
+<Canvas of={ComboBoxStories.Autocomplete}>
+  <Story of={ComboBoxStories.Autocomplete} />
 </Canvas>
 
 ### Override default invalid feedback
@@ -165,3 +172,12 @@ Set `noValidate` to disable built-in constraint validation. Use `setInvalid(bool
   <Story of={ComboBoxStories.NoValidate} />
 </Canvas>
 
+## Scroll to bottom detection
+
+Use `scrollBottomOffset` (number, default `0`) to configure how many pixels before the bottom of the menu the `sgds-scroll-end` event fires. This is useful for implementing infinite scroll or lazy-loading more options as the user scrolls toward the end of the list.
+
+Set `scrollBottomOffset` to a positive number (e.g. `50`) to fire the event slightly before the very bottom, giving time to fetch and append new options before the user reaches the end. Negative values are treated as `0`.
+
+<Canvas of={ComboBoxStories.ScrollEnd}>
+  <Story of={ComboBoxStories.ScrollEnd} />
+</Canvas>

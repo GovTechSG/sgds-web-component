@@ -39,14 +39,12 @@ export const Placement = {
   render: PlacementTemplate.bind({}),
   name: "Placement",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Trigger = {
   render: TriggerTemplate.bind({}),
   name: "Trigger",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

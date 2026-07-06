@@ -7,8 +7,7 @@ export const PaginationWithAPI = {
   render: MockPaginationTemplate.bind({}),
   name: "API example",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const PaginationSizes = {
@@ -18,8 +17,7 @@ export const PaginationSizes = {
   `,
   name: "Sizes",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const PaginationVariants = {
@@ -31,8 +29,7 @@ export const PaginationVariants = {
   `,
   name: "Variants",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Navigation = {
@@ -42,6 +39,5 @@ export const Navigation = {
   `,
   name: "Navigation button type",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

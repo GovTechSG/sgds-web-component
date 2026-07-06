@@ -45,11 +45,11 @@ export const Placement = {
   parameters: {
     docs: {
       story: {
-        height: "500px"
+        height: "500px",
+        controls: { disable: true }
       }
     }
-  },
-  tags: ["!dev"]
+  }
 };
 
 const SizeTemplate = () => {
@@ -97,9 +97,9 @@ export const Sizes = {
   parameters: {
     docs: {
       story: {
-        height: "500px"
+        height: "500px",
+        controls: { disable: true }
       }
     }
-  },
-  tags: ["!dev"]
+  }
 };

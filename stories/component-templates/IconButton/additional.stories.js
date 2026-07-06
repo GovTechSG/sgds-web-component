@@ -12,8 +12,7 @@ export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variants",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const ToneTemplate = args => {
@@ -47,8 +46,7 @@ export const Tone = {
   render: ToneTemplate.bind({}),
   name: "Tone",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const SizeTemplate = () => {
@@ -62,8 +60,7 @@ export const Sizes = {
   render: SizeTemplate.bind({}),
   name: "Sizes",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const ActiveTemplate = () => {
@@ -79,8 +76,7 @@ export const Active = {
   render: ActiveTemplate.bind({}),
   name: "Hover / Active state",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Disabled = {
@@ -91,8 +87,7 @@ export const Disabled = {
   `,
   name: "Disabled state",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Loading = {
@@ -122,6 +117,5 @@ export const Loading = {
   `,
   name: "Loading state",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

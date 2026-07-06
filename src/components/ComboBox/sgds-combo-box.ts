@@ -38,6 +38,7 @@ export type { ISgdsComboBoxInputEventDetail };
  * @event sgds-blur -  Emitted when user input is blurred.
  * @event sgds-invalid - Emitted when the combo box's invalid state is set to true.
  * @event sgds-valid - Emitted when the combo box's invalid state is set to false.
+ * @event sgds-scroll-end - Emitted once when the menu is scrolled to within `scrollBottomOffset` pixels of the bottom. Resets when the user scrolls back up.
  */
 export class SgdsComboBox extends SelectElement {
   static styles = [...SelectElement.styles, formTextControlStyle, comboBoxStyle];
@@ -68,6 +69,9 @@ export class SgdsComboBox extends SelectElement {
   /** When filtering remotely and there are no results, set this to true to enable no options feedback on the menu. Applicable for async combo box only. */
   @property({ type: Boolean, reflect: true }) emptyMenuAsync = false;
 
+  /** Number of pixels from the bottom of the menu at which the sgds-scroll-end event fires. */
+  @property({ type: Number, reflect: true }) scrollBottomOffset = 0;
+
   /** The function used to filter the menu list, given the user's input value. */
   @property()
   filterFunction: (inputValue: string, item: SgdsComboBoxOptionData) => boolean = (inputValue, item) => {
@@ -84,6 +88,9 @@ export class SgdsComboBox extends SelectElement {
 
   // Used to show and hide the clear button
   @state() protected isFocused = false;
+
+  // Used to determine if the scroll reached the end with offset
+  @state() protected isScrollEnd = false;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -421,6 +428,29 @@ export class SgdsComboBox extends SelectElement {
     }
   }
 
+  /**
+   * Handles scroll events on the menu. Emits `sgds-scroll-end` once when the
+   * scroll position reaches within `scrollBottomOffset` pixels of the bottom.
+   * The event is suppressed until the user scrolls back up, preventing repeated
+   * emissions while the menu stays at the bottom.
+   */
+  private async _handleScroll(e: MouseEvent) {
+    const ele = e.target as HTMLElement;
+    if (ele) {
+      const endOfScroll = ele.scrollHeight - ele.clientHeight;
+      const offset = Math.max(0, this.scrollBottomOffset);
+
+      if (ele.scrollTop >= endOfScroll - offset) {
+        if (!this.isScrollEnd) {
+          this.emit("sgds-scroll-end");
+        }
+        this.isScrollEnd = true;
+      } else {
+        this.isScrollEnd = false;
+      }
+    }
+  }
+
   /** Template for the suffix icon */
   protected suffixIconTemplate: TemplateResult = html`<sgds-icon
     name=${this.menuIsOpen ? "chevron-up" : "chevron-down"}
@@ -489,6 +519,7 @@ export class SgdsComboBox extends SelectElement {
             aria-labelledby="${this._labelId} ${this._controlId}Help ${this.invalid && this.hasFeedback
               ? `${this._controlId}-invalid`
               : ""}"
+            .autocomplete=${this.autocomplete}
           />
         </div>
 
@@ -551,6 +582,7 @@ export class SgdsComboBox extends SelectElement {
           role="menu"
           aria-label=${this.label || "Options"}
           ${ref(this.menuRef)}
+          @scroll=${this._handleScroll}
         >
           <slot
             id="default"
@@ -570,6 +602,7 @@ export class SgdsComboBox extends SelectElement {
             ?required=${this.required}
             tabindex="-1"
             aria-hidden="true"
+            .autocomplete=${this.autocomplete}
           />`
         : nothing}
     `;

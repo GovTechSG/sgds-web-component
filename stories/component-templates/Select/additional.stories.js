@@ -4,8 +4,7 @@ export const SelectDefaultSlot = {
   render: Template.bind({}),
   name: "Populating menu list with default slot",
   args: { ...args, thirdOptionDisabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const SelectMenuListProp = () => {
@@ -228,14 +227,69 @@ export const SelectMenuList = {
   render: SelectMenuListProp.bind({}),
   name: "Populating menu list with property",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const SelectLoading = {
   render: Template.bind({}),
   name: "Loading state",
   args: { ...args, loading: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
+};
+
+const NoValidateTemplate = () => {
+  return html`
+    <form id="novalidate-select-story-form">
+      <sgds-select
+        class="sgds:mb-layout-sm"
+        noValidate
+        hasFeedback
+        label="Fruit"
+        hintText="Custom validation: must select a fruit starting with 'A'"
+        id="novalidate-select-story"
+        placeholder="Select a fruit"
+      >
+        <sgds-select-option value="apple">Apple</sgds-select-option>
+        <sgds-select-option value="apricot">Apricot</sgds-select-option>
+        <sgds-select-option value="banana">Banana</sgds-select-option>
+        <sgds-select-option value="durian">Durian</sgds-select-option>
+      </sgds-select>
+      <sgds-button type="submit">Submit</sgds-button>
+    </form>
+    <script>
+      const noValidateSelect = document.querySelector("#novalidate-select-story");
+      const noValidateFormStory = document.querySelector("#novalidate-select-story-form");
+
+      noValidateSelect.addEventListener("sgds-change", e => {
+        if (!e.target.value) {
+          e.target.setInvalid(false);
+          return;
+        }
+        if (!e.target.value.startsWith("a")) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Custom feedback: selection must start with 'A'";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+
+      noValidateFormStory.addEventListener("submit", e => {
+        e.preventDefault();
+        if (!noValidateSelect.value) {
+          noValidateSelect.setInvalid(true);
+          noValidateSelect.invalidFeedback = "Custom feedback: select an option";
+          return;
+        }
+        if (noValidateSelect.invalid) return;
+        alert("Submitted");
+      });
+    </script>
+  `;
+};
+
+export const NoValidate = {
+  render: NoValidateTemplate.bind({}),
+  name: "Custom Validation with noValidate",
+  args: {},
+  parameters: {}
 };

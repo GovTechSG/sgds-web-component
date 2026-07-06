@@ -15,7 +15,7 @@ describe("sgds-input", () => {
            <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
             <slot name="trailing-icon"></slot>
           </div>
           <slot name="action"></slot>
@@ -35,7 +35,7 @@ describe("sgds-input", () => {
         <div class="form-control-row">
           <div class="form-control-group">
             <slot name="icon"></slot>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
             <span class="form-control-suffix">test</span>
             <slot name="trailing-icon"></slot>
           </div>
@@ -57,7 +57,7 @@ describe("sgds-input", () => {
             <span class="form-control-prefix">
               test
             </span>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
             <slot name="trailing-icon"></slot>
           </div>
             <slot name="action"></slot>
@@ -75,7 +75,7 @@ describe("sgds-input", () => {
           <div class="form-control-row">
             <div class="form-control-group">
               <slot name="icon"></slot>
-              <input type="text" class="form-control" id="test-id" aria-invalid="false" placeholder="placeholder">
+              <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
               <slot name="trailing-icon">
               <sgds-spinner
                 size="sm"
@@ -692,6 +692,42 @@ describe("noValidate disables native and sgds validation behaviours", async () =
     submitButton?.click();
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
+  });
+});
+
+describe("reset clears invalid state when noValidate is true", () => {
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input noValidate name="test"></sgds-input>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    input?.setInvalid(true);
+    await input?.updateComplete;
+    expect(input?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => input?.invalid === false);
+    expect(input?.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-input name="test"></sgds-input>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input");
+    input?.setInvalid(true);
+    await input?.updateComplete;
+    expect(input?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => input?.invalid === false);
+    expect(input?.invalid).to.be.false;
   });
 });
 

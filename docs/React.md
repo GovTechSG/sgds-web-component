@@ -1,8 +1,18 @@
 # React
 
-React 19 fully supports Web Components, enabling seamless integration of custom elements without additional wrappers. Therefore, using React-wrapped Web Components is no longer required, simplifying development and improving interoperability.
+## Recommended: React wrapper components
 
-Our library still outputs the React version of each of our web components for backward compabiltiy, but if you are on React 19, it is highly recommended to use the web components directly as we are looking to phase out the React wrapped components in the future. 
+For **Next.js** and other SSR frameworks, we recommend using the React-wrapped SGDS components (e.g. `<SgdsInput>`) over the native custom element tags (e.g. `<sgds-input>`). The React wrappers resolve hydration timing issues that cause event listeners to fail on initial page load.
+
+For **client-side only** React 19+ apps (e.g. Vite), both approaches work equally well. You may use either the native custom element tags or the React wrappers.
+
+```jsx
+import { SgdsInput } from "@govtechsg/sgds-web-component/react";
+
+function MyComponent() {
+  return <SgdsInput label="Name" onSgdsChange={(e) => console.log(e)} />;
+}
+```
 
 ## React 19 and onwards
 

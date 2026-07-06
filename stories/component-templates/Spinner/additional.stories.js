@@ -28,37 +28,32 @@ export const Tone = {
   args: {},
   parameters: {
     backgrounds: { default: "custom-blue" }
-  },
-  tags: ["!dev"]
+  }
 };
 export const ToneInverseFixedLight = {
   render: ToneInverseAndFixedLightTemplate.bind({}),
   name: "Tone - inverse and fixed light",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Size = {
   render: SizeTemplate.bind({}),
   name: "Size",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Label = {
   render: Template.bind({}),
   name: "Label",
   args: { label: "Label" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const LabelHorizontal = {
   render: Template.bind({}),
   name: "Label - Horizontal",
   args: { label: "Label", orientation: "horizontal" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

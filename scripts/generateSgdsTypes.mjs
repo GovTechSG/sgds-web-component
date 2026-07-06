@@ -16,6 +16,7 @@ import {
   componentNameFromPath,
   toPropsInterface,
   toReactEventPropKey,
+  toCamelCaseEventPropKey,
   shouldIncludeMember,
 } from "./generateSgdsTypes.helpers.mjs";
 
@@ -112,11 +113,15 @@ function buildPropInterfaceSection() {
 
     for (const ev of events) {
       if (!ev.name) continue;
-      const propKey = toEventPropKey(ev.name);
+      const kebabKey = toEventPropKey(ev.name);
+      const camelKey = toCamelCaseEventPropKey(ev.name);
       if (ev.detailType) {
-        propLines.push(`  ${propKey}?: (event: CustomEvent<${ev.detailType}>) => void;`);
+        const type = `(event: CustomEvent<${ev.detailType}>) => void`;
+        propLines.push(`  ${kebabKey}?: ${type};`);
+        propLines.push(`  ${camelKey}?: ${type};`);
       } else {
-        propLines.push(`  ${propKey}?: SgdsEventHandler;`);
+        propLines.push(`  ${kebabKey}?: SgdsEventHandler;`);
+        propLines.push(`  ${camelKey}?: SgdsEventHandler;`);
       }
     }
 
@@ -154,9 +159,9 @@ function generateReactTypes() {
  *   // ES import (tsconfig must include this file via \`include\` or \`typeRoots\`):
  *   import "@govtechsg/sgds-web-component/sgds-types";
  *
- * Custom event handlers use the lowercase kebab-case \`onsgds-*\` form —
- * React 19 maps these directly to native addEventListener calls:
- *   <sgds-input onsgds-change={handler} />
+ * Custom event handlers support both forms:
+ *   - Kebab-case (React 19 intrinsic elements): <sgds-input onsgds-change={handler} />
+ *   - CamelCase (@lit/react wrappers):          <SgdsInput onSgdsChange={handler} />
  */`);
   lines.push("");
   // `export {}` makes this a module so `declare module "react"` is a proper augmentation

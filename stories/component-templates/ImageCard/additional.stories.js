@@ -37,16 +37,14 @@ export const Stretched = {
   render: StretchedLinkTemplate.bind({}),
   name: "Stretched link",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Disabled = {
   render: Template.bind({}),
   name: "Disabled state",
   args: { ...args, disabled: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const OrientationTemplate = () =>
@@ -115,8 +113,7 @@ export const Orientation = {
   render: OrientationTemplate.bind({}),
   name: "Orientation",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const ImagePositionTemplate = () => {
@@ -242,8 +239,7 @@ export const ImagePosition = {
   render: ImagePositionTemplate.bind({}),
   name: "Image position",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const ImageAdjustmentTemplate = () => {
@@ -341,24 +337,21 @@ export const ImageAdjustment = {
   render: ImageAdjustmentTemplate.bind({}),
   name: "Image adjustment",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const HideBorder = {
   render: Template.bind({}),
   name: "Hide border",
   args: { ...args, hideBorder: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Tinted = {
   render: Template.bind({}),
   name: "Tinted",
   args: { ...args, tinted: true },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const NoPaddingTemplate = () =>
@@ -425,6 +418,5 @@ export const NoPadding = {
   render: NoPaddingTemplate.bind({}),
   name: "No padding",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

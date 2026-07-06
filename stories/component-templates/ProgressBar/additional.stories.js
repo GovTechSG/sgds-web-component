@@ -22,13 +22,11 @@ export const Variants = {
   render: VariantTemplate.bind({}),
   name: "Variants",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 export const Label = {
   render: LabelTemplate.bind({}),
   name: "Label",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

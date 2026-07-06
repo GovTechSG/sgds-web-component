@@ -1,6 +1,7 @@
 import { html, PropertyValueMap } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
 import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
@@ -48,6 +49,12 @@ export class SgdsSidenavItem extends SgdsElement {
    */
   @property({ type: Boolean, reflect: true })
   disabled = false;
+
+  /**
+   * Accessible label for the sidenav item's menu button. Forwarded to the button's aria-label attribute.
+   */
+  @property({ type: String })
+  ariaLabel: string;
 
   @state() private isLink = false;
 
@@ -233,6 +240,7 @@ export class SgdsSidenavItem extends SgdsElement {
         aria-expanded=${this.active}
         aria-controls=${this._collapseId}
         aria-current=${this.active}
+        aria-label=${ifDefined(this.ariaLabel)}
         id=${this._buttonId}
         ?disabled=${this.disabled}
         aria-disabled=${this.disabled ? "true" : "false"}

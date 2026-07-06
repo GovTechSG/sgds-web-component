@@ -26,6 +26,5 @@ export const Sizes = {
   render: SizeTemplate.bind({}),
   name: "Sizes",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

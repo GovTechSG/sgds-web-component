@@ -123,6 +123,7 @@ describe("sgds-combo-box ", () => {
           <div class="combobox-input-container">
             <input
               aria-invalid="false"
+              autocomplete="on"
                 class="form-control"
               type="text"
             >
@@ -1881,6 +1882,46 @@ describe("noValidate disables native and sgds validation behaviours", () => {
   });
 });
 
+describe("reset clears invalid state when noValidate is true", () => {
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-combo-box noValidate name="test">
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const comboBox = form.querySelector<SgdsComboBox>("sgds-combo-box");
+    comboBox?.setInvalid(true);
+    await comboBox?.updateComplete;
+    expect(comboBox?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => comboBox?.invalid === false);
+    expect(comboBox?.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-combo-box name="test">
+          <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+        </sgds-combo-box>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const comboBox = form.querySelector<SgdsComboBox>("sgds-combo-box");
+    comboBox?.setInvalid(true);
+    await comboBox?.updateComplete;
+    expect(comboBox?.invalid).to.be.true;
+
+    form.querySelector<SgdsButton>("sgds-button")?.click();
+    await waitUntil(() => comboBox?.invalid === false);
+    expect(comboBox?.invalid).to.be.false;
+  });
+});
+
 describe("form novalidate for combo-box", () => {
   it("when form has novalidate, form submission proceeds even when combo-box is required", async () => {
     const form = await fixture<HTMLFormElement>(html`
@@ -1971,5 +2012,136 @@ describe("setInvalid emits sgds-invalid and sgds-valid events", () => {
     el.setInvalid(false);
     await el.updateComplete;
     expect(validHandler).to.have.been.calledOnce;
+  });
+});
+
+describe("sgds-scroll-end event", () => {
+  const manyOptionsFixture = () => html`
+    <sgds-combo-box menuIsOpen style="--sgds-combo-box-menu-max-height:100px">
+      <sgds-combo-box-option value="a">Afghanistan</sgds-combo-box-option>
+      <sgds-combo-box-option value="b">Albania</sgds-combo-box-option>
+      <sgds-combo-box-option value="c">Algeria</sgds-combo-box-option>
+      <sgds-combo-box-option value="d">Andorra</sgds-combo-box-option>
+      <sgds-combo-box-option value="e">Angola</sgds-combo-box-option>
+      <sgds-combo-box-option value="f">Argentina</sgds-combo-box-option>
+      <sgds-combo-box-option value="g">Armenia</sgds-combo-box-option>
+      <sgds-combo-box-option value="h">Australia</sgds-combo-box-option>
+      <sgds-combo-box-option value="i">Austria</sgds-combo-box-option>
+      <sgds-combo-box-option value="j">Azerbaijan</sgds-combo-box-option>
+    </sgds-combo-box>
+  `;
+
+  it("emits sgds-scroll-end when scrolled to the bottom", async () => {
+    const el = await fixture<SgdsComboBox>(manyOptionsFixture());
+    await el.updateComplete;
+
+    const menu = el.shadowRoot?.querySelector("[role='menu']") as HTMLElement;
+    const handler = sinon.spy();
+    el.addEventListener("sgds-scroll-end", handler);
+
+    menu.scrollTop = menu.scrollHeight - menu.clientHeight;
+    menu.dispatchEvent(new Event("scroll"));
+    await el.updateComplete;
+
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("does not emit sgds-scroll-end again while still at the bottom", async () => {
+    const el = await fixture<SgdsComboBox>(manyOptionsFixture());
+    await el.updateComplete;
+
+    const menu = el.shadowRoot?.querySelector("[role='menu']") as HTMLElement;
+    const handler = sinon.spy();
+    el.addEventListener("sgds-scroll-end", handler);
+
+    menu.scrollTop = menu.scrollHeight - menu.clientHeight;
+    menu.dispatchEvent(new Event("scroll"));
+    await el.updateComplete;
+    menu.dispatchEvent(new Event("scroll"));
+    await el.updateComplete;
+
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("emits sgds-scroll-end again after scrolling back up then back to the bottom", async () => {
+    const el = await fixture<SgdsComboBox>(manyOptionsFixture());
+    await el.updateComplete;
+
+    const menu = el.shadowRoot?.querySelector("[role='menu']") as HTMLElement;
+    const handler = sinon.spy();
+    el.addEventListener("sgds-scroll-end", handler);
+
+    menu.scrollTop = menu.scrollHeight - menu.clientHeight;
+    menu.dispatchEvent(new Event("scroll"));
+    await el.updateComplete;
+
+    menu.scrollTop = 0;
+    menu.dispatchEvent(new Event("scroll"));
+    await el.updateComplete;
+
+    menu.scrollTop = menu.scrollHeight - menu.clientHeight;
+    menu.dispatchEvent(new Event("scroll"));
+    await el.updateComplete;
+
+    expect(handler).to.have.been.calledTwice;
+  });
+
+  it("fires sgds-scroll-end early when scrollBottomOffset is set", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box menuIsOpen scrollBottomOffset="50" style="--sgds-combo-box-menu-max-height:100px">
+        <sgds-combo-box-option value="a">Afghanistan</sgds-combo-box-option>
+        <sgds-combo-box-option value="b">Albania</sgds-combo-box-option>
+        <sgds-combo-box-option value="c">Algeria</sgds-combo-box-option>
+        <sgds-combo-box-option value="d">Andorra</sgds-combo-box-option>
+        <sgds-combo-box-option value="e">Angola</sgds-combo-box-option>
+        <sgds-combo-box-option value="f">Argentina</sgds-combo-box-option>
+        <sgds-combo-box-option value="g">Armenia</sgds-combo-box-option>
+        <sgds-combo-box-option value="h">Australia</sgds-combo-box-option>
+        <sgds-combo-box-option value="i">Austria</sgds-combo-box-option>
+        <sgds-combo-box-option value="j">Azerbaijan</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+
+    const menu = el.shadowRoot?.querySelector("[role='menu']") as HTMLElement;
+    const handler = sinon.spy();
+    el.addEventListener("sgds-scroll-end", handler);
+
+    const endOfScroll = menu.scrollHeight - menu.clientHeight;
+    menu.scrollTop = endOfScroll - 50;
+    menu.dispatchEvent(new Event("scroll"));
+    await el.updateComplete;
+
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("treats negative scrollBottomOffset as 0", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box menuIsOpen scrollBottomOffset="-100">
+        <sgds-combo-box-option value="a">Afghanistan</sgds-combo-box-option>
+        <sgds-combo-box-option value="b">Albania</sgds-combo-box-option>
+        <sgds-combo-box-option value="c">Algeria</sgds-combo-box-option>
+        <sgds-combo-box-option value="d">Andorra</sgds-combo-box-option>
+        <sgds-combo-box-option value="e">Angola</sgds-combo-box-option>
+        <sgds-combo-box-option value="f">Argentina</sgds-combo-box-option>
+        <sgds-combo-box-option value="g">Armenia</sgds-combo-box-option>
+        <sgds-combo-box-option value="h">Australia</sgds-combo-box-option>
+        <sgds-combo-box-option value="i">Austria</sgds-combo-box-option>
+        <sgds-combo-box-option value="j">Azerbaijan</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+
+    const menu = el.shadowRoot?.querySelector("[role='menu']") as HTMLElement;
+    const handler = sinon.spy();
+    el.addEventListener("sgds-scroll-end", handler);
+
+    // Scroll to the exact bottom — should fire because offset is clamped to 0
+    const endOfScroll = menu.scrollHeight - menu.clientHeight;
+    menu.scrollTop = endOfScroll;
+    menu.dispatchEvent(new Event("scroll"));
+    await el.updateComplete;
+
+    expect(handler).to.have.been.calledOnce;
   });
 });

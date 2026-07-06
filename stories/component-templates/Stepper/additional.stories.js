@@ -69,32 +69,28 @@ export const Orientation = {
   render: Template.bind({}),
   name: "Orientation",
   args: { ...args, orientation: "vertical" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Clickable = {
   render: ClickableTemplate.bind({}),
   name: "Clickable",
   args,
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const StepComponent = {
   render: StepComponentTemplate.bind({}),
   name: "With sgds-step Children",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const StepComponentClickable = {
   render: StepComponentClickableTemplate.bind({}),
   name: "With sgds-step Children (Clickable)",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const StepStatesTemplate = () => html`
@@ -115,8 +111,7 @@ export const StepStates = {
   render: StepStatesTemplate.bind({}),
   name: "Step States",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const SlottedClickableTemplate = () => html`
@@ -143,8 +138,7 @@ export const SlottedClickable = {
   render: SlottedClickableTemplate.bind({}),
   name: "Slotted Clickable Items",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const CustomIconTemplate = () => html`
@@ -165,8 +159,7 @@ export const CustomIcon = {
   render: CustomIconTemplate.bind({}),
   name: "Custom Icon",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 const MockStepperTemplate = () => html`<mock-stepper></mock-stepper>`;
@@ -175,6 +168,5 @@ export const StepperExample = {
   render: MockStepperTemplate.bind({}),
   name: "Stepper example",
   args: {},
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };

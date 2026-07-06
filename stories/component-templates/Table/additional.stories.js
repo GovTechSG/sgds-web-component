@@ -144,38 +144,33 @@ export const AlwaysResponsive = {
   render: Template.bind({}),
   name: "Always responsive",
   args: { responsive: "always" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const Responsive = {
   render: Template.bind({}),
   name: "Responsive",
   args: { responsive: "sm" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const StructuredElements = {
   render: StructuredElementsTemplate.bind({}),
   name: "Structured elements",
   args: { responsive: "sm" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const StructuredElementsVertical = {
   render: StructuredElementsTemplateVertical.bind({}),
   name: "Structured elements with vertical",
   args: { responsive: "sm" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
 
 export const StructuredElementsBoth = {
   render: StructuredElementsTemplateBoth.bind({}),
   name: "Structured elements with both header",
   args: { responsive: "sm" },
-  parameters: {},
-  tags: ["!dev"]
+  parameters: {}
 };
