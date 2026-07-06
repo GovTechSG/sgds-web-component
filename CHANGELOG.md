@@ -1,3 +1,47 @@
+## v3.23.0 (2026-07-06)
+
+### Feat
+
+- **Layout**: container sidebar layout new 3-xl [run-chromatic][skip-cd] (#716)
+- **Select**: new noValidate prop for custom validation  (#728) [skip-cd]
+- **RadioGroup**: add noValidate and setInvalid support for custom validation [skip-cd] (#727)
+- **Checkbox**: add noValidate and setInvalid support for custom valdation (#726) [skip-cd]
+- **Checkbox**: add noValidate and setInvalid support for custom validation
+- **MainnavDropdown**: ariaLabel prop for accessibility (#723) [skip-cd]
+- **MainnavDropdown**: add ariaLabel prop for accessible toggle button
+- **DropdownItem**: add ariaLabel prop for accessibility [skip-cd] (#722) [skip-cd]
+- **DropdownItem**: add ariaLabel prop for accessibility
+- **RadioGroup**: add noValidate and setInvalid support for custom validation
+- **Select**: add noValidate and setInvalid support for custom validation
+- **Combobox**: added new scroll-end event when menu reaches the end [run-chromatic] (#721)
+- **Combobox**: added new scroll-end event when menu reaches the end of list
+- **SidenavItem**: new ariaLabel prop to forward to shadow button (#720) [skip-cd]
+- **SidenavItem**: new ariaLabel prop to forward to shadow button
+- **Breakpoint**: update 3-xl max width to be 1296px
+- **Grid**: update the breakpoint 3-xl to 1680px
+- **Layout**: container sidebar layout new 3-xl
+
+### Fix
+
+- **MainnavItem**: prevent reboot.css anchor styles from overriding slotted link colours [skip-cd][run-chromatic] (#744)
+- **MainnavItem**: prevent reboot.css anchor styles from overriding slotted link colors
+- **SelectOption, ComboBoxOption**: assign role=presentation flagged from oobee failures (#730)
+- **ComboBoxOption**: add role presentation to fix oobee error
+- **SelectOption**: add role presentation to fix oobee error
+- **CheckboxGroup**: emit sgds-change only from user interaction
+- **Card**: prevent slot and tabindex attributes from being forwarded to shadow anchor [skip-cd] (#725)
+- **Card**: prevent slot and tabindex attributes from being forwarded to card root anchor
+- **Drawer**: remove reflect attribute from ariaLabel  (#724) [skip-cd]
+- **Drawer**: remove reflect attribute from ariaLabel
+- **RadioGroup**: suppress sgds-change event during form reset
+- **validatorMixin**: reset clears invalid state when noValidate is active
+
+### Refactor
+
+- **Form**: update typography of label from regular to semibold font weight [run-chromatic][skip-cd] (#729)
+- **Form**: update typography of label from regular to semibold font weight
+- **RadioGroup**: move sgds-change emission to direct user click and keyboard action
+
 ## v3.22.1 (2026-06-24)
 
 ### Fix
