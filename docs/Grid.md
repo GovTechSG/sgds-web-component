@@ -19,6 +19,7 @@ The **SGDS Grid System** is a mobile-first, fully responsive layout system based
      - **Large (1024px+)**: 840px max-width
      - **Extra Large (1280px+)**: 888px max-width
      - **Extra Extra Large (1440px+)**: 1024px max-width
+     - **3-XL (1680px+)**: 1296px max-width
    - Centers content horizontally with `margin-left: auto; margin-right: auto;`
 
 3. **Grid (`.sgds-grid`)**:
@@ -54,3 +55,4 @@ The **SGDS Grid System** is a mobile-first, fully responsive layout system based
 | Large             | 1024px - 1279px  | `.sgds-col-lg-*`   | 12      | 888px           | 24      | auto          |
 | Extra Large       | 1280px - 1439px  | `.sgds-col-xl-*`   | 12      | 1168px          | 32      | auto          |
 | Extra Extra Large | 1440px and above | `.sgds-col-2-xl-*` | 12      | 1312px          | 32      | auto          |
+| 3-XL (sidebar only) | 1680px and above | `.sgds-col-3-xl-*` | 12      | 1296px          | 32      | auto          |

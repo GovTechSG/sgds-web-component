@@ -52,6 +52,11 @@
         <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-breakpoint-2-xl</code></sgds-table-cell>
         <sgds-table-cell>1440px</sgds-table-cell>
       </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:3-xl:</code></sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">--sgds-breakpoint-3-xl</code></sgds-table-cell>
+        <sgds-table-cell>1680px (sidebar layouts)</sgds-table-cell>
+      </sgds-table-row>
     </sgds-table>
   </section>
 
@@ -59,7 +64,7 @@
   <section class="sgds:mb-2-xl">
     <h2>Test 1: Background Color Change per Breakpoint</h2>
     <p class="sgds:mb-md sgds:text-subtle">This box changes background color at each breakpoint. Resize the viewport to verify.</p>
-    <div class="sgds:p-2-xl sgds:rounded-sm sgds:text-fixed-light sgds:font-weight-bold sgds:text-center sgds:bg-neutral-default sgds:xs:bg-primary-default sgds:sm:bg-accent-default sgds:md:bg-success-default sgds:lg:bg-warning-default sgds:xl:bg-danger-default sgds:2-xl:bg-info-default">
+    <div class="sgds:p-2-xl sgds:rounded-sm sgds:text-fixed-light sgds:font-weight-bold sgds:text-center sgds:bg-neutral-default sgds:xs:bg-primary-default sgds:sm:bg-accent-default sgds:md:bg-success-default sgds:lg:bg-warning-default sgds:xl:bg-danger-default sgds:2-xl:bg-info-default sgds:3-xl:bg-neutral-default">
       <p>Default: neutral (below 320px)</p>
       <p>xs (320px+): primary (blue)</p>
       <p>sm (512px+): accent (purple)</p>
@@ -67,6 +72,7 @@
       <p>lg (1024px+): warning (yellow)</p>
       <p>xl (1280px+): danger (red)</p>
       <p>2-xl (1440px+): info (teal)</p>
+      <p>3-xl (1680px+): neutral</p>
     </div>
   </section>
 
@@ -93,6 +99,7 @@
       <sgds-badge variant="warning" class="sgds:hidden sgds:lg:inline-flex">lg+ (1024px)</sgds-badge>
       <sgds-badge variant="danger" class="sgds:hidden sgds:xl:inline-flex">xl+ (1280px)</sgds-badge>
       <sgds-badge variant="cyan" class="sgds:hidden sgds:2-xl:inline-flex">2-xl+ (1440px)</sgds-badge>
+      <sgds-badge variant="neutral" class="sgds:hidden sgds:3-xl:inline-flex">3-xl+ (1680px)</sgds-badge>
     </div>
   </section>
 
