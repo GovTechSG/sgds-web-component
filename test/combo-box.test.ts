@@ -1705,7 +1705,7 @@ describe("sgds-combo-box-option (default)", () => {
       el,
       `
        <div class="dropdown-item" tabindex="0">
-       <div class="normal-item-content">
+       <div class="normal-item-content" role="presentation">
                   <slot></slot>
                 </div>
       </div>
@@ -1718,7 +1718,7 @@ describe("sgds-combo-box-option (default)", () => {
       el,
       `
           <div class="dropdown-item active" tabindex="0">
-          <div class="normal-item-content" >
+          <div class="normal-item-content" role="presentation">
             <slot></slot>
             <sgds-icon name="check" size="lg"></sgds-icon>
           </div>
@@ -1732,7 +1732,7 @@ describe("sgds-combo-box-option (default)", () => {
       el,
       `
       <div class="dropdown-item disabled" tabindex="-1">
-          <div class="normal-item-content" >
+          <div class="normal-item-content" role="presentation">
             <slot></slot>
           </div>
         </div>

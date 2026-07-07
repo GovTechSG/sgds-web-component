@@ -43,7 +43,7 @@ export class SgdsComboBoxOption extends OptionElement {
           </sgds-checkbox>
         `
       : html`
-          <div class="normal-item-content">
+          <div class="normal-item-content" role="presentation">
             <slot></slot>
             ${this.active ? html` <sgds-icon name="check"></sgds-icon> ` : nothing}
           </div>

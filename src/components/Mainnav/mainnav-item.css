@@ -96,13 +96,13 @@
 
 ::slotted(*) {
   --sgds-link-color-default: var(--sgds-color-default);
+  --sgds-link-color-emphasis: var(--sgds-color-default);
   display: flex;
   cursor: pointer;
   height: auto !important;
   text-decoration: none !important;
   align-items: center;
-  text-decoration: none;
-  color: var(--sgds-link-color-default, var(--sgds-color-default));
+  color: var(--sgds-color-default) !important;
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   box-sizing: border-box;
 }
@@ -115,22 +115,36 @@
 
 :host(:not([disabled])[active]) ::slotted(*) {
   --sgds-link-color-default: var(--sgds-primary-color-default);
-  color: var(--sgds-link-color-default, var(--sgds-primary-color-default));
+  --sgds-link-color-emphasis: var(--sgds-primary-color-default);
+  color: var(--sgds-primary-color-default) !important;
+}
+
+:host(:not([disabled]):not([active])) ::slotted(a:hover) {
+  --sgds-link-color-emphasis: var(--sgds-color-default);
+  color: var(--sgds-color-default) !important;
+}
+
+:host(:not([disabled])[active]) ::slotted(a:hover) {
+  --sgds-link-color-emphasis: var(--sgds-primary-color-default);
+  color: var(--sgds-primary-color-default) !important;
 }
 
 :host([disabled]) ::slotted(a:hover) {
   --sgds-link-color-emphasis: var(--sgds-color-default);
-  color: var(--sgds-link-color-emphasis, var(--sgds-color-default));
+  color: var(--sgds-color-default) !important;
 }
 
-:host(:not([disabled])) ::slotted(a:hover) {
-  --sgds-link-color-emphasis: var(--sgds-primary-color-default);
-  color: var(--sgds-link-color-emphasis, var(--sgds-primary-color-default));
+:host(:not([disabled]):not([active])) ::slotted(a:active) {
+  color: var(--sgds-color-default) !important;
+}
+
+:host(:not([disabled])[active]) ::slotted(a:active) {
+  color: var(--sgds-primary-color-default) !important;
 }
 
 ::slotted(a:focus-visible) {
   --sgds-link-color-emphasis: var(--sgds-primary-color-default);
-  color: var(--sgds-link-color-emphasis, var(--sgds-primary-color-default));
+  color: var(--sgds-primary-color-default) !important;
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }

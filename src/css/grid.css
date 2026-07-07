@@ -12,6 +12,10 @@
   max-width: calc(100% - 40px); /* outer margin of 20px on each side. Expects sidebar to be overlayed */
 }
 
+.sgds-container-sidebar .sgds-grid {
+  gap: var(--sgds-gap-xl);
+}
+
 .sgds-grid {
   display: grid;
   gap: var(--sgds-gap-md);

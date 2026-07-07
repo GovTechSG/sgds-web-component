@@ -92,9 +92,9 @@ const Template = () => html`
       ${sidebarNav}
       <div class="sgds:flex sgds:flex-col sgds:flex-1 sgds:overflow-y-auto">
         <div class="sgds-container-sidebar sgds:py-layout-md sgds:flex-1">
-          <div class="sgds:flex sgds:gap-layout-md">
-            <div class="content-placeholder sgds:border sgds:border-muted sgds:flex-1"></div>
-            <div class="content-placeholder sgds:border sgds:border-muted sgds:flex-1"></div>
+          <div class="sgds-grid">
+            <div class="content-placeholder sgds:border sgds:border-muted sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"></div>
+            <div class="content-placeholder sgds:border sgds:border-muted sgds-col-4 sgds-col-sm-8 sgds-col-lg-6"></div>
           </div>
         </div>
         <sgds-footer tone="neutral" layout="sidebar"></sgds-footer>
