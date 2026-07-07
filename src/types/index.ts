@@ -28,16 +28,7 @@ export type DrawerPlacement = "top" | "end" | "bottom" | "start";
 export type FileUploadVariant = "default" | "drag-and-drop";
 export type FooterLayout = "default" | "sidebar";
 export type IconSize = "xs" | "sm" | "md" | "lg" | "xl" | "2-xl" | "3-xl";
-export type InputType =
-  | "email"
-  | "number"
-  | "password"
-  | "search"
-  | "tel"
-  | "text"
-  | "time"
-  | "url"
-  | "datetime-local";
+export type InputType = "email" | "number" | "password" | "search" | "tel" | "text" | "time" | "url" | "datetime-local";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 export type ModalSize = "sm" | "md" | "lg" | "xl" | "fullscreen";
 export type PaginationVariant = "default" | "number" | "button" | "description";
