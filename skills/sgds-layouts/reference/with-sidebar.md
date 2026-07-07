@@ -6,14 +6,15 @@ With Sidebar layouts are for dashboards, internal tools, admin portals, and tran
 
 | Breakpoint | `.sgds-container-sidebar` max-width |
 |---|---|
-| < 768px | `100%` |
-| >= 768px (md) | `calc(100% - 96px)` |
-| >= 1024px (lg) | `calc(100% - 96px)` |
-| >= 1280px (xl) | `calc(100% - 96px)` |
-| >= 1440px (2xl) | `calc(100% - 96px)` |
+| < 512px | `calc(100% - 40px)` |
+| >= 512px (sm) | `calc(100% - 48px)` |
+| >= 768px (md) | `auto` (48px margins) |
+| >= 1024px (lg) | `auto` (48px margins) |
+| >= 1280px (xl) | `auto` (48px margins) |
+| >= 1440px (2xl) | `auto` (48px margins) |
 | >= 1680px (3xl) | `1296px` |
 
-**Grid gutter:** `.sgds-grid` inside `.sgds-container-sidebar` always uses `var(--sgds-gap-xl)` (24px) regardless of breakpoint. No gap utility class is needed.
+**Grid gutter:** `.sgds-grid` inside `.sgds-container-sidebar` uses `var(--sgds-gap-md)` (16px) at XS/SM and `var(--sgds-gap-xl)` (24px) from MD (768px) onwards. No gap utility class is needed.
 
 ## Common Structure
 
