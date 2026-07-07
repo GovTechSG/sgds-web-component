@@ -3,6 +3,7 @@ import { property } from "lit/decorators.js";
 import { iconRegistry } from "./icon-registry";
 import SgdsElement from "../../base/sgds-element";
 import iconStyles from "./icon.css";
+import type { IconSize } from "../../types";
 
 /**
  * @summary Icons offer a form of visual shorthand that we are all familiar with. They can label, inform and aid navigation quickly and effectively in minimal space. Icons must first and foremost communicate meaning. By default, the icon component renders icons from `SgdsIcon` library set
@@ -14,7 +15,7 @@ export class SgdsIcon extends SgdsElement {
   @property({ type: String, reflect: true }) name: string;
 
   /** Specifies a small, medium or large icon, the size is medium by default. */
-  @property({ type: String, reflect: true }) size: "xs" | "sm" | "md" | "lg" | "xl" | "2-xl" | "3-xl" = "lg";
+  @property({ type: String, reflect: true }) size: IconSize = "lg";
 
   /** An accessible label for the icon. When set, the SVG is treated as informative. When omitted, the SVG is marked as decorative with aria-hidden="true". */
   @property({ type: String }) ariaLabel: string;

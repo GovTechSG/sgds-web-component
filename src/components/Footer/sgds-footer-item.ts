@@ -4,6 +4,7 @@ import SgdsElement from "../../base/sgds-element";
 import { watch } from "../../utils/watch";
 import footerLinkStyle from "./footer-item.css";
 import type SgdsLink from "../Link/sgds-link";
+import type { SgdsFooterTone } from "../../types";
 
 /**
  * @summary The footer item component organizes links under a clear, descriptive title within the footer. It helps users easily navigate to related resources or information, ensuring clarity and accessibility.
@@ -16,7 +17,7 @@ export class SgdsFooterItem extends SgdsElement {
   static styles = [...SgdsElement.styles, footerLinkStyle];
 
   /** Sets the color tone of the footer item. Inherited from the parent sgds-footer. */
-  @property({ type: String, reflect: true }) tone: "fixed-dark" | "neutral" = "fixed-dark";
+  @property({ type: String, reflect: true }) tone: SgdsFooterTone = "fixed-dark";
 
   /**@internal */
   @watch("tone", { waitUntilFirstUpdate: true })

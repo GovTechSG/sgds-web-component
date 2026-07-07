@@ -7,6 +7,7 @@ import { getAnimation, setDefaultAnimation } from "../../utils/animation-registr
 import { waitForEvent } from "../../utils/event";
 import { watch } from "../../utils/watch";
 import toastStyle from "./toast.css";
+import type { ToastVariant } from "../../types";
 /**
  * @summary Toast allows you to convey quick messaging notifications to the user.
  *
@@ -39,7 +40,7 @@ export class SgdsToast extends SgdsElement {
   /** The amount of time taken in miliseconds for toast to disappear after its first render. It takes effect only when autohide is set to true. Defaults to 5000ms */
   @property({ type: Number, reflect: true }) delay = 5000;
   /**The variant styles of toast */
-  @property({ type: String, reflect: true }) variant: "success" | "warning" | "danger" | "info" = "info";
+  @property({ type: String, reflect: true }) variant: ToastVariant = "info";
   /** Controls whether or not the Toast is dismissible */
   @property({ type: Boolean, reflect: true }) dismissible = false;
 

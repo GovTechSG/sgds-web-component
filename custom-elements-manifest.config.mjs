@@ -12,7 +12,7 @@ const noDash = string => string.replace(/^\s?-/, '').trim();
 const typesByAliasMap = new Map()
 
 export default {
-  globs: ['src/**/sgds-*.ts', 'src/**/*-element.ts'],
+  globs: ['src/types.ts', 'src/**/sgds-*.ts', 'src/**/*-element.ts'],
   exclude: ['**/*.scss', 'src/utils/'],
   plugins: [
     // Append package data

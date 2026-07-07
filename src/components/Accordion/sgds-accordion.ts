@@ -3,9 +3,9 @@ import { property, queryAssignedElements } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import type SgdsAccordionItem from "./sgds-accordion-item";
 import accordionStyle from "./accordion.css";
+import type { AccordionVariant, AccordionDensity } from "../../types";
 
-export type AccordionDensity = "default" | "compact" | "spacious";
-export type AccordionVariant = "default" | "border";
+export type { AccordionDensity, AccordionVariant } from "../../types";
 
 const VALID_KEYS = ["Enter", "ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
 

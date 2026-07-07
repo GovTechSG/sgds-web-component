@@ -7,8 +7,9 @@ import { watch } from "../../utils/watch";
 import SgdsCloseButton from "../CloseButton/sgds-close-button";
 import SgdsIcon from "../Icon/sgds-icon";
 import alertStyle from "./alert.css";
+import type { AlertVariant } from "../../types";
 
-export type AlertVariant = "info" | "success" | "danger" | "warning" | "neutral";
+export type { AlertVariant } from "../../types";
 /**
  * @summary Alerts provide short, timely, and relevant information for your users. It can be a simple text message or customised HTML content with paragraphs, headings and links.
  *

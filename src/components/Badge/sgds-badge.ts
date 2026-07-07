@@ -10,18 +10,9 @@ import SgdsTooltip from "../Tooltip/sgds-tooltip";
 import SgdsCloseButton from "../CloseButton/sgds-close-button";
 
 import { getTextContent } from "../../utils/slot";
+import type { BadgeVariant } from "../../types";
 
-export type BadgeVariant =
-  | "primary"
-  | "accent"
-  | "success"
-  | "danger"
-  | "warning"
-  | "cyan"
-  | "purple"
-  | "neutral"
-  | "white"
-  | "info";
+export type { BadgeVariant } from "../../types";
 
 /**
  * @summary Badges can be used to highlight important bits of information such as labels, notifications & status.

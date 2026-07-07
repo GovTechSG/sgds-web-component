@@ -11,6 +11,7 @@ import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import textareaStyle from "./textarea.css";
 import formTextControlStyles from "../../styles/form-text-control.css";
+import type { TextareaResize } from "../../types";
 
 /**
  * @summary Text areas allow for the collection of input longer than a single line.
@@ -51,7 +52,7 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
   /** Makes the textarea readonly. */
   @property({ type: Boolean, reflect: true }) readonly = false;
   /** Controls how the textarea can be resized. */
-  @property({ type: String, reflect: true }) resize: "none" | "vertical" | "auto" = "vertical";
+  @property({ type: String, reflect: true }) resize: TextareaResize = "vertical";
   /** The native textarea's inputmode attribute. It hints at the type of data that might be entered by the user while editing the element or its contents. This allows a browser to display an appropriate virtual keyboard. */
   @property({ type: String, reflect: true }) inputmode:
     | "none"

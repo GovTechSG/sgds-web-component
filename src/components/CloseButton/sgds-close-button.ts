@@ -3,6 +3,7 @@ import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import closeButtonStyles from "./close-button.css";
 import { warnUnregisteredElements } from "../../utils/ce-registry";
+import type { SgdsCompactSize, CloseButtonTone } from "../../types";
 /**
  * @summary Close button for closing actions. Used in Modal, Drawer, Alert and Toast.
  *
@@ -11,9 +12,9 @@ export class SgdsCloseButton extends SgdsElement {
   static styles = [...SgdsElement.styles, closeButtonStyles];
 
   /** Specifies a large or small button */
-  @property({ type: String, reflect: true }) size: "sm" | "md" = "md";
+  @property({ type: String, reflect: true }) size: SgdsCompactSize = "md";
   /** The tone of the close button */
-  @property({ type: String, reflect: true }) tone: "default" | "fixed-dark" | "fixed-light" = "default";
+  @property({ type: String, reflect: true }) tone: CloseButtonTone = "default";
   /** Disables the close button, preventing click events */
   @property({ type: Boolean, reflect: true }) disabled = false;
 

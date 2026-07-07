@@ -11,6 +11,7 @@ import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { watch } from "../../utils/watch";
 import checkboxStyle from "./checkbox.css";
 import formCheckStyles from "../../styles/form-check.css";
+import type { SgdsHasFeedback } from "../../types";
 
 /**
  * @summary Checkbox component is used when you require users to select multiple items from a list.
@@ -40,7 +41,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   @property({ type: Boolean, reflect: true }) checked = false;
 
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
+  @property({ type: String, reflect: true }) hasFeedback: SgdsHasFeedback;
 
   /** @internal Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue("checked")

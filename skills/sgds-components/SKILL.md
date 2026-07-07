@@ -150,6 +150,18 @@ Angular supports web components natively via `CUSTOM_ELEMENTS_SCHEMA` — no SGD
 
 ---
 
+## TypeScript Types
+
+All component property enumerations are exported as named type aliases. Import them from the package root:
+
+```ts
+import type { InputType, SgdsSize, ButtonVariant } from "@govtechsg/sgds-web-component";
+```
+
+For the full list of available types and their values, read `node_modules/@govtechsg/sgds-web-component/lib/types/index.d.ts`.
+
+---
+
 ## Troubleshooting Component Behaviour
 
 When a component behaves unexpectedly — wrong event fired, property not reflected, slot not rendering — read the compiled source directly. It contains full method bodies, event logic, internal defaults, and edge-case handling that no documentation captures.

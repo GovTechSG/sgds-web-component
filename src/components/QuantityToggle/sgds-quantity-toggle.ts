@@ -13,6 +13,7 @@ import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
 import formControlStyle from "../../styles/form-text-control.css";
+import type { SgdsHasFeedback } from "../../types";
 /**
  * @summary The quantity toggle component is used to increase or decrease an incremental venue,  best used when the user needs to enter or adjust the quantity of a selected item.
  *
@@ -53,7 +54,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
   /** The input's maximum value. Only applies number input types. */
   @property({ type: Number }) max: number;
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
+  @property({ type: String, reflect: true }) hasFeedback: SgdsHasFeedback;
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback: string;

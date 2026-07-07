@@ -14,6 +14,7 @@ import { watch } from "../../utils/watch";
 import { SgdsSpinner } from "../Spinner/sgds-spinner";
 import inputStyle from "./input.css";
 import SgdsIcon from "../Icon/sgds-icon";
+import type { InputType, SgdsHasFeedback } from "../../types";
 /**
  * @summary Text inputs allow your users to enter letters, numbers and symbols on a single line.
  *
@@ -36,16 +37,8 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     "sgds-icon": SgdsIcon
   };
 
-  @property({ reflect: true }) type:
-    | "email"
-    | "number"
-    | "password"
-    | "search"
-    | "tel"
-    | "text"
-    | "time"
-    | "url"
-    | "datetime-local" = "text";
+  /** The type of input control to render. */
+  @property({ reflect: true }) type: InputType = "text";
 
   /** The prefix of the input */
   @property({ type: String }) prefix: string;
@@ -87,7 +80,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
   @property() step: number | "any";
 
   /** Allows invalidFeedback, invalid and valid styles to be visible with the input */
-  @property({ type: String, reflect: true }) hasFeedback: "style" | "text" | "both";
+  @property({ type: String, reflect: true }) hasFeedback: SgdsHasFeedback;
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback: string;

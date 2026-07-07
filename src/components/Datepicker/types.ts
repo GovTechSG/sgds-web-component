@@ -1,1 +1,1 @@
-export type ViewEnum = "days" | "months" | "years";
+export type { DatepickerView as ViewEnum } from "../../types";

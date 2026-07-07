@@ -5,6 +5,7 @@ import SgdsElement from "../../base/sgds-element";
 import spinnerStyle from "./spinner.css";
 import textStyles from "../../styles/text-variants.css";
 import { nothing } from "lit";
+import type { SpinnerTone, SpinnerVariant, SgdsExtendedSize } from "../../types";
 /**
  * @summary Spinners notify the users that their request is being processed.
  *
@@ -16,7 +17,7 @@ export class SgdsSpinner extends SgdsElement {
   /** The color tones of spinner, replaces variant prop */
   @property({ type: String, reflect: true }) tone: SpinnerTone = "brand";
   /** Specifies a small, medium or large button, the size is medium by default. */
-  @property({ type: String, reflect: true }) size: "xs" | "sm" | "md" | "lg" | "xl" = "md";
+  @property({ type: String, reflect: true }) size: SgdsExtendedSize = "md";
   /** Text label of the spinner */
   @property({ reflect: true, type: String }) label: string;
   /** Orientation of label relative to the spinner */
@@ -42,7 +43,6 @@ export class SgdsSpinner extends SgdsElement {
     `;
   }
 }
-export type SpinnerTone = "brand" | "neutral" | "inverse" | "fixed-light" | "fixed-dark";
-export type SpinnerVariant = "primary" | "neutral";
+export type { SpinnerTone, SpinnerVariant } from "../../types";
 
 export default SgdsSpinner;

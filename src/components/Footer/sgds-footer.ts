@@ -8,6 +8,7 @@ import { watch } from "../../utils/watch";
 import footerStyle from "./footer.css";
 import gridStyle from "../../css/grid.css";
 import type { SgdsFooterItem } from "./sgds-footer-item";
+import type { FooterLayout, SgdsFooterTone } from "../../types";
 
 /**
  * @summary The footer contains supporting information for your service at the bottom of your website. All .gov.sg digital services shall contain a Global Footer Bar across all pages. The Global Footer Bar should include the name of the digital service, contact information, a privacy statement and the terms of use.
@@ -54,10 +55,10 @@ export class SgdsFooter extends SgdsElement {
   termsOfUseHref = "#";
 
   /** Sets the layout context of the footer. Use "sidebar" when the footer is alongside a collapsible or persistent sidebar. Overlay sidebars should use "default". */
-  @property({ type: String, reflect: true }) layout: "default" | "sidebar" = "default";
+  @property({ type: String, reflect: true }) layout: FooterLayout = "default";
 
   /** Sets the color tone of the footer. Use "neutral" for light backgrounds (e.g. sidebar layouts). */
-  @property({ type: String, reflect: true }) tone: "fixed-dark" | "neutral" = "fixed-dark";
+  @property({ type: String, reflect: true }) tone: SgdsFooterTone = "fixed-dark";
 
   /** Used only for SSR to indicate the presence of the `default` slot. */
   @property({ type: Boolean }) hasDefaultSlot = false;

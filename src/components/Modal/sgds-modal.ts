@@ -15,6 +15,7 @@ import SgdsCloseButton from "../CloseButton/sgds-close-button";
 import modalStyle from "./modal.css";
 import headerStyles from "../../styles/header-class.css";
 import svgStyles from "../../styles/svg.css";
+import type { ModalSize } from "../../types";
 /**
  * @summary The modal component inform users about a specific task and may contain critical information which users then have to make a decision.
  *
@@ -59,7 +60,7 @@ export class SgdsModal extends SgdsElement {
   @property({ type: Boolean, reflect: true }) noAnimation = false;
 
   /** Specifies a small, medium, large or fullscreen modal, the size is medium by default. */
-  @property({ reflect: true }) size: "sm" | "md" | "lg" | "xl" | "fullscreen" = "md";
+  @property({ reflect: true }) size: ModalSize = "md";
 
   /** Used only for SSR to indicate the presence of the `footer` slot. */
   @property({ type: Boolean }) hasFooterSlot = false;

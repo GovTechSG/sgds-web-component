@@ -15,7 +15,9 @@ import mainnavStyle from "./mainnav.css";
 import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
 import SgdsMainnavItem from "./sgds-mainnav-item";
 import { HasSlotController } from "../../utils/slot";
-export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
+import type { MainnavExpandSize } from "../../types";
+
+export type { MainnavExpandSize } from "../../types";
 
 const SIZES = {
   sm: SM_BREAKPOINT,

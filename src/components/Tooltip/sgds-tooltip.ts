@@ -4,6 +4,7 @@ import { Ref, createRef, ref } from "lit/directives/ref.js";
 import { computePosition, offset, flip, shift, hide, autoUpdate, Strategy } from "@floating-ui/dom";
 import SgdsElement from "../../base/sgds-element";
 import tooltipStyle from "./tooltip.css";
+import type { TooltipPlacement, TooltipTrigger } from "../../types";
 
 /**
  * @summary Tooltips display more information when users hover over, focus on, or interact with an element.
@@ -28,10 +29,10 @@ export class SgdsTooltip extends SgdsElement {
   @property({ type: String }) content = "";
 
   /** The placement of tooltip relative to its target */
-  @property({ type: String }) placement: "top" | "bottom" | "left" | "right" = "top";
+  @property({ type: String }) placement: TooltipPlacement = "top";
 
   /** The method to invoke the tooltip. `hover focus` is the default value which allows tooltip to be triggered via mouse hover and keyboard focus. Add `tabindex=0` for HTMLelements that are not tabbable. */
-  @property({ type: String }) trigger: "click" | "hover" | "focus" | "hover focus" = "hover focus";
+  @property({ type: String }) trigger: TooltipTrigger = "hover focus";
 
   /** Is tooltip currently open */
   @state() private open = false;

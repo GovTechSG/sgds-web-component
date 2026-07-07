@@ -46,3 +46,5 @@ import "./components/ThumbnailCard";
 import "./components/IconCard";
 import "./components/Sidebar";
 // COMPONENT IMPORTS
+
+export type * from "./types";

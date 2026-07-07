@@ -7,6 +7,7 @@ import tableStyle from "./table.css";
 import { HasSlotController } from "../../utils/slot";
 import { provide } from "@lit/context";
 import { TableHeaderBackgroundContext } from "./table-context";
+import type { TableLayout, TableResponsive } from "../../types";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
@@ -29,7 +30,7 @@ export class SgdsTable extends SgdsElement {
    * (@deprecated) Deprecated since 3.9.0 legacy from v2
    * @type {"sm" | "md" | "lg" | "xl" | "always"}
    */
-  @property({ type: String, reflect: true }) responsive: "sm" | "md" | "lg" | "xl" | "always";
+  @property({ type: String, reflect: true }) responsive: TableResponsive;
 
   /**
    * Array of strings to populate row header cells.
@@ -81,7 +82,7 @@ export class SgdsTable extends SgdsElement {
    * @type {"auto" | "fixed"}
    * @default "auto"
    */
-  @property({ type: String, reflect: true }) layout: "auto" | "fixed" = "auto";
+  @property({ type: String, reflect: true }) layout: TableLayout = "auto";
 
   /**
    * Indicates the presence of the default slot.

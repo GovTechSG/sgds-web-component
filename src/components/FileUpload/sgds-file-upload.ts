@@ -18,6 +18,7 @@ import type {
   ISgdsFileUploadFilesSelectedEventDetail,
   ISgdsFileUploadRemoveFileEventDetail
 } from "./types";
+import type { FileUploadVariant } from "../../types";
 export type {
   ISgdsFileUploadAddFilesEventDetail,
   ISgdsFileUploadChangeEventDetail,
@@ -66,7 +67,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   @property({ type: Boolean, reflect: true }) required = false;
 
   /** Variant of the file upload component: "default" or "drag-and-drop" */
-  @property({ type: String, reflect: true }) variant: "default" | "drag-and-drop" = "default";
+  @property({ type: String, reflect: true }) variant: FileUploadVariant = "default";
 
   /** An accessible label for the file upload button. Defaults to "Choose files" if not set. */
   @property({ type: String }) ariaLabel = "Choose files";

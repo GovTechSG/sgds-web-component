@@ -19,6 +19,7 @@ import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { classMap } from "lit/directives/class-map.js";
 import { defaultValue } from "../../utils/defaultvalue";
+import type { DatepickerMode } from "../../types";
 
 export type DateFormat = "MM/DD/YYYY" | "DD/MM/YYYY" | "YYYY/MM/DD";
 
@@ -84,7 +85,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   @property({ type: String }) maxDate = "";
 
   /** Changes DatePicker to single date selection or range date selection */
-  @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
+  @property({ type: String, reflect: true }) mode: DatepickerMode = "single";
 
   /**Feedback text for error state when date input is invalid */
   @property({ type: String, reflect: true }) invalidFeedback: string;

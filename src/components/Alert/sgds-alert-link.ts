@@ -4,6 +4,7 @@ import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
 import alertLinkStyle from "./alert-link.css";
 import anchorStyles from "../../styles/anchor.css";
+import type { SgdsTarget } from "../../types";
 /**
  * @deprecated From v3.21.0, use a native `<a>` element directly inside `<sgds-alert>` instead. The alert component now styles slotted anchor tags automatically.
  * @summary Alert link are used within the alert's message that is passed into the default slot of `<sgds-alert>`
@@ -15,7 +16,7 @@ export class SgdsAlertLink extends SgdsElement {
   /** Forwards to href attribute of anchor element */
   @property({ type: String, reflect: true }) href: string;
   /** Tells the browser where to open the link */
-  @property() target: "_blank" | "_parent" | "_self" | "_top";
+  @property() target: SgdsTarget;
 
   render() {
     return html`

@@ -3,6 +3,7 @@ import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
 import iconListStyles from "./icon-list.css";
+import type { SgdsSize } from "../../types";
 /**
  * @summary A IconList can be used to display content related to the same topic. Each list item begins an icon.
  *
@@ -14,7 +15,7 @@ export class SgdsIconList extends SgdsElement {
   /** Sets the aria-role of the sgds-icon-list */
   @property({ type: String, reflect: true }) role = "list";
   /** The size of icon list. Changes the font-size the list items */
-  @property({ type: String, reflect: true }) size: "sm" | "md" | "lg" = "md";
+  @property({ type: String, reflect: true }) size: SgdsSize = "md";
 
   render() {
     return html`

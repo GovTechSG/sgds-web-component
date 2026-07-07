@@ -10,6 +10,7 @@ import { lockBodyScrolling, unlockBodyScrolling } from "../../utils/scroll.js";
 import { watch } from "../../utils/watch.js";
 import drawerStyles from "./drawer.css";
 import SgdsCloseButton from "../CloseButton/sgds-close-button";
+import type { DrawerPlacement, SgdsSize } from "../../types";
 
 /**
  * @summary Drawers slide in from a container to expose additional options and information.
@@ -59,10 +60,10 @@ export class SgdsDrawer extends SgdsElement {
    * For drawers placed on the top or bottom, this controls the drawer's height.
    * Accepts `small`, `medium`, or `large`. Defaults to `small`.
    */
-  @property({ type: String, reflect: true }) size: "sm" | "md" | "lg" = "sm";
+  @property({ type: String, reflect: true }) size: SgdsSize = "sm";
 
   /** The direction from which the drawer will open. */
-  @property({ type: String, reflect: true }) placement: "top" | "end" | "bottom" | "start" = "end";
+  @property({ type: String, reflect: true }) placement: DrawerPlacement = "end";
 
   /**
    * The accessible label for the drawer dialog. This is required for assistive technology.

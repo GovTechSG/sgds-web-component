@@ -9,6 +9,7 @@ import { HasSlotController } from "../../utils/slot";
 import formLabelStyles from "../../styles/form-label.css";
 import switchStyle from "./switch.css";
 import type { ISgdsSwitchChangeEventDetail } from "./types";
+import type { SgdsSize } from "../../types";
 export type { ISgdsSwitchChangeEventDetail };
 
 /**
@@ -25,7 +26,7 @@ export class SgdsSwitch extends SgdsElement {
   static styles = [...SgdsElement.styles, formLabelStyles, switchStyle];
 
   /** The size of the switch. By default, it is small size */
-  @property({ reflect: true, type: String }) size: "sm" | "md" | "lg" = "md";
+  @property({ reflect: true, type: String }) size: SgdsSize = "md";
 
   /** When enabled, icon appears in the switch */
   @property({ reflect: true, type: Boolean }) icon = false;

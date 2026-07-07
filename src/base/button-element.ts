@@ -2,14 +2,9 @@ import { property, query } from "lit/decorators.js";
 import SgdsElement from "./sgds-element";
 import buttonStyles from "./button.css";
 import { SpinnerTone } from "../components";
+import type { ButtonTone, ButtonVariant, ButtonSize, SgdsTarget } from "../types";
 
-export type ButtonTone = "brand" | "danger" | "fixed-light" | "neutral";
-export type ButtonVariant =
-  | "primary"
-  | "outline"
-  | "ghost"
-  /** @deprecated since v3.5.6 */
-  | "danger";
+export type { ButtonTone, ButtonVariant } from "../types";
 
 export default class ButtonElement extends SgdsElement {
   static styles = [...SgdsElement.styles, buttonStyles];
@@ -23,7 +18,7 @@ export default class ButtonElement extends SgdsElement {
   @property({ reflect: true }) tone: ButtonTone = "brand";
 
   /** Specifies a small, medium or large button, the size is medium by default. */
-  @property({ reflect: true }) size: "xs" | "sm" | "md" | "lg" = "md";
+  @property({ reflect: true }) size: ButtonSize = "md";
 
   /** Manually set the visual state of the button to `:active` */
   @property({ type: Boolean, reflect: true }) active = false;
@@ -36,7 +31,7 @@ export default class ButtonElement extends SgdsElement {
 
   /** Where to display the linked URL, as the name for a browsing context. Forwards to the HTMLAnchor target attribute */
   @property({ type: String, reflect: true })
-  target: "_blank" | "_parent" | "_self" | "_top" = "_self";
+  target: SgdsTarget = "_self";
   /** Tells the browser to download the linked file as this filename. Only used when `href` is set. */
   @property({ type: String, reflect: true }) download: string;
 
@@ -81,7 +76,7 @@ export default class ButtonElement extends SgdsElement {
       return;
     }
   }
-  protected _assignSpinnerSize(buttonSize: "xs" | "sm" | "md" | "lg") {
+  protected _assignSpinnerSize(buttonSize: ButtonSize) {
     if (buttonSize === "xs" || buttonSize === "sm") return "xs";
     if (buttonSize === "md" || buttonSize === "lg") return "sm";
   }

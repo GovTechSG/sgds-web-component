@@ -7,8 +7,9 @@ import { HasSlotController } from "../../utils/slot";
 import { FormSubmitController } from "../../utils/formSubmitController";
 import anchorStyles from "../../styles/anchor.css";
 import buttonStyles from "./button.css";
+import type { ButtonType, ButtonFormMethod } from "../../types";
 
-export type ButtonVariant = "primary" | "outline" | "ghost" | "danger";
+export type { ButtonVariant } from "../../types";
 
 /**
  * @summary Custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.
@@ -47,7 +48,7 @@ export class SgdsButton extends ButtonElement {
   @property({ type: String, reflect: true }) value: string;
 
   /** The behavior of the button with default as `type='button', `reset` resets all the controls to their initial values and `submit` submits the form data to the server */
-  @property({ type: String, reflect: true }) type: "button" | "submit" | "reset" = "button";
+  @property({ type: String, reflect: true }) type: ButtonType = "button";
   /**
    * The "form owner" to associate the button with. If omitted, the closest containing form will be used instead. The
    * value of this attribute must be an id of a form in the same document or shadow root as the button.
@@ -58,7 +59,7 @@ export class SgdsButton extends ButtonElement {
   @property({ type: String, reflect: true, attribute: "formaction" }) formAction: string;
 
   /** Used to override the form owner's `method` attribute.  */
-  @property({ type: String, reflect: true, attribute: "formmethod" }) formMethod: "post" | "get";
+  @property({ type: String, reflect: true, attribute: "formmethod" }) formMethod: ButtonFormMethod;
 
   /** Used to override the form owner's `novalidate` attribute. */
   @property({ attribute: "formnovalidate", type: Boolean, reflect: true })

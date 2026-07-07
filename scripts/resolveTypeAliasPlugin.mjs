@@ -14,14 +14,16 @@ export const resolveTypeAliasInMembers = (member, typesByAliasMap) => {
   };
   
  export const updateMembersOfDeclaration = (declaration, typesByAliasMap) => {
+    let result = declaration;
     if (declaration.members) {
       const members = declaration.members?.map((member) => resolveTypeAliasInMembers(member, typesByAliasMap));
-      return {
-        ...declaration,
-        members,
-      };
+      result = { ...result, members };
     }
-  else return declaration
+    if (declaration.attributes) {
+      const attributes = declaration.attributes?.map((attr) => resolveTypeAliasInMembers(attr, typesByAliasMap));
+      result = { ...result, attributes };
+    }
+    return result;
   };
 
  export const updateMembersOfDeclarations = (declarations, typesByAliasMap) => {

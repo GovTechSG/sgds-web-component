@@ -7,6 +7,7 @@ import SgdsIcon from "../Icon/sgds-icon";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import paginationStyle from "./pagination.css";
 import type { ISgdsPaginationPageChangeEventDetail } from "./types";
+import type { PaginationVariant, SgdsCompactSize } from "../../types";
 export type { ISgdsPaginationPageChangeEventDetail };
 
 export type Navigation = "button" | "icon-button";
@@ -37,13 +38,13 @@ export class SgdsPagination extends SgdsElement {
   @property({ type: Number }) itemsPerPage = 5;
 
   /** Sets the variant of the pagination. */
-  @property({ type: String }) variant: "default" | "number" | "button" | "description" = "default";
+  @property({ type: String }) variant: PaginationVariant = "default";
 
   /** Sets the page direction button to contain text and/or icon */
   @property({ type: String }) navigation: Navigation = "icon-button";
 
   /** Sets the size of all page items. */
-  @property({ type: String }) size: "sm" | "md" = "md";
+  @property({ type: String }) size: SgdsCompactSize = "md";
 
   /**
    * The number of pages to show besides first and last page. First and last page always appears

@@ -3,7 +3,9 @@ import { property } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import SgdsElement from "../../base/sgds-element";
 import progressBarStyle from "./progress-bar.css";
-export type ProgressBarVariant = "primary" | "neutral";
+import type { ProgressBarVariant } from "../../types";
+
+export type { ProgressBarVariant } from "../../types";
 /**
  * @summary Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.
  */

@@ -4,6 +4,7 @@ import SgdsElement from "../../base/sgds-element";
 import { SgdsTab } from "./sgds-tab";
 import { SgdsTabPanel } from "./sgds-tab-panel";
 import tabGroupStyle from "./tab-group.css";
+import type { TabVariant, TabDensity, SgdsOrientation } from "../../types";
 /**
  * @summary Tab Group organizes content into a container with the syncing of tab and their corresponding panels.
  * Each tab must be slotted into the nav slot and its `panel` must refer to a tab panel of the same name.
@@ -34,11 +35,11 @@ export class SgdsTabGroup extends SgdsElement {
 
   private _panels: SgdsTabPanel[] = [];
   /** The variant of tabs. Controls the visual styles of all `sgds-tabs` in its slot. It also sets the variant atttribute of `sgds-tab` */
-  @property({ type: String, reflect: true }) variant: "underlined" | "solid" = "underlined";
+  @property({ type: String, reflect: true }) variant: TabVariant = "underlined";
   /** The orientation of tabs. Controls the orientation of all `sgds-tabs` in its slot. It also sets the orientation attribute of `sgds-tab` */
-  @property({ type: String, reflect: true }) orientation: "horizontal" | "vertical" = "horizontal";
+  @property({ type: String, reflect: true }) orientation: SgdsOrientation = "horizontal";
   /** The density of tabs. Controls the density of all `sgds-tabs` in its slot. It also sets the density attribute of `sgds-tab` */
-  @property({ type: String, reflect: true }) density: "compact" | "default" = "default";
+  @property({ type: String, reflect: true }) density: TabDensity = "default";
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
