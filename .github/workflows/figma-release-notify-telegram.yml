@@ -30,7 +30,7 @@ jobs:
           # Parse versions newer than $SINCE and format message
           MESSAGE=$(echo "$RESPONSE" | jq -r --arg since "$SINCE" '
             .versions
-            | map(select(.created_at > $since))
+            | map(select(.created_at > $since and .label == "Components published"))
             | if length == 0 then empty
               else
                 "📐 *SGDS Figma Library Updates (last 7 days)*\n\n" +
