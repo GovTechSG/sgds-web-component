@@ -47,12 +47,29 @@ The **SGDS Grid System** is a mobile-first, fully responsive layout system based
 
 ## Grid Breakpoints
 
+### Standard (`.sgds-container`)
+
+The gutter uses `var(--sgds-gap-layout-md)` across all breakpoints.
+
+| Breakpoint        | Screen Size      | Class Prefix       | Columns | Container Width | Gutters                    | Outer Margins |
+| ----------------- | ---------------- | ------------------ | ------- | --------------- | -------------------------- | ------------- |
+| Extra Small       | 511px and below  | `.sgds-col-*`      | 4       | auto            | `var(--sgds-gap-layout-md)` | 20            |
+| Small             | 512px - 767px    | `.sgds-col-sm-*`   | 8       | auto            | `var(--sgds-gap-layout-md)` | 24            |
+| Medium            | 768px - 1023px   | `.sgds-col-md-*`   | 8       | auto            | `var(--sgds-gap-layout-md)` | 28            |
+| Large             | 1024px - 1279px  | `.sgds-col-lg-*`   | 12      | 888px           | `var(--sgds-gap-layout-md)` | auto          |
+| Extra Large       | 1280px - 1439px  | `.sgds-col-xl-*`   | 12      | 1168px          | `var(--sgds-gap-layout-md)` | auto          |
+| Extra Extra Large | 1440px and above | `.sgds-col-2-xl-*` | 12      | 1312px          | `var(--sgds-gap-layout-md)` | auto          |
+
+### With Sticky Sidebar (`.sgds-container-sidebar`)
+
+Use for layouts where a sidebar exists alongside the main content area. The gutter is 16px (`--sgds-gap-md`) at smaller breakpoints and 24px (`--sgds-gap-xl`) from medium (768px) onwards.
+
 | Breakpoint        | Screen Size      | Class Prefix       | Columns | Container Width | Gutters | Outer Margins |
 | ----------------- | ---------------- | ------------------ | ------- | --------------- | ------- | ------------- |
 | Extra Small       | 511px and below  | `.sgds-col-*`      | 4       | auto            | 16      | 20            |
 | Small             | 512px - 767px    | `.sgds-col-sm-*`   | 8       | auto            | 16      | 24            |
-| Medium            | 768px - 1023px   | `.sgds-col-md-*`   | 8       | auto            | 24      | 28            |
-| Large             | 1024px - 1279px  | `.sgds-col-lg-*`   | 12      | 888px           | 24      | auto          |
-| Extra Large       | 1280px - 1439px  | `.sgds-col-xl-*`   | 12      | 1168px          | 32      | auto          |
-| Extra Extra Large | 1440px and above | `.sgds-col-2-xl-*` | 12      | 1312px          | 32      | auto          |
-| 3-XL (sidebar only) | 1680px and above | `.sgds-col-3-xl-*` | 12      | 1296px          | 32      | auto          |
+| Medium            | 768px - 1023px   | `.sgds-col-md-*`   | 8       | auto            | 24      | 48            |
+| Large             | 1024px - 1279px  | `.sgds-col-lg-*`   | 12      | auto            | 24      | 48            |
+| Extra Large       | 1280px - 1439px  | `.sgds-col-xl-*`   | 12      | auto            | 24      | 48            |
+| Extra Extra Large | 1440px - 1679px  | `.sgds-col-2-xl-*` | 12      | auto            | 24      | 48            |
+| 3-XL              | 1680px and above | `.sgds-col-3-xl-*` | 12      | 1296px          | 24      | auto          |

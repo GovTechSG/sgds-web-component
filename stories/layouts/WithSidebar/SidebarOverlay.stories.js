@@ -88,8 +88,12 @@ const Template = () => html`
     <div class="sgds:flex sgds:flex-row sgds:flex-1 sgds:overflow-hidden sgds:relative">
       ${sidebarNav}
       <div class="sgds:flex sgds:flex-col sgds:flex-1 sgds:overflow-y-auto">
-        <div class="sgds-container sgds:py-layout-md sgds:flex-1">
-          <div class="content-placeholder sgds:border sgds:border-muted sgds:flex-1"></div>
+        <div class="sgds-container-sidebar sgds:py-layout-md sgds:flex-1">
+          <div class="sgds-grid">
+            <div
+              class="content-placeholder sgds:border sgds:border-muted sgds-col-4 sgds-col-sm-8 sgds-col-lg-12"
+            ></div>
+          </div>
         </div>
         <sgds-footer tone="neutral"></sgds-footer>
       </div>
