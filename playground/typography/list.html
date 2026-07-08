@@ -1,0 +1,179 @@
+<script type="module" src="../../src/index.ts"></script>
+<link href="../../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="../css/utility.css" rel="stylesheet" type="text/css" />
+
+<body class="sgds:p-2-xl sgds:bg-default sgds:text-default">
+  <div class="sgds:sticky sgds:top-0 sgds:flex sgds:justify-between sgds:items-center sgds:mb-2-xl sgds:bg-default sgds:py-2-xl">
+    <h1>Typography — List</h1>
+    <sgds-button id="night-theme" variant="ghost">
+      <sgds-icon name="lightbulb"></sgds-icon>
+      Toggle Theme
+    </sgds-button>
+  </div>
+
+  <section class="sgds:mb-2-xl">
+    <h2>List Default (reboot.css — no Tailwind tokens)</h2>
+    <div class="sgds:flex sgds:gap-2-xl">
+      <ul>
+        <li>First item</li>
+        <li>
+          Second item
+          <ul>
+            <li>Sub item one</li>
+            <li>Sub item two</li>
+          </ul>
+        </li>
+        <li>Third item</li>
+      </ul>
+      <ol>
+        <li>First item</li>
+        <li>
+          Second item
+          <ol>
+            <li>Sub item one</li>
+            <li>Sub item two</li>
+          </ol>
+        </li>
+        <li>Third item</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>List Large</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>Name</sgds-table-head>
+        <sgds-table-head>SGDS Tailwind Tokens</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell>List Large Regular</sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:flex sgds:gap-2-xl">
+            <ul class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal">
+              <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">First item</li>
+              <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">
+                Second item
+                <ul class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal">
+                  <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">Sub item one</li>
+                  <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:mt-list-lg">Sub item two</li>
+                </ul>
+              </li>
+              <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:mt-list-lg">Third item</li>
+            </ul>
+            <ol class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal">
+              <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">First item</li>
+              <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">
+                Second item
+                <ol class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal">
+                  <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:my-list-lg">Sub item one</li>
+                  <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:mt-list-lg">Sub item two</li>
+                </ol>
+              </li>
+              <li class="sgds:text-list-lg sgds:font-regular sgds:leading-md sgds:tracking-normal sgds:mt-list-lg">Third item</li>
+            </ol>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>List Medium</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>Name</sgds-table-head>
+        <sgds-table-head>SGDS Tailwind Tokens</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell>List Medium Regular</sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:flex sgds:gap-2-xl">
+            <ul class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal">
+              <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">First item</li>
+              <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">
+                Second item
+                <ul class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal">
+                  <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">Sub item one</li>
+                  <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:mt-list-md">Sub item two</li>
+                </ul>
+              </li>
+              <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:mt-list-md">Third item</li>
+            </ul>
+            <ol class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal">
+              <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">First item</li>
+              <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">
+                Second item
+                <ol class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal">
+                  <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:my-list-md">Sub item one</li>
+                  <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:mt-list-md">Sub item two</li>
+                </ol>
+              </li>
+              <li class="sgds:text-list-md sgds:font-regular sgds:leading-xs sgds:tracking-normal sgds:mt-list-md">Third item</li>
+            </ol>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <section class="sgds:mb-2-xl">
+    <h2>List Small</h2>
+    <sgds-table>
+      <sgds-table-row>
+        <sgds-table-head>Name</sgds-table-head>
+        <sgds-table-head>SGDS Tailwind Tokens</sgds-table-head>
+        <sgds-table-head>Preview</sgds-table-head>
+      </sgds-table-row>
+      <sgds-table-row>
+        <sgds-table-cell>List Small Regular</sgds-table-cell>
+        <sgds-table-cell><code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm sgds:font-mono">sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm</code></sgds-table-cell>
+        <sgds-table-cell>
+          <div class="sgds:flex sgds:gap-2-xl">
+            <ul class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal">
+              <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">First item</li>
+              <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">
+                Second item
+                <ul class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal">
+                  <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">Sub item one</li>
+                  <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:mt-list-sm">Sub item two</li>
+                </ul>
+              </li>
+              <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:mt-list-sm">Third item</li>
+            </ul>
+            <ol class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal">
+              <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">First item</li>
+              <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">
+                Second item
+                <ol class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal">
+                  <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:my-list-sm">Sub item one</li>
+                  <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:mt-list-sm">Sub item two</li>
+                </ol>
+              </li>
+              <li class="sgds:text-list-sm sgds:font-regular sgds:leading-2-xs sgds:tracking-normal sgds:mt-list-sm">Third item</li>
+            </ol>
+          </div>
+        </sgds-table-cell>
+      </sgds-table-row>
+    </sgds-table>
+  </section>
+
+  <script>
+    const nightBtn = document.querySelector("#night-theme");
+    nightBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const html = document.querySelector("html");
+      if (html.classList.contains("sgds-night-theme")) {
+        html.classList.remove("sgds-night-theme");
+      } else {
+        html.classList.add("sgds-night-theme");
+      }
+    });
+  </script>
+</body>
