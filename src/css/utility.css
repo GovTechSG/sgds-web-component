@@ -13,6 +13,7 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2-xl: 1440px;
+  --breakpoint-3-xl: 1680px;
 
   /* Margin and Padding */
   --spacing-none: var(--sgds-spacer-0);

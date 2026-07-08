@@ -1,4 +1,4 @@
-import { isBefore, isEqual } from "date-fns";
+import { isBeforeDate, isEqualDate } from "../../utils/date-helpers";
 import { html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -149,7 +149,7 @@ export class DatepickerHeader extends SgdsElement {
     if (this.view === "years") {
       return displayYear < 1904;
     }
-    return isEqual(displayMonthYear, new Date(0, 0, 1)) || isBefore(displayMonthYear, new Date(0, 0, 1));
+    return isEqualDate(displayMonthYear, new Date(0, 0, 1)) || isBeforeDate(displayMonthYear, new Date(0, 0, 1));
   }
 
   private _ariaLabelForNextBtn() {
