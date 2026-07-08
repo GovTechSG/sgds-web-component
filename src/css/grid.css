@@ -12,9 +12,13 @@
   max-width: calc(100% - 40px); /* outer margin of 20px on each side. Expects sidebar to be overlayed */
 }
 
+.sgds-container-sidebar .sgds-grid {
+  gap: var(--sgds-gap-md);
+}
+
 .sgds-grid {
   display: grid;
-  gap: var(--sgds-gap-md);
+  gap: var(--sgds-gap-layout-md);
   grid-template-columns: repeat(4, 1fr);
 }
 
@@ -53,14 +57,12 @@
   .sgds-container {
     max-width: calc(100% - 56px); /* outer margin of 28px on each side */
   }
-    .sgds-container-sidebar {
+  .sgds-container-sidebar {
     max-width: calc(100% - 96px); /* outer margin of 48px on each side */
   }
-
-  .sgds-grid {
+  .sgds-container-sidebar .sgds-grid {
     gap: var(--sgds-gap-xl);
   }
-
   .sgds-col-md-1 { grid-column: span 1; }
   .sgds-col-md-2 { grid-column: span 2; }
   .sgds-col-md-3 { grid-column: span 3; }
@@ -111,10 +113,6 @@
 }
 
 @media (min-width: 1280px) {  /* sgds-breakpoint-xl */
-  .sgds-grid {
-    gap: var(--sgds-gap-2-xl);
-  }
-
   .sgds-container {
     max-width: var(--sgds-dimension-1168);
   }
