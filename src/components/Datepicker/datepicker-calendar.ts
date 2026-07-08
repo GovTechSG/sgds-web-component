@@ -1,4 +1,4 @@
-import { format, isAfter, isEqual } from "date-fns";
+import { formatDate, isAfterDate, isEqualDate } from "../../utils/date-helpers";
 import { HTMLTemplateResult, html } from "lit";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -125,7 +125,7 @@ export class DatepickerCalendar extends SgdsElement {
         const newFocusedDate = setTimeToNoon(
           new Date(currentFocusedYear, currentFocusedMonth, currentFocusedDate + shift)
         );
-        if (isAfter(newFocusedDate, new Date(0, 0, 1, 12)) || isEqual(newFocusedDate, new Date(0, 0, 1, 12)))
+        if (isAfterDate(newFocusedDate, new Date(0, 0, 1, 12)) || isEqualDate(newFocusedDate, new Date(0, 0, 1, 12)))
           this.focusedDate = newFocusedDate;
         break;
       }
@@ -134,7 +134,7 @@ export class DatepickerCalendar extends SgdsElement {
           new Date(currentFocusedYear, currentFocusedMonth + shift, currentFocusedDate)
         );
 
-        if (isAfter(newFocusedDate, new Date(0, 0, 1, 12)) || isEqual(newFocusedDate, new Date(0, 0, 1, 12))) {
+        if (isAfterDate(newFocusedDate, new Date(0, 0, 1, 12)) || isEqualDate(newFocusedDate, new Date(0, 0, 1, 12))) {
           this.focusedDate = newFocusedDate;
         }
         break;
@@ -347,7 +347,7 @@ export class DatepickerCalendar extends SgdsElement {
           const isLastSelectedDate =
             selectedDates.length > 1 && rangeSelectedDates[rangeSelectedDates.length - 1].toISOString() === dateStr;
           const ariaLabel =
-            `${isCurrentDay && isCurrentMonth && isCurrentYear ? "Today's date, " : ""}` + format(dateObj, "PPPP");
+            `${isCurrentDay && isCurrentMonth && isCurrentYear ? "Today's date, " : ""}` + formatDate(dateObj, "PPPP");
           week.push(
             html`<td
               key=${j}
