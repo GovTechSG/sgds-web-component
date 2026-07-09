@@ -10,8 +10,14 @@ import SgdsDataTableHead from "./sgds-data-table-head";
 import SgdsSpinner from "../Spinner/sgds-spinner";
 
 /**
- * @event sgds-row-select - Emitted when row checkboxes change. Detail: `{ selected: rowData[] }`
- * @event sgds-sort - Re-emitted from `sgds-data-table-head` when a sortable column header is clicked. Detail: `{ key: string; direction: "ascending" | "descending" | "none" }`
+ * @summary A data table container with pagination, row selection, loading, and sorting support.
+ *
+ * @slot default - Insert one or more `sgds-data-table-row` elements.
+ * @slot no-data - Custom content rendered when no body rows are available and `isLoading` is false.
+ *
+ * @event sgds-row-select - Emitted when row checkboxes change. Detail: `{ selected: rowData[] }`.
+ * @event sgds-sort - Emitted when `serverSort` is true and a sorting column header is clicked.
+ * Detail: `{ key: string; direction: "ascending" | "descending" | "none" }`.
  * @event sgds-page-change - Emitted when pagination changes page.
  */
 export class SgdsDataTable extends SgdsElement {
@@ -53,6 +59,17 @@ export class SgdsDataTable extends SgdsElement {
 
   /** When true in server mode, shows a loading state and hides body rows. */
   @property({ type: Boolean }) isLoading = false;
+
+  /** When true, emits sort events for external handling instead of local sorting. */
+  @property({ type: Boolean }) serverSort = false;
+
+  /**
+   * Controls the CSS `table-layout` algorithm.
+   * Use "auto" to let the browser size columns based on content, or "fixed" to distribute column widths evenly regardless of content.
+   * @type {"auto" | "fixed"}
+   * @default "auto"
+   */
+  @property({ type: String, reflect: true }) layout: "auto" | "fixed" = "auto";
 
   /**
    * Pagination mode. `client` (default) slices rows and renders pagination controls.
@@ -111,17 +128,17 @@ export class SgdsDataTable extends SgdsElement {
   }
 
   private _configureRows() {
-    const hasExpandable = this.tableRows.some(r => r.expandable);
+    const hasExpand = this.tableRows.some(r => r.expand);
 
     this.headerRows.forEach(row => {
       row.showCheckbox = this.multiSelect;
-      row.showExpandPlaceholder = hasExpandable;
+      row.showExpandPlaceholder = hasExpand;
       if (this.multiSelect) this._attachRowListener(row);
     });
 
     this.tableRows.forEach(row => {
       row.showCheckbox = this.multiSelect;
-      row.showExpandPlaceholder = !row.expandable && hasExpandable;
+      row.showExpandPlaceholder = !row.expand && hasExpand;
       if (this.multiSelect) this._attachRowListener(row);
     });
 
@@ -171,19 +188,52 @@ export class SgdsDataTable extends SgdsElement {
 
   private _resetOtherHeaderSortStates(activeHeader: SgdsDataTableHead | null) {
     this._headerCells.forEach(header => {
-      if (header !== activeHeader && header.sortable) {
+      if (header !== activeHeader && header.sorting) {
         header.ariasort = "none";
       }
     });
   }
 
   private _handleSort(e: Event) {
+    if (!(e.target instanceof SgdsDataTableHead) || !e.target.sorting) return;
+
     const { key, direction } = (e as CustomEvent<{ key: string; direction: "ascending" | "descending" | "none" }>)
       .detail;
-    const activeHeader = e.target instanceof SgdsDataTableHead ? e.target : null;
+    const activeHeader = e.target;
     const columnIndex = activeHeader ? this._headerCells.indexOf(activeHeader) : -1;
 
     this._resetOtherHeaderSortStates(activeHeader);
+
+    if (this.serverSort) {
+      e.stopPropagation();
+      this.emit("sgds-sort", { detail: { key, direction } });
+      return;
+    }
+
+    if (columnIndex < 0) return;
+
+    if (this.mode === "client") {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      const nextRows = [...this.tableRows];
+
+      if (direction === "none") {
+        const originalVisibleRows = this._unsortedRows.slice(start, end);
+        nextRows.splice(start, originalVisibleRows.length, ...originalVisibleRows);
+      } else {
+        const sortedVisibleRows = nextRows.slice(start, end).sort((left, right) => {
+          const leftValue = this._toComparableValue(left, key, columnIndex);
+          const rightValue = this._toComparableValue(right, key, columnIndex);
+          return this._compareValues(leftValue, rightValue, direction);
+        });
+        nextRows.splice(start, sortedVisibleRows.length, ...sortedVisibleRows);
+      }
+
+      this.tableRows = nextRows;
+      this._syncDomRowOrder();
+      this._updateVisibleRows();
+      return;
+    }
 
     if (direction === "none") {
       this.tableRows = [...this._unsortedRows];
@@ -191,8 +241,6 @@ export class SgdsDataTable extends SgdsElement {
       this._updateVisibleRows();
       return;
     }
-
-    if (columnIndex < 0) return;
 
     this.tableRows = [...this.tableRows].sort((left, right) => {
       const leftValue = this._toComparableValue(left, key, columnIndex);
@@ -234,7 +282,7 @@ export class SgdsDataTable extends SgdsElement {
     this._unsortedRows = [...this.tableRows];
 
     this._headerCells.forEach(header => {
-      if (header.sortable && !header.ariasort) {
+      if (header.sorting && !header.ariasort) {
         header.ariasort = "none";
       }
     });
@@ -273,15 +321,18 @@ export class SgdsDataTable extends SgdsElement {
     const total = this.dataLength || this.tableRows.length;
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = Math.min(start + this.itemsPerPage, total);
+    const showNoData = !this.isLoading && this.tableRows.length === 0;
 
     return html`
       <div class="data-table">
         <div>
-          <slot @slotchange=${this._handleSlotChange} @sgds-sort=${this._handleSort} class="table"></slot>
+          <slot @slotchange=${this._handleSlotChange} @i-sgds-sort=${this._handleSort} class="table"></slot>
           ${this.isLoading
             ? html`<div class="loading" role="status" aria-live="polite">
                 <div class="loading-menu"><sgds-spinner size="xs" tone="brand"></sgds-spinner>Loading...</div>
               </div>`
+            : showNoData
+            ? html`<slot name="no-data" class="no-data" role="status" aria-live="polite">No data</slot>`
             : nothing}
         </div>
 
