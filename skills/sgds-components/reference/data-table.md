@@ -1,14 +1,14 @@
 # SGDS Data Table Component Skill
 
 `<sgds-data-table>` displays structured tabular data using composed row, header, and cell elements.
-It supports client-side pagination, server-driven pagination, sortable headers, row selection, expandable rows, and server loading state.
+It supports client-side pagination, server-driven pagination, sorting headers, row selection, expandable rows, and server loading state.
 
 ## Usage Guideline
 
 ### When to use
 
 - When your data needs table semantics with SGDS-consistent interactions and styling.
-- When you need sortable columns based on slotted cells or rowData keys.
+- When you need sorting columns based on slotted cells or rowData keys.
 - When you need server-driven paging with loading feedback.
 - When rows require selection (checkboxes) or expandable detail panels.
 
@@ -21,14 +21,15 @@ It supports client-side pagination, server-driven pagination, sortable headers, 
 
 - Static list with local pagination and sorting: use `mode="client"` (default).
 - Data from API with backend pagination: use `mode="server"` and listen to `sgds-page-change`.
+- Data from API with backend sorting: set `serverSort` and listen to `sgds-sort`.
 - Need loading indicator while fetching server data: set `isLoading` to `true`.
 - Need numeric columns aligned right: set `textAlign="right"` on the corresponding `sgds-data-table-head`.
 
 ```html
 <sgds-data-table dataLength="3" itemsPerPage="5" currentPage="1">
   <sgds-data-table-row>
-    <sgds-data-table-head sortable sortKey="id">ID</sgds-data-table-head>
-    <sgds-data-table-head sortable sortKey="name">Name</sgds-data-table-head>
+    <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
+    <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
     <sgds-data-table-head textAlign="right">Amount</sgds-data-table-head>
   </sgds-data-table-row>
   <sgds-data-table-row>
@@ -53,12 +54,13 @@ It supports client-side pagination, server-driven pagination, sortable headers, 
 | `hideFooter` | boolean | `false` | Hides summary and pagination footer |
 | `mode` | `"client" \| "server"` | `"client"` | Pagination mode |
 | `isLoading` | boolean | `false` | Shows loading state in server mode |
+| `serverSort` | boolean | `false` | Emits `sgds-sort` for external sorting instead of local sorting |
 
 ### `<sgds-data-table-head>`
 
 | Attribute | Type | Default | Purpose |
 | --- | --- | --- | --- |
-| `sortable` | boolean | `true` | Enables sort toggle on click |
+| `sorting` | boolean | `true` | Enables sort toggle on click |
 | `sortKey` | string | `""` | Row data key used for sorting |
 | `textAlign` | `"left" \| "right"` | `"left"` | Alignment for header and same body column |
 | `width` | string | — | Column width |
@@ -78,7 +80,7 @@ It supports client-side pagination, server-driven pagination, sortable headers, 
 | Slot | Purpose |
 | --- | --- |
 | default | Accepts `sgds-data-table-head` and `sgds-data-table-cell` |
-| `expandable-content` | Content displayed in expanded detail row |
+| `content` | Content displayed in expanded detail row |
 
 ## Events
 
@@ -86,7 +88,7 @@ It supports client-side pagination, server-driven pagination, sortable headers, 
 | --- | --- |
 | `sgds-page-change` | Pagination page changes |
 | `sgds-row-select` | Selection state changes for row checkboxes |
-| `sgds-sort` | A sortable header changes sort direction |
+| `sgds-sort` | A sorting header changes sort direction (emitted by `sgds-data-table` when `serverSort` is true) |
 | `sgds-show` | Expandable row starts opening |
 | `sgds-after-show` | Expandable row finishes opening |
 | `sgds-hide` | Expandable row starts closing |
@@ -95,10 +97,10 @@ It supports client-side pagination, server-driven pagination, sortable headers, 
 ## Server Mode Example
 
 ```html
-<sgds-data-table id="users-table" mode="server" dataLength="100" itemsPerPage="10" currentPage="1">
+<sgds-data-table id="users-table" mode="server" serverSort dataLength="100" itemsPerPage="10" currentPage="1">
   <sgds-data-table-row>
-    <sgds-data-table-head>ID</sgds-data-table-head>
-    <sgds-data-table-head>Name</sgds-data-table-head>
+    <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
+    <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
   </sgds-data-table-row>
 </sgds-data-table>
 
@@ -131,6 +133,12 @@ It supports client-side pagination, server-driven pagination, sortable headers, 
     loadPage(Number(table.currentPage || 1));
   });
 
+  table.addEventListener("sgds-sort", ({ detail }) => {
+    // Use detail.key and detail.direction in your API query.
+    console.log(detail);
+    loadPage(Number(table.currentPage || 1));
+  });
+
   loadPage(1);
 </script>
 ```
@@ -142,5 +150,5 @@ It supports client-side pagination, server-driven pagination, sortable headers, 
 1. Always provide `dataLength`, `currentPage`, and `itemsPerPage` together for predictable pagination.
 2. In server mode, manage `isLoading` around fetch calls and update row markup externally.
 3. Use `textAlign` on header cells only; body alignment is inherited by column.
-4. Keep non-sortable control columns (expand/checkbox) unsortable.
+4. Keep non-sorting control columns (expand/checkbox) non-sorting.
 5. Prefer setting `sortKey` when rowData is provided for stable sorting behavior.

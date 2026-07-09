@@ -1,9 +1,60 @@
 ## Server Loading
 
 Use `mode="server"` with `isLoading` to show the loading state while waiting for remote data.
+For backend sorting, set `serverSort` on `<sgds-data-table>` and handle the emitted
+`sgds-sort` event in your application.
 
 <Canvas of={DataTableStories.ServerLoading}>
   <Story of={DataTableStories.ServerLoading} />
+</Canvas>
+
+## No rows
+
+Use a header-only table when data is unavailable. The component shows the default no-data state.
+
+<Canvas of={DataTableStories.NoRows}>
+  <Story of={DataTableStories.NoRows} />
+</Canvas>
+
+## Multi-select
+
+Set `multiSelect` to render a checkbox column for row selection.
+
+<Canvas of={DataTableStories.MultiSelect}>
+  <Story of={DataTableStories.MultiSelect} />
+</Canvas>
+
+## Expandable rows
+
+Set `expand` on a row and provide content in the `content` slot.
+Set `open` if a row should start expanded.
+
+<Canvas of={DataTableStories.ExpandableRows}>
+  <Story of={DataTableStories.ExpandableRows} />
+</Canvas>
+
+## Expandable with multi-select
+
+Use `expand` and `multiSelect` together when rows need both selection and detail content.
+
+<Canvas of={DataTableStories.ExpandableMultiSelect}>
+  <Story of={DataTableStories.ExpandableMultiSelect} />
+</Canvas>
+
+## Custom footer text
+
+Set `footerText` to replace the default results summary text in the footer.
+
+<Canvas of={DataTableStories.CustomFooterText}>
+  <Story of={DataTableStories.CustomFooterText} />
+</Canvas>
+
+## Hide footer
+
+Set `hideFooter` to hide both the results summary and pagination controls.
+
+<Canvas of={DataTableStories.HideFooter}>
+  <Story of={DataTableStories.HideFooter} />
 </Canvas>
 
 ## Header Text Alignment
@@ -12,4 +63,13 @@ Use `textAlign="right"` on `<sgds-data-table-head>` to right-align that header a
 
 <Canvas of={DataTableStories.HeaderTextAlignment}>
   <Story of={DataTableStories.HeaderTextAlignment} />
+</Canvas>
+
+## Header colspan and rowspan
+
+Use `colspan` to span a header cell across columns, and use `rowspan` to span a header cell across rows.
+This pattern supports grouped headers while keeping sorting on individual leaf headers.
+
+<Canvas of={DataTableStories.HeaderColspanRowspan}>
+  <Story of={DataTableStories.HeaderColspanRowspan} />
 </Canvas>
