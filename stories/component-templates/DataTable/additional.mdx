@@ -65,11 +65,20 @@ Use `textAlign="right"` on `<sgds-data-table-head>` to right-align that header a
   <Story of={DataTableStories.HeaderTextAlignment} />
 </Canvas>
 
-## Header colspan and rowspan
+## Header and cell props
 
-Use `colspan` to span a header cell across columns, and use `rowspan` to span a header cell across rows.
-This pattern supports grouped headers while keeping sorting on individual leaf headers.
+Use `sorting`, `sortKey`, `width`, and `textAlign` on header cells.
+Use `colspan` and `rowspan` on data cells when rows need merged columns or shared values.
 
 <Canvas of={DataTableStories.HeaderColspanRowspan}>
   <Story of={DataTableStories.HeaderColspanRowspan} />
+</Canvas>
+
+## Row colspan example (5 by 5)
+
+This table has five columns and five data rows.
+Rows two and four use `colspan="2"` to merge the item and category columns.
+
+<Canvas of={DataTableStories.RowColspanFiveByFive}>
+  <Story of={DataTableStories.RowColspanFiveByFive} />
 </Canvas>
