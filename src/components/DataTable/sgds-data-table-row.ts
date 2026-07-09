@@ -237,7 +237,15 @@ export class SgdsDataTableRow extends SgdsElement {
           ? this._renderExpandPlaceholder(isHeaderRow)
           : nothing}
         ${this.showCheckbox ? this._renderCheckboxCell(isHeaderRow) : nothing}
-        ${cells.map((el, index) => this._renderCell(el, index))}
+        ${(() => {
+          let visualColumnIndex = 0;
+          return cells.map(el => {
+            const renderedCell = this._renderCell(el, visualColumnIndex);
+            const span = Number(el.colspan) > 0 ? Number(el.colspan) : 1;
+            visualColumnIndex += span;
+            return renderedCell;
+          });
+        })()}
       </tr>
 
       ${this.expand

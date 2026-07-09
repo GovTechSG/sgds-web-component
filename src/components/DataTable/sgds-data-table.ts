@@ -146,7 +146,10 @@ export class SgdsDataTable extends SgdsElement {
   }
 
   private _applyColumnAlignment() {
-    const headerAlignments = this._headerCells.map(header => header.textAlign ?? "left");
+    const headerAlignments = this._headerCells.flatMap(header => {
+      const span = Number(header.colspan) > 0 ? Number(header.colspan) : 1;
+      return Array(span).fill(header.textAlign ?? "left");
+    });
 
     this.headerRows.forEach(row => {
       row.columnAlignments = [...headerAlignments];
