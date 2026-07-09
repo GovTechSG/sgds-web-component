@@ -178,17 +178,20 @@ const HeaderAndCellPropsTemplate = () => html`
     <sgds-data-table-row>
       <sgds-data-table-cell>1</sgds-data-table-cell>
       <sgds-data-table-cell>Lina</sgds-data-table-cell>
-      <sgds-data-table-cell rowspan="2">Engineer</sgds-data-table-cell>
-      <sgds-data-table-cell rowspan="2">82</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+      <sgds-data-table-cell>82</sgds-data-table-cell>
     </sgds-data-table-row>
     <sgds-data-table-row>
       <sgds-data-table-cell>2</sgds-data-table-cell>
       <sgds-data-table-cell>Adam</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+      <sgds-data-table-cell>70</sgds-data-table-cell>
     </sgds-data-table-row>
     <sgds-data-table-row>
       <sgds-data-table-cell>3</sgds-data-table-cell>
-      <sgds-data-table-cell colspan="2">Nora · Manager</sgds-data-table-cell>
-      <sgds-data-table-cell>75</sgds-data-table-cell>
+      <sgds-data-table-cell>Nora</sgds-data-table-cell>
+      <sgds-data-table-cell>Manager</sgds-data-table-cell>
+      <sgds-data-table-cell>85</sgds-data-table-cell>
     </sgds-data-table-row>
   </sgds-data-table>
 `;
