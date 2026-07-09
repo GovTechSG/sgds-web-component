@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { elementUpdated, expect, fixture } from "@open-wc/testing";
-import { SgdsDataTable } from "../src/components";
-import "./sgds-web-component";
+import { SgdsDataTable } from "../../../src/components";
+import "../../sgds-web-component";
 
 describe("<sgds-data-table>", () => {
   it("renders data rows and header row from slotted content", async () => {
