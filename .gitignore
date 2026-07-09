@@ -31,4 +31,4 @@ test/skills/*
 # Oobee a11y scan results
 results/
 a11y-failures.log
-**/.pnpm/*
+**/.pnpm*

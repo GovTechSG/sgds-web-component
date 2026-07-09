@@ -13,17 +13,16 @@ import SgdsDataTableHead from "./sgds-data-table-head";
 import { SgdsIcon } from "../Icon/sgds-icon";
 
 /**
- * @summary A data table row. Add `expandable` to enable an expandable content area beneath
- * the row — place content in the `expandable-content` slot.
+ * @summary A data table row. Set `expand` to enable an expandable content area beneath
+ * the row, then place detail content in the `content` slot.
  *
  * @slot default - Insert `sgds-data-table-cell` or `sgds-data-table-head` elements.
- * @slot expandable-content - Content shown in the animated expand area beneath the row.
+ * @slot content - Content shown in the animated expand area beneath the row.
  *
  * @event sgds-show - Emitted when the expandable row begins to open.
  * @event sgds-after-show - Emitted after the expandable row open animation completes.
  * @event sgds-hide - Emitted when the expandable row begins to close.
  * @event sgds-after-hide - Emitted after the expandable row close animation completes.
- * @event i-sgds-change - Emitted when the row checkbox changes. Detail: `{ checked: boolean }`
  */
 export class SgdsDataTableRow extends SgdsElement {
   static styles = [...SgdsElement.styles, tableRowStyle];
@@ -36,17 +35,14 @@ export class SgdsDataTableRow extends SgdsElement {
     "sgds-icon": SgdsIcon
   };
 
-  /** @internal */
-  @query(".expandable-body") private _expandableBody!: HTMLElement;
-
-  /** @internal */
-  @query("sgds-checkbox") private _checkboxEl!: SgdsCheckbox;
-
   /** Arbitrary data associated with this row. Returned in event detail on row selection. */
   @property({ type: Object }) rowData: Record<string, unknown> = {};
 
   /** When true, the row has an expandable content area toggled by a chevron. */
-  @property({ type: Boolean, reflect: true }) expandable = false;
+  @property({ type: Boolean }) expand = false;
+
+  /** When true, the expandable content area is open. */
+  @property({ type: Boolean }) open = false;
 
   /** @internal — set by `sgds-data-table` to show a checkbox cell on this row. */
   @property({ type: Boolean }) showCheckbox = false;
@@ -54,11 +50,14 @@ export class SgdsDataTableRow extends SgdsElement {
   /** @internal — set by `sgds-data-table` when at least one sibling row is expandable. */
   @property({ type: Boolean }) showExpandPlaceholder = false;
 
-  /** When true, the expandable content area is open. */
-  @property({ type: Boolean, reflect: true }) expanded = false;
-
   /** @internal — per-column alignment injected by `sgds-data-table` from header cells. */
   @property({ attribute: false }) columnAlignments: Array<"left" | "right"> = [];
+
+  /** @internal */
+  @query(".expandable-body") private _expandableBody!: HTMLElement;
+
+  /** @internal */
+  @query("sgds-checkbox") private _checkboxEl!: SgdsCheckbox;
 
   @queryAssignedElements({ flatten: true })
   private _assignedCells!: Array<SgdsDataTableCell | SgdsDataTableHead>;
@@ -70,21 +69,21 @@ export class SgdsDataTableRow extends SgdsElement {
 
   firstUpdated() {
     if (this._expandableBody) {
-      this._expandableBody.hidden = true;
+      this._expandableBody.hidden = !this.open;
     }
   }
 
-  @watch("expanded", { waitUntilFirstUpdate: true })
+  @watch("open", { waitUntilFirstUpdate: true })
   async handleExpandedChange() {
-    if (this.expanded) {
+    if (this.open) {
       const sgdsShow = this.emit("sgds-show", { cancelable: true });
       if (sgdsShow.defaultPrevented) {
-        this.expanded = false;
+        this.open = false;
         return;
       }
       await stopAnimations(this._expandableBody);
       this._expandableBody.hidden = false;
-      const { keyframes, options } = getAnimation(this, "dataTableRow.expandRow.show");
+      const { keyframes, options } = getAnimation(this, "row.expand.show");
       await animateTo(
         this._expandableBody,
         shimKeyframesHeightAuto(keyframes, this._expandableBody.scrollHeight),
@@ -94,11 +93,11 @@ export class SgdsDataTableRow extends SgdsElement {
     } else {
       const sgdsHide = this.emit("sgds-hide", { cancelable: true });
       if (sgdsHide.defaultPrevented) {
-        this.expanded = true;
+        this.open = true;
         return;
       }
       await stopAnimations(this._expandableBody);
-      const { keyframes, options } = getAnimation(this, "dataTableRow.expandRow.hide");
+      const { keyframes, options } = getAnimation(this, "row.expand.hide");
       await animateTo(
         this._expandableBody,
         shimKeyframesHeightAuto(keyframes, this._expandableBody.scrollHeight),
@@ -111,15 +110,15 @@ export class SgdsDataTableRow extends SgdsElement {
 
   /** Opens the expandable content area. */
   public async show() {
-    if (this.expanded) return;
-    this.expanded = true;
+    if (this.open) return;
+    this.open = true;
     return waitForEvent(this, "sgds-after-show");
   }
 
   /** Closes the expandable content area. */
   public async hide() {
-    if (!this.expanded) return;
-    this.expanded = false;
+    if (!this.open) return;
+    this.open = false;
     return waitForEvent(this, "sgds-after-hide");
   }
 
@@ -132,7 +131,19 @@ export class SgdsDataTableRow extends SgdsElement {
   }
 
   private _toggleExpand() {
-    this.expanded ? this.hide() : this.show();
+    this.open ? this.hide() : this.show();
+  }
+
+  private _onExpandKeyDown(e: KeyboardEvent) {
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    this._toggleExpand();
+  }
+
+  private _onSortKeyDown(e: KeyboardEvent, header: SgdsDataTableHead) {
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    header.handleSortClick();
   }
 
   private _renderCell(el: SgdsDataTableCell | SgdsDataTableHead, columnIndex: number) {
@@ -145,12 +156,27 @@ export class SgdsDataTableRow extends SgdsElement {
         rowspan=${ifDefined(el.rowspan)}
         aria-sort=${ifDefined(el.ariasort)}
         scope="col"
-        ?data-sortable=${el.sortable}
-        @click=${el.sortable ? () => el.handleSortClick() : nothing}
+        tabindex=${ifDefined(el.sorting ? "0" : undefined)}
+        ?data-sorting=${el.sorting}
+        @click=${el.sorting ? () => el.handleSortClick() : nothing}
+        @keydown=${el.sorting ? (e: KeyboardEvent) => this._onSortKeyDown(e, el) : nothing}
       >
         <div class="data-table-head ${el.textAlign === "right" ? "align-right" : "align-left"}">
           ${children}
-          ${el.sortable ? html`<sgds-icon name="chevron-selector-vertical" size="sm"></sgds-icon>` : nothing}
+          ${el.sorting
+            ? html`<div class="sort">
+                <sgds-icon
+                  class="sort-icon ${el.ariasort === "ascending" ? "active" : ""}"
+                  name="chevron-up"
+                  size="sm"
+                ></sgds-icon>
+                <sgds-icon
+                  class="sort-icon ${el.ariasort === "descending" ? "active" : ""}"
+                  name="chevron-down"
+                  size="sm"
+                ></sgds-icon>
+              </div>`
+            : nothing}
         </div>
       </th>`;
     }
@@ -161,50 +187,66 @@ export class SgdsDataTableRow extends SgdsElement {
     </td>`;
   }
 
-  private _renderExpandCell() {
-    return html`<td class="control-cell" @click=${this._toggleExpand}>
+  private _renderExpandCell(isHeaderRow: boolean) {
+    if (isHeaderRow) {
+      return html`<th class="control-cell" scope="col"></th>`;
+    }
+
+    return html`<td class="control-cell" @click=${this._toggleExpand} @keydown=${this._onExpandKeyDown} tabindex="0">
       <div class="data-table-cell expand-cell">
-        <sgds-icon name=${this.expanded ? "chevron-up" : "chevron-down"} size="md"></sgds-icon>
+        <sgds-icon name=${this.open ? "chevron-up" : "chevron-down"} size="md"></sgds-icon>
       </div>
     </td>`;
   }
 
-  private _renderExpandPlaceholder() {
-    return html`<td class="control-cell"></td>`;
+  private _renderExpandPlaceholder(isHeaderRow: boolean) {
+    return isHeaderRow ? html`<th class="control-cell" scope="col"></th>` : html`<td class="control-cell"></td>`;
   }
 
-  private _renderCheckboxCell() {
-    return html`<td class="control-cell">
-      <div class="data-table-cell checkbox-cell">
-        <sgds-checkbox @sgds-change=${this._onCheckboxChange}></sgds-checkbox>
-      </div>
-    </td>`;
+  private _renderCheckboxCell(isHeaderRow: boolean) {
+    return isHeaderRow
+      ? html`<th class="control-cell" scope="col">
+          <div class="data-table-cell checkbox-cell">
+            <sgds-checkbox @sgds-change=${this._onCheckboxChange}></sgds-checkbox>
+          </div>
+        </th>`
+      : html`<td class="control-cell">
+          <div class="data-table-cell checkbox-cell">
+            <sgds-checkbox @sgds-change=${this._onCheckboxChange}></sgds-checkbox>
+          </div>
+        </td>`;
+  }
+
+  private _renderHiddenSlotCell(isHeaderRow: boolean) {
+    return isHeaderRow
+      ? html`<th hidden style="display:none"><slot @slotchange=${this._onSlotChange}></slot></th>`
+      : html`<td hidden style="display:none"><slot @slotchange=${this._onSlotChange}></slot></td>`;
   }
 
   render() {
     const cells = this._assignedCells ?? [];
-    const totalCols =
-      cells.length + (this.showCheckbox ? 1 : 0) + (this.expandable || this.showExpandPlaceholder ? 1 : 0);
+    const isHeaderRow = cells.some(cell => cell instanceof SgdsDataTableHead);
+    const totalCols = cells.length + (this.showCheckbox ? 1 : 0) + (this.expand || this.showExpandPlaceholder ? 1 : 0);
 
     return html`
-      <tr>
-        <td hidden style="display:none"><slot @slotchange=${this._onSlotChange}></slot></td>
-        ${this.expandable
-          ? this._renderExpandCell()
+      <tr ?data-header-row=${isHeaderRow} class=${this.open ? "active" : ""}>
+        ${this._renderHiddenSlotCell(isHeaderRow)}
+        ${this.expand
+          ? this._renderExpandCell(isHeaderRow)
           : this.showExpandPlaceholder
-          ? this._renderExpandPlaceholder()
+          ? this._renderExpandPlaceholder(isHeaderRow)
           : nothing}
-        ${this.showCheckbox ? this._renderCheckboxCell() : nothing}
+        ${this.showCheckbox ? this._renderCheckboxCell(isHeaderRow) : nothing}
         ${cells.map((el, index) => this._renderCell(el, index))}
       </tr>
 
-      ${this.expandable
+      ${this.expand
         ? html`
             <tr class="expandable-row">
               <td colspan=${totalCols} class="expandable-td">
                 <div class="expandable-body">
                   <div class="expandable-content">
-                    <slot name="expandable-content"></slot>
+                    <slot name="content"></slot>
                   </div>
                 </div>
               </td>
@@ -215,7 +257,7 @@ export class SgdsDataTableRow extends SgdsElement {
   }
 }
 
-setDefaultAnimation("dataTableRow.expandRow.show", {
+setDefaultAnimation("row.expand.show", {
   keyframes: [
     { height: "0", opacity: "0" },
     { height: "auto", opacity: "1" }
@@ -223,7 +265,7 @@ setDefaultAnimation("dataTableRow.expandRow.show", {
   options: { duration: 250, easing: "ease-in-out" }
 });
 
-setDefaultAnimation("dataTableRow.expandRow.hide", {
+setDefaultAnimation("row.expand.hide", {
   keyframes: [
     { height: "auto", opacity: "1" },
     { height: "0", opacity: "0" }

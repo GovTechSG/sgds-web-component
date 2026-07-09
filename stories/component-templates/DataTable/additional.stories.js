@@ -15,6 +15,198 @@ const ServerLoadingTemplate = () => html`
   </sgds-data-table>
 `;
 
+const NoRowsTemplate = () => html`
+  <sgds-data-table>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const MultiSelectTemplate = () => html`
+  <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5} .multiSelect=${true}>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const ExpandableRowsTemplate = () => html`
+  <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5}>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row .expand=${true} .open=${true}>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+      <div slot="content">Department: Engineering · Join date: 01 Jan 2022 · Status: Active</div>
+    </sgds-data-table-row>
+    <sgds-data-table-row .expand=${true}>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+      <div slot="content">Department: Design · Join date: 15 Mar 2023 · Status: Active</div>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const ExpandableMultiSelectTemplate = () => html`
+  <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5} .multiSelect=${true}>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row .expand=${true}>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+      <div slot="content">Department: Engineering</div>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const CustomFooterTextTemplate = () => html`
+  <sgds-data-table
+    .currentPage=${1}
+    .dataLength=${4}
+    .itemsPerPage=${2}
+    footerText="Showing records fetched from API cache"
+  >
+    <sgds-data-table-row>
+      <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>Name</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Amy</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Cara</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell>Dan</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const HideFooterTemplate = () => html`
+  <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5} .hideFooter=${true}>
+    <sgds-data-table-row>
+      <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>Status</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1001</sgds-data-table-cell>
+      <sgds-data-table-cell>Pending</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1002</sgds-data-table-cell>
+      <sgds-data-table-cell>Approved</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1003</sgds-data-table-cell>
+      <sgds-data-table-cell>Rejected</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const HeaderSpanTemplate = () => html`
+  <sgds-data-table .currentPage=${1} .dataLength=${4} .itemsPerPage=${4}>
+    <sgds-data-table-row>
+      <sgds-data-table-head rowspan="2" width="88">ID</sgds-data-table-head>
+      <sgds-data-table-head colspan="2">Profile</sgds-data-table-head>
+      <sgds-data-table-head rowspan="2" sorting sortKey="score" width="120" textAlign="right"
+        >Score</sgds-data-table-head
+      >
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="role">Role</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Lina</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+      <sgds-data-table-cell>82</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Adam</sgds-data-table-cell>
+      <sgds-data-table-cell>Designer</sgds-data-table-cell>
+      <sgds-data-table-cell>90</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Nora</sgds-data-table-cell>
+      <sgds-data-table-cell>Manager</sgds-data-table-cell>
+      <sgds-data-table-cell>75</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+      <sgds-data-table-cell>88</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
 const HeaderAlignmentTemplate = () => html`
   <sgds-data-table .dataLength=${3} .itemsPerPage=${5} .currentPage=${1}>
     <sgds-data-table-row>
@@ -39,6 +231,55 @@ const HeaderAlignmentTemplate = () => html`
 export const ServerLoading = {
   render: ServerLoadingTemplate.bind({}),
   name: "Server loading",
+  args: {},
+  parameters: {}
+};
+
+export const NoRows = {
+  render: NoRowsTemplate.bind({}),
+  name: "No rows",
+  args: {},
+  parameters: {}
+};
+
+export const MultiSelect = {
+  render: MultiSelectTemplate.bind({}),
+  name: "Multi-select",
+  args: {},
+  parameters: {}
+};
+
+export const ExpandableRows = {
+  render: ExpandableRowsTemplate.bind({}),
+  name: "Expandable rows",
+  args: {},
+  parameters: {}
+};
+
+export const ExpandableMultiSelect = {
+  render: ExpandableMultiSelectTemplate.bind({}),
+  name: "Expandable with multi-select",
+  args: {},
+  parameters: {}
+};
+
+export const CustomFooterText = {
+  render: CustomFooterTextTemplate.bind({}),
+  name: "Custom footer text",
+  args: {},
+  parameters: {}
+};
+
+export const HideFooter = {
+  render: HideFooterTemplate.bind({}),
+  name: "Hide footer",
+  args: {},
+  parameters: {}
+};
+
+export const HeaderColspanRowspan = {
+  render: HeaderSpanTemplate.bind({}),
+  name: "Header colspan and rowspan",
   args: {},
   parameters: {}
 };

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "lib": ["es2017", "dom", "dom.iterable"],
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+    "allowJs": true,
+    "types": ["mocha"],
+    "typeRoots": ["../node_modules/@types"]
+  },
+  "include": ["**/*.ts", "../src/**/*.ts"]
+}
