@@ -23,9 +23,8 @@ describe("<sgds-icon>", () => {
     const warnStub = Sinon.stub(console, "warn");
 
     const el = await fixture<SgdsIcon>(html`<sgds-icon name="invalid-icon"></sgds-icon>`);
-    await el.updateComplete;
+    await waitUntil(() => warnStub.calledOnce, "Expected console.warn to be called");
 
-    expect(warnStub.calledOnce).to.be.true;
     expect(warnStub.firstCall.args[0]).to.include("Icon not found: invalid-icon");
 
     // Since invalid icon, shadowRoot should be empty or not contain <svg>

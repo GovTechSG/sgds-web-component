@@ -1,435 +1,221 @@
 // Auto-generated icon registry. Do not edit manually.
 
-import Announcement from "./icons/announcement";
-import Archive from "./icons/archive";
-import ArrowBarDown from "./icons/arrow-bar-down";
-import ArrowBarLeft from "./icons/arrow-bar-left";
-import ArrowBarRight from "./icons/arrow-bar-right";
-import ArrowBarUp from "./icons/arrow-bar-up";
-import ArrowCircleDown from "./icons/arrow-circle-down";
-import ArrowCircleLeft from "./icons/arrow-circle-left";
-import ArrowCircleRight from "./icons/arrow-circle-right";
-import ArrowCircleUp from "./icons/arrow-circle-up";
-import ArrowClockwise from "./icons/arrow-clockwise";
-import ArrowDown from "./icons/arrow-down";
-import ArrowLeft from "./icons/arrow-left";
-import ArrowRepeat from "./icons/arrow-repeat";
-import ArrowRight from "./icons/arrow-right";
-import ArrowSquareDown from "./icons/arrow-square-down";
-import ArrowSquareLeft from "./icons/arrow-square-left";
-import ArrowSquareRight from "./icons/arrow-square-right";
-import ArrowSquareUp from "./icons/arrow-square-up";
-import ArrowUp from "./icons/arrow-up";
-import BankFill from "./icons/bank-fill";
-import BellSlash from "./icons/bell-slash";
-import Bell from "./icons/bell";
-import BiFunnel from "./icons/bi-funnel";
-import BookmarkFill from "./icons/bookmark-fill";
-import Bookmark from "./icons/bookmark";
-import BoxArrowUpRight from "./icons/box-arrow-up-right";
-import BoxSeam from "./icons/box-seam";
-import Building from "./icons/building";
-import Bus from "./icons/bus";
-import Calculator from "./icons/calculator";
-import CalendarCheck from "./icons/calendar-check";
-import CalendarHeart from "./icons/calendar-heart";
-import CalendarX from "./icons/calendar-x";
-import Calendar from "./icons/calendar";
-import Camera from "./icons/camera";
-import Car from "./icons/car";
-import ChatDots from "./icons/chat-dots";
-import ChatLeftText from "./icons/chat-left-text";
-import Chat from "./icons/chat";
-import CheckCircleFill from "./icons/check-circle-fill";
-import CheckCircle from "./icons/check-circle";
-import Check from "./icons/check";
-import ChevronDown from "./icons/chevron-down";
-import ChevronLeft from "./icons/chevron-left";
-import ChevronRight from "./icons/chevron-right";
-import ChevronSelectorVertical from "./icons/chevron-selector-vertical";
-import ChevronUp from "./icons/chevron-up";
-import Clock from "./icons/clock";
-import CloudCheck from "./icons/cloud-check";
-import CloudDownload from "./icons/cloud-download";
-import CloudUpload from "./icons/cloud-upload";
-import Cloud from "./icons/cloud";
-import CodeSquare from "./icons/code-square";
-import CoinsHand from "./icons/coins-hand";
-import Compass from "./icons/compass";
-import Copy from "./icons/copy";
-import CpuChipAi from "./icons/cpu-chip-ai";
-import Cross from "./icons/cross";
-import CursorFill from "./icons/cursor-fill";
-import Cursor from "./icons/cursor";
-import DashCircle from "./icons/dash-circle";
-import DashSquare from "./icons/dash-square";
-import Dash from "./icons/dash";
-import Database from "./icons/database";
-import Dataflow from "./icons/dataflow";
-import Download from "./icons/download";
-import Edit from "./icons/edit";
-import ExclamationCircleFill from "./icons/exclamation-circle-fill";
-import ExclamationCircle from "./icons/exclamation-circle";
-import ExclamationTriangleFill from "./icons/exclamation-triangle-fill";
-import ExclamationTriangle from "./icons/exclamation-triangle";
-import Exclamation from "./icons/exclamation";
-import EyeFill from "./icons/eye-fill";
-import EyeSlashFill from "./icons/eye-slash-fill";
-import EyeSlash from "./icons/eye-slash";
-import Eye from "./icons/eye";
-import Facebook from "./icons/facebook";
-import FileEarmarkText from "./icons/file-earmark-text";
-import FilePdf from "./icons/file-pdf";
-import FilePlus from "./icons/file-plus";
-import FileText from "./icons/file-text";
-import File from "./icons/file";
-import Files from "./icons/files";
-import Fingerprint from "./icons/fingerprint";
-import Flash from "./icons/flash";
-import FolderCheck from "./icons/folder-check";
-import FolderMinus from "./icons/folder-minus";
-import FolderPlus from "./icons/folder-plus";
-import Folder from "./icons/folder";
-import Gear from "./icons/gear";
-import GeoAlt from "./icons/geo-alt";
-import GeoFill from "./icons/geo-fill";
-import Geo from "./icons/geo";
-import GlobeAlt from "./icons/globe-alt";
-import Globe from "./icons/globe";
-import Google from "./icons/google";
-import GridFill from "./icons/grid-fill";
-import HandThumbsDown from "./icons/hand-thumbs-down";
-import HandThumbsUp from "./icons/hand-thumbs-up";
-import HardDrive from "./icons/hard-drive";
-import Heart from "./icons/heart";
-import HouseDoor from "./icons/house-door";
-import House from "./icons/house";
-import Image from "./icons/image";
-import InBox from "./icons/in-box";
-import InfoCircleFill from "./icons/info-circle-fill";
-import InfoCircle from "./icons/info-circle";
-import Instagram from "./icons/instagram";
-import Key from "./icons/key";
-import LaptopGear from "./icons/laptop-gear";
-import Laptop from "./icons/laptop";
-import Layers from "./icons/layers";
-import LayoutTextWindowReverse from "./icons/layout-text-window-reverse";
-import LayoutTextWindow from "./icons/layout-text-window";
-import Layout from "./icons/layout";
-import LifeBuoy from "./icons/life-buoy";
-import Lightbulb from "./icons/lightbulb";
-import Link from "./icons/link";
-import Linkedin from "./icons/linkedin";
-import List from "./icons/list";
-import LockFill from "./icons/lock-fill";
-import Lock from "./icons/lock";
-import Login from "./icons/login";
-import Logout from "./icons/logout";
-import Luggage from "./icons/luggage";
-import MailOpen from "./icons/mail-open";
-import Mail from "./icons/mail";
-import Map from "./icons/map";
-import Meetup from "./icons/meetup";
-import Menu from "./icons/menu";
-import Microphone from "./icons/microphone";
-import Monitor from "./icons/monitor";
-import Moon from "./icons/moon";
-import Move from "./icons/move";
-import Paperclip from "./icons/paperclip";
-import Passcode from "./icons/passcode";
-import Passport from "./icons/passport";
-import Pause from "./icons/pause";
-import Pencil from "./icons/pencil";
-import PendingCircle from "./icons/pending-circle";
-import PersonDash from "./icons/person-dash";
-import PersonPlus from "./icons/person-plus";
-import PersonX from "./icons/person-x";
-import Person from "./icons/person";
-import Phone from "./icons/phone";
-import PinMapFill from "./icons/pin-map-fill";
-import Pin from "./icons/pin";
-import Placeholder from "./icons/placeholder";
-import Plane from "./icons/plane";
-import Play from "./icons/play";
-import PlusCircle from "./icons/plus-circle";
-import PlusSquare from "./icons/plus-square";
-import Plus from "./icons/plus";
-import Printer from "./icons/printer";
-import QuestionCircle from "./icons/question-circle";
-import Rocket from "./icons/rocket";
-import Save from "./icons/save";
-import Search from "./icons/search";
-import Send from "./icons/send";
-import SgCrest from "./icons/sg-crest";
-import Share from "./icons/share";
-import ShieldTick from "./icons/shield-tick";
-import SidebarCollapse from "./icons/sidebar-collapse";
-import SidebarExpand from "./icons/sidebar-expand";
-import SlashCircle from "./icons/slash-circle";
-import SlashDivider from "./icons/slash-divider";
-import Sliders from "./icons/sliders";
-import Speedometer from "./icons/speedometer";
-import StarFill from "./icons/star-fill";
-import Star from "./icons/star";
-import Stoplights from "./icons/stoplights";
-import Sun from "./icons/sun";
-import SwitchHorizontal from "./icons/switch-horizontal";
-import SwitchVertical from "./icons/switch-vertical";
-import Tablet from "./icons/tablet";
-import Telegram from "./icons/telegram";
-import Telephone from "./icons/telephone";
-import ThreeDotsVertical from "./icons/three-dots-vertical";
-import ThreeDots from "./icons/three-dots";
-import Ticket from "./icons/ticket";
-import ToggleOff from "./icons/toggle-off";
-import ToggleOn from "./icons/toggle-on";
-import Train from "./icons/train";
-import Translate from "./icons/translate";
-import Trash from "./icons/trash";
-import TrendDown from "./icons/trend-down";
-import TrendUp from "./icons/trend-up";
-import Truck from "./icons/truck";
-import TwitterX from "./icons/twitter-x";
-import Unlock from "./icons/unlock";
-import Upload from "./icons/upload";
-import UserCheck from "./icons/user-check";
-import UserCircle from "./icons/user-circle";
-import UserPause from "./icons/user-pause";
-import UserSquare from "./icons/user-square";
-import Users from "./icons/users";
-import VideoRecorder from "./icons/video-recorder";
-import VolumeMax from "./icons/volume-max";
-import VolumeX from "./icons/volume-x";
-import WindowDash from "./icons/window-dash";
-import WindowDesktop from "./icons/window-desktop";
-import WindowDock from "./icons/window-dock";
-import WindowFullscreen from "./icons/window-fullscreen";
-import WindowPlus from "./icons/window-plus";
-import WindowSidebar from "./icons/window-sidebar";
-import WindowSplit from "./icons/window-split";
-import WindowStack from "./icons/window-stack";
-import WindowX from "./icons/window-x";
-import Window from "./icons/window";
-import XcircleFill from "./icons/xcircle-fill";
-import Xcircle from "./icons/xcircle";
-import Youtube from "./icons/youtube";
-import ZoomIn from "./icons/zoom-in";
-import ZoomOut from "./icons/zoom-out";
+import type { TemplateResult } from "lit";
 
-export const iconRegistry = {
-  announcement: Announcement,
-  archive: Archive,
-  "arrow-bar-down": ArrowBarDown,
-  "arrow-bar-left": ArrowBarLeft,
-  "arrow-bar-right": ArrowBarRight,
-  "arrow-bar-up": ArrowBarUp,
-  "arrow-circle-down": ArrowCircleDown,
-  "arrow-circle-left": ArrowCircleLeft,
-  "arrow-circle-right": ArrowCircleRight,
-  "arrow-circle-up": ArrowCircleUp,
-  "arrow-clockwise": ArrowClockwise,
-  "arrow-down": ArrowDown,
-  "arrow-left": ArrowLeft,
-  "arrow-repeat": ArrowRepeat,
-  "arrow-right": ArrowRight,
-  "arrow-square-down": ArrowSquareDown,
-  "arrow-square-left": ArrowSquareLeft,
-  "arrow-square-right": ArrowSquareRight,
-  "arrow-square-up": ArrowSquareUp,
-  "arrow-up": ArrowUp,
-  "bank-fill": BankFill,
-  "bell-slash": BellSlash,
-  bell: Bell,
-  "bi-funnel": BiFunnel,
-  "bookmark-fill": BookmarkFill,
-  bookmark: Bookmark,
-  "box-arrow-up-right": BoxArrowUpRight,
-  "box-seam": BoxSeam,
-  building: Building,
-  bus: Bus,
-  calculator: Calculator,
-  "calendar-check": CalendarCheck,
-  "calendar-heart": CalendarHeart,
-  "calendar-x": CalendarX,
-  calendar: Calendar,
-  camera: Camera,
-  car: Car,
-  "chat-dots": ChatDots,
-  "chat-left-text": ChatLeftText,
-  chat: Chat,
-  "check-circle-fill": CheckCircleFill,
-  "check-circle": CheckCircle,
-  check: Check,
-  "chevron-down": ChevronDown,
-  "chevron-left": ChevronLeft,
-  "chevron-right": ChevronRight,
-  "chevron-selector-vertical": ChevronSelectorVertical,
-  "chevron-up": ChevronUp,
-  clock: Clock,
-  "cloud-check": CloudCheck,
-  "cloud-download": CloudDownload,
-  "cloud-upload": CloudUpload,
-  cloud: Cloud,
-  "code-square": CodeSquare,
-  "coins-hand": CoinsHand,
-  compass: Compass,
-  copy: Copy,
-  "cpu-chip-ai": CpuChipAi,
-  cross: Cross,
-  "cursor-fill": CursorFill,
-  cursor: Cursor,
-  "dash-circle": DashCircle,
-  "dash-square": DashSquare,
-  dash: Dash,
-  database: Database,
-  dataflow: Dataflow,
-  download: Download,
-  edit: Edit,
-  "exclamation-circle-fill": ExclamationCircleFill,
-  "exclamation-circle": ExclamationCircle,
-  "exclamation-triangle-fill": ExclamationTriangleFill,
-  "exclamation-triangle": ExclamationTriangle,
-  exclamation: Exclamation,
-  "eye-fill": EyeFill,
-  "eye-slash-fill": EyeSlashFill,
-  "eye-slash": EyeSlash,
-  eye: Eye,
-  facebook: Facebook,
-  "file-earmark-text": FileEarmarkText,
-  "file-pdf": FilePdf,
-  "file-plus": FilePlus,
-  "file-text": FileText,
-  file: File,
-  files: Files,
-  fingerprint: Fingerprint,
-  flash: Flash,
-  "folder-check": FolderCheck,
-  "folder-minus": FolderMinus,
-  "folder-plus": FolderPlus,
-  folder: Folder,
-  gear: Gear,
-  "geo-alt": GeoAlt,
-  "geo-fill": GeoFill,
-  geo: Geo,
-  "globe-alt": GlobeAlt,
-  globe: Globe,
-  google: Google,
-  "grid-fill": GridFill,
-  "hand-thumbs-down": HandThumbsDown,
-  "hand-thumbs-up": HandThumbsUp,
-  "hard-drive": HardDrive,
-  heart: Heart,
-  "house-door": HouseDoor,
-  house: House,
-  image: Image,
-  "in-box": InBox,
-  "info-circle-fill": InfoCircleFill,
-  "info-circle": InfoCircle,
-  instagram: Instagram,
-  key: Key,
-  "laptop-gear": LaptopGear,
-  laptop: Laptop,
-  layers: Layers,
-  "layout-text-window-reverse": LayoutTextWindowReverse,
-  "layout-text-window": LayoutTextWindow,
-  layout: Layout,
-  "life-buoy": LifeBuoy,
-  lightbulb: Lightbulb,
-  link: Link,
-  linkedin: Linkedin,
-  list: List,
-  "lock-fill": LockFill,
-  lock: Lock,
-  login: Login,
-  logout: Logout,
-  luggage: Luggage,
-  "mail-open": MailOpen,
-  mail: Mail,
-  map: Map,
-  meetup: Meetup,
-  menu: Menu,
-  microphone: Microphone,
-  monitor: Monitor,
-  moon: Moon,
-  move: Move,
-  paperclip: Paperclip,
-  passcode: Passcode,
-  passport: Passport,
-  pause: Pause,
-  pencil: Pencil,
-  "pending-circle": PendingCircle,
-  "person-dash": PersonDash,
-  "person-plus": PersonPlus,
-  "person-x": PersonX,
-  person: Person,
-  phone: Phone,
-  "pin-map-fill": PinMapFill,
-  pin: Pin,
-  placeholder: Placeholder,
-  plane: Plane,
-  play: Play,
-  "plus-circle": PlusCircle,
-  "plus-square": PlusSquare,
-  plus: Plus,
-  printer: Printer,
-  "question-circle": QuestionCircle,
-  rocket: Rocket,
-  save: Save,
-  search: Search,
-  send: Send,
-  "sg-crest": SgCrest,
-  share: Share,
-  "shield-tick": ShieldTick,
-  "sidebar-collapse": SidebarCollapse,
-  "sidebar-expand": SidebarExpand,
-  "slash-circle": SlashCircle,
-  "slash-divider": SlashDivider,
-  sliders: Sliders,
-  speedometer: Speedometer,
-  "star-fill": StarFill,
-  star: Star,
-  stoplights: Stoplights,
-  sun: Sun,
-  "switch-horizontal": SwitchHorizontal,
-  "switch-vertical": SwitchVertical,
-  tablet: Tablet,
-  telegram: Telegram,
-  telephone: Telephone,
-  "three-dots-vertical": ThreeDotsVertical,
-  "three-dots": ThreeDots,
-  ticket: Ticket,
-  "toggle-off": ToggleOff,
-  "toggle-on": ToggleOn,
-  train: Train,
-  translate: Translate,
-  trash: Trash,
-  "trend-down": TrendDown,
-  "trend-up": TrendUp,
-  truck: Truck,
-  "twitter-x": TwitterX,
-  unlock: Unlock,
-  upload: Upload,
-  "user-check": UserCheck,
-  "user-circle": UserCircle,
-  "user-pause": UserPause,
-  "user-square": UserSquare,
-  users: Users,
-  "video-recorder": VideoRecorder,
-  "volume-max": VolumeMax,
-  "volume-x": VolumeX,
-  "window-dash": WindowDash,
-  "window-desktop": WindowDesktop,
-  "window-dock": WindowDock,
-  "window-fullscreen": WindowFullscreen,
-  "window-plus": WindowPlus,
-  "window-sidebar": WindowSidebar,
-  "window-split": WindowSplit,
-  "window-stack": WindowStack,
-  "window-x": WindowX,
-  window: Window,
-  "xcircle-fill": XcircleFill,
-  xcircle: Xcircle,
-  youtube: Youtube,
-  "zoom-in": ZoomIn,
-  "zoom-out": ZoomOut
+export const iconRegistry: Record<string, () => Promise<{ default: TemplateResult }>> = {
+  announcement: () => import("./icons/announcement"),
+  archive: () => import("./icons/archive"),
+  "arrow-bar-down": () => import("./icons/arrow-bar-down"),
+  "arrow-bar-left": () => import("./icons/arrow-bar-left"),
+  "arrow-bar-right": () => import("./icons/arrow-bar-right"),
+  "arrow-bar-up": () => import("./icons/arrow-bar-up"),
+  "arrow-circle-down": () => import("./icons/arrow-circle-down"),
+  "arrow-circle-left": () => import("./icons/arrow-circle-left"),
+  "arrow-circle-right": () => import("./icons/arrow-circle-right"),
+  "arrow-circle-up": () => import("./icons/arrow-circle-up"),
+  "arrow-clockwise": () => import("./icons/arrow-clockwise"),
+  "arrow-down": () => import("./icons/arrow-down"),
+  "arrow-left": () => import("./icons/arrow-left"),
+  "arrow-repeat": () => import("./icons/arrow-repeat"),
+  "arrow-right": () => import("./icons/arrow-right"),
+  "arrow-square-down": () => import("./icons/arrow-square-down"),
+  "arrow-square-left": () => import("./icons/arrow-square-left"),
+  "arrow-square-right": () => import("./icons/arrow-square-right"),
+  "arrow-square-up": () => import("./icons/arrow-square-up"),
+  "arrow-up": () => import("./icons/arrow-up"),
+  "bank-fill": () => import("./icons/bank-fill"),
+  "bell-slash": () => import("./icons/bell-slash"),
+  bell: () => import("./icons/bell"),
+  "bi-funnel": () => import("./icons/bi-funnel"),
+  "bookmark-fill": () => import("./icons/bookmark-fill"),
+  bookmark: () => import("./icons/bookmark"),
+  "box-arrow-up-right": () => import("./icons/box-arrow-up-right"),
+  "box-seam": () => import("./icons/box-seam"),
+  building: () => import("./icons/building"),
+  bus: () => import("./icons/bus"),
+  calculator: () => import("./icons/calculator"),
+  "calendar-check": () => import("./icons/calendar-check"),
+  "calendar-heart": () => import("./icons/calendar-heart"),
+  "calendar-x": () => import("./icons/calendar-x"),
+  calendar: () => import("./icons/calendar"),
+  camera: () => import("./icons/camera"),
+  car: () => import("./icons/car"),
+  "chat-dots": () => import("./icons/chat-dots"),
+  "chat-left-text": () => import("./icons/chat-left-text"),
+  chat: () => import("./icons/chat"),
+  "check-circle-fill": () => import("./icons/check-circle-fill"),
+  "check-circle": () => import("./icons/check-circle"),
+  check: () => import("./icons/check"),
+  "chevron-down": () => import("./icons/chevron-down"),
+  "chevron-left": () => import("./icons/chevron-left"),
+  "chevron-right": () => import("./icons/chevron-right"),
+  "chevron-selector-vertical": () => import("./icons/chevron-selector-vertical"),
+  "chevron-up": () => import("./icons/chevron-up"),
+  clock: () => import("./icons/clock"),
+  "cloud-check": () => import("./icons/cloud-check"),
+  "cloud-download": () => import("./icons/cloud-download"),
+  "cloud-upload": () => import("./icons/cloud-upload"),
+  cloud: () => import("./icons/cloud"),
+  "code-square": () => import("./icons/code-square"),
+  "coins-hand": () => import("./icons/coins-hand"),
+  compass: () => import("./icons/compass"),
+  copy: () => import("./icons/copy"),
+  "cpu-chip-ai": () => import("./icons/cpu-chip-ai"),
+  cross: () => import("./icons/cross"),
+  "cursor-fill": () => import("./icons/cursor-fill"),
+  cursor: () => import("./icons/cursor"),
+  "dash-circle": () => import("./icons/dash-circle"),
+  "dash-square": () => import("./icons/dash-square"),
+  dash: () => import("./icons/dash"),
+  database: () => import("./icons/database"),
+  dataflow: () => import("./icons/dataflow"),
+  download: () => import("./icons/download"),
+  edit: () => import("./icons/edit"),
+  "exclamation-circle-fill": () => import("./icons/exclamation-circle-fill"),
+  "exclamation-circle": () => import("./icons/exclamation-circle"),
+  "exclamation-triangle-fill": () => import("./icons/exclamation-triangle-fill"),
+  "exclamation-triangle": () => import("./icons/exclamation-triangle"),
+  exclamation: () => import("./icons/exclamation"),
+  "eye-fill": () => import("./icons/eye-fill"),
+  "eye-slash-fill": () => import("./icons/eye-slash-fill"),
+  "eye-slash": () => import("./icons/eye-slash"),
+  eye: () => import("./icons/eye"),
+  facebook: () => import("./icons/facebook"),
+  "file-earmark-text": () => import("./icons/file-earmark-text"),
+  "file-pdf": () => import("./icons/file-pdf"),
+  "file-plus": () => import("./icons/file-plus"),
+  "file-text": () => import("./icons/file-text"),
+  file: () => import("./icons/file"),
+  files: () => import("./icons/files"),
+  fingerprint: () => import("./icons/fingerprint"),
+  flash: () => import("./icons/flash"),
+  "folder-check": () => import("./icons/folder-check"),
+  "folder-minus": () => import("./icons/folder-minus"),
+  "folder-plus": () => import("./icons/folder-plus"),
+  folder: () => import("./icons/folder"),
+  gear: () => import("./icons/gear"),
+  "geo-alt": () => import("./icons/geo-alt"),
+  "geo-fill": () => import("./icons/geo-fill"),
+  geo: () => import("./icons/geo"),
+  "globe-alt": () => import("./icons/globe-alt"),
+  globe: () => import("./icons/globe"),
+  google: () => import("./icons/google"),
+  "grid-fill": () => import("./icons/grid-fill"),
+  "hand-thumbs-down": () => import("./icons/hand-thumbs-down"),
+  "hand-thumbs-up": () => import("./icons/hand-thumbs-up"),
+  "hard-drive": () => import("./icons/hard-drive"),
+  heart: () => import("./icons/heart"),
+  "house-door": () => import("./icons/house-door"),
+  house: () => import("./icons/house"),
+  image: () => import("./icons/image"),
+  "in-box": () => import("./icons/in-box"),
+  "info-circle-fill": () => import("./icons/info-circle-fill"),
+  "info-circle": () => import("./icons/info-circle"),
+  instagram: () => import("./icons/instagram"),
+  key: () => import("./icons/key"),
+  "laptop-gear": () => import("./icons/laptop-gear"),
+  laptop: () => import("./icons/laptop"),
+  layers: () => import("./icons/layers"),
+  "layout-text-window-reverse": () => import("./icons/layout-text-window-reverse"),
+  "layout-text-window": () => import("./icons/layout-text-window"),
+  layout: () => import("./icons/layout"),
+  "life-buoy": () => import("./icons/life-buoy"),
+  lightbulb: () => import("./icons/lightbulb"),
+  link: () => import("./icons/link"),
+  linkedin: () => import("./icons/linkedin"),
+  list: () => import("./icons/list"),
+  "lock-fill": () => import("./icons/lock-fill"),
+  lock: () => import("./icons/lock"),
+  login: () => import("./icons/login"),
+  logout: () => import("./icons/logout"),
+  luggage: () => import("./icons/luggage"),
+  "mail-open": () => import("./icons/mail-open"),
+  mail: () => import("./icons/mail"),
+  map: () => import("./icons/map"),
+  meetup: () => import("./icons/meetup"),
+  menu: () => import("./icons/menu"),
+  microphone: () => import("./icons/microphone"),
+  monitor: () => import("./icons/monitor"),
+  moon: () => import("./icons/moon"),
+  move: () => import("./icons/move"),
+  paperclip: () => import("./icons/paperclip"),
+  passcode: () => import("./icons/passcode"),
+  passport: () => import("./icons/passport"),
+  pause: () => import("./icons/pause"),
+  pencil: () => import("./icons/pencil"),
+  "pending-circle": () => import("./icons/pending-circle"),
+  "person-dash": () => import("./icons/person-dash"),
+  "person-plus": () => import("./icons/person-plus"),
+  "person-x": () => import("./icons/person-x"),
+  person: () => import("./icons/person"),
+  phone: () => import("./icons/phone"),
+  "pin-map-fill": () => import("./icons/pin-map-fill"),
+  pin: () => import("./icons/pin"),
+  placeholder: () => import("./icons/placeholder"),
+  plane: () => import("./icons/plane"),
+  play: () => import("./icons/play"),
+  "plus-circle": () => import("./icons/plus-circle"),
+  "plus-square": () => import("./icons/plus-square"),
+  plus: () => import("./icons/plus"),
+  printer: () => import("./icons/printer"),
+  "question-circle": () => import("./icons/question-circle"),
+  rocket: () => import("./icons/rocket"),
+  save: () => import("./icons/save"),
+  search: () => import("./icons/search"),
+  send: () => import("./icons/send"),
+  "sg-crest": () => import("./icons/sg-crest"),
+  share: () => import("./icons/share"),
+  "shield-tick": () => import("./icons/shield-tick"),
+  "sidebar-collapse": () => import("./icons/sidebar-collapse"),
+  "sidebar-expand": () => import("./icons/sidebar-expand"),
+  "slash-circle": () => import("./icons/slash-circle"),
+  "slash-divider": () => import("./icons/slash-divider"),
+  sliders: () => import("./icons/sliders"),
+  speedometer: () => import("./icons/speedometer"),
+  "star-fill": () => import("./icons/star-fill"),
+  star: () => import("./icons/star"),
+  stoplights: () => import("./icons/stoplights"),
+  sun: () => import("./icons/sun"),
+  "switch-horizontal": () => import("./icons/switch-horizontal"),
+  "switch-vertical": () => import("./icons/switch-vertical"),
+  tablet: () => import("./icons/tablet"),
+  telegram: () => import("./icons/telegram"),
+  telephone: () => import("./icons/telephone"),
+  "three-dots-vertical": () => import("./icons/three-dots-vertical"),
+  "three-dots": () => import("./icons/three-dots"),
+  ticket: () => import("./icons/ticket"),
+  "toggle-off": () => import("./icons/toggle-off"),
+  "toggle-on": () => import("./icons/toggle-on"),
+  train: () => import("./icons/train"),
+  translate: () => import("./icons/translate"),
+  trash: () => import("./icons/trash"),
+  "trend-down": () => import("./icons/trend-down"),
+  "trend-up": () => import("./icons/trend-up"),
+  truck: () => import("./icons/truck"),
+  "twitter-x": () => import("./icons/twitter-x"),
+  unlock: () => import("./icons/unlock"),
+  upload: () => import("./icons/upload"),
+  "user-check": () => import("./icons/user-check"),
+  "user-circle": () => import("./icons/user-circle"),
+  "user-pause": () => import("./icons/user-pause"),
+  "user-square": () => import("./icons/user-square"),
+  users: () => import("./icons/users"),
+  "video-recorder": () => import("./icons/video-recorder"),
+  "volume-max": () => import("./icons/volume-max"),
+  "volume-x": () => import("./icons/volume-x"),
+  "window-dash": () => import("./icons/window-dash"),
+  "window-desktop": () => import("./icons/window-desktop"),
+  "window-dock": () => import("./icons/window-dock"),
+  "window-fullscreen": () => import("./icons/window-fullscreen"),
+  "window-plus": () => import("./icons/window-plus"),
+  "window-sidebar": () => import("./icons/window-sidebar"),
+  "window-split": () => import("./icons/window-split"),
+  "window-stack": () => import("./icons/window-stack"),
+  "window-x": () => import("./icons/window-x"),
+  window: () => import("./icons/window"),
+  "xcircle-fill": () => import("./icons/xcircle-fill"),
+  xcircle: () => import("./icons/xcircle"),
+  youtube: () => import("./icons/youtube"),
+  "zoom-in": () => import("./icons/zoom-in"),
+  "zoom-out": () => import("./icons/zoom-out")
 };
