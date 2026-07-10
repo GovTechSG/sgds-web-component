@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 36px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+      .narrow-container {
+        border: 1px dashed red;
+        padding: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Checkbox Label Break Words Bug</h1>
+      <p>When the container width is limited and the label text is long with no natural break points, the checkbox input gets squished.</p>
+
+      <div>
+        <h2>Narrow container (200px) - Long label with no breaks</h2>
+        <div class="narrow-container" style="width: 200px;">
+          <sgds-checkbox value="terms">
+            Iagreetothetermsandconditionsofthisserviceagreementwithoutwwwwwwwwwwwwwwwwwexception
+          </sgds-checkbox>
+        </div>
+      </div>
+
+      <div>
+        <h2>Narrow container (200px) - Long label with spaces</h2>
+        <div class="narrow-container" style="width: 200px;">
+          <sgds-checkbox value="terms">
+            I agree to the terms and conditions of this service agreement without exception and furthermore acknowledge all responsibilities
+          </sgds-checkbox>
+        </div>
+      </div>
+
+      <div>
+        <h2>Narrow container (150px) - Medium label</h2>
+        <div class="narrow-container" style="width: 150px;">
+          <sgds-checkbox value="newsletter">
+            Subscribe to our weekly newsletter updates
+          </sgds-checkbox>
+        </div>
+      </div>
+
+      <div>
+        <h2>Narrow container (200px) - Checkbox group with long labels</h2>
+        <div class="narrow-container" style="width: 200px;">
+          <sgds-checkbox-group label="Select your preferences">
+            <sgds-checkbox value="a">Thisisaverylongoptionlabelwithnospacesorbreakpointsatall</sgds-checkbox>
+            <sgds-checkbox value="b">Another really long option label that should wrap nicely but may squish the checkbox</sgds-checkbox>
+            <sgds-checkbox value="c">Short</sgds-checkbox>
+          </sgds-checkbox-group>
+        </div>
+      </div>
+
+      <div>
+        <h2>Narrow container (120px) - Extreme case</h2>
+        <div class="narrow-container" style="width: 120px;">
+          <sgds-checkbox value="agree">
+            Acknowledgementoftermsandconditions
+          </sgds-checkbox>
+        </div>
+      </div>
+
+      <div>
+        <h2>Normal width (no issue) - For comparison</h2>
+        <div class="narrow-container" style="width: 400px;">
+          <sgds-checkbox value="terms">
+            I agree to the terms and conditions of this service agreement without exception
+          </sgds-checkbox>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

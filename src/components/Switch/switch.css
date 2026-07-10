@@ -21,6 +21,7 @@ input {
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-transparent);
   width: var(--sgds-switch-width);
   height: var(--sgds-switch-height);
+  flex-shrink: 0;
   border-radius: var(--sgds-form-border-radius-full);
   transition: background-position 0.15s ease-in-out;
   padding: 0px var(--sgds-form-padding-inline-sm);
