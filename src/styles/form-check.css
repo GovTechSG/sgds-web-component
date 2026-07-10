@@ -18,6 +18,7 @@ input {
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
   width: var(--sgds-form-width-xs);
   height: var(--sgds-form-height-sm);
+  flex-shrink: 0;
 }
 
 .form-check-input[checked] {
