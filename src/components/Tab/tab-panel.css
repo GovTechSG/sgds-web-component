@@ -1,3 +1,7 @@
+:host(:not([active])) {
+  display: none;
+}
+
 .tab-panel {
   display: block;
 }
