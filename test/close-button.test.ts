@@ -57,6 +57,10 @@ describe("<sgds-close-button>", () => {
     const button = el.shadowRoot?.querySelector(".btn-close") as HTMLElement;
     expect(button).to.exist;
 
+    // Wait for the icon inside to load asynchronously
+    const icon = button.querySelector("sgds-icon");
+    await waitUntil(() => icon?.shadowRoot?.querySelector("svg"), "Icon SVG should render");
+
     expect(getComputedStyle(button).width).to.equal("24px");
     expect(getComputedStyle(button).height).to.equal("24px");
     expect(el.size).to.equal("sm");
@@ -71,6 +75,10 @@ describe("<sgds-close-button>", () => {
     // Access the rendered button
     const button = el.shadowRoot?.querySelector(".btn-close") as HTMLElement;
     expect(button).to.exist;
+
+    // Wait for the icon inside to load asynchronously
+    const icon = button.querySelector("sgds-icon");
+    await waitUntil(() => icon?.shadowRoot?.querySelector("svg"), "Icon SVG should render");
 
     expect(getComputedStyle(button).width).to.equal("32px");
     expect(getComputedStyle(button).height).to.equal("32px");

@@ -1,8 +1,11 @@
 import { nothing } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import type { TemplateResult } from "lit";
 import { iconRegistry } from "./icon-registry";
 import SgdsElement from "../../base/sgds-element";
 import iconStyles from "./icon.css";
+
+const iconCache = new Map<string, TemplateResult>();
 
 /**
  * @summary Icons offer a form of visual shorthand that we are all familiar with. They can label, inform and aid navigation quickly and effectively in minimal space. Icons must first and foremost communicate meaning. By default, the icon component renders icons from `SgdsIcon` library set
@@ -19,17 +22,40 @@ export class SgdsIcon extends SgdsElement {
   /** An accessible label for the icon. When set, the SVG is treated as informative. When omitted, the SVG is marked as decorative with aria-hidden="true". */
   @property({ type: String }) ariaLabel: string;
 
-  private _getIconByName(name: string) {
-    if (!name) return;
+  @state() private _icon: TemplateResult | undefined;
 
-    const svg = iconRegistry[name];
+  willUpdate(changedProperties: Map<string, unknown>) {
+    if (changedProperties.has("name")) {
+      this._loadIcon(this.name);
+    }
+  }
 
-    if (!svg) {
-      console.warn(`Icon not found: ${name}`);
+  private async _loadIcon(name: string) {
+    if (!name) {
+      this._icon = undefined;
       return;
     }
 
-    return svg;
+    if (iconCache.has(name)) {
+      this._icon = iconCache.get(name);
+      return;
+    }
+
+    const loader = iconRegistry[name];
+    if (!loader) {
+      console.warn(`Icon not found: ${name}`);
+      this._icon = undefined;
+      return;
+    }
+
+    try {
+      const module = await loader();
+      iconCache.set(name, module.default);
+      this._icon = module.default;
+    } catch {
+      console.warn(`Failed to load icon: ${name}`);
+      this._icon = undefined;
+    }
   }
 
   updated() {
@@ -46,8 +72,7 @@ export class SgdsIcon extends SgdsElement {
   }
 
   render() {
-    const icon = this._getIconByName(this.name);
-    return icon ? icon : nothing;
+    return this._icon ?? nothing;
   }
 }
 

@@ -5,13 +5,6 @@ const prettier = require("prettier");
 const iconsDir = path.resolve(__dirname, "../src/components/Icon/icons");
 const outputFile = path.resolve(__dirname, "../src/components/Icon/icon-registry.ts");
 
-function kebabToPascalCase(str) {
-  return str
-    .split("-")
-    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-    .join("");
-}
-
 const prettierOptions = prettier.resolveConfig.sync(process.cwd()) || {
   parser: "typescript"
 };
@@ -21,21 +14,18 @@ const files = fs.readdirSync(iconsDir).filter(file => {
   return ext === ".ts" || ext === ".js";
 });
 
-const imports = [];
 const registryEntries = [];
 
 files.forEach(file => {
   const nameWithoutExt = path.basename(file, path.extname(file));
-  const pascalName = kebabToPascalCase(nameWithoutExt);
-  imports.push(`import ${pascalName} from "./icons/${nameWithoutExt}";`);
-  registryEntries.push(`  '${nameWithoutExt}': ${pascalName},`);
+  registryEntries.push(`  '${nameWithoutExt}': () => import("./icons/${nameWithoutExt}"),`);
 });
 
 const content = `// Auto-generated icon registry. Do not edit manually.
 
-${imports.join("\n")}
+import type { TemplateResult } from "lit";
 
-export const iconRegistry = {
+export const iconRegistry: Record<string, () => Promise<{ default: TemplateResult }>> = {
 ${registryEntries.join("\n")}
 };
 `;
