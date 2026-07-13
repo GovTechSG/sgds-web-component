@@ -85,6 +85,24 @@ The `tinted` prop applies a subtle tinted background to the card, enhancing its 
   <Story of={CardStories.Tinted} />
 </Canvas>
 
+## No padding
+
+The `noPadding` prop removes the card's internal padding, making the card's border transparent and its background inherited. This is useful when you want the card content to sit flush against its container, or when the image should bleed to the card edges without any spacing.
+
+When `noPadding` is enabled:
+
+- The card border becomes transparent and the background is inherited from the parent.
+- The `tinted` background effect is suppressed.
+- Card body padding adjusts based on orientation and `imagePosition`:
+  - Vertical (default): padding only on top of the body.
+  - Vertical with `imagePosition="after"`: padding only on bottom of the body.
+  - Horizontal: padding only on the left of the body.
+  - Horizontal with `imagePosition="after"`: padding only on the right of the body.
+
+<Canvas of={CardStories.NoPadding}>
+  <Story of={CardStories.NoPadding} />
+</Canvas>
+
 ## With overflow menu
 
 The `menu` slot is positioned at the top-right corner of the card, allowing you to add an overflow or actions menu to provide quick access to additional actions or options. This is useful for managing card-specific controls without cluttering the main content.

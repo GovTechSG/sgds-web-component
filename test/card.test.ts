@@ -14,7 +14,6 @@ describe("<sgds-card>", () => {
           class="card"
           tabindex="-1"
         >
-          <div class="card-tinted-bg"></div>
           <slot name="menu"></slot>
           <div>
             <slot name="upper">
@@ -49,7 +48,6 @@ describe("<sgds-card>", () => {
           class="card"
           tabindex="-1"
         >
-          <div class="card-tinted-bg"></div>
           <slot name="menu"></slot>
           <div class="card-image">
             <slot name="upper">
@@ -86,7 +84,6 @@ describe("<sgds-card>", () => {
           class="card"
           tabindex="-1"
         >
-          <div class="card-tinted-bg"></div>
           <slot name="menu"></slot>
           <div class="card-media">
             <slot name="upper">
@@ -121,7 +118,6 @@ describe("<sgds-card>", () => {
           class="card"
           tabindex="-1"
         >
-          <div class="card-tinted-bg"></div>
           <slot name="menu"></slot>
           <div>
             <slot name="upper">
@@ -237,6 +233,44 @@ describe("<sgds-card>", () => {
     const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
     expect(card.getAttribute("href")).to.be.null;
     expect(card.getAttribute("target")).to.be.null;
+  });
+});
+
+describe("<sgds-card> noPadding", () => {
+  it("noPadding property defaults to false", async () => {
+    const el = await fixture<SgdsCard>(html`<sgds-card></sgds-card>`);
+    expect(el.noPadding).to.be.false;
+  });
+
+  it("renders tinted background when tinted and not noPadding", async () => {
+    const el = await fixture<SgdsCard>(html`<sgds-card tinted></sgds-card>`);
+    const tinted = el.shadowRoot?.querySelector(".card-tinted-bg");
+    expect(tinted).to.exist;
+  });
+
+  it("does not render tinted background when noPadding is true", async () => {
+    const el = await fixture<SgdsCard>(html`<sgds-card tinted noPadding></sgds-card>`);
+    const tinted = el.shadowRoot?.querySelector(".card-tinted-bg");
+    expect(tinted).to.not.exist;
+  });
+
+  it("does not render tinted background when not tinted regardless of noPadding", async () => {
+    const el = await fixture<SgdsCard>(html`<sgds-card noPadding></sgds-card>`);
+    const tinted = el.shadowRoot?.querySelector(".card-tinted-bg");
+    expect(tinted).to.not.exist;
+  });
+
+  it("reflects noPadding attribute", async () => {
+    const el = await fixture<SgdsCard>(html`<sgds-card noPadding></sgds-card>`);
+    expect(el.hasAttribute("noPadding")).to.be.true;
+  });
+
+  it("sets card-body padding to 0px when noPadding and no media slots", async () => {
+    const el = await fixture<SgdsCard>(html`<sgds-card noPadding>
+      <span slot="title">Title</span>
+    </sgds-card>`);
+    const body = el.shadowRoot?.querySelector(".card-body") as HTMLDivElement;
+    expect(body.style.padding).to.equal("0px");
   });
 });
 

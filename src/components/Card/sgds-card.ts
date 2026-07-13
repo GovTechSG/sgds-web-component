@@ -1,4 +1,4 @@
-import { PropertyValueMap } from "lit";
+import { nothing, PropertyValueMap } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { html, literal } from "lit/static-html.js";
@@ -46,6 +46,9 @@ export class SgdsCard extends CardElement {
   /** Used only for SSR to indicate the presence of the `upper` slot. */
   @property({ type: Boolean }) hasUpperSlot = false;
 
+  /** Removes the card's internal padding when set to true. */
+  @property({ type: Boolean, reflect: true }) noPadding = false;
+
   private get linkSlotItems(): HTMLAnchorElement | null {
     if (!this.linkNode || this.linkNode.length === 0) return null;
     const element = this.linkNode[0] as HTMLElement;
@@ -62,6 +65,18 @@ export class SgdsCard extends CardElement {
 
   protected firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
+
+    if (
+      !this.hasSlotController.test("image") &&
+      !this.hasSlotController.test("icon") &&
+      !this.hasSlotController.test("upper")
+    ) {
+      if (this.noPadding) {
+        const body = this.shadowRoot?.querySelector(".card-body") as HTMLDivElement | undefined;
+        if (body) body.style.padding = "0px";
+      }
+    }
+
     if (this.stretchedLink) {
       const footerAnchor = this.footerSlotItems;
       const linkAnchor = this.linkSlotItems;
@@ -98,8 +113,7 @@ export class SgdsCard extends CardElement {
         })}"
         tabindex=${cardTabIndex}
       >
-        <div class="card-tinted-bg"></div>
-        
+        ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
         <slot name="menu"></slot>
         <div class=${classMap({
           "card-image": this.hasImageSlot,
