@@ -92,7 +92,7 @@ export const parameters = {
     source: {
       code: `
           <!-- Standalone informative icon (add ariaLabel) -->
-            ${iconDocsSource}
+${iconDocsSource}
         `
     }
   }
