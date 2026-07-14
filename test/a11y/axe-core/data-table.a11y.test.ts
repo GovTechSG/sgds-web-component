@@ -1,6 +1,7 @@
 import { html } from "lit";
 import { elementUpdated, expect, fixture } from "@open-wc/testing";
 import { SgdsDataTable } from "../../../src/components";
+import SgdsDataTableHead from "../../../src/components/DataTable/sgds-data-table-head";
 import "../../sgds-web-component";
 
 describe("<sgds-data-table>", () => {
@@ -32,8 +33,8 @@ describe("<sgds-data-table>", () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table dataLength="3" itemsPerPage="5" currentPage="1">
         <sgds-data-table-row>
-          <sgds-data-table-head>ID</sgds-data-table-head>
-          <sgds-data-table-head>Name</sgds-data-table-head>
+          <sgds-data-table-head sortKey="id" sorting>ID</sgds-data-table-head>
+          <sgds-data-table-head sortKey="name" sorting>Name</sgds-data-table-head>
         </sgds-data-table-row>
         <sgds-data-table-row>
           <sgds-data-table-cell>2</sgds-data-table-cell>
@@ -53,7 +54,7 @@ describe("<sgds-data-table>", () => {
 
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const [headerRow] = slot.assignedElements({ flatten: true });
-    const headerCells = headerRow.shadowRoot?.querySelectorAll("th") || [];
+    const headerCells = headerRow.shadowRoot?.querySelectorAll("th[data-sorting]") || [];
 
     // Sort by Name ascending
     (headerCells[1] as HTMLElement).click();
@@ -80,8 +81,8 @@ describe("<sgds-data-table>", () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table dataLength="3" itemsPerPage="5" currentPage="1">
         <sgds-data-table-row>
-          <sgds-data-table-head>ID</sgds-data-table-head>
-          <sgds-data-table-head>Name</sgds-data-table-head>
+          <sgds-data-table-head sortKey="id" sorting>ID</sgds-data-table-head>
+          <sgds-data-table-head sortKey="name" sorting>Name</sgds-data-table-head>
         </sgds-data-table-row>
         <sgds-data-table-row>
           <sgds-data-table-cell>2</sgds-data-table-cell>
@@ -101,7 +102,7 @@ describe("<sgds-data-table>", () => {
 
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const [headerRow] = slot.assignedElements({ flatten: true });
-    const headerCells = headerRow.shadowRoot?.querySelectorAll("th") || [];
+    const headerCells = headerRow.shadowRoot?.querySelectorAll("th[data-sorting]") || [];
 
     (headerCells[1] as HTMLElement).dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
     await elementUpdated(el);
@@ -117,8 +118,8 @@ describe("<sgds-data-table>", () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table dataLength="4" itemsPerPage="2" currentPage="1" mode="client">
         <sgds-data-table-row>
-          <sgds-data-table-head>ID</sgds-data-table-head>
-          <sgds-data-table-head>Name</sgds-data-table-head>
+          <sgds-data-table-head sortKey="id" sorting>ID</sgds-data-table-head>
+          <sgds-data-table-head sortKey="name" sorting>Name</sgds-data-table-head>
         </sgds-data-table-row>
         <sgds-data-table-row>
           <sgds-data-table-cell>2</sgds-data-table-cell>
@@ -142,7 +143,7 @@ describe("<sgds-data-table>", () => {
 
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const [headerRow] = slot.assignedElements({ flatten: true });
-    const headerCells = headerRow.shadowRoot?.querySelectorAll("th") || [];
+    const headerCells = headerRow.shadowRoot?.querySelectorAll("th[data-sorting]") || [];
 
     (headerCells[1] as HTMLElement).click();
     await elementUpdated(el);
@@ -202,33 +203,33 @@ describe("<sgds-data-table>", () => {
     expect(orderAfterNonHeaderSort).to.deep.equal(initialOrder);
   });
 
-  it("keeps an expandable row expanded when expanded is true", async () => {
+  it("keeps an expandable row open when open is true", async () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table dataLength="1" itemsPerPage="5" currentPage="1">
         <sgds-data-table-row>
           <sgds-data-table-head>ID</sgds-data-table-head>
         </sgds-data-table-row>
-        <sgds-data-table-row expandable expanded>
+        <sgds-data-table-row expand open>
           <sgds-data-table-cell>1</sgds-data-table-cell>
-          <div slot="expandable-content">Details</div>
+          <div slot="content">Details</div>
         </sgds-data-table-row>
       </sgds-data-table>
     `);
     await elementUpdated(el);
 
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
-    const row = slot.assignedElements({ flatten: true })[1] as HTMLElement & { expanded: boolean };
+    const row = slot.assignedElements({ flatten: true })[1] as HTMLElement & { open: boolean };
     const expandControl = row.shadowRoot?.querySelector("td.control-cell") as HTMLElement;
     const renderedRow = row.shadowRoot?.querySelector("tr") as HTMLElement;
 
-    expect(row.expanded).to.be.true;
+    expect(row.open).to.be.true;
     expect(renderedRow.classList.contains("active")).to.be.true;
 
     expandControl.click();
     await elementUpdated(el);
 
-    expect(row.expanded).to.be.true;
-    expect(renderedRow.classList.contains("active")).to.be.true;
+    expect(row.open).to.be.false;
+    expect(renderedRow.classList.contains("active")).to.be.false;
   });
 
   it("toggles expandable row when pressing Enter on expand control", async () => {
@@ -337,7 +338,7 @@ describe("<sgds-data-table>", () => {
     expect(bodyRows[0].style.display).to.equal("");
   });
 
-  it("does not show loading state in client mode", async () => {
+  it("shows loading state in client mode when isLoading is true", async () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table mode="client" ?isLoading=${true} dataLength="1" itemsPerPage="5" currentPage="1">
         <sgds-data-table-row>
@@ -350,12 +351,17 @@ describe("<sgds-data-table>", () => {
     `);
     await elementUpdated(el);
 
-    expect(el.shadowRoot?.querySelector(".loading")).to.not.exist;
+    const loadingState = el.shadowRoot?.querySelector(".loading");
+    const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
+    const bodyRows = slot.assignedElements({ flatten: true }).slice(1) as HTMLElement[];
+
+    expect(loadingState).to.exist;
+    expect(bodyRows[0].style.display).to.equal("");
   });
 
   it("emits sgds-sort in server mode without locally sorting rows", async () => {
     const el = await fixture<SgdsDataTable>(html`
-      <sgds-data-table mode="server" dataLength="3" itemsPerPage="5" currentPage="1">
+      <sgds-data-table mode="server" serverSort dataLength="3" itemsPerPage="5" currentPage="1">
         <sgds-data-table-row>
           <sgds-data-table-head sortKey="name" sorting>Name</sgds-data-table-head>
         </sgds-data-table-row>
@@ -379,9 +385,9 @@ describe("<sgds-data-table>", () => {
 
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const [headerRow] = slot.assignedElements({ flatten: true });
-    const headerCells = headerRow.shadowRoot?.querySelectorAll("th") || [];
+    const header = headerRow.querySelector("sgds-data-table-head") as SgdsDataTableHead;
 
-    (headerCells[0] as HTMLElement).click();
+    header.handleSortClick();
     await elementUpdated(el);
 
     expect(receivedDetail).to.deep.equal({ key: "name", direction: "ascending" });
