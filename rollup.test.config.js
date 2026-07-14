@@ -10,10 +10,11 @@ import * as fs from "fs";
 function getFilesInDirectorySync(directoryPath) {
   try {
     const files = fs.readdirSync(directoryPath);
+    const supportedTestExtensions = new Set([".js", ".ts"]);
     const result = files.map(file => {
       const filePath = path.join(directoryPath, file);
       const stats = fs.statSync(filePath);
-      if (stats.isFile()) {
+      if (stats.isFile() && supportedTestExtensions.has(path.extname(filePath))) {
         return filePath;
       }
     });

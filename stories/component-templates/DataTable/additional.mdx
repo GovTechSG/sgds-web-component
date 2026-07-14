@@ -80,9 +80,24 @@ Use `sorting`, `sortKey`, `width`, and `textAlign` on header cells.
 This example keeps all cells unmerged to show a standard sortable fixed-layout table.
 Use the row colspan example below when rows need merged columns.
 
+Only headers with `sorting` participate in sort interactions.
+When the sort direction cycles back to `none`, client-mode rows return to their initial slotted order.
+
 <Canvas of={DataTableStories.HeaderColspanRowspan}>
   <Story of={DataTableStories.HeaderColspanRowspan} />
 </Canvas>
+
+## Default sort
+
+Set `ariasort` on a sortable header to present an initial sort state on first render.
+
+<Canvas of={DataTableStories.DefaultSort}>
+  <Story of={DataTableStories.DefaultSort} />
+</Canvas>
+
+## Sorting with no rows
+
+When there are no body rows, sort controls are disabled.
 
 ## Row colspan example (5 by 5)
 
