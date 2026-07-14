@@ -10,25 +10,25 @@ import { property } from "lit/decorators.js";
  */
 export class SgdsDataTableHead extends SgdsElement {
   /** Sets the column width. */
-  @property({ type: String }) width: string | undefined;
+  @property({ type: String, reflect: true }) width: string | undefined;
 
   /** Number of columns this cell spans. */
-  @property({ type: Number }) colspan: number | undefined;
+  @property({ type: Number, reflect: true }) colspan: number | undefined;
 
   /** Number of rows this cell spans. */
-  @property({ type: Number }) rowspan: number | undefined;
+  @property({ type: Number, reflect: true }) rowspan: number | undefined;
 
   /** Text alignment for the header content. */
-  @property({ type: String }) textAlign: "left" | "right" = "left";
+  @property({ type: String, reflect: true }) textAlign: "left" | "right" = "left";
 
   /** Current sort direction for this column. */
-  @property({ type: String }) ariasort: "ascending" | "descending" | "none" | "other" | undefined;
+  @property({ type: String, reflect: true }) ariasort: "ascending" | "descending" | "none" | "other" | undefined;
 
   /** When true, clicking this header cycles through ascending → descending → none sort. */
-  @property({ type: Boolean }) sorting = true;
+  @property({ type: Boolean, reflect: true }) sorting = true;
 
-  /** Column key passed in `i-sgds-sort` event detail, used to identify which column to sort. */
-  @property({ type: String }) sortKey = "";
+  /** Column key emitted in the row's internal sort payload, used to identify which column to sort. */
+  @property({ type: String, reflect: true }) sortKey = "";
 
   /** @internal — called by the row when the rendered `<th>` is clicked. */
   handleSortClick() {
