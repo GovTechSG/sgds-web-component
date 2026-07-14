@@ -24,17 +24,21 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 - Data from API with backend sorting: set `serverSort` and listen to `sgds-sort`.
 - Need loading indicator while fetching server data: set `isLoading` to `true`.
 - Need numeric columns aligned right: set `textAlign="right"` on the corresponding `sgds-data-table-head`.
+- Need only selected columns to sort: set `sorting` only on those headers.
+- Need default sort indicator on first render: set `ariasort` on a sortable header.
 
 ```html
 <sgds-data-table dataLength="3" itemsPerPage="5" currentPage="1">
   <sgds-data-table-row>
     <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
-    <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
+    <sgds-data-table-head sorting sortKey="name" ariasort="ascending">Name</sgds-data-table-head>
+    <sgds-data-table-head>Role</sgds-data-table-head>
     <sgds-data-table-head textAlign="right">Amount</sgds-data-table-head>
   </sgds-data-table-row>
   <sgds-data-table-row>
     <sgds-data-table-cell>1</sgds-data-table-cell>
     <sgds-data-table-cell>Amy</sgds-data-table-cell>
+    <sgds-data-table-cell>Analyst</sgds-data-table-cell>
     <sgds-data-table-cell>125.00</sgds-data-table-cell>
   </sgds-data-table-row>
 </sgds-data-table>
@@ -93,6 +97,12 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 | `sgds-after-show` | Expandable row finishes opening |
 | `sgds-hide` | Expandable row starts closing |
 | `sgds-after-hide` | Expandable row finishes closing |
+
+## Sorting Behavior Notes
+
+- In client mode, sorting affects only currently visible rows.
+- When a sort cycles back to `none`, row order reverts to the initial slotted order captured at first non-server load.
+- Sort controls are disabled when there are no body rows.
 
 ## Server Mode Example
 
