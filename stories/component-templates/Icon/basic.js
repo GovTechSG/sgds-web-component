@@ -56,6 +56,7 @@ export const Template = () => {
 
     <div data-icon-explorer>
       <sgds-input
+        type="search"
         hintText="Search for an icon name, then click an icon to copy its name to your clipboard."
         placeholder="Search icon name"
         @sgds-input=${filterIcons}
