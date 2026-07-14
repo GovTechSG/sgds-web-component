@@ -86,6 +86,55 @@ th {
   gap: var(--sgds-gap-2-xs);
 }
 
+.sort {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sort-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24);
+  padding: 0;
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
+  border-radius: var(--sgds-form-border-radius-md);
+  background-color: var(--sgds-bg-transparent);
+  color: var(--sgds-color-subtle);
+  cursor: pointer;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.sort-button:hover {
+  background-color: var(--sgds-bg-translucent-subtle);
+  color: var(--sgds-color-default);
+}
+
+.sort-button:focus,
+.sort-button:focus-visible {
+  background-color: var(--sgds-bg-translucent-subtle);
+  border-color: transparent;
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+}
+
+.sort-button:disabled {
+  background-color: var(--sgds-bg-transparent);
+  color: var(--sgds-color-muted);
+  cursor: not-allowed;
+}
+
+.sort-button.active {
+  background-color: var(--sgds-primary-surface-translucent);
+  color: var(--sgds-primary-color-default);
+}
+
+.sort-icon {
+  display: inline-flex;
+}
+
 .data-table-head.align-right {
   justify-content: flex-end;
   text-align: right;
@@ -94,27 +143,6 @@ th {
 .data-table-cell.align-right {
   justify-content: flex-end;
   text-align: right;
-}
-
-.sort {
-  width: var(--sgds-dimension-24);
-  height: var(--sgds-dimension-24);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.sort :first-child {
-  margin-bottom: calc(-1 * var(--sgds-margin-xs));
-}
-
-.sort .sort-icon {
-  color: var(--sgds-color-muted);
-}
-
-.sort .active.sort-icon {
-  color: var(--sgds-color-default);
 }
 
 /* control cell variants — applied as classes on the host */

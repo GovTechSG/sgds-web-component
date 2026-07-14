@@ -3,6 +3,17 @@
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 <style>
+  body {
+    background: var(--sgds-bg-default);
+    color: var(--sgds-color-default);
+  }
+
+  .theme-toggle {
+    max-width: 1200px;
+    margin: 18px auto 0 auto;
+    padding: 0 18px;
+  }
+
   .container {
     max-width: 1200px;
     margin: 0 auto 36px auto;
@@ -19,6 +30,10 @@
   }
 </style>
 
+<div class="theme-toggle">
+  <sgds-switch id="night-mode-toggle">Night mode</sgds-switch>
+</div>
+
 <!-- Basic table -->
 <div class="container">
   <h3>Basic</h3>
@@ -26,8 +41,8 @@
     <sgds-data-table-row>
       <sgds-data-table-head>#</sgds-data-table-head>
       <sgds-data-table-head>First name</sgds-data-table-head>
-      <sgds-data-table-head>Last name</sgds-data-table-head>
-      <sgds-data-table-head>Username</sgds-data-table-head>
+      <sgds-data-table-head sorting>Last name</sgds-data-table-head>
+      <sgds-data-table-head sorting>Username</sgds-data-table-head>
     </sgds-data-table-row>
     <sgds-data-table-row>
       <sgds-data-table-cell>1</sgds-data-table-cell>
@@ -373,7 +388,7 @@
     <sgds-data-table-row>
       <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
       <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
-      <sgds-data-table-head sorting sortKey="region">Region</sgds-data-table-head>
+      <sgds-data-table-head>Region</sgds-data-table-head>
     </sgds-data-table-row>
   </sgds-data-table>
 </div>
@@ -385,7 +400,7 @@
     <sgds-data-table-row>
       <sgds-data-table-head width="88">ID</sgds-data-table-head>
       <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
-      <sgds-data-table-head sorting sortKey="role">Role</sgds-data-table-head>
+      <sgds-data-table-head>Role</sgds-data-table-head>
       <sgds-data-table-head sorting sortKey="score" width="120" textAlign="right">Score</sgds-data-table-head>
     </sgds-data-table-row>
 
@@ -406,6 +421,39 @@
       <sgds-data-table-cell>Nora</sgds-data-table-cell>
       <sgds-data-table-cell>Manager</sgds-data-table-cell>
       <sgds-data-table-cell>85</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Default sort -->
+<div class="container">
+  <h3>Default Sort</h3>
+  <sgds-data-table currentPage="1" dataLength="4" itemsPerPage="4">
+    <sgds-data-table-row>
+      <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="name" ariasort="ascending">Name</sgds-data-table-head>
+      <sgds-data-table-head>Role</sgds-data-table-head>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row id="default-sort-row-1">
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Alice</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="default-sort-row-2">
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben</sgds-data-table-cell>
+      <sgds-data-table-cell>Analyst</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="default-sort-row-3">
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Chloe</sgds-data-table-cell>
+      <sgds-data-table-cell>Manager</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="default-sort-row-4">
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Darren</sgds-data-table-cell>
+      <sgds-data-table-cell>Designer</sgds-data-table-cell>
     </sgds-data-table-row>
   </sgds-data-table>
 </div>
@@ -463,6 +511,13 @@
 </div>
 
 <script type="module">
+  const nightModeToggle = document.getElementById("night-mode-toggle");
+
+  nightModeToggle?.addEventListener("sgds-change", event => {
+    const isNight = event.target?.checked === true;
+    document.documentElement.classList.toggle("sgds-night-theme", isNight);
+  });
+
   // Set rowData on multi-select rows
   document.getElementById("ms-row-1").rowData = { id: 1, name: "John Doe" };
   document.getElementById("ms-row-2").rowData = { id: 2, name: "Jane Doe" };
@@ -477,6 +532,12 @@
   document.getElementById("sort-row-1").rowData = { id: 1, name: "Lina", role: "Engineer", score: 82 };
   document.getElementById("sort-row-2").rowData = { id: 2, name: "Adam", role: "Engineer", score: 82 };
   document.getElementById("sort-row-3").rowData = { id: 3, name: "Nora", role: "Manager", score: 75 };
+
+  // Set rowData for default sort sample
+  document.getElementById("default-sort-row-1").rowData = { id: 2, name: "Alice", role: "Engineer" };
+  document.getElementById("default-sort-row-2").rowData = { id: 4, name: "Ben", role: "Analyst" };
+  document.getElementById("default-sort-row-3").rowData = { id: 1, name: "Chloe", role: "Manager" };
+  document.getElementById("default-sort-row-4").rowData = { id: 3, name: "Darren", role: "Designer" };
 
   // Mock API-driven pagination demo for server mode table
   const serverTable = document.getElementById("server-table");

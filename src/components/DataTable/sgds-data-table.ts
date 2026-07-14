@@ -57,7 +57,7 @@ export class SgdsDataTable extends SgdsElement {
   /** If true, hides the footer (summary text and pagination controls). */
   @property({ type: Boolean }) hideFooter = false;
 
-  /** When true in server mode, shows a loading state and hides body rows. */
+  /** When true, shows a loading state and hides body rows. */
   @property({ type: Boolean }) isLoading = false;
 
   /** When true, emits sort events for external handling instead of local sorting. */
@@ -82,7 +82,8 @@ export class SgdsDataTable extends SgdsElement {
   @state() private headerRows: SgdsDataTableRow[] = [];
 
   private _headerCells: SgdsDataTableHead[] = [];
-  private _unsortedRows: SgdsDataTableRow[] = [];
+  private _initialRowPositions = new WeakMap<SgdsDataTableRow, number>();
+  private _hasCapturedInitialRowPositions = false;
 
   private _rowHandlers = new WeakMap<SgdsDataTableRow, EventListener>();
 
@@ -147,10 +148,12 @@ export class SgdsDataTable extends SgdsElement {
 
   private _configureRows() {
     const hasExpand = this.tableRows.some(r => r.expand);
+    const hasDataRows = this.tableRows.length > 0;
 
     this.headerRows.forEach(row => {
       row.showCheckbox = this.multiSelect;
       row.showExpandPlaceholder = hasExpand;
+      row.hasDataRows = hasDataRows;
       if (this.multiSelect) this._attachRowListener(row);
     });
 
@@ -223,6 +226,28 @@ export class SgdsDataTable extends SgdsElement {
     });
   }
 
+  private _getRowsInInitialPositionOrder(rows: SgdsDataTableRow[]) {
+    return [...rows].sort((left, right) => {
+      const leftPosition = this._initialRowPositions.get(left);
+      const rightPosition = this._initialRowPositions.get(right);
+
+      if (leftPosition === undefined && rightPosition === undefined) return 0;
+      if (leftPosition === undefined) return 1;
+      if (rightPosition === undefined) return -1;
+      return leftPosition - rightPosition;
+    });
+  }
+
+  private _captureInitialRowPositions(rows: SgdsDataTableRow[]) {
+    if (this._hasCapturedInitialRowPositions) return;
+
+    rows.forEach((row, index) => {
+      this._initialRowPositions.set(row, index);
+    });
+
+    this._hasCapturedInitialRowPositions = true;
+  }
+
   private _handleSort(e: Event) {
     if (!(e.target instanceof SgdsDataTableHead) || !e.target.sorting) return;
 
@@ -241,31 +266,26 @@ export class SgdsDataTable extends SgdsElement {
 
     if (columnIndex < 0) return;
 
-    if (this.mode === "client") {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      const end = start + this.itemsPerPage;
-      const nextRows = [...this.tableRows];
-
-      if (direction === "none") {
-        const originalVisibleRows = this._unsortedRows.slice(start, end);
-        nextRows.splice(start, originalVisibleRows.length, ...originalVisibleRows);
-      } else {
-        const sortedVisibleRows = nextRows.slice(start, end).sort((left, right) => {
-          const leftValue = this._toComparableValue(left, key, columnIndex);
-          const rightValue = this._toComparableValue(right, key, columnIndex);
-          return this._compareValues(leftValue, rightValue, direction);
-        });
-        nextRows.splice(start, sortedVisibleRows.length, ...sortedVisibleRows);
-      }
-
-      this.tableRows = nextRows;
+    if (direction === "none") {
+      this.tableRows = this._getRowsInInitialPositionOrder(this.tableRows);
       this._syncDomRowOrder();
       this._updateVisibleRows();
       return;
     }
 
-    if (direction === "none") {
-      this.tableRows = [...this._unsortedRows];
+    if (this.mode === "client") {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      const end = start + this.itemsPerPage;
+      const nextRows = [...this.tableRows];
+
+      const sortedVisibleRows = nextRows.slice(start, end).sort((left, right) => {
+        const leftValue = this._toComparableValue(left, key, columnIndex);
+        const rightValue = this._toComparableValue(right, key, columnIndex);
+        return this._compareValues(leftValue, rightValue, direction);
+      });
+      nextRows.splice(start, sortedVisibleRows.length, ...sortedVisibleRows);
+
+      this.tableRows = nextRows;
       this._syncDomRowOrder();
       this._updateVisibleRows();
       return;
@@ -308,7 +328,8 @@ export class SgdsDataTable extends SgdsElement {
       acc.push(...headers);
       return acc;
     }, []);
-    this._unsortedRows = [...this.tableRows];
+
+    this._captureInitialRowPositions(this.tableRows);
 
     this._headerCells.forEach(header => {
       if (header.sorting && !header.ariasort) {
@@ -354,6 +375,7 @@ export class SgdsDataTable extends SgdsElement {
     const total = this.dataLength || this.tableRows.length;
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = Math.min(start + this.itemsPerPage, total);
+    const displayStart = total === 0 ? 0 : start + 1;
     const showNoData = !this.isLoading && this.tableRows.length === 0;
 
     return html`
@@ -372,7 +394,7 @@ export class SgdsDataTable extends SgdsElement {
         ${this.hideFooter
           ? nothing
           : html`<div class="footer">
-              ${this.footerText || html`<span>Showing ${start + 1} to ${end} of ${total} results</span>`}
+              ${this.footerText || html`<span>Showing ${displayStart} to ${end} of ${total} results</span>`}
               <sgds-pagination
                 .dataLength=${total}
                 .currentPage=${this.currentPage}

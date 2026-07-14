@@ -55,6 +55,8 @@ export class SgdsDataTableRow extends SgdsElement {
 
   /** @internal — per-column alignment injected by `sgds-data-table` from header cells. */
   @property({ attribute: false }) columnAlignments: Array<"left" | "right"> = [];
+  /** @internal — set by `sgds-data-table` to indicate whether body rows exist. */
+  @property({ type: Boolean }) hasDataRows = false;
 
   /** @internal */
   @query(".expandable-body") private _expandableBody!: HTMLElement;
@@ -182,18 +184,20 @@ export class SgdsDataTableRow extends SgdsElement {
         <div class="data-table-head ${el.textAlign === "right" ? "align-right" : "align-left"}">
           ${children}
           ${el.sorting
-            ? html`<div class="sort">
-                <sgds-icon
-                  class="sort-icon ${el.ariasort === "ascending" ? "active" : ""}"
-                  name="chevron-up"
-                  size="sm"
-                ></sgds-icon>
-                <sgds-icon
-                  class="sort-icon ${el.ariasort === "descending" ? "active" : ""}"
-                  name="chevron-down"
-                  size="sm"
-                ></sgds-icon>
-              </div>`
+            ? html`
+                <button
+                  type="button"
+                  class="sort-button ${el.ariasort === "none" ? "" : "active"}"
+                  aria-label=${el.ariasort === "descending" ? "Sort descending" : "Sort ascending"}
+                  ?disabled=${!this.hasDataRows}
+                >
+                  <sgds-icon
+                    class="sort-icon"
+                    name=${el.ariasort === "descending" ? "sort-descending" : "sort-ascending"}
+                    size="sm"
+                  ></sgds-icon>
+                </button>
+              `
             : nothing}
         </div>
       </th>`;
@@ -244,9 +248,10 @@ export class SgdsDataTableRow extends SgdsElement {
   render() {
     const cells = this._assignedCells ?? [];
     const totalCols = cells.length + (this.showCheckbox ? 1 : 0) + (this.expand || this.showExpandPlaceholder ? 1 : 0);
+    const rowPart = this._isHeaderRow ? "row row-header" : "row row-body";
 
     return html`
-      <tr ?data-header-row=${this._isHeaderRow} class=${this.open ? "active" : ""}>
+      <tr part=${rowPart} ?data-header-row=${this._isHeaderRow} class=${this.open ? "active" : ""}>
         ${this._renderHiddenSlotCell()}
         ${this.expand
           ? this._renderExpandCell()
