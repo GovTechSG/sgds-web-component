@@ -201,7 +201,7 @@ const HeaderAndCellPropsTemplate = () => html`
     <sgds-data-table-row>
       <sgds-data-table-head width="88">ID</sgds-data-table-head>
       <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
-      <sgds-data-table-head sorting sortKey="role">Role</sgds-data-table-head>
+      <sgds-data-table-head>Role</sgds-data-table-head>
       <sgds-data-table-head sorting sortKey="score" width="120" textAlign="right">Score</sgds-data-table-head>
     </sgds-data-table-row>
     <sgds-data-table-row>
@@ -221,6 +221,36 @@ const HeaderAndCellPropsTemplate = () => html`
       <sgds-data-table-cell>Nora</sgds-data-table-cell>
       <sgds-data-table-cell>Manager</sgds-data-table-cell>
       <sgds-data-table-cell>85</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const DefaultSortTemplate = () => html`
+  <sgds-data-table .currentPage=${1} .dataLength=${4} .itemsPerPage=${4}>
+    <sgds-data-table-row>
+      <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="name" ariasort="ascending">Name</sgds-data-table-head>
+      <sgds-data-table-head>Role</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Alice</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben</sgds-data-table-cell>
+      <sgds-data-table-cell>Analyst</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Chloe</sgds-data-table-cell>
+      <sgds-data-table-cell>Manager</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Darren</sgds-data-table-cell>
+      <sgds-data-table-cell>Designer</sgds-data-table-cell>
     </sgds-data-table-row>
   </sgds-data-table>
 `;
@@ -350,6 +380,13 @@ export const HideFooter = {
 export const HeaderColspanRowspan = {
   render: HeaderAndCellPropsTemplate.bind({}),
   name: "Header and cell props",
+  args: {},
+  parameters: {}
+};
+
+export const DefaultSort = {
+  render: DefaultSortTemplate.bind({}),
+  name: "Default sort",
   args: {},
   parameters: {}
 };

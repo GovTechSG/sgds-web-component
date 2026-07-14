@@ -25,7 +25,7 @@ export class SgdsDataTableHead extends SgdsElement {
   @property({ type: String, reflect: true }) ariasort: "ascending" | "descending" | "none" | "other" | undefined;
 
   /** When true, clicking this header cycles through ascending → descending → none sort. */
-  @property({ type: Boolean, reflect: true }) sorting = true;
+  @property({ type: Boolean, reflect: true }) sorting = false;
 
   /** Column key emitted in the row's internal sort payload, used to identify which column to sort. */
   @property({ type: String, reflect: true }) sortKey = "";
