@@ -1,3 +1,22 @@
+## v3.24.0 (2026-07-10)
+
+### Feat
+
+- **List**: new css variables to cover different types of lists [run-chromatic] (#745)
+
+### Fix
+
+- **Checkbox**: prevent check input from squshing in space constraints [skip-cd][run-chromatic] (#759)
+- **Checkbox**: prevent check input from squshing in space constraints
+- **Layout**: container sidebar layout to always have gutter 16 to 24px [run-chromatic][skip-cd] (#747)
+- **Grid**: sidebar container grid to 16px at mobile sizes
+- **Grid**: sidebar layout gutter always 24px
+
+### Refactor
+
+- **Icon**: lazy-load icons via dynamic import to reduce upfront … (#749)
+- **Combobox**:  programatic value change should not trigger sgds-change (#741)
+
 ## v3.23.0 (2026-07-06)
 
 ### Feat
