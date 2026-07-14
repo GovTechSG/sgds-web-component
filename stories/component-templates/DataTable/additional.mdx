@@ -24,6 +24,15 @@ Set `multiSelect` to render a checkbox column for row selection.
   <Story of={DataTableStories.MultiSelect} />
 </Canvas>
 
+## Multi-select pre-checked on load
+
+Set `checked` on body rows to preselect them on initial render.
+The header checkbox state is computed on load and shows indeterminate or checked accordingly.
+
+<Canvas of={DataTableStories.MultiSelectPrecheckedOnLoad}>
+  <Story of={DataTableStories.MultiSelectPrecheckedOnLoad} />
+</Canvas>
+
 ## Expandable rows
 
 Set `expand` on a row and provide content in the `content` slot.

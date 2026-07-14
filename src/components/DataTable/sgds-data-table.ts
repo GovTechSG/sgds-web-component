@@ -91,10 +91,17 @@ export class SgdsDataTable extends SgdsElement {
     this.setAttribute("role", "table");
   }
 
+  private _isRowChecked(row: SgdsDataTableRow) {
+    return row.checked || row.checkbox?.checked === true;
+  }
+
   private _updateHeaderCheckbox() {
-    const checkedCount = this.tableRows.filter(r => r.checkbox?.checked).length;
+    const checkedCount = this.tableRows.filter(r => this._isRowChecked(r)).length;
+
     const allChecked = checkedCount === this.tableRows.length && checkedCount > 0;
+
     this.headerRows.forEach(r => {
+      r.checked = allChecked;
       if (r.checkbox) {
         r.checkbox.checked = allChecked;
         r.checkbox.indeterminate = checkedCount > 0 && !allChecked;
@@ -102,8 +109,16 @@ export class SgdsDataTable extends SgdsElement {
     });
   }
 
+  private async _syncHeaderCheckboxAfterRender() {
+    if (!this.multiSelect || this.headerRows.length === 0) return;
+
+    const rows = [...this.headerRows, ...this.tableRows];
+    await Promise.all(rows.map(row => row.updateComplete));
+    this._updateHeaderCheckbox();
+  }
+
   private _emitRowSelect() {
-    const selected = this.tableRows.filter(r => r.checkbox?.checked).map(r => r.rowData);
+    const selected = this.tableRows.filter(r => this._isRowChecked(r)).map(r => r.rowData);
     this.emit("sgds-row-select", { detail: { selected } });
   }
 
@@ -113,11 +128,14 @@ export class SgdsDataTable extends SgdsElement {
 
     const handler: EventListener = (e: Event) => {
       const { checked } = (e as CustomEvent<{ checked: boolean }>).detail;
+
       if (this.headerRows.includes(row)) {
         this.tableRows.forEach(r => {
+          r.checked = checked;
           if (r.checkbox) r.checkbox.checked = checked;
         });
       } else {
+        row.checked = checked;
         this._updateHeaderCheckbox();
       }
       this._emitRowSelect();
@@ -142,14 +160,22 @@ export class SgdsDataTable extends SgdsElement {
       if (this.multiSelect) this._attachRowListener(row);
     });
 
+    if (this.multiSelect) {
+      this._syncHeaderCheckboxAfterRender();
+    }
+
     this._applyColumnAlignment();
   }
 
   private _applyColumnAlignment() {
-    const headerAlignments = this._headerCells.flatMap(header => {
+    const headerAlignments = this._headerCells.reduce<Array<"left" | "right">>((acc, header) => {
       const span = Number(header.colspan) > 0 ? Number(header.colspan) : 1;
-      return Array(span).fill(header.textAlign ?? "left");
-    });
+      const alignment = header.textAlign ?? "left";
+      for (let i = 0; i < span; i++) {
+        acc.push(alignment);
+      }
+      return acc;
+    }, []);
 
     this.headerRows.forEach(row => {
       row.columnAlignments = [...headerAlignments];
@@ -317,6 +343,10 @@ export class SgdsDataTable extends SgdsElement {
     }
     if (changed.has("multiSelect")) {
       this._configureRows();
+    }
+
+    if (this.multiSelect && (changed.has("tableRows") || changed.has("headerRows"))) {
+      this._syncHeaderCheckboxAfterRender();
     }
   }
 

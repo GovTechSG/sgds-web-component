@@ -55,6 +55,35 @@ const MultiSelectTemplate = () => html`
   </sgds-data-table>
 `;
 
+const MultiSelectPrecheckedOnLoadTemplate = () => html`
+  <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5} .multiSelect=${true}>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row checked>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
 const ExpandableRowsTemplate = () => html`
   <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5}>
     <sgds-data-table-row>
@@ -279,6 +308,13 @@ export const NoRows = {
 export const MultiSelect = {
   render: MultiSelectTemplate.bind({}),
   name: "Multi-select",
+  args: {},
+  parameters: {}
+};
+
+export const MultiSelectPrecheckedOnLoad = {
+  render: MultiSelectPrecheckedOnLoadTemplate.bind({}),
+  name: "Multi-select pre-checked on load",
   args: {},
   parameters: {}
 };
