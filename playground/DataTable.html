@@ -1,0 +1,643 @@
+<script type="module" src="../src/index.ts"></script>
+<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<style>
+  body {
+    background: var(--sgds-bg-default);
+    color: var(--sgds-color-default);
+  }
+
+  .theme-toggle {
+    max-width: 1200px;
+    margin: 18px auto 0 auto;
+    padding: 0 18px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto 36px auto;
+    padding: 18px;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .container h3 {
+    margin-bottom: 12px;
+  }
+</style>
+
+<div class="theme-toggle">
+  <sgds-switch id="night-mode-toggle">Night mode</sgds-switch>
+</div>
+
+<!-- Basic table -->
+<div class="container">
+  <h3>Basic</h3>
+  <sgds-data-table currentPage="10" dataLength="23" itemsPerPage="5">
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head sorting>Last name</sgds-data-table-head>
+      <sgds-data-table-head sorting>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell>Alice</sgds-data-table-cell>
+      <sgds-data-table-cell>Tan</sgds-data-table-cell>
+      <sgds-data-table-cell>@alicetan</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>5</sgds-data-table-cell>
+      <sgds-data-table-cell>Charlie</sgds-data-table-cell>
+      <sgds-data-table-cell>Lee</sgds-data-table-cell>
+      <sgds-data-table-cell>@charlielee</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>6</sgds-data-table-cell>
+      <sgds-data-table-cell>Diana</sgds-data-table-cell>
+      <sgds-data-table-cell>Lim</sgds-data-table-cell>
+      <sgds-data-table-cell>@dianalim</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>7</sgds-data-table-cell>
+      <sgds-data-table-cell>Ethan</sgds-data-table-cell>
+      <sgds-data-table-cell>Ng</sgds-data-table-cell>
+      <sgds-data-table-cell>@ethanng</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>8</sgds-data-table-cell>
+      <sgds-data-table-cell>Fiona</sgds-data-table-cell>
+      <sgds-data-table-cell>Koh</sgds-data-table-cell>
+      <sgds-data-table-cell>@fionakoh</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>9</sgds-data-table-cell>
+      <sgds-data-table-cell>George</sgds-data-table-cell>
+      <sgds-data-table-cell>Wong</sgds-data-table-cell>
+      <sgds-data-table-cell>@georgewong</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>10</sgds-data-table-cell>
+      <sgds-data-table-cell>Hannah</sgds-data-table-cell>
+      <sgds-data-table-cell>Yeo</sgds-data-table-cell>
+      <sgds-data-table-cell>@hannahyeo</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>11</sgds-data-table-cell>
+      <sgds-data-table-cell>Ivan</sgds-data-table-cell>
+      <sgds-data-table-cell>Chua</sgds-data-table-cell>
+      <sgds-data-table-cell>@ivanchua</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>12</sgds-data-table-cell>
+      <sgds-data-table-cell>Julia</sgds-data-table-cell>
+      <sgds-data-table-cell>Goh</sgds-data-table-cell>
+      <sgds-data-table-cell>@juliagoh</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>13</sgds-data-table-cell>
+      <sgds-data-table-cell>Kevin</sgds-data-table-cell>
+      <sgds-data-table-cell>Teo</sgds-data-table-cell>
+      <sgds-data-table-cell>@kevinteo</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>14</sgds-data-table-cell>
+      <sgds-data-table-cell>Laura</sgds-data-table-cell>
+      <sgds-data-table-cell>Ong</sgds-data-table-cell>
+      <sgds-data-table-cell>@lauraong</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>15</sgds-data-table-cell>
+      <sgds-data-table-cell>Marcus</sgds-data-table-cell>
+      <sgds-data-table-cell>Chan</sgds-data-table-cell>
+      <sgds-data-table-cell>@marcuschan</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>16</sgds-data-table-cell>
+      <sgds-data-table-cell>Nina</sgds-data-table-cell>
+      <sgds-data-table-cell>Phua</sgds-data-table-cell>
+      <sgds-data-table-cell>@ninaphua</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>17</sgds-data-table-cell>
+      <sgds-data-table-cell>Oscar</sgds-data-table-cell>
+      <sgds-data-table-cell>Sim</sgds-data-table-cell>
+      <sgds-data-table-cell>@oscarsim</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>18</sgds-data-table-cell>
+      <sgds-data-table-cell>Priya</sgds-data-table-cell>
+      <sgds-data-table-cell>Rajan</sgds-data-table-cell>
+      <sgds-data-table-cell>@priyarajan</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>19</sgds-data-table-cell>
+      <sgds-data-table-cell>Quinn</sgds-data-table-cell>
+      <sgds-data-table-cell>Ho</sgds-data-table-cell>
+      <sgds-data-table-cell>@quinnho</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>20</sgds-data-table-cell>
+      <sgds-data-table-cell>Rachel</sgds-data-table-cell>
+      <sgds-data-table-cell>Wee</sgds-data-table-cell>
+      <sgds-data-table-cell>@rachelwee</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>21</sgds-data-table-cell>
+      <sgds-data-table-cell>Samuel</sgds-data-table-cell>
+      <sgds-data-table-cell>Tan</sgds-data-table-cell>
+      <sgds-data-table-cell>@samueltan</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>22</sgds-data-table-cell>
+      <sgds-data-table-cell>Tina</sgds-data-table-cell>
+      <sgds-data-table-cell>Loh</sgds-data-table-cell>
+      <sgds-data-table-cell>@tinaloh</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>23</sgds-data-table-cell>
+      <sgds-data-table-cell>Uma</sgds-data-table-cell>
+      <sgds-data-table-cell>Devi</sgds-data-table-cell>
+      <sgds-data-table-cell>@umadevi</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- No rows -->
+<div class="container">
+  <h3>No rows</h3>
+  <sgds-data-table>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Multi-select -->
+<div class="container">
+  <h3>Multi-select</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" multiSelect>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="ms-row-1">
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="ms-row-2">
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="ms-row-3">
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Multi-select pre-checked on load -->
+<div class="container">
+  <h3>Multi-select (Pre-checked on load)</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" multiSelect>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="ms-load-row-1">
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="ms-load-row-2" checked>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="ms-load-row-3">
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Expandable rows -->
+<div class="container">
+  <h3>Expandable rows</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5">
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row expand open>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+      <div slot="content">Department: Engineering · Join date: 01 Jan 2022 · Status: Active</div>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row expand>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+      <div slot="content">Department: Design · Join date: 15 Mar 2023 · Status: Active</div>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Expandable + multi-select -->
+<div class="container">
+  <h3>Expandable + Multi-select</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" multiSelect>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row id="ems-row-1" expand>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+      <div slot="content">Department: Engineering</div>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row id="ems-row-2">
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row id="ems-row-3">
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Custom footer text -->
+<div class="container">
+  <h3>Custom Footer Text (footerText)</h3>
+  <sgds-data-table currentPage="1" dataLength="4" itemsPerPage="2" footerText="Showing records fetched from API cache">
+    <sgds-data-table-row>
+      <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>Name</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Amy</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Cara</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell>Dan</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Hide footer -->
+<div class="container">
+  <h3>Hide Footer (hideFooter)</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" hideFooter>
+    <sgds-data-table-row>
+      <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>Status</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1001</sgds-data-table-cell>
+      <sgds-data-table-cell>Pending</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1002</sgds-data-table-cell>
+      <sgds-data-table-cell>Approved</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1003</sgds-data-table-cell>
+      <sgds-data-table-cell>Rejected</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Server mode -->
+<div class="container">
+  <h3>Server Mode (mode="server")</h3>
+  <sgds-data-table id="server-table" currentPage="1" dataLength="50" itemsPerPage="10" mode="server" isLoading>
+    <sgds-data-table-row>
+      <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
+      <sgds-data-table-head>Region</sgds-data-table-head>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Header and cell props: sorting, sortKey, width, colspan, rowspan, textAlign -->
+<div class="container">
+  <h3>Header and Cell Props (sorting, sortKey, width)</h3>
+  <sgds-data-table layout="fixed" currentPage="1" dataLength="4" itemsPerPage="4">
+    <sgds-data-table-row>
+      <sgds-data-table-head width="88">ID</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
+      <sgds-data-table-head>Role</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="score" width="120" textAlign="right">Score</sgds-data-table-head>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row id="sort-row-1">
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Lina</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+      <sgds-data-table-cell>82</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="sort-row-2">
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Adam</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+      <sgds-data-table-cell>70</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="sort-row-3">
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Nora</sgds-data-table-cell>
+      <sgds-data-table-cell>Manager</sgds-data-table-cell>
+      <sgds-data-table-cell>85</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Default sort -->
+<div class="container">
+  <h3>Default Sort</h3>
+  <sgds-data-table currentPage="1" dataLength="4" itemsPerPage="4">
+    <sgds-data-table-row>
+      <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="name" ariasort="ascending">Name</sgds-data-table-head>
+      <sgds-data-table-head>Role</sgds-data-table-head>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row id="default-sort-row-1">
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Alice</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="default-sort-row-2">
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben</sgds-data-table-cell>
+      <sgds-data-table-cell>Analyst</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="default-sort-row-3">
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Chloe</sgds-data-table-cell>
+      <sgds-data-table-cell>Manager</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row id="default-sort-row-4">
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Darren</sgds-data-table-cell>
+      <sgds-data-table-cell>Designer</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Row colspan example (5 data rows, 5 columns) -->
+<div class="container">
+  <h3>Row Colspan Example (5 data rows, 5 columns)</h3>
+  <sgds-data-table currentPage="1" dataLength="5" itemsPerPage="5">
+    <sgds-data-table-row>
+      <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>Item</sgds-data-table-head>
+      <sgds-data-table-head>Category</sgds-data-table-head>
+      <sgds-data-table-head>Status</sgds-data-table-head>
+      <sgds-data-table-head textAlign="right">Amount</sgds-data-table-head>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Application fee</sgds-data-table-cell>
+      <sgds-data-table-cell>Service</sgds-data-table-cell>
+      <sgds-data-table-cell>Paid</sgds-data-table-cell>
+      <sgds-data-table-cell>120.00</sgds-data-table-cell>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell colspan="2">Support package (category merged)</sgds-data-table-cell>
+      <sgds-data-table-cell>Pending</sgds-data-table-cell>
+      <sgds-data-table-cell>240.00</sgds-data-table-cell>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Licence renewal</sgds-data-table-cell>
+      <sgds-data-table-cell>Regulatory</sgds-data-table-cell>
+      <sgds-data-table-cell>Paid</sgds-data-table-cell>
+      <sgds-data-table-cell>320.00</sgds-data-table-cell>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row>
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell colspan="2">Bulk order adjustment (category merged)</sgds-data-table-cell>
+      <sgds-data-table-cell>Approved</sgds-data-table-cell>
+      <sgds-data-table-cell>180.00</sgds-data-table-cell>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row>
+      <sgds-data-table-cell>5</sgds-data-table-cell>
+      <sgds-data-table-cell>Maintenance</sgds-data-table-cell>
+      <sgds-data-table-cell>Service</sgds-data-table-cell>
+      <sgds-data-table-cell>In progress</sgds-data-table-cell>
+      <sgds-data-table-cell>95.00</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<script type="module">
+  const nightModeToggle = document.getElementById("night-mode-toggle");
+
+  nightModeToggle?.addEventListener("sgds-change", event => {
+    const isNight = event.target?.checked === true;
+    document.documentElement.classList.toggle("sgds-night-theme", isNight);
+  });
+
+  // Set rowData on multi-select rows
+  document.getElementById("ms-row-1").rowData = { id: 1, name: "John Doe" };
+  document.getElementById("ms-row-2").rowData = { id: 2, name: "Jane Doe" };
+  document.getElementById("ms-row-3").rowData = { id: 3, name: "Bob Smith" };
+
+  // Set rowData on expandable + multi-select rows
+  document.getElementById("ems-row-1").rowData = { id: 1, name: "John Doe" };
+  document.getElementById("ems-row-2").rowData = { id: 2, name: "Jane Doe" };
+  document.getElementById("ems-row-3").rowData = { id: 3, name: "Bob Smith" };
+
+  // Set rowData for sorting table head demo (sorting)
+  document.getElementById("sort-row-1").rowData = { id: 1, name: "Lina", role: "Engineer", score: 82 };
+  document.getElementById("sort-row-2").rowData = { id: 2, name: "Adam", role: "Engineer", score: 82 };
+  document.getElementById("sort-row-3").rowData = { id: 3, name: "Nora", role: "Manager", score: 75 };
+
+  // Set rowData for default sort sample
+  document.getElementById("default-sort-row-1").rowData = { id: 2, name: "Alice", role: "Engineer" };
+  document.getElementById("default-sort-row-2").rowData = { id: 4, name: "Ben", role: "Analyst" };
+  document.getElementById("default-sort-row-3").rowData = { id: 1, name: "Chloe", role: "Manager" };
+  document.getElementById("default-sort-row-4").rowData = { id: 3, name: "Darren", role: "Designer" };
+
+  // Mock API-driven pagination demo for server mode table
+  const serverTable = document.getElementById("server-table");
+  const totalRows = 50;
+  const regions = ["North", "South", "East", "West", "Central"];
+  const serverSort = { key: "", direction: "none" };
+
+  const compareServerRows = (left, right, key, direction) => {
+    if (direction === "none") return 0;
+
+    const leftValue = left[key];
+    const rightValue = right[key];
+
+    if (leftValue === rightValue) return 0;
+
+    const leftNumber = Number(leftValue);
+    const rightNumber = Number(rightValue);
+    const bothNumeric = Number.isFinite(leftNumber) && Number.isFinite(rightNumber);
+
+    if (bothNumeric) {
+      return direction === "ascending" ? leftNumber - rightNumber : rightNumber - leftNumber;
+    }
+
+    const cmp = String(leftValue).localeCompare(String(rightValue), undefined, {
+      numeric: true,
+      sensitivity: "base"
+    });
+    return direction === "ascending" ? cmp : -cmp;
+  };
+
+  const mockApi = ({ page, itemsPerPage, sortKey, sortDirection }) => {
+    const allRows = Array.from({ length: totalRows }, (_, index) => {
+      const id = index + 1;
+      return {
+        id,
+        name: `Citizen ${id}`,
+        region: regions[id % regions.length]
+      };
+    });
+
+    if (sortKey && sortDirection !== "none") {
+      allRows.sort((left, right) => compareServerRows(left, right, sortKey, sortDirection));
+    }
+
+    const start = (page - 1) * itemsPerPage;
+    const end = Math.min(start + itemsPerPage, totalRows);
+    const rows = allRows.slice(start, end);
+
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve({ total: totalRows, rows });
+      }, 350);
+    });
+  };
+
+  const renderServerRows = rows => {
+    const headerRow = serverTable.querySelector("sgds-data-table-row");
+    if (!headerRow) return;
+
+    const bodyMarkup = rows
+      .map(
+        row => `
+      <sgds-data-table-row>
+        <sgds-data-table-cell>${row.id}</sgds-data-table-cell>
+        <sgds-data-table-cell>${row.name}</sgds-data-table-cell>
+        <sgds-data-table-cell>${row.region}</sgds-data-table-cell>
+      </sgds-data-table-row>`
+      )
+      .join("");
+
+    serverTable.innerHTML = `${headerRow.outerHTML}${bodyMarkup}`;
+  };
+
+  const loadServerPage = async page => {
+    const itemsPerPage = Number(serverTable.itemsPerPage || 10);
+    serverTable.isLoading = true;
+
+    try {
+      const response = await mockApi({
+        page,
+        itemsPerPage,
+        sortKey: serverSort.key,
+        sortDirection: serverSort.direction
+      });
+      serverTable.dataLength = response.total;
+      renderServerRows(response.rows);
+    } finally {
+      serverTable.isLoading = false;
+    }
+  };
+
+  serverTable.addEventListener("sgds-page-change", async () => {
+    await loadServerPage(Number(serverTable.currentPage || 1));
+  });
+
+  serverTable.addEventListener("sgds-sort", async event => {
+    serverSort.key = event.detail.key;
+    serverSort.direction = event.detail.direction;
+    await loadServerPage(Number(serverTable.currentPage || 1));
+  });
+
+  loadServerPage(1);
+</script>

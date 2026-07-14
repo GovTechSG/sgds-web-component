@@ -1,0 +1,178 @@
+/* shared default — overridden per component below */
+:host {
+  display: contents;
+}
+
+/* ── sgds-data-table ──────────────────────────────────────────── */
+:host([layout="fixed"]) .table {
+  table-layout: fixed;
+}
+
+.table {
+  display: table;
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+}
+
+.data-table {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--sgds-dimension-56);
+  border: var(--sgds-border-width-1) solid;
+  border-color: var(--sgds-border-color-muted);
+  border-radius: var(--sgds-border-radius-md);
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--sgds-dimension-128);
+  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+  border-top: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}
+
+.loading .loading-menu {
+  display: flex;
+  gap: var(--sgds-gap-xs);
+  align-items: center;
+  color: var(--sgds-text-color-subtle);
+  pointer-events: none;
+}
+
+.no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--sgds-dimension-128);
+  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+  color: var(--sgds-text-color-subtle);
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}
+
+/* hover / expanded states — set CSS custom property on the row host,
+   cells inherit it across the shadow boundary */
+tr:hover:not([data-header-row]),
+.active:not(.sort-icon) {
+  background-color: var(--sgds-bg-translucent-subtle);
+  transition: background-color 0.15s ease;
+}
+
+/* ── sgds-data-table-cell / sgds-data-table-head ─────────────── */
+td,
+th {
+  vertical-align: middle;
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}
+
+.data-table-cell,
+.data-table-head {
+  display: flex;
+  align-items: center;
+  min-height: var(--sgds-dimension-56);
+  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+}
+
+.data-table-head {
+  font-weight: var(--sgds-font-weight-semibold);
+  gap: var(--sgds-gap-2-xs);
+}
+
+.sort {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sort-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24);
+  padding: 0;
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
+  border-radius: var(--sgds-form-border-radius-md);
+  background-color: var(--sgds-bg-transparent);
+  color: var(--sgds-color-subtle);
+  cursor: pointer;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.sort-button:hover {
+  background-color: var(--sgds-bg-translucent-subtle);
+  color: var(--sgds-color-default);
+}
+
+.sort-button:focus,
+.sort-button:focus-visible {
+  background-color: var(--sgds-bg-translucent-subtle);
+  border-color: transparent;
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+}
+
+.sort-button:disabled {
+  background-color: var(--sgds-bg-transparent);
+  color: var(--sgds-color-muted);
+  cursor: not-allowed;
+}
+
+.sort-button.active {
+  background-color: var(--sgds-primary-surface-translucent);
+  color: var(--sgds-primary-color-default);
+}
+
+.sort-icon {
+  display: inline-flex;
+}
+
+.data-table-head.align-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.data-table-cell.align-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+/* control cell variants — applied as classes on the host */
+.control-cell {
+  width: var(--sgds-dimension-56);
+}
+
+:host(.checkbox-cell) .data-table-cell,
+:host(.checkbox-cell) .data-table-head {
+  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+}
+
+:host(.expand-cell) .data-table-cell {
+  padding: var(--sgds-padding-md);
+  cursor: pointer;
+}
+
+/* ── expandable content row ───────────────────────────────────── */
+.expandable-td {
+  padding: 0;
+  border: 0;
+}
+
+.expandable-content {
+  background-color: var(--sgds-surface-raised);
+  padding: var(--sgds-padding-2-xl);
+  padding-left: var(--sgds-padding-4-xl);
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}
+
+.hidden {
+  display: none;
+}
