@@ -110,7 +110,7 @@ th {
 }
 
 .sort .sort-icon {
-  color: var(--sgds-color-subtle);
+  color: var(--sgds-color-muted);
 }
 
 .sort .active.sort-icon {

@@ -1,5 +1,5 @@
 import { html, nothing } from "lit";
-import { property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import { SgdsCheckbox } from "../Checkbox/sgds-checkbox";
@@ -36,13 +36,16 @@ export class SgdsDataTableRow extends SgdsElement {
   };
 
   /** Arbitrary data associated with this row. Returned in event detail on row selection. */
-  @property({ type: Object }) rowData: Record<string, unknown> = {};
+  @property({ type: Object, reflect: true }) rowData: Record<string, unknown> = {};
 
   /** When true, the row has an expandable content area toggled by a chevron. */
-  @property({ type: Boolean }) expand = false;
+  @property({ type: Boolean, reflect: true }) expand = false;
 
   /** When true, the expandable content area is open. */
-  @property({ type: Boolean }) open = false;
+  @property({ type: Boolean, reflect: true }) open = false;
+
+  /** When true, the row is checked. */
+  @property({ type: Boolean, reflect: true }) checked = false;
 
   /** @internal — set by `sgds-data-table` to show a checkbox cell on this row. */
   @property({ type: Boolean }) showCheckbox = false;
@@ -62,9 +65,15 @@ export class SgdsDataTableRow extends SgdsElement {
   @queryAssignedElements({ flatten: true })
   private _assignedCells!: Array<SgdsDataTableCell | SgdsDataTableHead>;
 
+  @state() private _isHeaderRow = false;
+
   /** The checkbox rendered inside this row, if `showCheckbox` is true. */
   get checkbox(): SgdsCheckbox | null {
     return this._checkboxEl ?? null;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
   }
 
   firstUpdated() {
@@ -108,6 +117,13 @@ export class SgdsDataTableRow extends SgdsElement {
     }
   }
 
+  @watch("checked")
+  async handleCheckedChange() {
+    if (this.checked) {
+      this.emit("i-sgds-change", { detail: { checked: true } });
+    }
+  }
+
   /** Opens the expandable content area. */
   public async show() {
     if (this.open) return;
@@ -123,6 +139,8 @@ export class SgdsDataTableRow extends SgdsElement {
   }
 
   private _onSlotChange() {
+    const cells = this._assignedCells ?? [];
+    this._isHeaderRow = cells.some(cell => cell instanceof SgdsDataTableHead);
     this.requestUpdate();
   }
 
@@ -187,8 +205,8 @@ export class SgdsDataTableRow extends SgdsElement {
     </td>`;
   }
 
-  private _renderExpandCell(isHeaderRow: boolean) {
-    if (isHeaderRow) {
+  private _renderExpandCell() {
+    if (this._isHeaderRow) {
       return html`<th class="control-cell" scope="col"></th>`;
     }
 
@@ -199,44 +217,43 @@ export class SgdsDataTableRow extends SgdsElement {
     </td>`;
   }
 
-  private _renderExpandPlaceholder(isHeaderRow: boolean) {
-    return isHeaderRow ? html`<th class="control-cell" scope="col"></th>` : html`<td class="control-cell"></td>`;
+  private _renderExpandPlaceholder() {
+    return this._isHeaderRow ? html`<th class="control-cell" scope="col"></th>` : html`<td class="control-cell"></td>`;
   }
 
-  private _renderCheckboxCell(isHeaderRow: boolean) {
-    return isHeaderRow
+  private _renderCheckboxCell() {
+    return this._isHeaderRow
       ? html`<th class="control-cell" scope="col">
           <div class="data-table-cell checkbox-cell">
-            <sgds-checkbox @sgds-change=${this._onCheckboxChange}></sgds-checkbox>
+            <sgds-checkbox .checked=${this.checked} @sgds-change=${this._onCheckboxChange}></sgds-checkbox>
           </div>
         </th>`
       : html`<td class="control-cell">
           <div class="data-table-cell checkbox-cell">
-            <sgds-checkbox @sgds-change=${this._onCheckboxChange}></sgds-checkbox>
+            <sgds-checkbox .checked=${this.checked} @sgds-change=${this._onCheckboxChange}></sgds-checkbox>
           </div>
         </td>`;
   }
 
-  private _renderHiddenSlotCell(isHeaderRow: boolean) {
-    return isHeaderRow
+  private _renderHiddenSlotCell() {
+    return this._isHeaderRow
       ? html`<th hidden style="display:none"><slot @slotchange=${this._onSlotChange}></slot></th>`
       : html`<td hidden style="display:none"><slot @slotchange=${this._onSlotChange}></slot></td>`;
   }
 
   render() {
     const cells = this._assignedCells ?? [];
-    const isHeaderRow = cells.some(cell => cell instanceof SgdsDataTableHead);
     const totalCols = cells.length + (this.showCheckbox ? 1 : 0) + (this.expand || this.showExpandPlaceholder ? 1 : 0);
 
     return html`
-      <tr ?data-header-row=${isHeaderRow} class=${this.open ? "active" : ""}>
-        ${this._renderHiddenSlotCell(isHeaderRow)}
+      <tr ?data-header-row=${this._isHeaderRow} class=${this.open ? "active" : ""}>
+        ${this._renderHiddenSlotCell()}
         ${this.expand
-          ? this._renderExpandCell(isHeaderRow)
+          ? this._renderExpandCell()
           : this.showExpandPlaceholder
-          ? this._renderExpandPlaceholder(isHeaderRow)
+          ? this._renderExpandPlaceholder()
           : nothing}
-        ${this.showCheckbox ? this._renderCheckboxCell(isHeaderRow) : nothing}
+        ${this.showCheckbox ? this._renderCheckboxCell() : nothing}
         ${(() => {
           let visualColumnIndex = 0;
           return cells.map(el => {
