@@ -68,7 +68,6 @@ export class SgdsTile extends SgdsElement {
   }
 }
 
-
 export type TileVariant = "checkbox" | "radio";
 
 export default SgdsTile;
