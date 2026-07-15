@@ -9,7 +9,7 @@ button {
 .sidenav-btn {
   width: 100%;
   text-align: initial;
-  line-height: var(--sgds-line-height-24);
+  line-height: var(--sgds-line-height-xs);
   font-size: var(--sgds-font-size-label-md);
   border: 0;
   background: 0;
@@ -56,7 +56,7 @@ button {
 .no-menu-default::slotted(a) {
   text-decoration: none !important;
   color: inherit !important;
-  line-height: var(--sgds-line-height-24) !important;
+  line-height: var(--sgds-line-height-xs) !important;
   font-size: var(--sgds-font-size-label-md);
   border: 0;
   background: 0;

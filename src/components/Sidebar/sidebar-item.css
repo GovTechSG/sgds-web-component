@@ -29,7 +29,7 @@
 
 .sidebar-item-label {
   font-size: var(--sgds-font-size-label-sm);
-  line-height: var(--sgds-line-height-20);
+  line-height: var(--sgds-line-height-2-xs);
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;

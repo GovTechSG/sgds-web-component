@@ -5,10 +5,6 @@
 <link href="css/utility.css" rel="stylesheet" type="text/css" />
 
 <style>
-  .shell-nav {
-    position: sticky;
-    top: 0;
-  }
   .section-title {
     border-bottom: 1px solid var(--sgds-color-border-default);
   }
@@ -16,8 +12,9 @@
 
 <body>
 
-  <!-- ── APP SHELL: Masthead + Mainnav ── -->
-  <div class="shell-nav">
+<div class="sgds:h-screen sgds:flex sgds:flex-col sgds:overflow-hidden">
+  <!-- Sticky top bar -->
+  <div class="sgds:flex-none">
     <sgds-masthead fluid></sgds-masthead>
     <sgds-mainnav fluid>
       <strong slot="brand">Theming Playground</strong>
@@ -44,48 +41,45 @@
     </sgds-mainnav>
   </div>
 
-  <!-- ── SHELL BODY: Sidebar + Main ── -->
-  <div class="sgds:flex sgds:flex-row">
-
+  <!-- Two-column body -->
+  <div class="sgds:flex sgds:flex-row sgds:flex-1 sgds:overflow-hidden">
     <!-- SIDE NAVIGATION -->
-    <div class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)]">
-      <sgds-sidebar active="overview">
-        <div slot="brandName">Theming</div>
-        <sgds-sidebar-section title="Sections" name="sections">
-          <sgds-sidebar-item name="overview" title="Overview">
-            <sgds-icon name="grid-fill" slot="icon"></sgds-icon>
-            <a href="#overview"></a>
-          </sgds-sidebar-item>
-          <sgds-sidebar-item name="buttons" title="Buttons">
-            <sgds-icon name="circle-fill" slot="icon"></sgds-icon>
-            <a href="#buttons"></a>
-          </sgds-sidebar-item>
-          <sgds-sidebar-item name="forms" title="Forms">
-            <sgds-icon name="pencil-fill" slot="icon"></sgds-icon>
-            <a href="#forms"></a>
-          </sgds-sidebar-item>
-          <sgds-sidebar-item name="feedback" title="Feedback">
-            <sgds-icon name="info-circle-fill" slot="icon"></sgds-icon>
-            <a href="#feedback"></a>
-          </sgds-sidebar-item>
-          <sgds-sidebar-item name="navigation" title="Navigation">
-            <sgds-icon name="signpost-split-fill" slot="icon"></sgds-icon>
-            <a href="#navigation"></a>
-          </sgds-sidebar-item>
-          <sgds-sidebar-item name="data" title="Data Display">
-            <sgds-icon name="table" slot="icon"></sgds-icon>
-            <a href="#data"></a>
-          </sgds-sidebar-item>
-          <sgds-sidebar-item name="overlays" title="Overlays">
-            <sgds-icon name="layers-fill" slot="icon"></sgds-icon>
-            <a href="#overlays"></a>
-          </sgds-sidebar-item>
-        </sgds-sidebar-section>
-      </sgds-sidebar>
-    </div>
+    <sgds-sidebar active="overview">
+      <div slot="brandName">Theming</div>
+      <sgds-sidebar-section title="Sections" name="sections">
+        <sgds-sidebar-item name="overview" title="Overview">
+          <sgds-icon name="grid-fill" slot="icon"></sgds-icon>
+          <a href="#overview"></a>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item name="buttons" title="Buttons">
+          <sgds-icon name="circle-fill" slot="icon"></sgds-icon>
+          <a href="#buttons"></a>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item name="forms" title="Forms">
+          <sgds-icon name="pencil-fill" slot="icon"></sgds-icon>
+          <a href="#forms"></a>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item name="feedback" title="Feedback">
+          <sgds-icon name="info-circle-fill" slot="icon"></sgds-icon>
+          <a href="#feedback"></a>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item name="navigation" title="Navigation">
+          <sgds-icon name="signpost-split-fill" slot="icon"></sgds-icon>
+          <a href="#navigation"></a>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item name="data" title="Data Display">
+          <sgds-icon name="table" slot="icon"></sgds-icon>
+          <a href="#data"></a>
+        </sgds-sidebar-item>
+        <sgds-sidebar-item name="overlays" title="Overlays">
+          <sgds-icon name="layers-fill" slot="icon"></sgds-icon>
+          <a href="#overlays"></a>
+        </sgds-sidebar-item>
+      </sgds-sidebar-section>
+    </sgds-sidebar>
 
-    <!-- MAIN CONTENT -->
-    <main class="sgds:flex sgds:flex-col sgds:w-full sgds:min-h-[calc(100vh-108px)]" id="main-content" tabindex="-1">
+    <!-- MAIN CONTENT (scrollable) -->
+    <div class="sgds:flex sgds:flex-col sgds:flex-1 sgds:overflow-y-auto">
       <div class="sgds-container-sidebar sgds:py-layout-md sgds:flex-1">
 
         <!-- ════════════════════════════════════════════ -->
@@ -722,7 +716,7 @@
       </div>
 
       <!-- Footer -->
-      <sgds-footer contacthref="#" feedbackhref="#" faqhref="#" privacyhref="#" termsofusehref="#">
+      <sgds-footer tone="neutral" layout="sidebar" contacthref="#" feedbackhref="#" faqhref="#" privacyhref="#" termsofusehref="#">
         <h3 slot="title">Theming Playground</h3>
         <p slot="description">A demonstration of all SGDS web components for theming and visual testing.</p>
         <sgds-footer-item slot="items">
@@ -744,9 +738,9 @@
           <sgds-link><a href="#">FAQ</a></sgds-link>
         </sgds-footer-item>
       </sgds-footer>
-    </main>
-
+    </div>
   </div>
+</div>
 
   <!-- Drawer (placed at body level for proper overlay) -->
   <sgds-drawer id="demo-drawer" size="md" placement="end" ariaLabel="Demo Drawer">

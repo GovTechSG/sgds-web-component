@@ -131,14 +131,14 @@ slot[name="title"]::slotted(*) {
   align-items: center;
   gap: 1rem;
   margin: var(--sgds-margin-none) !important;
-  line-height: var(--sgds-line-height-40) !important;
+  line-height: var(--sgds-line-height-lg) !important;
   font-size: var(--sgds-font-size-heading-sm) !important;
 }
 
 slot[name="description"]::slotted(*) {
   margin: var(--sgds-margin-none) !important;
   color: var(--sgds-color-subtle);
-  line-height: var(--sgds-line-height-24);
+  line-height: var(--sgds-line-height-xs);
 }
 
 .modal-body {
