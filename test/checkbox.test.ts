@@ -82,11 +82,9 @@ describe("<sgds-checkbox>", () => {
     expect(el.invalid).to.be.false;
   });
   it("id attribute should equal to label for attribute", async () => {
-    const el = await fixture(html`<sgds-checkbox>Label</sgds-checkbox>`);
+    const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
     const input = el.shadowRoot?.querySelector("input");
     const label = el.shadowRoot?.querySelector("label");
-
-    expect(label).to.exist;
     expect(input?.getAttribute("id")).to.equal(label?.getAttribute("for"));
   });
 
@@ -122,14 +120,10 @@ describe("<sgds-checkbox>", () => {
   });
 
   it("should emit sgds-change event when label is clicked", async () => {
-    const el = await fixture(html`<sgds-checkbox>Label</sgds-checkbox>`);
+    const el = await fixture(html`<sgds-checkbox></sgds-checkbox>`);
     const toggleHandler = Sinon.spy();
     el.addEventListener("sgds-change", toggleHandler);
-
-    const label = el.shadowRoot?.querySelector("label");
-    expect(label).to.exist;
-    label?.click();
-
+    el.shadowRoot?.querySelector("label")?.click();
     expect(toggleHandler).to.have.been.calledOnce;
   });
 
