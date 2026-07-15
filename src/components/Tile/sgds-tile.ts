@@ -6,8 +6,6 @@ import tileStyle from "./tile.css";
 import SgdsCheckbox from "../Checkbox/sgds-checkbox";
 import SgdsRadio from "../Radio/sgds-radio";
 
-export type TileVariant = "checkbox" | "radio";
-
 /**
  * @summary A tile component that displays an icon alongside a title and description.
  *
@@ -49,12 +47,15 @@ export class SgdsTile extends SgdsElement {
 
   render() {
     return html`
-      <div class=${classMap({ tile: true, disabled: this.disabled, checked: this.checked })} @click=${this._handleTileClick}>
+      <div
+        class=${classMap({ tile: true, disabled: this.disabled, checked: this.checked })}
+        @click=${this._handleTileClick}
+      >
         ${this.variant === "checkbox"
           ? html`<sgds-checkbox ?disabled=${this.disabled} ?checked=${this.checked}></sgds-checkbox>`
           : this.variant === "radio"
-            ? html`<sgds-radio ?disabled=${this.disabled} ?checked=${this.checked}></sgds-radio>`
-            : nothing}
+          ? html`<sgds-radio ?disabled=${this.disabled} ?checked=${this.checked}></sgds-radio>`
+          : nothing}
         <div class="tile-container">
           <slot name="icon"></slot>
           <div class="tile-text">
@@ -66,5 +67,8 @@ export class SgdsTile extends SgdsElement {
     `;
   }
 }
+
+
+export type TileVariant = "checkbox" | "radio";
 
 export default SgdsTile;
