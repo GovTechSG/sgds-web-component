@@ -8,7 +8,7 @@
   align-items: center;
   gap: var(--sgds-gap-2-xs);
   cursor: pointer;
-  font-size: var(--sgds-font-size-0);
+  font-size: var(--sgds-font-size-label-xs);
   line-height: var(--sgds-line-height-20);
   color: var(--sgds-label-color-subtle);
   padding: var(--sgds-padding-xs) var(--sgds-padding-sm);

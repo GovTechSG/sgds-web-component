@@ -62,7 +62,7 @@ svg {
 }
 
 .pagination-sm .page-link {
-  font-size: var(--sgds-font-size-14);
+  font-size: var(--sgds-font-size-label-sm);
   width: var(--sgds-dimension-40);
   height: var(--sgds-dimension-40);
 }
@@ -85,5 +85,5 @@ svg {
 }
 
 .pagination-sm .pagination-description {
-  font-size: var(--sgds-font-size-14);
+  font-size: var(--sgds-font-size-label-sm);
 }

@@ -12,14 +12,14 @@ slot[name="title"]::slotted(*) {
   color: var(--sgds-heading-color-default);
   font-weight: var(--sgds-font-weight-semibold);
   letter-spacing: var(--sgds-letter-spacing-tight);
-  font-size: var(--sgds-font-size-24);
+  font-size: var(--sgds-font-size-heading-sm);
   line-height: var(--sgds-line-height-32);
 }
 
 slot[name="description"]::slotted(*) {
   font-weight: var(--sgds-font-weight-regular);
   color: var(--sgds-color-subtle);
-  font-size: var(--sgds-font-size-16);
+  font-size: var(--sgds-font-size-label-md);
   line-height: var(--sgds-line-height-24);
 }
 

@@ -9,7 +9,7 @@
 }
 
 :host([density="compact"]) .accordion-body {
-  font-size: var(--sgds-font-size-body-sm);
+  font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs);
 }
 
@@ -105,7 +105,7 @@ slot[name="caret"] sgds-icon {
 .accordion-body {
   padding: 0;
   overflow: hidden;
-  font-size: var(--sgds-font-size-body-md);
+  font-size: var(--sgds-font-size-label-md);
   line-height: var(--sgds-line-height-xs);
   color: var(--sgds-body-color-subtle);
 }

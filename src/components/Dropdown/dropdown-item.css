@@ -12,6 +12,7 @@
   color: var(--sgds-color-default);
   text-align: inherit;
   cursor: pointer;
+  font-size: var(--sgds-font-size-label-sm);
 }
 
 .dropdown-item:hover {

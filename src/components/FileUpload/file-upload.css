@@ -94,8 +94,8 @@
 
 .file-upload-item-error-message {
   color: var(--sgds-form-danger-color-default);
-  font-size: var(--sgds-font-size-12);
-  line-height: var(--sgds-line-height-16);
+  font-size: var(--sgds-font-size-label-sm,);
+  line-height: var(--sgds-line-height-2-xs);
 }
 
 ul {
@@ -139,7 +139,7 @@ sgds-icon.invalid {
 }
 
 .drag-drop-text {
-  font-size: var(--sgds-font-size-14);
+  font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-20);
 }
 

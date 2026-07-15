@@ -1,0 +1,789 @@
+<script type="module" src="../src/index.ts"></script>
+<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="css/utility.css" rel="stylesheet" type="text/css" />
+
+<style>
+  .shell-nav {
+    position: sticky;
+    top: 0;
+  }
+  .section-title {
+    border-bottom: 1px solid var(--sgds-color-border-default);
+  }
+</style>
+
+<body>
+
+  <!-- ── APP SHELL: Masthead + Mainnav ── -->
+  <div class="shell-nav">
+    <sgds-masthead fluid></sgds-masthead>
+    <sgds-mainnav fluid>
+      <strong slot="brand">Theming Playground</strong>
+      <sgds-mainnav-item><a href="#overview">Overview</a></sgds-mainnav-item>
+      <sgds-mainnav-dropdown ariaLabel="Components menu">
+        <span slot="toggler">Components</span>
+        <sgds-dropdown-item><a href="#buttons">Buttons</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#forms">Forms</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#navigation">Navigation</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#data">Data Display</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#overlays">Overlays</a></sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+      <sgds-mainnav-dropdown ariaLabel="Resources menu">
+        <span slot="toggler">Resources</span>
+        <sgds-dropdown-item><a href="#">Documentation</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">GitHub</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Changelog</a></sgds-dropdown-item>
+      </sgds-mainnav-dropdown>
+      <sgds-mainnav-item><a href="#feedback">Feedback</a></sgds-mainnav-item>
+      <sgds-mainnav-item><a href="#">Contact</a></sgds-mainnav-item>
+      <div slot="end">
+        <sgds-button variant="primary" size="sm" id="theme-toggle">Toggle Theme</sgds-button>
+      </div>
+    </sgds-mainnav>
+  </div>
+
+  <!-- ── SHELL BODY: Sidebar + Main ── -->
+  <div class="sgds:flex sgds:flex-row">
+
+    <!-- SIDE NAVIGATION -->
+    <div class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)]">
+      <sgds-sidebar active="overview">
+        <div slot="brandName">Theming</div>
+        <sgds-sidebar-section title="Sections" name="sections">
+          <sgds-sidebar-item name="overview" title="Overview">
+            <sgds-icon name="grid-fill" slot="icon"></sgds-icon>
+            <a href="#overview"></a>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item name="buttons" title="Buttons">
+            <sgds-icon name="circle-fill" slot="icon"></sgds-icon>
+            <a href="#buttons"></a>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item name="forms" title="Forms">
+            <sgds-icon name="pencil-fill" slot="icon"></sgds-icon>
+            <a href="#forms"></a>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item name="feedback" title="Feedback">
+            <sgds-icon name="info-circle-fill" slot="icon"></sgds-icon>
+            <a href="#feedback"></a>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item name="navigation" title="Navigation">
+            <sgds-icon name="signpost-split-fill" slot="icon"></sgds-icon>
+            <a href="#navigation"></a>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item name="data" title="Data Display">
+            <sgds-icon name="table" slot="icon"></sgds-icon>
+            <a href="#data"></a>
+          </sgds-sidebar-item>
+          <sgds-sidebar-item name="overlays" title="Overlays">
+            <sgds-icon name="layers-fill" slot="icon"></sgds-icon>
+            <a href="#overlays"></a>
+          </sgds-sidebar-item>
+        </sgds-sidebar-section>
+      </sgds-sidebar>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="sgds:flex sgds:flex-col sgds:w-full sgds:min-h-[calc(100vh-108px)]" id="main-content" tabindex="-1">
+      <div class="sgds-container-sidebar sgds:py-layout-md sgds:flex-1">
+
+        <!-- ════════════════════════════════════════════ -->
+        <!-- OVERVIEW / ALERTS / BADGES                  -->
+        <!-- ════════════════════════════════════════════ -->
+        <section id="overview" class="sgds:mb-layout-lg">
+          <h2 class="sgds:text-heading-md sgds:font-bold sgds:pb-text-sm sgds:mb-layout-sm section-title">Overview</h2>
+
+          <!-- System Banner -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-component-sm sgds:mb-layout-sm">
+            <sgds-system-banner show>
+              <sgds-system-banner-item>
+                <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
+                This is a default system banner with an icon and action link.
+                <sgds-link size="sm" tone="fixed-light" slot="action">
+                  <a href="#">Learn more <sgds-icon name="arrow-right"></sgds-icon></a>
+                </sgds-link>
+              </sgds-system-banner-item>
+            </sgds-system-banner>
+            <sgds-system-banner show dismissible>
+              <sgds-system-banner-item>
+                <sgds-badge slot="badge" variant="info">New</sgds-badge>
+                A dismissible system banner with a badge. Users can close this notification.
+                <sgds-link size="sm" tone="fixed-light" slot="action">
+                  <a href="#">View details <sgds-icon name="arrow-right"></sgds-icon></a>
+                </sgds-link>
+              </sgds-system-banner-item>
+            </sgds-system-banner>
+            <sgds-system-banner show>
+              <sgds-system-banner-item>
+                <sgds-icon slot="icon" name="exclamation-triangle-fill" size="md"></sgds-icon>
+                Scheduled maintenance on 20 July 2026 from 2:00 AM to 6:00 AM SGT.
+                <sgds-link size="sm" tone="fixed-light" slot="action">
+                  <a href="#">Details</a>
+                </sgds-link>
+              </sgds-system-banner-item>
+              <sgds-system-banner-item>
+                <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
+                All systems are currently operational.
+              </sgds-system-banner-item>
+            </sgds-system-banner>
+          </div>
+
+          <!-- Alerts -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-component-sm sgds:mb-layout-sm">
+            <sgds-alert variant="primary" title="Primary Alert" show>This is a primary alert with a title and description text.</sgds-alert>
+            <sgds-alert variant="success" title="Success" show>Your changes have been saved successfully.</sgds-alert>
+            <sgds-alert variant="warning" title="Warning" show>Please review your inputs before proceeding.</sgds-alert>
+            <sgds-alert variant="danger" title="Error" show>Something went wrong. Please try again later.</sgds-alert>
+            <sgds-alert variant="info" title="Information" show>A new version is available for download.</sgds-alert>
+          </div>
+
+          <!-- Badges -->
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:mb-layout-sm">
+            <sgds-badge variant="primary">Primary</sgds-badge>
+            <sgds-badge variant="secondary">Secondary</sgds-badge>
+            <sgds-badge variant="success">Success</sgds-badge>
+            <sgds-badge variant="danger">Danger</sgds-badge>
+            <sgds-badge variant="warning">Warning</sgds-badge>
+            <sgds-badge variant="info">Info</sgds-badge>
+            <sgds-badge variant="neutral">Neutral</sgds-badge>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="sgds:mb-layout-sm">
+            <sgds-progress-bar label="Progress" value="65"></sgds-progress-bar>
+          </div>
+
+          <!-- Spinner — Variants and sizes -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Spinners (tones)</h3>
+          <div class="sgds:flex sgds:gap-component-sm sgds:items-center sgds:mb-layout-sm">
+            <sgds-spinner variant="primary" tone="brand"></sgds-spinner>
+            <sgds-spinner variant="primary" tone="neutral"></sgds-spinner>
+            <sgds-spinner variant="neutral"></sgds-spinner>
+          </div>
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Spinners (sizes)</h3>
+          <div class="sgds:flex sgds:gap-component-sm sgds:items-center">
+            <sgds-spinner size="xs"></sgds-spinner>
+            <sgds-spinner size="sm"></sgds-spinner>
+            <sgds-spinner size="md"></sgds-spinner>
+            <sgds-spinner size="lg"></sgds-spinner>
+            <sgds-spinner size="xl"></sgds-spinner>
+          </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════ -->
+        <!-- BUTTONS                                     -->
+        <!-- ════════════════════════════════════════════ -->
+        <section id="buttons" class="sgds:mb-layout-lg">
+          <h2 class="sgds:text-heading-md sgds:font-bold sgds:pb-text-sm sgds:mb-layout-sm section-title">Buttons</h2>
+
+          <!-- Button Sizes -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Sizes</h3>
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:items-center sgds:mb-layout-sm">
+            <sgds-button variant="primary" size="xs">Extra Small</sgds-button>
+            <sgds-button variant="primary" size="sm">Small</sgds-button>
+            <sgds-button variant="primary">Default (md)</sgds-button>
+            <sgds-button variant="primary" size="lg">Large</sgds-button>
+          </div>
+
+          <!-- Primary Buttons (all tones) -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Primary (variant)</h3>
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:mb-layout-sm">
+            <sgds-button variant="primary" tone="brand">Brand</sgds-button>
+            <sgds-button variant="primary" tone="danger">Danger</sgds-button>
+            <sgds-button variant="primary" tone="neutral">Neutral</sgds-button>
+          </div>
+
+          <!-- Outline Buttons (all tones) -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Outline (variant)</h3>
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:mb-layout-sm">
+            <sgds-button variant="outline" tone="brand">Brand</sgds-button>
+            <sgds-button variant="outline" tone="danger">Danger</sgds-button>
+            <sgds-button variant="outline" tone="neutral">Neutral</sgds-button>
+          </div>
+
+          <!-- Ghost Buttons (all tones) -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Ghost (variant)</h3>
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:mb-layout-sm">
+            <sgds-button variant="ghost" tone="brand">Brand</sgds-button>
+            <sgds-button variant="ghost" tone="danger">Danger</sgds-button>
+            <sgds-button variant="ghost" tone="neutral">Neutral</sgds-button>
+          </div>
+
+          <!-- Icon Buttons -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Icon Buttons</h3>
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:items-center sgds:mb-layout-sm">
+            <sgds-icon-button name="plus-lg" variant="primary" size="xs" ariaLabel="Add"></sgds-icon-button>
+            <sgds-icon-button name="plus-lg" variant="primary" size="sm" ariaLabel="Add"></sgds-icon-button>
+            <sgds-icon-button name="plus-lg" variant="primary" ariaLabel="Add"></sgds-icon-button>
+            <sgds-icon-button name="plus-lg" variant="primary" size="lg" ariaLabel="Add"></sgds-icon-button>
+            <sgds-icon-button name="pencil" variant="outline" ariaLabel="Edit"></sgds-icon-button>
+            <sgds-icon-button name="trash" variant="primary" tone="danger" ariaLabel="Delete"></sgds-icon-button>
+            <sgds-icon-button name="gear-fill" variant="ghost" tone="neutral" ariaLabel="Settings"></sgds-icon-button>
+          </div>
+
+          <!-- Close Button -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Close Button</h3>
+          <div class="sgds:flex sgds:gap-component-sm">
+            <sgds-close-button ariaLabel="Close"></sgds-close-button>
+          </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════ -->
+        <!-- FORMS                                       -->
+        <!-- ════════════════════════════════════════════ -->
+        <section id="forms" class="sgds:mb-layout-lg">
+          <h2 class="sgds:text-heading-md sgds:font-bold sgds:pb-text-sm sgds:mb-layout-sm section-title">Forms</h2>
+
+          <div class="sgds:flex sgds:flex-col sgds:gap-component-md">
+            <!-- Input -->
+            <sgds-input label="Text Input" placeholder="Enter text here" hintText="This is a hint"></sgds-input>
+
+            <!-- Textarea -->
+            <sgds-textarea label="Textarea" placeholder="Enter long text here" rows="3"></sgds-textarea>
+
+            <!-- Select -->
+            <sgds-select label="Select">
+              <sgds-select-option value="1">Option 1</sgds-select-option>
+              <sgds-select-option value="2">Option 2</sgds-select-option>
+              <sgds-select-option value="3">Option 3</sgds-select-option>
+            </sgds-select>
+
+            <!-- ComboBox -->
+            <sgds-combo-box label="Combo Box" placeholder="Search or select">
+              <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+              <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+              <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+              <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+            </sgds-combo-box>
+
+            <!-- Datepicker -->
+            <sgds-datepicker label="Date Picker" placeholder="Select a date"></sgds-datepicker>
+
+            <!-- File Upload -->
+            <sgds-file-upload label="File Upload"></sgds-file-upload>
+
+            <!-- Quantity Toggle -->
+            <sgds-quantity-toggle label="Quantity" value="1" min="0" max="10"></sgds-quantity-toggle>
+
+            <!-- Checkboxes -->
+            <fieldset class="sgds:border-0 sgds:p-0 sgds:m-0">
+              <legend class="sgds:text-body-md sgds:font-semibold sgds:mb-text-sm">Checkboxes</legend>
+              <div class="sgds:flex sgds:flex-col sgds:gap-text-xs">
+                <sgds-checkbox>Option A</sgds-checkbox>
+                <sgds-checkbox>Option B</sgds-checkbox>
+                <sgds-checkbox checked>Option C (checked)</sgds-checkbox>
+              </div>
+            </fieldset>
+
+            <!-- Radio -->
+            <fieldset class="sgds:border-0 sgds:p-0 sgds:m-0">
+              <legend class="sgds:text-body-md sgds:font-semibold sgds:mb-text-sm">Radio Buttons</legend>
+              <div class="sgds:flex sgds:flex-col sgds:gap-text-xs">
+                <sgds-radio name="radio-group" value="1">Radio 1</sgds-radio>
+                <sgds-radio name="radio-group" value="2">Radio 2</sgds-radio>
+                <sgds-radio name="radio-group" value="3" checked>Radio 3 (checked)</sgds-radio>
+              </div>
+            </fieldset>
+
+            <!-- Switch — All sizes -->
+            <fieldset class="sgds:border-0 sgds:p-0 sgds:m-0">
+              <legend class="sgds:text-body-md sgds:font-semibold sgds:mb-text-sm">Switch (sizes)</legend>
+              <div class="sgds:flex sgds:flex-col sgds:gap-text-xs">
+                <sgds-switch size="sm" label="Small switch"></sgds-switch>
+                <sgds-switch label="Medium switch (default)"></sgds-switch>
+                <sgds-switch size="lg" label="Large switch"></sgds-switch>
+                <sgds-switch size="lg" label="Large checked" checked></sgds-switch>
+              </div>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════ -->
+        <!-- FEEDBACK & STATUS                           -->
+        <!-- ════════════════════════════════════════════ -->
+        <section id="feedback" class="sgds:mb-layout-lg">
+          <h2 class="sgds:text-heading-md sgds:font-bold sgds:pb-text-sm sgds:mb-layout-sm section-title">Feedback & Status</h2>
+
+          <!-- Toast trigger -->
+          <div class="sgds:mb-layout-sm">
+            <sgds-button variant="primary" id="toast-trigger">Show Toast</sgds-button>
+            <sgds-toast id="demo-toast" variant="success" status="Success" duration="5000">
+              This is a success toast notification.
+            </sgds-toast>
+          </div>
+
+          <!-- Stepper — Horizontal -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Stepper (horizontal)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-stepper activeStep="1">
+              <sgds-step title="Details">Enter your personal information</sgds-step>
+              <sgds-step title="Review">Review your submission</sgds-step>
+              <sgds-step title="Payment">Complete payment</sgds-step>
+              <sgds-step title="Done">Confirmation</sgds-step>
+            </sgds-stepper>
+          </div>
+
+          <!-- Stepper — Vertical -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Stepper (vertical)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-stepper activeStep="2" orientation="vertical">
+              <sgds-step title="Account Created">Your account has been set up</sgds-step>
+              <sgds-step title="Profile Complete">Personal details saved</sgds-step>
+              <sgds-step title="Verification">Awaiting email verification</sgds-step>
+              <sgds-step title="Approved">Ready to use</sgds-step>
+            </sgds-stepper>
+          </div>
+
+          <!-- Skeleton -->
+          <div class="sgds:flex sgds:flex-col sgds:gap-text-sm">
+            <sgds-skeleton effect="wave" width="100%" height="20px"></sgds-skeleton>
+            <sgds-skeleton effect="wave" width="80%" height="20px"></sgds-skeleton>
+            <sgds-skeleton effect="wave" width="60%" height="20px"></sgds-skeleton>
+          </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════ -->
+        <!-- NAVIGATION                                  -->
+        <!-- ════════════════════════════════════════════ -->
+        <section id="navigation" class="sgds:mb-layout-lg">
+          <h2 class="sgds:text-heading-md sgds:font-bold sgds:pb-text-sm sgds:mb-layout-sm section-title">Navigation</h2>
+
+          <!-- Breadcrumb -->
+          <div class="sgds:mb-layout-sm">
+            <sgds-breadcrumb>
+              <sgds-breadcrumb-item><a href="#">Home</a></sgds-breadcrumb-item>
+              <sgds-breadcrumb-item><a href="#">Category</a></sgds-breadcrumb-item>
+              <sgds-breadcrumb-item>Current Page</sgds-breadcrumb-item>
+            </sgds-breadcrumb>
+          </div>
+
+          <!-- Subnav -->
+          <div class="sgds:mb-layout-sm">
+            <sgds-subnav>
+              <sgds-subnav-item active><a href="#">Overview</a></sgds-subnav-item>
+              <sgds-subnav-item><a href="#">Details</a></sgds-subnav-item>
+              <sgds-subnav-item><a href="#">Analytics</a></sgds-subnav-item>
+              <sgds-subnav-item><a href="#">Members</a></sgds-subnav-item>
+              <sgds-subnav-item><a href="#">Integrations</a></sgds-subnav-item>
+              <sgds-subnav-item><a href="#">Settings</a></sgds-subnav-item>
+            </sgds-subnav>
+          </div>
+
+          <!-- Tabs — Underlined (default) -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Tabs (underlined, default density)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-tab-group variant="underlined">
+              <sgds-tab slot="nav" panel="tab1" active>Overview</sgds-tab>
+              <sgds-tab slot="nav" panel="tab2">Details</sgds-tab>
+              <sgds-tab slot="nav" panel="tab3">Settings</sgds-tab>
+              <sgds-tab-panel name="tab1">Overview content goes here.</sgds-tab-panel>
+              <sgds-tab-panel name="tab2">Details content goes here.</sgds-tab-panel>
+              <sgds-tab-panel name="tab3">Settings content goes here.</sgds-tab-panel>
+            </sgds-tab-group>
+          </div>
+
+          <!-- Tabs — Solid variant -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Tabs (solid variant)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-tab-group variant="solid">
+              <sgds-tab slot="nav" panel="stab1" active>Dashboard</sgds-tab>
+              <sgds-tab slot="nav" panel="stab2">Analytics</sgds-tab>
+              <sgds-tab slot="nav" panel="stab3">Reports</sgds-tab>
+              <sgds-tab-panel name="stab1">Dashboard content goes here.</sgds-tab-panel>
+              <sgds-tab-panel name="stab2">Analytics content goes here.</sgds-tab-panel>
+              <sgds-tab-panel name="stab3">Reports content goes here.</sgds-tab-panel>
+            </sgds-tab-group>
+          </div>
+
+          <!-- Tabs — Compact density -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Tabs (compact density)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-tab-group density="compact">
+              <sgds-tab slot="nav" panel="ctab1" active>Tab A</sgds-tab>
+              <sgds-tab slot="nav" panel="ctab2">Tab B</sgds-tab>
+              <sgds-tab slot="nav" panel="ctab3">Tab C</sgds-tab>
+              <sgds-tab-panel name="ctab1">Compact tab A content.</sgds-tab-panel>
+              <sgds-tab-panel name="ctab2">Compact tab B content.</sgds-tab-panel>
+              <sgds-tab-panel name="ctab3">Compact tab C content.</sgds-tab-panel>
+            </sgds-tab-group>
+          </div>
+
+          <!-- Tabs — Vertical orientation -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Tabs (vertical orientation)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-tab-group orientation="vertical">
+              <sgds-tab slot="nav" panel="vtab1" active>General</sgds-tab>
+              <sgds-tab slot="nav" panel="vtab2">Security</sgds-tab>
+              <sgds-tab slot="nav" panel="vtab3">Notifications</sgds-tab>
+              <sgds-tab slot="nav" panel="vtab4">Billing</sgds-tab>
+              <sgds-tab-panel name="vtab1">General settings content.</sgds-tab-panel>
+              <sgds-tab-panel name="vtab2">Security settings content.</sgds-tab-panel>
+              <sgds-tab-panel name="vtab3">Notification preferences content.</sgds-tab-panel>
+              <sgds-tab-panel name="vtab4">Billing information content.</sgds-tab-panel>
+            </sgds-tab-group>
+          </div>
+
+          <!-- Pagination -->
+          <div class="sgds:mb-layout-sm">
+            <sgds-pagination totalItems="50" itemsPerPage="10" currentPage="1"></sgds-pagination>
+          </div>
+
+          <!-- Sidenav -->
+          <div class="sgds:mb-layout-sm">
+            <sgds-sidenav>
+              <sgds-sidenav-item>
+                <a href="#">Sidenav Item 1</a>
+              </sgds-sidenav-item>
+              <sgds-sidenav-item>
+                <a href="#">Sidenav Item 2</a>
+                <sgds-sidenav-item slot="subitem">
+                  <a href="#">Sub-item 2a</a>
+                </sgds-sidenav-item>
+                <sgds-sidenav-item slot="subitem">
+                  <a href="#">Sub-item 2b</a>
+                </sgds-sidenav-item>
+              </sgds-sidenav-item>
+              <sgds-sidenav-item>
+                <a href="#">Sidenav Item 3</a>
+              </sgds-sidenav-item>
+            </sgds-sidenav>
+          </div>
+
+          <!-- Links — All sizes -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Links (sizes)</h3>
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:items-center sgds:mb-layout-sm">
+            <sgds-link size="xs"><a href="#">Extra Small</a></sgds-link>
+            <sgds-link size="sm"><a href="#">Small</a></sgds-link>
+            <sgds-link size="md"><a href="#">Medium</a></sgds-link>
+            <sgds-link size="lg"><a href="#">Large</a></sgds-link>
+          </div>
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Links (neutral variant)</h3>
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:items-center">
+            <sgds-link variant="neutral" size="xs"><a href="#">Extra Small</a></sgds-link>
+            <sgds-link variant="neutral" size="sm"><a href="#">Small</a></sgds-link>
+            <sgds-link variant="neutral" size="md"><a href="#">Medium</a></sgds-link>
+            <sgds-link variant="neutral" size="lg"><a href="#">Large</a></sgds-link>
+          </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════ -->
+        <!-- DATA DISPLAY                                -->
+        <!-- ════════════════════════════════════════════ -->
+        <section id="data" class="sgds:mb-layout-lg">
+          <h2 class="sgds:text-heading-md sgds:font-bold sgds:pb-text-sm sgds:mb-layout-sm section-title">Data Display</h2>
+
+          <!-- Table -->
+          <div class="sgds:mb-layout-sm">
+            <sgds-table headerBackground tableBorder>
+              <sgds-table-row>
+                <sgds-table-head>Name</sgds-table-head>
+                <sgds-table-head>Role</sgds-table-head>
+                <sgds-table-head>Status</sgds-table-head>
+                <sgds-table-head>Action</sgds-table-head>
+              </sgds-table-row>
+              <sgds-table-row>
+                <sgds-table-cell>Alice</sgds-table-cell>
+                <sgds-table-cell>Engineer</sgds-table-cell>
+                <sgds-table-cell><sgds-badge variant="success">Active</sgds-badge></sgds-table-cell>
+                <sgds-table-cell><sgds-icon-button name="three-dots-vertical" variant="neutral" ariaLabel="More"></sgds-icon-button></sgds-table-cell>
+              </sgds-table-row>
+              <sgds-table-row>
+                <sgds-table-cell>Bob</sgds-table-cell>
+                <sgds-table-cell>Designer</sgds-table-cell>
+                <sgds-table-cell><sgds-badge variant="warning">Away</sgds-badge></sgds-table-cell>
+                <sgds-table-cell><sgds-icon-button name="three-dots-vertical" variant="neutral" ariaLabel="More"></sgds-icon-button></sgds-table-cell>
+              </sgds-table-row>
+              <sgds-table-row>
+                <sgds-table-cell>Charlie</sgds-table-cell>
+                <sgds-table-cell>Manager</sgds-table-cell>
+                <sgds-table-cell><sgds-badge variant="danger">Offline</sgds-badge></sgds-table-cell>
+                <sgds-table-cell><sgds-icon-button name="three-dots-vertical" variant="neutral" ariaLabel="More"></sgds-icon-button></sgds-table-cell>
+              </sgds-table-row>
+            </sgds-table>
+          </div>
+
+          <!-- Accordion — Default density -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Accordion (default density)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-accordion>
+              <sgds-accordion-item open ariaLabel="What is SGDS?">
+                <div slot="header">What is SGDS?</div>
+                <div slot="content">The Singapore Government Design System (SGDS) is a collection of reusable components and patterns built for government digital services. It ensures consistency and accessibility across all touchpoints.</div>
+              </sgds-accordion-item>
+              <sgds-accordion-item ariaLabel="How do I get started?">
+                <div slot="header">How do I get started?</div>
+                <div slot="content">Install the web component library via npm: npm install @govtechsg/sgds-web-component. Then import and use the components in your HTML or framework of choice.</div>
+              </sgds-accordion-item>
+              <sgds-accordion-item ariaLabel="Is SGDS accessible?">
+                <div slot="header">Is SGDS accessible?</div>
+                <div slot="content">Yes. All components are built with WCAG 2.1 AA compliance in mind. They include proper ARIA attributes, keyboard navigation, and focus management out of the box.</div>
+              </sgds-accordion-item>
+            </sgds-accordion>
+          </div>
+
+          <!-- Accordion — Compact density -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Accordion (compact density)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-accordion density="compact">
+              <sgds-accordion-item open ariaLabel="Compact Item 1">
+                <div slot="header">Compact Item 1</div>
+                <div slot="content">This accordion uses compact density for tighter spacing. Useful for sidebars or constrained layouts.</div>
+              </sgds-accordion-item>
+              <sgds-accordion-item ariaLabel="Compact Item 2">
+                <div slot="header">Compact Item 2</div>
+                <div slot="content">Content remains readable while taking up less vertical space.</div>
+              </sgds-accordion-item>
+              <sgds-accordion-item ariaLabel="Compact Item 3">
+                <div slot="header">Compact Item 3</div>
+                <div slot="content">Ideal for navigation menus or settings panels.</div>
+              </sgds-accordion-item>
+            </sgds-accordion>
+          </div>
+
+          <!-- Accordion — Spacious density -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Accordion (spacious density)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-accordion density="spacious">
+              <sgds-accordion-item open ariaLabel="Spacious Item 1">
+                <div slot="header">Spacious Item 1</div>
+                <div slot="content">The spacious density gives more breathing room between items. Best for content-heavy sections where readability is paramount.</div>
+              </sgds-accordion-item>
+              <sgds-accordion-item ariaLabel="Spacious Item 2">
+                <div slot="header">Spacious Item 2</div>
+                <div slot="content">Each item has generous padding, making it easy to scan through multiple sections.</div>
+              </sgds-accordion-item>
+              <sgds-accordion-item ariaLabel="Spacious Item 3">
+                <div slot="header">Spacious Item 3</div>
+                <div slot="content">Use this density for FAQ pages, documentation, or long-form content.</div>
+              </sgds-accordion-item>
+            </sgds-accordion>
+          </div>
+
+          <!-- Accordion — Border variant -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Accordion (border variant)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-accordion variant="border">
+              <sgds-accordion-item open ariaLabel="Border Item 1">
+                <div slot="header">Border Item 1</div>
+                <div slot="content">The border variant adds an outlined style to each accordion item for visual separation.</div>
+              </sgds-accordion-item>
+              <sgds-accordion-item ariaLabel="Border Item 2">
+                <div slot="header">Border Item 2</div>
+                <div slot="content">Useful when the accordion sits on a coloured background and needs extra definition.</div>
+              </sgds-accordion-item>
+            </sgds-accordion>
+          </div>
+
+          <!-- Description List -->
+          <div class="sgds:mb-layout-sm">
+            <sgds-description-list-group>
+              <div slot="title">Project Details</div>
+              <sgds-description-list>
+                Project Name
+                <span slot="data">SGDS Web Components</span>
+              </sgds-description-list>
+              <sgds-description-list>
+                Version
+                <span slot="data">3.24.0</span>
+              </sgds-description-list>
+              <sgds-description-list>
+                Framework
+                <span slot="data">Lit + TypeScript</span>
+              </sgds-description-list>
+              <sgds-description-list>
+                License
+                <span slot="data">MIT</span>
+              </sgds-description-list>
+            </sgds-description-list-group>
+          </div>
+
+          <!-- Divider -->
+          <sgds-divider></sgds-divider>
+
+          <!-- Cards -->
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-layout-sm sgds:mt-layout-sm">
+            <sgds-card>
+              <span slot="title">Card Title</span>
+              <span slot="description">This is a basic card component with a title and description.</span>
+            </sgds-card>
+            <sgds-icon-card>
+              <sgds-icon name="star-fill" slot="icon"></sgds-icon>
+              <span slot="title">Icon Card</span>
+              <span slot="description">A card with an icon.</span>
+            </sgds-icon-card>
+            <sgds-thumbnail-card>
+              <img slot="thumbnail" src="https://placehold.co/300x200" alt="Thumbnail" />
+              <span slot="title">Thumbnail Card</span>
+              <span slot="description">A card with an image thumbnail.</span>
+            </sgds-thumbnail-card>
+            <sgds-image-card>
+              <img slot="image" src="https://placehold.co/400x200" alt="Image" />
+              <span slot="title">Image Card</span>
+              <span slot="description">A card with a prominent image.</span>
+            </sgds-image-card>
+          </div>
+        </section>
+
+        <!-- ════════════════════════════════════════════ -->
+        <!-- OVERLAYS & INTERACTIVE                      -->
+        <!-- ════════════════════════════════════════════ -->
+        <section id="overlays" class="sgds:mb-layout-lg">
+          <h2 class="sgds:text-heading-md sgds:font-bold sgds:pb-text-sm sgds:mb-layout-sm section-title">Overlays & Interactive</h2>
+
+          <!-- Modal trigger -->
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:mb-layout-sm">
+            <sgds-button variant="primary" id="modal-trigger">Open Modal</sgds-button>
+            <sgds-modal id="demo-modal" title="Modal Title">
+              <p>This is a modal dialog. It overlays the page content.</p>
+            </sgds-modal>
+
+            <!-- Drawer trigger -->
+            <sgds-button variant="outline" id="drawer-trigger">Open Drawer</sgds-button>
+          </div>
+
+          <!-- Dropdown -->
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:mb-layout-sm">
+            <sgds-dropdown>
+              <sgds-button slot="toggler" variant="outline">Dropdown</sgds-button>
+              <sgds-dropdown-item><a href="#">Action 1</a></sgds-dropdown-item>
+              <sgds-dropdown-item><a href="#">Action 2</a></sgds-dropdown-item>
+              <sgds-dropdown-item><a href="#">Action 3</a></sgds-dropdown-item>
+            </sgds-dropdown>
+
+            <!-- Overflow Menu -->
+            <sgds-overflow-menu>
+              <sgds-dropdown-item><a href="#">Menu Item 1</a></sgds-dropdown-item>
+              <sgds-dropdown-item><a href="#">Menu Item 2</a></sgds-dropdown-item>
+              <sgds-dropdown-item><a href="#">Menu Item 3</a></sgds-dropdown-item>
+            </sgds-overflow-menu>
+          </div>
+
+          <!-- Tooltip -->
+          <div class="sgds:flex sgds:flex-wrap sgds:gap-component-sm sgds:mb-layout-sm">
+            <sgds-tooltip content="This is a tooltip">
+              <sgds-button variant="outline" tone="neutral">Hover for Tooltip</sgds-button>
+            </sgds-tooltip>
+          </div>
+
+          <!-- Icon List — All sizes -->
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Icon List (small)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-icon-list size="sm">
+              <sgds-icon-list-item>
+                <sgds-icon name="check-circle-fill" slot="icon"></sgds-icon>
+                Small icon list item
+              </sgds-icon-list-item>
+              <sgds-icon-list-item>
+                <sgds-icon name="check-circle-fill" slot="icon"></sgds-icon>
+                Another small item
+              </sgds-icon-list-item>
+            </sgds-icon-list>
+          </div>
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Icon List (medium)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-icon-list size="md">
+              <sgds-icon-list-item>
+                <sgds-icon name="check-circle-fill" slot="icon"></sgds-icon>
+                Medium icon list item
+              </sgds-icon-list-item>
+              <sgds-icon-list-item>
+                <sgds-icon name="check-circle-fill" slot="icon"></sgds-icon>
+                Another medium item
+              </sgds-icon-list-item>
+            </sgds-icon-list>
+          </div>
+          <h3 class="sgds:text-heading-sm sgds:font-semibold sgds:mb-text-sm">Icon List (large)</h3>
+          <div class="sgds:mb-layout-sm">
+            <sgds-icon-list size="lg">
+              <sgds-icon-list-item>
+                <sgds-icon name="check-circle-fill" slot="icon"></sgds-icon>
+                Large icon list item
+              </sgds-icon-list-item>
+              <sgds-icon-list-item>
+                <sgds-icon name="check-circle-fill" slot="icon"></sgds-icon>
+                Another large item
+              </sgds-icon-list-item>
+            </sgds-icon-list>
+          </div>
+
+          <!-- Table of Contents -->
+          <div class="sgds:mb-layout-sm">
+            <sgds-table-of-contents>
+              <sgds-table-of-contents-item><a href="#overview">Overview</a></sgds-table-of-contents-item>
+              <sgds-table-of-contents-item><a href="#buttons">Buttons</a></sgds-table-of-contents-item>
+              <sgds-table-of-contents-item><a href="#forms">Forms</a></sgds-table-of-contents-item>
+              <sgds-table-of-contents-item><a href="#feedback">Feedback</a></sgds-table-of-contents-item>
+              <sgds-table-of-contents-item><a href="#navigation">Navigation</a></sgds-table-of-contents-item>
+            </sgds-table-of-contents>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Footer -->
+      <sgds-footer contacthref="#" feedbackhref="#" faqhref="#" privacyhref="#" termsofusehref="#">
+        <h3 slot="title">Theming Playground</h3>
+        <p slot="description">A demonstration of all SGDS web components for theming and visual testing.</p>
+        <sgds-footer-item slot="items">
+          <div slot="title">Resources</div>
+          <sgds-link><a href="#">Documentation</a></sgds-link>
+          <sgds-link><a href="#">Getting Started</a></sgds-link>
+          <sgds-link><a href="#">Component Library</a></sgds-link>
+        </sgds-footer-item>
+        <sgds-footer-item slot="items">
+          <div slot="title">Community</div>
+          <sgds-link><a href="#">GitHub</a></sgds-link>
+          <sgds-link><a href="#">Discussions</a></sgds-link>
+          <sgds-link><a href="#">Changelog</a></sgds-link>
+        </sgds-footer-item>
+        <sgds-footer-item slot="items">
+          <div slot="title">Support</div>
+          <sgds-link><a href="#">Report a Bug</a></sgds-link>
+          <sgds-link><a href="#">Feature Request</a></sgds-link>
+          <sgds-link><a href="#">FAQ</a></sgds-link>
+        </sgds-footer-item>
+      </sgds-footer>
+    </main>
+
+  </div>
+
+  <!-- Drawer (placed at body level for proper overlay) -->
+  <sgds-drawer id="demo-drawer" size="md" placement="end" ariaLabel="Demo Drawer">
+    <h4 slot="title">Drawer Title</h4>
+    <p slot="description">A side panel for additional content.</p>
+    <p>This is a drawer panel that slides in from the side. It can contain forms, details, or any supplementary content.</p>
+    <div slot="footer">
+      <sgds-button variant="primary" id="drawer-close-btn">Close</sgds-button>
+    </div>
+  </sgds-drawer>
+
+</body>
+
+<script>
+  // Footer year
+  document.getElementById("footer-year").textContent = new Date().getFullYear();
+
+  // Theme toggle
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+    document.documentElement.classList.toggle("sgds-theme-night");
+  });
+
+  // Modal trigger
+  document.getElementById("modal-trigger").addEventListener("click", () => {
+    document.getElementById("demo-modal").show();
+  });
+
+  // Drawer trigger
+  document.getElementById("drawer-trigger").addEventListener("click", () => {
+    document.getElementById("demo-drawer").show();
+  });
+  document.getElementById("drawer-close-btn").addEventListener("click", () => {
+    document.getElementById("demo-drawer").hide();
+  });
+
+  // Toast trigger
+  document.getElementById("toast-trigger").addEventListener("click", () => {
+    document.getElementById("demo-toast").show();
+  });
+</script>
