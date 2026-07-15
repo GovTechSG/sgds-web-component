@@ -1,0 +1,73 @@
+.tile {
+  position: relative;
+  padding: var(--sgds-padding-xl);
+  background-color: var(--sgds-surface-default);
+  border: var(--sgds-border-width-1, 1px) solid var(--sgds-border-color-muted, #DFDFDF);
+  border-radius: var(--sgds-border-radius-md);
+  cursor: pointer;
+}
+
+.tile:hover,
+.tile:focus,
+.tile:focus-within {
+  border: var(--sgds-border-width-2, 2px) solid var(--sgds-border-color-emphasis, #3B3B3B);
+  box-shadow: 0 0 2px 0 rgba(14, 14, 14, 0.16), 0 8px 16px 0 rgba(14, 14, 14, 0.08);
+}
+
+.tile.checked {
+  border: var(--sgds-border-width-2, 2px) solid var(--sgds-primary-border-color-default, #8055BB);
+}
+
+.tile.disabled {
+  opacity: var(--sgds-opacity-40);
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+sgds-checkbox,
+sgds-radio {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  --sgds-form-gap-md: 0;
+  --sgds-form-padding-inline-sm: 0;
+}
+
+.tile-container {
+  display: flex;
+  flex-direction: row;
+  gap: var(--sgds-gap-md);
+  padding-right: var(--sgds-padding-2-xl);
+}
+
+.tile-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sgds-text-gap-2-xs);
+}
+
+.tile-text ::slotted([slot="title"]) {
+  overflow: hidden;
+  color: var(--sgds-color-default, #1A1A1A);
+  font-feature-settings: 'liga' off, 'clig' off;
+  text-overflow: ellipsis;
+  font-family: var(--sgds-font-family-brand, Inter);
+  font-size: var(--sgds-font-size-subtitle-sm, 16px);
+  font-style: normal;
+  font-weight: var(--sgds-font-weight-semibold, 600);
+  line-height: var(--sgds-line-height-2-xs, 20px);
+  letter-spacing: var(--sgds-letter-spacing-normal, 0);
+}
+
+.tile-text ::slotted([slot="description"]) {
+  overflow: hidden;
+  color: var(--sgds-color-subtle, #525252);
+  font-feature-settings: 'liga' off, 'clig' off;
+  text-overflow: ellipsis;
+  font-family: var(--sgds-font-family-brand, Inter);
+  font-size: var(--sgds-font-size-body-sm, 14px);
+  font-style: normal;
+  font-weight: var(--sgds-font-weight-regular, 400);
+  line-height: var(--sgds-line-height-2-xs, 20px);
+  letter-spacing: var(--sgds-letter-spacing-normal, 0);
+}

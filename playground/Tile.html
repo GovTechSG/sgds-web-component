@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/utility.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="sgds-container">
+      <h2>Tile - Default (no variant)</h2>
+      <div class="sgds:flex sgds:flex-col sgds:gap-md">
+        <sgds-tile>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Tile Title</span>
+          <span slot="description">This is a description for the tile component.</span>
+        </sgds-tile>
+        <sgds-tile disabled>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Disabled Tile</span>
+          <span slot="description">This tile is disabled.</span>
+        </sgds-tile>
+      </div>
+
+      <br />
+
+      <h2>Tile - Checkbox variant</h2>
+      <div class="sgds:flex sgds:flex-col sgds:gap-md">
+        <sgds-tile variant="checkbox">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Checkbox Tile</span>
+          <span slot="description">Tile with a checkbox in the top-right corner.</span>
+        </sgds-tile>
+        <sgds-tile variant="checkbox" checked>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Checked Checkbox Tile</span>
+          <span slot="description">Pre-checked on initial load.</span>
+        </sgds-tile>
+        <sgds-tile variant="checkbox" disabled>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Disabled Checkbox Tile</span>
+          <span slot="description">Disabled tile with checkbox.</span>
+        </sgds-tile>
+      </div>
+
+      <br />
+
+      <h2>Tile - Radio variant</h2>
+      <div class="sgds:flex sgds:flex-col sgds:gap-md">
+        <sgds-tile variant="radio">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Radio Tile</span>
+          <span slot="description">Tile with a radio in the top-right corner.</span>
+        </sgds-tile>
+        <sgds-tile variant="radio" checked>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Checked Radio Tile</span>
+          <span slot="description">Pre-checked on initial load.</span>
+        </sgds-tile>
+        <sgds-tile variant="radio" disabled>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Disabled Radio Tile</span>
+          <span slot="description">Disabled tile with radio.</span>
+        </sgds-tile>
+      </div>
+    </div>
+  </body>
+</html>

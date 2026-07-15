@@ -520,6 +520,24 @@ describe("<sgds-checkbox>", () => {
 
     expect(checkbox?.getAttribute("indeterminate")).to.not.exist;
   });
+
+  it("hides label and removes gap when no label content is slotted", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
+    await el.updateComplete;
+
+    const label = el.shadowRoot!.querySelector(".form-check-label") as HTMLElement;
+    expect(label).to.exist;
+    expect(getComputedStyle(label).display).to.equal("none");
+  });
+
+  it("shows label when content is slotted", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox>My label</sgds-checkbox>`);
+    await el.updateComplete;
+
+    const label = el.shadowRoot!.querySelector(".form-check-label") as HTMLElement;
+    expect(label).to.exist;
+    expect(getComputedStyle(label).display).to.not.equal("none");
+  });
 });
 
 describe("sgds-checkbox-group", () => {

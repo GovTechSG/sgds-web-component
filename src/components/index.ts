@@ -67,4 +67,5 @@ export * from "./ThumbnailCard/sgds-thumbnail-card";
 export * from "./Toast/sgds-toast";
 export * from "./Toast/sgds-toast-container";
 export * from "./Tooltip/sgds-tooltip";
+export * from "./Tile/sgds-tile";
 // COMPONENT EXPORTS
