@@ -6,11 +6,11 @@
 }
 
 .sidebar-item.active,
-.sidebar-item:hover {
+.sidebar-item:hover,
+.sidebar-item:focus-visible {
   background-color: var(--sgds-bg-translucent-subtle);
 }
 
-.sidebar-item:focus,
 .sidebar-item:focus-visible {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
