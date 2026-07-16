@@ -32,12 +32,12 @@ svg {
 }
 
 .page-link:not(.ellipsis):hover,
-.page-link:focus {
+.page-link:not(.ellipsis):focus-visible {
   color: var(--sgds-primary-color-default);
   background-color: var(--sgds-primary-surface-translucent);
 }
 
-.page-link:focus-visible {
+.page-link:not(.ellipsis):focus-visible {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }
