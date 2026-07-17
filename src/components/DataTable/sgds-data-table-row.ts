@@ -1,5 +1,5 @@
 import { html, nothing } from "lit";
-import { property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "../../base/sgds-element";
 import { SgdsCheckbox } from "../Checkbox/sgds-checkbox";
@@ -64,10 +64,9 @@ export class SgdsDataTableRow extends SgdsElement {
   /** @internal */
   @query("sgds-checkbox") private _checkboxEl!: SgdsCheckbox;
 
-  @queryAssignedElements({ flatten: true })
-  private _assignedCells!: Array<SgdsDataTableCell | SgdsDataTableHead>;
-
   @state() private _isHeaderRow = false;
+  private _cellSlotNames = new WeakMap<SgdsDataTableCell | SgdsDataTableHead, string>();
+  private _lightDomObserver?: MutationObserver;
 
   /** The checkbox rendered inside this row, if `showCheckbox` is true. */
   get checkbox(): SgdsCheckbox | null {
@@ -76,6 +75,14 @@ export class SgdsDataTableRow extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this._lightDomObserver = new MutationObserver(() => this._handleLightDomChange());
+    this._lightDomObserver.observe(this, { childList: true });
+    this._handleLightDomChange();
+  }
+
+  disconnectedCallback() {
+    this._lightDomObserver?.disconnect();
+    super.disconnectedCallback();
   }
 
   firstUpdated() {
@@ -140,8 +147,34 @@ export class SgdsDataTableRow extends SgdsElement {
     return waitForEvent(this, "sgds-after-hide");
   }
 
-  private _onSlotChange() {
-    const cells = this._assignedCells ?? [];
+  /** @internal — returns visible text content for a body cell by visual column index. */
+  public getCellText(columnIndex: number) {
+    const cells = this._getCells().filter(cell => cell instanceof SgdsDataTableCell) as SgdsDataTableCell[];
+    const cell = cells[columnIndex];
+    if (!cell) return "";
+    return (cell.textContent ?? "").trim();
+  }
+
+  private _getCells() {
+    return Array.from(this.children).filter(
+      child => child instanceof SgdsDataTableCell || child instanceof SgdsDataTableHead
+    ) as Array<SgdsDataTableCell | SgdsDataTableHead>;
+  }
+
+  private _syncCellSlots(cells: Array<SgdsDataTableCell | SgdsDataTableHead>) {
+    cells.forEach(cell => {
+      const index = cells.indexOf(cell);
+      const slotName = `cell-${index}`;
+      this._cellSlotNames.set(cell, slotName);
+      if (cell.getAttribute("slot") !== slotName) {
+        cell.setAttribute("slot", slotName);
+      }
+    });
+  }
+
+  private _handleLightDomChange() {
+    const cells = this._getCells();
+    this._syncCellSlots(cells);
     this._isHeaderRow = cells.some(cell => cell instanceof SgdsDataTableHead);
     this.requestUpdate();
   }
@@ -167,7 +200,7 @@ export class SgdsDataTableRow extends SgdsElement {
   }
 
   private _renderCell(el: SgdsDataTableCell | SgdsDataTableHead, columnIndex: number) {
-    const children = Array.from(el.childNodes).map(n => n.cloneNode(true));
+    const slotName = this._cellSlotNames.get(el);
 
     if (el instanceof SgdsDataTableHead) {
       return html`<th
@@ -182,7 +215,7 @@ export class SgdsDataTableRow extends SgdsElement {
         @keydown=${el.sorting ? (e: KeyboardEvent) => this._onSortKeyDown(e, el) : nothing}
       >
         <div class="data-table-head ${el.textAlign === "right" ? "align-right" : "align-left"}">
-          ${children}
+          ${slotName ? html`<slot name=${slotName}></slot>` : nothing}
           ${el.sorting
             ? html`
                 <button
@@ -205,7 +238,9 @@ export class SgdsDataTableRow extends SgdsElement {
 
     const cellAlignment = this.columnAlignments[columnIndex] ?? "left";
     return html`<td colspan=${ifDefined(el.colspan)} rowspan=${ifDefined(el.rowspan)}>
-      <div class="data-table-cell ${cellAlignment === "right" ? "align-right" : "align-left"}">${children}</div>
+      <div class="data-table-cell ${cellAlignment === "right" ? "align-right" : "align-left"}">
+        ${slotName ? html`<slot name=${slotName}></slot>` : nothing}
+      </div>
     </td>`;
   }
 
@@ -239,20 +274,13 @@ export class SgdsDataTableRow extends SgdsElement {
         </td>`;
   }
 
-  private _renderHiddenSlotCell() {
-    return this._isHeaderRow
-      ? html`<th hidden style="display:none"><slot @slotchange=${this._onSlotChange}></slot></th>`
-      : html`<td hidden style="display:none"><slot @slotchange=${this._onSlotChange}></slot></td>`;
-  }
-
   render() {
-    const cells = this._assignedCells ?? [];
+    const cells = this._getCells();
     const totalCols = cells.length + (this.showCheckbox ? 1 : 0) + (this.expand || this.showExpandPlaceholder ? 1 : 0);
     const rowPart = this._isHeaderRow ? "row row-header" : "row row-body";
 
     return html`
       <tr part=${rowPart} ?data-header-row=${this._isHeaderRow} class=${this.open ? "active" : ""}>
-        ${this._renderHiddenSlotCell()}
         ${this.expand
           ? this._renderExpandCell()
           : this.showExpandPlaceholder
