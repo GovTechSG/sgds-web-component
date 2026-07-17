@@ -52,6 +52,13 @@
   .badge-click-target {
     cursor: pointer;
   }
+
+  .controls-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 220px;
+  }
 </style>
 
 <div class="theme-toggle">
@@ -543,8 +550,7 @@
       <sgds-data-table-head width="170">Dropdown</sgds-data-table-head>
       <sgds-data-table-head width="120">Overflow</sgds-data-table-head>
       <sgds-data-table-head width="120">Button</sgds-data-table-head>
-      <sgds-data-table-head width="220">Combobox</sgds-data-table-head>
-      <sgds-data-table-head width="220">Input</sgds-data-table-head>
+      <sgds-data-table-head width="280">Controls (Combobox + Input)</sgds-data-table-head>
       <sgds-data-table-head width="180">Badges</sgds-data-table-head>
     </sgds-data-table-row>
 
@@ -571,14 +577,14 @@
         <sgds-button id="table-button-1" size="sm">Run</sgds-button>
       </sgds-data-table-cell>
       <sgds-data-table-cell>
-        <sgds-combo-box id="table-combobox-1" placeholder="Select" clearable>
-          <sgds-combo-box-option value="opt-a">Option A</sgds-combo-box-option>
-          <sgds-combo-box-option value="opt-b">Option B</sgds-combo-box-option>
-          <sgds-combo-box-option value="opt-c">Option C</sgds-combo-box-option>
-        </sgds-combo-box>
-      </sgds-data-table-cell>
-      <sgds-data-table-cell>
-        <sgds-input id="table-input-1" placeholder="Type and blur"></sgds-input>
+        <div class="controls-stack">
+          <sgds-combo-box id="table-combobox-1" placeholder="Select" clearable>
+            <sgds-combo-box-option value="opt-a">Option A</sgds-combo-box-option>
+            <sgds-combo-box-option value="opt-b">Option B</sgds-combo-box-option>
+            <sgds-combo-box-option value="opt-c">Option C</sgds-combo-box-option>
+          </sgds-combo-box>
+          <sgds-input id="table-input-1" placeholder="Type and blur"></sgds-input>
+        </div>
       </sgds-data-table-cell>
       <sgds-data-table-cell>
         <div class="cell-inline" id="table-badges-1">
@@ -610,14 +616,14 @@
         <sgds-button id="table-button-2" size="sm" variant="outline">Retry</sgds-button>
       </sgds-data-table-cell>
       <sgds-data-table-cell>
-        <sgds-combo-box id="table-combobox-2" placeholder="Choose" clearable>
-          <sgds-combo-box-option value="p1">Priority 1</sgds-combo-box-option>
-          <sgds-combo-box-option value="p2">Priority 2</sgds-combo-box-option>
-          <sgds-combo-box-option value="p3">Priority 3</sgds-combo-box-option>
-        </sgds-combo-box>
-      </sgds-data-table-cell>
-      <sgds-data-table-cell>
-        <sgds-input id="table-input-2" value="Editable"></sgds-input>
+        <div class="controls-stack">
+          <sgds-combo-box id="table-combobox-2" placeholder="Choose" clearable>
+            <sgds-combo-box-option value="p1">Priority 1</sgds-combo-box-option>
+            <sgds-combo-box-option value="p2">Priority 2</sgds-combo-box-option>
+            <sgds-combo-box-option value="p3">Priority 3</sgds-combo-box-option>
+          </sgds-combo-box>
+          <sgds-input id="table-input-2" value="Editable"></sgds-input>
+        </div>
       </sgds-data-table-cell>
       <sgds-data-table-cell>
         <div class="cell-inline" id="table-badges-2">
