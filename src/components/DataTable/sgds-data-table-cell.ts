@@ -1,4 +1,4 @@
-import { nothing } from "lit";
+import { css, html } from "lit";
 import SgdsElement from "../../base/sgds-element";
 import { property } from "lit/decorators.js";
 
@@ -8,6 +8,15 @@ import { property } from "lit/decorators.js";
  * @slot default - Content to display inside the cell.
  */
 export class SgdsDataTableCell extends SgdsElement {
+  static styles = [
+    ...SgdsElement.styles,
+    css`
+      :host {
+        display: contents;
+      }
+    `
+  ];
+
   /** Number of columns this cell spans. */
   @property({ type: Number, reflect: true }) colspan: number | undefined;
 
@@ -15,7 +24,7 @@ export class SgdsDataTableCell extends SgdsElement {
   @property({ type: Number, reflect: true }) rowspan: number | undefined;
 
   render() {
-    return nothing;
+    return html`<slot></slot>`;
   }
 }
 
