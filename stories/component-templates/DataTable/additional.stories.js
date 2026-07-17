@@ -97,14 +97,78 @@ const ExpandableRowsTemplate = () => html`
       <sgds-data-table-cell>John</sgds-data-table-cell>
       <sgds-data-table-cell>Doe</sgds-data-table-cell>
       <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
-      <div slot="content">Department: Engineering · Join date: 01 Jan 2022 · Status: Active</div>
+      <div slot="content">
+        <div style="border-radius: var(--sgds-border-radius-sm);">
+          <sgds-table>
+            <sgds-table-row>
+              <sgds-table-head>Case ID</sgds-table-head>
+              <sgds-table-head>Owner</sgds-table-head>
+              <sgds-table-head>Category</sgds-table-head>
+              <sgds-table-head>Amount</sgds-table-head>
+              <sgds-table-head>Status</sgds-table-head>
+            </sgds-table-row>
+
+            <sgds-table-row>
+              <sgds-table-cell>OPS-2026-001</sgds-table-cell>
+              <sgds-table-cell>Amy Tan</sgds-table-cell>
+              <sgds-table-cell><sgds-badge variant="info" outlined>Operations</sgds-badge></sgds-table-cell>
+              <sgds-table-cell>12,450.00</sgds-table-cell>
+              <sgds-table-cell><sgds-badge variant="warning" outlined>Review</sgds-badge></sgds-table-cell>
+            </sgds-table-row>
+
+            <sgds-table-row>
+              <sgds-table-cell>FIN-2026-014</sgds-table-cell>
+              <sgds-table-cell>Ben Ho</sgds-table-cell>
+              <sgds-table-cell><sgds-badge variant="purple" outlined>Finance</sgds-badge></sgds-table-cell>
+              <sgds-table-cell>3,180.00</sgds-table-cell>
+              <sgds-table-cell><sgds-badge variant="success" outlined>Approved</sgds-badge></sgds-table-cell>
+            </sgds-table-row>
+
+            <sgds-table-row>
+              <sgds-table-cell>SEC-2026-007</sgds-table-cell>
+              <sgds-table-cell>Cara Lim</sgds-table-cell>
+              <sgds-table-cell><sgds-badge variant="danger" outlined>Security</sgds-badge></sgds-table-cell>
+              <sgds-table-cell>28,900.00</sgds-table-cell>
+              <sgds-table-cell><sgds-badge variant="danger" outlined>Escalated</sgds-badge></sgds-table-cell>
+            </sgds-table-row>
+          </sgds-table>
+        </div>
+      </div>
     </sgds-data-table-row>
     <sgds-data-table-row .expand=${true}>
       <sgds-data-table-cell>2</sgds-data-table-cell>
       <sgds-data-table-cell>Jane</sgds-data-table-cell>
       <sgds-data-table-cell>Doe</sgds-data-table-cell>
       <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
-      <div slot="content">Department: Design · Join date: 15 Mar 2023 · Status: Active</div>
+      <div slot="content">
+        <div style="border-radius: var(--sgds-border-radius-sm);">
+          <sgds-table>
+            <sgds-table-row>
+              <sgds-table-head>Case ID</sgds-table-head>
+              <sgds-table-head>Owner</sgds-table-head>
+              <sgds-table-head>Category</sgds-table-head>
+              <sgds-table-head>Amount</sgds-table-head>
+              <sgds-table-head>Status</sgds-table-head>
+            </sgds-table-row>
+
+            <sgds-table-row>
+              <sgds-table-cell>OPS-2026-019</sgds-table-cell>
+              <sgds-table-cell>Faye Low</sgds-table-cell>
+              <sgds-table-cell><sgds-badge variant="info" outlined>Design</sgds-badge></sgds-table-cell>
+              <sgds-table-cell>4,560.00</sgds-table-cell>
+              <sgds-table-cell><sgds-badge variant="warning" outlined>In Review</sgds-badge></sgds-table-cell>
+            </sgds-table-row>
+
+            <sgds-table-row>
+              <sgds-table-cell>OPS-2026-021</sgds-table-cell>
+              <sgds-table-cell>Glen Neo</sgds-table-cell>
+              <sgds-table-cell><sgds-badge variant="primary" outlined>Operations</sgds-badge></sgds-table-cell>
+              <sgds-table-cell>2,330.00</sgds-table-cell>
+              <sgds-table-cell><sgds-badge variant="success" outlined>Completed</sgds-badge></sgds-table-cell>
+            </sgds-table-row>
+          </sgds-table>
+        </div>
+      </div>
     </sgds-data-table-row>
     <sgds-data-table-row>
       <sgds-data-table-cell>3</sgds-data-table-cell>
@@ -128,7 +192,9 @@ const ExpandableMultiSelectTemplate = () => html`
       <sgds-data-table-cell>John</sgds-data-table-cell>
       <sgds-data-table-cell>Doe</sgds-data-table-cell>
       <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
-      <div slot="content">Department: Engineering</div>
+      <div slot="content">
+        <div style="border-radius: var(--sgds-border-radius-sm);">Department: Engineering</div>
+      </div>
     </sgds-data-table-row>
     <sgds-data-table-row>
       <sgds-data-table-cell>2</sgds-data-table-cell>
@@ -199,10 +265,10 @@ const HideFooterTemplate = () => html`
 const HeaderAndCellPropsTemplate = () => html`
   <sgds-data-table layout="fixed" .currentPage=${1} .dataLength=${4} .itemsPerPage=${4}>
     <sgds-data-table-row>
-      <sgds-data-table-head width="88">ID</sgds-data-table-head>
+      <sgds-data-table-head>ID</sgds-data-table-head>
       <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
       <sgds-data-table-head>Role</sgds-data-table-head>
-      <sgds-data-table-head sorting sortKey="score" width="120" textAlign="right">Score</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="score" textAlign="right">Score</sgds-data-table-head>
     </sgds-data-table-row>
     <sgds-data-table-row>
       <sgds-data-table-cell>1</sgds-data-table-cell>

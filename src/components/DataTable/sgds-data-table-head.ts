@@ -1,4 +1,4 @@
-import { nothing } from "lit";
+import { css, html } from "lit";
 import SgdsElement from "../../base/sgds-element";
 import { property } from "lit/decorators.js";
 
@@ -9,6 +9,15 @@ import { property } from "lit/decorators.js";
  *
  */
 export class SgdsDataTableHead extends SgdsElement {
+  static styles = [
+    ...SgdsElement.styles,
+    css`
+      :host {
+        display: contents;
+      }
+    `
+  ];
+
   /** Sets the column width. */
   @property({ type: String, reflect: true }) width: string | undefined;
 
@@ -43,7 +52,7 @@ export class SgdsDataTableHead extends SgdsElement {
   }
 
   render() {
-    return nothing;
+    return html`<slot></slot>`;
   }
 }
 
