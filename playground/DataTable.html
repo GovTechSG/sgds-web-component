@@ -28,6 +28,30 @@
   .container h3 {
     margin-bottom: 12px;
   }
+
+  .event-log {
+    margin-top: 12px;
+    border: 1px solid var(--sgds-border-color-default);
+    border-radius: 8px;
+    background: var(--sgds-bg-subtle);
+    padding: 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    max-height: 220px;
+    overflow: auto;
+    white-space: pre-wrap;
+  }
+
+  .cell-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .badge-click-target {
+    cursor: pointer;
+  }
 </style>
 
 <div class="theme-toggle">
@@ -510,6 +534,103 @@
   </sgds-data-table>
 </div>
 
+<!-- Interactive slotted controls demo -->
+<div class="container">
+  <h3>Interactive Slotted Content (Event Hooks)</h3>
+  <sgds-data-table id="interactive-table" currentPage="1" dataLength="2" itemsPerPage="5" layout="fixed">
+    <sgds-data-table-row>
+      <sgds-data-table-head width="80">ID</sgds-data-table-head>
+      <sgds-data-table-head width="170">Dropdown</sgds-data-table-head>
+      <sgds-data-table-head width="120">Overflow</sgds-data-table-head>
+      <sgds-data-table-head width="120">Button</sgds-data-table-head>
+      <sgds-data-table-head width="220">Combobox</sgds-data-table-head>
+      <sgds-data-table-head width="220">Input</sgds-data-table-head>
+      <sgds-data-table-head width="180">Badges</sgds-data-table-head>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <sgds-dropdown id="table-dropdown-1">
+          <sgds-button slot="toggler" variant="secondary" size="sm">
+            Action
+            <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+          </sgds-button>
+          <sgds-dropdown-item><a href="#" data-action="open">Open</a></sgds-dropdown-item>
+          <sgds-dropdown-item><a href="#" data-action="archive">Archive</a></sgds-dropdown-item>
+        </sgds-dropdown>
+      </sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <sgds-overflow-menu id="table-overflow-1" size="sm">
+          <sgds-dropdown-item>View</sgds-dropdown-item>
+          <sgds-dropdown-item>Edit</sgds-dropdown-item>
+          <sgds-dropdown-item>Delete</sgds-dropdown-item>
+        </sgds-overflow-menu>
+      </sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <sgds-button id="table-button-1" size="sm">Run</sgds-button>
+      </sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <sgds-combo-box id="table-combobox-1" placeholder="Select" clearable>
+          <sgds-combo-box-option value="opt-a">Option A</sgds-combo-box-option>
+          <sgds-combo-box-option value="opt-b">Option B</sgds-combo-box-option>
+          <sgds-combo-box-option value="opt-c">Option C</sgds-combo-box-option>
+        </sgds-combo-box>
+      </sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <sgds-input id="table-input-1" placeholder="Type and blur"></sgds-input>
+      </sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <div class="cell-inline" id="table-badges-1">
+          <sgds-badge class="badge-click-target" variant="primary" outlined>New</sgds-badge>
+          <sgds-badge class="badge-click-target" variant="success" outlined>Synced</sgds-badge>
+        </div>
+      </sgds-data-table-cell>
+    </sgds-data-table-row>
+
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <sgds-dropdown id="table-dropdown-2">
+          <sgds-button slot="toggler" variant="secondary" size="sm">
+            Action
+            <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+          </sgds-button>
+          <sgds-dropdown-item><a href="#" data-action="approve">Approve</a></sgds-dropdown-item>
+          <sgds-dropdown-item><a href="#" data-action="reject">Reject</a></sgds-dropdown-item>
+        </sgds-dropdown>
+      </sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <sgds-overflow-menu id="table-overflow-2" size="sm">
+          <sgds-dropdown-item>Copy</sgds-dropdown-item>
+          <sgds-dropdown-item>Export</sgds-dropdown-item>
+        </sgds-overflow-menu>
+      </sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <sgds-button id="table-button-2" size="sm" variant="outline">Retry</sgds-button>
+      </sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <sgds-combo-box id="table-combobox-2" placeholder="Choose" clearable>
+          <sgds-combo-box-option value="p1">Priority 1</sgds-combo-box-option>
+          <sgds-combo-box-option value="p2">Priority 2</sgds-combo-box-option>
+          <sgds-combo-box-option value="p3">Priority 3</sgds-combo-box-option>
+        </sgds-combo-box>
+      </sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <sgds-input id="table-input-2" value="Editable"></sgds-input>
+      </sgds-data-table-cell>
+      <sgds-data-table-cell>
+        <div class="cell-inline" id="table-badges-2">
+          <sgds-badge class="badge-click-target" variant="warning" outlined>Review</sgds-badge>
+          <sgds-badge class="badge-click-target" variant="danger" outlined>Alert</sgds-badge>
+        </div>
+      </sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+
+  <div id="interactive-event-log" class="event-log">Event log ready.</div>
+</div>
+
 <script type="module">
   const nightModeToggle = document.getElementById("night-mode-toggle");
 
@@ -630,13 +751,132 @@
   };
 
   serverTable.addEventListener("sgds-page-change", async () => {
+    console.log("[DataTable playground] server-table sgds-page-change", {
+      currentPage: Number(serverTable.currentPage || 1)
+    });
     await loadServerPage(Number(serverTable.currentPage || 1));
   });
 
   serverTable.addEventListener("sgds-sort", async event => {
+    console.log("[DataTable playground] server-table sgds-sort", {
+      key: event.detail.key,
+      direction: event.detail.direction,
+      currentPage: Number(serverTable.currentPage || 1)
+    });
     serverSort.key = event.detail.key;
     serverSort.direction = event.detail.direction;
     await loadServerPage(Number(serverTable.currentPage || 1));
+  });
+
+  const eventLog = document.getElementById("interactive-event-log");
+  const safeStringify = value => {
+    const seen = new WeakSet();
+
+    return JSON.stringify(value, (_key, currentValue) => {
+      if (typeof currentValue === "object" && currentValue !== null) {
+        if (seen.has(currentValue)) return "[Circular]";
+        seen.add(currentValue);
+
+        if (currentValue instanceof HTMLElement) {
+          return {
+            tagName: currentValue.tagName.toLowerCase(),
+            id: currentValue.id || undefined,
+            className: currentValue.className || undefined
+          };
+        }
+      }
+
+      if (typeof currentValue === "function") return "[Function]";
+      return currentValue;
+    });
+  };
+
+  const appendEventLog = (source, eventName, detail) => {
+    if (!eventLog) return;
+
+    const renderedDetail = detail ? safeStringify(detail) : "-";
+    const timestamp = new Date().toLocaleTimeString();
+    const nextLine = `[${timestamp}] ${source} :: ${eventName} :: ${renderedDetail}`;
+    const lines = eventLog.textContent ? eventLog.textContent.split("\n") : [];
+    lines.push(nextLine);
+    eventLog.textContent = lines.slice(-18).join("\n");
+    eventLog.scrollTop = eventLog.scrollHeight;
+  };
+
+  const bindLoggedEvent = (selector, eventName, source, mapDetail) => {
+    const element = document.querySelector(selector);
+    if (!element) return;
+    element.addEventListener(eventName, event => {
+      const detail = mapDetail ? mapDetail(event) : event.detail;
+      console.log("[DataTable playground] interactive event", {
+        source,
+        eventName,
+        detail,
+        target: event.target
+      });
+      appendEventLog(source, eventName, detail);
+    });
+  };
+
+  bindLoggedEvent("#table-dropdown-1", "sgds-select", "dropdown-1", event => ({
+    selectedText: event.target?.textContent?.trim() || ""
+  }));
+  bindLoggedEvent("#table-dropdown-2", "sgds-select", "dropdown-2", event => ({
+    selectedText: event.target?.textContent?.trim() || ""
+  }));
+
+  bindLoggedEvent("#table-overflow-1", "sgds-select", "overflow-1");
+  bindLoggedEvent("#table-overflow-2", "sgds-select", "overflow-2");
+
+  bindLoggedEvent("#table-button-1", "click", "button-1");
+  bindLoggedEvent("#table-button-2", "click", "button-2");
+
+  bindLoggedEvent("#table-combobox-1", "sgds-change", "combobox-1", event => ({
+    value: event.currentTarget?.value || ""
+  }));
+  bindLoggedEvent("#table-combobox-1", "sgds-select", "combobox-1", event => ({
+    value: event.currentTarget?.value || ""
+  }));
+  bindLoggedEvent("#table-combobox-2", "sgds-change", "combobox-2", event => ({
+    value: event.currentTarget?.value || ""
+  }));
+  bindLoggedEvent("#table-combobox-2", "sgds-select", "combobox-2", event => ({
+    value: event.currentTarget?.value || ""
+  }));
+
+  bindLoggedEvent("#table-input-1", "sgds-input", "input-1", event => ({
+    value: event.currentTarget?.value || ""
+  }));
+  bindLoggedEvent("#table-input-1", "sgds-change", "input-1", event => ({
+    value: event.currentTarget?.value || ""
+  }));
+  bindLoggedEvent("#table-input-2", "sgds-input", "input-2", event => ({
+    value: event.currentTarget?.value || ""
+  }));
+  bindLoggedEvent("#table-input-2", "sgds-change", "input-2", event => ({
+    value: event.currentTarget?.value || ""
+  }));
+
+  bindLoggedEvent("#table-badges-1", "click", "badges-1", event => ({
+    text: event.target?.textContent?.trim() || ""
+  }));
+  bindLoggedEvent("#table-badges-2", "click", "badges-2", event => ({
+    text: event.target?.textContent?.trim() || ""
+  }));
+
+  const interactiveTable = document.getElementById("interactive-table");
+  interactiveTable?.addEventListener("sgds-change", event => {
+    const sourceElement = event.target;
+    const detail = {
+      sourceTag: sourceElement?.tagName?.toLowerCase?.() || "unknown",
+      sourceId: sourceElement?.id || "",
+      value: sourceElement?.value,
+      checked: sourceElement?.checked,
+      detail: event.detail
+    };
+
+    console.log("[DataTable playground] interactive-table delegated sgds-change", detail);
+    appendEventLog("interactive-table", "sgds-change", detail);
   });
 
   loadServerPage(1);
