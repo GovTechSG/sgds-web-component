@@ -190,6 +190,9 @@ export class SgdsDataTable extends SgdsElement {
   }
 
   private _extractCellText(row: SgdsDataTableRow, columnIndex: number) {
+    const rowCellText = row.getCellText(columnIndex);
+    if (rowCellText) return rowCellText;
+
     const cells = Array.from(row.children).filter(child => child.tagName.toLowerCase() === "sgds-data-table-cell");
     const cell = cells[columnIndex];
     return (cell?.textContent || "").trim();
@@ -249,11 +252,14 @@ export class SgdsDataTable extends SgdsElement {
   }
 
   private _handleSort(e: Event) {
-    if (!(e.target instanceof SgdsDataTableHead) || !e.target.sorting) return;
+    const activeHeader = e.composedPath().find(node => node instanceof SgdsDataTableHead) as
+      | SgdsDataTableHead
+      | undefined;
+
+    if (!activeHeader || !activeHeader.sorting) return;
 
     const { key, direction } = (e as CustomEvent<{ key: string; direction: "ascending" | "descending" | "none" }>)
       .detail;
-    const activeHeader = e.target;
     const columnIndex = activeHeader ? this._headerCells.indexOf(activeHeader) : -1;
 
     this._resetOtherHeaderSortStates(activeHeader);
@@ -312,14 +318,22 @@ export class SgdsDataTable extends SgdsElement {
       .assignedElements({ flatten: true })
       .filter(el => el instanceof SgdsDataTableRow) as SgdsDataTableRow[];
 
+    const rowTableChildren = (row: SgdsDataTableRow) =>
+      Array.from(row.children).filter(child => {
+        const tagName = child.tagName.toLowerCase();
+        const isTableCell = tagName === "sgds-data-table-cell" || tagName === "sgds-data-table-head";
+        if (!isTableCell) return false;
+        return child.getAttribute("slot") !== "content";
+      });
+
     this.headerRows = slotted.filter(row =>
-      Array.from(row.children).some(child => child.tagName.toLowerCase() === "sgds-data-table-head")
+      rowTableChildren(row).some(child => child.tagName.toLowerCase() === "sgds-data-table-head")
     );
-    this.tableRows = slotted.filter(row =>
-      Array.from(row.children)
-        .filter(child => !child.hasAttribute("slot"))
-        .every(child => child.tagName.toLowerCase() === "sgds-data-table-cell")
-    );
+
+    this.tableRows = slotted.filter(row => {
+      const children = rowTableChildren(row);
+      return children.length > 0 && children.every(child => child.tagName.toLowerCase() === "sgds-data-table-cell");
+    });
 
     this._headerCells = this.headerRows.reduce<SgdsDataTableHead[]>((acc, row) => {
       const headers = Array.from(row.children).filter(
