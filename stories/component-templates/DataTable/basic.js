@@ -34,14 +34,24 @@ export const Template = args => html`
       <sgds-data-table-head .sorting=${false}>#</sgds-data-table-head>
       <sgds-data-table-head .sorting=${false}>Name</sgds-data-table-head>
       <sgds-data-table-head .sorting=${false}>Status</sgds-data-table-head>
-      <sgds-data-table-head .sorting=${false}>Action</sgds-data-table-head>
+      <sgds-data-table-head .sorting=${false}>Button (sm)</sgds-data-table-head>
+      <sgds-data-table-head .sorting=${false}>Overflow</sgds-data-table-head>
     </sgds-data-table-row>
     ${sampleRows.map(
       row => html`
         <sgds-data-table-row>
           <sgds-data-table-cell>${row.id}</sgds-data-table-cell>
           <sgds-data-table-cell>${row.name}</sgds-data-table-cell>
-          <sgds-data-table-cell>${row.status}</sgds-data-table-cell>
+          <sgds-data-table-cell>
+            ${row.status === "Active"
+              ? html`<sgds-badge variant="success" outlined>${row.status}</sgds-badge>`
+              : row.status === "Pending"
+              ? html`<sgds-badge variant="warning" outlined>${row.status}</sgds-badge>`
+              : html`<sgds-badge variant="neutral" outlined>${row.status}</sgds-badge>`}
+          </sgds-data-table-cell>
+          <sgds-data-table-cell>
+            <sgds-button size="sm" variant="outline">View</sgds-button>
+          </sgds-data-table-cell>
           <sgds-data-table-cell>
             <sgds-overflow-menu size="sm">
               <sgds-dropdown-item ariaLabel="View">View</sgds-dropdown-item>

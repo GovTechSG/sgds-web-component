@@ -5,6 +5,30 @@ import SgdsDataTableHead from "../../../src/components/DataTable/sgds-data-table
 import "../../sgds-web-component";
 
 describe("<sgds-data-table>", () => {
+  it("projects slotted table cells through named slots in row shadow DOM", async () => {
+    const el = await fixture<SgdsDataTable>(html`
+      <sgds-data-table dataLength="1" itemsPerPage="5" currentPage="1">
+        <sgds-data-table-row>
+          <sgds-data-table-head>Name</sgds-data-table-head>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>
+            <sgds-button size="sm">Action</sgds-button>
+          </sgds-data-table-cell>
+        </sgds-data-table-row>
+      </sgds-data-table>
+    `);
+    await elementUpdated(el);
+
+    const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
+    const bodyRow = slot.assignedElements({ flatten: true })[1] as HTMLElement;
+    const cellHost = bodyRow.querySelector("sgds-data-table-cell") as HTMLElement;
+    const projectedCellSlot = bodyRow.shadowRoot?.querySelector('slot[name="cell-0"]') as HTMLSlotElement;
+
+    expect(projectedCellSlot).to.exist;
+    expect(projectedCellSlot.assignedElements({ flatten: true })[0]).to.equal(cellHost);
+  });
+
   it("renders data rows and header row from slotted content", async () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table dataLength="2" itemsPerPage="5" currentPage="1">
