@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 :host([variant="info"]) slot[name="icon"]::slotted(*) {
   color: var(--sgds-primary-color-default);
 }
