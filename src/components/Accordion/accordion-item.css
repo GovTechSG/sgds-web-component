@@ -61,16 +61,10 @@
   background-color: var(--sgds-bg-translucent-subtle);
 }
 
-.accordion-btn:not(.disabled):focus,
 .accordion-btn:not(.disabled):focus-visible,
-.accordion-btn:not(:disabled):focus,
 .accordion-btn:not(:disabled):focus-visible {
   z-index: 3;
   background-color: var(--sgds-bg-translucent-subtle);
-}
-
-.accordion-btn:not(.disabled):focus-visible,
-.accordion-btn:not(:disabled):focus-visible {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }
@@ -86,8 +80,8 @@ slot[name="badge"]::slotted(*) {
 }
 
 .accordion-header__trailing {
-  margin-left:auto;
-  display:flex;
+  margin-left: auto;
+  display: flex;
   gap: var(--sgds-gap-md);
 }
 

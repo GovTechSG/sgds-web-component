@@ -26,6 +26,7 @@ export class SgdsSidebarItem extends SidebarElement {
         class=${classMap({
           "sidebar-item": true,
           "sidebar-item--collapsed": !this._isOverlay && this._sidebarCollapsed && this._childLevel === 1,
+          "sidebar-item-leaf": this._childLevel > 2,
           active: this._selected
         })}
         @click=${() => this._handleClick()}

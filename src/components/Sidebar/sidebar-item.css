@@ -6,11 +6,11 @@
 }
 
 .sidebar-item.active,
-.sidebar-item:hover {
+.sidebar-item:hover,
+.sidebar-item:focus-visible {
   background-color: var(--sgds-bg-translucent-subtle);
 }
 
-.sidebar-item:focus,
 .sidebar-item:focus-visible {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
@@ -39,7 +39,20 @@
 }
 
 .sidebar-item-label.offset {
+  color: var(--sgds-color-subtle);
   margin-left: var(--sgds-margin-2-xl);
+}
+
+.sidebar-item-leaf.active .sidebar-item-label.offset,
+.sidebar-item-leaf:hover .sidebar-item-label.offset,
+.sidebar-item-leaf:focus-visible .sidebar-item-label.offset {
+  color: var(--sgds-color-default);
+}
+
+.sidebar-item-leaf.active,
+.sidebar-item-leaf:hover,
+.sidebar-item-leaf:focus-visible {
+  background-color: var(--sgds-bg-translucent-subtle);
 }
 
 .sidebar-item-label-wrapper .sidebar-item.active {

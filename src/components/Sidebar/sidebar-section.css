@@ -15,12 +15,16 @@
   border-radius: var(--sgds-border-radius-md);
 }
 
-.sidebar-section-label:hover {
+.sidebar-section-label--collapsible {
+  cursor: pointer;
+}
+
+.sidebar-section-label--collapsible:hover,
+.sidebar-section-label--collapsible:focus-visible {
   color: var(--sgds-label-color-default);
 }
 
-.sidebar-section-label:focus,
-.sidebar-section-label:focus-visible {
+.sidebar-section-label--collapsible:focus-visible {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }

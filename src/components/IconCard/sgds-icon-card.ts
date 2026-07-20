@@ -53,11 +53,11 @@ export class SgdsIconCard extends CardElement {
 
     if (this._iconNode.length === 0) {
       if ((this.orientation === "vertical" && this._upperNode.length === 0) || this.orientation === "horizontal") {
-        const media = this.shadowRoot.querySelector(".card-media") as HTMLDivElement;
-        media.style.display = "none";
+        const media = this.shadowRoot?.querySelector(".card-media") as HTMLDivElement | undefined;
+        if (media) media.style.display = "none";
 
-        const body = this.shadowRoot.querySelector(".card-body") as HTMLDivElement;
-        if (this.noPadding) body.style.padding = "0px";
+        const body = this.shadowRoot?.querySelector(".card-body") as HTMLDivElement | undefined;
+        if (body && this.noPadding) body.style.padding = "0px";
       }
     }
 

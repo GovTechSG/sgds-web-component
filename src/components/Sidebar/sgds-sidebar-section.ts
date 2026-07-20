@@ -95,12 +95,15 @@ export class SgdsSidebarSection extends SidebarElement {
       >
         ${this.title !== ""
           ? html`<div
-              class="sidebar-section-label"
+              class=${classMap({
+                "sidebar-section-label": true,
+                "sidebar-section-label--collapsible": this.collapsible
+              })}
               role="button"
               @click=${this._handleClick}
               aria-expanded=${!this.collapsed}
               aria-disabled=${!this.collapsible}
-              tabindex="0"
+              tabindex=${this.collapsible ? 0 : -1}
             >
               <span>${this.title}</span>
               ${this.collapsible
