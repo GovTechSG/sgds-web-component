@@ -48,8 +48,8 @@ export class SgdsToast extends SgdsElement {
 
   /** @internal Used by toast-container to pause autohide on hover */
   private _autohideTimer: ReturnType<typeof setTimeout> | null = null;
-  private _autohideRemaining: number = 0;
-  private _autohideStart: number = 0;
+  private _autohideRemaining = 0;
+  private _autohideStart = 0;
 
   /** @internal Pause autohide countdown */
   pauseAutohide() {
@@ -162,7 +162,6 @@ export class SgdsToast extends SgdsElement {
                 { height: "0px", overflow: "hidden" }
               ],
               { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" }
-
             );
           }
         } else {

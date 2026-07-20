@@ -7,29 +7,45 @@
 <sgds-system-banner show></sgds-system-banner>
 <sgds-mainnav></sgds-mainnav>
 
-<sgds-toast dismissible show>
-  <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
-  This is a toast notifications
-</sgds-toast>
+<style>
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 2rem;
+  }
+</style>
 
-<sgds-toast-container>
-  <sgds-toast show>
-    <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
-    This is a toast notifications
-    <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
-  </sgds-toast>
-  <sgds-toast show>
-    <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
-    This is a toast notifications
-    <sgds-link slot="action" size="sm"><a href="#" target="_blank">Action</a></sgds-link>
-  </sgds-toast>
-  <sgds-toast dismissible show>
-    <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
-    This is a toast notifications This is a toast notifications his is a toast notifications his is a toast
-    notifications his is a toast notifications his is a toast notifications his is a toast notifications This is a toast
-    notifications This is a toast notifications his is a toast notifications his is a toast notifications his is a toast
-    notifications his is a toast notifications his is a toast notifications This is a toast notifications This is a
-    toast notifications his is a toast notifications his is a toast notifications his is a toast notifications his is a
-    toast notifications his is a toast notifications
-  </sgds-toast>
-</sgds-toast-container>
+<div class="container">
+  <sgds-button id="btn-top-center">Show Toast (top-center)</sgds-button>
+  <sgds-button id="btn-bottom-end">Show Toast (bottom-end)</sgds-button>
+</div>
+
+<script type="module">
+  import { toast } from "../src/components/Toast/index.ts";
+
+  let topCount = 0;
+  let bottomCount = 0;
+
+  document.getElementById("btn-top-center").addEventListener("click", () => {
+    topCount++;
+    toast({
+      title: `Top Toast #${topCount}`,
+      message: "This toast slides down from the top.",
+      variant: "neutral",
+      position: "top-center",
+      delay: 5000
+    });
+  });
+
+  document.getElementById("btn-bottom-end").addEventListener("click", () => {
+    bottomCount++;
+    toast({
+      title: `Bottom Toast #${bottomCount}`,
+      message: "This toast slides up from the bottom.",
+      variant: "success",
+      position: "bottom-end",
+      delay: 5000
+    });
+  });
+</script>

@@ -1,4 +1,4 @@
-##  Variants
+## Variants
 
 The default variant is `info`. Modify the `variant` prop to the intended value.
 
@@ -32,10 +32,9 @@ The default variant is `info`. Modify the `variant` prop to the intended value.
   <Story of={ToastStories.NeutralVariant} />
 </Canvas>
 
-
 ## Dismissible alerts
 
-Add `dismissible` prop to allow users to close the toast 
+Add `dismissible` prop to allow users to close the toast
 
 <Canvas of={ToastStories.Dismissible}>
   <Story of={ToastStories.Dismissible} />
@@ -45,7 +44,6 @@ Add `dismissible` prop to allow users to close the toast
 
 ToastContainers positions the toast with respect to the entire page. Adjust the `position` prop accordingly to render your toast at the correct placements
 Top position takes into consideration the height of masthead and mainnav.
-
 
 ### top-center
 
@@ -81,4 +79,12 @@ Top position takes into consideration the height of masthead and mainnav.
 
 <Canvas of={ToastStories.Stacking}>
   <Story of={ToastStories.Stacking} />
+</Canvas>
+
+## Imperative API
+
+Use the `toast()` function to programmatically create toasts without writing HTML. The container is auto-created per position, and toasts are automatically removed from the DOM after hiding.
+
+<Canvas of={ToastStories.Imperative}>
+  <Story of={ToastStories.Imperative} />
 </Canvas>

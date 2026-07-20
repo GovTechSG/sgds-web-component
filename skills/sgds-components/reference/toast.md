@@ -24,24 +24,59 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - `variant` sets the visual tone: `info` (default), `success`, `danger`, `warning`, or `neutral`.
 - `autohide` dismisses the toast automatically after `delay` milliseconds (default 5000); without `autohide` the toast persists until dismissed or hidden via JS.
 - `dismissible` renders a close button users can click to dismiss the toast manually.
-- Multiple `<sgds-toast>` elements inside one `<sgds-toast-container>` stack vertically — limit to 3–4 to avoid clutter.
+- Multiple toasts overlap as a card-deck stack (max 3 visible, older toasts scale down and peek behind). When a 4th toast appears, the oldest fades out automatically.
+- Hovering over the toast stack expands all toasts vertically with gaps so users can read/interact with each one. Autohide timers pause while hovered and resume on mouse leave.
+- Toasts animate in with a slide + fade (direction based on container position: top positions slide down, bottom positions slide up).
 - Events fire in sequence: `sgds-show` → `sgds-after-show` when showing; `sgds-hide` → `sgds-after-hide` when hiding.
 - `noAnimation` disables show/hide animations for reduced-motion contexts.
+
+## Imperative API (`toast()` function)
+
+For programmatic usage, import the `toast()` utility function. It auto-creates a container per position, creates the toast with the correct variant icon, shows it, and removes it from the DOM after hiding.
+
+```js
+import { toast } from "@govtechsg/sgds-web-component";
+
+toast({
+  title: "Success",
+  message: "Your changes have been saved.",
+  variant: "success",
+  position: "bottom-end",
+  delay: 5000,
+  dismissible: true
+});
+```
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `title` | string | *(required)* | Toast heading |
+| `message` | string | — | Toast body text |
+| `variant` | `info \| success \| danger \| warning \| neutral` | `"info"` | Visual style (icon auto-selected) |
+| `position` | ToastPosition | `"bottom-end"` | Where on screen to show the toast |
+| `autohide` | boolean | `true` | Auto-dismiss after delay |
+| `delay` | number | `5000` | Ms before auto-dismiss |
+| `dismissible` | boolean | `true` | Show close button |
+
+The `toast()` function returns the created `<sgds-toast>` element, which can be used to call `hideToast()` programmatically.
+
+Alternatively, call `container.toast(options)` directly on an existing `<sgds-toast-container>` element (same options except `position`).
 
 ## Advanced Considerations
 
 - **Always use `<sgds-toast-container>`**: `<sgds-toast>` must be placed inside `<sgds-toast-container>` — the container handles screen positioning and stacking.
 - **`title` is required for accessibility**: always set a meaningful `title` on every `<sgds-toast>` — it is the accessible heading of the notification.
-- **`show` attribute vs `showToast()` method**: use the `show` attribute for toasts that should be visible on initial render; use `showToast()` / `hideToast()` for dynamically triggered notifications (e.g. after a form submit).
+- **Declarative vs imperative**: use the `show` attribute and HTML templates for toasts visible on initial render; use the `toast()` function or `showToast()` / `hideToast()` methods for dynamically triggered notifications.
 - **Deprecated positions**: `top-start`, `middle-start`, `middle-center`, `middle-end` are deprecated since v3.7.1 — use only `top-center`, `top-end`, `bottom-start`, `bottom-center`, `bottom-end`.
-- **One container per position**: use a single `<sgds-toast-container>` per screen position — do not create multiple containers at the same position.
+- **One container per position**: use a single `<sgds-toast-container>` per screen position — the `toast()` function handles this automatically.
 - **Auto-dismiss timing**: `delay` only takes effect when `autohide` is also set — setting `delay` alone has no effect.
+- **Max 3 visible**: the container limits the visible stack to 3 toasts. Older toasts fade out when a 4th arrives.
 
 ## Edge Cases
 
-- **Multiple rapid toasts**: implement queueing or throttling in the host application to avoid flooding the UI with simultaneous toasts.
+- **Multiple rapid toasts**: the container handles rapid creation gracefully — max 3 visible, oldest fades out. No need for application-level queueing.
 - **Z-index conflicts**: ensure `<sgds-toast-container>` appears above modals, banners, and other overlays — check stacking context if toasts are hidden behind other elements.
-- **`sgds-after-hide` for DOM cleanup**: use `sgds-after-hide` (not `sgds-hide`) to remove the toast element from the DOM or reset state — `sgds-hide` fires before the animation completes, so the element is still visible at that point.
+- **DOM cleanup**: toasts created via `toast()` or `container.toast()` auto-remove from the DOM after hiding. Declarative toasts (in HTML templates) stay in the DOM — use `sgds-after-hide` to remove them manually if needed.
+- **Hover pauses autohide**: when a user hovers over the toast stack, all autohide timers pause and the stack expands for readability. Timers resume on mouse leave.
 
 ## Quick Decision Guide
 
@@ -60,10 +95,18 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - Bottom right → `position="bottom-end"` on `<sgds-toast-container>` (common default)
 - Use `"top-end"`, `"top-center"`, `"bottom-center"`, `"bottom-start"` etc.
 
-**Show/hide a toast via JS?** → Use `showToast()` / `hideToast()` methods
+**Show/hide a toast via JS?** → Use `toast()` function (preferred) or `showToast()` / `hideToast()` methods
+
+```js
+// Preferred: imperative toast() function (auto-creates container, auto-removes after hide)
+import { toast } from "@govtechsg/sgds-web-component";
+
+toast({ title: "Saved", message: "Your changes have been saved.", variant: "success", position: "bottom-end" });
+toast({ title: "Error", message: "Something went wrong.", variant: "danger", position: "bottom-end" });
+```
 
 ```html
-<!-- Basic toast (already shown) -->
+<!-- Declarative: basic toast (already shown) -->
 <sgds-toast-container position="bottom-end">
   <sgds-toast show variant="info" title="Info" dismissible>
     <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
@@ -72,38 +115,11 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
   </sgds-toast>
 </sgds-toast-container>
 
-<!-- Auto-dismissing toast after 3 seconds -->
+<!-- Declarative: auto-dismissing toast after 3 seconds -->
 <sgds-toast-container position="top-end">
   <sgds-toast show variant="success" title="Success" autohide delay="3000">
     <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
     Item added to cart.
-  </sgds-toast>
-</sgds-toast-container>
-
-<!-- Trigger toast via JS -->
-<sgds-button id="trigger-toast">Show Toast</sgds-button>
-<sgds-toast-container position="bottom-end">
-  <sgds-toast id="my-toast" variant="danger" title="Error" dismissible>
-    <sgds-icon slot="icon" name="exclamation-circle-fill" size="md"></sgds-icon>
-    Something went wrong. Please try again.
-  </sgds-toast>
-</sgds-toast-container>
-
-<script>
-  document.getElementById("trigger-toast").addEventListener("click", () => {
-    document.getElementById("my-toast").showToast();
-  });
-</script>
-
-<!-- Multiple toasts stacked -->
-<sgds-toast-container position="bottom-end">
-  <sgds-toast show variant="success" title="Saved">
-    <sgds-icon slot="icon" name="check-circle-fill" size="md"></sgds-icon>
-    Document saved.
-  </sgds-toast>
-  <sgds-toast show variant="warning" title="Warning">
-    <sgds-icon slot="icon" name="exclamation-triangle-fill" size="md"></sgds-icon>
-    Storage almost full.
   </sgds-toast>
 </sgds-toast-container>
 ```
@@ -156,13 +172,28 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 |---|---|
 | `showToast()` | Shows the toast (sets `show = true` with animation) |
 | `hideToast()` | Hides the toast (sets `show = false` with animation) |
+| `pauseAutohide()` | Pauses the autohide countdown (used internally on hover) |
+| `resumeAutohide()` | Resumes the autohide countdown |
+
+## Public Methods (`<sgds-toast-container>`)
+
+| Method | Description |
+|---|---|
+| `toast(options)` | Creates a toast with the correct variant icon, appends it, shows it, and auto-removes after hide. Returns the toast element. |
+
+## Exported Utility Function
+
+| Function | Description |
+|---|---|
+| `toast(options)` | Convenience function — finds or creates a container for the given `position`, then calls `container.toast()`. Import from `@govtechsg/sgds-web-component`. |
 
 ---
 
 **For AI agents**:
-1. Always set `title` on `<sgds-toast>` — it is required for accessibility.
-2. `show` must be set on the toast for it to be visible on page load; `showToast()` / `hideToast()` are the programmatic API.
-3. Always wrap `<sgds-toast>` inside `<sgds-toast-container>` — the container handles positioning.
-4. Multiple `<sgds-toast>` elements inside one container stack vertically automatically.
+1. **Prefer `toast()` function** for dynamic notifications — it handles container creation, icon selection, and DOM cleanup automatically.
+2. Always set `title` on `<sgds-toast>` — it is required for accessibility.
+3. For declarative toasts (in HTML), `show` must be set for visibility on page load; wrap inside `<sgds-toast-container>`.
+4. Multiple toasts stack as an overlapping card-deck (max 3 visible). Hovering expands the stack.
 5. Avoid deprecated position values (`top-start`, `middle-*`); use `bottom-end` as the default position.
-6. Icon slot accepts `<sgds-icon size="md">`, action slot accepts `<sgds-link size="sm">` wrapping an `<a>` tag.
+6. The `toast()` function auto-selects the correct icon per variant — no need to manually add `<sgds-icon>`.
+7. For declarative usage, icon slot accepts `<sgds-icon size="md">`, action slot accepts `<sgds-link size="sm">` wrapping an `<a>` tag.

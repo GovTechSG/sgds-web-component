@@ -117,8 +117,7 @@ export class SgdsToastContainer extends SgdsElement {
       }
 
       // Collapsed: overlapping stack
-      const toastHeight = totalVisible > 0 ? visibleToasts[totalVisible - 1].offsetHeight : 0;
-      const peekAmount = Math.round(toastHeight * 0.25);
+      const peekAmount = 16;
 
       visibleToasts.forEach((toast, index) => {
         const stackPosition = totalVisible - 1 - index; // 0 = newest
@@ -148,6 +147,39 @@ export class SgdsToastContainer extends SgdsElement {
     });
   }
 
+  private static _variantIcons: Record<string, string> = {
+    info: "info-circle-fill",
+    success: "check-circle-fill",
+    danger: "exclamation-circle-fill",
+    warning: "exclamation-triangle-fill",
+    neutral: "info-circle-fill"
+  };
+
+  /** Creates a toast, appends it to this container, shows it, and auto-removes it after hiding. */
+  public toast(options: ToastMethodOptions) {
+    const toastEl = document.createElement("sgds-toast") as any;
+    toastEl.title = options.title;
+    if (options.message) toastEl.textContent = options.message;
+    toastEl.variant = options.variant ?? "info";
+    toastEl.autohide = options.autohide ?? true;
+    toastEl.delay = options.delay ?? 5000;
+    toastEl.dismissible = options.dismissible ?? true;
+
+    const iconName = SgdsToastContainer._variantIcons[toastEl.variant];
+    if (iconName) {
+      const icon = document.createElement("sgds-icon");
+      icon.setAttribute("slot", "icon");
+      icon.setAttribute("name", iconName);
+      icon.setAttribute("size", "md");
+      toastEl.appendChild(icon);
+    }
+
+    this.appendChild(toastEl);
+    requestAnimationFrame(() => toastEl.showToast());
+    toastEl.addEventListener("sgds-after-hide", () => toastEl.remove(), { once: true });
+    return toastEl;
+  }
+
   render() {
     return html`
       <div
@@ -160,6 +192,15 @@ export class SgdsToastContainer extends SgdsElement {
       </div>
     `;
   }
+}
+
+export interface ToastMethodOptions {
+  title: string;
+  message?: string;
+  variant?: "success" | "warning" | "danger" | "info";
+  autohide?: boolean;
+  delay?: number;
+  dismissible?: boolean;
 }
 
 export type ToastPosition =

@@ -115,6 +115,7 @@ const buildSgdsPackage = () => {
         entryFileNames: "[name].umd.min.js",
         dir: "lib",
         format: "umd",
+        name: "SgdsWebComponent",
         sourcemap: true,
         inlineDynamicImports: true
       },
