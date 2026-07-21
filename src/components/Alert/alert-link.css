@@ -7,7 +7,7 @@
 .alert-link:hover {
   color: var(--sgds-alert-color);
   text-decoration-line: underline;
-  font-size: var(--sgds-font-size-body-sm);
+  font-size: var(--sgds-font-size-label-sm);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-2-xs);
 }

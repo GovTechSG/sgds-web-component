@@ -1,6 +1,6 @@
 :host([density="compact"]) .tab {
   padding: var(--sgds-spacer-3) var(--sgds-spacer-5);
-  font-size: var(--sgds-font-size-14);
+  font-size: var(--sgds-font-size-label-sm);
 }
 
 :host(:not([active])) .tab {

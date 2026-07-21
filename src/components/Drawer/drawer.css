@@ -105,7 +105,7 @@ sgds-close-button.drawer-close {
 
 slot[name="title"]::slotted(*) {
   margin-bottom: var(--sgds-margin-none) !important;
-  font-size: var(--sgds-font-size-24) !important;
+  font-size: var(--sgds-font-size-heading-sm) !important;
   color: var(--sgds-color-default) !important;
 }
 

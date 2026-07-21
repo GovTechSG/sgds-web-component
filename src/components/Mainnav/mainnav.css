@@ -20,6 +20,7 @@ nav {
   max-width: var(--sgds-mainnav-max-width, 1440px);
   min-height: 80px;
   margin: auto;
+  font-size: var(--sgds-font-size-label-sm);
 }
 
 :host([fluid]) .navbar {
@@ -31,6 +32,7 @@ nav {
   align-items: center;
   text-decoration: none;
   white-space: nowrap;
+  color: var(--sgds-color-default);
 }
 
 .navbar-brand:focus-visible {
