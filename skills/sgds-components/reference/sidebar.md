@@ -33,7 +33,7 @@
 - `collapsed` on `<sgds-sidebar>` switches to icon-only mode — all labels are hidden, only `icon` slot icons are shown.
 - `<sgds-sidebar-group>` at level 0 (direct child of sidebar or section) opens a **drawer overlay** when clicked; at levels 1+ it toggles an **inline submenu**.
 - `<sgds-sidebar-section>` provides visual grouping with an optional header; add `collapsible` to let users toggle its visibility.
-- `icon` is **required** on every `<sgds-sidebar-item>` and `<sgds-sidebar-group>` at levels 1 and 2 — omitting it breaks icon-only collapse mode.
+- `icon` is **required** on every `<sgds-sidebar-item>` and `<sgds-sidebar-group>` at levels 1 and 2 — omitting it breaks icon-only collapse mode. Always use `size="md"` on `<sgds-icon>` in sidebar slots (e.g. `<sgds-icon name="house" slot="icon" size="md">`).
 - **Fallback icon**: if you are unsure whether an icon name exists, use `name="placeholder"` — this always renders a valid icon and prevents broken icon slots.
 - `sgds-select` fires with `{ activeItem: string }` (the `name` of the selected item) whenever an item or group is activated.
 - Navigation via anchor: place an `<a href="...">` as a direct child of `<sgds-sidebar-item>` — on activation the sidebar automatically clicks it.
@@ -48,7 +48,7 @@
 ## Edge Cases
 
 - **Missing `name` on items**: `active` tracking will not work — always provide a unique `name` on every item and group.
-- **Missing `icon` at levels 1–2**: breaks icon-only collapse mode — always supply an `icon` slot at these levels even if visually redundant.
+- **Missing `icon` at levels 1–2**: breaks icon-only collapse mode — always supply an `icon` slot with `size="md"` at these levels even if visually redundant.
 - **Unknown icon name**: if an icon name cannot be verified, use `name="placeholder"` as a safe fallback — do not omit the `icon` slot or leave the name empty.
 - **Nesting beyond level 3**: not officially supported — limit to 3 levels to avoid rendering issues.
 - **`sgds-sidebar-section` `collapsed` without `collapsible`**: the section renders collapsed but has no user control to expand — only use `collapsed` together with `collapsible`.
@@ -77,13 +77,13 @@
 ```html
 <sgds-sidebar active="dashboard">
   <sgds-sidebar-item name="dashboard" title="Dashboard">
-    <sgds-icon name="grid-fill" slot="icon"></sgds-icon>
+    <sgds-icon name="grid-fill" slot="icon" size="md"></sgds-icon>
   </sgds-sidebar-item>
   <sgds-sidebar-item name="records" title="Records">
-    <sgds-icon name="users" slot="icon"></sgds-icon>
+    <sgds-icon name="users" slot="icon" size="md"></sgds-icon>
   </sgds-sidebar-item>
   <sgds-sidebar-item name="settings" title="Settings">
-    <sgds-icon name="gear" slot="icon"></sgds-icon>
+    <sgds-icon name="gear" slot="icon" size="md"></sgds-icon>
   </sgds-sidebar-item>
 </sgds-sidebar>
 ```
@@ -98,71 +98,71 @@
   <sgds-sidebar-section title="Main" name="main">
     <!-- Root-level group: clicking opens a drawer overlay -->
     <sgds-sidebar-group title="Dashboard" name="dashboard">
-      <sgds-icon name="house" slot="icon"></sgds-icon>
+      <sgds-icon name="house" slot="icon" size="md"></sgds-icon>
 
       <!-- Nested group (level 1): clicking toggles an inline submenu -->
       <sgds-sidebar-group title="Summary" name="summary">
-        <sgds-icon name="building" slot="icon"></sgds-icon>
+        <sgds-icon name="building" slot="icon" size="md"></sgds-icon>
         <sgds-sidebar-item title="Latest Sales" name="latest-sales">
-          <sgds-icon name="building" slot="icon"></sgds-icon>
+          <sgds-icon name="building" slot="icon" size="md"></sgds-icon>
           <a href="/sales"></a>
         </sgds-sidebar-item>
         <sgds-sidebar-item title="Refunds" name="refunds">
-          <sgds-icon name="building" slot="icon"></sgds-icon>
+          <sgds-icon name="building" slot="icon" size="md"></sgds-icon>
         </sgds-sidebar-item>
       </sgds-sidebar-group>
 
       <sgds-sidebar-item title="Meetings" name="meetings">
-        <sgds-icon name="calendar" slot="icon"></sgds-icon>
+        <sgds-icon name="calendar" slot="icon" size="md"></sgds-icon>
         <a href="/meetings"></a>
       </sgds-sidebar-item>
       <sgds-sidebar-item title="Gallery" name="gallery">
-        <sgds-icon name="camera" slot="icon"></sgds-icon>
+        <sgds-icon name="camera" slot="icon" size="md"></sgds-icon>
         <a href="/gallery"></a>
       </sgds-sidebar-item>
     </sgds-sidebar-group>
 
     <sgds-sidebar-group title="Reports" name="reports">
-      <sgds-icon name="file-text" slot="icon"></sgds-icon>
+      <sgds-icon name="file-text" slot="icon" size="md"></sgds-icon>
       <sgds-sidebar-item title="Yearly" name="yearly">
-        <sgds-icon name="house" slot="icon"></sgds-icon>
+        <sgds-icon name="house" slot="icon" size="md"></sgds-icon>
       </sgds-sidebar-item>
       <sgds-sidebar-item title="Monthly" name="monthly">
-        <sgds-icon name="house" slot="icon"></sgds-icon>
+        <sgds-icon name="house" slot="icon" size="md"></sgds-icon>
       </sgds-sidebar-item>
     </sgds-sidebar-group>
 
     <!-- Item with a custom trailing icon -->
     <sgds-sidebar-item title="Public Members" name="public-members">
-      <sgds-icon name="user-circle" slot="icon"></sgds-icon>
-      <sgds-icon name="box-arrow-up-right" slot="indicator"></sgds-icon>
+      <sgds-icon name="user-circle" slot="icon" size="md"></sgds-icon>
+      <sgds-icon name="box-arrow-up-right" slot="indicator" size="md"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 
   <!-- Collapsible sections -->
   <sgds-sidebar-section title="Organization" name="organization" collapsible>
     <sgds-sidebar-item title="Team Management" name="team-management">
-      <sgds-icon name="users" slot="icon"></sgds-icon>
+      <sgds-icon name="users" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item title="Projects" name="projects">
-      <sgds-icon name="layers" slot="icon"></sgds-icon>
+      <sgds-icon name="layers" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 
   <sgds-sidebar-section title="Configuration" name="configuration" collapsible>
     <sgds-sidebar-item title="Settings" name="settings">
-      <sgds-icon name="gear" slot="icon"></sgds-icon>
+      <sgds-icon name="gear" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 
   <!-- Top-level items outside any section are valid -->
   <sgds-sidebar-item title="Help &amp; Support" name="help-support">
-    <sgds-icon name="question-circle" slot="icon"></sgds-icon>
+    <sgds-icon name="question-circle" slot="icon" size="md"></sgds-icon>
     <sgds-badge slot="indicator" outlined="" variant="white">3</sgds-badge>
   </sgds-sidebar-item>
 
   <sgds-sidebar-item title="Premium Features" name="premium-features">
-    <sgds-icon name="star" slot="icon"></sgds-icon>
+    <sgds-icon name="star" slot="icon" size="md"></sgds-icon>
   </sgds-sidebar-item>
 </sgds-sidebar>
 ```
@@ -214,9 +214,9 @@
 | `sgds-sidebar` | *(default)* | — | `sgds-sidebar-item`, `sgds-sidebar-group`, `sgds-sidebar-section` — top-level items outside sections are valid |
 | `sgds-sidebar` | `upper` | — | Brand or logo content rendered in the sidebar header — accepts any HTML (`<div>`, `<img>`, custom element). Shown above the navigation items. |
 | `sgds-sidebar` | `lower` | — | Footer area at the bottom of the sidebar, pinned below the main navigation. Typically used for secondary actions such as Settings, user account, logout, or a user avatar. **Always prefer `sgds-sidebar-*` sub-components** — wrap them in `sgds-sidebar-section` to keep padding consistent with the rest of the sidebar. If passing custom HTML (e.g. an avatar component) instead, match the padding manually using `sgds:px-component-xs` (`--sgds-component-padding-xs`) on the x-axis and `sgds:py-2` on the y-axis. |
-| `sgds-sidebar-item` | `icon` | **Required at levels 1 & 2** | Icon before the label (typically `<sgds-icon>`) |
+| `sgds-sidebar-item` | `icon` | **Required at levels 1 & 2** | Icon before the label (use `<sgds-icon name="..." slot="icon" size="md">`) |
 | `sgds-sidebar-item` | `indicator` | — | Notification count or status indicator after the label. Use `<sgds-badge outlined="" variant="white">` or a custom element ≤ 24×24 px |
-| `sgds-sidebar-group` | `icon` | **Required at levels 1 & 2** | Icon before the group label |
+| `sgds-sidebar-group` | `icon` | **Required at levels 1 & 2** | Icon before the group label (use `<sgds-icon name="..." slot="icon" size="md">`) |
 | `sgds-sidebar-group` | `indicator` | — | Notification count or status indicator after the group label. A chevron is always auto-appended after this. Use `<sgds-badge outlined="" variant="white">` or a custom element ≤ 24×24 px |
 | `sgds-sidebar-group` | *(default)* | — | Nested `sgds-sidebar-item` or `sgds-sidebar-group` children |
 | `sgds-sidebar-section` | *(default)* | — | `sgds-sidebar-item` and `sgds-sidebar-group` elements |
@@ -241,7 +241,7 @@ For real URL routing, place an `<a>` as a direct child of `sgds-sidebar-item`. W
 
 ```html
 <sgds-sidebar-item name="dashboard" title="Dashboard">
-  <sgds-icon name="grid-fill" slot="icon"></sgds-icon>
+  <sgds-icon name="grid-fill" slot="icon" size="md"></sgds-icon>
   <a href="/dashboard"></a>
 </sgds-sidebar-item>
 ```
@@ -260,22 +260,22 @@ Simple dashboard with grouped items — no nesting. Use sections to organize rel
 
   <sgds-sidebar-section title="Main Navigation" name="main">
     <sgds-sidebar-item name="dashboard" title="Dashboard">
-      <sgds-icon name="house" slot="icon"></sgds-icon>
+      <sgds-icon name="house" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="analytics" title="Analytics">
-      <sgds-icon name="bar-chart" slot="icon"></sgds-icon>
+      <sgds-icon name="bar-chart" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="reports" title="Reports">
-      <sgds-icon name="file-text" slot="icon"></sgds-icon>
+      <sgds-icon name="file-text" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 
   <sgds-sidebar-section title="Settings" name="settings" collapsible>
     <sgds-sidebar-item name="account" title="Account">
-      <sgds-icon name="user-circle" slot="icon"></sgds-icon>
+      <sgds-icon name="user-circle" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="configuration" title="Configuration">
-      <sgds-icon name="gear" slot="icon"></sgds-icon>
+      <sgds-icon name="gear" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 </sgds-sidebar>
@@ -299,32 +299,32 @@ Complex management system with expandable groups and multiple nesting levels. Ro
   <sgds-sidebar-section title="Content" name="content">
     <!-- Root group: opens drawer overlay on click -->
     <sgds-sidebar-group name="reports" title="Reports">
-      <sgds-icon name="file-text" slot="icon"></sgds-icon>
+      <sgds-icon name="file-text" slot="icon" size="md"></sgds-icon>
 
       <!-- Level 1 group: toggles inline submenu -->
       <sgds-sidebar-group name="analytics" title="Analytics">
-        <sgds-icon name="chart-line" slot="icon"></sgds-icon>
+        <sgds-icon name="chart-line" slot="icon" size="md"></sgds-icon>
 
         <!-- Level 2 items: optional icons -->
         <sgds-sidebar-item name="monthly-view" title="Monthly View">
-          <sgds-icon name="calendar" slot="icon"></sgds-icon>
+          <sgds-icon name="calendar" slot="icon" size="md"></sgds-icon>
         </sgds-sidebar-item>
         <sgds-sidebar-item name="yearly-view" title="Yearly View"></sgds-sidebar-item>
       </sgds-sidebar-group>
 
       <!-- Level 1 items -->
       <sgds-sidebar-item name="sales-report" title="Sales Report">
-        <sgds-icon name="trending-up" slot="icon"></sgds-icon>
+        <sgds-icon name="trending-up" slot="icon" size="md"></sgds-icon>
       </sgds-sidebar-item>
     </sgds-sidebar-group>
 
     <sgds-sidebar-group name="content-mgmt" title="Content Management">
-      <sgds-icon name="pencil-square" slot="icon"></sgds-icon>
+      <sgds-icon name="pencil-square" slot="icon" size="md"></sgds-icon>
       <sgds-sidebar-item name="pages" title="Pages">
-        <sgds-icon name="file" slot="icon"></sgds-icon>
+        <sgds-icon name="file" slot="icon" size="md"></sgds-icon>
       </sgds-sidebar-item>
       <sgds-sidebar-item name="media" title="Media">
-        <sgds-icon name="image" slot="icon"></sgds-icon>
+        <sgds-icon name="image" slot="icon" size="md"></sgds-icon>
       </sgds-sidebar-item>
     </sgds-sidebar-group>
   </sgds-sidebar-section>
@@ -361,10 +361,10 @@ Floating sidebar panel for responsive layouts (mobile-first). Ideal for dashboar
         <div slot="upper">My Application</div>
         <sgds-sidebar-section name="nav">
           <sgds-sidebar-item name="dashboard" title="Dashboard">
-            <sgds-icon name="house" slot="icon"></sgds-icon>
+            <sgds-icon name="house" slot="icon" size="md"></sgds-icon>
           </sgds-sidebar-item>
           <sgds-sidebar-item name="settings" title="Settings">
-            <sgds-icon name="gear" slot="icon"></sgds-icon>
+            <sgds-icon name="gear" slot="icon" size="md"></sgds-icon>
           </sgds-sidebar-item>
         </sgds-sidebar-section>
       </sgds-sidebar>
@@ -409,13 +409,13 @@ Sync sidebar with external controls — update active state dynamically via butt
 <sgds-sidebar id="main-sidebar" active="dashboard">
   <sgds-sidebar-section name="main">
     <sgds-sidebar-item name="dashboard" title="Dashboard">
-      <sgds-icon name="house" slot="icon"></sgds-icon>
+      <sgds-icon name="house" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="analytics" title="Analytics">
-      <sgds-icon name="bar-chart" slot="icon"></sgds-icon>
+      <sgds-icon name="bar-chart" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="settings" title="Settings">
-      <sgds-icon name="gear" slot="icon"></sgds-icon>
+      <sgds-icon name="gear" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 </sgds-sidebar>
@@ -447,27 +447,27 @@ Organize navigation into collapsible groups with visual indicators like notifica
   <!-- Non-collapsible main section -->
   <sgds-sidebar-section title="Folders" name="folders" collapsible="false">
     <sgds-sidebar-item name="inbox" title="Inbox">
-      <sgds-icon name="envelope" slot="icon"></sgds-icon>
+      <sgds-icon name="envelope" slot="icon" size="md"></sgds-icon>
       <sgds-badge slot="indicator" outlined="" variant="white">5</sgds-badge>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="sent" title="Sent">
-      <sgds-icon name="send" slot="icon"></sgds-icon>
+      <sgds-icon name="send" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="drafts" title="Drafts">
-      <sgds-icon name="pencil" slot="icon"></sgds-icon>
+      <sgds-icon name="pencil" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 
   <!-- Collapsible tags/labels section -->
   <sgds-sidebar-section title="Labels" name="labels" collapsible>
     <sgds-sidebar-item name="work" title="Work">
-      <sgds-icon name="tag" slot="icon"></sgds-icon>
+      <sgds-icon name="tag" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="personal" title="Personal">
-      <sgds-icon name="tag" slot="icon"></sgds-icon>
+      <sgds-icon name="tag" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
     <sgds-sidebar-item name="important" title="Important">
-      <sgds-icon name="star" slot="icon"></sgds-icon>
+      <sgds-icon name="star" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
   </sgds-sidebar-section>
 </sgds-sidebar>
@@ -490,7 +490,7 @@ Organize navigation into collapsible groups with visual indicators like notifica
 <div class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)] sgds:overflow-y-auto sgds:w-68 sgds:border-r sgds:border-muted sgds:bg-surface-raised">
   <sgds-sidebar active="dashboard">
     <sgds-sidebar-item name="dashboard" title="Dashboard">
-      <sgds-icon name="grid-fill" slot="icon"></sgds-icon>
+      <sgds-icon name="grid-fill" slot="icon" size="md"></sgds-icon>
     </sgds-sidebar-item>
     <!-- more items -->
   </sgds-sidebar>
