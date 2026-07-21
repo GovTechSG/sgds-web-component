@@ -44,7 +44,6 @@ button {
     transform: rotate(0deg);
   }
 }
-.sidenav-btn:focus:not(.disabled),
 .sidenav-btn:focus-visible:not(.disabled) {
   background-color: var(--sgds-bg-translucent-subtle);
 }
@@ -68,7 +67,6 @@ button {
   font-weight: var(--sgds-font-weight-semibold) !important;
 }
 
-.no-menu-default::slotted(a:focus),
 .no-menu-default::slotted(a:focus-visible) {
   background-color: var(--sgds-bg-translucent-subtle);
 }
