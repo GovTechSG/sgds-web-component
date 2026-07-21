@@ -1,28 +1,49 @@
 name: Notify Telegram on Release
 
 on:
-  release:
-    types: [published]
+  schedule:
+    - cron: "0 6 * * 2" # Every Tuesday at 2:00pm SGT (UTC+8)
+  workflow_dispatch: # Allow manual trigger
 
 permissions:
   contents: read
 
 jobs:
-  notify:
+  check-releases:
     runs-on: ubuntu-latest
     steps:
-      - name: Send release notification to Telegram topic
-        run: |
-          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -d chat_id="${TELEGRAM_CHAT_ID}" \
-            -d message_thread_id="${TELEGRAM_TOPIC_ID}" \
-            -d parse_mode="Markdown" \
-            -d text="*New Release: ${{ github.event.release.name }}*
-
-          ${{ github.event.release.body }}
-
-          [View on GitHub](${{ github.event.release.html_url }})"
+      - name: Check for new releases in the last 7 days
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TELEGRAM_TOPIC_ID: ${{ secrets.TELEGRAM_TOPIC_ID_CODE }}
+        run: |
+          # Get releases from the last 7 days via GitHub API
+          SINCE=$(date -u -d "7 days ago" +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-7d +%Y-%m-%dT%H:%M:%SZ)
+
+          RESPONSE=$(curl -s -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/releases?per_page=10")
+
+          # Parse releases newer than $SINCE and format message
+          MESSAGE=$(echo "$RESPONSE" | jq -r --arg since "$SINCE" '
+            map(select(.published_at > $since and .draft == false and .prerelease == false))
+            | if length == 0 then empty
+              else
+                "📦 *SGDS Web Component Releases (last 7 days)*\n\n" +
+                (map("• *" + .name + "*\n" + (.body | split("\n") | map(select(length > 0)) | first // "No description") + "\n  [View on GitHub](" + .html_url + ")") | join("\n\n"))
+              end
+          ')
+
+          # Send to Telegram if there are new releases
+          if [ -n "$MESSAGE" ]; then
+            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              -d chat_id="${TELEGRAM_CHAT_ID}" \
+              -d message_thread_id="${TELEGRAM_TOPIC_ID}" \
+              -d parse_mode="Markdown" \
+              -d text="${MESSAGE}"
+            echo "Notification sent."
+          else
+            echo "No new releases in the last 7 days."
+          fi
