@@ -2,9 +2,14 @@
   position: relative;
   padding: var(--sgds-padding-xl);
   background-color: var(--sgds-surface-default);
+  min-width: var(--sgds-dimension-256, 256px);
   border: var(--sgds-border-width-1, 1px) solid var(--sgds-border-color-muted, #DFDFDF);
   border-radius: var(--sgds-border-radius-md);
   cursor: pointer;
+}
+
+.tile:focus {
+  outline: none;
 }
 
 .tile:hover,
@@ -16,6 +21,10 @@
 
 .tile.checked {
   border: var(--sgds-border-width-2, 2px) solid var(--sgds-primary-border-color-default, #8055BB);
+}
+
+.tile.invalid {
+  border: var(--sgds-border-width-2, 2px) solid var(--sgds-danger-border-color-default, #CF2323);
 }
 
 .tile.disabled {
@@ -40,6 +49,11 @@ sgds-radio {
   padding-right: var(--sgds-padding-2-xl);
 }
 
+.tile-container.stacked {
+  flex-direction: column;
+  gap: var(--sgds-gap-lg, 16px);
+}
+
 .tile-text {
   display: flex;
   flex-direction: column;
@@ -47,10 +61,12 @@ sgds-radio {
 }
 
 .tile-text ::slotted([slot="title"]) {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   color: var(--sgds-color-default, #1A1A1A);
   font-feature-settings: 'liga' off, 'clig' off;
-  text-overflow: ellipsis;
   font-family: var(--sgds-font-family-brand, Inter);
   font-size: var(--sgds-font-size-subtitle-sm, 16px);
   font-style: normal;
@@ -60,10 +76,12 @@ sgds-radio {
 }
 
 .tile-text ::slotted([slot="description"]) {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   color: var(--sgds-color-subtle, #525252);
   font-feature-settings: 'liga' off, 'clig' off;
-  text-overflow: ellipsis;
   font-family: var(--sgds-font-family-brand, Inter);
   font-size: var(--sgds-font-size-body-sm, 14px);
   font-style: normal;

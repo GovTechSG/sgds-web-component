@@ -153,4 +153,103 @@ describe("<sgds-tile>", () => {
 
     expect(checkbox.checked).to.be.false;
   });
+
+  // Keyboard navigation tests
+  it("tile is focusable with tabindex 0", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="checkbox"></sgds-tile>`);
+    await el.updateComplete;
+
+    const tile = el.shadowRoot!.querySelector(".tile") as HTMLElement;
+    expect(tile.getAttribute("tabindex")).to.equal("0");
+  });
+
+  it("disabled tile has tabindex -1", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="checkbox" disabled></sgds-tile>`);
+    await el.updateComplete;
+
+    const tile = el.shadowRoot!.querySelector(".tile") as HTMLElement;
+    expect(tile.getAttribute("tabindex")).to.equal("-1");
+  });
+
+  it("internal checkbox has tabindex -1", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="checkbox"></sgds-tile>`);
+    await el.updateComplete;
+
+    const checkbox = el.shadowRoot!.querySelector("sgds-checkbox") as any;
+    await checkbox.updateComplete;
+
+    expect(checkbox.getAttribute("tabindex")).to.equal("-1");
+  });
+
+  it("internal radio has tabindex -1", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="radio"></sgds-tile>`);
+    await el.updateComplete;
+
+    const radio = el.shadowRoot!.querySelector("sgds-radio") as any;
+    await radio.updateComplete;
+
+    expect(radio.getAttribute("tabindex")).to.equal("-1");
+  });
+
+  it("pressing Enter toggles the checkbox", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="checkbox"></sgds-tile>`);
+    await el.updateComplete;
+
+    const tile = el.shadowRoot!.querySelector(".tile") as HTMLElement;
+    const checkbox = el.shadowRoot!.querySelector("sgds-checkbox") as any;
+    await checkbox.updateComplete;
+
+    tile.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    await el.updateComplete;
+    await checkbox.updateComplete;
+
+    expect(checkbox.checked).to.be.true;
+  });
+
+  it("pressing Enter toggles the radio", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="radio"></sgds-tile>`);
+    await el.updateComplete;
+
+    const tile = el.shadowRoot!.querySelector(".tile") as HTMLElement;
+    const radio = el.shadowRoot!.querySelector("sgds-radio") as any;
+    await radio.updateComplete;
+
+    tile.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    await el.updateComplete;
+    await radio.updateComplete;
+
+    expect(radio.checked).to.be.true;
+  });
+
+  it("pressing Enter on a disabled tile does not toggle the checkbox", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="checkbox" disabled></sgds-tile>`);
+    await el.updateComplete;
+
+    const tile = el.shadowRoot!.querySelector(".tile") as HTMLElement;
+    const checkbox = el.shadowRoot!.querySelector("sgds-checkbox") as any;
+    await checkbox.updateComplete;
+
+    tile.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+    await el.updateComplete;
+    await checkbox.updateComplete;
+
+    expect(checkbox.checked).to.be.false;
+  });
+
+  // Stacked layout tests
+  it("applies stacked class when stacked is true", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile stacked></sgds-tile>`);
+    await el.updateComplete;
+
+    const container = el.shadowRoot!.querySelector(".tile-container");
+    expect(container).to.have.class("stacked");
+  });
+
+  it("does not have stacked class by default", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile></sgds-tile>`);
+    await el.updateComplete;
+
+    const container = el.shadowRoot!.querySelector(".tile-container");
+    expect(container).to.not.have.class("stacked");
+  });
 });

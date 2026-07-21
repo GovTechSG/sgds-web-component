@@ -31,6 +31,12 @@ export class SgdsTile extends SgdsElement {
   /** Sets the checked state of the internal checkbox or radio */
   @property({ type: Boolean, reflect: true }) checked = false;
 
+  /** Stacks the icon above the title and description instead of beside them */
+  @property({ type: Boolean, reflect: true }) stacked = false;
+
+  /** Sets the tile to an invalid state */
+  @property({ type: Boolean, reflect: true }) invalid = false;
+
   private _handleTileClick() {
     if (this.disabled || !this.variant) return;
 
@@ -45,18 +51,51 @@ export class SgdsTile extends SgdsElement {
     }
   }
 
+  private _handleInputClick(e: Event) {
+    e.stopPropagation();
+    if (this.variant === "checkbox") {
+      const checkbox = this.shadowRoot!.querySelector("sgds-checkbox") as SgdsCheckbox;
+      this.checked = checkbox?.checked;
+    } else if (this.variant === "radio") {
+      const radio = this.shadowRoot!.querySelector("sgds-radio") as SgdsRadio;
+      this.checked = radio?.checked;
+    }
+  }
+
+  private _handleKeyDown(e: KeyboardEvent) {
+    if (e.key === "Enter") {
+      this._handleTileClick();
+    }
+  }
+
   render() {
     return html`
       <div
-        class=${classMap({ tile: true, disabled: this.disabled, checked: this.checked })}
+        class=${classMap({ tile: true, disabled: this.disabled, checked: this.checked, invalid: this.invalid })}
+        tabindex=${this.disabled ? "-1" : "0"}
         @click=${this._handleTileClick}
+        @keydown=${this._handleKeyDown}
       >
         ${this.variant === "checkbox"
-          ? html`<sgds-checkbox ?disabled=${this.disabled} ?checked=${this.checked}></sgds-checkbox>`
+          ? html`<sgds-checkbox
+              tabindex="-1"
+              ?disabled=${this.disabled}
+              ?checked=${this.checked}
+              ?invalid=${this.invalid}
+              ?noValidate=${true}
+              hasFeedback="style"
+              @click=${this._handleInputClick}
+            ></sgds-checkbox>`
           : this.variant === "radio"
-          ? html`<sgds-radio ?disabled=${this.disabled} ?checked=${this.checked}></sgds-radio>`
+          ? html`<sgds-radio
+              tabindex="-1"
+              ?disabled=${this.disabled}
+              ?checked=${this.checked}
+              ?invalid=${this.invalid}
+              @click=${this._handleInputClick}
+            ></sgds-radio>`
           : nothing}
-        <div class="tile-container">
+        <div class=${classMap({ "tile-container": true, stacked: this.stacked })}>
           <slot name="icon"></slot>
           <div class="tile-text">
             <slot name="title"></slot>

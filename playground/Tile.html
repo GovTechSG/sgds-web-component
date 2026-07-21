@@ -30,8 +30,8 @@
       <div class="sgds:flex sgds:flex-col sgds:gap-md">
         <sgds-tile variant="checkbox">
           <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
-          <span slot="title">Checkbox Tile</span>
-          <span slot="description">Tile with a checkbox in the top-right corner.</span>
+          <span slot="title">This is a very long tile title to test how the component handles overflow and text wrapping behaviour</span>
+          <span slot="description">This is a much longer description text to see how the tile component handles overflow and wrapping when the content exceeds the available space within the tile boundaries.</span>
         </sgds-tile>
         <sgds-tile variant="checkbox" checked>
           <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
@@ -42,6 +42,73 @@
           <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
           <span slot="title">Disabled Checkbox Tile</span>
           <span slot="description">Disabled tile with checkbox.</span>
+        </sgds-tile>
+      </div>
+
+      <br />
+
+      <h2>Tile - Invalid state</h2>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <sgds-tile variant="checkbox" invalid>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Invalid Checkbox Tile</span>
+          <span slot="description">This tile is in an invalid state.</span>
+        </sgds-tile>
+        <sgds-tile variant="checkbox" invalid checked>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Invalid Checked Checkbox Tile</span>
+          <span slot="description">Invalid and checked.</span>
+        </sgds-tile>
+        <sgds-tile variant="radio" invalid>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Invalid Radio Tile</span>
+          <span slot="description">This tile is in an invalid state.</span>
+        </sgds-tile>
+        <sgds-tile variant="radio" invalid checked>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Invalid Checked Radio Tile</span>
+          <span slot="description">Invalid and checked.</span>
+        </sgds-tile>
+        <sgds-tile stacked variant="radio" invalid>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Invalid Stacked Tile</span>
+          <span slot="description">Stacked tile in an invalid state.</span>
+        </sgds-tile>
+      </div>
+
+      <br />
+
+      <h2>Tile - Stacked layout (grid)</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+        <sgds-tile stacked variant="checkbox">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">This is a very long tile title to test how the component handles overflow and text wrapping behaviour</span>
+          <span slot="description">This is a much longer description text to see how the tile component handles overflow and wrapping when the content exceeds the available space within the tile boundaries.</span>
+        </sgds-tile>
+        <sgds-tile stacked variant="radio">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Stacked Radio Tile</span>
+          <span slot="description">Icon stacked above title and description.</span>
+        </sgds-tile>
+        <sgds-tile stacked variant="checkbox" checked>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Stacked Checked</span>
+          <span slot="description">Pre-checked stacked tile.</span>
+        </sgds-tile>
+        <sgds-tile stacked variant="radio" disabled>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Stacked Disabled</span>
+          <span slot="description">Disabled stacked tile.</span>
+        </sgds-tile>
+        <sgds-tile stacked variant="checkbox">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Stacked Tile 5</span>
+          <span slot="description">Another stacked tile in the grid.</span>
+        </sgds-tile>
+        <sgds-tile stacked variant="radio">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Stacked Tile 6</span>
+          <span slot="description">Another stacked tile in the grid.</span>
         </sgds-tile>
       </div>
 
