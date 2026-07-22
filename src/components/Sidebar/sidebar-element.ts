@@ -146,6 +146,11 @@ export class SidebarElement extends SgdsElement {
   updated() {
     if (this._childLevel === 2) {
       this._hidden = !this.closest(".sidebar-nested-overlay");
+    } else if (this._childLevel >= 3) {
+      const inOverlay = !!this.closest(".sidebar-nested-overlay");
+      const parentGroup = this.parentElement as SidebarElement & { showMenu?: boolean };
+      const parentExpanded = parentGroup?.showMenu ?? false;
+      this._hidden = !inOverlay || !parentExpanded;
     }
   }
 
