@@ -12,8 +12,6 @@ import {
   SidebarDrawerOverlay
 } from "./sidebar-context";
 
-const ARROW_DOWN = "ArrowDown";
-const ARROW_UP = "ArrowUp";
 const ARROW_LEFT = "ArrowLeft";
 const ARROW_RIGHT = "ArrowRight";
 const ENTER = "Enter";
@@ -146,6 +144,11 @@ export class SidebarElement extends SgdsElement {
   updated() {
     if (this._childLevel === 2) {
       this._hidden = !this.closest(".sidebar-nested-overlay");
+    } else if (this._childLevel >= 3) {
+      const inOverlay = !!this.closest(".sidebar-nested-overlay");
+      const parentGroup = this.parentElement as SidebarElement & { showMenu?: boolean };
+      const parentExpanded = parentGroup?.showMenu ?? false;
+      this._hidden = !inOverlay || !parentExpanded;
     }
   }
 
@@ -186,40 +189,6 @@ export class SidebarElement extends SgdsElement {
         event.preventDefault();
         event.stopPropagation();
         if (event.target === this) this._handleClick();
-        return;
-      }
-      case ARROW_DOWN: {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const child = (target as SidebarElement)._childElements[0];
-
-        const isChildHidden = child?._hidden;
-        const childElement = !isChildHidden ? child : null;
-        const nextElement = childElement || target.nextElementSibling || target.parentElement?.nextElementSibling;
-
-        if (nextElement?.shadowRoot) {
-          const focusTarget = nextElement.shadowRoot.querySelector("[tabindex]") as HTMLElement | null;
-          focusTarget?.focus();
-        }
-
-        return;
-      }
-      case ARROW_UP: {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const prevSiblingChildren = (target.previousElementSibling as SidebarElement)?._childElements;
-        const lastChild = prevSiblingChildren ? prevSiblingChildren[prevSiblingChildren?.length - 1] : null;
-        const isChildHidden = lastChild?._hidden;
-
-        const childElement = !isChildHidden ? lastChild : null;
-        const prevElement = childElement || target.previousElementSibling || target.parentElement;
-
-        if (prevElement?.shadowRoot) {
-          const focusTarget = prevElement.shadowRoot.querySelector("[tabindex]") as HTMLElement | null;
-          focusTarget?.focus();
-        }
         return;
       }
       case ARROW_LEFT: {
