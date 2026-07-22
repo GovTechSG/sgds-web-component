@@ -29,8 +29,30 @@
   display: flex;
   flex-direction: row;
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  position: relative;
 }
 
 :host([variant="underlined"][orientation="vertical"]) .tab-group__nav {
   border-right: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  position: relative;
+}
+
+:host([variant="underlined"][orientation="horizontal"]) .tab-group__indicator {
+  position: absolute;
+  bottom: -1px;
+  height: var(--sgds-border-width-4);
+  background-color: var(--sgds-primary-surface-default);
+  transition: left 0.3s cubic-bezier(0.25, 0, 0.25, 1), width 0.3s cubic-bezier(0.25, 0, 0.25, 1);
+}
+
+:host([variant="underlined"][orientation="vertical"]) .tab-group__indicator {
+  position: absolute;
+  right: -1px;
+  width: var(--sgds-border-width-4);
+  background-color: var(--sgds-primary-surface-default);
+  transition: top 0.3s cubic-bezier(0.25, 0, 0.25, 1), height 0.3s cubic-bezier(0.25, 0, 0.25, 1);
+}
+
+:host([variant="solid"]) .tab-group__indicator {
+  display: none;
 }
