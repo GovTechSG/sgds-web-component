@@ -40,25 +40,6 @@
   color: var(--sgds-primary-color-default);
 }
 
-:host([variant="underlined"][orientation="vertical"][active]) .tab::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: -1px;
-  width: var(--sgds-border-width-4);
-  height: 100%;
-  background-color: var(--sgds-primary-surface-default);
-}
-
-:host([variant="underlined"][orientation="horizontal"][active]) .tab::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  height: var(--sgds-border-width-4);
-  width: 100%;
-  background-color: var(--sgds-primary-surface-default);
-}
 
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:focus,
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:focus-visible {
