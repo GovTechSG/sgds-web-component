@@ -153,3 +153,47 @@ export const Stacking = {
   args: { position: "bottom-end" },
   parameters: {}
 };
+
+const ImperativeTemplate = () =>
+  html`
+    <div style="height:400px;">
+      <sgds-toast-container id="imperative-container" position="bottom-end"></sgds-toast-container>
+      <sgds-button
+        @click=${() => {
+          const container = document.getElementById("imperative-container");
+          container.toast({
+            title: "Success",
+            message: "Your changes have been saved.",
+            variant: "success",
+            delay: 5000
+          });
+        }}
+      >
+        Show Toast
+      </sgds-button>
+    </div>
+  `;
+
+export const Imperative = {
+  render: ImperativeTemplate.bind({}),
+  name: "Imperative API (toast function)",
+  args: {},
+  parameters: {
+    docs: {
+      source: {
+        code: `import { toast } from "@govtechsg/sgds-web-component";
+
+// Call toast() to create and show a toast notification
+toast({
+  title: "Success",
+  message: "Your changes have been saved.",
+  variant: "success",   // "info" | "success" | "danger" | "warning" | "neutral"
+  position: "bottom-end", // "top-center" | "top-end" | "bottom-start" | "bottom-center" | "bottom-end"
+  delay: 5000,          // auto-hide delay in ms (default: 5000)
+  dismissible: true     // show close button (default: true)
+});`,
+        language: "js"
+      }
+    }
+  }
+};
