@@ -515,12 +515,12 @@ See **[Application Shell](../../sgds-blocks/reference/application-shell.md)** fo
 
 ## Keyboard Navigation
 
-| Key                       | Action                                                    |
-| ------------------------- | --------------------------------------------------------- |
-| `Arrow Up` / `Arrow Down` | Navigate between items at the same level                  |
-| `Arrow Right`             | Open drawer (root group) or expand submenu (nested group) |
-| `Arrow Left`              | Close drawer or return focus to parent group              |
-| `Enter` / `Space`         | Activate focused item or toggle group                     |
+| Key                 | Action                                                    |
+| ------------------- | --------------------------------------------------------- |
+| `Tab` / `Shift+Tab` | Navigate between visible sidebar items in DOM order       |
+| `Arrow Right`       | Open drawer (root group) or expand submenu (nested group) |
+| `Arrow Left`        | Close drawer or return focus to parent group              |
+| `Enter` / `Space`   | Activate focused item or toggle group                     |
 
 Non-visible items (inside collapsed groups or collapsed sections) are removed from the tab order (`tabindex="-1"`) so `Tab` naturally skips them. When a group is expanded, its children become tabbable again.
 
