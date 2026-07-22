@@ -4,12 +4,12 @@
 
 ## Sub-components
 
-| Tag | Role |
-|-----|------|
-| `<sgds-sidebar>` | Root container — manages active state, collapse, and drawer coordination |
-| `<sgds-sidebar-item>` | Leaf navigation item (no children). Supports an optional `<a>` child for real URL navigation |
-| `<sgds-sidebar-group>` | Parent item that expands to reveal children. At level 0 opens a drawer overlay; at level 1+ toggles an inline submenu |
-| `<sgds-sidebar-section>` | Visual grouping with an optional collapsible section title. Items inside it participate in active tracking normally |
+| Tag                      | Role                                                                                                                  |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| `<sgds-sidebar>`         | Root container — manages active state, collapse, and drawer coordination                                              |
+| `<sgds-sidebar-item>`    | Leaf navigation item (no children). Supports an optional `<a>` child for real URL navigation                          |
+| `<sgds-sidebar-group>`   | Parent item that expands to reveal children. At level 0 opens a drawer overlay; at level 1+ toggles an inline submenu |
+| `<sgds-sidebar-section>` | Visual grouping with an optional collapsible section title. Items inside it participate in active tracking normally   |
 
 ## Usage Guideline
 
@@ -171,66 +171,66 @@
 
 ### `<sgds-sidebar>`
 
-| Attribute | Type | Default | Purpose |
-|-----------|------|---------|---------|
-| `active` | `string` | `""` | Name of the currently active item. Two-way: set programmatically or read after user interaction |
-| `collapsed` | `boolean` | `false` | When true, sidebar shows icon-only mode |
-| `variant` | `"collapsible" \| "persistent" \| "overlay"` | `"collapsible"` | Layout behaviour — `collapsible` shows an internal toggle button; `persistent` is always visible and cannot be collapsed; `overlay` slides the sidebar over content (requires an external toggle with `data-sidebar-toggler="true"`) |
-| `scrim` | `boolean` | `false` | When true, renders a semi-transparent overlay behind the sidebar drawer to focus user attention. Visible when the drawer is open or when the overlay sidebar is expanded |
-| `ariaLabel` | `string` | `"Sidebar navigation"` | Accessible label for the `<nav>` landmark — override when multiple navs exist on the page (e.g. `"Dashboard navigation"`) |
+| Attribute   | Type                                         | Default                | Purpose                                                                                                                                                                                                                              |
+| ----------- | -------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `active`    | `string`                                     | `""`                   | Name of the currently active item. Two-way: set programmatically or read after user interaction                                                                                                                                      |
+| `collapsed` | `boolean`                                    | `false`                | When true, sidebar shows icon-only mode                                                                                                                                                                                              |
+| `variant`   | `"collapsible" \| "persistent" \| "overlay"` | `"collapsible"`        | Layout behaviour — `collapsible` shows an internal toggle button; `persistent` is always visible and cannot be collapsed; `overlay` slides the sidebar over content (requires an external toggle with `data-sidebar-toggler="true"`) |
+| `scrim`     | `boolean`                                    | `false`                | When true, renders a semi-transparent overlay behind the sidebar drawer to focus user attention. Visible when the drawer is open or when the overlay sidebar is expanded                                                             |
+| `ariaLabel` | `string`                                     | `"Sidebar navigation"` | Accessible label for the `<nav>` landmark — override when multiple navs exist on the page (e.g. `"Dashboard navigation"`)                                                                                                            |
 
 ### `<sgds-sidebar-item>`
 
-| Attribute | Type | Default | Purpose |
-|-----------|------|---------|---------|
-| `name` | `string` | `""` | Unique identifier used for active state matching |
-| `title` | `string` | `""` | Display label shown in the sidebar |
+| Attribute | Type     | Default | Purpose                                          |
+| --------- | -------- | ------- | ------------------------------------------------ |
+| `name`    | `string` | `""`    | Unique identifier used for active state matching |
+| `title`   | `string` | `""`    | Display label shown in the sidebar               |
 
 ### `<sgds-sidebar-group>`
 
-| Attribute | Type | Default | Purpose |
-|-----------|------|---------|---------|
-| `name` | `string` | `""` | Unique identifier used for active state matching |
-| `title` | `string` | `""` | Display label shown as the group header |
+| Attribute | Type     | Default | Purpose                                          |
+| --------- | -------- | ------- | ------------------------------------------------ |
+| `name`    | `string` | `""`    | Unique identifier used for active state matching |
+| `title`   | `string` | `""`    | Display label shown as the group header          |
 
-| Property (read-only) | Type | Purpose |
-|----------------------|------|---------|
-| `showMenu` | `boolean` | Returns `true` when the inline submenu is open. Only meaningful for nested groups (level 2+); root-level groups use the drawer overlay instead |
+| Property (read-only) | Type      | Purpose                                                                                                                                        |
+| -------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `showMenu`           | `boolean` | Returns `true` when the inline submenu is open. Only meaningful for nested groups (level 2+); root-level groups use the drawer overlay instead |
 
 ### `<sgds-sidebar-section>`
 
-| Attribute | Type | Default | Purpose |
-|-----------|------|---------|---------|
-| `name` | `string` | `""` | Identifier for the section (does not participate in `active` tracking) |
-| `title` | `string` | `""` | Section header label |
-| `collapsed` | `boolean` | `false` | Whether section content is hidden |
-| `collapsible` | `boolean` | `false` | Whether the user can click the header to toggle |
-| `separator` | `boolean` | `false` | When true, renders a divider below the section to visually separate it from the next section |
+| Attribute     | Type      | Default | Purpose                                                                                      |
+| ------------- | --------- | ------- | -------------------------------------------------------------------------------------------- |
+| `name`        | `string`  | `""`    | Identifier for the section (does not participate in `active` tracking)                       |
+| `title`       | `string`  | `""`    | Section header label                                                                         |
+| `collapsed`   | `boolean` | `false` | Whether section content is hidden                                                            |
+| `collapsible` | `boolean` | `false` | Whether the user can click the header to toggle                                              |
+| `separator`   | `boolean` | `false` | When true, renders a divider below the section to visually separate it from the next section |
 
 ## Slots
 
-| Component | Slot | Required? | Purpose |
-|-----------|------|-----------|--------|
-| `sgds-sidebar` | *(default)* | — | `sgds-sidebar-item`, `sgds-sidebar-group`, `sgds-sidebar-section` — top-level items outside sections are valid |
-| `sgds-sidebar` | `upper` | — | Brand or logo content rendered in the sidebar header — accepts any HTML (`<div>`, `<img>`, custom element). Shown above the navigation items. |
-| `sgds-sidebar` | `lower` | — | Footer area at the bottom of the sidebar, pinned below the main navigation. Typically used for secondary actions such as Settings, user account, logout, or a user avatar. **Always prefer `sgds-sidebar-*` sub-components** — wrap them in `sgds-sidebar-section` to keep padding consistent with the rest of the sidebar. If passing custom HTML (e.g. an avatar component) instead, match the padding manually using `sgds:px-component-xs` (`--sgds-component-padding-xs`) on the x-axis and `sgds:py-2` on the y-axis. |
-| `sgds-sidebar-item` | `icon` | **Required at levels 1 & 2** | Icon before the label (typically `<sgds-icon>`) |
-| `sgds-sidebar-item` | `indicator` | — | Notification count or status indicator after the label. Use `<sgds-badge outlined="" variant="white">` or a custom element ≤ 24×24 px |
-| `sgds-sidebar-group` | `icon` | **Required at levels 1 & 2** | Icon before the group label |
-| `sgds-sidebar-group` | `indicator` | — | Notification count or status indicator after the group label. A chevron is always auto-appended after this. Use `<sgds-badge outlined="" variant="white">` or a custom element ≤ 24×24 px |
-| `sgds-sidebar-group` | *(default)* | — | Nested `sgds-sidebar-item` or `sgds-sidebar-group` children |
-| `sgds-sidebar-section` | *(default)* | — | `sgds-sidebar-item` and `sgds-sidebar-group` elements |
+| Component              | Slot        | Required?                    | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ---------------------- | ----------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `sgds-sidebar`         | _(default)_ | —                            | `sgds-sidebar-item`, `sgds-sidebar-group`, `sgds-sidebar-section` — top-level items outside sections are valid                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `sgds-sidebar`         | `upper`     | —                            | Brand or logo content rendered in the sidebar header — accepts any HTML (`<div>`, `<img>`, custom element). Shown above the navigation items.                                                                                                                                                                                                                                                                                                                                                                               |
+| `sgds-sidebar`         | `lower`     | —                            | Footer area at the bottom of the sidebar, pinned below the main navigation. Typically used for secondary actions such as Settings, user account, logout, or a user avatar. **Always prefer `sgds-sidebar-*` sub-components** — wrap them in `sgds-sidebar-section` to keep padding consistent with the rest of the sidebar. If passing custom HTML (e.g. an avatar component) instead, match the padding manually using `sgds:px-component-xs` (`--sgds-component-padding-xs`) on the x-axis and `sgds:py-2` on the y-axis. |
+| `sgds-sidebar-item`    | `icon`      | **Required at levels 1 & 2** | Icon before the label (typically `<sgds-icon>`)                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `sgds-sidebar-item`    | `indicator` | —                            | Notification count or status indicator after the label. Use `<sgds-badge outlined="" variant="white">` or a custom element ≤ 24×24 px                                                                                                                                                                                                                                                                                                                                                                                       |
+| `sgds-sidebar-group`   | `icon`      | **Required at levels 1 & 2** | Icon before the group label                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `sgds-sidebar-group`   | `indicator` | —                            | Notification count or status indicator after the group label. A chevron is always auto-appended after this. Use `<sgds-badge outlined="" variant="white">` or a custom element ≤ 24×24 px                                                                                                                                                                                                                                                                                                                                   |
+| `sgds-sidebar-group`   | _(default)_ | —                            | Nested `sgds-sidebar-item` or `sgds-sidebar-group` children                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `sgds-sidebar-section` | _(default)_ | —                            | `sgds-sidebar-item` and `sgds-sidebar-group` elements                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 > **`icon` is compulsory on every `sgds-sidebar-item` and `sgds-sidebar-group` at level 1 (direct children of `sgds-sidebar` or `sgds-sidebar-section`) and level 2 (children of a root group). This applies regardless of whether the component is `sgds-sidebar-group` or `sgds-sidebar-item`. Omitting it at these levels breaks the icon-only collapse mode and the sidebar's visual consistency.**
 
 ## Events
 
-| Event | When fired | Detail |
-|-------|-----------|--------|
+| Event         | When fired                   | Detail                                                        |
+| ------------- | ---------------------------- | ------------------------------------------------------------- |
 | `sgds-select` | An item or group is selected | `{ activeItem: string }` — the `name` of the selected element |
 
 ```js
-document.querySelector('sgds-sidebar').addEventListener('sgds-select', e => {
+document.querySelector("sgds-sidebar").addEventListener("sgds-select", e => {
   console.log(e.detail.activeItem); // e.g. "dashboard"
 });
 ```
@@ -282,6 +282,7 @@ Simple dashboard with grouped items — no nesting. Use sections to organize rel
 ```
 
 **Key features:**
+
 - All items at the same level — no group hierarchy
 - `collapsible` sections allow users to collapse/expand Settings independently
 - Perfect for apps with shallow navigation
@@ -332,6 +333,7 @@ Complex management system with expandable groups and multiple nesting levels. Ro
 ```
 
 **Key features:**
+
 - Root groups (`reports`, `content-mgmt`) open drawer overlays
 - Nested groups (`analytics`) toggle inline submenus
 - Up to 3 levels of nesting supported
@@ -345,48 +347,48 @@ Floating sidebar panel for responsive layouts (mobile-first). Ideal for dashboar
 
 ```html
 <html>
-<head>
-</head>
-<body>
-  <div class="app-header" style="padding: 12px 16px; border-bottom: 1px solid {{color-border}};">
-    <button onclick="toggleSidebar()" style="background: none; border: none; cursor: pointer;">
-      <sgds-icon name="three-dots" size="24"></sgds-icon>
-    </button>
-  </div>
-
-  <div style="display: flex; height: 100vh;">
-    <!-- Overlay sidebar: floats over content -->
-    <div>
-      <sgds-sidebar id="app-sidebar" variant="overlay" scrim collapsed>
-        <div slot="upper">My Application</div>
-        <sgds-sidebar-section name="nav">
-          <sgds-sidebar-item name="dashboard" title="Dashboard">
-            <sgds-icon name="house" slot="icon"></sgds-icon>
-          </sgds-sidebar-item>
-          <sgds-sidebar-item name="settings" title="Settings">
-            <sgds-icon name="gear" slot="icon"></sgds-icon>
-          </sgds-sidebar-item>
-        </sgds-sidebar-section>
-      </sgds-sidebar>
+  <head> </head>
+  <body>
+    <div class="app-header" style="padding: 12px 16px; border-bottom: 1px solid {{color-border}};">
+      <button onclick="toggleSidebar()" style="background: none; border: none; cursor: pointer;">
+        <sgds-icon name="three-dots" size="24"></sgds-icon>
+      </button>
     </div>
 
-    <!-- Main content -->
-    <div style="flex: 1; padding: 24px; overflow-y: auto;">
-      <h1>Dashboard</h1>
-    </div>
-  </div>
+    <div style="display: flex; height: 100vh;">
+      <!-- Overlay sidebar: floats over content -->
+      <div>
+        <sgds-sidebar id="app-sidebar" variant="overlay" scrim collapsed>
+          <div slot="upper">My Application</div>
+          <sgds-sidebar-section name="nav">
+            <sgds-sidebar-item name="dashboard" title="Dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item name="settings" title="Settings">
+              <sgds-icon name="gear" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      </div>
 
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById('app-sidebar');
-      sidebar.toggleCollapsed();
-    }
-  </script>
-</body>
+      <!-- Main content -->
+      <div style="flex: 1; padding: 24px; overflow-y: auto;">
+        <h1>Dashboard</h1>
+      </div>
+    </div>
+
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById("app-sidebar");
+        sidebar.toggleCollapsed();
+      }
+    </script>
+  </body>
 </html>
 ```
 
 **Key features:**
+
 - `overlay` attribute makes sidebar float above content
 - `scrim` adds a dark background for focus (optional)
 - `collapsed` hides the sidebar on load (ideal for mobile)
@@ -422,12 +424,13 @@ Sync sidebar with external controls — update active state dynamically via butt
 
 <script>
   function setActive(itemName) {
-    document.getElementById('main-sidebar').active = itemName;
+    document.getElementById("main-sidebar").active = itemName;
   }
 </script>
 ```
 
 **Key features:**
+
 - Buttons trigger programmatic navigation
 - `sidebar.active = "item-name"` updates active state and highlights the item
 - Parent groups expand automatically when a nested item becomes active
@@ -474,6 +477,7 @@ Organize navigation into collapsible groups with visual indicators like notifica
 ```
 
 **Key features:**
+
 - Notification counts in `indicator` slot
 - `collapsible` sections toggle independently
 - Combines flat and grouped navigation styles
@@ -487,7 +491,9 @@ Organize navigation into collapsible groups with visual indicators like notifica
 
 ```html
 <!-- Sticky left rail -->
-<div class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)] sgds:overflow-y-auto sgds:w-68 sgds:border-r sgds:border-muted sgds:bg-surface-raised">
+<div
+  class="sgds:sticky sgds:top-27 sgds:h-[calc(100vh-108px)] sgds:overflow-y-auto sgds:w-68 sgds:border-r sgds:border-muted sgds:bg-surface-raised"
+>
   <sgds-sidebar active="dashboard">
     <sgds-sidebar-item name="dashboard" title="Dashboard">
       <sgds-icon name="grid-fill" slot="icon"></sgds-icon>
@@ -509,13 +515,14 @@ See **[Application Shell](../../sgds-blocks/reference/application-shell.md)** fo
 
 ## Keyboard Navigation
 
-| Key | Action |
-|-----|--------|
-| `Arrow Up` / `Arrow Down` | Navigate between items at the same level |
-| `Arrow Right` | Open drawer (root group) or expand submenu (nested group) |
-| `Arrow Left` | Close drawer or return focus to parent group |
-| `Enter` / `Space` | Activate focused item or toggle group |
-| `Tab` | Standard focus order through interactive elements |
+| Key                 | Action                                                    |
+| ------------------- | --------------------------------------------------------- |
+| `Tab` / `Shift+Tab` | Navigate between visible sidebar items in DOM order       |
+| `Arrow Right`       | Open drawer (root group) or expand submenu (nested group) |
+| `Arrow Left`        | Close drawer or return focus to parent group              |
+| `Enter` / `Space`   | Activate focused item or toggle group                     |
+
+Non-visible items (inside collapsed groups or collapsed sections) are removed from the tab order (`tabindex="-1"`) so `Tab` naturally skips them. When a group is expanded, its children become tabbable again.
 
 ## Related Components
 
