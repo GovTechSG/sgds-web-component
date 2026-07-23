@@ -32,9 +32,9 @@ const SPACE = " ";
  * - Automatic child element tracking and nesting level detection
  *
  * Keyboard Navigation:
- * - Arrow Up/Down: Navigate between siblings in the same level
+ * - Tab/Shift+Tab: Navigate between visible items in DOM order
  * - Arrow Left/Right: Navigate hierarchically (collapse/expand or move in drawer)
- * - Enter: Activate focused item or toggle group
+ * - Enter/Space: Activate focused item or toggle group
  *
  * Context Management:
  * - Consumes: SidebarCollapsed, SidebarActiveItem, SidebarActiveGroup, SidebarDrawerItems
