@@ -59,6 +59,18 @@
     gap: 8px;
     min-width: 220px;
   }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 </style>
 
 <div class="theme-toggle">
@@ -414,14 +426,28 @@
 
 <!-- Server mode -->
 <div class="container">
-  <h3>Server Mode (mode="server")</h3>
-  <sgds-data-table id="server-table" currentPage="1" dataLength="50" itemsPerPage="10" mode="server" isLoading>
+  <h3 id="server-table-heading">Server Mode (mode="server")</h3>
+  <p id="server-table-help">
+    This table fetches data per page. Use the pagination controls to load the next set of results.
+  </p>
+  <sgds-data-table
+    id="server-table"
+    aria-labelledby="server-table-heading"
+    aria-describedby="server-table-help"
+    currentPage="1"
+    dataLength="50"
+    itemsPerPage="10"
+    mode="server"
+    serverSort
+    isLoading
+  >
     <sgds-data-table-row>
       <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
       <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
       <sgds-data-table-head>Region</sgds-data-table-head>
     </sgds-data-table-row>
   </sgds-data-table>
+  <div id="server-table-status" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 </div>
 
 <!-- Header and cell props: sorting, sortKey, width, colspan, rowspan, textAlign -->
@@ -668,6 +694,7 @@
 
   // Mock API-driven pagination demo for server mode table
   const serverTable = document.getElementById("server-table");
+  const serverTableStatus = document.getElementById("server-table-status");
   const totalRows = 50;
   const regions = ["North", "South", "East", "West", "Central"];
   const serverSort = { key: "", direction: "none" };
@@ -721,25 +748,39 @@
   };
 
   const renderServerRows = rows => {
-    const headerRow = serverTable.querySelector("sgds-data-table-row");
+    if (!serverTable) return;
+
+    const allTableRows = Array.from(serverTable.querySelectorAll("sgds-data-table-row"));
+    const headerRow = allTableRows[0];
     if (!headerRow) return;
 
-    const bodyMarkup = rows
-      .map(
-        row => `
-      <sgds-data-table-row>
-        <sgds-data-table-cell>${row.id}</sgds-data-table-cell>
-        <sgds-data-table-cell>${row.name}</sgds-data-table-cell>
-        <sgds-data-table-cell>${row.region}</sgds-data-table-cell>
-      </sgds-data-table-row>`
-      )
-      .join("");
+    allTableRows.slice(1).forEach(row => row.remove());
 
-    serverTable.innerHTML = `${headerRow.outerHTML}${bodyMarkup}`;
+    rows.forEach(rowData => {
+      const row = document.createElement("sgds-data-table-row");
+
+      const idCell = document.createElement("sgds-data-table-cell");
+      idCell.textContent = String(rowData.id);
+
+      const nameCell = document.createElement("sgds-data-table-cell");
+      nameCell.textContent = rowData.name;
+
+      const regionCell = document.createElement("sgds-data-table-cell");
+      regionCell.textContent = rowData.region;
+
+      row.rowData = rowData;
+      row.append(idCell, nameCell, regionCell);
+      serverTable.append(row);
+    });
   };
 
   const loadServerPage = async page => {
+    if (!serverTable) return;
+
     const itemsPerPage = Number(serverTable.itemsPerPage || 10);
+    if (serverTableStatus) {
+      serverTableStatus.textContent = `Loading page ${page}...`;
+    }
     serverTable.isLoading = true;
 
     try {
@@ -751,28 +792,41 @@
       });
       serverTable.dataLength = response.total;
       renderServerRows(response.rows);
+
+      const start = (page - 1) * itemsPerPage + 1;
+      const end = Math.min(start + response.rows.length - 1, response.total);
+      const sortText =
+        serverSort.key && serverSort.direction !== "none"
+          ? ` Sorted by ${serverSort.key} ${serverSort.direction}.`
+          : "";
+
+      if (serverTableStatus) {
+        serverTableStatus.textContent = `Showing rows ${start} to ${end} of ${response.total}.${sortText}`;
+      }
     } finally {
       serverTable.isLoading = false;
     }
   };
 
-  serverTable.addEventListener("sgds-page-change", async () => {
-    console.log("[DataTable playground] server-table sgds-page-change", {
-      currentPage: Number(serverTable.currentPage || 1)
+  if (serverTable) {
+    serverTable.addEventListener("sgds-page-change", async () => {
+      console.log("[DataTable playground] server-table sgds-page-change", {
+        currentPage: Number(serverTable.currentPage || 1)
+      });
+      await loadServerPage(Number(serverTable.currentPage || 1));
     });
-    await loadServerPage(Number(serverTable.currentPage || 1));
-  });
 
-  serverTable.addEventListener("sgds-sort", async event => {
-    console.log("[DataTable playground] server-table sgds-sort", {
-      key: event.detail.key,
-      direction: event.detail.direction,
-      currentPage: Number(serverTable.currentPage || 1)
+    serverTable.addEventListener("sgds-sort", async event => {
+      console.log("[DataTable playground] server-table sgds-sort", {
+        key: event.detail.key,
+        direction: event.detail.direction,
+        currentPage: Number(serverTable.currentPage || 1)
+      });
+      serverSort.key = event.detail.key;
+      serverSort.direction = event.detail.direction;
+      await loadServerPage(Number(serverTable.currentPage || 1));
     });
-    serverSort.key = event.detail.key;
-    serverSort.direction = event.detail.direction;
-    await loadServerPage(Number(serverTable.currentPage || 1));
-  });
+  }
 
   const eventLog = document.getElementById("interactive-event-log");
   const safeStringify = value => {
@@ -824,50 +878,84 @@
     });
   };
 
+  const getEventValue = event => {
+    const detailValue = event.detail?.value ?? event.detail?.displayValue;
+    if (detailValue !== undefined && detailValue !== null && detailValue !== "") return detailValue;
+
+    const targetValue = event.target?.value;
+    if (targetValue !== undefined && targetValue !== null && targetValue !== "") return targetValue;
+
+    const currentTargetValue = event.currentTarget?.value;
+    if (currentTargetValue !== undefined && currentTargetValue !== null && currentTargetValue !== "") {
+      return currentTargetValue;
+    }
+
+    return "";
+  };
+
+  const getEventText = event => {
+    const path = event.composedPath ? event.composedPath() : [];
+    const firstElementWithText = path.find(node => typeof node?.textContent === "string");
+    const textFromPath = firstElementWithText?.textContent?.trim();
+    if (textFromPath) return textFromPath;
+
+    const targetText = event.target?.textContent?.trim();
+    if (targetText) return targetText;
+
+    const currentTargetText = event.currentTarget?.textContent?.trim();
+    if (currentTargetText) return currentTargetText;
+
+    return "";
+  };
+
   bindLoggedEvent("#table-dropdown-1", "sgds-select", "dropdown-1", event => ({
-    selectedText: event.target?.textContent?.trim() || ""
+    selectedText: getEventText(event)
   }));
   bindLoggedEvent("#table-dropdown-2", "sgds-select", "dropdown-2", event => ({
-    selectedText: event.target?.textContent?.trim() || ""
+    selectedText: getEventText(event)
   }));
 
-  bindLoggedEvent("#table-overflow-1", "sgds-select", "overflow-1");
-  bindLoggedEvent("#table-overflow-2", "sgds-select", "overflow-2");
+  bindLoggedEvent("#table-overflow-1", "sgds-select", "overflow-1", event => ({
+    selectedText: getEventText(event)
+  }));
+  bindLoggedEvent("#table-overflow-2", "sgds-select", "overflow-2", event => ({
+    selectedText: getEventText(event)
+  }));
 
   bindLoggedEvent("#table-button-1", "click", "button-1");
   bindLoggedEvent("#table-button-2", "click", "button-2");
 
   bindLoggedEvent("#table-combobox-1", "sgds-change", "combobox-1", event => ({
-    value: event.currentTarget?.value || ""
+    value: getEventValue(event)
   }));
   bindLoggedEvent("#table-combobox-1", "sgds-select", "combobox-1", event => ({
-    value: event.currentTarget?.value || ""
+    value: getEventValue(event)
   }));
   bindLoggedEvent("#table-combobox-2", "sgds-change", "combobox-2", event => ({
-    value: event.currentTarget?.value || ""
+    value: getEventValue(event)
   }));
   bindLoggedEvent("#table-combobox-2", "sgds-select", "combobox-2", event => ({
-    value: event.currentTarget?.value || ""
+    value: getEventValue(event)
   }));
 
   bindLoggedEvent("#table-input-1", "sgds-input", "input-1", event => ({
-    value: event.currentTarget?.value || ""
+    value: getEventValue(event)
   }));
   bindLoggedEvent("#table-input-1", "sgds-change", "input-1", event => ({
-    value: event.currentTarget?.value || ""
+    value: getEventValue(event)
   }));
   bindLoggedEvent("#table-input-2", "sgds-input", "input-2", event => ({
-    value: event.currentTarget?.value || ""
+    value: getEventValue(event)
   }));
   bindLoggedEvent("#table-input-2", "sgds-change", "input-2", event => ({
-    value: event.currentTarget?.value || ""
+    value: getEventValue(event)
   }));
 
   bindLoggedEvent("#table-badges-1", "click", "badges-1", event => ({
-    text: event.target?.textContent?.trim() || ""
+    text: getEventText(event)
   }));
   bindLoggedEvent("#table-badges-2", "click", "badges-2", event => ({
-    text: event.target?.textContent?.trim() || ""
+    text: getEventText(event)
   }));
 
   const interactiveTable = document.getElementById("interactive-table");
