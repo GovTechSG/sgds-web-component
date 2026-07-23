@@ -98,13 +98,24 @@ a:hover {
 }
 
 .sgds-masthead .sgds-masthead-content {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  display: none;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: grid-template-rows 0.3s cubic-bezier(0.25, 0, 0.25, 1), opacity 0.3s cubic-bezier(0.25, 0, 0.25, 1), padding 0.3s cubic-bezier(0.25, 0, 0.25, 1);
 }
 
 .sgds-masthead .sgds-masthead-content.show {
-  display: block;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.sgds-masthead .sgds-masthead-content > .content-grid {
+  min-height: 0;
 }
 
 .content-grid {
