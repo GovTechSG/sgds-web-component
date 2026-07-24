@@ -49,16 +49,16 @@ The **SGDS Grid System** is a mobile-first, fully responsive layout system based
 
 ### Standard (`.sgds-container`)
 
-The gutter uses `var(--sgds-gap-layout-md)` across all breakpoints.
+The gutter uses `var(--sgds-layout-gap-md)` across all breakpoints.
 
 | Breakpoint        | Screen Size      | Class Prefix       | Columns | Container Width | Gutters                    | Outer Margins |
 | ----------------- | ---------------- | ------------------ | ------- | --------------- | -------------------------- | ------------- |
-| Extra Small       | 511px and below  | `.sgds-col-*`      | 4       | auto            | `var(--sgds-gap-layout-md)` | 20            |
-| Small             | 512px - 767px    | `.sgds-col-sm-*`   | 8       | auto            | `var(--sgds-gap-layout-md)` | 24            |
-| Medium            | 768px - 1023px   | `.sgds-col-md-*`   | 8       | auto            | `var(--sgds-gap-layout-md)` | 28            |
-| Large             | 1024px - 1279px  | `.sgds-col-lg-*`   | 12      | 888px           | `var(--sgds-gap-layout-md)` | auto          |
-| Extra Large       | 1280px - 1439px  | `.sgds-col-xl-*`   | 12      | 1168px          | `var(--sgds-gap-layout-md)` | auto          |
-| Extra Extra Large | 1440px and above | `.sgds-col-2-xl-*` | 12      | 1312px          | `var(--sgds-gap-layout-md)` | auto          |
+| Extra Small       | 511px and below  | `.sgds-col-*`      | 4       | auto            | `var(--sgds-layout-gap-md)` | 20            |
+| Small             | 512px - 767px    | `.sgds-col-sm-*`   | 8       | auto            | `var(--sgds-layout-gap-md)` | 24            |
+| Medium            | 768px - 1023px   | `.sgds-col-md-*`   | 8       | auto            | `var(--sgds-layout-gap-md)` | 28            |
+| Large             | 1024px - 1279px  | `.sgds-col-lg-*`   | 12      | 888px           | `var(--sgds-layout-gap-md)` | auto          |
+| Extra Large       | 1280px - 1439px  | `.sgds-col-xl-*`   | 12      | 1168px          | `var(--sgds-layout-gap-md)` | auto          |
+| Extra Extra Large | 1440px and above | `.sgds-col-2-xl-*` | 12      | 1312px          | `var(--sgds-layout-gap-md)` | auto          |
 
 ### With Sticky Sidebar (`.sgds-container-sidebar`)
 
