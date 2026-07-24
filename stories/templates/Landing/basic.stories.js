@@ -5,7 +5,7 @@ const Template = () => html`
     .hero-row {
       display: flex;
       flex-direction: column;
-      gap: var(--sgds-gap-layout-md);
+      gap: var(--sgds-layout-gap-md);
     }
     .hero-row > * {
       width: 100%;
@@ -28,7 +28,7 @@ const Template = () => html`
     .stats-row {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--sgds-gap-layout-md);
+      gap: var(--sgds-layout-gap-md);
     }
     .stats-row > * {
       width: 100%;
@@ -91,7 +91,7 @@ const Template = () => html`
   <!--   FEATURES - feature-cards-below pattern                            -->
   <section class="sgds:bg-default sgds:py-layout-md">
     <div class="sgds-container">
-      <div style="display: flex; flex-direction: column; gap: var(--sgds-gap-layout-md);">
+      <div style="display: flex; flex-direction: column; gap: var(--sgds-layout-gap-md);">
         <div
           class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left"
           style="padding-bottom: var(--sgds-spacing-layout-md);"
@@ -113,7 +113,7 @@ const Template = () => html`
           </h5>
         </div>
 
-        <div class="sgds-grid" style="gap: var(--sgds-gap-layout-md);">
+        <div class="sgds-grid" style="gap: var(--sgds-layout-gap-md);">
           <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
             <sgds-card tinted hideBorder stretchedLink>
               <span slot="subtitle">FAMILY</span>
@@ -163,7 +163,7 @@ const Template = () => html`
   <!--   STATS - section header + 4 stats                                  -->
   <section class="sgds:bg-default sgds:py-layout-md">
     <div class="sgds-container">
-      <div style="display: flex; flex-direction: column; gap: var(--sgds-gap-layout-md);">
+      <div style="display: flex; flex-direction: column; gap: var(--sgds-layout-gap-md);">
         <div style="max-width: var(--sgds-text-max-width);">
           <div
             class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"

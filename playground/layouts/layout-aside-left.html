@@ -19,7 +19,9 @@
     border-radius: 0 0 8px 0;
     text-decoration: none;
   }
-  .skip-link:focus { left: 0; }
+  .skip-link:focus {
+    left: 0;
+  }
 
   /* Sticky top bar */
   .shell-nav {
@@ -49,7 +51,6 @@
 </style>
 
 <body>
-
   <!-- Skip navigation for keyboard / screen reader users -->
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -81,31 +82,23 @@
 
   <!-- ── MAIN ── -->
   <div class="shell-main">
-
     <main id="main-content" tabindex="-1" class="sgds:flex-1">
       <div class="sgds-container sgds:py-layout-md">
-        <div class="sgds-grid" style="gap: var(--sgds-gap-layout-md); align-items: stretch;">
-
+        <div class="sgds-grid" style="gap: var(--sgds-layout-gap-md); align-items: stretch">
           <!-- ASIDE — 4 cols -->
-          <aside class="content-placeholder sgds:border sgds:border-muted sgds-col-4 sgds-col-sm-8 sgds-col-lg-4"></aside>
+          <aside
+            class="content-placeholder sgds:border sgds:border-muted sgds-col-4 sgds-col-sm-8 sgds-col-lg-4"
+          ></aside>
 
           <!-- CONTENT — 8 cols -->
           <div class="content-placeholder sgds:border sgds:border-muted sgds-col-8 sgds-col-sm-8 sgds-col-lg-8"></div>
-
         </div>
       </div>
     </main>
 
-    <sgds-footer
-      privacyhref="#"
-      termsofusehref="#"
-      contacthref="#"
-      feedbackhref="#"
-    >
+    <sgds-footer privacyhref="#" termsofusehref="#" contacthref="#" feedbackhref="#">
       <h2 slot="title">My App</h2>
       <p slot="description">A Singapore Government digital service.</p>
     </sgds-footer>
-
   </div>
-
 </body>
