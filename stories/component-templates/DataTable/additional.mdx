@@ -1,0 +1,120 @@
+## Basic content examples
+
+The basic table story uses static cell content patterns without event handlers:
+`sgds-badge` for status, a combined controls column with `sgds-combo-box` and `sgds-input`
+(plus a small `sgds-button` with `size="sm"`), and a small `sgds-overflow-menu`.
+
+<Canvas of={DataTableStories.Basic}>
+  <Story of={DataTableStories.Basic} />
+</Canvas>
+
+## Server Loading
+
+Use `mode="server"` with `isLoading` to show the loading state while waiting for remote data.
+For backend sorting, set `serverSort` on `<sgds-data-table>` and handle the emitted
+`sgds-sort` event in your application.
+
+<Canvas of={DataTableStories.ServerLoading}>
+  <Story of={DataTableStories.ServerLoading} />
+</Canvas>
+
+## No rows
+
+Use a header-only table when data is unavailable. The component shows the default no-data state.
+
+<Canvas of={DataTableStories.NoRows}>
+  <Story of={DataTableStories.NoRows} />
+</Canvas>
+
+## Multi-select
+
+Set `multiSelect` to render a checkbox column for row selection.
+
+<Canvas of={DataTableStories.MultiSelect}>
+  <Story of={DataTableStories.MultiSelect} />
+</Canvas>
+
+## Multi-select pre-checked on load
+
+Set `checked` on body rows to preselect them on initial render.
+The header checkbox state is computed on load and shows indeterminate or checked accordingly.
+
+<Canvas of={DataTableStories.MultiSelectPrecheckedOnLoad}>
+  <Story of={DataTableStories.MultiSelectPrecheckedOnLoad} />
+</Canvas>
+
+## Expandable rows
+
+Set `expand` on a row and provide content in the `content` slot.
+Set `open` if a row should start expanded.
+This example uses static `sgds-table` samples inside expandable content, showing three rows in the first expandable section and two rows in the second.
+
+<Canvas of={DataTableStories.ExpandableRows}>
+  <Story of={DataTableStories.ExpandableRows} />
+</Canvas>
+
+## Expandable with multi-select
+
+Use `expand` and `multiSelect` together when rows need both selection and detail content.
+
+<Canvas of={DataTableStories.ExpandableMultiSelect}>
+  <Story of={DataTableStories.ExpandableMultiSelect} />
+</Canvas>
+
+## Custom footer text
+
+Set `footerText` to replace the default results summary text in the footer.
+
+<Canvas of={DataTableStories.CustomFooterText}>
+  <Story of={DataTableStories.CustomFooterText} />
+</Canvas>
+
+## Hide footer
+
+Set `hideFooter` to hide both the results summary and pagination controls.
+
+<Canvas of={DataTableStories.HideFooter}>
+  <Story of={DataTableStories.HideFooter} />
+</Canvas>
+
+## Header Text Alignment
+
+Use `textAlign="right"` on `<sgds-data-table-head>` to right-align that header and all body cells in the same column.
+
+<Canvas of={DataTableStories.HeaderTextAlignment}>
+  <Story of={DataTableStories.HeaderTextAlignment} />
+</Canvas>
+
+## Header and cell props
+
+Use `sorting`, `sortKey`, `width`, and `textAlign` on header cells.
+This example keeps all cells unmerged to show a standard sortable fixed-layout table.
+Use the row colspan example below when rows need merged columns.
+
+Only headers with `sorting` participate in sort interactions.
+When the sort direction cycles back to `none`, client-mode rows return to their initial slotted order.
+
+<Canvas of={DataTableStories.HeaderColspanRowspan}>
+  <Story of={DataTableStories.HeaderColspanRowspan} />
+</Canvas>
+
+## Default sort
+
+Set `ariasort` on a sortable header to present an initial sort state on first render.
+
+<Canvas of={DataTableStories.DefaultSort}>
+  <Story of={DataTableStories.DefaultSort} />
+</Canvas>
+
+## Sorting with no rows
+
+When there are no body rows, sort controls are disabled.
+
+## Row colspan example (5 by 5)
+
+This table has five columns and five data rows.
+Rows two and four use `colspan="2"` to merge the item and category columns.
+
+<Canvas of={DataTableStories.RowColspanFiveByFive}>
+  <Story of={DataTableStories.RowColspanFiveByFive} />
+</Canvas>
