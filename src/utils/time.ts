@@ -1,4 +1,4 @@
-import { getDaysInMonth, isLastDayOfMonth, lastDayOfMonth } from "date-fns";
+import { getDaysInMonth, isLastDayOfMonth, lastDayOfMonth } from "./date-helpers";
 
 export const DATE_PATTERNS = {
   "DD/MM/YYYY": {
