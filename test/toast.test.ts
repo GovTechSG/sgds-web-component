@@ -3,6 +3,8 @@ import { aTimeout, expect, fixture, elementUpdated } from "@open-wc/testing";
 import { html } from "lit";
 import { waitForEvent } from "../src/utils/event";
 import type { SgdsToast } from "../src/components";
+import type { SgdsToastContainer } from "../src/components/Toast/sgds-toast-container";
+import { toast } from "../src/components/Toast";
 import sinon from "sinon";
 
 describe("SgdsToast component", () => {
@@ -101,5 +103,92 @@ describe("SgdsToast component", () => {
     const el = await fixture<SgdsToast>(html`<sgds-toast show></sgds-toast>`);
     await elementUpdated(el);
     expect(el.shadowRoot?.querySelector(".toast-action.d-none")).to.exist;
+  });
+});
+
+describe("SgdsToastContainer.toast() method", () => {
+  it("creates a toast element and appends it to the container", async () => {
+    const container = await fixture<SgdsToastContainer>(
+      html`<sgds-toast-container position="bottom-end"></sgds-toast-container>`
+    );
+    const toastEl = container.toast({ title: "Test" });
+    expect(toastEl).to.exist;
+    expect(toastEl.title).to.equal("Test");
+    expect(toastEl.parentElement).to.equal(container);
+  });
+
+  it("applies default options", async () => {
+    const container = await fixture<SgdsToastContainer>(
+      html`<sgds-toast-container position="bottom-end"></sgds-toast-container>`
+    );
+    const toastEl = container.toast({ title: "Defaults" });
+    expect(toastEl.autohide).to.be.true;
+    expect(toastEl.delay).to.equal(5000);
+    expect(toastEl.dismissible).to.be.true;
+  });
+
+  it("applies custom options", async () => {
+    const container = await fixture<SgdsToastContainer>(
+      html`<sgds-toast-container position="bottom-end"></sgds-toast-container>`
+    );
+    const toastEl = container.toast({
+      title: "Custom",
+      message: "Hello",
+      variant: "danger",
+      autohide: false,
+      delay: 3000,
+      dismissible: false
+    });
+    expect(toastEl.variant).to.equal("danger");
+    expect(toastEl.autohide).to.be.false;
+    expect(toastEl.delay).to.equal(3000);
+    expect(toastEl.dismissible).to.be.false;
+    expect(toastEl.textContent).to.equal("Hello");
+  });
+
+  it("auto-removes toast from DOM after hiding", async () => {
+    const container = await fixture<SgdsToastContainer>(
+      html`<sgds-toast-container position="bottom-end"></sgds-toast-container>`
+    );
+    const toastEl = container.toast({ title: "AutoRemove" });
+    await aTimeout(100);
+    await toastEl.hideToast();
+    await aTimeout(100);
+    expect(toastEl.parentElement).to.be.null;
+  }).timeout(6000);
+});
+
+describe("toast() utility function", () => {
+  afterEach(() => {
+    document.querySelectorAll("sgds-toast-container").forEach(el => el.remove());
+  });
+
+  it("creates a container and toast when called", async () => {
+    const toastEl = toast({ title: "Utility", position: "bottom-end" });
+    await elementUpdated(toastEl);
+    expect(toastEl).to.exist;
+    expect(toastEl.title).to.equal("Utility");
+    const container = toastEl.parentElement as SgdsToastContainer;
+    expect(container).to.exist;
+    expect(container.position).to.equal("bottom-end");
+  });
+
+  it("reuses the same container for the same position", async () => {
+    const t1 = toast({ title: "First", position: "top-center" });
+    const t2 = toast({ title: "Second", position: "top-center" });
+    expect(t1.parentElement).to.equal(t2.parentElement);
+  });
+
+  it("creates separate containers for different positions", async () => {
+    const t1 = toast({ title: "Bottom", position: "bottom-end" });
+    const t2 = toast({ title: "Top", position: "top-center" });
+    expect(t1.parentElement).to.not.equal(t2.parentElement);
+  });
+
+  it("defaults to bottom-end position", async () => {
+    const toastEl = toast({ title: "Default position" });
+    await elementUpdated(toastEl);
+    const container = toastEl.parentElement as SgdsToastContainer;
+    expect(container.position).to.equal("bottom-end");
   });
 });

@@ -32,7 +32,6 @@
   --toast-container-bottom: var(--sgds-spacer-8);
 }
 
-
 .top-center {
   top: var(--toast-container-top);
   left: 50%;
@@ -61,16 +60,22 @@
 }
 
 slot {
-  display: flex;
-  gap: var(--sgds-layout-gap-md);
+  display: grid;
+  justify-items: center;
 }
 
-:host([position^="top"]) slot {
- flex-direction: column-reverse;
-}
-:host([position^="bottom"]) slot {
- flex-direction: column;
+::slotted(sgds-toast) {
+  grid-row: 1;
+  grid-column: 1;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1), opacity 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+:host([position^="top"]) ::slotted(sgds-toast) {
+  align-self: start;
+}
+
+:host([position^="bottom"]) ::slotted(sgds-toast) {
+  align-self: end;
+}
 
 

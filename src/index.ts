@@ -37,6 +37,7 @@ import "./components/Tab";
 import "./components/Table";
 import "./components/Textarea";
 import "./components/Toast";
+export { toast } from "./components/Toast";
 import "./components/Tooltip";
 import "./components/TableOfContents";
 import "./components/Subnav";
