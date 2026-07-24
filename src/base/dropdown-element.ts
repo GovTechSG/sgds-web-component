@@ -4,6 +4,8 @@ import { computePosition, flip, shift, offset, Placement, Middleware, autoUpdate
 import SgdsElement from "./sgds-element";
 import generateId from "../utils/generateId";
 import { PropertyValueMap } from "lit";
+import { animateTo } from "../utils/animate";
+import { getAnimation, setDefaultAnimation } from "../utils/animation-registry";
 
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
@@ -97,8 +99,23 @@ export class DropdownElement extends SgdsElement {
     this.menuIsOpen = true;
     this.emit("sgds-show");
     await this.updateFloatingPosition();
-    this.emit("sgds-after-show");
     this._startAutoUpdate();
+
+    if (this.menuRef.value) {
+      const placement = this.menuRef.value.getAttribute("data-placement") || "";
+      const translateOffset = placement.startsWith("top") ? "4px" : "-4px";
+      const { options } = getAnimation(this, "dropdown.show");
+      await animateTo(
+        this.menuRef.value,
+        [
+          { opacity: 0, transform: `translateY(${translateOffset})` },
+          { opacity: 1, transform: "translateY(0)" }
+        ],
+        options
+      );
+    }
+
+    this.emit("sgds-after-show");
   }
 
   /** Starts Floating UI's autoUpdate loop, recomputing menu position on scroll, resize, or ancestor layout changes. Stores the cleanup function to stop tracking when the menu closes. */
@@ -111,12 +128,26 @@ export class DropdownElement extends SgdsElement {
   }
 
   /** When invoked, hides the dropdown menu */
-  public hideMenu(isOutside?: boolean) {
+  public async hideMenu(isOutside?: boolean) {
     if (!this.menuIsOpen) return;
     this.emit("sgds-hide", { detail: { isOutside } });
 
+    if (this.menuRef.value) {
+      const placement = this.menuRef.value.getAttribute("data-placement") || "";
+      const translateOffset = placement.startsWith("top") ? "4px" : "-4px";
+      const { options } = getAnimation(this, "dropdown.hide");
+      await animateTo(
+        this.menuRef.value,
+        [
+          { opacity: 1, transform: "translateY(0)" },
+          { opacity: 0, transform: `translateY(${translateOffset})` }
+        ],
+        options
+      );
+    }
+
     this.menuIsOpen = false;
-    setTimeout(() => this.emit("sgds-after-hide"), 0);
+    this.emit("sgds-after-hide");
 
     if (this._cleanupAutoUpdate) {
       this._cleanupAutoUpdate();
@@ -222,3 +253,13 @@ export class DropdownElement extends SgdsElement {
     });
   }
 }
+
+setDefaultAnimation("dropdown.show", {
+  keyframes: [],
+  options: { duration: 200, easing: "cubic-bezier(0.1, 0, 0.5, 0)" }
+});
+
+setDefaultAnimation("dropdown.hide", {
+  keyframes: [],
+  options: { duration: 200, easing: "cubic-bezier(0.15, 0.6, 0.6, 1)" }
+});
