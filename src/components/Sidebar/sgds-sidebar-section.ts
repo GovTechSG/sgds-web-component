@@ -82,7 +82,20 @@ export class SgdsSidebarSection extends SidebarElement {
    * @returns {void}
    */
   protected override _handleClick(): void {
-    if (this.collapsible) this.collapsed = !this.collapsed;
+    if (this.collapsible) {
+      this.collapsed = !this.collapsed;
+      this._childElements.forEach(v => {
+        v._hidden = this.collapsed;
+      });
+    }
+  }
+
+  protected override _handleSlotChange(): void {
+    super._handleSlotChange();
+
+    this._childElements.forEach(v => {
+      v._hidden = this.collapsed;
+    });
   }
 
   render() {
@@ -103,7 +116,7 @@ export class SgdsSidebarSection extends SidebarElement {
               @click=${this._handleClick}
               aria-expanded=${!this.collapsed}
               aria-disabled=${!this.collapsible}
-              tabindex=${this.collapsible ? 0 : -1}
+              tabindex=${this.collapsible && !this._sidebarCollapsed ? 0 : -1}
             >
               <span>${this.title}</span>
               ${this.collapsible
