@@ -33,7 +33,12 @@ const ConstraintValidationTemplate = args => {
                 </sgds-input>
               </div>
               <div>
-                <sgds-datepicker required hasFeedback="both" name="appointmentDate" label="Appointment date"></sgds-datepicker>
+                <sgds-datepicker
+                  required
+                  hasFeedback="both"
+                  name="appointmentDate"
+                  label="Appointment date"
+                ></sgds-datepicker>
               </div>
               <div>
                 <sgds-select
@@ -118,7 +123,9 @@ const ConstraintValidationTemplate = args => {
                 >
               </div>
               <div>
-                <sgds-checkbox name="consentA" value="consentA" required hasFeedback="both">I consent to ...</sgds-checkbox>
+                <sgds-checkbox name="consentA" value="consentA" required hasFeedback="both"
+                  >I consent to ...</sgds-checkbox
+                >
               </div>
             </div>
             <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
@@ -178,7 +185,12 @@ const FormDataTemplate = args => {
                 ></sgds-quantity-toggle>
               </div>
               <div>
-                <sgds-datepicker required hasFeedback="both" name="appointmentDate" label="Appointment date"></sgds-datepicker>
+                <sgds-datepicker
+                  required
+                  hasFeedback="both"
+                  name="appointmentDate"
+                  label="Appointment date"
+                ></sgds-datepicker>
               </div>
               <div>
                 <sgds-select
@@ -259,7 +271,9 @@ const FormDataTemplate = args => {
                 >
               </div>
               <div>
-                <sgds-checkbox name="consentA" value="consentA" required hasFeedback="both">I consent to ...</sgds-checkbox>
+                <sgds-checkbox name="consentA" value="consentA" required hasFeedback="both"
+                  >I consent to ...</sgds-checkbox
+                >
               </div>
             </div>
             <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">

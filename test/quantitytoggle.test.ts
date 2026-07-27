@@ -444,9 +444,7 @@ describe("reset clears invalid state when noValidate is true", () => {
 
 describe("setInvalid emits sgds-invalid and sgds-valid events", () => {
   it("setInvalid(true) emits sgds-invalid event", async () => {
-    const el = await fixture<SgdsQuantityToggle>(html`
-      <sgds-quantity-toggle noValidate></sgds-quantity-toggle>
-    `);
+    const el = await fixture<SgdsQuantityToggle>(html` <sgds-quantity-toggle noValidate></sgds-quantity-toggle> `);
     const handler = sinon.spy();
     el.addEventListener("sgds-invalid", handler);
 
@@ -456,9 +454,7 @@ describe("setInvalid emits sgds-invalid and sgds-valid events", () => {
   });
 
   it("setInvalid(false) emits sgds-valid event", async () => {
-    const el = await fixture<SgdsQuantityToggle>(html`
-      <sgds-quantity-toggle noValidate></sgds-quantity-toggle>
-    `);
+    const el = await fixture<SgdsQuantityToggle>(html` <sgds-quantity-toggle noValidate></sgds-quantity-toggle> `);
     const handler = sinon.spy();
     el.addEventListener("sgds-valid", handler);
 
@@ -468,9 +464,7 @@ describe("setInvalid emits sgds-invalid and sgds-valid events", () => {
   });
 
   it("setInvalid(true) followed by setInvalid(false) emits both events in order", async () => {
-    const el = await fixture<SgdsQuantityToggle>(html`
-      <sgds-quantity-toggle noValidate></sgds-quantity-toggle>
-    `);
+    const el = await fixture<SgdsQuantityToggle>(html` <sgds-quantity-toggle noValidate></sgds-quantity-toggle> `);
     const invalidHandler = sinon.spy();
     const validHandler = sinon.spy();
     el.addEventListener("sgds-invalid", invalidHandler);
