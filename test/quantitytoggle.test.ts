@@ -307,3 +307,203 @@ describe("in form context", () => {
     expect(el.invalid).to.be.false;
   });
 });
+
+describe("noValidate disables native and sgds validation behaviours", () => {
+  it("form submission proceeds with noValidate even when min constraint is violated", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-quantity-toggle noValidate name="qty" min="3" value="1"></sgds-quantity-toggle>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    form.addEventListener("submit", submitHandler);
+
+    const button = form.querySelector("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("clicking +/- buttons does not show invalid state when noValidate is set", async () => {
+    const el = await fixture<SgdsQuantityToggle>(
+      html`<sgds-quantity-toggle noValidate hasFeedback="both" min="3" value="0"></sgds-quantity-toggle>`
+    );
+    const plusBtn = el.shadowRoot?.querySelectorAll("sgds-icon-button")[1] as SgdsIconButton;
+    plusBtn?.click();
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null;
+  });
+
+  it("direct input change does not trigger validation when noValidate is set", async () => {
+    const el = await fixture<SgdsQuantityToggle>(
+      html`<sgds-quantity-toggle noValidate hasFeedback="both" min="5"></sgds-quantity-toggle>`
+    );
+    const input = el.shadowRoot?.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    await sendKeys({ press: "2" });
+    input?.blur();
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+    expect(el.shadowRoot?.querySelector(".invalid-feedback")).to.be.null;
+  });
+});
+
+describe("with noValidate, setInvalid(true) still works for programmatic control", () => {
+  it("setInvalid(true) sets invalid state", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`
+      <sgds-quantity-toggle noValidate hasFeedback="both"></sgds-quantity-toggle>
+    `);
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+  });
+
+  it("setInvalid(false) clears invalid state", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`
+      <sgds-quantity-toggle noValidate hasFeedback="both"></sgds-quantity-toggle>
+    `);
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(el.invalid).to.be.true;
+
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(el.invalid).to.be.false;
+  });
+});
+
+describe("form novalidate for sgds-quantity-toggle", () => {
+  it("when form has novalidate, form submission proceeds even when min constraint is violated", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-quantity-toggle name="qty" min="3" value="1"></sgds-quantity-toggle>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => event.preventDefault());
+    expect(form.reportValidity()).to.equal(true);
+    form.addEventListener("submit", submitHandler);
+    const button = form.querySelector("sgds-button");
+    button?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+
+  it("when form has novalidate, quantity-toggle does not show invalid state on touch", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-quantity-toggle hasFeedback="both" min="3" value="1"></sgds-quantity-toggle>
+      </form>
+    `);
+    const el = form.querySelector<SgdsQuantityToggle>("sgds-quantity-toggle");
+    const input = el?.shadowRoot?.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    input?.blur();
+    await el?.updateComplete;
+    expect(el?.invalid).to.be.false;
+  });
+});
+
+describe("reset clears invalid state when noValidate is true", () => {
+  it("reset clears programmatic invalid state when component has noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-quantity-toggle noValidate name="qty"></sgds-quantity-toggle>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const el = form.querySelector<SgdsQuantityToggle>("sgds-quantity-toggle");
+    el?.setInvalid(true);
+    await el?.updateComplete;
+    expect(el?.invalid).to.be.true;
+
+    setTimeout(() => form.querySelector("sgds-button")?.click());
+    await waitUntil(() => el?.invalid === false);
+    expect(el?.invalid).to.be.false;
+  });
+
+  it("reset clears programmatic invalid state when form has novalidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-quantity-toggle name="qty"></sgds-quantity-toggle>
+        <sgds-button type="reset">Reset</sgds-button>
+      </form>
+    `);
+    const el = form.querySelector<SgdsQuantityToggle>("sgds-quantity-toggle");
+    el?.setInvalid(true);
+    await el?.updateComplete;
+    expect(el?.invalid).to.be.true;
+
+    setTimeout(() => form.querySelector("sgds-button")?.click());
+    await waitUntil(() => el?.invalid === false);
+    expect(el?.invalid).to.be.false;
+  });
+});
+
+describe("setInvalid emits sgds-invalid and sgds-valid events", () => {
+  it("setInvalid(true) emits sgds-invalid event", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`
+      <sgds-quantity-toggle noValidate></sgds-quantity-toggle>
+    `);
+    const handler = sinon.spy();
+    el.addEventListener("sgds-invalid", handler);
+
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("setInvalid(false) emits sgds-valid event", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`
+      <sgds-quantity-toggle noValidate></sgds-quantity-toggle>
+    `);
+    const handler = sinon.spy();
+    el.addEventListener("sgds-valid", handler);
+
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(handler).to.have.been.calledOnce;
+  });
+
+  it("setInvalid(true) followed by setInvalid(false) emits both events in order", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`
+      <sgds-quantity-toggle noValidate></sgds-quantity-toggle>
+    `);
+    const invalidHandler = sinon.spy();
+    const validHandler = sinon.spy();
+    el.addEventListener("sgds-invalid", invalidHandler);
+    el.addEventListener("sgds-valid", validHandler);
+
+    el.setInvalid(true);
+    await el.updateComplete;
+    expect(invalidHandler).to.have.been.calledOnce;
+    expect(validHandler).not.to.have.been.called;
+
+    el.setInvalid(false);
+    await el.updateComplete;
+    expect(validHandler).to.have.been.calledOnce;
+  });
+});
+
+describe("should still populate FormData when noValidate is enabled", () => {
+  it("FormData contains the quantity-toggle value with noValidate", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-quantity-toggle noValidate name="qty" value="7"></sgds-quantity-toggle>
+        <sgds-button type="submit">Submit</sgds-button>
+      </form>
+    `);
+    const submitHandler = sinon.spy((event: SubmitEvent) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      expect(formData.get("qty")).to.equal("7");
+    });
+
+    form.addEventListener("submit", submitHandler);
+    form.querySelector("sgds-button")?.click();
+    await waitUntil(() => submitHandler.calledOnce);
+    expect(submitHandler).to.have.been.calledOnce;
+  });
+});
