@@ -137,7 +137,6 @@ describe("sgds-combo-box ", () => {
         <div
           class="dropdown-menu"
           id="id-7895-sgds-dropdown-menu-div"
-          part="menu"
           tabindex="-1"
           role="menu"
           aria-label="Options"
