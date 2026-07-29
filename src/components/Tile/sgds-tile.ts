@@ -1,6 +1,6 @@
 import SgdsElement from "../../base/sgds-element";
 import { html, nothing } from "lit";
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import tileStyle from "./tile.css";
 import SgdsCheckbox from "../Checkbox/sgds-checkbox";
@@ -37,8 +37,14 @@ export class SgdsTile extends SgdsElement {
   /** Sets the tile to an invalid state */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** The value of the tile, used by sgds-tile-group to track selection */
+  @property({ reflect: true }) value = "";
+
+  /**@internal */
+  @state() _isGrouped = false;
+
   private _handleTileClick() {
-    if (this.disabled || !this.variant) return;
+    if (this.disabled || !this.variant || this._isGrouped) return;
 
     if (this.variant === "checkbox") {
       const checkbox = this.shadowRoot!.querySelector("sgds-checkbox") as SgdsCheckbox;
@@ -72,7 +78,7 @@ export class SgdsTile extends SgdsElement {
     return html`
       <div
         class=${classMap({ tile: true, disabled: this.disabled, checked: this.checked, invalid: this.invalid })}
-        tabindex=${this.disabled ? "-1" : "0"}
+        tabindex=${this._isGrouped || this.disabled ? "-1" : "0"}
         @click=${this._handleTileClick}
         @keydown=${this._handleKeyDown}
       >

@@ -1,0 +1,207 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height" />
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <link href="../src/css/utility.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div class="sgds-container">
+      <h2>Tile Group - Radio mode</h2>
+      <sgds-tile-group label="Select a plan" name="plan" required hasFeedback invalidFeedback="Please select a plan">
+        <sgds-tile value="basic">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Basic</span>
+          <span slot="description">Free tier with limited features.</span>
+        </sgds-tile>
+        <sgds-tile value="pro">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Pro</span>
+          <span slot="description">For professionals and small teams.</span>
+        </sgds-tile>
+        <sgds-tile value="enterprise">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Enterprise</span>
+          <span slot="description">For large organisations with advanced needs.</span>
+        </sgds-tile>
+      </sgds-tile-group>
+
+      <br />
+
+      <h2>Tile Group - Radio mode (pre-selected)</h2>
+      <sgds-tile-group label="Select a plan" name="plan2" value="pro">
+        <sgds-tile value="basic">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Basic</span>
+          <span slot="description">Free tier with limited features.</span>
+        </sgds-tile>
+        <sgds-tile value="pro">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Pro</span>
+          <span slot="description">For professionals and small teams.</span>
+        </sgds-tile>
+        <sgds-tile value="enterprise">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Enterprise</span>
+          <span slot="description">For large organisations with advanced needs.</span>
+        </sgds-tile>
+      </sgds-tile-group>
+
+      <br />
+
+      <h2>Tile Group - Checkbox mode</h2>
+      <sgds-tile-group label="Select features" name="features" variant="checkbox">
+        <sgds-tile value="analytics">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Analytics</span>
+          <span slot="description">Track usage and performance metrics.</span>
+        </sgds-tile>
+        <sgds-tile value="reporting">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Reporting</span>
+          <span slot="description">Generate reports and export data.</span>
+        </sgds-tile>
+        <sgds-tile value="automation">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Automation</span>
+          <span slot="description">Automate workflows and processes.</span>
+        </sgds-tile>
+      </sgds-tile-group>
+
+      <br />
+
+      <h2>Tile Group - Checkbox mode (pre-selected)</h2>
+      <sgds-tile-group label="Select features" name="features2" variant="checkbox" value="analytics,automation">
+        <sgds-tile value="analytics">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Analytics</span>
+          <span slot="description">Track usage and performance metrics.</span>
+        </sgds-tile>
+        <sgds-tile value="reporting">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Reporting</span>
+          <span slot="description">Generate reports and export data.</span>
+        </sgds-tile>
+        <sgds-tile value="automation">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Automation</span>
+          <span slot="description">Automate workflows and processes.</span>
+        </sgds-tile>
+      </sgds-tile-group>
+
+      <br />
+
+      <h2>Tile Group - Disabled</h2>
+      <sgds-tile-group label="Disabled group" name="disabled-group" disabled>
+        <sgds-tile value="a">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Option A</span>
+          <span slot="description">Disabled option.</span>
+        </sgds-tile>
+        <sgds-tile value="b">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Option B</span>
+          <span slot="description">Disabled option.</span>
+        </sgds-tile>
+      </sgds-tile-group>
+
+      <br />
+
+      <h2>Tile Group - Stacked layout</h2>
+      <sgds-tile-group label="Select a category" name="category">
+        <sgds-tile value="finance" stacked>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Finance</span>
+          <span slot="description">Financial services and tools.</span>
+        </sgds-tile>
+        <sgds-tile value="health" stacked>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Health</span>
+          <span slot="description">Healthcare and wellness.</span>
+        </sgds-tile>
+        <sgds-tile value="education" stacked>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Education</span>
+          <span slot="description">Learning and development.</span>
+        </sgds-tile>
+      </sgds-tile-group>
+
+      <br />
+
+      <h2>Tile Group - Form submission test</h2>
+      <form id="test-form" onsubmit="handleSubmit(event)">
+        <sgds-tile-group label="Pick one" name="selection" required hasFeedback invalidFeedback="Selection is required">
+          <sgds-tile value="option1">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Option 1</span>
+            <span slot="description">First option.</span>
+          </sgds-tile>
+          <sgds-tile value="option2">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Option 2</span>
+            <span slot="description">Second option.</span>
+          </sgds-tile>
+        </sgds-tile-group>
+        <br />
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+        <pre id="form-output"></pre>
+      </form>
+
+      <h2>Tile Group - Checkbox with required validation (min 1 checked)</h2>
+      <form id="checkbox-form" onsubmit="handleCheckboxSubmit(event)">
+        <sgds-tile-group label="Select at least one feature" name="required-features" variant="checkbox" required hasFeedback invalidFeedback="Please select at least one feature">
+          <sgds-tile value="dashboard">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Dashboard</span>
+            <span slot="description">Overview and metrics.</span>
+          </sgds-tile>
+          <sgds-tile value="notifications">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Notifications</span>
+            <span slot="description">Alerts and messages.</span>
+          </sgds-tile>
+          <sgds-tile value="settings">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Settings</span>
+            <span slot="description">Configuration and preferences.</span>
+          </sgds-tile>
+        </sgds-tile-group>
+        <br />
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+        <pre id="checkbox-form-output"></pre>
+      </form>
+
+      <br />
+
+      <script>
+        function handleCheckboxSubmit(e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const output = {};
+          formData.forEach((value, key) => (output[key] = value));
+          document.getElementById("checkbox-form-output").textContent = JSON.stringify(output, null, 2);
+        }
+
+        function handleSubmit(e) {
+          e.preventDefault();
+          const formData = new FormData(e.target);
+          const output = {};
+          formData.forEach((value, key) => (output[key] = value));
+          document.getElementById("form-output").textContent = JSON.stringify(output, null, 2);
+        }
+
+        // Log sgds-change events
+        document.querySelectorAll("sgds-tile-group").forEach(group => {
+          group.addEventListener("sgds-change", e => {
+            console.log(`[${group.getAttribute("name")}] sgds-change:`, e.detail.value);
+          });
+        });
+      </script>
+    </div>
+  </body>
+</html>

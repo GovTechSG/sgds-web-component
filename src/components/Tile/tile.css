@@ -1,30 +1,34 @@
+:host(:focus) {
+  outline: none;
+}
+
 .tile {
   position: relative;
   padding: var(--sgds-padding-xl);
   background-color: var(--sgds-surface-default);
   min-width: var(--sgds-dimension-256, 256px);
-  border: var(--sgds-border-width-1, 1px) solid var(--sgds-border-color-muted, #DFDFDF);
+  border: var(--sgds-border-width-1, 1px) solid var(--sgds-border-color-muted, #dfdfdf);
   border-radius: var(--sgds-border-radius-md);
   cursor: pointer;
-}
-
-.tile:focus {
-  outline: none;
 }
 
 .tile:hover,
 .tile:focus,
 .tile:focus-within {
-  border: var(--sgds-border-width-2, 2px) solid var(--sgds-border-color-emphasis, #3B3B3B);
+  border: var(--sgds-border-width-2, 2px) solid var(--sgds-border-color-emphasis, #3b3b3b);
   box-shadow: 0 0 2px 0 rgba(14, 14, 14, 0.16), 0 8px 16px 0 rgba(14, 14, 14, 0.08);
+}
+.tile:focus,
+.tile:focus-within {
+  outline: var(--sgds-form-outline-focus);
 }
 
 .tile.checked {
-  border: var(--sgds-border-width-2, 2px) solid var(--sgds-primary-border-color-default, #8055BB);
+  border: var(--sgds-border-width-2, 2px) solid var(--sgds-primary-border-color-default, #8055bb);
 }
 
 .tile.invalid {
-  border: var(--sgds-border-width-2, 2px) solid var(--sgds-danger-border-color-default, #CF2323);
+  border: var(--sgds-border-width-2, 2px) solid var(--sgds-danger-border-color-default, #cf2323);
 }
 
 .tile.disabled {
@@ -65,8 +69,8 @@ sgds-radio {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  color: var(--sgds-color-default, #1A1A1A);
-  font-feature-settings: 'liga' off, 'clig' off;
+  color: var(--sgds-color-default, #1a1a1a);
+  font-feature-settings: "liga" off, "clig" off;
   font-family: var(--sgds-font-family-brand, Inter);
   font-size: var(--sgds-font-size-subtitle-sm, 16px);
   font-style: normal;
@@ -81,7 +85,7 @@ sgds-radio {
   -webkit-box-orient: vertical;
   overflow: hidden;
   color: var(--sgds-color-subtle, #525252);
-  font-feature-settings: 'liga' off, 'clig' off;
+  font-feature-settings: "liga" off, "clig" off;
   font-family: var(--sgds-font-family-brand, Inter);
   font-size: var(--sgds-font-size-body-sm, 14px);
   font-style: normal;

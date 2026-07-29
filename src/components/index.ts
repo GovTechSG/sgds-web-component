@@ -65,6 +65,7 @@ export * from "./TableOfContents/sgds-table-of-contents";
 export * from "./Textarea/sgds-textarea";
 export * from "./ThumbnailCard/sgds-thumbnail-card";
 export * from "./Tile/sgds-tile";
+export * from "./Tile/sgds-tile-group";
 export * from "./Toast/sgds-toast";
 export * from "./Toast/sgds-toast-container";
 export * from "./Tooltip/sgds-tooltip";
