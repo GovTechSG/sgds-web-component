@@ -143,6 +143,7 @@
     "plop": "^3.1.2",
     "postcss": "^8.2.13",
     "prettier": "^2.8.7",
+    "puppeteer": "^25.2.1",
     "react": "^19.2.3",
     "remark-gfm": "^4.0.0",
     "resize-observer-polyfill": "^1.5.1",
