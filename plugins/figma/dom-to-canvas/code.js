@@ -18,6 +18,7 @@ var SGDS_COMPONENT_MAP = {
   },
   "sgds-accordion": { key: "ffada43a96f710368e420ffd6087b09ee8894502", name: "Accordion" },
   "sgds-badge": { key: "30f64a9fe1033f49f39d7e77f1b318b0549a852f", name: "Badge" },
+  "sgds-badge-group": { key: "a3a5b5b3fc8ccf2c240d05aceec658eda1249a1b", name: "Badge group" },
   "sgds-alert": { key: "78d35168e3f57033a677c8bce6d5242e1e771ffc", name: "Alert" },
   "sgds-breadcrumb": { key: "0fe6194b637fc81281ba384c7cb7595e36e2aa23", name: "Breadcrumb" },
   "sgds-checkbox": { key: "a8736f77a9aa8db166ba3e6a2af36ea62f231796", name: "Checkbox group" },
@@ -226,8 +227,13 @@ var ATTR_VALUE_MAP = {
 var COMPONENT_SLOT_CONFIG = {
   "sgds-card": {
     attrOverrides: {
-      hideBorder: { prop: "Border", values: { true: "False", false: "True" } },
-      disabled: { prop: "State", values: { true: "disabled" } }
+      hideborder: { prop: "Border", values: { true: "False", "": "False" } },
+      nopadding: { prop: "Padding", values: { true: "False", "": "False" } },
+      disabled: { prop: "State", values: { true: "disabled", "": "disabled" } },
+      orientation: { prop: "Media on left", values: { horizontal: "True", vertical: "False" }, target: "structure" }
+    },
+    booleanAttrs: {
+      tinted: "Tinted#29055:104"
     },
     structureName: "Structure",
     slots: {
@@ -255,6 +261,15 @@ var COMPONENT_SLOT_CONFIG = {
     }
   },
   "sgds-icon-card": {
+    attrOverrides: {
+      disabled: { prop: "State", values: { true: "disabled", "": "disabled" } },
+      hideborder: { prop: "Border", values: { true: "False", "": "False" } },
+      nopadding: { prop: "Padding", values: { true: "False", "": "False" } },
+      orientation: { prop: "Media on left", values: { horizontal: "True", vertical: "False" }, target: "structure" }
+    },
+    booleanAttrs: {
+      tinted: "Tinted#29055:104"
+    },
     structureName: "Structure",
     slots: {
       upper: {
@@ -304,7 +319,7 @@ var COMPONENT_SLOT_CONFIG = {
   },
   "sgds-image-card": {
     attrOverrides: {
-      hideBorder: { prop: "Border", values: { true: "False", false: "True" } },
+      hideborder: { prop: "Border", values: { true: "False", false: "True" } },
       disabled: { prop: "State", values: { true: "disabled" } }
     },
     structureName: "Card structure",
@@ -861,6 +876,7 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   }
   var slotConfig = COMPONENT_SLOT_CONFIG[configTag];
   var criteria = {};
+  var structureProps = {}; // Properties to apply to the Structure nested instance
   if (Object.keys(attrs).length > 0) {
     for (var attrName in attrs) {
       // Check for component-specific attr overrides (e.g. accordion variant→Border)
@@ -868,7 +884,11 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
         var override = slotConfig.attrOverrides[attrName];
         var mappedValue = override.values[attrs[attrName]];
         if (mappedValue) {
-          criteria[override.prop] = mappedValue;
+          if (override.target === "structure") {
+            structureProps[override.prop] = mappedValue;
+          } else {
+            criteria[override.prop] = mappedValue;
+          }
         }
         continue;
       }
@@ -1044,6 +1064,17 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
     } catch (e) {}
   }
 
+  // Boolean attrs: map DOM attrs to Figma boolean props (e.g. tinted → Tinted#29055:104)
+  if (slotConfig && slotConfig.booleanAttrs) {
+    for (var boolAttr in slotConfig.booleanAttrs) {
+      if (attrs[boolAttr] === true || attrs[boolAttr] === "" || attrs[boolAttr] === "true") {
+        try {
+          instance.setProperties(makeProps(slotConfig.booleanAttrs[boolAttr], true));
+        } catch (e) {}
+      }
+    }
+  }
+
   instance.name = mapping.name;
 
   var posX = (data.x || 0) - parentX;
@@ -1093,6 +1124,18 @@ async function createSgdsComponent(data, parent, parentX, parentY, siblingTags) 
   }
 
   parent.appendChild(instance);
+
+  // Apply structure-targeted properties (e.g. "Media on left" on Structure nested instance)
+  if (Object.keys(structureProps).length > 0 && slotConfig && slotConfig.structureName) {
+    var structureInst = instance.findOne(function (n) {
+      return n.name === slotConfig.structureName && n.type === "INSTANCE";
+    });
+    if (structureInst) {
+      try {
+        structureInst.setProperties(structureProps);
+      } catch (e) {}
+    }
+  }
 
   // Apply slot content using declarative config
   var slotConfig2 = COMPONENT_SLOT_CONFIG[configTag];
@@ -1679,29 +1722,62 @@ async function applySlotContent(instance, data, config) {
           }
         }
       } else {
-        // Non-SGDS slot child (e.g. <span> with step number circle)
-        // Create a local Component with HUG sizing (like Badge) so it won't stretch
-        var localComponent = await createLocalSlotComponent(slotChild);
-        if (localComponent) {
-          var slotText = slotChild.text || collectFirstText(slotChild);
+        // Non-SGDS slot child — check if it's a wrapper with SGDS children inside
+        var innerSgdsChildren = (slotChild.children || []).filter(function (c) {
+          return c.tag && isSgdsComponent(c.tag);
+        });
+        var innerBadges = innerSgdsChildren.filter(function (c) { return c.tag === "sgds-badge"; });
 
-          // Enable tinted mode for step number indicators
-          if (slotText && slotText.length <= 2 && config.extraBooleans && config.extraBooleans.tinted) {
-            try {
-              instance.setProperties(makeProps(config.extraBooleans.tinted, true));
-            } catch (e) {}
+        if (innerBadges.length > 1 && innerBadges.length === innerSgdsChildren.length) {
+          // Badge group: multiple badges in a wrapper div → use library Badge group
+          await applyBadgeGroupInLowerSlot(instance, innerBadges);
+        } else if (innerSgdsChildren.length === 1) {
+          // Single SGDS component inside a wrapper → import and swap it
+          var innerChild = innerSgdsChildren[0];
+          var innerComponent = await importSlottedComponent(innerChild);
+          if (innerComponent) {
+            var swapped = false;
+            if (slotConfig.frameName) {
+              swapped = await swapSlotInstance(instance, slotConfig.frameName, innerComponent);
+            }
+            if (!swapped && slotConfig.swapKey) {
+              try {
+                target.setProperties(makeProps(slotConfig.swapKey, innerComponent.id));
+                swapped = true;
+              } catch (e) {}
+            }
+            if (swapped) {
+              var swappedInner = findSwappedInstance(instance, SGDS_COMPONENT_MAP[innerChild.tag].key);
+              if (swappedInner) {
+                await applySlottedComponentContent(swappedInner, innerChild.tag, innerChild);
+              }
+            }
           }
+        } else {
+          // Non-SGDS slot child (e.g. <span> with step number circle)
+          // Create a local Component with HUG sizing (like Badge) so it won't stretch
+          var localComponent = await createLocalSlotComponent(slotChild);
+          if (localComponent) {
+            var slotText = slotChild.text || collectFirstText(slotChild);
 
-          // Swap it into the slot
-          var swapped = false;
-          if (slotConfig.frameName) {
-            swapped = await swapSlotInstance(instance, slotConfig.frameName, localComponent);
-          }
-          if (!swapped && slotConfig.swapKey) {
-            try {
-              target.setProperties(makeProps(slotConfig.swapKey, localComponent.id));
-              swapped = true;
-            } catch (e) {}
+            // Enable tinted mode for step number indicators
+            if (slotText && slotText.length <= 2 && config.extraBooleans && config.extraBooleans.tinted) {
+              try {
+                instance.setProperties(makeProps(config.extraBooleans.tinted, true));
+              } catch (e) {}
+            }
+
+            // Swap it into the slot
+            var swapped = false;
+            if (slotConfig.frameName) {
+              swapped = await swapSlotInstance(instance, slotConfig.frameName, localComponent);
+            }
+            if (!swapped && slotConfig.swapKey) {
+              try {
+                target.setProperties(makeProps(slotConfig.swapKey, localComponent.id));
+                swapped = true;
+              } catch (e) {}
+            }
           }
         }
       }
@@ -1774,6 +1850,9 @@ async function applySlotContent(instance, data, config) {
         }
         continue;
       }
+
+      // Collapse HTML whitespace (newlines + indentation) into single space
+      textValue = textValue.replace(/\s+/g, " ").trim();
 
       var textTarget = instance;
       if (textConfig.instanceName) {
@@ -2437,9 +2516,9 @@ async function applyCardContentHeuristic(instance, data, config, target) {
     if (t.text.length <= 2 && t.styles && t.styles.backgroundColor) continue;
 
     if (!title && (fs >= 20 || fw >= 600)) {
-      title = t.text;
+      title = t.text.replace(/\s+/g, " ").trim();
     } else if (!description && fs <= 20 && fw < 600) {
-      description = t.text;
+      description = t.text.replace(/\s+/g, " ").trim();
     }
   }
 
@@ -2801,6 +2880,47 @@ async function applyCardContent(instance, data) {
             }
           }
         }
+      } else if (lowerChild.children && lowerChild.children.length > 0) {
+        // Wrapper div with SGDS component children
+        var sgdsChildren = lowerChild.children.filter(function (c) {
+          return c.tag && isSgdsComponent(c.tag);
+        });
+
+        // Badge group: multiple badges → find & configure existing Badge group instance
+        var badgeChildren = sgdsChildren.filter(function (c) { return c.tag === "sgds-badge"; });
+        if (badgeChildren.length > 1 && badgeChildren.length === sgdsChildren.length) {
+          await applyBadgeGroupInLowerSlot(instance, badgeChildren);
+        } else if (sgdsChildren.length === 1) {
+          // Single SGDS component in wrapper → treat like direct child
+          var singleChild = sgdsChildren[0];
+          var singleComponent = await importSlottedComponent(singleChild);
+          if (singleComponent) {
+            var singleSwapped = await swapSlotInstance(instance, "[lower slot]", singleComponent);
+            if (!singleSwapped) {
+              try {
+                structure.setProperties(makeProps("↳ Swap instance (lower)#30708:0", singleComponent.id));
+              } catch (e2) {}
+            }
+            if (singleSwapped) {
+              await applySlottedComponentContent(
+                findSwappedInstance(instance, SGDS_COMPONENT_MAP[singleChild.tag].key),
+                singleChild.tag,
+                singleChild
+              );
+            }
+          }
+        } else if (sgdsChildren.length > 1) {
+          // Mixed group — create local component with imported instances
+          var groupComp = await createSlotGroupComponent(lowerChild);
+          if (groupComp) {
+            var groupSwapped = await swapSlotInstance(instance, "[lower slot]", groupComp);
+            if (!groupSwapped) {
+              try {
+                structure.setProperties(makeProps("↳ Swap instance (lower)#30708:0", groupComp.id));
+              } catch (e2) {}
+            }
+          }
+        }
       }
     } catch (e) {}
   }
@@ -2811,6 +2931,82 @@ async function applyCardContent(instance, data) {
       structure.setProperties({ "Footer#29055:82": false });
     } catch (e) {}
   }
+}
+
+// Apply badge group to a slot.
+// Creates a local auto-layout component containing imported library Badge instances.
+// Each badge is individually configured with text/variant/tone via the established badge mapping.
+// (The library Badge group component doesn't expose individual badge text props,
+// so we compose our own group from individual library badges instead.)
+async function applyBadgeGroupInLowerSlot(cardInstance, badgeChildren) {
+  var comp = figma.createComponent();
+  comp.name = "Badge group";
+  comp.layoutMode = "HORIZONTAL";
+  comp.layoutWrap = "WRAP";
+  comp.primaryAxisSizingMode = "AUTO";
+  comp.counterAxisSizingMode = "AUTO";
+  comp.itemSpacing = 8;
+  comp.fills = [];
+
+  for (var bi = 0; bi < badgeChildren.length; bi++) {
+    var badgeData = badgeChildren[bi];
+    var badgeVariant = await importSlottedComponent(badgeData);
+    if (badgeVariant) {
+      var badgeInstance = badgeVariant.createInstance();
+      comp.appendChild(badgeInstance);
+      // Apply text + variant/tone/outlined using the established badge mapping
+      await applySlottedComponentContent(badgeInstance, "sgds-badge", badgeData);
+    }
+  }
+
+  comp.x = -9999;
+  comp.y = -9999;
+
+  // Swap into the [lower slot] frame
+  var swapped = await swapSlotInstance(cardInstance, "[lower slot]", comp);
+  if (!swapped) {
+    var structure = cardInstance.findOne(function (n) {
+      return n.name === "Structure" && n.type === "INSTANCE";
+    });
+    if (structure) {
+      try {
+        structure.setProperties(makeProps("↳ Swap instance (lower)#30708:0", comp.id));
+      } catch (e) {}
+    }
+  }
+}
+
+// Create a local auto-layout component from mixed SGDS component children.
+// Used as fallback when lower slot contains a non-badge mix of components.
+async function createSlotGroupComponent(wrapperData) {
+  if (!wrapperData.children || wrapperData.children.length === 0) return null;
+
+  var sgdsChildren = wrapperData.children.filter(function (c) {
+    return c.tag && isSgdsComponent(c.tag);
+  });
+  if (sgdsChildren.length === 0) return null;
+
+  var comp = figma.createComponent();
+  comp.name = "slot: group";
+  comp.layoutMode = "HORIZONTAL";
+  comp.primaryAxisSizingMode = "AUTO";
+  comp.counterAxisSizingMode = "AUTO";
+  comp.itemSpacing = 8;
+  comp.fills = [];
+
+  for (var i = 0; i < sgdsChildren.length; i++) {
+    var childData = sgdsChildren[i];
+    var childVariant = await importSlottedComponent(childData);
+    if (childVariant) {
+      var childInstance = childVariant.createInstance();
+      comp.appendChild(childInstance);
+      await applySlottedComponentContent(childInstance, childData.tag, childData);
+    }
+  }
+
+  comp.x = -9999;
+  comp.y = -9999;
+  return comp;
 }
 
 // Classify card DOM children into slot roles
@@ -2979,6 +3175,7 @@ async function addComponentAnnotation(frame, tag) {
 // Recursively collect all text nodes
 function collectTexts(node, results) {
   if (node.type === "text" && node.text) {
+    node.text = node.text.replace(/\s+/g, " ").trim();
     results.push(node);
   }
   if (node.children) {

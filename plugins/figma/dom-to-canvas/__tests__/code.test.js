@@ -275,8 +275,8 @@ describe("Variant matching (buildVariantCriteria)", () => {
     assert.equal(r.Variant, undefined);
   });
 
-  it("card: attrOverrides (hideBorder + disabled)", () => {
-    const r = buildVariantCriteria({ tag: "sgds-card", attrs: { hideBorder: "true", disabled: "true" }, children: [] });
+  it("card: attrOverrides (hideborder + disabled)", () => {
+    const r = buildVariantCriteria({ tag: "sgds-card", attrs: { hideborder: "true", disabled: "true" }, children: [] });
     assert.equal(r.Border, "False");
     assert.equal(r.State, "disabled");
   });

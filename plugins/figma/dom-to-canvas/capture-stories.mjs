@@ -93,7 +93,7 @@ function captureDom(maxDepth) {
   function captureNode(el, depth) {
     if (depth > maxDepth) return null;
     if (el.nodeType === Node.TEXT_NODE) {
-      const text = el.textContent.trim();
+      const text = el.textContent.replace(/\s+/g, " ").trim();
       if (!text) return null;
       return { type: "text", text };
     }
@@ -166,7 +166,7 @@ function captureDom(maxDepth) {
 
     const directText = Array.from(el.childNodes)
       .filter(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim())
-      .map(n => n.textContent.trim())
+      .map(n => n.textContent.replace(/\s+/g, " ").trim())
       .join(" ");
 
     if (directText && el.children.length === 0) {
@@ -192,7 +192,7 @@ function captureDom(maxDepth) {
       if (hasTextSiblings) {
         for (const childNode of el.childNodes) {
           if (childNode.nodeType === Node.TEXT_NODE) {
-            const text = childNode.textContent.trim();
+            const text = childNode.textContent.replace(/\s+/g, " ").trim();
             if (text) {
               node.children.push({
                 type: "text", tag: "#text", text: text,
