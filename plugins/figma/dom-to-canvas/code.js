@@ -1320,9 +1320,15 @@ figma.ui.onmessage = async function (msg) {
         if (responsiveVar) {
           var responsiveCol = figma.variables.getVariableCollectionById(responsiveVar.variableCollectionId);
           if (responsiveCol) {
-            var desktopMode = responsiveCol.modes.find(function(m) { return m.name === "Desktop"; });
-            var tabletMode = responsiveCol.modes.find(function(m) { return m.name === "Tablet"; });
-            var mobileMode = responsiveCol.modes.find(function(m) { return m.name === "Mobile"; });
+            var desktopMode = responsiveCol.modes.find(function (m) {
+              return m.name === "Desktop";
+            });
+            var tabletMode = responsiveCol.modes.find(function (m) {
+              return m.name === "Tablet";
+            });
+            var mobileMode = responsiveCol.modes.find(function (m) {
+              return m.name === "Mobile";
+            });
 
             var targetResponsiveMode;
             if (pageWidth >= 1024) targetResponsiveMode = desktopMode;
@@ -1331,7 +1337,12 @@ figma.ui.onmessage = async function (msg) {
 
             if (targetResponsiveMode) {
               rootFrame.setExplicitVariableModeForCollection(responsiveCol, targetResponsiveMode.modeId);
-              console.log("[theme] Responsive mode set to:", targetResponsiveMode.name, "for viewport", pageWidth + "px");
+              console.log(
+                "[theme] Responsive mode set to:",
+                targetResponsiveMode.name,
+                "for viewport",
+                pageWidth + "px"
+              );
             }
           }
         }
@@ -4319,12 +4330,8 @@ async function createFrameNode(data, parent, parentX, parentY) {
           if (frame.layoutMode === "VERTICAL") {
             frame.counterAxisAlignItems = "CENTER";
           } else if (frame.layoutMode === "HORIZONTAL") {
-            // Center container horizontally when it's the only visible child
-            // (overlay children return null and aren't in frame.children)
-            var visibleSiblings = frame.children.length;
-            if (visibleSiblings <= 1) {
-              frame.primaryAxisAlignItems = "CENTER";
-            }
+            // Center container horizontally in horizontal parent
+            frame.primaryAxisAlignItems = "CENTER";
           }
         }
       }
@@ -4333,10 +4340,11 @@ async function createFrameNode(data, parent, parentX, parentY) {
 
   // Apply per-element text-gap: wrap each text child in a frame with paddingBottom
   // This gives per-element spacing (h1 gets text-gap/md, p gets text-gap/xl, etc.)
-  // Only for vertical auto-layout frames without explicit gap
+  // Skip when: explicit gap present, or parent has margin/padding classes (already handles spacing)
   if (frame.layoutMode === "VERTICAL" && data.children && data.children.length > 1) {
     var hasExplicitGap = (data.name && data.name.indexOf("sgds:gap-") >= 0) || (data.styles && data.styles.gap);
-    if (!hasExplicitGap) {
+    var hasExplicitSpacing = data.name && data.name.match(/sgds:(mb|mt|py|px|p)-/);
+    if (!hasExplicitGap && !hasExplicitSpacing) {
       // Wrap text children that have marginBottom in a frame with paddingBottom
       for (var wi = 0; wi < frame.children.length; wi++) {
         var wChild = frame.children[wi];
@@ -4762,7 +4770,8 @@ function applyAutoLayout(frame, name, styles) {
 
     // Sizing: hug primary axis for small inline elements (button rows),
     // but keep FIXED for full-width sections to maintain page layout
-    var isFullWidth = frame.width > 800;
+    var vpWidth = globalThis.__sgdsPageWidth || 1440;
+    var isFullWidth = (frame.width >= vpWidth * 0.8); // 80% of viewport = full-width
     frame.primaryAxisSizingMode = isFullWidth ? "FIXED" : "AUTO";
     frame.counterAxisSizingMode = "FIXED";
 
@@ -4787,6 +4796,23 @@ function applyChildSizing(child, childName, parentLayoutMode, parentFrame) {
     // Grid child: size based on column span
     var vpWidth = globalThis.__sgdsPageWidth || 1440;
     var colSpan = parseColSpanForViewport(childName, vpWidth);
+    // If no col class found, use the child's captured width (don't resize)
+    if (colSpan === 0) {
+      // Still set up auto-layout for the grid child
+      if (child.layoutMode === "NONE") {
+        child.layoutMode = "VERTICAL";
+        child.counterAxisSizingMode = "FIXED";
+        child.primaryAxisSizingMode = "AUTO";
+        child.fills = [];
+      }
+      // Make its children fill
+      if (child.children) {
+        for (var gci3 = 0; gci3 < child.children.length; gci3++) {
+          child.children[gci3].layoutSizingHorizontal = "FILL";
+        }
+      }
+      return;
+    }
     if (colSpan > 0) {
       // Determine column count based on viewport
       var totalCols = 12;
@@ -4802,6 +4828,31 @@ function applyChildSizing(child, childName, parentLayoutMode, parentFrame) {
         var availableSpace = parentWidth - (totalCols - 1) * gap;
         var childWidth = (availableSpace / totalCols) * colSpan + (colSpan - 1) * gap;
         child.resize(Math.max(childWidth, 1), Math.max(child.height || 1, 1));
+      }
+      // Grid columns should hug content vertically (library components may be shorter than DOM capture)
+      if (child.layoutMode === "NONE") {
+        child.layoutMode = "VERTICAL";
+        child.counterAxisSizingMode = "FIXED";
+        child.fills = [];
+      }
+      child.primaryAxisSizingMode = "AUTO";
+      // Make grid column children fill the column width (recursively for single-child wrappers)
+      if (child.children) {
+        for (var gci = 0; gci < child.children.length; gci++) {
+          var gridChild = child.children[gci];
+          gridChild.layoutSizingHorizontal = "FILL";
+          // If this child is a wrapper with its own children, make them fill too
+          if (gridChild.type === "FRAME" && gridChild.children && gridChild.layoutMode === "NONE") {
+            gridChild.layoutMode = "VERTICAL";
+            gridChild.primaryAxisSizingMode = "AUTO";
+            gridChild.counterAxisSizingMode = "FIXED";
+            gridChild.layoutSizingHorizontal = "FILL";
+            gridChild.fills = [];
+            for (var gci2 = 0; gci2 < gridChild.children.length; gci2++) {
+              gridChild.children[gci2].layoutSizingHorizontal = "FILL";
+            }
+          }
+        }
       }
     }
     return;
