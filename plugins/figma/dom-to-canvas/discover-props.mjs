@@ -405,6 +405,43 @@ async function main() {
     console.log(`  (This requires Figma Enterprise or file-level variables)\n`);
   }
 
+  // --- Step 10: Discover published text styles ---
+  console.log("Fetching published text styles...");
+  try {
+    const stylesData = await figmaGet(`/files/${FILE_ID}/styles`);
+    const styles = stylesData.meta?.styles || [];
+
+    // Filter for TEXT styles only
+    const textStyles = styles.filter((s) => s.style_type === "TEXT");
+    console.log(`  Found ${textStyles.length} text styles`);
+
+    // Build mapping: style name → { key, nodeId, description }
+    const textStyleMap = {};
+    for (const style of textStyles) {
+      textStyleMap[style.name] = {
+        key: style.key,
+        nodeId: style.node_id,
+        description: style.description || "",
+      };
+    }
+
+    // Write text styles to discovered-variables.json (append)
+    const varsPath = resolve(__dirname, "discovered-variables.json");
+    try {
+      const existing = JSON.parse(readFileSync(varsPath, "utf-8"));
+      existing.textStyles = textStyleMap;
+      writeFileSync(varsPath, JSON.stringify(existing, null, 2));
+      console.log(`  Appended textStyles to: ${varsPath}\n`);
+    } catch (e) {
+      // Write standalone if main file doesn't exist
+      const textStylesPath = resolve(__dirname, "discovered-text-styles.json");
+      writeFileSync(textStylesPath, JSON.stringify(textStyleMap, null, 2));
+      console.log(`  Written: ${textStylesPath}\n`);
+    }
+  } catch (e) {
+    console.log(`  Warning: Could not fetch text styles: ${e.message}\n`);
+  }
+
   // --- Output JSON ---
   const jsonPath = resolve(__dirname, "discovered-props.json");
   writeFileSync(jsonPath, JSON.stringify(results, null, 2));
