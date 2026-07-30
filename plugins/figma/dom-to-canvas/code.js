@@ -1726,7 +1726,9 @@ async function applySlotContent(instance, data, config) {
         var innerSgdsChildren = (slotChild.children || []).filter(function (c) {
           return c.tag && isSgdsComponent(c.tag);
         });
-        var innerBadges = innerSgdsChildren.filter(function (c) { return c.tag === "sgds-badge"; });
+        var innerBadges = innerSgdsChildren.filter(function (c) {
+          return c.tag === "sgds-badge";
+        });
 
         if (innerBadges.length > 1 && innerBadges.length === innerSgdsChildren.length) {
           // Badge group: multiple badges in a wrapper div → use library Badge group
@@ -2887,7 +2889,9 @@ async function applyCardContent(instance, data) {
         });
 
         // Badge group: multiple badges → find & configure existing Badge group instance
-        var badgeChildren = sgdsChildren.filter(function (c) { return c.tag === "sgds-badge"; });
+        var badgeChildren = sgdsChildren.filter(function (c) {
+          return c.tag === "sgds-badge";
+        });
         if (badgeChildren.length > 1 && badgeChildren.length === sgdsChildren.length) {
           await applyBadgeGroupInLowerSlot(instance, badgeChildren);
         } else if (sgdsChildren.length === 1) {
@@ -3449,7 +3453,14 @@ async function createFrameNode(data, parent, parentX, parentY) {
 
   parent.appendChild(frame);
 
-  // Simple absolute positioning — honour DOM dimensions exactly
+  // Apply auto-layout from flex classes (must be before spacing so layoutMode is set)
+  applyAutoLayout(frame, data.name);
+
+  // Apply spacing tokens (gap, padding, margin→padding) with variable bindings
+  await applySpacing(frame, data.name);
+
+  // Determine positioning mode for children
+  var isAutoLayout = frame.layoutMode !== "NONE";
   var thisX = data.x || 0;
   var thisY = data.y || 0;
 
@@ -3458,7 +3469,18 @@ async function createFrameNode(data, parent, parentX, parentY) {
       var sibTags = data.children.map(function (ch) {
         return ch.tag || "";
       });
-      await createNode(data.children[i], frame, thisX, thisY, sibTags);
+      var childNode = await createNode(
+        data.children[i],
+        frame,
+        isAutoLayout ? 0 : thisX,
+        isAutoLayout ? 0 : thisY,
+        sibTags
+      );
+
+      // Apply child sizing in auto-layout context
+      if (isAutoLayout && childNode && data.children[i].name) {
+        applyChildSizing(childNode, data.children[i].name, frame.layoutMode, frame);
+      }
     }
   }
 
@@ -3468,6 +3490,19 @@ async function createFrameNode(data, parent, parentX, parentY) {
 // Parse spacing classes and apply padding/gap with variable bindings
 async function applySpacing(frame, name) {
   if (!name) return;
+
+  // sgds-grid default gap: bind to gap-xl token (desktop breakpoint from grid.css)
+  // This applies when no explicit sgds:gap-* class is present on the grid
+  if (name.indexOf("sgds-grid") >= 0 && name.indexOf("sgds:gap-") < 0) {
+    var gridGapKey = SGDS_SPACING_MAP["xl"];
+    if (gridGapKey) {
+      var gridGapVar = await importVariable(gridGapKey);
+      if (gridGapVar) {
+        frame.setBoundVariable("itemSpacing", gridGapVar);
+        frame.setBoundVariable("counterAxisSpacing", gridGapVar);
+      }
+    }
+  }
 
   // Parse all sgds: spacing classes
   var classes = name.split(/\s+/);
@@ -3592,6 +3627,144 @@ async function applySpacing(frame, name) {
         }
       }
       continue;
+    }
+  }
+}
+
+// Parse flex/layout classes and configure Figma auto-layout
+// Maps Tailwind flex utilities → Figma layoutMode, alignment, wrap
+// Also handles sgds-grid → HORIZONTAL + WRAP (CSS Grid approximation)
+function applyAutoLayout(frame, name) {
+  if (!name) return;
+
+  var classes = name.split(/\s+/);
+  var hasFlex = false;
+  var hasGrid = false;
+  var direction = null; // null = default (HORIZONTAL), "col" = VERTICAL
+  var alignItems = null;
+  var justifyContent = null;
+  var wrap = false;
+
+  for (var i = 0; i < classes.length; i++) {
+    var cls = classes[i].replace("sgds:", "");
+
+    // Detect flex
+    if (cls === "flex" || cls === "inline-flex") hasFlex = true;
+
+    // Detect CSS grid (sgds-grid class — not prefixed with sgds:)
+    if (cls === "sgds-grid" || classes[i] === "sgds-grid") hasGrid = true;
+    if (cls === "grid") hasGrid = true;
+
+    // Direction
+    if (cls === "flex-col" || cls === "flex-col-reverse") direction = "col";
+    if (cls === "flex-row" || cls === "flex-row-reverse") direction = "row";
+
+    // Align items (cross-axis)
+    if (cls === "items-center") alignItems = "CENTER";
+    if (cls === "items-start") alignItems = "MIN";
+    if (cls === "items-end") alignItems = "MAX";
+    if (cls === "items-stretch") alignItems = "STRETCH";
+    if (cls === "items-baseline") alignItems = "BASELINE";
+
+    // Justify content (primary axis)
+    if (cls === "justify-center") justifyContent = "CENTER";
+    if (cls === "justify-between") justifyContent = "SPACE_BETWEEN";
+    if (cls === "justify-start") justifyContent = "MIN";
+    if (cls === "justify-end") justifyContent = "MAX";
+    if (cls === "justify-around") justifyContent = "SPACE_BETWEEN"; // closest Figma equivalent
+    if (cls === "justify-evenly") justifyContent = "SPACE_BETWEEN"; // closest Figma equivalent
+
+    // Wrap
+    if (cls === "flex-wrap" || cls === "flex-wrap-reverse") wrap = true;
+  }
+
+  if (!hasFlex && !hasGrid) return;
+
+  if (hasGrid) {
+    // CSS Grid → Auto-layout HORIZONTAL + WRAP
+    // Children will be sized by column span in applyChildSizing
+    frame.layoutMode = "HORIZONTAL";
+    frame.layoutWrap = "WRAP";
+    frame.primaryAxisSizingMode = "FIXED";
+    frame.counterAxisSizingMode = "AUTO";
+    // Mark frame so children know they're in a grid context
+    frame.setPluginData("sgds-grid", "true");
+  } else {
+    // Flexbox
+    if (direction === "col") {
+      frame.layoutMode = "VERTICAL";
+    } else {
+      frame.layoutMode = "HORIZONTAL";
+    }
+
+    // Sizing: use captured dimensions as fixed
+    frame.primaryAxisSizingMode = "FIXED";
+    frame.counterAxisSizingMode = "FIXED";
+
+    // Wrap
+    if (wrap) frame.layoutWrap = "WRAP";
+  }
+
+  // Alignment
+  if (alignItems) frame.counterAxisAlignItems = alignItems;
+  if (justifyContent) frame.primaryAxisAlignItems = justifyContent;
+}
+
+// Apply child sizing classes after children are created in an auto-layout parent
+// Also handles sgds-grid column spans: sgds-col-lg-6 → width as fraction of 12-col grid
+function applyChildSizing(child, childName, parentLayoutMode, parentFrame) {
+  if (!childName || parentLayoutMode === "NONE") return;
+
+  // Check if parent is a grid container
+  var isGrid = parentFrame && parentFrame.getPluginData && parentFrame.getPluginData("sgds-grid") === "true";
+
+  if (isGrid) {
+    // Grid child: size based on column span
+    var colSpan = parseColSpan(childName);
+    if (colSpan > 0) {
+      // Desktop grid = 12 columns
+      // Child width = (parentWidth / 12) * colSpan - gap adjustment
+      // Gap is applied by auto-layout itemSpacing, so each child just needs proportional width
+      var totalCols = 12;
+      var parentWidth = parentFrame.width || 800;
+      var gap = parentFrame.itemSpacing || 0;
+      // Width formula: (available space / totalCols) * colSpan + (colSpan - 1) * gap
+      // Available space = parentWidth - (totalCols - 1) * gap
+      var availableSpace = parentWidth - (totalCols - 1) * gap;
+      var childWidth = (availableSpace / totalCols) * colSpan + (colSpan - 1) * gap;
+      child.resize(Math.max(childWidth, 1), Math.max(child.height || 1, 1));
+    }
+    return;
+  }
+
+  var classes = childName.split(/\s+/);
+  for (var i = 0; i < classes.length; i++) {
+    var cls = classes[i].replace("sgds:", "");
+
+    // flex-1 / flex-grow → fill on primary axis
+    if (cls === "flex-1" || cls === "flex-grow" || cls === "grow") {
+      if (parentLayoutMode === "HORIZONTAL") {
+        child.layoutSizingHorizontal = "FILL";
+      } else {
+        child.layoutSizingVertical = "FILL";
+      }
+    }
+
+    // w-full → fill horizontal
+    if (cls === "w-full") {
+      child.layoutSizingHorizontal = "FILL";
+    }
+
+    // h-full → fill vertical
+    if (cls === "h-full") {
+      child.layoutSizingVertical = "FILL";
+    }
+
+    // overflow-auto with flex-1 context: fill
+    if (cls === "overflow-auto" || cls === "overflow-y-auto") {
+      if (parentLayoutMode === "VERTICAL") {
+        child.layoutSizingVertical = "FILL";
+      }
     }
   }
 }
