@@ -190,67 +190,231 @@ var SGDS_SPACING_MAP = {
 // In Figma, designers apply this as the parent frame's itemSpacing (vertical gap between text elements)
 var SGDS_TEXT_STYLE_MAP = [
   // Display — text-gap/md for lg, text-gap/sm for md, text-gap/xs for sm
-  { classes: ["sgds:text-display-lg", "sgds:font-bold"], key: "2a178cc4310fd777ff879d05a4dfd7268868990d", textGapKey: "a74a8c0ee3a3eb79304e7b1ea46e6c12439e3a09" },
-  { classes: ["sgds:text-display-lg", "sgds:font-light"], key: "789b7227c8d1f5b76f5ca0e9628e866bf782ed44", textGapKey: "a74a8c0ee3a3eb79304e7b1ea46e6c12439e3a09" },
-  { classes: ["sgds:text-display-md", "sgds:font-bold"], key: "5189154e0f3fdadd3b954dd81d38b1ed8a33a892", textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391" },
-  { classes: ["sgds:text-display-md", "sgds:font-light"], key: "871770a02d23acbf40864421447982a8476e09b9", textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391" },
-  { classes: ["sgds:text-display-sm", "sgds:font-bold"], key: "9c918eb31b1a158eba26c9b49fbfb68b0849648a", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
-  { classes: ["sgds:text-display-sm", "sgds:font-light"], key: "6a21766611d21803cd7f9f2d0b5e064a486d0789", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
+  {
+    classes: ["sgds:text-display-lg", "sgds:font-bold"],
+    key: "2a178cc4310fd777ff879d05a4dfd7268868990d",
+    textGapKey: "a74a8c0ee3a3eb79304e7b1ea46e6c12439e3a09"
+  },
+  {
+    classes: ["sgds:text-display-lg", "sgds:font-light"],
+    key: "789b7227c8d1f5b76f5ca0e9628e866bf782ed44",
+    textGapKey: "a74a8c0ee3a3eb79304e7b1ea46e6c12439e3a09"
+  },
+  {
+    classes: ["sgds:text-display-md", "sgds:font-bold"],
+    key: "5189154e0f3fdadd3b954dd81d38b1ed8a33a892",
+    textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391"
+  },
+  {
+    classes: ["sgds:text-display-md", "sgds:font-light"],
+    key: "871770a02d23acbf40864421447982a8476e09b9",
+    textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391"
+  },
+  {
+    classes: ["sgds:text-display-sm", "sgds:font-bold"],
+    key: "9c918eb31b1a158eba26c9b49fbfb68b0849648a",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
+  {
+    classes: ["sgds:text-display-sm", "sgds:font-light"],
+    key: "6a21766611d21803cd7f9f2d0b5e064a486d0789",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
   // Heading — text-gap/md for xl, text-gap/sm for lg+md, text-gap/xs for sm
-  { classes: ["sgds:text-heading-xl", "sgds:font-bold"], key: "5cdb65eba3153b242bb8e142d1af1e672bede286", textGapKey: "a74a8c0ee3a3eb79304e7b1ea46e6c12439e3a09" },
-  { classes: ["sgds:text-heading-xl", "sgds:font-light"], key: "eca3cbd7d550ff6ed872e49a2d4eaab33e15f3f4", textGapKey: "a74a8c0ee3a3eb79304e7b1ea46e6c12439e3a09" },
-  { classes: ["sgds:text-heading-lg", "sgds:font-bold"], key: "eb581c5cdeb4e766d3f7ee70eb06c5a5e6b7d7e2", textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391" },
-  { classes: ["sgds:text-heading-lg", "sgds:font-light"], key: "405fb91bd5a8d5cc4a277dafaa13a165271f3473", textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391" },
-  { classes: ["sgds:text-heading-md", "sgds:font-semibold"], key: "1d726367767f3ae67690847d13e811d14bdfb18b", textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391" },
-  { classes: ["sgds:text-heading-md", "sgds:font-light"], key: "87a8cbdfff5b88619a1267457affc5135ebfea7e", textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391" },
-  { classes: ["sgds:text-heading-sm", "sgds:font-semibold"], key: "916f07c16a469b02c0cccb3761df0649ed23c7a1", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
-  { classes: ["sgds:text-heading-sm", "sgds:font-light"], key: "3ddbd27fbf6674ca1d7ca51dc41776d5f7fdcef8", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
+  {
+    classes: ["sgds:text-heading-xl", "sgds:font-bold"],
+    key: "5cdb65eba3153b242bb8e142d1af1e672bede286",
+    textGapKey: "a74a8c0ee3a3eb79304e7b1ea46e6c12439e3a09"
+  },
+  {
+    classes: ["sgds:text-heading-xl", "sgds:font-light"],
+    key: "eca3cbd7d550ff6ed872e49a2d4eaab33e15f3f4",
+    textGapKey: "a74a8c0ee3a3eb79304e7b1ea46e6c12439e3a09"
+  },
+  {
+    classes: ["sgds:text-heading-lg", "sgds:font-bold"],
+    key: "eb581c5cdeb4e766d3f7ee70eb06c5a5e6b7d7e2",
+    textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391"
+  },
+  {
+    classes: ["sgds:text-heading-lg", "sgds:font-light"],
+    key: "405fb91bd5a8d5cc4a277dafaa13a165271f3473",
+    textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391"
+  },
+  {
+    classes: ["sgds:text-heading-md", "sgds:font-semibold"],
+    key: "1d726367767f3ae67690847d13e811d14bdfb18b",
+    textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391"
+  },
+  {
+    classes: ["sgds:text-heading-md", "sgds:font-light"],
+    key: "87a8cbdfff5b88619a1267457affc5135ebfea7e",
+    textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391"
+  },
+  {
+    classes: ["sgds:text-heading-sm", "sgds:font-semibold"],
+    key: "916f07c16a469b02c0cccb3761df0649ed23c7a1",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
+  {
+    classes: ["sgds:text-heading-sm", "sgds:font-light"],
+    key: "3ddbd27fbf6674ca1d7ca51dc41776d5f7fdcef8",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
   // Subtitle — text-gap/xs for md, text-gap/2-xs for sm
-  { classes: ["sgds:text-subtitle-md", "sgds:font-semibold"], key: "2f5eaef26d8b2a987ce63291e59110a5c49a0604", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
-  { classes: ["sgds:text-subtitle-md", "sgds:font-light"], key: "9613843760694cd923f78e7a1fb0f99476828464", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
-  { classes: ["sgds:text-subtitle-sm", "sgds:font-semibold"], key: "8881a0b233ca1b5d3247c13dc5c4f78dcd038daf", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-subtitle-sm", "sgds:font-light"], key: "a25bb36cbc9da02d057b7c019f86bfb9f008e752", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
+  {
+    classes: ["sgds:text-subtitle-md", "sgds:font-semibold"],
+    key: "2f5eaef26d8b2a987ce63291e59110a5c49a0604",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
+  {
+    classes: ["sgds:text-subtitle-md", "sgds:font-light"],
+    key: "9613843760694cd923f78e7a1fb0f99476828464",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
+  {
+    classes: ["sgds:text-subtitle-sm", "sgds:font-semibold"],
+    key: "8881a0b233ca1b5d3247c13dc5c4f78dcd038daf",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-subtitle-sm", "sgds:font-light"],
+    key: "a25bb36cbc9da02d057b7c019f86bfb9f008e752",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
   // Body — text-gap/sm for lg, text-gap/xs for md, text-gap/2-xs for sm
-  { classes: ["sgds:text-body-lg", "sgds:font-semibold"], key: "8e357183f095194ec405a0a5e7a3d8ef047167cd", textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391" },
-  { classes: ["sgds:text-body-lg", "sgds:font-regular"], key: "24983871c35b856959db6db763ce4cbf2d7aae25", textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391" },
-  { classes: ["sgds:text-body-md", "sgds:font-semibold"], key: "4fc6466df19f9e755a2c87d615468dfdc3823e74", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
-  { classes: ["sgds:text-body-md", "sgds:font-regular"], key: "52251808f011d65ab25e06b5279429b11ed08537", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
-  { classes: ["sgds:text-body-sm", "sgds:font-semibold"], key: "3760f584e4a888883759bfec6805f78258d31a36", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-body-sm", "sgds:font-regular"], key: "f5344762f1bf81b31311f18d79ce5d5b8bc3eb1a", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
+  {
+    classes: ["sgds:text-body-lg", "sgds:font-semibold"],
+    key: "8e357183f095194ec405a0a5e7a3d8ef047167cd",
+    textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391"
+  },
+  {
+    classes: ["sgds:text-body-lg", "sgds:font-regular"],
+    key: "24983871c35b856959db6db763ce4cbf2d7aae25",
+    textGapKey: "266a8e83d2cdb224d84b7f53303a14053061b391"
+  },
+  {
+    classes: ["sgds:text-body-md", "sgds:font-semibold"],
+    key: "4fc6466df19f9e755a2c87d615468dfdc3823e74",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
+  {
+    classes: ["sgds:text-body-md", "sgds:font-regular"],
+    key: "52251808f011d65ab25e06b5279429b11ed08537",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
+  {
+    classes: ["sgds:text-body-sm", "sgds:font-semibold"],
+    key: "3760f584e4a888883759bfec6805f78258d31a36",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-body-sm", "sgds:font-regular"],
+    key: "f5344762f1bf81b31311f18d79ce5d5b8bc3eb1a",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
   // Label — text-gap/xs for lg, text-gap/2-xs for md/sm/xs
-  { classes: ["sgds:text-label-lg", "sgds:font-semibold"], key: "9c97f0835e0d03a39fc16f8a5efa68d1bbd911f2", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
-  { classes: ["sgds:text-label-lg", "sgds:font-regular"], key: "60e08d075b01433409e0fbacd1d9310a3692b4c6", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
-  { classes: ["sgds:text-label-md", "sgds:font-semibold"], key: "f525dd0459769ca64b7b517ad4984b824991d6f4", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-label-md", "sgds:font-regular"], key: "091a52e640efb2b226b0e9bd09e3cebd5ed1fa46", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-label-md", "sgds:font-light"], key: "b13a5819976d89b3f42ef6b8699592bdf7b5722c", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-label-sm", "sgds:font-semibold"], key: "1f764a9519b5ef804034cc46b28016403f677a24", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-label-sm", "sgds:font-regular"], key: "d646a23a2d863eb76808abf09926d31701a60069", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-label-xs", "sgds:font-semibold"], key: "5ae7d2f3911320924aa4842caae68fc1bdc50aaa", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-label-xs", "sgds:font-regular"], key: "0689ac64b7fe5fcd0390903699ecf043da3cf9ad", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
+  {
+    classes: ["sgds:text-label-lg", "sgds:font-semibold"],
+    key: "9c97f0835e0d03a39fc16f8a5efa68d1bbd911f2",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
+  {
+    classes: ["sgds:text-label-lg", "sgds:font-regular"],
+    key: "60e08d075b01433409e0fbacd1d9310a3692b4c6",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
+  {
+    classes: ["sgds:text-label-md", "sgds:font-semibold"],
+    key: "f525dd0459769ca64b7b517ad4984b824991d6f4",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-label-md", "sgds:font-regular"],
+    key: "091a52e640efb2b226b0e9bd09e3cebd5ed1fa46",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-label-md", "sgds:font-light"],
+    key: "b13a5819976d89b3f42ef6b8699592bdf7b5722c",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-label-sm", "sgds:font-semibold"],
+    key: "1f764a9519b5ef804034cc46b28016403f677a24",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-label-sm", "sgds:font-regular"],
+    key: "d646a23a2d863eb76808abf09926d31701a60069",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-label-xs", "sgds:font-semibold"],
+    key: "5ae7d2f3911320924aa4842caae68fc1bdc50aaa",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-label-xs", "sgds:font-regular"],
+    key: "0689ac64b7fe5fcd0390903699ecf043da3cf9ad",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
   // Caption — text-gap/2-xs
-  { classes: ["sgds:text-caption-md", "sgds:font-semibold"], key: "a030edd30bf585cbe7fa2ee318d43af22f863808", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-caption-md", "sgds:font-regular"], key: "6f3122ebc05a0e3e80454130c336dc109c4766bf", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
+  {
+    classes: ["sgds:text-caption-md", "sgds:font-semibold"],
+    key: "a030edd30bf585cbe7fa2ee318d43af22f863808",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-caption-md", "sgds:font-regular"],
+    key: "6f3122ebc05a0e3e80454130c336dc109c4766bf",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
   // Overline — text-gap/2-xs
-  { classes: ["sgds:text-overline-md", "sgds:font-semibold"], key: "91b5a1aa4150a2388273052eda2db77d93632b1c", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-overline-md", "sgds:font-regular"], key: "789fb85cfbf7dd1e36b1b965b80630c5819d2750", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
+  {
+    classes: ["sgds:text-overline-md", "sgds:font-semibold"],
+    key: "91b5a1aa4150a2388273052eda2db77d93632b1c",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-overline-md", "sgds:font-regular"],
+    key: "789fb85cfbf7dd1e36b1b965b80630c5819d2750",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
   // Link — text-gap/xs
-  { classes: ["sgds:text-link-lg", "sgds:font-regular"], key: "3979e066b25df430a94d9c4ceed95944187f47e8", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
-  { classes: ["sgds:text-link-md", "sgds:font-regular"], key: "87188208ce4f91a6228866e944e4972748126f2c", textGapKey: "c9d442584c66372516b613d947efea6201d995e2" },
-  { classes: ["sgds:text-link-sm", "sgds:font-regular"], key: "fa2f2c18f51f5934cc9454f8f52c45fc29b45c45", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" },
-  { classes: ["sgds:text-link-xs", "sgds:font-regular"], key: "6548ed6193a03c8869d3146eb2fbd331c3858d8f", textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91" }
+  {
+    classes: ["sgds:text-link-lg", "sgds:font-regular"],
+    key: "3979e066b25df430a94d9c4ceed95944187f47e8",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
+  {
+    classes: ["sgds:text-link-md", "sgds:font-regular"],
+    key: "87188208ce4f91a6228866e944e4972748126f2c",
+    textGapKey: "c9d442584c66372516b613d947efea6201d995e2"
+  },
+  {
+    classes: ["sgds:text-link-sm", "sgds:font-regular"],
+    key: "fa2f2c18f51f5934cc9454f8f52c45fc29b45c45",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  },
+  {
+    classes: ["sgds:text-link-xs", "sgds:font-regular"],
+    key: "6548ed6193a03c8869d3146eb2fbd331c3858d8f",
+    textGapKey: "59e561862f412e72a426e77f58db6f3a0bec4a91"
+  }
 ];
 
 // Map a margin-bottom pixel value to the closest sgds/text-gap/* variable key
 // text-gap/2-xs=4, text-gap/xs=8, text-gap/sm=12, text-gap/md=16, text-gap/lg=20, text-gap/xl=24, text-gap/2-xl=32
 function marginToTextGapKey(marginPx) {
   var gaps = [
-    { px: 4, key: "59e561862f412e72a426e77f58db6f3a0bec4a91" },  // text-gap/2-xs
-    { px: 8, key: "c9d442584c66372516b613d947efea6201d995e2" },  // text-gap/xs
+    { px: 4, key: "59e561862f412e72a426e77f58db6f3a0bec4a91" }, // text-gap/2-xs
+    { px: 8, key: "c9d442584c66372516b613d947efea6201d995e2" }, // text-gap/xs
     { px: 12, key: "266a8e83d2cdb224d84b7f53303a14053061b391" }, // text-gap/sm
     { px: 16, key: "a74a8c0ee3a3eb79304e7b1ea46e6c12439e3a09" }, // text-gap/md
     { px: 20, key: "cb398364c6d30a4b32441e56c9ba6a9372816e62" }, // text-gap/lg
     { px: 24, key: "8a948572fd6d74000e61465f40e8826ced0144f7" }, // text-gap/xl
-    { px: 32, key: "f669a2ee794ed7fe6bd709ce649fa87b85eadee3" }  // text-gap/2-xl
+    { px: 32, key: "f669a2ee794ed7fe6bd709ce649fa87b85eadee3" } // text-gap/2-xl
   ];
   // Find closest match
   var closest = null;
@@ -269,12 +433,12 @@ function marginToTextGapKey(marginPx) {
 // Used for direct children of sgds-container (section-level spacing)
 function gapToLayoutGapKey(gapPx) {
   var gaps = [
-    { px: 4, key: "2acc288eaad399a10c49dc50485cbcca972bb3a1" },  // layout-gap/2-xs
-    { px: 8, key: "e41563056d916eeccf13707fa3ae5d821cc91994" },  // layout-gap/xs
+    { px: 4, key: "2acc288eaad399a10c49dc50485cbcca972bb3a1" }, // layout-gap/2-xs
+    { px: 8, key: "e41563056d916eeccf13707fa3ae5d821cc91994" }, // layout-gap/xs
     { px: 16, key: "264a182d25512a99f28631977728b56bd05bff34" }, // layout-gap/sm
     { px: 24, key: "f24863bda1524075c9bf13c4f27f3b9e86c91f5d" }, // layout-gap/md
     { px: 32, key: "cac0599410256b10fc64c68b6788aacebdd3e22c" }, // layout-gap/lg
-    { px: 40, key: "e059ad27d69c72d22b384d34214acb43a619deff" }  // layout-gap/xl
+    { px: 40, key: "e059ad27d69c72d22b384d34214acb43a619deff" } // layout-gap/xl
   ];
   var closest = null;
   var minDiff = Infinity;
@@ -292,11 +456,11 @@ function gapToLayoutGapKey(gapPx) {
 // Used for nested elements within components (not direct container children)
 function gapToComponentGapKey(gapPx) {
   var gaps = [
-    { px: 4, key: "a3c1cd4e3d5e7c0db42a02c699258b57c9c470b1" },  // component-gap/xs
-    { px: 8, key: "20dde083c5af77bafbb74752d33cdb64ea7ea970" },  // component-gap/sm
+    { px: 4, key: "a3c1cd4e3d5e7c0db42a02c699258b57c9c470b1" }, // component-gap/xs
+    { px: 8, key: "20dde083c5af77bafbb74752d33cdb64ea7ea970" }, // component-gap/sm
     { px: 16, key: "9bd62772f15986afa0a1a870b88fd3589cf8af55" }, // component-gap/md
     { px: 24, key: "673be2a683dced8e5afc8abe7f4250fa732635df" }, // component-gap/lg
-    { px: 32, key: "b50f7ff4208106d76bb4bca2cd6564734ac14dbe" }  // component-gap/xl
+    { px: 32, key: "b50f7ff4208106d76bb4bca2cd6564734ac14dbe" } // component-gap/xl
   ];
   var closest = null;
   var minDiff = Infinity;
@@ -957,18 +1121,18 @@ function getBreakpoint(viewportWidth, hasSidebar) {
 // Pattern: "default/{breakpoint}" or "with-sidebar/{breakpoint}"
 var SGDS_GRID_STYLE_KEYS = {
   // Default (no sidebar)
-  "default/xs": null,   // 4 cols, gap-md, margin 20px
-  "default/sm": null,   // 8 cols, gap-md, margin 24px
-  "default/md": null,   // 8 cols, gap-xl, margin 28px
-  "default/lg": null,   // 12 cols, gap-xl, max-width 888px
-  "default/xl": null,   // 12 cols, gap-2-xl, max-width 1168px
+  "default/xs": null, // 4 cols, gap-md, margin 20px
+  "default/sm": null, // 8 cols, gap-md, margin 24px
+  "default/md": null, // 8 cols, gap-xl, margin 28px
+  "default/lg": null, // 12 cols, gap-xl, max-width 888px
+  "default/xl": null, // 12 cols, gap-2-xl, max-width 1168px
   "default/2-xl": null, // 12 cols, gap-2-xl, max-width 1312px
   // With sidebar (expand)
-  "sidebar/md": null,   // 8 cols
-  "sidebar/lg": null,   // 12 cols, max-width 840px
-  "sidebar/xl": null,   // 12 cols, max-width 888px
+  "sidebar/md": null, // 8 cols
+  "sidebar/lg": null, // 12 cols, max-width 840px
+  "sidebar/xl": null, // 12 cols, max-width 888px
   "sidebar/2-xl": null, // 12 cols, max-width 1024px
-  "sidebar/3-xl": null  // 12 cols
+  "sidebar/3-xl": null // 12 cols
 };
 
 // Get the layout grid configuration for a given viewport width and sidebar state
@@ -986,32 +1150,76 @@ function getLayoutGridConfig(viewportWidth, hasSidebar) {
   if (hasSidebar) {
     switch (breakpoint) {
       case "md":
-        cols = 8; gutter = 24; margin = 48; alignment = "CENTER"; break;
+        cols = 8;
+        gutter = 24;
+        margin = 48;
+        alignment = "CENTER";
+        break;
       case "lg":
-        cols = 12; gutter = 24; margin = Math.max((viewportWidth - 840) / 2, 0); alignment = "CENTER"; break;
+        cols = 12;
+        gutter = 24;
+        margin = Math.max((viewportWidth - 840) / 2, 0);
+        alignment = "CENTER";
+        break;
       case "xl":
-        cols = 12; gutter = 32; margin = Math.max((viewportWidth - 888) / 2, 0); alignment = "CENTER"; break;
+        cols = 12;
+        gutter = 32;
+        margin = Math.max((viewportWidth - 888) / 2, 0);
+        alignment = "CENTER";
+        break;
       case "2-xl":
-        cols = 12; gutter = 32; margin = Math.max((viewportWidth - 1024) / 2, 0); alignment = "CENTER"; break;
+        cols = 12;
+        gutter = 32;
+        margin = Math.max((viewportWidth - 1024) / 2, 0);
+        alignment = "CENTER";
+        break;
       case "3-xl":
       default:
-        cols = 12; gutter = 32; margin = Math.max((viewportWidth - 1024) / 2, 0); alignment = "CENTER"; break;
+        cols = 12;
+        gutter = 32;
+        margin = Math.max((viewportWidth - 1024) / 2, 0);
+        alignment = "CENTER";
+        break;
     }
   } else {
     switch (breakpoint) {
       case "xs":
-        cols = 4; gutter = 16; margin = 20; alignment = "MIN"; break;
+        cols = 4;
+        gutter = 16;
+        margin = 20;
+        alignment = "MIN";
+        break;
       case "sm":
-        cols = 8; gutter = 16; margin = 24; alignment = "MIN"; break;
+        cols = 8;
+        gutter = 16;
+        margin = 24;
+        alignment = "MIN";
+        break;
       case "md":
-        cols = 8; gutter = 24; margin = 28; alignment = "MIN"; break;
+        cols = 8;
+        gutter = 24;
+        margin = 28;
+        alignment = "MIN";
+        break;
       case "lg":
-        cols = 12; gutter = 24; margin = Math.max((viewportWidth - 888) / 2, 0); alignment = "CENTER"; break;
+        cols = 12;
+        gutter = 24;
+        margin = Math.max((viewportWidth - 888) / 2, 0);
+        alignment = "CENTER";
+        break;
       case "xl":
-        cols = 12; gutter = 32; margin = Math.max((viewportWidth - 1168) / 2, 0); alignment = "CENTER"; break;
+        cols = 12;
+        gutter = 32;
+        margin = Math.max((viewportWidth - 1168) / 2, 0);
+        alignment = "CENTER";
+        break;
       case "2-xl":
       default:
-        cols = 12; gutter = 32; margin = Math.max((viewportWidth - 1312) / 2, 0); alignment = "CENTER"; break;
+        cols = 12;
+        gutter = 32;
+        margin = Math.max((viewportWidth - 1312) / 2, 0);
+        alignment = "CENTER";
+        break;
     }
   }
 
@@ -1048,6 +1256,8 @@ figma.ui.onmessage = async function (msg) {
 
       // Create root frame
       var pageWidth = data.pageWidth || data.width || 1440;
+      // Store globally for grid column calculations
+      globalThis.__sgdsPageWidth = pageWidth;
       var pageHeight = data.pageHeight || data.height || 900;
 
       var rootFrame = figma.createFrame();
@@ -1072,11 +1282,25 @@ figma.ui.onmessage = async function (msg) {
 
         if (modeVar) {
           var modeCollection = figma.variables.getVariableCollectionById(modeVar.variableCollectionId);
-          console.log("[theme] modeCollection:", !!modeCollection, modeCollection ? modeCollection.modes.map(function(m){return m.name}).join(",") : "null");
+          console.log(
+            "[theme] modeCollection:",
+            !!modeCollection,
+            modeCollection
+              ? modeCollection.modes
+                  .map(function (m) {
+                    return m.name;
+                  })
+                  .join(",")
+              : "null"
+          );
 
           if (modeCollection) {
-            var lightMode = modeCollection.modes.find(function(m) { return m.name === "Light"; });
-            var darkMode = modeCollection.modes.find(function(m) { return m.name === "Dark"; });
+            var lightMode = modeCollection.modes.find(function (m) {
+              return m.name === "Light";
+            });
+            var darkMode = modeCollection.modes.find(function (m) {
+              return m.name === "Dark";
+            });
             var targetMode = isNightMode ? darkMode : lightMode;
             console.log("[theme] targetMode:", targetMode ? targetMode.name + ":" + targetMode.modeId : "null");
             if (targetMode) {
@@ -1085,9 +1309,34 @@ figma.ui.onmessage = async function (msg) {
             }
           }
         }
-
       } catch (e) {
         console.log("[theme] Mode ERROR: " + String(e));
+      }
+
+      // Set Responsive collection mode based on viewport width
+      // This ensures font sizes, gaps, spacing resolve to correct breakpoint values
+      try {
+        var responsiveVar = await importVariable("c9d442584c66372516b613d947efea6201d995e2"); // text-gap/xs (from Responsive collection)
+        if (responsiveVar) {
+          var responsiveCol = figma.variables.getVariableCollectionById(responsiveVar.variableCollectionId);
+          if (responsiveCol) {
+            var desktopMode = responsiveCol.modes.find(function(m) { return m.name === "Desktop"; });
+            var tabletMode = responsiveCol.modes.find(function(m) { return m.name === "Tablet"; });
+            var mobileMode = responsiveCol.modes.find(function(m) { return m.name === "Mobile"; });
+
+            var targetResponsiveMode;
+            if (pageWidth >= 1024) targetResponsiveMode = desktopMode;
+            else if (pageWidth >= 512) targetResponsiveMode = tabletMode;
+            else targetResponsiveMode = mobileMode;
+
+            if (targetResponsiveMode) {
+              rootFrame.setExplicitVariableModeForCollection(responsiveCol, targetResponsiveMode.modeId);
+              console.log("[theme] Responsive mode set to:", targetResponsiveMode.name, "for viewport", pageWidth + "px");
+            }
+          }
+        }
+      } catch (eResp) {
+        console.log("[theme] Responsive mode ERROR: " + String(eResp));
       }
 
       // GT Brand color — applied as post-processing after all components are created
@@ -1176,11 +1425,15 @@ figma.ui.onmessage = async function (msg) {
           console.log("[theme] Post-processing: applying GT brand '" + gtColor + "'...");
 
           // Find any component instance in the tree
-          var anyInstance = rootFrame.findOne(function(n) { return n.type === "INSTANCE"; });
+          var anyInstance = rootFrame.findOne(function (n) {
+            return n.type === "INSTANCE";
+          });
           if (anyInstance) {
             // Traverse all nodes in the instance to find bound variables
             var gtCollectionFound = null;
-            var allNodes = anyInstance.findAll(function() { return true; });
+            var allNodes = anyInstance.findAll(function () {
+              return true;
+            });
             for (var ni = 0; ni < allNodes.length && !gtCollectionFound; ni++) {
               var bvs = allNodes[ni].boundVariables;
               if (!bvs) continue;
@@ -1194,18 +1447,32 @@ figma.ui.onmessage = async function (msg) {
                   var v = figma.variables.getVariableById(varId);
                   if (v) {
                     var col = figma.variables.getVariableCollectionById(v.variableCollectionId);
-                    if (col && col.modes.some(function(m) { return m.name === "pink" || m.name === "cyan" || m.name === "magenta"; })) {
+                    if (
+                      col &&
+                      col.modes.some(function (m) {
+                        return m.name === "pink" || m.name === "cyan" || m.name === "magenta";
+                      })
+                    ) {
                       gtCollectionFound = col;
                       break;
                     }
                   }
-                } catch(e6) {}
+                } catch (e6) {}
               }
             }
 
             if (gtCollectionFound) {
-              console.log("[theme] GT brand collection found! Modes:", gtCollectionFound.modes.map(function(m){return m.name}).join(","));
-              var targetGtMode = gtCollectionFound.modes.find(function(m) { return m.name === gtColor; });
+              console.log(
+                "[theme] GT brand collection found! Modes:",
+                gtCollectionFound.modes
+                  .map(function (m) {
+                    return m.name;
+                  })
+                  .join(",")
+              );
+              var targetGtMode = gtCollectionFound.modes.find(function (m) {
+                return m.name === gtColor;
+              });
               if (targetGtMode) {
                 gtRootFrame.setExplicitVariableModeForCollection(gtCollectionFound, targetGtMode.modeId);
                 console.log("[theme] GT brand '" + gtColor + "' applied successfully!");
@@ -3891,9 +4158,12 @@ async function createFrameNode(data, parent, parentX, parentY) {
   // Enable auto-layout on frames that have spacing utility classes but no flex/grid
   if (frame.layoutMode === "NONE" && data.name) {
     var hasSpacingClass = data.name.match(/sgds:(py|px|p|pt|pb|pl|pr|mb|mt|mx|my)-/);
-    var allTextChildren = data.children && data.children.length > 1 && data.children.every(function (c) {
-      return c.type === "text" || (c.type === "element" && c.text);
-    });
+    var allTextChildren =
+      data.children &&
+      data.children.length > 1 &&
+      data.children.every(function (c) {
+        return c.type === "text" || (c.type === "element" && c.text);
+      });
 
     if (hasSpacingClass || allTextChildren) {
       frame.layoutMode = "VERTICAL";
@@ -3915,7 +4185,9 @@ async function createFrameNode(data, parent, parentX, parentY) {
   // Lists (ul/ol): use Icon List library component
   // Bullet/numbered lists: single item mode, hidden icon, newline-joined text with markers
   if ((data.tag === "ul" || data.tag === "ol") && data.children && data.children.length > 0) {
-    var liItems = data.children.filter(function (c) { return c.tag === "li"; });
+    var liItems = data.children.filter(function (c) {
+      return c.tag === "li";
+    });
 
     if (liItems.length > 0) {
       try {
@@ -3938,14 +4210,21 @@ async function createFrameNode(data, parent, parentX, parentY) {
 
             // Build newline-joined text with bullet/number markers
             // Extract text from li items (may have nested children like <strong> + text)
-            var listText = liItems.map(function (item, idx) {
-              var marker = data.tag === "ol" ? (idx + 1) + ". " : "\u2022 ";
-              var liText = item.text || "";
-              if (!liText && item.children) {
-                liText = item.children.map(function (c) { return c.text || ""; }).join(" ").trim();
-              }
-              return marker + liText;
-            }).join("\n");
+            var listText = liItems
+              .map(function (item, idx) {
+                var marker = data.tag === "ol" ? idx + 1 + ". " : "\u2022 ";
+                var liText = item.text || "";
+                if (!liText && item.children) {
+                  liText = item.children
+                    .map(function (c) {
+                      return c.text || "";
+                    })
+                    .join(" ")
+                    .trim();
+                }
+                return marker + liText;
+              })
+              .join("\n");
 
             // Set text on the single "Icon list 1" item
             var itemInstance = listInstance.findOne(function (n) {
@@ -3956,7 +4235,9 @@ async function createFrameNode(data, parent, parentX, parentY) {
               try {
                 itemInstance.setProperties({ "Edit text#16628:108": listText });
               } catch (e) {
-                var labelNode = itemInstance.findOne(function (n) { return n.name === "label" && n.type === "TEXT"; });
+                var labelNode = itemInstance.findOne(function (n) {
+                  return n.name === "label" && n.type === "TEXT";
+                });
                 if (labelNode) {
                   await figma.loadFontAsync(labelNode.fontName);
                   labelNode.characters = listText;
@@ -3990,7 +4271,7 @@ async function createFrameNode(data, parent, parentX, parentY) {
       for (var li2 = 0; li2 < data.children.length; li2++) {
         var liChild = data.children[li2];
         if (liChild.tag === "li" && liChild.text) {
-          var marker2 = data.tag === "ol" ? (li2 + 1) + ". " : "\u2022 ";
+          var marker2 = data.tag === "ol" ? li2 + 1 + ". " : "\u2022 ";
           liChild.text = marker2 + liChild.text;
         }
       }
@@ -4030,9 +4311,10 @@ async function createFrameNode(data, parent, parentX, parentY) {
 
         // Center sgds-container or mx-auto children within their parent
         // sgds-container always has margin:auto in CSS → center it
-        var shouldCenter = childDataName.indexOf("sgds:mx-auto") >= 0 ||
-                           childDataName.indexOf("mx-auto") >= 0 ||
-                           childDataName.indexOf("sgds-container") >= 0;
+        var shouldCenter =
+          childDataName.indexOf("sgds:mx-auto") >= 0 ||
+          childDataName.indexOf("mx-auto") >= 0 ||
+          childDataName.indexOf("sgds-container") >= 0;
         if (shouldCenter && childNode.width < frame.width) {
           if (frame.layoutMode === "VERTICAL") {
             frame.counterAxisAlignItems = "CENTER";
@@ -4053,8 +4335,7 @@ async function createFrameNode(data, parent, parentX, parentY) {
   // This gives per-element spacing (h1 gets text-gap/md, p gets text-gap/xl, etc.)
   // Only for vertical auto-layout frames without explicit gap
   if (frame.layoutMode === "VERTICAL" && data.children && data.children.length > 1) {
-    var hasExplicitGap = (data.name && data.name.indexOf("sgds:gap-") >= 0) ||
-                         (data.styles && data.styles.gap);
+    var hasExplicitGap = (data.name && data.name.indexOf("sgds:gap-") >= 0) || (data.styles && data.styles.gap);
     if (!hasExplicitGap) {
       // Wrap text children that have marginBottom in a frame with paddingBottom
       for (var wi = 0; wi < frame.children.length; wi++) {
@@ -4099,7 +4380,10 @@ async function createFrameNode(data, parent, parentX, parentY) {
   // Restack: for frames containing multiple sections that may have grown from HUG + padding
   // Ensures no overlap between vertically stacked sections/footer
   if (frame.layoutMode === "NONE" && data.children && data.children.length > 2) {
-    var hasSectionChildren = data.children.filter(function (c) { return (c.name || "").indexOf("sgds:bg-") >= 0; }).length >= 2;
+    var hasSectionChildren =
+      data.children.filter(function (c) {
+        return (c.name || "").indexOf("sgds:bg-") >= 0;
+      }).length >= 2;
 
     if (hasSectionChildren && frame.children.length > 1) {
       var currentY = 0;
@@ -4137,7 +4421,7 @@ async function applySpacing(frame, name, styles, data, parentName) {
       // - Inside an sgds-* component → component-gap
       // - Everything else (page-level content) → layout-gap
       var textChildCount = 0;
-      var totalChildCount = (data && data.children) ? data.children.length : 0;
+      var totalChildCount = data && data.children ? data.children.length : 0;
       for (var gi = 0; gi < totalChildCount; gi++) {
         var gChild = data.children[gi];
         if (gChild.type === "text" || (gChild.type === "element" && gChild.text && !gChild.children)) {
@@ -4146,7 +4430,8 @@ async function applySpacing(frame, name, styles, data, parentName) {
       }
       var isTextGroup = totalChildCount > 0 && textChildCount > totalChildCount / 2;
       // Component-gap only applies inside sgds-* components (cards, modals, etc.)
-      var isInsideComponent = parentName && parentName.indexOf("sgds-") === 0 && parentName.indexOf("sgds-container") < 0;
+      var isInsideComponent =
+        parentName && parentName.indexOf("sgds-") === 0 && parentName.indexOf("sgds-container") < 0;
 
       var computedGapKey;
       if (isTextGroup) {
@@ -4158,7 +4443,18 @@ async function applySpacing(frame, name, styles, data, parentName) {
         computedGapKey = gapToLayoutGapKey(styles.gap);
       }
 
-      console.log("[gap] " + name.substring(0, 30) + " | gap:" + styles.gap + "px | text:" + isTextGroup + " inComponent:" + isInsideComponent + " | key:" + computedGapKey);
+      console.log(
+        "[gap] " +
+          name.substring(0, 30) +
+          " | gap:" +
+          styles.gap +
+          "px | text:" +
+          isTextGroup +
+          " inComponent:" +
+          isInsideComponent +
+          " | key:" +
+          computedGapKey
+      );
 
       var gapBound2 = false;
       if (computedGapKey) {
@@ -4466,7 +4762,7 @@ function applyAutoLayout(frame, name, styles) {
 
     // Sizing: hug primary axis for small inline elements (button rows),
     // but keep FIXED for full-width sections to maintain page layout
-    var isFullWidth = (frame.width > 800);
+    var isFullWidth = frame.width > 800;
     frame.primaryAxisSizingMode = isFullWidth ? "FIXED" : "AUTO";
     frame.counterAxisSizingMode = "FIXED";
 
@@ -4489,19 +4785,24 @@ function applyChildSizing(child, childName, parentLayoutMode, parentFrame) {
 
   if (isGrid) {
     // Grid child: size based on column span
-    var colSpan = parseColSpan(childName);
+    var vpWidth = globalThis.__sgdsPageWidth || 1440;
+    var colSpan = parseColSpanForViewport(childName, vpWidth);
     if (colSpan > 0) {
-      // Desktop grid = 12 columns
-      // Child width = (parentWidth / 12) * colSpan - gap adjustment
-      // Gap is applied by auto-layout itemSpacing, so each child just needs proportional width
+      // Determine column count based on viewport
       var totalCols = 12;
+      if (vpWidth < 512) totalCols = 4;
+      else if (vpWidth < 1024) totalCols = 8;
+
       var parentWidth = parentFrame.width || 800;
       var gap = parentFrame.itemSpacing || 0;
-      // Width formula: (available space / totalCols) * colSpan + (colSpan - 1) * gap
-      // Available space = parentWidth - (totalCols - 1) * gap
-      var availableSpace = parentWidth - (totalCols - 1) * gap;
-      var childWidth = (availableSpace / totalCols) * colSpan + (colSpan - 1) * gap;
-      child.resize(Math.max(childWidth, 1), Math.max(child.height || 1, 1));
+      // If colSpan equals totalCols, it's full width
+      if (colSpan >= totalCols) {
+        child.resize(Math.max(parentWidth, 1), Math.max(child.height || 1, 1));
+      } else {
+        var availableSpace = parentWidth - (totalCols - 1) * gap;
+        var childWidth = (availableSpace / totalCols) * colSpan + (colSpan - 1) * gap;
+        child.resize(Math.max(childWidth, 1), Math.max(child.height || 1, 1));
+      }
     }
     return;
   }
@@ -4578,6 +4879,42 @@ function parseColSpan(name) {
   return 0;
 }
 
+// Viewport-aware column span parser
+// Selects the column class that applies at the given viewport width
+function parseColSpanForViewport(name, viewportWidth) {
+  // At each breakpoint, use the largest applicable class
+  // lg+ (≥1024): prefer 2-xl > xl > lg > md > sm > base
+  // md (768-1023): prefer md > sm > base (ignore lg+)
+  // sm (512-767): prefer sm > base (ignore md+)
+  // xs (<512): prefer base only
+
+  if (viewportWidth >= 1024) {
+    // Desktop: use largest available
+    return parseColSpan(name);
+  } else if (viewportWidth >= 768) {
+    // Tablet (md): use md, sm, or base
+    var matchMd = name.match(/sgds-col-md-(\d+)/);
+    if (matchMd) return parseInt(matchMd[1]);
+    var matchSm = name.match(/sgds-col-sm-(\d+)/);
+    if (matchSm) return parseInt(matchSm[1]);
+    var matchBase = name.match(/sgds-col-(\d+)/);
+    if (matchBase) return parseInt(matchBase[1]);
+    return 0;
+  } else if (viewportWidth >= 512) {
+    // Small tablet (sm): use sm or base
+    var matchSm2 = name.match(/sgds-col-sm-(\d+)/);
+    if (matchSm2) return parseInt(matchSm2[1]);
+    var matchBase2 = name.match(/sgds-col-(\d+)/);
+    if (matchBase2) return parseInt(matchBase2[1]);
+    return 0;
+  } else {
+    // Mobile (xs): use base only
+    var matchBase3 = name.match(/sgds-col-(\d+)/);
+    if (matchBase3) return parseInt(matchBase3[1]);
+    return 0;
+  }
+}
+
 // Resolve a spacing token to a variable key
 // context: "gap" | "padding" — determines which key to look up for specialized categories
 // e.g. resolveSpacingKey("component-md", "gap") → "component-gap-md"
@@ -4627,10 +4964,10 @@ async function createTextNode(data, parent, parentX, parentY) {
   // Fallback: map HTML tags to text styles when no sgds: classes present
   if (!textStyleMatch && data.tag) {
     var tagStyleMap = {
-      "strong": "f525dd0459769ca64b7b517ad4984b824991d6f4", // label/md-semibold
-      "b": "f525dd0459769ca64b7b517ad4984b824991d6f4",      // label/md-semibold
-      "em": "091a52e640efb2b226b0e9bd09e3cebd5ed1fa46",     // label/md-regular (italic context)
-      "small": "d646a23a2d863eb76808abf09926d31701a60069"   // label/sm-regular
+      strong: "f525dd0459769ca64b7b517ad4984b824991d6f4", // label/md-semibold
+      b: "f525dd0459769ca64b7b517ad4984b824991d6f4", // label/md-semibold
+      em: "091a52e640efb2b226b0e9bd09e3cebd5ed1fa46", // label/md-regular (italic context)
+      small: "d646a23a2d863eb76808abf09926d31701a60069" // label/sm-regular
     };
     if (tagStyleMap[data.tag]) {
       textStyleMatch = { key: tagStyleMap[data.tag] };

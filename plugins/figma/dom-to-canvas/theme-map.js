@@ -33,7 +33,7 @@ export var THEME_COLLECTIONS = {
     collectionId: "VariableCollectionId:33495:17427",
     collectionKey: "23e086fd1c3e03221b79847965afd45932e1cbc0",
     modes: {
-      purple: "33503:4",  // default
+      purple: "33503:4", // default
       cyan: "33495:0",
       blue: "33503:3",
       magenta: "33503:1",
@@ -47,7 +47,7 @@ export var THEME_COLLECTIONS = {
     collectionId: "VariableCollectionId:29541:58337",
     collectionKey: "3c35b193196ec2cbcaa961c799729c93d8bac029",
     modes: {
-      sgds: "29541:4",        // default
+      sgds: "29541:4", // default
       devconsole: "29541:0",
       stackx: "29541:1",
       techpass: "29541:2",

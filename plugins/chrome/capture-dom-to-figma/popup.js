@@ -265,9 +265,7 @@ function captureDom(maxDepth) {
       .join(" ");
 
     // Check if element contains only text and <br> elements (multi-line text block)
-    const onlyTextAndBr = el.children.length > 0 && Array.from(el.children).every(
-      child => child.tagName === "BR"
-    );
+    const onlyTextAndBr = el.children.length > 0 && Array.from(el.children).every(child => child.tagName === "BR");
 
     if (directText && (el.children.length === 0 || onlyTextAndBr)) {
       node.type = "text";
