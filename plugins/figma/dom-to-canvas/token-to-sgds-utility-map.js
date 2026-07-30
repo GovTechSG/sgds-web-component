@@ -1878,3 +1878,246 @@ export function findByCssVar(cssVar) {
 export function findBySgdsTailwind(sgdsTailwindClass) {
   return bySgdsTailwind.get(sgdsTailwindClass) || null;
 }
+
+// ─── Typography: SGDS Utility Classes → Figma Text Style Mapping ────────────────
+// Maps the combination of sgds:* typography classes to the corresponding Figma text style.
+// When the plugin encounters these class combinations on a text element,
+// it should apply the Figma text style via figma.importStyleByKeyAsync(key).
+//
+// Each entry:
+//   { sgdsClasses, figmaTextStyleName, figmaTextStyleKey, figmaTextStyleNodeId }
+//
+// - sgdsClasses:          Array of utility classes that identify this typography style
+// - figmaTextStyleName:   Figma text style name (e.g. "heading/md-semibold")
+// - figmaTextStyleKey:    Figma style key for importStyleByKeyAsync
+// - figmaTextStyleNodeId: Figma node ID of the style
+
+export const textStyleMap = [
+  // ─── Display ──────────────────────────────────────────────────────────────────
+  { sgdsClasses: ["sgds:text-display-lg", "sgds:font-bold"], figmaTextStyleName: "display/lg-bold", figmaTextStyleKey: "2a178cc4310fd777ff879d05a4dfd7268868990d", figmaTextStyleNodeId: "15403:2420" },
+  { sgdsClasses: ["sgds:text-display-lg", "sgds:font-light"], figmaTextStyleName: "display/lg-light", figmaTextStyleKey: "789b7227c8d1f5b76f5ca0e9628e866bf782ed44", figmaTextStyleNodeId: "15403:5463" },
+  { sgdsClasses: ["sgds:text-display-md", "sgds:font-bold"], figmaTextStyleName: "display/md-bold", figmaTextStyleKey: "5189154e0f3fdadd3b954dd81d38b1ed8a33a892", figmaTextStyleNodeId: "15403:5464" },
+  { sgdsClasses: ["sgds:text-display-md", "sgds:font-light"], figmaTextStyleName: "display/md-light", figmaTextStyleKey: "871770a02d23acbf40864421447982a8476e09b9", figmaTextStyleNodeId: "15403:5465" },
+  { sgdsClasses: ["sgds:text-display-sm", "sgds:font-bold"], figmaTextStyleName: "display/sm-bold", figmaTextStyleKey: "9c918eb31b1a158eba26c9b49fbfb68b0849648a", figmaTextStyleNodeId: "15403:5466" },
+  { sgdsClasses: ["sgds:text-display-sm", "sgds:font-light"], figmaTextStyleName: "display/sm-light", figmaTextStyleKey: "6a21766611d21803cd7f9f2d0b5e064a486d0789", figmaTextStyleNodeId: "15403:5467" },
+
+  // ─── Heading ──────────────────────────────────────────────────────────────────
+  { sgdsClasses: ["sgds:text-heading-xl", "sgds:font-bold"], figmaTextStyleName: "heading/xl-bold", figmaTextStyleKey: "5cdb65eba3153b242bb8e142d1af1e672bede286", figmaTextStyleNodeId: "15403:5468" },
+  { sgdsClasses: ["sgds:text-heading-xl", "sgds:font-light"], figmaTextStyleName: "heading/xl-light", figmaTextStyleKey: "eca3cbd7d550ff6ed872e49a2d4eaab33e15f3f4", figmaTextStyleNodeId: "15403:5469" },
+  { sgdsClasses: ["sgds:text-heading-lg", "sgds:font-bold"], figmaTextStyleName: "heading/lg-bold", figmaTextStyleKey: "eb581c5cdeb4e766d3f7ee70eb06c5a5e6b7d7e2", figmaTextStyleNodeId: "15403:5470" },
+  { sgdsClasses: ["sgds:text-heading-lg", "sgds:font-light"], figmaTextStyleName: "heading/lg-light", figmaTextStyleKey: "405fb91bd5a8d5cc4a277dafaa13a165271f3473", figmaTextStyleNodeId: "15403:5471" },
+  { sgdsClasses: ["sgds:text-heading-md", "sgds:font-semibold"], figmaTextStyleName: "heading/md-semibold", figmaTextStyleKey: "1d726367767f3ae67690847d13e811d14bdfb18b", figmaTextStyleNodeId: "15403:5472" },
+  { sgdsClasses: ["sgds:text-heading-md", "sgds:font-light"], figmaTextStyleName: "heading/md-light", figmaTextStyleKey: "87a8cbdfff5b88619a1267457affc5135ebfea7e", figmaTextStyleNodeId: "15403:5473" },
+  { sgdsClasses: ["sgds:text-heading-sm", "sgds:font-semibold"], figmaTextStyleName: "heading/sm-semibold", figmaTextStyleKey: "916f07c16a469b02c0cccb3761df0649ed23c7a1", figmaTextStyleNodeId: "15403:5474" },
+  { sgdsClasses: ["sgds:text-heading-sm", "sgds:font-light"], figmaTextStyleName: "heading/sm-light", figmaTextStyleKey: "3ddbd27fbf6674ca1d7ca51dc41776d5f7fdcef8", figmaTextStyleNodeId: "15403:5475" },
+
+  // ─── Subtitle ─────────────────────────────────────────────────────────────────
+  { sgdsClasses: ["sgds:text-subtitle-md", "sgds:font-semibold"], figmaTextStyleName: "subtitle/md-semibold", figmaTextStyleKey: "2f5eaef26d8b2a987ce63291e59110a5c49a0604", figmaTextStyleNodeId: "15441:10016" },
+  { sgdsClasses: ["sgds:text-subtitle-md", "sgds:font-light"], figmaTextStyleName: "subtitle/md-light", figmaTextStyleKey: "9613843760694cd923f78e7a1fb0f99476828464", figmaTextStyleNodeId: "15441:10017" },
+  { sgdsClasses: ["sgds:text-subtitle-sm", "sgds:font-semibold"], figmaTextStyleName: "subtitle/sm-semibold", figmaTextStyleKey: "8881a0b233ca1b5d3247c13dc5c4f78dcd038daf", figmaTextStyleNodeId: "15632:41545" },
+  { sgdsClasses: ["sgds:text-subtitle-sm", "sgds:font-light"], figmaTextStyleName: "subtitle/sm-light", figmaTextStyleKey: "a25bb36cbc9da02d057b7c019f86bfb9f008e752", figmaTextStyleNodeId: "15632:41546" },
+
+  // ─── Body ─────────────────────────────────────────────────────────────────────
+  { sgdsClasses: ["sgds:text-body-lg", "sgds:font-semibold"], figmaTextStyleName: "body/lg-semibold", figmaTextStyleKey: "8e357183f095194ec405a0a5e7a3d8ef047167cd", figmaTextStyleNodeId: "15403:5476" },
+  { sgdsClasses: ["sgds:text-body-lg", "sgds:font-regular"], figmaTextStyleName: "body/lg-regular", figmaTextStyleKey: "24983871c35b856959db6db763ce4cbf2d7aae25", figmaTextStyleNodeId: "15403:5477" },
+  { sgdsClasses: ["sgds:text-body-md", "sgds:font-semibold"], figmaTextStyleName: "body/md-semibold", figmaTextStyleKey: "4fc6466df19f9e755a2c87d615468dfdc3823e74", figmaTextStyleNodeId: "15403:5480" },
+  { sgdsClasses: ["sgds:text-body-md", "sgds:font-regular"], figmaTextStyleName: "body/md-regular", figmaTextStyleKey: "52251808f011d65ab25e06b5279429b11ed08537", figmaTextStyleNodeId: "15403:5481" },
+  { sgdsClasses: ["sgds:text-body-sm", "sgds:font-semibold"], figmaTextStyleName: "body/sm-semibold", figmaTextStyleKey: "3760f584e4a888883759bfec6805f78258d31a36", figmaTextStyleNodeId: "15403:5482" },
+  { sgdsClasses: ["sgds:text-body-sm", "sgds:font-regular"], figmaTextStyleName: "body/sm-regular", figmaTextStyleKey: "f5344762f1bf81b31311f18d79ce5d5b8bc3eb1a", figmaTextStyleNodeId: "15403:5483" },
+
+  // ─── Label ────────────────────────────────────────────────────────────────────
+  { sgdsClasses: ["sgds:text-label-lg", "sgds:font-semibold"], figmaTextStyleName: "label/lg-semibold", figmaTextStyleKey: "9c97f0835e0d03a39fc16f8a5efa68d1bbd911f2", figmaTextStyleNodeId: "15403:5484" },
+  { sgdsClasses: ["sgds:text-label-lg", "sgds:font-regular"], figmaTextStyleName: "label/lg-regular", figmaTextStyleKey: "60e08d075b01433409e0fbacd1d9310a3692b4c6", figmaTextStyleNodeId: "15403:5485" },
+  { sgdsClasses: ["sgds:text-label-md", "sgds:font-semibold"], figmaTextStyleName: "label/md-semibold", figmaTextStyleKey: "f525dd0459769ca64b7b517ad4984b824991d6f4", figmaTextStyleNodeId: "15403:5487" },
+  { sgdsClasses: ["sgds:text-label-md", "sgds:font-regular"], figmaTextStyleName: "label/md-regular", figmaTextStyleKey: "091a52e640efb2b226b0e9bd09e3cebd5ed1fa46", figmaTextStyleNodeId: "15403:5488" },
+  { sgdsClasses: ["sgds:text-label-md", "sgds:font-light"], figmaTextStyleName: "label/md-light", figmaTextStyleKey: "b13a5819976d89b3f42ef6b8699592bdf7b5722c", figmaTextStyleNodeId: "15403:5489" },
+  { sgdsClasses: ["sgds:text-label-sm", "sgds:font-semibold"], figmaTextStyleName: "label/sm-semibold", figmaTextStyleKey: "1f764a9519b5ef804034cc46b28016403f677a24", figmaTextStyleNodeId: "15403:5490" },
+  { sgdsClasses: ["sgds:text-label-sm", "sgds:font-regular"], figmaTextStyleName: "label/sm-regular", figmaTextStyleKey: "d646a23a2d863eb76808abf09926d31701a60069", figmaTextStyleNodeId: "15403:5491" },
+  { sgdsClasses: ["sgds:text-label-xs", "sgds:font-semibold"], figmaTextStyleName: "label/xs-semibold", figmaTextStyleKey: "5ae7d2f3911320924aa4842caae68fc1bdc50aaa", figmaTextStyleNodeId: "28758:1419" },
+  { sgdsClasses: ["sgds:text-label-xs", "sgds:font-regular"], figmaTextStyleName: "label/xs-regular", figmaTextStyleKey: "0689ac64b7fe5fcd0390903699ecf043da3cf9ad", figmaTextStyleNodeId: "28717:4074" },
+
+  // ─── Caption ──────────────────────────────────────────────────────────────────
+  { sgdsClasses: ["sgds:text-caption-md", "sgds:font-semibold"], figmaTextStyleName: "caption/semibold", figmaTextStyleKey: "a030edd30bf585cbe7fa2ee318d43af22f863808", figmaTextStyleNodeId: "15403:5492" },
+  { sgdsClasses: ["sgds:text-caption-md", "sgds:font-regular"], figmaTextStyleName: "caption/regular", figmaTextStyleKey: "6f3122ebc05a0e3e80454130c336dc109c4766bf", figmaTextStyleNodeId: "15403:5493" },
+
+  // ─── Overline ─────────────────────────────────────────────────────────────────
+  { sgdsClasses: ["sgds:text-overline-md", "sgds:font-semibold"], figmaTextStyleName: "overline/semibold", figmaTextStyleKey: "91b5a1aa4150a2388273052eda2db77d93632b1c", figmaTextStyleNodeId: "15403:5496" },
+  { sgdsClasses: ["sgds:text-overline-md", "sgds:font-regular"], figmaTextStyleName: "overline/regular", figmaTextStyleKey: "789fb85cfbf7dd1e36b1b965b80630c5819d2750", figmaTextStyleNodeId: "15403:5497" },
+
+  // ─── Link ─────────────────────────────────────────────────────────────────────
+  { sgdsClasses: ["sgds:text-link-lg", "sgds:font-regular"], figmaTextStyleName: "link/lg-regular", figmaTextStyleKey: "3979e066b25df430a94d9c4ceed95944187f47e8", figmaTextStyleNodeId: "15403:5505" },
+  { sgdsClasses: ["sgds:text-link-md", "sgds:font-regular"], figmaTextStyleName: "link/md-regular", figmaTextStyleKey: "87188208ce4f91a6228866e944e4972748126f2c", figmaTextStyleNodeId: "15403:5507" },
+  { sgdsClasses: ["sgds:text-link-sm", "sgds:font-regular"], figmaTextStyleName: "link/sm-regular", figmaTextStyleKey: "fa2f2c18f51f5934cc9454f8f52c45fc29b45c45", figmaTextStyleNodeId: "15403:5509" },
+  { sgdsClasses: ["sgds:text-link-xs", "sgds:font-regular"], figmaTextStyleName: "link/xs-regular", figmaTextStyleKey: "6548ed6193a03c8869d3146eb2fbd331c3858d8f", figmaTextStyleNodeId: "29048:83324" },
+
+  // ─── List ─────────────────────────────────────────────────────────────────────
+  { sgdsClasses: ["sgds:text-body-lg"], figmaTextStyleName: "list/lg-regular", figmaTextStyleKey: "2927582678e8795b655b3de64cd9ae34a874d905", figmaTextStyleNodeId: "38795:3180", listOnly: true },
+  { sgdsClasses: ["sgds:text-body-md"], figmaTextStyleName: "list/md-regular", figmaTextStyleKey: "2d333e403dd8892d95b20be2e033ec78727c6f56", figmaTextStyleNodeId: "38795:3182", listOnly: true },
+  { sgdsClasses: ["sgds:text-body-sm"], figmaTextStyleName: "list/sm-regular", figmaTextStyleKey: "7614fc2e5918cbc0ebcfbaabfec840ac79eab956", figmaTextStyleNodeId: "38795:3184", listOnly: true },
+];
+
+/**
+ * Find the matching Figma text style for a class string that CONTAINS the required sgds classes.
+ * Uses "contains" matching — the class string may have additional classes beyond the ones needed.
+ * @param {string} classString - Space-separated class list (e.g. "sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default")
+ * @returns {{ figmaTextStyleName, figmaTextStyleKey, figmaTextStyleNodeId } | null}
+ */
+export function findTextStyle(classString) {
+  if (!classString) return null;
+  for (var i = 0; i < textStyleMap.length; i++) {
+    var entry = textStyleMap[i];
+    if (entry.listOnly) continue; // skip list-specific styles for general matching
+    var allMatch = entry.sgdsClasses.every(function (cls) {
+      // Check if classString contains this class (as a whole word)
+      return classString.indexOf(cls) >= 0;
+    });
+    if (allMatch) return entry;
+  }
+  return null;
+}
+
+// ─── Element Tag → Default Typography (from reboot.css) ─────────────────────────
+// Maps HTML tags to their default SGDS typography properties
+// Used when elements don't have explicit sgds:* classes
+
+export const typographyMap = [
+  {
+    tag: "h1",
+    fontSize: "--sgds-font-size-heading-xl",
+    fontWeight: "--sgds-font-weight-bold",
+    lineHeight: "--sgds-line-height-xl",
+    letterSpacing: "--sgds-letter-spacing-tight",
+    marginBottom: "--sgds-margin-lg",
+    marginBottomVarId: "VariableID:29937:84956",
+    figmaTextStyleKey: null // TODO: populate from discovered-variables.json textStyles
+  },
+  {
+    tag: "h2",
+    fontSize: "--sgds-font-size-heading-lg",
+    fontWeight: "--sgds-font-weight-bold",
+    lineHeight: "--sgds-line-height-lg",
+    letterSpacing: "--sgds-letter-spacing-tight",
+    marginBottom: "--sgds-margin-md",
+    marginBottomVarId: "VariableID:29937:84957",
+    figmaTextStyleKey: null
+  },
+  {
+    tag: "h3",
+    fontSize: "--sgds-font-size-heading-md",
+    fontWeight: "--sgds-font-weight-semibold",
+    lineHeight: "--sgds-line-height-md",
+    letterSpacing: "--sgds-letter-spacing-tight",
+    marginBottom: "--sgds-margin-md",
+    marginBottomVarId: "VariableID:29937:84957",
+    figmaTextStyleKey: null
+  },
+  {
+    tag: "h4",
+    fontSize: "--sgds-font-size-heading-sm",
+    fontWeight: "--sgds-font-weight-semibold",
+    lineHeight: "--sgds-line-height-sm",
+    letterSpacing: "--sgds-letter-spacing-tight",
+    marginBottom: "--sgds-margin-md",
+    marginBottomVarId: "VariableID:29937:84957",
+    figmaTextStyleKey: null
+  },
+  {
+    tag: "h5",
+    fontSize: "--sgds-font-size-subtitle-md",
+    fontWeight: "--sgds-font-weight-semibold",
+    lineHeight: "--sgds-line-height-xs",
+    letterSpacing: "--sgds-letter-spacing-normal",
+    marginBottom: "--sgds-margin-xs",
+    marginBottomVarId: "VariableID:29937:84959",
+    figmaTextStyleKey: null
+  },
+  {
+    tag: "h6",
+    fontSize: "--sgds-font-size-subtitle-sm",
+    fontWeight: "--sgds-font-weight-semibold",
+    lineHeight: "--sgds-line-height-2-xs",
+    letterSpacing: "--sgds-letter-spacing-normal",
+    marginBottom: "--sgds-margin-xs",
+    marginBottomVarId: "VariableID:29937:84959",
+    figmaTextStyleKey: null
+  },
+  {
+    tag: "p",
+    fontSize: "--sgds-font-size-body-md",
+    fontWeight: "--sgds-font-weight-regular",
+    lineHeight: "--sgds-line-height-xs",
+    letterSpacing: "--sgds-letter-spacing-normal",
+    marginBottom: "--sgds-paragraph-spacing-xl",
+    marginBottomVarId: "VariableID:15627:8448",
+    figmaTextStyleKey: null
+  },
+  {
+    tag: "ol",
+    fontSize: "--sgds-font-size-body-md",
+    fontWeight: "--sgds-font-weight-regular",
+    lineHeight: "--sgds-line-height-xs",
+    letterSpacing: "--sgds-letter-spacing-normal",
+    marginTop: "--sgds-margin-xs",
+    marginTopVarId: "VariableID:29937:84959",
+    paddingLeft: "--sgds-padding-2-xl",
+    marginBottom: null,
+    marginBottomVarId: null,
+    figmaTextStyleKey: null
+  },
+  {
+    tag: "ul",
+    fontSize: "--sgds-font-size-body-md",
+    fontWeight: "--sgds-font-weight-regular",
+    lineHeight: "--sgds-line-height-xs",
+    letterSpacing: "--sgds-letter-spacing-normal",
+    marginTop: "--sgds-margin-xs",
+    marginTopVarId: "VariableID:29937:84959",
+    paddingLeft: "--sgds-padding-2-xl",
+    marginBottom: null,
+    marginBottomVarId: null,
+    figmaTextStyleKey: null
+  },
+  {
+    tag: "li",
+    fontSize: "--sgds-font-size-body-md",
+    fontWeight: "--sgds-font-weight-regular",
+    lineHeight: "--sgds-line-height-xs",
+    letterSpacing: "--sgds-letter-spacing-normal",
+    marginTop: "--sgds-margin-xs",
+    marginTopVarId: "VariableID:29937:84959",
+    marginBottom: null,
+    marginBottomVarId: null,
+    figmaTextStyleKey: null
+  },
+  {
+    tag: "caption",
+    fontSize: "--sgds-font-size-caption-md",
+    fontWeight: "--sgds-font-weight-regular",
+    lineHeight: "--sgds-line-height-2-xs",
+    letterSpacing: "--sgds-letter-spacing-normal",
+    marginBottom: "--sgds-paragraph-spacing-md",
+    marginBottomVarId: "VariableID:15722:7471",
+    figmaTextStyleKey: null
+  },
+  {
+    tag: "label",
+    fontSize: "--sgds-font-size-body-md",
+    fontWeight: "--sgds-font-weight-regular",
+    lineHeight: "--sgds-line-height-xs",
+    letterSpacing: "--sgds-letter-spacing-normal",
+    marginBottom: null,
+    marginBottomVarId: null,
+    figmaTextStyleKey: null
+  }
+];
+
+/** Map keyed by HTML tag → typography entry */
+export const byTag = new Map(typographyMap.map(e => [e.tag, e]));
+
+/**
+ * Find typography mapping by HTML tag.
+ * @param {string} tag - e.g. "h3", "p", "li"
+ */
+export function findTypographyByTag(tag) {
+  return byTag.get(tag) || null;
+}

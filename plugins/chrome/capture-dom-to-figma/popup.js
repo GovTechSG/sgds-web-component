@@ -222,21 +222,68 @@ function captureDom(maxDepth) {
     // Overflow (for clipping)
     if (style.overflow === "hidden") node.styles.clipContent = true;
 
+    // Flex/Grid layout detection (for auto-layout in Figma)
+    if (style.display === "flex" || style.display === "inline-flex") {
+      node.styles.display = "flex";
+      if (style.flexDirection === "column" || style.flexDirection === "column-reverse") {
+        node.styles.flexDirection = "column";
+      } else {
+        node.styles.flexDirection = "row";
+      }
+      if (style.flexWrap === "wrap" || style.flexWrap === "wrap-reverse") {
+        node.styles.flexWrap = "wrap";
+      }
+      if (style.alignItems && style.alignItems !== "normal" && style.alignItems !== "stretch") {
+        node.styles.alignItems = style.alignItems;
+      }
+      if (style.justifyContent && style.justifyContent !== "normal" && style.justifyContent !== "flex-start") {
+        node.styles.justifyContent = style.justifyContent;
+      }
+      // Gap
+      const gap = parseFloat(style.gap || style.rowGap || 0);
+      if (gap > 0) node.styles.gap = gap;
+    } else if (style.display === "grid" || style.display === "inline-grid") {
+      node.styles.display = "grid";
+      const gap = parseFloat(style.gap || style.rowGap || 0);
+      if (gap > 0) node.styles.gap = gap;
+    }
+
+    // Margin bottom (for text-gap mapping in Figma)
+    const mb = parseFloat(style.marginBottom);
+    if (mb > 0) node.styles.marginBottom = mb;
+
     // Images
     if (el.tagName === "IMG" && el.src) {
       node.type = "image";
       node.imageSrc = el.src;
     }
 
-    // Text content (leaf text nodes)
+    // Text content (leaf text nodes) — collapse whitespace like browsers do
     const directText = Array.from(el.childNodes)
       .filter(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim())
-      .map(n => n.textContent.trim())
+      .map(n => n.textContent.replace(/\s+/g, " ").trim())
       .join(" ");
 
-    if (directText && el.children.length === 0) {
+    // Check if element contains only text and <br> elements (multi-line text block)
+    const onlyTextAndBr = el.children.length > 0 && Array.from(el.children).every(
+      child => child.tagName === "BR"
+    );
+
+    if (directText && (el.children.length === 0 || onlyTextAndBr)) {
       node.type = "text";
-      node.text = directText;
+      // For elements with <br>, join text nodes with newline
+      if (onlyTextAndBr) {
+        node.text = Array.from(el.childNodes)
+          .map(n => {
+            if (n.nodeType === Node.TEXT_NODE) return n.textContent.replace(/\s+/g, " ").trim();
+            if (n.nodeName === "BR") return "\n";
+            return "";
+          })
+          .join("")
+          .trim();
+      } else {
+        node.text = directText;
+      }
       node.textStyles = {
         fontSize: parseFloat(style.fontSize),
         fontFamily: style.fontFamily.split(",")[0].replace(/["']/g, "").trim(),
@@ -260,7 +307,7 @@ function captureDom(maxDepth) {
         // Mixed content: iterate childNodes to preserve text + element order
         for (const childNode of el.childNodes) {
           if (childNode.nodeType === Node.TEXT_NODE) {
-            const text = childNode.textContent.trim();
+            const text = childNode.textContent.replace(/\s+/g, " ").trim();
             if (text) {
               node.children.push({
                 type: "text",
