@@ -1,5 +1,6 @@
 import { html } from "lit";
 import { expect, fixture } from "@open-wc/testing";
+import sinon from "sinon";
 import { SgdsTile } from "../src/components";
 import "../src/index";
 
@@ -251,5 +252,74 @@ describe("<sgds-tile>", () => {
 
     const container = el.shadowRoot!.querySelector(".tile-container");
     expect(container).to.not.have.class("stacked");
+  });
+
+  // Switch variant tests
+  it("renders sgds-switch when variant is switch", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="switch"></sgds-tile>`);
+    await el.updateComplete;
+
+    const sw = el.shadowRoot!.querySelector("sgds-switch");
+    expect(sw).to.exist;
+  });
+
+  it("clicking the tile toggles the switch", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="switch"></sgds-tile>`);
+    await el.updateComplete;
+
+    const sw = el.shadowRoot!.querySelector("sgds-switch") as any;
+    await sw.updateComplete;
+
+    expect(el.checked).to.be.false;
+
+    const tile = el.shadowRoot!.querySelector(".tile") as HTMLElement;
+    tile.click();
+    await el.updateComplete;
+    await sw.updateComplete;
+
+    expect(el.checked).to.be.true;
+  });
+
+  it("switch tile emits sgds-change with checked detail", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="switch"></sgds-tile>`);
+    await el.updateComplete;
+
+    const handler = sinon.spy();
+    el.addEventListener("sgds-change", handler);
+
+    const tile = el.shadowRoot!.querySelector(".tile") as HTMLElement;
+    tile.click();
+    await el.updateComplete;
+
+    expect(handler).to.have.been.calledOnce;
+    expect(handler.firstCall.args[0].detail.checked).to.be.true;
+  });
+
+  it("clicking a disabled switch tile does not toggle", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="switch" disabled></sgds-tile>`);
+    await el.updateComplete;
+
+    const tile = el.shadowRoot!.querySelector(".tile") as HTMLElement;
+    tile.click();
+    await el.updateComplete;
+
+    expect(el.checked).to.be.false;
+  });
+
+  it("forwards checked prop to switch on first load", async () => {
+    const el = await fixture<SgdsTile>(html`<sgds-tile variant="switch" checked></sgds-tile>`);
+    await el.updateComplete;
+
+    const sw = el.shadowRoot!.querySelector("sgds-switch") as any;
+    await sw.updateComplete;
+
+    expect(sw.checked).to.be.true;
+  });
+
+  it("does not show dev warning for standalone switch tile", async () => {
+    const warnSpy = sinon.spy(console, "warn");
+    await fixture<SgdsTile>(html`<sgds-tile variant="switch"></sgds-tile>`);
+    expect(warnSpy).to.not.have.been.called;
+    warnSpy.restore();
   });
 });

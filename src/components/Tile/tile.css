@@ -45,7 +45,8 @@
 }
 
 sgds-checkbox,
-sgds-radio {
+sgds-radio,
+sgds-switch {
   position: absolute;
   right: 24px;
   top: 24px;

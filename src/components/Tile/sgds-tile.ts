@@ -5,6 +5,7 @@ import { classMap } from "lit/directives/class-map.js";
 import tileStyle from "./tile.css";
 import SgdsCheckbox from "../Checkbox/sgds-checkbox";
 import SgdsRadio from "../Radio/sgds-radio";
+import { SgdsSwitch } from "../Switch/sgds-switch";
 
 /**
  * @summary A tile component that displays an icon alongside a title and description.
@@ -19,7 +20,8 @@ export class SgdsTile extends SgdsElement {
   /**@internal */
   static dependencies = {
     "sgds-checkbox": SgdsCheckbox,
-    "sgds-radio": SgdsRadio
+    "sgds-radio": SgdsRadio,
+    "sgds-switch": SgdsSwitch
   };
 
   /** Disables the tile */
@@ -63,25 +65,35 @@ export class SgdsTile extends SgdsElement {
     if (this.disabled || !this.variant || this._isGrouped) return;
 
     if (this.variant === "checkbox") {
-      const checkbox = this.shadowRoot!.querySelector("sgds-checkbox") as SgdsCheckbox;
+      const checkbox = this.shadowRoot?.querySelector("sgds-checkbox") as SgdsCheckbox;
       checkbox?.click();
       this.checked = checkbox?.checked;
     } else if (this.variant === "radio") {
-      const radio = this.shadowRoot!.querySelector("sgds-radio") as SgdsRadio;
+      const radio = this.shadowRoot?.querySelector("sgds-radio") as SgdsRadio;
       radio?.click();
       this.checked = radio?.checked;
+    } else if (this.variant === "switch") {
+      const sw = this.shadowRoot?.querySelector("sgds-switch") as SgdsSwitch;
+      sw?.click();
     }
   }
 
   private _handleInputClick(e: Event) {
     e.stopPropagation();
     if (this.variant === "checkbox") {
-      const checkbox = this.shadowRoot!.querySelector("sgds-checkbox") as SgdsCheckbox;
+      const checkbox = this.shadowRoot?.querySelector("sgds-checkbox") as SgdsCheckbox;
       this.checked = checkbox?.checked;
     } else if (this.variant === "radio") {
-      const radio = this.shadowRoot!.querySelector("sgds-radio") as SgdsRadio;
+      const radio = this.shadowRoot?.querySelector("sgds-radio") as SgdsRadio;
       this.checked = radio?.checked;
     }
+  }
+
+  private _handleSwitchChange(e: Event) {
+    e.stopPropagation();
+    const sw = this.shadowRoot?.querySelector("sgds-switch") as SgdsSwitch;
+    this.checked = sw?.checked;
+    this.emit("sgds-change", { detail: { checked: this.checked } });
   }
 
   private _handleKeyDown(e: KeyboardEvent) {
@@ -93,7 +105,7 @@ export class SgdsTile extends SgdsElement {
   render() {
     return html`
       <div
-        class=${classMap({ tile: true, disabled: this.disabled, checked: this.checked, invalid: this.invalid })}
+        class=${classMap({ tile: true, disabled: this.disabled, checked: this.checked, invalid: this.invalid && this.variant !== "switch" })}
         tabindex=${this._isGrouped || this.disabled ? "-1" : "0"}
         @click=${this._handleTileClick}
         @keydown=${this._handleKeyDown}
@@ -116,6 +128,15 @@ export class SgdsTile extends SgdsElement {
               ?invalid=${this.invalid}
               @click=${this._handleInputClick}
             ></sgds-radio>`
+          : this.variant === "switch"
+          ? html`<sgds-switch
+              tabindex="-1"
+              size="sm"
+              ?disabled=${this.disabled}
+              ?checked=${this.checked}
+              @click=${(e: Event) => e.stopPropagation()}
+              @sgds-change=${this._handleSwitchChange}
+            ></sgds-switch>`
           : nothing}
         <div class=${classMap({ "tile-container": true, stacked: this.stacked })}>
           <slot name="icon"></slot>
@@ -129,6 +150,6 @@ export class SgdsTile extends SgdsElement {
   }
 }
 
-export type TileVariant = "checkbox" | "radio";
+export type TileVariant = "checkbox" | "radio" | "switch";
 
 export default SgdsTile;

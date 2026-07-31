@@ -132,6 +132,40 @@
           <span slot="description">Disabled tile with radio.</span>
         </sgds-tile>
       </div>
+
+      <br />
+
+      <h2>Tile - Switch variant (standalone, no group needed)</h2>
+      <div class="sgds:flex sgds:flex-col sgds:gap-md">
+        <sgds-tile variant="switch" id="switch-tile-1">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Enable notifications</span>
+          <span slot="description">Receive alerts when something important happens.</span>
+        </sgds-tile>
+        <sgds-tile variant="switch" checked id="switch-tile-2">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Dark mode</span>
+          <span slot="description">Switch between light and dark themes.</span>
+        </sgds-tile>
+        <sgds-tile variant="switch" disabled>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Disabled switch</span>
+          <span slot="description">This switch is disabled.</span>
+        </sgds-tile>
+        <sgds-tile variant="switch" stacked>
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Stacked switch</span>
+          <span slot="description">Switch tile with stacked layout.</span>
+        </sgds-tile>
+      </div>
+
+      <script>
+        document.querySelectorAll('sgds-tile[variant="switch"]').forEach(tile => {
+          tile.addEventListener("sgds-change", e => {
+            console.log(`[${tile.id || 'switch'}] sgds-change:`, e.detail);
+          });
+        });
+      </script>
     </div>
   </body>
 </html>
