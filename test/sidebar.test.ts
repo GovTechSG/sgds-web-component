@@ -1609,4 +1609,246 @@ describe("sgds-sidebar", () => {
       expect(sectionDiv).to.have.class("sidebar-section--collapsed");
     });
   });
+
+  describe("Keyboard Accessibility", () => {
+    it("does not move focus on ArrowDown key", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const items = el.querySelectorAll("sgds-sidebar-item");
+      const firstItemDiv = (items[0] as SgdsSidebarItem).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      const secondItemDiv = (items[1] as SgdsSidebarItem).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      firstItemDiv.focus();
+      const event = new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true, composed: true });
+      items[0].dispatchEvent(event);
+      await elementUpdated(el);
+
+      expect(secondItemDiv).not.to.equal(document.activeElement);
+      expect(secondItemDiv).not.to.equal(items[1].shadowRoot?.activeElement);
+    });
+
+    it("does not move focus on ArrowUp key", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const items = el.querySelectorAll("sgds-sidebar-item");
+      const firstItemDiv = (items[0] as SgdsSidebarItem).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      const secondItemDiv = (items[1] as SgdsSidebarItem).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      secondItemDiv.focus();
+      const event = new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true, composed: true });
+      items[1].dispatchEvent(event);
+      await elementUpdated(el);
+
+      expect(firstItemDiv).not.to.equal(document.activeElement);
+      expect(firstItemDiv).not.to.equal(items[0].shadowRoot?.activeElement);
+    });
+
+    it("activates item with Enter key", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const selectHandler = sinon.spy();
+      el.addEventListener("sgds-select", selectHandler);
+
+      const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
+      const event = new KeyboardEvent("keydown", { key: "Enter", bubbles: true, composed: true });
+      item.dispatchEvent(event);
+      await elementUpdated(el);
+
+      expect(selectHandler).to.have.been.called;
+    });
+
+    it("activates item with Space key", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const selectHandler = sinon.spy();
+      el.addEventListener("sgds-select", selectHandler);
+
+      const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
+      const event = new KeyboardEvent("keydown", { key: " ", bubbles: true, composed: true });
+      item.dispatchEvent(event);
+      await elementUpdated(el);
+
+      expect(selectHandler).to.have.been.called;
+    });
+
+    it("sets tabindex -1 on child items when sidebar-group submenu is collapsed", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="icon"></sgds-icon>
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
+              <sgds-sidebar-item title="Sales" name="sales">
+                <sgds-icon name="building" slot="icon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      // Grab references before drawer moves them
+      const nestedGroup = el.querySelector('sgds-sidebar-group[name="overview"]') as SgdsSidebarGroup;
+      const nestedItem = el.querySelector('sgds-sidebar-item[name="sales"]') as SgdsSidebarItem;
+      const rootGroup = el.querySelector('sgds-sidebar-group[name="dashboard"]') as SgdsSidebarGroup;
+      const groupDiv = rootGroup.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      // Open the drawer
+      groupDiv.click();
+      await elementUpdated(el);
+
+      // The level-2 group's child item should have tabindex -1 since the submenu is collapsed
+      const nestedItemDiv = nestedItem.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      expect(nestedItemDiv).to.have.attribute("tabindex", "-1");
+    });
+
+    it("sets tabindex 0 on child items when sidebar-group submenu is expanded", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="icon"></sgds-icon>
+            <sgds-sidebar-group title="Overview" name="overview">
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
+              <sgds-sidebar-item title="Sales" name="sales">
+                <sgds-icon name="building" slot="icon"></sgds-icon>
+              </sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-group>
+        </sgds-sidebar>
+      `);
+      // Grab references before drawer moves them
+      const nestedGroup = el.querySelector('sgds-sidebar-group[name="overview"]') as SgdsSidebarGroup;
+      const nestedItem = el.querySelector('sgds-sidebar-item[name="sales"]') as SgdsSidebarItem;
+      const rootGroup = el.querySelector('sgds-sidebar-group[name="dashboard"]') as SgdsSidebarGroup;
+      const groupDiv = rootGroup.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      // Open the drawer
+      groupDiv.click();
+      await elementUpdated(el);
+
+      // Expand the nested group's submenu
+      const nestedGroupDiv = nestedGroup.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      nestedGroupDiv.click();
+      await elementUpdated(el);
+
+      // The nested item should now be tabbable
+      const nestedItemDiv = nestedItem.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+
+      expect(nestedItemDiv).to.have.attribute("tabindex", "0");
+    });
+
+    it("sets tabindex -1 on child items when collapsible section is collapsed", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main" collapsible>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Reports" name="reports">
+              <sgds-icon name="file-text" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section") as SgdsSidebarSection;
+      const sectionLabel = section.shadowRoot?.querySelector(".sidebar-section-label") as HTMLElement;
+
+      // Collapse the section
+      sectionLabel.click();
+      await elementUpdated(el);
+
+      const items = section.querySelectorAll("sgds-sidebar-item");
+      items.forEach((item: Element) => {
+        const itemDiv = (item as SgdsSidebarItem).shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+        expect(itemDiv).to.have.attribute("tabindex", "-1");
+      });
+    });
+
+    it("restores tabindex 0 on child items when collapsible section is expanded", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main" collapsible collapsed>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section") as SgdsSidebarSection;
+      const sectionLabel = section.shadowRoot?.querySelector(".sidebar-section-label") as HTMLElement;
+
+      // Expand the section
+      sectionLabel.click();
+      await elementUpdated(el);
+
+      const item = section.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item") as HTMLElement;
+      expect(itemDiv).to.have.attribute("tabindex", "0");
+    });
+
+    it("sets tabindex -1 on collapsible section label when sidebar is collapsed", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar collapsed>
+          <sgds-sidebar-section title="Main" name="main" collapsible>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section") as SgdsSidebarSection;
+      const sectionLabel = section.shadowRoot?.querySelector(".sidebar-section-label") as HTMLElement;
+
+      expect(sectionLabel).to.have.attribute("tabindex", "-1");
+    });
+
+    it("sets tabindex 0 on collapsible section label when sidebar is expanded", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section title="Main" name="main" collapsible>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const section = el.querySelector("sgds-sidebar-section") as SgdsSidebarSection;
+      const sectionLabel = section.shadowRoot?.querySelector(".sidebar-section-label") as HTMLElement;
+
+      expect(sectionLabel).to.have.attribute("tabindex", "0");
+    });
+  });
 });

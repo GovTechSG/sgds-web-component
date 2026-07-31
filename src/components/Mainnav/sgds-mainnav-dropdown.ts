@@ -285,11 +285,11 @@ export class SgdsMainnavDropdown extends SgdsElement {
         @keydown=${this._handleKeyboardOpen}
       >
         <slot name="toggler"></slot>
-        <sgds-icon name="chevron-right"></sgds-icon>
+        <sgds-icon name="chevron-right" size="md"></sgds-icon>
       </a>
       <div class="dropdown-items">
         <a tabindex="0" role="button" @click=${this._closeMenu} @keydown=${this._handleHeaderKeyboardEvent}>
-          <sgds-icon name="chevron-left"></sgds-icon>
+          <sgds-icon name="chevron-left" size="md"></sgds-icon>
           <span></span>
         </a>
         <slot @slotchange=${this._handleSlotChange}></slot>
@@ -316,7 +316,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
         slot="toggler"
       >
         <slot name="toggler"></slot>
-        <sgds-icon name="chevron-down"></sgds-icon>
+        <sgds-icon name="chevron-down" size="md"></sgds-icon>
       </a>
       <slot @slotchange=${this._handleDesktopSlotChange}></slot>
     </sgds-dropdown>`;

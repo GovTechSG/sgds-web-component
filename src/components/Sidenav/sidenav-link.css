@@ -42,12 +42,10 @@
   opacity: var(--sgds-opacity-40);
   pointer-events: none;
 }
-:host([disabled]) ::slotted(a:focus),
 :host([disabled]) ::slotted(a:focus-visible) {
   outline: 0;
 }
 
-::slotted(a:focus),
 ::slotted(a:focus-visible) {
   background-color: var(--sgds-bg-translucent-subtle);
 }
@@ -56,7 +54,6 @@
   outline-offset: var(--sgds-outline-offset-focus);
 }
 
-:host([active]) ::slotted(a:focus),
 :host([active]) ::slotted(a:focus-visible) {
   background-color: var(--sgds-primary-bg-translucent);
 }

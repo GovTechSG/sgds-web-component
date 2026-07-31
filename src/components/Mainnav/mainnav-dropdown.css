@@ -53,6 +53,8 @@
   text-decoration: none;
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   box-sizing: border-box;
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs, 20px);
 }
 
 .nav-link:not(.disabled).active,
@@ -97,6 +99,8 @@
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   max-width: var(--sgds-mainnav-max-width, 1440px);
   margin: auto;
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs, 20px);
 }
 
 .dropdown-items a:hover {

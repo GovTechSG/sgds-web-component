@@ -36,10 +36,10 @@
 .pagination {
   display: flex;
   gap: var(--sgds-gap-2-xs);
-  font-size: var(--sgds-font-size-12);
+  font-size: var(--sgds-font-size-label-xs);
   align-items: center;
   font-weight: var(--sgds-font-weight-regular, 400);
-  line-height: var(--sgds-line-height-16, 16px); /* 133.333% */
+  line-height: var(--sgds-line-height-3-xs); /* 133.333% */
   letter-spacing: var(--sgds-letter-spacing-normal, 0);
   position: absolute;
   bottom: 12px;

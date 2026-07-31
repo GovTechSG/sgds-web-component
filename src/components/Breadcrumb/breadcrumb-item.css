@@ -3,6 +3,7 @@
   gap: var(--sgds-gap-xs);
   align-items: center;
   min-width: 0;
+  font-size: var(--sgds-font-size-link-md);
 }
 
 :host .nav-link::slotted(*) {

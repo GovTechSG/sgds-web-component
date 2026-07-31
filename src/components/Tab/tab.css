@@ -1,6 +1,6 @@
 :host([density="compact"]) .tab {
   padding: var(--sgds-spacer-3) var(--sgds-spacer-5);
-  font-size: var(--sgds-font-size-14);
+  font-size: var(--sgds-font-size-label-sm);
 }
 
 :host(:not([active])) .tab {
@@ -73,6 +73,10 @@
 
 :host([variant="underlined"]:not([active]):not([disabled])) .tab:hover {
   background-color: var(--sgds-bg-translucent-subtle);
+}
+
+:host([fullWidth][orientation="horizontal"]) .tab {
+  justify-content: center;
 }
 
 .tab {

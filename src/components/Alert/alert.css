@@ -97,13 +97,13 @@
 }
 .alert-content__description {
   display: inline;
-  font-size: var(--sgds-font-size-body-sm);
+  font-size: var(--sgds-font-size-label-sm);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-2-xs);
 }
 
 .alert-content__description::slotted(*) {
-  font-size: var(--sgds-font-size-body-sm);
+  font-size: var(--sgds-font-size-label-sm);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-2-xs);
 }
