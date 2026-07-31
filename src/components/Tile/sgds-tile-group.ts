@@ -205,13 +205,18 @@ export class SgdsTileGroup extends SgdsFormValidatorMixin(FormControlElement) {
 
   private _updateTabIndices() {
     const tiles = this._tiles;
+    if (this.disabled) {
+      tiles.forEach(t => (t.tabIndex = -1));
+      return;
+    }
     if (this.variant === "radio") {
-      const checkedTile = tiles.find(t => t.checked);
+      const checkedTile = tiles.find(t => t.checked && !t.disabled);
       tiles.forEach(t => (t.tabIndex = -1));
       if (checkedTile) {
         checkedTile.tabIndex = 0;
-      } else if (tiles[0]) {
-        tiles[0].tabIndex = 0;
+      } else {
+        const firstEnabled = tiles.find(t => !t.disabled);
+        if (firstEnabled) firstEnabled.tabIndex = 0;
       }
     } else {
       tiles.forEach(t => (t.tabIndex = t.disabled ? -1 : 0));

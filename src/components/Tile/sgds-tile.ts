@@ -43,6 +43,22 @@ export class SgdsTile extends SgdsElement {
   /**@internal */
   @state() _isGrouped = false;
 
+  connectedCallback() {
+    super.connectedCallback();
+    if ((this.variant === "radio" || this.variant === "checkbox") && !this.closest("sgds-tile-group")) {
+      console.warn(
+        `[sgds-tile] A tile with variant="${this.variant}" should be wrapped in <sgds-tile-group> for proper selection, keyboard navigation, form integration, and validation.`
+      );
+    }
+  }
+
+  updated() {
+    const radio = this.shadowRoot?.querySelector("sgds-radio") as SgdsRadio | null;
+    if (radio && radio._manageTabIndex) {
+      radio._manageTabIndex = false;
+    }
+  }
+
   private _handleTileClick() {
     if (this.disabled || !this.variant || this._isGrouped) return;
 

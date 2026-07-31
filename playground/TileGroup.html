@@ -178,7 +178,99 @@
 
       <br />
 
+      <h2>Tile Group - Custom Validation (noValidate + setInvalid)</h2>
+      <form id="custom-validation-form" onsubmit="handleCustomValidationSubmit(event)">
+        <sgds-tile-group
+          noValidate
+          required
+          label="Select a plan"
+          hintText="Custom rule: must select 'Pro' plan"
+          name="custom-plan"
+          hasFeedback
+          id="custom-tile-radio"
+        >
+          <sgds-tile value="basic">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Basic</span>
+            <span slot="description">Free tier with limited features.</span>
+          </sgds-tile>
+          <sgds-tile value="pro">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Pro</span>
+            <span slot="description">For professionals and small teams.</span>
+          </sgds-tile>
+          <sgds-tile value="enterprise">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Enterprise</span>
+            <span slot="description">For large organisations.</span>
+          </sgds-tile>
+        </sgds-tile-group>
+        <br />
+        <sgds-tile-group
+          noValidate
+          required
+          variant="checkbox"
+          label="Select features"
+          hintText="Custom rule: must select at least 2"
+          name="custom-features"
+          hasFeedback
+          id="custom-tile-checkbox"
+        >
+          <sgds-tile value="analytics">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Analytics</span>
+            <span slot="description">Track usage metrics.</span>
+          </sgds-tile>
+          <sgds-tile value="reporting">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Reporting</span>
+            <span slot="description">Generate reports.</span>
+          </sgds-tile>
+          <sgds-tile value="automation">
+            <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+            <span slot="title">Automation</span>
+            <span slot="description">Automate workflows.</span>
+          </sgds-tile>
+        </sgds-tile-group>
+        <br />
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+        <pre id="custom-validation-output"></pre>
+      </form>
+
+      <br />
+
       <script>
+        function handleCustomValidationSubmit(e) {
+          e.preventDefault();
+          const radio = document.getElementById("custom-tile-radio");
+          const checkbox = document.getElementById("custom-tile-checkbox");
+          if (radio.invalid || checkbox.invalid) return;
+          const formData = new FormData(e.target);
+          const output = {};
+          formData.forEach((value, key) => (output[key] = value));
+          document.getElementById("custom-validation-output").textContent = JSON.stringify(output, null, 2);
+        }
+
+        document.getElementById("custom-tile-radio").addEventListener("sgds-change", e => {
+          if (e.target.value !== "pro") {
+            e.target.setInvalid(true);
+            e.target.invalidFeedback = "Please select the 'Pro' plan";
+          } else {
+            e.target.setInvalid(false);
+          }
+        });
+
+        document.getElementById("custom-tile-checkbox").addEventListener("sgds-change", e => {
+          const selected = e.target.value ? e.target.value.split(",") : [];
+          if (selected.length < 2) {
+            e.target.setInvalid(true);
+            e.target.invalidFeedback = "Please select at least 2 features";
+          } else {
+            e.target.setInvalid(false);
+          }
+        });
+
         function handleCheckboxSubmit(e) {
           e.preventDefault();
           const formData = new FormData(e.target);

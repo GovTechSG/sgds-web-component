@@ -436,5 +436,86 @@ describe("<sgds-tile-group>", () => {
       expect(tiles[1].tabIndex).to.equal(0);
       expect(tiles[2].tabIndex).to.equal(-1);
     });
+
+    it("disabled group sets all tiles to tabindex -1", async () => {
+      const el = await fixture<SgdsTileGroup>(html`
+        <sgds-tile-group label="Select one" disabled>
+          <sgds-tile value="a"><span slot="title">A</span></sgds-tile>
+          <sgds-tile value="b"><span slot="title">B</span></sgds-tile>
+        </sgds-tile-group>
+      `);
+      await el.updateComplete;
+
+      const tiles = el.querySelectorAll("sgds-tile");
+      expect(tiles[0].tabIndex).to.equal(-1);
+      expect(tiles[1].tabIndex).to.equal(-1);
+    });
+
+    it("internal radio does not override tabindex when checked", async () => {
+      const el = await fixture<SgdsTileGroup>(html`
+        <sgds-tile-group label="Select one" value="a">
+          <sgds-tile value="a"><span slot="title">A</span></sgds-tile>
+          <sgds-tile value="b"><span slot="title">B</span></sgds-tile>
+        </sgds-tile-group>
+      `);
+      await el.updateComplete;
+
+      const tiles = el.querySelectorAll("sgds-tile");
+      // tile B should remain tabindex -1 even after group interaction
+      const tileB = tiles[1];
+      expect(tileB.tabIndex).to.equal(-1);
+
+      // internal radio of tile A should not have tabindex 0
+      const radioA = tiles[0].shadowRoot!.querySelector("sgds-radio") as HTMLElement;
+      if (radioA) {
+        expect(radioA.getAttribute("tabindex")).to.equal("-1");
+      }
+    });
+  });
+
+  describe("_isGrouped behaviour", () => {
+    it("sets _isGrouped on child tiles", async () => {
+      const el = await fixture<SgdsTileGroup>(html`
+        <sgds-tile-group label="Select one">
+          <sgds-tile value="a"><span slot="title">A</span></sgds-tile>
+        </sgds-tile-group>
+      `);
+      await el.updateComplete;
+
+      const tile = el.querySelector("sgds-tile") as SgdsTile;
+      expect(tile._isGrouped).to.be.true;
+    });
+
+    it("inner .tile div has tabindex -1 when grouped", async () => {
+      const el = await fixture<SgdsTileGroup>(html`
+        <sgds-tile-group label="Select one">
+          <sgds-tile value="a"><span slot="title">A</span></sgds-tile>
+        </sgds-tile-group>
+      `);
+      await el.updateComplete;
+
+      const tile = el.querySelector("sgds-tile") as SgdsTile;
+      await tile.updateComplete;
+      const innerDiv = tile.shadowRoot!.querySelector(".tile") as HTMLElement;
+      expect(innerDiv.getAttribute("tabindex")).to.equal("-1");
+    });
+  });
+
+  describe("noValidate", () => {
+    it("skips validation when noValidate is set", async () => {
+      const el = await fixture<SgdsTileGroup>(html`
+        <sgds-tile-group label="Select one" name="plan" required noValidate hasFeedback>
+          <sgds-tile value="a"><span slot="title">A</span></sgds-tile>
+          <sgds-tile value="b"><span slot="title">B</span></sgds-tile>
+        </sgds-tile-group>
+      `);
+      await el.updateComplete;
+
+      const isValid = el.reportValidity();
+      await el.updateComplete;
+
+      expect(isValid).to.be.true;
+      expect(el.invalid).to.be.false;
+    });
   });
 });

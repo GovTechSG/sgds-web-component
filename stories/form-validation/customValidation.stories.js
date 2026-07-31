@@ -463,6 +463,102 @@ const DisableValidationByFormTemplate = args => {
   `;
 };
 
+const TileGroupCustomValidationTemplate = args => {
+  return html`
+    <form id="tile-group-custom-validation-form" class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-tile-group
+        noValidate
+        required
+        label="Select a plan"
+        hintText="Custom validation: must select 'Pro' plan"
+        name="tile-plan"
+        hasFeedback
+        id="custom-validation__tile-group-novalidate"
+      >
+        <sgds-tile value="basic">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Basic</span>
+          <span slot="description">Free tier with limited features.</span>
+        </sgds-tile>
+        <sgds-tile value="pro">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Pro</span>
+          <span slot="description">For professionals and small teams.</span>
+        </sgds-tile>
+        <sgds-tile value="enterprise">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Enterprise</span>
+          <span slot="description">For large organisations.</span>
+        </sgds-tile>
+      </sgds-tile-group>
+      <sgds-tile-group
+        noValidate
+        required
+        variant="checkbox"
+        label="Select features"
+        hintText="Custom validation: must select at least 2 features"
+        name="tile-features"
+        hasFeedback
+        id="custom-validation__tile-group-checkbox-novalidate"
+      >
+        <sgds-tile value="analytics">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Analytics</span>
+          <span slot="description">Track usage metrics.</span>
+        </sgds-tile>
+        <sgds-tile value="reporting">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Reporting</span>
+          <span slot="description">Generate reports.</span>
+        </sgds-tile>
+        <sgds-tile value="automation">
+          <sgds-icon slot="icon" name="placeholder" size="2-xl"></sgds-icon>
+          <span slot="title">Automation</span>
+          <span slot="description">Automate workflows.</span>
+        </sgds-tile>
+      </sgds-tile-group>
+      <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
+        <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+        <sgds-button type="submit">Submit</sgds-button>
+      </div>
+    </form>
+    <script>
+      const tileForm = document.getElementById("tile-group-custom-validation-form");
+      tileForm.addEventListener("submit", e => {
+        e.preventDefault();
+        const tileGroupRadio = document.getElementById("custom-validation__tile-group-novalidate");
+        const tileGroupCheckbox = document.getElementById("custom-validation__tile-group-checkbox-novalidate");
+        let hasInvalid = false;
+
+        if (tileGroupRadio.invalid || tileGroupCheckbox.invalid) hasInvalid = true;
+        if (hasInvalid) return;
+        alert("Form submitted successfully!");
+      });
+
+      const tileGroupRadio = document.getElementById("custom-validation__tile-group-novalidate");
+      tileGroupRadio.addEventListener("sgds-change", e => {
+        if (e.target.value !== "pro") {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select the 'Pro' plan";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+
+      const tileGroupCheckbox = document.getElementById("custom-validation__tile-group-checkbox-novalidate");
+      tileGroupCheckbox.addEventListener("sgds-change", e => {
+        const selected = e.target.value ? e.target.value.split(",") : [];
+        if (selected.length < 2) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select at least 2 features";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+    </script>
+  `;
+};
+
 export const DisableThroughForm = {
   render: DisableValidationByFormTemplate.bind({}),
   name: "Form novalidate attribute",
@@ -474,6 +570,14 @@ export const DisableThroughForm = {
 export const DisableThroughInput = {
   render: DisableValidationByInputTemplate.bind({}),
   name: "Component noValidate property",
+  args: {},
+  parameters: {},
+  tags: ["!dev"]
+};
+
+export const TileGroupCustomValidation = {
+  render: TileGroupCustomValidationTemplate.bind({}),
+  name: "Tile Group custom validation",
   args: {},
   parameters: {},
   tags: ["!dev"]

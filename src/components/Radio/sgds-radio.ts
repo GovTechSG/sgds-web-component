@@ -46,12 +46,17 @@ export class SgdsRadio extends SgdsElement {
     this.addEventListeners();
   }
 
+  /** @internal When false, the radio will not manage its own tabindex (e.g. when used inside sgds-tile). */
+  _manageTabIndex = true;
+
   @watch("checked")
   handleCheckedChange() {
     if (this.checked && this.autofocus) {
       this.input?.focus();
     }
-    this.setAttribute("tabindex", this.checked ? "0" : "-1");
+    if (this._manageTabIndex) {
+      this.setAttribute("tabindex", this.checked ? "0" : "-1");
+    }
   }
 
   @watch("disabled", { waitUntilFirstUpdate: true })
