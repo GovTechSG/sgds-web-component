@@ -68,11 +68,6 @@
   color: var(--sgds-neutral-color-default);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .spinner {
-    animation-duration: 1.5s;
-  }
-}
 
 /*! CSS Used keyframes */
 @keyframes spinner {

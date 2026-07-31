@@ -48,12 +48,7 @@
   font-weight: var(--sgds-font-weight-semibold);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .accordion-btn,
-  .accordion-btn:after {
-    transition: none;
-  }
-}
+
 
 .accordion-btn:not(.disabled):hover,
 .accordion-btn:not(:disabled):hover {

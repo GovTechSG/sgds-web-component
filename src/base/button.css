@@ -163,11 +163,6 @@
   opacity: var(--btn-opacity);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .btn {
-    transition: none;
-  }
-}
 
 .btn:hover,
 .btn.active {
