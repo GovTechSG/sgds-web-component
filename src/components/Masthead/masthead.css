@@ -184,3 +184,13 @@ a.trusted-websites-link:focus-visible,
     padding: 0.25rem var(--sgds-mainnav-padding-x, 2rem);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .sgds-masthead-button svg {
+    transition: none;
+  }
+
+  .sgds-masthead .sgds-masthead-content {
+    transition: none;
+  }
+}
