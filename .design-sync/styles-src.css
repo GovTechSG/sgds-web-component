@@ -1,0 +1,10 @@
+/* design-sync foundation stylesheet (source). Bundled by esbuild into
+   styles-foundation.css and shipped via cfg.cssEntry so rendered designs and
+   preview cards get SGDS tokens, base reset/grid, utilities, and the layout
+   helpers the stories use. SGDS component styles live in shadow DOM (in the JS
+   bundle), so this file is tokens + globals only. */
+@import "../lib/themes/day.css";      /* semantic day-mode tokens (+ root + responsive) on :root */
+@import "../lib/themes/night.css";    /* night-mode tokens under .sgds-night-theme */
+@import "../lib/css/sgds.css";        /* reboot + grid (base layer) */
+@import "../.storybook/utility.css";  /* compiled sgds: Tailwind utilities */
+@import "../.storybook/global.css";   /* d-flex-row/-column and story layout helpers */

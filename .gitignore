@@ -32,3 +32,12 @@ test/skills/*
 results/
 a11y-failures.log
 **/.pnpm/*
+
+# design-sync (claude.ai/design) — transient/verification state
+.design-sync/sb-reference/
+.design-sync/learnings/
+.design-sync/.cache/
+.design-sync/node_modules
+.ds-sync/
+ds-bundle/
+.design-sync/react-entry/styles-foundation.css
