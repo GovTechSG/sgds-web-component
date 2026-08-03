@@ -2,11 +2,31 @@
   display: block;
 }
 
+
 nav {
   background-color: var(--sgds-surface-default);
   box-shadow: 0px 2px 2px 0px rgba(14, 14, 14, 0.08);
   position: relative;
   z-index: var(--sgds-z-index-floating);
+}
+:host([tone="brand"]) nav {
+  background-color: var(--sgds-primary-surface-default);
+}
+
+:host([tone="brand"][gradient="gradient-1"]) nav {
+  background: linear-gradient(100deg, #9510c7, #6c20c9 46%, #18499c);
+}
+
+:host([tone="brand"][gradient="gradient-2"]) nav {
+  background: linear-gradient(100deg, #9510c7, #6c20c9 46%, #18499c);
+}
+
+:host([tone="brand"][gradient="gradient-3"]) nav {
+  background: linear-gradient(100deg, #9510c7, #6c20c9 46%, #18499c);
+}
+
+:host([tone="brand"][gradient="gradient-4"]) nav {
+  background: linear-gradient(100deg, #9510c7, #6c20c9 46%, #18499c);
 }
 
 .navbar {
@@ -33,6 +53,10 @@ nav {
   text-decoration: none;
   white-space: nowrap;
   color: var(--sgds-color-default);
+}
+
+:host([tone="brand"]) .navbar-brand {
+  color: var(--sgds-color-fixed-light);
 }
 
 .navbar-brand:focus-visible {
@@ -68,6 +92,7 @@ nav > .navbar-body .navbar-nav {
 
 nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown)) {
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
+  align-self: center;
 }
 
 .navbar-collapse {
@@ -78,6 +103,10 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
 .navbar-toggler {
   align-self: center;
+}
+
+:host([tone="brand"]) .navbar-toggler {
+  color: var(--sgds-color-fixed-light);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -99,6 +128,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-sm .navbar-nav {
     flex-direction: row;
+    align-items: center;
   }
 
   .navbar-expand-sm .navbar-nav-scroll {
@@ -123,6 +153,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-md .navbar-nav {
     flex-direction: row;
+    align-items: center;
   }
 
   .navbar-expand-md .navbar-nav-scroll {
@@ -151,6 +182,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-lg .navbar-nav {
     flex-direction: row;
+    align-items: center;
   }
 
   .navbar-expand-lg .navbar-nav-scroll {
@@ -175,6 +207,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-xl .navbar-nav {
     flex-direction: row;
+    align-items: center;
   }
 
   .navbar-expand-xl .navbar-nav .nav-link {
@@ -204,6 +237,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-xxl .navbar-nav {
     flex-direction: row;
+    align-items: center;
   }
 
   .navbar-expand-xxl .navbar-nav-scroll {
@@ -227,6 +261,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 }
 .navbar-expand .navbar-nav {
   flex-direction: row;
+  align-items: center;
 }
 
 .navbar-expand .navbar-nav-scroll {
@@ -244,6 +279,13 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
 /* slot */
 
+slot[name="start"] {
+  display: flex;
+  align-items: center;
+  gap: var(--sgds-gap-xs);
+}
+
+
 slot[name="non-collapsible"] {
   display: flex;
   gap: var(--sgds-spacer-4);
@@ -259,6 +301,7 @@ slot[name="non-collapsible"].non-collapsible-empty {
   display: flex;
   margin-left: auto;
   align-items: stretch;
+  height: inherit;
   gap: var(--sgds-gap-xs);
 }
 
