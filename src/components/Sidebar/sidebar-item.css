@@ -25,6 +25,7 @@
 
 .sidebar-item-label-wrapper {
   justify-content: space-between;
+  padding: var(--sgds-padding-3-xs) var(--sgds-padding-2-xs);
 }
 
 .sidebar-item-label {
@@ -64,6 +65,11 @@
   display: flex;
   align-items: center;
   gap: var(--sgds-gap-2-xs);
+}
+
+.sidebar-item--collapsed {
+  width: var(--sgds-dimension-40);
+  margin: auto;
 }
 
 .sidebar-item--collapsed .sidebar-item-label,
