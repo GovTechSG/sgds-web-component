@@ -21,6 +21,8 @@ import { XL_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
 import type { ISgdsSidebarSelectEventDetail } from "./types";
 export type { ISgdsSidebarSelectEventDetail };
 
+type SidebarVariant = "persistent" | "overlay" | "collapsible";
+
 /**
  * @summary Sidebar is a collapsible navigation component that displays menu items and groups.
  * Users can expand and collapse the sidebar to save screen space while navigating through organized menu items.
@@ -46,8 +48,6 @@ export type { ISgdsSidebarSelectEventDetail };
  * @eventDetail {ISgdsSidebarSelectEventDetail} sgds-select
  *
  */
-
-type SidebarVariant = "persistent" | "overlay" | "collapsible";
 export class SgdsSidebar extends SgdsElement {
   static styles = [...SgdsElement.styles, sidebarStyle];
 
