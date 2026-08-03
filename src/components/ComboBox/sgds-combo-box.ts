@@ -586,7 +586,6 @@ export class SgdsComboBox extends SelectElement {
         <div
           id=${this.dropdownMenuId}
           class="dropdown-menu"
-          part="menu"
           tabindex="-1"
           role="menu"
           aria-label=${this.label || "Options"}

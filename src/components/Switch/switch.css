@@ -58,7 +58,7 @@ input {
 }
 
 :host([size="sm"]) .form-check {
-  font-size: var(--sgds-font-size-14);
+  font-size: var(--sgds-font-size-label-sm);
 }
 
 :host([size="sm"]) .form-check-input {
@@ -68,7 +68,7 @@ input {
 }
 
 :host([size="lg"]) .form-check {
-  font-size: var(--sgds-font-size-20);
+  font-size: var(--sgds-font-size-label-lg);
 }
 
 :host([size="lg"]) .form-check-input {

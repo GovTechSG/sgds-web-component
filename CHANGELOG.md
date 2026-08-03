@@ -1,3 +1,22 @@
+## v3.25.0 (2026-07-21)
+
+### Feat
+
+- **Icons**: update latest icon set and updated story [run-chromatic] [skip-cd] (#762)
+- **card**: implement no padding prop [run-chromatic][skip-cd] (#760)
+- **card**: implement no padding prop
+
+### Fix
+
+- **sidebar**: remove interaction for non-collapsible section label
+- **sidebar**: update UI discrepancy
+
+### Refactor
+
+- *****: components use label size over body size tokens [run-chromatic][skip-cd] (#763)
+- *****: replace primitives with semantics for line height
+- *****: update all component to use label size token
+
 ## v3.24.0 (2026-07-10)
 
 ### Feat

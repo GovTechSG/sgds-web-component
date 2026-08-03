@@ -24,11 +24,17 @@ export class SgdsTabGroup extends SgdsElement {
 
   @query(".tab-group__nav") private _nav: HTMLElement;
 
+  @query(".tab-group__indicator") private _indicator: HTMLElement;
+
   private _activeTab?: SgdsTab;
 
   private _mutationObserver: MutationObserver;
 
   private _resizeObserver: ResizeObserver;
+
+  private _tabResizeObserver: ResizeObserver;
+
+  private _indicatorAnimating = false;
 
   private _tabs: SgdsTab[] = [];
 
@@ -39,6 +45,8 @@ export class SgdsTabGroup extends SgdsElement {
   @property({ type: String, reflect: true }) orientation: "horizontal" | "vertical" = "horizontal";
   /** The density of tabs. Controls the density of all `sgds-tabs` in its slot. It also sets the density attribute of `sgds-tab` */
   @property({ type: String, reflect: true }) density: "compact" | "default" = "default";
+  /** When set, all `sgds-tabs` in its slot will be in full width. Only takes effect when `orientation` is set to `horizontal` */
+  @property({ type: Boolean, reflect: true }) fullWidth = false;
 
   connectedCallback() {
     const whenAllDefined = Promise.all([
@@ -47,7 +55,15 @@ export class SgdsTabGroup extends SgdsElement {
     ]);
     super.connectedCallback();
     this._resizeObserver = new ResizeObserver(() => {
-      return;
+      if (this._activeTab && this.variant === "underlined" && !this._indicatorAnimating) {
+        this._animateIndicator(undefined, this._activeTab);
+      }
+    });
+
+    this._tabResizeObserver = new ResizeObserver(() => {
+      if (this._activeTab && this.variant === "underlined" && !this._indicatorAnimating) {
+        this._animateIndicator(undefined, this._activeTab);
+      }
     });
 
     this._mutationObserver = new MutationObserver(mutations => {
@@ -84,6 +100,7 @@ export class SgdsTabGroup extends SgdsElement {
   disconnectedCallback() {
     this._mutationObserver.disconnect();
     this._resizeObserver.unobserve(this._nav);
+    this._tabResizeObserver.disconnect();
   }
 
   /** Shows the specified tab panel. */
@@ -193,6 +210,10 @@ export class SgdsTabGroup extends SgdsElement {
 
       this._panels.map(el => (el.active = el.name === this._activeTab?.panel));
 
+      if (this.variant === "underlined") {
+        this._animateIndicator(previousTab, tab);
+      }
+
       // Emit events
       if (options.emitEvents) {
         if (previousTab) {
@@ -201,6 +222,48 @@ export class SgdsTabGroup extends SgdsElement {
 
         this.emit("sgds-tab-show", { detail: { name: this._activeTab.panel } });
       }
+    }
+  }
+
+  private _animateIndicator(from: SgdsTab | undefined, to: SgdsTab) {
+    if (!this._indicator || !this._nav) return;
+
+    const navRect = this._nav.getBoundingClientRect();
+    const toRect = to.getBoundingClientRect();
+
+    // Skip transition on initial placement and resize corrections
+    if (!from) {
+      this._indicator.style.transition = "none";
+    } else {
+      this._indicatorAnimating = true;
+      this._indicator.style.removeProperty("transition");
+    }
+
+    if (this.orientation === "vertical") {
+      Object.assign(this._indicator.style, {
+        top: `${toRect.top - navRect.top}px`,
+        height: `${toRect.height}px`
+      });
+    } else {
+      Object.assign(this._indicator.style, {
+        left: `${toRect.left - navRect.left}px`,
+        width: `${toRect.width}px`
+      });
+    }
+
+    if (!from) {
+      requestAnimationFrame(() => {
+        this._indicator.style.removeProperty("transition");
+      });
+    } else {
+      const handler = () => {
+        this._indicatorAnimating = false;
+        this._indicator.removeEventListener("transitionend", handler);
+      };
+      this._indicator.addEventListener("transitionend", handler);
+      setTimeout(() => {
+        this._indicatorAnimating = false;
+      }, 350);
     }
   }
   private _setAriaLabels() {
@@ -216,8 +279,14 @@ export class SgdsTabGroup extends SgdsElement {
 
   // This stores tabs and panels so we can refer to a cache instead of calling querySelectorAll() multiple times.
   private _syncTabsAndPanels() {
+    // Unobserve old tabs
+    this._tabs.forEach(tab => this._tabResizeObserver?.unobserve(tab));
+
     this._tabs = this._getAllTabs({ includeDisabled: false });
     this._panels = this._getAllPanels();
+
+    // Observe new tabs for size changes (e.g. icon loading)
+    this._tabs.forEach(tab => this._tabResizeObserver?.observe(tab));
   }
 
   @queryAssignedElements({ slot: "nav", flatten: true })
@@ -235,6 +304,7 @@ export class SgdsTabGroup extends SgdsElement {
     this._updateTabsAttribute("variant");
     this._updateTabsAttribute("orientation");
     this._updateTabsAttribute("density");
+    this._updateTabsAttribute("fullWidth");
     this._syncTabsAndPanels();
   }
 
@@ -249,6 +319,9 @@ export class SgdsTabGroup extends SgdsElement {
     if (_changedProperties.has("density")) {
       this._updateTabsAttribute("density");
     }
+    if (_changedProperties.has("fullWidth")) {
+      this._updateTabsAttribute("fullWidth");
+    }
   }
 
   render() {
@@ -256,6 +329,7 @@ export class SgdsTabGroup extends SgdsElement {
       <div class="tab-group" @click=${this._handleClick} @keydown=${this._handleKeyDown}>
         <div class="tab-group__nav" role="tablist">
           <slot name="nav" @slotchange=${this._handleSlotChange}></slot>
+          <div class="tab-group__indicator"></div>
         </div>
 
         <div class="tab-group__content">

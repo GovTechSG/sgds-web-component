@@ -87,6 +87,14 @@ export class SgdsSidebarGroup extends SidebarElement {
     }
   }
 
+  protected override _handleSlotChange() {
+    super._handleSlotChange();
+
+    this._childElements.forEach(v => {
+      v._hidden = !this._showMenu;
+    });
+  }
+
   render() {
     return html`
       <div
@@ -99,7 +107,7 @@ export class SgdsSidebarGroup extends SidebarElement {
         @click=${() => this._handleClick()}
         aria-label=${this.title || this.name}
         aria-expanded=${this._showMenu}
-        tabindex=${this._childLevel > 2 && !this._showMenu ? -1 : 0}
+        tabindex=${this._hidden ? -1 : 0}
       >
         <div class="sidebar-item-label-wrapper">
           <div>

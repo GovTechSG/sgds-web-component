@@ -32,10 +32,9 @@ import { XL_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
  * - Active item tracking and synchronized state management
  *
  * Keyboard Navigation:
- * - Arrow Up/Down: Navigate between sidebar items and groups
+ * - Tab/Shift+Tab: Navigate between visible sidebar items and groups
  * - Arrow Left/Right: Collapse/expand groups or navigate drawer overlays
  * - Enter/Space: Activate focused item or toggle group
- * - Tab: Standard focus management to interactive elements
  *
  * @slot default - Insert sgds-sidebar-item, sgds-sidebar-group, and sgds-sidebar-section elements
  * @slot upper - Insert brand/logo content in sidebar header

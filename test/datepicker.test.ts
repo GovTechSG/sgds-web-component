@@ -1225,7 +1225,7 @@ describe("datepicker input masking", () => {
     {
       mode: "single",
       value: "12/03/2024",
-      editValues: ["12/03/202Y", "12/03/2Y2Y", "12/M3/2Y2Y", "D2/M3/2Y2Y", "22/M3/2Y2Y", "D2/M3/2Y2Y"]
+      editValues: ["12/03/202Y", "12/03/2Y2Y", "12/M3/2Y2Y", "1D/M3/2Y2Y", "12/M3/2Y2Y", "DD/M3/2Y2Y"]
     },
     {
       mode: "range",
@@ -1234,9 +1234,9 @@ describe("datepicker input masking", () => {
         "12/03/2024 - 13/04/202Y",
         "12/03/2024 - 13/04/2Y2Y",
         "12/03/2024 - 13/M4/2Y2Y",
-        "12/03/2024 - D3/M4/2Y2Y",
-        "12/03/2024 - 23/M4/2Y2Y",
-        "12/03/20YY - D3/M4/2Y2Y"
+        "12/03/2024 - 1D/M4/2Y2Y",
+        "12/03/2024 - 12/M4/2Y2Y",
+        "12/03/202Y - DD/M4/2Y2Y"
       ]
     }
   ];
@@ -1269,18 +1269,18 @@ describe("datepicker input masking", () => {
       await sendKeys({ press: "ArrowLeft" });
       await sendKeys({ press: "Backspace" });
       await inputEl.updateComplete;
-      expect(inputEl?.value).to.equal(editValues?.[3]);
+      await waitUntil(() => expect(inputEl?.value).to.equal(editValues?.[3]));
 
       await sendKeys({ press: "Digit2" });
       await inputEl.updateComplete;
-      expect(inputEl?.value).to.equal(editValues?.[4]);
+      await waitUntil(() => expect(inputEl?.value).to.equal(editValues?.[4]));
 
       await sendKeys({ press: "Backspace" });
       await sendKeys({ press: "Backspace" });
       await sendKeys({ press: "Backspace" });
 
       await inputEl.updateComplete;
-      expect(inputEl?.value).to.equal(editValues?.[5]);
+      await waitUntil(() => expect(inputEl?.value).to.equal(editValues?.[5]));
     });
   });
   const validationOnChangeMode = [

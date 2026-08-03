@@ -21,6 +21,7 @@ table {
   display: table;
   width: 100%;
   table-layout: auto;
+  font-size: var(--sgds-font-size-label-sm);
 }
 
 :host([layout="fixed"]) .table {
