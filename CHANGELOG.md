@@ -1,3 +1,39 @@
+## v3.26.0 (2026-08-04)
+
+### Feat
+
+- **QuantityToggle**: custom validation support with noValidate [skip-cd] (#794)
+- **QuantityToggle**: custom validation with noValidate
+- *****: cover prefer reduced motion at a single place [skip-cd] (#797)
+- *****: cover prefer reduced motion at a single place
+- **tab**: apply motion for active underlined tab [run-chromatic][skip-cd] (#785)
+- **tab**: apply motion for active underlined tab
+- **dropdown-element**: apply motion for the dropdown element [run-chromatic][skip-cd] (#784)
+- **dropdown-element**: apply motion for the dropdown element
+- **masthead**: add motion to the masthead panel [run-chromatic][skip-cd] (#786)
+- **Masthead**: observers prefer reduced motion
+- **masthead**: add motion to the masthead panel
+- **Tab**: implement full width attribute [run-chromatic][skip-cd] (#740)
+- **tab**: implement full width attribute
+
+### Fix
+
+- **Sidebar**: sidebar select event not emitting for react component [skip-cd] (#796)
+- **Sidebar**: jsdocs directly above class to be detected by cem
+- **Sidebar**: update jsdocs of sidebar select event
+- **Sidebar**:  icon button size [run-chromatic][skip-cd] (#780)
+- **Sidebar**: keyboard interaction [run-chromatic][skip-cd] (#783)
+- **sidebar**: remove vertical arrow key listeners in favor of tab navigation
+- **sidebar**: prevent keyboard focus on non-visible sub-items
+- **Grid**: fix grid gap variable reference [run-chromatic] (#792)
+- **Grid**: fix grid gap variable reference
+- **sidebar**: adjust sidebar item icon size to match sgds icon button
+
+### Refactor
+
+- **Datepicker**: replace date-fns and imask with in house utils …[skip-cd][run-chromatic] (#750)
+- **Datepicker**: replace date-fns and imask with in house utils to reduce bundle size and deps
+
 ## v3.25.0 (2026-07-21)
 
 ### Feat
