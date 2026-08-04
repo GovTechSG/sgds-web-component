@@ -80,11 +80,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   align-self: center;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .navbar-toggler {
-    transition: none;
-  }
-}
 
 .navbar-nav-scroll {
   overflow-y: auto;
