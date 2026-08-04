@@ -1,125 +1,176 @@
 import { html } from "lit";
 
 export default {
-  title: "Form/Custom Validation"
+  title: "Form/Custom Validation",
+  parameters: { layout: "fullscreen" }
 };
-const handleInput = e => {};
 
 const DisableValidationByInputTemplate = args => {
   return html`
-    <form id="custom-validation-form" class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
-      <sgds-input
-        noValidate
-        required
-        label="Keys"
-        hinttext="Keys cannot start with special characters like @, #, $"
-        name="input-keys"
-        hasFeedback="both"
-        placeholder="Placeholder"
-        id="custom-validation__input-novalidate"
-        @sgds-input=${handleInput}
-      >
-      </sgds-input>
-      <sgds-textarea
-        noValidate
-        required
-        label="Bio"
-        hinttext="Must be at least 10 characters long"
-        name="textarea-bio"
-        hasFeedback
-        placeholder="Enter bio"
-        id="custom-validation__textarea-novalidate"
-      >
-      </sgds-textarea>
-      <sgds-combo-box
-        noValidate
-        required
-        label="Fruit"
-        hinttext="Selection must start with 'A'"
-        name="combo-fruit"
-        hasFeedback
-        placeholder="Select a fruit"
-        id="custom-validation__combobox-novalidate"
-      >
-        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
-        <sgds-combo-box-option value="apricot">Apricot</sgds-combo-box-option>
-        <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
-        <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
-      </sgds-combo-box>
-      <sgds-select
-        noValidate
-        required
-        label="Gender"
-        hinttext="Please select a gender"
-        name="select-gender"
-        hasFeedback
-        placeholder="Select a gender"
-        id="custom-validation__select-novalidate"
-      >
-        <sgds-select-option value="male">Male</sgds-select-option>
-        <sgds-select-option value="female">Female</sgds-select-option>
-        <sgds-select-option value="other">Other</sgds-select-option>
-        <sgds-select-option value="prefer-not-to-say">Prefer not to say</sgds-select-option>
-      </sgds-select>
-      <sgds-file-upload
-        noValidate
-        required
-        label="Documents"
-        hinttext="Max 2 PDF files"
-        name="documents"
-        hasFeedback
-        multiple
-        accept=".pdf"
-        id="custom-validation__file-upload-novalidate"
-      >
-        Choose Files
-      </sgds-file-upload>
-      <sgds-datepicker
-        noValidate
-        required
-        label="Appointment Date"
-        hintText="Must be a future date"
-        name="appointment-date"
-        hasFeedback
-        id="custom-validation__datepicker-novalidate"
-      ></sgds-datepicker>
-      <sgds-radio-group
-        noValidate
-        required
-        label="Gender"
-        hintText="Please select a gender"
-        name="radio-gender"
-        hasFeedback
-        id="custom-validation__radio-novalidate"
-      >
-        <sgds-radio value="male">Male</sgds-radio>
-        <sgds-radio value="female">Female</sgds-radio>
-        <sgds-radio value="other">Other</sgds-radio>
-      </sgds-radio-group>
-      <sgds-checkbox-group
-        noValidate
-        required
-        label="Interests"
-        hintText="Select at least one interest"
-        name="checkbox-interests"
-        hasFeedback
-        id="custom-validation__checkbox-novalidate"
-      >
-        <sgds-checkbox value="sports">Sports</sgds-checkbox>
-        <sgds-checkbox value="music">Music</sgds-checkbox>
-        <sgds-checkbox value="reading">Reading</sgds-checkbox>
-      </sgds-checkbox-group>
-      <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
-        <sgds-button type="reset" variant="ghost">Reset</sgds-button>
-        <sgds-button type="submit">Submit</sgds-button>
+    <div class="sgds-container sgds:py-layout-md">
+      <div class="sgds-grid sgds:gap-layout-md">
+        <form
+          id="custom-validation-form"
+          class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8"
+        >
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+            <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+              <h5
+                class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+              >
+                Custom Validation (Component noValidate)
+              </h5>
+              <div>
+                <sgds-input
+                  noValidate
+                  required
+                  label="Keys"
+                  hinttext="Keys cannot start with special characters like @, #, $"
+                  name="input-keys"
+                  hasFeedback="both"
+                  placeholder="Placeholder"
+                  id="custom-validation__input-novalidate"
+                >
+                </sgds-input>
+              </div>
+              <div>
+                <sgds-textarea
+                  noValidate
+                  required
+                  label="Bio"
+                  hinttext="Must be at least 10 characters long"
+                  name="textarea-bio"
+                  hasFeedback="both"
+                  placeholder="Enter bio"
+                  id="custom-validation__textarea-novalidate"
+                >
+                </sgds-textarea>
+              </div>
+              <div>
+                <sgds-combo-box
+                  noValidate
+                  required
+                  label="Fruit"
+                  hinttext="Selection must start with 'A'"
+                  name="combo-fruit"
+                  hasFeedback="both"
+                  placeholder="Select a fruit"
+                  id="custom-validation__combobox-novalidate"
+                >
+                  <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+                  <sgds-combo-box-option value="apricot">Apricot</sgds-combo-box-option>
+                  <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+                  <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+                </sgds-combo-box>
+              </div>
+              <div>
+                <sgds-select
+                  noValidate
+                  required
+                  label="Gender"
+                  hinttext="Please select a gender"
+                  name="select-gender"
+                  hasFeedback="both"
+                  placeholder="Select a gender"
+                  id="custom-validation__select-novalidate"
+                >
+                  <sgds-select-option value="male">Male</sgds-select-option>
+                  <sgds-select-option value="female">Female</sgds-select-option>
+                  <sgds-select-option value="other">Other</sgds-select-option>
+                  <sgds-select-option value="prefer-not-to-say">Prefer not to say</sgds-select-option>
+                </sgds-select>
+              </div>
+              <div>
+                <sgds-file-upload
+                  noValidate
+                  required
+                  label="Documents"
+                  hinttext="Max 2 PDF files"
+                  name="documents"
+                  hasFeedback="both"
+                  multiple
+                  accept=".pdf"
+                  id="custom-validation__file-upload-novalidate"
+                >
+                  Choose Files
+                </sgds-file-upload>
+              </div>
+              <div>
+                <sgds-datepicker
+                  noValidate
+                  required
+                  label="Appointment Date"
+                  hintText="Must be a future date"
+                  name="appointment-date"
+                  hasFeedback="both"
+                  id="custom-validation__datepicker-novalidate"
+                ></sgds-datepicker>
+              </div>
+              <div>
+                <sgds-radio-group
+                  noValidate
+                  required
+                  label="Gender"
+                  hintText="Please select a gender"
+                  name="radio-gender"
+                  hasFeedback="both"
+                  id="custom-validation__radio-novalidate"
+                >
+                  <sgds-radio value="male">Male</sgds-radio>
+                  <sgds-radio value="female">Female</sgds-radio>
+                  <sgds-radio value="other">Other</sgds-radio>
+                </sgds-radio-group>
+              </div>
+              <div>
+                <sgds-checkbox-group
+                  noValidate
+                  required
+                  label="Interests"
+                  hintText="Select at least one interest"
+                  name="checkbox-interests"
+                  hasFeedback="both"
+                  id="custom-validation__checkbox-novalidate"
+                >
+                  <sgds-checkbox value="sports">Sports</sgds-checkbox>
+                  <sgds-checkbox value="music">Music</sgds-checkbox>
+                  <sgds-checkbox value="reading">Reading</sgds-checkbox>
+                </sgds-checkbox-group>
+              </div>
+              <div>
+                <sgds-quantity-toggle
+                  noValidate
+                  min="3"
+                  max="50"
+                  label="Quantity"
+                  hintText="Value must be a multiple of 5 (min=3, max=50 ignored by noValidate)"
+                  name="quantity"
+                  hasFeedback="both"
+                  id="custom-validation__quantity-toggle-novalidate"
+                ></sgds-quantity-toggle>
+              </div>
+            </div>
+            <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
+              <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+              <sgds-button type="submit">Submit</sgds-button>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
     <script>
       const formOne = document.getElementById("custom-validation-form");
       formOne.addEventListener("submit", e => {
         e.preventDefault();
+
+        // Validate quantity-toggle on submit
+        const qtSubmit = document.getElementById("custom-validation__quantity-toggle-novalidate");
+        if (qtSubmit.value !== 0 && qtSubmit.value % 5 !== 0) {
+          qtSubmit.setInvalid(true);
+          qtSubmit.invalidFeedback = "Value must be a multiple of 5";
+        }
+
         const components = formOne.querySelectorAll(
-          "sgds-input, sgds-textarea, sgds-combo-box, sgds-select, sgds-file-upload, sgds-datepicker"
+          "sgds-input, sgds-textarea, sgds-combo-box, sgds-select, sgds-file-upload, sgds-datepicker, sgds-quantity-toggle"
         );
         let hasInvalid = false;
         components.forEach(c => {
@@ -238,114 +289,183 @@ const DisableValidationByInputTemplate = args => {
           e.target.setInvalid(false);
         }
       });
+
+      const qtOne = document.getElementById("custom-validation__quantity-toggle-novalidate");
+      qtOne.addEventListener("sgds-change", e => {
+        if (e.target.value % 5 !== 0) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Value must be a multiple of 5";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
     </script>
   `;
 };
 const DisableValidationByFormTemplate = args => {
   return html`
-    <form id="custom-validation-form_novalidate" class="sgds:flex sgds:flex-col sgds:gap-layout-xs" novalidate>
-      <sgds-input
-        required
-        label="Keys"
-        hinttext="Keys cannot start with special characters like @, #, $"
-        name="input-keys"
-        hasFeedback="both"
-        placeholder="Placeholder"
-        id="custom-validation__input-two-novalidate"
-      >
-      </sgds-input>
-      <sgds-textarea
-        required
-        label="Notes"
-        hinttext="Custom validation: minimum 5 characters"
-        name="textarea-notes"
-        hasFeedback
-        placeholder="Enter notes"
-        id="custom-validation__textarea-two-novalidate"
-      >
-      </sgds-textarea>
-      <sgds-combo-box
-        required
-        label="Fruit"
-        hinttext="Selection must start with 'A'"
-        name="combo-fruit"
-        hasFeedback
-        placeholder="Select a fruit"
-        id="custom-validation__combobox-two-novalidate"
-      >
-        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
-        <sgds-combo-box-option value="apricot">Apricot</sgds-combo-box-option>
-        <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
-        <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
-      </sgds-combo-box>
-      <sgds-select
-        required
-        label="Gender"
-        hinttext="Please select a gender"
-        name="select-gender"
-        hasFeedback
-        placeholder="Select a gender"
-        id="custom-validation__select-two-novalidate"
-      >
-        <sgds-select-option value="male">Male</sgds-select-option>
-        <sgds-select-option value="female">Female</sgds-select-option>
-        <sgds-select-option value="other">Other</sgds-select-option>
-        <sgds-select-option value="prefer-not-to-say">Prefer not to say</sgds-select-option>
-      </sgds-select>
-      <sgds-file-upload
-        required
-        label="Documents"
-        hinttext="Max 2 PDF files"
-        name="documents"
-        hasFeedback
-        multiple
-        accept=".pdf"
-        id="custom-validation__file-upload-two-novalidate"
-      >
-        Choose Files
-      </sgds-file-upload>
-      <sgds-datepicker
-        required
-        label="Appointment Date"
-        hintText="Must be a future date"
-        name="appointment-date"
-        hasFeedback
-        id="custom-validation__datepicker-two-novalidate"
-      ></sgds-datepicker>
-      <sgds-radio-group
-        required
-        label="Gender"
-        hintText="Please select a gender"
-        name="radio-gender"
-        hasFeedback
-        id="custom-validation__radio-two-novalidate"
-      >
-        <sgds-radio value="male">Male</sgds-radio>
-        <sgds-radio value="female">Female</sgds-radio>
-        <sgds-radio value="other">Other</sgds-radio>
-      </sgds-radio-group>
-      <sgds-button type="submit">Submit</sgds-button>
-      <sgds-checkbox-group
-        required
-        label="Interests"
-        hintText="Select at least one interest"
-        name="checkbox-interests"
-        hasFeedback
-        id="custom-validation__checkbox-two-novalidate"
-      >
-        <sgds-checkbox value="sports">Sports</sgds-checkbox>
-        <sgds-checkbox value="music">Music</sgds-checkbox>
-        <sgds-checkbox value="reading">Reading</sgds-checkbox>
-      </sgds-checkbox-group>
-      <div class="sgds:flex sgds:justify-end sgds:gap-component-xs">
-        <sgds-button type="reset" variant="ghost">Reset</sgds-button>
-        <sgds-button type="submit">Submit</sgds-button>
+    <div class="sgds-container sgds:py-layout-md">
+      <div class="sgds-grid sgds:gap-layout-md">
+        <form
+          id="custom-validation-form_novalidate"
+          class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8"
+          novalidate
+        >
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+            <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+              <h5
+                class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+              >
+                Custom Validation (Form novalidate)
+              </h5>
+              <div>
+                <sgds-input
+                  required
+                  label="Keys"
+                  hinttext="Keys cannot start with special characters like @, #, $"
+                  name="input-keys"
+                  hasFeedback="both"
+                  placeholder="Placeholder"
+                  id="custom-validation__input-two-novalidate"
+                >
+                </sgds-input>
+              </div>
+              <div>
+                <sgds-textarea
+                  required
+                  label="Notes"
+                  hinttext="Custom validation: minimum 5 characters"
+                  name="textarea-notes"
+                  hasFeedback="both"
+                  placeholder="Enter notes"
+                  id="custom-validation__textarea-two-novalidate"
+                >
+                </sgds-textarea>
+              </div>
+              <div>
+                <sgds-combo-box
+                  required
+                  label="Fruit"
+                  hinttext="Selection must start with 'A'"
+                  name="combo-fruit"
+                  hasFeedback="both"
+                  placeholder="Select a fruit"
+                  id="custom-validation__combobox-two-novalidate"
+                >
+                  <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+                  <sgds-combo-box-option value="apricot">Apricot</sgds-combo-box-option>
+                  <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+                  <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+                </sgds-combo-box>
+              </div>
+              <div>
+                <sgds-select
+                  required
+                  label="Gender"
+                  hinttext="Please select a gender"
+                  name="select-gender"
+                  hasFeedback="both"
+                  placeholder="Select a gender"
+                  id="custom-validation__select-two-novalidate"
+                >
+                  <sgds-select-option value="male">Male</sgds-select-option>
+                  <sgds-select-option value="female">Female</sgds-select-option>
+                  <sgds-select-option value="other">Other</sgds-select-option>
+                  <sgds-select-option value="prefer-not-to-say">Prefer not to say</sgds-select-option>
+                </sgds-select>
+              </div>
+              <div>
+                <sgds-file-upload
+                  required
+                  label="Documents"
+                  hinttext="Max 2 PDF files"
+                  name="documents"
+                  hasFeedback="both"
+                  multiple
+                  accept=".pdf"
+                  id="custom-validation__file-upload-two-novalidate"
+                >
+                  Choose Files
+                </sgds-file-upload>
+              </div>
+              <div>
+                <sgds-datepicker
+                  required
+                  label="Appointment Date"
+                  hintText="Must be a future date"
+                  name="appointment-date"
+                  hasFeedback="both"
+                  id="custom-validation__datepicker-two-novalidate"
+                ></sgds-datepicker>
+              </div>
+              <div>
+                <sgds-radio-group
+                  required
+                  label="Gender"
+                  hintText="Please select a gender"
+                  name="radio-gender"
+                  hasFeedback="both"
+                  id="custom-validation__radio-two-novalidate"
+                >
+                  <sgds-radio value="male">Male</sgds-radio>
+                  <sgds-radio value="female">Female</sgds-radio>
+                  <sgds-radio value="other">Other</sgds-radio>
+                </sgds-radio-group>
+              </div>
+              <div>
+                <sgds-checkbox-group
+                  required
+                  label="Interests"
+                  hintText="Select at least one interest"
+                  name="checkbox-interests"
+                  hasFeedback="both"
+                  id="custom-validation__checkbox-two-novalidate"
+                >
+                  <sgds-checkbox value="sports">Sports</sgds-checkbox>
+                  <sgds-checkbox value="music">Music</sgds-checkbox>
+                  <sgds-checkbox value="reading">Reading</sgds-checkbox>
+                </sgds-checkbox-group>
+              </div>
+              <div>
+                <sgds-quantity-toggle
+                  min="3"
+                  max="50"
+                  label="Quantity"
+                  hintText="Value must be a multiple of 5 (min=3, max=50 ignored by form novalidate)"
+                  name="quantity"
+                  hasFeedback="both"
+                  id="custom-validation__quantity-toggle-two-novalidate"
+                ></sgds-quantity-toggle>
+              </div>
+            </div>
+            <div class="sgds:flex sgds:gap-layout-sm sgds:items-center sgds:justify-end">
+              <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+              <sgds-button type="submit">Submit</sgds-button>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
     <script>
       const formTwo = document.getElementById("custom-validation-form_novalidate");
       formTwo.addEventListener("submit", e => {
         e.preventDefault();
+
+        // Validate quantity-toggle on submit
+        const qtSubmitTwo = document.getElementById("custom-validation__quantity-toggle-two-novalidate");
+        if (qtSubmitTwo.value !== 0 && qtSubmitTwo.value % 5 !== 0) {
+          qtSubmitTwo.setInvalid(true);
+          qtSubmitTwo.invalidFeedback = "Value must be a multiple of 5";
+        }
+
+        const components = formTwo.querySelectorAll(
+          "sgds-input, sgds-textarea, sgds-combo-box, sgds-select, sgds-file-upload, sgds-datepicker, sgds-quantity-toggle"
+        );
+        let hasInvalid = false;
+        components.forEach(c => {
+          if (c.invalid) hasInvalid = true;
+        });
+        if (hasInvalid) return;
         alert(
           "Form submitted successfully despite empty required fields — constraint validation was disabled by the noValidate property."
         );
@@ -455,6 +575,16 @@ const DisableValidationByFormTemplate = args => {
         if (!e.target.value) {
           e.target.setInvalid(true);
           e.target.invalidFeedback = "Please select at least one interest";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+
+      const qtTwo = document.getElementById("custom-validation__quantity-toggle-two-novalidate");
+      qtTwo.addEventListener("sgds-change", e => {
+        if (e.target.value % 5 !== 0) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Value must be a multiple of 5";
         } else {
           e.target.setInvalid(false);
         }
