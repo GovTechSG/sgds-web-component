@@ -17,8 +17,14 @@ for (const mod of (customElements as any).modules) {
     const attrToField: Record<string, string> = {};
     for (const attr of decl.attributes || []) {
       if (attr.fieldName) {
-        // Always map HTML attribute → React prop (fieldName is the camelCase prop)
+        // Map HTML attribute → React prop (fieldName is the camelCase prop)
         attrToField[attr.name] = attr.fieldName;
+        // Also map the lowercased version since HTML attributes are case-insensitive
+        // and rendered source may show them lowercased (e.g. "arialabel" → "ariaLabel")
+        const lower = attr.name.toLowerCase();
+        if (lower !== attr.name) {
+          attrToField[lower] = attr.fieldName;
+        }
       }
     }
 

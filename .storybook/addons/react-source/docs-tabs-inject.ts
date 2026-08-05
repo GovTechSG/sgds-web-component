@@ -37,8 +37,8 @@ function injectTabs(pre: HTMLElement) {
   const tabBar = document.createElement("div");
   tabBar.className = "react-source-tab-bar";
   tabBar.innerHTML = `
-    <button class="react-source-tab active" data-tab="html">HTML</button>
-    <button class="react-source-tab" data-tab="react">React</button>
+    <button class="react-source-tab active" data-tab="react">React</button>
+    <button class="react-source-tab" data-tab="html">Others (Vue, Angular, HTML)</button>
   `;
   tabBar.style.cssText =
     "display:flex;gap:0;padding:0 12px;border-bottom:1px solid rgba(255,255,255,0.1);background:inherit;";
@@ -59,10 +59,10 @@ function injectTabs(pre: HTMLElement) {
   sourceContainer.insertBefore(tabBar, sourceContainer.firstChild);
 
   // State
-  let activeTab = "html";
+  let activeTab = "react";
 
-  // Initially show only HTML (remove the React portion from the display)
-  codeDiv.innerHTML = highlightHtml(htmlCode);
+  // Initially show React code
+  codeDiv.innerHTML = highlightReact(reactCode);
 
   // Tab click handler
   tabBar.addEventListener("click", e => {

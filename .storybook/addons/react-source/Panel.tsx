@@ -11,7 +11,7 @@ interface PanelProps {
 }
 
 export const Panel: React.FC<PanelProps> = ({ active }) => {
-  const [activeTab, setActiveTab] = useState<"html" | "react">("html");
+  const [activeTab, setActiveTab] = useState<"html" | "react">("react");
   const [htmlSource, setHtmlSource] = useState<string>("");
   useChannel({
     [SNIPPET_RENDERED]: ({ source }: { source: string }) => {
@@ -24,8 +24,8 @@ export const Panel: React.FC<PanelProps> = ({ active }) => {
 
   const hasScript = htmlSource.includes("<script");
   const reactSource = htmlSource && !hasScript ? htmlToReact(htmlSource) : "";
-  const displayedCode = activeTab === "html" || hasScript ? htmlSource : reactSource;
-  const language = activeTab === "html" || hasScript ? "html" : "tsx";
+  const displayedCode = activeTab === "react" && !hasScript ? reactSource : htmlSource;
+  const language = activeTab === "react" && !hasScript ? "tsx" : "html";
 
   return (
     <AddonPanel active={active}>
@@ -40,14 +40,14 @@ export const Panel: React.FC<PanelProps> = ({ active }) => {
             flexShrink: 0
           }}
         >
-          <TabButton active={activeTab === "html" || hasScript} onClick={() => setActiveTab("html")}>
-            HTML
-          </TabButton>
           {!hasScript && (
             <TabButton active={activeTab === "react"} onClick={() => setActiveTab("react")}>
               React
             </TabButton>
           )}
+          <TabButton active={activeTab === "html" || hasScript} onClick={() => setActiveTab("html")}>
+            Others (Vue, Angular, HTML)
+          </TabButton>
         </div>
         <div style={{ flex: 1, overflow: "auto" }}>
           {displayedCode ? (
