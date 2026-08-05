@@ -102,7 +102,7 @@ import * as ${key}Stories from './${key}.stories';
 
 <Meta of={${key}Stories}/>
 
-# ${key}  
+# ${key}
 ${summary ? summary + "\n" : "\n"}
 <Canvas>
   <Story of={${key}Stories.Basic} />
