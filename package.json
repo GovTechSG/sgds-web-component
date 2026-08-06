@@ -37,7 +37,7 @@
     "utility:storybook": "tailwindcss -i ./src/css/utility.css -o ./.storybook/utility.css --config tailwind.config.js",
     "scan:snyk-agent": "tsx scripts/snyk-agent-scan/index.ts",
     "test:a11y": "tsx scripts/oobee-a11y-scan/index.ts",
-    "test:a11y:setup": "cd node_modules/@govtechsg/oobee && npm install && npm run build"
+    "test:a11y:setup": "tsx scripts/oobee-a11y-scan/setup.ts"
   },
   "author": "GovTechSG",
   "contributors": [
@@ -79,7 +79,7 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@custom-elements-manifest/analyzer": "^0.6.4",
     "@figma/rest-api-spec": "^0.33.0",
-    "@govtechsg/oobee": "^0.10.86",
+    "@govtechsg/oobee": "^0.11.7",
     "@open-wc/testing": "^3.0.0-next.5",
     "@playwright/test": "^1.45.1",
     "@rollup/plugin-node-resolve": "^11.2.1",
