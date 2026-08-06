@@ -270,10 +270,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   }
 
   private async _handleCloseMenu() {
-    //return focus to input when menu closes
-    const input = await this.datepickerInputAsync;
-    input.focus();
-
     if (this.selectedDateRange.length === 0) {
       this.displayDate = this.initialDisplayDate;
     } else {
@@ -282,6 +278,12 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
       const calendar = await this.calendar;
       calendar._updateFocusedDate();
     }
+
+    // Focus input after displayDate reset and calendar re-render to prevent
+    // the calendar's updated() from stealing focus during the hide animation
+    await this.updateComplete;
+    const input = await this.datepickerInputAsync;
+    input.focus();
   }
   private async _handleOpenMenu() {
     const cal = await this.calendar;

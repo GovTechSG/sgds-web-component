@@ -45,8 +45,4 @@ progress {
   color: var(--sgds-color-subtle);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .progress-bar {
-    transition: none;
-  }
-}
+

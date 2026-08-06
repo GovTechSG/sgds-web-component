@@ -170,7 +170,7 @@ describe("sgds-datepicker", () => {
     inputEl?.click();
 
     tdButtonTwo.click();
-    await elementUpdated(el);
+    await waitUntil(() => !el.menuIsOpen);
     // check for day 01 and 02
     expect(inputEl.value).to.contain("01");
     expect(inputEl.value).to.contain("02");
@@ -1133,9 +1133,8 @@ describe("sgds-datepicker close and open menu behaviours", async () => {
     expect(getCalendarActiveElement() === thisYearEl).to.be.true;
   });
   it("in day view, when calendar focus is moved, it should auto focus to the today calendar date after close and open, when close focuses to input", async () => {
-    const { calendar, getCalendarActiveElement, calendarBtnEl, getDateInputActiveElement, input } = await dayViewSetup([
-      "01/02/2024"
-    ]);
+    const { calendar, getCalendarActiveElement, calendarBtnEl, getDateInputActiveElement, input, el } =
+      await dayViewSetup(["01/02/2024"]);
     const selectedTdEl = calendar.shadowRoot?.querySelector(`td[data-day="1"]`);
     expect(getCalendarActiveElement() === selectedTdEl).to.be.true;
 
@@ -1149,15 +1148,17 @@ describe("sgds-datepicker close and open menu behaviours", async () => {
     calendarBtnEl.click();
     const inputFocusedEl = input.shadowRoot?.querySelector("input");
 
+    await waitUntil(() => !el.menuIsOpen);
     await waitUntil(() => getDateInputActiveElement() === inputFocusedEl);
     expect(getDateInputActiveElement() === inputFocusedEl).to.be.true;
     calendarBtnEl.click();
+    await waitUntil(() => el.menuIsOpen);
 
     await waitUntil(() => getCalendarActiveElement() === selectedTdEl);
     expect(getCalendarActiveElement() === selectedTdEl).to.be.true;
   });
   it("in month view, when calendar focus is moved, it should auto focus to the today calendar date after close and open, when close focuses to input", async () => {
-    const { calendar, getCalendarActiveElement, calendarBtnEl, getDateInputActiveElement, input } =
+    const { calendar, getCalendarActiveElement, calendarBtnEl, getDateInputActiveElement, input, el } =
       await monthViewSetup(["01/02/2024"]);
     const selectedButtonEL = calendar.shadowRoot?.querySelector(`button[data-month="1"]`);
     expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
@@ -1171,17 +1172,18 @@ describe("sgds-datepicker close and open menu behaviours", async () => {
     //close and open menu
     calendarBtnEl.click();
     const inputFocusedEl = input.shadowRoot?.querySelector("input");
+    await waitUntil(() => !el.menuIsOpen);
     await waitUntil(() => getDateInputActiveElement() === inputFocusedEl);
 
     calendarBtnEl.click();
+    await waitUntil(() => el.menuIsOpen);
     await waitUntil(() => getCalendarActiveElement() === selectedButtonEL);
 
     expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
   });
   it("in year view, when calendar focus is moved, it should auto focus to the today calendar date after close and open, when close focuses to input", async () => {
-    const { calendar, getCalendarActiveElement, calendarBtnEl, getDateInputActiveElement, input } = await yearViewSetup(
-      ["01/02/2024"]
-    );
+    const { calendar, getCalendarActiveElement, calendarBtnEl, getDateInputActiveElement, input, el } =
+      await yearViewSetup(["01/02/2024"]);
     const selectedButtonEL = calendar.shadowRoot?.querySelector(`button[data-year="2024"]`);
     expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
 
@@ -1194,11 +1196,26 @@ describe("sgds-datepicker close and open menu behaviours", async () => {
     //close and open menu
     calendarBtnEl.click();
     const inputFocusedEl = input.shadowRoot?.querySelector("input");
-    await waitUntil(() => getDateInputActiveElement() === inputFocusedEl);
-    calendarBtnEl.click();
-    await waitUntil(() => getCalendarActiveElement() === selectedButtonEL);
+    await waitUntil(() => !el.menuIsOpen, "menu did not close", { timeout: 2000 });
+    await waitUntil(() => getDateInputActiveElement() === inputFocusedEl, "input did not get focus after close", {
+      timeout: 2000
+    });
 
-    expect(getCalendarActiveElement() === selectedButtonEL).to.be.true;
+    calendarBtnEl.click();
+    await waitUntil(() => el.menuIsOpen, "menu did not reopen", { timeout: 2000 });
+    // Wait for calendar to re-render with updated displayDate and year grid
+    await calendar.updateComplete;
+    await waitUntil(
+      () => {
+        const yearBtn = calendar.shadowRoot?.querySelector(`button[data-year="2024"]`);
+        return yearBtn && getCalendarActiveElement() === yearBtn;
+      },
+      "year button did not get focus after reopen",
+      { timeout: 3000 }
+    );
+
+    const requeriedYearBtn = calendar.shadowRoot?.querySelector(`button[data-year="2024"]`);
+    expect(getCalendarActiveElement() === requeriedYearBtn).to.be.true;
   });
 });
 

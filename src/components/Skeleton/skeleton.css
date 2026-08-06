@@ -33,8 +33,4 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .sheen {
-    animation: none;
-  }
-}
+

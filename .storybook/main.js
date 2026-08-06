@@ -33,7 +33,8 @@ module.exports = {
       }
     },
     "@storybook/addon-interactions",
-    "@storybook/addon-themes"
+    "@storybook/addon-themes",
+    "./addons/react-source/preset"
   ],
   framework: {
     name: "@storybook/web-components-vite",
