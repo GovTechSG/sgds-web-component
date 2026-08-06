@@ -39,6 +39,8 @@ jobs:
 
       - name: Run A11y Scan
         run: pnpm test:a11y
+        env:
+          CRAWLEE_STORAGE_DIR: ./storage
 
       - name: Upload Oobee Report
         if: always()
