@@ -25,7 +25,7 @@ function injectTabs(pre: HTMLElement) {
   if (sepIndex < 0) return;
 
   const htmlCode = fullText.substring(0, sepIndex);
-  const reactCode = fullText.substring(sepIndex + SEPARATOR.length);
+  const reactCode = htmlToReact(htmlCode);
 
   // Find the outermost source container (parent of the scroll area wrapper)
   // Structure: div.css-* > div[dir="ltr"] > ... > pre.prismjs

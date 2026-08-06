@@ -1,8 +1,10 @@
 import { componentMap, type ComponentMeta } from "./componentMap";
+import prettier from "prettier/standalone";
+import prettierBabel from "prettier/parser-babel";
 
 /**
  * Converts an HTML source string (containing sgds-* custom elements)
- * to React JSX with proper imports.
+ * to React JSX with proper imports, formatted by prettier.
  */
 export function htmlToReact(html: string): string {
   const usedComponents = new Set<ComponentMeta>();
@@ -16,13 +18,42 @@ export function htmlToReact(html: string): string {
     .map(c => `import ${c.name} from "@govtechsg/sgds-web-component/react/${c.importPath}/index.js";`)
     .join("\n");
 
-  // Clean up whitespace
   jsx = jsx.trim();
 
-  if (imports) {
-    return `${imports}\n\n${jsx}`;
+  const raw = imports ? `${imports}\n\n${jsx}` : jsx;
+
+  return formatWithPrettier(raw);
+}
+
+function formatWithPrettier(raw: string): string {
+  try {
+    const hasImports = raw.includes("import ");
+    // Wrap in a valid JS expression so prettier can parse it
+    const wrappedForFormat = hasImports ? raw + "\n" : `const __x = (\n<>\n${raw}\n</>\n);\n`;
+
+    const formatted = prettier.format(wrappedForFormat, {
+      parser: "babel",
+      plugins: [prettierBabel],
+      printWidth: 80,
+      tabWidth: 2,
+      semi: true,
+      singleQuote: false,
+      jsxSingleQuote: false,
+      trailingComma: "all"
+    });
+
+    if (hasImports) {
+      return formatted.trimEnd();
+    }
+    // Strip wrapper: remove `const __x = (\n<>\n` and `\n</>\n);\n`
+    const lines = formatted.split("\n");
+    const inner = lines
+      .slice(2, -3)
+      .map(l => (l.startsWith("    ") ? l.slice(4) : l.startsWith("  ") ? l.slice(2) : l));
+    return inner.join("\n").trimEnd();
+  } catch {
+    return raw;
   }
-  return jsx;
 }
 
 function transformNode(html: string, usedComponents: Set<ComponentMeta>): string {
