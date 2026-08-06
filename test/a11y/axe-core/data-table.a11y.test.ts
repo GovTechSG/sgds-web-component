@@ -345,14 +345,12 @@ describe("<sgds-data-table>", () => {
     await elementUpdated(el);
 
     const loadingState = el.shadowRoot?.querySelector(".loading");
-    const loadingMenu = el.shadowRoot?.querySelector(".loading-menu");
-    const loadingSpinner = el.shadowRoot?.querySelector("sgds-spinner");
+    const skeletons = el.shadowRoot?.querySelectorAll("sgds-skeleton") || [];
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const bodyRows = slot.assignedElements({ flatten: true }).slice(1) as HTMLElement[];
 
     expect(loadingState).to.exist;
-    expect(loadingMenu).to.exist;
-    expect(loadingSpinner).to.exist;
+    expect(skeletons.length).to.equal(5);
     expect(bodyRows[0].style.display).to.equal("none");
 
     el.isLoading = false;
@@ -376,11 +374,13 @@ describe("<sgds-data-table>", () => {
     await elementUpdated(el);
 
     const loadingState = el.shadowRoot?.querySelector(".loading");
+    const skeletons = el.shadowRoot?.querySelectorAll("sgds-skeleton") || [];
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const bodyRows = slot.assignedElements({ flatten: true }).slice(1) as HTMLElement[];
 
     expect(loadingState).to.exist;
-    expect(bodyRows[0].style.display).to.equal("");
+    expect(skeletons.length).to.equal(5);
+    expect(bodyRows[0].style.display).to.equal("none");
   });
 
   it("emits sgds-sort in server mode without locally sorting rows", async () => {
