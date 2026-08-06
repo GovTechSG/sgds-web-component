@@ -85,8 +85,5 @@ export default defineConfig({
   customLogger: logger,
   build: {
     cssCodeSplit: false
-  },
-  optimizeDeps: {
-    entries: ["index.html", "playground/**/*.html", "test/a11y/**/*.html"]
   }
 });
