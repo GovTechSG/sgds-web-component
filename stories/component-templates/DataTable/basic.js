@@ -27,7 +27,7 @@ export const Template = args => html`
     .mode=${args.mode}
     .serverSort=${args.serverSort}
     .isLoading=${args.isLoading}
-    .hideFooter=${args.hideFooter}
+    .paginationVariant=${args.paginationVariant}
     .footerText=${args.footerText}
   >
     <sgds-data-table-row>
@@ -71,7 +71,7 @@ export const args = {
   mode: "client",
   serverSort: false,
   isLoading: false,
-  hideFooter: false,
+  paginationVariant: "default",
   footerText: ""
 };
 

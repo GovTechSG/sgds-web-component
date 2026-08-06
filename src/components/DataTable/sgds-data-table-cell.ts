@@ -17,11 +17,11 @@ export class SgdsDataTableCell extends SgdsElement {
     `
   ];
 
-  /** Number of columns this cell spans. */
-  @property({ type: Number, reflect: true }) colspan: number | undefined;
+  /** @internal Number of columns this cell spans. */
+  @property({ type: Number }) colSpan: number | undefined;
 
-  /** Number of rows this cell spans. */
-  @property({ type: Number, reflect: true }) rowspan: number | undefined;
+  /** @internal Number of rows this cell spans. */
+  @property({ type: Number }) rowSpan: number | undefined;
 
   render() {
     return html`<slot></slot>`;

@@ -401,29 +401,6 @@
   </sgds-data-table>
 </div>
 
-<!-- Hide footer -->
-<div class="container">
-  <h3>Hide Footer (hideFooter)</h3>
-  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" hideFooter>
-    <sgds-data-table-row>
-      <sgds-data-table-head>ID</sgds-data-table-head>
-      <sgds-data-table-head>Status</sgds-data-table-head>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>1001</sgds-data-table-cell>
-      <sgds-data-table-cell>Pending</sgds-data-table-cell>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>1002</sgds-data-table-cell>
-      <sgds-data-table-cell>Approved</sgds-data-table-cell>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>1003</sgds-data-table-cell>
-      <sgds-data-table-cell>Rejected</sgds-data-table-cell>
-    </sgds-data-table-row>
-  </sgds-data-table>
-</div>
-
 <!-- Server mode -->
 <div class="container">
   <h3 id="server-table-heading">Server Mode (mode="server")</h3>
@@ -450,7 +427,7 @@
   <div id="server-table-status" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 </div>
 
-<!-- Header and cell props: sorting, sortKey, width, colspan, rowspan, textAlign -->
+<!-- Header and cell props: sorting, sortKey, width, textAlign -->
 <div class="container">
   <h3>Header and Cell Props (sorting, sortKey, width)</h3>
   <sgds-data-table layout="fixed" currentPage="1" dataLength="4" itemsPerPage="4">
@@ -488,7 +465,9 @@
   <sgds-data-table currentPage="1" dataLength="4" itemsPerPage="4">
     <sgds-data-table-row>
       <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
-      <sgds-data-table-head sorting sortKey="name" ariasort="ascending">Name</sgds-data-table-head>
+      <sgds-data-table-head id="default-sort-head-name" sorting sortKey="name" sortDirection="ascending"
+        >Name</sgds-data-table-head
+      >
       <sgds-data-table-head>Role</sgds-data-table-head>
     </sgds-data-table-row>
 
@@ -511,58 +490,6 @@
       <sgds-data-table-cell>3</sgds-data-table-cell>
       <sgds-data-table-cell>Darren</sgds-data-table-cell>
       <sgds-data-table-cell>Designer</sgds-data-table-cell>
-    </sgds-data-table-row>
-  </sgds-data-table>
-</div>
-
-<!-- Row colspan example (5 data rows, 5 columns) -->
-<div class="container">
-  <h3>Row Colspan Example (5 data rows, 5 columns)</h3>
-  <sgds-data-table currentPage="1" dataLength="5" itemsPerPage="5">
-    <sgds-data-table-row>
-      <sgds-data-table-head>ID</sgds-data-table-head>
-      <sgds-data-table-head>Item</sgds-data-table-head>
-      <sgds-data-table-head>Category</sgds-data-table-head>
-      <sgds-data-table-head>Status</sgds-data-table-head>
-      <sgds-data-table-head textAlign="right">Amount</sgds-data-table-head>
-    </sgds-data-table-row>
-
-    <sgds-data-table-row>
-      <sgds-data-table-cell>1</sgds-data-table-cell>
-      <sgds-data-table-cell>Application fee</sgds-data-table-cell>
-      <sgds-data-table-cell>Service</sgds-data-table-cell>
-      <sgds-data-table-cell>Paid</sgds-data-table-cell>
-      <sgds-data-table-cell>120.00</sgds-data-table-cell>
-    </sgds-data-table-row>
-
-    <sgds-data-table-row>
-      <sgds-data-table-cell>2</sgds-data-table-cell>
-      <sgds-data-table-cell colspan="2">Support package (category merged)</sgds-data-table-cell>
-      <sgds-data-table-cell>Pending</sgds-data-table-cell>
-      <sgds-data-table-cell>240.00</sgds-data-table-cell>
-    </sgds-data-table-row>
-
-    <sgds-data-table-row>
-      <sgds-data-table-cell>3</sgds-data-table-cell>
-      <sgds-data-table-cell>Licence renewal</sgds-data-table-cell>
-      <sgds-data-table-cell>Regulatory</sgds-data-table-cell>
-      <sgds-data-table-cell>Paid</sgds-data-table-cell>
-      <sgds-data-table-cell>320.00</sgds-data-table-cell>
-    </sgds-data-table-row>
-
-    <sgds-data-table-row>
-      <sgds-data-table-cell>4</sgds-data-table-cell>
-      <sgds-data-table-cell colspan="2">Bulk order adjustment (category merged)</sgds-data-table-cell>
-      <sgds-data-table-cell>Approved</sgds-data-table-cell>
-      <sgds-data-table-cell>180.00</sgds-data-table-cell>
-    </sgds-data-table-row>
-
-    <sgds-data-table-row>
-      <sgds-data-table-cell>5</sgds-data-table-cell>
-      <sgds-data-table-cell>Maintenance</sgds-data-table-cell>
-      <sgds-data-table-cell>Service</sgds-data-table-cell>
-      <sgds-data-table-cell>In progress</sgds-data-table-cell>
-      <sgds-data-table-cell>95.00</sgds-data-table-cell>
     </sgds-data-table-row>
   </sgds-data-table>
 </div>
@@ -691,6 +618,7 @@
   document.getElementById("default-sort-row-2").rowData = { id: 4, name: "Ben", role: "Analyst" };
   document.getElementById("default-sort-row-3").rowData = { id: 1, name: "Chloe", role: "Manager" };
   document.getElementById("default-sort-row-4").rowData = { id: 3, name: "Darren", role: "Designer" };
+  document.getElementById("default-sort-head-name").sortDirection = "ascending";
 
   // Mock API-driven pagination demo for server mode table
   const serverTable = document.getElementById("server-table");
