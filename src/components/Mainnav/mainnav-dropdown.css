@@ -58,12 +58,15 @@
   line-height: var(--sgds-line-height-2-xs, 20px);
 }
 
-:host([tone="brand"]) .nav-link {
+:host([tone="brand"]) .nav-link,
+:host([tone^="gradient"]) .nav-link {
   color: var(--sgds-color-fixed-light);
 }
 
 :host([tone="brand"]) .nav-link:not(.disabled):hover,
-:host([tone="brand"]) .nav-link:not(.disabled):focus-visible {
+:host([tone="brand"]) .nav-link:not(.disabled):focus-visible,
+:host([tone^="gradient"]) .nav-link:not(.disabled):hover,
+:host([tone^="gradient"]) .nav-link:not(.disabled):focus-visible {
   color: var(--sgds-color-fixed-light);
 }
 
@@ -129,7 +132,8 @@
   color: var(--sgds-primary-color-default);
 }
 
-:host([tone="brand"]) slot[name="toggler"]::slotted(*) {
+:host([tone="brand"]) slot[name="toggler"]::slotted(*),
+:host([tone^="gradient"]) slot[name="toggler"]::slotted(*) {
   color: var(--sgds-color-fixed-light);
 }
 
