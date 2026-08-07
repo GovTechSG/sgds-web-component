@@ -25,6 +25,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - The menu is hidden by default; clicking the `toggler` slot element opens and closes it.
 - `drop` controls the direction the menu opens: `down` (default), `up`, `left`, or `right`.
 - `menuAlignRight` right-aligns the menu panel with the toggler.
+- `fullWidth` makes the toggler and menu span the full width of the parent container; the menu width matches the toggler width. Also passes `fullWidth` to the toggler slot element.
 - `noFlip` prevents the menu from auto-repositioning when it would overflow the viewport edge.
 - `close` controls when the menu auto-closes: `default` (closes on outside click or item click), `outside` (closes only on outside click), `inside` (closes only on item click).
 - `disabled` on `<sgds-dropdown>` disables the toggler and prevents the menu from opening.
@@ -71,6 +72,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 **Menu opens upward?** → `drop="up"`
 
+**Full-width dropdown spanning its container?** → Add `fullWidth`
+
 **Right-align menu with toggler?** → Add `menuAlignRight`
 
 **Prevent menu from flipping when near viewport edge?** → Add `noFlip`
@@ -113,6 +116,15 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
   });
 </script>
 
+<!-- Full-width dropdown -->
+<sgds-dropdown fullWidth>
+  <sgds-button slot="toggler" ariaLabel="Select option">
+    Select option <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+  </sgds-button>
+  <sgds-dropdown-item ariaLabel="Option A">Option A</sgds-dropdown-item>
+  <sgds-dropdown-item ariaLabel="Option B">Option B</sgds-dropdown-item>
+</sgds-dropdown>
+
 <!-- Dropdown opens upward -->
 <sgds-dropdown drop="up">
   <sgds-button slot="toggler" ariaLabel="Menu above">Menu above <sgds-icon name="chevron-up" slot="rightIcon"></sgds-icon></sgds-button>
@@ -133,6 +145,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | `menuIsOpen` | boolean | `false` | Opens the menu on first render |
 | `disabled` | boolean | `false` | Disables the toggler and prevents menu from opening |
 | `close` | `default \| outside \| inside` | `default` | When the menu auto-closes: default (outside click or item click), outside (only outside click), inside (only item click) |
+| `fullWidth` | boolean | `false` | Makes the toggler and menu span the full width of the parent; menu width matches the toggler |
 
 ### `<sgds-dropdown-item>`
 

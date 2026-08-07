@@ -1,6 +1,6 @@
 import "./sgds-web-component";
 import { SgdsDropdown, SgdsDropdownItem } from "../src/components";
-import { fixture, assert, expect, waitUntil, oneEvent, nextFrame } from "@open-wc/testing";
+import { fixture, assert, expect, waitUntil, oneEvent, nextFrame, elementUpdated } from "@open-wc/testing";
 import sinon from "sinon";
 import { html } from "lit";
 import { sendKeys, sendMouse } from "@web/test-runner-commands";
@@ -688,6 +688,64 @@ describe("sgds-dropdown", () => {
   //     expect(el.menuIsOpen).to.be.false;
   //   });
   // });
+
+  it("fullWidth attribute is forwarded to toggler", async () => {
+    const dropdown = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown fullWidth>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
+      </sgds-dropdown> `
+    );
+
+    const button = dropdown.querySelector("sgds-button");
+
+    expect(button?.hasAttribute("fullWidth")).to.be.true;
+
+    dropdown["fullWidth"] = false;
+    await elementUpdated(dropdown);
+
+    expect(button?.hasAttribute("fullWidth")).to.be.false;
+  });
+
+  it("fullWidth attribute stretches sgds-button toggler to width of sgds-dropdown", async () => {
+    const dropdown = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
+      </sgds-dropdown> `
+    );
+
+    const button = dropdown.querySelector("sgds-button")?.shadowRoot?.querySelector(".btn") as HTMLElement;
+    const dropdownWidth = getComputedStyle(dropdown).width;
+    expect(getComputedStyle(button).width).not.to.equal(dropdownWidth);
+
+    dropdown["fullWidth"] = true;
+    await elementUpdated(dropdown);
+
+    expect(getComputedStyle(button).width).to.equal(dropdownWidth);
+  });
+
+  it("fullWidth stretches the width of dropdown menu", async () => {
+    const dropdown = await fixture<SgdsDropdown>(
+      html`<sgds-dropdown>
+        <sgds-button slot="toggler">Dropdown</sgds-button>
+        <sgds-dropdown-item>slot 1</sgds-dropdown-item>
+        <sgds-dropdown-item>slot 2</sgds-dropdown-item>
+      </sgds-dropdown> `
+    );
+
+    const dropdownMenu = dropdown.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+    const dropdownWidth = getComputedStyle(dropdown).width;
+
+    expect(getComputedStyle(dropdownMenu).width).not.to.equal(dropdownWidth);
+
+    dropdown["fullWidth"] = true;
+    await elementUpdated(dropdown);
+
+    expect(getComputedStyle(dropdownMenu).width).to.equal(dropdownWidth);
+  });
 });
 
 describe("sgds-dropdown-item", () => {

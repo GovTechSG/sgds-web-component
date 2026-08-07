@@ -36,7 +36,30 @@ const SgdsSelectCloseTemplate = args => {
 
 export const SgdsSelectClose = {
   render: SgdsSelectCloseTemplate.bind({}),
-  name: "sgds-select close",
+  name: "Close",
+  args: {},
+  parameters: {
+    chromatic: { disableSnapshot: true }
+  }
+};
+
+const SgdsSelectFullWidthTemplate = args => {
+  return html`
+    <sgds-dropdown fullWidth>
+      <sgds-button slot="toggler" variant="primary" tone="brand" ariaLabel="Full Width">
+        Dropdown
+        <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+      </sgds-button>
+      <sgds-dropdown-item ariaLabel="Item #1">Item #1</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #2">Item #2</sgds-dropdown-item>
+      <sgds-dropdown-item ariaLabel="Item #3">Item #3</sgds-dropdown-item>
+    </sgds-dropdown>
+  `;
+};
+
+export const SgdsSelectFullWidth = {
+  render: SgdsSelectFullWidthTemplate.bind({}),
+  name: "Full Width",
   args: {},
   parameters: {
     chromatic: { disableSnapshot: true }
@@ -143,7 +166,7 @@ const SgdsSelectDropdownItemTemplate = args => {
 
 export const SgdsSelectDropdownItem = {
   render: SgdsSelectDropdownItemTemplate.bind({}),
-  name: "sgds-dropdown-item customisation",
+  name: "Dropdown Item Customisation",
   args: {},
   parameters: {
     chromatic: { disableSnapshot: true }

@@ -6,6 +6,14 @@ The close behaviour of `sgds-dropdown` can be modified using the `close` attribu
   <Story of={DropdownStories.SgdsSelectClose} />
 </Canvas>
 
+## Full Width
+
+`sgds-dropdown` can be set to fill the full width of its container by setting the `fullWidth` attribute to `true`. Will also pass `fullWidth` attribute to button in `toggler` slot.
+
+<Canvas of={DropdownStories.SgdsSelectFullWidth}>
+  <Story of={DropdownStories.SgdsSelectFullWidth} />
+</Canvas>
+
 ## sgds-select event
 
 The `sgds-select` event is emitted on `sgds-dropdown` whenever a non-disabled item is clicked. Use `event.detail.item` to access the selected `SgdsDropdownItem` element.
@@ -16,7 +24,7 @@ Disabled items do not emit `sgds-select`.
   <Story of={DropdownStories.SgdsSelectEvent} />
 </Canvas>
 
-## SGDS Dropdown Item Customisation
+## Dropdown Item Customisation
 
 Using SGDS utility classes, the layout of `SgdsDropdownItem` can be customised as needed.
 

@@ -12,7 +12,8 @@ export const Template = ({
   close,
   menuIsOpen,
   disabled,
-  target
+  target,
+  fullWidth
 }) => {
   return html`
     <sgds-dropdown
@@ -23,6 +24,7 @@ export const Template = ({
       close=${ifDefined(close)}
       ?menuIsOpen=${menuIsOpen}
       ?disabled=${disabled}
+      ?fullWidth=${ifDefined(fullWidth)}
     >
       <sgds-button slot="toggler" variant="primary" tone="brand" ariaLabel="Dropdown">
         Dropdown

@@ -1,8 +1,9 @@
-import { html, PropertyValueMap } from "lit";
+import { html, PropertyValueMap, PropertyValues } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { ref } from "lit/directives/ref.js";
 import { DropdownListElement } from "../../base/dropdown-list-element";
 import { watch } from "../../utils/watch";
+import { size } from "@floating-ui/dom";
 import dropdownMenuStyle from "./dropdown-menu.css";
 import dropdownStyle from "./dropdown.css";
 
@@ -37,6 +38,10 @@ export class SgdsDropdown extends DropdownListElement {
   /** Controls the close behaviour of dropdown menu. By default menu auto-closes when SgdsDropdownItem or area outside dropdown is clicked */
   @property({ type: String, reflect: true, state: false })
   close: "outside" | "default" | "inside" = "default";
+
+  /** When set, the dropdown toggler and menu will be in full width. Also passes the `fullWidth` property to the element in the `toggler` slot */
+  @property({ type: Boolean, reflect: true, state: false })
+  fullWidth = false;
 
   @queryAssignedElements({ slot: "toggler", flatten: true })
   private _toggler: Array<HTMLElement>;
@@ -81,6 +86,7 @@ export class SgdsDropdown extends DropdownListElement {
 
   async firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
+    this._updateFloatingOpts();
     if (this.menuIsOpen) {
       await this.updateFloatingPosition();
     }
@@ -94,7 +100,31 @@ export class SgdsDropdown extends DropdownListElement {
     if (button) {
       button.setAttribute("aria-haspopup", "menu");
       button.setAttribute("aria-expanded", String(this.menuIsOpen));
+      button.toggleAttribute("fullWidth", this["fullWidth"]);
     }
+  }
+
+  private _updateFloatingOpts() {
+    this.floatingOpts = {
+      middleware: this.fullWidth
+        ? [
+            size({
+              apply({ rects, elements }) {
+                elements.floating.style.width = `${rects.reference.width}px`;
+              }
+            })
+          ]
+        : []
+    };
+  }
+
+  @watch("fullWidth")
+  _handleFullWidthChage() {
+    const button = this._toggler[0];
+    if (button) {
+      button.toggleAttribute("fullWidth", this["fullWidth"]);
+    }
+    this._updateFloatingOpts();
   }
 
   @watch("menuIsOpen")
