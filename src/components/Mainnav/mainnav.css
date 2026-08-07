@@ -5,7 +5,7 @@
 
 nav {
   background-color: var(--sgds-surface-default);
-  box-shadow: 0px 2px 2px 0px rgba(14, 14, 14, 0.08);
+  box-shadow: 0px 2px 4px 0px rgba(14, 14, 14, 0.08);
   position: relative;
   z-index: var(--sgds-z-index-floating);
 }
@@ -13,20 +13,20 @@ nav {
   background-color: var(--sgds-primary-surface-default);
 }
 
-:host([tone="brand"][gradient="gradient-1"]) nav {
-  background: linear-gradient(100deg, #9510c7, #6c20c9 46%, #18499c);
+:host([tone="gradient-1"]) nav {
+  background: var(--sgds-gradient-1);
 }
 
-:host([tone="brand"][gradient="gradient-2"]) nav {
-  background: linear-gradient(100deg, #9510c7, #6c20c9 46%, #18499c);
+:host([tone="gradient-2"]) nav {
+  background: var(--sgds-gradient-2);
 }
 
-:host([tone="brand"][gradient="gradient-3"]) nav {
-  background: linear-gradient(100deg, #9510c7, #6c20c9 46%, #18499c);
+:host([tone="gradient-3"]) nav {
+  background: var(--sgds-gradient-3);
 }
 
-:host([tone="brand"][gradient="gradient-4"]) nav {
-  background: linear-gradient(100deg, #9510c7, #6c20c9 46%, #18499c);
+:host([tone="gradient-4"]) nav {
+  background: var(--sgds-gradient-4);
 }
 
 .navbar {
@@ -38,7 +38,7 @@ nav {
   padding: 0px var(--sgds-mainnav-mobile-padding-x);
   width: 100%;
   max-width: var(--sgds-mainnav-max-width, 1440px);
-  min-height: 80px;
+  min-height: var(--sgds-mainnav-height, 72px);
   margin: auto;
   font-size: var(--sgds-font-size-label-sm);
 }
@@ -55,7 +55,8 @@ nav {
   color: var(--sgds-color-default);
 }
 
-:host([tone="brand"]) .navbar-brand {
+:host([tone="brand"]) .navbar-brand,
+:host([tone^="gradient"]) .navbar-brand {
   color: var(--sgds-color-fixed-light);
 }
 
@@ -80,7 +81,7 @@ nav > .navbar-body {
   background-color: var(--sgds-surface-default);
   padding: var(--sgds-padding-md) 0px;
   border-top: var(--sgds-border-width-1) solid var(--sgds-border-color-translucent);
-  box-shadow: 0px 2px 2px 0px rgba(14, 14, 14, 0.08);
+  box-shadow: 0px 2px 4px 0px rgba(14, 14, 14, 0.08);
   transition: transform 0.2s ease-in-out;
 }
 
@@ -105,7 +106,8 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   align-self: center;
 }
 
-:host([tone="brand"]) .navbar-toggler {
+:host([tone="brand"]) .navbar-toggler,
+:host([tone^="gradient"]) .navbar-toggler {
   color: var(--sgds-color-fixed-light);
 }
 

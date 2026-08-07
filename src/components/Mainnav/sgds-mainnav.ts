@@ -1,5 +1,5 @@
 import { provide } from "@lit/context";
-import { html, PropertyValueMap } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -16,6 +16,7 @@ import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
 import SgdsMainnavItem from "./sgds-mainnav-item";
 import { HasSlotController } from "../../utils/slot";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
+export type MainnavTone = "default" | "brand" | "gradient-1" | "gradient-2" | "gradient-3" | "gradient-4";
 
 const SIZES = {
   sm: SM_BREAKPOINT,
@@ -81,10 +82,7 @@ export class SgdsMainnav extends SgdsElement {
   brandHref = "";
 
   @property({ type: String, reflect: true })
-  tone: "default" | "brand" = "default";
-
-  @property({ type: String, reflect: true })
-  gradient: "none" | "gradient-1" | "gradient-2" | "gradient-3" | "gradient-4" = "none";
+  tone: MainnavTone = "default";
 
   private collapseId = genId("mainnav", "collapse");
 
@@ -330,6 +328,7 @@ export class SgdsMainnav extends SgdsElement {
             name=${this.expanded ? "cross" : "menu"}
             variant="ghost"
             size="sm"
+            tone=${this.tone !== "default" ? "fixed-light" : nothing}
             class="navbar-toggler"
             @click=${this._handleSummaryClick}
             aria-controls="${this.collapseId}"
