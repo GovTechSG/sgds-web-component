@@ -109,25 +109,29 @@
   line-height: var(--sgds-line-height-2-xs, 20px);
 }
 
-:host([tone="brand"]) ::slotted(*) {
+:host([tone="brand"]) ::slotted(*),
+:host([tone^="gradient"]) ::slotted(*) {
   --sgds-link-color-default: var(--sgds-color-fixed-light);
   --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
   color: var(--sgds-color-fixed-light) !important;
 }
 
-:host([tone="brand"]:not([disabled])[active]) ::slotted(*) {
+:host([tone="brand"]:not([disabled])[active]) ::slotted(*),
+:host([tone^="gradient"]:not([disabled])[active]) ::slotted(*) {
   --sgds-link-color-default: var(--sgds-color-fixed-light);
   --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
   color: var(--sgds-color-fixed-light) !important;
   border-color: var(--sgds-color-fixed-light);
 }
 
-:host([tone="brand"]:not([disabled]):not([active])) ::slotted(a:hover) {
+:host([tone="brand"]:not([disabled]):not([active])) ::slotted(a:hover),
+:host([tone^="gradient"]:not([disabled]):not([active])) ::slotted(a:hover) {
   --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
   color: var(--sgds-color-fixed-light) !important;
 }
 
-:host([tone="brand"]:not([disabled])[active]) ::slotted(a:hover) {
+:host([tone="brand"]:not([disabled])[active]) ::slotted(a:hover),
+:host([tone^="gradient"]:not([disabled])[active]) ::slotted(a:hover) {
   --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
   color: var(--sgds-color-fixed-light) !important;
 }
