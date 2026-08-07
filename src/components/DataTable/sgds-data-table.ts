@@ -440,7 +440,6 @@ export class SgdsDataTable extends SgdsElement {
     const displayStart = total === 0 ? 0 : start + 1;
     const showNoData = !this.isLoading && this.tableRows.length === 0;
     const showFooter = total !== 0;
-    const showPagination = total > this.itemsPerPage && !this.isLoading;
 
     return html`
       <div class="data-table">
@@ -456,19 +455,17 @@ export class SgdsDataTable extends SgdsElement {
         ${showFooter
           ? html`<div class="footer">
               ${this.footerText || html`<span>Showing ${displayStart} to ${end} of ${total} results</span>`}
-              ${showPagination
-                ? html`<sgds-pagination
-                    .dataLength=${total}
-                    .currentPage=${this.currentPage}
-                    .itemsPerPage=${this.itemsPerPage}
-                    .variant=${this.paginationVariant}
-                    size="sm"
-                    @sgds-page-change=${(e: CustomEvent<ISgdsPaginationPageChangeEventDetail>) => {
-                      this.currentPage = e.detail.currentPage;
-                      this.emit("sgds-page-change");
-                    }}
-                  ></sgds-pagination>`
-                : nothing}
+              <sgds-pagination
+                .dataLength=${total}
+                .currentPage=${this.currentPage}
+                .itemsPerPage=${this.itemsPerPage}
+                .variant=${this.paginationVariant}
+                size="sm"
+                @sgds-page-change=${(e: CustomEvent<ISgdsPaginationPageChangeEventDetail>) => {
+                  this.currentPage = e.detail.currentPage;
+                  this.emit("sgds-page-change");
+                }}
+              ></sgds-pagination>
             </div>`
           : nothing}
       </div>

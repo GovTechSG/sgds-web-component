@@ -34,7 +34,7 @@
 .loading {
   display: block;
   padding: var(--sgds-padding-sm) var(--sgds-padding-md);
-  border-top: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
 
 .loading-grid {
