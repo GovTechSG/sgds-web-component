@@ -52,6 +52,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Advanced Considerations
 
+- **`tone` prop**: controls the visual theme of the navigation bar. Use `"brand"` for a solid primary-colour background, or `"gradient-1"` through `"gradient-4"` for gradient backgrounds. All non-default tones render text and icons in fixed-light (white). When using a non-default tone, pair with `fluid` for a full-width edge-to-edge appearance.
+- **`start` slot**: use for items that appear before the brand area (e.g. a hamburger menu icon-button for sidebar toggling in console layouts).
 - **`non-collapsible` slot**: use for items that must always be visible (e.g. a language toggle icon) — these are not hidden when the nav collapses.
 - **`end` slot collapse behaviour**: items in `end` collapse into the hamburger menu alongside default slot items — if an item must stay visible on mobile, use `non-collapsible` instead.
 - **`<sgds-mainnav-dropdown>` API**: inherits `<sgds-dropdown>` properties — see [dropdown.md](dropdown.md) for `active`, `menuIsOpen`, `close`, and `drop` options.
@@ -78,8 +80,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 **Brand logo link?** → Set `brandHref` to the target URL
 
+**Solid brand colour?** → `tone="brand" fluid`
+
+**Gradient background?** → `tone="gradient-1"` (or `gradient-2`, `gradient-3`, `gradient-4`) with `fluid`
+
 ```html
-<!-- Full mainnav example -->
+<!-- Default mainnav example -->
 <sgds-mainnav brandHref="/">
   <img slot="brand" alt="Site logo" width="130" src="/logo.svg" />
 
@@ -107,12 +113,23 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 </sgds-mainnav>
 ```
 
+```html
+<!-- Mainnav with gradient tone -->
+<sgds-mainnav tone="gradient-1" fluid>
+  <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+  <img slot="brand" alt="Site logo" width="130" src="/logo.svg" />
+  <sgds-mainnav-item slot="end"><a href="/settings">Settings</a></sgds-mainnav-item>
+  <sgds-button slot="end" variant="ghost" tone="fixed-light">Login</sgds-button>
+</sgds-mainnav>
+```
+
 ## API Summary
 
 ### `<sgds-mainnav>`
 
 | Attribute | Type | Default | Purpose |
 |---|---|---|---|
+| `tone` | `default \| brand \| gradient-1 \| gradient-2 \| gradient-3 \| gradient-4` | `default` | Visual theme — `brand` uses primary surface colour; `gradient-*` uses a gradient background |
 | `expand` | `sm \| md \| lg \| xl \| xxl \| always \| never` | `lg` | Breakpoint below which the nav collapses |
 | `brandHref` | string | `""` | URL for the brand logo link |
 | `fluid` | boolean | `false` | Uses a full-width container instead of a fixed-width one |
@@ -140,6 +157,7 @@ Also inherits `<sgds-dropdown>` properties — see **[components-dropdown](dropd
 
 | Slot | Purpose |
 |---|---|
+| `start` | Items before the brand area (e.g. hamburger icon-button for sidebar toggle) |
 | `brand` | Brand logo image |
 | *(default)* | `<sgds-mainnav-item>` and `<sgds-mainnav-dropdown>` elements |
 | `end` | Items right-aligned in the navbar; also collapses into the hamburger menu |
