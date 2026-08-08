@@ -33,7 +33,7 @@ nav {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: var(--sgds-gap-xs);
   padding: 0px var(--sgds-mainnav-mobile-padding-x);
   width: 100%;
@@ -104,6 +104,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
 .navbar-toggler {
   align-self: center;
+  margin-left: auto;
 }
 
 :host([tone="brand"]) .navbar-toggler,

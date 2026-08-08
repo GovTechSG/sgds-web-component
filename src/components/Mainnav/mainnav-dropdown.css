@@ -58,16 +58,44 @@
   line-height: var(--sgds-line-height-2-xs, 20px);
 }
 
-:host([tone="brand"]) .nav-link,
-:host([tone^="gradient"]) .nav-link {
+:host([tone="brand"][expand="always"]) .nav-link,
+:host([tone^="gradient"][expand="always"]) .nav-link {
   color: var(--sgds-color-fixed-light);
 }
 
-:host([tone="brand"]) .nav-link:not(.disabled):hover,
-:host([tone="brand"]) .nav-link:not(.disabled):focus-visible,
-:host([tone^="gradient"]) .nav-link:not(.disabled):hover,
-:host([tone^="gradient"]) .nav-link:not(.disabled):focus-visible {
-  color: var(--sgds-color-fixed-light);
+@media screen and (min-width: 512px) {
+  :host([tone="brand"][expand="sm"]) .nav-link,
+  :host([tone^="gradient"][expand="sm"]) .nav-link {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :host([tone="brand"][expand="md"]) .nav-link,
+  :host([tone^="gradient"][expand="md"]) .nav-link {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :host([tone="brand"][expand="lg"]) .nav-link,
+  :host([tone^="gradient"][expand="lg"]) .nav-link {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :host([tone="brand"][expand="xl"]) .nav-link,
+  :host([tone^="gradient"][expand="xl"]) .nav-link {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :host([tone="brand"][expand="xxl"]) .nav-link,
+  :host([tone^="gradient"][expand="xxl"]) .nav-link {
+    color: var(--sgds-color-fixed-light);
+  }
 }
 
 .nav-link:not(.disabled).active,
@@ -132,9 +160,44 @@
   color: var(--sgds-primary-color-default);
 }
 
-:host([tone="brand"]) slot[name="toggler"]::slotted(*),
-:host([tone^="gradient"]) slot[name="toggler"]::slotted(*) {
+:host([tone="brand"][expand="always"]) slot[name="toggler"]::slotted(*),
+:host([tone^="gradient"][expand="always"]) slot[name="toggler"]::slotted(*) {
   color: var(--sgds-color-fixed-light);
+}
+
+@media screen and (min-width: 512px) {
+  :host([tone="brand"][expand="sm"]) slot[name="toggler"]::slotted(*),
+  :host([tone^="gradient"][expand="sm"]) slot[name="toggler"]::slotted(*) {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :host([tone="brand"][expand="md"]) slot[name="toggler"]::slotted(*),
+  :host([tone^="gradient"][expand="md"]) slot[name="toggler"]::slotted(*) {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :host([tone="brand"][expand="lg"]) slot[name="toggler"]::slotted(*),
+  :host([tone^="gradient"][expand="lg"]) slot[name="toggler"]::slotted(*) {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :host([tone="brand"][expand="xl"]) slot[name="toggler"]::slotted(*),
+  :host([tone^="gradient"][expand="xl"]) slot[name="toggler"]::slotted(*) {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :host([tone="brand"][expand="xxl"]) slot[name="toggler"]::slotted(*),
+  :host([tone^="gradient"][expand="xxl"]) slot[name="toggler"]::slotted(*) {
+    color: var(--sgds-color-fixed-light);
+  }
 }
 
 slot[name="toggler"]::slotted(*) {
