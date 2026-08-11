@@ -244,16 +244,16 @@ describe("sgds-mainnav", () => {
     expect(el.getAttribute("tone")).to.equal("brand");
   });
 
-  it("gradient prop reflects as attribute and defaults to 'none'", async () => {
+  it("tone prop defaults to 'default'", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
-    expect(el.gradient).to.equal("none");
-    expect(el.getAttribute("gradient")).to.equal("none");
+    expect(el.tone).to.equal("default");
+    expect(el.getAttribute("tone")).to.equal("default");
   });
 
-  it("gradient='gradient-1' reflects as attribute", async () => {
-    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav gradient="gradient-1"></sgds-mainnav>`);
-    expect(el.gradient).to.equal("gradient-1");
-    expect(el.getAttribute("gradient")).to.equal("gradient-1");
+  it("tone='gradient-1' reflects as attribute", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav tone="gradient-1"></sgds-mainnav>`);
+    expect(el.tone).to.equal("gradient-1");
+    expect(el.getAttribute("tone")).to.equal("gradient-1");
   });
 
   it("slotchange on default slot propagates tone attribute to slotted items", async () => {
@@ -525,4 +525,27 @@ describe("sgds-mainnav-dropdown", () => {
     expect(stubHide.called).to.be.true;
     stubHide.restore();
   }); // retries 1 time as occasionally fails with timeout (CI or local)
+
+  describe("togglerIconName", () => {
+    it("defaults to 'menu' icon name on the toggler button", async () => {
+      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="never"></sgds-mainnav>`);
+      const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
+      expect(toggler.getAttribute("name")).to.equal("menu");
+    });
+
+    it("forwards custom icon name to the toggler button", async () => {
+      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="never" togglerIconName="hamburger"></sgds-mainnav>`);
+      const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
+      expect(toggler.getAttribute("name")).to.equal("hamburger");
+    });
+
+    it("still shows 'cross' icon when expanded regardless of togglerIconName", async () => {
+      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="never" togglerIconName="hamburger"></sgds-mainnav>`);
+      const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
+      toggler.click();
+      await elementUpdated(el);
+      await aTimeout(500);
+      expect(toggler.getAttribute("name")).to.equal("cross");
+    });
+  });
 });

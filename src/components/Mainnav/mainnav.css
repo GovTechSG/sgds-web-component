@@ -300,6 +300,11 @@ slot[name="non-collapsible"].non-collapsible-empty {
   display: none;
 }
 
+:host([tone="brand"]) slot[name="non-collapsible"]::slotted(*),
+:host([tone^="gradient"]) slot[name="non-collapsible"]::slotted(*) {
+  color: var(--sgds-color-fixed-light);
+}
+
 .slot-end {
   display: flex;
   margin-left: auto;
