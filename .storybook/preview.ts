@@ -9,7 +9,6 @@ import "./utility.css";
 import "./gt-themes.css";
 import "./global.css";
 import sgdsTheme from "./sgdsTheme";
-import { htmlToReact } from "./addons/react-source/htmlToReact";
 import "./addons/react-source/docs-tabs-inject";
 
 export const setCustomElementsManifestWithOptions = (
@@ -46,14 +45,7 @@ export const parameters = {
       title: "Table of Contents",
       disable: false
     },
-    source: {
-      transform: (code: string) => {
-        if (!code.includes("sgds-")) return code;
-        if (code.includes("<script")) return code;
-        const reactCode = htmlToReact(code);
-        return `${code}\n\n// ─── React ───────────────────────────────────────\n\n${reactCode}`;
-      }
-    }
+    source: {}
   },
   viewport: {
     viewports: {
