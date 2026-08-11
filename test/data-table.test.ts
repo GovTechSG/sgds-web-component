@@ -524,7 +524,7 @@ describe("<sgds-data-table>", () => {
     expect(pagination?.variant).to.equal("number");
   });
 
-  it("shows loading footer without pagination while isLoading is true", async () => {
+  it("shows loading footer with pagination while isLoading is true", async () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table mode="server" ?isLoading=${true} dataLength="10" itemsPerPage="5" currentPage="1">
         <sgds-data-table-row>
@@ -533,10 +533,11 @@ describe("<sgds-data-table>", () => {
       </sgds-data-table>
     `);
     await elementUpdated(el);
+    await elementUpdated(el);
 
     expect(el.shadowRoot?.querySelector(".footer")).to.exist;
     expect(el.shadowRoot?.querySelector(".footer span")?.textContent).to.contain("Showing");
-    expect(el.shadowRoot?.querySelector("sgds-pagination")).to.not.exist;
+    expect(el.shadowRoot?.querySelector("sgds-pagination")).to.exist;
   });
 
   it("emits sgds-sort in server mode without locally sorting rows", async () => {
