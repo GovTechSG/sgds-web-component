@@ -61,18 +61,13 @@ export class SgdsMainnav extends SgdsElement {
   @state()
   private expanding = false;
 
-  /** @internal */
-  @query("nav") nav: HTMLElement;
-  /** @internal */
-  @query(".navbar") navbar: HTMLElement;
-  /** @internal */
-  @query(".navbar-toggler") header: HTMLElement;
-  /** @internal */
-  @query(".navbar-body") body: HTMLElement;
-  /** @internal */
-  @query(".navbar-nav-scroll") navScroll: HTMLElement;
-  /** @internal */
-  @query("slot[name='non-collapsible']") nonCollapsibleSlot: HTMLSlotElement;
+  @query("nav") private nav: HTMLElement;
+  @query(".navbar") private navbar: HTMLElement;
+  @query(".navbar-toggler") private header: HTMLElement;
+  @query(".navbar-body") private body: HTMLElement;
+  @query(".navbar-nav-scroll") private navScroll: HTMLElement;
+  @query("slot[name='non-collapsible']") private nonCollapsibleSlot: HTMLSlotElement;
+  @query("slot[name='end']") private endSlot: HTMLSlotElement;
 
   /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
   @property({ type: Boolean }) hasNonCollapsibleSlot = false;
@@ -94,14 +89,15 @@ export class SgdsMainnav extends SgdsElement {
   @property({ type: Boolean, reflect: true })
   fluid = false;
 
-  /** @internal */
-  @state()
-  breakpointReached = false;
+  /** The icon name for the mobile menu toggle button */
+  @property({ type: String })
+  togglerIconName = "menu";
 
-  /** @internal */
+  @state()
+  private breakpointReached = false;
+
   @queryAssignedElements() private defaultNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
 
-  /** @internal */
   @queryAssignedElements({ slot: "end" }) private endNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
 
   /** @internal */
@@ -196,6 +192,8 @@ export class SgdsMainnav extends SgdsElement {
   private async _handleMobileNav() {
     if (!this.nav) return;
 
+    // Move end slot back inside navbar-nav for mobile menu
+    this.navScroll?.appendChild(this.endSlot);
     this.nav.appendChild(this.body);
     await customElements.whenDefined("sgds-masthead");
 
@@ -208,6 +206,8 @@ export class SgdsMainnav extends SgdsElement {
 
   private _handleDesktopNav() {
     this.navbar?.insertBefore(this.body, this.nonCollapsibleSlot);
+    // Move end slot after non-collapsible so DOM order is: body → non-collapsible → end
+    this.navbar?.insertBefore(this.endSlot, this.header);
   }
 
   private async _animateToShow() {
@@ -289,10 +289,16 @@ export class SgdsMainnav extends SgdsElement {
     });
   }
 
+  private _handleNonCollapsibleSlotChange(e: Event) {
+    const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    childElements.forEach(el => {
+      el.setAttribute("expand", this.expand);
+    });
+  }
+
   // assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
   private _handleSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-
     childElements.forEach(e => {
       e.setAttribute("name", e.tagName.toLowerCase());
       e.setAttribute("expand", this.expand);
@@ -323,9 +329,10 @@ export class SgdsMainnav extends SgdsElement {
           <slot
             name="non-collapsible"
             class=${classMap({ "non-collapsible-empty": !this.hasNonCollapsibleSlot })}
+            @slotchange=${this._handleNonCollapsibleSlotChange}
           ></slot>
           <sgds-icon-button
-            name=${this.expanded ? "cross" : "menu"}
+            name=${this.expanded ? "cross" : this.togglerIconName}
             variant="ghost"
             size="sm"
             tone=${this.tone !== "default" ? "fixed-light" : nothing}

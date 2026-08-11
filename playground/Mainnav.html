@@ -9,17 +9,16 @@
     height: 40px;
     border-radius: 50%;
     background-color: #9A74CF;
-  }
+  }                                                                                                                           
+     
 </style>
 
-<!-- <sgds-mainnav>
+<sgds-mainnav>
   <div slot="brand">Logo</div>
   <sgds-mainnav-item active>
     <a href="#">Home</a>
   </sgds-mainnav-item>
   <sgds-mainnav-item disabled><a href="#">About</a></sgds-mainnav-item>
-  <sgds-mainnav-item slot="end" class="test test2"><a href="#">Info</a></sgds-mainnav-item>
-  <sgds-mainnav-item slot="end" id="night-theme"><a href="#"><sgds-icon name="moon"></sgds-icon></a></sgds-mainnav-item>
   <sgds-mainnav-dropdown ariaLabel="Dropdown menu">
     <span slot="toggler">Dropdown</span>
     <sgds-dropdown-item disabled><a href="https://www.google.com/">Item 1</a></sgds-dropdown-item>
@@ -27,17 +26,8 @@
     <sgds-dropdown-item active><a href="#">Item 3</a></sgds-dropdown-item>
     <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
     <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
   </sgds-mainnav-dropdown>
+  <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm"></sgds-icon-button>
   <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
     <span slot="toggler">Dropdown</span>
     <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
@@ -45,27 +35,23 @@
     <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
   </sgds-mainnav-dropdown>
   <sgds-button slot="end">Login</sgds-button>
-  <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"> </dev-console-widget>
-</sgds-mainnav> -->
+</sgds-mainnav>
 
 <br/>
 <p>tone="brand"</p>
-<sgds-mainnav tone="brand" fluid>
+<sgds-mainnav tone="brand" fluid togglerIconName="three-dots-vertical">
   <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
   <div slot="brand">Logo</div>
-  <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
-  <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
-  <sgds-mainnav-item><a href="#">Services</a></sgds-mainnav-item>
-  <sgds-mainnav-item slot="end" id="night-theme"><a href="#"><sgds-icon name="moon"></sgds-icon></a></sgds-mainnav-item>
+<sgds-icon-button  variant="ghost" tone="fixed-light" slot="non-collapsible" name="moon"></sgds-icon-button>
   <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
     <div slot="toggler" class="sgds:flex sgds:flex-row sgds:items-center sgds:gap-3">
       <div id="avatar"></div>
       <div class="sgds:flex sgds:flex-col sgds:gap-text-2-xs">
-        <span class="sgds:text-body-xs sgds:font-semibold sgds:leading-3-xs sgds:text-fixed-light">Lu Khei</span>
-        <span class="sgds:text-body-xs sgds:leading-3-xs sgds:text-fixed-light">Agency (admin)</span>
+        <span class="sgds:text-body-xs sgds:font-semibold sgds:leading-3-xs">Lu Khei</span>
+        <span class="sgds:text-body-xs sgds:leading-3-xs">Agency (admin)</span>
       </div>
     </div>
-    <div class="sgds:w-70">
+    <sgds-dropdown-item>
       <div class="sgds:flex sgds:items-center sgds:gap-3 sgds:px-4 sgds:py-3">
         <span class="sgds:h-12 sgds:w-12 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
           <span class="sgds:h-full sgds:w-full sgds:block" style="background-color: #9A74CF; border-radius: 50%;"></span>
@@ -74,13 +60,11 @@
           <span class="sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-default">Lu Khei</span>
           <span class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-subtle">lkc@tech.gov.sg</span>
         </div>
-      </div>
-      <sgds-divider thickness="thin"></sgds-divider>
-      <div class="sgds:px-4 sgds:pb-1 sgds:pt-4">
-        <span class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal sgds:text-subtle">View</span>
-      </div>
+        </div>
+      </sgds-dropdown-item>
+  
       <sgds-dropdown-item arialabel="Agency view selected">
-        <span class="sgds:flex sgds:w-62 sgds:items-center sgds:justify-between sgds:gap-3 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-default"><span>Agency</span><sgds-icon name="chevron-right" size="sm"></sgds-icon></span>
+        <span class="sgds:flex sgds:items-center sgds:justify-between sgds:gap-3 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-default"><span>Agency</span><sgds-icon name="chevron-right" size="sm"></sgds-icon></span>
       </sgds-dropdown-item>
       <sgds-dropdown-item arialabel="Switch to product view">
         <span class="sgds:flex sgds:w-62 sgds:items-center sgds:justify-between sgds:gap-3 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-default"><span>Product</span></span>
@@ -107,13 +91,13 @@
 
 <br/>
 <p>tone="gradient-1"</p>
-<!-- <sgds-mainnav tone="gradient-1" fluid>
+<sgds-mainnav tone="gradient-1" fluid togglerIconName="three-dots-vertical">
   <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
   <div slot="brand">Logo</div>
   <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
   <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
   <sgds-mainnav-item><a href="#">Services</a></sgds-mainnav-item>
-  <sgds-mainnav-item slot="end" id="night-theme"><a href="#"><sgds-icon name="moon"></sgds-icon></a></sgds-mainnav-item>
+  <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
   <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
     <div slot="toggler" class="sgds:flex sgds:flex-row sgds:items-center sgds:gap-3">
       <div id="avatar"></div>
@@ -160,17 +144,17 @@
       </sgds-dropdown-item>
     </div>
   </sgds-mainnav-dropdown>
-</sgds-mainnav> -->
+</sgds-mainnav>
 
 <br/>
-<!-- <p>tone="gradient-2"</p>
-<sgds-mainnav tone="gradient-2" fluid>
+<p>tone="gradient-2"</p>
+<sgds-mainnav tone="gradient-2" fluid togglerIconName="three-dots-vertical">
   <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
   <div slot="brand">Logo</div>
   <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
   <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
   <sgds-mainnav-item><a href="#">Services</a></sgds-mainnav-item>
-  <sgds-mainnav-item slot="end" id="night-theme"><a href="#"><sgds-icon name="moon"></sgds-icon></a></sgds-mainnav-item>
+  <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
   <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
     <div slot="toggler" class="sgds:flex sgds:flex-row sgds:items-center sgds:gap-3">
       <div id="avatar"></div>
@@ -221,13 +205,13 @@
 
 <br/>
 <p>tone="gradient-3"</p>
-<sgds-mainnav tone="gradient-3" fluid>
+<sgds-mainnav tone="gradient-3" fluid togglerIconName="three-dots-vertical">
   <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
   <div slot="brand">Logo</div>
   <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
   <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
   <sgds-mainnav-item><a href="#">Services</a></sgds-mainnav-item>
-  <sgds-mainnav-item slot="end" id="night-theme"><a href="#"><sgds-icon name="moon"></sgds-icon></a></sgds-mainnav-item>
+  <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
   <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
     <div slot="toggler" class="sgds:flex sgds:flex-row sgds:items-center sgds:gap-3">
       <div id="avatar"></div>
@@ -278,13 +262,13 @@
 
 <br/>
 <p>tone="gradient-4"</p>
-<sgds-mainnav tone="gradient-4" fluid>
+<sgds-mainnav tone="gradient-4" fluid togglerIconName="three-dots-vertical">
   <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
   <div slot="brand">Logo</div>
   <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
   <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
   <sgds-mainnav-item><a href="#">Services</a></sgds-mainnav-item>
-  <sgds-mainnav-item slot="end" id="night-theme"><a href="#"><sgds-icon name="moon"></sgds-icon></a></sgds-mainnav-item>
+  <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
   <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
     <div slot="toggler" class="sgds:flex sgds:flex-row sgds:items-center sgds:gap-3">
       <div id="avatar"></div>
@@ -331,4 +315,4 @@
       </sgds-dropdown-item>
     </div>
   </sgds-mainnav-dropdown>
-</sgds-mainnav> -->
+</sgds-mainnav>
