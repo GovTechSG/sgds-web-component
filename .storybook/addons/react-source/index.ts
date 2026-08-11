@@ -1,0 +1,1 @@
+export { htmlToReact } from "./htmlToReact";
