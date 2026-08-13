@@ -97,33 +97,30 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     return this._mixinGetValidationMessage();
   }
 
-  private async _handleChange() {
+  private async _handleChange(e: Event) {
+    e.stopPropagation();
     const sgdsInput = await this._sgdsInput;
     if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
       sgdsInput.value = "0";
     }
     this.value = parseInt(sgdsInput.value);
     this._mixinSetFormValue();
+    this.emit("sgds-change");
     if (this._mixinShouldSkipSgdsValidation()) return;
     this._mixinValidate(sgdsInput.input);
     this.invalid = !this._mixinReportValidity();
   }
-  private async _handleInputChange() {
+  private async _handleInputChange(e: Event) {
+    e.stopPropagation();
     const sgdsInput = await this._sgdsInput;
-    if (this._mixinShouldSkipSgdsValidation()) {
-      if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
-        sgdsInput.value = "0";
-      }
-      this.value = parseInt(sgdsInput.value);
-      this._mixinSetFormValue();
-      return;
-    }
-    this.invalid = false;
     if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
       sgdsInput.value = "0";
     }
     this.value = parseInt(sgdsInput.value);
     this._mixinSetFormValue();
+    this.emit("sgds-input");
+    if (this._mixinShouldSkipSgdsValidation()) return;
+    this.invalid = false;
     this._mixinValidate(sgdsInput.input);
   }
 
