@@ -98,3 +98,40 @@ export const NoValidate = {
   args: {},
   parameters: {}
 };
+
+const EventEmissionTemplate = () =>
+  html`
+    <sgds-quantity-toggle
+      label="Quantity"
+      hintText="Type a number or use +/- buttons, then check the output below"
+      id="event-demo-qt"
+    ></sgds-quantity-toggle>
+    <div class="sgds:mt-layout-xs">
+      <strong>Event log:</strong>
+      <pre id="event-demo-log" style="background: var(--sgds-color-gray-100); padding: 0.5rem; min-height: 80px; overflow-y: auto; max-height: 200px;"></pre>
+    </div>
+    <script>
+      const eventDemoQt = document.querySelector("#event-demo-qt");
+      const eventDemoLog = document.querySelector("#event-demo-log");
+
+      eventDemoQt.addEventListener("sgds-input", e => {
+        const line = document.createElement("div");
+        line.textContent = "[sgds-input] value = " + e.target.value;
+        eventDemoLog.prepend(line);
+      });
+
+      eventDemoQt.addEventListener("sgds-change", e => {
+        const line = document.createElement("div");
+        line.textContent = "[sgds-change] value = " + e.target.value;
+        line.style.color = "var(--sgds-color-primary)";
+        eventDemoLog.prepend(line);
+      });
+    </script>
+  `;
+
+export const EventEmission = {
+  render: EventEmissionTemplate.bind({}),
+  name: "Event Emission",
+  args: {},
+  parameters: {}
+};
