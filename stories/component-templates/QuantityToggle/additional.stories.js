@@ -108,7 +108,10 @@ const EventEmissionTemplate = () =>
     ></sgds-quantity-toggle>
     <div class="sgds:mt-layout-xs">
       <strong>Event log:</strong>
-      <pre id="event-demo-log" style="background: var(--sgds-color-gray-100); padding: 0.5rem; min-height: 80px; overflow-y: auto; max-height: 200px;"></pre>
+      <pre
+        id="event-demo-log"
+        style="background: var(--sgds-color-gray-100); padding: 0.5rem; min-height: 80px; overflow-y: auto; max-height: 200px;"
+      ></pre>
     </div>
     <script>
       const eventDemoQt = document.querySelector("#event-demo-qt");
