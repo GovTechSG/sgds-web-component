@@ -33,21 +33,24 @@ describe("sgds-mainnav", () => {
           >
             <slot name="brand"></slot>
           </a>
-          <slot
-            class="non-collapsible-empty"
-            name="non-collapsible"
-          >
-          </slot>
-          <sgds-icon-button
-            aria-expanded="false"
-            class="navbar-toggler"
-            name="menu"
-            size="sm"
-            target="_self"
-            tone="brand"
-            variant="ghost"
-          >
-          </sgds-icon-button>
+          <div class="navbar-end">
+            <slot
+              class="non-collapsible-empty"
+              name="non-collapsible"
+            >
+            </slot>
+            <slot name="profile">
+            </slot>
+            <sgds-icon-button
+              aria-expanded="false"
+              class="navbar-toggler"
+              name="menu"
+              size="sm"
+              target="_self"
+              variant="ghost"
+            >
+            </sgds-icon-button>
+          </div>
         </div>
         <div
           class="navbar-body navbar-collapse"
@@ -127,7 +130,7 @@ describe("sgds-mainnav", () => {
   // initial window.innerWidth = 800
   // LG_BREAKPOINT = 1024
   // since window.innerWidth < LG_BREAKPOINT --> expect non-collapsible slot to be .order-2 (see first test)
-  it("when expand=lg and window resize event occurs to above breakpoint, it inserts .navbar-body before non-collapsible slot, and end slot has class .slot-end", async () => {
+  it("when expand=lg and window resize event occurs to above breakpoint, it inserts .navbar-body before .navbar-end, and end slot has class .slot-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
@@ -146,7 +149,7 @@ describe("sgds-mainnav", () => {
   });
   //SM_BREAKPOINT = 512
   // now window.innerWidth = 1030
-  it("when expand=sm and window resize event occurs to above breakpoint, it inserts .navbar-body before non-collapsible slot, and end slot has class slot-end ", async () => {
+  it("when expand=sm and window resize event occurs to above breakpoint, it inserts .navbar-body before .navbar-end, and end slot has class slot-end ", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="sm"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
@@ -328,6 +331,102 @@ describe("sgds-mainnav", () => {
     await el.updateComplete;
     expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("expand", "lg");
     expect(el.querySelector("sgds-mainnav-item")).not.to.have.attribute("name");
+  });
+
+  describe("profile slot", () => {
+    it("renders profile slot inside .navbar-end", async () => {
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav>
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
+      expect(navbarEnd?.querySelector("slot[name='profile']")).to.exist;
+    });
+
+    it("profile slot propagates tone and expand attributes to slotted items", async () => {
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav tone="brand" expand="xl">
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      expect(el.querySelector("sgds-mainnav-dropdown[slot='profile']")).to.have.attribute("tone", "brand");
+      expect(el.querySelector("sgds-mainnav-dropdown[slot='profile']")).to.have.attribute("expand", "xl");
+    });
+
+    it("in mobile view, profile slot moves into navbar-nav-scroll as the first item", async () => {
+      Object.defineProperty(window, "innerWidth", {
+        writable: true,
+        configurable: true,
+        value: 300
+      });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav expand="lg">
+          <sgds-mainnav-item><a href="#">Home</a></sgds-mainnav-item>
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const navScroll = el.shadowRoot?.querySelector(".navbar-nav-scroll");
+      const firstChild = navScroll?.firstElementChild;
+      expect(firstChild?.getAttribute("name")).to.equal("profile");
+    });
+
+    it("on resize to desktop, profile slot moves back into .navbar-end", async () => {
+      Object.defineProperty(window, "innerWidth", {
+        writable: true,
+        configurable: true,
+        value: 300
+      });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav expand="lg">
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      // Now resize to desktop
+      Object.defineProperty(window, "innerWidth", {
+        writable: true,
+        configurable: true,
+        value: 1030
+      });
+      window.dispatchEvent(new Event("resize"));
+      await el.updateComplete;
+      const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
+      expect(navbarEnd?.querySelector("slot[name='profile']")).to.exist;
+    });
+  });
+
+  describe("start slot", () => {
+    it("renders start slot before the brand", async () => {
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav>
+          <sgds-icon-button name="menu" slot="start" variant="ghost" size="sm"></sgds-icon-button>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const navbar = el.shadowRoot?.querySelector(".navbar");
+      const startSlot = navbar?.querySelector("slot[name='start']");
+      const brand = navbar?.querySelector(".navbar-brand");
+      expect(startSlot).to.exist;
+      // start slot should come before brand in DOM order
+      const children = Array.from(navbar?.children || []);
+      const startIndex = children.indexOf(startSlot as Element);
+      const brandIndex = children.indexOf(brand as Element);
+      expect(startIndex).to.be.lessThan(brandIndex);
+    });
   });
 });
 
@@ -534,13 +633,17 @@ describe("sgds-mainnav-dropdown", () => {
     });
 
     it("forwards custom icon name to the toggler button", async () => {
-      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="never" togglerIconName="hamburger"></sgds-mainnav>`);
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav expand="never" togglerIconName="hamburger"></sgds-mainnav>`
+      );
       const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
       expect(toggler.getAttribute("name")).to.equal("hamburger");
     });
 
     it("still shows 'cross' icon when expanded regardless of togglerIconName", async () => {
-      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="never" togglerIconName="hamburger"></sgds-mainnav>`);
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav expand="never" togglerIconName="hamburger"></sgds-mainnav>`
+      );
       const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
       toggler.click();
       await elementUpdated(el);

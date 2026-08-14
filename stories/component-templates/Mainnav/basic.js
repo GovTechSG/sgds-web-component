@@ -3,9 +3,27 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { allModes } from "../../../.storybook/modes";
 import { userEvent } from "@storybook/test";
 
-export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen, close, target, fluid }) => {
+export const Template = ({
+  expand,
+  brandHref,
+  active,
+  href,
+  disabled,
+  menuIsOpen,
+  close,
+  target,
+  fluid,
+  tone,
+  togglerIconName
+}) => {
   return html`
-    <sgds-mainnav expand=${ifDefined(expand)} brandHref=${ifDefined(brandHref)} ?fluid=${fluid}>
+    <sgds-mainnav
+      expand=${ifDefined(expand)}
+      brandHref=${ifDefined(brandHref)}
+      ?fluid=${fluid}
+      tone=${ifDefined(tone)}
+      togglerIconName=${ifDefined(togglerIconName)}
+    >
       <img alt="sgds logo" width="130" src="/logo.svg" slot="brand" />
       <sgds-mainnav-item ?active=${active} ?disabled=${disabled}>
         <a href="#">ArgsTable Controlled</a>
