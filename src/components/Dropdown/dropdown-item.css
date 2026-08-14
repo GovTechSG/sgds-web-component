@@ -40,6 +40,17 @@
   pointer-events: none;
 }
 
+.dropdown-item.readonly {
+  cursor: default;
+}
+
+.dropdown-item.readonly:hover,
+.dropdown-item.readonly:focus,
+.dropdown-item.readonly:focus-visible {
+  background-color: var(--sgds-bg-transparent);
+  outline: none;
+}
+
 ::slotted(*) {
   display: flex;
   gap: var(--sgds-gap-sm);
