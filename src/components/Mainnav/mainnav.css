@@ -104,7 +104,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
 .navbar-toggler {
   align-self: center;
-  margin-left: auto;
 }
 
 :host([tone="brand"]) .navbar-toggler,
@@ -282,6 +281,13 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
 /* slot */
 
+.navbar-end {
+  display: flex;
+  align-items: center;
+  gap: var(--sgds-gap-xs);
+  margin-left: auto;
+}
+
 slot[name="start"] {
   display: flex;
   align-items: center;
@@ -289,11 +295,20 @@ slot[name="start"] {
 }
 
 
+slot[name="profile"] {
+  display: flex;
+  align-self: stretch;
+}
+
+nav > .navbar-body slot[name="profile"] {
+  display: block;
+  width: 100%;
+}
+
 slot[name="non-collapsible"] {
   display: flex;
   gap: var(--sgds-spacer-4);
   align-items: center;
-  margin-left: auto;
 }
 
 slot[name="non-collapsible"].non-collapsible-empty {

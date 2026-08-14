@@ -40,6 +40,7 @@ const SIZES = {
  * @slot start - Elements in this slot will be positioned to the left of the brand.
  * @slot end - Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.
  * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
+ * @slot profile - Profile slot positioned at the far right in desktop. In mobile, moves into the collapsed menu as the first item.
  * @slot non-collapsible - Elements in this slot will not be collapsed
  *
  */
@@ -66,8 +67,8 @@ export class SgdsMainnav extends SgdsElement {
   @query(".navbar-toggler") private header: HTMLElement;
   @query(".navbar-body") private body: HTMLElement;
   @query(".navbar-nav-scroll") private navScroll: HTMLElement;
-  @query("slot[name='non-collapsible']") private nonCollapsibleSlot: HTMLSlotElement;
-  @query("slot[name='end']") private endSlot: HTMLSlotElement;
+  @query(".navbar-end") private navbarEnd: HTMLElement;
+  @query("slot[name='profile']") private profileSlot: HTMLSlotElement;
 
   /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
   @property({ type: Boolean }) hasNonCollapsibleSlot = false;
@@ -192,8 +193,8 @@ export class SgdsMainnav extends SgdsElement {
   private async _handleMobileNav() {
     if (!this.nav) return;
 
-    // Move end slot back inside navbar-nav for mobile menu
-    this.navScroll?.appendChild(this.endSlot);
+    // Move profile slot into mobile menu as the first item
+    this.navScroll?.prepend(this.profileSlot);
     this.nav.appendChild(this.body);
     await customElements.whenDefined("sgds-masthead");
 
@@ -205,9 +206,9 @@ export class SgdsMainnav extends SgdsElement {
   }
 
   private _handleDesktopNav() {
-    this.navbar?.insertBefore(this.body, this.nonCollapsibleSlot);
-    // Move end slot after non-collapsible so DOM order is: body → non-collapsible → end
-    this.navbar?.insertBefore(this.endSlot, this.header);
+    this.navbar?.insertBefore(this.body, this.navbarEnd);
+    // Move profile slot back into navbar-end (before toggler)
+    this.navbarEnd?.insertBefore(this.profileSlot, this.header);
   }
 
   private async _animateToShow() {
@@ -289,13 +290,6 @@ export class SgdsMainnav extends SgdsElement {
     });
   }
 
-  private _handleNonCollapsibleSlotChange(e: Event) {
-    const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    childElements.forEach(el => {
-      el.setAttribute("expand", this.expand);
-    });
-  }
-
   // assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
   private _handleSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
@@ -326,22 +320,24 @@ export class SgdsMainnav extends SgdsElement {
               ></slot>
             </div>
           </div>
-          <slot
-            name="non-collapsible"
-            class=${classMap({ "non-collapsible-empty": !this.hasNonCollapsibleSlot })}
-            @slotchange=${this._handleNonCollapsibleSlotChange}
-          ></slot>
-          <sgds-icon-button
-            name=${this.expanded ? "cross" : this.togglerIconName}
-            variant="ghost"
-            size="sm"
-            tone=${this.tone !== "default" ? "fixed-light" : nothing}
-            class="navbar-toggler"
-            @click=${this._handleSummaryClick}
-            aria-controls="${this.collapseId}"
-            aria-expanded="${this.expanded}"
-            .ariaLabel=${"Toggle navigation"}
-          ></sgds-icon-button>
+          <div class="navbar-end">
+            <slot
+              name="non-collapsible"
+              class=${classMap({ "non-collapsible-empty": !this.hasNonCollapsibleSlot })}
+            ></slot>
+            <slot name="profile" @slotchange=${this._handleSlotChange}></slot>
+            <sgds-icon-button
+              name=${this.expanded ? "cross" : this.togglerIconName}
+              variant="ghost"
+              size="sm"
+              tone=${this.tone !== "default" ? "fixed-light" : nothing}
+              class="navbar-toggler"
+              @click=${this._handleSummaryClick}
+              aria-controls="${this.collapseId}"
+              aria-expanded="${this.expanded}"
+              .ariaLabel=${"Toggle navigation"}
+            ></sgds-icon-button>
+          </div>
         </div>
       </nav>
     `;
