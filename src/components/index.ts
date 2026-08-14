@@ -36,6 +36,7 @@ export * from "./Link/sgds-link";
 export * from "./Mainnav/sgds-mainnav";
 export * from "./Mainnav/sgds-mainnav-dropdown";
 export * from "./Mainnav/sgds-mainnav-item";
+export * from "./Mainnav/sgds-mainnav-profile";
 export * from "./Masthead/sgds-masthead";
 export * from "./Modal/sgds-modal";
 export * from "./OverflowMenu/sgds-overflow-menu";

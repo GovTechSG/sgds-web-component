@@ -91,9 +91,24 @@ nav > .navbar-body .navbar-nav {
   margin: auto;
 }
 
-nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown)) {
+nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown):not(sgds-mainnav-profile)) {
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
-  align-self: center;
+}
+
+/* Profile avatar slot (replaces toggler when sgds-mainnav-profile is present in mobile) */
+.profile-avatar-slot {
+  display: flex;
+  align-items: center;
+}
+
+.profile-avatar-slot::slotted(*) {
+  cursor: pointer;
+  border-radius: var(--sgds-border-radius-full);
+}
+
+.profile-avatar-slot::slotted(*:focus-visible) {
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .navbar-collapse {
@@ -327,6 +342,7 @@ slot[name="non-collapsible"].non-collapsible-empty {
   height: inherit;
   gap: var(--sgds-gap-xs);
 }
+
 
 /* there is no wildcard selector for element tag names in css */
 .slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {

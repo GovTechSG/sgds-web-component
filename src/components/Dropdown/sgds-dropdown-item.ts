@@ -27,6 +27,10 @@ export class SgdsDropdownItem extends SgdsElement {
   @property({ type: Boolean, reflect: true })
   disabled = false;
 
+  /** When true, removes interactive styles (hover, cursor) for non-navigational display items */
+  @property({ type: Boolean, reflect: true })
+  readonly = false;
+
   /** Forwards aria-label to the inner clickable element for accessibility */
   @property({ type: String })
   ariaLabel = "";
@@ -47,9 +51,10 @@ export class SgdsDropdownItem extends SgdsElement {
       <div
         class="dropdown-item ${classMap({
           disabled: this.disabled,
-          active: this.active
+          active: this.active,
+          readonly: this.readonly
         })}"
-        tabindex=${this.disabled ? "-1" : "0"}
+        tabindex=${this.disabled || this.readonly ? "-1" : "0"}
         aria-label=${ifDefined(this.ariaLabel || undefined)}
       >
         <slot></slot>

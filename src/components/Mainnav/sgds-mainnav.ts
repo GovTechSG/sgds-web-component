@@ -70,6 +70,10 @@ export class SgdsMainnav extends SgdsElement {
   @query(".navbar-end") private navbarEnd: HTMLElement;
   @query("slot[name='profile']") private profileSlot: HTMLSlotElement;
 
+  /** @internal Whether sgds-mainnav-profile is slotted in the profile slot */
+  @state()
+  private _hasProfileComponent = false;
+
   /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
   @property({ type: Boolean }) hasNonCollapsibleSlot = false;
 
@@ -149,7 +153,7 @@ export class SgdsMainnav extends SgdsElement {
   }
 
   private _handleClickOutOfElement(e: MouseEvent, self: HTMLElement) {
-    if (!e.composedPath().includes(self) && !e.composedPath().includes(this.header)) {
+    if (!e.composedPath().includes(self) && !(this.header && e.composedPath().includes(this.header))) {
       this.hide();
     }
   }
@@ -253,7 +257,7 @@ export class SgdsMainnav extends SgdsElement {
       await this._animateToShow();
       this.expanded = true;
     } else {
-      this.header.focus();
+      this.header?.focus();
       // Hide
       await this._animateToHide();
       this.expanded = false;
@@ -300,6 +304,17 @@ export class SgdsMainnav extends SgdsElement {
     });
   }
 
+  private _handleProfileSlotChange(e: Event) {
+    const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    this._hasProfileComponent = childElements.some(
+      el => el.tagName.toLowerCase() === "sgds-mainnav-profile"
+    );
+    childElements.forEach(el => {
+      el.setAttribute("expand", this.expand);
+      el.setAttribute("tone", this.tone);
+    });
+  }
+
   render() {
     this.breakpointReached = window.innerWidth < SIZES[this.expand];
 
@@ -325,18 +340,23 @@ export class SgdsMainnav extends SgdsElement {
               name="non-collapsible"
               class=${classMap({ "non-collapsible-empty": !this.hasNonCollapsibleSlot })}
             ></slot>
-            <slot name="profile" @slotchange=${this._handleSlotChange}></slot>
-            <sgds-icon-button
-              name=${this.expanded ? "cross" : this.togglerIconName}
-              variant="ghost"
-              size="sm"
-              tone=${this.tone !== "default" ? "fixed-light" : nothing}
-              class="navbar-toggler"
-              @click=${this._handleSummaryClick}
-              aria-controls="${this.collapseId}"
-              aria-expanded="${this.expanded}"
-              .ariaLabel=${"Toggle navigation"}
-            ></sgds-icon-button>
+            <slot name="profile" @slotchange=${this._handleProfileSlotChange}></slot>
+            ${this._hasProfileComponent && this.breakpointReached
+              ? html`<slot name="profile-avatar" class="profile-avatar-slot"></slot>`
+              : nothing}
+            ${!(this._hasProfileComponent && this.breakpointReached)
+              ? html`<sgds-icon-button
+                  name=${this.expanded ? "cross" : this.togglerIconName}
+                  variant="ghost"
+                  size="sm"
+                  tone=${this.tone !== "default" ? "fixed-light" : nothing}
+                  class="navbar-toggler"
+                  @click=${this._handleSummaryClick}
+                  aria-controls="${this.collapseId}"
+                  aria-expanded="${this.expanded}"
+                  .ariaLabel=${"Toggle navigation"}
+                ></sgds-icon-button>`
+              : nothing}
           </div>
         </div>
       </nav>

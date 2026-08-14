@@ -12,7 +12,13 @@ const ToneTemplate = ({ tone }) => {
   return html`
     <sgds-mainnav tone=${tone} fluid>
       <img slot="brand" alt="logo" width="130" src="/logo-white.svg" />
-      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+      <sgds-icon-button
+        slot="non-collapsible"
+        name="moon"
+        variant="ghost"
+        tone="fixed-light"
+        size="sm"
+      ></sgds-icon-button>
     </sgds-mainnav>
   `;
 };
@@ -24,7 +30,13 @@ const ToneBrandTemplate = () => {
       <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
       <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
       <sgds-mainnav-item><a href="#">Services</a></sgds-mainnav-item>
-      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+      <sgds-icon-button
+        slot="non-collapsible"
+        name="moon"
+        variant="ghost"
+        tone="fixed-light"
+        size="sm"
+      ></sgds-icon-button>
     </sgds-mainnav>
   `;
 };
@@ -104,7 +116,7 @@ export const ProfileSlot = {
         <sgds-dropdown-item ariaLabel="Item 2"><a href="#">Service 2</a></sgds-dropdown-item>
       </sgds-mainnav-dropdown>
       <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm"></sgds-icon-button>
-      <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+      <sgds-mainnav-profile slot="profile" ariaLabel="Profile menu" close="outside">
         <div slot="toggler" class="sgds:flex sgds:flex-row sgds:items-center sgds:gap-3">
           <span class="sgds:h-10 sgds:w-10 sgds:rounded-full sgds:bg-neutral-subtle-default"></span>
           <div class="sgds:flex sgds:flex-col sgds:gap-text-2-xs">
@@ -112,13 +124,79 @@ export const ProfileSlot = {
             <span class="sgds:text-body-xs sgds:leading-3-xs">Agency (admin)</span>
           </div>
         </div>
-        <sgds-dropdown-item ariaLabel="My profile"><span>My profile</span></sgds-dropdown-item>
-        <sgds-dropdown-item ariaLabel="Settings"><span>Settings</span></sgds-dropdown-item>
-        <sgds-dropdown-item ariaLabel="Log out"><span>Log out</span></sgds-dropdown-item>
-      </sgds-mainnav-dropdown>
+        <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:rounded-full sgds:bg-neutral-subtle-default sgds:block"></span>
+        <sgds-dropdown-item readonly>
+          <div class="sgds:flex sgds:flex-col sgds:gap-4">
+            <span class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal sgds:text-subtle">Account</span>
+            <div class="sgds:flex sgds:items-center sgds:gap-3 sgds:py-1">
+              <span class="sgds:h-12 sgds:w-12 sgds:shrink-0 sgds:rounded-full sgds:bg-neutral-subtle-default"></span>
+              <div class="sgds:flex sgds:flex-col sgds:justify-center">
+                <span class="sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-default">User Name</span>
+                <span class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-subtle">user@agency.gov.sg</span>
+              </div>
+            </div>
+          </div>
+        </sgds-dropdown-item>
+        <sgds-divider thickness="thin"></sgds-divider>
+        <div class="sgds:px-4 sgds:pb-1 sgds:pt-4">
+          <span class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal sgds:text-subtle">View</span>
+        </div>
+        <sgds-dropdown-item ariaLabel="Agency"><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">Agency</span></sgds-dropdown-item>
+        <sgds-dropdown-item ariaLabel="Product"><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">Product</span></sgds-dropdown-item>
+        <sgds-divider thickness="thin"></sgds-divider>
+        <sgds-dropdown-item ariaLabel="My profile"><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">My profile</span></sgds-dropdown-item>
+        <sgds-dropdown-item ariaLabel="Settings"><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">Settings</span></sgds-dropdown-item>
+        <sgds-dropdown-item ariaLabel="Log out"><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-danger-default">Log out</span></sgds-dropdown-item>
+      </sgds-mainnav-profile>
     </sgds-mainnav>
   `,
   name: "Profile Slot",
+  parameters: { layout: "fullscreen" },
+  tags: []
+};
+
+export const ProfileSlotBrand = {
+  render: () => html`
+    <sgds-mainnav tone="brand" fluid>
+      <img slot="brand" alt="logo" width="130" src="/logo-white.svg" />
+      <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
+      <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
+      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+      <sgds-mainnav-profile slot="profile" ariaLabel="Profile menu" close="outside">
+        <div slot="toggler" class="sgds:flex sgds:flex-row sgds:items-center sgds:gap-3">
+          <span class="sgds:h-10 sgds:w-10 sgds:rounded-full sgds:bg-neutral-subtle-default"></span>
+          <div class="sgds:flex sgds:flex-col sgds:gap-text-2-xs">
+            <span class="sgds:text-body-xs sgds:font-semibold sgds:leading-3-xs">User Name</span>
+            <span class="sgds:text-body-xs sgds:leading-3-xs">Agency (admin)</span>
+          </div>
+        </div>
+        <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:rounded-full sgds:bg-neutral-subtle-default sgds:block"></span>
+        <sgds-dropdown-item readonly>
+          <div class="sgds:flex sgds:flex-col sgds:gap-4">
+            <span class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal sgds:text-subtle">Account</span>
+            <div class="sgds:flex sgds:items-center sgds:gap-3 sgds:py-1">
+              <span class="sgds:h-12 sgds:w-12 sgds:shrink-0 sgds:rounded-full sgds:bg-neutral-subtle-default"></span>
+              <div class="sgds:flex sgds:flex-col sgds:justify-center">
+                <span class="sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-default">User Name</span>
+                <span class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-subtle">user@agency.gov.sg</span>
+              </div>
+            </div>
+          </div>
+        </sgds-dropdown-item>
+        <sgds-divider thickness="thin"></sgds-divider>
+        <div class="sgds:px-4 sgds:pb-1 sgds:pt-4">
+          <span class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal sgds:text-subtle">View</span>
+        </div>
+        <sgds-dropdown-item ariaLabel="Agency"><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">Agency</span></sgds-dropdown-item>
+        <sgds-dropdown-item ariaLabel="Product"><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">Product</span></sgds-dropdown-item>
+        <sgds-divider thickness="thin"></sgds-divider>
+        <sgds-dropdown-item ariaLabel="My profile"><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">My profile</span></sgds-dropdown-item>
+        <sgds-dropdown-item ariaLabel="Settings"><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">Settings</span></sgds-dropdown-item>
+        <sgds-dropdown-item ariaLabel="Log out"><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-danger-default">Log out</span></sgds-dropdown-item>
+      </sgds-mainnav-profile>
+    </sgds-mainnav>
+  `,
+  name: "Profile Slot (Brand)",
   parameters: { layout: "fullscreen" },
   tags: []
 };
