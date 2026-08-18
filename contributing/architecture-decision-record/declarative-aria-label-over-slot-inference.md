@@ -28,6 +28,25 @@ Use a declarative `ariaLabel` property on components whose internal interactive 
 
 Do not infer the label from slot content via JavaScript.
 
+### Exception: host element `aria-label` from `textContent`
+
+This ADR applies specifically to **internal shadow DOM elements** (e.g. a `<button>` inside the shadow root) that depend on slotted content for their accessible name. When the `aria-label` is needed on the **host element itself** — such as `<sgds-combo-box-option>` or `<sgds-select-option>` which carry `role="menuitem"` on the host — it is acceptable to programmatically set `aria-label` from `this.textContent` in `connectedCallback()`.
+
+This does not suffer from the timing issues described above because:
+- The host element's `textContent` is the light DOM text content, which is available synchronously at `connectedCallback` time (no slot projection or async rendering involved).
+- There is no dependency on `slotchange` events or shadow DOM rendering completing.
+
+```typescript
+connectedCallback(): void {
+  super.connectedCallback();
+  this.setAttribute("role", "menuitem");
+  const label = this.textContent?.trim();
+  if (label) {
+    this.setAttribute("aria-label", label);
+  }
+}
+```
+
 ## Consequences
 
 **Easier:**

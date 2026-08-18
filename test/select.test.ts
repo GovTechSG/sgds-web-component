@@ -99,7 +99,6 @@ describe("<sgds-select>", () => {
           <div
             class="dropdown-menu"
             id="id-7895-sgds-dropdown-menu-div"
-            part="menu"
             tabindex="-1"
             role="menu"
             aria-label="Options"
@@ -107,6 +106,7 @@ describe("<sgds-select>", () => {
             <slot>
             <sgds-select-option
               aria-disabled="false"
+              aria-label="Option 1"
               role="menuitem"
               value="option1"
             >
@@ -114,6 +114,7 @@ describe("<sgds-select>", () => {
             </sgds-select-option>
             <sgds-select-option
               aria-disabled="false"
+              aria-label="Option 2"
               role="menuitem"
               value="option2"
             >

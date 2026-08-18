@@ -22,6 +22,14 @@ export class OptionElement extends SgdsElement {
     super.connectedCallback();
     this.setAttribute("role", "menuitem");
     this.setAttribute("aria-disabled", `${this.disabled}`);
+    this._updateAriaLabel();
+  }
+
+  private _updateAriaLabel() {
+    const label = this.textContent?.trim();
+    if (label) {
+      this.setAttribute("aria-label", label);
+    }
   }
   render() {
     const classes = {

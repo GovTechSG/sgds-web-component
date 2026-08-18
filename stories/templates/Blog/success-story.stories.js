@@ -5,7 +5,7 @@ const Template = () => html`
     .stats-row {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--sgds-gap-layout-md);
+      gap: var(--sgds-layout-gap-md);
     }
     .stats-row > * {
       width: 100%;

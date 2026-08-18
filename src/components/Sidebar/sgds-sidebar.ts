@@ -18,6 +18,10 @@ import { SidebarElement } from "./sidebar-element";
 import SgdsSidebarGroup from "./sgds-sidebar-group";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import { XL_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
+import type { ISgdsSidebarSelectEventDetail } from "./types";
+export type { ISgdsSidebarSelectEventDetail };
+
+type SidebarVariant = "persistent" | "overlay" | "collapsible";
 
 /**
  * @summary Sidebar is a collapsible navigation component that displays menu items and groups.
@@ -32,21 +36,18 @@ import { XL_BREAKPOINT, MD_BREAKPOINT } from "../../utils/breakpoints";
  * - Active item tracking and synchronized state management
  *
  * Keyboard Navigation:
- * - Arrow Up/Down: Navigate between sidebar items and groups
+ * - Tab/Shift+Tab: Navigate between visible sidebar items and groups
  * - Arrow Left/Right: Collapse/expand groups or navigate drawer overlays
  * - Enter/Space: Activate focused item or toggle group
- * - Tab: Standard focus management to interactive elements
  *
  * @slot default - Insert sgds-sidebar-item, sgds-sidebar-group, and sgds-sidebar-section elements
  * @slot upper - Insert brand/logo content in sidebar header
  * @slot lower - Insert content in sidebar footer
  *
- * @fires sgds-select - Emitted when a sidebar item or group is selected.
- *   Event detail: { activeItem: string } - name of the selected item
+ * @event sgds-select - Emitted when a sidebar item or group is selected.
+ * @eventDetail {ISgdsSidebarSelectEventDetail} sgds-select
  *
  */
-
-type SidebarVariant = "persistent" | "overlay" | "collapsible";
 export class SgdsSidebar extends SgdsElement {
   static styles = [...SgdsElement.styles, sidebarStyle];
 
@@ -403,7 +404,7 @@ export class SgdsSidebar extends SgdsElement {
       }
 
       // Emit sgds-select event when an item is selected
-      this.emit("sgds-select", { detail: { activeItem: element.name } });
+      this.emit<ISgdsSidebarSelectEventDetail>("sgds-select", { detail: { activeItem: element.name } });
     }
   }
 

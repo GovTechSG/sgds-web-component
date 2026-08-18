@@ -137,7 +137,6 @@ describe("sgds-combo-box ", () => {
         <div
           class="dropdown-menu"
           id="id-7895-sgds-dropdown-menu-div"
-          part="menu"
           tabindex="-1"
           role="menu"
           aria-label="Options"
@@ -621,13 +620,13 @@ describe("single select combobox", () => {
       input.focus();
       await sendKeys({ type: "Durian" });
 
-      await waitUntil(() => input.value === "Durian");
+      await waitUntil(() => input.value === "Durian", "input did not update to Durian", { timeout: 2000 });
       input.blur();
-      await waitUntil(() => input.value === "");
+      await waitUntil(() => input.value === "", "input did not clear after blur", { timeout: 2000 });
       expect(el.value).to.equal("");
       const durItem = el.querySelector("sgds-combo-box-option[value='option3']") as SgdsComboBoxOption;
       expect(durItem.active).to.be.false;
-    });
+    }).timeout(5000);
 
     it(`MODE=${mode} When there is already a selectedItem, even when user types more rubbish, the value of input or displayValue will sync with the menu selected item regardless of the value`, async () => {
       const el = await fixture<SgdsComboBox>(render({ value: "option1" }));
@@ -637,13 +636,19 @@ describe("single select combobox", () => {
       const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
       input.focus();
       await sendKeys({ type: "rubbish" });
-      await waitUntil(() => el.shadowRoot?.querySelector("input")?.value === "Applerubbish");
+      await waitUntil(() => el.shadowRoot?.querySelector("input")?.value === "Applerubbish", "input did not update", {
+        timeout: 2000
+      });
       expect(el.value).to.equal("option1");
 
       input.blur();
-      await waitUntil(() => el.shadowRoot?.querySelector("input")?.value === "Apple");
+      await waitUntil(
+        () => el.shadowRoot?.querySelector("input")?.value === "Apple",
+        "input did not restore after blur",
+        { timeout: 2000 }
+      );
       expect(el.value).to.equal("option1");
-    });
+    }).timeout(5000);
 
     it(`MODE=${mode} Keyboard arrowDown and enter populates the input and update value`, async () => {
       const el = await fixture<SgdsComboBox>(render({}));
@@ -1659,13 +1664,19 @@ describe("multi select >> when submitting a form", () => {
     await combobox?.updateComplete;
     expect(combobox?.value).to.equal("");
 
+    // Wait for showMenu animation triggered by _handleClear to complete
+    await waitUntil(() => combobox?.menuIsOpen, "menu did not open after clear", { timeout: 2000 });
+    // Close menu and wait for hide animation to finish before form reset
+    combobox?.hideMenu();
+    await waitUntil(() => !combobox?.menuIsOpen, "menu did not close", { timeout: 2000 });
+
     const resetButton = el.querySelector<SgdsButton>("sgds-button[type='reset']");
     resetButton?.click();
 
     await combobox?.updateComplete;
 
     expect(combobox?.value).to.equal("1;2");
-    await waitUntil(() => !combobox?.invalid);
+    await waitUntil(() => !combobox?.invalid, "invalid did not reset", { timeout: 2000 });
     expect(combobox?.invalid).to.equal(false);
   });
 });

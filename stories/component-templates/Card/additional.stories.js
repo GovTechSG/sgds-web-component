@@ -370,6 +370,30 @@ export const Tinted = {
   parameters: {}
 };
 
+const NoPaddingTemplate = () => {
+  return html`
+    <div class="container">
+      <sgds-card noPadding>
+        <span slot="subtitle">SUBTITLE</span>
+        <h3 slot="title">No Padding Card</h3>
+        <span slot="description">card with no padding</span>
+        <sgds-link slot="footer">
+          <a href="https://google.com" aria-label="Go somewhere"
+            >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
+          ></a>
+        </sgds-link>
+      </sgds-card>
+    </div>
+  `;
+};
+
+export const NoPadding = {
+  render: NoPaddingTemplate.bind({}),
+  name: "No padding",
+  args: {},
+  parameters: {}
+};
+
 const OverflowMenuTemplate = () => {
   return html`
     <div class="container">

@@ -327,7 +327,7 @@ describe("sgds-mainnav-dropdown", () => {
           </slot>
           <sgds-icon
             name="chevron-down"
-            size="lg"
+            size="md"
           >
           </sgds-icon>  
         </a>
@@ -368,11 +368,11 @@ describe("sgds-mainnav-dropdown", () => {
              role="button"
            >
              <slot name="toggler"></slot>
-             <sgds-icon name="chevron-right" size="lg"></sgds-icon>
+             <sgds-icon name="chevron-right" size="md"></sgds-icon>
            </a>
            <div class="dropdown-items" aria-hidden="true" style="display: none;">
              <a tabindex="0" role="button">
-               <sgds-icon name="chevron-left" size="lg"></sgds-icon>
+               <sgds-icon name="chevron-left" size="md"></sgds-icon>
                <span>Dropdown</span>
              </a>
              <slot></slot>
@@ -416,11 +416,11 @@ describe("sgds-mainnav-dropdown", () => {
              role="button"
            >
              <slot name="toggler"></slot>
-             <sgds-icon name="chevron-right" size="lg"></sgds-icon>
+             <sgds-icon name="chevron-right" size="md"></sgds-icon>
            </a>
            <div class="dropdown-items" aria-hidden="false" style="">
              <a tabindex="0" role="button">
-               <sgds-icon name="chevron-left" size="lg"></sgds-icon>
+               <sgds-icon name="chevron-left" size="md"></sgds-icon>
                <span>Dropdown</span>
              </a>
              <slot></slot>

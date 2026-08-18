@@ -163,18 +163,12 @@
   opacity: var(--btn-opacity);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .btn {
-    transition: none;
-  }
-}
 
 .btn:hover,
 .btn.active {
   background: var(--btn-hover-bg);
 }
 
-.btn:focus,
 .btn:focus-visible {
   background: var(--btn-hover-bg);
   border-color: transparent;

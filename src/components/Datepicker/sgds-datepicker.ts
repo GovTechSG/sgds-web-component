@@ -1,4 +1,4 @@
-import { format, parse } from "date-fns";
+import { formatDate, parseDate } from "../../utils/date-helpers";
 import { html, PropertyValueMap } from "lit";
 import { property, query, queryAsync, state } from "lit/decorators.js";
 import { live } from "lit/directives/live.js";
@@ -211,7 +211,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
         return console.error("Invalid date format in initialValue:", invalidDates);
       } else {
         const initialSelectedDates = this.initialValue.map(v =>
-          setTimeToNoon(parse(v, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
+          setTimeToNoon(parseDate(v, DATE_PATTERNS[this.dateFormat].fnsPattern))
         );
         this._handleSelectDates(initialSelectedDates);
       }
@@ -270,10 +270,6 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   }
 
   private async _handleCloseMenu() {
-    //return focus to input when menu closes
-    const input = await this.datepickerInputAsync;
-    input.focus();
-
     if (this.selectedDateRange.length === 0) {
       this.displayDate = this.initialDisplayDate;
     } else {
@@ -282,6 +278,12 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
       const calendar = await this.calendar;
       calendar._updateFocusedDate();
     }
+
+    // Focus input after displayDate reset and calendar re-render to prevent
+    // the calendar's updated() from stealing focus during the hide animation
+    await this.updateComplete;
+    const input = await this.datepickerInputAsync;
+    input.focus();
   }
   private async _handleOpenMenu() {
     const cal = await this.calendar;
@@ -291,20 +293,20 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   private _makeInputValueString = (startDate: Date, endDate: Date, dateFormat: string) => {
     if (!startDate && !endDate) return this.value;
-    const formatDate = (date: Date) => format(date, DATE_PATTERNS[dateFormat].fnsPattern);
+    const fmtDate = (date: Date) => formatDate(date, DATE_PATTERNS[dateFormat].fnsPattern);
     switch (this.mode) {
       case "single": {
         if (startDate) {
-          this.value = formatDate(startDate);
+          this.value = fmtDate(startDate);
         }
         break;
       }
       case "range": {
         if (startDate && endDate) {
-          this.value = `${formatDate(startDate)} - ${formatDate(endDate)}`;
+          this.value = `${fmtDate(startDate)} - ${fmtDate(endDate)}`;
         }
         if (startDate && !endDate) {
-          this.value = `${formatDate(startDate)} - ${this.dateFormat}`;
+          this.value = `${fmtDate(startDate)} - ${this.dateFormat}`;
         }
         break;
       }

@@ -9,7 +9,7 @@
 }
 
 :host([density="compact"]) .accordion-body {
-  font-size: var(--sgds-font-size-body-sm);
+  font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs);
 }
 
@@ -48,12 +48,7 @@
   font-weight: var(--sgds-font-weight-semibold);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .accordion-btn,
-  .accordion-btn:after {
-    transition: none;
-  }
-}
+
 
 .accordion-btn:not(.disabled):hover,
 .accordion-btn:not(:disabled):hover {
@@ -61,16 +56,10 @@
   background-color: var(--sgds-bg-translucent-subtle);
 }
 
-.accordion-btn:not(.disabled):focus,
 .accordion-btn:not(.disabled):focus-visible,
-.accordion-btn:not(:disabled):focus,
 .accordion-btn:not(:disabled):focus-visible {
   z-index: 3;
   background-color: var(--sgds-bg-translucent-subtle);
-}
-
-.accordion-btn:not(.disabled):focus-visible,
-.accordion-btn:not(:disabled):focus-visible {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }
@@ -86,8 +75,8 @@ slot[name="badge"]::slotted(*) {
 }
 
 .accordion-header__trailing {
-  margin-left:auto;
-  display:flex;
+  margin-left: auto;
+  display: flex;
   gap: var(--sgds-gap-md);
 }
 
@@ -105,7 +94,7 @@ slot[name="caret"] sgds-icon {
 .accordion-body {
   padding: 0;
   overflow: hidden;
-  font-size: var(--sgds-font-size-body-md);
+  font-size: var(--sgds-font-size-label-md);
   line-height: var(--sgds-line-height-xs);
   color: var(--sgds-body-color-subtle);
 }

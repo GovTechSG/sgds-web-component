@@ -147,7 +147,7 @@ describe("dropdown-element generic keyboard interactions", () => {
 
     //closing the menu resets the states nextDropdownItemNo and prevDropdownItemNo
     await sendKeys({ press: "Escape" });
-    await el.updateComplete;
+    await waitUntil(() => !el.menuIsOpen);
     expect(el.menuIsOpen).to.be.false;
     expect(el.nextDropdownItemNo).to.equal(0);
     expect(el.prevDropdownItemNo).to.equal(-1);
@@ -455,7 +455,7 @@ describe("sgds-dropdown", () => {
     expect(el.menuIsOpen).to.be.true;
     expect(getComputedStyle(menuEl).display).to.equal("block");
     el.hideMenu();
-    await el.updateComplete;
+    await waitUntil(() => !el.menuIsOpen);
     expect(el.menuIsOpen).to.be.false;
     expect(getComputedStyle(menuEl).display).to.equal("none");
   });
@@ -545,7 +545,7 @@ describe("sgds-dropdown", () => {
     expect(getComputedStyle(menuEl).display).to.equal("block");
     const item = el.querySelector("sgds-dropdown-item");
     item?.click();
-    await el.updateComplete;
+    await waitUntil(() => !el.menuIsOpen);
     expect(getComputedStyle(menuEl).display).to.equal("none");
   });
   it("clicking the slotted toggler opens the menu when closed", async () => {
@@ -568,7 +568,7 @@ describe("sgds-dropdown", () => {
     expect(el.menuIsOpen).to.be.true;
     const button = el.querySelector("sgds-button") as HTMLElement;
     button.click();
-    await el.updateComplete;
+    await waitUntil(() => !el.menuIsOpen);
     expect(el.menuIsOpen).to.be.false;
   });
 
@@ -581,7 +581,7 @@ describe("sgds-dropdown", () => {
     // Simulate the click that falls through pointer-events:none on .toggler-container to .dropdown
     const dropdownDiv = el.shadowRoot?.querySelector(".dropdown") as HTMLElement;
     dropdownDiv.dispatchEvent(new MouseEvent("click", { bubbles: true, composed: true }));
-    await el.updateComplete;
+    await waitUntil(() => !el.menuIsOpen);
     expect(el.menuIsOpen).to.be.false;
   });
 
@@ -605,7 +605,7 @@ describe("sgds-dropdown", () => {
     expect(el.menuIsOpen).to.be.true;
     const item = el.querySelector("sgds-dropdown-item") as HTMLElement;
     item.click();
-    await el.updateComplete;
+    await waitUntil(() => !el.menuIsOpen);
     expect(el.menuIsOpen).to.be.false;
   });
 
@@ -623,7 +623,7 @@ describe("sgds-dropdown", () => {
     expect(el.menuIsOpen).to.be.true;
     expect(getComputedStyle(menuEl).display).to.equal("block");
     await sendMouse({ type: "click", position: [0, 0] });
-    await el.updateComplete;
+    await waitUntil(() => !el.menuIsOpen);
     expect(getComputedStyle(menuEl).display).to.equal("none");
     expect(el.menuIsOpen).to.be.false;
   });

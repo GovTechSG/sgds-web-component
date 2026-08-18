@@ -6,8 +6,8 @@
   z-index: var(--sgds-z-index-sticky);
   width: var(--sgds-dimension-288);
   transition: width var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
-
 }
+
 .sidebar:not(.overlay).sidebar--collapsed {
   width: var(--sgds-dimension-72);
 }
@@ -71,6 +71,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--sgds-gap-md);
+  margin-top: var(--sgds-margin-lg);
+}
+
+slot[name="lower"]::slotted(*) {
+  margin-top: var(--sgds-margin-lg);
 }
 
 .sidebar-nested-overlay {

@@ -111,11 +111,6 @@ a.card {
   color: initial;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .card {
-    transition: none;
-  }
-}
 
 .card.disabled {
   opacity: var(--sgds-opacity-40);

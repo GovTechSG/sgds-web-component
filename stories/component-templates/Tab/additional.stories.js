@@ -6,6 +6,20 @@ export const SolidVariant = {
   args: { variant: "solid" },
   parameters: {}
 };
+export const UnderlinedFullWidth = {
+  render: Template.bind({}),
+  name: "Full width underlined tabs",
+  args: { fullWidth: true },
+  parameters: {},
+  tags: ["!dev"]
+};
+export const SolidFullWidth = {
+  render: Template.bind({}),
+  name: "Full width solid tabs",
+  args: { variant: "solid", fullWidth: true },
+  parameters: {},
+  tags: ["!dev"]
+};
 export const UnderlinedDensityCompact = {
   render: Template.bind({}),
   name: "Compact density for underlined tabs",

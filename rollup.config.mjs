@@ -17,8 +17,6 @@ const external = [
   /@open-wc\/.*/,
   "tslib",
   /lit\/.*/,
-  "imask",
-  "date-fns",
   "@floating-ui/dom"
 ];
 

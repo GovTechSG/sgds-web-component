@@ -1,5 +1,5 @@
-import { isAfter, isBefore, isValid, parse } from "date-fns";
-import IMask, { InputMask } from "imask";
+import { isAfterDate, isBeforeDate, isValidDate, parseDate } from "../../utils/date-helpers";
+import { DateMask } from "../../utils/date-mask";
 import { html, PropertyValueMap } from "lit";
 import { property, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -25,7 +25,7 @@ export class DatepickerInput extends SgdsInput {
   @queryAsync("input")
   shadowInput: Promise<HTMLInputElement>;
 
-  private mask: InputMask;
+  private mask: DateMask;
   constructor() {
     super();
     this.type = "text";
@@ -35,14 +35,14 @@ export class DatepickerInput extends SgdsInput {
     const dates = this.mask.value.split(" - ");
     const noEmptyDates = dates.filter(d => d !== this.dateFormat);
     const dateArray: Date[] | string[] = noEmptyDates.map(date =>
-      setTimeToNoon(parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
+      setTimeToNoon(parseDate(date, DATE_PATTERNS[this.dateFormat].fnsPattern))
     );
     const invalidDates = dateArray.filter(
       date =>
-        !isValid(date) ||
-        isBefore(date, new Date(0, 0, 1)) ||
-        isBefore(date, setTimeToNoon(new Date(this.minDate))) ||
-        isAfter(date, setTimeToNoon(new Date(this.maxDate)))
+        !isValidDate(date as Date) ||
+        isBeforeDate(date as Date, new Date(0, 0, 1)) ||
+        isBeforeDate(date as Date, setTimeToNoon(new Date(this.minDate))) ||
+        isAfterDate(date as Date, setTimeToNoon(new Date(this.maxDate)))
     );
 
     // Only clear if the mask is complete AND there are invalid dates
@@ -72,44 +72,8 @@ export class DatepickerInput extends SgdsInput {
     const shadowInput = await this.shadowInput;
     const imPattern =
       this.mode === "single" ? DATE_PATTERNS[dateFormat].imPattern : DATE_PATTERNS[dateFormat].imRangePattern;
-    const blocks = {
-      d: { mask: IMask.MaskedRange, placeholderChar: "D", from: 0, to: 9, maxLength: 1 },
-      m: { mask: IMask.MaskedRange, placeholderChar: "M", from: 0, to: 9, maxLength: 1 },
-      y: { mask: IMask.MaskedRange, placeholderChar: "Y", from: 0, to: 9, maxLength: 1 },
-      D: { mask: IMask.MaskedRange, placeholderChar: "D", from: 0, to: 9, maxLength: 1 },
-      M: { mask: IMask.MaskedRange, placeholderChar: "M", from: 0, to: 9, maxLength: 1 },
-      Y: { mask: IMask.MaskedRange, placeholderChar: "Y", from: 0, to: 9, maxLength: 1 }
-    };
-    const maskOptions = {
-      mask: imPattern,
-      pattern: imPattern,
-      eager: true,
-      overwrite: true,
-      // define str -> date convertion
-      parse: function (str: string) {
-        const dates = str.split(" - ");
-        return dates.map(date => parse(date, DATE_PATTERNS[dateFormat].fnsPattern, new Date()));
-      },
-      format: function (dateArr: Date[]) {
-        const dateStrings = dateArr.map(date => {
-          let dayStr: string,
-            monthStr = "";
-          const day = date.getDate();
-          const month = date.getMonth() + 1;
-          const year = date.getFullYear();
 
-          if (day < 10) dayStr = "0" + day;
-          if (month < 10) monthStr = "0" + month;
-
-          return [dayStr, monthStr, year].join("/");
-        });
-        return dateStrings.join(" - ");
-      },
-      lazy: false,
-      blocks
-    };
-
-    this.mask = IMask(shadowInput, maskOptions);
+    this.mask = new DateMask(shadowInput, { pattern: imPattern });
     this.mask.on("accept", () => {
       this.value = this.mask.masked.value;
       this.emit("i-sgds-mask-input-change", { detail: this.value });
@@ -126,14 +90,14 @@ export class DatepickerInput extends SgdsInput {
     const dates = this.mask.value.split(" - ");
     const noEmptyDates = dates.filter(d => d !== this.dateFormat);
     const dateArray: Date[] | string[] = noEmptyDates.map(date =>
-      setTimeToNoon(parse(date, DATE_PATTERNS[this.dateFormat].fnsPattern, new Date()))
+      setTimeToNoon(parseDate(date, DATE_PATTERNS[this.dateFormat].fnsPattern))
     );
     const invalidDates = dateArray.filter(
       date =>
-        !isValid(date) ||
-        isBefore(date, new Date(0, 0, 1)) ||
-        isBefore(date, setTimeToNoon(new Date(this.minDate))) ||
-        isAfter(date, setTimeToNoon(new Date(this.maxDate)))
+        !isValidDate(date as Date) ||
+        isBeforeDate(date as Date, new Date(0, 0, 1)) ||
+        isBeforeDate(date as Date, setTimeToNoon(new Date(this.minDate))) ||
+        isAfterDate(date as Date, setTimeToNoon(new Date(this.maxDate)))
     );
 
     if (invalidDates.length > 0) {

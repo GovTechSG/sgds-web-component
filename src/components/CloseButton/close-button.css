@@ -32,17 +32,14 @@
 }
 
 .btn-close:hover,
-.btn-close:focus,
 .btn-close:focus-visible {
   background-color: var(--sgds-bg-translucent);
 }
 :host([tone="fixed-light"]) .btn-close:hover,
-:host([tone="fixed-light"]) .btn-close:focus,
 :host([tone="fixed-light"]) .btn-close:focus-visible {
   background-color: var(--sgds-bg-translucent-fixed-light);
 }
 :host([tone="fixed-dark"]) .btn-close:hover,
-:host([tone="fixed-dark"]) .btn-close:focus,
 :host([tone="fixed-dark"]) .btn-close:focus-visible {
   background-color: var(--sgds-bg-translucent-fixed-dark);
 }

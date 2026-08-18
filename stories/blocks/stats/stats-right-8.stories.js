@@ -5,7 +5,7 @@ const Template = () => html`
     .stats-inner {
       display: flex;
       flex-direction: column;
-      gap: var(--sgds-gap-layout-md);
+      gap: var(--sgds-layout-gap-md);
     }
     @media (width >= 1024px) {
       .stats-heading {
@@ -21,7 +21,7 @@ const Template = () => html`
   -->
   <section class="sgds:bg-default sgds:py-layout-md">
     <div class="sgds-container">
-      <div class="sgds-grid" style="gap: var(--sgds-gap-layout-md); align-items: start;">
+      <div class="sgds-grid" style="gap: var(--sgds-layout-gap-md); align-items: start;">
         <!-- Heading — left 4 cols -->
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-md-4 sgds-col-lg-4 stats-heading">
           <div

@@ -33,7 +33,7 @@ describe("<sgds-modal>", () => {
               ></sgds-close-button>
             <div class="modal-header">
                 <div class="modal-header__title-description">
-                  <slot class="modal-title" id="title" name="title"></slot>
+                  <div id="title"><slot class="modal-title" name="title"></slot></div>
                   <slot name="description"></slot>
                 </div>
               </div>

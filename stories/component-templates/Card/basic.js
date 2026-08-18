@@ -12,6 +12,7 @@ export const Template = args =>
         imageAdjustment=${ifDefined(args.imageAdjustment)}
         ?hideBorder=${ifDefined(args.hideBorder)}
         ?tinted=${ifDefined(args.tinted)}
+        ?noPadding=${ifDefined(args.noPadding)}
       >
         <img
           slot="image"

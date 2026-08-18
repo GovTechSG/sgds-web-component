@@ -20,6 +20,8 @@ import formControlStyle from "../../styles/form-text-control.css";
  *
  * @event sgds-change - Emitted when an alteration to the control's value is committed by the user.
  * @event sgds-input - Emitted when the control receives input and its value changes.
+ * @event sgds-invalid - Emitted when the control's invalid state is set to true.
+ * @event sgds-valid - Emitted when the control's invalid state is set to false.
  *
  */
 export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
@@ -57,6 +59,8 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
 
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback: string;
+  /** Disables native and sgds validation for the quantity toggle. */
+  @property({ type: Boolean, reflect: true }) noValidate = false;
   /** Sets the quantity toggle as readonly  */
   @property({ type: Boolean, reflect: true }) readonly = false;
 
@@ -100,11 +104,20 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     }
     this.value = parseInt(sgdsInput.value);
     this._mixinSetFormValue();
+    if (this._mixinShouldSkipSgdsValidation()) return;
     this._mixinValidate(sgdsInput.input);
     this.invalid = !this._mixinReportValidity();
   }
   private async _handleInputChange() {
     const sgdsInput = await this._sgdsInput;
+    if (this._mixinShouldSkipSgdsValidation()) {
+      if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
+        sgdsInput.value = "0";
+      }
+      this.value = parseInt(sgdsInput.value);
+      this._mixinSetFormValue();
+      return;
+    }
     this.invalid = false;
     if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
       sgdsInput.value = "0";
@@ -161,6 +174,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     event.stopPropagation();
     this.value = parseInt(sgdsInput.value) + parseInt(sgdsInput.step.toString());
     this._validateOnClick(sgdsInput.input);
+    this.emit("sgds-change");
   }
   private async _onMinus(event: MouseEvent) {
     const sgdsInput = await this._sgdsInput;
@@ -171,8 +185,8 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     } else {
       this.value = parseInt(sgdsInput.value) - parseInt(sgdsInput.step.toString());
     }
-
     this._validateOnClick(sgdsInput.input);
+    this.emit("sgds-change");
   }
 
   /**
@@ -185,6 +199,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     const sgdsInput = await this._sgdsInput;
     await sgdsInput.updateComplete;
     this._mixinSetFormValue();
+    if (this._mixinShouldSkipSgdsValidation()) return;
     this._mixinValidate(input);
     this.invalid = !this._mixinReportValidity();
   }
@@ -260,6 +275,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             @sgds-valid=${this._handleValid}
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
+            ?noValidate=${this._mixinShouldSkipSgdsValidation()}
             id=${this._controlId}
             ?invalid=${this.invalid}
             hasFeedback=${ifDefined(this.hasFeedback !== "text" ? "style" : undefined)}

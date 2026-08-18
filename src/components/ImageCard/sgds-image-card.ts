@@ -58,10 +58,10 @@ export class SgdsImageCard extends CardElement {
     super.firstUpdated(changedProperties);
 
     if (this._imageNode.length === 0) {
-      const image = this.shadowRoot.querySelector(".card-image") as HTMLDivElement;
-      const body = this.shadowRoot.querySelector(".card-body") as HTMLDivElement;
-      image.style.display = "none";
-      if (this.noPadding) body.style.padding = "0px";
+      const image = this.shadowRoot?.querySelector(".card-image") as HTMLDivElement | undefined;
+      const body = this.shadowRoot?.querySelector(".card-body") as HTMLDivElement | undefined;
+      if (image) image.style.display = "none";
+      if (body && this.noPadding) body.style.padding = "0px";
     }
 
     if (this.stretchedLink) {

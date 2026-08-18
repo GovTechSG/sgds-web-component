@@ -50,6 +50,48 @@
           <sgds-button type="submit">Submit</sgds-button>
         </form>
       </div>
+
+      <div>
+        <h2>Custom Validation (noValidate)</h2>
+        <form id="custom-validation-form">
+          <sgds-quantity-toggle
+            noValidate
+            hasFeedback="both"
+            label="Quantity (must be multiple of 5)"
+            id="custom-qt"
+            step="1"
+          ></sgds-quantity-toggle>
+          <br />
+          <sgds-button type="submit">Submit</sgds-button>
+          <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+        </form>
+        <script>
+          const customQt = document.querySelector("#custom-qt");
+          const customForm = document.querySelector("#custom-validation-form");
+          customQt.addEventListener("sgds-change", e => {
+            if (e.target.value === 0) {
+              e.target.setInvalid(false);
+              return;
+            }
+            if (e.target.value % 5 !== 0) {
+              e.target.setInvalid(true);
+              e.target.invalidFeedback = "Value must be a multiple of 5";
+            } else {
+              e.target.setInvalid(false);
+            }
+          });
+          customForm.addEventListener("submit", e => {
+            e.preventDefault();
+            if (customQt.value === 0) {
+              customQt.setInvalid(true);
+              customQt.invalidFeedback = "Please enter a quantity";
+              return;
+            }
+            if (customQt.invalid) return;
+            alert("Submitted: " + customQt.value);
+          });
+        </script>
+      </div>
     </div>
   </body>
 </html>

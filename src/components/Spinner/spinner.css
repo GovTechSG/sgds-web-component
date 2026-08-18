@@ -64,15 +64,10 @@
 }
 
 .spinner-label {
-  font-size: var(--sgds-font-size-14);
+  font-size: var(--sgds-font-size-label-sm);
   color: var(--sgds-neutral-color-default);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .spinner {
-    animation-duration: 1.5s;
-  }
-}
 
 /*! CSS Used keyframes */
 @keyframes spinner {

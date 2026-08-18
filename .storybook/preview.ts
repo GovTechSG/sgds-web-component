@@ -9,6 +9,7 @@ import "./utility.css";
 import "./gt-themes.css";
 import "./global.css";
 import sgdsTheme from "./sgdsTheme";
+import "./addons/react-source/docs-tabs-inject";
 
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
@@ -44,7 +45,7 @@ export const parameters = {
       title: "Table of Contents",
       disable: false
     },
-    codePanel: true
+    source: {}
   },
   viewport: {
     viewports: {
