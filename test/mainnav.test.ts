@@ -24,6 +24,8 @@ describe("sgds-mainnav", () => {
       el,
       `<nav>
         <div class="navbar navbar-expand-lg">
+          <slot name="start">
+          </slot>
           <a
             aria-label="brand-link"
             class="navbar-brand"
@@ -31,21 +33,25 @@ describe("sgds-mainnav", () => {
           >
             <slot name="brand"></slot>
           </a>
-          <slot
-            class="non-collapsible-empty"
-            name="non-collapsible"
-          >
-          </slot>
-          <sgds-icon-button
-            aria-expanded="false"
-            class="navbar-toggler"
-            name="menu"
-            size="sm"
-            target="_self"
-            variant="ghost"
-            tone="brand"
-          >
-          </sgds-icon-button>
+          <div class="navbar-end">
+            <slot
+              class="non-collapsible-empty"
+              name="non-collapsible"
+            >
+            </slot>
+            <slot name="profile">
+            </slot>
+            <sgds-icon-button
+              aria-expanded="false"
+              class="navbar-toggler"
+              name="menu"
+              size="sm"
+              target="_self"
+              tone="brand"
+              variant="ghost"
+            >
+            </sgds-icon-button>
+          </div>
         </div>
         <div
           class="navbar-body navbar-collapse"
@@ -58,7 +64,6 @@ describe("sgds-mainnav", () => {
             </slot>
           </div>
         </div>
-       </div>
       </nav>
     `,
       { ignoreAttributes: ["id", "aria-controls", "style"] }
@@ -126,7 +131,7 @@ describe("sgds-mainnav", () => {
   // initial window.innerWidth = 800
   // LG_BREAKPOINT = 1024
   // since window.innerWidth < LG_BREAKPOINT --> expect non-collapsible slot to be .order-2 (see first test)
-  it("when expand=lg and window resize event occurs to above breakpoint, it inserts .navbar-body before non-collapsible slot, and end slot has class .slot-end", async () => {
+  it("when expand=lg and window resize event occurs to above breakpoint, it inserts .navbar-body before .navbar-end, and end slot has class .slot-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
@@ -145,7 +150,7 @@ describe("sgds-mainnav", () => {
   });
   //SM_BREAKPOINT = 512
   // now window.innerWidth = 1030
-  it("when expand=sm and window resize event occurs to above breakpoint, it inserts .navbar-body before non-collapsible slot, and end slot has class slot-end ", async () => {
+  it("when expand=sm and window resize event occurs to above breakpoint, it inserts .navbar-body before .navbar-end, and end slot has class slot-end ", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="sm"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
@@ -231,6 +236,54 @@ describe("sgds-mainnav", () => {
   //   expect(el.shadowRoot?.querySelector('.offcanvas')).not.to.have.class('show')
 
   // })
+  it("tone prop reflects as attribute and defaults to 'default'", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
+    expect(el.tone).to.equal("default");
+    expect(el.getAttribute("tone")).to.equal("default");
+  });
+
+  it("tone='brand' reflects as attribute", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav tone="brand"></sgds-mainnav>`);
+    expect(el.tone).to.equal("brand");
+    expect(el.getAttribute("tone")).to.equal("brand");
+  });
+
+  it("tone prop defaults to 'default'", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
+    expect(el.tone).to.equal("default");
+    expect(el.getAttribute("tone")).to.equal("default");
+  });
+
+  it("tone='gradient-1' reflects as attribute", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav tone="gradient-1"></sgds-mainnav>`);
+    expect(el.tone).to.equal("gradient-1");
+    expect(el.getAttribute("tone")).to.equal("gradient-1");
+  });
+
+  it("slotchange on default slot propagates tone attribute to slotted items", async () => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav tone="brand">
+        <sgds-mainnav-item></sgds-mainnav-item>
+        <sgds-mainnav-dropdown><span slot="toggler">Menu</span></sgds-mainnav-dropdown>
+      </sgds-mainnav>`
+    );
+    await el.updateComplete;
+    expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("tone", "brand");
+    expect(el.querySelector("sgds-mainnav-dropdown")).to.have.attribute("tone", "brand");
+  });
+
+  it("slotchange on end slot propagates tone attribute to slotted items", async () => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav tone="brand">
+        <sgds-mainnav-item slot="end"></sgds-mainnav-item>
+        <sgds-mainnav-dropdown slot="end"><span slot="toggler">Menu</span></sgds-mainnav-dropdown>
+      </sgds-mainnav>`
+    );
+    await el.updateComplete;
+    expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("tone", "brand");
+    expect(el.querySelector("sgds-mainnav-dropdown")).to.have.attribute("tone", "brand");
+  });
+
   it('adds name attribute to elements in slot="end" only', async () => {
     const el = await fixture<SgdsMainnav>(
       html`<sgds-mainnav>
@@ -280,6 +333,90 @@ describe("sgds-mainnav", () => {
     expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("expand", "lg");
     expect(el.querySelector("sgds-mainnav-item")).not.to.have.attribute("name");
   });
+
+  describe("profile slot", () => {
+    it("renders profile slot inside .navbar-end", async () => {
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav>
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
+      expect(navbarEnd?.querySelector("slot[name='profile']")).to.exist;
+    });
+
+    it("profile slot propagates tone and expand attributes to slotted items", async () => {
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav tone="brand" expand="xl">
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      expect(el.querySelector("sgds-mainnav-dropdown[slot='profile']")).to.have.attribute("tone", "brand");
+      expect(el.querySelector("sgds-mainnav-dropdown[slot='profile']")).to.have.attribute("expand", "xl");
+    });
+
+    it("warns when sgds-mainnav-item and sgds-mainnav-profile are both slotted", async () => {
+      const warnStub = Sinon.stub(console, "warn");
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav expand="lg">
+          <sgds-mainnav-item><a href="#">Home</a></sgds-mainnav-item>
+          <sgds-mainnav-profile slot="profile" label="User" ariaLabel="Profile">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      expect(warnStub.calledWith(Sinon.match("[sgds-mainnav]"))).to.be.true;
+      warnStub.restore();
+    });
+
+    it("profile slot stays in .navbar-end in mobile view", async () => {
+      Object.defineProperty(window, "innerWidth", {
+        writable: true,
+        configurable: true,
+        value: 300
+      });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav expand="lg">
+          <sgds-mainnav-item><a href="#">Home</a></sgds-mainnav-item>
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
+      expect(navbarEnd?.querySelector("slot[name='profile']")).to.exist;
+    });
+  });
+
+  describe("start slot", () => {
+    it("renders start slot before the brand", async () => {
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav>
+          <sgds-icon-button name="menu" slot="start" variant="ghost" size="sm"></sgds-icon-button>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const navbar = el.shadowRoot?.querySelector(".navbar");
+      const startSlot = navbar?.querySelector("slot[name='start']");
+      const brand = navbar?.querySelector(".navbar-brand");
+      expect(startSlot).to.exist;
+      // start slot should come before brand in DOM order
+      const children = Array.from(navbar?.children || []);
+      const startIndex = children.indexOf(startSlot as Element);
+      const brandIndex = children.indexOf(brand as Element);
+      expect(startIndex).to.be.lessThan(brandIndex);
+    });
+  });
 });
 
 describe("sgds-mainnav-item", () => {
@@ -295,6 +432,8 @@ describe("sgds-mainnav-dropdown", () => {
     assert.instanceOf(el, SgdsMainnavDropdown);
   });
   it("desktop view: can be semantically compare with shadowDom trees", async () => {
+    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+    window.dispatchEvent(new Event("resize"));
     const el = await fixture<SgdsMainnav>(html`
       <sgds-mainnav>
         <sgds-mainnav-dropdown>

@@ -1,5 +1,5 @@
 import { provide } from "@lit/context";
-import { html, PropertyValueMap } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, query, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -16,6 +16,7 @@ import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
 import SgdsMainnavItem from "./sgds-mainnav-item";
 import { HasSlotController } from "../../utils/slot";
 export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
+export type MainnavTone = "default" | "brand" | "gradient-1" | "gradient-2" | "gradient-3" | "gradient-4";
 
 const SIZES = {
   sm: SM_BREAKPOINT,
@@ -36,8 +37,10 @@ const SIZES = {
  * @event sgds-after-hide - Emitted on hide after animation has completed. Only for collapsed menu.
  *
  * @slot default - Default slot of SgdsMainnav. Pass in SgdsMainnavItem elements here.
+ * @slot start - Elements in this slot will be positioned to the left of the brand.
  * @slot end - Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.
  * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
+ * @slot profile - Profile slot positioned at the far right in desktop. In mobile, moves into the collapsed menu as the first item.
  * @slot non-collapsible - Elements in this slot will not be collapsed
  *
  */
@@ -59,18 +62,16 @@ export class SgdsMainnav extends SgdsElement {
   @state()
   private expanding = false;
 
-  /** @internal */
-  @query("nav") nav: HTMLElement;
-  /** @internal */
-  @query(".navbar") navbar: HTMLElement;
-  /** @internal */
-  @query(".navbar-toggler") header: HTMLElement;
-  /** @internal */
-  @query(".navbar-body") body: HTMLElement;
-  /** @internal */
-  @query(".navbar-nav-scroll") navScroll: HTMLElement;
-  /** @internal */
-  @query("slot[name='non-collapsible']") nonCollapsibleSlot: HTMLSlotElement;
+  @query("nav") private nav: HTMLElement;
+  @query(".navbar") private navbar: HTMLElement;
+  @query(".navbar-toggler") private header: HTMLElement;
+  @query(".navbar-body") private body: HTMLElement;
+  @query(".navbar-nav-scroll") private navScroll: HTMLElement;
+  @query(".navbar-end") private navbarEnd: HTMLElement;
+
+  /** @internal Whether sgds-mainnav-profile is slotted in the profile slot */
+  @state()
+  private _hasProfileComponent = false;
 
   /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
   @property({ type: Boolean }) hasNonCollapsibleSlot = false;
@@ -78,6 +79,9 @@ export class SgdsMainnav extends SgdsElement {
   /** The href link for brand logo */
   @property({ type: String })
   brandHref = "";
+
+  @property({ type: String, reflect: true })
+  tone: MainnavTone = "default";
 
   private collapseId = genId("mainnav", "collapse");
 
@@ -89,14 +93,11 @@ export class SgdsMainnav extends SgdsElement {
   @property({ type: Boolean, reflect: true })
   fluid = false;
 
-  /** @internal */
   @state()
-  breakpointReached = false;
+  private breakpointReached = false;
 
-  /** @internal */
   @queryAssignedElements() private defaultNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
 
-  /** @internal */
   @queryAssignedElements({ slot: "end" }) private endNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
 
   /** @internal */
@@ -147,7 +148,7 @@ export class SgdsMainnav extends SgdsElement {
   }
 
   private _handleClickOutOfElement(e: MouseEvent, self: HTMLElement) {
-    if (!e.composedPath().includes(self) && !e.composedPath().includes(this.header)) {
+    if (!e.composedPath().includes(self) && !(this.header && e.composedPath().includes(this.header))) {
       this.hide();
     }
   }
@@ -202,7 +203,7 @@ export class SgdsMainnav extends SgdsElement {
   }
 
   private _handleDesktopNav() {
-    this.navbar?.insertBefore(this.body, this.nonCollapsibleSlot);
+    this.navbar?.insertBefore(this.body, this.navbarEnd);
   }
 
   private async _animateToShow() {
@@ -247,7 +248,7 @@ export class SgdsMainnav extends SgdsElement {
       await this._animateToShow();
       this.expanded = true;
     } else {
-      this.header.focus();
+      this.header?.focus();
       // Hide
       await this._animateToHide();
       this.expanded = false;
@@ -280,17 +281,43 @@ export class SgdsMainnav extends SgdsElement {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
     childElements.forEach(el => {
       el.setAttribute("expand", this.expand);
+      el.setAttribute("tone", this.tone);
     });
+
+    if (this._hasProfileComponent && childElements.length > 0) {
+      console.warn(
+        "[sgds-mainnav] Using <sgds-mainnav-item> alongside <sgds-mainnav-profile> is not recommended. " +
+          "The profile component disables the mainnav hamburger menu, so nav items will have no mobile menu. " +
+          "Use a sidebar for navigation in operational apps."
+      );
+    }
   }
 
   // assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
   private _handleSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-
     childElements.forEach(e => {
       e.setAttribute("name", e.tagName.toLowerCase());
       e.setAttribute("expand", this.expand);
+      e.setAttribute("tone", this.tone);
     });
+  }
+
+  private _handleProfileSlotChange(e: Event) {
+    const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    this._hasProfileComponent = childElements.some(el => el.tagName.toLowerCase() === "sgds-mainnav-profile");
+    childElements.forEach(el => {
+      el.setAttribute("expand", this.expand);
+      el.setAttribute("tone", this.tone);
+    });
+
+    if (this._hasProfileComponent && this.defaultSlotItems.length > 0) {
+      console.warn(
+        "[sgds-mainnav] Using <sgds-mainnav-item> alongside <sgds-mainnav-profile> is not recommended. " +
+          "The profile component disables the mainnav hamburger menu, so nav items will have no mobile menu. " +
+          "Use a sidebar for navigation in operational apps."
+      );
+    }
   }
 
   render() {
@@ -299,6 +326,7 @@ export class SgdsMainnav extends SgdsElement {
     return html`
       <nav>
         <div class="navbar ${this._expandClass()}">
+          <slot name="start"></slot>
           <a class="navbar-brand" href=${this.brandHref} aria-label="brand-link">
             <slot name="brand"></slot>
           </a>
@@ -312,20 +340,26 @@ export class SgdsMainnav extends SgdsElement {
               ></slot>
             </div>
           </div>
-          <slot
-            name="non-collapsible"
-            class=${classMap({ "non-collapsible-empty": !this.hasNonCollapsibleSlot })}
-          ></slot>
-          <sgds-icon-button
-            name=${this.expanded ? "cross" : "menu"}
-            variant="ghost"
-            size="sm"
-            class="navbar-toggler"
-            @click=${this._handleSummaryClick}
-            aria-controls="${this.collapseId}"
-            aria-expanded="${this.expanded}"
-            .ariaLabel=${"Toggle navigation"}
-          ></sgds-icon-button>
+          <div class="navbar-end">
+            <slot
+              name="non-collapsible"
+              class=${classMap({ "non-collapsible-empty": !this.hasNonCollapsibleSlot })}
+            ></slot>
+            <slot name="profile" @slotchange=${this._handleProfileSlotChange}></slot>
+            ${!(this._hasProfileComponent && this.breakpointReached)
+              ? html`<sgds-icon-button
+                  name=${this.expanded ? "cross" : "menu"}
+                  variant="ghost"
+                  size="sm"
+                  tone=${this.tone !== "default" ? "fixed-light" : nothing}
+                  class="navbar-toggler"
+                  @click=${this._handleSummaryClick}
+                  aria-controls="${this.collapseId}"
+                  aria-expanded="${this.expanded}"
+                  .ariaLabel=${"Toggle navigation"}
+                ></sgds-icon-button>`
+              : nothing}
+          </div>
         </div>
       </nav>
     `;
