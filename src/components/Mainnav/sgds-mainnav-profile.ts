@@ -98,7 +98,7 @@ export class SgdsMainnavProfile extends SgdsElement {
                 </div>`
               : nothing}
             <sgds-icon name="chevron-down" size="md"></sgds-icon>
-                  </button>
+          </button>
           <slot></slot>
         </sgds-dropdown>
       `;
