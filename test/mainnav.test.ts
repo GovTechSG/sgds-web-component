@@ -615,5 +615,4 @@ describe("sgds-mainnav-dropdown", () => {
     expect(stubHide.called).to.be.true;
     stubHide.restore();
   }); // retries 1 time as occasionally fails with timeout (CI or local)
-
 });

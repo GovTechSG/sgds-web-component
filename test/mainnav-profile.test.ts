@@ -113,7 +113,12 @@ describe("sgds-mainnav-profile", () => {
     it("renders a dropdown in desktop mode", async () => {
       const el = await fixture<SgdsMainnav>(html`
         <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
+          <sgds-mainnav-profile
+            slot="profile"
+            label="User Name"
+            secondaryText="Agency (admin)"
+            ariaLabel="Profile menu"
+          >
             <span slot="avatar" class="avatar"></span>
             <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
           </sgds-mainnav-profile>
@@ -149,7 +154,12 @@ describe("sgds-mainnav-profile", () => {
     it("renders label and secondaryText props in desktop", async () => {
       const el = await fixture<SgdsMainnav>(html`
         <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
+          <sgds-mainnav-profile
+            slot="profile"
+            label="User Name"
+            secondaryText="Agency (admin)"
+            ariaLabel="Profile menu"
+          >
             <span slot="avatar" class="avatar"></span>
             <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
           </sgds-mainnav-profile>
