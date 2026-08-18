@@ -47,6 +47,7 @@ describe("sgds-mainnav", () => {
               name="menu"
               size="sm"
               target="_self"
+              tone="brand"
               variant="ghost"
             >
             </sgds-icon-button>
@@ -360,7 +361,23 @@ describe("sgds-mainnav", () => {
       expect(el.querySelector("sgds-mainnav-dropdown[slot='profile']")).to.have.attribute("expand", "xl");
     });
 
-    it("in mobile view, profile slot moves into navbar-nav-scroll as the first item", async () => {
+    it("warns when sgds-mainnav-item and sgds-mainnav-profile are both slotted", async () => {
+      const warnStub = Sinon.stub(console, "warn");
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav expand="lg">
+          <sgds-mainnav-item><a href="#">Home</a></sgds-mainnav-item>
+          <sgds-mainnav-profile slot="profile" label="User" ariaLabel="Profile">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      expect(warnStub.calledWith(Sinon.match("[sgds-mainnav]"))).to.be.true;
+      warnStub.restore();
+    });
+
+    it("profile slot stays in .navbar-end in mobile view", async () => {
       Object.defineProperty(window, "innerWidth", {
         writable: true,
         configurable: true,
@@ -375,34 +392,6 @@ describe("sgds-mainnav", () => {
           </sgds-mainnav-dropdown>
         </sgds-mainnav>`
       );
-      await el.updateComplete;
-      const navScroll = el.shadowRoot?.querySelector(".navbar-nav-scroll");
-      const firstChild = navScroll?.firstElementChild;
-      expect(firstChild?.getAttribute("name")).to.equal("profile");
-    });
-
-    it("on resize to desktop, profile slot moves back into .navbar-end", async () => {
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 300
-      });
-      window.dispatchEvent(new Event("resize"));
-      const el = await fixture<SgdsMainnav>(
-        html`<sgds-mainnav expand="lg">
-          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
-            <span slot="toggler">User</span>
-          </sgds-mainnav-dropdown>
-        </sgds-mainnav>`
-      );
-      await el.updateComplete;
-      // Now resize to desktop
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 1030
-      });
-      window.dispatchEvent(new Event("resize"));
       await el.updateComplete;
       const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
       expect(navbarEnd?.querySelector("slot[name='profile']")).to.exist;
@@ -443,6 +432,8 @@ describe("sgds-mainnav-dropdown", () => {
     assert.instanceOf(el, SgdsMainnavDropdown);
   });
   it("desktop view: can be semantically compare with shadowDom trees", async () => {
+    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+    window.dispatchEvent(new Event("resize"));
     const el = await fixture<SgdsMainnav>(html`
       <sgds-mainnav>
         <sgds-mainnav-dropdown>
@@ -625,30 +616,4 @@ describe("sgds-mainnav-dropdown", () => {
     stubHide.restore();
   }); // retries 1 time as occasionally fails with timeout (CI or local)
 
-  describe("togglerIconName", () => {
-    it("defaults to 'menu' icon name on the toggler button", async () => {
-      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="never"></sgds-mainnav>`);
-      const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
-      expect(toggler.getAttribute("name")).to.equal("menu");
-    });
-
-    it("forwards custom icon name to the toggler button", async () => {
-      const el = await fixture<SgdsMainnav>(
-        html`<sgds-mainnav expand="never" togglerIconName="hamburger"></sgds-mainnav>`
-      );
-      const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
-      expect(toggler.getAttribute("name")).to.equal("hamburger");
-    });
-
-    it("still shows 'cross' icon when expanded regardless of togglerIconName", async () => {
-      const el = await fixture<SgdsMainnav>(
-        html`<sgds-mainnav expand="never" togglerIconName="hamburger"></sgds-mainnav>`
-      );
-      const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
-      toggler.click();
-      await elementUpdated(el);
-      await aTimeout(500);
-      expect(toggler.getAttribute("name")).to.equal("cross");
-    });
-  });
 });

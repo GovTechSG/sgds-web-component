@@ -13,8 +13,7 @@ export const Template = ({
   close,
   target,
   fluid,
-  tone,
-  togglerIconName
+  tone
 }) => {
   return html`
     <sgds-mainnav
@@ -22,7 +21,6 @@ export const Template = ({
       brandHref=${ifDefined(brandHref)}
       ?fluid=${fluid}
       tone=${ifDefined(tone)}
-      togglerIconName=${ifDefined(togglerIconName)}
     >
       <img alt="sgds logo" width="130" src="/logo.svg" slot="brand" />
       <sgds-mainnav-item ?active=${active} ?disabled=${disabled}>

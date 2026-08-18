@@ -95,22 +95,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
 }
 
-/* Profile avatar slot (replaces toggler when sgds-mainnav-profile is present in mobile) */
-.profile-avatar-slot {
-  display: flex;
-  align-items: center;
-}
-
-.profile-avatar-slot::slotted(*) {
-  cursor: pointer;
-  border-radius: var(--sgds-border-radius-full);
-}
-
-.profile-avatar-slot::slotted(*:focus-visible) {
-  outline: var(--sgds-outline-focus);
-  outline-offset: var(--sgds-outline-offset-focus);
-}
-
 .navbar-collapse {
   align-items: center;
   flex-basis: 100%;
@@ -145,7 +129,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-sm .navbar-nav {
     flex-direction: row;
-    align-items: center;
   }
 
   .navbar-expand-sm .navbar-nav-scroll {
@@ -170,7 +153,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-md .navbar-nav {
     flex-direction: row;
-    align-items: center;
   }
 
   .navbar-expand-md .navbar-nav-scroll {
@@ -199,7 +181,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-lg .navbar-nav {
     flex-direction: row;
-    align-items: center;
   }
 
   .navbar-expand-lg .navbar-nav-scroll {
@@ -224,7 +205,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-xl .navbar-nav {
     flex-direction: row;
-    align-items: center;
   }
 
   .navbar-expand-xl .navbar-nav .nav-link {
@@ -254,7 +234,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-xxl .navbar-nav {
     flex-direction: row;
-    align-items: center;
   }
 
   .navbar-expand-xxl .navbar-nav-scroll {
@@ -278,7 +257,6 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 }
 .navbar-expand .navbar-nav {
   flex-direction: row;
-  align-items: center;
 }
 
 .navbar-expand .navbar-nav-scroll {
@@ -313,11 +291,6 @@ slot[name="start"] {
 slot[name="profile"] {
   display: flex;
   align-self: stretch;
-}
-
-nav > .navbar-body slot[name="profile"] {
-  display: block;
-  width: 100%;
 }
 
 slot[name="non-collapsible"] {

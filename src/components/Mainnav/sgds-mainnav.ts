@@ -68,7 +68,6 @@ export class SgdsMainnav extends SgdsElement {
   @query(".navbar-body") private body: HTMLElement;
   @query(".navbar-nav-scroll") private navScroll: HTMLElement;
   @query(".navbar-end") private navbarEnd: HTMLElement;
-  @query("slot[name='profile']") private profileSlot: HTMLSlotElement;
 
   /** @internal Whether sgds-mainnav-profile is slotted in the profile slot */
   @state()
@@ -93,10 +92,6 @@ export class SgdsMainnav extends SgdsElement {
   /** When true, removes max-width constraint to allow content to stretch full screen width */
   @property({ type: Boolean, reflect: true })
   fluid = false;
-
-  /** The icon name for the mobile menu toggle button */
-  @property({ type: String })
-  togglerIconName = "menu";
 
   @state()
   private breakpointReached = false;
@@ -197,8 +192,6 @@ export class SgdsMainnav extends SgdsElement {
   private async _handleMobileNav() {
     if (!this.nav) return;
 
-    // Move profile slot into mobile menu as the first item
-    this.navScroll?.prepend(this.profileSlot);
     this.nav.appendChild(this.body);
     await customElements.whenDefined("sgds-masthead");
 
@@ -211,8 +204,6 @@ export class SgdsMainnav extends SgdsElement {
 
   private _handleDesktopNav() {
     this.navbar?.insertBefore(this.body, this.navbarEnd);
-    // Move profile slot back into navbar-end (before toggler)
-    this.navbarEnd?.insertBefore(this.profileSlot, this.header);
   }
 
   private async _animateToShow() {
@@ -292,6 +283,14 @@ export class SgdsMainnav extends SgdsElement {
       el.setAttribute("expand", this.expand);
       el.setAttribute("tone", this.tone);
     });
+
+    if (this._hasProfileComponent && childElements.length > 0) {
+      console.warn(
+        "[sgds-mainnav] Using <sgds-mainnav-item> alongside <sgds-mainnav-profile> is not recommended. " +
+          "The profile component disables the mainnav hamburger menu, so nav items will have no mobile menu. " +
+          "Use a sidebar for navigation in operational apps."
+      );
+    }
   }
 
   // assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
@@ -306,13 +305,19 @@ export class SgdsMainnav extends SgdsElement {
 
   private _handleProfileSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    this._hasProfileComponent = childElements.some(
-      el => el.tagName.toLowerCase() === "sgds-mainnav-profile"
-    );
+    this._hasProfileComponent = childElements.some(el => el.tagName.toLowerCase() === "sgds-mainnav-profile");
     childElements.forEach(el => {
       el.setAttribute("expand", this.expand);
       el.setAttribute("tone", this.tone);
     });
+
+    if (this._hasProfileComponent && this.defaultSlotItems.length > 0) {
+      console.warn(
+        "[sgds-mainnav] Using <sgds-mainnav-item> alongside <sgds-mainnav-profile> is not recommended. " +
+          "The profile component disables the mainnav hamburger menu, so nav items will have no mobile menu. " +
+          "Use a sidebar for navigation in operational apps."
+      );
+    }
   }
 
   render() {
@@ -341,12 +346,9 @@ export class SgdsMainnav extends SgdsElement {
               class=${classMap({ "non-collapsible-empty": !this.hasNonCollapsibleSlot })}
             ></slot>
             <slot name="profile" @slotchange=${this._handleProfileSlotChange}></slot>
-            ${this._hasProfileComponent && this.breakpointReached
-              ? html`<slot name="profile-avatar" class="profile-avatar-slot"></slot>`
-              : nothing}
             ${!(this._hasProfileComponent && this.breakpointReached)
               ? html`<sgds-icon-button
-                  name=${this.expanded ? "cross" : this.togglerIconName}
+                  name=${this.expanded ? "cross" : "menu"}
                   variant="ghost"
                   size="sm"
                   tone=${this.tone !== "default" ? "fixed-light" : nothing}

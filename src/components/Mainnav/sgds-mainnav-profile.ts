@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { consume } from "@lit/context";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
@@ -8,18 +8,17 @@ import SgdsElement from "../../base/sgds-element";
 import SgdsDropdown from "../Dropdown/sgds-dropdown";
 import SgdsDropdownItem from "../Dropdown/sgds-dropdown-item";
 import SgdsIcon from "../Icon/sgds-icon";
-import { MainnavBreakpointContext, MainnavExpandedContext } from "./mainnav-context";
-import { SgdsMainnav } from "./sgds-mainnav";
+import { MainnavBreakpointContext } from "./mainnav-context";
 import mainnavProfileStyle from "./mainnav-profile.css";
 import genId from "../../utils/generateId";
 
 /**
- * @summary A profile dropdown for the mainnav that shows a full dropdown in desktop and a flat action list in mobile.
- * In mobile, the avatar slot replaces the default menu toggler. Clicking it opens the mobile menu
- * with profile items rendered flat (no drill-down submenu).
+ * @summary A profile component for the mainnav that shows a full dropdown in desktop and handles its own mobile menu.
+ * In desktop: renders avatar + label + secondaryText with a dropdown.
+ * In mobile: renders the avatar as a toggler that opens a self-contained mobile panel with profile items.
+ * When present, it disables the mainnav's default hamburger toggler.
  *
- * @slot toggler - Full desktop toggler content (avatar + name + agency text)
- * @slot avatar - Avatar-only element displayed as the mobile menu toggler
+ * @slot avatar - Avatar element displayed in both desktop (before label) and mobile (as toggler)
  * @slot default - Profile menu items (sgds-dropdown-item elements)
  */
 export class SgdsMainnavProfile extends SgdsElement {
@@ -35,9 +34,17 @@ export class SgdsMainnavProfile extends SgdsElement {
   @state()
   private _breakpointReached = true;
 
-  @consume({ context: MainnavExpandedContext, subscribe: true })
+  /** @internal Whether the mobile menu is open */
   @state()
-  private expanded: boolean;
+  private _mobileMenuOpen = false;
+
+  /** Primary text displayed next to the avatar in desktop (e.g. user name) */
+  @property({ type: String, reflect: true })
+  label = "";
+
+  /** Secondary text displayed below the label in desktop (e.g. agency or role) */
+  @property({ type: String, reflect: true })
+  secondaryText = "";
 
   /** When true, disables the profile dropdown */
   @property({ type: Boolean })
@@ -45,7 +52,7 @@ export class SgdsMainnavProfile extends SgdsElement {
 
   /** Accessible label for the profile toggle button */
   @property({ type: String })
-  ariaLabel: string;
+  ariaLabel = "";
 
   /** Controls dropdown close behavior. "default" auto-closes on item/outside click, "outside" closes only on outside click, "inside" prevents auto-close. */
   @property({ type: String })
@@ -54,93 +61,23 @@ export class SgdsMainnavProfile extends SgdsElement {
   /** @internal */
   private togglerId: string = genId("profile", "button");
 
-  /** @internal */
-  private _prevBreakpointReached: boolean | null = null;
+  private _handleMobileToggle = () => {
+    this._mobileMenuOpen = !this._mobileMenuOpen;
+  };
 
-  /** @internal The avatar element's original slot value */
-  private _avatarEl: HTMLElement | null = null;
-
-  updated() {
-    if (this._prevBreakpointReached !== this._breakpointReached) {
-      if (this._breakpointReached) {
-        requestAnimationFrame(() => this._moveAvatarToMainnav());
-      } else {
-        this._moveAvatarBack();
-      }
-      this._prevBreakpointReached = this._breakpointReached;
-    }
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this._moveAvatarBack();
-  }
-
-  private _getMainnav(): SgdsMainnav | null {
-    return this.closest("sgds-mainnav") as SgdsMainnav | null;
-  }
-
-  /**
-   * Move the [slot="avatar"] element to be a direct child of sgds-mainnav
-   * with slot="profile-avatar" so it gets projected into navbar-end.
-   * This keeps it in light DOM where page-level utility styles apply.
-   */
-  private _moveAvatarToMainnav() {
-    const mainnav = this._getMainnav();
-    if (!mainnav) return;
-
-    this._avatarEl = this.querySelector('[slot="avatar"]') as HTMLElement;
-    if (!this._avatarEl) return;
-
-    // Re-slot it to the mainnav's profile-avatar slot
-    this._avatarEl.setAttribute("slot", "profile-avatar");
-    this._avatarEl.addEventListener("click", this._handleAvatarClick);
-    this._avatarEl.setAttribute("role", "button");
-    this._avatarEl.setAttribute("tabindex", "0");
-    this._avatarEl.setAttribute("aria-label", this.ariaLabel || "Toggle navigation");
-    this._avatarEl.style.cursor = "pointer";
-
-    // Move to be a direct child of mainnav (light DOM)
-    mainnav.appendChild(this._avatarEl);
-  }
-
-  /** Move avatar back to this component */
-  private _moveAvatarBack() {
-    if (!this._avatarEl) return;
-
-    this._avatarEl.removeEventListener("click", this._handleAvatarClick);
-    this._avatarEl.setAttribute("slot", "avatar");
-    this._avatarEl.removeAttribute("role");
-    this._avatarEl.removeAttribute("tabindex");
-    this._avatarEl.removeAttribute("aria-label");
-    this._avatarEl.style.removeProperty("cursor");
-
-    // Move back to this element
-    this.appendChild(this._avatarEl);
-    this._avatarEl = null;
-  }
-
-  private _handleAvatarClick = () => {
-    const mainnav = this._getMainnav();
-    if (mainnav) {
-      if (this.expanded) {
-        mainnav.hide();
-      } else {
-        mainnav.show();
-      }
+  private _handleKeydown = (e: KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      this._handleMobileToggle();
     }
   };
 
   render() {
     if (!this._breakpointReached) {
-      // Desktop: standard dropdown
+      // Desktop: dropdown with avatar + label + secondaryText
       return html`
-        <sgds-dropdown
-          .floatingOpts=${{ middleware: [offset(0)] }}
-          ?disabled=${this.disabled}
-          close=${this.close}
-        >
-          <a
+        <sgds-dropdown .floatingOpts=${{ middleware: [offset(0)] }} ?disabled=${this.disabled} close=${this.close}>
+          <button
             class="${classMap({
               "nav-link": true,
               disabled: this.disabled
@@ -149,23 +86,41 @@ export class SgdsMainnavProfile extends SgdsElement {
             aria-label=${ifDefined(this.ariaLabel)}
             id=${this.togglerId}
             tabindex=${this.disabled ? "-1" : "0"}
-            role="button"
             slot="toggler"
           >
-            <slot name="toggler"></slot>
+            <slot name="avatar"></slot>
+            ${this.label || this.secondaryText
+              ? html`<div class="profile-text">
+                  ${this.label ? html`<span class="profile-label">${this.label}</span>` : nothing}
+                  ${this.secondaryText
+                    ? html`<span class="profile-secondary-text">${this.secondaryText}</span>`
+                    : nothing}
+                </div>`
+              : nothing}
             <sgds-icon name="chevron-down" size="md"></sgds-icon>
-          </a>
+                  </button>
           <slot></slot>
         </sgds-dropdown>
       `;
     }
 
-    // Mobile: flat items rendered in-place (projected into mobile menu via slot="profile")
+    // Mobile: avatar toggler + self-contained mobile panel
     return html`
-      <div class="profile-mobile-items">
-        <slot name="toggler" style="display:none"></slot>
-        <slot name="avatar" style="display:none"></slot>
-        <slot></slot>
+      <div
+        class="profile-avatar-mobile"
+        role="button"
+        tabindex="0"
+        aria-label=${this.ariaLabel || "Toggle navigation"}
+        aria-expanded=${this._mobileMenuOpen ? "true" : "false"}
+        @click=${this._handleMobileToggle}
+        @keydown=${this._handleKeydown}
+      >
+        <slot name="avatar"></slot>
+      </div>
+      <div class="profile-mobile-panel" ?hidden=${!this._mobileMenuOpen}>
+        <div class="profile-mobile-items">
+          <slot></slot>
+        </div>
       </div>
     `;
   }
