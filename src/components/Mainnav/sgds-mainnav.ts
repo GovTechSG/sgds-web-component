@@ -76,6 +76,9 @@ export class SgdsMainnav extends SgdsElement {
   /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
   @property({ type: Boolean }) hasNonCollapsibleSlot = false;
 
+  /** Used only for SSR to indicate the presence of the `start` slot. */
+  @property({ type: Boolean }) hasStartSlot = false;
+
   /** The href link for brand logo */
   @property({ type: String })
   brandHref = "";
@@ -145,6 +148,7 @@ export class SgdsMainnav extends SgdsElement {
 
   updated() {
     if (!this.hasNonCollapsibleSlot) this.hasNonCollapsibleSlot = this.hasSlotController.test("non-collapsible");
+    if (!this.hasStartSlot) this.hasStartSlot = this.hasSlotController.test("start");
   }
 
   private _handleClickOutOfElement(e: MouseEvent, self: HTMLElement) {
@@ -326,7 +330,7 @@ export class SgdsMainnav extends SgdsElement {
     return html`
       <nav>
         <div class="navbar ${this._expandClass()}">
-          <slot name="start"></slot>
+          <slot name="start" class=${classMap({ "slot-empty": !this.hasStartSlot })}></slot>
           <a class="navbar-brand" href=${this.brandHref} aria-label="brand-link">
             <slot name="brand"></slot>
           </a>
@@ -341,10 +345,7 @@ export class SgdsMainnav extends SgdsElement {
             </div>
           </div>
           <div class="navbar-end">
-            <slot
-              name="non-collapsible"
-              class=${classMap({ "non-collapsible-empty": !this.hasNonCollapsibleSlot })}
-            ></slot>
+            <slot name="non-collapsible" class=${classMap({ "slot-empty": !this.hasNonCollapsibleSlot })}></slot>
             <slot name="profile" @slotchange=${this._handleProfileSlotChange}></slot>
             ${!(this._hasProfileComponent && this.breakpointReached)
               ? html`<sgds-icon-button
