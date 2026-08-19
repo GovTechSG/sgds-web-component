@@ -51,3 +51,16 @@ Magenta to Red gradient background.
 <Canvas of={MainnavStories.ToneGradient4}>
   <Story of={MainnavStories.ToneGradient4} />
 </Canvas>
+
+## Profile Slot
+
+Use `sgds-mainnav-profile` in the `profile` slot to render a user profile dropdown. It displays an avatar, label, and secondary text in desktop, and collapses into an avatar toggler with a mobile panel in smaller viewports.
+
+- The `label` and `secondaryText` props control the text displayed beside the avatar in desktop.
+- Use `readonly` on the first `sgds-dropdown-item` for non-interactive account info.
+- Use `sgds-divider` to separate item groups within the dropdown.
+- Set `close="outside"` to prevent the menu from closing when clicking inside it.
+
+<Canvas of={MainnavStories.ProfileSlot}>
+  <Story of={MainnavStories.ProfileSlot} />
+</Canvas>

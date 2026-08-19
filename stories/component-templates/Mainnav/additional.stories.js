@@ -129,7 +129,6 @@ export const ProfileSlot = {
   render: () => html`
     <sgds-mainnav fluid>
       <img alt="sgds logo" width="130" src="/logo.svg" slot="brand" />
-      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm"></sgds-icon-button>
       <sgds-mainnav-profile
         slot="profile"
         label="User Name"

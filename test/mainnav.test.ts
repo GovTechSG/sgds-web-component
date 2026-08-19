@@ -24,7 +24,7 @@ describe("sgds-mainnav", () => {
       el,
       `<nav>
         <div class="navbar navbar-expand-lg">
-          <slot name="start">
+          <slot class="slot-empty" name="start">
           </slot>
           <a
             aria-label="brand-link"
@@ -35,7 +35,7 @@ describe("sgds-mainnav", () => {
           </a>
           <div class="navbar-end">
             <slot
-              class="non-collapsible-empty"
+              class="slot-empty"
               name="non-collapsible"
             >
             </slot>
@@ -415,6 +415,24 @@ describe("sgds-mainnav", () => {
       const startIndex = children.indexOf(startSlot as Element);
       const brandIndex = children.indexOf(brand as Element);
       expect(startIndex).to.be.lessThan(brandIndex);
+    });
+
+    it("start slot has slot-empty class when nothing is slotted", async () => {
+      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
+      await el.updateComplete;
+      const startSlot = el.shadowRoot?.querySelector("slot[name='start']");
+      expect(startSlot).to.have.class("slot-empty");
+    });
+
+    it("start slot does not have slot-empty class when content is slotted", async () => {
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav>
+          <sgds-icon-button name="menu" slot="start" variant="ghost" size="sm"></sgds-icon-button>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const startSlot = el.shadowRoot?.querySelector("slot[name='start']");
+      expect(startSlot).not.to.have.class("slot-empty");
     });
   });
 });
