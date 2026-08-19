@@ -6,7 +6,6 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { offset } from "@floating-ui/dom";
 import SgdsElement from "../../base/sgds-element";
 import SgdsDropdown from "../Dropdown/sgds-dropdown";
-import SgdsDropdownItem from "../Dropdown/sgds-dropdown-item";
 import SgdsIcon from "../Icon/sgds-icon";
 import { MainnavBreakpointContext } from "./mainnav-context";
 import mainnavProfileStyle from "./mainnav-profile.css";
@@ -26,7 +25,6 @@ export class SgdsMainnavProfile extends SgdsElement {
   /** @internal */
   static dependencies = {
     "sgds-dropdown": SgdsDropdown,
-    "sgds-dropdown-item": SgdsDropdownItem,
     "sgds-icon": SgdsIcon
   };
 
