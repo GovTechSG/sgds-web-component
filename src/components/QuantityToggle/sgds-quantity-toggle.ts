@@ -97,34 +97,23 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     return this._mixinGetValidationMessage();
   }
 
-  private async _handleChange() {
+  private async _handleValueChange(e: Event, eventName: "sgds-change" | "sgds-input") {
+    e.stopPropagation();
     const sgdsInput = await this._sgdsInput;
     if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
       sgdsInput.value = "0";
     }
     this.value = parseInt(sgdsInput.value);
     this._mixinSetFormValue();
+    this.emit(eventName);
     if (this._mixinShouldSkipSgdsValidation()) return;
-    this._mixinValidate(sgdsInput.input);
-    this.invalid = !this._mixinReportValidity();
-  }
-  private async _handleInputChange() {
-    const sgdsInput = await this._sgdsInput;
-    if (this._mixinShouldSkipSgdsValidation()) {
-      if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
-        sgdsInput.value = "0";
-      }
-      this.value = parseInt(sgdsInput.value);
-      this._mixinSetFormValue();
-      return;
+    if (eventName === "sgds-input") {
+      this.invalid = false;
     }
-    this.invalid = false;
-    if (parseInt(sgdsInput.value) < this.step || sgdsInput.value === "") {
-      sgdsInput.value = "0";
-    }
-    this.value = parseInt(sgdsInput.value);
-    this._mixinSetFormValue();
     this._mixinValidate(sgdsInput.input);
+    if (eventName === "sgds-change") {
+      this.invalid = !this._mixinReportValidity();
+    }
   }
 
   private async _mixinResetFormControl() {
@@ -269,8 +258,8 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             min=${ifDefined(this.min)}
             max=${ifDefined(this.max)}
             .value=${live(this.value)}
-            @sgds-change=${this._handleChange}
-            @sgds-input=${this._handleInputChange}
+            @sgds-change=${(e: Event) => this._handleValueChange(e, "sgds-change")}
+            @sgds-input=${(e: Event) => this._handleValueChange(e, "sgds-input")}
             @sgds-invalid=${this._handleInvalid}
             @sgds-valid=${this._handleValid}
             @keydown=${this._handleKeyDown}

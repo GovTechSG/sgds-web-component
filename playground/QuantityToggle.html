@@ -19,7 +19,7 @@
     <div class="container">
       <div>
         <h2>Default</h2>
-        <sgds-quantity-toggle label="Quantity"></sgds-quantity-toggle>
+        <sgds-quantity-toggle label="Quantity" id="qt"></sgds-quantity-toggle>
       </div>
 
       <div>
@@ -90,6 +90,12 @@
             if (customQt.invalid) return;
             alert("Submitted: " + customQt.value);
           });
+
+      const el = document.getElementById('qt');
+
+      el.addEventListener('sgds-input', (e) => {
+        console.log('sgds-input fired, el.value =', el.value);
+      });
         </script>
       </div>
     </div>

@@ -42,3 +42,16 @@ use `invalidFeedback` prop.
 <Canvas of={QuantityToggleStories.OverrideInvalidFeedback}>
   <Story of={QuantityToggleStories.OverrideInvalidFeedback} />
 </Canvas>
+
+## Event Emission
+
+Listen to `sgds-input` and `sgds-change` events to react to value changes.
+
+- `sgds-input` fires on every keystroke as the user types
+- `sgds-change` fires when the value is committed (on blur, or when +/- buttons are clicked)
+
+When the event fires, `el.value` reflects the current value.
+
+<Canvas of={QuantityToggleStories.EventEmission}>
+  <Story of={QuantityToggleStories.EventEmission} />
+</Canvas>

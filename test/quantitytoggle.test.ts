@@ -97,6 +97,37 @@ describe("when value change", () => {
     expect(inputHandler).to.have.been.calledOnce;
   });
 
+  it("el.value is up-to-date when sgds-input event fires", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="0"></sgds-quantity-toggle>`);
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    inputEl.focus();
+
+    let valueAtEvent: number | undefined;
+    el.addEventListener("sgds-input", () => {
+      valueAtEvent = el.value;
+    });
+
+    await sendKeys({ press: "5" });
+    await waitUntil(() => valueAtEvent !== undefined);
+    expect(valueAtEvent).to.equal(5);
+  });
+
+  it("el.value is up-to-date when sgds-change event fires", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="0"></sgds-quantity-toggle>`);
+    const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
+    inputEl.focus();
+
+    let valueAtEvent: number | undefined;
+    el.addEventListener("sgds-change", () => {
+      valueAtEvent = el.value;
+    });
+
+    await sendKeys({ press: "5" });
+    await sendKeys({ press: "Tab" });
+    await waitUntil(() => valueAtEvent !== undefined);
+    expect(valueAtEvent).to.equal(5);
+  });
+
   it("prevent from entering special characters", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="15"></sgds-quantity-toggle>`);
     const inputEl = el.shadowRoot?.querySelector("sgds-input") as SgdsInput;
