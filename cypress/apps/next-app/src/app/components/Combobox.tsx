@@ -1,18 +1,21 @@
 'use client';
 
+import SgdsComboBox from '@govtechsg/sgds-web-component/react/combo-box/index.js';
+import SgdsComboBoxOption from '@govtechsg/sgds-web-component/react/combo-box-option/index.js';
+
 export const Combobox = () => {
   return (
     <div>
-      <sgds-combo-box label="Fruits" hintText="single select" name="combobox-single" placeholder="Select a fruit" suppressHydrationWarning>
-        <sgds-combo-box-option value="apple" suppressHydrationWarning>Apple</sgds-combo-box-option>
-        <sgds-combo-box-option value="orange" suppressHydrationWarning>Orange</sgds-combo-box-option>
-        <sgds-combo-box-option value="pear" suppressHydrationWarning>Pear</sgds-combo-box-option>
-      </sgds-combo-box>
-      <sgds-combo-box label="Fruits" hintText="multi select" name="combobox-multi" placeholder="Select fruits" multiselect suppressHydrationWarning>
-        <sgds-combo-box-option value="apple" suppressHydrationWarning>Apple</sgds-combo-box-option>
-        <sgds-combo-box-option value="orange" suppressHydrationWarning>Orange</sgds-combo-box-option>
-        <sgds-combo-box-option value="pear" suppressHydrationWarning>Pear</sgds-combo-box-option>
-      </sgds-combo-box>
+      <SgdsComboBox label="Fruits" hintText="single select" name="combobox-single" placeholder="Select a fruit">
+        <SgdsComboBoxOption value="apple">Apple</SgdsComboBoxOption>
+        <SgdsComboBoxOption value="orange">Orange</SgdsComboBoxOption>
+        <SgdsComboBoxOption value="pear">Pear</SgdsComboBoxOption>
+      </SgdsComboBox>
+      <SgdsComboBox label="Fruits" hintText="multi select" name="combobox-multi" placeholder="Select fruits" multiselect>
+        <SgdsComboBoxOption value="apple">Apple</SgdsComboBoxOption>
+        <SgdsComboBoxOption value="orange">Orange</SgdsComboBoxOption>
+        <SgdsComboBoxOption value="pear">Pear</SgdsComboBoxOption>
+      </SgdsComboBox>
     </div>
   );
 };

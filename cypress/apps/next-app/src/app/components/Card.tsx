@@ -1,8 +1,10 @@
 'use client';
 
+import SgdsThumbnailCard from '@govtechsg/sgds-web-component/react/thumbnail-card/index.js';
+
 export const Card = () => {
   return (
-    <sgds-thumbnail-card stretchedLink orientation="vertical" suppressHydrationWarning>
+    <SgdsThumbnailCard stretchedLink orientation="vertical">
       <span slot="subtitle">EXPLORE THE FEATURES</span>
       <span slot="title">Innovative Solutions for You</span>
       <span slot="description">
@@ -11,6 +13,6 @@ export const Card = () => {
       </span>
       <div slot="lower"></div>
       <a href="#" slot="link">Register now</a>
-    </sgds-thumbnail-card>
+    </SgdsThumbnailCard>
   );
 };

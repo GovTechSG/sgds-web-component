@@ -1,47 +1,61 @@
 <script lang="ts" setup>
-import { onMounted } from "vue";
-
-onMounted(async () => {
-  await import("@govtechsg/sgds-web-component/components/Mainnav/index.js");
-});
-import "@govtechsg/sgds-web-component/components/Dropdown/index.js";  
+import "@govtechsg/sgds-web-component/components/Mainnav/index.js";
+import "@govtechsg/sgds-web-component/components/Dropdown/index.js";
+import "@govtechsg/sgds-web-component/components/Divider/index.js";
+import "@govtechsg/sgds-web-component/components/IconButton/index.js";
 </script>
 
 <template>
-  <sgds-mainnav expand="lg">
-    <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand">
-    <sgds-mainnav-item active>
-        <a href="#">Home</a>
-    </sgds-mainnav-item>
-    <sgds-mainnav-item disabled><a href="#">About</a></sgds-mainnav-item>
-    <sgds-mainnav-item slot="end" class="test test2"><a href="#">Info</a></sgds-mainnav-item>
-    <sgds-mainnav-item slot="end" id="night-theme"><a href="#"><sgds-icon name="lightbulb"></sgds-icon></a></sgds-mainnav-item>
-    <sgds-mainnav-dropdown>
-        <span slot="toggler">Dropdown</span>
-        <sgds-dropdown-item disabled><a href="https://www.google.com/">Item 1</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="https://www.google.com/">Item 2</a></sgds-dropdown-item>
-        <sgds-dropdown-item active><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
-    </sgds-mainnav-dropdown>
-    <sgds-mainnav-dropdown>
-        <span slot="toggler">Dropdown</span>
-        <sgds-dropdown-item>Item 1</sgds-dropdown-item>
-        <sgds-dropdown-item>Item 2</sgds-dropdown-item>
-        <sgds-dropdown-item>Item 3</sgds-dropdown-item>
-    </sgds-mainnav-dropdown>
-    <sgds-button slot="end">Login</sgds-button>
-    <!-- <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px">
-    </dev-console-widget> -->
+  <sgds-mainnav fluid tone="gradient-1">
+    <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+    <div slot="brand">Logo</div>
+    <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+    <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu" close="outside">
+      <span slot="avatar" class="avatar-circle"></span>
+      <sgds-dropdown-item readonly>
+        <div class="sgds:flex sgds:flex-col sgds:gap-4">
+          <span class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal sgds:text-subtle">Account</span>
+          <div class="sgds:flex sgds:items-center sgds:gap-3 sgds:py-1">
+            <span class="sgds:h-12 sgds:w-12 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
+              <span class="sgds:h-full sgds:w-full sgds:block sgds:bg-surface-raised sgds:rounded-[50%]" style="border-radius: 50%;"></span>
+            </span>
+            <div class="sgds:flex sgds:flex-col sgds:justify-center">
+              <span class="sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-default">User Name</span>
+              <span class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-subtle">user@agency.gov.sg</span>
+            </div>
+          </div>
+        </div>
+      </sgds-dropdown-item>
+      <sgds-divider thickness="thin"></sgds-divider>
+      <div class="sgds:px-4 sgds:pb-1 sgds:pt-4">
+        <span class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal sgds:text-subtle">View</span>
+      </div>
+      <sgds-dropdown-item arialabel="Agency view selected">
+        <span class="sgds:flex sgds:w-62 sgds:items-center sgds:justify-between sgds:gap-3 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-default"><span>Agency</span></span>
+      </sgds-dropdown-item>
+      <sgds-dropdown-item arialabel="Switch to product view">
+        <span class="sgds:flex sgds:w-62 sgds:items-center sgds:justify-between sgds:gap-3 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-default"><span>Product</span></span>
+      </sgds-dropdown-item>
+      <sgds-divider thickness="thin"></sgds-divider>
+      <sgds-dropdown-item arialabel="My profile">
+        <span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">My profile</span>
+      </sgds-dropdown-item>
+      <sgds-dropdown-item arialabel="Settings">
+        <span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">Settings</span>
+      </sgds-dropdown-item>
+      <sgds-dropdown-item arialabel="Log out">
+        <span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-danger-default">Log out</span>
+      </sgds-dropdown-item>
+    </sgds-mainnav-profile>
   </sgds-mainnav>
 </template>
+
+<style scoped>
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--sgds-surface-raised);
+  display: block;
+}
+</style>

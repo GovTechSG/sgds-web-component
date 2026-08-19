@@ -1,15 +1,18 @@
 'use client';
 
+import SgdsDescriptionListGroup from '@govtechsg/sgds-web-component/react/description-list-group/index.js';
+import SgdsDescriptionList from '@govtechsg/sgds-web-component/react/description-list/index.js';
+
 export const DescriptionList = () => {
   return (
-    <sgds-description-list-group suppressHydrationWarning>
+    <SgdsDescriptionListGroup>
       <span slot="description">Description</span>
-      <sgds-description-list suppressHydrationWarning>
+      <SgdsDescriptionList>
         Label 1<span slot="data">Data Text Description List 1</span>
-      </sgds-description-list>
-      <sgds-description-list suppressHydrationWarning>
+      </SgdsDescriptionList>
+      <SgdsDescriptionList>
         Label 2<span slot="data">Data Text Description List 2</span>
-      </sgds-description-list>
-    </sgds-description-list-group>
+      </SgdsDescriptionList>
+    </SgdsDescriptionListGroup>
   );
 };
