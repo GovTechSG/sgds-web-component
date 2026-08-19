@@ -116,7 +116,10 @@ export class DropdownListElement extends DropdownElement {
         ?.assignedElements({
           flatten: true
         })
-        .filter(el => !el.classList.contains("empty-menu") && !el.hasAttribute("hidden")) as SgdsDropdownItem[];
+        .filter(
+          el =>
+            el.getAttribute("role") === "menuitem" && !el.classList.contains("empty-menu") && !el.hasAttribute("hidden")
+        ) as SgdsDropdownItem[];
       return defaultSlotItems;
     }
     // for case when there is no slot e.g. combobox
@@ -129,7 +132,7 @@ export class DropdownListElement extends DropdownElement {
   }
 
   private _getActiveMenuItems(): SgdsDropdownItem[] {
-    return this._getMenuItems().filter(item => !item.disabled && !item.hidden);
+    return this._getMenuItems().filter(item => !item.disabled && !item.hidden && !item.readonly);
   }
   private _setMenuItem(currentItemIdx: number) {
     const items = this._getActiveMenuItems();
