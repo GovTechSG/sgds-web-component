@@ -166,6 +166,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | `expand` | `sm \| md \| lg \| xl \| xxl \| always \| never` | `lg` | Breakpoint below which the nav collapses |
 | `brandHref` | string | `""` | URL for the brand logo link |
 | `fluid` | boolean | `false` | Uses a full-width container instead of a fixed-width one |
+| `hasStartSlot` | boolean | `false` | SSR hint — set to `true` when the `start` slot has content (prevents flash of empty gap) |
+| `hasNonCollapsibleSlot` | boolean | `false` | SSR hint — set to `true` when the `non-collapsible` slot has content |
 
 ### `<sgds-mainnav-item>`
 
@@ -251,8 +253,8 @@ Also inherits `<sgds-dropdown>` properties — see **[components-dropdown](dropd
 4. User profile/account dropdowns go in the `profile` slot — use `<sgds-mainnav-profile>` with `label` and `secondaryText` props (avatar replaces hamburger in mobile, self-contained mobile panel) or `<sgds-mainnav-dropdown>` (navigational drill-down). Prefer `<sgds-mainnav-profile>` for operational/internal apps.
 5. `non-collapsible` slot stays visible on all screen sizes — use for icons that should never collapse.
 6. The `<sgds-mainnav-profile>` component manages text colour automatically based on `tone` — no need to hardcode colour classes.
-7. **Do NOT use `<sgds-mainnav-item>` with `tone="gradient-*"`** — text fails accessibility against gradient backgrounds. Gradient tones are for operational apps using `<sgds-mainnav-profile>` with sidebar navigation.
+7. **Do NOT place text elements in the mainnav when `tone` is non-default** — text fails contrast ratio against brand/gradient backgrounds. This applies to `<sgds-mainnav-item>` (use sidebar navigation instead) and the `start` slot (only icon-buttons allowed). Gradient tones are for operational apps using `<sgds-mainnav-profile>` with sidebar navigation.
 8. **Do NOT use `<sgds-mainnav-item>` alongside `<sgds-mainnav-profile>`** — the profile disables the mainnav hamburger, so nav items would have no mobile menu. Use a sidebar for navigation in these apps.
 9. Use `<sgds-masthead>` above `<sgds-mainnav>` as required for Singapore Government sites.
 10. **Always set `ariaLabel` on `<sgds-mainnav-dropdown>`** — the slotted toggler text is not accessible to screen readers through the shadow DOM boundary. Use a descriptive label like `"Resources menu"`.
-11. For console/dashboard layouts with a sidebar toggle, use `slot="start"` for the hamburger icon-button.
+11. Use `slot="start"` for `<sgds-icon-button>` elements that appear before the brand (e.g. sidebar toggle, additional actions). When `tone` is set (non-default), only `variant="ghost" tone="fixed-light"` is allowed.

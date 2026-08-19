@@ -287,6 +287,10 @@ slot[name="start"] {
   gap: var(--sgds-gap-xs);
 }
 
+.slot-empty {
+  display: none;
+}
+
 
 slot[name="profile"] {
   display: flex;
@@ -299,9 +303,6 @@ slot[name="non-collapsible"] {
   align-items: center;
 }
 
-slot[name="non-collapsible"].non-collapsible-empty {
-  display: none;
-}
 
 :host([tone="brand"]) slot[name="non-collapsible"]::slotted(*),
 :host([tone^="gradient"]) slot[name="non-collapsible"]::slotted(*) {
