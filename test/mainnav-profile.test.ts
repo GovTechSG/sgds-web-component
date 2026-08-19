@@ -1,5 +1,6 @@
-import { aTimeout, assert, elementUpdated, expect, fixture, fixtureCleanup } from "@open-wc/testing";
+import { aTimeout, assert, elementUpdated, expect, fixture, fixtureCleanup, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
+import { sendKeys } from "@web/test-runner-commands";
 import { SgdsDropdownItem, SgdsMainnav, SgdsMainnavProfile } from "../src/components";
 import "./sgds-web-component";
 
@@ -76,16 +77,14 @@ describe("sgds-mainnav-profile", () => {
     assert.shadowDom.equal(
       profile,
       `
-      <div
+      <button
         class="profile-avatar-mobile"
         aria-expanded="false"
         aria-label="Profile menu"
-        role="button"
-        tabindex="0"
       >
         <slot name="avatar">
         </slot>
-      </div>
+      </button>
       <div
         class="profile-mobile-panel"
         hidden=""
@@ -322,10 +321,9 @@ describe("sgds-mainnav-profile", () => {
       const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
       await profile.updateComplete;
 
-      const avatarToggler = profile.shadowRoot?.querySelector(".profile-avatar-mobile");
+      const avatarToggler = profile.shadowRoot?.querySelector("button.profile-avatar-mobile");
       expect(avatarToggler).to.exist;
-      expect(avatarToggler).to.have.attribute("role", "button");
-      expect(avatarToggler).to.have.attribute("tabindex", "0");
+      expect(avatarToggler?.tagName.toLowerCase()).to.equal("button");
       expect(avatarToggler).to.have.attribute("aria-label", "Profile menu");
     });
 
@@ -456,6 +454,208 @@ describe("sgds-mainnav-profile", () => {
       // Desktop: toggler returns
       expect(el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler")).to.exist;
     });
+  });
+
+  describe("desktop keyboard navigation", () => {
+    beforeEach(() => {
+      Object.defineProperty(window, "innerWidth", {
+        writable: true,
+        configurable: true,
+        value: 1030
+      });
+      window.dispatchEvent(new Event("resize"));
+    });
+
+    it("ArrowDown opens the dropdown menu", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
+            <sgds-dropdown-item><span>Settings</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
+      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
+      toggler.focus();
+
+      await sendKeys({ press: "ArrowDown" });
+      await dropdown.updateComplete;
+
+      expect(dropdown.menuIsOpen).to.be.true;
+    }).retries(1);
+
+    it("ArrowDown navigates through dropdown items", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
+            <sgds-dropdown-item><span>Settings</span></sgds-dropdown-item>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
+      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
+
+      // Click to open menu first
+      toggler.click();
+      await dropdown.updateComplete;
+      await aTimeout(0);
+      toggler.focus();
+
+      // Navigate to first item
+      await sendKeys({ press: "ArrowDown" });
+      await dropdown.updateComplete;
+
+      const items = profile.querySelectorAll("sgds-dropdown-item");
+      expect(items[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
+      expect(items[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "-1");
+    }).retries(1);
+
+    it("ArrowDown loops from last item to first item", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
+      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
+
+      // Click to open menu first
+      toggler.click();
+      await dropdown.updateComplete;
+      await aTimeout(0);
+      toggler.focus();
+
+      // Navigate: first → second → loops back to first
+      await sendKeys({ press: "ArrowDown" });
+      await dropdown.updateComplete;
+      await sendKeys({ press: "ArrowDown" });
+      await dropdown.updateComplete;
+      await sendKeys({ press: "ArrowDown" });
+      await dropdown.updateComplete;
+
+      const items = profile.querySelectorAll("sgds-dropdown-item");
+      expect(items[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
+    }).retries(1);
+
+    it("skips readonly items during keyboard navigation", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item readonly><span>Account info</span></sgds-dropdown-item>
+            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
+            <sgds-dropdown-item><span>Settings</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
+      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
+
+      // Click to open menu first
+      toggler.click();
+      await dropdown.updateComplete;
+      await aTimeout(0);
+      toggler.focus();
+
+      // Navigate to first active item (should skip readonly)
+      await sendKeys({ press: "ArrowDown" });
+      await dropdown.updateComplete;
+
+      const items = profile.querySelectorAll("sgds-dropdown-item");
+      // readonly item (index 0) should be skipped, first navigable item (index 1) gets focus
+      expect(items[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "-1");
+      expect(items[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
+    }).retries(1);
+
+    it("skips non-dropdown-item elements (dividers, divs) during keyboard navigation", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
+            <sgds-divider thickness="thin"></sgds-divider>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
+      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
+
+      // Click to open menu first
+      toggler.click();
+      await dropdown.updateComplete;
+      await aTimeout(0);
+      toggler.focus();
+
+      // Navigate to first item
+      await sendKeys({ press: "ArrowDown" });
+      await dropdown.updateComplete;
+
+      // Navigate to second item (should skip the divider)
+      await sendKeys({ press: "ArrowDown" });
+      await dropdown.updateComplete;
+
+      const items = profile.querySelectorAll("sgds-dropdown-item");
+      expect(items[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "-1");
+      expect(items[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
+    }).retries(1);
+
+    it("Escape closes the dropdown menu", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
+      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
+      toggler.focus();
+
+      // Open menu
+      await sendKeys({ press: "ArrowDown" });
+      await dropdown.updateComplete;
+      expect(dropdown.menuIsOpen).to.be.true;
+
+      // Close menu
+      await sendKeys({ press: "Escape" });
+      await dropdown.updateComplete;
+      expect(dropdown.menuIsOpen).to.be.false;
+    }).retries(1);
   });
 
   describe("dropdown-item readonly prop", () => {
