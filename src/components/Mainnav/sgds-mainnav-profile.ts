@@ -106,17 +106,15 @@ export class SgdsMainnavProfile extends SgdsElement {
 
     // Mobile: avatar toggler + self-contained mobile panel
     return html`
-      <div
+      <button
         class="profile-avatar-mobile"
-        role="button"
-        tabindex="0"
         aria-label=${this.ariaLabel || "Toggle navigation"}
         aria-expanded=${this._mobileMenuOpen ? "true" : "false"}
         @click=${this._handleMobileToggle}
         @keydown=${this._handleKeydown}
       >
         <slot name="avatar"></slot>
-      </div>
+      </button>
       <div class="profile-mobile-panel" ?hidden=${!this._mobileMenuOpen}>
         <div class="profile-mobile-items">
           <slot></slot>

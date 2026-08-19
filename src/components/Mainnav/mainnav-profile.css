@@ -155,11 +155,22 @@ sgds-dropdown {
   cursor: pointer;
   border-radius: var(--sgds-border-radius-full);
   height: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
 }
 
 .profile-avatar-mobile:focus-visible {
+  outline: none;
+}
+
+.profile-avatar-mobile:focus-visible ::slotted(*) {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
+  border-radius: var(--sgds-border-radius-full);
 }
 
 /* Mobile: self-contained panel mimicking mainnav body */
