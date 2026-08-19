@@ -63,6 +63,11 @@ function injectTabs(pre: HTMLElement) {
   const sourceContainer = scrollWrapper?.parentElement;
   if (!sourceContainer) return;
 
+  // Only inject tabs for Canvas blocks (which have a story preview sibling),
+  // not standalone <Source> blocks in MDX documentation
+  const canvasWrapper = sourceContainer.parentElement;
+  if (!canvasWrapper?.querySelector(":scope > .docs-story")) return;
+
   // Mark the container for the clipboard interceptor
   sourceContainer.setAttribute("data-react-tabs-container", "true");
 
