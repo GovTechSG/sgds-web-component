@@ -287,7 +287,8 @@ slot[name="start"] {
   gap: var(--sgds-gap-xs);
 }
 
-.slot-empty {
+slot[name="start"].slot-empty,
+slot[name="non-collapsible"].slot-empty {
   display: none;
 }
 
