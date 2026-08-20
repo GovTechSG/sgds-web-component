@@ -51,10 +51,20 @@
   cursor: pointer;
   align-items: center;
   text-decoration: none;
+  color: var(--sgds-color-default);
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   box-sizing: border-box;
   font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs, 20px);
+}
+
+:host([tone="brand"]) .nav-link {
+  color: var(--sgds-color-fixed-light);
+}
+
+:host([tone="brand"]) .nav-link:not(.disabled):hover,
+:host([tone="brand"]) .nav-link:not(.disabled):focus-visible {
+  color: var(--sgds-color-fixed-light);
 }
 
 .nav-link:not(.disabled).active,
@@ -117,6 +127,10 @@
   outline-offset: var(--sgds-outline-offset-focus);
   outline-offset: -5px;
   color: var(--sgds-primary-color-default);
+}
+
+:host([tone="brand"]) slot[name="toggler"]::slotted(*) {
+  color: var(--sgds-color-fixed-light);
 }
 
 slot[name="toggler"]::slotted(*) {

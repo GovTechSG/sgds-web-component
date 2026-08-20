@@ -2,9 +2,20 @@
 <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="./css/utility.css" rel="stylesheet" type="text/css" />
+<style>
+  #avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+    background-image: url("https://i.pravatar.cc/40");
+    background-size: cover;
+  }
+</style>
 
 <sgds-mainnav>
-  <img width="130" src="https://www.designsystem.tech.gov.sg/assets/img/logo-sgds.svg" slot="brand" />
+  <div slot="brand">Logo</div>
   <sgds-mainnav-item active>
     <a href="#">Home</a>
   </sgds-mainnav-item>
@@ -37,4 +48,118 @@
   </sgds-mainnav-dropdown>
   <sgds-button slot="end">Login</sgds-button>
   <dev-console-widget slot="non-collapsible" iconColor="black" iconWidth="28px" iconHeight="28px"> </dev-console-widget>
+</sgds-mainnav>
+
+<br/>
+
+<sgds-mainnav tone="brand" gradient="gradient-1">
+  <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light"></sgds-icon-button>
+  <div slot="brand">CONSOLE LOGO</div>
+  <sgds-mainnav-item active>
+    <a href="#">Home</a>
+  </sgds-mainnav-item>
+  <sgds-mainnav-item slot="end" id="night-theme"><a href="#"><sgds-icon name="moon"></sgds-icon></a></sgds-mainnav-item>
+ 
+  <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
+    <div slot="toggler" class="sgds:flex sgds:flex-row sgds:items-center sgds:gap-3">
+      <div id="avatar"></div>
+     <div class="sgds:flex sgds:flex-col sgds:gap-text-2-xs">
+      <span class="sgds:text-body-xs sgds:font-semibold sgds:leading-3-xs sgds:text-fixed-light">Lu Khei</span>
+      <span class="sgds:text-body-xs sgds:leading-3-xs sgds:text-fixed-light">Agency (admin)</span>
+    </div> 
+    </div>
+    <div class="sgds:w-70">
+      <div class="sgds:flex sgds:items-center sgds:gap-3 sgds:px-4 sgds:py-3">
+        <span class="sgds:h-12 sgds:w-12 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
+          <img src="https://ca.slack-edge.com/E07ASS05KG9-U026NLZ9L2G-b7ec81941440-512" alt="" aria-hidden="true" class="sgds:h-full sgds:w-full sgds:scale-125 sgds:object-cover sgds:object-center">
+        </span>
+        <div class="sgds:flex sgds:flex-col sgds:justify-center">
+          <span class="sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-default">Lu Khei</span>
+          <span class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-subtle">lkc@tech.gov.sg</span>
+        </div>
+      </div>
+      <sgds-divider thickness="thin"></sgds-divider>
+      <div class="sgds:px-4 sgds:pb-1 sgds:pt-4">
+        <span class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal sgds:text-subtle">View</span>
+      </div>
+      <sgds-dropdown-item arialabel="Agency view selected">
+        <span class="sgds:flex sgds:w-62 sgds:items-center sgds:justify-between sgds:gap-3 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-default"><span>Agency</span><sgds-icon name="chevron-right" size="sm"></sgds-icon></span>
+      </sgds-dropdown-item>
+      <sgds-dropdown-item arialabel="Switch to product view">
+        <span class="sgds:flex sgds:w-62 sgds:items-center sgds:justify-between sgds:gap-3 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-default"><span>Product</span></span>
+      </sgds-dropdown-item>
+      <sgds-dropdown-item arialabel="Switch to programme view">
+        <span class="sgds:flex sgds:w-62 sgds:items-center sgds:justify-between sgds:gap-3 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-default"><span>Programme</span></span>
+      </sgds-dropdown-item>
+      <sgds-divider thickness="thin"></sgds-divider>
+      <sgds-dropdown-item arialabel="My profile">
+        <span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">My profile</span>
+      </sgds-dropdown-item>
+      <sgds-dropdown-item arialabel="Invite user">
+        <span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">Invite user</span>
+      </sgds-dropdown-item>
+      <sgds-dropdown-item arialabel="API keys">
+        <span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">API keys</span>
+      </sgds-dropdown-item>
+      <sgds-dropdown-item arialabel="Log out">
+        <span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-danger-default">Log out</span>
+      </sgds-dropdown-item>
+    </div>
+  </sgds-mainnav-dropdown>
+</sgds-mainnav>
+
+<br/>
+<p>tone="brand" (no gradient - falls back to --sgds-primary-surface-default)</p>
+<sgds-mainnav tone="brand">
+  <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light"></sgds-icon-button>
+  <div slot="brand">CONSOLE LOGO</div>
+  <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
+  <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
+  <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
+    <span slot="toggler">Dropdown</span>
+    <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+    <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+  </sgds-mainnav-dropdown>
+</sgds-mainnav>
+
+<br/>
+<p>tone="brand" gradient="gradient-2"</p>
+<sgds-mainnav tone="brand" gradient="gradient-2">
+  <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light"></sgds-icon-button>
+  <div slot="brand">CONSOLE LOGO</div>
+  <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
+  <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
+  <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
+    <span slot="toggler">Dropdown</span>
+    <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+    <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+  </sgds-mainnav-dropdown>
+</sgds-mainnav>
+
+<br/>
+<p>tone="brand" gradient="gradient-3"</p>
+<sgds-mainnav tone="brand" gradient="gradient-3">
+  <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light"></sgds-icon-button>
+  <div slot="brand">CONSOLE LOGO</div>
+  <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
+  <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
+  <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
+    <span slot="toggler">Dropdown</span>
+    <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+    <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+  </sgds-mainnav-dropdown>
+</sgds-mainnav>
+
+<br/>
+<p>tone="brand" gradient="gradient-4"</p>
+<sgds-mainnav tone="brand" gradient="gradient-4">
+  <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light"></sgds-icon-button>
+  <div slot="brand">CONSOLE LOGO</div>
+  <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
+  <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
+  <sgds-mainnav-dropdown slot="end" ariaLabel="Dropdown menu">
+    <span slot="toggler">Dropdown</span>
+    <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+    <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+  </sgds-mainnav-dropdown>
 </sgds-mainnav>
