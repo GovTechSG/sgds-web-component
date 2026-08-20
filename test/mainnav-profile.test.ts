@@ -1,6 +1,6 @@
 import { aTimeout, assert, elementUpdated, expect, fixture, fixtureCleanup, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
-import { sendKeys } from "@web/test-runner-commands";
+import { sendKeys, sendMouse } from "@web/test-runner-commands";
 import { SgdsDropdownItem, SgdsMainnav, SgdsMainnavProfile } from "../src/components";
 import "./sgds-web-component";
 
@@ -375,6 +375,63 @@ describe("sgds-mainnav-profile", () => {
       avatarToggler.click();
       await profile.updateComplete;
       expect(panel).to.have.attribute("hidden");
+    });
+
+    it("clicking outside the profile mobile panel closes it", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const avatarToggler = profile.shadowRoot?.querySelector(".profile-avatar-mobile") as HTMLElement;
+      const panel = profile.shadowRoot?.querySelector(".profile-mobile-panel");
+
+      // Open the panel
+      avatarToggler.click();
+      await profile.updateComplete;
+      expect(panel).not.to.have.attribute("hidden");
+
+      // Click outside the component
+      await sendMouse({ type: "click", position: [0, 0] });
+      await profile.updateComplete;
+
+      expect(panel).to.have.attribute("hidden");
+    });
+
+    it("does not close mobile panel on outside click when close='inside'", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu" close="inside">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const avatarToggler = profile.shadowRoot?.querySelector(".profile-avatar-mobile") as HTMLElement;
+      const panel = profile.shadowRoot?.querySelector(".profile-mobile-panel");
+
+      // Open the panel
+      avatarToggler.click();
+      await profile.updateComplete;
+      expect(panel).not.to.have.attribute("hidden");
+
+      // Click outside the component
+      await sendMouse({ type: "click", position: [0, 0] });
+      await profile.updateComplete;
+
+      // Panel should remain open
+      expect(panel).not.to.have.attribute("hidden");
     });
   });
 
