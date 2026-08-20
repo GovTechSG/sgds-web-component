@@ -11,7 +11,14 @@ export const Fluid = {
 const ToneTemplate = ({ tone }) => {
   return html`
     <sgds-mainnav tone=${tone} fluid>
-      <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+      <sgds-icon-button
+        name="menu"
+        slot="start"
+        variant="ghost"
+        tone="fixed-light"
+        size="sm"
+        ariaLabel="Open side menu"
+      ></sgds-icon-button>
       <img slot="brand" alt="logo" width="130" src="/logo-white.svg" />
       <sgds-icon-button
         slot="non-collapsible"
@@ -19,6 +26,7 @@ const ToneTemplate = ({ tone }) => {
         variant="ghost"
         tone="fixed-light"
         size="sm"
+        ariaLabel="Toggle dark mode"
       ></sgds-icon-button>
       <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
         <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
@@ -109,7 +117,13 @@ export const ToneGradient4 = {
 export const StartSlot = {
   render: () => html`
     <sgds-mainnav fluid>
-      <sgds-icon-button name="placeholder" slot="start" variant="ghost" size="sm"></sgds-icon-button>
+      <sgds-icon-button
+        name="placeholder"
+        slot="start"
+        variant="ghost"
+        size="sm"
+        ariaLabel="Open side menu"
+      ></sgds-icon-button>
       <img alt="sgds logo" width="130" src="/logo.svg" slot="brand" />
       <sgds-mainnav-item active>
         <a href="#">Home</a>
@@ -117,7 +131,13 @@ export const StartSlot = {
       <sgds-mainnav-item>
         <a href="#">About</a>
       </sgds-mainnav-item>
-      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm"></sgds-icon-button>
+      <sgds-icon-button
+        slot="non-collapsible"
+        name="moon"
+        variant="ghost"
+        size="sm"
+        ariaLabel="Toggle dark mode"
+      ></sgds-icon-button>
     </sgds-mainnav>
   `,
   name: "Start Slot",
