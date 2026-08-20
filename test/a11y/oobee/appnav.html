@@ -14,29 +14,18 @@
     </style>
   </head>
   <body>
-    <sgds-mainnav>
+    <sgds-appnav>
+      <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Open side menu"></sgds-icon-button>
       <div slot="brand">Logo</div>
-      <sgds-mainnav-item active>
-        <a href="#">Home</a>
-      </sgds-mainnav-item>
-      <sgds-mainnav-item disabled><a href="#">About</a></sgds-mainnav-item>
-      <sgds-mainnav-dropdown ariaLabel="Dropdown menu">
-        <span slot="toggler">Dropdown</span>
-        <sgds-dropdown-item disabled><a href="#">Item 1</a></sgds-dropdown-item>
-        <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
-        <sgds-dropdown-item active><a href="#">Item 3</a></sgds-dropdown-item>
-      </sgds-mainnav-dropdown>
-      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
-      <sgds-button slot="end" ariaLabel="Login">Login</sgds-button>
-    </sgds-mainnav>
+      <sgds-icon-button name="moon" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
+      <sgds-icon-button name="bell" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Notifications"></sgds-icon-button>
+    </sgds-appnav>
 
-    <sgds-mainnav fluid>
+    <sgds-appnav tone="gradient-3">
+      <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Open side menu"></sgds-icon-button>
       <div slot="brand">Logo</div>
-      <sgds-mainnav-item active>
-        <a href="#">Home</a>
-      </sgds-mainnav-item>
-      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
-      <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
+      <sgds-icon-button name="moon" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
+      <sgds-appnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
         <span slot="avatar" class="avatar-circle"></span>
         <sgds-dropdown-item readonly>
           <div>
@@ -57,7 +46,7 @@
         <sgds-dropdown-item arialabel="Log out">
           <span>Log out</span>
         </sgds-dropdown-item>
-      </sgds-mainnav-profile>
-    </sgds-mainnav>
+      </sgds-appnav-profile>
+    </sgds-appnav>
   </body>
 </html>

@@ -2,12 +2,30 @@
   display: block;
 }
 
-
 nav {
-  background-color: var(--sgds-surface-default);
   box-shadow: 0px 2px 4px 0px rgba(14, 14, 14, 0.08);
   position: relative;
   z-index: var(--sgds-z-index-floating);
+}
+
+:host([tone="brand"]) nav {
+  background-color: var(--sgds-primary-surface-default);
+}
+
+:host([tone="gradient-1"]) nav {
+  background: var(--sgds-gradient-1);
+}
+
+:host([tone="gradient-2"]) nav {
+  background: var(--sgds-gradient-2);
+}
+
+:host([tone="gradient-3"]) nav {
+  background: var(--sgds-gradient-3);
+}
+
+:host([tone="gradient-4"]) nav {
+  background: var(--sgds-gradient-4);
 }
 
 .navbar {
@@ -18,14 +36,9 @@ nav {
   gap: var(--sgds-gap-xs);
   padding: 0px var(--sgds-mainnav-mobile-padding-x);
   width: 100%;
-  max-width: var(--sgds-mainnav-max-width, 1440px);
   min-height: var(--sgds-mainnav-height, 72px);
   margin: auto;
   font-size: var(--sgds-font-size-label-sm);
-}
-
-:host([fluid]) .navbar {
-  max-width: none;
 }
 
 .navbar-brand {
@@ -33,7 +46,7 @@ nav {
   align-items: center;
   text-decoration: none;
   white-space: nowrap;
-  color: var(--sgds-color-default);
+  color: var(--sgds-color-fixed-light);
 }
 
 .navbar-brand:focus-visible {
@@ -44,10 +57,12 @@ nav {
 .navbar-nav {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   height: 100%;
-  width: 100%;
   margin-top: 0;
   margin-bottom: 0;
+  margin-left: auto;
+  gap: var(--sgds-gap-xs);
 }
 
 nav > .navbar-body {
@@ -63,11 +78,10 @@ nav > .navbar-body {
 
 nav > .navbar-body .navbar-nav {
   height: 100dvh;
-  max-width: var(--sgds-mainnav-max-width, 1440px);
   margin: auto;
 }
 
-nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown):not(sgds-mainnav-profile)) {
+nav > .navbar-body slot::slotted(*) {
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
 }
 
@@ -100,6 +114,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-sm .navbar-nav {
     flex-direction: row;
+    align-items: center;
   }
 
   .navbar-expand-sm .navbar-nav-scroll {
@@ -115,6 +130,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
     display: none;
   }
 }
+
 @media (min-width: 768px) {
   .navbar-expand-md {
     flex-wrap: nowrap;
@@ -124,6 +140,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-md .navbar-nav {
     flex-direction: row;
+    align-items: center;
   }
 
   .navbar-expand-md .navbar-nav-scroll {
@@ -139,6 +156,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
     display: none;
   }
 }
+
 @media (min-width: 1024px) {
   .navbar {
     padding: 0px var(--sgds-mainnav-padding-x);
@@ -152,6 +170,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-lg .navbar-nav {
     flex-direction: row;
+    align-items: center;
   }
 
   .navbar-expand-lg .navbar-nav-scroll {
@@ -167,6 +186,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
     display: none;
   }
 }
+
 @media (min-width: 1280px) {
   .navbar-expand-xl {
     flex-wrap: nowrap;
@@ -176,11 +196,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-xl .navbar-nav {
     flex-direction: row;
-  }
-
-  .navbar-expand-xl .navbar-nav .nav-link {
-    padding-left: var(--mainnav-nav-link-padding-x);
-    padding-right: var(--mainnav-nav-link-padding-x);
+    align-items: center;
   }
 
   .navbar-expand-xl .navbar-nav-scroll {
@@ -196,6 +212,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
     display: none;
   }
 }
+
 @media (min-width: 1440px) {
   .navbar-expand-xxl {
     flex-wrap: nowrap;
@@ -205,6 +222,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-xxl .navbar-nav {
     flex-direction: row;
+    align-items: center;
   }
 
   .navbar-expand-xxl .navbar-nav-scroll {
@@ -226,8 +244,10 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   justify-content: flex-start;
   gap: var(--sgds-gap-xl);
 }
+
 .navbar-expand .navbar-nav {
   flex-direction: row;
+  align-items: center;
 }
 
 .navbar-expand .navbar-nav-scroll {
@@ -243,7 +263,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   display: none;
 }
 
-/* slot */
+/* slots */
 
 .navbar-end {
   display: flex;
@@ -252,7 +272,13 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   margin-left: auto;
 }
 
-slot[name="non-collapsible"].slot-empty {
+slot[name="start"] {
+  display: flex;
+  align-items: center;
+  gap: var(--sgds-gap-xs);
+}
+
+slot[name="start"].slot-empty {
   display: none;
 }
 
@@ -261,22 +287,38 @@ slot[name="profile"] {
   align-self: stretch;
 }
 
-slot[name="non-collapsible"] {
+slot[name="start"]::slotted(*) {
+  color: var(--sgds-color-fixed-light);
+}
+
+.navbar-end.slot-empty {
+  display: none;
+}
+
+/* Hide slotted icon-buttons in mobile menu, show text items instead */
+.slot-desktop-only {
+  display: none;
+}
+
+.appnav-menu-item {
   display: flex;
-  gap: var(--sgds-spacer-4);
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
+  color: var(--sgds-color-default);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs, 20px);
 }
 
-.slot-end {
-  display: flex;
-  margin-left: auto;
-  align-items: stretch;
-  height: inherit;
-  gap: var(--sgds-gap-xs);
+.appnav-menu-item:hover {
+  color: var(--sgds-color-default);
 }
 
-
-/* there is no wildcard selector for element tag names in css */
-.slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
-  align-self: center;
+.appnav-menu-item:focus-visible {
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+  color: var(--sgds-primary-color-default);
 }

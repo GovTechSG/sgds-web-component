@@ -194,7 +194,7 @@ describe("sgds-mainnav-profile", () => {
       expect(icon).to.exist;
     });
 
-    it("mainnav toggler icon-button is still rendered in desktop when profile is present", async () => {
+    it("mainnav toggler icon-button is always rendered when profile is present", async () => {
       const el = await fixture<SgdsMainnav>(html`
         <sgds-mainnav expand="lg">
           <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
@@ -209,9 +209,9 @@ describe("sgds-mainnav-profile", () => {
       expect(toggler).to.exist;
     });
 
-    it("forwards expand and tone attributes to profile component", async () => {
+    it("forwards expand attribute to profile component", async () => {
       const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg" tone="brand">
+        <sgds-mainnav expand="lg">
           <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
             <span slot="avatar" class="avatar"></span>
             <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
@@ -222,7 +222,6 @@ describe("sgds-mainnav-profile", () => {
 
       const profile = el.querySelector("sgds-mainnav-profile");
       expect(profile).to.have.attribute("expand", "lg");
-      expect(profile).to.have.attribute("tone", "brand");
     });
 
     it("does not render profile-text when label and secondaryText are empty", async () => {
@@ -293,7 +292,7 @@ describe("sgds-mainnav-profile", () => {
       expect(secondary).not.to.exist;
     });
 
-    it("mainnav hides the default toggler icon-button in mobile when profile component is present", async () => {
+    it("hamburger toggler is always rendered in mobile when profile is present", async () => {
       const el = await fixture<SgdsMainnav>(html`
         <sgds-mainnav expand="lg">
           <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
@@ -305,7 +304,7 @@ describe("sgds-mainnav-profile", () => {
       await el.updateComplete;
 
       const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler");
-      expect(toggler).not.to.exist;
+      expect(toggler).to.exist;
     });
 
     it("renders avatar toggler in mobile mode", async () => {
@@ -477,7 +476,7 @@ describe("sgds-mainnav-profile", () => {
       expect(profile.shadowRoot?.querySelector(".profile-secondary-text")?.textContent).to.equal("Agency");
     });
 
-    it("toggler icon-button returns when resizing to desktop", async () => {
+    it("toggler icon-button is always present regardless of viewport", async () => {
       // Start in mobile
       Object.defineProperty(window, "innerWidth", {
         writable: true,
@@ -496,8 +495,8 @@ describe("sgds-mainnav-profile", () => {
       `);
       await el.updateComplete;
 
-      // Mobile: no toggler
-      expect(el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler")).not.to.exist;
+      // Mobile: toggler is present
+      expect(el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler")).to.exist;
 
       // Resize to desktop
       Object.defineProperty(window, "innerWidth", {
@@ -508,7 +507,7 @@ describe("sgds-mainnav-profile", () => {
       window.dispatchEvent(new Event("resize"));
       await el.updateComplete;
 
-      // Desktop: toggler returns
+      // Desktop: toggler still present
       expect(el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler")).to.exist;
     });
   });

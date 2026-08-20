@@ -1,32 +1,15 @@
 import { provide } from "@lit/context";
-import { html, nothing, PropertyValueMap } from "lit";
-import { property, query, queryAssignedElements, state } from "lit/decorators.js";
+import { html } from "lit";
+import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import SgdsElement from "../../base/sgds-element";
-import { animateTo, shimKeyframesHeightAuto, stopAnimations } from "../../utils/animate";
-import { getAnimation, setDefaultAnimation } from "../../utils/animation-registry";
-import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPOINT } from "../../utils/breakpoints";
-import { waitForEvent } from "../../utils/event";
-import genId from "../../utils/generateId";
-import { watch } from "../../utils/watch";
-import SgdsIconButton from "../IconButton/sgds-icon-button";
+import NavElement from "../../base/nav-element";
+import { HasSlotController } from "../../utils/slot";
 import { MainnavBreakpointContext, MainnavExpandedContext } from "./mainnav-context";
 import mainnavStyle from "./mainnav.css";
 import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
 import SgdsMainnavItem from "./sgds-mainnav-item";
-import { HasSlotController } from "../../utils/slot";
-export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
-export type MainnavTone = "default" | "brand" | "gradient-1" | "gradient-2" | "gradient-3" | "gradient-4";
 
-const SIZES = {
-  sm: SM_BREAKPOINT,
-  md: MD_BREAKPOINT,
-  lg: LG_BREAKPOINT,
-  xl: XL_BREAKPOINT,
-  xxl: XXL_BREAKPOINT,
-  never: Infinity,
-  always: -1
-};
+export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "never";
 
 /**
  * @summary This component is the primary means that your users will use to navigate through your portal. It includes horizontal navigation and branding to identify your site.
@@ -37,67 +20,30 @@ const SIZES = {
  * @event sgds-after-hide - Emitted on hide after animation has completed. Only for collapsed menu.
  *
  * @slot default - Default slot of SgdsMainnav. Pass in SgdsMainnavItem elements here.
- * @slot start - Elements in this slot will be positioned to the left of the brand.
  * @slot end - Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.
  * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
  * @slot profile - Profile slot positioned at the far right in desktop. In mobile, moves into the collapsed menu as the first item.
  * @slot non-collapsible - Elements in this slot will not be collapsed
  *
  */
-export class SgdsMainnav extends SgdsElement {
-  static styles = [...SgdsElement.styles, mainnavStyle];
-  /** @internal */
-  static dependencies = {
-    "sgds-icon-button": SgdsIconButton
-  };
+export class SgdsMainnav extends NavElement {
+  static styles = [...NavElement.styles, mainnavStyle];
 
   @provide({ context: MainnavBreakpointContext })
   @state()
   private _breakpointReached = false;
-  /** Indicates if mobile menu is open or closed */
+
   @provide({ context: MainnavExpandedContext })
   @state()
-  private expanded = false;
-  /** Denotes the transition state of mobile mainnav menu opening  */
-  @state()
-  private expanding = false;
-
-  @query("nav") private nav: HTMLElement;
-  @query(".navbar") private navbar: HTMLElement;
-  @query(".navbar-toggler") private header: HTMLElement;
-  @query(".navbar-body") private body: HTMLElement;
-  @query(".navbar-nav-scroll") private navScroll: HTMLElement;
-  @query(".navbar-end") private navbarEnd: HTMLElement;
-
-  /** @internal Whether sgds-mainnav-profile is slotted in the profile slot */
-  @state()
-  private _hasProfileComponent = false;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private _expanded = false;
 
   /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
   @property({ type: Boolean }) hasNonCollapsibleSlot = false;
 
-  /** Used only for SSR to indicate the presence of the `start` slot. */
-  @property({ type: Boolean }) hasStartSlot = false;
-
-  /** The href link for brand logo */
-  @property({ type: String })
-  brandHref = "";
-
-  @property({ type: String, reflect: true })
-  tone: MainnavTone = "default";
-
-  private collapseId = genId("mainnav", "collapse");
-
-  /** The breakpoint, below which, the Navbar will collapse. When always the Navbar will always be expanded regardless of screen size. When never, the Navbar will always be collapsed */
-  @property({ type: String })
-  expand: MainnavExpandSize = "lg";
-
   /** When true, removes max-width constraint to allow content to stretch full screen width */
   @property({ type: Boolean, reflect: true })
   fluid = false;
-
-  @state()
-  private breakpointReached = false;
 
   @queryAssignedElements() private defaultNodes!: SgdsMainnavItem[] | SgdsMainnavDropdown[];
 
@@ -119,218 +65,54 @@ export class SgdsMainnav extends SgdsElement {
 
   private readonly hasSlotController = new HasSlotController(this, "non-collapsible");
 
-  connectedCallback() {
-    super.connectedCallback();
-
-    this._handleResize();
-
-    window.addEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
-    window.addEventListener("resize", this._handleResize.bind(this));
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-
-    window.removeEventListener("click", (event: MouseEvent) => this._handleClickOutOfElement(event, this.body));
-    window.removeEventListener("resize", this._handleResize.bind(this));
-  }
-
-  firstUpdated(changedProperties: PropertyValueMap<this>) {
-    super.firstUpdated(changedProperties);
-
-    if (this.breakpointReached && this.body) {
-      this.expanded = false;
-      this.body.hidden = true;
-      this._handleMobileNav();
-      this._breakpointReached = true;
-    }
-  }
-
   updated() {
     if (!this.hasNonCollapsibleSlot) this.hasNonCollapsibleSlot = this.hasSlotController.test("non-collapsible");
-    if (!this.hasStartSlot) this.hasStartSlot = this.hasSlotController.test("start");
+    // Sync expanded state to context
+    this._expanded = this.expanded;
   }
 
-  private _handleClickOutOfElement(e: MouseEvent, self: HTMLElement) {
-    if (!e.composedPath().includes(self) && !(this.header && e.composedPath().includes(this.header))) {
-      this.hide();
-    }
+  protected _onBreakpointReached(reached: boolean): void {
+    this._breakpointReached = reached;
   }
 
-  private _handleSummaryClick() {
-    if (this.expanded) {
-      this.hide();
-    } else {
-      document.body.style.overflow = "hidden";
-      this.show();
-    }
-  }
-
-  private _handleResize() {
-    const newBreakpointReachedValue = window.innerWidth < SIZES[this.expand];
-    if (newBreakpointReachedValue !== this.breakpointReached) {
-      this.requestUpdate();
-    } else {
-      this.body ? (this.body.hidden = true) : null;
-      // this.expanded = false;
-      this.expanding = false;
-    }
-
-    if (newBreakpointReachedValue) {
-      this._handleMobileNav();
-
-      if (!this._breakpointReached) {
-        this._breakpointReached = true;
-
-        window.addEventListener("scrollend", this._handleMobileNavBound);
-      }
-    } else {
-      this._handleDesktopNav();
-      this._breakpointReached = false;
-      window.removeEventListener("scrollend", this._handleMobileNavBound);
-    }
-  }
-
-  private _handleMobileNavBound = this._handleMobileNav.bind(this);
-
-  private async _handleMobileNav() {
-    if (!this.nav) return;
-
-    this.nav.appendChild(this.body);
-    await customElements.whenDefined("sgds-masthead");
-
-    const { bottom } = this.nav.getBoundingClientRect();
-    const navBodyPaddingY =
-      parseFloat(getComputedStyle(this.body).paddingTop) + parseFloat(getComputedStyle(this.body).paddingBottom);
-
-    this.navScroll.style.maxHeight = `calc(100dvh - ${bottom}px - ${navBodyPaddingY}px)`;
-  }
-
-  private _handleDesktopNav() {
-    this.navbar?.insertBefore(this.body, this.navbarEnd);
-  }
-
-  private async _animateToShow() {
-    const sgdsShow = this.emit("sgds-show", { cancelable: true });
-    if (sgdsShow.defaultPrevented) {
-      this.expanding = false;
-      this.expanded = false;
-      return;
-    }
-
-    await stopAnimations(this.body);
-    this.body.hidden = false;
-
-    const { keyframes, options } = getAnimation(this, "mainnav.show");
-    await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-    this.body.style.height = "auto";
-
-    this.emit("sgds-after-show");
-  }
-
-  private async _animateToHide() {
-    const slHide = this.emit("sgds-hide", { cancelable: true });
-    if (slHide.defaultPrevented) {
-      this.expanding = false;
-      this.expanded = true;
-      return;
-    }
-
-    await stopAnimations(this.body);
-
-    const { keyframes, options } = getAnimation(this, "mainnav.hide");
-    await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
-    this.body.hidden = true;
-    this.body.style.height = "auto";
-    this.emit("sgds-after-hide");
-  }
-  /** @internal */
-  @watch("expanding", { waitUntilFirstUpdate: true })
-  async handleOpenChange() {
-    if (this.expanding) {
-      // Show
-      await this._animateToShow();
-      this.expanded = true;
-    } else {
-      this.header?.focus();
-      // Hide
-      await this._animateToHide();
-      this.expanded = false;
-    }
-  }
-
-  /** Shows the menu. For when mainnav is in the collapsed form */
-  public async show() {
-    if (this.expanded) {
-      return;
-    }
-
-    this.expanding = true;
-    return waitForEvent(this, "sgds-after-show");
-  }
-
-  /** Hide the menu. For when mainnav is in the collapsed form */
-  public async hide() {
-    if (!this.expanded) {
-      return;
-    }
-
-    this.expanding = false;
-    document.body.style.removeProperty("overflow");
-
-    return waitForEvent(this, "sgds-after-hide");
+  protected _isBreakpointReached(): boolean {
+    return this._breakpointReached;
   }
 
   private _handleDefaultSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
     childElements.forEach(el => {
       el.setAttribute("expand", this.expand);
-      el.setAttribute("tone", this.tone);
     });
-
-    if (this._hasProfileComponent && childElements.length > 0) {
-      console.warn(
-        "[sgds-mainnav] Using <sgds-mainnav-item> alongside <sgds-mainnav-profile> is not recommended. " +
-          "The profile component disables the mainnav hamburger menu, so nav items will have no mobile menu. " +
-          "Use a sidebar for navigation in operational apps."
-      );
-    }
   }
 
-  // assigning name attribute to elements added in slot="end", to use wildcard css selector to assign styles only to *-mainnav-item
   private _handleSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
     childElements.forEach(e => {
       e.setAttribute("name", e.tagName.toLowerCase());
       e.setAttribute("expand", this.expand);
-      e.setAttribute("tone", this.tone);
     });
   }
 
   private _handleProfileSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    this._hasProfileComponent = childElements.some(el => el.tagName.toLowerCase() === "sgds-mainnav-profile");
     childElements.forEach(el => {
       el.setAttribute("expand", this.expand);
-      el.setAttribute("tone", this.tone);
     });
-
-    if (this._hasProfileComponent && this.defaultSlotItems.length > 0) {
-      console.warn(
-        "[sgds-mainnav] Using <sgds-mainnav-item> alongside <sgds-mainnav-profile> is not recommended. " +
-          "The profile component disables the mainnav hamburger menu, so nav items will have no mobile menu. " +
-          "Use a sidebar for navigation in operational apps."
-      );
-    }
   }
 
   render() {
-    this.breakpointReached = window.innerWidth < SIZES[this.expand];
+    this.breakpointReached =
+      window.innerWidth <
+      (this.expand === "always"
+        ? -1
+        : this.expand === "never"
+        ? Infinity
+        : { sm: 512, md: 768, lg: 1024, xl: 1280, xxl: 1440 }[this.expand]);
 
     return html`
       <nav>
         <div class="navbar ${this._expandClass()}">
-          <slot name="start" class=${classMap({ "slot-empty": !this.hasStartSlot })}></slot>
           <a class="navbar-brand" href=${this.brandHref} aria-label="brand-link">
             <slot name="brand"></slot>
           </a>
@@ -347,49 +129,12 @@ export class SgdsMainnav extends SgdsElement {
           <div class="navbar-end">
             <slot name="non-collapsible" class=${classMap({ "slot-empty": !this.hasNonCollapsibleSlot })}></slot>
             <slot name="profile" @slotchange=${this._handleProfileSlotChange}></slot>
-            ${!(this._hasProfileComponent && this.breakpointReached)
-              ? html`<sgds-icon-button
-                  name=${this.expanded ? "cross" : "menu"}
-                  variant="ghost"
-                  size="sm"
-                  tone=${this.tone !== "default" ? "fixed-light" : nothing}
-                  class="navbar-toggler"
-                  @click=${this._handleSummaryClick}
-                  aria-controls="${this.collapseId}"
-                  aria-expanded="${this.expanded}"
-                  .ariaLabel=${"Toggle navigation"}
-                ></sgds-icon-button>`
-              : nothing}
+            ${this._renderToggler()}
           </div>
         </div>
       </nav>
     `;
   }
-  _expandClass() {
-    switch (this.expand) {
-      case "always":
-        return "navbar-expand";
-      case "never":
-        break;
-      default:
-        return `navbar-expand-${this.expand}`;
-    }
-  }
 }
-setDefaultAnimation("mainnav.show", {
-  keyframes: [
-    { height: "0", opacity: "0" },
-    { height: "auto", opacity: "1" }
-  ],
-  options: { duration: 200, easing: "ease-in-out" }
-});
-
-setDefaultAnimation("mainnav.hide", {
-  keyframes: [
-    { height: "auto", opacity: "1" },
-    { height: "0", opacity: "0" }
-  ],
-  options: { duration: 200, easing: "ease-in-out" }
-});
 
 export default SgdsMainnav;
