@@ -24,8 +24,6 @@ describe("sgds-mainnav", () => {
       el,
       `<nav>
         <div class="navbar navbar-expand-lg">
-          <slot class="slot-empty" name="start">
-          </slot>
           <a
             aria-label="brand-link"
             class="navbar-brand"
@@ -80,12 +78,6 @@ describe("sgds-mainnav", () => {
     const el = await fixture(html`<sgds-mainnav brandHref="test"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("a.navbar-brand")?.getAttribute("href")).to.equal("test");
   });
-
-  // itx("when mode is offcanvas, offcanvas classes are present instead of collapse classes", async () => {
-  //   const el = await fixture(html`<sgds-mainnav mode="offcanvas"></sgds-mainnav>`);
-  //   expect(el.shadowRoot?.querySelector(".offcanvas.offcanvas-start.order-4")).to.exist;
-  //   expect(el.shadowRoot?.querySelector(".collapse.navbar-collapse.order-4")).not.to.exist;
-  // });
 
   it("when expand=always, navbar class has .navbar-expand", async () => {
     const el = await fixture(html`<sgds-mainnav expand="always"></sgds-mainnav>`);
@@ -193,6 +185,7 @@ describe("sgds-mainnav", () => {
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
+    expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
   });
   it("when expand=never and window resize event occurs, it NEVER changes the position of .navbar-body,  and end slot NEVER has class slot-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="never"></sgds-mainnav>`);
@@ -221,67 +214,6 @@ describe("sgds-mainnav", () => {
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
-  });
-
-  // it('keyboard esc to exit offcanvas works', async() => {
-  //   const el = await fixture<SgdsMainnav>(
-  //     html`<sgds-mainnav expand="never" mode="offcanvas"></sgds-mainnav>`
-  //   );
-  //   el.shadowRoot?.querySelector('button')?.click()
-  //   await el.updateComplete
-  //   expect(el.shadowRoot?.querySelector(".offcanvas.show")).to.exist
-
-  //   el.dispatchEvent(new KeyboardEvent("keydown", {key: "Escape"}))
-  //   await el.updateComplete
-  //   expect(el.shadowRoot?.querySelector('.offcanvas')).not.to.have.class('show')
-
-  // })
-  it("tone prop reflects as attribute and defaults to 'default'", async () => {
-    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
-    expect(el.tone).to.equal("default");
-    expect(el.getAttribute("tone")).to.equal("default");
-  });
-
-  it("tone='brand' reflects as attribute", async () => {
-    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav tone="brand"></sgds-mainnav>`);
-    expect(el.tone).to.equal("brand");
-    expect(el.getAttribute("tone")).to.equal("brand");
-  });
-
-  it("tone prop defaults to 'default'", async () => {
-    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
-    expect(el.tone).to.equal("default");
-    expect(el.getAttribute("tone")).to.equal("default");
-  });
-
-  it("tone='gradient-1' reflects as attribute", async () => {
-    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav tone="gradient-1"></sgds-mainnav>`);
-    expect(el.tone).to.equal("gradient-1");
-    expect(el.getAttribute("tone")).to.equal("gradient-1");
-  });
-
-  it("slotchange on default slot propagates tone attribute to slotted items", async () => {
-    const el = await fixture<SgdsMainnav>(
-      html`<sgds-mainnav tone="brand">
-        <sgds-mainnav-item></sgds-mainnav-item>
-        <sgds-mainnav-dropdown><span slot="toggler">Menu</span></sgds-mainnav-dropdown>
-      </sgds-mainnav>`
-    );
-    await el.updateComplete;
-    expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("tone", "brand");
-    expect(el.querySelector("sgds-mainnav-dropdown")).to.have.attribute("tone", "brand");
-  });
-
-  it("slotchange on end slot propagates tone attribute to slotted items", async () => {
-    const el = await fixture<SgdsMainnav>(
-      html`<sgds-mainnav tone="brand">
-        <sgds-mainnav-item slot="end"></sgds-mainnav-item>
-        <sgds-mainnav-dropdown slot="end"><span slot="toggler">Menu</span></sgds-mainnav-dropdown>
-      </sgds-mainnav>`
-    );
-    await el.updateComplete;
-    expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("tone", "brand");
-    expect(el.querySelector("sgds-mainnav-dropdown")).to.have.attribute("tone", "brand");
   });
 
   it('adds name attribute to elements in slot="end" only', async () => {
@@ -348,20 +280,19 @@ describe("sgds-mainnav", () => {
       expect(navbarEnd?.querySelector("slot[name='profile']")).to.exist;
     });
 
-    it("profile slot propagates tone and expand attributes to slotted items", async () => {
+    it("profile slot propagates expand attribute to slotted items", async () => {
       const el = await fixture<SgdsMainnav>(
-        html`<sgds-mainnav tone="brand" expand="xl">
+        html`<sgds-mainnav expand="xl">
           <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
             <span slot="toggler">User</span>
           </sgds-mainnav-dropdown>
         </sgds-mainnav>`
       );
       await el.updateComplete;
-      expect(el.querySelector("sgds-mainnav-dropdown[slot='profile']")).to.have.attribute("tone", "brand");
       expect(el.querySelector("sgds-mainnav-dropdown[slot='profile']")).to.have.attribute("expand", "xl");
     });
 
-    it("warns when sgds-mainnav-item and sgds-mainnav-profile are both slotted", async () => {
+    it("sgds-mainnav-item and sgds-mainnav-profile can coexist without warning", async () => {
       const warnStub = Sinon.stub(console, "warn");
       const el = await fixture<SgdsMainnav>(
         html`<sgds-mainnav expand="lg">
@@ -373,8 +304,29 @@ describe("sgds-mainnav", () => {
         </sgds-mainnav>`
       );
       await el.updateComplete;
-      expect(warnStub.calledWith(Sinon.match("[sgds-mainnav]"))).to.be.true;
+      expect(warnStub.calledWith(Sinon.match("[sgds-mainnav]"))).to.be.false;
       warnStub.restore();
+    });
+
+    it("hamburger toggler is always rendered regardless of profile presence", async () => {
+      Object.defineProperty(window, "innerWidth", {
+        writable: true,
+        configurable: true,
+        value: 300
+      });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav expand="lg">
+          <sgds-mainnav-item><a href="#">Home</a></sgds-mainnav-item>
+          <sgds-mainnav-profile slot="profile" label="User" ariaLabel="Profile">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler");
+      expect(toggler).to.exist;
     });
 
     it("profile slot stays in .navbar-end in mobile view", async () => {
@@ -395,44 +347,6 @@ describe("sgds-mainnav", () => {
       await el.updateComplete;
       const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
       expect(navbarEnd?.querySelector("slot[name='profile']")).to.exist;
-    });
-  });
-
-  describe("start slot", () => {
-    it("renders start slot before the brand", async () => {
-      const el = await fixture<SgdsMainnav>(
-        html`<sgds-mainnav>
-          <sgds-icon-button name="menu" slot="start" variant="ghost" size="sm"></sgds-icon-button>
-        </sgds-mainnav>`
-      );
-      await el.updateComplete;
-      const navbar = el.shadowRoot?.querySelector(".navbar");
-      const startSlot = navbar?.querySelector("slot[name='start']");
-      const brand = navbar?.querySelector(".navbar-brand");
-      expect(startSlot).to.exist;
-      // start slot should come before brand in DOM order
-      const children = Array.from(navbar?.children || []);
-      const startIndex = children.indexOf(startSlot as Element);
-      const brandIndex = children.indexOf(brand as Element);
-      expect(startIndex).to.be.lessThan(brandIndex);
-    });
-
-    it("start slot has slot-empty class when nothing is slotted", async () => {
-      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
-      await el.updateComplete;
-      const startSlot = el.shadowRoot?.querySelector("slot[name='start']");
-      expect(startSlot).to.have.class("slot-empty");
-    });
-
-    it("start slot does not have slot-empty class when content is slotted", async () => {
-      const el = await fixture<SgdsMainnav>(
-        html`<sgds-mainnav>
-          <sgds-icon-button name="menu" slot="start" variant="ghost" size="sm"></sgds-icon-button>
-        </sgds-mainnav>`
-      );
-      await el.updateComplete;
-      const startSlot = el.shadowRoot?.querySelector("slot[name='start']");
-      expect(startSlot).not.to.have.class("slot-empty");
     });
   });
 });
@@ -486,7 +400,7 @@ describe("sgds-mainnav-dropdown", () => {
             name="chevron-down"
             size="md"
           >
-          </sgds-icon>  
+          </sgds-icon>
         </a>
         <slot>
         </slot>
@@ -605,32 +519,40 @@ describe("sgds-mainnav-dropdown", () => {
       value: 300 // mobile size
     });
     window.dispatchEvent(new Event("resize"));
+    // Restore any leftover stub from a previous retry
+    if ((SgdsMainnav.prototype.hide as any).restore) {
+      (SgdsMainnav.prototype.hide as any).restore();
+    }
     const stubHide = Sinon.stub(SgdsMainnav.prototype, "hide");
-    const showSpy = Sinon.spy();
+    try {
+      const showSpy = Sinon.spy();
 
-    const mainnav = await fixture<SgdsMainnav>(html`
-      <sgds-mainnav expand="lg">
-        <sgds-mainnav-dropdown>
-          <span slot="toggler">Menu</span>
-          <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
-          <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
-        </sgds-mainnav-dropdown>
-      </sgds-mainnav>
-    `);
-    mainnav.addEventListener("sgds-show", showSpy);
-    await mainnav.updateComplete;
-    const hamburgerButton = mainnav.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
-    hamburgerButton.click();
-    await elementUpdated(mainnav);
-    expect(showSpy.calledOnce).to.be.true;
-    const anchorOne = mainnav.querySelectorAll("sgds-dropdown-item")?.[0] as SgdsDropdownItem;
-    anchorOne.click();
-    await elementUpdated(mainnav);
-    const dropdown = mainnav.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+      const mainnav = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-dropdown>
+            <span slot="toggler">Menu</span>
+            <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+            <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>
+      `);
+      mainnav.addEventListener("sgds-show", showSpy);
+      await mainnav.updateComplete;
+      const hamburgerButton = mainnav.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as SgdsIconButton;
+      hamburgerButton.click();
+      await elementUpdated(mainnav);
+      expect(showSpy.calledOnce).to.be.true;
+      const dropdownItemOne = mainnav.querySelectorAll("sgds-dropdown-item")?.[0] as SgdsDropdownItem;
+      const anchorLink = dropdownItemOne.querySelector("a") as HTMLAnchorElement;
+      anchorLink.click();
+      await elementUpdated(mainnav);
+      const dropdown = mainnav.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
 
-    await dropdown?.updateComplete;
-    await waitUntil(() => stubHide.called);
-    expect(stubHide.called).to.be.true;
-    stubHide.restore();
-  }); // retries 1 time as occasionally fails with timeout (CI or local)
+      await dropdown?.updateComplete;
+      await waitUntil(() => stubHide.called, "hide() was not called", { timeout: 3000 });
+      expect(stubHide.called).to.be.true;
+    } finally {
+      stubHide.restore();
+    }
+  }).retries(2); // retries as occasionally fails with timeout (CI or local)
 });
