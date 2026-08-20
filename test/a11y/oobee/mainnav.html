@@ -15,9 +15,9 @@
   </head>
   <body>
     <sgds-mainnav fluid tone="gradient-3">
-      <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+      <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Open side menu"></sgds-icon-button>
       <div slot="brand">Logo</div>
-      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
       <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
         <span slot="avatar" class="avatar-circle"></span>
         <sgds-dropdown-item readonly>
@@ -61,7 +61,7 @@
         <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
         <sgds-dropdown-item active><a href="#">Item 3</a></sgds-dropdown-item>
       </sgds-mainnav-dropdown>
-      <sgds-button slot="end">Login</sgds-button>
+      <sgds-button slot="end" ariaLabel="Login">Login</sgds-button>
     </sgds-mainnav>
   </body>
 </html>
