@@ -63,6 +63,24 @@ export class SgdsMainnavProfile extends SgdsElement {
     this._mobileMenuOpen = !this._mobileMenuOpen;
   };
 
+  private _handleClickOutside = (e: MouseEvent) => {
+    if (!this._mobileMenuOpen) return;
+    if (this.close === "inside") return;
+    if (!e.composedPath().includes(this)) {
+      this._mobileMenuOpen = false;
+    }
+  };
+
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("click", this._handleClickOutside);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener("click", this._handleClickOutside);
+  }
+
   private _handleKeydown = (e: KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
