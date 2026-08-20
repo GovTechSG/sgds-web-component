@@ -27,7 +27,7 @@ export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen
       <sgds-mainnav-item slot="end">
         <a href="#">Contact Us</a>
       </sgds-mainnav-item>
-      <sgds-button slot="end">Login</sgds-button>
+      <sgds-button slot="end" ariaLabel="Login">Login</sgds-button>
       <dev-console-widget
         slot="non-collapsible"
         iconColor="black"
