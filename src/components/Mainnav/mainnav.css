@@ -2,23 +2,43 @@
   display: block;
 }
 
+
 nav {
   background-color: var(--sgds-surface-default);
-  box-shadow: 0px 2px 2px 0px rgba(14, 14, 14, 0.08);
+  box-shadow: 0px 2px 4px 0px rgba(14, 14, 14, 0.08);
   position: relative;
   z-index: var(--sgds-z-index-floating);
+}
+:host([tone="brand"]) nav {
+  background-color: var(--sgds-primary-surface-default);
+}
+
+:host([tone="gradient-1"]) nav {
+  background: var(--sgds-gradient-1);
+}
+
+:host([tone="gradient-2"]) nav {
+  background: var(--sgds-gradient-2);
+}
+
+:host([tone="gradient-3"]) nav {
+  background: var(--sgds-gradient-3);
+}
+
+:host([tone="gradient-4"]) nav {
+  background: var(--sgds-gradient-4);
 }
 
 .navbar {
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: var(--sgds-gap-xs);
   padding: 0px var(--sgds-mainnav-mobile-padding-x);
   width: 100%;
   max-width: var(--sgds-mainnav-max-width, 1440px);
-  min-height: 80px;
+  min-height: var(--sgds-mainnav-height, 72px);
   margin: auto;
   font-size: var(--sgds-font-size-label-sm);
 }
@@ -33,6 +53,11 @@ nav {
   text-decoration: none;
   white-space: nowrap;
   color: var(--sgds-color-default);
+}
+
+:host([tone="brand"]) .navbar-brand,
+:host([tone^="gradient"]) .navbar-brand {
+  color: var(--sgds-color-fixed-light);
 }
 
 .navbar-brand:focus-visible {
@@ -56,7 +81,7 @@ nav > .navbar-body {
   background-color: var(--sgds-surface-default);
   padding: var(--sgds-padding-md) 0px;
   border-top: var(--sgds-border-width-1) solid var(--sgds-border-color-translucent);
-  box-shadow: 0px 2px 2px 0px rgba(14, 14, 14, 0.08);
+  box-shadow: 0px 2px 4px 0px rgba(14, 14, 14, 0.08);
   transition: transform 0.2s ease-in-out;
 }
 
@@ -66,7 +91,7 @@ nav > .navbar-body .navbar-nav {
   margin: auto;
 }
 
-nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown)) {
+nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown):not(sgds-mainnav-profile)) {
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
 }
 
@@ -80,6 +105,16 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   align-self: center;
 }
 
+:host([tone="brand"]) .navbar-toggler,
+:host([tone^="gradient"]) .navbar-toggler {
+  color: var(--sgds-color-fixed-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-toggler {
+    transition: none;
+  }
+}
 
 .navbar-nav-scroll {
   overflow-y: auto;
@@ -239,23 +274,49 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
 /* slot */
 
+.navbar-end {
+  display: flex;
+  align-items: center;
+  gap: var(--sgds-gap-xs);
+  margin-left: auto;
+}
+
+slot[name="start"] {
+  display: flex;
+  align-items: center;
+  gap: var(--sgds-gap-xs);
+}
+
+.slot-empty {
+  display: none;
+}
+
+
+slot[name="profile"] {
+  display: flex;
+  align-self: stretch;
+}
+
 slot[name="non-collapsible"] {
   display: flex;
   gap: var(--sgds-spacer-4);
   align-items: center;
-  margin-left: auto;
 }
 
-slot[name="non-collapsible"].non-collapsible-empty {
-  display: none;
+
+:host([tone="brand"]) slot[name="non-collapsible"]::slotted(*),
+:host([tone^="gradient"]) slot[name="non-collapsible"]::slotted(*) {
+  color: var(--sgds-color-fixed-light);
 }
 
 .slot-end {
   display: flex;
   margin-left: auto;
   align-items: stretch;
+  height: inherit;
   gap: var(--sgds-gap-xs);
 }
+
 
 /* there is no wildcard selector for element tag names in css */
 .slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
