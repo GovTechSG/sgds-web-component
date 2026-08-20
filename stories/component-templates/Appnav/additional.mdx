@@ -1,0 +1,63 @@
+## Tone
+
+The `tone` prop controls the visual theme of the navigation bar. There is no white/default tone — the minimum is `brand`. All tones render text and icons in fixed-light (white).
+
+### Brand
+
+Uses the primary surface colour as the background. This is the default.
+
+<Canvas of={AppnavStories.ToneBrand}>
+  <Story of={AppnavStories.ToneBrand} />
+</Canvas>
+
+### Gradient 1
+
+Cyan to Purple gradient background.
+
+<Canvas of={AppnavStories.ToneGradient1}>
+  <Story of={AppnavStories.ToneGradient1} />
+</Canvas>
+
+### Gradient 2
+
+Blue to Magenta gradient background.
+
+<Canvas of={AppnavStories.ToneGradient2}>
+  <Story of={AppnavStories.ToneGradient2} />
+</Canvas>
+
+### Gradient 3
+
+Purple to Pink gradient background.
+
+<Canvas of={AppnavStories.ToneGradient3}>
+  <Story of={AppnavStories.ToneGradient3} />
+</Canvas>
+
+### Gradient 4
+
+Magenta to Red gradient background.
+
+<Canvas of={AppnavStories.ToneGradient4}>
+  <Story of={AppnavStories.ToneGradient4} />
+</Canvas>
+
+## With Profile
+
+Use `sgds-appnav-profile` in the `profile` slot for user account menus. It displays avatar + label + secondary text in desktop, and collapses into an avatar toggler with a self-contained mobile panel in smaller viewports.
+
+- The three-dots toggler appears to the left of the profile when the default slot has items.
+- In mobile, icon-buttons collapse into text menu items (using their `ariaLabel`).
+- The profile has its own independent mobile panel.
+
+<Canvas of={AppnavStories.WithProfile}>
+  <Story of={AppnavStories.WithProfile} />
+</Canvas>
+
+## No Default Slot Items
+
+When no icon-buttons are placed in the default slot, the three-dots toggler does not render. Only the start slot, brand, and profile are visible.
+
+<Canvas of={AppnavStories.NoDefaultSlotItems}>
+  <Story of={AppnavStories.NoDefaultSlotItems} />
+</Canvas>

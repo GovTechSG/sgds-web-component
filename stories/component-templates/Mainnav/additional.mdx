@@ -8,50 +8,6 @@ By default, the Mainnav content is contained within a max-width container. Use t
   <Story of={MainnavStories.Fluid} />
 </Canvas>
 
-## Tone
-
-The `tone` prop controls the visual theme of the navigation bar. All non-default tones render text and icons in fixed-light (white) and are typically paired with `fluid`.
-
-### Brand
-
-Uses the primary surface colour as the background.
-
-<Canvas of={MainnavStories.ToneBrand}>
-  <Story of={MainnavStories.ToneBrand} />
-</Canvas>
-
-### Gradient 1
-
-Cyan to Purple gradient background.
-
-<Canvas of={MainnavStories.ToneGradient1}>
-  <Story of={MainnavStories.ToneGradient1} />
-</Canvas>
-
-### Gradient 2
-
-Blue to Magenta gradient background.
-
-<Canvas of={MainnavStories.ToneGradient2}>
-  <Story of={MainnavStories.ToneGradient2} />
-</Canvas>
-
-### Gradient 3
-
-Purple to Pink gradient background.
-
-<Canvas of={MainnavStories.ToneGradient3}>
-  <Story of={MainnavStories.ToneGradient3} />
-</Canvas>
-
-### Gradient 4
-
-Magenta to Red gradient background.
-
-<Canvas of={MainnavStories.ToneGradient4}>
-  <Story of={MainnavStories.ToneGradient4} />
-</Canvas>
-
 ## Profile Slot
 
 Use `sgds-mainnav-profile` in the `profile` slot to render a user profile dropdown. It displays an avatar, label, and secondary text in desktop, and collapses into an avatar toggler with a mobile panel in smaller viewports.
@@ -60,6 +16,7 @@ Use `sgds-mainnav-profile` in the `profile` slot to render a user profile dropdo
 - Use `readonly` on the first `sgds-dropdown-item` for non-interactive account info.
 - Use `sgds-divider` to separate item groups within the dropdown.
 - Set `close="outside"` to prevent the menu from closing when clicking inside it.
+- The hamburger toggler is always rendered alongside the profile — both menus work independently.
 
 <Canvas of={MainnavStories.ProfileSlot}>
   <Story of={MainnavStories.ProfileSlot} />
