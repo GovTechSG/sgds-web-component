@@ -36,6 +36,7 @@ const SIZES = {
  * @event sgds-after-hide - Emitted on hide after animation has completed. Only for collapsed menu.
  *
  * @slot default - Default slot of SgdsMainnav. Pass in SgdsMainnavItem elements here.
+ * @slot start - Elements in this slot will be positioned to the left of the brand.
  * @slot end - Elements in this slot will be positioned to the right end of .navbar-nav. Elements in this slot will also be included in collapsed menu.
  * @slot brand - Brand slot of SgdsMainnav. Pass in brand logo img here
  * @slot non-collapsible - Elements in this slot will not be collapsed
@@ -78,6 +79,12 @@ export class SgdsMainnav extends SgdsElement {
   /** The href link for brand logo */
   @property({ type: String })
   brandHref = "";
+
+  @property({ type: String, reflect: true })
+  tone: "default" | "brand" = "default";
+
+  @property({ type: String, reflect: true })
+  gradient: "none" | "gradient-1" | "gradient-2" | "gradient-3" | "gradient-4" = "none";
 
   private collapseId = genId("mainnav", "collapse");
 
@@ -280,6 +287,7 @@ export class SgdsMainnav extends SgdsElement {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
     childElements.forEach(el => {
       el.setAttribute("expand", this.expand);
+      el.setAttribute("tone", this.tone);
     });
   }
 
@@ -290,6 +298,7 @@ export class SgdsMainnav extends SgdsElement {
     childElements.forEach(e => {
       e.setAttribute("name", e.tagName.toLowerCase());
       e.setAttribute("expand", this.expand);
+      e.setAttribute("tone", this.tone);
     });
   }
 
@@ -299,6 +308,7 @@ export class SgdsMainnav extends SgdsElement {
     return html`
       <nav>
         <div class="navbar ${this._expandClass()}">
+          <slot name="start"></slot>
           <a class="navbar-brand" href=${this.brandHref} aria-label="brand-link">
             <slot name="brand"></slot>
           </a>

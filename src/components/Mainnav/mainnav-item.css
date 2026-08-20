@@ -109,6 +109,29 @@
   line-height: var(--sgds-line-height-2-xs, 20px);
 }
 
+:host([tone="brand"]) ::slotted(*) {
+  --sgds-link-color-default: var(--sgds-color-fixed-light);
+  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+  color: var(--sgds-color-fixed-light) !important;
+}
+
+:host([tone="brand"]:not([disabled])[active]) ::slotted(*) {
+  --sgds-link-color-default: var(--sgds-color-fixed-light);
+  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+  color: var(--sgds-color-fixed-light) !important;
+  border-color: var(--sgds-color-fixed-light);
+}
+
+:host([tone="brand"]:not([disabled]):not([active])) ::slotted(a:hover) {
+  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+  color: var(--sgds-color-fixed-light) !important;
+}
+
+:host([tone="brand"]:not([disabled])[active]) ::slotted(a:hover) {
+  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+  color: var(--sgds-color-fixed-light) !important;
+}
+
 @media screen and (min-width: 1024px) {
   ::slotted(*) {
     padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);

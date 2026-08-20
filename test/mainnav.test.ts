@@ -24,6 +24,8 @@ describe("sgds-mainnav", () => {
       el,
       `<nav>
         <div class="navbar navbar-expand-lg">
+          <slot name="start">
+          </slot>
           <a
             aria-label="brand-link"
             class="navbar-brand"
@@ -42,8 +44,8 @@ describe("sgds-mainnav", () => {
             name="menu"
             size="sm"
             target="_self"
-            variant="ghost"
             tone="brand"
+            variant="ghost"
           >
           </sgds-icon-button>
         </div>
@@ -58,7 +60,6 @@ describe("sgds-mainnav", () => {
             </slot>
           </div>
         </div>
-       </div>
       </nav>
     `,
       { ignoreAttributes: ["id", "aria-controls", "style"] }
@@ -231,6 +232,54 @@ describe("sgds-mainnav", () => {
   //   expect(el.shadowRoot?.querySelector('.offcanvas')).not.to.have.class('show')
 
   // })
+  it("tone prop reflects as attribute and defaults to 'default'", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
+    expect(el.tone).to.equal("default");
+    expect(el.getAttribute("tone")).to.equal("default");
+  });
+
+  it("tone='brand' reflects as attribute", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav tone="brand"></sgds-mainnav>`);
+    expect(el.tone).to.equal("brand");
+    expect(el.getAttribute("tone")).to.equal("brand");
+  });
+
+  it("gradient prop reflects as attribute and defaults to 'none'", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
+    expect(el.gradient).to.equal("none");
+    expect(el.getAttribute("gradient")).to.equal("none");
+  });
+
+  it("gradient='gradient-1' reflects as attribute", async () => {
+    const el = await fixture<SgdsMainnav>(html`<sgds-mainnav gradient="gradient-1"></sgds-mainnav>`);
+    expect(el.gradient).to.equal("gradient-1");
+    expect(el.getAttribute("gradient")).to.equal("gradient-1");
+  });
+
+  it("slotchange on default slot propagates tone attribute to slotted items", async () => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav tone="brand">
+        <sgds-mainnav-item></sgds-mainnav-item>
+        <sgds-mainnav-dropdown><span slot="toggler">Menu</span></sgds-mainnav-dropdown>
+      </sgds-mainnav>`
+    );
+    await el.updateComplete;
+    expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("tone", "brand");
+    expect(el.querySelector("sgds-mainnav-dropdown")).to.have.attribute("tone", "brand");
+  });
+
+  it("slotchange on end slot propagates tone attribute to slotted items", async () => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav tone="brand">
+        <sgds-mainnav-item slot="end"></sgds-mainnav-item>
+        <sgds-mainnav-dropdown slot="end"><span slot="toggler">Menu</span></sgds-mainnav-dropdown>
+      </sgds-mainnav>`
+    );
+    await el.updateComplete;
+    expect(el.querySelector("sgds-mainnav-item")).to.have.attribute("tone", "brand");
+    expect(el.querySelector("sgds-mainnav-dropdown")).to.have.attribute("tone", "brand");
+  });
+
   it('adds name attribute to elements in slot="end" only', async () => {
     const el = await fixture<SgdsMainnav>(
       html`<sgds-mainnav>
