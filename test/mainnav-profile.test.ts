@@ -711,7 +711,7 @@ describe("sgds-mainnav-profile", () => {
       // Close menu
       await sendKeys({ press: "Escape" });
       await dropdown.updateComplete;
-      await waitUntil(() => !dropdown.menuIsOpen)
+      await waitUntil(() => !dropdown.menuIsOpen);
       expect(dropdown.menuIsOpen).to.be.false;
     }).retries(1);
   });
