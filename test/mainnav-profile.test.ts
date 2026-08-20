@@ -1,6 +1,6 @@
-import { aTimeout, assert, elementUpdated, expect, fixture, fixtureCleanup, waitUntil } from "@open-wc/testing";
-import { html } from "lit";
+import { aTimeout, assert, expect, fixture, fixtureCleanup, waitUntil } from "@open-wc/testing";
 import { sendKeys, sendMouse } from "@web/test-runner-commands";
+import { html } from "lit";
 import { SgdsDropdownItem, SgdsMainnav, SgdsMainnavProfile } from "../src/components";
 import "./sgds-web-component";
 
@@ -711,6 +711,7 @@ describe("sgds-mainnav-profile", () => {
       // Close menu
       await sendKeys({ press: "Escape" });
       await dropdown.updateComplete;
+      await waitUntil(() => !dropdown.menuIsOpen);
       expect(dropdown.menuIsOpen).to.be.false;
     }).retries(1);
   });

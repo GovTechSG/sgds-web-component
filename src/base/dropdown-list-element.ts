@@ -7,6 +7,7 @@ const TAB = "Tab";
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
 const ENTER = "Enter";
+const ESCAPE = "Escape";
 
 /**
  * @event sgds-select - Emitted when a dropdown item is selected. `event.detail.item` is the clicked `SgdsDropdownItem` element.
@@ -94,6 +95,12 @@ export class DropdownListElement extends DropdownElement {
           this._setMenuItem(this.prevDropdownItemNo);
         } else {
           this._setMenuItem(this.nextDropdownItemNo);
+        }
+        break;
+      case ESCAPE:
+        if (this.menuIsOpen) {
+          e.preventDefault();
+          this.hideMenu();
         }
         break;
       case ENTER: {
