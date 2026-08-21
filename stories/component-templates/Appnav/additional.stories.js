@@ -1,68 +1,70 @@
 import { html } from "lit";
 
-export const Fluid = {
+export const ToneBrand = {
   render: Template.bind({}),
-  name: "Fluid",
-  args: { fluid: true },
-  parameters,
-  tags: []
-};
-
-export const ProfileReadOnly = {
-  render: () => html`
-    <sgds-mainnav fluid>
-      <img alt="sgds logo" width="130" src="/logo.svg" slot="brand" />
-      <sgds-mainnav-item active>
-        <a href="#">Home</a>
-      </sgds-mainnav-item>
-      <sgds-mainnav-item>
-        <a href="#">About</a>
-      </sgds-mainnav-item>
-      <sgds-icon-button
-        slot="non-collapsible"
-        name="moon"
-        variant="ghost"
-        size="sm"
-        ariaLabel="Toggle dark mode"
-      ></sgds-icon-button>
-      <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile info">
-        <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
-          <span
-            class="sgds:h-full sgds:w-full sgds:block sgds:bg-neutral-surface-muted sgds:rounded-[50%]"
-            style="border-radius: 50%;"
-          ></span>
-        </span>
-      </sgds-mainnav-profile>
-    </sgds-mainnav>
-  `,
-  name: "Profile Read-Only (No Dropdown)",
+  name: "Tone: Brand",
+  args: { tone: "brand" },
   parameters: { layout: "fullscreen" },
   tags: []
 };
 
-export const ProfileSlot = {
-  render: () => html`
-    <sgds-mainnav fluid>
-      <img alt="sgds logo" width="130" src="/logo.svg" slot="brand" />
-      <sgds-mainnav-item active>
-        <a href="#">Home</a>
-      </sgds-mainnav-item>
-      <sgds-mainnav-item>
-        <a href="#">About</a>
-      </sgds-mainnav-item>
+export const ToneGradient1 = {
+  render: Template.bind({}),
+  name: "Tone: Gradient 1",
+  args: { tone: "gradient-1" },
+  parameters: { layout: "fullscreen" },
+  tags: []
+};
+
+export const ToneGradient2 = {
+  render: Template.bind({}),
+  name: "Tone: Gradient 2",
+  args: { tone: "gradient-2" },
+  parameters: { layout: "fullscreen" },
+  tags: []
+};
+
+export const ToneGradient3 = {
+  render: Template.bind({}),
+  name: "Tone: Gradient 3",
+  args: { tone: "gradient-3" },
+  parameters: { layout: "fullscreen" },
+  tags: []
+};
+
+export const ToneGradient4 = {
+  render: Template.bind({}),
+  name: "Tone: Gradient 4",
+  args: { tone: "gradient-4" },
+  parameters: { layout: "fullscreen" },
+  tags: []
+};
+
+export const WithProfile = {
+  render: ({ tone }) => html`
+    <sgds-appnav tone=${tone}>
       <sgds-icon-button
-        slot="non-collapsible"
+        name="menu"
+        slot="start"
+        variant="ghost"
+        tone="fixed-light"
+        size="sm"
+        ariaLabel="Open side menu"
+      ></sgds-icon-button>
+      <img alt="sgds logo" width="130" src="/logo-white.svg" slot="brand" />
+      <sgds-icon-button
         name="moon"
         variant="ghost"
+        tone="fixed-light"
         size="sm"
         ariaLabel="Toggle dark mode"
       ></sgds-icon-button>
-      <sgds-mainnav-profile
+      <sgds-appnav-profile
         slot="profile"
         label="User Name"
         secondaryText="Agency (admin)"
         ariaLabel="Profile menu"
-        close="outside"
+        close="inside"
       >
         <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
           <span
@@ -104,10 +106,46 @@ export const ProfileSlot = {
             >Log out</span
           ></sgds-dropdown-item
         >
-      </sgds-mainnav-profile>
-    </sgds-mainnav>
+      </sgds-appnav-profile>
+    </sgds-appnav>
   `,
-  name: "Profile Slot",
+  name: "With Profile",
+  args: { tone: "gradient-3" },
+  parameters: { layout: "fullscreen" },
+  tags: []
+};
+
+export const ProfileReadOnly = {
+  render: ({ tone }) => html`
+    <sgds-appnav tone=${tone}>
+      <sgds-icon-button
+        name="menu"
+        slot="start"
+        variant="ghost"
+        tone="fixed-light"
+        size="sm"
+        ariaLabel="Open side menu"
+      ></sgds-icon-button>
+      <img alt="sgds logo" width="130" src="/logo-white.svg" slot="brand" />
+      <sgds-icon-button
+        name="moon"
+        variant="ghost"
+        tone="fixed-light"
+        size="sm"
+        ariaLabel="Toggle dark mode"
+      ></sgds-icon-button>
+      <sgds-appnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile info">
+        <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
+          <span
+            class="sgds:h-full sgds:w-full sgds:block sgds:bg-neutral-surface-muted sgds:rounded-[50%]"
+            style="border-radius: 50%;"
+          ></span>
+        </span>
+      </sgds-appnav-profile>
+    </sgds-appnav>
+  `,
+  name: "Profile Read-Only (No Dropdown)",
+  args: { tone: "brand" },
   parameters: { layout: "fullscreen" },
   tags: []
 };

@@ -3,17 +3,71 @@
     <script type="module" src="/src/index.ts"></script>
     <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
     <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .avatar-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--sgds-surface-raised);
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <sgds-mainnav>
-      <img slot="brand" alt="Site logo" src="https://placehold.co/120x40" />
-      <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
-      <sgds-mainnav-item href="#">About</sgds-mainnav-item>
-      <sgds-mainnav-dropdown ariaLabel="Services menu">
-        <span slot="toggler">Services</span>
-        <sgds-dropdown-item href="#">Service 1</sgds-dropdown-item>
-        <sgds-dropdown-item href="#">Service 2</sgds-dropdown-item>
+      <div slot="brand">Logo</div>
+      <sgds-mainnav-item active>
+        <a href="#">Home</a>
+      </sgds-mainnav-item>
+      <sgds-mainnav-item disabled><a href="#">About</a></sgds-mainnav-item>
+      <sgds-mainnav-dropdown ariaLabel="Dropdown menu">
+        <span slot="toggler">Dropdown</span>
+        <sgds-dropdown-item disabled><a href="#">Item 1</a></sgds-dropdown-item>
+        <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+        <sgds-dropdown-item active><a href="#">Item 3</a></sgds-dropdown-item>
       </sgds-mainnav-dropdown>
+      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
+      <sgds-button slot="end" ariaLabel="Login">Login</sgds-button>
+    </sgds-mainnav>
+
+    <sgds-mainnav fluid>
+      <div slot="brand">Logo</div>
+      <sgds-mainnav-item active>
+        <a href="#">Home</a>
+      </sgds-mainnav-item>
+      <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
+      <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
+        <span slot="avatar" class="avatar-circle"></span>
+        <sgds-dropdown-item readonly>
+          <div>
+            <span>Account</span>
+            <div>
+              <span>User Name</span>
+              <span>user@agency.gov.sg</span>
+            </div>
+          </div>
+        </sgds-dropdown-item>
+        <sgds-divider thickness="thin"></sgds-divider>
+        <sgds-dropdown-item arialabel="My profile">
+          <span>My profile</span>
+        </sgds-dropdown-item>
+        <sgds-dropdown-item arialabel="Settings">
+          <span>Settings</span>
+        </sgds-dropdown-item>
+        <sgds-dropdown-item arialabel="Log out">
+          <span>Log out</span>
+        </sgds-dropdown-item>
+      </sgds-mainnav-profile>
+    </sgds-mainnav>
+
+    <sgds-mainnav>
+      <div slot="brand">Logo</div>
+      <sgds-mainnav-item active>
+        <a href="#">Home</a>
+      </sgds-mainnav-item>
+      <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile info">
+        <span slot="avatar" class="avatar-circle"></span>
+      </sgds-mainnav-profile>
     </sgds-mainnav>
   </body>
 </html>

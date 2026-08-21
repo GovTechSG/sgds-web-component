@@ -79,7 +79,7 @@ const PositionTemplate = args =>
     <div style="height:600px;">
       <sgds-masthead></sgds-masthead>
       <sgds-mainnav>
-        <img alt="sgds logo" width="130" src="/logo.png" slot="brand" />
+        <img alt="sgds logo" width="130" src="/logo.svg" slot="brand" />
       </sgds-mainnav>
       <sgds-toast-container position=${ifDefined(args.position)}>
         <sgds-toast
