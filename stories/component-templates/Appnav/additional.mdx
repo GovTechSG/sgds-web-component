@@ -54,10 +54,13 @@ Use `sgds-appnav-profile` in the `profile` slot for user account menus. It displ
   <Story of={AppnavStories.WithProfile} />
 </Canvas>
 
-## No Default Slot Items
+## Profile Read-Only (No Dropdown)
 
-When no icon-buttons are placed in the default slot, the three-dots toggler does not render. Only the start slot, brand, and profile are visible.
+When no dropdown items are slotted into `sgds-appnav-profile`, the component renders as a non-interactive, read-only display element. The dropdown menu, caret icon, and pointer cursor are all removed — the profile is not focusable or clickable.
 
-<Canvas of={AppnavStories.NoDefaultSlotItems}>
-  <Story of={AppnavStories.NoDefaultSlotItems} />
+- Use this when the profile is purely informational (e.g. showing the logged-in user without any actions).
+- If items are dynamically added later, the component transitions back to its interactive dropdown state.
+
+<Canvas of={AppnavStories.ProfileReadOnly}>
+  <Story of={AppnavStories.ProfileReadOnly} />
 </Canvas>

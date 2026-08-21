@@ -781,7 +781,12 @@ describe("sgds-mainnav-profile", () => {
       it("still renders label and secondaryText in read-only mode", async () => {
         const el = await fixture<SgdsMainnav>(html`
           <sgds-mainnav expand="lg">
-            <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile info">
+            <sgds-mainnav-profile
+              slot="profile"
+              label="User Name"
+              secondaryText="Agency (admin)"
+              ariaLabel="Profile info"
+            >
               <span slot="avatar" class="avatar"></span>
             </sgds-mainnav-profile>
           </sgds-mainnav>
