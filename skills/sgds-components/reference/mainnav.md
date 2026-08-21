@@ -221,7 +221,7 @@ Also inherits `<sgds-dropdown>` properties — see **[components-dropdown](dropd
 | Slot | Purpose |
 |---|---|
 | `avatar` | Avatar element — shown in both desktop (before label) and mobile (as toggler) |
-| *(default)* | `<sgds-dropdown-item>` elements — rendered as dropdown in desktop, flat list in mobile |
+| *(default)* | `<sgds-dropdown-item>` elements — rendered as dropdown in desktop, flat list in mobile. **When empty, the profile becomes a non-interactive read-only display** (no caret, no pointer cursor, not focusable). |
 
 ## Events (`<sgds-mainnav>`)
 
