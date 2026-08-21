@@ -115,7 +115,7 @@ export const WithProfile = {
   tags: []
 };
 
-export const NoDefaultSlotItems = {
+export const ProfileReadOnly = {
   render: ({ tone }) => html`
     <sgds-appnav tone=${tone}>
       <sgds-icon-button
@@ -127,12 +127,18 @@ export const NoDefaultSlotItems = {
         ariaLabel="Open side menu"
       ></sgds-icon-button>
       <img alt="sgds logo" width="130" src="/logo-white.svg" slot="brand" />
+      <sgds-icon-button
+        name="moon"
+        variant="ghost"
+        tone="fixed-light"
+        size="sm"
+        ariaLabel="Toggle dark mode"
+      ></sgds-icon-button>
       <sgds-appnav-profile
         slot="profile"
         label="User Name"
         secondaryText="Agency (admin)"
-        ariaLabel="Profile menu"
-        close="outside"
+        ariaLabel="Profile info"
       >
         <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
           <span
@@ -140,21 +146,10 @@ export const NoDefaultSlotItems = {
             style="border-radius: 50%;"
           ></span>
         </span>
-        <sgds-dropdown-item ariaLabel="My profile"
-          ><span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal"
-            >My profile</span
-          ></sgds-dropdown-item
-        >
-        <sgds-dropdown-item ariaLabel="Log out"
-          ><span
-            class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-danger-default"
-            >Log out</span
-          ></sgds-dropdown-item
-        >
       </sgds-appnav-profile>
     </sgds-appnav>
   `,
-  name: "No Default Slot Items (no toggler)",
+  name: "Profile Read-Only (No Dropdown)",
   args: { tone: "brand" },
   parameters: { layout: "fullscreen" },
   tags: []

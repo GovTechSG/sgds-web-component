@@ -715,6 +715,184 @@ describe("sgds-mainnav-profile", () => {
     }).retries(1);
   });
 
+  describe("read-only mode (no dropdown items)", () => {
+    describe("desktop", () => {
+      beforeEach(() => {
+        Object.defineProperty(window, "innerWidth", {
+          writable: true,
+          configurable: true,
+          value: 1030
+        });
+        window.dispatchEvent(new Event("resize"));
+      });
+
+      it("renders a div instead of a dropdown when no items are slotted", async () => {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav expand="lg">
+            <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency" ariaLabel="Profile info">
+              <span slot="avatar" class="avatar"></span>
+            </sgds-mainnav-profile>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
+        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+        await profile.updateComplete;
+
+        const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown");
+        expect(dropdown).not.to.exist;
+
+        const navLink = profile.shadowRoot?.querySelector(".nav-link");
+        expect(navLink).to.exist;
+        expect(navLink?.tagName.toLowerCase()).to.equal("div");
+      });
+
+      it("does not render chevron-down icon when no items are slotted", async () => {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav expand="lg">
+            <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile info">
+              <span slot="avatar" class="avatar"></span>
+            </sgds-mainnav-profile>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
+        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+        await profile.updateComplete;
+
+        const icon = profile.shadowRoot?.querySelector('sgds-icon[name="chevron-down"]');
+        expect(icon).not.to.exist;
+      });
+
+      it("has read-only class with pointer-events none", async () => {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav expand="lg">
+            <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile info">
+              <span slot="avatar" class="avatar"></span>
+            </sgds-mainnav-profile>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
+        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+        await profile.updateComplete;
+
+        const navLink = profile.shadowRoot?.querySelector(".nav-link");
+        expect(navLink).to.have.class("read-only");
+      });
+
+      it("still renders label and secondaryText in read-only mode", async () => {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav expand="lg">
+            <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile info">
+              <span slot="avatar" class="avatar"></span>
+            </sgds-mainnav-profile>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
+        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+        await profile.updateComplete;
+
+        const label = profile.shadowRoot?.querySelector(".profile-label");
+        expect(label).to.exist;
+        expect(label?.textContent).to.equal("User Name");
+
+        const secondary = profile.shadowRoot?.querySelector(".profile-secondary-text");
+        expect(secondary).to.exist;
+        expect(secondary?.textContent).to.equal("Agency (admin)");
+      });
+
+      it("is not focusable via keyboard in read-only mode", async () => {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav expand="lg">
+            <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile info">
+              <span slot="avatar" class="avatar"></span>
+            </sgds-mainnav-profile>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
+        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+        await profile.updateComplete;
+
+        const button = profile.shadowRoot?.querySelector("button");
+        expect(button).not.to.exist;
+      });
+
+      it("transitions from read-only to interactive when items are dynamically added", async () => {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav expand="lg">
+            <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+              <span slot="avatar" class="avatar"></span>
+            </sgds-mainnav-profile>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
+        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+        await profile.updateComplete;
+
+        // Initially read-only
+        expect(profile.shadowRoot?.querySelector("sgds-dropdown")).not.to.exist;
+        expect(profile.shadowRoot?.querySelector(".nav-link.read-only")).to.exist;
+
+        // Dynamically add a dropdown item
+        const item = document.createElement("sgds-dropdown-item");
+        item.innerHTML = "<span>Log out</span>";
+        profile.appendChild(item);
+        await profile.updateComplete;
+        await aTimeout(0);
+        await profile.updateComplete;
+
+        // Should now render interactive dropdown
+        expect(profile.shadowRoot?.querySelector("sgds-dropdown")).to.exist;
+        expect(profile.shadowRoot?.querySelector('sgds-icon[name="chevron-down"]')).to.exist;
+      });
+    });
+
+    describe("mobile", () => {
+      beforeEach(() => {
+        Object.defineProperty(window, "innerWidth", {
+          writable: true,
+          configurable: true,
+          value: 300
+        });
+        window.dispatchEvent(new Event("resize"));
+      });
+
+      it("renders a div instead of a button when no items are slotted", async () => {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav expand="lg">
+            <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile info">
+              <span slot="avatar" class="avatar"></span>
+            </sgds-mainnav-profile>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
+        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+        await profile.updateComplete;
+
+        const button = profile.shadowRoot?.querySelector("button.profile-avatar-mobile");
+        expect(button).not.to.exist;
+
+        const div = profile.shadowRoot?.querySelector("div.profile-avatar-mobile");
+        expect(div).to.exist;
+        expect(div).to.have.class("read-only");
+      });
+
+      it("does not render mobile panel when no items are slotted", async () => {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav expand="lg">
+            <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile info">
+              <span slot="avatar" class="avatar"></span>
+            </sgds-mainnav-profile>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
+        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+        await profile.updateComplete;
+
+        const panel = profile.shadowRoot?.querySelector(".profile-mobile-panel");
+        expect(panel).not.to.exist;
+      });
+    });
+  });
+
   describe("dropdown-item readonly prop", () => {
     it("readonly attribute reflects on sgds-dropdown-item", async () => {
       const el = await fixture<SgdsDropdownItem>(
