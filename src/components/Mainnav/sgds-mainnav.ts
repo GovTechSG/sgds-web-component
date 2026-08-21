@@ -84,7 +84,6 @@ export class SgdsMainnav extends NavElement {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
     childElements.forEach(el => {
       el.setAttribute("expand", this.expand);
-      el.setAttribute("tone", this.tone);
     });
 
     if (this._hasProfileComponent && childElements.length > 0) {
@@ -101,7 +100,6 @@ export class SgdsMainnav extends NavElement {
     childElements.forEach(e => {
       e.setAttribute("name", e.tagName.toLowerCase());
       e.setAttribute("expand", this.expand);
-      e.setAttribute("tone", this.tone);
     });
   }
 
