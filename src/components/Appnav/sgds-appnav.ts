@@ -15,7 +15,9 @@ interface DefaultSlotItem {
 }
 
 /**
- * @summary Application navigation bar for operational apps. Accepts icon-buttons and profile in a fluid layout with collapse/expand behavior.
+ * @summary `SgdsAppnav` is a application navigation bar for operational apps. Accepts icon-buttons and profile in a fluid layout with collapse/expand behavior.
+ *
+ * @storyOrder 1
  *
  * @event sgds-show - Emitted on show. Only for collapsed menu.
  * @event sgds-after-show - Emitted on show after animation has completed. Only for collapsed menu.
