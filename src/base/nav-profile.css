@@ -221,7 +221,7 @@ sgds-dropdown {
   max-width: var(--sgds-mainnav-max-width, 1440px);
   margin: auto;
   overflow-y: auto;
-  max-height: calc(100dvh - 72px);
+  height: 100dvh;
 }
 
 @media screen and (min-width: 1024px) {
