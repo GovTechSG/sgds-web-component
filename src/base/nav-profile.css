@@ -82,6 +82,17 @@ button.nav-link {
   cursor: not-allowed;
 }
 
+/* Read-only: no dropdown items, non-interactive */
+.nav-link.read-only {
+  cursor: default;
+  pointer-events: none;
+}
+
+.profile-avatar-mobile.read-only {
+  cursor: default;
+  pointer-events: none;
+}
+
 /* Desktop tone overrides */
 :host([tone="brand"][expand="always"]) .nav-link,
 :host([tone^="gradient"][expand="always"]) .nav-link {
@@ -184,7 +195,6 @@ sgds-dropdown {
   padding: var(--sgds-padding-md) 0px;
   border-top: var(--sgds-border-width-1) solid var(--sgds-border-color-translucent);
   box-shadow: 0px 2px 4px 0px rgba(14, 14, 14, 0.08);
-  overflow: hidden;
   animation: profile-panel-show 0.2s ease-in-out;
 }
 
@@ -211,7 +221,7 @@ sgds-dropdown {
   max-width: var(--sgds-mainnav-max-width, 1440px);
   margin: auto;
   overflow-y: auto;
-  max-height: calc(100dvh - 72px);
+  height: 100dvh;
 }
 
 @media screen and (min-width: 1024px) {

@@ -7,6 +7,7 @@ const TAB = "Tab";
 const ARROW_DOWN = "ArrowDown";
 const ARROW_UP = "ArrowUp";
 const ENTER = "Enter";
+const ESCAPE = "Escape";
 
 /**
  * @event sgds-select - Emitted when a dropdown item is selected. `event.detail.item` is the clicked `SgdsDropdownItem` element.
@@ -96,6 +97,12 @@ export class DropdownListElement extends DropdownElement {
           this._setMenuItem(this.nextDropdownItemNo);
         }
         break;
+      case ESCAPE:
+        if (this.menuIsOpen) {
+          e.preventDefault();
+          this.hideMenu();
+        }
+        break;
       case ENTER: {
         const target = menuItems.find(item => e.composedPath().includes(item));
         if (target) {
@@ -116,7 +123,10 @@ export class DropdownListElement extends DropdownElement {
         ?.assignedElements({
           flatten: true
         })
-        .filter(el => !el.classList.contains("empty-menu") && !el.hasAttribute("hidden")) as SgdsDropdownItem[];
+        .filter(
+          el =>
+            el.getAttribute("role") === "menuitem" && !el.classList.contains("empty-menu") && !el.hasAttribute("hidden")
+        ) as SgdsDropdownItem[];
       return defaultSlotItems;
     }
     // for case when there is no slot e.g. combobox
@@ -129,7 +139,7 @@ export class DropdownListElement extends DropdownElement {
   }
 
   private _getActiveMenuItems(): SgdsDropdownItem[] {
-    return this._getMenuItems().filter(item => !item.disabled && !item.hidden);
+    return this._getMenuItems().filter(item => !item.disabled && !item.hidden && !item.readonly);
   }
   private _setMenuItem(currentItemIdx: number) {
     const items = this._getActiveMenuItems();

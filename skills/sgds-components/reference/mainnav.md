@@ -1,6 +1,6 @@
 # SGDS Mainnav Component Skill
 
-`<sgds-mainnav>` is the primary horizontal navigation bar. It collapses into a hamburger menu on small screens. Navigation items use `<sgds-mainnav-item>` and dropdown menus use `<sgds-mainnav-dropdown>`.
+`<sgds-mainnav>` is the primary horizontal navigation bar for public-facing Singapore Government digital services. It collapses into a hamburger menu on small screens. Navigation items use `<sgds-mainnav-item>` and dropdown menus use `<sgds-mainnav-dropdown>`.
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
@@ -19,6 +19,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - For secondary or section-level navigation — use `<sgds-subnav>` or `<sgds-sidenav>` instead.
 - For in-page navigation between sections — use `<sgds-table-of-contents>`.
 - As the sole navigation in a sidebar layout — use `<sgds-sidebar>` or `<sgds-sidenav>`.
+- For operational/internal apps with coloured backgrounds (brand/gradient) — use `<sgds-appnav>` instead.
 - When navigation is minimal and does not require a full header bar — consider a simpler standalone link structure.
 
 ## Behaviour
@@ -29,7 +30,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - `<sgds-mainnav-dropdown>` renders a dropdown trigger with `<sgds-dropdown-item>` children; the `toggler` slot takes the trigger element.
 - Items in the `end` slot are right-aligned and also collapse into the hamburger menu on small screens.
 - Items in the `non-collapsible` slot remain visible at all screen sizes regardless of the `expand` setting.
-- Items in the `profile` slot are positioned at the far right in desktop. When `<sgds-mainnav-profile>` is used, it handles its own mobile menu (self-contained panel) — the avatar replaces the hamburger toggler and the profile manages its own expand/collapse independently from the mainnav body.
+- Items in the `profile` slot are positioned at the far right in desktop. When `<sgds-mainnav-profile>` is used, it renders its avatar as a toggler for its own self-contained mobile panel (independent from mainnav's collapsed menu body). The hamburger toggler is always rendered alongside the profile.
+- `<sgds-mainnav-item>` and `<sgds-mainnav-dropdown>` can coexist with `<sgds-mainnav-profile>` — both the hamburger menu (for nav items) and the profile's own mobile panel work independently.
 - `active` on `<sgds-mainnav-item>` highlights the current page link.
 - Fires `sgds-show`, `sgds-after-show`, `sgds-hide`, `sgds-after-hide` when the collapsed menu opens or closes (mobile only).
 
@@ -47,14 +49,13 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 **`non-collapsible` slot** — items that stay visible at all screen sizes regardless of hamburger collapse state (e.g. a language icon, accessibility toggle).
 
-**`profile` slot** — a `<sgds-mainnav-profile>` (preferred) or `<sgds-mainnav-dropdown>` for the user profile/account menu. It renders at the far right of the navigation bar (after `non-collapsible`). The profile slot stays in `navbar-end` at all times — it does NOT move into the collapsed menu body. The component manages colour automatically based on `tone`.
+**`profile` slot** — a `<sgds-mainnav-profile>` (preferred) or `<sgds-mainnav-dropdown>` for the user profile/account menu. It renders at the far right of the navigation bar. The profile slot stays in `navbar-end` at all times — it does NOT move into the collapsed menu body.
 
-**`<sgds-mainnav-profile>`** — a self-contained, responsive profile component for the `profile` slot. Unlike `<sgds-mainnav-dropdown>`, it:
+**`<sgds-mainnav-profile>`** — a self-contained, responsive profile component for the `profile` slot:
 - In desktop: renders avatar + label + secondaryText with a dropdown chevron
-- In mobile: replaces the default hamburger toggler with the avatar only (label/secondaryText hidden), and opens its own self-contained mobile panel with a slide animation (independent from mainnav's collapsed menu body)
+- In mobile: renders the avatar as a toggler that opens its own self-contained mobile panel (independent from mainnav's hamburger menu)
 - Requires an `avatar` slot, `label` prop (user name), optional `secondaryText` prop (agency/role), and default slot items (`<sgds-dropdown-item>` elements)
 - Use `readonly` on `<sgds-dropdown-item>` for non-interactive display items (e.g. user info header)
-- When present, it disables the mainnav's default hamburger toggler in mobile
 
 **Avoid placing inside mainnav:**
 - Form inputs or search bars in the default slot — use the `end` slot or a dedicated search component
@@ -64,9 +65,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Advanced Considerations
 
-- **`tone` prop**: controls the visual theme of the navigation bar. Use `"brand"` for a solid primary-colour background, or `"gradient-1"` through `"gradient-4"` for gradient backgrounds. All non-default tones render text and icons in fixed-light (white). When using a non-default tone, pair with `fluid` for a full-width edge-to-edge appearance.
-- **`start` slot**: use for items that appear before the brand area (e.g. a hamburger menu icon-button for sidebar toggling in console layouts).
-- **`profile` slot**: use for user account/profile dropdowns. The profile slot stays in `navbar-end` at all times. In mobile, `<sgds-mainnav-profile>` disables the mainnav's hamburger and renders its own avatar toggler + self-contained mobile panel with slide animation. The component handles text colour automatically.
+- **`profile` slot**: use for user account/profile dropdowns. In mobile, `<sgds-mainnav-profile>` renders its avatar toggler alongside the mainnav's hamburger. Both menus operate independently.
 - **`non-collapsible` slot**: use for items that must always be visible (e.g. a language toggle icon) — these are not hidden when the nav collapses.
 - **`end` slot collapse behaviour**: items in `end` collapse into the hamburger menu alongside default slot items — if an item must stay visible on mobile, use `non-collapsible` instead.
 - **`<sgds-mainnav-dropdown>` API**: inherits `<sgds-dropdown>` properties — see [dropdown.md](dropdown.md) for `active`, `menuIsOpen`, `close`, and `drop` options.
@@ -93,11 +92,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 **Brand logo link?** → Set `brandHref` to the target URL
 
-**Solid brand colour?** → `tone="brand" fluid`
-
-**Gradient background?** → `tone="gradient-1"` (or `gradient-2`, `gradient-3`, `gradient-4`) with `fluid`. Do NOT use `<sgds-mainnav-item>` with gradient tones — text fails accessibility. Use with `<sgds-mainnav-profile>` only (operational/internal apps with sidebar navigation).
-
-**User profile dropdown at far right?** → Use `slot="profile"` on a `<sgds-mainnav-profile>` with `label` and `secondaryText` props (preferred — avatar replaces hamburger in mobile, items render flat) or `<sgds-mainnav-dropdown>` (navigational drill-down in mobile)
+**User profile dropdown at far right?** → Use `slot="profile"` on a `<sgds-mainnav-profile>` with `label` and `secondaryText` props (preferred).
 
 ```html
 <!-- Default mainnav example -->
@@ -129,15 +124,14 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 ```
 
 ```html
-<!-- Mainnav with profile component (preferred for user profile) -->
-<sgds-mainnav tone="brand" fluid>
-  <img slot="brand" alt="Site logo" width="130" src="/logo-white.svg" />
+<!-- Mainnav with profile component -->
+<sgds-mainnav brandHref="/" fluid>
+  <img slot="brand" alt="Site logo" width="130" src="/logo.svg" />
   <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
-  <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+  <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
+  <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
   <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu" close="outside">
-    <!-- Avatar: shown in desktop (before label) and mobile (as toggler) -->
     <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:rounded-full sgds:bg-neutral-subtle-default sgds:block"></span>
-    <!-- Non-interactive user info header -->
     <sgds-dropdown-item readonly>
       <div class="sgds:flex sgds:items-center sgds:gap-3 sgds:py-1">
         <span class="sgds:h-12 sgds:w-12 sgds:shrink-0 sgds:rounded-full sgds:bg-neutral-subtle-default"></span>
@@ -148,7 +142,6 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
       </div>
     </sgds-dropdown-item>
     <sgds-divider thickness="thin"></sgds-divider>
-    <!-- Action items -->
     <sgds-dropdown-item ariaLabel="My profile"><span>My profile</span></sgds-dropdown-item>
     <sgds-dropdown-item ariaLabel="Settings"><span>Settings</span></sgds-dropdown-item>
     <sgds-dropdown-item ariaLabel="Log out"><span>Log out</span></sgds-dropdown-item>
@@ -166,6 +159,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | `expand` | `sm \| md \| lg \| xl \| xxl \| always \| never` | `lg` | Breakpoint below which the nav collapses |
 | `brandHref` | string | `""` | URL for the brand logo link |
 | `fluid` | boolean | `false` | Uses a full-width container instead of a fixed-width one |
+| `hasNonCollapsibleSlot` | boolean | `false` | SSR hint — set to `true` when the `non-collapsible` slot has content |
 
 ### `<sgds-mainnav-item>`
 
@@ -194,7 +188,7 @@ Also inherits `<sgds-dropdown>` properties — see **[components-dropdown](dropd
 | `ariaLabel` | string | `""` | Accessible label for the toggle button |
 | `close` | `default \| outside \| inside` | `"default"` | Controls dropdown close behaviour (forwarded to internal `<sgds-dropdown>`) |
 
-### `<sgds-dropdown-item>` (new prop)
+### `<sgds-dropdown-item>` (relevant prop)
 
 | Attribute | Type | Default | Purpose |
 |---|---|---|---|
@@ -230,8 +224,8 @@ Also inherits `<sgds-dropdown>` properties — see **[components-dropdown](dropd
 
 | Slot | Purpose |
 |---|---|
-| `avatar` | Avatar element — shown in both desktop (before label) and mobile (replaces hamburger toggler) |
-| *(default)* | `<sgds-dropdown-item>` elements — rendered as dropdown in desktop, flat list in mobile |
+| `avatar` | Avatar element — shown in both desktop (before label) and mobile (as toggler) |
+| *(default)* | `<sgds-dropdown-item>` elements — rendered as dropdown in desktop, flat list in mobile. **When empty, the profile becomes a non-interactive read-only display** (no caret, no pointer cursor, not focusable). |
 
 ## Events (`<sgds-mainnav>`)
 
@@ -248,11 +242,8 @@ Also inherits `<sgds-dropdown>` properties — see **[components-dropdown](dropd
 1. Always place the brand logo in the `brand` slot using an `<img>` element; set `brandHref` to `"/"` for home navigation.
 2. Regular nav links use `<a>` tags inside `<sgds-mainnav-item>`.
 3. Right-aligned items (login button, contact link) go in the `end` slot.
-4. User profile/account dropdowns go in the `profile` slot — use `<sgds-mainnav-profile>` with `label` and `secondaryText` props (avatar replaces hamburger in mobile, self-contained mobile panel) or `<sgds-mainnav-dropdown>` (navigational drill-down). Prefer `<sgds-mainnav-profile>` for operational/internal apps.
+4. User profile/account dropdowns go in the `profile` slot — use `<sgds-mainnav-profile>` with `label` and `secondaryText` props (preferred) or `<sgds-mainnav-dropdown>`. The hamburger toggler always renders alongside the profile.
 5. `non-collapsible` slot stays visible on all screen sizes — use for icons that should never collapse.
-6. The `<sgds-mainnav-profile>` component manages text colour automatically based on `tone` — no need to hardcode colour classes.
-7. **Do NOT use `<sgds-mainnav-item>` with `tone="gradient-*"`** — text fails accessibility against gradient backgrounds. Gradient tones are for operational apps using `<sgds-mainnav-profile>` with sidebar navigation.
-8. **Do NOT use `<sgds-mainnav-item>` alongside `<sgds-mainnav-profile>`** — the profile disables the mainnav hamburger, so nav items would have no mobile menu. Use a sidebar for navigation in these apps.
-9. Use `<sgds-masthead>` above `<sgds-mainnav>` as required for Singapore Government sites.
-10. **Always set `ariaLabel` on `<sgds-mainnav-dropdown>`** — the slotted toggler text is not accessible to screen readers through the shadow DOM boundary. Use a descriptive label like `"Resources menu"`.
-11. For console/dashboard layouts with a sidebar toggle, use `slot="start"` for the hamburger icon-button.
+6. Use `<sgds-masthead>` above `<sgds-mainnav>` as required for Singapore Government sites.
+7. **Always set `ariaLabel` on `<sgds-mainnav-dropdown>`** — the slotted toggler text is not accessible to screen readers through the shadow DOM boundary. Use a descriptive label like `"Resources menu"`.
+8. For operational/internal apps with coloured nav bars (brand/gradient tones), use `<sgds-appnav>` instead of `<sgds-mainnav>`.

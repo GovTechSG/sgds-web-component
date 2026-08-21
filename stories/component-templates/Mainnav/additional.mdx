@@ -8,46 +8,27 @@ By default, the Mainnav content is contained within a max-width container. Use t
   <Story of={MainnavStories.Fluid} />
 </Canvas>
 
-## Tone
+## Profile Slot
 
-The `tone` prop controls the visual theme of the navigation bar. All non-default tones render text and icons in fixed-light (white) and are typically paired with `fluid`.
+Use `sgds-mainnav-profile` in the `profile` slot to render a user profile dropdown. It displays an avatar, label, and secondary text in desktop, and collapses into an avatar toggler with a mobile panel in smaller viewports.
 
-### Brand
+- The `label` and `secondaryText` props control the text displayed beside the avatar in desktop.
+- Use `readonly` on the first `sgds-dropdown-item` for non-interactive account info.
+- Use `sgds-divider` to separate item groups within the dropdown.
+- Set `close="outside"` to prevent the menu from closing when clicking inside it.
+- The hamburger toggler is always rendered alongside the profile — both menus work independently.
 
-Uses the primary surface colour as the background.
-
-<Canvas of={MainnavStories.ToneBrand}>
-  <Story of={MainnavStories.ToneBrand} />
+<Canvas of={MainnavStories.ProfileSlot}>
+  <Story of={MainnavStories.ProfileSlot} />
 </Canvas>
 
-### Gradient 1
+## Profile Read-Only (No Dropdown)
 
-Cyan to Purple gradient background.
+When no dropdown items are slotted into `sgds-mainnav-profile`, the component renders as a non-interactive, read-only display element. The dropdown menu, caret icon, and pointer cursor are all removed — the profile is not focusable or clickable.
 
-<Canvas of={MainnavStories.ToneGradient1}>
-  <Story of={MainnavStories.ToneGradient1} />
-</Canvas>
+- Use this when the profile is purely informational (e.g. showing the logged-in user without any actions).
+- If items are dynamically added later, the component transitions back to its interactive dropdown state.
 
-### Gradient 2
-
-Blue to Magenta gradient background.
-
-<Canvas of={MainnavStories.ToneGradient2}>
-  <Story of={MainnavStories.ToneGradient2} />
-</Canvas>
-
-### Gradient 3
-
-Purple to Pink gradient background.
-
-<Canvas of={MainnavStories.ToneGradient3}>
-  <Story of={MainnavStories.ToneGradient3} />
-</Canvas>
-
-### Gradient 4
-
-Magenta to Red gradient background.
-
-<Canvas of={MainnavStories.ToneGradient4}>
-  <Story of={MainnavStories.ToneGradient4} />
+<Canvas of={MainnavStories.ProfileReadOnly}>
+  <Story of={MainnavStories.ProfileReadOnly} />
 </Canvas>
