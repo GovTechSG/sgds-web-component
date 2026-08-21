@@ -1,5 +1,5 @@
 import { html, nothing } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { offset } from "@floating-ui/dom";
@@ -12,10 +12,12 @@ import genId from "../utils/generateId";
 /**
  * Base class for navigation profile components (sgds-mainnav-profile and sgds-appnav-profile).
  * Provides the full profile dropdown (desktop) and mobile panel behavior.
+ * When no dropdown items are slotted into the default slot, renders as a non-interactive
+ * read-only element (no dropdown menu, no caret icon, cursor default, not focusable by keyboard or mouse).
  * Subclasses must consume the appropriate breakpoint context and set `_breakpointReached`.
  *
  * @slot avatar - Avatar element displayed in both desktop (before label) and mobile (as toggler)
- * @slot default - Profile menu items (sgds-dropdown-item elements)
+ * @slot default - Profile menu items (sgds-dropdown-item elements). When empty, the component becomes read-only.
  */
 export default abstract class NavProfileElement extends SgdsElement {
   static styles = [...SgdsElement.styles, navProfileStyle];
@@ -32,6 +34,13 @@ export default abstract class NavProfileElement extends SgdsElement {
   /** @internal Whether the mobile menu is open */
   @state()
   private _mobileMenuOpen = false;
+
+  /** @internal Whether dropdown items are slotted */
+  @state()
+  private _hasDropdownItems = false;
+
+  @queryAssignedElements({ flatten: true })
+  private _defaultSlotElements!: HTMLElement[];
 
   /** Primary text displayed next to the avatar in desktop (e.g. user name) */
   @property({ type: String, reflect: true })
@@ -78,6 +87,10 @@ export default abstract class NavProfileElement extends SgdsElement {
     window.removeEventListener("click", this._handleClickOutside);
   }
 
+  private _handleSlotChange = () => {
+    this._hasDropdownItems = this._defaultSlotElements.length > 0;
+  };
+
   private _handleKeydown = (e: KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -87,6 +100,30 @@ export default abstract class NavProfileElement extends SgdsElement {
 
   render() {
     if (!this._breakpointReached) {
+      // Desktop: read-only (no dropdown items)
+      if (!this._hasDropdownItems) {
+        return html`
+          <div
+            class="${classMap({
+              "nav-link": true,
+              "read-only": true
+            })}"
+            aria-label=${ifDefined(this.ariaLabel)}
+          >
+            <slot name="avatar"></slot>
+            ${this.label || this.secondaryText
+              ? html`<div class="profile-text">
+                  ${this.label ? html`<span class="profile-label">${this.label}</span>` : nothing}
+                  ${this.secondaryText
+                    ? html`<span class="profile-secondary-text">${this.secondaryText}</span>`
+                    : nothing}
+                </div>`
+              : nothing}
+          </div>
+          <slot @slotchange=${this._handleSlotChange}></slot>
+        `;
+      }
+
       // Desktop: dropdown with avatar + label + secondaryText
       return html`
         <sgds-dropdown .floatingOpts=${{ middleware: [offset(0)] }} ?disabled=${this.disabled} close=${this.close}>
@@ -112,8 +149,18 @@ export default abstract class NavProfileElement extends SgdsElement {
               : nothing}
             <sgds-icon name="chevron-down" size="md"></sgds-icon>
           </button>
-          <slot></slot>
+          <slot @slotchange=${this._handleSlotChange}></slot>
         </sgds-dropdown>
+      `;
+    }
+
+    // Mobile: read-only (no dropdown items)
+    if (!this._hasDropdownItems) {
+      return html`
+        <div class="profile-avatar-mobile read-only">
+          <slot name="avatar"></slot>
+        </div>
+        <slot @slotchange=${this._handleSlotChange}></slot>
       `;
     }
 
@@ -130,7 +177,7 @@ export default abstract class NavProfileElement extends SgdsElement {
       </button>
       <div class="profile-mobile-panel" ?hidden=${!this._mobileMenuOpen}>
         <div class="profile-mobile-items">
-          <slot></slot>
+          <slot @slotchange=${this._handleSlotChange}></slot>
         </div>
       </div>
     `;

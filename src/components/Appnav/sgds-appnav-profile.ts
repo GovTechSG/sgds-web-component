@@ -7,12 +7,13 @@ import { AppnavBreakpointContext } from "./appnav-context";
  * @summary `SgdsAppnavProfile` is a profile component for the appnav that shows a full dropdown in desktop and handles its own mobile menu.
  * In desktop: renders avatar + label + secondaryText with a dropdown.
  * In mobile: renders the avatar as a toggler that opens a self-contained mobile panel with profile items.
+ * When no dropdown items are slotted, renders as a non-interactive read-only element (no caret, no pointer cursor, not focusable).
  * When present, it disables the appnav's default hamburger toggler.
  *
  * @storyOrder 2
  *
  * @slot avatar - Avatar element displayed in both desktop (before label) and mobile (as toggler)
- * @slot default - Profile menu items (sgds-dropdown-item elements)
+ * @slot default - Profile menu items (sgds-dropdown-item elements). When empty, the component becomes read-only.
  */
 export class SgdsAppnavProfile extends NavProfileElement {
   @consume({ context: AppnavBreakpointContext, subscribe: true })

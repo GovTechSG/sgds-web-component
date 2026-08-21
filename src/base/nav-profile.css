@@ -82,6 +82,17 @@ button.nav-link {
   cursor: not-allowed;
 }
 
+/* Read-only: no dropdown items, non-interactive */
+.nav-link.read-only {
+  cursor: default;
+  pointer-events: none;
+}
+
+.profile-avatar-mobile.read-only {
+  cursor: default;
+  pointer-events: none;
+}
+
 /* Desktop tone overrides */
 :host([tone="brand"][expand="always"]) .nav-link,
 :host([tone^="gradient"][expand="always"]) .nav-link {
