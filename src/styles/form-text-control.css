@@ -28,7 +28,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--sgds-form-gap-md);
+  gap: var(--sgds-form-gap-xl);
   background-color: var(--sgds-form-surface-default);
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
   border-radius: var(--input-border-radius, var(--sgds-form-border-radius-md));
