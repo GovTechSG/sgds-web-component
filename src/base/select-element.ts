@@ -219,7 +219,7 @@ export class SelectElement
     });
     const options = await Promise.all(readyOptions);
     return options?.map((el: OptionElement) => ({
-      label: el.innerText,
+      label: el.textContent?.trim() ?? "",
       value: el.getAttribute("value"),
       disabled: el.disabled ?? undefined
     }));

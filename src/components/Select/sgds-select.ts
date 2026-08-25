@@ -72,20 +72,26 @@ export class SgdsSelect extends SelectElement {
       })
     );
     this.menuList = await this._getMenuListFromOptions(assignedElements);
-    this._updateDisplayValue();
+    // If value was set before options slotted (e.g. React sets value prop
+    // before children mount), sync the display now that options are available.
+    if (this.value) {
+      this._updateDisplayValue();
+      this._setActiveToOption();
+    }
     this.input = await this._input;
     this._mixinValidate(this.input);
   }
   private _updateDisplayValue() {
     if (this.value && this.menuList.length > 0) {
       const initialSelectedItem = this.menuList.filter(({ value }) => value === this.value);
+      if (initialSelectedItem.length === 0) return;
       this.displayValue = initialSelectedItem[0].label;
 
       this._setActiveToOption();
     }
   }
   private _setActiveToOption() {
-    const activeIndex = this.menuList.findIndex(item => item.value.toString() === this.value);
+    const activeIndex = this.menuList.findIndex(item => item.value?.toString() === this.value);
     this.options.forEach((option, index) => {
       option.active = index === activeIndex;
     });
@@ -93,6 +99,10 @@ export class SgdsSelect extends SelectElement {
 
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
+    // Guard: if options haven't slotted yet, menuList is empty.
+    // _handleSlotChange will sync the display once options are available.
+    if (this.menuList.length === 0) return;
+
     this._setActiveToOption();
 
     // when value change, always emit a change event
