@@ -1,11 +1,45 @@
 /**
  * Injects HTML/React tabs into Storybook's docs mode source blocks.
  * Targets `pre.prismjs` elements inside the Canvas source containers.
+ *
+ * Intercepts the native Storybook copy button so it copies only the
+ * active tab's code (same behavior as the canvas mode panel).
  */
 import { htmlToReact } from "./htmlToReact";
 
 const PROCESSED_ATTR = "data-react-tabs";
-const SEPARATOR = "\n\n// ─── React ───────────────────────────────────────\n\n";
+
+// Store active tab code per container so the clipboard interceptor can read it
+const containerCodeMap = new WeakMap<Element, () => string>();
+
+// Intercept clipboard writes from native Storybook copy buttons.
+// When a copy happens inside a processed container, override with the active tab's code.
+document.addEventListener(
+  "click",
+  e => {
+    const btn = (e.target as HTMLElement).closest("button");
+    if (!btn || btn.classList.contains("react-source-tab")) return;
+    if (btn.textContent?.trim() !== "Copy") return;
+
+    // Check if this button is inside one of our processed containers
+    const container = btn.closest("[data-react-tabs-container]");
+    if (!container) return;
+
+    const getCode = containerCodeMap.get(container);
+    if (!getCode) return;
+
+    // Prevent Storybook's handler and write our own clipboard content
+    e.stopPropagation();
+    e.preventDefault();
+    navigator.clipboard.writeText(getCode()).then(() => {
+      btn.textContent = "Copied";
+      setTimeout(() => {
+        btn.textContent = "Copy";
+      }, 1500);
+    });
+  },
+  true // capture phase to fire before Storybook's handler
+);
 
 function injectTabs(pre: HTMLElement) {
   if (pre.hasAttribute(PROCESSED_ATTR)) return;
@@ -15,23 +49,33 @@ function injectTabs(pre: HTMLElement) {
   const codeDiv = pre.querySelector("div[class*='language-']") as HTMLElement;
   if (!codeDiv) return;
 
-  const fullText = pre.textContent || "";
+  const htmlCode = (pre.textContent || "").trim();
 
-  // Check if this contains our separator (meaning transform already ran)
-  if (!fullText.includes("// ─── React")) return;
+  // Only inject tabs for SGDS components (skip script-containing snippets)
+  if (!htmlCode.includes("sgds-") || htmlCode.includes("<script")) return;
 
-  // Split into HTML and React parts
-  const sepIndex = fullText.indexOf(SEPARATOR);
-  if (sepIndex < 0) return;
-
-  const htmlCode = fullText.substring(0, sepIndex);
   const reactCode = htmlToReact(htmlCode);
+  if (!reactCode) return;
 
   // Find the outermost source container (parent of the scroll area wrapper)
   // Structure: div.css-* > div[dir="ltr"] > ... > pre.prismjs
   const scrollWrapper = pre.closest("[data-radix-scroll-area-viewport]")?.parentElement;
   const sourceContainer = scrollWrapper?.parentElement;
   if (!sourceContainer) return;
+
+  // Only inject tabs for Canvas blocks (which have a story preview sibling),
+  // not standalone <Source> blocks in MDX documentation
+  const canvasWrapper = sourceContainer.parentElement;
+  if (!canvasWrapper?.querySelector(":scope > .docs-story")) return;
+
+  // Mark the container for the clipboard interceptor
+  sourceContainer.setAttribute("data-react-tabs-container", "true");
+
+  // State
+  let activeTab = "react";
+
+  // Register code getter for clipboard interceptor
+  containerCodeMap.set(sourceContainer, () => (activeTab === "react" ? reactCode : htmlCode));
 
   // Create tab bar
   const tabBar = document.createElement("div");
@@ -41,7 +85,7 @@ function injectTabs(pre: HTMLElement) {
     <button class="react-source-tab" data-tab="html">Others (Vue, Angular, HTML)</button>
   `;
   tabBar.style.cssText =
-    "display:flex;gap:0;padding:0 12px;border-bottom:1px solid rgba(255,255,255,0.1);background:inherit;";
+    "display:flex;gap:0;padding:0 12px;border-bottom:1px solid rgba(255,255,255,0.1);background:inherit;align-items:center;";
 
   // Style the tab buttons
   tabBar.querySelectorAll(".react-source-tab").forEach(btn => {
@@ -57,9 +101,6 @@ function injectTabs(pre: HTMLElement) {
 
   // Insert tab bar before the scroll area
   sourceContainer.insertBefore(tabBar, sourceContainer.firstChild);
-
-  // State
-  let activeTab = "react";
 
   // Initially show React code
   codeDiv.innerHTML = highlightReact(reactCode);
