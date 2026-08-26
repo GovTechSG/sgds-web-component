@@ -241,27 +241,6 @@ const CustomFooterTextTemplate = () => html`
   </sgds-data-table>
 `;
 
-const HideFooterTemplate = () => html`
-  <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5} .hideFooter=${true}>
-    <sgds-data-table-row>
-      <sgds-data-table-head>ID</sgds-data-table-head>
-      <sgds-data-table-head>Status</sgds-data-table-head>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>1001</sgds-data-table-cell>
-      <sgds-data-table-cell>Pending</sgds-data-table-cell>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>1002</sgds-data-table-cell>
-      <sgds-data-table-cell>Approved</sgds-data-table-cell>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>1003</sgds-data-table-cell>
-      <sgds-data-table-cell>Rejected</sgds-data-table-cell>
-    </sgds-data-table-row>
-  </sgds-data-table>
-`;
-
 const HeaderAndCellPropsTemplate = () => html`
   <sgds-data-table layout="fixed" .currentPage=${1} .dataLength=${4} .itemsPerPage=${4}>
     <sgds-data-table-row>
@@ -295,7 +274,7 @@ const DefaultSortTemplate = () => html`
   <sgds-data-table .currentPage=${1} .dataLength=${4} .itemsPerPage=${4}>
     <sgds-data-table-row>
       <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
-      <sgds-data-table-head sorting sortKey="name" ariasort="ascending">Name</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="name" .sortDirection=${"ascending"}>Name</sgds-data-table-head>
       <sgds-data-table-head>Role</sgds-data-table-head>
     </sgds-data-table-row>
     <sgds-data-table-row>
@@ -317,51 +296,6 @@ const DefaultSortTemplate = () => html`
       <sgds-data-table-cell>3</sgds-data-table-cell>
       <sgds-data-table-cell>Darren</sgds-data-table-cell>
       <sgds-data-table-cell>Designer</sgds-data-table-cell>
-    </sgds-data-table-row>
-  </sgds-data-table>
-`;
-
-const RowColspanFiveByFiveTemplate = () => html`
-  <sgds-data-table .currentPage=${1} .dataLength=${5} .itemsPerPage=${5}>
-    <sgds-data-table-row>
-      <sgds-data-table-head>ID</sgds-data-table-head>
-      <sgds-data-table-head>Item</sgds-data-table-head>
-      <sgds-data-table-head>Category</sgds-data-table-head>
-      <sgds-data-table-head>Status</sgds-data-table-head>
-      <sgds-data-table-head textAlign="right">Amount</sgds-data-table-head>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>1</sgds-data-table-cell>
-      <sgds-data-table-cell>Application fee</sgds-data-table-cell>
-      <sgds-data-table-cell>Service</sgds-data-table-cell>
-      <sgds-data-table-cell>Paid</sgds-data-table-cell>
-      <sgds-data-table-cell>120.00</sgds-data-table-cell>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>2</sgds-data-table-cell>
-      <sgds-data-table-cell colspan="2">Support package (category merged)</sgds-data-table-cell>
-      <sgds-data-table-cell>Pending</sgds-data-table-cell>
-      <sgds-data-table-cell>240.00</sgds-data-table-cell>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>3</sgds-data-table-cell>
-      <sgds-data-table-cell>Licence renewal</sgds-data-table-cell>
-      <sgds-data-table-cell>Regulatory</sgds-data-table-cell>
-      <sgds-data-table-cell>Paid</sgds-data-table-cell>
-      <sgds-data-table-cell>320.00</sgds-data-table-cell>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>4</sgds-data-table-cell>
-      <sgds-data-table-cell colspan="2">Bulk order adjustment (category merged)</sgds-data-table-cell>
-      <sgds-data-table-cell>Approved</sgds-data-table-cell>
-      <sgds-data-table-cell>180.00</sgds-data-table-cell>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>5</sgds-data-table-cell>
-      <sgds-data-table-cell>Maintenance</sgds-data-table-cell>
-      <sgds-data-table-cell>Service</sgds-data-table-cell>
-      <sgds-data-table-cell>In progress</sgds-data-table-cell>
-      <sgds-data-table-cell>95.00</sgds-data-table-cell>
     </sgds-data-table-row>
   </sgds-data-table>
 `;
@@ -436,14 +370,7 @@ export const CustomFooterText = {
   parameters: {}
 };
 
-export const HideFooter = {
-  render: HideFooterTemplate.bind({}),
-  name: "Hide footer",
-  args: {},
-  parameters: {}
-};
-
-export const HeaderColspanRowspan = {
+export const HeaderAndCellProps = {
   render: HeaderAndCellPropsTemplate.bind({}),
   name: "Header and cell props",
   args: {},
@@ -453,13 +380,6 @@ export const HeaderColspanRowspan = {
 export const DefaultSort = {
   render: DefaultSortTemplate.bind({}),
   name: "Default sort",
-  args: {},
-  parameters: {}
-};
-
-export const RowColspanFiveByFive = {
-  render: RowColspanFiveByFiveTemplate.bind({}),
-  name: "Row colspan example (5 by 5)",
   args: {},
   parameters: {}
 };

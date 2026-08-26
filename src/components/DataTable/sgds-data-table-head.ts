@@ -21,17 +21,17 @@ export class SgdsDataTableHead extends SgdsElement {
   /** Sets the column width. */
   @property({ type: String, reflect: true }) width: string | undefined;
 
-  /** Number of columns this cell spans. */
-  @property({ type: Number, reflect: true }) colspan: number | undefined;
+  /** @internal Number of columns this cell spans. */
+  @property({ type: Number }) colSpan: number | undefined;
 
-  /** Number of rows this cell spans. */
-  @property({ type: Number, reflect: true }) rowspan: number | undefined;
+  /** @internal Number of rows this cell spans. */
+  @property({ type: Number }) rowSpan: number | undefined;
 
   /** Text alignment for the header content. */
   @property({ type: String, reflect: true }) textAlign: "left" | "right" = "left";
 
   /** Current sort direction for this column. */
-  @property({ type: String, reflect: true }) ariasort: "ascending" | "descending" | "none" | "other" | undefined;
+  @property({ type: String, reflect: true }) sortDirection: "ascending" | "descending" | "none" | "other" | undefined;
 
   /** When true, clicking this header cycles through ascending → descending → none sort. */
   @property({ type: Boolean, reflect: true }) sorting = false;
@@ -42,8 +42,9 @@ export class SgdsDataTableHead extends SgdsElement {
   /** @internal — called by the row when the rendered `<th>` is clicked. */
   handleSortClick() {
     if (!this.sorting) return;
-    const next = this.ariasort === "ascending" ? "descending" : this.ariasort === "descending" ? "none" : "ascending";
-    this.ariasort = next;
+    const next =
+      this.sortDirection === "ascending" ? "descending" : this.sortDirection === "descending" ? "none" : "ascending";
+    this.sortDirection = next;
     this.emit("i-sgds-sort", {
       detail: { key: this.sortKey, direction: next },
       bubbles: true,

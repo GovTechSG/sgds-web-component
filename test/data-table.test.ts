@@ -397,14 +397,12 @@ describe("<sgds-data-table>", () => {
     await elementUpdated(el);
 
     const loadingState = el.shadowRoot?.querySelector(".loading");
-    const loadingMenu = el.shadowRoot?.querySelector(".loading-menu");
-    const loadingSpinner = el.shadowRoot?.querySelector("sgds-spinner");
+    const skeletons = el.shadowRoot?.querySelectorAll("sgds-skeleton") || [];
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const bodyRows = slot.assignedElements({ flatten: true }).slice(1) as HTMLElement[];
 
     expect(loadingState).to.exist;
-    expect(loadingMenu).to.exist;
-    expect(loadingSpinner).to.exist;
+    expect(skeletons.length).to.equal(5);
     expect(bodyRows[0].style.display).to.equal("none");
 
     el.isLoading = false;
@@ -428,11 +426,28 @@ describe("<sgds-data-table>", () => {
     await elementUpdated(el);
 
     const loadingState = el.shadowRoot?.querySelector(".loading");
+    const skeletons = el.shadowRoot?.querySelectorAll("sgds-skeleton") || [];
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const bodyRows = slot.assignedElements({ flatten: true }).slice(1) as HTMLElement[];
 
     expect(loadingState).to.exist;
-    expect(bodyRows[0].style.display).to.equal("");
+    expect(skeletons.length).to.equal(5);
+    expect(bodyRows[0].style.display).to.equal("none");
+  });
+
+  it("renders loading skeleton using column count x page size", async () => {
+    const el = await fixture<SgdsDataTable>(html`
+      <sgds-data-table mode="server" ?isLoading=${true} dataLength="10" itemsPerPage="3" currentPage="1" multiSelect>
+        <sgds-data-table-row>
+          <sgds-data-table-head>ID</sgds-data-table-head>
+          <sgds-data-table-head>Name</sgds-data-table-head>
+        </sgds-data-table-row>
+      </sgds-data-table>
+    `);
+    await elementUpdated(el);
+
+    const skeletons = el.shadowRoot?.querySelectorAll("sgds-skeleton") || [];
+    expect(skeletons.length).to.equal(9);
   });
 
   it("disables sort control when there are no body rows", async () => {
@@ -471,9 +486,58 @@ describe("<sgds-data-table>", () => {
     const header = headerRow.querySelector("sgds-data-table-head") as SgdsDataTableHead;
     const sortButton = headerRow.shadowRoot?.querySelector(".sort-button") as HTMLButtonElement;
 
-    expect(header.ariasort).to.equal("none");
+    expect(header.sortDirection).to.equal("none");
     expect(sortButton).to.exist;
     expect(sortButton.disabled).to.be.false;
+  });
+
+  it("forwards paginationVariant to the internal pagination control", async () => {
+    const el = await fixture<SgdsDataTable>(html`
+      <sgds-data-table mode="client" paginationVariant="number" dataLength="6" itemsPerPage="5" currentPage="1">
+        <sgds-data-table-row>
+          <sgds-data-table-head>ID</sgds-data-table-head>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>1</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>2</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>3</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>4</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>5</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>6</sgds-data-table-cell>
+        </sgds-data-table-row>
+      </sgds-data-table>
+    `);
+    await elementUpdated(el);
+
+    const pagination = el.shadowRoot?.querySelector("sgds-pagination") as { variant: string } | null;
+    expect(pagination).to.exist;
+    expect(pagination?.variant).to.equal("number");
+  });
+
+  it("shows loading footer with pagination while isLoading is true", async () => {
+    const el = await fixture<SgdsDataTable>(html`
+      <sgds-data-table mode="server" ?isLoading=${true} dataLength="10" itemsPerPage="5" currentPage="1">
+        <sgds-data-table-row>
+          <sgds-data-table-head>ID</sgds-data-table-head>
+        </sgds-data-table-row>
+      </sgds-data-table>
+    `);
+    await elementUpdated(el);
+    await elementUpdated(el);
+
+    expect(el.shadowRoot?.querySelector(".footer")).to.exist;
+    expect(el.shadowRoot?.querySelector(".footer span")?.textContent).to.contain("Showing");
+    expect(el.shadowRoot?.querySelector("sgds-pagination")).to.exist;
   });
 
   it("emits sgds-sort in server mode without locally sorting rows", async () => {

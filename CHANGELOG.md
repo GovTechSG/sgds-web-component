@@ -1,3 +1,19 @@
+## v3.26.1 (2026-08-21)
+
+### Fix
+
+- **TextArea**: set height to auto, so its not locked [run-chromatic][skip-cd] (#812)
+- **TextArea**: set height to auto, so its not locked
+- **storybook**: limit React/HTML tabs to Canvas source blocks only
+- **QuantityToggle**: input event emission lagging in value [skip-cd] (#807)
+- **QuantityToggle**: input event emission lagging in value
+- **storybook**: copy button now copies only the active tab's code in … (#803)
+- **storybook**: copy button now copies only the active tab's code in docs mode
+
+### Refactor
+
+- **QuantityToggle**: combine _handleChange and _handleInputChange into single method
+
 ## v3.26.0 (2026-08-04)
 
 ### Feat

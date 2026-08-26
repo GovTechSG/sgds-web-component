@@ -7,7 +7,7 @@ import type { ISgdsPaginationPageChangeEventDetail } from "../Pagination/sgds-pa
 import SgdsDataTableRow from "./sgds-data-table-row";
 import SgdsDataTableCell from "./sgds-data-table-cell";
 import SgdsDataTableHead from "./sgds-data-table-head";
-import SgdsSpinner from "../Spinner/sgds-spinner";
+import SgdsSkeleton from "../Skeleton/sgds-skeleton";
 
 /**
  * @summary A data table container with pagination, row selection, loading, and sorting support.
@@ -36,7 +36,7 @@ export class SgdsDataTable extends SgdsElement {
     "sgds-pagination": SgdsPagination,
     "sgds-data-table-cell": SgdsDataTableCell,
     "sgds-data-table-head": SgdsDataTableHead,
-    "sgds-spinner": SgdsSpinner
+    "sgds-skeleton": SgdsSkeleton
   };
 
   /** If true, renders a checkbox column for row selection. */
@@ -54,14 +54,14 @@ export class SgdsDataTable extends SgdsElement {
   /** Custom text shown on the footer's left side. */
   @property({ type: String }) footerText = "";
 
-  /** If true, hides the footer (summary text and pagination controls). */
-  @property({ type: Boolean }) hideFooter = false;
-
   /** When true, shows a loading state and hides body rows. */
   @property({ type: Boolean }) isLoading = false;
 
   /** When true, emits sort events for external handling instead of local sorting. */
   @property({ type: Boolean }) serverSort = false;
+
+  /** Variant forwarded to the internal pagination component. */
+  @property({ type: String }) paginationVariant: "default" | "number" | "button" | "description" = "default";
 
   /**
    * Controls the CSS `table-layout` algorithm.
@@ -172,7 +172,7 @@ export class SgdsDataTable extends SgdsElement {
 
   private _applyColumnAlignment() {
     const headerAlignments = this._headerCells.reduce<Array<"left" | "right">>((acc, header) => {
-      const span = Number(header.colspan) > 0 ? Number(header.colspan) : 1;
+      const span = Number(header.colSpan) > 0 ? Number(header.colSpan) : 1;
       const alignment = header.textAlign ?? "left";
       for (let i = 0; i < span; i++) {
         acc.push(alignment);
@@ -224,7 +224,7 @@ export class SgdsDataTable extends SgdsElement {
   private _resetOtherHeaderSortStates(activeHeader: SgdsDataTableHead | null) {
     this._headerCells.forEach(header => {
       if (header !== activeHeader && header.sorting) {
-        header.ariasort = "none";
+        header.sortDirection = "none";
       }
     });
   }
@@ -346,8 +346,8 @@ export class SgdsDataTable extends SgdsElement {
     this._captureInitialRowPositions(this.tableRows);
 
     this._headerCells.forEach(header => {
-      if (header.sorting && !header.ariasort) {
-        header.ariasort = "none";
+      if (header.sorting && !header.sortDirection) {
+        header.sortDirection = "none";
       }
     });
 
@@ -356,8 +356,13 @@ export class SgdsDataTable extends SgdsElement {
   }
 
   private _updateVisibleRows() {
+    if (this.isLoading) {
+      this.tableRows.forEach(row => (row.style.display = "none"));
+      return;
+    }
+
     if (this.mode === "server") {
-      this.tableRows.forEach(row => (row.style.display = this.isLoading ? "none" : ""));
+      this.tableRows.forEach(row => (row.style.display = ""));
       return;
     }
 
@@ -370,6 +375,49 @@ export class SgdsDataTable extends SgdsElement {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const visible = new Set(this.tableRows.slice(start, start + this.itemsPerPage));
     this.tableRows.forEach(row => (row.style.display = visible.has(row) ? "" : "none"));
+  }
+
+  private _getSkeletonColumnCount() {
+    const firstHeaderRow = this.headerRows[0];
+    const firstHeaderCells = firstHeaderRow
+      ? (Array.from(firstHeaderRow.children).filter(child => child instanceof SgdsDataTableHead) as SgdsDataTableHead[])
+      : [];
+
+    const headerColumnCount = firstHeaderCells.reduce((count, header) => {
+      const span = Number(header.colSpan) > 0 ? Number(header.colSpan) : 1;
+      return count + span;
+    }, 0);
+
+    const firstBodyRow = this.tableRows[0];
+    const fallbackBodyColumnCount = firstBodyRow
+      ? Array.from(firstBodyRow.children).filter(child => child instanceof SgdsDataTableCell).length
+      : 0;
+
+    const hasExpand = this.tableRows.some(row => row.expand);
+    const controlColumns = (this.multiSelect ? 1 : 0) + (hasExpand ? 1 : 0);
+    const dataColumns = headerColumnCount || fallbackBodyColumnCount || 1;
+
+    return Math.max(1, dataColumns + controlColumns);
+  }
+
+  private _renderLoadingSkeleton() {
+    const skeletonColumns = this._getSkeletonColumnCount();
+    const skeletonRows = Math.max(1, this.itemsPerPage || 1);
+
+    return html`<div class="loading" role="status" aria-live="polite" aria-label="Loading">
+      <div class="loading-grid" style=${`--sgds-data-table-loading-columns: ${skeletonColumns};`} aria-hidden="true">
+        ${Array.from(
+          { length: skeletonRows },
+          (_, rowIndex) =>
+            html`<div class="loading-grid-row" key=${rowIndex}>
+              ${Array.from(
+                { length: skeletonColumns },
+                () => html`<sgds-skeleton .height=${"56px"} .borderRadius=${"4px"}></sgds-skeleton>`
+              )}
+            </div>`
+        )}
+      </div>
+    </div>`;
   }
 
   updated(changed: Map<string, unknown>) {
@@ -391,35 +439,35 @@ export class SgdsDataTable extends SgdsElement {
     const end = Math.min(start + this.itemsPerPage, total);
     const displayStart = total === 0 ? 0 : start + 1;
     const showNoData = !this.isLoading && this.tableRows.length === 0;
+    const showFooter = total !== 0;
 
     return html`
       <div class="data-table">
-        <div>
+        <div class="table-container">
           <slot @slotchange=${this._handleSlotChange} @i-sgds-sort=${this._handleSort} class="table"></slot>
           ${this.isLoading
-            ? html`<div class="loading" role="status" aria-live="polite">
-                <div class="loading-menu"><sgds-spinner size="xs" tone="brand"></sgds-spinner>Loading...</div>
-              </div>`
+            ? this._renderLoadingSkeleton()
             : showNoData
             ? html`<slot name="no-data" class="no-data" role="status" aria-live="polite">No data</slot>`
             : nothing}
         </div>
 
-        ${this.hideFooter
-          ? nothing
-          : html`<div class="footer">
+        ${showFooter
+          ? html`<div class="footer">
               ${this.footerText || html`<span>Showing ${displayStart} to ${end} of ${total} results</span>`}
               <sgds-pagination
                 .dataLength=${total}
                 .currentPage=${this.currentPage}
                 .itemsPerPage=${this.itemsPerPage}
+                .variant=${this.paginationVariant}
                 size="sm"
                 @sgds-page-change=${(e: CustomEvent<ISgdsPaginationPageChangeEventDetail>) => {
                   this.currentPage = e.detail.currentPage;
                   this.emit("sgds-page-change");
                 }}
               ></sgds-pagination>
-            </div>`}
+            </div>`
+          : nothing}
       </div>
     `;
   }

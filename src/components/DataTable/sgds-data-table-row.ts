@@ -205,9 +205,9 @@ export class SgdsDataTableRow extends SgdsElement {
     if (el instanceof SgdsDataTableHead) {
       return html`<th
         width=${ifDefined(el.width)}
-        colspan=${ifDefined(el.colspan)}
-        rowspan=${ifDefined(el.rowspan)}
-        aria-sort=${ifDefined(el.ariasort)}
+        colspan=${ifDefined(el.colSpan)}
+        rowspan=${ifDefined(el.rowSpan)}
+        aria-sort=${ifDefined(el.sortDirection)}
         scope="col"
         tabindex=${ifDefined(el.sorting ? "0" : undefined)}
         ?data-sorting=${el.sorting}
@@ -220,13 +220,13 @@ export class SgdsDataTableRow extends SgdsElement {
             ? html`
                 <button
                   type="button"
-                  class="sort-button ${el.ariasort === "none" ? "" : "active"}"
-                  aria-label=${el.ariasort === "descending" ? "Sort descending" : "Sort ascending"}
+                  class="sort-button ${el.sortDirection === "none" ? "" : "active"}"
+                  aria-label=${el.sortDirection === "descending" ? "Sort descending" : "Sort ascending"}
                   ?disabled=${!this.hasDataRows}
                 >
                   <sgds-icon
                     class="sort-icon"
-                    name=${el.ariasort === "descending" ? "sort-descending" : "sort-ascending"}
+                    name=${el.sortDirection === "descending" ? "sort-descending" : "sort-ascending"}
                     size="sm"
                   ></sgds-icon>
                 </button>
@@ -237,7 +237,7 @@ export class SgdsDataTableRow extends SgdsElement {
     }
 
     const cellAlignment = this.columnAlignments[columnIndex] ?? "left";
-    return html`<td colspan=${ifDefined(el.colspan)} rowspan=${ifDefined(el.rowspan)}>
+    return html`<td colspan=${ifDefined(el.colSpan)} rowspan=${ifDefined(el.rowSpan)}>
       <div class="data-table-cell ${cellAlignment === "right" ? "align-right" : "align-left"}">
         ${slotName ? html`<slot name=${slotName}></slot>` : nothing}
       </div>
@@ -291,7 +291,7 @@ export class SgdsDataTableRow extends SgdsElement {
           let visualColumnIndex = 0;
           return cells.map(el => {
             const renderedCell = this._renderCell(el, visualColumnIndex);
-            const span = Number(el.colspan) > 0 ? Number(el.colspan) : 1;
+            const span = Number(el.colSpan) > 0 ? Number(el.colSpan) : 1;
             visualColumnIndex += span;
             return renderedCell;
           });

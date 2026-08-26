@@ -25,13 +25,13 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 - Need loading indicator while fetching server data: set `isLoading` to `true`.
 - Need numeric columns aligned right: set `textAlign="right"` on the corresponding `sgds-data-table-head`.
 - Need only selected columns to sort: set `sorting` only on those headers.
-- Need default sort indicator on first render: set `ariasort` on a sortable header.
+- Need default sort indicator on first render: set `sortDirection` on a sortable header.
 
 ```html
 <sgds-data-table dataLength="3" itemsPerPage="5" currentPage="1">
   <sgds-data-table-row>
     <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
-    <sgds-data-table-head sorting sortKey="name" ariasort="ascending">Name</sgds-data-table-head>
+    <sgds-data-table-head sorting sortKey="name" sortDirection="ascending">Name</sgds-data-table-head>
     <sgds-data-table-head>Role</sgds-data-table-head>
     <sgds-data-table-head textAlign="right">Amount</sgds-data-table-head>
   </sgds-data-table-row>
@@ -55,7 +55,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 | `currentPage` | number | `1` | Current page number |
 | `itemsPerPage` | number | `5` | Rows per page |
 | `footerText` | string | `""` | Replaces default summary text in footer |
-| `hideFooter` | boolean | `false` | Hides summary and pagination footer |
+| `paginationVariant` | `"default" \| "number" \| "button" \| "description"` | `"default"` | Variant forwarded to internal pagination |
 | `mode` | `"client" \| "server"` | `"client"` | Pagination mode |
 | `isLoading` | boolean | `false` | Shows loading state in server mode |
 | `serverSort` | boolean | `false` | Emits `sgds-sort` for external sorting instead of local sorting |
@@ -66,10 +66,9 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 | --- | --- | --- | --- |
 | `sorting` | boolean | `true` | Enables sort toggle on click |
 | `sortKey` | string | `""` | Row data key used for sorting |
+| `sortDirection` | `"ascending" \| "descending" \| "none" \| "other"` | `"none"` | Initial sort direction for sortable headers |
 | `textAlign` | `"left" \| "right"` | `"left"` | Alignment for header and same body column |
 | `width` | string | — | Column width |
-| `colspan` | number | — | Number of columns spanned |
-| `rowspan` | number | — | Number of rows spanned |
 
 ## Slots
 
