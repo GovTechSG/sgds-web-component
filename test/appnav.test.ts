@@ -205,6 +205,49 @@ describe("sgds-appnav", () => {
       const firstMenuItem = el.shadowRoot?.querySelector(".appnav-menu-item") as HTMLElement;
       expect(el.shadowRoot?.activeElement).to.equal(firstMenuItem);
     }).retries(1);
+
+    it("Shift+Tab from first menu item focuses the toggler, not profile avatar", async () => {
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsAppnav>(html`<sgds-appnav expand="lg">
+        <sgds-icon-button
+          name="moon"
+          variant="ghost"
+          tone="fixed-light"
+          size="sm"
+          ariaLabel="Toggle dark mode"
+        ></sgds-icon-button>
+        <sgds-icon-button
+          name="bell"
+          variant="ghost"
+          tone="fixed-light"
+          size="sm"
+          ariaLabel="Notifications"
+        ></sgds-icon-button>
+        <sgds-appnav-profile slot="profile" label="User" ariaLabel="Profile">
+          <span slot="avatar" class="avatar"></span>
+        </sgds-appnav-profile>
+      </sgds-appnav>`);
+      await el.updateComplete;
+
+      // Open the menu
+      const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler") as HTMLElement;
+      toggler.click();
+      await elementUpdated(el);
+      await aTimeout(300);
+
+      // Focus the first menu item
+      const firstMenuItem = el.shadowRoot?.querySelector(".appnav-menu-item") as HTMLElement;
+      firstMenuItem.focus();
+      expect(el.shadowRoot?.activeElement).to.equal(firstMenuItem);
+
+      // Shift+Tab should move focus to the toggler
+      await sendKeys({ down: "Shift" });
+      await sendKeys({ press: "Tab" });
+      await sendKeys({ up: "Shift" });
+
+      expect(el.shadowRoot?.activeElement).to.equal(toggler);
+    }).retries(1);
   });
 
   describe("navbar-end visibility", () => {
@@ -402,6 +445,40 @@ describe("sgds-appnav", () => {
       menuItem.click();
       expect(hideSpy.calledOnce).to.be.true;
       hideSpy.restore();
+    });
+
+    it("logs a console.warn when slotted element has no ariaLabel", async () => {
+      const warnSpy = Sinon.spy(console, "warn");
+      const el = await fixture<SgdsAppnav>(html`
+        <sgds-appnav expand="lg">
+          <sgds-icon-button name="moon" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
+        </sgds-appnav>
+      `);
+      await el.updateComplete;
+
+      expect(warnSpy.calledOnce).to.be.true;
+      expect(warnSpy.firstCall.args[0]).to.include("[sgds-appnav]");
+      expect(warnSpy.firstCall.args[0]).to.include("no ariaLabel");
+      warnSpy.restore();
+    });
+
+    it("does not log a warning when slotted element has ariaLabel", async () => {
+      const warnSpy = Sinon.spy(console, "warn");
+      const el = await fixture<SgdsAppnav>(html`
+        <sgds-appnav expand="lg">
+          <sgds-icon-button
+            name="moon"
+            variant="ghost"
+            tone="fixed-light"
+            size="sm"
+            ariaLabel="Toggle dark mode"
+          ></sgds-icon-button>
+        </sgds-appnav>
+      `);
+      await el.updateComplete;
+
+      expect(warnSpy.called).to.be.false;
+      warnSpy.restore();
     });
 
     it("does not render text menu items in desktop view", async () => {
