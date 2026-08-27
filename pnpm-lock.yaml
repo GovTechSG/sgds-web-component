@@ -2937,6 +2937,9 @@ packages:
   '@types/sizzle@2.3.10':
     resolution: {integrity: sha512-TC0dmN0K8YcWEAEfiPi5gJP14eJe30TTGjkvek3iM/1NdHHsdCA/Td6GvNndMOo/iSnIsZ4HuuhrYPDAmbxzww==}
 
+  '@types/tedious@4.0.14':
+    resolution: {integrity: sha512-KHPsfX/FoVbUGbyYvk1q9MMQHLPeRZhRJZdO45Q4YjvFkv4hMNghCWTvy7rdKessBsmtz4euWCWAB6/tVpI1Iw==}
+
   '@types/through@0.0.33':
     resolution: {integrity: sha512-HsJ+z3QuETzP3cswwtzt2vEIiHBk/dCcHGhbmG5X3ecnwFD/lPrMpliGXxSCg03L9AhrdwA4Oz/qfspkDW+xGQ==}
 
@@ -11840,6 +11843,10 @@ snapshots:
   '@types/sinonjs__fake-timers@8.1.1': {}
 
   '@types/sizzle@2.3.10': {}
+
+  '@types/tedious@4.0.14':
+    dependencies:
+      '@types/node': 25.0.8
 
   '@types/through@0.0.33':
     dependencies:
