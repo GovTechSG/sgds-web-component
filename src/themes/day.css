@@ -16,7 +16,7 @@
   --sgds-bg-translucent-fixed-dark: oklch(from var(--sgds-gray-1100) l c h / 0.2);
   --sgds-bg-translucent-fixed-light: oklch(from var(--sgds-gray-000) l c h / 0.2);
   --sgds-surface-default: var(--sgds-gray-000);
-  --sgds-surface-raised: var(--sgds-gray-100);
+  --sgds-surface-raised: var(--sgds-gray-50);
   --sgds-surface-inverse: var(--sgds-gray-900);
   --sgds-surface-fixed-light: var(--sgds-gray-000);
   --sgds-surface-fixed-dark: var(--sgds-gray-900);
