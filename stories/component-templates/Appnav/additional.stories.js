@@ -59,13 +59,7 @@ export const WithProfile = {
         size="sm"
         ariaLabel="Toggle dark mode"
       ></sgds-icon-button>
-      <sgds-appnav-profile
-        slot="profile"
-        label="User Name"
-        secondaryText="Agency (admin)"
-        ariaLabel="Profile menu"
-        close="inside"
-      >
+      <sgds-appnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
         <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
           <span
             class="sgds:h-full sgds:w-full sgds:block sgds:bg-neutral-surface-muted sgds:rounded-[50%]"

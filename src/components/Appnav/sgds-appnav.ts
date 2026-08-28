@@ -84,15 +84,31 @@ export class SgdsAppnav extends NavElement {
     }
   }
 
+  private _handleMenuItemKeydown(e: KeyboardEvent, index: number) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      this._handleMobileItemClick(this._defaultSlotItems[index]);
+    } else if (e.key === "Tab" && e.shiftKey && index === 0) {
+      e.preventDefault();
+      this.header?.focus();
+    }
+  }
+
   private _handleDefaultSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as HTMLElement[];
     this._hasDefaultSlotItems = childElements.length > 0;
     this._defaultSlotItems = childElements
       .filter(el => typeof el.tagName !== "undefined")
-      .map(el => ({
-        label: el.getAttribute("ariaLabel") || el.getAttribute("aria-label") || el.textContent?.trim() || "",
-        element: el
-      }));
+      .map(el => {
+        const label = el.getAttribute("ariaLabel") || el.getAttribute("aria-label") || el.textContent?.trim() || "";
+        if (!label) {
+          console.warn(
+            `[sgds-appnav] Slotted element <${el.tagName.toLowerCase()}> has no ariaLabel, aria-label, or textContent. It will render as a blank item in the mobile menu. Add an ariaLabel for accessibility and mobile display.`,
+            el
+          );
+        }
+        return { label, element: el };
+      });
     childElements.forEach(el => {
       el.setAttribute("expand", this.expand);
     });
@@ -151,17 +167,12 @@ export class SgdsAppnav extends NavElement {
               ></slot>
               ${this.breakpointReached
                 ? this._defaultSlotItems.map(
-                    item => html`<a
+                    (item, index) => html`<a
                       class="appnav-menu-item"
                       role="button"
                       tabindex="0"
                       @click=${() => this._handleMobileItemClick(item)}
-                      @keydown=${(e: KeyboardEvent) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          this._handleMobileItemClick(item);
-                        }
-                      }}
+                      @keydown=${(e: KeyboardEvent) => this._handleMenuItemKeydown(e, index)}
                       >${item.label}</a
                     >`
                   )
