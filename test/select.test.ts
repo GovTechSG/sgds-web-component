@@ -796,3 +796,60 @@ describe("sgds-select-option (default)", () => {
     expect(dropdownMenu?.textContent).to.contain("Loading...");
   });
 });
+
+describe("select >> value set before options slot (React timing)", () => {
+  it("should not emit sgds-change when value is set after first update but before children slot", async () => {
+    // Simulate React useLayoutEffect timing:
+    // Element mounts → first Lit update → React sets value → slotchange hasn't fired yet
+    const el = document.createElement("sgds-select") as SgdsSelect;
+    document.body.appendChild(el);
+    await el.updateComplete; // first update done, hasUpdated = true
+
+    const changeHandler = sinon.spy();
+    el.addEventListener("sgds-change", changeHandler);
+
+    // React sets value AFTER first update but BEFORE children are slotted
+    el.value = "option2";
+    await el.updateComplete;
+    await aTimeout(50);
+
+    // Guard prevents sgds-change from firing with empty menuList
+    expect(changeHandler).to.not.have.been.called;
+
+    // Now append children — slotchange syncs display
+    const opt1 = document.createElement("sgds-select-option");
+    opt1.setAttribute("value", "option1");
+    opt1.textContent = "Option 1";
+    const opt2 = document.createElement("sgds-select-option");
+    opt2.setAttribute("value", "option2");
+    opt2.textContent = "Option 2";
+    el.appendChild(opt1);
+    el.appendChild(opt2);
+
+    await el.updateComplete;
+    await aTimeout(50);
+
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    expect(input.value).to.equal("Option 2");
+    expect(el.value).to.equal("option2");
+
+    el.remove();
+  });
+
+  it("should display correct label after programmatic value change", async () => {
+    const el = await fixture<SgdsSelect>(html`
+      <sgds-select>
+        <sgds-select-option value="all">All Roles</sgds-select-option>
+        <sgds-select-option value="admin">Admin</sgds-select-option>
+        <sgds-select-option value="editor">Editor</sgds-select-option>
+      </sgds-select>
+    `);
+    await el.updateComplete;
+
+    el.value = "admin";
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await waitUntil(() => input.value === "Admin");
+    expect(input.value).to.equal("Admin");
+  });
+});
