@@ -14,14 +14,26 @@
 :host(.quantity-toggle) input {
   text-align: center;
 }
-
-.form-control-prefix,
+.form-control-prefix, 
 .form-control-suffix {
-  color: var(--sgds-form-color-subtle);
+ color: var(--sgds-form-color-subtle);
   font-weight: var(--sgds-font-weight-semibold);
   display: flex;
   gap: var(--sgds-gap-xs);
   flex-shrink: 0;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-control-prefix{
+  border-right: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
+  padding-right:var(--sgds-form-padding-x); 
+}
+
+.form-control-suffix {
+  border-left: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
+  padding-left:var(--sgds-form-padding-x); 
 }
 
 .form-control-group.quantity-toggle {
