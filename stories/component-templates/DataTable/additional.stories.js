@@ -19,7 +19,7 @@ const CustomNoDataTemplate = () => html`
       <sgds-data-table-head>Last name</sgds-data-table-head>
       <sgds-data-table-head>Username</sgds-data-table-head>
     </sgds-data-table-row>
-    <div slot="no-data" style="display: flex; flex-direction: column; align-items: center;">
+    <div slot="no-data" class="sgds:flex sgds:flex-col sgds:items-center">
       <div class="sgds:mb-paragraph-sm">
         <sgds-icon name="exclamation-circle-fill" size="xl" class="sgds:text-default"></sgds-icon>
       </div>
