@@ -35,9 +35,6 @@ export class SgdsDataTableRow extends SgdsElement {
     "sgds-icon": SgdsIcon
   };
 
-  /** Arbitrary data associated with this row. Returned in event detail on row selection. */
-  @property({ type: Object, reflect: true }) rowData: Record<string, unknown> = {};
-
   /** When true, the row has an expandable content area toggled by a chevron. */
   @property({ type: Boolean, reflect: true }) expand = false;
 
@@ -55,6 +52,7 @@ export class SgdsDataTableRow extends SgdsElement {
 
   /** @internal — per-column alignment injected by `sgds-data-table` from header cells. */
   @property({ attribute: false }) columnAlignments: Array<"left" | "right"> = [];
+
   /** @internal — set by `sgds-data-table` to indicate whether body rows exist. */
   @property({ type: Boolean }) hasDataRows = false;
 
@@ -123,13 +121,6 @@ export class SgdsDataTableRow extends SgdsElement {
       );
       this._expandableBody.hidden = true;
       this.emit("sgds-after-hide");
-    }
-  }
-
-  @watch("checked")
-  async handleCheckedChange() {
-    if (this.checked) {
-      this.emit("i-sgds-change", { detail: { checked: true } });
     }
   }
 

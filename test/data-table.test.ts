@@ -592,6 +592,70 @@ describe("<sgds-data-table>", () => {
     expect(noData?.textContent?.trim()).to.equal("No data");
   });
 
+  it("emits sgds-row-select with row data derived from cell text", async () => {
+    const el = await fixture<SgdsDataTable>(html`
+      <sgds-data-table dataLength="2" itemsPerPage="5" currentPage="1" multiSelect>
+        <sgds-data-table-row>
+          <sgds-data-table-head>Name</sgds-data-table-head>
+          <sgds-data-table-head>Role</sgds-data-table-head>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>Alice</sgds-data-table-cell>
+          <sgds-data-table-cell>Admin</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>Bob</sgds-data-table-cell>
+          <sgds-data-table-cell>User</sgds-data-table-cell>
+        </sgds-data-table-row>
+      </sgds-data-table>
+    `);
+    await elementUpdated(el);
+
+    let receivedDetail: { selected: Record<string, string>[] } | null = null;
+    el.addEventListener("sgds-row-select", (event: Event) => {
+      receivedDetail = (event as CustomEvent).detail;
+    });
+
+    const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
+    const bodyRows = slot.assignedElements({ flatten: true }).slice(1) as HTMLElement[];
+    const checkbox = bodyRows[0].shadowRoot?.querySelector("sgds-checkbox") as HTMLElement;
+    checkbox.click();
+    await elementUpdated(el);
+
+    expect(receivedDetail).to.exist;
+    expect(receivedDetail!.selected).to.deep.equal([{ Name: "Alice", Role: "Admin" }]);
+  });
+
+  it("uses sortKey as key in sgds-row-select when available", async () => {
+    const el = await fixture<SgdsDataTable>(html`
+      <sgds-data-table dataLength="1" itemsPerPage="5" currentPage="1" multiSelect>
+        <sgds-data-table-row>
+          <sgds-data-table-head sortKey="name">Name</sgds-data-table-head>
+          <sgds-data-table-head>Role</sgds-data-table-head>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>Alice</sgds-data-table-cell>
+          <sgds-data-table-cell>Admin</sgds-data-table-cell>
+        </sgds-data-table-row>
+      </sgds-data-table>
+    `);
+    await elementUpdated(el);
+
+    let receivedDetail: { selected: Record<string, string>[] } | null = null;
+    el.addEventListener("sgds-row-select", (event: Event) => {
+      receivedDetail = (event as CustomEvent).detail;
+    });
+
+    const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
+    const bodyRow = slot.assignedElements({ flatten: true })[1] as HTMLElement;
+    const checkbox = bodyRow.shadowRoot?.querySelector("sgds-checkbox") as HTMLElement;
+    checkbox.click();
+    await elementUpdated(el);
+
+    expect(receivedDetail).to.exist;
+    expect(receivedDetail!.selected).to.deep.equal([{ name: "Alice", Role: "Admin" }]);
+  });
+
   it("does not show no-data state while loading", async () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table

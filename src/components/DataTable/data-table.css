@@ -73,6 +73,10 @@ th {
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
 
+th[data-sorting] {
+  cursor: pointer;
+}
+
 .data-table-cell,
 .data-table-head {
   display: flex;
@@ -95,11 +99,11 @@ th {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--sgds-dimension-24);
-  height: var(--sgds-dimension-24);
+  width: var(--sgds-dimension-20);
+  height: var(--sgds-dimension-20);
   padding: 0;
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
-  border-radius: var(--sgds-form-border-radius-md);
+  border-radius: var(--sgds-form-border-radius-sm);
   background-color: var(--sgds-bg-transparent);
   color: var(--sgds-color-subtle);
   cursor: pointer;

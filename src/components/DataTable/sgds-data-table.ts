@@ -15,7 +15,7 @@ import SgdsSkeleton from "../Skeleton/sgds-skeleton";
  * @slot default - Insert one or more `sgds-data-table-row` elements.
  * @slot no-data - Custom content rendered when no body rows are available and `isLoading` is false.
  *
- * @event sgds-row-select - Emitted when row checkboxes change. Detail: `{ selected: rowData[] }`.
+ * @event sgds-row-select - Emitted when row checkboxes change. Detail: `{ selected: Record<string, string>[] }`.
  * @event sgds-sort - Emitted when `serverSort` is true and a sorting column header is clicked.
  * Detail: `{ key: string; direction: "ascending" | "descending" | "none" }`.
  * @event sgds-page-change - Emitted when pagination changes page.
@@ -52,7 +52,7 @@ export class SgdsDataTable extends SgdsElement {
   @property({ type: Number }) itemsPerPage = 5;
 
   /** Custom text shown on the footer's left side. */
-  @property({ type: String }) footerText = "";
+  @property({ type: String }) paginationSummary = "";
 
   /** When true, shows a loading state and hides body rows. */
   @property({ type: Boolean }) isLoading = false;
@@ -119,7 +119,7 @@ export class SgdsDataTable extends SgdsElement {
   }
 
   private _emitRowSelect() {
-    const selected = this.tableRows.filter(r => this._isRowChecked(r)).map(r => r.rowData);
+    const selected = this.tableRows.filter(r => this._isRowChecked(r)).map(r => this._getRowData(r));
     this.emit("sgds-row-select", { detail: { selected } });
   }
 
@@ -198,11 +198,16 @@ export class SgdsDataTable extends SgdsElement {
     return (cell?.textContent || "").trim();
   }
 
-  private _toComparableValue(row: SgdsDataTableRow, key: string, columnIndex: number) {
-    if (key && row.rowData && key in row.rowData) {
-      return row.rowData[key];
-    }
+  private _getRowData(row: SgdsDataTableRow): Record<string, string> {
+    const data: Record<string, string> = {};
+    this._headerCells.forEach((header, index) => {
+      const key = header.sortKey || (header.textContent ?? "").trim() || `col-${index}`;
+      data[key] = this._extractCellText(row, index);
+    });
+    return data;
+  }
 
+  private _toComparableValue(row: SgdsDataTableRow, _key: string, columnIndex: number) {
     return this._extractCellText(row, columnIndex);
   }
 
@@ -454,7 +459,7 @@ export class SgdsDataTable extends SgdsElement {
 
         ${showFooter
           ? html`<div class="footer">
-              ${this.footerText || html`<span>Showing ${displayStart} to ${end} of ${total} results</span>`}
+              ${this.paginationSummary || html`<span>Showing ${displayStart} to ${end} of ${total} results</span>`}
               <sgds-pagination
                 .dataLength=${total}
                 .currentPage=${this.currentPage}

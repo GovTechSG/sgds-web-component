@@ -244,26 +244,26 @@
 <!-- Multi-select -->
 <div class="container">
   <h3>Multi-select</h3>
-  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" multiSelect>
+  <sgds-data-table id="ms-table" currentPage="1" dataLength="3" itemsPerPage="5" multiSelect>
     <sgds-data-table-row>
       <sgds-data-table-head>#</sgds-data-table-head>
       <sgds-data-table-head>First name</sgds-data-table-head>
       <sgds-data-table-head>Last name</sgds-data-table-head>
       <sgds-data-table-head>Username</sgds-data-table-head>
     </sgds-data-table-row>
-    <sgds-data-table-row id="ms-row-1">
+    <sgds-data-table-row>
       <sgds-data-table-cell>1</sgds-data-table-cell>
       <sgds-data-table-cell>John</sgds-data-table-cell>
       <sgds-data-table-cell>Doe</sgds-data-table-cell>
       <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
     </sgds-data-table-row>
-    <sgds-data-table-row id="ms-row-2">
+    <sgds-data-table-row>
       <sgds-data-table-cell>2</sgds-data-table-cell>
       <sgds-data-table-cell>Jane</sgds-data-table-cell>
       <sgds-data-table-cell>Doe</sgds-data-table-cell>
       <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
     </sgds-data-table-row>
-    <sgds-data-table-row id="ms-row-3">
+    <sgds-data-table-row>
       <sgds-data-table-cell>3</sgds-data-table-cell>
       <sgds-data-table-cell>Bob</sgds-data-table-cell>
       <sgds-data-table-cell>Smith</sgds-data-table-cell>
@@ -350,7 +350,7 @@
       <sgds-data-table-head>Username</sgds-data-table-head>
     </sgds-data-table-row>
 
-    <sgds-data-table-row id="ems-row-1" expand>
+    <sgds-data-table-row expand>
       <sgds-data-table-cell>1</sgds-data-table-cell>
       <sgds-data-table-cell>John</sgds-data-table-cell>
       <sgds-data-table-cell>Doe</sgds-data-table-cell>
@@ -358,14 +358,14 @@
       <div slot="content">Department: Engineering</div>
     </sgds-data-table-row>
 
-    <sgds-data-table-row id="ems-row-2">
+    <sgds-data-table-row>
       <sgds-data-table-cell>2</sgds-data-table-cell>
       <sgds-data-table-cell>Jane</sgds-data-table-cell>
       <sgds-data-table-cell>Doe</sgds-data-table-cell>
       <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
     </sgds-data-table-row>
 
-    <sgds-data-table-row id="ems-row-3">
+    <sgds-data-table-row>
       <sgds-data-table-cell>3</sgds-data-table-cell>
       <sgds-data-table-cell>Bob</sgds-data-table-cell>
       <sgds-data-table-cell>Smith</sgds-data-table-cell>
@@ -374,10 +374,10 @@
   </sgds-data-table>
 </div>
 
-<!-- Custom footer text -->
+<!-- Custom pagination summary -->
 <div class="container">
-  <h3>Custom Footer Text (footerText)</h3>
-  <sgds-data-table currentPage="1" dataLength="4" itemsPerPage="2" footerText="Showing records fetched from API cache">
+  <h3>Custom Pagination Summary (paginationSummary)</h3>
+  <sgds-data-table currentPage="1" dataLength="4" itemsPerPage="2" paginationSummary="Showing records fetched from API cache">
     <sgds-data-table-row>
       <sgds-data-table-head>ID</sgds-data-table-head>
       <sgds-data-table-head>Name</sgds-data-table-head>
@@ -438,19 +438,19 @@
       <sgds-data-table-head sorting sortKey="score" width="120" textAlign="right">Score</sgds-data-table-head>
     </sgds-data-table-row>
 
-    <sgds-data-table-row id="sort-row-1">
+    <sgds-data-table-row>
       <sgds-data-table-cell>1</sgds-data-table-cell>
       <sgds-data-table-cell>Lina</sgds-data-table-cell>
       <sgds-data-table-cell>Engineer</sgds-data-table-cell>
       <sgds-data-table-cell>82</sgds-data-table-cell>
     </sgds-data-table-row>
-    <sgds-data-table-row id="sort-row-2">
+    <sgds-data-table-row>
       <sgds-data-table-cell>2</sgds-data-table-cell>
       <sgds-data-table-cell>Adam</sgds-data-table-cell>
       <sgds-data-table-cell>Engineer</sgds-data-table-cell>
       <sgds-data-table-cell>70</sgds-data-table-cell>
     </sgds-data-table-row>
-    <sgds-data-table-row id="sort-row-3">
+    <sgds-data-table-row>
       <sgds-data-table-cell>3</sgds-data-table-cell>
       <sgds-data-table-cell>Nora</sgds-data-table-cell>
       <sgds-data-table-cell>Manager</sgds-data-table-cell>
@@ -471,22 +471,22 @@
       <sgds-data-table-head>Role</sgds-data-table-head>
     </sgds-data-table-row>
 
-    <sgds-data-table-row id="default-sort-row-1">
+    <sgds-data-table-row>
       <sgds-data-table-cell>2</sgds-data-table-cell>
       <sgds-data-table-cell>Alice</sgds-data-table-cell>
       <sgds-data-table-cell>Engineer</sgds-data-table-cell>
     </sgds-data-table-row>
-    <sgds-data-table-row id="default-sort-row-2">
+    <sgds-data-table-row>
       <sgds-data-table-cell>4</sgds-data-table-cell>
       <sgds-data-table-cell>Ben</sgds-data-table-cell>
       <sgds-data-table-cell>Analyst</sgds-data-table-cell>
     </sgds-data-table-row>
-    <sgds-data-table-row id="default-sort-row-3">
+    <sgds-data-table-row>
       <sgds-data-table-cell>1</sgds-data-table-cell>
       <sgds-data-table-cell>Chloe</sgds-data-table-cell>
       <sgds-data-table-cell>Manager</sgds-data-table-cell>
     </sgds-data-table-row>
-    <sgds-data-table-row id="default-sort-row-4">
+    <sgds-data-table-row>
       <sgds-data-table-cell>3</sgds-data-table-cell>
       <sgds-data-table-cell>Darren</sgds-data-table-cell>
       <sgds-data-table-cell>Designer</sgds-data-table-cell>
@@ -598,27 +598,11 @@
     document.documentElement.classList.toggle("sgds-night-theme", isNight);
   });
 
-  // Set rowData on multi-select rows
-  document.getElementById("ms-row-1").rowData = { id: 1, name: "John Doe" };
-  document.getElementById("ms-row-2").rowData = { id: 2, name: "Jane Doe" };
-  document.getElementById("ms-row-3").rowData = { id: 3, name: "Bob Smith" };
-
-  // Set rowData on expandable + multi-select rows
-  document.getElementById("ems-row-1").rowData = { id: 1, name: "John Doe" };
-  document.getElementById("ems-row-2").rowData = { id: 2, name: "Jane Doe" };
-  document.getElementById("ems-row-3").rowData = { id: 3, name: "Bob Smith" };
-
-  // Set rowData for sorting table head demo (sorting)
-  document.getElementById("sort-row-1").rowData = { id: 1, name: "Lina", role: "Engineer", score: 82 };
-  document.getElementById("sort-row-2").rowData = { id: 2, name: "Adam", role: "Engineer", score: 82 };
-  document.getElementById("sort-row-3").rowData = { id: 3, name: "Nora", role: "Manager", score: 75 };
-
-  // Set rowData for default sort sample
-  document.getElementById("default-sort-row-1").rowData = { id: 2, name: "Alice", role: "Engineer" };
-  document.getElementById("default-sort-row-2").rowData = { id: 4, name: "Ben", role: "Analyst" };
-  document.getElementById("default-sort-row-3").rowData = { id: 1, name: "Chloe", role: "Manager" };
-  document.getElementById("default-sort-row-4").rowData = { id: 3, name: "Darren", role: "Designer" };
   document.getElementById("default-sort-head-name").sortDirection = "ascending";
+
+  document.getElementById("ms-table")?.addEventListener("sgds-row-select", e => {
+    console.log("[DataTable playground] sgds-row-select", e.detail);
+  });
 
   // Mock API-driven pagination demo for server mode table
   const serverTable = document.getElementById("server-table");
@@ -696,7 +680,6 @@
       const regionCell = document.createElement("sgds-data-table-cell");
       regionCell.textContent = rowData.region;
 
-      row.rowData = rowData;
       row.append(idCell, nameCell, regionCell);
       serverTable.append(row);
     });

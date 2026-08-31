@@ -8,7 +8,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 ### When to use
 
 - When your data needs table semantics with SGDS-consistent interactions and styling.
-- When you need sorting columns based on slotted cells or rowData keys.
+- When you need sorting columns based on slotted cell content.
 - When you need server-driven paging with loading feedback.
 - When rows require selection (checkboxes) or expandable detail panels.
 
@@ -54,7 +54,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 | `dataLength` | number | `0` | Total number of rows (especially for server mode) |
 | `currentPage` | number | `1` | Current page number |
 | `itemsPerPage` | number | `5` | Rows per page |
-| `footerText` | string | `""` | Replaces default summary text in footer |
+| `paginationSummary` | string | `""` | Replaces default summary text in footer |
 | `paginationVariant` | `"default" \| "number" \| "button" \| "description"` | `"default"` | Variant forwarded to internal pagination |
 | `mode` | `"client" \| "server"` | `"client"` | Pagination mode |
 | `isLoading` | boolean | `false` | Shows loading state in server mode |
@@ -87,15 +87,15 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 
 ## Events
 
-| Event | When |
-| --- | --- |
-| `sgds-page-change` | Pagination page changes |
-| `sgds-row-select` | Selection state changes for row checkboxes |
-| `sgds-sort` | A sorting header changes sort direction (emitted by `sgds-data-table` when `serverSort` is true) |
-| `sgds-show` | Expandable row starts opening |
-| `sgds-after-show` | Expandable row finishes opening |
-| `sgds-hide` | Expandable row starts closing |
-| `sgds-after-hide` | Expandable row finishes closing |
+| Event | When | Detail |
+| --- | --- | --- |
+| `sgds-page-change` | Pagination page changes | — |
+| `sgds-row-select` | Selection state changes for row checkboxes | `{ selected: Record<string, string>[] }` — each object maps header text (or `sortKey` if set) to cell text |
+| `sgds-sort` | A sorting header changes sort direction (emitted by `sgds-data-table` when `serverSort` is true) | `{ key: string, direction: "ascending" \| "descending" \| "none" }` |
+| `sgds-show` | Expandable row starts opening | — |
+| `sgds-after-show` | Expandable row finishes opening | — |
+| `sgds-hide` | Expandable row starts closing | — |
+| `sgds-after-hide` | Expandable row finishes closing | — |
 
 ## Sorting Behavior Notes
 
@@ -160,4 +160,4 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 2. In server mode, manage `isLoading` around fetch calls and update row markup externally.
 3. Use `textAlign` on header cells only; body alignment is inherited by column.
 4. Keep non-sorting control columns (expand/checkbox) non-sorting.
-5. Prefer setting `sortKey` when rowData is provided for stable sorting behavior.
+5. Set `sortKey` on sortable headers for stable sorting behavior.
