@@ -1,20 +1,5 @@
 import { html } from "lit";
 
-const ServerLoadingTemplate = () => html`
-  <sgds-data-table mode="server" .isLoading=${true} .dataLength=${50} .itemsPerPage=${10} .currentPage=${1}>
-    <sgds-data-table-row>
-      <sgds-data-table-head>ID</sgds-data-table-head>
-      <sgds-data-table-head>Name</sgds-data-table-head>
-      <sgds-data-table-head textAlign="right">Amount</sgds-data-table-head>
-    </sgds-data-table-row>
-    <sgds-data-table-row>
-      <sgds-data-table-cell>1</sgds-data-table-cell>
-      <sgds-data-table-cell>Citizen 1</sgds-data-table-cell>
-      <sgds-data-table-cell>42</sgds-data-table-cell>
-    </sgds-data-table-row>
-  </sgds-data-table>
-`;
-
 const NoRowsTemplate = () => html`
   <sgds-data-table>
     <sgds-data-table-row>
@@ -23,6 +8,23 @@ const NoRowsTemplate = () => html`
       <sgds-data-table-head>Last name</sgds-data-table-head>
       <sgds-data-table-head>Username</sgds-data-table-head>
     </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const CustomNoDataTemplate = () => html`
+  <sgds-data-table>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <div slot="no-data" class="sgds:flex sgds:flex-col sgds:items-center">
+      <div class="sgds:mb-paragraph-sm">
+        <sgds-icon name="exclamation-circle-fill" size="xl" class="sgds:text-default"></sgds-icon>
+      </div>
+      No records found. Try adjusting your search or filters.
+    </div>
   </sgds-data-table>
 `;
 
@@ -53,6 +55,67 @@ const MultiSelectTemplate = () => html`
       <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
     </sgds-data-table-row>
   </sgds-data-table>
+`;
+
+const MultiSelectRowSelectEventTemplate = () => html`
+  <div class="event-demo">
+    <sgds-data-table
+      .currentPage=${1}
+      .dataLength=${6}
+      .itemsPerPage=${3}
+      .multiSelect=${true}
+      @sgds-row-select=${e => {
+        const output = e.target.closest(".event-demo")?.querySelector(".event-output");
+        if (output) output.textContent = JSON.stringify(e.detail, null, 2);
+      }}
+    >
+      <sgds-data-table-row>
+        <sgds-data-table-head>#</sgds-data-table-head>
+        <sgds-data-table-head>First name</sgds-data-table-head>
+        <sgds-data-table-head>Last name</sgds-data-table-head>
+        <sgds-data-table-head>Username</sgds-data-table-head>
+      </sgds-data-table-row>
+      <sgds-data-table-row>
+        <sgds-data-table-cell>1</sgds-data-table-cell>
+        <sgds-data-table-cell>John</sgds-data-table-cell>
+        <sgds-data-table-cell>Doe</sgds-data-table-cell>
+        <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+      </sgds-data-table-row>
+      <sgds-data-table-row>
+        <sgds-data-table-cell>2</sgds-data-table-cell>
+        <sgds-data-table-cell>Jane</sgds-data-table-cell>
+        <sgds-data-table-cell>Doe</sgds-data-table-cell>
+        <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+      </sgds-data-table-row>
+      <sgds-data-table-row>
+        <sgds-data-table-cell>3</sgds-data-table-cell>
+        <sgds-data-table-cell>Bob</sgds-data-table-cell>
+        <sgds-data-table-cell>Smith</sgds-data-table-cell>
+        <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+      </sgds-data-table-row>
+      <sgds-data-table-row>
+        <sgds-data-table-cell>4</sgds-data-table-cell>
+        <sgds-data-table-cell>Amy</sgds-data-table-cell>
+        <sgds-data-table-cell>Tan</sgds-data-table-cell>
+        <sgds-data-table-cell>@amytan</sgds-data-table-cell>
+      </sgds-data-table-row>
+      <sgds-data-table-row>
+        <sgds-data-table-cell>5</sgds-data-table-cell>
+        <sgds-data-table-cell>Ben</sgds-data-table-cell>
+        <sgds-data-table-cell>Ho</sgds-data-table-cell>
+        <sgds-data-table-cell>@benho</sgds-data-table-cell>
+      </sgds-data-table-row>
+      <sgds-data-table-row>
+        <sgds-data-table-cell>6</sgds-data-table-cell>
+        <sgds-data-table-cell>Cara</sgds-data-table-cell>
+        <sgds-data-table-cell>Lim</sgds-data-table-cell>
+        <sgds-data-table-cell>@caralim</sgds-data-table-cell>
+      </sgds-data-table-row>
+    </sgds-data-table>
+    <pre class="event-output sgds:mt-4 sgds:p-4 sgds:bg-alternate sgds:rounded-sm sgds:text-label-sm">
+Check a row to see the sgds-row-select event detail</pre
+    >
+  </div>
 `;
 
 const MultiSelectPrecheckedOnLoadTemplate = () => html`
@@ -211,13 +274,8 @@ const ExpandableMultiSelectTemplate = () => html`
   </sgds-data-table>
 `;
 
-const CustomFooterTextTemplate = () => html`
-  <sgds-data-table
-    .currentPage=${1}
-    .dataLength=${4}
-    .itemsPerPage=${2}
-    footerText="Showing records fetched from API cache"
-  >
+const CustomPaginationSummaryTemplate = () => html`
+  <sgds-data-table .currentPage=${1} .dataLength=${4} .itemsPerPage=${2} paginationSummary="Showing 2 out of 4 records">
     <sgds-data-table-row>
       <sgds-data-table-head>ID</sgds-data-table-head>
       <sgds-data-table-head>Name</sgds-data-table-head>
@@ -300,33 +358,106 @@ const DefaultSortTemplate = () => html`
   </sgds-data-table>
 `;
 
+const SortingWithNoRowsTemplate = () => html`
+  <sgds-data-table>
+    <sgds-data-table-row>
+      <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="role">Role</sgds-data-table-head>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
 const HeaderAlignmentTemplate = () => html`
   <sgds-data-table .dataLength=${3} .itemsPerPage=${5} .currentPage=${1}>
     <sgds-data-table-row>
       <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>Name</sgds-data-table-head>
+      <sgds-data-table-head>Category</sgds-data-table-head>
+      <sgds-data-table-head textAlign="right">Quantity</sgds-data-table-head>
       <sgds-data-table-head textAlign="right">Amount</sgds-data-table-head>
     </sgds-data-table-row>
     <sgds-data-table-row>
       <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Amy Tan</sgds-data-table-cell>
+      <sgds-data-table-cell>Operations</sgds-data-table-cell>
+      <sgds-data-table-cell>12</sgds-data-table-cell>
       <sgds-data-table-cell>125.00</sgds-data-table-cell>
     </sgds-data-table-row>
     <sgds-data-table-row>
       <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben Ho</sgds-data-table-cell>
+      <sgds-data-table-cell>Finance</sgds-data-table-cell>
+      <sgds-data-table-cell>5</sgds-data-table-cell>
       <sgds-data-table-cell>98.30</sgds-data-table-cell>
     </sgds-data-table-row>
     <sgds-data-table-row>
       <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Cara Lim</sgds-data-table-cell>
+      <sgds-data-table-cell>Security</sgds-data-table-cell>
+      <sgds-data-table-cell>28</sgds-data-table-cell>
       <sgds-data-table-cell>302.10</sgds-data-table-cell>
     </sgds-data-table-row>
   </sgds-data-table>
 `;
 
-export const ServerLoading = {
-  render: ServerLoadingTemplate.bind({}),
-  name: "Server loading",
-  args: {},
-  parameters: {}
-};
+const ServerLoadingTemplate = () => html`
+  <sgds-data-table mode="server" .isLoading=${true} .dataLength=${50} .itemsPerPage=${10} .currentPage=${1}>
+    <sgds-data-table-row>
+      <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>Name</sgds-data-table-head>
+      <sgds-data-table-head textAlign="right">Amount</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Citizen 1</sgds-data-table-cell>
+      <sgds-data-table-cell>42</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const SortEventTemplate = () => html`
+  <div class="event-demo">
+    <sgds-data-table
+      mode="server"
+      serverSort
+      currentPage="1"
+      dataLength="3"
+      itemsPerPage="5"
+      @sgds-sort=${e => {
+        const output = e.target.closest(".event-demo")?.querySelector(".event-output");
+        if (output) output.textContent = JSON.stringify(e.detail, null, 2);
+      }}
+    >
+      <sgds-data-table-row>
+        <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
+        <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
+        <sgds-data-table-head sorting sortKey="role">Role</sgds-data-table-head>
+      </sgds-data-table-row>
+      <sgds-data-table-row>
+        <sgds-data-table-cell>1</sgds-data-table-cell>
+        <sgds-data-table-cell>Alice</sgds-data-table-cell>
+        <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+      </sgds-data-table-row>
+      <sgds-data-table-row>
+        <sgds-data-table-cell>2</sgds-data-table-cell>
+        <sgds-data-table-cell>Ben</sgds-data-table-cell>
+        <sgds-data-table-cell>Analyst</sgds-data-table-cell>
+      </sgds-data-table-row>
+      <sgds-data-table-row>
+        <sgds-data-table-cell>3</sgds-data-table-cell>
+        <sgds-data-table-cell>Chloe</sgds-data-table-cell>
+        <sgds-data-table-cell>Manager</sgds-data-table-cell>
+      </sgds-data-table-row>
+    </sgds-data-table>
+    <pre
+      class="event-output"
+      style="margin-top: 1rem; padding: 1rem; background: var(--sgds-color-bg-neutral-subtle, #f5f5f5); border-radius: 4px; font-size: 0.875rem; min-height: 2.5rem;"
+    >
+Click a sort header to see the sgds-sort event detail</pre
+    >
+  </div>
+`;
 
 export const NoRows = {
   render: NoRowsTemplate.bind({}),
@@ -335,9 +466,23 @@ export const NoRows = {
   parameters: {}
 };
 
+export const CustomNoData = {
+  render: CustomNoDataTemplate.bind({}),
+  name: "Custom no-data slot",
+  args: {},
+  parameters: {}
+};
+
 export const MultiSelect = {
   render: MultiSelectTemplate.bind({}),
   name: "Multi-select",
+  args: {},
+  parameters: {}
+};
+
+export const MultiSelectRowSelectEvent = {
+  render: MultiSelectRowSelectEventTemplate.bind({}),
+  name: "Multi-select row select event",
   args: {},
   parameters: {}
 };
@@ -363,9 +508,9 @@ export const ExpandableMultiSelect = {
   parameters: {}
 };
 
-export const CustomFooterText = {
-  render: CustomFooterTextTemplate.bind({}),
-  name: "Custom footer text",
+export const CustomPaginationSummary = {
+  render: CustomPaginationSummaryTemplate.bind({}),
+  name: "Custom pagination summary",
   args: {},
   parameters: {}
 };
@@ -384,9 +529,30 @@ export const DefaultSort = {
   parameters: {}
 };
 
+export const SortingWithNoRows = {
+  render: SortingWithNoRowsTemplate.bind({}),
+  name: "Sorting with no rows",
+  args: {},
+  parameters: {}
+};
+
 export const HeaderTextAlignment = {
   render: HeaderAlignmentTemplate.bind({}),
   name: "Header text alignment",
+  args: {},
+  parameters: {}
+};
+
+export const ServerLoading = {
+  render: ServerLoadingTemplate.bind({}),
+  name: "Server loading",
+  args: {},
+  parameters: {}
+};
+
+export const SortEvent = {
+  render: SortEventTemplate.bind({}),
+  name: "Sort event (server mode)",
   args: {},
   parameters: {}
 };

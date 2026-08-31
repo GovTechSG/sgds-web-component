@@ -28,7 +28,7 @@ export const Template = args => html`
     .serverSort=${args.serverSort}
     .isLoading=${args.isLoading}
     .paginationVariant=${args.paginationVariant}
-    .footerText=${args.footerText}
+    .paginationSummary=${args.paginationSummary}
   >
     <sgds-data-table-row>
       <sgds-data-table-head .sorting=${false}>#</sgds-data-table-head>
@@ -72,7 +72,7 @@ export const args = {
   serverSort: false,
   isLoading: false,
   paginationVariant: "default",
-  footerText: ""
+  paginationSummary: ""
 };
 
 export const parameters = {};

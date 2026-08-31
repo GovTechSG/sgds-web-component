@@ -8,16 +8,6 @@ The basic table story uses static cell content patterns without event handlers:
   <Story of={DataTableStories.Basic} />
 </Canvas>
 
-## Server Loading
-
-Use `mode="server"` with `isLoading` to show the loading state while waiting for remote data.
-For backend sorting, set `serverSort` on `<sgds-data-table>` and handle the emitted
-`sgds-sort` event in your application.
-
-<Canvas of={DataTableStories.ServerLoading}>
-  <Story of={DataTableStories.ServerLoading} />
-</Canvas>
-
 ## No rows
 
 Use a header-only table when data is unavailable. The component shows the default no-data state.
@@ -26,12 +16,29 @@ Use a header-only table when data is unavailable. The component shows the defaul
   <Story of={DataTableStories.NoRows} />
 </Canvas>
 
+## Custom no-data slot
+
+Use the `no-data` slot to replace the default "No data" message with custom content.
+
+<Canvas of={DataTableStories.CustomNoData}>
+  <Story of={DataTableStories.CustomNoData} />
+</Canvas>
+
 ## Multi-select
 
 Set `multiSelect` to render a checkbox column for row selection.
 
 <Canvas of={DataTableStories.MultiSelect}>
   <Story of={DataTableStories.MultiSelect} />
+</Canvas>
+
+## Multi-select row select event
+
+When `multiSelect` is enabled, the `sgds-row-select` event is emitted each time a row checkbox changes.
+The event detail contains a `selected` array of objects, where each key is derived from the header text (or `sortKey` if set).
+
+<Canvas of={DataTableStories.MultiSelectRowSelectEvent}>
+  <Story of={DataTableStories.MultiSelectRowSelectEvent} />
 </Canvas>
 
 ## Multi-select pre-checked on load
@@ -61,12 +68,12 @@ Use `expand` and `multiSelect` together when rows need both selection and detail
   <Story of={DataTableStories.ExpandableMultiSelect} />
 </Canvas>
 
-## Custom footer text
+## Custom pagination summary
 
-Set `footerText` to replace the default results summary text in the footer.
+Set `paginationSummary` to replace the default results summary text in the footer.
 
-<Canvas of={DataTableStories.CustomFooterText}>
-  <Story of={DataTableStories.CustomFooterText} />
+<Canvas of={DataTableStories.CustomPaginationSummary}>
+  <Story of={DataTableStories.CustomPaginationSummary} />
 </Canvas>
 
 ## Header Text Alignment
@@ -100,3 +107,27 @@ Set `sortDirection` on a sortable header to present an initial sort state on fir
 ## Sorting with no rows
 
 When there are no body rows, sort controls are disabled.
+
+<Canvas of={DataTableStories.SortingWithNoRows}>
+  <Story of={DataTableStories.SortingWithNoRows} />
+</Canvas>
+
+## Server Loading
+
+Use `mode="server"` with `isLoading` to show the loading state while waiting for remote data.
+For backend sorting, set `serverSort` on `<sgds-data-table>` and handle the emitted
+`sgds-sort` event in your application.
+
+<Canvas of={DataTableStories.ServerLoading}>
+  <Story of={DataTableStories.ServerLoading} />
+</Canvas>
+
+## Sort event (server mode)
+
+When `serverSort` is enabled, the component's built-in client-side sorting is disabled.
+Clicking a sort header only emits the `sgds-sort` event — the actual sorting must be handled by your API.
+Listen for `sgds-sort`, pass `detail.key` and `detail.direction` to your API request, then replace the table rows with the sorted response.
+
+<Canvas of={DataTableStories.SortEvent}>
+  <Story of={DataTableStories.SortEvent} />
+</Canvas>
