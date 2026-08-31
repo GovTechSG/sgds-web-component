@@ -11,6 +11,23 @@ const NoRowsTemplate = () => html`
   </sgds-data-table>
 `;
 
+const CustomNoDataTemplate = () => html`
+  <sgds-data-table>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <div slot="no-data" style="display: flex; flex-direction: column; align-items: center;">
+      <div class="sgds:mb-paragraph-sm">
+        <sgds-icon name="exclamation-circle-fill" size="xl" class="sgds:text-default"></sgds-icon>
+      </div>
+      No records found. Try adjusting your search or filters.
+    </div>
+  </sgds-data-table>
+`;
+
 const MultiSelectTemplate = () => html`
   <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5} .multiSelect=${true}>
     <sgds-data-table-row>
@@ -95,10 +112,7 @@ const MultiSelectRowSelectEventTemplate = () => html`
         <sgds-data-table-cell>@caralim</sgds-data-table-cell>
       </sgds-data-table-row>
     </sgds-data-table>
-    <pre
-      class="event-output"
-      style="margin-top: 1rem; padding: 1rem; background: var(--sgds-color-bg-neutral-subtle, #f5f5f5); border-radius: 4px; font-size: 0.875rem; min-height: 2.5rem;"
-    >
+    <pre class="event-output sgds:mt-4 sgds:p-4 sgds:bg-alternate sgds:rounded-sm sgds:text-label-sm">
 Check a row to see the sgds-row-select event detail</pre
     >
   </div>
@@ -405,11 +419,11 @@ const ServerLoadingTemplate = () => html`
 const SortEventTemplate = () => html`
   <div class="event-demo">
     <sgds-data-table
-      .mode=${"server"}
-      .serverSort=${true}
-      .currentPage=${1}
-      .dataLength=${6}
-      .itemsPerPage=${3}
+      mode="server"
+      serverSort
+      currentPage="1"
+      dataLength="3"
+      itemsPerPage="5"
       @sgds-sort=${e => {
         const output = e.target.closest(".event-demo")?.querySelector(".event-output");
         if (output) output.textContent = JSON.stringify(e.detail, null, 2);
@@ -435,21 +449,6 @@ const SortEventTemplate = () => html`
         <sgds-data-table-cell>Chloe</sgds-data-table-cell>
         <sgds-data-table-cell>Manager</sgds-data-table-cell>
       </sgds-data-table-row>
-      <sgds-data-table-row>
-        <sgds-data-table-cell>4</sgds-data-table-cell>
-        <sgds-data-table-cell>Darren</sgds-data-table-cell>
-        <sgds-data-table-cell>Designer</sgds-data-table-cell>
-      </sgds-data-table-row>
-      <sgds-data-table-row>
-        <sgds-data-table-cell>5</sgds-data-table-cell>
-        <sgds-data-table-cell>Eve</sgds-data-table-cell>
-        <sgds-data-table-cell>Director</sgds-data-table-cell>
-      </sgds-data-table-row>
-      <sgds-data-table-row>
-        <sgds-data-table-cell>6</sgds-data-table-cell>
-        <sgds-data-table-cell>Faye</sgds-data-table-cell>
-        <sgds-data-table-cell>Architect</sgds-data-table-cell>
-      </sgds-data-table-row>
     </sgds-data-table>
     <pre
       class="event-output"
@@ -463,6 +462,13 @@ Click a sort header to see the sgds-sort event detail</pre
 export const NoRows = {
   render: NoRowsTemplate.bind({}),
   name: "No rows",
+  args: {},
+  parameters: {}
+};
+
+export const CustomNoData = {
+  render: CustomNoDataTemplate.bind({}),
+  name: "Custom no-data slot",
   args: {},
   parameters: {}
 };

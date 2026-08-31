@@ -448,7 +448,7 @@ export class SgdsDataTable extends SgdsElement {
 
     return html`
       <div class="data-table">
-        <div>
+        <div class="table-container">
           <slot @slotchange=${this._handleSlotChange} @i-sgds-sort=${this._handleSort} class="table"></slot>
           ${this.isLoading
             ? this._renderLoadingSkeleton()

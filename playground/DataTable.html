@@ -2,6 +2,7 @@
 <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="./css/utility.css" rel="stylesheet" type="text/css" />
 <style>
   body {
     background: var(--sgds-bg-default);
@@ -228,6 +229,65 @@
   </sgds-data-table>
 </div>
 
+<!-- Horizontal overflow (many columns) -->
+<div class="container">
+  <h3>Horizontal overflow</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5">
+    <sgds-data-table-row>
+      <sgds-data-table-head>ID</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Email</sgds-data-table-head>
+      <sgds-data-table-head>Department</sgds-data-table-head>
+      <sgds-data-table-head>Role</sgds-data-table-head>
+      <sgds-data-table-head>Status</sgds-data-table-head>
+      <sgds-data-table-head>Location</sgds-data-table-head>
+      <sgds-data-table-head>Phone</sgds-data-table-head>
+      <sgds-data-table-head>Start date</sgds-data-table-head>
+      <sgds-data-table-head textAlign="right">Salary</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Amy</sgds-data-table-cell>
+      <sgds-data-table-cell>Tan</sgds-data-table-cell>
+      <sgds-data-table-cell>amy.tan@example.gov.sg</sgds-data-table-cell>
+      <sgds-data-table-cell>Operations</sgds-data-table-cell>
+      <sgds-data-table-cell>Manager</sgds-data-table-cell>
+      <sgds-data-table-cell>Active</sgds-data-table-cell>
+      <sgds-data-table-cell>Singapore</sgds-data-table-cell>
+      <sgds-data-table-cell>+65 9123 4567</sgds-data-table-cell>
+      <sgds-data-table-cell>2022-03-15</sgds-data-table-cell>
+      <sgds-data-table-cell>8,500.00</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben</sgds-data-table-cell>
+      <sgds-data-table-cell>Ho</sgds-data-table-cell>
+      <sgds-data-table-cell>ben.ho@example.gov.sg</sgds-data-table-cell>
+      <sgds-data-table-cell>Finance</sgds-data-table-cell>
+      <sgds-data-table-cell>Analyst</sgds-data-table-cell>
+      <sgds-data-table-cell>Active</sgds-data-table-cell>
+      <sgds-data-table-cell>Singapore</sgds-data-table-cell>
+      <sgds-data-table-cell>+65 9234 5678</sgds-data-table-cell>
+      <sgds-data-table-cell>2023-07-01</sgds-data-table-cell>
+      <sgds-data-table-cell>6,200.00</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Cara</sgds-data-table-cell>
+      <sgds-data-table-cell>Lim</sgds-data-table-cell>
+      <sgds-data-table-cell>cara.lim@example.gov.sg</sgds-data-table-cell>
+      <sgds-data-table-cell>Security</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+      <sgds-data-table-cell>Pending</sgds-data-table-cell>
+      <sgds-data-table-cell>Singapore</sgds-data-table-cell>
+      <sgds-data-table-cell>+65 9345 6789</sgds-data-table-cell>
+      <sgds-data-table-cell>2024-01-10</sgds-data-table-cell>
+      <sgds-data-table-cell>7,800.00</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
 <!-- No rows -->
 <div class="container">
   <h3>No rows</h3>
@@ -238,6 +298,25 @@
       <sgds-data-table-head>Last name</sgds-data-table-head>
       <sgds-data-table-head>Username</sgds-data-table-head>
     </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Custom no-data slot -->
+<div class="container">
+  <h3>Custom no-data slot</h3>
+  <sgds-data-table>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <div slot="no-data" style="display: flex; flex-direction: column; align-items: center;">
+      <div style="margin-bottom: var(--sgds-paragraph-spacing-sm);">
+        <sgds-icon name="exclamation-circle-fill" size="xl" style="color: var(--sgds-color-default);"></sgds-icon>
+      </div>
+      No records found. Try adjusting your search or filters.
+    </div>
   </sgds-data-table>
 </div>
 

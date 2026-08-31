@@ -15,6 +15,10 @@
   border-collapse: collapse;
 }
 
+.table-container {
+  overflow-x: auto;
+}
+
 .data-table {
   display: flex;
   flex-direction: column;
@@ -79,7 +83,9 @@ th[data-sorting] {
 
 .data-table-cell,
 .data-table-head,
-.footer {
+.footer,
+.no-data,
+.expandable-content {
   display: flex;
   align-items: center;
   min-height: var(--sgds-dimension-56);

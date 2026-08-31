@@ -58,17 +58,26 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 | `paginationVariant` | `"default" \| "number" \| "button" \| "description"` | `"default"` | Variant forwarded to internal pagination |
 | `mode` | `"client" \| "server"` | `"client"` | Pagination mode |
 | `isLoading` | boolean | `false` | Shows loading state in server mode |
-| `serverSort` | boolean | `false` | Emits `sgds-sort` for external sorting instead of local sorting |
+| `serverSort` | boolean | `false` | Disables built-in sorting and emits `sgds-sort` for external sorting via API |
+| `layout` | `"auto" \| "fixed"` | `"auto"` | CSS `table-layout` algorithm — `"fixed"` distributes column widths evenly |
 
 ### `<sgds-data-table-head>`
 
 | Attribute | Type | Default | Purpose |
 | --- | --- | --- | --- |
-| `sorting` | boolean | `true` | Enables sort toggle on click |
-| `sortKey` | string | `""` | Row data key used for sorting |
+| `sorting` | boolean | `false` | Enables sort toggle on click |
+| `sortKey` | string | `""` | Column key emitted in sort event detail, used to identify which column to sort |
 | `sortDirection` | `"ascending" \| "descending" \| "none" \| "other"` | `"none"` | Initial sort direction for sortable headers |
 | `textAlign` | `"left" \| "right"` | `"left"` | Alignment for header and same body column |
 | `width` | string | — | Column width |
+
+### `<sgds-data-table-row>`
+
+| Attribute | Type | Default | Purpose |
+| --- | --- | --- | --- |
+| `expand` | boolean | `false` | Enables an expandable content area beneath the row |
+| `open` | boolean | `false` | When true, the expandable content area is open |
+| `checked` | boolean | `false` | When true, the row is checked (used with `multiSelect`) |
 
 ## Slots
 
@@ -77,6 +86,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 | Slot | Purpose |
 | --- | --- |
 | default | Accepts `sgds-data-table-row` entries for header and body rows |
+| `no-data` | Custom content rendered when no body rows are available and `isLoading` is false |
 
 ### Data Table Row Slots
 
@@ -100,7 +110,8 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 ## Sorting Behavior Notes
 
 - In client mode, sorting affects only currently visible rows.
-- When a sort cycles back to `none`, row order reverts to the initial slotted order captured at first non-server load.
+- When `serverSort` is enabled, built-in client-side sorting is disabled. Clicking a sort header only emits `sgds-sort` — the actual sorting must be handled by your API.
+- When a sort cycles back to `none`, client-mode row order reverts to the initial slotted order.
 - Sort controls are disabled when there are no body rows.
 
 ## Server Mode Example

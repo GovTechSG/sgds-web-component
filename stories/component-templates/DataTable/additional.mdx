@@ -16,6 +16,14 @@ Use a header-only table when data is unavailable. The component shows the defaul
   <Story of={DataTableStories.NoRows} />
 </Canvas>
 
+## Custom no-data slot
+
+Use the `no-data` slot to replace the default "No data" message with custom content.
+
+<Canvas of={DataTableStories.CustomNoData}>
+  <Story of={DataTableStories.CustomNoData} />
+</Canvas>
+
 ## Multi-select
 
 Set `multiSelect` to render a checkbox column for row selection.
@@ -116,8 +124,9 @@ For backend sorting, set `serverSort` on `<sgds-data-table>` and handle the emit
 
 ## Sort event (server mode)
 
-When `serverSort` is enabled, clicking a sort header emits the `sgds-sort` event instead of sorting rows locally.
-The event detail contains the `key` (from `sortKey`) and the `direction` (`ascending`, `descending`, or `none`).
+When `serverSort` is enabled, the component's built-in client-side sorting is disabled.
+Clicking a sort header only emits the `sgds-sort` event — the actual sorting must be handled by your API.
+Listen for `sgds-sort`, pass `detail.key` and `detail.direction` to your API request, then replace the table rows with the sorted response.
 
 <Canvas of={DataTableStories.SortEvent}>
   <Story of={DataTableStories.SortEvent} />
