@@ -78,16 +78,39 @@ th[data-sorting] {
 }
 
 .data-table-cell,
-.data-table-head {
+.data-table-head,
+.footer {
   display: flex;
   align-items: center;
   min-height: var(--sgds-dimension-56);
   padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+  font-family: var(--sgds-font-family-brand);
+  font-size: var(--sgds-font-size-label-sm);
+  font-style: normal;
+  line-height: var(--sgds-line-height-2-xs);
+  letter-spacing: var(--sgds-letter-spacing-normal);
 }
 
 .data-table-head {
+  color: var(--sgds-color-default);
   font-weight: var(--sgds-font-weight-semibold);
   gap: var(--sgds-gap-2-xs);
+}
+
+.data-table-head ::slotted(sgds-data-table-head) {
+  font-size: var(--sgds-font-size-label-sm);
+  font-weight: var(--sgds-font-weight-semibold);
+  line-height: var(--sgds-line-height-2-xs);
+}
+
+.data-table-cell {
+  font-weight: var(--sgds-font-weight-regular);
+}
+
+.data-table-cell ::slotted(sgds-data-table-cell) {
+  font-size: var(--sgds-font-size-label-sm);
+  font-weight: var(--sgds-font-weight-regular);
+  line-height: var(--sgds-line-height-2-xs);
 }
 
 .sort {
