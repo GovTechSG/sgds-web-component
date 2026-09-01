@@ -402,7 +402,7 @@ const HeaderAlignmentTemplate = () => html`
 `;
 
 const ServerLoadingTemplate = () => html`
-  <sgds-data-table mode="server" .isLoading=${true} .dataLength=${50} .itemsPerPage=${10} .currentPage=${1}>
+  <sgds-data-table mode="server" .loading=${true} .dataLength=${50} .itemsPerPage=${10} .currentPage=${1}>
     <sgds-data-table-row>
       <sgds-data-table-head>ID</sgds-data-table-head>
       <sgds-data-table-head>Name</sgds-data-table-head>

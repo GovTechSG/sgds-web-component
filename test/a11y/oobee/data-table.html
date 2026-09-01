@@ -499,7 +499,7 @@
 
   const loadServerPage = async page => {
     const itemsPerPage = Number(serverTable.itemsPerPage || 10);
-    serverTable.isLoading = true;
+    serverTable.loading = true;
 
     try {
       const response = await mockApi({
@@ -511,7 +511,7 @@
       serverTable.dataLength = response.total;
       renderServerRows(response.rows);
     } finally {
-      serverTable.isLoading = false;
+      serverTable.loading = false;
     }
   };
 

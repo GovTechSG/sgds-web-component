@@ -383,9 +383,9 @@ describe("<sgds-data-table>", () => {
     expect(bodyCellContent?.classList.contains("align-right")).to.be.true;
   });
 
-  it("shows loading state in server mode when isLoading is true", async () => {
+  it("shows loading state in server mode when loading is true", async () => {
     const el = await fixture<SgdsDataTable>(html`
-      <sgds-data-table mode="server" ?isLoading=${true} dataLength="10" itemsPerPage="5" currentPage="1">
+      <sgds-data-table mode="server" ?loading=${true} dataLength="10" itemsPerPage="5" currentPage="1">
         <sgds-data-table-row>
           <sgds-data-table-head>ID</sgds-data-table-head>
         </sgds-data-table-row>
@@ -405,16 +405,16 @@ describe("<sgds-data-table>", () => {
     expect(skeletons.length).to.equal(5);
     expect(bodyRows[0].style.display).to.equal("none");
 
-    el.isLoading = false;
+    el.loading = false;
     await elementUpdated(el);
 
     expect(el.shadowRoot?.querySelector(".loading")).to.not.exist;
     expect(bodyRows[0].style.display).to.equal("");
   });
 
-  it("shows loading state in client mode when isLoading is true", async () => {
+  it("shows loading state in client mode when loading is true", async () => {
     const el = await fixture<SgdsDataTable>(html`
-      <sgds-data-table mode="client" ?isLoading=${true} dataLength="1" itemsPerPage="5" currentPage="1">
+      <sgds-data-table mode="client" ?loading=${true} dataLength="1" itemsPerPage="5" currentPage="1">
         <sgds-data-table-row>
           <sgds-data-table-head>ID</sgds-data-table-head>
         </sgds-data-table-row>
@@ -437,7 +437,7 @@ describe("<sgds-data-table>", () => {
 
   it("renders loading skeleton using column count x page size", async () => {
     const el = await fixture<SgdsDataTable>(html`
-      <sgds-data-table mode="server" ?isLoading=${true} dataLength="10" itemsPerPage="3" currentPage="1" multiSelect>
+      <sgds-data-table mode="server" ?loading=${true} dataLength="10" itemsPerPage="3" currentPage="1" multiSelect>
         <sgds-data-table-row>
           <sgds-data-table-head>ID</sgds-data-table-head>
           <sgds-data-table-head>Name</sgds-data-table-head>
@@ -524,9 +524,9 @@ describe("<sgds-data-table>", () => {
     expect(pagination?.variant).to.equal("number");
   });
 
-  it("shows loading footer with pagination while isLoading is true", async () => {
+  it("shows loading footer with pagination while loading is true", async () => {
     const el = await fixture<SgdsDataTable>(html`
-      <sgds-data-table mode="server" ?isLoading=${true} dataLength="10" itemsPerPage="5" currentPage="1">
+      <sgds-data-table mode="server" ?loading=${true} dataLength="10" itemsPerPage="5" currentPage="1">
         <sgds-data-table-row>
           <sgds-data-table-head>ID</sgds-data-table-head>
         </sgds-data-table-row>
@@ -658,13 +658,7 @@ describe("<sgds-data-table>", () => {
 
   it("does not show no-data state while loading", async () => {
     const el = await fixture<SgdsDataTable>(html`
-      <sgds-data-table
-        mode="server"
-        ?isLoading=${true}
-        dataLength="0"
-        itemsPerPage="5"
-        currentPage="1"
-      ></sgds-data-table>
+      <sgds-data-table mode="server" ?loading=${true} dataLength="0" itemsPerPage="5" currentPage="1"></sgds-data-table>
     `);
     await elementUpdated(el);
 

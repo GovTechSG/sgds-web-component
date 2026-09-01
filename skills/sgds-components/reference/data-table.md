@@ -22,7 +22,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 - Static list with local pagination and sorting: use `mode="client"` (default).
 - Data from API with backend pagination: use `mode="server"` and listen to `sgds-page-change`.
 - Data from API with backend sorting: set `serverSort` and listen to `sgds-sort`.
-- Need loading indicator while fetching server data: set `isLoading` to `true`.
+- Need loading indicator while fetching server data: set `loading` to `true`.
 - Need numeric columns aligned right: set `textAlign="right"` on the corresponding `sgds-data-table-head`.
 - Need only selected columns to sort: set `sorting` only on those headers.
 - Need default sort indicator on first render: set `sortDirection` on a sortable header.
@@ -57,7 +57,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 | `paginationSummary` | string | `""` | Replaces default summary text in footer |
 | `paginationVariant` | `"default" \| "number" \| "button" \| "description"` | `"default"` | Variant forwarded to internal pagination |
 | `mode` | `"client" \| "server"` | `"client"` | Pagination mode |
-| `isLoading` | boolean | `false` | Shows loading state in server mode |
+| `loading` | boolean | `false` | Shows loading state in server mode |
 | `serverSort` | boolean | `false` | Disables built-in sorting and emits `sgds-sort` for external sorting via API |
 | `layout` | `"auto" \| "fixed"` | `"auto"` | CSS `table-layout` algorithm — `"fixed"` distributes column widths evenly |
 
@@ -86,7 +86,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 | Slot | Purpose |
 | --- | --- |
 | default | Accepts `sgds-data-table-row` entries for header and body rows |
-| `no-data` | Custom content rendered when no body rows are available and `isLoading` is false |
+| `no-data` | Custom content rendered when no body rows are available and `loading` is false |
 
 ### Data Table Row Slots
 
@@ -128,7 +128,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
   const table = document.getElementById("users-table");
 
   async function loadPage(page) {
-    table.isLoading = true;
+    table.loading = true;
     try {
       const response = await fetch(`/api/users?page=${page}`);
       const { total, rows } = await response.json();
@@ -145,7 +145,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
         )
         .join("")}`;
     } finally {
-      table.isLoading = false;
+      table.loading = false;
     }
   }
 
@@ -168,7 +168,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 **For AI agents**:
 
 1. Always provide `dataLength`, `currentPage`, and `itemsPerPage` together for predictable pagination.
-2. In server mode, manage `isLoading` around fetch calls and update row markup externally.
+2. In server mode, manage `loading` around fetch calls and update row markup externally.
 3. Use `textAlign` on header cells only; body alignment is inherited by column.
 4. Keep non-sorting control columns (expand/checkbox) non-sorting.
 5. Set `sortKey` on sortable headers for stable sorting behavior.

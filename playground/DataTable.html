@@ -385,7 +385,7 @@
 <!-- Expandable rows -->
 <div class="container">
   <h3>Expandable rows</h3>
-  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" isLoading>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" loading>
     <sgds-data-table-row>
       <sgds-data-table-head>#</sgds-data-table-head>
       <sgds-data-table-head>First name</sgds-data-table-head>
@@ -495,7 +495,7 @@
     itemsPerPage="10"
     mode="server"
     serverSort
-    isLoading
+    loading
   >
     <sgds-data-table-row>
       <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
@@ -771,7 +771,7 @@
     if (serverTableStatus) {
       serverTableStatus.textContent = `Loading page ${page}...`;
     }
-    serverTable.isLoading = true;
+    serverTable.loading = true;
 
     try {
       const response = await mockApi({
@@ -794,7 +794,7 @@
         serverTableStatus.textContent = `Showing rows ${start} to ${end} of ${response.total}.${sortText}`;
       }
     } finally {
-      serverTable.isLoading = false;
+      serverTable.loading = false;
     }
   };
 

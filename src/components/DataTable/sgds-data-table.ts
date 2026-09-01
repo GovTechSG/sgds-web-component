@@ -13,7 +13,7 @@ import SgdsSkeleton from "../Skeleton/sgds-skeleton";
  * @summary A data table container with pagination, row selection, loading, and sorting support.
  *
  * @slot default - Insert one or more `sgds-data-table-row` elements.
- * @slot no-data - Custom content rendered when no body rows are available and `isLoading` is false.
+ * @slot no-data - Custom content rendered when no body rows are available and `loading` is false.
  *
  * @event sgds-row-select - Emitted when row checkboxes change. Detail: `{ selected: Record<string, string>[] }`.
  * @event sgds-sort - Emitted when `serverSort` is true and a sorting column header is clicked.
@@ -55,7 +55,7 @@ export class SgdsDataTable extends SgdsElement {
   @property({ type: String }) paginationSummary = "";
 
   /** When true, shows a loading state and hides body rows. */
-  @property({ type: Boolean }) isLoading = false;
+  @property({ type: Boolean }) loading = false;
 
   /** When true, emits sort events for external handling instead of local sorting. */
   @property({ type: Boolean }) serverSort = false;
@@ -361,7 +361,7 @@ export class SgdsDataTable extends SgdsElement {
   }
 
   private _updateVisibleRows() {
-    if (this.isLoading) {
+    if (this.loading) {
       this.tableRows.forEach(row => (row.style.display = "none"));
       return;
     }
@@ -426,7 +426,7 @@ export class SgdsDataTable extends SgdsElement {
   }
 
   updated(changed: Map<string, unknown>) {
-    if (changed.has("currentPage") || changed.has("itemsPerPage") || changed.has("mode") || changed.has("isLoading")) {
+    if (changed.has("currentPage") || changed.has("itemsPerPage") || changed.has("mode") || changed.has("loading")) {
       this._updateVisibleRows();
     }
     if (changed.has("multiSelect")) {
@@ -443,14 +443,14 @@ export class SgdsDataTable extends SgdsElement {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = Math.min(start + this.itemsPerPage, total);
     const displayStart = total === 0 ? 0 : start + 1;
-    const showNoData = !this.isLoading && this.tableRows.length === 0;
+    const showNoData = !this.loading && this.tableRows.length === 0;
     const showFooter = total !== 0;
 
     return html`
       <div class="data-table">
         <div class="table-container">
           <slot @slotchange=${this._handleSlotChange} @i-sgds-sort=${this._handleSort} class="table"></slot>
-          ${this.isLoading
+          ${this.loading
             ? this._renderLoadingSkeleton()
             : showNoData
             ? html`<slot name="no-data" class="no-data" role="status" aria-live="polite">No data</slot>`

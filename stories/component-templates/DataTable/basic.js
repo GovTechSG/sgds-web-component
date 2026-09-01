@@ -26,7 +26,7 @@ export const Template = args => html`
     .multiSelect=${args.multiSelect}
     .mode=${args.mode}
     .serverSort=${args.serverSort}
-    .isLoading=${args.isLoading}
+    .loading=${args.loading}
     .paginationVariant=${args.paginationVariant}
     .paginationSummary=${args.paginationSummary}
   >
@@ -70,7 +70,7 @@ export const args = {
   multiSelect: false,
   mode: "client",
   serverSort: false,
-  isLoading: false,
+  loading: false,
   paginationVariant: "default",
   paginationSummary: ""
 };
