@@ -81,6 +81,11 @@ th[data-sorting] {
   cursor: pointer;
 }
 
+th[data-sorting]:focus-visible {
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+}
+
 .data-table-cell,
 .data-table-head,
 .footer,
