@@ -343,6 +343,101 @@
   </sgds-data-table>
 </div>
 
+<!-- Loading (normal) -->
+<div class="container">
+  <h3>Loading (Normal)</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" loading>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Loading (expandable) -->
+<div class="container">
+  <h3>Loading (Expandable)</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" loading>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row expand open>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+      <div slot="content">Department: Engineering</div>
+    </sgds-data-table-row>
+    <sgds-data-table-row expand>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+      <div slot="content">Department: Design</div>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Loading + multi-select -->
+<div class="container">
+  <h3>Loading + Multi-select</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" loading multiSelect>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
 <!-- Server mode -->
 <div class="container">
   <h3>Server Mode (mode="server")</h3>
@@ -499,7 +594,7 @@
 
   const loadServerPage = async page => {
     const itemsPerPage = Number(serverTable.itemsPerPage || 10);
-    serverTable.isLoading = true;
+    serverTable.loading = true;
 
     try {
       const response = await mockApi({
@@ -511,7 +606,7 @@
       serverTable.dataLength = response.total;
       renderServerRows(response.rows);
     } finally {
-      serverTable.isLoading = false;
+      serverTable.loading = false;
     }
   };
 

@@ -112,9 +112,33 @@ When there are no body rows, sort controls are disabled.
   <Story of={DataTableStories.SortingWithNoRows} />
 </Canvas>
 
+## Loading
+
+Set `loading` to show skeleton placeholders while data is being fetched. The skeletons align with table headers. The number of skeleton rows matches the `itemsPerPage` prop (default 5).
+
+<Canvas of={DataTableStories.Loading}>
+  <Story of={DataTableStories.Loading} />
+</Canvas>
+
+## Loading (expandable)
+
+When rows have `expand`, the loading skeleton includes a control column matching the expand chevron.
+
+<Canvas of={DataTableStories.LoadingExpandable}>
+  <Story of={DataTableStories.LoadingExpandable} />
+</Canvas>
+
+## Loading (multi-select)
+
+When `multiSelect` is enabled, the loading skeleton includes a control column matching the checkbox.
+
+<Canvas of={DataTableStories.LoadingMultiSelect}>
+  <Story of={DataTableStories.LoadingMultiSelect} />
+</Canvas>
+
 ## Server Loading
 
-Use `mode="server"` with `isLoading` to show the loading state while waiting for remote data.
+Use `mode="server"` with `loading` to show the loading state while waiting for remote data.
 For backend sorting, set `serverSort` on `<sgds-data-table>` and handle the emitted
 `sgds-sort` event in your application.
 

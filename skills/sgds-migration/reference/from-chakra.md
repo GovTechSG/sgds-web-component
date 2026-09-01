@@ -151,7 +151,7 @@
 | `colorScheme="yellow"` | `tone="warning"` |
 | `size="sm"` | `size="sm"` |
 | `size="lg"` | `size="lg"` |
-| `isLoading` | Render `<SgdsSpinner>` inside button manually |
+| `isLoading` | `loading` on `<SgdsButton>` |
 | `leftIcon` | Use `<SgdsIcon>` as child |
 
 ---

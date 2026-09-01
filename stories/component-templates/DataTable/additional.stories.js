@@ -29,7 +29,7 @@ const CustomNoDataTemplate = () => html`
 `;
 
 const MultiSelectTemplate = () => html`
-  <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5} .multiSelect=${true}>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" multiSelect>
     <sgds-data-table-row>
       <sgds-data-table-head>#</sgds-data-table-head>
       <sgds-data-table-head>First name</sgds-data-table-head>
@@ -60,10 +60,10 @@ const MultiSelectTemplate = () => html`
 const MultiSelectRowSelectEventTemplate = () => html`
   <div class="event-demo">
     <sgds-data-table
-      .currentPage=${1}
-      .dataLength=${6}
-      .itemsPerPage=${3}
-      .multiSelect=${true}
+      currentPage="1"
+      dataLength="6"
+      itemsPerPage="3"
+      multiSelect
       @sgds-row-select=${e => {
         const output = e.target.closest(".event-demo")?.querySelector(".event-output");
         if (output) output.textContent = JSON.stringify(e.detail, null, 2);
@@ -119,7 +119,7 @@ Check a row to see the sgds-row-select event detail</pre
 `;
 
 const MultiSelectPrecheckedOnLoadTemplate = () => html`
-  <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5} .multiSelect=${true}>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" multiSelect>
     <sgds-data-table-row>
       <sgds-data-table-head>#</sgds-data-table-head>
       <sgds-data-table-head>First name</sgds-data-table-head>
@@ -148,20 +148,20 @@ const MultiSelectPrecheckedOnLoadTemplate = () => html`
 `;
 
 const ExpandableRowsTemplate = () => html`
-  <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5}>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5">
     <sgds-data-table-row>
       <sgds-data-table-head>#</sgds-data-table-head>
       <sgds-data-table-head>First name</sgds-data-table-head>
       <sgds-data-table-head>Last name</sgds-data-table-head>
       <sgds-data-table-head>Username</sgds-data-table-head>
     </sgds-data-table-row>
-    <sgds-data-table-row .expand=${true} .open=${true}>
+    <sgds-data-table-row expand open>
       <sgds-data-table-cell>1</sgds-data-table-cell>
       <sgds-data-table-cell>John</sgds-data-table-cell>
       <sgds-data-table-cell>Doe</sgds-data-table-cell>
       <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
       <div slot="content">
-        <div style="border-radius: var(--sgds-border-radius-sm);">
+        <div class="sgds:rounded-sm">
           <sgds-table>
             <sgds-table-row>
               <sgds-table-head>Case ID</sgds-table-head>
@@ -198,13 +198,13 @@ const ExpandableRowsTemplate = () => html`
         </div>
       </div>
     </sgds-data-table-row>
-    <sgds-data-table-row .expand=${true}>
+    <sgds-data-table-row expand>
       <sgds-data-table-cell>2</sgds-data-table-cell>
       <sgds-data-table-cell>Jane</sgds-data-table-cell>
       <sgds-data-table-cell>Doe</sgds-data-table-cell>
       <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
       <div slot="content">
-        <div style="border-radius: var(--sgds-border-radius-sm);">
+        <div class="sgds:rounded-sm">
           <sgds-table>
             <sgds-table-row>
               <sgds-table-head>Case ID</sgds-table-head>
@@ -243,20 +243,20 @@ const ExpandableRowsTemplate = () => html`
 `;
 
 const ExpandableMultiSelectTemplate = () => html`
-  <sgds-data-table .currentPage=${1} .dataLength=${3} .itemsPerPage=${5} .multiSelect=${true}>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" multiSelect>
     <sgds-data-table-row>
       <sgds-data-table-head>#</sgds-data-table-head>
       <sgds-data-table-head>First name</sgds-data-table-head>
       <sgds-data-table-head>Last name</sgds-data-table-head>
       <sgds-data-table-head>Username</sgds-data-table-head>
     </sgds-data-table-row>
-    <sgds-data-table-row .expand=${true}>
+    <sgds-data-table-row expand>
       <sgds-data-table-cell>1</sgds-data-table-cell>
       <sgds-data-table-cell>John</sgds-data-table-cell>
       <sgds-data-table-cell>Doe</sgds-data-table-cell>
       <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
       <div slot="content">
-        <div style="border-radius: var(--sgds-border-radius-sm);">Department: Engineering</div>
+        <div class="sgds:rounded-sm">Department: Engineering</div>
       </div>
     </sgds-data-table-row>
     <sgds-data-table-row>
@@ -275,7 +275,7 @@ const ExpandableMultiSelectTemplate = () => html`
 `;
 
 const CustomPaginationSummaryTemplate = () => html`
-  <sgds-data-table .currentPage=${1} .dataLength=${4} .itemsPerPage=${2} paginationSummary="Showing 2 out of 4 records">
+  <sgds-data-table currentPage="1" dataLength="4" itemsPerPage="2" paginationSummary="Showing 2 out of 4 records">
     <sgds-data-table-row>
       <sgds-data-table-head>ID</sgds-data-table-head>
       <sgds-data-table-head>Name</sgds-data-table-head>
@@ -300,7 +300,7 @@ const CustomPaginationSummaryTemplate = () => html`
 `;
 
 const HeaderAndCellPropsTemplate = () => html`
-  <sgds-data-table layout="fixed" .currentPage=${1} .dataLength=${4} .itemsPerPage=${4}>
+  <sgds-data-table layout="fixed" currentPage="1" dataLength="4" itemsPerPage="4">
     <sgds-data-table-row>
       <sgds-data-table-head>ID</sgds-data-table-head>
       <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
@@ -329,10 +329,10 @@ const HeaderAndCellPropsTemplate = () => html`
 `;
 
 const DefaultSortTemplate = () => html`
-  <sgds-data-table .currentPage=${1} .dataLength=${4} .itemsPerPage=${4}>
+  <sgds-data-table currentPage="1" dataLength="4" itemsPerPage="4">
     <sgds-data-table-row>
       <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
-      <sgds-data-table-head sorting sortKey="name" .sortDirection=${"ascending"}>Name</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="name" sortDirection="ascending">Name</sgds-data-table-head>
       <sgds-data-table-head>Role</sgds-data-table-head>
     </sgds-data-table-row>
     <sgds-data-table-row>
@@ -369,7 +369,7 @@ const SortingWithNoRowsTemplate = () => html`
 `;
 
 const HeaderAlignmentTemplate = () => html`
-  <sgds-data-table .dataLength=${3} .itemsPerPage=${5} .currentPage=${1}>
+  <sgds-data-table dataLength="3" itemsPerPage="5" currentPage="1">
     <sgds-data-table-row>
       <sgds-data-table-head>ID</sgds-data-table-head>
       <sgds-data-table-head>Name</sgds-data-table-head>
@@ -401,8 +401,97 @@ const HeaderAlignmentTemplate = () => html`
   </sgds-data-table>
 `;
 
+const LoadingTemplate = () => html`
+  <sgds-data-table loading currentPage="1" dataLength="3" itemsPerPage="5">
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const LoadingExpandableTemplate = () => html`
+  <sgds-data-table loading currentPage="1" dataLength="3" itemsPerPage="5">
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row expand open>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+      <div slot="content">Department: Engineering</div>
+    </sgds-data-table-row>
+    <sgds-data-table-row expand>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+      <div slot="content">Department: Design</div>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
+const LoadingMultiSelectTemplate = () => html`
+  <sgds-data-table loading currentPage="1" dataLength="3" itemsPerPage="5" multiSelect>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
 const ServerLoadingTemplate = () => html`
-  <sgds-data-table mode="server" .isLoading=${true} .dataLength=${50} .itemsPerPage=${10} .currentPage=${1}>
+  <sgds-data-table mode="server" loading dataLength="50" itemsPerPage="10" currentPage="1">
     <sgds-data-table-row>
       <sgds-data-table-head>ID</sgds-data-table-head>
       <sgds-data-table-head>Name</sgds-data-table-head>
@@ -539,6 +628,27 @@ export const SortingWithNoRows = {
 export const HeaderTextAlignment = {
   render: HeaderAlignmentTemplate.bind({}),
   name: "Header text alignment",
+  args: {},
+  parameters: {}
+};
+
+export const Loading = {
+  render: LoadingTemplate.bind({}),
+  name: "Loading",
+  args: {},
+  parameters: {}
+};
+
+export const LoadingExpandable = {
+  render: LoadingExpandableTemplate.bind({}),
+  name: "Loading (expandable)",
+  args: {},
+  parameters: {}
+};
+
+export const LoadingMultiSelect = {
+  render: LoadingMultiSelectTemplate.bind({}),
+  name: "Loading (multi-select)",
   args: {},
   parameters: {}
 };
