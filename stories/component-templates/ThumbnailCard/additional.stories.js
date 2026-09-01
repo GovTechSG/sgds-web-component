@@ -18,7 +18,7 @@ const OrientationTemplate = () =>
   html`
     <div class="container">
       <sgds-thumbnail-card>
-        <img slot="thumbnail" alt="img alternate text goes here" width="64" height="64" src="/logo.png" />
+        <img slot="thumbnail" alt="img alternate text goes here" width="64" height="64" src="/logo.svg" />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
         <span slot="title">Innovative solutions for you</span>
@@ -38,7 +38,7 @@ const OrientationTemplate = () =>
         </sgds-link>
       </sgds-thumbnail-card>
       <sgds-thumbnail-card orientation="horizontal">
-        <img slot="thumbnail" alt="img alternate text goes here" width="64" height="64" src="/logo.png" />
+        <img slot="thumbnail" alt="img alternate text goes here" width="64" height="64" src="/logo.svg" />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
         <span slot="title">Innovative solutions for you</span>
@@ -85,7 +85,7 @@ const NoPaddingTemplate = () =>
   html`
     <div class="container">
       <sgds-thumbnail-card noPadding>
-        <img slot="thumbnail" alt="img alternate text goes here" width="64" height="64" src="/logo.png" />
+        <img slot="thumbnail" alt="img alternate text goes here" width="64" height="64" src="/logo.svg" />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
         <span slot="title">Innovative solutions for you</span>
@@ -105,7 +105,7 @@ const NoPaddingTemplate = () =>
         </sgds-link>
       </sgds-thumbnail-card>
       <sgds-thumbnail-card orientation="horizontal" noPadding>
-        <img slot="thumbnail" alt="img alternate text goes here" width="64" height="64" src="/logo.png" />
+        <img slot="thumbnail" alt="img alternate text goes here" width="64" height="64" src="/logo.svg" />
         <sgds-badge variant="primary" slot="upper">New</sgds-badge>
         <span slot="subtitle">EXPLORE THE FEATURES</span>
         <span slot="title">Innovative solutions for you</span>
