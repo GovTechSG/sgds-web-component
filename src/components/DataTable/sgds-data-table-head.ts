@@ -21,10 +21,10 @@ export class SgdsDataTableHead extends SgdsElement {
   /** Sets the column width. */
   @property({ type: String, reflect: true }) width: string | undefined;
 
-  /** @internal Number of columns this cell spans. */
+  /** @internal Not a supported feature yet. Number of columns this cell spans. */
   @property({ type: Number }) colSpan: number | undefined;
 
-  /** @internal Number of rows this cell spans. */
+  /** @internal Not a supported feature yet. Number of rows this cell spans. */
   @property({ type: Number }) rowSpan: number | undefined;
 
   /** Text alignment for the header content. */
