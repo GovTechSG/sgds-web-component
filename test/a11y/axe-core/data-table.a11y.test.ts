@@ -344,19 +344,19 @@ describe("<sgds-data-table>", () => {
     `);
     await elementUpdated(el);
 
-    const loadingState = el.shadowRoot?.querySelector(".loading");
+    const skeletonRows = el.shadowRoot?.querySelectorAll(".skeleton-row") || [];
     const skeletons = el.shadowRoot?.querySelectorAll("sgds-skeleton") || [];
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const bodyRows = slot.assignedElements({ flatten: true }).slice(1) as HTMLElement[];
 
-    expect(loadingState).to.exist;
+    expect(skeletonRows.length).to.equal(5);
     expect(skeletons.length).to.equal(5);
     expect(bodyRows[0].style.display).to.equal("none");
 
     el.loading = false;
     await elementUpdated(el);
 
-    expect(el.shadowRoot?.querySelector(".loading")).to.not.exist;
+    expect(el.shadowRoot?.querySelectorAll(".skeleton-row").length).to.equal(0);
     expect(bodyRows[0].style.display).to.equal("");
   });
 
@@ -373,12 +373,12 @@ describe("<sgds-data-table>", () => {
     `);
     await elementUpdated(el);
 
-    const loadingState = el.shadowRoot?.querySelector(".loading");
+    const skeletonRows = el.shadowRoot?.querySelectorAll(".skeleton-row") || [];
     const skeletons = el.shadowRoot?.querySelectorAll("sgds-skeleton") || [];
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const bodyRows = slot.assignedElements({ flatten: true }).slice(1) as HTMLElement[];
 
-    expect(loadingState).to.exist;
+    expect(skeletonRows.length).to.equal(5);
     expect(skeletons.length).to.equal(5);
     expect(bodyRows[0].style.display).to.equal("none");
   });
@@ -441,7 +441,7 @@ describe("<sgds-data-table>", () => {
     `);
     await elementUpdated(el);
 
-    expect(el.shadowRoot?.querySelector(".loading")).to.exist;
+    expect(el.shadowRoot?.querySelectorAll(".skeleton-row").length).to.be.greaterThan(0);
     expect(el.shadowRoot?.querySelector(".no-data")).to.not.exist;
   });
 });

@@ -8,6 +8,8 @@ import SgdsDataTableRow from "./sgds-data-table-row";
 import SgdsDataTableCell from "./sgds-data-table-cell";
 import SgdsDataTableHead from "./sgds-data-table-head";
 import SgdsSkeleton from "../Skeleton/sgds-skeleton";
+import type { ISgdsDataTableRowSelectEventDetail, ISgdsDataTableSortEventDetail } from "./types";
+export type { ISgdsDataTableRowSelectEventDetail, ISgdsDataTableSortEventDetail };
 
 /**
  * @summary A data table container with pagination, row selection, loading, and sorting support.
@@ -263,8 +265,7 @@ export class SgdsDataTable extends SgdsElement {
 
     if (!activeHeader || !activeHeader.sorting) return;
 
-    const { key, direction } = (e as CustomEvent<{ key: string; direction: "ascending" | "descending" | "none" }>)
-      .detail;
+    const { key, direction } = (e as CustomEvent<ISgdsDataTableSortEventDetail>).detail;
     const columnIndex = activeHeader ? this._headerCells.indexOf(activeHeader) : -1;
 
     this._resetOtherHeaderSortStates(activeHeader);
@@ -382,13 +383,8 @@ export class SgdsDataTable extends SgdsElement {
     this.tableRows.forEach(row => (row.style.display = visible.has(row) ? "" : "none"));
   }
 
-  private _getSkeletonColumnCount() {
-    const firstHeaderRow = this.headerRows[0];
-    const firstHeaderCells = firstHeaderRow
-      ? (Array.from(firstHeaderRow.children).filter(child => child instanceof SgdsDataTableHead) as SgdsDataTableHead[])
-      : [];
-
-    const headerColumnCount = firstHeaderCells.reduce((count, header) => {
+  private _getSkeletonColumnCount(): { dataColumns: number; hasExpand: boolean; hasCheckbox: boolean } {
+    const headerColumnCount = this._headerCells.reduce((count, header) => {
       const span = Number(header.colSpan) > 0 ? Number(header.colSpan) : 1;
       return count + span;
     }, 0);
@@ -399,30 +395,38 @@ export class SgdsDataTable extends SgdsElement {
       : 0;
 
     const hasExpand = this.tableRows.some(row => row.expand);
-    const controlColumns = (this.multiSelect ? 1 : 0) + (hasExpand ? 1 : 0);
     const dataColumns = headerColumnCount || fallbackBodyColumnCount || 1;
 
-    return Math.max(1, dataColumns + controlColumns);
+    return { dataColumns, hasExpand, hasCheckbox: this.multiSelect };
   }
 
   private _renderLoadingSkeleton() {
-    const skeletonColumns = this._getSkeletonColumnCount();
+    const { dataColumns, hasExpand, hasCheckbox } = this._getSkeletonColumnCount();
     const skeletonRows = Math.max(1, this.itemsPerPage || 1);
 
-    return html`<div class="loading" role="status" aria-live="polite" aria-label="Loading">
-      <div class="loading-grid" style=${`--sgds-data-table-loading-columns: ${skeletonColumns};`} aria-hidden="true">
-        ${Array.from(
-          { length: skeletonRows },
-          (_, rowIndex) =>
-            html`<div class="loading-grid-row" key=${rowIndex}>
-              ${Array.from(
-                { length: skeletonColumns },
-                () => html`<sgds-skeleton .height=${"56px"} .borderRadius=${"4px"}></sgds-skeleton>`
-              )}
-            </div>`
-        )}
-      </div>
-    </div>`;
+    return Array.from(
+      { length: skeletonRows },
+      () =>
+        html`<div class="skeleton-row" role="presentation">
+          ${hasExpand
+            ? html`<div class="skeleton-cell control-cell">
+                <sgds-skeleton .height=${"20px"} .width=${"20px"} .borderRadius=${"4px"}></sgds-skeleton>
+              </div>`
+            : nothing}
+          ${hasCheckbox
+            ? html`<div class="skeleton-cell control-cell">
+                <sgds-skeleton .height=${"24px"} .width=${"24px"} .borderRadius=${"4px"}></sgds-skeleton>
+              </div>`
+            : nothing}
+          ${Array.from(
+            { length: dataColumns },
+            () =>
+              html`<div class="skeleton-cell">
+                <sgds-skeleton .height=${"100%"} .borderRadius=${"4px"}></sgds-skeleton>
+              </div>`
+          )}
+        </div>`
+    );
   }
 
   updated(changed: Map<string, unknown>) {
@@ -449,17 +453,20 @@ export class SgdsDataTable extends SgdsElement {
     return html`
       <div class="data-table">
         <div class="table-container">
-          <slot @slotchange=${this._handleSlotChange} @i-sgds-sort=${this._handleSort} class="table"></slot>
-          ${this.loading
-            ? this._renderLoadingSkeleton()
-            : showNoData
+          <div class="table">
+            <slot @slotchange=${this._handleSlotChange} @i-sgds-sort=${this._handleSort}></slot>
+            ${this.loading ? this._renderLoadingSkeleton() : nothing}
+          </div>
+          ${!this.loading && showNoData
             ? html`<slot name="no-data" class="no-data" role="status" aria-live="polite">No data</slot>`
             : nothing}
         </div>
 
         ${showFooter
           ? html`<div class="footer">
-              ${this.paginationSummary || html`<span>Showing ${displayStart} to ${end} of ${total} results</span>`}
+              ${this.loading
+                ? html`<span></span>`
+                : this.paginationSummary || html`<span>Showing ${displayStart} to ${end} of ${total} results</span>`}
               <sgds-pagination
                 .dataLength=${total}
                 .currentPage=${this.currentPage}

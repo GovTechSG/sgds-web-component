@@ -396,19 +396,19 @@ describe("<sgds-data-table>", () => {
     `);
     await elementUpdated(el);
 
-    const loadingState = el.shadowRoot?.querySelector(".loading");
+    const skeletonRows = el.shadowRoot?.querySelectorAll(".skeleton-row") || [];
     const skeletons = el.shadowRoot?.querySelectorAll("sgds-skeleton") || [];
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const bodyRows = slot.assignedElements({ flatten: true }).slice(1) as HTMLElement[];
 
-    expect(loadingState).to.exist;
+    expect(skeletonRows.length).to.equal(5);
     expect(skeletons.length).to.equal(5);
     expect(bodyRows[0].style.display).to.equal("none");
 
     el.loading = false;
     await elementUpdated(el);
 
-    expect(el.shadowRoot?.querySelector(".loading")).to.not.exist;
+    expect(el.shadowRoot?.querySelectorAll(".skeleton-row").length).to.equal(0);
     expect(bodyRows[0].style.display).to.equal("");
   });
 
@@ -425,12 +425,12 @@ describe("<sgds-data-table>", () => {
     `);
     await elementUpdated(el);
 
-    const loadingState = el.shadowRoot?.querySelector(".loading");
+    const skeletonRows = el.shadowRoot?.querySelectorAll(".skeleton-row") || [];
     const skeletons = el.shadowRoot?.querySelectorAll("sgds-skeleton") || [];
     const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
     const bodyRows = slot.assignedElements({ flatten: true }).slice(1) as HTMLElement[];
 
-    expect(loadingState).to.exist;
+    expect(skeletonRows.length).to.equal(5);
     expect(skeletons.length).to.equal(5);
     expect(bodyRows[0].style.display).to.equal("none");
   });
@@ -524,7 +524,7 @@ describe("<sgds-data-table>", () => {
     expect(pagination?.variant).to.equal("number");
   });
 
-  it("shows loading footer with pagination while loading is true", async () => {
+  it("shows loading footer with pagination but hides summary while loading is true", async () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table mode="server" ?loading=${true} dataLength="10" itemsPerPage="5" currentPage="1">
         <sgds-data-table-row>
@@ -536,7 +536,7 @@ describe("<sgds-data-table>", () => {
     await elementUpdated(el);
 
     expect(el.shadowRoot?.querySelector(".footer")).to.exist;
-    expect(el.shadowRoot?.querySelector(".footer span")?.textContent).to.contain("Showing");
+    expect(el.shadowRoot?.querySelector(".footer span")?.textContent?.trim()).to.equal("");
     expect(el.shadowRoot?.querySelector("sgds-pagination")).to.exist;
   });
 
@@ -662,7 +662,59 @@ describe("<sgds-data-table>", () => {
     `);
     await elementUpdated(el);
 
-    expect(el.shadowRoot?.querySelector(".loading")).to.exist;
+    expect(el.shadowRoot?.querySelectorAll(".skeleton-row").length).to.be.greaterThan(0);
     expect(el.shadowRoot?.querySelector(".no-data")).to.not.exist;
+  });
+
+  it("renders checkbox skeleton in each loading row when multiSelect is true", async () => {
+    const el = await fixture<SgdsDataTable>(html`
+      <sgds-data-table mode="server" ?loading=${true} dataLength="10" itemsPerPage="3" currentPage="1" multiSelect>
+        <sgds-data-table-row>
+          <sgds-data-table-head>ID</sgds-data-table-head>
+          <sgds-data-table-head>Name</sgds-data-table-head>
+        </sgds-data-table-row>
+      </sgds-data-table>
+    `);
+    await elementUpdated(el);
+
+    const skeletonRows = el.shadowRoot?.querySelectorAll(".skeleton-row") || [];
+    expect(skeletonRows.length).to.equal(3);
+
+    const controlCells = el.shadowRoot?.querySelectorAll(".skeleton-cell.control-cell") || [];
+    expect(controlCells.length).to.equal(3);
+
+    controlCells.forEach(cell => {
+      const skeleton = cell.querySelector("sgds-skeleton");
+      expect(skeleton).to.exist;
+    });
+  });
+
+  it("renders expand skeleton in each loading row when rows have expand", async () => {
+    const el = await fixture<SgdsDataTable>(html`
+      <sgds-data-table ?loading=${true} dataLength="2" itemsPerPage="3" currentPage="1">
+        <sgds-data-table-row>
+          <sgds-data-table-head>ID</sgds-data-table-head>
+        </sgds-data-table-row>
+        <sgds-data-table-row expand>
+          <sgds-data-table-cell>1</sgds-data-table-cell>
+          <div slot="content">Details</div>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>2</sgds-data-table-cell>
+        </sgds-data-table-row>
+      </sgds-data-table>
+    `);
+    await elementUpdated(el);
+
+    const skeletonRows = el.shadowRoot?.querySelectorAll(".skeleton-row") || [];
+    expect(skeletonRows.length).to.equal(3);
+
+    const controlCells = el.shadowRoot?.querySelectorAll(".skeleton-cell.control-cell") || [];
+    expect(controlCells.length).to.equal(3);
+
+    controlCells.forEach(cell => {
+      const skeleton = cell.querySelector("sgds-skeleton");
+      expect(skeleton).to.exist;
+    });
   });
 });

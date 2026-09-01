@@ -57,7 +57,7 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 | `paginationSummary` | string | `""` | Replaces default summary text in footer |
 | `paginationVariant` | `"default" \| "number" \| "button" \| "description"` | `"default"` | Variant forwarded to internal pagination |
 | `mode` | `"client" \| "server"` | `"client"` | Pagination mode |
-| `loading` | boolean | `false` | Shows loading state in server mode |
+| `loading` | boolean | `false` | Shows skeleton loading rows aligned with table headers. The number of skeleton rows matches `itemsPerPage` |
 | `serverSort` | boolean | `false` | Disables built-in sorting and emits `sgds-sort` for external sorting via API |
 | `layout` | `"auto" \| "fixed"` | `"auto"` | CSS `table-layout` algorithm — `"fixed"` distributes column widths evenly |
 
