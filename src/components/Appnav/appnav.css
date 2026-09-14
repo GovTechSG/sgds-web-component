@@ -43,10 +43,16 @@ nav {
 
 .navbar-brand {
   display: flex;
+  height: var(--sgds-dimension-40);
+  align-self: center;
   align-items: center;
   text-decoration: none;
   white-space: nowrap;
   color: var(--sgds-color-fixed-light);
+}
+
+.navbar-brand ::slotted(img) {
+  height: 100%;
 }
 
 .navbar-brand:focus-visible {
