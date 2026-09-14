@@ -52,7 +52,7 @@ describe("footer", () => {
                 </li>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Terms of use</a>
+                    <a href="#" tabindex="0">Terms of Use</a>
                   </sgds-link>
                 </li>
               </ul>
@@ -116,7 +116,7 @@ describe("footer", () => {
                 </li>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Terms of use</a>
+                    <a href="#" tabindex="0">Terms of Use</a>
                   </sgds-link>
                 </li>
               </ul>
@@ -164,9 +164,9 @@ describe("footer", () => {
     const el = await fixture(html`<sgds-footer privacyHref="test"></sgds-footer>`);
     expect(el.shadowRoot?.querySelector("a[href='test']")?.textContent).to.contain("Privacy Statement");
   });
-  it("termsOfUseHref prop forward to Terms of use's href attr", async () => {
+  it("termsOfUseHref prop forward to Terms of Use's href attr", async () => {
     const el = await fixture(html`<sgds-footer termsOfUseHref="test"></sgds-footer>`);
-    expect(el.shadowRoot?.querySelector("a[href='test']")?.textContent).to.contain("Terms of use");
+    expect(el.shadowRoot?.querySelector("a[href='test']")?.textContent).to.contain("Terms of Use");
   });
   it("sitemapHref prop forward to Ssitemap href attr", async () => {
     const el = await fixture(html`<sgds-footer sitemapHref="test"></sgds-footer>`);
