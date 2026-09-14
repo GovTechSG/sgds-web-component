@@ -49,8 +49,8 @@ importers:
         specifier: ^0.33.0
         version: 0.33.0
       '@govtechsg/oobee':
-        specifier: ^0.11.7
-        version: 0.11.7(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@types/node@25.0.8)
+        specifier: ^0.11.16
+        version: 0.11.16(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@types/node@25.0.8)
       '@open-wc/testing':
         specifier: ^3.0.0-next.5
         version: 3.2.2
@@ -1848,8 +1848,8 @@ packages:
   '@github/catalyst@1.7.0':
     resolution: {integrity: sha512-qOAxrDdRZz9+v4y2WoAfh11rpRY/x4FRofPNmJyZFzAjubtzE3sCa/tAycWWufmQGoYiwwzL/qJBBgyg7avxPw==}
 
-  '@govtechsg/oobee@0.11.7':
-    resolution: {integrity: sha512-qtX1EGxZVmMqalP+8KZAKDTbyClNPl7ffw727/LWfTQwTb5ITJ2WHvkHvpUuFuashr1KiO6gCqddQB9CYV+0AQ==}
+  '@govtechsg/oobee@0.11.16':
+    resolution: {integrity: sha512-McOhb4AdNF8E0nHxkP2hbtyn3FKgzy+4O+s+AYWbsdEOuYp8ULpsIKZEES8ojwrDOgWoXOLXVoYGn2ff24N6yQ==}
     hasBin: true
 
   '@gulpjs/messages@1.1.0':
@@ -2936,9 +2936,6 @@ packages:
 
   '@types/sizzle@2.3.10':
     resolution: {integrity: sha512-TC0dmN0K8YcWEAEfiPi5gJP14eJe30TTGjkvek3iM/1NdHHsdCA/Td6GvNndMOo/iSnIsZ4HuuhrYPDAmbxzww==}
-
-  '@types/tedious@4.0.14':
-    resolution: {integrity: sha512-KHPsfX/FoVbUGbyYvk1q9MMQHLPeRZhRJZdO45Q4YjvFkv4hMNghCWTvy7rdKessBsmtz4euWCWAB6/tVpI1Iw==}
 
   '@types/through@0.0.33':
     resolution: {integrity: sha512-HsJ+z3QuETzP3cswwtzt2vEIiHBk/dCcHGhbmG5X3ecnwFD/lPrMpliGXxSCg03L9AhrdwA4Oz/qfspkDW+xGQ==}
@@ -10618,7 +10615,7 @@ snapshots:
 
   '@github/catalyst@1.7.0': {}
 
-  '@govtechsg/oobee@0.11.7(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@types/node@25.0.8)':
+  '@govtechsg/oobee@0.11.16(@opentelemetry/core@2.10.0(@opentelemetry/api@1.9.1))(@types/node@25.0.8)':
     dependencies:
       '@aws-sdk/client-s3': 3.1104.0
       '@json2csv/node': 7.0.6
@@ -11843,10 +11840,6 @@ snapshots:
   '@types/sinonjs__fake-timers@8.1.1': {}
 
   '@types/sizzle@2.3.10': {}
-
-  '@types/tedious@4.0.14':
-    dependencies:
-      '@types/node': 25.0.8
 
   '@types/through@0.0.33':
     dependencies:
