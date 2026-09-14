@@ -67,7 +67,7 @@ export const WithProfile = {
           ></span>
         </span>
         <sgds-dropdown-item readonly>
-          <div class="sgds:flex sgds:flex-col sgds:gap-4">
+          <div class="sgds:flex sgds:flex-col sgds:gap-2">
             <span class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal sgds:text-subtle">Account</span>
             <div class="sgds:flex sgds:items-center sgds:gap-3 sgds:py-1">
               <span class="sgds:h-12 sgds:w-12 sgds:shrink-0 sgds:rounded-full sgds:bg-neutral-surface-muted"></span>
