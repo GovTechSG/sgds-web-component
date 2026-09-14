@@ -11,7 +11,13 @@ const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
 pkg.pnpm = { overrides: { crawlee: "~3.17.0" } };
 writeFileSync(pkgPath, JSON.stringify(pkg, null, 2));
 
-execSync("pnpm install && pnpm run build && pnpm exec playwright install chromium", {
+execSync("pnpm install", {
   cwd: oobeeDir,
+  stdio: "inherit"
+});
+
+// Install Chromium for the project-level playwright (used by index.ts),
+// not oobee's nested copy
+execSync("pnpm exec playwright install chromium", {
   stdio: "inherit"
 });
