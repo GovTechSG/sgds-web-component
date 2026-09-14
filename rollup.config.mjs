@@ -50,8 +50,8 @@ const createPlugins = (resolveOptions = {}) => [
   visualizer()
 ];
 
-const wcPlugins = createPlugins({ dedupe: external });
-const umdPlugins = createPlugins();
+const wcPlugins = createPlugins({ dedupe: external }); // ESM — Lit is external, condition doesn't matter
+const umdPlugins = createPlugins({ exportConditions: ["default"] }); // UMD — bundles Lit, use production
 
 const reactBuildPlugins = [
   resolve(),

@@ -1,29 +1,39 @@
-import { execSync } from "child_process";
+//code
+import { execFileSync } from "child_process";
 
 export interface ScanResult {
   file: string;
   passed: boolean;
-  unauthorized?: boolean;
+  unauthorized: boolean;
   output: string;
 }
 
+type ExecError = Error & { stdout?: string; stderr?: string; status?: number | null };
+
+const SAFE_PATH = /^[\w./-]+$/;
+const SCAN_VERSION = "snyk-agent-scan@0.6.0"; // pin explicitly
+
 export function scanFile(file: string): ScanResult {
+  if (!SAFE_PATH.test(file)) {
+    return { file, passed: false, unauthorized: false, output: `unsafe filename: ${file}` };
+  }
+
   try {
-    const output = execSync(`uvx snyk-agent-scan@latest --skills "${file}" --ci`, {
+    const output = execFileSync("uvx", [SCAN_VERSION, "--skills", file, "--ci"], {
       encoding: "utf-8",
-      stdio: ["inherit", "pipe", "pipe"]
+      stdio: ["inherit", "pipe", "pipe"],
+      timeout: 5 * 60_000
     });
     process.stdout.write(output);
-    if (output.toLowerCase().includes("unauthorized")) {
-      return { file, passed: false, unauthorized: true, output };
+    const unauthorized = /\bunauthorized\b/i.test(output);
+    return { file, passed: !unauthorized, unauthorized, output };
+  } catch (e) {
+    const err = e as ExecError;
+    const output = (err.stdout ?? "") + (err.stderr ?? "");
+    process.stderr.write(output);
+    if (/no mcp servers or skills found/i.test(output)) {
+      return { file, passed: true, unauthorized: false, output };
     }
-    return { file, passed: true, output };
-  } catch (err) {
-    const output = ((err as { stdout?: string }).stdout ?? "") + ((err as { stderr?: string }).stderr ?? "");
-    process.stdout.write(output);
-    if (output.includes("no mcp servers or skills found")) {
-      return { file, passed: true, output };
-    }
-    return { file, passed: false, output };
+    return { file, passed: false, unauthorized: false, output: output || err.message };
   }
 }
