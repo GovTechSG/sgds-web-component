@@ -162,7 +162,7 @@ export class SgdsFooter extends SgdsElement {
                 >
               </li>
               <li>
-                <sgds-link size="sm" tone=${this._linkTone}><a href=${this.termsOfUseHref}>Terms of use</a></sgds-link>
+                <sgds-link size="sm" tone=${this._linkTone}><a href=${this.termsOfUseHref}>Terms of Use</a></sgds-link>
               </li>
             </ul>
             <div class="footer-copyrights">© ${new Date().getFullYear()}, ${this.copyrightLiner}</div>

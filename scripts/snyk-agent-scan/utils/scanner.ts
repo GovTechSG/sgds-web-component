@@ -19,11 +19,11 @@ export function scanFile(file: string): ScanResult {
   }
 
   try {
-    const output = execFileSync(
-      "uvx",
-      [SCAN_VERSION, "--skills", file, "--ci"],
-      { encoding: "utf-8", stdio: ["inherit", "pipe", "pipe"], timeout: 5 * 60_000 }
-    );
+    const output = execFileSync("uvx", [SCAN_VERSION, "--skills", file, "--ci"], {
+      encoding: "utf-8",
+      stdio: ["inherit", "pipe", "pipe"],
+      timeout: 5 * 60_000
+    });
     process.stdout.write(output);
     const unauthorized = /\bunauthorized\b/i.test(output);
     return { file, passed: !unauthorized, unauthorized, output };
