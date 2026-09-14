@@ -25,7 +25,7 @@
   min-height: var(--sgds-dimension-56);
   border: var(--sgds-border-width-1) solid;
   border-color: var(--sgds-border-color-muted);
-  border-radius: var(--sgds-border-radius-none);
+  border-radius: var(--sgds-border-radius-md);
 }
 
 .footer {
