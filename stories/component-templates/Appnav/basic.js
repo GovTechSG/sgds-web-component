@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { appllModes } from "../../../.storybook/modes";
+import { allModes } from "../../../.storybook/modes";
 
 export const Template = ({ tone, expand, brandHref }) => {
   return html`
