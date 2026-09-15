@@ -137,6 +137,7 @@
 }
 
 .btn {
+  position: relative;
   background-color: var(--btn-bg);
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
   border-radius: var(--btn-border-radius);
@@ -174,6 +175,14 @@
   border-color: transparent;
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
+}
+
+.btn:active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--sgds-bg-translucent);
+  border-radius: inherit;
 }
 
 .btn.disabled,
