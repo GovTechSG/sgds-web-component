@@ -62,10 +62,11 @@ for (const [key, value] of Object.entries(groupedComponents)) {
     .flat()
     .filter(member => !(member.privacy && member.privacy === "private"));
   const methodsMeta = methodsTable(value);
-  const summary = value
+  const summary = [...value]
+    .sort((a, b) => (a.storyOrder ?? Infinity) - (b.storyOrder ?? Infinity))
     .filter(i => i.summary)
     .map(i => i.summary)
-    .join("<br/>");
+    .join("\n\n");
   const args = allMembers.filter(member => member.kind === "field");
   const mdxFilePath = path.join(storiesDir, `${key}.mdx`);
   const reactComponentPaths = value
@@ -80,8 +81,8 @@ for (const [key, value] of Object.entries(groupedComponents)) {
     .join("");
 
   // Only add in the ArgType table when there is at least one attribute
-  // Sort by tagName length (shorter first) so parent components appear before sub-components
-  const sortedValue = [...value].sort((a, b) => a.tagName.length - b.tagName.length);
+  // Sort by @storyOrder tag, falling back to tagName length for untagged components
+  const sortedValue = [...value].sort((a, b) => (a.storyOrder ?? Infinity) - (b.storyOrder ?? Infinity) || a.tagName.length - b.tagName.length);
   const ArgsType = sortedValue.map(component => {
     const deprecatedLabel = component.deprecated ? ` <sgds-badge variant="warning">deprecated</sgds-badge>` : "";
     const deprecatedNotice = component.deprecated
