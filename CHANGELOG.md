@@ -1,3 +1,43 @@
+## v3.27.0 (2026-09-14)
+
+### Feat
+
+- **DataTable**: border radius 0 [skip-cd][run-chromatic] (#822)
+- **DataTable**: border radius 0
+- **DataTable**: new component [run-chromatic] (#732) [skip-cd]
+- **DataTable**: render loading skeletons as table rows for column alignment
+- **DataTable**: rename footerText to paginationSummary, polish stories
+- **DataTable**: added dynamic sorting, clean up and updated props name
+- **Datatable**: added sorting for header cell
+- **Skills**: migration guide (#814)
+- **Skills**: migration references
+- **Skills**: migratin skill
+- **sgds-migration**: add Phase 4 - Migrate Foundation and Styling CSS
+
+### Fix
+
+- **Footer**:  term of use copyright [run-chromatic] (#825) [skip-cd]
+- **Footer**: copyright for terms of use
+- **a11y**: install Playwright chromium at project root [skip-cd]
+- **Select**: guard against empty menuList when value is set before options slot [skip-cd] (#815)
+- **Select**: guard against empty menuList when value is set before options slot
+- *****: cdn  exports to bundle in production build (#817)
+- *****: cdn  exports to bundle in production build
+- **storybook**: replace GTM with gtag.js (G-44RXQV5CXC) (#813)
+- **storybook**: replace GTM with gtag.js (G-44RXQV5CXC)
+
+### Refactor
+
+- **DataTable**: rename isLoading prop to loading
+- **Input**: add border for prefix and suffix for better distinct… [run-chromatic][skip-cd] (#761)
+- **Input**: add border for prefix and suffix for better distinction of content
+- **sgds-migration**: trim duplicate content from other skills
+- **sgds-migration**: Phase 2 - minimal setup for component rendering
+- **sgds-migration**: remove unimplemented framework sections from Phase 3
+- **sgds-migration**: specify Vitest + Playwright as recommended approach
+- **sgds-migration**: simplify Phase 3 - focus on core principle
+- **skills**: expand sgds-test-migration into comprehensive sgds-migration skill
+
 ## v3.26.1 (2026-08-21)
 
 ### Fix

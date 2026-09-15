@@ -47,4 +47,5 @@ import "./components/IconCard";
 import "./components/Sidebar";
 import "./components/Appnav";
 import "./components/DataTable";
+import "./components/Appnav";
 // COMPONENT IMPORTS
