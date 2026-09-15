@@ -49,6 +49,14 @@
   outline-offset: var(--sgds-outline-offset-focus);
 }
 
+.btn-close:active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--sgds-bg-translucent);
+  border-radius: inherit;
+}
+
 :host([disabled]) .btn-close {
   cursor: not-allowed;
   opacity: var(--sgds-opacity-40);
