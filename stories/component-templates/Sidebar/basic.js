@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export const Template = args => html`
-  <div class="sgds:h-175">
+  <div class="sgds:h-screen sgds:flex">
     <sgds-sidebar active=${args.active} ?collapsed=${args.collapsed} ?scrim=${args.scrim}>
       <div slot="upper">SGDS Sidebar</div>
 
@@ -83,13 +83,7 @@ export const args = {
 };
 
 export const parameters = {
-  layout: "fullscreen",
-  docs: {
-    story: {
-      inline: false,
-      height: 700
-    }
-  }
+  layout: "fullscreen"
 };
 
 export const play = undefined;

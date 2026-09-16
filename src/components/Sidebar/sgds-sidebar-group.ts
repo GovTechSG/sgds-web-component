@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, nothing } from "lit";
 import { state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -96,12 +96,18 @@ export class SgdsSidebarGroup extends SidebarElement {
   }
 
   render() {
+    const isCollapsedL1 = !this._isOverlay && this._sidebarCollapsed && this._childLevel === 1;
+
+    if (isCollapsedL1 && !this.hasIconSlot) {
+      return nothing;
+    }
+
     return html`
       <div
         role="button"
         class=${classMap({
           "sidebar-item": true,
-          "sidebar-item--collapsed": !this._isOverlay && this._sidebarCollapsed && this._childLevel === 1,
+          "sidebar-item--collapsed": isCollapsedL1,
           active: this._selected
         })}
         @click=${() => this._handleClick()}
