@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 const BasicTemplate = args => html`
-  <div class="sgds:h-110">
+  <div class="sgds:h-screen sgds:flex">
     <sgds-sidebar
       active=${args.active}
       ?collapsed=${args.collapsed}
@@ -36,7 +36,7 @@ const BasicTemplate = args => html`
 `;
 
 const MultiLevelTemplate = args => html`
-  <div class="sgds:h-110">
+  <div class="sgds:h-screen sgds:flex">
     <sgds-sidebar
       active=${args.active}
       ?collapsed=${args.collapsed}
@@ -96,18 +96,18 @@ const MultiLevelTemplate = args => html`
 `;
 
 const OverlayTemplate = args => html`
-  <div class="sgds:h-110">
+  <div class="sgds:h-screen sgds:flex sgds:flex-col">
     <div class="sgds:bg-surface-raised sgds:p-xs">
       <sgds-icon-button
         data-sidebar-toggler="true"
         size="xs"
         variant="ghost"
         name="sidebar-expand"
-        onclick="handleToggle()"
+        @click=${e => e.target.closest("div.sgds\\:h-screen").querySelector("sgds-sidebar")?.toggleCollapsed()}
       ></sgds-icon-button>
     </div>
 
-    <div class="sgds:relative sgds:bg-white sgds:h-full">
+    <div class="sgds:relative sgds:bg-white sgds:flex-1">
       <sgds-sidebar variant="overlay" ?scrim=${args.scrim} ?collapsed=${args.collapsed} active=${args.active}>
         <div slot="upper" class="sgds:font-semibold">Navigation</div>
 
@@ -144,15 +144,6 @@ const OverlayTemplate = args => html`
         <p>Click "Toggle Sidebar" to open the overlay navigation panel.</p>
       </div>
     </div>
-
-    <script>
-      function handleToggle() {
-        const sidebar = document.querySelector("sgds-sidebar");
-        if (sidebar) {
-          sidebar.toggleCollapsed();
-        }
-      }
-    </script>
   </div>
 `;
 
@@ -168,14 +159,14 @@ const DynamicTemplate = args => {
   };
 
   return html`
-    <div class="sgds:h-110 sgds:flex sgds:flex-col">
+    <div class="sgds:h-screen sgds:flex sgds:flex-col">
       <div class="sgds:bg-surface-raised sgds:p-4 sgds:flex sgds:gap-2">
         <sgds-button size="xs" variant="outline" @click=${() => handleSetActive("dashboard")}> Dashboard </sgds-button>
         <sgds-button size="xs" variant="outline" @click=${() => handleSetActive("analytics")}> Analytics </sgds-button>
         <sgds-button size="xs" variant="outline" @click=${() => handleSetActive("reports")}> Reports </sgds-button>
       </div>
 
-      <div class="sgds:flex-1 sgds:overflow-auto">
+      <div class="sgds:flex sgds:flex-1">
         <sgds-sidebar
           active=${activeItem}
           ?collapsed=${args.collapsed}
@@ -206,7 +197,7 @@ const DynamicTemplate = args => {
 };
 
 const LinkedItemsTemplate = args => html`
-  <div class="sgds:h-110">
+  <div class="sgds:h-screen sgds:flex">
     <sgds-sidebar
       active=${args.active}
       ?collapsed=${args.collapsed}
@@ -252,14 +243,7 @@ export const Default = {
     variant: "collapsible"
   },
   parameters: {
-    layout: "fullscreen",
-    docs: {
-      story: {
-        inline: false,
-        height: 440,
-        controls: { disable: true }
-      }
-    }
+    layout: "fullscreen"
   }
 };
 
@@ -273,14 +257,7 @@ export const MultiLevel = {
     variant: "collapsible"
   },
   parameters: {
-    layout: "fullscreen",
-    docs: {
-      story: {
-        inline: false,
-        height: 440,
-        controls: { disable: true }
-      }
-    }
+    layout: "fullscreen"
   }
 };
 
@@ -295,13 +272,6 @@ export const Overlay = {
   },
   parameters: {
     layout: "fullscreen",
-    docs: {
-      story: {
-        inline: false,
-        height: 440,
-        controls: { disable: true }
-      }
-    },
     argTypes: {
       attributes: true
     }
@@ -318,14 +288,7 @@ export const Dynamic = {
     variant: "collapsible"
   },
   parameters: {
-    layout: "fullscreen",
-    docs: {
-      story: {
-        inline: false,
-        height: 440,
-        controls: { disable: true }
-      }
-    }
+    layout: "fullscreen"
   }
 };
 
@@ -339,13 +302,6 @@ export const LinkedItems = {
     variant: "collapsible"
   },
   parameters: {
-    layout: "fullscreen",
-    docs: {
-      story: {
-        inline: false,
-        height: 440,
-        controls: { disable: true }
-      }
-    }
+    layout: "fullscreen"
   }
 };

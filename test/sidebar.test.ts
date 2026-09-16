@@ -1610,6 +1610,99 @@ describe("sgds-sidebar", () => {
     });
   });
 
+  describe("Collapsed State Without Icon Slot", () => {
+    it("hides sgds-sidebar-item when collapsed at level 1 with no icon slot", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar collapsed>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard"></sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item");
+      expect(itemDiv).to.not.exist;
+    });
+
+    it("hides sgds-sidebar-group when collapsed at level 1 with no icon slot", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar collapsed>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-sidebar-item title="Summary" name="summary"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item");
+      expect(groupDiv).to.not.exist;
+    });
+
+    it("shows sgds-sidebar-item when collapsed at level 1 with icon slot present", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar collapsed>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard">
+              <sgds-icon name="house" slot="icon"></sgds-icon>
+            </sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item");
+      expect(itemDiv).to.exist;
+    });
+
+    it("shows sgds-sidebar-item without icon slot when sidebar is not collapsed", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard"></sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
+      const itemDiv = item.shadowRoot?.querySelector(".sidebar-item");
+      expect(itemDiv).to.exist;
+    });
+
+    it("shows sgds-sidebar-group without icon slot when sidebar is not collapsed", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section>
+            <sgds-sidebar-group title="Dashboard" name="dashboard">
+              <sgds-sidebar-item title="Summary" name="summary"></sgds-sidebar-item>
+            </sgds-sidebar-group>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
+      const groupDiv = group.shadowRoot?.querySelector(".sidebar-item");
+      expect(groupDiv).to.exist;
+    });
+
+    it("hides sgds-sidebar-item when sidebar transitions from expanded to collapsed without icon", async () => {
+      const el = await fixture<SgdsSidebar>(html`
+        <sgds-sidebar>
+          <sgds-sidebar-section>
+            <sgds-sidebar-item title="Dashboard" name="dashboard"></sgds-sidebar-item>
+          </sgds-sidebar-section>
+        </sgds-sidebar>
+      `);
+      const item = el.querySelector("sgds-sidebar-item") as SgdsSidebarItem;
+
+      // Initially visible
+      expect(item.shadowRoot?.querySelector(".sidebar-item")).to.exist;
+
+      // Collapse sidebar
+      el.collapsed = true;
+      await elementUpdated(el);
+
+      expect(item.shadowRoot?.querySelector(".sidebar-item")).to.not.exist;
+    });
+  });
+
   describe("Keyboard Accessibility", () => {
     it("does not move focus on ArrowDown key", async () => {
       const el = await fixture<SgdsSidebar>(html`
