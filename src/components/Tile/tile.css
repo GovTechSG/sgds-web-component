@@ -6,12 +6,14 @@
   outline: var(--sgds-form-outline-focus);
   outline-offset: var(--sgds-form-outline-offset-focus);
 }
-
 .tile {
   position: relative;
   padding: var(--sgds-padding-xl);
   background-color: var(--sgds-surface-default);
-  min-width: var(--sgds-dimension-256, 256px);
+  width: var(--sgds-dimension-384, 384px);
+  min-width: var(--sgds-dimension-384, 384px);
+  height: 100%;
+  box-sizing: border-box;
   border: var(--sgds-border-width-1, 1px) solid var(--sgds-border-color-muted, #dfdfdf);
   border-radius: var(--sgds-border-radius-md);
   cursor: pointer;
@@ -60,6 +62,11 @@ sgds-switch {
   flex-direction: row;
   gap: var(--sgds-gap-md);
   padding-right: var(--sgds-padding-2-xl);
+}
+
+:host([stacked]) .tile {
+  width: var(--sgds-dimension-256, 256px);
+  min-width: var(--sgds-dimension-256, 256px);
 }
 
 .tile-container.stacked {
