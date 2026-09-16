@@ -103,7 +103,7 @@ const OverlayTemplate = args => html`
         size="xs"
         variant="ghost"
         name="sidebar-expand"
-        onclick="handleToggle()"
+        @click=${e => e.target.closest("div.sgds\\:h-screen").querySelector("sgds-sidebar")?.toggleCollapsed()}
       ></sgds-icon-button>
     </div>
 
@@ -144,15 +144,6 @@ const OverlayTemplate = args => html`
         <p>Click "Toggle Sidebar" to open the overlay navigation panel.</p>
       </div>
     </div>
-
-    <script>
-      function handleToggle() {
-        const sidebar = document.querySelector("sgds-sidebar");
-        if (sidebar) {
-          sidebar.toggleCollapsed();
-        }
-      }
-    </script>
   </div>
 `;
 
