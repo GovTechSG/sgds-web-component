@@ -23,7 +23,7 @@ import { ISgdsComboBoxInputEventDetail, ISgdsComboBoxCreateOptionEventDetail } f
  */
 type SgdsComboBoxOptionData = SgdsOptionData;
 
-export type { ISgdsComboBoxInputEventDetail, ISgdsComboBoxCreateOptionEventDetail };
+export type { ISgdsComboBoxCreateOptionEventDetail, ISgdsComboBoxInputEventDetail };
 
 /**
  * @summary ComboBox component is used for users to make one or more selections from a list through user input, keyboard or mouse actions
@@ -635,8 +635,7 @@ export class SgdsComboBox extends SelectElement {
       if (this.creatable && this.emptyMenuAfterFiltering && this.optionList.length > 0) {
         return nothing;
       }
-      return this.optionList.length === 0 ||
-        (this.emptyMenuAfterFiltering && this.optionList.length > 0)
+      return this.optionList.length === 0 || (this.emptyMenuAfterFiltering && this.optionList.length > 0)
         ? this._renderEmptyMenu()
         : nothing;
     }
