@@ -87,8 +87,7 @@ th[data-sorting]:focus-visible {
 .data-table-cell,
 .data-table-head,
 .footer,
-.no-data,
-.expandable-content {
+.no-data {
   display: flex;
   align-items: center;
   min-height: var(--sgds-dimension-56);

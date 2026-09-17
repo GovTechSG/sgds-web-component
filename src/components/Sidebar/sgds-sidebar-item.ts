@@ -21,11 +21,17 @@ export class SgdsSidebarItem extends SidebarElement {
   static styles = [...SgdsElement.styles, sidebarOptionStyle];
 
   render() {
+    const isCollapsedL1 = !this._isOverlay && this._sidebarCollapsed && this._childLevel === 1;
+
+    if (isCollapsedL1 && !this.hasIconSlot) {
+      return nothing;
+    }
+
     return html`
       <div
         class=${classMap({
           "sidebar-item": true,
-          "sidebar-item--collapsed": !this._isOverlay && this._sidebarCollapsed && this._childLevel === 1,
+          "sidebar-item--collapsed": isCollapsedL1,
           "sidebar-item-leaf": this._childLevel > 2,
           active: this._selected
         })}
