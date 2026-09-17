@@ -6,7 +6,7 @@ import { userEvent } from "@storybook/test";
 export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen, close, target, fluid }) => {
   return html`
     <sgds-mainnav expand=${ifDefined(expand)} brandHref=${ifDefined(brandHref)} ?fluid=${fluid}>
-      <img alt="sgds logo" width="130" src="/logo.png" slot="brand" />
+      <img alt="sgds logo" width="130" src="/logo.svg" slot="brand" />
       <sgds-mainnav-item ?active=${active} ?disabled=${disabled}>
         <a href="#">ArgsTable Controlled</a>
       </sgds-mainnav-item>
@@ -27,7 +27,7 @@ export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen
       <sgds-mainnav-item slot="end">
         <a href="#">Contact Us</a>
       </sgds-mainnav-item>
-      <sgds-button slot="end">Login</sgds-button>
+      <sgds-button slot="end" ariaLabel="Login">Login</sgds-button>
       <dev-console-widget
         slot="non-collapsible"
         iconColor="black"

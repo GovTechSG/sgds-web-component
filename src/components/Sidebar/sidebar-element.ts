@@ -3,6 +3,7 @@ import { DropdownElement } from "../../base/dropdown-element";
 import { PropertyValueMap } from "lit";
 import SgdsElement from "../../base/sgds-element";
 import { consume } from "@lit/context";
+import { HasSlotController } from "../../utils/slot";
 import {
   SidebarActiveGroup,
   SidebarActiveItem,
@@ -95,6 +96,12 @@ export class SidebarElement extends SgdsElement {
   _isOverlay = false;
 
   /** @internal */
+  private readonly _hasSlotController = new HasSlotController(this, "icon");
+
+  /** Used only for SSR to indicate the presence of the `icon` slot. */
+  @property({ type: Boolean }) hasIconSlot = false;
+
+  /** @internal */
   @state() _childLevel = 1;
 
   /**
@@ -142,6 +149,8 @@ export class SidebarElement extends SgdsElement {
   }
 
   updated() {
+    if (!this.hasIconSlot) this.hasIconSlot = this._hasSlotController.test("icon");
+
     if (this._childLevel === 2) {
       this._hidden = !this.closest(".sidebar-nested-overlay");
     } else if (this._childLevel >= 3) {

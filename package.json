@@ -133,6 +133,7 @@
     "gulp-order": "^1.2.0",
     "gulp-replace": "^1.1.4",
     "husky": "^8.0.0",
+    "iconv-lite": "^0.7.3",
     "lodash": "^4.17.21",
     "nodemon": "^2.0.22",
     "pascal-case": "^4.0.0",
