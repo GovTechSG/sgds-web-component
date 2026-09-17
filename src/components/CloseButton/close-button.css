@@ -49,7 +49,7 @@
   outline-offset: var(--sgds-outline-offset-focus);
 }
 
-.btn-close:active::after {
+:host(:not([disabled])) .btn-close:active::after {
   content: "";
   position: absolute;
   inset: 0;
