@@ -83,6 +83,15 @@ export default defineConfig({
     "process.env.VITE_ENV": JSON.stringify(process.env.VITE_ENV)
   },
   customLogger: logger,
+  server: {
+    watch: {
+      ignored: ["**/test/skills/**"]
+    }
+  },
+  optimizeDeps: {
+    exclude: ["@govtechsg/sgds-web-component"],
+    entries: ["index.html", "playground/**/*.html", "test/a11y/**/*.html"]
+  },
   build: {
     cssCodeSplit: false
   }
