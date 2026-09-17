@@ -1,3 +1,43 @@
+## v3.28.0 (2026-09-17)
+
+### Feat
+
+- **Mainnav, Appnav, DropdownItem**: new sgds-appnav, sgds-mainnav-profile, sgds-appnav-profile subcomponents, new readonly prop for DropdownItem [run-chromatic][skip-cd] (#800)
+- **Sidebar**: hide collapsed L1 items/groups when no icon slot is present (#829)
+- **Appnav**: ensure brand slot is fixed at 40px
+- **templates**: add Operational App Shell template with overlay sidebar
+- **MainnavProfile, AppnavProfile**: render read-only when no dropdown items are slotted
+- **stories**: add @storyOrder JSDoc tag to control component display order
+- **Appnav**: add sgds-appnav component with shared NavElement base class
+- **MainnavProfile**: close mobile panel on outside click
+- **Mainnav**: hide empty start slot and add profile story docs
+- **Mainnav**: add sgds-mainnav-profile component and dropdown-item readonly prop
+- **Mainnav**: add profile slot, start slot, navbar-end wrapper, and update stories
+- **Mainnav**: handle text colors and menu toggler icon name cahange
+- **Mainnav**: tone-aware mobile menu colors, stories, and logo swap
+- **Mainnav**: new tone prop for brand and gradients
+
+### Fix
+
+- **Sidebar**: support collapsed state with no icon slotted into sidebar group or items [run-chromatic][skip-cd] (#830)
+- **Appnav**: shift-tab from mobile menu item now focuses toggler
+- **Mainnav**: add missing ariaLabel to buttons in stories and oobee test
+- **Mainnav**: add aria-labels for accessibility compliance
+- **Mainnav**: fix empty start slot not hidden due to CSS specificity
+- **DropdownList**: escape key closes dropdown
+- **Dropdown**: keyboard nav skips non-item elements and readonly items
+- **Mainnav**: use semantic button for mobile profile toggler and fix oval focus ring
+- **security**: upgrade deps and add pnpm overrides to reduce vulnerabilities
+- **security**: address ASGARD vulnerability findings
+- **DataTable**: remove unintended display:flex from .expandable-content [skip-cd][run-chromatic] (#827)
+- **DataTable**: remove unintended display:flex from .expandable-content
+
+### Refactor
+
+- **Mainnav**: ensure brand slot is fixed at 40px
+- **Mainnav**: self-contained sgds-mainnav-profile with label/secondaryText props
+- **themes**: remove --sgds-gt-* tokens and use raw hex values
+
 ## v3.27.0 (2026-09-14)
 
 ### Feat

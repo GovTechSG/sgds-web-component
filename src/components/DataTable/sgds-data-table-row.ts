@@ -237,7 +237,7 @@ export class SgdsDataTableRow extends SgdsElement {
 
   private _renderExpandCell() {
     if (this._isHeaderRow) {
-      return html`<th class="control-cell" scope="col"></th>`;
+      return html`<th class="control-cell" scope="col"><span class="visually-hidden">Expand</span></th>`;
     }
 
     return html`<td class="control-cell" @click=${this._toggleExpand} @keydown=${this._onExpandKeyDown} tabindex="0">
@@ -248,19 +248,26 @@ export class SgdsDataTableRow extends SgdsElement {
   }
 
   private _renderExpandPlaceholder() {
-    return this._isHeaderRow ? html`<th class="control-cell" scope="col"></th>` : html`<td class="control-cell"></td>`;
+    return this._isHeaderRow
+      ? html`<th class="control-cell" scope="col"><span class="visually-hidden">Expand</span></th>`
+      : html`<td class="control-cell"></td>`;
   }
 
   private _renderCheckboxCell() {
     return this._isHeaderRow
       ? html`<th class="control-cell" scope="col">
+          <span class="visually-hidden">Select</span>
           <div class="data-table-cell checkbox-cell">
-            <sgds-checkbox .checked=${this.checked} @sgds-change=${this._onCheckboxChange}></sgds-checkbox>
+            <sgds-checkbox .checked=${this.checked} @sgds-change=${this._onCheckboxChange}
+              ><span class="visually-hidden">Select all rows</span></sgds-checkbox
+            >
           </div>
         </th>`
       : html`<td class="control-cell">
           <div class="data-table-cell checkbox-cell">
-            <sgds-checkbox .checked=${this.checked} @sgds-change=${this._onCheckboxChange}></sgds-checkbox>
+            <sgds-checkbox .checked=${this.checked} @sgds-change=${this._onCheckboxChange}
+              ><span class="visually-hidden">Select row</span></sgds-checkbox
+            >
           </div>
         </td>`;
   }
