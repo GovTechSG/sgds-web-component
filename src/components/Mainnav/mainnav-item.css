@@ -109,6 +109,88 @@
   line-height: var(--sgds-line-height-2-xs, 20px);
 }
 
+:host([tone="brand"][expand="always"]) ::slotted(*),
+:host([tone^="gradient"][expand="always"]) ::slotted(*) {
+  --sgds-link-color-default: var(--sgds-color-fixed-light);
+  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+  color: var(--sgds-color-fixed-light) !important;
+}
+
+:host([tone="brand"][expand="always"]:not([disabled])[active]) ::slotted(*),
+:host([tone^="gradient"][expand="always"]:not([disabled])[active]) ::slotted(*) {
+  border-color: var(--sgds-color-fixed-light);
+}
+
+@media screen and (min-width: 512px) {
+  :host([tone="brand"][expand="sm"]) ::slotted(*),
+  :host([tone^="gradient"][expand="sm"]) ::slotted(*) {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light) !important;
+  }
+
+  :host([tone="brand"][expand="sm"]:not([disabled])[active]) ::slotted(*),
+  :host([tone^="gradient"][expand="sm"]:not([disabled])[active]) ::slotted(*) {
+    border-color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :host([tone="brand"][expand="md"]) ::slotted(*),
+  :host([tone^="gradient"][expand="md"]) ::slotted(*) {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light) !important;
+  }
+
+  :host([tone="brand"][expand="md"]:not([disabled])[active]) ::slotted(*),
+  :host([tone^="gradient"][expand="md"]:not([disabled])[active]) ::slotted(*) {
+    border-color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :host([tone="brand"][expand="lg"]) ::slotted(*),
+  :host([tone^="gradient"][expand="lg"]) ::slotted(*) {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light) !important;
+  }
+
+  :host([tone="brand"][expand="lg"]:not([disabled])[active]) ::slotted(*),
+  :host([tone^="gradient"][expand="lg"]:not([disabled])[active]) ::slotted(*) {
+    border-color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :host([tone="brand"][expand="xl"]) ::slotted(*),
+  :host([tone^="gradient"][expand="xl"]) ::slotted(*) {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light) !important;
+  }
+
+  :host([tone="brand"][expand="xl"]:not([disabled])[active]) ::slotted(*),
+  :host([tone^="gradient"][expand="xl"]:not([disabled])[active]) ::slotted(*) {
+    border-color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :host([tone="brand"][expand="xxl"]) ::slotted(*),
+  :host([tone^="gradient"][expand="xxl"]) ::slotted(*) {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light) !important;
+  }
+
+  :host([tone="brand"][expand="xxl"]:not([disabled])[active]) ::slotted(*),
+  :host([tone^="gradient"][expand="xxl"]:not([disabled])[active]) ::slotted(*) {
+    border-color: var(--sgds-color-fixed-light);
+  }
+}
+
 @media screen and (min-width: 1024px) {
   ::slotted(*) {
     padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
@@ -129,6 +211,70 @@
 :host(:not([disabled])[active]) ::slotted(a:hover) {
   --sgds-link-color-emphasis: var(--sgds-primary-color-default);
   color: var(--sgds-primary-color-default) !important;
+}
+
+:host([tone="brand"][expand="always"]:not([disabled])[active]) ::slotted(*),
+:host([tone="brand"][expand="always"]:not([disabled])[active]) ::slotted(a:hover),
+:host([tone^="gradient"][expand="always"]:not([disabled])[active]) ::slotted(*),
+:host([tone^="gradient"][expand="always"]:not([disabled])[active]) ::slotted(a:hover) {
+  --sgds-link-color-default: var(--sgds-color-fixed-light);
+  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+  color: var(--sgds-color-fixed-light) !important;
+}
+
+@media screen and (min-width: 512px) {
+  :host([tone="brand"][expand="sm"]:not([disabled])[active]) ::slotted(*),
+  :host([tone="brand"][expand="sm"]:not([disabled])[active]) ::slotted(a:hover),
+  :host([tone^="gradient"][expand="sm"]:not([disabled])[active]) ::slotted(*),
+  :host([tone^="gradient"][expand="sm"]:not([disabled])[active]) ::slotted(a:hover) {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light) !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :host([tone="brand"][expand="md"]:not([disabled])[active]) ::slotted(*),
+  :host([tone="brand"][expand="md"]:not([disabled])[active]) ::slotted(a:hover),
+  :host([tone^="gradient"][expand="md"]:not([disabled])[active]) ::slotted(*),
+  :host([tone^="gradient"][expand="md"]:not([disabled])[active]) ::slotted(a:hover) {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light) !important;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :host([tone="brand"][expand="lg"]:not([disabled])[active]) ::slotted(*),
+  :host([tone="brand"][expand="lg"]:not([disabled])[active]) ::slotted(a:hover),
+  :host([tone^="gradient"][expand="lg"]:not([disabled])[active]) ::slotted(*),
+  :host([tone^="gradient"][expand="lg"]:not([disabled])[active]) ::slotted(a:hover) {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light) !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :host([tone="brand"][expand="xl"]:not([disabled])[active]) ::slotted(*),
+  :host([tone="brand"][expand="xl"]:not([disabled])[active]) ::slotted(a:hover),
+  :host([tone^="gradient"][expand="xl"]:not([disabled])[active]) ::slotted(*),
+  :host([tone^="gradient"][expand="xl"]:not([disabled])[active]) ::slotted(a:hover) {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light) !important;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :host([tone="brand"][expand="xxl"]:not([disabled])[active]) ::slotted(*),
+  :host([tone="brand"][expand="xxl"]:not([disabled])[active]) ::slotted(a:hover),
+  :host([tone^="gradient"][expand="xxl"]:not([disabled])[active]) ::slotted(*),
+  :host([tone^="gradient"][expand="xxl"]:not([disabled])[active]) ::slotted(a:hover) {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light) !important;
+  }
 }
 
 :host([disabled]) ::slotted(a:hover) {

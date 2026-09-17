@@ -12,6 +12,11 @@
   --sgds-product-primary-800: #3c2b8a;
   --sgds-product-primary-900: #2a1e61;
 
+  --sgds-gradient-1: linear-gradient(90deg, #0091B8 0%, #8055BB 100%);
+  --sgds-gradient-2: linear-gradient(90deg, #4288D6 0%, #B82EA0 100%);
+  --sgds-gradient-3: linear-gradient(90deg, #9A74CF 0%, #C7286A 100%);
+  --sgds-gradient-4: linear-gradient(90deg, #C95EB7 0%, #CB2B33 100%);
+
   /* Primitive - Purple Color */
   --sgds-purple-100: #fbf0fe;
   --sgds-purple-200: #f2d6fc;
