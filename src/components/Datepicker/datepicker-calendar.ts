@@ -192,25 +192,12 @@ export class DatepickerCalendar extends SgdsElement {
     }
   }
 
-  private _generateIncrementDates(): Date[] {
-    const start = setTimeToNoon(this.selectedDate[0]);
-
-    if (this.selectedDate.length < 2) {
-      return [start];
-    }
-
-    const end = setTimeToNoon(this.selectedDate[1]);
-    const arr: Date[] = [];
-    if (start.getTime() < end.getTime()) {
-      for (let dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
-        arr.push(new Date(dt));
-      }
-    } else {
-      for (let dt = end; dt <= start; dt.setDate(dt.getDate() + 1)) {
-        arr.push(new Date(dt));
-      }
-    }
-    return arr;
+  private _getSelectedRange(): { start: Date; end: Date } | null {
+    if (this.selectedDate.length === 0) return null;
+    const a = setTimeToNoon(this.selectedDate[0]);
+    if (this.selectedDate.length < 2) return { start: a, end: a };
+    const b = setTimeToNoon(this.selectedDate[1]);
+    return a.getTime() <= b.getTime() ? { start: a, end: b } : { start: b, end: a };
   }
 
   private _onClickDay(event: MouseEvent | KeyboardEvent) {
@@ -310,7 +297,7 @@ export class DatepickerCalendar extends SgdsElement {
   private _generateDays() {
     const selectedDates = this.selectedDate.map(d => setTimeToNoon(d));
 
-    const rangeSelectedDates = this._generateIncrementDates();
+    const range = this._getSelectedRange();
     const minimumDate = this.minDate ? setTimeToNoon(new Date(this.minDate)) : null;
     const maximumDate = this.maxDate ? setTimeToNoon(new Date(this.maxDate)) : null;
     const year = this.displayDate.getFullYear();
@@ -340,12 +327,11 @@ export class DatepickerCalendar extends SgdsElement {
           const isCurrentYear = TODAY_DATE.getFullYear() === this.displayDate.getFullYear();
           const isCurrentDay = TODAY_DATE.getDate() === day;
 
-          const isSelected =
-            selectedDates.length > 0 &&
-            rangeSelectedDates.some(d => Date.parse(dateStr) === Date.parse(d.toISOString()));
-          const isFirstSelectedDate = selectedDates.length > 0 && rangeSelectedDates[0].toISOString() === dateStr;
+          const dateTime = Date.parse(dateStr);
+          const isSelected = range !== null && dateTime >= range.start.getTime() && dateTime <= range.end.getTime();
+          const isFirstSelectedDate = range !== null && range.start.toISOString() === dateStr;
           const isLastSelectedDate =
-            selectedDates.length > 1 && rangeSelectedDates[rangeSelectedDates.length - 1].toISOString() === dateStr;
+            range !== null && this.selectedDate.length > 1 && range.end.toISOString() === dateStr;
           const ariaLabel =
             `${isCurrentDay && isCurrentMonth && isCurrentYear ? "Today's date, " : ""}` + formatDate(dateObj, "PPPP");
           week.push(
@@ -406,9 +392,7 @@ export class DatepickerCalendar extends SgdsElement {
   }
 
   private _generateMonths() {
-    const rangeDates = this._generateIncrementDates();
-    const selectedTime = rangeDates.map(e => setTimeToNoon(new Date(e.getFullYear(), e.getMonth())).getTime());
-
+    const range = this._getSelectedRange();
     const year = this.displayDate.getFullYear();
 
     const monthView = html`
@@ -419,26 +403,30 @@ export class DatepickerCalendar extends SgdsElement {
               ${DatepickerCalendar.MONTHVIEW_LABELS.slice(row * 3, row * 3 + 3).map((m, i) => {
                 const idx = row * 3 + i;
                 const isCurrentMonth = idx === TODAY_DATE.getMonth() && year === TODAY_DATE.getFullYear();
-                const time = setTimeToNoon(new Date(year, idx)).getTime();
-                const isFirstSelectedMonth = rangeDates[0].getMonth() === idx;
-                const isFirstSelectedYear = rangeDates[0].getFullYear() === year;
-                const isLastSelectedMonth = rangeDates[rangeDates.length - 1].getMonth() === idx;
-                const isLastSelectedYear = rangeDates[rangeDates.length - 1].getFullYear() === year;
+                const monthStart = setTimeToNoon(new Date(year, idx, 1));
+                const monthEnd = setTimeToNoon(new Date(year, idx + 1, 0));
+                const isActive =
+                  range !== null &&
+                  monthEnd.getTime() >= range.start.getTime() &&
+                  monthStart.getTime() <= range.end.getTime();
+                const isFirstSelectedMonth =
+                  range !== null && range.start.getMonth() === idx && range.start.getFullYear() === year;
+                const isLastSelectedMonth =
+                  range !== null && range.end.getMonth() === idx && range.end.getFullYear() === year;
                 const ariaLabel = isCurrentMonth ? `Current month ${m} ${year}` : `${m} ${year}`;
                 return html` <button
                   role="gridcell"
                   class=${classMap({
-                    active: selectedTime.includes(time),
+                    active: isActive,
                     today: isCurrentMonth,
                     month: true,
-                    "selected-ends":
-                      (isFirstSelectedMonth && isFirstSelectedYear) || (isLastSelectedMonth && isLastSelectedYear)
+                    "selected-ends": isFirstSelectedMonth || isLastSelectedMonth
                   })}
                   @click=${() => this._onClickMonth(idx)}
                   data-month=${idx}
                   data-year=${year}
                   tabindex="0"
-                  aria-selected=${selectedTime.includes(time) ? "true" : "false"}
+                  aria-selected=${isActive ? "true" : "false"}
                   aria-label=${ariaLabel}
                 >
                   ${m.slice(0, 3)}
@@ -453,7 +441,7 @@ export class DatepickerCalendar extends SgdsElement {
   }
 
   private _generateYears() {
-    const selectedYears = this._generateIncrementDates().map(e => e.getFullYear());
+    const range = this._getSelectedRange();
     const CURRENT_YEAR = TODAY_DATE.getFullYear();
 
     const yearArray = createYearViewArray(this.displayDate, CURRENT_YEAR);
@@ -464,22 +452,25 @@ export class DatepickerCalendar extends SgdsElement {
           row => html`
             <div role="row">
               ${yearArray.slice(row * 3, row * 3 + 3).map(y => {
-                const isFirstSelectedYear = selectedYears[0] === y;
-                const isLastSectedYear = selectedYears[selectedYears.length - 1] === y;
+                const startYear = range ? range.start.getFullYear() : -1;
+                const endYear = range ? range.end.getFullYear() : -1;
+                const isActive = range !== null && y >= startYear && y <= endYear;
+                const isFirstSelectedYear = range !== null && startYear === y;
+                const isLastSelectedYear = range !== null && endYear === y;
                 return html`
                   <button
                     role="gridcell"
                     class=${classMap({
-                      active: selectedYears.includes(y),
+                      active: isActive,
                       year: true,
                       today: CURRENT_YEAR === y,
-                      "selected-ends": isFirstSelectedYear || isLastSectedYear
+                      "selected-ends": isFirstSelectedYear || isLastSelectedYear
                     })}
                     @click=${() => this._onClickYear(y)}
                     data-year=${y}
                     tabindex="0"
                     ?disabled=${y < 1900}
-                    aria-selected=${selectedYears.includes(y) ? "true" : "false"}
+                    aria-selected=${isActive ? "true" : "false"}
                     aria-label=${ifDefined(CURRENT_YEAR === y ? `Current year, ${y}` : undefined)}
                   >
                     ${y}

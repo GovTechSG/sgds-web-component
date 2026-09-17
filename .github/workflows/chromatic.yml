@@ -50,8 +50,10 @@ jobs:
            CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
            CHROMATIC_SLUG: ${{ github.repository }}      
       - name: Verify checkout
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
-          echo ">>>>GitHub Event Pull Request Head SHA: ${{ github.event.pull_request.head.ref }}"
+          echo ">>>>GitHub Event Pull Request Head Ref: $HEAD_REF"
           echo ">>>>Checked out commit: $(git rev-parse HEAD)"
       - uses: pnpm/action-setup@v4
       - name: Install dependencies

@@ -176,7 +176,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
   }
 
   private _copyTextToMenu() {
-    this.menuHeaderText.innerHTML = this.togglerNodes[0].innerHTML;
+    this.menuHeaderText.textContent = this.togglerNodes[0].textContent;
   }
 
   private _hideDropdownMenuItems() {
