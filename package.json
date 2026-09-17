@@ -77,9 +77,9 @@
     "@chromatic-com/storybook": "^1.6.1",
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
-    "@custom-elements-manifest/analyzer": "^0.6.4",
+    "@custom-elements-manifest/analyzer": "^0.11.0",
     "@figma/rest-api-spec": "^0.33.0",
-    "@govtechsg/oobee": "^0.11.16",
+    "@govtechsg/oobee": "^0.11.18",
     "@open-wc/testing": "^3.0.0-next.5",
     "@playwright/test": "^1.45.1",
     "@rollup/plugin-node-resolve": "^11.2.1",
@@ -102,10 +102,10 @@
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "@wc-toolkit/cem-inheritance": "^1.2.2",
-    "@web/dev-server-esbuild": "^0.3.6",
-    "@web/test-runner": "^0.17.1",
-    "@web/test-runner-commands": "^0.6.5",
-    "@web/test-runner-playwright": "^0.8.10",
+    "@web/dev-server-esbuild": "^2.0.0",
+    "@web/test-runner": "^1.0.0",
+    "@web/test-runner-commands": "^1.0.1",
+    "@web/test-runner-playwright": "^1.0.0",
     "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "chalk": "^5.6.2",
     "chromatic": "^15.2.0",
@@ -173,7 +173,7 @@
     "overrides": {
       "tar": ">=7.5.21",
       "ws": ">=8.21.0",
-      "undici": ">=7.29.0",
+      "undici": ">=7.29.0 <8.0.0",
       "basic-ftp": ">=5.3.1",
       "tar-fs": ">=3.1.1",
       "fast-uri": ">=3.1.6",
@@ -196,7 +196,6 @@
       "qs": ">=6.16.0",
       "tmp": ">=0.2.6",
       "colord": ">=2.9.4",
-      "stream-json": ">=3.5.0",
       "uuid": ">=11.1.1",
       "ip-address": ">=10.3.1",
       "esbuild": ">=0.25.0",
@@ -206,5 +205,6 @@
       "brace-expansion": ">=2.1.4",
       "handlebars": ">=4.7.9"
     }
-  }
+  },
+  "customElements": "custom-elements.json"
 }
