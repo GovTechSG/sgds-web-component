@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useChannel } from "storybook/internal/manager-api";
+import { useChannel } from "storybook/manager-api";
 import { AddonPanel } from "storybook/internal/components";
-import { Source } from "@storybook/blocks";
+import { Source } from "@storybook/addon-docs/blocks";
 import { SNIPPET_RENDERED } from "storybook/internal/docs-tools";
 import { STORY_CHANGED } from "storybook/internal/core-events";
 import { htmlToReact } from "./htmlToReact";
