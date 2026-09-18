@@ -3,6 +3,7 @@ import { html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import NavElement from "../../base/nav-element";
+import { sanitizeHref } from "../../utils/safeUrl";
 import { HasSlotController } from "../../utils/slot";
 import { AppnavBreakpointContext, AppnavExpandedContext } from "./appnav-context";
 import appnavStyle from "./appnav.css";
@@ -156,7 +157,7 @@ export class SgdsAppnav extends NavElement {
       <nav>
         <div class="navbar ${this._expandClass()}">
           <slot name="start" class=${classMap({ "slot-empty": !this.hasStartSlot })}></slot>
-          <a class="navbar-brand" href=${this.brandHref} aria-label="brand-link">
+          <a class="navbar-brand" href=${sanitizeHref(this.brandHref) ?? ""} aria-label="brand-link">
             <slot name="brand"></slot>
           </a>
           <div class="navbar-body navbar-collapse" id=${this.collapseId}>

@@ -2,6 +2,7 @@ import { property } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
+import { sanitizeHref } from "../../utils/safeUrl";
 import alertLinkStyle from "./alert-link.css";
 import anchorStyles from "../../styles/anchor.css";
 /**
@@ -19,7 +20,9 @@ export class SgdsAlertLink extends SgdsElement {
 
   render() {
     return html`
-      <a class="alert-link" href=${ifDefined(this.href)} target=${ifDefined(this.target)} tabindex="0"><slot></slot></a>
+      <a class="alert-link" href=${ifDefined(sanitizeHref(this.href))} target=${ifDefined(this.target)} tabindex="0"
+        ><slot></slot
+      ></a>
     `;
   }
 }
