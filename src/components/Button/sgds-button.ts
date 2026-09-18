@@ -3,6 +3,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
 import ButtonElement from "../../base/button-element";
+import { sanitizeHref } from "../../utils/safeUrl";
 import { HasSlotController } from "../../utils/slot";
 import { FormSubmitController } from "../../utils/formSubmitController";
 import anchorStyles from "../../styles/anchor.css";
@@ -126,7 +127,7 @@ export class SgdsButton extends ButtonElement {
         type=${ifDefined(isLink ? undefined : this.type)}
         name=${ifDefined(isLink ? undefined : this.name)}
         value=${ifDefined(isLink ? undefined : this.value)}
-        href=${ifDefined(isLink ? this.href : undefined)}
+        href=${ifDefined(isLink ? sanitizeHref(this.href) : undefined)}
         target=${ifDefined(isLink ? this.target : undefined)}
         download=${ifDefined(isLink ? this.download : undefined)}
         rel=${ifDefined(isLink && this.target === "_blank" ? "noreferrer noopener" : undefined)}

@@ -3,6 +3,7 @@ import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html, literal } from "lit/static-html.js";
 import ButtonElement from "../../base/button-element";
+import { sanitizeHref } from "../../utils/safeUrl";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsSpinner from "../Spinner/sgds-spinner";
 import iconButtonStyles from "./icon-button.css";
@@ -44,7 +45,7 @@ export class SgdsIconButton extends ButtonElement {
             })}"
             ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
             type=${ifDefined(isLink ? undefined : "button")}
-            href=${ifDefined(isLink ? this.href : undefined)}
+            href=${ifDefined(isLink ? sanitizeHref(this.href) : undefined)}
             target=${ifDefined(isLink ? this.target : undefined)}
             download=${ifDefined(isLink ? this.download : undefined)}
             rel=${ifDefined(isLink && this.target === "_blank" ? "noreferrer noopener" : undefined)}
