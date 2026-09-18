@@ -143,7 +143,6 @@ export const ConstraintValidation = {
   render: ConstraintValidationTemplate.bind({}),
   name: "Constraint validation",
   args: {},
-  parameters: {},
   tags: ["!dev"]
 };
 
@@ -326,6 +325,5 @@ export const FormData = {
   render: FormDataTemplate.bind({}),
   name: "Get values through FormData",
   args: {},
-  parameters: {},
   tags: ["!dev"]
 };

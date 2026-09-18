@@ -1,4 +1,4 @@
-import { setCustomElementsManifest } from "@storybook/web-components";
+import { setCustomElementsManifest } from "@storybook/web-components-vite";
 import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js";
 import customElements from "../custom-elements.json";
 import "../lib/index.js";
@@ -8,7 +8,6 @@ import "../lib/css/sgds.css";
 import "./utility.css";
 import "./gt-themes.css";
 import "./global.css";
-import sgdsTheme from "./sgdsTheme";
 import "./addons/react-source/docs-tabs-inject";
 
 export const setCustomElementsManifestWithOptions = (
@@ -38,8 +37,6 @@ setCustomElementsManifestWithOptions(customElements, { privateFields: false });
 export const parameters = {
   viewMode: "docs",
   docs: {
-    //@ts-ignore
-    theme: sgdsTheme,
     toc: {
       headingSelector: "h1, h2, h3",
       title: "Table of Contents",
@@ -48,7 +45,7 @@ export const parameters = {
     source: {}
   },
   viewport: {
-    viewports: {
+    options: {
       xs: { name: "xs mobile", styles: { width: "320px", height: "568px" } },
       sm: { name: "sm mobile", styles: { width: "512px", height: "960px" } },
       md: { name: "md tablet", styles: { width: "768px", height: "1080px" } },
