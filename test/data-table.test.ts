@@ -717,4 +717,30 @@ describe("<sgds-data-table>", () => {
       expect(skeleton).to.exist;
     });
   });
+
+  it("multiselect checkbox uses ariaLabel instead of slotted content (no label rendered)", async () => {
+    const el = await fixture<SgdsDataTable>(html`
+      <sgds-data-table dataLength="1" itemsPerPage="5" currentPage="1" multiSelect>
+        <sgds-data-table-row>
+          <sgds-data-table-head>Name</sgds-data-table-head>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>Alice</sgds-data-table-cell>
+        </sgds-data-table-row>
+      </sgds-data-table>
+    `);
+    await elementUpdated(el);
+
+    const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
+    const headerRow = slot.assignedElements({ flatten: true })[0] as HTMLElement;
+    const checkbox = headerRow.shadowRoot?.querySelector("sgds-checkbox") as HTMLElement;
+
+    expect(checkbox).to.exist;
+
+    const input = checkbox.shadowRoot?.querySelector("input");
+    expect(input?.getAttribute("aria-label")).to.equal("Select all rows");
+
+    const label = checkbox.shadowRoot?.querySelector("label");
+    expect(label).to.be.null;
+  });
 });

@@ -1,7 +1,7 @@
-<script type="module" src="../src/index.ts"></script>
-<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
-<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
-<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<script type="module" src="/src/index.ts"></script>
+<link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="/src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
 <style>
   .container {
     max-width: 1200px;
@@ -376,8 +376,8 @@
 
 <!-- Loading (expandable) -->
 <div class="container">
-  <h3>Loading (Expandable)</h3>
-  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" loading>
+  <h3>Loading (Expandable) test</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5">
     <sgds-data-table-row>
       <sgds-data-table-head>#</sgds-data-table-head>
       <sgds-data-table-head>First name</sgds-data-table-head>
@@ -435,6 +435,65 @@
       <sgds-data-table-cell>Smith</sgds-data-table-cell>
       <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
     </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- Loading + expandable + multi-select -->
+<div class="container">
+  <h3>Loading + Expandable + Multi-select</h3>
+  <sgds-data-table currentPage="1" dataLength="3" itemsPerPage="5" loading multiSelect>
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row expand>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>John</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@johndoe</sgds-data-table-cell>
+      <div slot="content">Department: Engineering</div>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Jane</sgds-data-table-cell>
+      <sgds-data-table-cell>Doe</sgds-data-table-cell>
+      <sgds-data-table-cell>@janedoe</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Bob</sgds-data-table-cell>
+      <sgds-data-table-cell>Smith</sgds-data-table-cell>
+      <sgds-data-table-cell>@bobsmith</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- No data -->
+<div class="container">
+  <h3>No data</h3>
+  <sgds-data-table dataLength="0" itemsPerPage="5" currentPage="1">
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+  </sgds-data-table>
+</div>
+
+<!-- No data with custom slot -->
+<div class="container">
+  <h3>No data (custom slot)</h3>
+  <sgds-data-table dataLength="0" itemsPerPage="5" currentPage="1">
+    <sgds-data-table-row>
+      <sgds-data-table-head>#</sgds-data-table-head>
+      <sgds-data-table-head>First name</sgds-data-table-head>
+      <sgds-data-table-head>Last name</sgds-data-table-head>
+      <sgds-data-table-head>Username</sgds-data-table-head>
+    </sgds-data-table-row>
+    <div slot="no-data">No results found. Try adjusting your filters.</div>
   </sgds-data-table>
 </div>
 
