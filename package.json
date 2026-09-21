@@ -134,7 +134,7 @@
     "lodash": "^4.17.21",
     "nodemon": "^2.0.22",
     "pascal-case": "^4.0.0",
-    "playwright": "^1.59.1",
+    "playwright": "^1.62.1",
     "plop": "^4.0.5",
     "postcss": "^8.2.13",
     "prettier": "^2.8.7",
