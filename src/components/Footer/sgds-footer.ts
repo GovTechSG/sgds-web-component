@@ -3,6 +3,7 @@ import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsLink from "../Link/sgds-link";
 import SgdsElement from "../../base/sgds-element";
+import { sanitizeHref } from "../../utils/safeUrl";
 import { HasSlotController } from "../../utils/slot";
 import { watch } from "../../utils/watch";
 import footerStyle from "./footer.css";
@@ -134,19 +135,27 @@ export class SgdsFooter extends SgdsElement {
           <div class="footer-mandatory-links">
             <ul>
               <li>
-                <sgds-link size="sm" tone=${this._linkTone}><a href=${this.contactHref}>Contact</a></sgds-link>
+                <sgds-link size="sm" tone=${this._linkTone}
+                  ><a href=${sanitizeHref(this.contactHref) ?? "#"}>Contact</a></sgds-link
+                >
               </li>
               <li>
-                <sgds-link size="sm" tone=${this._linkTone}><a href=${this.feedbackHref}>Feedback</a></sgds-link>
+                <sgds-link size="sm" tone=${this._linkTone}
+                  ><a href=${sanitizeHref(this.feedbackHref) ?? "#"}>Feedback</a></sgds-link
+                >
               </li>
               ${this.faqHref
                 ? html`<li>
-                    <sgds-link size="sm" tone=${this._linkTone}><a href=${this.faqHref}>FAQ</a></sgds-link>
+                    <sgds-link size="sm" tone=${this._linkTone}
+                      ><a href=${sanitizeHref(this.faqHref) ?? ""}>FAQ</a></sgds-link
+                    >
                   </li>`
                 : nothing}
               ${this.sitemapHref
                 ? html`<li>
-                    <sgds-link size="sm" tone=${this._linkTone}><a href=${this.sitemapHref}>Sitemap</a></sgds-link>
+                    <sgds-link size="sm" tone=${this._linkTone}
+                      ><a href=${sanitizeHref(this.sitemapHref) ?? ""}>Sitemap</a></sgds-link
+                    >
                   </li>`
                 : nothing}
               <li>
@@ -158,11 +167,13 @@ export class SgdsFooter extends SgdsElement {
               </li>
               <li>
                 <sgds-link size="sm" tone=${this._linkTone}
-                  ><a href=${this.privacyHref}>Privacy Statement</a></sgds-link
+                  ><a href=${sanitizeHref(this.privacyHref) ?? "#"}>Privacy Statement</a></sgds-link
                 >
               </li>
               <li>
-                <sgds-link size="sm" tone=${this._linkTone}><a href=${this.termsOfUseHref}>Terms of Use</a></sgds-link>
+                <sgds-link size="sm" tone=${this._linkTone}
+                  ><a href=${sanitizeHref(this.termsOfUseHref) ?? "#"}>Terms of Use</a></sgds-link
+                >
               </li>
             </ul>
             <div class="footer-copyrights">© ${new Date().getFullYear()}, ${this.copyrightLiner}</div>

@@ -3,6 +3,7 @@ import { html } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import NavElement from "../../base/nav-element";
+import { sanitizeHref } from "../../utils/safeUrl";
 import { HasSlotController } from "../../utils/slot";
 import { MainnavBreakpointContext, MainnavExpandedContext } from "./mainnav-context";
 import mainnavStyle from "./mainnav.css";
@@ -113,7 +114,7 @@ export class SgdsMainnav extends NavElement {
     return html`
       <nav>
         <div class="navbar ${this._expandClass()}">
-          <a class="navbar-brand" href=${this.brandHref} aria-label="brand-link">
+          <a class="navbar-brand" href=${sanitizeHref(this.brandHref) ?? ""} aria-label="brand-link">
             <slot name="brand"></slot>
           </a>
           <div class="navbar-body navbar-collapse" id=${this.collapseId}>
