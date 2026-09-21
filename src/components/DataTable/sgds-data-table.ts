@@ -91,7 +91,6 @@ export class SgdsDataTable extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.setAttribute("role", "table");
   }
 
   private _isRowChecked(row: SgdsDataTableRow) {
@@ -453,7 +452,7 @@ export class SgdsDataTable extends SgdsElement {
     return html`
       <div class="data-table">
         <div class="table-container">
-          <div class="table">
+          <div class="table" role="table">
             <slot @slotchange=${this._handleSlotChange} @i-sgds-sort=${this._handleSort}></slot>
             ${this.loading ? this._renderLoadingSkeleton() : nothing}
           </div>

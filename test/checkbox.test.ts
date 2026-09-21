@@ -1094,3 +1094,33 @@ describe("reset does not emit sgds-change for checkbox-group", () => {
     expect(changeHandler).to.not.have.been.called;
   });
 });
+
+describe("ariaLabel forwarding", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("forwards ariaLabel property to internal input's aria-label attribute", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
+    el.ariaLabel = "Select all rows";
+    await elementUpdated(el);
+
+    const input = el.shadowRoot!.querySelector("input")!;
+    expect(input.getAttribute("aria-label")).to.equal("Select all rows");
+  });
+
+  it("does not render a label when only ariaLabel is set (no slot content)", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox></sgds-checkbox>`);
+    el.ariaLabel = "Select row";
+    await elementUpdated(el);
+
+    const label = el.shadowRoot!.querySelector("label");
+    expect(label).to.be.null;
+  });
+
+  it("omits aria-label on input when ariaLabel is not set", async () => {
+    const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox>Label</sgds-checkbox>`);
+    await elementUpdated(el);
+
+    const input = el.shadowRoot!.querySelector("input")!;
+    expect(input.hasAttribute("aria-label")).to.be.false;
+  });
+});
