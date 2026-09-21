@@ -19,16 +19,23 @@ export default {
     "../stories/blocks/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/*.mdx"
   ],
-  addons: ["@storybook/addon-a11y", {
-    name: "@storybook/addon-docs",
-    options: {
-      mdxPluginOptions: {
-        mdxCompileOptions: {
-          remarkPlugins: [remarkGfm]
+  addons: [
+    "@storybook/addon-a11y",
+    "@storybook/addon-vitest",
+    {
+      name: "@storybook/addon-docs",
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm]
+          }
         }
       }
-    }
-  }, "@storybook/addon-themes", "./addons/react-source/preset", "@storybook/addon-mcp"],
+    },
+    "@storybook/addon-themes",
+    "./addons/react-source/preset",
+    "@storybook/addon-mcp"
+  ],
   framework: {
     name: "@storybook/web-components-vite",
     options: {

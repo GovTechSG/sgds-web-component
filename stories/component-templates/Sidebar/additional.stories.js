@@ -103,6 +103,7 @@ const OverlayTemplate = args => html`
         size="xs"
         variant="ghost"
         name="sidebar-expand"
+        ariaLabel="Toggle sidebar"
         @click=${e => e.target.closest("div.sgds\\:h-screen").querySelector("sgds-sidebar")?.toggleCollapsed()}
       ></sgds-icon-button>
     </div>

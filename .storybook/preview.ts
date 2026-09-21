@@ -35,6 +35,20 @@ export const setCustomElementsManifestWithOptions = (
 setCustomElementsManifestWithOptions(customElements, { privateFields: false });
 
 export const parameters = {
+  a11y: {
+    test: "error",
+    config: {
+      rules: [
+        { id: "color-contrast", enabled: false },
+        { id: "heading-order", enabled: false },
+        { id: "landmark-unique", enabled: false },
+        { id: "aria-required-children", enabled: false },
+        { id: "empty-table-header", enabled: false },
+        { id: "empty-heading", enabled: false },
+        { id: "label", enabled: false }
+      ]
+    }
+  },
   viewMode: "docs",
   docs: {
     toc: {

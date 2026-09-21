@@ -64,6 +64,7 @@ const Template = () => html`
             >
               Logo
             </div>
+            <span slot="title">Singapore Government Design System</span>
             <span slot="description">
               Trusted by agencies across the whole-of-government ecosystem to deliver accessible, compliant, and
               consistent digital interfaces.
