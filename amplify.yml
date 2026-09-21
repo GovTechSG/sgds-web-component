@@ -8,7 +8,7 @@ frontend:
         - pnpm exec playwright install
     build:
       commands:
-        - pnpm run test && pnpm run test:scripts && pnpm run build-storybook
+        - pnpm run test && pnpm run test:scripts && pnpm run test-storybook && pnpm run build-storybook
   artifacts:
     baseDirectory: /storybook-static
     files:
