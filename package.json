@@ -81,7 +81,6 @@
     "@figma/rest-api-spec": "^0.33.0",
     "@govtechsg/oobee": "^0.11.18",
     "@open-wc/testing": "^3.0.0-next.5",
-    "@playwright/test": "^1.45.1",
     "@rollup/plugin-replace": "^5.0.7",
     "@storybook/addon-docs": "^8.2.6",
     "@storybook/addon-essentials": "^8.2.6",
