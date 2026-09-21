@@ -30,5 +30,7 @@ jobs:
         run: pnpm run test
       - name: Run script tests
         run: pnpm run test:scripts
+      - name: Build library and stories
+        run: pnpm run utility:storybook && pnpm run build && pnpm run write:stories
       - name: Run Storybook tests
         run: pnpm run test-storybook
