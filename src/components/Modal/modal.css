@@ -147,6 +147,11 @@ slot[name="description"]::slotted(*) {
   -webkit-overflow-scrolling: touch;
 }
 
+.modal-body:focus-visible {
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+}
+
 .modal-body slot::slotted(*) {
   --sgds-paragraph-spacing-xl: var(--sgds-margin-none);
 }

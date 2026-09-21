@@ -180,6 +180,7 @@ export class SgdsSystemBanner extends SgdsElement {
                   tone="fixed-light"
                   variant="ghost"
                   size="xs"
+                  ariaLabel="Previous"
                   @click=${this._prev}
                 ></sgds-icon-button>
                 <span>${this._currentIndex + 1}/${this.childCount}</span>
@@ -188,6 +189,7 @@ export class SgdsSystemBanner extends SgdsElement {
                   tone="fixed-light"
                   variant="ghost"
                   size="xs"
+                  ariaLabel="Next"
                   @click=${this._next}
                 ></sgds-icon-button>
               </div>`

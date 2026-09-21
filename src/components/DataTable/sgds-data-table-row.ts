@@ -256,18 +256,21 @@ export class SgdsDataTableRow extends SgdsElement {
   private _renderCheckboxCell() {
     return this._isHeaderRow
       ? html`<th class="control-cell" scope="col">
-          <span class="visually-hidden">Select</span>
           <div class="data-table-cell checkbox-cell">
-            <sgds-checkbox .checked=${this.checked} @sgds-change=${this._onCheckboxChange}
-              ><span class="visually-hidden">Select all rows</span></sgds-checkbox
-            >
+            <sgds-checkbox
+              .checked=${this.checked}
+              @sgds-change=${this._onCheckboxChange}
+              .ariaLabel=${"Select all rows"}
+            ></sgds-checkbox>
           </div>
         </th>`
       : html`<td class="control-cell">
           <div class="data-table-cell checkbox-cell">
-            <sgds-checkbox .checked=${this.checked} @sgds-change=${this._onCheckboxChange}
-              ><span class="visually-hidden">Select row</span></sgds-checkbox
-            >
+            <sgds-checkbox
+              .checked=${this.checked}
+              @sgds-change=${this._onCheckboxChange}
+              .ariaLabel=${"Select row"}
+            ></sgds-checkbox>
           </div>
         </td>`;
   }
