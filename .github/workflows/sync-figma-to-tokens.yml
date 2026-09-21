@@ -34,8 +34,17 @@ jobs:
           FILE_KEY: ${{ github.event.inputs.file_key }}
           PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_ACTION_VARIABLES_SYNC_FIGMA_TOKEN }}
 
+      - name: Validate file_key format
+        run: |
+          if [[ ! "$FILE_KEY" =~ ^[A-Za-z0-9]+$ ]]; then
+            echo "::error::Invalid file_key format. Must be alphanumeric."
+            exit 1
+          fi
+        env:
+          FILE_KEY: ${{ github.event.inputs.file_key }}
+
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
         with:
           commit-message: "refactor(themes): update tokens from Figma"
           title: Update tokens from Figma
