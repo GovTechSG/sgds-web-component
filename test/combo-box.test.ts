@@ -142,6 +142,7 @@ describe("sgds-combo-box ", () => {
           aria-label="Options"
           >
               <slot></slot>
+              <slot class="d-none" name="create"></slot>
         </div>
           `,
       { ignoreAttributes: ["id", "aria-controls", "aria-labelledby"] }
@@ -2346,9 +2347,8 @@ describe("creatable combo-box", () => {
     await sendKeys({ type: "zzz" });
     await el.updateComplete;
 
-    const createOption = el.querySelector<SgdsComboBoxOption>("sgds-combo-box-option[data-create]");
+    const createOption = el.shadowRoot?.querySelector(".create-option");
     expect(createOption).to.exist;
-    expect(createOption?.hidden).to.be.false;
     expect(createOption?.textContent?.trim()).to.equal('Create "zzz"');
     expect(el.shadowRoot?.querySelector(".empty-menu")).to.not.exist;
   });
@@ -2367,8 +2367,7 @@ describe("creatable combo-box", () => {
     await el.updateComplete;
 
     expect(el.shadowRoot?.querySelector(".empty-menu")).to.exist;
-    // No create option should exist when creatable is false
-    expect(el.querySelector("sgds-combo-box-option[data-create]")).to.not.exist;
+    expect(el.shadowRoot?.querySelector(".create-option")).to.not.exist;
   });
 
   it("emits sgds-create-option event on click with the typed value", async () => {
@@ -2386,9 +2385,9 @@ describe("creatable combo-box", () => {
     const handler = sinon.spy();
     el.addEventListener("sgds-create-option", handler);
 
-    const createOption = el.querySelector<SgdsComboBoxOption>("sgds-combo-box-option[data-create]");
+    const createOption = el.shadowRoot?.querySelector(".create-option") as HTMLElement;
     expect(createOption).to.exist;
-    createOption!.click();
+    createOption.click();
     await el.updateComplete;
 
     expect(handler).to.have.been.calledOnce;
@@ -2410,9 +2409,9 @@ describe("creatable combo-box", () => {
     const handler = sinon.spy();
     el.addEventListener("sgds-create-option", handler);
 
-    const createOption = el.querySelector<SgdsComboBoxOption>("sgds-combo-box-option[data-create]");
+    const createOption = el.shadowRoot?.querySelector(".create-option") as HTMLElement;
     expect(createOption).to.exist;
-    createOption!.click();
+    createOption.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
     await el.updateComplete;
 
     expect(handler).to.have.been.calledOnce;
@@ -2432,8 +2431,8 @@ describe("creatable combo-box", () => {
     await el.updateComplete;
     expect(el.menuIsOpen).to.be.true;
 
-    const createOption = el.querySelector<SgdsComboBoxOption>("sgds-combo-box-option[data-create]");
-    createOption!.click();
+    const createOption = el.shadowRoot?.querySelector(".create-option") as HTMLElement;
+    createOption.click();
     await el.updateComplete;
 
     await waitUntil(() => !el.menuIsOpen);
@@ -2453,7 +2452,94 @@ describe("creatable combo-box", () => {
     await sendKeys({ type: "App" });
     await el.updateComplete;
 
-    const createOption = el.querySelector<SgdsComboBoxOption>("sgds-combo-box-option[data-create]");
-    expect(createOption?.hidden).to.be.true;
+    expect(el.shadowRoot?.querySelector(".create-option")).to.not.exist;
+  });
+
+  it("uses create-option slot content instead of default text when slot is provided", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box creatable>
+        <span slot="create">Add new item</span>
+        <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await sendKeys({ type: "zzz" });
+    await el.updateComplete;
+
+    const createOption = el.shadowRoot?.querySelector(".create-option");
+    expect(createOption).to.exist;
+    // Slot projects the light-DOM content
+    const slot = createOption?.querySelector("slot[name='create']") as HTMLSlotElement;
+    expect(slot).to.exist;
+    const assigned = slot?.assignedElements({ flatten: true });
+    expect(assigned?.[0]?.textContent?.trim()).to.equal("Add new item");
+  });
+
+  it("falls back to default 'Create' text when no create-option slot is provided", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box creatable>
+        <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await sendKeys({ type: "zzz" });
+    await el.updateComplete;
+
+    const createOption = el.shadowRoot?.querySelector(".create-option");
+    expect(createOption?.textContent?.trim()).to.equal('Create "zzz"');
+  });
+
+  it("still emits sgds-create-option event when clicking the create-option container with custom slot", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box creatable>
+        <span slot="create">Add new item</span>
+        <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await sendKeys({ type: "Mango" });
+    await el.updateComplete;
+
+    const handler = sinon.spy();
+    el.addEventListener("sgds-create-option", handler);
+
+    const createOption = el.shadowRoot?.querySelector(".create-option") as HTMLElement;
+    expect(createOption).to.exist;
+    createOption.click();
+    await el.updateComplete;
+
+    expect(handler).to.have.been.calledOnce;
+    expect(handler.firstCall.args[0].detail.value).to.equal("Mango");
+  });
+
+  it("allows clicks on interactive elements inside slotted create-option content", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box creatable>
+        <span slot="create">Create in <a href="https://www.google.com" target="_blank">form</a></span>
+        <sgds-combo-box-option value="option1">Apple</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await sendKeys({ type: "zzz" });
+    await el.updateComplete;
+
+    const handler = sinon.spy();
+    el.addEventListener("sgds-create-option", handler);
+
+    // Click the anchor — should NOT fire sgds-create-option
+    const anchor = el.querySelector("span[slot='create'] a") as HTMLElement;
+    expect(anchor).to.exist;
+    anchor.click();
+    await el.updateComplete;
+
+    expect(handler).to.not.have.been.called;
   });
 });

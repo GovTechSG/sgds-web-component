@@ -181,3 +181,27 @@ Set `scrollBottomOffset` to a positive number (e.g. `50`) to fire the event slig
 <Canvas of={ComboBoxStories.ScrollEnd}>
   <Story of={ComboBoxStories.ScrollEnd} />
 </Canvas>
+
+## Creatable ComboBox
+
+Set `creatable` to allow users to create new options when no match is found. A "Create xxx" option appears at the bottom of the menu when the typed value does not match any existing option.
+
+<Canvas of={ComboBoxStories.Creatable}>
+  <Story of={ComboBoxStories.Creatable} />
+</Canvas>
+
+### Handling the `sgds-create-option` event
+
+Listen to the `sgds-create-option` event to handle option creation. The event detail contains `{ value: string }` with the typed text.
+
+<Canvas of={ComboBoxStories.CreatableWithEvent}>
+  <Story of={ComboBoxStories.CreatableWithEvent} />
+</Canvas>
+
+### Customising the create option text with `create` slot
+
+Use the `create` named slot to override the default "Create xxx" text. The slotted content supports interactive elements such as links.
+
+<Canvas of={ComboBoxStories.CreatableCustomSlot}>
+  <Story of={ComboBoxStories.CreatableCustomSlot} />
+</Canvas>

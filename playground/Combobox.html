@@ -298,6 +298,14 @@
       });
     </script>
 
+    <h4>Single select creatable with custom create-option slot</h4>
+    <sgds-combo-box id="creatable-custom-slot" creatable label="Assignee" placeholder="Search for a person">
+      <span slot="create">Register new person in <a href="https://www.google.com" target="_blank">form</a></span>
+      <sgds-combo-box-option value="alice-tan">Alice Tan</sgds-combo-box-option>
+      <sgds-combo-box-option value="benjamin-lee">Benjamin Lee</sgds-combo-box-option>
+      <sgds-combo-box-option value="catherine-lim">Catherine Lim</sgds-combo-box-option>
+    </sgds-combo-box>
+
     <h4>Multi select creatable</h4>
     <sgds-combo-box id="creatable-multi" creatable multiSelect clearable label="Tags" placeholder="Type to search or create">
       <sgds-combo-box-option value="react">React</sgds-combo-box-option>
