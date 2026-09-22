@@ -38,7 +38,7 @@ export class SgdsSelect extends SelectElement {
     super.connectedCallback();
     this.addEventListener("sgds-hide", async () => {
       const sgdsInput = await this._input;
-      sgdsInput.focus();
+      sgdsInput.focus({ preventScroll: true });
     });
   }
   @queryAssignedElements({ flatten: true, selector: "sgds-select-option" })
