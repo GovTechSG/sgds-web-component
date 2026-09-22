@@ -578,7 +578,12 @@ export const ScrollEnd = {
 
 const CreatableTemplate = () => {
   return html`
-    <sgds-combo-box creatable label="Fruits" placeholder="Type a fruit that's not in the list" id="creatable-combobox-example">
+    <sgds-combo-box
+      creatable
+      label="Fruits"
+      placeholder="Type a fruit that's not in the list"
+      id="creatable-combobox-example"
+    >
       <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
       <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
       <sgds-combo-box-option value="carrot">Carrot</sgds-combo-box-option>
@@ -609,7 +614,7 @@ const CreatableWithEventTemplate = () => {
     </sgds-combo-box>
     <script>
       const creatableComboBox = document.querySelector("#creatable-event-combobox-example");
-      creatableComboBox.addEventListener("sgds-create-option", async (e) => {
+      creatableComboBox.addEventListener("sgds-create-option", async e => {
         const comboBox = e.target;
         const newValue = e.detail.value;
 
@@ -625,7 +630,7 @@ const CreatableWithEventTemplate = () => {
 
         // Append the new option to the combo box
         const option = document.createElement("sgds-combo-box-option");
-        option.value = newValue.toLowerCase().replace(/\s+/g, "-");
+        option.value = newValue.toLowerCase().replace(/s+/g, "-");
         option.textContent = newValue;
         comboBox.appendChild(option);
       });
