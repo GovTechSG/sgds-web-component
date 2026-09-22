@@ -351,6 +351,7 @@ export class SgdsComboBox extends SelectElement {
 
       this.value = this.selectedItems.map(i => i.value).join(";");
       itemEl.active = true;
+      this.displayValue = "";
     } else {
       // Single-select
       // Only update active states if a new item is selected
@@ -419,6 +420,11 @@ export class SgdsComboBox extends SelectElement {
     e.preventDefault();
 
     this.emit("sgds-blur");
+
+    // When focus is moving to an element inside this component (e.g. keyboard nav to an option),
+    // preserve the typed input. If focus moves outside, clear as usual.
+    const relatedTarget = (e as FocusEvent).relatedTarget as Node | null;
+    if ((this.creatable || this.multiSelect) && relatedTarget && this.contains(relatedTarget)) return;
 
     if (this.multiSelect) {
       const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);

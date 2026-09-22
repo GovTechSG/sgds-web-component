@@ -1091,6 +1091,74 @@ describe("multi select combobox", () => {
       });
       expect(getRootActiveElement(input)).to.equal(input);
     });
+
+    it("typing to filter then ArrowDown should preserve displayValue in input", async () => {
+      const el = await fixture<SgdsComboBox>(render({ multiSelect: true }));
+
+      const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+      input.focus();
+      await sendKeys({ type: "A" });
+      await waitUntil(() => input.value === "A");
+
+      // ArrowDown moves focus to the first visible option
+      await sendKeys({ press: "ArrowDown" });
+      await waitUntil(
+        () => {
+          const firstVisible = el.querySelector("sgds-combo-box-option:not([hidden])");
+          return document.activeElement === firstVisible;
+        },
+        "focus did not move to first visible option",
+        { timeout: 2000 }
+      );
+
+      // displayValue should still be preserved in the input
+      expect(input.value).to.equal("A");
+    });
+
+    it("after selecting an item via keyboard, displayValue should be cleared", async () => {
+      const el = await fixture<SgdsComboBox>(render({ multiSelect: true }));
+
+      const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+      input.focus();
+      await sendKeys({ type: "A" });
+      await waitUntil(() => input.value === "A");
+
+      // Navigate and select the first filtered option
+      await sendKeys({ press: "ArrowDown" });
+      await sendKeys({ press: "Enter" });
+      await el.updateComplete;
+
+      // displayValue should be cleared after selection
+      expect(input.value).to.equal("");
+      // value should be set
+      expect(el.value).to.equal("option1");
+    });
+
+    it("value should not change while typing and navigating with keyboard before selecting", async () => {
+      const el = await fixture<SgdsComboBox>(render({ multiSelect: true, value: "option3" }));
+
+      const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+      input.focus();
+      await sendKeys({ type: "A" });
+      await waitUntil(() => input.value === "A");
+
+      // value must remain unchanged — only "option3" was previously selected
+      expect(el.value).to.equal("option3");
+
+      // Navigate with ArrowDown without selecting
+      await sendKeys({ press: "ArrowDown" });
+      await waitUntil(
+        () => {
+          const firstVisible = el.querySelector("sgds-combo-box-option:not([hidden])");
+          return document.activeElement === firstVisible;
+        },
+        "focus did not move to first visible option",
+        { timeout: 2000 }
+      );
+
+      // value must still be unchanged after keyboard navigation
+      expect(el.value).to.equal("option3");
+    });
   });
   it("when there is value, and on focus, it should show clearable button when enabled and can clear value", async () => {
     const closeButtonClass = "sgds-icon[name='xcircle-fill']";
