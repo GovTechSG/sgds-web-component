@@ -58,6 +58,9 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   /** Disables native and sgds validation for the checkbox. */
   @property({ type: Boolean, reflect: true }) noValidate = false;
 
+  /** Accessible label forwarded to the internal input's aria-label. Use when no visible label slot is used. */
+  @property({ type: String }) ariaLabel = "";
+
   /**Feedback text for error state when validated */
   @property({ type: String, reflect: true }) invalidFeedback = "";
 
@@ -198,6 +201,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
           type="checkbox"
           id=${this._controlId}
           aria-invalid=${this.invalid ? "true" : "false"}
+          aria-label=${ifDefined(this.ariaLabel || undefined)}
           name=${ifDefined(this.name)}
           ?indeterminate=${this.indeterminate}
           ?required=${this.required}

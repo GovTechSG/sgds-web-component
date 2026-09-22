@@ -50,15 +50,17 @@ jobs:
            CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
            CHROMATIC_SLUG: ${{ github.repository }}      
       - name: Verify checkout
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
-          echo ">>>>GitHub Event Pull Request Head SHA: ${{ github.event.pull_request.head.ref }}"
+          echo ">>>>GitHub Event Pull Request Head Ref: $HEAD_REF"
           echo ">>>>Checked out commit: $(git rev-parse HEAD)"
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI 
         run: pnpm install
       - name: Run Chromatic
-        uses: chromaui/action@latest
+        uses: chromaui/action@bb3b582719a93c1828c5e520e62992b2937d7889 # latest
         with:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
@@ -78,12 +80,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
         run: pnpm install
       - name: Run Chromatic
-        uses: chromaui/action@latest
+        uses: chromaui/action@bb3b582719a93c1828c5e520e62992b2937d7889 # latest
         with:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

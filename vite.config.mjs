@@ -76,13 +76,29 @@ export default defineConfig({
       {
         find: /^~(.*)$/,
         replacement: "$1"
-      }
+      },
+      ...(process.env.VITE_ENV === "production"
+        ? [
+            { find: /\.\.\/src\/index\.ts$/, replacement: path.resolve("lib/index.js") },
+            { find: /\.\.\/src\/themes\/(.*)/, replacement: path.resolve("lib/themes/$1") },
+            { find: /\.\.\/src\/css\/(.*)/, replacement: path.resolve("lib/css/$1") }
+          ]
+        : [])
     ]
   },
   define: {
     "process.env.VITE_ENV": JSON.stringify(process.env.VITE_ENV)
   },
   customLogger: logger,
+  server: {
+    watch: {
+      ignored: ["**/test/skills/**"]
+    }
+  },
+  optimizeDeps: {
+    exclude: ["@govtechsg/sgds-web-component"],
+    entries: ["index.html", "playground/**/*.html", "test/a11y/**/*.html"]
+  },
   build: {
     cssCodeSplit: false
   }
