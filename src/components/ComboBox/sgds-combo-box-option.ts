@@ -29,7 +29,6 @@ export class SgdsComboBoxOption extends OptionElement {
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
-    if (this.hasAttribute("data-create")) return;
     const parent = this.parentElement as SgdsComboBox;
     if (parent?.multiSelect) {
       this.checkbox = true;

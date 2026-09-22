@@ -29,6 +29,7 @@ export type { ISgdsComboBoxCreateOptionEventDetail, ISgdsComboBoxInputEventDetai
  * @summary ComboBox component is used for users to make one or more selections from a list through user input, keyboard or mouse actions
  *
  * @slot default - default slot to pass in sgds-combo-box-option
+ * @slot create - Custom content for the "Create" option shown when `creatable` is true and no match is found. Use `sgds-input` event to dynamically update the slotted content with the current input value.
  *
  * @event sgds-select - Emitted when the combo box's selected value changes.
  * @event sgds-change - Emitted when the combo box's value changes.
@@ -123,9 +124,8 @@ export class SgdsComboBox extends SelectElement {
         sgdsInput.focus();
       }
 
-      this._removeCreateOption();
       this.options.forEach(o => {
-        if (!o.hasAttribute("data-create")) o.removeAttribute("hidden");
+        o.removeAttribute("hidden");
       });
       // reset emptyMenu state
       this.emptyMenuAfterFiltering = false;
@@ -144,7 +144,6 @@ export class SgdsComboBox extends SelectElement {
       this.appendChild(comboBoxOption);
     });
     this._setupValidation(this.menuList);
-    if (this.creatable) this._ensureCreateOption();
     if (this.menuIsOpen) {
       await this.updateFloatingPosition();
     }
@@ -159,26 +158,6 @@ export class SgdsComboBox extends SelectElement {
       // Handling of click events
       if (option.hasAttribute("disabled")) return false;
       if (option.clickEventAdded) return false;
-
-      // Intercept clicks on the dynamic "Create" option
-      if (option.hasAttribute("data-create")) {
-        option.addEventListener("click", (evt: PointerEvent) => {
-          evt.preventDefault();
-          this.emit<ISgdsComboBoxCreateOptionEventDetail>("sgds-create-option", {
-            detail: { value: this._createOptionValue }
-          });
-          this.emptyMenuAfterFiltering = false;
-          this._removeCreateOption();
-          this.hideMenu();
-        });
-        option.clickEventAdded = true;
-        option.addEventListener("keydown", (evt: KeyboardEvent) => {
-          if (evt.key === "Enter") {
-            option.click();
-          }
-        });
-        return;
-      }
 
       option.addEventListener("click", (evt: PointerEvent) => {
         evt.preventDefault();
@@ -204,7 +183,7 @@ export class SgdsComboBox extends SelectElement {
 
     /** this will trigger _updateValueAndDisplayValue */
     await this.updateComplete;
-    const realOptions = assignedElements.filter(el => !el.hasAttribute("data-create"));
+    const realOptions = assignedElements;
     this.optionList = await this._getMenuListFromOptions(realOptions);
     this._setupValidation(this.optionList);
   }
@@ -227,7 +206,7 @@ export class SgdsComboBox extends SelectElement {
   @watch("value", { waitUntilFirstUpdate: true })
   async _handleValueChange() {
     this.options.forEach(o => {
-      if (!o.hasAttribute("data-create")) o.removeAttribute("hidden");
+      o.removeAttribute("hidden");
     });
 
     const sgdsInput = await this._input;
@@ -311,7 +290,7 @@ export class SgdsComboBox extends SelectElement {
     }
     // There is a race condition in certain situations where this.optionList is not fully updated during slotchange
     // Hence instead of using this.optionList, we have to perform a query on the <sgds-combo-box-option> elements
-    const realOptions = this.options.filter(o => !o.hasAttribute("data-create"));
+    const realOptions = this.options;
     const optionList = realOptions.map(o => ({ value: o.value, label: o.textContent.trim() }));
     this.filteredList = optionList.filter(item => this.filterFunction(this.displayValue, item));
 
@@ -320,7 +299,6 @@ export class SgdsComboBox extends SelectElement {
     const filteredValues = this.filteredList.map(l => l.value);
 
     this.options.forEach(o => {
-      if (o.hasAttribute("data-create")) return;
       if (!filteredValues.includes(o.value)) {
         o.hidden = true;
       } else {
@@ -424,7 +402,12 @@ export class SgdsComboBox extends SelectElement {
     // When focus is moving to an element inside this component (e.g. keyboard nav to an option),
     // preserve the typed input. If focus moves outside, clear as usual.
     const relatedTarget = (e as FocusEvent).relatedTarget as Node | null;
-    if ((this.creatable || this.multiSelect) && relatedTarget && this.contains(relatedTarget)) return;
+    if (
+      (this.creatable || this.multiSelect) &&
+      relatedTarget &&
+      (this.contains(relatedTarget) || this.shadowRoot?.contains(relatedTarget))
+    )
+      return;
 
     if (this.multiSelect) {
       const displayValueMatchedSelectedItems = this.selectedItems.filter(({ label }) => this.displayValue === label);
@@ -593,40 +576,94 @@ export class SgdsComboBox extends SelectElement {
     `;
   }
 
-  /** The dynamically-managed "Create" option appended to the light DOM when creatable is active. */
-  private _createOptionEl: SgdsComboBoxOption | null = null;
+  /** Slotted elements from the `create-option` named slot. */
+  private _createOptionSlotContent: Element[] = [];
 
   /** The typed value captured when the create option was last synced. */
   private _createOptionValue = "";
 
-  /** Ensures the create option element exists in the light DOM (appended once). */
-  private _ensureCreateOption() {
-    if (!this._createOptionEl) {
-      const el = document.createElement("sgds-combo-box-option") as SgdsComboBoxOption;
-      el.setAttribute("data-create", "");
-      el.value = "__sgds-create__";
-      el.hidden = true;
-      this._createOptionEl = el;
-      this.appendChild(el);
-    }
-  }
+  /** Whether the shadow-DOM create-option container is visible. */
+  @state() private _showCreateOption = false;
 
-  /** Shows or hides the light-DOM "Create" option based on current creatable + filter state. */
+  /** Updates visibility of the create-option container based on creatable + filter state. */
   private _syncCreateOption() {
-    if (!this._createOptionEl) return;
-    if (this.creatable && this.emptyMenuAfterFiltering && this.displayValue !== "") {
+    this._showCreateOption = this.creatable && this.emptyMenuAfterFiltering && this.displayValue !== "";
+    if (this._showCreateOption) {
       this._createOptionValue = this.displayValue;
-      this._createOptionEl.textContent = `Create "${this.displayValue}"`;
-      this._createOptionEl.hidden = false;
-    } else {
-      this._createOptionEl.hidden = true;
     }
   }
 
-  private _removeCreateOption() {
-    if (this._createOptionEl) {
-      this._createOptionEl.hidden = true;
+  /** Handles slotchange for the create-option named slot. */
+  private _handleCreateOptionSlotChange(e: Event) {
+    this._createOptionSlotContent = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+  }
+
+  /** Click handler for the create-option container. Lets interactive slotted elements (links, buttons) pass through. */
+  private _handleCreateOptionClick(evt: Event) {
+    const target = evt.composedPath()[0] as HTMLElement;
+    if (target.closest?.("a, button")) return;
+
+    this.emit<ISgdsComboBoxCreateOptionEventDetail>("sgds-create-option", {
+      detail: { value: this._createOptionValue }
+    });
+    this.emptyMenuAfterFiltering = false;
+    this._syncCreateOption();
+    this.hideMenu();
+  }
+
+  /** Keydown handler for the create-option container. */
+  private _handleCreateOptionKeydown(evt: KeyboardEvent) {
+    if (evt.key === "Enter") {
+      this._handleCreateOptionClick(evt);
+      return;
     }
+    // ArrowUp from create option → focus last menu item
+    if (evt.key === "ArrowUp") {
+      evt.preventDefault();
+      const items = this._getActiveMenuItems();
+      if (items.length > 0) {
+        this._setMenuItem(items.length - 1);
+      }
+      return;
+    }
+    // ArrowDown from create option → wrap to first menu item
+    if (evt.key === "ArrowDown") {
+      evt.preventDefault();
+      const items = this._getActiveMenuItems();
+      if (items.length > 0) {
+        this._setMenuItem(0);
+      }
+    }
+  }
+
+  /** Override base keyboard handler to include create-option in ArrowDown/Tab navigation. */
+  protected override _handleKeyboardMenuItemsEvent(e: KeyboardEvent) {
+    // When create-option div is focused, let Tab pass through naturally so it can reach
+    // interactive elements inside slotted content (e.g. links)
+    const createDiv = this.shadowRoot?.querySelector(".create-option") as HTMLElement;
+    if (createDiv?.matches(":focus") && e.key === "Tab") {
+      return;
+    }
+
+    if (this._showCreateOption && (e.key === "ArrowDown" || (e.key === "Tab" && !e.shiftKey))) {
+      const items = this._getActiveMenuItems();
+      if (items.length > 0) {
+        const lastItem = items[items.length - 1];
+        const lastItemFocused = lastItem.shadowRoot?.querySelector(".dropdown-item")?.matches(":focus");
+        if (lastItemFocused) {
+          e.preventDefault();
+          createDiv?.focus();
+          return;
+        }
+      }
+      // When no items exist but create option is visible (empty filter), focus it
+      if (items.length === 0) {
+        e.preventDefault();
+        createDiv?.focus();
+        return;
+      }
+    }
+    super._handleKeyboardMenuItemsEvent(e);
   }
 
   protected _renderFeedbackMenu() {
@@ -678,6 +715,19 @@ export class SgdsComboBox extends SelectElement {
             class=${classMap({ "d-none": this.loading || this.emptyMenuAsync || this.optionList.length === 0 })}
             @slotchange=${this._handleDefaultSlotChange}
           ></slot>
+          ${this._showCreateOption
+            ? html`<div
+                class=${classMap({ "create-option": true, slotted: this._createOptionSlotContent.length > 0 })}
+                tabindex="0"
+                role="option"
+                @click=${this._handleCreateOptionClick}
+                @keydown=${this._handleCreateOptionKeydown}
+              >
+                ${this._createOptionSlotContent.length > 0
+                  ? html`<slot name="create" @slotchange=${this._handleCreateOptionSlotChange}></slot>`
+                  : `Create "${this.displayValue}"`}
+              </div>`
+            : html`<slot name="create" class="d-none" @slotchange=${this._handleCreateOptionSlotChange}></slot>`}
           ${this._renderFeedbackMenu()}
         </div>
       </div>

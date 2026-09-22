@@ -575,3 +575,90 @@ export const ScrollEnd = {
   args: {},
   parameters: {}
 };
+
+const CreatableTemplate = () => {
+  return html`
+    <sgds-combo-box creatable label="Fruits" placeholder="Type a fruit that's not in the list" id="creatable-combobox-example">
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="carrot">Carrot</sgds-combo-box-option>
+      <sgds-combo-box-option value="durian">Durian</sgds-combo-box-option>
+      <sgds-combo-box-option value="eggplant">Eggplant</sgds-combo-box-option>
+    </sgds-combo-box>
+  `;
+};
+
+export const Creatable = {
+  render: CreatableTemplate.bind({}),
+  name: "Creatable ComboBox",
+  args: {},
+  parameters: {}
+};
+
+const CreatableWithEventTemplate = () => {
+  return html`
+    <sgds-combo-box
+      creatable
+      label="Fruits"
+      placeholder="Type a new fruit to create it"
+      id="creatable-event-combobox-example"
+    >
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="carrot">Carrot</sgds-combo-box-option>
+    </sgds-combo-box>
+    <script>
+      const creatableComboBox = document.querySelector("#creatable-event-combobox-example");
+      creatableComboBox.addEventListener("sgds-create-option", async (e) => {
+        const comboBox = e.target;
+        const newValue = e.detail.value;
+
+        // Wait for the menu close animation to finish before reopening
+        await new Promise(resolve => comboBox.addEventListener("sgds-after-hide", resolve, { once: true }));
+
+        // Reopen with loading state
+        comboBox.showMenu();
+        comboBox.loading = true;
+
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        comboBox.loading = false;
+
+        // Append the new option to the combo box
+        const option = document.createElement("sgds-combo-box-option");
+        option.value = newValue.toLowerCase().replace(/\s+/g, "-");
+        option.textContent = newValue;
+        comboBox.appendChild(option);
+      });
+    </script>
+  `;
+};
+
+export const CreatableWithEvent = {
+  render: CreatableWithEventTemplate.bind({}),
+  name: "Creatable with sgds-create-option event",
+  args: {},
+  parameters: {}
+};
+
+const CreatableCustomSlotTemplate = () => {
+  return html`
+    <sgds-combo-box
+      creatable
+      label="Assignee"
+      placeholder="Find or register a new assignee"
+      id="creatable-custom-slot-combobox-example"
+    >
+      <span slot="create">Register new person in <a href="https://www.google.com" target="_blank">form</a></span>
+      <sgds-combo-box-option value="alice-tan">Alice Tan</sgds-combo-box-option>
+      <sgds-combo-box-option value="benjamin-lee">Benjamin Lee</sgds-combo-box-option>
+      <sgds-combo-box-option value="catherine-lim">Catherine Lim</sgds-combo-box-option>
+    </sgds-combo-box>
+  `;
+};
+
+export const CreatableCustomSlot = {
+  render: CreatableCustomSlotTemplate.bind({}),
+  name: "Creatable with custom create-option slot",
+  args: {},
+  parameters: {}
+};
