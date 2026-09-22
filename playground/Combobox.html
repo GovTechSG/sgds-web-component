@@ -283,6 +283,44 @@
   </div>
 
   <div class="container">
+    <h2>Creatable examples</h2>
+
+    <h4>Single select creatable — type a value not in the list</h4>
+    <sgds-combo-box id="creatable-single" creatable label="Fruits" placeholder="Type to search or create">
+      <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+    </sgds-combo-box>
+    <script>
+      document.querySelector("#creatable-single").addEventListener("sgds-create-option", (e) => {
+        console.log("sgds-create-option fired:", e.detail.value);
+        alert(`Create option: "${e.detail.value}"`);
+      });
+    </script>
+
+    <h4>Single select creatable with custom create-option slot</h4>
+    <sgds-combo-box id="creatable-custom-slot" creatable label="Assignee" placeholder="Search for a person">
+      <span slot="create">Register new person in <a href="https://www.google.com" target="_blank">form</a></span>
+      <sgds-combo-box-option value="alice-tan">Alice Tan</sgds-combo-box-option>
+      <sgds-combo-box-option value="benjamin-lee">Benjamin Lee</sgds-combo-box-option>
+      <sgds-combo-box-option value="catherine-lim">Catherine Lim</sgds-combo-box-option>
+    </sgds-combo-box>
+
+    <h4>Multi select creatable</h4>
+    <sgds-combo-box id="creatable-multi" creatable multiSelect clearable label="Tags" placeholder="Type to search or create">
+      <sgds-combo-box-option value="react">React</sgds-combo-box-option>
+      <sgds-combo-box-option value="vue">Vue</sgds-combo-box-option>
+      <sgds-combo-box-option value="angular">Angular</sgds-combo-box-option>
+    </sgds-combo-box>
+    <script>
+      document.querySelector("#creatable-multi").addEventListener("sgds-create-option", (e) => {
+        console.log("sgds-create-option fired:", e.detail.value);
+        alert(`Create option: "${e.detail.value}"`);
+      });
+    </script>
+  </div>
+
+  <div class="container">
     <h2>Autocomplete examples</h2>
 
     <div class="small-container" style="display: flex; flex-direction: column; gap: 2rem;">
