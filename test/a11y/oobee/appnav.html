@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <script type="module" src="/src/index.ts"></script>
+    <link href="/src/themes/day.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <style>
+      .avatar-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--sgds-surface-raised);
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <sgds-appnav>
+      <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Open side menu"></sgds-icon-button>
+      <div slot="brand">Logo</div>
+      <sgds-icon-button name="moon" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
+      <sgds-icon-button name="bell" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Notifications"></sgds-icon-button>
+    </sgds-appnav>
+
+    <sgds-appnav tone="gradient-3">
+      <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Open side menu"></sgds-icon-button>
+      <div slot="brand">Logo</div>
+      <sgds-icon-button name="moon" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
+      <sgds-appnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
+        <span slot="avatar" class="avatar-circle"></span>
+        <sgds-dropdown-item readonly>
+          <div>
+            <span>Account</span>
+            <div>
+              <span>User Name</span>
+              <span>user@agency.gov.sg</span>
+            </div>
+          </div>
+        </sgds-dropdown-item>
+        <sgds-divider thickness="thin"></sgds-divider>
+        <sgds-dropdown-item arialabel="My profile">
+          <span>My profile</span>
+        </sgds-dropdown-item>
+        <sgds-dropdown-item arialabel="Settings">
+          <span>Settings</span>
+        </sgds-dropdown-item>
+        <sgds-dropdown-item arialabel="Log out">
+          <span>Log out</span>
+        </sgds-dropdown-item>
+      </sgds-appnav-profile>
+    </sgds-appnav>
+
+    <sgds-appnav>
+      <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Open side menu"></sgds-icon-button>
+      <div slot="brand">Logo</div>
+      <sgds-appnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile info">
+        <span slot="avatar" class="avatar-circle"></span>
+      </sgds-appnav-profile>
+    </sgds-appnav>
+  </body>
+</html>

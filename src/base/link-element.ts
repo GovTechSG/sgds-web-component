@@ -3,6 +3,7 @@ import SgdsElement from "./sgds-element";
 import { property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { sanitizeHref } from "../utils/safeUrl";
 import { watch } from "../utils/watch";
 
 /**
@@ -30,7 +31,7 @@ export default class LinkElement extends SgdsElement {
   render() {
     return html`
       <a
-        href=${this.disabled ? "javascript:void(0)" : ifDefined(this.href)}
+        href=${this.disabled ? "javascript:void(0)" : ifDefined(sanitizeHref(this.href))}
         class="nav-link ${classMap({
           disabled: this.disabled,
           active: this.active

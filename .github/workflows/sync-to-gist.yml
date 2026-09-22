@@ -13,7 +13,7 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v4
         - name: Gist Repo Sync
-          uses: pentatonicfunk/action-gist-repo-sync@v1.8
+          uses: pentatonicfunk/action-gist-repo-sync@7a37e23973f58c405adb0f4040bd6a4e4bd31779 # v1.8
           with:
             gist_token: ${{ secrets.GIST_TOKEN }}
             gist_id: 425e29332ec837d9ea4bbe90ff8d4a37
@@ -24,7 +24,7 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v4
         - name: Gist Repo Sync
-          uses: pentatonicfunk/action-gist-repo-sync@v1.8
+          uses: pentatonicfunk/action-gist-repo-sync@7a37e23973f58c405adb0f4040bd6a4e4bd31779 # v1.8
           with:
             gist_token: ${{ secrets.GIST_TOKEN }}
             gist_id: a31bfc0ea0c2b87d950b125f92835a76
