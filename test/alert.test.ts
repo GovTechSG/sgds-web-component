@@ -204,3 +204,52 @@ describe("<Alert>", () => {
     });
   });
 });
+
+describe("outlined Alert theme colours", () => {
+  const links: HTMLLinkElement[] = [];
+  before(async () => {
+    for (const theme of ["day", "night"]) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = `/src/themes/${theme}.css`;
+      links.push(link);
+      await new Promise<void>((resolve, reject) => {
+        link.onload = () => resolve();
+        link.onerror = reject;
+        document.head.append(link);
+      });
+    }
+  });
+  afterEach(() => document.documentElement.classList.remove("sgds-night-theme"));
+  after(() => links.forEach(link => link.remove()));
+
+  const variants = [
+    { variant: "info", day: "rgb(244, 242, 254)", night: "rgb(42, 30, 97)", icon: "rgb(169, 153, 243)" },
+    { variant: "success", day: "rgb(227, 249, 237)", night: "rgb(6, 49, 25)", icon: "rgb(22, 189, 94)" },
+    { variant: "danger", day: "rgb(252, 241, 241)", night: "rgb(85, 14, 14)", icon: "rgb(233, 139, 139)" },
+    { variant: "warning", day: "rgb(254, 244, 203)", night: "rgb(50, 41, 9)", icon: "rgb(229, 191, 41)" },
+    { variant: "neutral", day: "rgb(243, 243, 243)", night: "rgb(42, 42, 42)", icon: "rgb(255, 255, 255)" }
+  ];
+  for (const { variant, day, night, icon } of variants) {
+    for (const dark of [false, true]) {
+      it(`${variant} uses the expected ${dark ? "night" : "day"} colours`, async () => {
+        document.documentElement.classList.toggle("sgds-night-theme", dark);
+        const el = await fixture<SgdsAlert>(html`
+          <sgds-alert show outlined dismissible variant=${variant} title="Title">
+            <span slot="icon">Icon</span>Description with <a href="#">link</a>
+          </sgds-alert>
+        `);
+        const alert = el.shadowRoot!.querySelector<HTMLElement>(".alert")!;
+        expect(getComputedStyle(alert).backgroundColor).to.equal(dark ? night : day);
+        expect(getComputedStyle(alert).color).to.equal(dark ? "rgb(255, 255, 255)" : "rgb(26, 26, 26)");
+        if (dark) expect(getComputedStyle(el.querySelector("[slot=icon]")!).color).to.equal(icon);
+        expect(getComputedStyle(el.querySelector("a")!).color).to.equal(getComputedStyle(alert).color);
+        const close = el.shadowRoot!.querySelector<SgdsCloseButton>("sgds-close-button")!;
+        await close.updateComplete;
+        expect(getComputedStyle(close.shadowRoot!.querySelector("button")!).color).to.equal(
+          getComputedStyle(alert).color
+        );
+      });
+    }
+  }
+});

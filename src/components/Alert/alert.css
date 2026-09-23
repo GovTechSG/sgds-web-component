@@ -16,31 +16,31 @@
 }
 
 :host([variant="success"][outlined]) .alert {
-  background-color: var(--sgds-success-surface-muted);
+  background-color: light-dark(var(--sgds-success-surface-muted), var(--sgds-green-900));
   border: var(--sgds-border-width-1) solid var(--sgds-success-border-color-muted);
 }
 
 :host([variant="warning"][outlined]) .alert {
-  background-color: var(--sgds-warning-surface-muted);
+  background-color: light-dark(var(--sgds-warning-surface-muted), var(--sgds-yellow-900));
   border: var(--sgds-border-width-1) solid var(--sgds-warning-border-color-muted);
 }
 
 :host([variant="danger"][outlined]) .alert {
-  background-color: var(--sgds-danger-surface-muted);
+  background-color: light-dark(var(--sgds-danger-surface-muted), var(--sgds-red-900));
   border: var(--sgds-border-width-1) solid var(--sgds-danger-border-color-muted);
 }
 
 :host([variant="neutral"][outlined]) .alert {
-  background-color: var(--sgds-neutral-surface-muted);
+  background-color: light-dark(var(--sgds-neutral-surface-muted), var(--sgds-gray-900));
   border: var(--sgds-border-width-1) solid var(--sgds-neutral-border-color-muted);
 }
 
 :host([outlined]) .alert-icon__outlined::slotted(*) {
-  color: var(--sgds-primary-color-fixed-dark);
+  color: var(--sgds-primary-color-default);
 }
 
 :host([variant="success"][outlined]) .alert-icon__outlined::slotted(*) {
-  color: var(--sgds-success-color-fixed-dark);
+  color: var(--sgds-success-color-default);
 }
 
 :host([variant="warning"][outlined]) .alert-icon__outlined::slotted(*) {
@@ -48,15 +48,17 @@
 }
 
 :host([variant="danger"][outlined]) .alert-icon__outlined::slotted(*) {
-  color: var(--sgds-danger-color-fixed-dark);
+  color: var(--sgds-danger-color-default);
 }
 
 :host([variant="neutral"][outlined]) .alert-icon__outlined::slotted(*) {
-  color: var(--sgds-color-fixed-dark);
+  color: light-dark(var(--sgds-color-fixed-dark), var(--sgds-gray-000));
 }
 
 .alert {
   --sgds-alert-color: var(--sgds-color-fixed-light);
+  /* Follow the SGDS theme, including scoped theme token overrides. */
+  color-scheme: var(--sgds-color-scheme, only light);
   position: relative;
   display: flex;
   flex-direction: row;
@@ -68,9 +70,9 @@
   padding: var(--sgds-padding-lg);
 }
 
-.alert.outlined {
-  --sgds-alert-color: var(--sgds-color-fixed-dark);
-  background-color: var(--sgds-primary-surface-muted);
+:host([outlined]) .alert {
+  --sgds-alert-color: light-dark(var(--sgds-color-fixed-dark), var(--sgds-gray-000));
+  background-color: light-dark(var(--sgds-primary-surface-muted), var(--sgds-product-primary-900));
   border: var(--sgds-border-width-1) solid var(--sgds-primary-border-color-muted);
 }
 
@@ -122,4 +124,10 @@
   position: absolute;
   right: 14px;
   top: 14px;
+}
+
+/* Keep the close button aligned with the outlined Alert without changing other consumers. */
+:host([outlined]) sgds-close-button {
+  --sgds-color-fixed-dark: var(--sgds-alert-color);
+  --sgds-bg-translucent-fixed-dark: var(--sgds-bg-translucent);
 }
