@@ -230,6 +230,24 @@ describe("outlined Alert theme colours", () => {
     { variant: "warning", day: "rgb(254, 244, 203)", night: "rgb(50, 41, 9)", icon: "rgb(229, 191, 41)" },
     { variant: "neutral", day: "rgb(243, 243, 243)", night: "rgb(42, 42, 42)", icon: "rgb(255, 255, 255)" }
   ];
+  for (const { variant } of variants) {
+    it(`${variant} respects semantic surface and text overrides at night`, async () => {
+      document.documentElement.classList.add("sgds-night-theme");
+      const semantic = variant === "info" ? "primary" : variant;
+      const el = await fixture<SgdsAlert>(
+        html`<sgds-alert show outlined dismissible variant=${variant}>Alert</sgds-alert>`
+      );
+      el.style.setProperty(`--sgds-${semantic}-surface-muted`, "rgb(12, 34, 56)");
+      el.style.setProperty("--sgds-body-color-default", "rgb(210, 220, 230)");
+      const alert = el.shadowRoot?.querySelector(".alert") as HTMLElement;
+      expect(getComputedStyle(alert).backgroundColor).to.equal("rgb(12, 34, 56)");
+      expect(getComputedStyle(alert).color).to.equal("rgb(210, 220, 230)");
+      const close = el.shadowRoot?.querySelector("sgds-close-button") as SgdsCloseButton;
+      await close.updateComplete;
+      const button = close.shadowRoot?.querySelector("button") as HTMLButtonElement;
+      expect(getComputedStyle(button).color).to.equal("rgb(210, 220, 230)");
+    });
+  }
   for (const { variant, day, night, icon } of variants) {
     for (const dark of [false, true]) {
       it(`${variant} uses the expected ${dark ? "night" : "day"} colours`, async () => {
