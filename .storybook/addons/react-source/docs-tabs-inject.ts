@@ -14,15 +14,22 @@ const containerCodeMap = new WeakMap<Element, () => string>();
 
 // Intercept clipboard writes from native Storybook copy buttons.
 // When a copy happens inside a processed container, override with the active tab's code.
+// SB 10: the copy button lives in ActionBar (sibling of the source wrapper),
+// so we walk up to .sbdocs-preview and look for our container inside it.
 document.addEventListener(
   "click",
   e => {
     const btn = (e.target as HTMLElement).closest("button");
     if (!btn || btn.classList.contains("react-source-tab")) return;
-    if (btn.textContent?.trim() !== "Copy") return;
 
-    // Check if this button is inside one of our processed containers
-    const container = btn.closest("[data-react-tabs-container]");
+    const btnText = btn.textContent?.trim() || "";
+    if (!btnText.includes("Copy code") && btnText !== "Copy") return;
+
+    // SB 10: copy button is in ActionBar (.sbdocs-preview-actions),
+    // which is a sibling of .sbdocs-preview. Both share a common parent.
+    const actionsBar = btn.closest(".sbdocs-preview-actions");
+    const canvasParent = actionsBar?.parentElement ?? btn.closest(".sbdocs-preview");
+    const container = canvasParent?.querySelector("[data-react-tabs-container]");
     if (!container) return;
 
     const getCode = containerCodeMap.get(container);
@@ -34,7 +41,7 @@ document.addEventListener(
     navigator.clipboard.writeText(getCode()).then(() => {
       btn.textContent = "Copied";
       setTimeout(() => {
-        btn.textContent = "Copy";
+        btn.textContent = "Copy code";
       }, 1500);
     });
   },
@@ -43,7 +50,6 @@ document.addEventListener(
 
 function injectTabs(pre: HTMLElement) {
   if (pre.hasAttribute(PROCESSED_ATTR)) return;
-  pre.setAttribute(PROCESSED_ATTR, "true");
 
   // Get code content from the inner div
   const codeDiv = pre.querySelector("div[class*='language-']") as HTMLElement;
@@ -58,15 +64,20 @@ function injectTabs(pre: HTMLElement) {
   if (!reactCode) return;
 
   // Find the outermost source container (parent of the scroll area wrapper)
-  // Structure: div.css-* > div[dir="ltr"] > ... > pre.prismjs
+  // SB 10 DOM: pre.prismjs > div > div[radix] > div > div(sourceContainer)
+  //            > div#react-aria > div.sbdocs-preview(.docs-story is inside here)
   const scrollWrapper = pre.closest("[data-radix-scroll-area-viewport]")?.parentElement;
   const sourceContainer = scrollWrapper?.parentElement;
   if (!sourceContainer) return;
 
   // Only inject tabs for Canvas blocks (which have a story preview sibling),
-  // not standalone <Source> blocks in MDX documentation
-  const canvasWrapper = sourceContainer.parentElement;
-  if (!canvasWrapper?.querySelector(":scope > .docs-story")) return;
+  // not standalone <Source> blocks in MDX documentation.
+  // Walk up to the .sbdocs-preview container and check for .docs-story
+  const canvasWrapper = pre.closest(".sbdocs-preview");
+  if (!canvasWrapper?.querySelector(".docs-story")) return;
+
+  // All checks passed — mark as processed to avoid re-injection
+  pre.setAttribute(PROCESSED_ATTR, "true");
 
   // Mark the container for the clipboard interceptor
   sourceContainer.setAttribute("data-react-tabs-container", "true");
@@ -99,7 +110,10 @@ function injectTabs(pre: HTMLElement) {
     activeBtn.style.borderBottomColor = "#2563eb";
   }
 
-  // Insert tab bar before the scroll area
+  // Insert tab bar before the scroll area wrapper, inside the source container
+  // Ensure the source container has a block layout so the tab bar stacks above the code
+  sourceContainer.style.display = "flex";
+  sourceContainer.style.flexDirection = "column";
   sourceContainer.insertBefore(tabBar, sourceContainer.firstChild);
 
   // Initially show React code
@@ -155,24 +169,24 @@ function escapeHtml(str: string): string {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
+function processAll() {
+  document.querySelectorAll<HTMLElement>("pre.prismjs").forEach(injectTabs);
+}
+
 function observe() {
   // Process existing
-  document.querySelectorAll<HTMLElement>("pre.prismjs").forEach(injectTabs);
+  processAll();
 
-  // Watch for new ones
-  const observer = new MutationObserver(mutations => {
-    for (const mutation of mutations) {
-      for (const node of mutation.addedNodes) {
-        if (!(node instanceof HTMLElement)) continue;
-        if (node.matches?.("pre.prismjs")) {
-          injectTabs(node);
-        }
-        node.querySelectorAll<HTMLElement>("pre.prismjs").forEach(injectTabs);
-      }
-    }
+  // Watch for new elements AND content changes (SB 10 adds pre.prismjs first,
+  // then populates content via React re-render)
+  let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  const observer = new MutationObserver(() => {
+    // Debounce to batch rapid mutations from React renders
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(processAll, 100);
   });
 
-  observer.observe(document.body, { childList: true, subtree: true });
+  observer.observe(document.body, { childList: true, subtree: true, characterData: true });
 }
 
 if (document.readyState === "loading") {

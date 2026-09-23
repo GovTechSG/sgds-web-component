@@ -27,8 +27,10 @@ const ModeTemplate = args => {
   return html`
     <sgds-datepicker id="single-mode-example" .initialValue=${args.initialValue} mode=${args.mode}></sgds-datepicker>
     <script>
-      const datepicker = document.querySelector("#single-mode-example");
-      datepicker.initialValue = ["23/05/2023"];
+      (() => {
+        const datepicker = document.querySelector("#single-mode-example");
+        datepicker.initialValue = ["23/05/2023"];
+      })();
     </script>
   `;
 };
@@ -58,8 +60,10 @@ const MinMaxTemplate = args => {
         maxDate="2023-06-19T12:00:00.000Z"
       ></sgds-datepicker>
       <script>
-        const datepicker = document.querySelector("#min-max-example");
-        datepicker.displayDate = new Date(2023, 5, 10);
+        (() => {
+          const datepicker = document.querySelector("#min-max-example");
+          datepicker.displayDate = new Date(2023, 5, 10);
+        })();
       </script>
     </div>
   `;
@@ -92,14 +96,16 @@ const FormSubmissionTemplate = args => {
       <sgds-button type="submit">Submit</sgds-button>
     </form>
     <script>
-      const datepicker = document.querySelector("#form-submission-example");
-      datepicker.displayDate = new Date(2023, 5, 10);
-      const form = document.querySelector("#datepicker-form");
-      form.addEventListener("submit", event => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        alert("Date submitted :" + formData.get("myDatepicker"));
-      });
+      (() => {
+        const datepicker = document.querySelector("#form-submission-example");
+        datepicker.displayDate = new Date(2023, 5, 10);
+        const form = document.querySelector("#datepicker-form");
+        form.addEventListener("submit", event => {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          alert("Date submitted :" + formData.get("myDatepicker"));
+        });
+      })();
     </script>
   `;
 };
@@ -120,21 +126,23 @@ const CustomValidationTemplate = () => html`
     hasFeedback
   ></sgds-datepicker>
   <script>
-    const picker = document.getElementById("custom-validation-example");
-    picker.addEventListener("sgds-change-date", e => {
-      const val = e.target.value;
-      if (!val || val === "DD/MM/YYYY") return;
-      const [day, month, year] = val.split("/");
-      const selected = new Date(year + "-" + month + "-" + day);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      if (selected <= today) {
-        e.target.setInvalid(true);
-        e.target.invalidFeedback = "Please select a future date";
-      } else {
-        e.target.setInvalid(false);
-      }
-    });
+    (() => {
+      const picker = document.getElementById("custom-validation-example");
+      picker.addEventListener("sgds-change-date", e => {
+        const val = e.target.value;
+        if (!val || val === "DD/MM/YYYY") return;
+        const [day, month, year] = val.split("/");
+        const selected = new Date(year + "-" + month + "-" + day);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selected <= today) {
+          e.target.setInvalid(true);
+          e.target.invalidFeedback = "Please select a future date";
+        } else {
+          e.target.setInvalid(false);
+        }
+      });
+    })();
   </script>
 `;
 

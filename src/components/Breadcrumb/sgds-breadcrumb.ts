@@ -75,11 +75,11 @@ export class SgdsBreadcrumb extends SgdsElement {
 
   render() {
     return html`
-      <div aria-label=${ifDefined(this.ariaLabel)}>
+      <nav aria-label=${ifDefined(this.ariaLabel)}>
         <div class="breadcrumb">
           <slot @slotchange=${this._handleSlotChange}></slot>
         </div>
-      </div>
+      </nav>
     `;
   }
 }

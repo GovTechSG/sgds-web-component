@@ -154,7 +154,7 @@ export class SgdsAppnav extends NavElement {
         : { sm: 512, md: 768, lg: 1024, xl: 1280, xxl: 1440 }[this.expand]);
 
     return html`
-      <nav>
+      <nav aria-label="App navigation">
         <div class="navbar ${this._expandClass()}">
           <slot name="start" class=${classMap({ "slot-empty": !this.hasStartSlot })}></slot>
           <a class="navbar-brand" href=${sanitizeHref(this.brandHref) ?? ""} aria-label="brand-link">

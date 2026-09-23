@@ -7,6 +7,7 @@ export const Template = args => html` <sgds-switch
   ?checked=${args.checked}
   ?disabled=${args.disabled}
 >
+  Toggle
 </sgds-switch>`;
 
 export const args = {};

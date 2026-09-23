@@ -55,7 +55,6 @@ export const Basic = {
   render: BasicGrid.bind({}),
   name: "Basic Grid",
   args: {},
-  parameters: {},
   tags: ["!dev", "!autodocs"]
 };
 
@@ -63,7 +62,6 @@ export const Responsive = {
   render: ResponsiveGrid.bind({}),
   name: "Responsive Grid",
   args: {},
-  parameters: {},
   tags: ["!dev", "!autodocs"]
 };
 
@@ -71,7 +69,6 @@ export const HiddenCol = {
   render: HiddenColumns.bind({}),
   name: "Hidden Columns",
   args: {},
-  parameters: {},
   tags: ["!dev", "!autodocs"]
 };
 
@@ -79,6 +76,5 @@ export const CenterCol = {
   render: CenterColumn.bind({}),
   name: "Hidden Columns",
   args: {},
-  parameters: {},
   tags: ["!dev", "!autodocs"]
 };

@@ -9,11 +9,11 @@ describe("sgds-breadcrumb", () => {
     const el = await fixture<SgdsBreadcrumb>(html`<sgds-breadcrumb></sgds-breadcrumb>`);
     assert.shadowDom.equal(
       el,
-      ` <div aria-label="breadcrumb">
+      ` <nav aria-label="breadcrumb">
         <div class="breadcrumb">
           <slot></slot>
         </div>
-      </div>
+      </nav>
         `
     );
   });
@@ -26,11 +26,11 @@ describe("sgds-breadcrumb", () => {
     </sgds-breadcrumb>`);
     assert.shadowDom.equal(
       el,
-      ` <div aria-label="breadcrumb">
+      ` <nav aria-label="breadcrumb">
         <div class="breadcrumb">
           <slot></slot>
         </div>
-      </div>
+      </nav>
         `
     );
   });
@@ -49,7 +49,7 @@ describe("sgds-breadcrumb", () => {
     </sgds-breadcrumb>`);
     assert.shadowDom.equal(
       el,
-      ` <div aria-label="breadcrumb">
+      ` <nav aria-label="breadcrumb">
         <div class="breadcrumb">
               <sgds-breadcrumb-item
           >
@@ -95,7 +95,7 @@ describe("sgds-breadcrumb", () => {
            </a>
          </sgds-breadcrumb-item>
         </div>
-      </div>
+      </nav>
         `
     );
 
