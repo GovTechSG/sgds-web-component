@@ -27,32 +27,36 @@
     value="1"
   ></sgds-select> -->
 
-  <h2> Select populated by slots</h2>
+  <h2>Select populated by slots</h2>
   <form>
-  <sgds-select
-    label="Select label"
-    hinttext="Select an option"
-    placeholder="Select an option"
-    required
-    hasFeedback
-    menuIsOpen
+    <sgds-select
+      label="Select label"
+      hinttext="Select an option"
+      placeholder="Select an option"
+      required
+      hasFeedback
+      menuIsOpen
+    >
+      <sgds-select-option value="1">Option 1</sgds-select-option>
+      <sgds-select-option value="2">Option 2</sgds-select-option>
+      <sgds-select-option value="3">Option 3</sgds-select-option></sgds-select
+    >
+    <button type="submit">Sub</button>
+    <button type="reset">reset</button>
+  </form>
 
-  >  <sgds-select-option  value="1">Option 1</sgds-select-option>
-  <sgds-select-option  value="2">Option 2</sgds-select-option>
-  <sgds-select-option value="3">Option 3</sgds-select-option></sgds-select>
-<button type="submit">Sub</button>
-<button type="reset">reset</button>
- </form>
-
- <h4>Loading state</h4>
- <sgds-select loading>
-  <sgds-select-option  value="1">Option 1</sgds-select-option>
-  <sgds-select-option  value="2">Option 2</sgds-select-option>
-  <sgds-select-option value="3">Option 3</sgds-select-option>
- </sgds-select>
+  <h4>Loading state</h4>
+  <sgds-select loading>
+    <sgds-select-option value="1">Option 1</sgds-select-option>
+    <sgds-select-option value="2">Option 2</sgds-select-option>
+    <sgds-select-option value="3">Option 3</sgds-select-option>
+  </sgds-select>
 
   <h2>Custom Validation with noValidate</h2>
-  <p>Set <code>noValidate</code> to disable built-in constraint validation. Use <code>setInvalid(bool)</code> and <code>invalidFeedback</code> to control the state programmatically.</p>
+  <p>
+    Set <code>noValidate</code> to disable built-in constraint validation. Use <code>setInvalid(bool)</code> and
+    <code>invalidFeedback</code> to control the state programmatically.
+  </p>
   <form id="custom-validation-form">
     <sgds-select
       id="custom-validation-select"
@@ -67,7 +71,7 @@
       <sgds-select-option value="banana">Banana</sgds-select-option>
       <sgds-select-option value="durian">Durian</sgds-select-option>
     </sgds-select>
-    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+    <div style="margin-top: 1rem; display: flex; gap: 0.5rem">
       <button type="submit">Submit</button>
       <button type="reset">Reset</button>
     </div>
@@ -127,7 +131,6 @@
     hinttext="Select an option"
     placeholder="Select an option"
   ></sgds-select> -->
-
 </div>
 <!-- 
 <script>
@@ -341,6 +344,8 @@
     { label: "Zimbabwe", value: "205" }
   ];
 </script> -->
+
+<div style="height: 1300px; border: 1px solid red"></div>
 
 <script>
   window.addEventListener("sgds-change", () => console.log("sgds-change"));
