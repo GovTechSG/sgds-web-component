@@ -597,6 +597,27 @@ export const ExpandableMultiSelect = {
   parameters: {}
 };
 
+export const PaginationVariantDescription = {
+  render: Template.bind({}),
+  name: "Pagination variant: description",
+  args: { ...args, paginationVariant: "description" },
+  parameters: {}
+};
+
+export const PaginationVariantNumber = {
+  render: Template.bind({}),
+  name: "Pagination variant: number",
+  args: { ...args, paginationVariant: "number" },
+  parameters: {}
+};
+
+export const PaginationVariantButton = {
+  render: Template.bind({}),
+  name: "Pagination variant: button",
+  args: { ...args, paginationVariant: "button" },
+  parameters: {}
+};
+
 export const CustomPaginationSummary = {
   render: CustomPaginationSummaryTemplate.bind({}),
   name: "Custom pagination summary",
