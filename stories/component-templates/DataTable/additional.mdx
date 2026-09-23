@@ -68,6 +68,30 @@ Use `expand` and `multiSelect` together when rows need both selection and detail
   <Story of={DataTableStories.ExpandableMultiSelect} />
 </Canvas>
 
+## Pagination variant: description
+
+Set `paginationVariant="description"` to show a "Page X of Y" text between the direction buttons.
+
+<Canvas of={DataTableStories.PaginationVariantDescription}>
+  <Story of={DataTableStories.PaginationVariantDescription} />
+</Canvas>
+
+## Pagination variant: number
+
+Set `paginationVariant="number"` to show only page numbers without direction buttons.
+
+<Canvas of={DataTableStories.PaginationVariantNumber}>
+  <Story of={DataTableStories.PaginationVariantNumber} />
+</Canvas>
+
+## Pagination variant: button
+
+Set `paginationVariant="button"` to show only Prev/Next direction buttons without page numbers.
+
+<Canvas of={DataTableStories.PaginationVariantButton}>
+  <Story of={DataTableStories.PaginationVariantButton} />
+</Canvas>
+
 ## Custom pagination summary
 
 Set `paginationSummary` to replace the default results summary text in the footer.
