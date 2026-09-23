@@ -179,3 +179,89 @@ describe("SgdsBadge component", () => {
     expect(spyHide).not.to.be.called;
   });
 });
+
+describe("outlined Badge theme colours", () => {
+  const links: HTMLLinkElement[] = [];
+  before(async () => {
+    for (const theme of ["day", "night"]) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = `/src/themes/${theme}.css`;
+      links.push(link);
+      await new Promise<void>((resolve, reject) => {
+        link.onload = () => resolve();
+        link.onerror = reject;
+        document.head.append(link);
+      });
+    }
+  });
+  afterEach(() => document.documentElement.classList.remove("sgds-night-theme"));
+  after(() => links.forEach(link => link.remove()));
+
+  const rgb = (hex: string) =>
+    `rgb(${hex
+      .match(/../g)
+      ?.map(value => parseInt(value, 16))
+      .join(", ")})`;
+  // Day backgrounds/labels remain unchanged; night colours follow the Badge design.
+  const variants = [
+    ["primary", "f4f2fe", "6b4feb", "2a1e61", "a999f3", "523abc"],
+    ["info", "f4f2fe", "6b4feb", "2a1e61", "a999f3", "523abc"],
+    ["accent", "ecf5fe", "0269d0", "012a54", "60aaf4", "0151a0"],
+    ["success", "e3f9ed", "0e7c3d", "063119", "16bd5e", "0b5e2f"],
+    ["danger", "fcf1f1", "cf2323", "550e0e", "e98b8b", "a11b1b"],
+    ["warning", "fef4cb", "7e6917", "322909", "e5bf29", "605111"],
+    ["cyan", "e0f7fc", "00758d", "002f38", "00b4da", "005a6d"],
+    ["purple", "fbf0fe", "ac1cdb", "460c5a", "d983f6", "8516a9"],
+    ["neutral", "f3f3f3", "1a1a1a", "2a2a2a", "a5a5a5", "525252"],
+    ["white", "ffffff", "1a1a1a", "ffffff", "1a1a1a", ""]
+  ];
+  for (const [variant] of variants) {
+    it(`${variant} respects its semantic background and border tokens`, async () => {
+      const tokenVariant = variant === "info" ? "primary" : variant;
+      const el = await fixture<SgdsBadge>(html`<sgds-badge outlined variant=${variant}>Badge</sgds-badge>`);
+      el.style.setProperty(
+        tokenVariant === "white" ? "--sgds-surface-fixed-light" : `--sgds-${tokenVariant}-surface-muted`,
+        "rgb(12, 34, 56)"
+      );
+      el.style.setProperty(
+        tokenVariant === "white" ? "--sgds-border-color-muted" : `--sgds-${tokenVariant}-border-color-muted`,
+        "rgb(65, 43, 21)"
+      );
+      const badge = el.shadowRoot?.querySelector(".badge") as HTMLElement;
+      expect(getComputedStyle(badge).backgroundColor).to.equal("rgb(12, 34, 56)");
+      expect(getComputedStyle(badge).borderTopColor).to.equal("rgb(65, 43, 21)");
+    });
+  }
+  for (const [variant, dayBg, dayText, nightBg, nightText, nightBorder] of variants) {
+    for (const dark of [false, true]) {
+      it(`${variant} uses the expected ${dark ? "night" : "day"} colours`, async () => {
+        document.documentElement.classList.toggle("sgds-night-theme", dark);
+        const el = await fixture<SgdsBadge>(
+          html`<sgds-badge show outlined dismissible variant=${variant}>Badge</sgds-badge>`
+        );
+        const badge = el.shadowRoot?.querySelector(".badge") as HTMLElement;
+        const style = getComputedStyle(badge);
+        expect(style.backgroundColor).to.equal(rgb(dark ? nightBg : dayBg));
+        expect(style.color).to.equal(rgb(dark ? nightText : dayText));
+        if (dark && nightBorder) expect(style.borderTopColor).to.equal(rgb(nightBorder));
+        if (dark && variant === "white") {
+          // Browsers serialize this relative colour in OKLCH; compare rendered RGBA values.
+          const context = document.createElement("canvas").getContext("2d") as CanvasRenderingContext2D;
+          context.fillStyle = style.borderTopColor;
+          context.fillRect(0, 0, 1, 1);
+          expect(Array.from(context.getImageData(0, 0, 1, 1).data)).to.deep.equal([255, 255, 255, 26]);
+        }
+        const close = el.shadowRoot?.querySelector("sgds-close-button") as SgdsCloseButton;
+        await close.updateComplete;
+        const button = close.shadowRoot?.querySelector("button") as HTMLButtonElement;
+        expect(getComputedStyle(button).color).to.equal(rgb(dark && variant !== "white" ? "ffffff" : "1a1a1a"));
+        el.dismissible = false;
+        el.innerHTML = '<span slot="icon">Icon</span>Badge';
+        await elementUpdated(el);
+        const icon = el.querySelector("[slot=icon]") as HTMLElement;
+        expect(getComputedStyle(icon).color).to.equal(style.color);
+      });
+    }
+  }
+});
