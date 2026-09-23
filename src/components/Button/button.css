@@ -19,7 +19,7 @@
   justify-content: center;
 }
 
-.btn span {
+.btn > slot:not([name]) {
   padding: 0px var(--sgds-padding-2-xs);
 }
 

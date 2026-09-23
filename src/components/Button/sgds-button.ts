@@ -147,7 +147,7 @@ export class SgdsButton extends ButtonElement {
                tone=${ifDefined(this._assignSpinnerTone(this.tone, this.variant))}
              ></sgds-spinner>`
            : html`<slot name="leftIcon"></slot>
-               <span><slot></slot></span>
+               <slot></slot>
                <slot name="rightIcon"></slot>`
        }
       
