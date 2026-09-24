@@ -21,7 +21,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Behaviour
 
-- Renders a pre-built three-dot (`⋯`) icon button; clicking it toggles the dropdown menu.
+- Renders a pre-built three-dot icon button; clicking it toggles the dropdown menu.
 - `size` controls the icon button size: `md` (default) or `sm`.
 - List items must be `<sgds-dropdown-item>` elements in the default slot.
 - `disabled` on `<sgds-dropdown-item>` prevents selection; `sgds-select` does not fire for disabled items.
@@ -52,13 +52,6 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ```html
 <!-- Basic overflow menu -->
-<sgds-overflow-menu>
-  <sgds-dropdown-item ariaLabel="View">View</sgds-dropdown-item>
-  <sgds-dropdown-item ariaLabel="Edit">Edit</sgds-dropdown-item>
-  <sgds-dropdown-item ariaLabel="Delete">Delete</sgds-dropdown-item>
-</sgds-overflow-menu>
-
-<!-- Small size for compact layouts -->
 <sgds-overflow-menu size="sm">
   <sgds-dropdown-item ariaLabel="View">View</sgds-dropdown-item>
   <sgds-dropdown-item ariaLabel="Edit">Edit</sgds-dropdown-item>
@@ -97,6 +90,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | Attribute | Type | Default | Purpose |
 |---|---|---|---|
 | `size` | `sm \| md` | `md` | Size of the three-dot icon button |
+| `orientation` | `horizontal \| vertical` | `horizontal` | Direction of the three-dot icon (`⋯` or `⋮`) |
 
 ## Slots
 
