@@ -12,7 +12,7 @@
   line-height: var(--sgds-line-height-2-xs);
   color: var(--sgds-label-color-subtle);
   padding: var(--sgds-padding-xs) var(--sgds-padding-sm);
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-interactive-border-radius);
 }
 
 .sidebar-section-label--collapsible {
