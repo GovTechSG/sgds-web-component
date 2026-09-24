@@ -1,5 +1,5 @@
 .form-check-input[type="checkbox"] {
-  border-radius: var(--sgds-form-border-radius-md);
+  border-radius: var(--sgds-form-border-radius-dense);
 }
 
 .form-check-input[checked] {
