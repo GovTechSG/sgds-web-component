@@ -20,4 +20,21 @@ describe("<sgds-overflow-menu>", () => {
       `
     );
   });
+  it("renders vertical three-dots icon when orientation is vertical", async () => {
+    const el = await fixture(html`<sgds-overflow-menu orientation="vertical"></sgds-overflow-menu>`);
+    assert.shadowDom.equal(
+      el,
+      `
+      <sgds-dropdown
+        close="default"
+        drop="down"
+      >
+        <button aria-expanded="false" aria-haspopup="menu" aria-label="More options" slot="toggler" class="overflow-btn">
+            <sgds-icon name="three-dots-vertical" size="md"></sgds-icon>
+        </button>
+        <slot></slot>
+      </sgds-dropdown>
+      `
+    );
+  });
 });

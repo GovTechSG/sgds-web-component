@@ -3,7 +3,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { userEvent } from "storybook/test";
 
 export const Template = args => html`
-  <sgds-overflow-menu size=${ifDefined(args.size)}>
+  <sgds-overflow-menu size=${ifDefined(args.size)} orientation=${ifDefined(args.orientation)}>
     <sgds-dropdown-item ariaLabel="View">View</sgds-dropdown-item>
     <sgds-dropdown-item ariaLabel="Edit">Edit</sgds-dropdown-item>
     <sgds-dropdown-item ariaLabel="Delete">Delete</sgds-dropdown-item>
@@ -11,7 +11,8 @@ export const Template = args => html`
 `;
 
 export const args = {
-  size: "md"
+  size: "md",
+  orientation: "horizontal"
 };
 
 export const parameters = {};

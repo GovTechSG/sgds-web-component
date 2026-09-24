@@ -22,3 +22,10 @@ export const MediumSize = {
   args: { size: "md" },
   parameters: {}
 };
+
+export const VerticalOrientation = {
+  render: Template.bind({}),
+  name: "Vertical orientation",
+  args: { orientation: "vertical" },
+  parameters: {}
+};
