@@ -97,7 +97,7 @@ ${deprecatedNotice}<ArgTypes of="${component.tagName}"/>\n
 
   const mdxSource = prettier.format(
     `
-import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/blocks";
+import { Canvas, Meta, Story, ArgTypes, Markdown } from "@storybook/addon-docs/blocks";
 import { html } from "lit";
 import * as ${key}Stories from './${key}.stories';
 

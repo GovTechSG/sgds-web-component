@@ -1,5 +1,6 @@
 import remarkGfm from "remark-gfm";
-module.exports = {
+
+export default {
   stories: [
     "../stories/foundation/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/usage/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
@@ -19,9 +20,8 @@ module.exports = {
     "../stories/*.mdx"
   ],
   addons: [
-    "@storybook/addon-essentials",
     "@storybook/addon-a11y",
-    "@storybook/addon-mdx-gfm",
+    "@storybook/addon-vitest",
     {
       name: "@storybook/addon-docs",
       options: {
@@ -32,9 +32,9 @@ module.exports = {
         }
       }
     },
-    "@storybook/addon-interactions",
     "@storybook/addon-themes",
-    "./addons/react-source/preset"
+    "./addons/react-source/preset",
+    "@storybook/addon-mcp"
   ],
   framework: {
     name: "@storybook/web-components-vite",

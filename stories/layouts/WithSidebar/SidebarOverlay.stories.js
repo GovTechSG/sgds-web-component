@@ -76,6 +76,7 @@ const Template = () => html`
           tone="neutral"
           variant="ghost"
           name="sidebar-expand"
+          ariaLabel="Toggle sidebar"
           @click=${() => document.querySelector("sgds-sidebar").toggleCollapsed()}
         ></sgds-icon-button>
         <sgds-breadcrumb>

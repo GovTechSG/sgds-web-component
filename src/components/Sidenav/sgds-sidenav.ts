@@ -50,7 +50,7 @@ export class SgdsSidenav extends SgdsElement {
 
   render() {
     return html`
-      <nav class=${classMap({ sticky: this.sticky })}>
+      <nav aria-label="Side navigation" class=${classMap({ sticky: this.sticky })}>
         <div>
           <slot @click=${this.onToggle}></slot>
         </div>

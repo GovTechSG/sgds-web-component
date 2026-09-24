@@ -303,7 +303,7 @@ export class SgdsModal extends SgdsElement {
                 <slot name="description"></slot>
               </div>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" tabindex="0">
               <slot></slot>
             </div>
           </div class="modal-content">

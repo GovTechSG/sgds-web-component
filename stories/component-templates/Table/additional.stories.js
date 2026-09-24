@@ -20,7 +20,7 @@ const StructuredElementsTemplate = () => html`
         </sgds-link>
       </sgds-table-cell>
       <sgds-table-cell>
-        <sgds-icon-button name="three-dots-vertical"></sgds-icon-button>
+        <sgds-icon-button name="three-dots-vertical" ariaLabel="More actions"></sgds-icon-button>
       </sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
@@ -62,7 +62,7 @@ const StructuredElementsTemplateVertical = () => html`
         </sgds-link>
       </sgds-table-cell>
       <sgds-table-cell>
-        <sgds-icon-button name="three-dots-vertical"></sgds-icon-button>
+        <sgds-icon-button name="three-dots-vertical" ariaLabel="More actions"></sgds-icon-button>
       </sgds-table-cell>
     </sgds-table-row>
     <sgds-table-row>
@@ -111,7 +111,7 @@ const StructuredElementsTemplateBoth = () => html` <sgds-table ?headerbackground
       </sgds-link>
     </sgds-table-cell>
     <sgds-table-cell>
-      <sgds-icon-button name="three-dots-vertical"></sgds-icon-button>
+      <sgds-icon-button name="three-dots-vertical" ariaLabel="More actions"></sgds-icon-button>
     </sgds-table-cell>
   </sgds-table-row>
   <sgds-table-row>
