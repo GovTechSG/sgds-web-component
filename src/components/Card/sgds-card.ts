@@ -132,8 +132,8 @@ export class SgdsCard extends CardElement {
               <h3 class="card-title"><slot name="title" @slotchange=${this.handleTitleSlotChange}></slot></h3>
             </div>
             <slot></slot>
+            <slot name="description"></slot>
           </div>
-          <slot name="description"></slot>
           <slot name="lower"></slot>
           <slot name="footer">
             <slot name="link" @slotchange=${this.warnLinkSlotMisused}></slot>
