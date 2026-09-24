@@ -57,8 +57,6 @@
 
 .alert {
   --sgds-alert-color: var(--sgds-color-fixed-light);
-  /* Follow the SGDS theme, including scoped theme token overrides. */
-  color-scheme: var(--sgds-color-scheme, only light);
   position: relative;
   display: flex;
   flex-direction: row;
@@ -124,10 +122,4 @@
   position: absolute;
   right: 14px;
   top: 14px;
-}
-
-/* Keep the close button aligned with the outlined Alert without changing other consumers. */
-:host([outlined]) sgds-close-button {
-  --sgds-color-fixed-dark: var(--sgds-alert-color);
-  --sgds-bg-translucent-fixed-dark: var(--sgds-bg-translucent);
 }
