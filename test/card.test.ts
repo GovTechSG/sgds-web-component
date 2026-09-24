@@ -28,8 +28,8 @@ describe("<sgds-card>", () => {
                 <h3 class="card-title"><slot name="title"></slot></h3>
               </div>
               <slot></slot>
+              <slot name="description"></slot>
             </div>
-            <slot name="description"></slot>
             <slot name="lower"></slot>
             <slot name="footer">
               <slot name="link"></slot>
@@ -62,8 +62,8 @@ describe("<sgds-card>", () => {
                 <h3 class="card-title"><slot name="title"></slot></h3>
               </div>
               <slot></slot>
+              <slot name="description"></slot>
             </div>
-            <slot name="description"></slot>
             <slot name="lower"></slot>
             <slot name="footer">
               <slot name="link"></slot>
@@ -98,8 +98,8 @@ describe("<sgds-card>", () => {
                 <h3 class="card-title"><slot name="title"></slot></h3>
               </div>
               <slot></slot>
+              <slot name="description"></slot>
             </div>
-            <slot name="description"></slot>
             <slot name="lower"></slot>
             <slot name="footer">
               <slot name="link"></slot>
@@ -132,8 +132,8 @@ describe("<sgds-card>", () => {
                 <h3 class="card-title"><slot name="title"></slot></h3>
               </div>
               <slot></slot>
+              <slot name="description"></slot>
             </div>
-            <slot name="description"></slot>
             <slot name="lower"></slot>
             <slot name="footer">
               <slot name="link"></slot>
@@ -143,6 +143,26 @@ describe("<sgds-card>", () => {
       `
     );
   });
+
+  for (const orientation of ["vertical", "horizontal"]) {
+    it(`uses the 8px semantic gap between title and description in ${orientation} cards`, async () => {
+      const el = await fixture<SgdsCard>(html`
+        <sgds-card orientation=${orientation} style="--sgds-gap-xs: 8px; --sgds-gap-lg: 20px; --sgds-margin-none: 0px;">
+          <span slot="title">Card title</span>
+          <span slot="description">Card description</span>
+          <span slot="lower">Additional content</span>
+        </sgds-card>
+      `);
+      const title = el.shadowRoot!.querySelector(".card-header")!;
+      const description = el.querySelector('[slot="description"]')!;
+      const lower = el.querySelector('[slot="lower"]')!;
+      expect(description.getBoundingClientRect().top - title.getBoundingClientRect().bottom).to.equal(8);
+      expect(lower.getBoundingClientRect().top - description.getBoundingClientRect().bottom).to.equal(20);
+
+      el.style.setProperty("--sgds-gap-xs", "12px");
+      expect(description.getBoundingClientRect().top - title.getBoundingClientRect().bottom).to.equal(12);
+    });
+  }
 
   it("renders content in the description slot", async () => {
     const el = await fixture<SgdsCard>(html`
