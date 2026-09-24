@@ -9,7 +9,7 @@
 
 :host([variant="solid"]) .tab {
   background-color: var(--sgds-bg-translucent-subtle);
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-interactive-border-radius);
 }
 
 :host([variant="solid"][active]) .tab {
