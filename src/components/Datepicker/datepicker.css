@@ -28,10 +28,10 @@
 sgds-datepicker-input {
   flex: 1;
   margin-right: 0; /* Remove the margin on the right */
-  --input-border-radius: var(--sgds-form-border-radius-md) 0 0 var(--sgds-form-border-radius-md);
+  --input-border-radius: var(--sgds-form-border-radius) 0 0 var(--sgds-form-border-radius);
 }
 sgds-icon-button {
-  --btn-border-radius: 0 var(--sgds-form-border-radius-md) var(--sgds-form-border-radius-md) 0;
+  --btn-border-radius: 0 var(--sgds-form-border-radius) var(--sgds-form-border-radius) 0;
 }
 
 .m-width-160 {
