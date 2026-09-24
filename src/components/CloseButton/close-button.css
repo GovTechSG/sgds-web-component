@@ -1,5 +1,5 @@
 :host {
-  --sgds-close-btn-border-radius: var(--sgds-border-radius-sm);
+  --sgds-close-btn-border-radius: var(--sgds-interactive-border-radius);
   display: inline-flex;
 }
 
