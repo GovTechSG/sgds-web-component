@@ -3,7 +3,7 @@
   --btn-color: var(--sgds-color-fixed-light);
   --btn-bg: var(--sgds-primary-surface-default);
   --btn-hover-bg: var(--sgds-primary-surface-emphasis);
-  --btn-border-radius: var(--sgds-border-radius-md);
+  --btn-border-radius: var(--sgds-interactive-border-radius);
   --btn-opacity: var(--sgds-opacity-100, 1);
 }
 /* deprecated in v3.5.6 */
