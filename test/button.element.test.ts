@@ -12,7 +12,7 @@ describe("sgds-button", () => {
       el,
       `<button class="btn no-icon" type="button" aria-disabled="false" tabindex="0">
         <slot name="leftIcon"></slot>
-        <span>
+        <span role="presentation">
           <slot></slot>
         </span>
         <slot name="rightIcon"></slot>
