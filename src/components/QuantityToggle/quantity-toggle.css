@@ -19,11 +19,11 @@ sgds-input {
 }
 
 .input-group > sgds-icon-button.minus-btn {
-  --btn-border-radius: var(--sgds-form-border-radius-md) 0 0 var(--sgds-form-border-radius-md);
+  --btn-border-radius: var(--sgds-form-border-radius) 0 0 var(--sgds-form-border-radius);
 }
 
 .input-group > sgds-icon-button.plus-btn {
-  --btn-border-radius: 0 var(--sgds-form-border-radius-md) var(--sgds-form-border-radius-md) 0;
+  --btn-border-radius: 0 var(--sgds-form-border-radius) var(--sgds-form-border-radius) 0;
 }
 
 .input-group sgds-button:focus {
