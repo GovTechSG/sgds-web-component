@@ -123,6 +123,14 @@
   --sgds-form-border-radius-md: var(--sgds-border-radius-md);
   --sgds-form-border-radius-full: var(--sgds-border-radius-full);
 
+  /* Semantic - Border Radius */
+  --sgds-structure-border-radius: var(--sgds-border-radius-none);
+  --sgds-indicator-border-radius: var(--sgds-border-radius-sm);
+  --sgds-interactive-border-radius: var(--sgds-border-radius-md);
+  --sgds-form-border-radius: var(--sgds-border-radius-md);
+  --sgds-surface-border-radius: var(--sgds-border-radius-lg);
+  --sgds-overlay-border-radius: var(--sgds-border-radius-lg);
+
   /* Primitive - Breakpoint */
   --sgds-breakpoint-xs: var(--sgds-dimension-320);
   --sgds-breakpoint-sm: var(--sgds-dimension-512);
@@ -139,7 +147,17 @@
   --sgds-breakpoint-sbar-3-xl: var(--sgds-dimension-1680px);
 
   /* Primitive - Font Family */
-  --sgds-font-family-brand: "Inter", system-ui, sans-serif;
+  --sgds-font-family-sans: "Inter", system-ui, sans-serif;
+  --sgds-font-family-mono: "Roboto Mono", monospace;
+  --sgds-font-family-brand: var(--sgds-font-family-sans);
+
+  /* Semantic - Font Family */
+  --sgds-font-family-display: var(--sgds-font-family-brand);
+  --sgds-font-family-heading: var(--sgds-font-family-brand);
+  --sgds-font-family-subtitle: var(--sgds-font-family-brand);
+  --sgds-font-family-body: var(--sgds-font-family-brand);
+  --sgds-font-family-label: var(--sgds-font-family-brand);
+  --sgds-font-family-code: var(--sgds-font-family-mono);
 
   /* Primitive - Font Weight */
   --sgds-font-weight-light: 300;
