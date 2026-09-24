@@ -10,7 +10,7 @@
   padding-bottom: var(--sgds-padding-sm);
   padding-left: var(--sgds-padding-3-xl);
   padding-right: var(--sgds-padding-sm);
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-interactive-border-radius);
   text-decoration: none !important;
 }
 
