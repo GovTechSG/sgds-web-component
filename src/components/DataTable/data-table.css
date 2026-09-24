@@ -134,7 +134,7 @@ th[data-sorting]:focus-visible {
   height: var(--sgds-dimension-20);
   padding: 0;
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
-  border-radius: var(--sgds-form-border-radius-sm);
+  border-radius: var(--sgds-interactive-border-radius);
   background-color: var(--sgds-bg-transparent);
   color: var(--sgds-color-subtle);
   cursor: pointer;
