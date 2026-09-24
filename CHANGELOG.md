@@ -1,3 +1,37 @@
+## v3.29.0 (2026-09-25)
+
+### Feat
+
+- **Checkbox**: ariaLabel prop for standalone checkbox accessibility [skip-cd][run-chromatic] (#832)
+- **Checkbox**: new ariaLabel prop for case when visible label not passed
+- **Button**: pseudo active style to indicate click action
+
+### Fix
+
+- **Button**: resolve oobee a11y violation for inner span element   [skip-cd] (#841)
+- **button**: add missing role="presentation" to shadow DOM test
+- **alert**: update outlined dark mode colours [run-chromatic] (#842)[skip-cd]
+- **alert**: use default close button tone
+- **alert**: consume semantic dark mode tokens
+- **alert**: improve outlined colours in dark mode
+- **ci**: add --dangerously-run-mcp-servers flag and restrict scan to repo members
+- **ci**: run build before test-storybook and fix eslint config
+- **Button**: add role=presentation to span for oobee a11y compliance
+- **Button**: remove span wrapping slot
+- **Select/Dropdown**: remove scrolling when on focus [run-chromatic] (#839) [skip-cd]
+- **Select/Dropdown**: remove scrolling when on focus
+- **Button**: pseudo active style to indicate click action [run-chromatic] (#826)
+- **security**: upgrade deps and fix override compatibility
+- **Button, AlertLink, Appnav, Mainnav, Footer, IconButton**: sanitise forwarded href [skip-cd] (#834)
+- **link-element**: deps on link-element to santize hrefs
+- **DataTable**: resolve accessibility violations flagged by oobee
+- **Button**: exclude disabled state from pseudo active style
+
+### Refactor
+
+- **a11y**: add aria-label to nav components and update test snapshots
+- **build**: migrate bundler from Rollup to Rolldown
+
 ## v3.28.0 (2026-09-17)
 
 ### Feat
