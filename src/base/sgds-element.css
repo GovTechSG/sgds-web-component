@@ -2,7 +2,7 @@
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   color: var(--sgds-body-color-default, #1a1a1a);
-  font-family: var(--sgds-font-family-brand, "Inter", system-ui, sans-serif);
+  font-family: var(--sgds-font-family-label, "Inter", system-ui, sans-serif);
   font-size: var(--sgds-font-size-body-md, 1rem);
   font-weight: var(--sgds-font-weight-regular, 400);
   line-height: var(--sgds-line-height-xs, 24px);

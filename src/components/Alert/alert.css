@@ -89,6 +89,7 @@
 }
 
 .alert-title {
+  font-family: var(--sgds-font-family-subtitle);
   font-weight: var(--sgds-font-weight-semibold);
   font-size: var(--sgds-font-size-subtitle-sm);
   font-style: normal;

@@ -45,6 +45,7 @@
 }
 
 .toast-body__title {
+  font-family: var(--sgds-font-family-subtitle);
   font-size: var(--sgds-font-size-subtitle-sm);
   font-weight: var(--sgds-font-weight-semibold);
   line-height: var(--sgds-line-height-2-xs);
