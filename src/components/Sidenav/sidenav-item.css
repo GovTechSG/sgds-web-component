@@ -15,7 +15,7 @@ button {
   background: 0;
   padding: var(--sgds-padding-sm) var(--sgds-padding-sm) var(--sgds-padding-sm)
     calc(var(--sgds-padding-sm) + var(--sgds-padding-2-xs));
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-interactive-border-radius);
   display: flex;
   gap: var(--sgds-gap-xs);
   font-weight: var(--sgds-font-weight-semibold);
@@ -61,7 +61,7 @@ button {
   background: 0;
   padding: var(--sgds-padding-sm) var(--sgds-padding-sm) var(--sgds-padding-sm)
     calc(var(--sgds-padding-sm) + var(--sgds-padding-2-xs));
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-interactive-border-radius);
   display: flex;
   gap: var(--sgds-gap-xs);
   font-weight: var(--sgds-font-weight-semibold) !important;
