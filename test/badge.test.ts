@@ -203,7 +203,7 @@ describe("outlined Badge theme colours", () => {
       .match(/../g)
       ?.map(value => parseInt(value, 16))
       .join(", ")})`;
-  // Day backgrounds/labels remain unchanged; night colours follow the Badge design.
+  // Theme colours follow the Badge design.
   const variants = [
     ["primary", "f4f2fe", "6b4feb", "2a1e61", "a999f3", "523abc"],
     ["info", "f4f2fe", "6b4feb", "2a1e61", "a999f3", "523abc"],
@@ -213,7 +213,7 @@ describe("outlined Badge theme colours", () => {
     ["warning", "fef4cb", "7e6917", "322909", "e5bf29", "605111"],
     ["cyan", "e0f7fc", "00758d", "002f38", "00b4da", "005a6d"],
     ["purple", "fbf0fe", "ac1cdb", "460c5a", "d983f6", "8516a9"],
-    ["neutral", "f3f3f3", "1a1a1a", "2a2a2a", "a5a5a5", "525252"],
+    ["neutral", "f3f3f3", "525252", "2a2a2a", "a5a5a5", "525252"],
     ["white", "ffffff", "1a1a1a", "ffffff", "1a1a1a", ""]
   ];
   for (const [variant] of variants) {
@@ -225,7 +225,7 @@ describe("outlined Badge theme colours", () => {
         "rgb(12, 34, 56)"
       );
       el.style.setProperty(
-        tokenVariant === "white" ? "--sgds-border-color-muted" : `--sgds-${tokenVariant}-border-color-muted`,
+        tokenVariant === "white" ? "--sgds-border-color-translucent" : `--sgds-${tokenVariant}-border-color-muted`,
         "rgb(65, 43, 21)"
       );
       const badge = el.shadowRoot?.querySelector(".badge") as HTMLElement;
@@ -254,8 +254,7 @@ describe("outlined Badge theme colours", () => {
         }
         const close = el.shadowRoot?.querySelector("sgds-close-button") as SgdsCloseButton;
         await close.updateComplete;
-        const button = close.shadowRoot?.querySelector("button") as HTMLButtonElement;
-        expect(getComputedStyle(button).color).to.equal(rgb(dark && variant !== "white" ? "ffffff" : "1a1a1a"));
+        expect(close).to.have.attribute("tone", variant === "white" ? "fixed-dark" : "default");
         el.dismissible = false;
         el.innerHTML = '<span slot="icon">Icon</span>Badge';
         await elementUpdated(el);

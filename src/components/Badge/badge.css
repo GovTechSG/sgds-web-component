@@ -75,7 +75,7 @@
 }
 
 :host([variant="neutral"][outlined]) .badge {
-  color: light-dark(var(--sgds-color-fixed-dark), var(--sgds-color-subtle));
+  color: var(--sgds-color-subtle);
   background-color: var(--sgds-neutral-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-neutral-border-color-muted);
 }
@@ -83,7 +83,7 @@
 :host([variant="white"][outlined]) .badge {
   color: var(--sgds-color-fixed-dark);
   background-color: var(--sgds-surface-fixed-light);
-  border: var(--sgds-border-width-1) solid light-dark(var(--sgds-border-color-muted), var(--sgds-border-color-translucent));
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-translucent);
 }
 
 sgds-tooltip {
@@ -92,8 +92,6 @@ sgds-tooltip {
 }
 
 .badge {
-  /* Follow the SGDS theme, including scoped theme token overrides. */
-  color-scheme: var(--sgds-color-scheme, only light);
   background-color: var(--sgds-primary-surface-default);
   color: var(--sgds-color-fixed-light);
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
@@ -139,10 +137,4 @@ slot::slotted(*) {
   line-height: inherit !important;
   margin: inherit !important;
   color: inherit !important;
-}
-
-/* Outlined coloured badges use a light close icon at night; white badges stay dark. */
-:host([outlined]:not([variant="white"])) sgds-close-button {
-  --sgds-color-fixed-dark: var(--sgds-body-color-default);
-  --sgds-bg-translucent-fixed-dark: var(--sgds-bg-translucent);
 }
