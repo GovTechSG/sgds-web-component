@@ -39,43 +39,43 @@
 }
 
 :host([variant="accent"][outlined]) .badge {
-  color: var(--sgds-accent-color-fixed-dark);
+  color: var(--sgds-accent-color-default);
   background-color: var(--sgds-accent-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-accent-border-color-muted);
 }
 
 :host([variant="success"][outlined]) .badge {
-  color: var(--sgds-success-color-fixed-dark);
+  color: var(--sgds-success-color-default);
   background-color: var(--sgds-success-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-success-border-color-muted);
 }
 
 :host([variant="danger"][outlined]) .badge {
-  color: var(--sgds-danger-color-fixed-dark);
+  color: var(--sgds-danger-color-default);
   background-color: var(--sgds-danger-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-danger-border-color-muted);
 }
 
 :host([variant="warning"][outlined]) .badge {
-  color: var(--sgds-warning-color-fixed-dark);
+  color: var(--sgds-warning-color-default);
   background-color: var(--sgds-warning-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-warning-border-color-muted);
 }
 
 :host([variant="cyan"][outlined]) .badge {
-  color: var(--sgds-cyan-color-fixed-dark);
+  color: var(--sgds-cyan-color-default);
   background-color: var(--sgds-cyan-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-cyan-border-color-muted);
 }
 
 :host([variant="purple"][outlined]) .badge {
-  color: var(--sgds-purple-color-fixed-dark);
+  color: var(--sgds-purple-color-default);
   background-color: var(--sgds-purple-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-purple-border-color-muted);
 }
 
 :host([variant="neutral"][outlined]) .badge {
-  color: var(--sgds-color-fixed-dark);
+  color: var(--sgds-color-subtle);
   background-color: var(--sgds-neutral-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-neutral-border-color-muted);
 }
@@ -83,7 +83,7 @@
 :host([variant="white"][outlined]) .badge {
   color: var(--sgds-color-fixed-dark);
   background-color: var(--sgds-surface-fixed-light);
-  border: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+  border: var(--sgds-border-width-1) solid var(--sgds-border-color-translucent);
 }
 
 sgds-tooltip {
@@ -108,7 +108,7 @@ sgds-tooltip {
 }
 
 .badge.outlined {
-  color: var(--sgds-primary-color-fixed-dark);
+  color: var(--sgds-primary-color-default);
   background-color: var(--sgds-primary-surface-muted);
   border: var(--sgds-border-width-1) solid var(--sgds-primary-border-color-muted);
 }
