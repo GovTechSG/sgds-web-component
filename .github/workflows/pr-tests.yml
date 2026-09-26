@@ -1,0 +1,36 @@
+name: PR Tests
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [22.18.0]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium firefox
+      - name: Run unit tests
+        run: pnpm run test
+      - name: Run script tests
+        run: pnpm run test:scripts
+      - name: Build library and stories
+        run: pnpm run utility:storybook && pnpm run build && pnpm run write:stories
+      - name: Run Storybook tests
+        run: pnpm run test-storybook

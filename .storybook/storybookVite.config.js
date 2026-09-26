@@ -1,3 +1,3 @@
-import { defineConfig, createLogger } from "vite";
+import { defineConfig } from "vite";
 
 export default defineConfig({});

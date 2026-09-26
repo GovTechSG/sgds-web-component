@@ -1,4 +1,4 @@
-import { setCustomElementsManifest } from "@storybook/web-components";
+import { setCustomElementsManifest } from "@storybook/web-components-vite";
 import "@webcomponents/scoped-custom-element-registry/scoped-custom-element-registry.min.js";
 import customElements from "../custom-elements.json";
 import "../lib/index.js";
@@ -8,7 +8,6 @@ import "../lib/css/sgds.css";
 import "./utility.css";
 import "./gt-themes.css";
 import "./global.css";
-import sgdsTheme from "./sgdsTheme";
 import "./addons/react-source/docs-tabs-inject";
 
 export const setCustomElementsManifestWithOptions = (
@@ -36,10 +35,22 @@ export const setCustomElementsManifestWithOptions = (
 setCustomElementsManifestWithOptions(customElements, { privateFields: false });
 
 export const parameters = {
+  a11y: {
+    test: "error",
+    config: {
+      rules: [
+        { id: "color-contrast", enabled: false },
+        { id: "heading-order", enabled: false },
+        { id: "landmark-unique", enabled: false },
+        { id: "aria-required-children", enabled: false },
+        { id: "empty-table-header", enabled: false },
+        { id: "empty-heading", enabled: false },
+        { id: "label", enabled: false }
+      ]
+    }
+  },
   viewMode: "docs",
   docs: {
-    //@ts-ignore
-    theme: sgdsTheme,
     toc: {
       headingSelector: "h1, h2, h3",
       title: "Table of Contents",
@@ -48,7 +59,7 @@ export const parameters = {
     source: {}
   },
   viewport: {
-    viewports: {
+    options: {
       xs: { name: "xs mobile", styles: { width: "320px", height: "568px" } },
       sm: { name: "sm mobile", styles: { width: "512px", height: "960px" } },
       md: { name: "md tablet", styles: { width: "768px", height: "1080px" } },
