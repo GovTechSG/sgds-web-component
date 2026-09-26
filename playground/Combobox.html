@@ -285,6 +285,70 @@
   <div class="container">
     <h2>Creatable examples</h2>
 
+    <h4>Creatable with no initial options (vanilla JS)</h4>
+    <sgds-combo-box id="creatable-empty" creatable multiSelect label="Fruits" placeholder="Type to create an option...">
+    </sgds-combo-box>
+    <div id="created-options-log" style="margin-top: 0.5rem; padding: 0.5rem; background: #f5f5f5; border-radius: 4px; font-family: monospace; font-size: 0.875rem;">
+      No options created yet.
+    </div>
+    <script>
+      {
+        const comboBox = document.querySelector("#creatable-empty");
+        const log = document.querySelector("#created-options-log");
+        const createdItems = [];
+
+        comboBox.addEventListener("sgds-create-option", (e) => {
+          const { value } = e.detail;
+
+          // Append the new option and select it
+          const option = document.createElement("sgds-combo-box-option");
+          option.value = value;
+          option.textContent = value;
+          comboBox.appendChild(option);
+
+          const currentValue = comboBox.value;
+          comboBox.value = currentValue ? currentValue + ";" + value : value;
+          comboBox.displayValue = "";
+
+          createdItems.push(value);
+          log.textContent = "Created options: " + createdItems.join(", ");
+        });
+      }
+    </script>
+
+    <h4>Creatable with no initial options (React-style pattern)</h4>
+    <p>Simulates React's controlled pattern: set value and options together, no <code>await ready</code> needed.</p>
+    <sgds-combo-box id="creatable-react-style" creatable multiSelect label="Tags" placeholder="Type to create a tag...">
+    </sgds-combo-box>
+    <div id="react-style-log" style="margin-top: 0.5rem; padding: 0.5rem; background: #f5f5f5; border-radius: 4px; font-family: monospace; font-size: 0.875rem;">
+      No tags created yet.
+    </div>
+    <script>
+      {
+        // Simulates React state — options and value are managed together
+        const state = { options: [], value: [] };
+        const comboBox = document.querySelector("#creatable-react-style");
+        const log = document.querySelector("#react-style-log");
+
+        function render() {
+          // Like React re-render: replace children and set value in one go
+          comboBox.innerHTML = state.options
+            .map(opt => `<sgds-combo-box-option value="${opt}">${opt}</sgds-combo-box-option>`)
+            .join("");
+          comboBox.value = state.value.join(";");
+          comboBox.displayValue = "";
+        }
+
+        comboBox.addEventListener("sgds-create-option", (e) => {
+          const { value } = e.detail;
+          state.options.push(value);
+          state.value.push(value);
+          render();
+          log.textContent = "Tags: " + state.value.join(", ");
+        });
+      }
+    </script>
+
     <h4>Single select creatable — type a value not in the list</h4>
     <sgds-combo-box id="creatable-single" creatable label="Fruits" placeholder="Type to search or create">
       <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>

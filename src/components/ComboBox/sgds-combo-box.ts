@@ -192,7 +192,7 @@ export class SgdsComboBox extends SelectElement {
     if (this.value && list.length > 0) {
       const valueArray = this.value.split(";");
       const initialSelectedItem = list.filter(({ value }) => valueArray.includes(value));
-      this.selectedItems = [...initialSelectedItem, ...this.selectedItems];
+      this.selectedItems = [...initialSelectedItem];
 
       if (!this.multiSelect) {
         this.displayValue = initialSelectedItem[0]?.label;
@@ -261,9 +261,12 @@ export class SgdsComboBox extends SelectElement {
     const valueArray = this.value.split(";");
     const initialSelectedItem = list.filter(({ value }) => valueArray.includes(value));
     this.selectedItems = [...initialSelectedItem];
-    // When the new filtered items don't match value we update it
+    // When the new filtered items don't match value we update it.
+    // In creatable mode, preserve unmatched values — they may not yet
+    // be in optionList because the async slot change handler is still
+    // processing the newly appended option element.
     const updatedValue = initialSelectedItem.map(item => item.value).join(";");
-    if (updatedValue !== this.value) {
+    if (updatedValue !== this.value && !this.creatable) {
       this.value = updatedValue;
     }
     // Disabling this condition for async combobox so that the display value in the input will not clear when menu options changes
@@ -603,12 +606,13 @@ export class SgdsComboBox extends SelectElement {
     const target = evt.composedPath()[0] as HTMLElement;
     if (target.closest?.("a, button")) return;
 
-    this.emit<ISgdsComboBoxCreateOptionEventDetail>("sgds-create-option", {
-      detail: { value: this._createOptionValue }
-    });
     this.emptyMenuAfterFiltering = false;
     this._syncCreateOption();
     this.hideMenu();
+
+    this.emit<ISgdsComboBoxCreateOptionEventDetail>("sgds-create-option", {
+      detail: { value: this._createOptionValue }
+    });
   }
 
   /** Keydown handler for the create-option container. */
@@ -674,8 +678,8 @@ export class SgdsComboBox extends SelectElement {
     if (this.async) {
       return this.emptyMenuAsync || this.optionList.length === 0 ? this._renderEmptyMenu() : nothing;
     } else {
-      // When creatable, the create option is a slotted element — skip "No options"
-      if (this.creatable && this.emptyMenuAfterFiltering && this.optionList.length > 0) {
+      // When creatable and the create option is shown, skip "No options" — it's redundant
+      if (this._showCreateOption) {
         return nothing;
       }
       return this.optionList.length === 0 || (this.emptyMenuAfterFiltering && this.optionList.length > 0)

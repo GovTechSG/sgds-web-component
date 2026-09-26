@@ -2542,4 +2542,131 @@ describe("creatable combo-box", () => {
 
     expect(handler).to.not.have.been.called;
   });
+
+  it("does not show 'No options' when creatable and combobox has no initial options", async () => {
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box creatable></sgds-combo-box> `);
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await sendKeys({ type: "zzz" });
+    await el.updateComplete;
+
+    const createOption = el.shadowRoot?.querySelector(".create-option");
+    expect(createOption).to.exist;
+    expect(createOption?.textContent?.trim()).to.equal('Create "zzz"');
+    expect(el.shadowRoot?.querySelector(".empty-menu")).to.not.exist;
+  });
+
+  it("preserves value in creatable mode when option is appended and value set synchronously", async () => {
+    const el = await fixture<SgdsComboBox>(html` <sgds-combo-box creatable multiSelect></sgds-combo-box> `);
+    await el.updateComplete;
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await sendKeys({ type: "zzz" });
+    await el.updateComplete;
+
+    // Simulate consumer pattern: listen to event, append option, set value
+    el.addEventListener("sgds-create-option", (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      const option = document.createElement("sgds-combo-box-option") as SgdsComboBoxOption;
+      option.value = detail.value;
+      option.textContent = detail.value;
+      el.appendChild(option);
+      el.value = detail.value;
+    });
+
+    const createOption = el.shadowRoot?.querySelector(".create-option") as HTMLElement;
+    createOption.click();
+
+    // Wait for all async slot processing to settle
+    await aTimeout(100);
+
+    expect(el.value).to.equal("zzz");
+  });
+
+  it("discards unmatched values in non-creatable mode", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box value="nonexistent">
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+    await el.updateComplete;
+    await el.updateComplete;
+
+    await waitUntil(() => el.value === "", "value should be discarded", { timeout: 3000 });
+    expect(el.value).to.equal("");
+  });
+
+  it("does not accumulate selectedItems on repeated slot changes", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box creatable multiSelect value="apple">
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+
+    const badges = () => el.shadowRoot?.querySelectorAll("sgds-badge") as NodeListOf<SgdsBadge>;
+
+    // Append a second option and select it — simulates what happens on sgds-create-option
+    const optionB = document.createElement("sgds-combo-box-option") as SgdsComboBoxOption;
+    optionB.value = "B";
+    optionB.textContent = "B";
+    el.appendChild(optionB);
+    el.value = "apple;B";
+    // Allow full async slot processing chain to settle
+    await aTimeout(100);
+
+    // Append a third option and select it
+    const optionC = document.createElement("sgds-combo-box-option") as SgdsComboBoxOption;
+    optionC.value = "C";
+    optionC.textContent = "C";
+    el.appendChild(optionC);
+    el.value = "apple;B;C";
+    await aTimeout(100);
+
+    // Should have exactly 3 badges, not duplicates from accumulation
+    expect(badges().length).to.equal(3);
+  });
+
+  it("create, unselect via badge dismiss, create another — does not re-select old options", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box creatable multiSelect value="apple">
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+
+    const badges = () => el.shadowRoot?.querySelectorAll("sgds-badge") as NodeListOf<SgdsBadge>;
+
+    // Append option B and select it
+    const optionB = document.createElement("sgds-combo-box-option") as SgdsComboBoxOption;
+    optionB.value = "B";
+    optionB.textContent = "B";
+    el.appendChild(optionB);
+    el.value = "apple;B";
+    await aTimeout(100);
+
+    // Unselect apple via badge dismiss
+    expect(badges().length).to.equal(2);
+    const appleBadgeClose = badges()[0].shadowRoot?.querySelector("sgds-close-button") as SgdsCloseButton;
+    appleBadgeClose.click();
+    await aTimeout(100);
+
+    expect(el.value).to.equal("B");
+
+    // Append option C and select it alongside B
+    const optionC = document.createElement("sgds-combo-box-option") as SgdsComboBoxOption;
+    optionC.value = "C";
+    optionC.textContent = "C";
+    el.appendChild(optionC);
+    el.value = "B;C";
+    await aTimeout(100);
+
+    // Should have B and C only — apple should NOT be re-selected
+    expect(el.value).to.equal("B;C");
+    expect(badges().length).to.equal(2);
+    expect(badges()[0].textContent?.trim()).to.equal("B");
+    expect(badges()[1].textContent?.trim()).to.equal("C");
+  });
 });

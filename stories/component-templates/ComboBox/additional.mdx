@@ -198,6 +198,14 @@ Listen to the `sgds-create-option` event to handle option creation. The event de
   <Story of={ComboBoxStories.CreatableWithEvent} />
 </Canvas>
 
+### Creatable multi-select with auto-select
+
+Combine `creatable` with `multiSelect` to let users build a list of tags on the fly. In the `sgds-create-option` handler, append the new option, add it to `value` (semicolon-delimited), and clear `displayValue` to reset the input.
+
+<Canvas of={ComboBoxStories.CreatableMultiSelect}>
+  <Story of={ComboBoxStories.CreatableMultiSelect} />
+</Canvas>
+
 ### Customising the create option text with `create` slot
 
 Use the `create` named slot to override the default "Create xxx" text. The slotted content supports interactive elements such as links.
