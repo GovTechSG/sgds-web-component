@@ -115,7 +115,7 @@ export class DropdownListElement extends DropdownElement {
     }
   }
 
-  private _getMenuItems(): SgdsDropdownItem[] {
+  protected _getMenuItems(): SgdsDropdownItem[] {
     const defaultSlot = this.shadowRoot.querySelector("slot#default");
     // for case when default slot is used e.g. dropdown, mainnavdropdown
     if (defaultSlot) {
@@ -138,10 +138,10 @@ export class DropdownListElement extends DropdownElement {
     return [];
   }
 
-  private _getActiveMenuItems(): SgdsDropdownItem[] {
+  protected _getActiveMenuItems(): SgdsDropdownItem[] {
     return this._getMenuItems().filter(item => !item.disabled && !item.hidden && !item.readonly);
   }
-  private _setMenuItem(currentItemIdx: number) {
+  protected _setMenuItem(currentItemIdx: number) {
     const items = this._getActiveMenuItems();
     if (items.length === 0) return;
 
