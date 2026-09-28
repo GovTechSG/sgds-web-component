@@ -77,7 +77,7 @@ export class SgdsAlert extends SgdsElement {
               ? html`<sgds-close-button
                   aria-label="close the alert"
                   @click=${this.close}
-                  tone=${this.outlined || this.variant === "warning" ? "fixed-dark" : "fixed-light"}
+                  tone="default"
                 ></sgds-close-button>`
               : nothing}
           </div>
