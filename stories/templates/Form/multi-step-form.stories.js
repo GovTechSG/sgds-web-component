@@ -10,6 +10,7 @@ const Template = () => html`
     }
   </style>
 
+  <div class="sgds:bg-default sgds:min-h-screen sgds:flex sgds:flex-col">
   <sgds-masthead></sgds-masthead>
 
   <sgds-mainnav>
@@ -50,7 +51,7 @@ const Template = () => html`
     </div>
   </section>
 
-  <section class="sgds:bg-surface-default sgds:min-h-screen">
+  <section class="sgds:bg-surface-default sgds:flex-1">
     <div class="sgds-container sgds:py-2-xl">
       <!-- ── Info alert ─────────────────────────────────────── -->
       <sgds-alert variant="info" class="sgds:mb-layout-md" dismissible>
@@ -453,6 +454,7 @@ const Template = () => html`
   </section>
 
   <sgds-footer></sgds-footer>
+  </div>
 
   <!-- ── Script ──────────────────────────────────────────────── -->
   <script>

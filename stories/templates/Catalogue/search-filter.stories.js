@@ -16,6 +16,7 @@ const Template = () => html`
     }
   </style>
 
+  <div class="sgds:bg-default sgds:min-h-screen sgds:flex sgds:flex-col">
   <sgds-masthead></sgds-masthead>
   <sgds-mainnav>
     <strong slot="brand">Logo</strong>
@@ -57,7 +58,7 @@ const Template = () => html`
        Layout   : sidebar filters (left) + main content (right)
        Includes : filter sidebar, sort, results grid, empty state
   -->
-  <section class="sgds:bg-default sgds:py-layout-md">
+  <section class="sgds:bg-default sgds:py-layout-md sgds:flex-1">
     <div class="sgds-container">
       <div class="sgds-grid sgds:items-start">
         <!-- ── Left sidebar: filters ───────────────────────────────────── -->
@@ -420,6 +421,7 @@ const Template = () => html`
       </sgds-drawer>
     </div>
   </section>
+  </div>
 `;
 
 export default {

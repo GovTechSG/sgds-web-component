@@ -1,10 +1,8 @@
 import { html } from "lit";
 
 const Template = () => html`
-  <div class="sgds:bg-surface-default sgds:min-h-screen">
-    <div class="sgds:w-container sgds:mx-auto sgds:py-layout-md">
       <!-- Filter sidebar -->
-      <aside class="sgds:w-64 sgds:flex sgds:flex-col sgds:gap-2-xl">
+      <aside class="sgds:flex sgds:flex-col sgds:gap-2-xl">
         <!-- Filter header -->
         <div class="sgds:flex sgds:gap-4 sgds:items-center">
           <span
@@ -70,8 +68,6 @@ const Template = () => html`
           </sgds-checkbox-group>
         </div>
       </aside>
-    </div>
-  </div>
 `;
 
 export default {

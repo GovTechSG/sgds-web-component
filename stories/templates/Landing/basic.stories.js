@@ -44,6 +44,7 @@ const Template = () => html`
     }
   </style>
 
+  <div class="sgds:bg-default sgds:min-h-screen sgds:flex sgds:flex-col">
   <sgds-masthead></sgds-masthead>
   <sgds-mainnav>
     <strong slot="brand">Logo</strong>
@@ -323,6 +324,7 @@ const Template = () => html`
   </section>
 
   <sgds-footer></sgds-footer>
+  </div>
 `;
 
 export default {

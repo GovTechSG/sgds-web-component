@@ -7,12 +7,13 @@ const Template = () => html`
     }
   </style>
 
+  <div class="sgds:bg-default sgds:min-h-screen sgds:flex sgds:flex-col">
   <sgds-masthead></sgds-masthead>
   <sgds-mainnav>
     <strong slot="brand">Logo</strong>
   </sgds-mainnav>
 
-  <section class="sgds:bg-default sgds:py-layout-lg">
+  <section class="sgds:bg-default sgds:py-layout-lg sgds:flex-1">
     <div class="sgds-container">
       <div class="sgds-grid">
         <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8">
@@ -151,6 +152,7 @@ const Template = () => html`
   </section>
 
   <sgds-footer></sgds-footer>
+  </div>
 
   <script>
     const form = document.getElementById("report-issue-form");

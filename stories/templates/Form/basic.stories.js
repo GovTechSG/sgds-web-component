@@ -1,6 +1,7 @@
 import { html } from "lit";
 
 const Template = () => html`
+  <div class="sgds:bg-default sgds:min-h-screen sgds:flex sgds:flex-col">
   <sgds-masthead></sgds-masthead>
 
   <sgds-mainnav>
@@ -29,7 +30,7 @@ const Template = () => html`
     </div>
   </section>
 
-  <section class="sgds:bg-surface-default sgds:min-h-screen">
+  <section class="sgds:bg-surface-default sgds:flex-1">
     <div class="sgds-container">
       <form id="profile-form" method="post" novalidate>
         <!-- Section 1: Personal information -->
@@ -151,6 +152,7 @@ const Template = () => html`
   </section>
 
   <sgds-footer></sgds-footer>
+  </div>
 `;
 
 export default {

@@ -20,13 +20,14 @@ const Template = () => html`
     }
   </style>
 
+  <div class="sgds:bg-default sgds:min-h-screen sgds:flex sgds:flex-col">
   <sgds-masthead></sgds-masthead>
 
   <sgds-mainnav>
     <strong slot="brand">Logo</strong>
   </sgds-mainnav>
 
-  <div class="sgds:bg-surface-default sgds:min-h-screen">
+  <div class="sgds:bg-surface-default sgds:flex-1">
     <div class="sgds-container sgds:py-layout-xl">
       <!-- ① Header: two-column headline + description -->
       <div class="sgds-grid sgds:mb-layout-lg">
@@ -216,6 +217,7 @@ const Template = () => html`
   </div>
 
   <sgds-footer></sgds-footer>
+  </div>
 `;
 
 export default {
