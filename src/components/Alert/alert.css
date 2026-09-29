@@ -63,7 +63,7 @@
   gap: var(--sgds-gap-sm);
   background-color: var(--sgds-primary-surface-default);
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-surface-border-radius);
   color: var(--sgds-alert-color);
   padding: var(--sgds-padding-lg);
 }
