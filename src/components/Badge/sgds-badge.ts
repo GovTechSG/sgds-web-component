@@ -112,7 +112,14 @@ export class SgdsBadge extends SgdsElement {
   }
 
   private _renderBadge() {
-    const isDarkCloseButton = this.outlined || this.variant === "warning" || this.variant === "white";
+    const closeButtonTone =
+      this.variant === "white"
+        ? "fixed-dark"
+        : this.outlined
+        ? "default"
+        : this.variant === "warning"
+        ? "fixed-dark"
+        : "fixed-light";
 
     return html`<div
       class="  
@@ -135,7 +142,7 @@ export class SgdsBadge extends SgdsElement {
             size="sm"
             aria-label="close the badge"
             @click=${this.close}
-            tone=${isDarkCloseButton ? "fixed-dark" : "fixed-light"}
+            tone=${closeButtonTone}
           ></sgds-close-button>`
         : nothing}
     </div>`;
