@@ -20,8 +20,8 @@ describe("<sgds-overflow-menu>", () => {
       `
     );
   });
-  it("renders vertical three-dots icon when orientation is vertical", async () => {
-    const el = await fixture(html`<sgds-overflow-menu orientation="vertical"></sgds-overflow-menu>`);
+  it("renders custom icon when icon prop is set", async () => {
+    const el = await fixture(html`<sgds-overflow-menu icon="three-dots-vertical"></sgds-overflow-menu>`);
     assert.shadowDom.equal(
       el,
       `
