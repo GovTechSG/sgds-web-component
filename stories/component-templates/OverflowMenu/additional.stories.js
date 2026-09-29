@@ -22,3 +22,10 @@ export const MediumSize = {
   args: { size: "md" },
   parameters: {}
 };
+
+export const CustomIcon = {
+  render: Template.bind({}),
+  name: "Custom icon",
+  args: { icon: "three-dots-vertical" },
+  parameters: {}
+};
