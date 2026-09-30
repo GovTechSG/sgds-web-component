@@ -128,6 +128,7 @@
   --sgds-indicator-border-radius: var(--sgds-border-radius-sm);
   --sgds-interactive-border-radius: var(--sgds-border-radius-md);
   --sgds-form-border-radius: var(--sgds-border-radius-md);
+  --sgds-form-border-radius-dense: var(--sgds-border-radius-md);
   --sgds-surface-border-radius: var(--sgds-border-radius-lg);
   --sgds-overlay-border-radius: var(--sgds-border-radius-lg);
 
