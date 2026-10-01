@@ -37,9 +37,9 @@ describe("<sgds-modal>", () => {
                   <slot name="description"></slot>
                 </div>
               </div>
-              <div class="modal-body" tabindex="0">
+              <section class="modal-body" tabindex="0" aria-label="Modal body content">
                 <slot></slot>
-              </div>
+              </section>
           </div>
           <div class="modal-footer">
             <slot name="footer">
