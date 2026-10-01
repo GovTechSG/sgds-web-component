@@ -9,7 +9,7 @@
 
 .tooltip {
   background-color: var(--sgds-surface-fixed-dark);
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-overlay-border-radius);
   color: var(--sgds-color-fixed-light);
   font-size: var(--sgds-font-size-label-sm);
   max-width: var(--sgds-dimension-320);
