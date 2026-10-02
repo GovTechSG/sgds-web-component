@@ -300,7 +300,7 @@ export class SgdsModal extends SgdsElement {
             <div class="modal-header">
               <div class="modal-header__title-description">
                 <div id="title"><slot class="modal-title" name="title"></slot></div>
-                <slot name="description"></slot>
+                <slot class="modal-description" name="description"></slot>
               </div>
             </div>
             <div class="modal-body">

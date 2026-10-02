@@ -92,7 +92,6 @@ th[data-sorting]:focus-visible {
   align-items: center;
   min-height: var(--sgds-dimension-56);
   padding: var(--sgds-padding-sm) var(--sgds-padding-md);
-  font-family: var(--sgds-font-family-brand);
   font-size: var(--sgds-font-size-label-sm);
   font-style: normal;
   line-height: var(--sgds-line-height-2-xs);

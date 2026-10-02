@@ -10,6 +10,7 @@
 
 slot[name="title"]::slotted(*) {
   color: var(--sgds-heading-color-default);
+  font-family: var(--sgds-font-family-heading);
   font-weight: var(--sgds-font-weight-semibold);
   letter-spacing: var(--sgds-letter-spacing-tight);
   font-size: var(--sgds-font-size-heading-sm);

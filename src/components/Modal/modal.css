@@ -36,7 +36,6 @@
   bottom: 0;
   left: 0;
   z-index: var(--sgds-z-index-modal);
-  font-family: var(--sgds-body-font-family);
 }
 
 .modal-panel {
@@ -131,6 +130,7 @@ slot[name="title"]::slotted(*) {
   align-items: center;
   gap: 1rem;
   margin: var(--sgds-margin-none) !important;
+  font-family: var(--sgds-font-family-heading) !important;
   line-height: var(--sgds-line-height-lg) !important;
   font-size: var(--sgds-font-size-heading-sm) !important;
 }
@@ -142,6 +142,7 @@ slot[name="description"]::slotted(*) {
 }
 
 .modal-body {
+  font-family: var(--sgds-font-family-body);
   flex: 1 1 auto;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
