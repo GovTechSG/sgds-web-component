@@ -41,7 +41,7 @@
 
 .modal-panel {
   width: 100%;
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-overlay-border-radius);
   z-index: 2; /* shift above overlay  */
   display: flex;
   flex-direction: column;
