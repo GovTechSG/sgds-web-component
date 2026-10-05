@@ -139,10 +139,11 @@ slot[name="description"]::slotted(*) {
   margin: var(--sgds-margin-none) !important;
   color: var(--sgds-color-subtle);
   line-height: var(--sgds-line-height-xs);
+  font-family: var(--sgds-font-family-label) !important;
 }
 
 .modal-body {
-  font-family: var(--sgds-font-family-body);
+  font-family: var(--sgds-font-family-label) !important;
   flex: 1 1 auto;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
