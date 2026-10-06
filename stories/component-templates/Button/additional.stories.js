@@ -133,8 +133,14 @@ const FormSubmitTemplate = () => {
         document.getElementById("form-output").textContent = "Selected: " + formData.get("subject");
       }}
     >
-      <div role="group" aria-labelledby="subject-label" class="sgds:flex sgds:flex-col sgds:gap-form-md sgds:items-start">
-        <label id="subject-label" class="sgds:text-label-md sgds:leading-xs sgds:tracking-normal">Choose your favourite subject:</label>
+      <div
+        role="group"
+        aria-labelledby="subject-label"
+        class="sgds:flex sgds:flex-col sgds:gap-form-md sgds:items-start"
+      >
+        <label id="subject-label" class="sgds:text-label-md sgds:leading-xs sgds:tracking-normal"
+          >Choose your favourite subject:</label
+        >
         <div class="sgds:flex sgds:gap-4">
           <sgds-button name="subject" type="submit" value="fav_HTML" ariaLabel="HTML">HTML</sgds-button>
           <sgds-button name="subject" type="submit" value="fav_CSS" ariaLabel="CSS">CSS</sgds-button>
