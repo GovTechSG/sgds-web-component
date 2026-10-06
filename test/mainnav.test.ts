@@ -389,6 +389,7 @@ describe("sgds-mainnav-dropdown", () => {
           aria-disabled="false"
           aria-expanded="false"
           aria-haspopup="menu"
+          aria-label="Dropdown"
           class="nav-link"
           role="button"
           slot="toggler"
@@ -435,6 +436,7 @@ describe("sgds-mainnav-dropdown", () => {
       <a
              class="nav-link"
              aria-disabled="false"
+             aria-label="Dropdown"
              tabindex="0"
              role="button"
            >
@@ -483,6 +485,7 @@ describe("sgds-mainnav-dropdown", () => {
       <a
              class="nav-link"
              aria-disabled="false"
+             aria-label="Dropdown"
              tabindex="0"
              role="button"
            >
@@ -555,4 +558,36 @@ describe("sgds-mainnav-dropdown", () => {
       stubHide.restore();
     }
   }).retries(2); // retries as occasionally fails with timeout (CI or local)
+
+  it("auto-derives aria-label from slotted toggler text", async () => {
+    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+    window.dispatchEvent(new Event("resize"));
+    const el = await fixture<SgdsMainnav>(html`
+      <sgds-mainnav>
+        <sgds-mainnav-dropdown>
+          <span slot="toggler">Services</span>
+        </sgds-mainnav-dropdown>
+      </sgds-mainnav>
+    `);
+    const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+    await dropdown?.updateComplete;
+    const toggler = dropdown?.shadowRoot?.querySelector("a[role='button']") as HTMLAnchorElement;
+    expect(toggler.getAttribute("aria-label")).to.equal("Services");
+  });
+
+  it("explicit ariaLabel takes precedence over slotted toggler text", async () => {
+    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+    window.dispatchEvent(new Event("resize"));
+    const el = await fixture<SgdsMainnav>(html`
+      <sgds-mainnav>
+        <sgds-mainnav-dropdown ariaLabel="Custom label">
+          <span slot="toggler">Services</span>
+        </sgds-mainnav-dropdown>
+      </sgds-mainnav>
+    `);
+    const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+    await dropdown?.updateComplete;
+    const toggler = dropdown?.shadowRoot?.querySelector("a[role='button']") as HTMLAnchorElement;
+    expect(toggler.getAttribute("aria-label")).to.equal("Custom label");
+  });
 });
