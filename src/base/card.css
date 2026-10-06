@@ -16,8 +16,14 @@
   display: none;
 }
 
-:host([stretchedLink]) .card::after {
-  display: none;
+:host([stretchedLink]) {
+  cursor: pointer;
+  border-radius: var(--sgds-border-radius-md);
+}
+
+:host([stretchedLink]:focus-visible) .card {
+  outline: var(--sgds-outline-focus);
+  outline-offset: -1px;
 }
 
 :host([orientation="horizontal"]) .card {
@@ -106,21 +112,9 @@
   transition: box-shadow 0.3s ease;
 }
 
-a.card {
-  text-decoration: none;
-  color: initial;
-}
-
-
 .card.disabled {
   opacity: var(--sgds-opacity-40);
   pointer-events: none;
-}
-
-a.card:not(.disabled):focus-visible {
-  --sgds-outline-offset-focus: -1px;
-  outline: var(--sgds-outline-focus);
-  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .card-tinted-bg {

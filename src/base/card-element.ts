@@ -1,4 +1,4 @@
-import { property, query } from "lit/decorators.js";
+import { property } from "lit/decorators.js";
 import { SgdsLink } from "../components/Link/sgds-link";
 import { CardOrientation } from "../components/Card/types";
 import SgdsElement from "./sgds-element";
@@ -11,9 +11,6 @@ import paragraphStyles from "../styles/paragraph.css";
 
 export class CardElement extends SgdsElement {
   static styles = [...SgdsElement.styles, textStyles, bgStyles, borderStyles, headerStyles, paragraphStyles, cardStyle];
-
-  /** @internal */
-  @query("a.card") card: HTMLAnchorElement;
 
   /** Extends the link passed in either `footer` or `link`(deprecated) slot.
    */
@@ -31,6 +28,9 @@ export class CardElement extends SgdsElement {
   /** Sets the orientation of the card. Available options: `vertical`, `horizontal` */
   @property({ type: String, reflect: true }) orientation: CardOrientation = "vertical";
 
+  /** @internal The anchor element from the footer/link slot, used for navigation */
+  private _stretchedAnchor: HTMLAnchorElement | null = null;
+
   handleTitleSlotChange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLElement>;
 
@@ -42,7 +42,6 @@ export class CardElement extends SgdsElement {
   }
 
   protected _forwardAnchorAttributes(anchor: HTMLAnchorElement | null) {
-    const SKIP = new Set(["class", "style", "id", "slot", "tabindex"]);
     if (
       !anchor?.href ||
       anchor.href.startsWith("javascript:") ||
@@ -52,12 +51,33 @@ export class CardElement extends SgdsElement {
       return;
     }
 
-    for (const { name, value } of Array.from(anchor.attributes)) {
-      if (!SKIP.has(name) && !name.startsWith("on")) {
-        this.card.setAttribute(name, value);
-      }
+    this._stretchedAnchor = anchor;
+
+    // Set host-level link semantics
+    this.setAttribute("role", "link");
+    this.setAttribute("tabindex", "0");
+
+    // Derive accessible name from anchor text or card title
+    const label = anchor.textContent?.trim() || this.querySelector("[slot='title']")?.textContent?.trim();
+    if (label) {
+      this.setAttribute("aria-label", label);
     }
+
+    this.addEventListener("click", this._handleStretchedClick);
+    this.addEventListener("keydown", this._handleStretchedKeydown);
   }
+
+  private _handleStretchedClick = () => {
+    if (this.disabled || !this._stretchedAnchor) return;
+    this._stretchedAnchor.click();
+  };
+
+  private _handleStretchedKeydown = (e: KeyboardEvent) => {
+    if (this.disabled || !this._stretchedAnchor) return;
+    if (e.key === "Enter") {
+      this._stretchedAnchor.click();
+    }
+  };
 
   warnLinkSlotMisused(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as

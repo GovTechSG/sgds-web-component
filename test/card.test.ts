@@ -12,7 +12,6 @@ describe("<sgds-card>", () => {
       `
         <div
           class="card"
-          tabindex="-1"
         >
           <slot name="menu"></slot>
           <div>
@@ -46,7 +45,6 @@ describe("<sgds-card>", () => {
       `
         <div
           class="card"
-          tabindex="-1"
         >
           <slot name="menu"></slot>
           <div class="card-image">
@@ -82,7 +80,6 @@ describe("<sgds-card>", () => {
       `
          <div
           class="card"
-          tabindex="-1"
         >
           <slot name="menu"></slot>
           <div class="card-media">
@@ -116,7 +113,6 @@ describe("<sgds-card>", () => {
       `
          <div
           class="card"
-          tabindex="-1"
         >
           <slot name="menu"></slot>
           <div>
@@ -167,72 +163,82 @@ describe("<sgds-card>", () => {
     expect(assignedNodes.length).to.equal(0);
   });
 
-  it("renders footer slot with stretchedLink", async () => {
+  it("renders card as div (not anchor) when stretchedLink is true", async () => {
     const el = await fixture<SgdsCard>(html`
       <sgds-card stretchedLink>
         <a slot="footer" href="#">Read More</a>
       </sgds-card>
     `);
     const tag = el.shadowRoot?.querySelector(".card") as HTMLElement;
-    expect(tag.tagName.toLowerCase()).to.equal("a");
+    expect(tag.tagName.toLowerCase()).to.equal("div");
   });
 
-  it("forwards href and target from footer slot anchor when stretchedLink is true", async () => {
+  it("sets role=link and tabindex=0 on host when stretchedLink with valid href", async () => {
     const el = await fixture<SgdsCard>(html`
       <sgds-card stretchedLink>
-        <a slot="footer" href="https://example.com" target="_blank">Read More</a>
+        <a slot="footer" href="https://example.com">Read More</a>
       </sgds-card>
     `);
-    const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
-    expect(card.getAttribute("href")).to.equal("https://example.com");
-    expect(card.getAttribute("target")).to.equal("_blank");
+    expect(el.getAttribute("role")).to.equal("link");
+    expect(el.getAttribute("tabindex")).to.equal("0");
   });
 
-  it("forwards safe attributes (rel, aria-label, data-*) from footer slot anchor", async () => {
+  it("delegates click to the footer anchor when stretchedLink is true", async () => {
     const el = await fixture<SgdsCard>(html`
       <sgds-card stretchedLink>
-        <a slot="footer" href="https://example.com" rel="noopener noreferrer" aria-label="Read more" data-id="123"
-          >Read More</a
-        >
+        <a slot="footer" href="https://example.com">Read More</a>
       </sgds-card>
     `);
-    const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
-    expect(card.getAttribute("rel")).to.equal("noopener noreferrer");
-    expect(card.getAttribute("aria-label")).to.equal("Read more");
-    expect(card.getAttribute("data-id")).to.equal("123");
+    const anchor = el.querySelector("a") as HTMLAnchorElement;
+    const clickSpy = Sinon.spy(anchor, "click");
+    el.click();
+    expect(clickSpy.calledOnce).to.be.true;
+    clickSpy.restore();
   });
 
-  it("does not forward class, style, id from footer slot anchor", async () => {
+  it("delegates Enter keydown to the footer anchor when stretchedLink is true", async () => {
     const el = await fixture<SgdsCard>(html`
       <sgds-card stretchedLink>
-        <a slot="footer" href="https://example.com" class="custom-link" style="color:red" id="my-link">Read More</a>
+        <a slot="footer" href="https://example.com">Read More</a>
       </sgds-card>
     `);
-    const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
-    expect(card.getAttribute("class")).to.not.include("custom-link");
-    expect(card.getAttribute("style")).to.be.null;
-    expect(card.getAttribute("id")).to.be.null;
+    const anchor = el.querySelector("a") as HTMLAnchorElement;
+    const clickSpy = Sinon.spy(anchor, "click");
+    el.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter" }));
+    expect(clickSpy.calledOnce).to.be.true;
+    clickSpy.restore();
   });
 
-  it("does not forward on* event handler attributes from footer slot anchor", async () => {
+  it("does not delegate click when disabled", async () => {
     const el = await fixture<SgdsCard>(html`
-      <sgds-card stretchedLink>
-        <a slot="footer" href="https://example.com" onclick="alert(1)">Read More</a>
+      <sgds-card stretchedLink disabled>
+        <a slot="footer" href="https://example.com">Read More</a>
       </sgds-card>
     `);
-    const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
-    expect(card.getAttribute("onclick")).to.be.null;
+    const anchor = el.querySelector("a") as HTMLAnchorElement;
+    const clickSpy = Sinon.spy(anchor, "click");
+    el.click();
+    expect(clickSpy.called).to.be.false;
+    clickSpy.restore();
   });
 
-  it("does not forward attributes when anchor href uses javascript: protocol", async () => {
+  it("does not set role=link when anchor href uses javascript: protocol", async () => {
     const el = await fixture<SgdsCard>(html`
       <sgds-card stretchedLink>
-        <a slot="footer" href="javascript:alert(1)" target="_blank">Read More</a>
+        <a slot="footer" href="javascript:alert(1)">Read More</a>
       </sgds-card>
     `);
-    const card = el.shadowRoot?.querySelector(".card") as HTMLElement;
-    expect(card.getAttribute("href")).to.be.null;
-    expect(card.getAttribute("target")).to.be.null;
+    expect(el.getAttribute("role")).to.be.null;
+    expect(el.getAttribute("tabindex")).to.be.null;
+  });
+
+  it("does not set role=link when anchor href uses data: protocol", async () => {
+    const el = await fixture<SgdsCard>(html`
+      <sgds-card stretchedLink>
+        <a slot="footer" href="data:text/html,<h1>test</h1>">Read More</a>
+      </sgds-card>
+    `);
+    expect(el.getAttribute("role")).to.be.null;
   });
 });
 
