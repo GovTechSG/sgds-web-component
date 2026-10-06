@@ -171,6 +171,7 @@ a.card:not(.disabled):focus-visible {
 .card-title,
 slot[name="title"]::slotted(*) {
   color: var(--sgds-color-default);
+  font-family: var(--sgds-font-family-heading) !important;
   font-size: var(--sgds-font-size-heading-sm) !important;
   font-weight: var(--sgds-font-weight-semibold) !important;
   line-height: var(--sgds-line-height-sm) !important;
