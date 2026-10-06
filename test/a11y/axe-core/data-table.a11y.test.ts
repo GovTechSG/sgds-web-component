@@ -138,7 +138,7 @@ describe("<sgds-data-table>", () => {
     expect(sortedByNameAsc).to.deep.equal(["Alice", "Bob", "Charlie"]);
   });
 
-  it("sorts only currently visible rows in client mode", async () => {
+  it("sorts all rows globally in client mode", async () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table dataLength="4" itemsPerPage="2" currentPage="1" mode="client">
         <sgds-data-table-row>
@@ -177,7 +177,7 @@ describe("<sgds-data-table>", () => {
       .slice(1)
       .map(row => row.querySelectorAll("sgds-data-table-cell")[0]?.textContent?.trim());
 
-    expect(rowIdsAfterSort).to.deep.equal(["1", "2", "4", "3"]);
+    expect(rowIdsAfterSort).to.deep.equal(["1", "3", "2", "4"]);
   });
 
   it("ignores sgds-sort events that do not originate from table headers", async () => {

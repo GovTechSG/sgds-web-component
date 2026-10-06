@@ -548,6 +548,89 @@ Click a sort header to see the sgds-sort event detail</pre
   </div>
 `;
 
+const SortingWithPaginationTemplate = () => html`
+  <sgds-data-table currentPage="1" dataLength="12" itemsPerPage="4">
+    <sgds-data-table-row>
+      <sgds-data-table-head sorting sortKey="id">ID</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="name">Name</sgds-data-table-head>
+      <sgds-data-table-head sorting sortKey="department">Department</sgds-data-table-head>
+      <sgds-data-table-head>Role</sgds-data-table-head>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>1</sgds-data-table-cell>
+      <sgds-data-table-cell>Lina</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineering</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>2</sgds-data-table-cell>
+      <sgds-data-table-cell>Kai</sgds-data-table-cell>
+      <sgds-data-table-cell>Design</sgds-data-table-cell>
+      <sgds-data-table-cell>Designer</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>3</sgds-data-table-cell>
+      <sgds-data-table-cell>Nora</sgds-data-table-cell>
+      <sgds-data-table-cell>Product</sgds-data-table-cell>
+      <sgds-data-table-cell>Manager</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>4</sgds-data-table-cell>
+      <sgds-data-table-cell>Adam</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineering</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>5</sgds-data-table-cell>
+      <sgds-data-table-cell>Hana</sgds-data-table-cell>
+      <sgds-data-table-cell>HR</sgds-data-table-cell>
+      <sgds-data-table-cell>Executive</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>6</sgds-data-table-cell>
+      <sgds-data-table-cell>Ben</sgds-data-table-cell>
+      <sgds-data-table-cell>Finance</sgds-data-table-cell>
+      <sgds-data-table-cell>Analyst</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>7</sgds-data-table-cell>
+      <sgds-data-table-cell>Milo</sgds-data-table-cell>
+      <sgds-data-table-cell>Engineering</sgds-data-table-cell>
+      <sgds-data-table-cell>QA</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>8</sgds-data-table-cell>
+      <sgds-data-table-cell>Cara</sgds-data-table-cell>
+      <sgds-data-table-cell>Design</sgds-data-table-cell>
+      <sgds-data-table-cell>Lead</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>9</sgds-data-table-cell>
+      <sgds-data-table-cell>Owen</sgds-data-table-cell>
+      <sgds-data-table-cell>Operations</sgds-data-table-cell>
+      <sgds-data-table-cell>Coordinator</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>10</sgds-data-table-cell>
+      <sgds-data-table-cell>Jade</sgds-data-table-cell>
+      <sgds-data-table-cell>Product</sgds-data-table-cell>
+      <sgds-data-table-cell>Owner</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>11</sgds-data-table-cell>
+      <sgds-data-table-cell>Eli</sgds-data-table-cell>
+      <sgds-data-table-cell>Finance</sgds-data-table-cell>
+      <sgds-data-table-cell>Accountant</sgds-data-table-cell>
+    </sgds-data-table-row>
+    <sgds-data-table-row>
+      <sgds-data-table-cell>12</sgds-data-table-cell>
+      <sgds-data-table-cell>Faye</sgds-data-table-cell>
+      <sgds-data-table-cell>HR</sgds-data-table-cell>
+      <sgds-data-table-cell>Recruiter</sgds-data-table-cell>
+    </sgds-data-table-row>
+  </sgds-data-table>
+`;
+
 export const NoRows = {
   render: NoRowsTemplate.bind({}),
   name: "No rows",
@@ -625,6 +708,13 @@ export const CustomPaginationSummary = {
   parameters: {}
 };
 
+export const HeaderTextAlignment = {
+  render: HeaderAlignmentTemplate.bind({}),
+  name: "Header text alignment",
+  args: {},
+  parameters: {}
+};
+
 export const HeaderAndCellProps = {
   render: HeaderAndCellPropsTemplate.bind({}),
   name: "Header and cell props",
@@ -639,6 +729,13 @@ export const DefaultSort = {
   parameters: {}
 };
 
+export const SortingWithPagination = {
+  render: SortingWithPaginationTemplate.bind({}),
+  name: "Sorting with pagination",
+  args: {},
+  parameters: {}
+};
+
 export const SortingWithNoRows = {
   render: SortingWithNoRowsTemplate.bind({}),
   name: "Sorting with no rows",
@@ -646,9 +743,9 @@ export const SortingWithNoRows = {
   parameters: {}
 };
 
-export const HeaderTextAlignment = {
-  render: HeaderAlignmentTemplate.bind({}),
-  name: "Header text alignment",
+export const SortEvent = {
+  render: SortEventTemplate.bind({}),
+  name: "Sort event (server mode)",
   args: {},
   parameters: {}
 };
@@ -677,13 +774,6 @@ export const LoadingMultiSelect = {
 export const ServerLoading = {
   render: ServerLoadingTemplate.bind({}),
   name: "Server loading",
-  args: {},
-  parameters: {}
-};
-
-export const SortEvent = {
-  render: SortEventTemplate.bind({}),
-  name: "Sort event (server mode)",
   args: {},
   parameters: {}
 };
