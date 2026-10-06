@@ -82,7 +82,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 <sgds-button id="open-btn">Open Drawer</sgds-button>
 <sgds-drawer id="my-drawer" size="sm" placement="end">
   <h4 slot="title">Drawer Title</h4>
-  <p slot="description">Brief drawer description</p>
+  <span slot="description">Brief drawer description</span>
   Main content goes in the default slot.
   <div slot="footer">
     <sgds-button id="close-btn">Close</sgds-button>
