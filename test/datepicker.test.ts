@@ -2138,6 +2138,54 @@ describe("aria-current in calendar", () => {
 
     expect(currentMonthButtonAriaLabel).to.include("Current month");
   });
+  it("for month view, aria-label includes abbreviated month name visible in the button (label-content-name-mismatch)", async () => {
+    const mockDate = new Date(2024, 0, 15);
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${mockDate}
+        view="months"
+        focusedTabIndex=${0}
+      ></sgds-datepicker-calendar>`
+    );
+    const monthButtons = el.shadowRoot?.querySelectorAll("button[data-month]") as NodeListOf<HTMLButtonElement>;
+    const expectedLabels = [
+      "Jan, January 2024",
+      "Feb, February 2024",
+      "Mar, March 2024",
+      "Apr, April 2024",
+      "May, May 2024",
+      "Jun, June 2024",
+      "Jul, July 2024",
+      "Aug, August 2024",
+      "Sep, September 2024",
+      "Oct, October 2024",
+      "Nov, November 2024",
+      "Dec, December 2024"
+    ];
+    monthButtons.forEach((btn, idx) => {
+      const visibleText = btn.textContent?.trim();
+      const ariaLabel = btn.getAttribute("aria-label");
+      expect(ariaLabel).to.equal(expectedLabels[idx]);
+      expect(ariaLabel).to.include(visibleText);
+    });
+  });
+  it("for month view, current month aria-label includes abbreviation and 'Current month'", async () => {
+    const todayDate = new Date();
+    const month = todayDate.getMonth();
+    const year = todayDate.getFullYear();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const el = await fixture<DatepickerCalendar>(
+      html`<sgds-datepicker-calendar
+        .displayDate=${todayDate}
+        view="months"
+        focusedTabIndex=${0}
+      ></sgds-datepicker-calendar>`
+    );
+    const currentMonthBtn = el.shadowRoot?.querySelector(`button[data-month='${month}']`) as HTMLButtonElement;
+    const ariaLabel = currentMonthBtn.getAttribute("aria-label");
+    const shortMonth = months[month].slice(0, 3);
+    expect(ariaLabel).to.equal(`${shortMonth}, Current month ${months[month]} ${year}`);
+  });
   it("for year view, current month is indicated in aria-label", async () => {
     const todayDate = new Date();
     const year = todayDate.getFullYear();
