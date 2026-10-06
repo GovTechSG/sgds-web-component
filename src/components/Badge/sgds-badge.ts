@@ -111,16 +111,14 @@ export class SgdsBadge extends SgdsElement {
     return;
   }
 
-  private _renderBadge() {
-    const closeButtonTone =
-      this.variant === "white"
-        ? "fixed-dark"
-        : this.outlined
-        ? "default"
-        : this.variant === "warning"
-        ? "fixed-dark"
-        : "fixed-light";
+  private get _closeButtonTone() {
+    if (this.variant === "white") return "fixed-dark";
+    if (this.outlined) return "default";
+    if (this.variant === "warning") return "fixed-dark";
+    return "fixed-light";
+  }
 
+  private _renderBadge() {
     return html`<div
       class="  
           ${classMap({
@@ -142,7 +140,7 @@ export class SgdsBadge extends SgdsElement {
             size="sm"
             aria-label="close the badge"
             @click=${this.close}
-            tone=${closeButtonTone}
+            tone=${this._closeButtonTone}
           ></sgds-close-button>`
         : nothing}
     </div>`;
