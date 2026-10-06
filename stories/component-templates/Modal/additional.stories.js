@@ -78,7 +78,9 @@ const PreventCloseTemplate = args => {
   return html`
     <sgds-modal id="prevent-close-modal" open=${true}>
       <h2 slot="title">Prevent close example</h2>
-      <span slot="description">This modal cannot be closed by clicking the close button, overlay, or pressing Escape</span>
+      <span slot="description"
+        >This modal cannot be closed by clicking the close button, overlay, or pressing Escape</span
+      >
       <p>
         The <code>sgds-close</code> event is cancelable. By calling <code>event.preventDefault()</code>, you can prevent
         the modal from closing. Try clicking the close button, overlay, or pressing Escape - an alert will show the
