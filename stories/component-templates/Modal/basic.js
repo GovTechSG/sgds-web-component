@@ -11,7 +11,7 @@ export const Template = args => {
       ?noCloseButton=${args.noCloseButton}
     >
       <h2 slot="title">Modal title</h2>
-      <p slot="description">Modal description</p>
+      <span slot="description">Modal description</span>
       <p>
         Etiam suscipit nisi eget porta cursus. Ut sit amet felis aliquet, pellentesque mi at, vulputate nunc. Vivamus ac
         facilisis tellus. Maecenas ac libero scelerisque tellus maximus accumsan a vehicula arcu. Aenean quis leo
