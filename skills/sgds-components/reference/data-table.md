@@ -109,9 +109,9 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
 
 ## Sorting Behavior Notes
 
-- In client mode, sorting affects only currently visible rows.
+- In client mode, sorting applies globally across all pages. After sorting, the table resets to page 1.
 - When `serverSort` is enabled, built-in client-side sorting is disabled. Clicking a sort header only emits `sgds-sort` — the actual sorting must be handled by your API.
-- When a sort cycles back to `none`, client-mode row order reverts to the initial slotted order.
+- When a sort cycles back to `none`, client-mode row order reverts to the initial slotted order and resets to page 1.
 - Sort controls are disabled when there are no body rows.
 
 ## Server Mode Example

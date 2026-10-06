@@ -279,24 +279,7 @@ export class SgdsDataTable extends SgdsElement {
 
     if (direction === "none") {
       this.tableRows = this._getRowsInInitialPositionOrder(this.tableRows);
-      this._syncDomRowOrder();
-      this._updateVisibleRows();
-      return;
-    }
-
-    if (this.mode === "client") {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      const end = start + this.itemsPerPage;
-      const nextRows = [...this.tableRows];
-
-      const sortedVisibleRows = nextRows.slice(start, end).sort((left, right) => {
-        const leftValue = this._toComparableValue(left, key, columnIndex);
-        const rightValue = this._toComparableValue(right, key, columnIndex);
-        return this._compareValues(leftValue, rightValue, direction);
-      });
-      nextRows.splice(start, sortedVisibleRows.length, ...sortedVisibleRows);
-
-      this.tableRows = nextRows;
+      if (this.mode === "client") this.currentPage = 1;
       this._syncDomRowOrder();
       this._updateVisibleRows();
       return;
@@ -308,6 +291,7 @@ export class SgdsDataTable extends SgdsElement {
       return this._compareValues(leftValue, rightValue, direction);
     });
 
+    if (this.mode === "client") this.currentPage = 1;
     this._syncDomRowOrder();
     this._updateVisibleRows();
   }

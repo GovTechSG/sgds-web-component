@@ -33,3 +33,5 @@ test/skills/*
 results/
 a11y-failures.log
 **/.pnpm*
+
+docs/INSTALLATION.md
