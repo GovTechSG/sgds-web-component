@@ -222,9 +222,7 @@ describe("<sgds-data-table>", () => {
       .slice(1)
       .filter((row): row is HTMLElement => row instanceof HTMLElement && row.style.display !== "none");
 
-    const visibleNames = visibleRows.map(
-      row => row.querySelectorAll("sgds-data-table-cell")[0]?.textContent?.trim()
-    );
+    const visibleNames = visibleRows.map(row => row.querySelectorAll("sgds-data-table-cell")[0]?.textContent?.trim());
 
     expect(visibleNames).to.deep.equal(["Alice", "Bob"]);
   });
