@@ -1,6 +1,6 @@
 # SGDS Table Component Skill
 
-`<sgds-table>` renders structured tabular data. **Always use the slot-based sub-components** — `<sgds-table-row>`, `<sgds-table-head>`, and `<sgds-table-cell>` — for full structural control. The legacy array-based properties (`tableData`, `columnHeader`, `rowHeader`) exist but must not be used.
+`<sgds-table>` renders structured tabular data. **Always use the slot-based sub-components** — `<sgds-table-row>`, `<sgds-table-head>`, and `<sgds-table-cell>` — for full structural control. The legacy array-based properties (`tableData`, `columnHeader`, `rowHeader`, `headerPosition`) are deprecated since 3.30.0 and must not be used.
 
 No CSS styling modifications — custom properties and CSS parts are not exposed on this component.
 
@@ -33,7 +33,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Advanced Considerations
 
-- **Always use slot-based sub-components**: the legacy array-based properties (`tableData`, `columnHeader`, `rowHeader`) exist on `<sgds-table>` but must never be used — use `<sgds-table-row>`, `<sgds-table-head>`, and `<sgds-table-cell>` exclusively.
+- **Always use slot-based sub-components**: the legacy array-based properties (`tableData`, `columnHeader`, `rowHeader`, `headerPosition`) are deprecated since 3.30.0 and must never be used — use `<sgds-table-row>`, `<sgds-table-head>`, and `<sgds-table-cell>` exclusively.
 - **`headerBackground` and `tableBorder` cascade**: these attributes are set on `<sgds-table>` only and automatically affect all descendant header and cell elements — do not set them on individual sub-components.
 - **`responsive` breakpoint behaviour**: a table with `responsive="md"` scrolls horizontally only on viewports narrower than the `md` breakpoint; on wider viewports it renders normally.
 - **Rich cell content**: `<sgds-table-cell>` slots accept any HTML — placing interactive elements (buttons, links) inside cells is the supported pattern for action columns.
@@ -142,7 +142,7 @@ None.
 ---
 
 **For AI agents**:
-1. **Always use slots** — `<sgds-table-row>`, `<sgds-table-head>`, `<sgds-table-cell>` are the correct approach. Never use `tableData`, `columnHeader`, or `rowHeader` array properties.
+1. **Always use slots** — `<sgds-table-row>`, `<sgds-table-head>`, `<sgds-table-cell>` are the correct approach. Never use the deprecated `tableData`, `columnHeader`, `rowHeader`, or `headerPosition` properties.
 2. The first `<sgds-table-row>` should contain `<sgds-table-head>` cells; subsequent rows use `<sgds-table-cell>`.
 3. `<sgds-table-cell>` accepts rich HTML — badges, buttons, links are fine inside cells.
 4. `headerBackground` and `tableBorder` are boolean attributes on `<sgds-table>` only — they cascade down to sub-components automatically.
