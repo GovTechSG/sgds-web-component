@@ -24,6 +24,27 @@ export const setCustomElementsManifestWithOptions = (
               .filter((member: { privacy: string | string[] }) => !member.privacy?.includes("private"))
               .filter((member: { static: boolean }) => !member.static)
               .filter((member: { privacy: string | string[] }) => !member.privacy?.includes("protected"));
+
+            // Replace deprecated text with a styled warning badge
+            const badgeHtml = `<sgds-badge variant="warning" outlined>Deprecated</sgds-badge>`;
+            declaration[key].forEach((member: { deprecated?: string; description?: string }) => {
+              // Handle the `deprecated` field from manifest
+              if (member.deprecated) {
+                const deprecationNote =
+                  typeof member.deprecated === "string" && member.deprecated !== "true"
+                    ? ` ${member.deprecated}`
+                    : "";
+                member.description = `${badgeHtml}${deprecationNote}\n\n${member.description || ""}`;
+                delete member.deprecated;
+              }
+              // Handle inline (@deprecated) text in descriptions
+              if (member.description && /\(@deprecated\)/.test(member.description)) {
+                member.description = member.description.replace(
+                  /\(@deprecated\)\s*/,
+                  `${badgeHtml} `
+                );
+              }
+            });
           }
         });
       });
