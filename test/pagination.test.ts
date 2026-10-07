@@ -222,7 +222,7 @@ describe("variant=default sgds-pagination", () => {
       <nav aria-label="pagination" role="navigation">
       <div class="pagination pagination-md">
       <sgds-button ariaLabel="Previous" variant="ghost" tone="neutral" size="md" disabled="" target="_self" type="button">
-      <sgds-icon name="arrow-left" size="md" slot="leftIcon"></sgds-icon>Prev
+      <sgds-icon name="arrow-left" size="md" slot="leftIcon"></sgds-icon>Previous
       </sgds-button>
       <div key="1" class="page-item active">
           <span class="page-link" tabindex="0" aria-current="true" aria-label="Current Page, Page 1" role="button">1</span>
