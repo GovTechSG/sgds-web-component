@@ -2173,7 +2173,20 @@ describe("aria-current in calendar", () => {
     const todayDate = new Date();
     const month = todayDate.getMonth();
     const year = todayDate.getFullYear();
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
     const el = await fixture<DatepickerCalendar>(
       html`<sgds-datepicker-calendar
         .displayDate=${todayDate}
