@@ -2087,7 +2087,7 @@ describe("datepicker a11y labels", () => {
       ></sgds-datepicker-calendar>`
     );
     const td = el.shadowRoot?.querySelector("td[data-day='1']");
-    expect(td?.getAttribute("aria-label")).to.equal("Friday, March 1st, 2024");
+    expect(td?.getAttribute("aria-label")).to.equal("1, Friday, March 1st, 2024");
   });
 
   it("dates outside of min and max range have aria-disabled=true and vice versa", async () => {
