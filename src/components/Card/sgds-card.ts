@@ -20,7 +20,7 @@ import cardStyle from "./card.css";
  * @slot description - The paragrapher text of the card
  * @slot lower - Accepts any additional content to be displayed below the card description, such as badges, metadata, or supplementary information.
  * @slot footer - Footer area of the card. Accepts links, actions, or any custom content.
- * @slot link - (@deprecated) Deprecated since 3.3.2 in favour of `footer` slot.
+ * @slot link - @deprecated Deprecated since 3.3.2 in favour of `footer` slot.
  *  Legacy slot for anchor elements. Use `footer` instead.
  */
 export class SgdsCard extends CardElement {

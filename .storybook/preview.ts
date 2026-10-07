@@ -31,18 +31,13 @@ export const setCustomElementsManifestWithOptions = (
               // Handle the `deprecated` field from manifest
               if (member.deprecated) {
                 const deprecationNote =
-                  typeof member.deprecated === "string" && member.deprecated !== "true"
-                    ? ` ${member.deprecated}`
-                    : "";
+                  typeof member.deprecated === "string" && member.deprecated !== "true" ? ` ${member.deprecated}` : "";
                 member.description = `${badgeHtml}${deprecationNote}\n\n${member.description || ""}`;
                 delete member.deprecated;
               }
-              // Handle inline (@deprecated) text in descriptions
-              if (member.description && /\(@deprecated\)/.test(member.description)) {
-                member.description = member.description.replace(
-                  /\(@deprecated\)\s*/,
-                  `${badgeHtml} `
-                );
+              // Handle inline @deprecated text in descriptions
+              if (member.description && /@deprecated/.test(member.description)) {
+                member.description = member.description.replace(/@deprecated\s*/, `${badgeHtml} `);
               }
             });
           }
