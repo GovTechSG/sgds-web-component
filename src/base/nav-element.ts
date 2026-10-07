@@ -49,9 +49,21 @@ export default abstract class NavElement extends SgdsElement {
   @query(".navbar-nav-scroll") protected navScroll!: HTMLElement;
   @query(".navbar-end") protected navbarEnd!: HTMLElement;
 
-  /** The href link for brand logo */
+  /**
+   * The href link for brand logo.
+   * @deprecated Use a slotted `<a>` in the `brand` slot instead: `<a slot="brand" href="/"><img src="logo.svg" alt="Brand"></a>`
+   */
   @property({ type: String })
   brandHref = "";
+
+  /** @internal Applies navbar-brand styling to a slotted `<a>` element */
+  protected _handleBrandSlotChange(e: Event) {
+    const assignedElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    const anchor = assignedElements.find(el => el.tagName.toLowerCase() === "a");
+    if (anchor) {
+      anchor.classList.add("navbar-brand");
+    }
+  }
 
   /** @internal */
   protected collapseId = genId("nav", "collapse");
