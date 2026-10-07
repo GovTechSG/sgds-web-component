@@ -2,9 +2,9 @@ import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { allModes } from "../../../.storybook/modes";
 
-export const Template = ({ tone, expand, brandHref }) => {
+export const Template = ({ tone, expand }) => {
   return html`
-    <sgds-appnav tone=${ifDefined(tone)} expand=${ifDefined(expand)} brandHref=${ifDefined(brandHref)}>
+    <sgds-appnav tone=${ifDefined(tone)} expand=${ifDefined(expand)}>
       <sgds-icon-button
         name="menu"
         slot="start"
@@ -13,7 +13,7 @@ export const Template = ({ tone, expand, brandHref }) => {
         size="sm"
         ariaLabel="Open side menu"
       ></sgds-icon-button>
-      <img alt="sgds logo" width="130" src="/logo-white.svg" slot="brand" />
+      <a slot="brand" href="/"><img alt="sgds logo" width="130" src="/logo-white.svg" /></a>
       <sgds-icon-button
         name="moon"
         variant="ghost"

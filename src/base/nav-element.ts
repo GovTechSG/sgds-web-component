@@ -51,7 +51,7 @@ export default abstract class NavElement extends SgdsElement {
 
   /**
    * The href link for brand logo.
-   * @deprecated Use a slotted `<a>` in the `brand` slot instead: `<a slot="brand" href="/"><img src="logo.svg" alt="Brand"></a>`
+   * @deprecated since v3.30.0 — Use a slotted `<a>` in the `brand` slot instead: `<a slot="brand" href="/"><img src="logo.svg" alt="Brand"></a>`
    */
   @property({ type: String })
   brandHref = "";

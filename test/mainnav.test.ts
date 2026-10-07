@@ -79,6 +79,18 @@ describe("sgds-mainnav", () => {
     expect(el.shadowRoot?.querySelector("a.navbar-brand")?.getAttribute("href")).to.equal("test");
   });
 
+  it("slotted <a> in brand slot receives navbar-brand class", async () => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav>
+        <a slot="brand" href="/"><img alt="logo" src="/logo.svg" /></a>
+      </sgds-mainnav>`
+    );
+    await el.updateComplete;
+    const slottedAnchor = el.querySelector("a[slot='brand']");
+    expect(slottedAnchor).to.exist;
+    expect(slottedAnchor).to.have.class("navbar-brand");
+  });
+
   it("when expand=always, navbar class has .navbar-expand", async () => {
     const el = await fixture(html`<sgds-mainnav expand="always"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector(".navbar")).to.have.class("navbar-expand");
