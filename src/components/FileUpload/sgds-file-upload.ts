@@ -30,7 +30,7 @@ export type {
  *
  * @slot default - Label for file upload button (used in default variant)
  *
- * @event sgds-files-selected - @deprecated Deprecated since 3.19.0 in favour of sgds-change. Emitted whenever the file set changes (files added or removed). Access the files with event.detail.
+ * @event sgds-files-selected - @deprecated since v3.19.0 — use `sgds-change` instead. Emitted whenever the file set changes (files added or removed). Access the files with event.detail.
  * @eventDetail {ISgdsFileUploadFilesSelectedEventDetail} sgds-files-selected
  * @event sgds-add-files - Emitted when files are added to the upload. Access the files with event.detail
  * @eventDetail {ISgdsFileUploadAddFilesEventDetail} sgds-add-files

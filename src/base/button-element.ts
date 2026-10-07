@@ -8,7 +8,7 @@ export type ButtonVariant =
   | "primary"
   | "outline"
   | "ghost"
-  /** @deprecated since v3.5.6 */
+  /** @deprecated since v3.5.6 — use `variant="primary"` with `tone="danger"` instead. */
   | "danger";
 
 export default class ButtonElement extends SgdsElement {

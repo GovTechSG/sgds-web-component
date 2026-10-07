@@ -51,7 +51,7 @@ export class SgdsBadge extends SgdsElement {
    * One or more badge variant combinations.
    * Variants include: `primary`, `accent`, `success`, `danger`, `warning`, `cyan`, `purple`, `neutral`, `white`, `info`.
    *
-   * @deprecated The `info` variant is deprecated. Use `primary` instead.
+   * @deprecated since v3.5.0 — the `info` variant is removed. Use `primary` instead.
    */
   @property({ reflect: true }) variant: BadgeVariant = "primary";
 
