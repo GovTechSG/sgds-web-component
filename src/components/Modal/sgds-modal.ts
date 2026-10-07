@@ -303,9 +303,9 @@ export class SgdsModal extends SgdsElement {
                 <slot name="description"></slot>
               </div>
             </div>
-            <div class="modal-body">
+            <section class="modal-body" tabindex="0" aria-label="Modal body content">
               <slot></slot>
-            </div>
+            </section>
           </div class="modal-content">
           <div class="modal-footer">
             <slot name="footer"></slot>

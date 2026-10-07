@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { allModes } from "../../../.storybook/modes";
-import { userEvent } from "@storybook/test";
+import { userEvent } from "storybook/test";
 
 export const Template = ({ expand, brandHref, active, href, disabled, menuIsOpen, close, target, fluid }) => {
   return html`

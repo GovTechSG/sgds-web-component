@@ -112,7 +112,7 @@ export class SgdsMainnav extends NavElement {
         : { sm: 512, md: 768, lg: 1024, xl: 1280, xxl: 1440 }[this.expand]);
 
     return html`
-      <nav>
+      <nav aria-label="Main navigation">
         <div class="navbar ${this._expandClass()}">
           <a class="navbar-brand" href=${sanitizeHref(this.brandHref) ?? ""} aria-label="brand-link">
             <slot name="brand"></slot>

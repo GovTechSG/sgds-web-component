@@ -19,7 +19,7 @@ export function scanFile(file: string): ScanResult {
   }
 
   try {
-    const output = execFileSync("uvx", [SCAN_VERSION, "--skills", file, "--ci"], {
+    const output = execFileSync("uvx", [SCAN_VERSION, "--skills", file, "--ci", "--dangerously-run-mcp-servers"], {
       encoding: "utf-8",
       stdio: ["inherit", "pipe", "pipe"],
       timeout: 5 * 60_000

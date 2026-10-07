@@ -67,7 +67,7 @@ export class SgdsDropdown extends DropdownListElement {
 
   private _handleCloseMenu() {
     const button = this._toggler[0];
-    button?.focus();
+    button?.focus({ preventScroll: true });
   }
 
   async connectedCallback() {

@@ -54,7 +54,7 @@ stories/utilities/[category]/introduction.mdx  →  docs/[Category].md
 ```
 
 ```mdx
-import { Meta, Markdown } from "@storybook/blocks";
+import { Meta, Markdown } from "@storybook/addon-docs/blocks";
 import Docs from "../../../docs/Category.md?raw";
 
 <Meta title="Utilities/Category/Introduction" />

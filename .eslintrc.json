@@ -29,6 +29,9 @@
     "**/*.mjs",
     "cypress",
     "cypress.config.ts",
+    "vitest.config.ts",
+    "lib",
+    "scripts",
     "**/*/icon-registry.ts",
     "**/*.json"
   ]

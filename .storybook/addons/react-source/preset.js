@@ -1,7 +1,8 @@
-const path = require("path");
+import path from "path";
+import { fileURLToPath } from "url";
 
-module.exports = {
-  managerEntries(entry = []) {
-    return [...entry, path.resolve(__dirname, "./manager")];
-  }
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+export const managerEntries = (entry = []) => {
+  return [...entry, path.resolve(__dirname, "./manager")];
 };

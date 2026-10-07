@@ -1,6 +1,6 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { userEvent } from "@storybook/test";
+import { userEvent } from "storybook/test";
 
 export const Template = args =>
   html`

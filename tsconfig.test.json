@@ -4,6 +4,6 @@
     "allowSyntheticDefaultImports": true,
     "rootDir": "."
   },
-  "include": ["**/*.ts", "./mocks/*.ts"],
+  "include": ["test/**/*.ts", "./mocks/*.ts", "typings"],
   "exclude": ["node_modules", "lib", "src", "cypress", "cypress.config.ts"]
 }

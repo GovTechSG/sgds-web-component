@@ -597,7 +597,6 @@ export const DisableThroughForm = {
   render: DisableValidationByFormTemplate.bind({}),
   name: "Form novalidate attribute",
   args: {},
-  parameters: {},
   tags: ["!dev"]
 };
 
@@ -605,6 +604,5 @@ export const DisableThroughInput = {
   render: DisableValidationByInputTemplate.bind({}),
   name: "Component noValidate property",
   args: {},
-  parameters: {},
   tags: ["!dev"]
 };

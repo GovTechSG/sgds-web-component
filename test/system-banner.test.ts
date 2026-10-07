@@ -48,6 +48,7 @@ describe("<sgds-system-banner>", () => {
                 </div>
                 <div class="pagination">
               <sgds-icon-button
+                arialabel="Previous"
                 name="chevron-left"
                 tone="fixed-light"
                 variant="ghost"
@@ -56,6 +57,7 @@ describe("<sgds-system-banner>", () => {
               ></sgds-icon-button>
               <span>1/2</span>
               <sgds-icon-button
+                arialabel="Next"
                 name="chevron-right"
                 tone="fixed-light"
                 variant="ghost"

@@ -9,7 +9,7 @@ describe("sgds-sidenav", () => {
     const el = await fixture(html`<sgds-sidenav></sgds-sidenav>`);
     assert.shadowDom.equal(
       el,
-      ` <nav>
+      ` <nav aria-label="Side navigation">
          <div>
           <slot></slot>
         </div>
@@ -20,7 +20,7 @@ describe("sgds-sidenav", () => {
     const el = await fixture(html`<sgds-sidenav sticky></sgds-sidenav>`);
     assert.shadowDom.equal(
       el,
-      ` <nav class="sticky">
+      ` <nav aria-label="Side navigation" class="sticky">
          <div>
           <slot></slot>
         </div>

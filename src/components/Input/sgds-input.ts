@@ -263,6 +263,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     return html`<sgds-icon
       tabIndex="0"
       role="button"
+      aria-label=${this._showPassword ? "Hide password" : "Show password"}
       name=${this._showPassword ? "eye-slash-fill" : "eye-fill"}
       @click=${() => (this._showPassword = !this._showPassword)}
     ></sgds-icon>`;

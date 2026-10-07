@@ -35,7 +35,7 @@ const TrailingIconTemplate = args =>
 const ActionTemplate = args =>
   html`
     <sgds-input name="action-input" id="action-input" hintText="with action" label="Action">
-      <sgds-icon-button slot="action" name="trash" id="call-to-action">Action</sgds-icon-button>
+      <sgds-icon-button slot="action" name="trash" id="call-to-action" ariaLabel="Clear input"></sgds-icon-button>
     </sgds-input>
 
     <script>

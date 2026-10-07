@@ -13,8 +13,8 @@ const placeholderStyle = html`
         -45deg,
         transparent,
         transparent 6px,
-        var(--sgds-color-border-muted, #e5e7eb) 6px,
-        var(--sgds-color-border-muted, #e5e7eb) 7px
+        var(--sgds-border-color-muted, #e5e7eb) 6px,
+        var(--sgds-border-color-muted, #e5e7eb) 7px
       );
     }
   </style>
@@ -48,7 +48,7 @@ const sidebarNav = html`
 
 const Template = () => html`
   ${placeholderStyle}
-  <div class="sgds:h-screen sgds:flex sgds:flex-col sgds:overflow-hidden">
+  <div class="sgds:bg-default sgds:h-screen sgds:flex sgds:flex-col sgds:overflow-hidden">
     <div class="sgds:flex-none">
       <sgds-masthead fluid></sgds-masthead>
       <sgds-mainnav fluid>
@@ -76,6 +76,7 @@ const Template = () => html`
           tone="neutral"
           variant="ghost"
           name="sidebar-expand"
+          ariaLabel="Toggle sidebar"
           @click=${() => document.querySelector("sgds-sidebar").toggleCollapsed()}
         ></sgds-icon-button>
         <sgds-breadcrumb>
