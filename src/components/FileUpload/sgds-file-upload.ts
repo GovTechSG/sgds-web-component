@@ -68,8 +68,11 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   /** Variant of the file upload component: "default" or "drag-and-drop" */
   @property({ type: String, reflect: true }) variant: "default" | "drag-and-drop" = "default";
 
-  /** An accessible label for the file upload button. Defaults to "Choose files" if not set. */
-  @property({ type: String }) ariaLabel = "Choose files";
+  /** An accessible label for the file upload button. When set, takes priority over slot text content. If not set, the button's aria-label is derived from the slot text content. */
+  @property({ type: String }) ariaLabel = "";
+
+  @state()
+  private _slotText = "Choose files";
 
   /** Disables native and sgds validation for the component. Use this when you want to do custom validation */
   @property({ type: Boolean, reflect: true }) noValidate = false;
@@ -181,6 +184,18 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   private _dragZoneRef = createRef<HTMLDivElement>();
   private _dragCounter = 0;
   private _isDialogOpen = false;
+
+  private _handleSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    const nodes = slot.assignedNodes({ flatten: true });
+    const text = nodes
+      .map(node => node.textContent)
+      .join("")
+      .trim();
+    if (text) {
+      this._slotText = text;
+    }
+  }
 
   private _handleClick(event: Event) {
     event.preventDefault();
@@ -416,9 +431,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
             tone="brand"
             ?disabled=${this.disabled}
             @click=${this._handleClick}
-            ariaLabel=${this.ariaLabel}
+            ariaLabel=${this.ariaLabel || this._slotText}
           >
-            <slot>Choose files</slot>
+            <slot @slotchange=${this._handleSlotChange}>Choose files</slot>
           </sgds-button>
         </div>
       `;
@@ -430,9 +445,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         ?disabled=${this.disabled}
         @click=${this._handleClick}
         @sgds-blur=${this._handleBlur}
-        ariaLabel=${this.ariaLabel}
+        ariaLabel=${this.ariaLabel || this._slotText}
       >
-        <slot>Choose files</slot>
+        <slot @slotchange=${this._handleSlotChange}>Choose files</slot>
         <sgds-icon slot="rightIcon" name="upload"></sgds-icon>
       </sgds-button>
     `;

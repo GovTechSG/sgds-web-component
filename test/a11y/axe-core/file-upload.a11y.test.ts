@@ -25,10 +25,8 @@ describe("FileUpload a11y", () => {
     await expect(el).to.be.accessible();
   });
 
-  it("custom ariaLabel should be accessible", async () => {
-    const el = await fixture(
-      html` <sgds-file-upload label="Upload photo" ariaLabel="Upload photo"></sgds-file-upload> `
-    );
+  it("custom slot text should derive ariaLabel", async () => {
+    const el = await fixture(html` <sgds-file-upload label="Upload photo">Upload photo</sgds-file-upload> `);
     await expect(el).to.be.accessible();
   });
 
