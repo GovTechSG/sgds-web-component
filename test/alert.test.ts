@@ -179,7 +179,9 @@ describe("<Alert>", () => {
 
     it("should have tone='default' when outlined is true", async () => {
       for (const variant of ["info", "success", "danger", "warning", "neutral"] as const) {
-        const el = await fixture<SgdsAlert>(html`<sgds-alert show dismissible outlined variant=${variant}></sgds-alert>`);
+        const el = await fixture<SgdsAlert>(
+          html`<sgds-alert show dismissible outlined variant=${variant}></sgds-alert>`
+        );
         const closeButton = el.shadowRoot?.querySelector("sgds-close-button");
         expect(closeButton?.getAttribute("tone"), `outlined variant="${variant}"`).to.equal("default");
       }
