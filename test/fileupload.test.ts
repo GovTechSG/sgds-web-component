@@ -1900,4 +1900,34 @@ describe("sgds-file-upload dialog and drop validation behavior", () => {
     // Should be invalid again — required field is empty and component is touched
     expect(el.invalid).to.be.true;
   });
+
+  describe("button ariaLabel derivation", () => {
+    it("should default button ariaLabel to 'Choose files' when no slot content is provided", async () => {
+      const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload></sgds-file-upload>`);
+      const button = el.shadowRoot?.querySelector("sgds-button") as SgdsButton;
+      expect(button.ariaLabel).to.equal("Choose files");
+    });
+
+    it("should derive button ariaLabel from slot text content", async () => {
+      const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload>Upload photo</sgds-file-upload>`);
+      const button = el.shadowRoot?.querySelector("sgds-button") as SgdsButton;
+      expect(button.ariaLabel).to.equal("Upload photo");
+    });
+
+    it("should use ariaLabel property over slot text when explicitly set", async () => {
+      const el = await fixture<SgdsFileUpload>(
+        html`<sgds-file-upload ariaLabel="Custom label">Upload photo</sgds-file-upload>`
+      );
+      const button = el.shadowRoot?.querySelector("sgds-button") as SgdsButton;
+      expect(button.ariaLabel).to.equal("Custom label");
+    });
+
+    it("should derive button ariaLabel from slot text in drag-and-drop variant", async () => {
+      const el = await fixture<SgdsFileUpload>(
+        html`<sgds-file-upload variant="drag-and-drop">Upload documents</sgds-file-upload>`
+      );
+      const button = el.shadowRoot?.querySelector("sgds-button") as SgdsButton;
+      expect(button.ariaLabel).to.equal("Upload documents");
+    });
+  });
 });
