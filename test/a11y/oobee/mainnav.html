@@ -15,12 +15,12 @@
   </head>
   <body>
     <sgds-mainnav>
-      <div slot="brand">Logo</div>
+      <a slot="brand" href="/"><img src="/.storybook/static/logo.svg" alt="Singapore Government Design System"></a>
       <sgds-mainnav-item active>
         <a href="#">Home</a>
       </sgds-mainnav-item>
       <sgds-mainnav-item disabled><a href="#">About</a></sgds-mainnav-item>
-      <sgds-mainnav-dropdown ariaLabel="Dropdown menu">
+      <sgds-mainnav-dropdown>
         <span slot="toggler">Dropdown</span>
         <sgds-dropdown-item disabled><a href="#">Item 1</a></sgds-dropdown-item>
         <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
@@ -31,12 +31,12 @@
     </sgds-mainnav>
 
     <sgds-mainnav fluid>
-      <div slot="brand">Logo</div>
+      <a slot="brand" href="/"><img src="/.storybook/static/logo.svg" alt="Singapore Government Design System"></a>
       <sgds-mainnav-item active>
         <a href="#">Home</a>
       </sgds-mainnav-item>
       <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
-      <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
+      <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)">
         <span slot="avatar" class="avatar-circle"></span>
         <sgds-dropdown-item readonly>
           <div>
@@ -61,11 +61,11 @@
     </sgds-mainnav>
 
     <sgds-mainnav>
-      <div slot="brand">Logo</div>
+      <a slot="brand" href="/"><img src="/.storybook/static/logo.svg" alt="Singapore Government Design System"></a>
       <sgds-mainnav-item active>
         <a href="#">Home</a>
       </sgds-mainnav-item>
-      <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile info">
+      <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)">
         <span slot="avatar" class="avatar-circle"></span>
       </sgds-mainnav-profile>
     </sgds-mainnav>

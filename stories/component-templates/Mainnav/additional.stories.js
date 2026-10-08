@@ -11,7 +11,7 @@ export const Fluid = {
 export const ProfileReadOnly = {
   render: () => html`
     <sgds-mainnav fluid>
-      <img alt="sgds logo" width="130" src="/logo.svg" slot="brand" />
+      <a slot="brand" href="/"><img alt="sgds logo" width="130" src="/logo.svg" /></a>
       <sgds-mainnav-item active>
         <a href="#">Home</a>
       </sgds-mainnav-item>
@@ -43,7 +43,7 @@ export const ProfileReadOnly = {
 export const ProfileSlot = {
   render: () => html`
     <sgds-mainnav fluid>
-      <img alt="sgds logo" width="130" src="/logo.svg" slot="brand" />
+      <a slot="brand" href="/"><img alt="sgds logo" width="130" src="/logo.svg" /></a>
       <sgds-mainnav-item active>
         <a href="#">Home</a>
       </sgds-mainnav-item>
