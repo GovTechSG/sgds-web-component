@@ -24,13 +24,7 @@ describe("sgds-mainnav", () => {
       el,
       `<nav aria-label="Main navigation">
         <div class="navbar navbar-expand-lg">
-          <a
-            aria-label="brand-link"
-            class="navbar-brand"
-            href=""
-          >
-            <slot name="brand"></slot>
-          </a>
+          <slot name="brand"></slot>
           <div class="navbar-end">
             <slot
               class="slot-empty"
