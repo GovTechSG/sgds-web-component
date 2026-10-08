@@ -36,12 +36,11 @@
   bottom: 0;
   left: 0;
   z-index: var(--sgds-z-index-modal);
-  font-family: var(--sgds-body-font-family);
 }
 
 .modal-panel {
   width: 100%;
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-overlay-border-radius);
   z-index: 2; /* shift above overlay  */
   display: flex;
   flex-direction: column;
@@ -131,6 +130,7 @@ slot[name="title"]::slotted(*) {
   align-items: center;
   gap: 1rem;
   margin: var(--sgds-margin-none) !important;
+  font-family: var(--sgds-font-family-heading) !important;
   line-height: var(--sgds-line-height-lg) !important;
   font-size: var(--sgds-font-size-heading-sm) !important;
 }
@@ -139,9 +139,11 @@ slot[name="description"]::slotted(*) {
   margin: var(--sgds-margin-none) !important;
   color: var(--sgds-color-subtle);
   line-height: var(--sgds-line-height-xs);
+  font-family: var(--sgds-font-family-label) !important;
 }
 
 .modal-body {
+  font-family: var(--sgds-font-family-label) !important;
   flex: 1 1 auto;
   overflow: auto;
   -webkit-overflow-scrolling: touch;

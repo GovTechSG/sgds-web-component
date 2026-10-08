@@ -1,5 +1,5 @@
 :host {
-  --input-border-radius: var(--sgds-form-border-radius-md);
+  --input-border-radius: var(--sgds-form-border-radius);
   --input-min-width: var(--sgds-dimension-160);
 }
 .form-control-container {
