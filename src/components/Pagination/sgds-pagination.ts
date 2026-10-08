@@ -290,7 +290,7 @@ export class SgdsPagination extends SgdsElement {
         @click=${isDisabled ? undefined : clickHandler}
         ?disabled=${isDisabled}
         variant="ghost"
-        >${icon}${direction}</sgds-button
+        >${icon}${direction === "Prev" ? "Previous" : "Next"}</sgds-button
       >
     `;
   };
