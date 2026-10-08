@@ -77,6 +77,9 @@ export class SgdsIconCard extends CardElement {
         })}"
       >
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
+        ${this.stretchedLink && this._stretchedHref
+          ? html`<a class="stretched-link" href=${this._stretchedHref} aria-label=${this._stretchedLabel}></a>`
+          : nothing}
         <div class="card-media">
           <slot name="icon"></slot>
           ${this.orientation === "vertical" ? html`<slot name="upper"></slot>` : nothing}

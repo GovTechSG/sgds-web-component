@@ -1,4 +1,4 @@
-import { property } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { SgdsLink } from "../components/Link/sgds-link";
 import { CardOrientation } from "../components/Card/types";
 import SgdsElement from "./sgds-element";
@@ -28,8 +28,11 @@ export class CardElement extends SgdsElement {
   /** Sets the orientation of the card. Available options: `vertical`, `horizontal` */
   @property({ type: String, reflect: true }) orientation: CardOrientation = "vertical";
 
-  /** @internal The anchor element from the footer/link slot, used for navigation */
-  private _stretchedAnchor: HTMLAnchorElement | null = null;
+  /** @internal The href for the stretched link anchor rendered in shadow DOM */
+  @state() protected _stretchedHref = "";
+
+  /** @internal The accessible label for the stretched link */
+  @state() protected _stretchedLabel = "";
 
   handleTitleSlotChange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLElement>;
@@ -51,33 +54,12 @@ export class CardElement extends SgdsElement {
       return;
     }
 
-    this._stretchedAnchor = anchor;
+    this._stretchedHref = anchor.href;
 
-    // Set host-level link semantics
-    this.setAttribute("role", "link");
-    this.setAttribute("tabindex", "0");
-
-    // Derive accessible name from anchor text or card title
-    const label = anchor.textContent?.trim() || this.querySelector("[slot='title']")?.textContent?.trim();
-    if (label) {
-      this.setAttribute("aria-label", label);
-    }
-
-    this.addEventListener("click", this._handleStretchedClick);
-    this.addEventListener("keydown", this._handleStretchedKeydown);
+    // Derive accessible name from visible title text first, then anchor text
+    this._stretchedLabel =
+      this.querySelector("[slot='title']")?.textContent?.trim() || anchor.textContent?.trim() || "";
   }
-
-  private _handleStretchedClick = () => {
-    if (this.disabled || !this._stretchedAnchor) return;
-    this._stretchedAnchor.click();
-  };
-
-  private _handleStretchedKeydown = (e: KeyboardEvent) => {
-    if (this.disabled || !this._stretchedAnchor) return;
-    if (e.key === "Enter") {
-      this._stretchedAnchor.click();
-    }
-  };
 
   warnLinkSlotMisused(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as

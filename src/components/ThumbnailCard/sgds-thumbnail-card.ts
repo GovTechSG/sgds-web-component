@@ -66,6 +66,9 @@ export class SgdsThumbnailCard extends CardElement {
         })}"
       >
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
+        ${this.stretchedLink && this._stretchedHref
+          ? html`<a class="stretched-link" href=${this._stretchedHref} aria-label=${this._stretchedLabel}></a>`
+          : nothing}
         <div class="card-media">
           <slot name="thumbnail" @slotchange=${this._handleThumbnailSlotChange}></slot>
           ${this.orientation === "vertical" ? html`<slot name="upper"></slot>` : nothing}

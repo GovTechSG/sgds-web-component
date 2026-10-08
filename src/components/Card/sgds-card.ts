@@ -110,6 +110,9 @@ export class SgdsCard extends CardElement {
         })}"
       >
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
+        ${this.stretchedLink && this._stretchedHref
+          ? html`<a class="stretched-link" href=${this._stretchedHref} aria-label=${this._stretchedLabel}></a>`
+          : nothing}
         <slot name="menu"></slot>
         <div
           class=${classMap({

@@ -17,11 +17,20 @@
 }
 
 :host([stretchedLink]) {
-  cursor: pointer;
   border-radius: var(--sgds-border-radius-md);
 }
 
-:host([stretchedLink]:focus-visible) .card {
+.stretched-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.stretched-link:focus-visible {
   outline: var(--sgds-outline-focus);
   outline-offset: -1px;
 }

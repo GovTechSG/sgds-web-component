@@ -87,6 +87,9 @@ export class SgdsImageCard extends CardElement {
         })}"
       >
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
+        ${this.stretchedLink && this._stretchedHref
+          ? html`<a class="stretched-link" href=${this._stretchedHref} aria-label=${this._stretchedLabel}></a>`
+          : nothing}
         <div class="card-image">
           <slot name="image" @slotchange=${this.handleImgSlotChange}></slot>
           <slot name="image-badge"></slot>
