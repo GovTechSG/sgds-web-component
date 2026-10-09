@@ -26,7 +26,7 @@ export class SgdsTable extends SgdsElement {
    * From that breakpoint and up, the table will behave normally and not scroll horizontally.
    * Use "always" to make the table always responsive.
    *
-   * (@deprecated) Deprecated since 3.9.0 legacy from v2
+   * @deprecated since v3.9.0 — legacy from v2.
    * @type {"sm" | "md" | "lg" | "xl" | "always"}
    */
   @property({ type: String, reflect: true }) responsive: "sm" | "md" | "lg" | "xl" | "always";

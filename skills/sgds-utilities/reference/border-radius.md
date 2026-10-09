@@ -66,6 +66,41 @@ Use general tokens by default. Use form tokens only for native form controls.
 | `sgds:rounded-3-xl` | 32px | Huge radius Hero / feature sections |
 | `sgds:rounded-full` | 9999px | Full radius like circle, Avatars, Radio |
 
+## Semantic Border Radius
+
+Purpose-driven tokens that map a UI role to a primitive radius value. Components use these internally. Use these classes when building custom layouts that should align with component styling.
+
+```html
+<div class="sgds:rounded-structure">Structural containers (0px)</div>
+<div class="sgds:rounded-indicator">Badges, status indicators (4px)</div>
+<div class="sgds:rounded-interactive">Buttons, interactive elements (8px)</div>
+<div class="sgds:rounded-form">Form controls (8px)</div>
+<div class="sgds:rounded-form-dense">Compact form controls (8px)</div>
+<div class="sgds:rounded-surface">Cards, panels, raised surfaces (12px)</div>
+<div class="sgds:rounded-overlay">Modals, drawers, tooltips (12px)</div>
+```
+
+### Semantic Reference
+
+| Class | CSS Variable | Default |
+|-------|-------------|---------|
+| `sgds:rounded-structure` | `--sgds-structure-border-radius` | none (0px) |
+| `sgds:rounded-indicator` | `--sgds-indicator-border-radius` | sm (4px) |
+| `sgds:rounded-interactive` | `--sgds-interactive-border-radius` | md (8px) |
+| `sgds:rounded-form` | `--sgds-form-border-radius` | md (8px) |
+| `sgds:rounded-form-dense` | `--sgds-form-border-radius-dense` | md (8px) |
+| `sgds:rounded-surface` | `--sgds-surface-border-radius` | lg (12px) |
+| `sgds:rounded-overlay` | `--sgds-overlay-border-radius` | lg (12px) |
+
+> **Note**: `sgds:rounded-form` (semantic, no size suffix) is the purpose-driven token for form controls. It is distinct from `sgds:rounded-form-md` (primitive form scale with explicit size).
+
+### When to use semantic vs primitive
+
+- **Semantic** (`sgds:rounded-surface`) — when you want the element to match the design system's intent for that UI role. If the theme changes, the element updates automatically.
+- **Primitive** (`sgds:rounded-lg`) — when you need a specific pixel value regardless of the theme.
+
+---
+
 ## Form Border Radius
 
 Apply to native HTML form elements only: `<input>`, `<select>`, `<textarea>`, `<form>`.

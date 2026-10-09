@@ -435,6 +435,15 @@
   --radius-form-md: var(--sgds-form-border-radius-md);
   --radius-form-full: var(--sgds-form-border-radius-full);
 
+  /* Semantic Border Radius */
+  --radius-structure: var(--sgds-structure-border-radius);
+  --radius-indicator: var(--sgds-indicator-border-radius);
+  --radius-interactive: var(--sgds-interactive-border-radius);
+  --radius-form: var(--sgds-form-border-radius);
+  --radius-form-dense: var(--sgds-form-border-radius-dense);
+  --radius-surface: var(--sgds-surface-border-radius);
+  --radius-overlay: var(--sgds-overlay-border-radius);
+
   /* Paragraph Margins */
   --margin-paragraph-none: var(--sgds-paragraph-spacing-none);
   --margin-paragraph-sm: var(--sgds-paragraph-spacing-sm);

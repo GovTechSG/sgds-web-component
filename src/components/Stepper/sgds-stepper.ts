@@ -27,8 +27,8 @@ export class SgdsStepper extends SgdsElement {
   static styles = [...SgdsElement.styles, stepperStyle];
   /** @internal */
   static dependencies = { "sgds-icon": SgdsIcon };
-  /** The metadata of stepper, type `IStepMetaData`. Deprecated: use sgds-step child components instead.
-   * @deprecated Use sgds-step child components instead of the steps property
+  /** The metadata of stepper, type `IStepMetaData`.
+   * @deprecated since v3.20.0 — use `sgds-step` child components instead.
    */
   @property({ type: Array })
   steps: IStepMetaData[] = [];

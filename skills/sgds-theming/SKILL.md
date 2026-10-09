@@ -29,6 +29,7 @@ Import `themes/day.css` before your custom CSS. See **[sgds-getting-started](../
 | Enable dark/night mode | Import `themes/night.css` + add `.sgds-night-theme` to `<html>` | See below |
 | Font typeface (all roles) | Override `--sgds-font-family-brand` | [typography.md](reference/typography.md) |
 | Font typeface (per role) | Override individual `--sgds-font-family-{display,heading,subtitle,body,label,code}` | [typography.md](reference/typography.md) |
+| Border radius | Override semantic `--sgds-{purpose}-border-radius` tokens | [border-radius.md](reference/border-radius.md) |
 
 ---
 
@@ -89,3 +90,4 @@ document.documentElement.classList.toggle("sgds-night-theme");
 5. Custom overrides apply to both day and night mode simultaneously because they target `:root`, which both theme selectors inherit from.
 6. For brand colour theming, read [brand-colour.md](reference/brand-colour.md).
 7. For typography/font theming, read [typography.md](reference/typography.md).
+8. For border radius theming, read [border-radius.md](reference/border-radius.md). Override **semantic** tokens (`--sgds-{purpose}-border-radius`), referencing primitive values via `var(--sgds-border-radius-{size})`.

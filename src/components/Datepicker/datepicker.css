@@ -18,6 +18,7 @@
   gap: var(--sgds-form-gap-sm);
   overflow: unset;
   width: var(--sgds-dimension-320);
+  border-radius: var(--sgds-overlay-border-radius);
 }
 
 .dropdown {
