@@ -28,6 +28,7 @@ Import `themes/day.css` before your custom CSS. See **[sgds-getting-started](../
 | Product brand colour (GovTech) | Import one `themes/gt/<colour>.css` + map to `--sgds-product-primary-*` |
 | Enable dark/night mode | Import `themes/night.css` + add `.sgds-night-theme` to `<html>` |
 | Font typeface | Override `--sgds-font-family-brand` |
+| Border radius scale | Override `--sgds-border-radius-{size}` primitives |
 
 ---
 
@@ -182,6 +183,61 @@ You are responsible for loading the font assets — either via a `<link>` tag or
 
 ---
 
+## Changing the Border Radius
+
+SGDS uses a **3-layer token architecture** for border radius:
+
+1. **Primitives** (`--sgds-border-radius-{size}`) — the raw scale (none, xs, sm, md, lg, xl, 2-xl, 3-xl, full)
+2. **Semantic** (`--sgds-{purpose}-border-radius`) — purpose-driven aliases that reference primitives
+3. **Components** — web components read the semantic tokens internally
+
+Override the **primitive** tokens to change the entire radius system at once. The semantic tokens and all components update automatically.
+
+```css
+/* yourCustomCss.css */
+:root {
+  --sgds-border-radius-none: 0px;
+  --sgds-border-radius-xs: 4px;
+  --sgds-border-radius-sm: 8px;
+  --sgds-border-radius-md: 12px;
+  --sgds-border-radius-lg: 16px;
+  --sgds-border-radius-xl: 24px;
+  --sgds-border-radius-2-xl: 32px;
+  --sgds-border-radius-3-xl: 48px;
+  --sgds-border-radius-full: 999px;
+}
+```
+
+Import your custom CSS **after** the SGDS theme file:
+
+```js
+import "@govtechsg/sgds-web-component/themes/day.css";
+import "./yourCustomCss.css";
+```
+
+```css
+@import "@govtechsg/sgds-web-component/themes/day.css";
+@import "./yourCustomCss.css";
+```
+
+### Semantic border radius tokens
+
+These tokens map a UI purpose to a primitive radius value. Components use them internally — you rarely need to override these directly.
+
+| Semantic token | Default | Purpose |
+|----------------|---------|---------|
+| `--sgds-structure-border-radius` | none (0px) | Structural containers, table cells |
+| `--sgds-indicator-border-radius` | sm (4px) | Badges, status indicators |
+| `--sgds-interactive-border-radius` | md (8px) | Buttons, links, interactive elements |
+| `--sgds-form-border-radius` | md (8px) | Form controls (input, select, textarea) |
+| `--sgds-form-border-radius-dense` | md (8px) | Compact form controls |
+| `--sgds-surface-border-radius` | lg (12px) | Cards, panels, raised surfaces |
+| `--sgds-overlay-border-radius` | lg (12px) | Modals, drawers, tooltips |
+
+Changing a primitive value (e.g. `--sgds-border-radius-md` from `8px` to `12px`) automatically updates every semantic token that references it. This is the recommended approach — override primitives, not semantic tokens.
+
+---
+
 ## For AI Agents
 
 1. Always tell users to import their custom CSS **after** `themes/day.css` — otherwise the override will be overwritten.
@@ -193,3 +249,5 @@ You are responsible for loading the font assets — either via a `<link>` tag or
 7. Custom overrides apply to both day and night mode simultaneously because they target `:root`, which both theme selectors inherit from.
 8. GovTech products must use a colour from `themes/gt/` — not custom hex values. If a user is building a GovTech product and asks about brand colours, guide them to pick one GT colour and apply the `--gt-color-*` → `--sgds-product-primary-*` mapping pattern. Never let them import more than one GT colour file.
 9. The GT colour file must be imported **after** `themes/day.css` and **before** the custom mapping CSS so that `--gt-color-*` variables are defined in time.
+10. Border radius overrides target **primitive** tokens (`--sgds-border-radius-{size}`), not semantic tokens. Changing the primitives flows through to all semantic tokens and components automatically.
+11. Do not override semantic border radius tokens (e.g. `--sgds-surface-border-radius`) directly unless the user has a specific reason to decouple one purpose from the primitive scale.
