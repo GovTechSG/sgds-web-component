@@ -245,7 +245,13 @@
   --border-width-form-thick: var(--sgds-form-border-width-thick);
 
   /* Font Family */
-  --font-display: var(--sgds-font-family-brand);
+  --font-brand: var(--sgds-font-family-brand);
+  --font-display: var(--sgds-font-family-display);
+  --font-heading: var(--sgds-font-family-heading);
+  --font-subtitle: var(--sgds-font-family-subtitle);
+  --font-body: var(--sgds-font-family-body);
+  --font-label: var(--sgds-font-family-label);
+  --font-code: var(--sgds-font-family-code);
 
   /* Font Weight */
   --font-weight-light: var(--sgds-font-weight-light);
