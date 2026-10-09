@@ -12,7 +12,7 @@ export type HeaderPosition = "horizontal" | "vertical" | "both";
 
 /**
  * @summary Table is used for displaying collections of data in organized rows and columns.
- * It supports two rendering methods: supply an array of data for automatic table generation, or use the slot to insert custom table elements for full structural control.
+ * Use the slot to insert custom table elements (`sgds-table-row`, `sgds-table-head`, `sgds-table-cell`) for full structural control.
  *
  * @slot - Insert custom table elements (such as rows, headers, or cells) to define the table structure manually.
  */
@@ -26,13 +26,15 @@ export class SgdsTable extends SgdsElement {
    * From that breakpoint and up, the table will behave normally and not scroll horizontally.
    * Use "always" to make the table always responsive.
    *
-   * (@deprecated) Deprecated since 3.9.0 legacy from v2
+   * @deprecated since v3.9.0 — legacy from v2.
    * @type {"sm" | "md" | "lg" | "xl" | "always"}
    */
   @property({ type: String, reflect: true }) responsive: "sm" | "md" | "lg" | "xl" | "always";
 
   /**
    * Array of strings to populate row header cells.
+   *
+   * (@deprecated) Deprecated since 3.30.0. Use slotted sub-components instead.
    * @type {string[]}
    */
   @property({ type: Array }) rowHeader: string[] = [];
@@ -40,12 +42,16 @@ export class SgdsTable extends SgdsElement {
   /**
    * Array of strings to populate column header cells.
    * Only used when `headerPosition` is set to "vertical" or "both".
+   *
+   * (@deprecated) Deprecated since 3.30.0. Use slotted sub-components instead.
    * @type {string[]}
    */
   @property({ type: Array }) columnHeader: string[] = [];
 
   /**
    * Two-dimensional array of strings or numbers to populate table data cells.
+   *
+   * (@deprecated) Deprecated since 3.30.0. Use slotted sub-components instead.
    * @type {Array<(string | number)[]>}
    */
   @property({ type: Array }) tableData: Array<(string | number)[]> = [];
@@ -54,6 +60,8 @@ export class SgdsTable extends SgdsElement {
    * Defines the placement of headers in the table.
    * Use "horizontal" for top headers only, "vertical" for left headers only,
    * or "both" for both row and column headers.
+   *
+   * (@deprecated) Deprecated since 3.30.0. Use slotted sub-components instead.
    * @type {"horizontal" | "vertical" | "both"}
    * @default "horizontal"
    */

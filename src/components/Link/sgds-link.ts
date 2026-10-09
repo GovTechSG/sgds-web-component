@@ -13,7 +13,9 @@ export class SgdsLink extends SgdsElement {
   /** Determines the size of the link */
   @property({ type: String, reflect: true })
   size: "xs" | "sm" | "md" | "lg" = "md";
-  /** Sets the colour of the link @deprecated since 3.6.0 */
+  /** Sets the colour of the link.
+   * @deprecated since v3.6.0 — use `tone` instead.
+   */
   @property({ type: String, reflect: true })
   variant: "primary" | "danger" | "neutral" | "light" | "dark" = "primary";
   /** Sets the colour of the link, replaces variant prop  */

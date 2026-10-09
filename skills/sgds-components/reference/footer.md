@@ -100,7 +100,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
   sitemapHref="/sitemap"
 >
   <h2 slot="title">Name of Portal</h2>
-  <p slot="description">Brief description of the portal's purpose.</p>
+  <span slot="description">Brief description of the portal's purpose.</span>
 
   <sgds-footer-item slot="items">
     <div slot="title">Guides</div>

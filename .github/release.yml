@@ -4,6 +4,9 @@ changelog:
       labels:
         - breaking-change
         - breaking
+    - title: Deprecated
+      labels:
+        - deprecation
     - title: Features
       labels:
         - enhancement

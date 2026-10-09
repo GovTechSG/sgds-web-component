@@ -51,7 +51,7 @@ export class SgdsBadge extends SgdsElement {
    * One or more badge variant combinations.
    * Variants include: `primary`, `accent`, `success`, `danger`, `warning`, `cyan`, `purple`, `neutral`, `white`, `info`.
    *
-   * (@deprecated) The `info` variant is deprecated. Use `primary` instead.
+   * @deprecated since v3.5.0 — the `info` variant is removed. Use `primary` instead.
    */
   @property({ reflect: true }) variant: BadgeVariant = "primary";
 
@@ -111,9 +111,14 @@ export class SgdsBadge extends SgdsElement {
     return;
   }
 
-  private _renderBadge() {
-    const isDarkCloseButton = this.outlined || this.variant === "warning" || this.variant === "white";
+  private get _closeButtonTone() {
+    if (this.variant === "white") return "fixed-dark";
+    if (this.outlined) return "default";
+    if (this.variant === "warning") return "fixed-dark";
+    return "fixed-light";
+  }
 
+  private _renderBadge() {
     return html`<div
       class="  
           ${classMap({
@@ -135,7 +140,7 @@ export class SgdsBadge extends SgdsElement {
             size="sm"
             aria-label="close the badge"
             @click=${this.close}
-            tone=${isDarkCloseButton ? "fixed-dark" : "fixed-light"}
+            tone=${this._closeButtonTone}
           ></sgds-close-button>`
         : nothing}
     </div>`;

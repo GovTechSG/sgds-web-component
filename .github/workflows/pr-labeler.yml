@@ -28,6 +28,10 @@ jobs:
             LABEL="refactor"
           fi
 
+          if echo "$PR_TITLE" | grep -qiE 'deprecat'; then
+            LABEL="${LABEL:+$LABEL,}deprecation"
+          fi
+
           if [ -n "$LABEL" ]; then
             gh pr edit "$PR_NUMBER" --add-label "$LABEL" --repo "${{ github.repository }}"
           fi
