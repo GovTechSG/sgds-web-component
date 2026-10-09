@@ -8,7 +8,7 @@ All SGDS typography utilities use the `sgds:` prefix. The main properties:
 
 - **Font weight** — `sgds:font-{weight}` (light / regular / semibold / bold)
 - **Letter spacing** — `sgds:tracking-{size}` (tighter / tight / normal / wide / wider)
-- **Font family** — `sgds:font-sans` / `sgds:font-mono`
+- **Font family** — `sgds:font-{role}` (brand / display / heading / subtitle / body / label / code)
 
 ## Letter Spacing by Role
 
@@ -127,11 +127,42 @@ Always use `<a href="...">`. All link patterns include underline.
 
 **Styling code?**
 
-Always apply `sgds:font-mono` to `<code>` and `<pre>`.
+Always apply `sgds:font-code` to `<code>` and `<pre>`.
 
 ```html
-<code class="sgds:font-mono sgds:text-14">inline code</code>
-<pre class="sgds:font-mono sgds:text-14 sgds:leading-20">block code</pre>
+<code class="sgds:font-code sgds:text-label-md">inline code</code>
+<pre class="sgds:font-code sgds:text-label-md sgds:leading-xs">block code</pre>
+```
+
+## Font Family Utilities
+
+Each typographic role has a dedicated font-family utility class that maps to a semantic `--sgds-font-family-*` token. These allow theming by overriding the token in `:root`.
+
+| Utility | CSS Variable | Default |
+|---------|-------------|---------|
+| `sgds:font-brand` | `--sgds-font-family-brand` | `var(--sgds-font-family-sans)` |
+| `sgds:font-display` | `--sgds-font-family-display` | `var(--sgds-font-family-brand)` |
+| `sgds:font-heading` | `--sgds-font-family-heading` | `var(--sgds-font-family-brand)` |
+| `sgds:font-subtitle` | `--sgds-font-family-subtitle` | `var(--sgds-font-family-brand)` |
+| `sgds:font-body` | `--sgds-font-family-body` | `var(--sgds-font-family-brand)` |
+| `sgds:font-label` | `--sgds-font-family-label` | `var(--sgds-font-family-brand)` |
+| `sgds:font-code` | `--sgds-font-family-code` | `var(--sgds-font-family-mono)` |
+
+### When to use
+
+- The reboot already assigns the correct font-family to native elements (`h1`–`h6`, `p`, `a`, `label`, `code`), so **no class is needed** when using semantic HTML.
+- Use `sgds:font-{role}` when an element's font-family doesn't match its visual role — e.g. a `<div>` styled as a heading needs `sgds:font-heading`.
+
+### Theming example
+
+Override the brand font and mix fonts per role:
+
+```css
+:root {
+  --sgds-font-family-brand: "Noto Sans", system-ui, sans-serif;
+  --sgds-font-family-display: var(--sgds-font-family-serif);
+  --sgds-font-family-heading: var(--sgds-font-family-serif);
+}
 ```
 
 ## Reference Documentation
@@ -143,5 +174,5 @@ Always apply `sgds:font-mono` to `<code>` and `<pre>`.
 
 ---
 
-**For AI Agents**: Apply tracking by role: display → `tracking-tighter`, headings → `tracking-tight`, subtitles → `tracking-normal`, overlines → `tracking-wide`. Always apply `sgds:font-mono` to `<code>` and `<pre>`. See reference files for full property tables.
+**For AI Agents**: Apply tracking by role: display → `tracking-tighter`, headings → `tracking-tight`, subtitles → `tracking-normal`, overlines → `tracking-wide`. Always apply `sgds:font-code` to `<code>` and `<pre>`. Use `sgds:font-{role}` only on non-semantic elements; semantic HTML (`h1`–`h6`, `p`, `a`, `label`, `code`) gets the correct font-family from the reboot. See reference files for full property tables.
 
