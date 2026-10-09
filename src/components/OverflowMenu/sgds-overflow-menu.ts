@@ -19,12 +19,14 @@ export class SgdsOverflowMenu extends SgdsElement {
   };
   /** Specifies a large or small button */
   @property({ type: String, reflect: true }) size: "sm" | "md" = "md";
+  /** Specifies the icon name to display */
+  @property({ type: String, reflect: true }) icon = "three-dots";
 
   render() {
     return html`
       <sgds-dropdown>
         <button slot="toggler" class="overflow-btn" aria-label="More options">
-          <sgds-icon name="three-dots" size=${this.size === "md" ? "lg" : this.size}></sgds-icon>
+          <sgds-icon name=${this.icon} size=${this.size === "md" ? "lg" : this.size}></sgds-icon>
         </button>
         <slot></slot>
       </sgds-dropdown>
