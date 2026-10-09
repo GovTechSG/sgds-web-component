@@ -1,0 +1,58 @@
+<script type="module" src="../src/index.ts"></script>
+<link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+<link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+<link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="css/utility.css" rel="stylesheet" type="text/css" />
+<link href="css/fonts.css" rel="stylesheet" type="text/css" />
+
+<style>
+  .shell-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .shell-main {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 108px);
+  }
+  :root {
+    --sgds-font-family-display: "comic sans MS", "Comic Sans", cursive;
+    --sgds-font-family-heading: "comic sans MS", "Comic Sans", cursive;
+    --sgds-font-family-subtitle: var(--sgds-font-family-serif);
+    /* --sgds-font-family-body: Times new roman, serif; */
+    --sgds-font-family-label:  var(--sgds-font-family-serif);
+  }
+
+</style>
+
+<body>
+
+  <!-- ── STICKY TOP: Masthead + Mainnav ── -->
+  <div class="shell-nav">
+    <sgds-masthead fluid></sgds-masthead>
+    <sgds-mainnav fluid>
+      <strong slot="brand">Typography Playground</strong>
+      <div slot="end">
+        <sgds-button variant="primary" size="sm" id="theme-toggle">Toggle Theme</sgds-button>
+      </div>
+    </sgds-mainnav>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <div class="shell-main">
+
+    <!--  -->
+    <h1 class="sgds:font-subtitle sgds:text-heading-sm">iphone Duo</h1>
+    <h2 class="sgds:font-display sgds:text-display-lg">Hello Hello</h2>
+
+  </div>
+
+</body>
+
+<script>
+  document.getElementById("theme-toggle").addEventListener("click", () => {
+    document.documentElement.classList.toggle("sgds-theme-night");
+  });
+</script>

@@ -28,7 +28,7 @@ button.year {
   font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs);
   background-color: transparent;
-  border-radius: var(--sgds-form-border-radius-sm);
+  border-radius: var(--sgds-interactive-border-radius);
   position: relative;
 }
 
@@ -64,7 +64,7 @@ button.year:focus-visible {
 td[data-day].active:not(.selected-ends):focus,
 button.month.active:not(.selected-ends):focus,
 button.year.active:not(.selected-ends):focus {
-  border-radius: var(--sgds-form-border-radius-sm);
+  border-radius: var(--sgds-interactive-border-radius);
 }
 
 button.year.active {
@@ -78,7 +78,7 @@ td, th {
   padding: 0;
   font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs);
-  border-radius: var(--sgds-form-border-radius-sm);
+  border-radius: var(--sgds-interactive-border-radius);
   position: relative;
 }
 
