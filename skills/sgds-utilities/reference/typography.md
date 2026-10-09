@@ -10,6 +10,8 @@ All SGDS typography utilities use the `sgds:` prefix. The main properties:
 - **Letter spacing** — `sgds:tracking-{size}` (tighter / tight / normal / wide / wider)
 - **Font family** — `sgds:font-{role}` (brand / display / heading / subtitle / body / label / code)
 
+**Visual size is independent of HTML semantics.** Typography size classes are purely visual and can be applied to any HTML element. A `<span>` can use `sgds:text-display-lg` and an `<h1>` can use `sgds:text-body-sm` — the design system does not enforce a relationship between element type and font size. The default reboot maps `h1`–`h6` from large to small for convenience, but users are free to apply any size token to any element. HTML heading levels (`h1`–`h6`) should still follow sequential order for accessibility, regardless of visual size.
+
 ## Letter Spacing by Role
 
 | Role | Tracking |
@@ -24,7 +26,7 @@ All SGDS typography utilities use the `sgds:` prefix. The main properties:
 
 **Styling a display heading?**
 
-Use `<h1>`.
+Default used on `<h1>`, but can be applied to any element.
 
 | Variant | Classes |
 |---------|---------|
@@ -59,7 +61,7 @@ Use `<h1>`.
 
 **Styling body content?**
 
-Use `<p>`.
+Default used on `<p>`, but can be applied to any element.
 
 | Variant | Classes |
 |---------|---------|
@@ -153,18 +155,6 @@ Each typographic role has a dedicated font-family utility class that maps to a s
 - The reboot already assigns the correct font-family to native elements (`h1`–`h6`, `p`, `a`, `label`, `code`), so **no class is needed** when using semantic HTML.
 - Use `sgds:font-{role}` when an element's font-family doesn't match its visual role — e.g. a `<div>` styled as a heading needs `sgds:font-heading`.
 
-### Theming example
-
-Override the brand font and mix fonts per role:
-
-```css
-:root {
-  --sgds-font-family-brand: "Noto Sans", system-ui, sans-serif;
-  --sgds-font-family-display: var(--sgds-font-family-serif);
-  --sgds-font-family-heading: var(--sgds-font-family-serif);
-}
-```
-
 ## Reference Documentation
 
 | File | Covers |
@@ -174,5 +164,5 @@ Override the brand font and mix fonts per role:
 
 ---
 
-**For AI Agents**: Apply tracking by role: display → `tracking-tighter`, headings → `tracking-tight`, subtitles → `tracking-normal`, overlines → `tracking-wide`. Always apply `sgds:font-code` to `<code>` and `<pre>`. Use `sgds:font-{role}` only on non-semantic elements; semantic HTML (`h1`–`h6`, `p`, `a`, `label`, `code`) gets the correct font-family from the reboot. See reference files for full property tables.
+**For AI Agents**: Typography size classes are purely visual and can be applied to any element — do not assume a fixed mapping between HTML element and font size (e.g. display classes are not restricted to `<h1>`). However, heading levels (`h1`–`h6`) must still follow sequential order for accessibility. Apply tracking by role: display → `tracking-tighter`, headings → `tracking-tight`, subtitles → `tracking-normal`, overlines → `tracking-wide`. Always apply `sgds:font-code` to `<code>` and `<pre>`. Use `sgds:font-{role}` only on non-semantic elements; semantic HTML (`h1`–`h6`, `p`, `a`, `label`, `code`) gets the correct font-family from the reboot. See reference files for full property tables.
 
