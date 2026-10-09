@@ -6,7 +6,7 @@ import { sanitizeHref } from "../../utils/safeUrl";
 import alertLinkStyle from "./alert-link.css";
 import anchorStyles from "../../styles/anchor.css";
 /**
- * @deprecated From v3.21.0, use a native `<a>` element directly inside `<sgds-alert>` instead. The alert component now styles slotted anchor tags automatically.
+ * @deprecated since v3.21.0 — use a native `<a>` element directly inside `<sgds-alert>` instead. The alert component now styles slotted anchor tags automatically.
  * @summary Alert link are used within the alert's message that is passed into the default slot of `<sgds-alert>`
  *
  * @slot default - The text content of the anchor element
