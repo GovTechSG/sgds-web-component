@@ -17,12 +17,37 @@ const RADIUS_SCALE = [
   { name: "full", class: "sgds:rounded-full", variable: "--sgds-border-radius-full", value: "999px" }
 ];
 
+const SEMANTIC_RADIUS_SCALE = [
+  {
+    name: "structure",
+    class: "sgds:rounded-structure",
+    variable: "--sgds-structure-border-radius",
+    value: "none (0px)"
+  },
+  { name: "indicator", class: "sgds:rounded-indicator", variable: "--sgds-indicator-border-radius", value: "sm (4px)" },
+  {
+    name: "interactive",
+    class: "sgds:rounded-interactive",
+    variable: "--sgds-interactive-border-radius",
+    value: "md (8px)"
+  },
+  { name: "surface", class: "sgds:rounded-surface", variable: "--sgds-surface-border-radius", value: "lg (12px)" },
+  { name: "overlay", class: "sgds:rounded-overlay", variable: "--sgds-overlay-border-radius", value: "lg (12px)" }
+];
+
 const FORM_RADIUS_SCALE = [
   { name: "none", class: "sgds:rounded-form-none", variable: "--sgds-form-border-radius-none", value: "0px" },
   { name: "xs", class: "sgds:rounded-form-xs", variable: "--sgds-form-border-radius-xs", value: "2px" },
   { name: "sm", class: "sgds:rounded-form-sm", variable: "--sgds-form-border-radius-sm", value: "4px" },
   { name: "md", class: "sgds:rounded-form-md", variable: "--sgds-form-border-radius-md", value: "8px" },
-  { name: "full", class: "sgds:rounded-form-full", variable: "--sgds-form-border-radius-full", value: "999px" }
+  { name: "full", class: "sgds:rounded-form-full", variable: "--sgds-form-border-radius-full", value: "999px" },
+  { name: "form (semantic)", class: "sgds:rounded-form", variable: "--sgds-form-border-radius", value: "md (8px)" },
+  {
+    name: "form-dense (semantic)",
+    class: "sgds:rounded-form-dense",
+    variable: "--sgds-form-border-radius-dense",
+    value: "md (8px)"
+  }
 ];
 
 const copyToClipboard = (token, buttonEl) => {
@@ -85,5 +110,17 @@ export const FormRadius = () => html`
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
     ${FORM_RADIUS_SCALE.map(item => RadiusTableRow(item))}
+  </sgds-table>
+`;
+
+export const SemanticRadius = () => html`
+  <sgds-table>
+    <sgds-table-row>
+      <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
+      <sgds-table-head>CSS Variable</sgds-table-head>
+      <sgds-table-head>Maps To</sgds-table-head>
+      <sgds-table-head>Preview</sgds-table-head>
+    </sgds-table-row>
+    ${SEMANTIC_RADIUS_SCALE.map(item => RadiusTableRow(item))}
   </sgds-table>
 `;
