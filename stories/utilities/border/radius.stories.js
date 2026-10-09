@@ -18,9 +18,19 @@ const RADIUS_SCALE = [
 ];
 
 const SEMANTIC_RADIUS_SCALE = [
-  { name: "structure", class: "sgds:rounded-structure", variable: "--sgds-structure-border-radius", value: "none (0px)" },
+  {
+    name: "structure",
+    class: "sgds:rounded-structure",
+    variable: "--sgds-structure-border-radius",
+    value: "none (0px)"
+  },
   { name: "indicator", class: "sgds:rounded-indicator", variable: "--sgds-indicator-border-radius", value: "sm (4px)" },
-  { name: "interactive", class: "sgds:rounded-interactive", variable: "--sgds-interactive-border-radius", value: "md (8px)" },
+  {
+    name: "interactive",
+    class: "sgds:rounded-interactive",
+    variable: "--sgds-interactive-border-radius",
+    value: "md (8px)"
+  },
   { name: "surface", class: "sgds:rounded-surface", variable: "--sgds-surface-border-radius", value: "lg (12px)" },
   { name: "overlay", class: "sgds:rounded-overlay", variable: "--sgds-overlay-border-radius", value: "lg (12px)" }
 ];
@@ -32,7 +42,12 @@ const FORM_RADIUS_SCALE = [
   { name: "md", class: "sgds:rounded-form-md", variable: "--sgds-form-border-radius-md", value: "8px" },
   { name: "full", class: "sgds:rounded-form-full", variable: "--sgds-form-border-radius-full", value: "999px" },
   { name: "form (semantic)", class: "sgds:rounded-form", variable: "--sgds-form-border-radius", value: "md (8px)" },
-  { name: "form-dense (semantic)", class: "sgds:rounded-form-dense", variable: "--sgds-form-border-radius-dense", value: "md (8px)" }
+  {
+    name: "form-dense (semantic)",
+    class: "sgds:rounded-form-dense",
+    variable: "--sgds-form-border-radius-dense",
+    value: "md (8px)"
+  }
 ];
 
 const copyToClipboard = (token, buttonEl) => {

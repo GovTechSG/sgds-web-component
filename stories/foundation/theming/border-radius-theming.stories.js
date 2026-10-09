@@ -33,28 +33,27 @@ const storyParams = {
 };
 
 const TokenHeader = (cssVar, first = false) => html`
-  ${first ? '' : html`<sgds-divider class="sgds:my-layout-md"></sgds-divider>`}
+  ${first ? "" : html`<sgds-divider class="sgds:my-layout-md"></sgds-divider>`}
   <div class="sgds:pt-layout-md sgds:pb-lg">
-    <code class="sgds:text-label-md sgds:text-body-subtle sgds:font-semibold sgds:mb-lg sgds:inline-block sgds:bg-surface-raised sgds:px-sm sgds:py-2-xs sgds:rounded-sm">${cssVar}</code>
+    <code
+      class="sgds:text-label-md sgds:text-body-subtle sgds:font-semibold sgds:mb-lg sgds:inline-block sgds:bg-surface-raised sgds:px-sm sgds:py-2-xs sgds:rounded-sm"
+      >${cssVar}</code
+    >
   </div>
 `;
 
 const ComponentSection = (name, content) => html`
   <div class="sgds-grid sgds:gap-layout-md sgds:py-md">
     <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-      <h5 class="sgds:text-subtitle-md sgds:font-light sgds:leading-xs sgds:tracking-normal sgds:text-heading-default">${name}</h5>
+      <h5 class="sgds:text-subtitle-md sgds:font-light sgds:leading-xs sgds:tracking-normal sgds:text-heading-default">
+        ${name}
+      </h5>
     </div>
-    <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8">
-      ${content}
-    </div>
+    <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8">${content}</div>
   </div>
 `;
 
-const storyWrapper = content => html`
-  <div class="sgds-container sgds:flex sgds:flex-col">
-    ${content}
-  </div>
-`;
+const storyWrapper = content => html` <div class="sgds-container sgds:flex sgds:flex-col">${content}</div> `;
 
 export default {
   title: "Foundation/Theming/Border Radius",
@@ -84,7 +83,6 @@ export const Indicator = {
             </div>
           `
         )}
-
         ${ComponentSection(
           "Skeleton",
           html`
@@ -130,7 +128,6 @@ export const Interactive = {
             </div>
           `
         )}
-
         ${ComponentSection(
           "Close Button",
           html`
@@ -141,12 +138,10 @@ export const Interactive = {
             </div>
           `
         )}
-
         ${ComponentSection(
           "Datepicker (calendar cells)",
           html`<sgds-datepicker label="Select date" menuIsOpen></sgds-datepicker>`
         )}
-
         ${ComponentSection(
           "Icon Button",
           html`
@@ -157,7 +152,6 @@ export const Interactive = {
             </div>
           `
         )}
-
         ${ComponentSection(
           "Overflow Menu",
           html`
@@ -168,12 +162,10 @@ export const Interactive = {
             </sgds-overflow-menu>
           `
         )}
-
         ${ComponentSection(
           "Pagination",
           html`<sgds-pagination dataLength="50" currentPage="3" itemsPerPage="5"></sgds-pagination>`
         )}
-
         ${ComponentSection(
           "Sidebar",
           html`
@@ -191,26 +183,24 @@ export const Interactive = {
             </div>
           `
         )}
-
         ${ComponentSection(
           "Sidenav",
           html`
             <div class="sgds-grid">
-            <sgds-sidenav class="sgds-col-4">
-              <sgds-sidenav-item ariaLabel="Item 1">
-                <span slot="title">Navigation Item 1</span>
-                <sgds-sidenav-link><a href="#">Link 1</a></sgds-sidenav-link>
-                <sgds-sidenav-link><a href="#">Link 2</a></sgds-sidenav-link>
-              </sgds-sidenav-item>
-              <sgds-sidenav-item ariaLabel="Item 2">
-                <span slot="title">Navigation Item 2</span>
-                <sgds-sidenav-link><a href="#">Link 3</a></sgds-sidenav-link>
-              </sgds-sidenav-item>
-            </sgds-sidenav>
+              <sgds-sidenav class="sgds-col-4">
+                <sgds-sidenav-item ariaLabel="Item 1">
+                  <span slot="title">Navigation Item 1</span>
+                  <sgds-sidenav-link><a href="#">Link 1</a></sgds-sidenav-link>
+                  <sgds-sidenav-link><a href="#">Link 2</a></sgds-sidenav-link>
+                </sgds-sidenav-item>
+                <sgds-sidenav-item ariaLabel="Item 2">
+                  <span slot="title">Navigation Item 2</span>
+                  <sgds-sidenav-link><a href="#">Link 3</a></sgds-sidenav-link>
+                </sgds-sidenav-item>
+              </sgds-sidenav>
             </div>
           `
         )}
-
         ${ComponentSection(
           "Tab (solid variant)",
           html`
@@ -261,46 +251,43 @@ export const Form = {
             </div>
           `
         )}
-
         ${TokenHeader("--sgds-form-border-radius")}
         ${ComponentSection(
           "Combo Box",
           html`
-            <div >
-              <sgds-combo-box label="Search options" placeholder="Search for a fruit" .menuList=${["Apple", "Banana", "Cherry", "Date", "Elderberry"]}></sgds-combo-box>
+            <div>
+              <sgds-combo-box
+                label="Search options"
+                placeholder="Search for a fruit"
+                .menuList=${["Apple", "Banana", "Cherry", "Date", "Elderberry"]}
+              ></sgds-combo-box>
             </div>
           `
         )}
-
-        ${ComponentSection(
-          "Datepicker (input)",
-          html`<sgds-datepicker label="Select date" ></sgds-datepicker>`
-        )}
-
+        ${ComponentSection("Datepicker (input)", html`<sgds-datepicker label="Select date"></sgds-datepicker>`)}
         ${ComponentSection(
           "File Upload",
-          html`<sgds-file-upload id="form-file-upload" label="Upload file" hintText="Accepted formats: .jpg, .png">Choose file</sgds-file-upload>`
+          html`<sgds-file-upload id="form-file-upload" label="Upload file" hintText="Accepted formats: .jpg, .png"
+            >Choose file</sgds-file-upload
+          >`
         )}
-
         ${ComponentSection(
           "Input",
           html`
-            <div class="sgds:flex sgds:flex-col sgds:gap-md" >
+            <div class="sgds:flex sgds:flex-col sgds:gap-md">
               <sgds-input label="Text input" placeholder="Enter text"></sgds-input>
               <sgds-input label="Disabled" placeholder="Disabled" disabled></sgds-input>
             </div>
           `
         )}
-
         ${ComponentSection(
           "Quantity Toggle",
           html`<sgds-quantity-toggle value="1" step="1" label="Quantity"></sgds-quantity-toggle>`
         )}
-
         ${ComponentSection(
           "Select",
           html`
-            <div >
+            <div>
               <sgds-select label="Select option" placeholder="Choose an option">
                 <sgds-select-option value="1">Option 1</sgds-select-option>
                 <sgds-select-option value="2">Option 2</sgds-select-option>
@@ -309,11 +296,10 @@ export const Form = {
             </div>
           `
         )}
-
         ${ComponentSection(
           "Textarea",
           html`
-            <div >
+            <div>
               <sgds-textarea label="Message" placeholder="Enter your message"></sgds-textarea>
             </div>
           `
@@ -373,7 +359,6 @@ export const Surface = {
             </sgds-accordion>
           `
         )}
-
         ${ComponentSection(
           "Alert",
           html`
@@ -389,7 +374,6 @@ export const Surface = {
             </div>
           `
         )}
-
         ${ComponentSection(
           "Card",
           html`
@@ -401,7 +385,6 @@ export const Surface = {
             </sgds-card>
           `
         )}
-
         ${ComponentSection(
           "Description List",
           html`
@@ -412,7 +395,6 @@ export const Surface = {
             </sgds-description-list-group>
           `
         )}
-
         ${ComponentSection(
           "Icon Card",
           html`
@@ -421,23 +403,29 @@ export const Surface = {
               <sgds-badge variant="primary" slot="upper">New</sgds-badge>
               <span slot="subtitle">EXPLORE THE FEATURES</span>
               <span slot="title">Innovative solutions for you</span>
-              <span slot="description">Discover how our platform can streamline your workflow and enhance productivity.</span>
+              <span slot="description"
+                >Discover how our platform can streamline your workflow and enhance productivity.</span
+              >
             </sgds-icon-card>
           `
         )}
-
         ${ComponentSection(
           "Image Card",
           html`
             <sgds-image-card class="sgds:w-[350px]">
-              <img slot="image" alt="Photo by Jirath Ninchaikovit on Unsplash" src="https://images.unsplash.com/photo-1547982982-448b6fdad3a8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0" />
+              <img
+                slot="image"
+                alt="Photo by Jirath Ninchaikovit on Unsplash"
+                src="https://images.unsplash.com/photo-1547982982-448b6fdad3a8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0"
+              />
               <span slot="subtitle">HERITAGE</span>
               <span slot="title">Singapore Shophouses</span>
-              <span slot="description">Colourful heritage shophouses are an iconic feature of Singapore's architectural landscape.</span>
+              <span slot="description"
+                >Colourful heritage shophouses are an iconic feature of Singapore's architectural landscape.</span
+              >
             </sgds-image-card>
           `
         )}
-
         ${ComponentSection(
           "Thumbnail Card",
           html`
@@ -446,7 +434,9 @@ export const Surface = {
               <sgds-badge variant="primary" slot="upper">Official</sgds-badge>
               <span slot="subtitle">DESIGN SYSTEM</span>
               <span slot="title">Singapore Government Design System</span>
-              <span slot="description">A design system for the Singapore government to build consistent and accessible digital services.</span>
+              <span slot="description"
+                >A design system for the Singapore government to build consistent and accessible digital services.</span
+              >
             </sgds-thumbnail-card>
           `
         )}
@@ -477,7 +467,6 @@ export const Overlay = {
           "Datepicker (calendar panel)",
           html`<sgds-datepicker label="Select date" menuIsOpen></sgds-datepicker>`
         )}
-
         ${ComponentSection(
           "Mainnav Dropdown",
           html`
@@ -492,7 +481,6 @@ export const Overlay = {
             </sgds-mainnav>
           `
         )}
-
         ${ComponentSection(
           "Dropdown",
           html`
@@ -504,7 +492,6 @@ export const Overlay = {
             </sgds-dropdown>
           `
         )}
-
         ${ComponentSection(
           "Modal",
           html`
@@ -516,7 +503,6 @@ export const Overlay = {
             </sgds-modal>
           `
         )}
-
         ${ComponentSection(
           "Toast",
           html`
@@ -526,7 +512,6 @@ export const Overlay = {
             </sgds-toast>
           `
         )}
-
         ${ComponentSection(
           "Tooltip",
           html`
