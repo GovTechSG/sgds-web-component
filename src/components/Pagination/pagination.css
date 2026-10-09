@@ -19,7 +19,7 @@ svg {
   width: var(--sgds-dimension-48);
   height: var(--sgds-dimension-48);
   background-color: var(--sgds-bg-transparent);
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-interactive-border-radius);
   display: flex;
   justify-content: center;
   align-items: center;

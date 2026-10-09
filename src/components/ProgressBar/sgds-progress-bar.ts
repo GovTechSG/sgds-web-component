@@ -35,7 +35,7 @@ export class SgdsProgressBar extends SgdsElement {
   @property({ type: String, reflect: true }) ariaLabel = "";
 
   /**
-   * @deprecated Use `ariaLabel` instead.
+   * @deprecated since v3.19.0 — use `ariaLabel` instead.
    */
   @property({ type: String, reflect: true }) arialabel = "";
 
