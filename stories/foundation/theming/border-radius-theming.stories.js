@@ -56,7 +56,7 @@ const ComponentSection = (name, content) => html`
 const storyWrapper = content => html` <div class="sgds-container sgds:flex sgds:flex-col">${content}</div> `;
 
 export default {
-  title: "Foundation/Theming/Border Radius",
+  title: "Theming/Border Radius",
   tags: ["!autodocs"]
 };
 
