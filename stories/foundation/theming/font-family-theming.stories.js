@@ -29,7 +29,7 @@ const storyParams = {
 };
 
 export default {
-  title: "Foundation/Theming/Font Family",
+  title: "Theming/Font Family",
   tags: ["!autodocs"]
 };
 
