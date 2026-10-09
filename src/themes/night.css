@@ -41,7 +41,7 @@
   --sgds-primary-bg-translucent: oklch(from var(--sgds-product-primary-100) l c h / 0.05);
   --sgds-primary-surface-default: var(--sgds-product-primary-600);
   --sgds-primary-surface-emphasis: var(--sgds-product-primary-700);
-  --sgds-primary-surface-muted: var(--sgds-product-primary-100);
+  --sgds-primary-surface-muted: var(--sgds-product-primary-900);
   --sgds-primary-surface-translucent: oklch(from var(--sgds-product-primary-100) l c h / 0.1);
   --sgds-primary-color-default: var(--sgds-product-primary-400);
   --sgds-primary-color-emphasis: var(--sgds-product-primary-300);
@@ -56,7 +56,7 @@
   --sgds-accent-bg-muted: var(--sgds-blue-200);
   --sgds-accent-surface-default: var(--sgds-blue-600);
   --sgds-accent-surface-emphasis: var(--sgds-blue-700);
-  --sgds-accent-surface-muted: var(--sgds-blue-100);
+  --sgds-accent-surface-muted: var(--sgds-blue-900);
   --sgds-accent-color-default: var(--sgds-blue-400);
   --sgds-accent-color-emphasis: var(--sgds-blue-300);
   --sgds-accent-color-fixed-light: var(--sgds-blue-400);
@@ -70,7 +70,7 @@
   --sgds-success-bg-muted: var(--sgds-green-200);
   --sgds-success-surface-default: var(--sgds-green-600);
   --sgds-success-surface-emphasis: var(--sgds-green-700);
-  --sgds-success-surface-muted: var(--sgds-green-100);
+  --sgds-success-surface-muted: var(--sgds-green-900);
   --sgds-success-color-default: var(--sgds-green-400);
   --sgds-success-color-emphasis: var(--sgds-green-300);
   --sgds-success-color-fixed-light: var(--sgds-green-400);
@@ -84,7 +84,7 @@
   --sgds-danger-bg-muted: var(--sgds-red-200);
   --sgds-danger-surface-default: var(--sgds-red-600);
   --sgds-danger-surface-emphasis: var(--sgds-red-700);
-  --sgds-danger-surface-muted: var(--sgds-red-100);
+  --sgds-danger-surface-muted: var(--sgds-red-900);
   --sgds-danger-surface-translucent: oklch(from var(--sgds-red-100) l c h / 0.08);
   --sgds-danger-color-default: var(--sgds-red-400);
   --sgds-danger-color-emphasis: var(--sgds-red-300);
@@ -99,7 +99,7 @@
   --sgds-warning-bg-muted: var(--sgds-yellow-200);
   --sgds-warning-surface-default: var(--sgds-yellow-200);
   --sgds-warning-surface-emphasis: var(--sgds-yellow-600);
-  --sgds-warning-surface-muted: var(--sgds-yellow-100);
+  --sgds-warning-surface-muted: var(--sgds-yellow-900);
   --sgds-warning-color-default: var(--sgds-yellow-300);
   --sgds-warning-color-emphasis: var(--sgds-yellow-200);
   --sgds-warning-color-fixed-light: var(--sgds-yellow-300);
@@ -113,7 +113,7 @@
   --sgds-purple-bg-muted: var(--sgds-purple-200);
   --sgds-purple-surface-default: var(--sgds-purple-600);
   --sgds-purple-surface-emphasis: var(--sgds-purple-700);
-  --sgds-purple-surface-muted: var(--sgds-purple-100);
+  --sgds-purple-surface-muted: var(--sgds-purple-900);
   --sgds-purple-color-default: var(--sgds-purple-400);
   --sgds-purple-color-emphasis: var(--sgds-purple-300);
   --sgds-purple-color-fixed-light: var(--sgds-purple-400);
@@ -127,7 +127,7 @@
   --sgds-cyan-bg-muted: var(--sgds-cyan-200);
   --sgds-cyan-surface-default: var(--sgds-cyan-600);
   --sgds-cyan-surface-emphasis: var(--sgds-cyan-700);
-  --sgds-cyan-surface-muted: var(--sgds-cyan-100);
+  --sgds-cyan-surface-muted: var(--sgds-cyan-900);
   --sgds-cyan-color-default: var(--sgds-cyan-400);
   --sgds-cyan-color-emphasis: var(--sgds-cyan-300);
   --sgds-cyan-color-fixed-light: var(--sgds-cyan-400);
@@ -141,7 +141,7 @@
   --sgds-neutral-bg-muted: var(--sgds-gray-200);
   --sgds-neutral-surface-default: var(--sgds-gray-600);
   --sgds-neutral-surface-emphasis: var(--sgds-gray-700);
-  --sgds-neutral-surface-muted: var(--sgds-gray-200);
+  --sgds-neutral-surface-muted: var(--sgds-gray-900);
   --sgds-neutral-surface-translucent: oklch(from var(--sgds-gray-000) l c h / 0.15);
   --sgds-neutral-color-default: var(--sgds-gray-400);
   --sgds-neutral-color-emphasis: var(--sgds-gray-300);

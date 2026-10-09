@@ -7,150 +7,152 @@ const Template = () => html`
     }
   </style>
 
-  <sgds-masthead></sgds-masthead>
-  <sgds-mainnav>
-    <strong slot="brand">Logo</strong>
-  </sgds-mainnav>
+  <div class="sgds:bg-default sgds:min-h-screen sgds:flex sgds:flex-col">
+    <sgds-masthead></sgds-masthead>
+    <sgds-mainnav>
+      <strong slot="brand">Logo</strong>
+    </sgds-mainnav>
 
-  <section class="sgds:bg-default sgds:py-layout-lg">
-    <div class="sgds-container">
-      <div class="sgds-grid">
-        <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8">
-          <!-- VIEW: FORM -->
-          <div id="view-form">
-            <div class="sgds:mb-layout-md">
-              <h1
-                class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default"
-              >
-                Report an Issue
-              </h1>
-              <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
-                Help us improve by reporting problems in your area. We aim to respond within 3 working days.
-              </p>
-            </div>
-
-            <form id="report-issue-form" class="sgds:flex sgds:flex-col sgds:gap-form-2-xl">
-              <sgds-input
-                type="text"
-                label="Location"
-                name="location"
-                placeholder="e.g. Blk 123 Ang Mo Kio Ave 6, near bus stop"
-                hintText="Enter a street address or describe the location"
-                required
-                hasFeedback="both"
-                invalidFeedback="Enter the location of the issue"
-              ></sgds-input>
-
-              <sgds-textarea
-                label="Description"
-                name="description"
-                placeholder="Describe the issue in detail - what it is, how long it has been there, and any safety concerns"
-                hintText="Minimum 20 characters"
-                rows="5"
-                minlength="20"
-                maxlength="500"
-                required
-                hasFeedback="both"
-                invalidFeedback="Describe the issue (at least 20 characters)"
-              ></sgds-textarea>
-
-              <sgds-file-upload
-                id="photo-upload"
-                label="Photos (optional)"
-                name="photos"
-                accept="image/*"
-                multiple
-                hintText="Upload up to 3 photos. JPEG or PNG, max 5MB each."
-              >
-                Upload Photos
-              </sgds-file-upload>
-
-              <sgds-button id="submit-btn" type="submit" variant="primary" size="md" class="sgds:self-end">
-                Submit Report
-              </sgds-button>
-            </form>
-          </div>
-
-          <!-- VIEW: SUCCESS -->
-          <div id="view-success">
-            <div class="sgds:mb-lg">
-              <sgds-icon
-                name="check-circle-fill"
-                size="3-xl"
-                style="color: var(--sgds-success-color-default);"
-              ></sgds-icon>
-            </div>
-
-            <div class="sgds:mb-layout-md">
-              <h1
-                class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default"
-              >
-                Report Submitted
-              </h1>
-              <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
-                Thank you for helping us keep the community safe and clean.
-              </p>
-            </div>
-
-            <div class="sgds:mb-layout-sm">
-              <div
-                class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
-              >
-                Reference Number
+    <section class="sgds:bg-default sgds:py-layout-lg sgds:flex-1">
+      <div class="sgds-container">
+        <div class="sgds-grid">
+          <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8">
+            <!-- VIEW: FORM -->
+            <div id="view-form">
+              <div class="sgds:mb-layout-md">
+                <h1
+                  class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default"
+                >
+                  Report an Issue
+                </h1>
+                <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
+                  Help us improve by reporting problems in your area. We aim to respond within 3 working days.
+                </p>
               </div>
-              <h4
-                id="ref-number"
-                class="sgds:text-heading-sm sgds:font-light sgds:leading-sm sgds:tracking-tight sgds:text-heading-default"
-              ></h4>
+
+              <form id="report-issue-form" class="sgds:flex sgds:flex-col sgds:gap-form-2-xl">
+                <sgds-input
+                  type="text"
+                  label="Location"
+                  name="location"
+                  placeholder="e.g. Blk 123 Ang Mo Kio Ave 6, near bus stop"
+                  hintText="Enter a street address or describe the location"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="Enter the location of the issue"
+                ></sgds-input>
+
+                <sgds-textarea
+                  label="Description"
+                  name="description"
+                  placeholder="Describe the issue in detail - what it is, how long it has been there, and any safety concerns"
+                  hintText="Minimum 20 characters"
+                  rows="5"
+                  minlength="20"
+                  maxlength="500"
+                  required
+                  hasFeedback="both"
+                  invalidFeedback="Describe the issue (at least 20 characters)"
+                ></sgds-textarea>
+
+                <sgds-file-upload
+                  id="photo-upload"
+                  label="Photos (optional)"
+                  name="photos"
+                  accept="image/*"
+                  multiple
+                  hintText="Upload up to 3 photos. JPEG or PNG, max 5MB each."
+                >
+                  Upload Photos
+                </sgds-file-upload>
+
+                <sgds-button id="submit-btn" type="submit" variant="primary" size="md" class="sgds:self-end">
+                  Submit Report
+                </sgds-button>
+              </form>
             </div>
 
-            <!-- Submission summary -->
-            <sgds-description-list-group bordered class="sgds:mb-layout-sm">
-              <sgds-description-list>
-                Location
-                <span slot="data" id="summary-location"></span>
-              </sgds-description-list>
-              <sgds-description-list>
-                Description
-                <span slot="data" id="summary-description"></span>
-              </sgds-description-list>
-              <sgds-description-list>
-                Photos
-                <span slot="data" id="summary-photos"></span>
-              </sgds-description-list>
-              <sgds-description-list>
-                Submitted on
-                <span slot="data" id="summary-date"></span>
-              </sgds-description-list>
-            </sgds-description-list-group>
+            <!-- VIEW: SUCCESS -->
+            <div id="view-success">
+              <div class="sgds:mb-lg">
+                <sgds-icon
+                  name="check-circle-fill"
+                  size="3-xl"
+                  style="color: var(--sgds-success-color-default);"
+                ></sgds-icon>
+              </div>
 
-            <!-- What happens next -->
-            <div class="sgds:mb-layout-md">
-              <p
-                class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-sm"
-              >
-                What happens next
-              </p>
-              <ul
-                class="sgds:text-body-md sgds:font-regular sgds:leading-md sgds:text-default"
-                style="padding-left: var(--sgds-spacing-lg); margin: 0;"
-              >
-                <li>Our team will review your report within 3 working days.</li>
-                <li>You may be contacted for more information if needed.</li>
-                <li>98% of reports are resolved within 7 working days.</li>
-              </ul>
-            </div>
+              <div class="sgds:mb-layout-md">
+                <h1
+                  class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default"
+                >
+                  Report Submitted
+                </h1>
+                <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
+                  Thank you for helping us keep the community safe and clean.
+                </p>
+              </div>
 
-            <div class="sgds:flex sgds:justify-end">
-              <sgds-button id="new-report-btn" variant="outline" size="md"> Submit Another Report </sgds-button>
+              <div class="sgds:mb-layout-sm">
+                <div
+                  class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs"
+                >
+                  Reference Number
+                </div>
+                <h4
+                  id="ref-number"
+                  class="sgds:text-heading-sm sgds:font-light sgds:leading-sm sgds:tracking-tight sgds:text-heading-default"
+                ></h4>
+              </div>
+
+              <!-- Submission summary -->
+              <sgds-description-list-group bordered class="sgds:mb-layout-sm">
+                <sgds-description-list>
+                  Location
+                  <span slot="data" id="summary-location"></span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  Description
+                  <span slot="data" id="summary-description"></span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  Photos
+                  <span slot="data" id="summary-photos"></span>
+                </sgds-description-list>
+                <sgds-description-list>
+                  Submitted on
+                  <span slot="data" id="summary-date"></span>
+                </sgds-description-list>
+              </sgds-description-list-group>
+
+              <!-- What happens next -->
+              <div class="sgds:mb-layout-md">
+                <p
+                  class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-sm"
+                >
+                  What happens next
+                </p>
+                <ul
+                  class="sgds:text-body-md sgds:font-regular sgds:leading-md sgds:text-default"
+                  style="padding-left: var(--sgds-spacing-lg); margin: 0;"
+                >
+                  <li>Our team will review your report within 3 working days.</li>
+                  <li>You may be contacted for more information if needed.</li>
+                  <li>98% of reports are resolved within 7 working days.</li>
+                </ul>
+              </div>
+
+              <div class="sgds:flex sgds:justify-end">
+                <sgds-button id="new-report-btn" variant="outline" size="md"> Submit Another Report </sgds-button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <sgds-footer></sgds-footer>
+    <sgds-footer></sgds-footer>
+  </div>
 
   <script>
     const form = document.getElementById("report-issue-form");

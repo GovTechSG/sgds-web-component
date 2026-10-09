@@ -26,7 +26,7 @@ export class SgdsOverflowMenu extends SgdsElement {
     return html`
       <sgds-dropdown>
         <button slot="toggler" class="overflow-btn" aria-label="More options">
-          <sgds-icon name=${this.icon} size=${this.size}></sgds-icon>
+          <sgds-icon name="three-dots" size=${this.size === "md" ? "lg" : this.size}></sgds-icon>
         </button>
         <slot></slot>
       </sgds-dropdown>
