@@ -105,10 +105,10 @@ export const parameters = {
           "Introduction",
           "Typography",
           ["Introduction", "Display", "Headings", "Subtitles"],
-          "Theming",
           "Layout",
           "Grid System"
         ],
+        "Theming",
         "Form",
         ["Validation", "Custom Validation"],
         "Utilities",

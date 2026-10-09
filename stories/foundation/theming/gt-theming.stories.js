@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Foundation/Theming/GovTech Brand Palettes"
+  title: "Theming/GovTech Brand Palettes"
 };
 
 const GT_PALETTES = [
