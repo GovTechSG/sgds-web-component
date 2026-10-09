@@ -23,9 +23,9 @@ export const MediumSize = {
   parameters: {}
 };
 
-export const VerticalOrientation = {
+export const CustomIcon = {
   render: Template.bind({}),
-  name: "Vertical orientation",
-  args: { orientation: "vertical" },
+  name: "Custom icon",
+  args: { icon: "three-dots-vertical" },
   parameters: {}
 };
