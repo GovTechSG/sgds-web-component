@@ -89,13 +89,13 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
   <sgds-tab slot="nav" panel="settings" ariaLabel="Settings" disabled>Settings</sgds-tab>
 
   <sgds-tab-panel name="home">
-    <p>Welcome to the home tab content.</p>
+    <span>Welcome to the home tab content.</span>
   </sgds-tab-panel>
   <sgds-tab-panel name="profile">
-    <p>Profile information goes here.</p>
+    <span>Profile information goes here.</span>
   </sgds-tab-panel>
   <sgds-tab-panel name="settings">
-    <p>Settings are not available.</p>
+    <span>Settings are not available.</span>
   </sgds-tab-panel>
 </sgds-tab-group>
 

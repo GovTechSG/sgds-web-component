@@ -13,7 +13,7 @@ const ExtendedTemplate = args => html`
     layout=${ifDefined(args.layout)}
   >
     <h3 slot="title">Name of portal/digital service</h3>
-    <p slot="description">Description of portal/digital service</p>
+    <span slot="description">Description of portal/digital service</span>
     <sgds-footer-item slot="items">
       <div slot="title">Application guidelines</div>
       <sgds-link><a href="#">Lorem Ipsum One</a></sgds-link>
