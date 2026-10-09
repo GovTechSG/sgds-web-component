@@ -30,7 +30,7 @@ describe("<sgds-overflow-menu>", () => {
         drop="down"
       >
         <button aria-expanded="false" aria-haspopup="menu" aria-label="More options" slot="toggler" class="overflow-btn">
-            <sgds-icon name="three-dots-vertical" size="md"></sgds-icon>
+            <sgds-icon name="three-dots-vertical" size="lg"></sgds-icon>
         </button>
         <slot></slot>
       </sgds-dropdown>
