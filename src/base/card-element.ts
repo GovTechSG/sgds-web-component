@@ -54,7 +54,7 @@ export class CardElement extends SgdsElement {
       return;
     }
 
-    this._stretchedHref = anchor.href;
+    this._stretchedHref = anchor.getAttribute("href") || "";
 
     // Derive accessible name from visible title text first, then anchor text
     this._stretchedLabel =
