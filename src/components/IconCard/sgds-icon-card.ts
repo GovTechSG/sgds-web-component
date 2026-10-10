@@ -1,5 +1,5 @@
 import { nothing, PropertyValueMap } from "lit";
-import { html, literal } from "lit/static-html.js";
+import { html } from "lit";
 import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
@@ -69,18 +69,17 @@ export class SgdsIconCard extends CardElement {
   }
 
   render() {
-    const tag = this.stretchedLink ? literal`a` : literal`div`;
-    const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
-
     return html`
-      <${tag} 
+      <div
         class="${classMap({
           card: true,
           disabled: this.disabled
         })}"
-        tabindex=${cardTabIndex}
       >
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
+        ${this.stretchedLink && this._stretchedHref
+          ? html`<a class="stretched-link" href=${this._stretchedHref} aria-label=${this._stretchedLabel}></a>`
+          : nothing}
         <div class="card-media">
           <slot name="icon"></slot>
           ${this.orientation === "vertical" ? html`<slot name="upper"></slot>` : nothing}
@@ -100,7 +99,7 @@ export class SgdsIconCard extends CardElement {
             <slot name="link" @slotchange=${this.warnLinkSlotMisused}></slot>
           </slot>
         </div>
-      </${tag}>
+      </div>
     `;
   }
 }
