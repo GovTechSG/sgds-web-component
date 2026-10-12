@@ -32,6 +32,6 @@
 }
 
 .form-check {
-  margin: var(--sgds-form-padding-inline-sm) 0px;
+  margin: var(--sgds-padding-2-xs) 0px;
   padding: 0;
 }
