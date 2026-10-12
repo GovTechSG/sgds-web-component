@@ -6,7 +6,7 @@ import SgdsElement from "../../base/sgds-element";
 import tableStyle from "./table.css";
 import { HasSlotController } from "../../utils/slot";
 import { provide } from "@lit/context";
-import { TableHeaderBackgroundContext } from "./table-context";
+import { TableHeaderBackgroundContext, TableBorderContext } from "./table-context";
 
 export type HeaderPosition = "horizontal" | "vertical" | "both";
 
@@ -104,6 +104,10 @@ export class SgdsTable extends SgdsElement {
   @state()
   private _headerBackground = false;
 
+  @provide({ context: TableBorderContext })
+  @state()
+  private _tableBorder = false;
+
   /** @internal */
   private readonly hasSlotController = new HasSlotController(this, "[default]");
 
@@ -115,6 +119,7 @@ export class SgdsTable extends SgdsElement {
   updated() {
     if (!this.hasDefaultSlot) this.hasDefaultSlot = this.hasSlotController.test("[default]");
     this._headerBackground = this.headerBackground;
+    this._tableBorder = this.tableBorder;
   }
 
   private _renderTable() {
