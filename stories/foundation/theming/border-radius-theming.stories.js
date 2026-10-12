@@ -142,7 +142,7 @@ export const Structure = {
 };
 
 /* ------------------------------------------------------------------ */
-/*  1. Indicator — Badge, Skeleton                                     */
+/*  1. Indicator — Badge                                               */
 /* ------------------------------------------------------------------ */
 export const Indicator = {
   render: args => {
@@ -161,16 +161,6 @@ export const Indicator = {
               <sgds-badge variant="danger">Danger</sgds-badge>
               <sgds-badge variant="neutral">Neutral</sgds-badge>
               <sgds-badge outlined variant="info">Outlined</sgds-badge>
-            </div>
-          `
-        )}
-        ${ComponentSection(
-          "Skeleton",
-          html`
-            <div class="sgds:flex sgds:gap-md sgds:items-center">
-              <sgds-skeleton width="128px" height="24px"></sgds-skeleton>
-              <sgds-skeleton width="64px" height="64px"></sgds-skeleton>
-              <sgds-skeleton width="200px" height="16px"></sgds-skeleton>
             </div>
           `
         )}
