@@ -10,14 +10,14 @@ import cardStyle from "./card.css";
 
 /**
  * @summary Cards can be used for headers and footers, a wide variety of content, contain contextual background colors and images.
- * @slot default - The content area of the card, placed directly under the title. Accepts any HTML or custom elements.
+ * @slot default - The main description directly below the title, labelled Description in Figma. Accepts any HTML or custom elements.
  * @slot menu - Accepts an element for an overflow or contextual menu, positioned at the top-right corner of the card. Typically used for action menus or dropdowns.
  * @slot upper - Accepts an element to be displayed above the card content. When used, it overrides image and icon slot content.
  * @slot image - Accepts an image or svg element of the card. Only a single element is allowed to be passed in.
  * @slot icon - Accepts an icon element to visually represent the card. Only a single element is allowed to be passed in.
  * @slot subtitle - The subtitle of the card
  * @slot title - The title of the card
- * @slot description - The paragrapher text of the card
+ * @slot description - Supporting content below the main description, labelled Secondary text in Figma.
  * @slot lower - Accepts any additional content to be displayed below the card description, such as badges, metadata, or supplementary information.
  * @slot footer - Footer area of the card. Accepts links, actions, or any custom content.
  * @slot link - @deprecated since v3.3.2 — use `footer` slot instead.
@@ -131,8 +131,8 @@ export class SgdsCard extends CardElement {
               <h3 class="card-title"><slot name="title" @slotchange=${this.handleTitleSlotChange}></slot></h3>
             </div>
             <slot></slot>
-            <slot name="description"></slot>
           </div>
+          <slot name="description"></slot>
           <slot name="lower"></slot>
           <slot name="footer">
             <slot name="link" @slotchange=${this.warnLinkSlotMisused}></slot>
