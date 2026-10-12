@@ -533,7 +533,7 @@ export const Surface = {
 };
 
 /* ------------------------------------------------------------------ */
-/*  5. Overlay — Dropdown, Modal, Toast, Tooltip                       */
+/*  5. Overlay — Datepicker, Dropdown, Mainnav Dropdown, Modal, Toast, Tooltip */
 /* ------------------------------------------------------------------ */
 export const Overlay = {
   render: args => {
@@ -547,6 +547,17 @@ export const Overlay = {
           html`<sgds-datepicker label="Select date" menuIsOpen></sgds-datepicker>`
         )}
         ${ComponentSection(
+          "Dropdown",
+          html`
+            <sgds-dropdown>
+              <sgds-button slot="toggler" variant="outline">Open Dropdown</sgds-button>
+              <sgds-dropdown-item>Action 1</sgds-dropdown-item>
+              <sgds-dropdown-item>Action 2</sgds-dropdown-item>
+              <sgds-dropdown-item>Action 3</sgds-dropdown-item>
+            </sgds-dropdown>
+          `
+        )}
+        ${ComponentSection(
           "Mainnav Dropdown",
           html`
             <sgds-mainnav>
@@ -558,17 +569,6 @@ export const Overlay = {
                 <sgds-dropdown-item ariaLabel="Item 3">Item 3</sgds-dropdown-item>
               </sgds-mainnav-dropdown>
             </sgds-mainnav>
-          `
-        )}
-        ${ComponentSection(
-          "Dropdown",
-          html`
-            <sgds-dropdown>
-              <sgds-button slot="toggler" variant="outline">Open Dropdown</sgds-button>
-              <sgds-dropdown-item>Action 1</sgds-dropdown-item>
-              <sgds-dropdown-item>Action 2</sgds-dropdown-item>
-              <sgds-dropdown-item>Action 3</sgds-dropdown-item>
-            </sgds-dropdown>
           `
         )}
         ${ComponentSection(
