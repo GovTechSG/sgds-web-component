@@ -8,8 +8,12 @@ const RADIUS_OPTIONS = {
   "md (8px)": "var(--sgds-border-radius-md)",
   "lg (12px)": "var(--sgds-border-radius-lg)",
   "xl (16px)": "var(--sgds-border-radius-xl)",
-  "2-xl (24px)": "var(--sgds-border-radius-2-xl)",
-  "3-xl (32px)": "var(--sgds-border-radius-3-xl)"
+  "2-xl (24px)": "var(--sgds-border-radius-2-xl)"
+};
+
+const RADIUS_OPTIONS_WITH_FULL = {
+  ...RADIUS_OPTIONS,
+  "full (999px)": "var(--sgds-border-radius-full)"
 };
 
 const radiusArgType = (name, defaultVar) => ({
@@ -58,6 +62,83 @@ const storyWrapper = content => html` <div class="sgds-container sgds:flex sgds:
 export default {
   title: "Theming/Border Radius",
   tags: ["!autodocs"]
+};
+
+/* ------------------------------------------------------------------ */
+/*  0. Structure — DescriptionList, DataTable, Table                   */
+/* ------------------------------------------------------------------ */
+export const Structure = {
+  render: args => {
+    const style = setToken("--sgds-structure-border-radius", args.structure);
+    return html`
+      ${style}
+      ${storyWrapper(html`
+        ${TokenHeader("--sgds-structure-border-radius", true)}
+        ${ComponentSection(
+          "Description List",
+          html`
+            <sgds-description-list-group bordered>
+              <sgds-description-list>Full name<span slot="data">John Doe</span></sgds-description-list>
+              <sgds-description-list>Email<span slot="data">john@example.com</span></sgds-description-list>
+              <sgds-description-list>Role<span slot="data">Administrator</span></sgds-description-list>
+            </sgds-description-list-group>
+          `
+        )}
+        ${ComponentSection(
+          "Data Table",
+          html`
+            <sgds-data-table dataLength="2" itemsPerPage="5" currentPage="1">
+              <sgds-data-table-row>
+                <sgds-data-table-head>Name</sgds-data-table-head>
+                <sgds-data-table-head>Email</sgds-data-table-head>
+                <sgds-data-table-head>Role</sgds-data-table-head>
+              </sgds-data-table-row>
+              <sgds-data-table-row>
+                <sgds-data-table-cell>John Doe</sgds-data-table-cell>
+                <sgds-data-table-cell>john@example.com</sgds-data-table-cell>
+                <sgds-data-table-cell>Admin</sgds-data-table-cell>
+              </sgds-data-table-row>
+              <sgds-data-table-row>
+                <sgds-data-table-cell>Jane Smith</sgds-data-table-cell>
+                <sgds-data-table-cell>jane@example.com</sgds-data-table-cell>
+                <sgds-data-table-cell>Editor</sgds-data-table-cell>
+              </sgds-data-table-row>
+            </sgds-data-table>
+          `
+        )}
+        ${ComponentSection(
+          "Table",
+          html`
+            <sgds-table tableBorder>
+              <sgds-table-row>
+                <sgds-table-head>Name</sgds-table-head>
+                <sgds-table-head>Email</sgds-table-head>
+                <sgds-table-head>Role</sgds-table-head>
+              </sgds-table-row>
+              <sgds-table-row>
+                <sgds-table-cell>John Doe</sgds-table-cell>
+                <sgds-table-cell>john@example.com</sgds-table-cell>
+                <sgds-table-cell>Admin</sgds-table-cell>
+              </sgds-table-row>
+              <sgds-table-row>
+                <sgds-table-cell>Jane Smith</sgds-table-cell>
+                <sgds-table-cell>jane@example.com</sgds-table-cell>
+                <sgds-table-cell>Editor</sgds-table-cell>
+              </sgds-table-row>
+            </sgds-table>
+          `
+        )}
+      `)}
+    `;
+  },
+  name: "Structure",
+  args: {
+    structure: "none (0px)"
+  },
+  argTypes: {
+    structure: radiusArgType("--sgds-structure-border-radius", "var(--sgds-border-radius-none)")
+  },
+  parameters: storyParams
 };
 
 /* ------------------------------------------------------------------ */
@@ -222,7 +303,13 @@ export const Interactive = {
     interactive: "md (8px)"
   },
   argTypes: {
-    interactive: radiusArgType("--sgds-interactive-border-radius", "var(--sgds-border-radius-md)")
+    interactive: {
+      control: "select",
+      options: Object.keys(RADIUS_OPTIONS_WITH_FULL),
+      mapping: RADIUS_OPTIONS_WITH_FULL,
+      name: "--sgds-interactive-border-radius",
+      table: { defaultValue: { summary: "var(--sgds-border-radius-md)" } }
+    }
   },
   parameters: storyParams
 };
@@ -327,14 +414,26 @@ export const Form = {
     formDense: "md (8px)"
   },
   argTypes: {
-    form: radiusArgType("--sgds-form-border-radius", "var(--sgds-border-radius-md)"),
-    formDense: radiusArgType("--sgds-form-border-radius-dense", "var(--sgds-border-radius-md)")
+    form: {
+      control: "select",
+      options: Object.keys(RADIUS_OPTIONS_WITH_FULL),
+      mapping: RADIUS_OPTIONS_WITH_FULL,
+      name: "--sgds-form-border-radius",
+      table: { defaultValue: { summary: "var(--sgds-border-radius-md)" } }
+    },
+    formDense: {
+      control: "select",
+      options: Object.keys(RADIUS_OPTIONS_WITH_FULL),
+      mapping: RADIUS_OPTIONS_WITH_FULL,
+      name: "--sgds-form-border-radius-dense",
+      table: { defaultValue: { summary: "var(--sgds-border-radius-md)" } }
+    }
   },
   parameters: storyParams
 };
 
 /* ------------------------------------------------------------------ */
-/*  4. Surface — Accordion, Alert, Card, DescriptionList, IconCard,    */
+/*  4. Surface — Accordion, Alert, Card, IconCard,                     */
 /*     ImageCard, ThumbnailCard                                        */
 /* ------------------------------------------------------------------ */
 export const Surface = {
@@ -383,16 +482,6 @@ export const Surface = {
               <span slot="description">This is a card component using the surface border radius token.</span>
               <sgds-button slot="card-footer" variant="outline">Action</sgds-button>
             </sgds-card>
-          `
-        )}
-        ${ComponentSection(
-          "Description List",
-          html`
-            <sgds-description-list-group bordered>
-              <sgds-description-list>Full name<span slot="data">John Doe</span></sgds-description-list>
-              <sgds-description-list>Email<span slot="data">john@example.com</span></sgds-description-list>
-              <sgds-description-list>Role<span slot="data">Administrator</span></sgds-description-list>
-            </sgds-description-list-group>
           `
         )}
         ${ComponentSection(

@@ -66,6 +66,7 @@ table {
   border: var(--sgds-border-width-1) solid;
   border-color: var(--sgds-border-color-muted);
   border-bottom: 0;
+  border-radius: var(--sgds-structure-border-radius);
 }
 
 :host([tableBorder]) .table.no-border {
