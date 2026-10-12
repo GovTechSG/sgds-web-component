@@ -22,6 +22,7 @@
 
 slot[name="title"]::slotted(*) {
   color: var(--sgds-color-fixed-light) !important;
+  font-family: var(--sgds-font-family-heading) !important;
   font-size: var(--sgds-font-size-heading-md) !important;
   font-weight: var(--sgds-font-weight-semibold);
   line-height: var(--sgds-line-height-md) !important;

@@ -97,8 +97,7 @@ export class SelectElement
    * label: string;
    * value: string;
    * }`
-   * @deprecated
-   * Deprecated in favour of slots
+   * @deprecated since v3.5.0 — use slots instead.
    */
   @property({ type: Array }) menuList: SgdsOptionData[] = [];
   /** Track selected items (even for single-select, but it will have at most one). */

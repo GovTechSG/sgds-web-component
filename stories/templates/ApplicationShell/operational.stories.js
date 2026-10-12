@@ -8,8 +8,8 @@ const Template = () => html`
         -45deg,
         transparent,
         transparent 6px,
-        var(--sgds-color-border-muted, #e5e7eb) 6px,
-        var(--sgds-color-border-muted, #e5e7eb) 7px
+        var(--sgds-border-color-muted, #e5e7eb) 6px,
+        var(--sgds-border-color-muted, #e5e7eb) 7px
       );
     }
   </style>
@@ -40,7 +40,7 @@ const Template = () => html`
     });
   </script>
 
-  <div class="sgds:h-screen sgds:flex sgds:flex-col sgds:overflow-hidden">
+  <div class="sgds:bg-default sgds:h-screen sgds:flex sgds:flex-col sgds:overflow-hidden">
     <!-- Appnav top bar -->
     <div class="sgds:flex-none">
       <sgds-appnav tone="gradient-3">

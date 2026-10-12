@@ -49,7 +49,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - Omit the slot entirely for a text-only (no icon) alert.
 - Always set `size="md"` on the icon — this is the required size for alert icons.
 
-**Default slot (body)** — text content and native `<a>` tags for inline links. The alert component automatically styles slotted `<a>` elements to match the variant color with an underline. Basic HTML is permitted (`<strong>`, `<em>`, `<p>`). Avoid placing interactive components in the body — alerts are informational only.
+**Default slot (body)** — text content and native `<a>` tags for inline links. The alert component automatically styles slotted `<a>` elements to match the variant color with an underline. Basic HTML is permitted (`<strong>`, `<em>`, `<span>`). Avoid placing interactive components in the body — alerts are informational only.
 
 **Inline links** — use a native `<a>` tag directly as a slotted child (not wrapped in a `<div>`). The alert applies the correct variant-matched link style automatically via `::slotted(a)`.
 

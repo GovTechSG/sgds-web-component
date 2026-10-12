@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--sgds-gap-xs);
-  border-radius: var(--sgds-border-radius-sm);
+  border-radius: var(--sgds-indicator-border-radius);
   max-width: 100%;
 }
 .skeleton.skeleton-paragraph {
@@ -14,7 +14,7 @@
 .skeleton.skeleton-paragraph.auto-size-rows > div[class*="skeleton-row"] {
   height: -webkit-fill-available;
   background-color: var(--sgds-bg-translucent);
-  border-radius: var(--sgds-border-radius-sm);
+  border-radius: var(--sgds-indicator-border-radius);
 }
 
 .sheen {
