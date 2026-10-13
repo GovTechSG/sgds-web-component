@@ -1,5 +1,6 @@
 import { html } from "lit";
 import { ifDefined } from "lit/directives/if-defined.js";
+import { userEvent } from "storybook/test";
 import "../../mocks/comboBoxMultiAsync";
 import "../../mocks/comboBoxSingleAsync";
 
@@ -597,7 +598,13 @@ export const Creatable = {
   render: CreatableTemplate.bind({}),
   name: "Creatable ComboBox",
   args: {},
-  parameters: {}
+  parameters: {},
+  play: async ({ canvasElement }) => {
+    const comboBox = canvasElement.querySelector("#creatable-combobox-example");
+    const input = comboBox.shadowRoot.querySelector("input");
+    await userEvent.click(input);
+    await userEvent.type(input, "Mangosteen", { delay: 50 });
+  }
 };
 
 const CreatableWithEventTemplate = () => {
@@ -628,11 +635,12 @@ const CreatableWithEventTemplate = () => {
         await new Promise(resolve => setTimeout(resolve, 1000));
         comboBox.loading = false;
 
-        // Append the new option to the combo box
+        // Append the new option and select it
         const option = document.createElement("sgds-combo-box-option");
-        option.value = newValue.toLowerCase().replace(/s+/g, "-");
+        option.value = newValue.toLowerCase().replace(/\\s+/g, "-");
         option.textContent = newValue;
         comboBox.appendChild(option);
+        comboBox.value = option.value;
       });
     </script>
   `;
@@ -641,6 +649,44 @@ const CreatableWithEventTemplate = () => {
 export const CreatableWithEvent = {
   render: CreatableWithEventTemplate.bind({}),
   name: "Creatable with sgds-create-option event",
+  args: {},
+  parameters: {}
+};
+
+const CreatableMultiSelectTemplate = () => {
+  return html`
+    <sgds-combo-box
+      creatable
+      multiSelect
+      label="Tags"
+      placeholder="Type to create tags"
+      id="creatable-multiselect-combobox-example"
+    >
+    </sgds-combo-box>
+    <script>
+      const creatableMultiComboBox = document.querySelector("#creatable-multiselect-combobox-example");
+      creatableMultiComboBox.addEventListener("sgds-create-option", e => {
+        const comboBox = e.target;
+        const newValue = e.detail.value;
+
+        // Append the new option
+        const option = document.createElement("sgds-combo-box-option");
+        option.value = newValue;
+        option.textContent = newValue;
+        comboBox.appendChild(option);
+
+        // Select the newly created option
+        const currentValue = comboBox.value;
+        comboBox.value = currentValue ? currentValue + ";" + newValue : newValue;
+        comboBox.displayValue = "";
+      });
+    </script>
+  `;
+};
+
+export const CreatableMultiSelect = {
+  render: CreatableMultiSelectTemplate.bind({}),
+  name: "Creatable multi-select with auto-select",
   args: {},
   parameters: {}
 };
