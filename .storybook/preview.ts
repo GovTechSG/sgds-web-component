@@ -101,13 +101,7 @@ export const parameters = {
         "Frameworks",
         ["Angular", "Vue", "React", "NextJS"],
         "Foundation",
-        [
-          "Introduction",
-          "Typography",
-          ["Introduction", "Display", "Headings", "Subtitles"],
-          "Layout",
-          "Grid System"
-        ],
+        ["Introduction", "Typography", ["Introduction", "Display", "Headings", "Subtitles"], "Layout", "Grid System"],
         "Theming",
         "Form",
         ["Validation", "Custom Validation"],
