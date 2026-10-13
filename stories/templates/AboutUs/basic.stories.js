@@ -24,7 +24,7 @@ const Template = () => html`
     <sgds-masthead></sgds-masthead>
 
     <sgds-mainnav>
-      <strong slot="brand">Logo</strong>
+      <strong slot="brand" class="sgds:flex sgds:items-center sgds:self-center">Logo</strong>
     </sgds-mainnav>
 
     <div class="sgds:bg-surface-default sgds:flex-1">
