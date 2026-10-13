@@ -1,6 +1,9 @@
 import { html } from "lit";
+import { property } from "lit/decorators.js";
+import { consume } from "@lit/context";
 import SgdsElement from "../../base/sgds-element";
 import tableRowStyle from "./table-row.css";
+import { TableBorderContext } from "./table-context";
 
 /**
  * @summary Table row organizes and groups table cells or header cells into a single horizontal line within the table.
@@ -9,6 +12,11 @@ import tableRowStyle from "./table-row.css";
  */
 export class SgdsTableRow extends SgdsElement {
   static styles = [...SgdsElement.styles, tableRowStyle];
+
+  /** @internal Automatically set by the parent `<sgds-table>` via context. */
+  @consume({ context: TableBorderContext, subscribe: true })
+  @property({ type: Boolean, reflect: true })
+  tableBorder = false;
 
   connectedCallback() {
     super.connectedCallback();

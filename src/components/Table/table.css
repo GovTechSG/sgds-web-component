@@ -62,9 +62,15 @@ table {
   overflow-x: auto;
 }
 
-:host([tableBorder]) .table {
+:host([tableBorder]) {
   border: var(--sgds-border-width-1) solid;
   border-color: var(--sgds-border-color-muted);
+  border-radius: var(--sgds-structure-border-radius);
+  overflow: hidden;
+}
+
+:host([tableBorder]) .table > tbody > tr:last-child > th,
+:host([tableBorder]) .table > tbody > tr:last-child > td {
   border-bottom: 0;
 }
 

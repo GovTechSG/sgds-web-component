@@ -2,3 +2,7 @@
   display: table-row;
   width: 100%;
 }
+
+:host([tableBorder]:last-of-type) .table-row::slotted(*) {
+  border-bottom: 0;
+}

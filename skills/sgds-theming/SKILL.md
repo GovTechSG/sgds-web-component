@@ -22,12 +22,13 @@ Import `themes/day.css` before your custom CSS. See **[sgds-getting-started](../
 
 ## Quick Decision Guide
 
-| What you want to change | Token / mechanism |
-|-------------------------|-------------------|
-| Product brand colour (custom) | Override `--sgds-product-primary-{100–900}` |
-| Product brand colour (GovTech) | Import one `themes/gt/<colour>.css` + map to `--sgds-product-primary-*` |
-| Enable dark/night mode | Import `themes/night.css` + add `.sgds-night-theme` to `<html>` |
-| Font typeface | Override `--sgds-font-family-brand` |
+| What you want to change | Token / mechanism | Reference |
+|-------------------------|-------------------|-----------|
+| Product brand colour (custom) | Override `--sgds-product-primary-{100–900}` | |
+| Product brand colour (GovTech) | Import one `themes/gt/<colour>.css` + map to `--sgds-product-primary-*` | |
+| Enable dark/night mode | Import `themes/night.css` + add `.sgds-night-theme` to `<html>` | See below |
+| Font typeface | Override `--sgds-font-family-brand` | |
+| Border radius | Override semantic `--sgds-{purpose}-border-radius` tokens | [border-radius.md](reference/border-radius.md) |
 
 ---
 
@@ -182,6 +183,12 @@ You are responsible for loading the font assets — either via a `<link>` tag or
 
 ---
 
+## Changing the Border Radius
+
+See **[border-radius.md](reference/border-radius.md)** for the full reference — semantic token table, override examples, and available primitive values.
+
+---
+
 ## For AI Agents
 
 1. Always tell users to import their custom CSS **after** `themes/day.css` — otherwise the override will be overwritten.
@@ -193,3 +200,4 @@ You are responsible for loading the font assets — either via a `<link>` tag or
 7. Custom overrides apply to both day and night mode simultaneously because they target `:root`, which both theme selectors inherit from.
 8. GovTech products must use a colour from `themes/gt/` — not custom hex values. If a user is building a GovTech product and asks about brand colours, guide them to pick one GT colour and apply the `--gt-color-*` → `--sgds-product-primary-*` mapping pattern. Never let them import more than one GT colour file.
 9. The GT colour file must be imported **after** `themes/day.css` and **before** the custom mapping CSS so that `--gt-color-*` variables are defined in time.
+10. For border radius theming, read [border-radius.md](reference/border-radius.md). Override **semantic** tokens (`--sgds-{purpose}-border-radius`), referencing primitive values via `var(--sgds-border-radius-{size})`.

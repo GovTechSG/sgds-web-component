@@ -22,7 +22,7 @@ input {
   width: var(--sgds-switch-width);
   height: var(--sgds-switch-height);
   flex-shrink: 0;
-  border-radius: var(--sgds-form-border-radius-full);
+  border-radius: var(--sgds-border-radius-full);
   transition: background-position 0.15s ease-in-out;
   padding: 0px var(--sgds-padding-2-xs);
 }
