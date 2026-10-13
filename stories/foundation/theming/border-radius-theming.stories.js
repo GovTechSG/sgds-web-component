@@ -16,6 +16,13 @@ const RADIUS_OPTIONS_WITH_FULL = {
   "full (999px)": "var(--sgds-border-radius-full)"
 };
 
+const RADIUS_OPTIONS_SUBTLE = {
+  "none (0px)": "var(--sgds-border-radius-none)",
+  "xs (2px)": "var(--sgds-border-radius-xs)",
+  "sm (4px)": "var(--sgds-border-radius-sm)",
+  "md (8px)": "var(--sgds-border-radius-md)"
+};
+
 const radiusArgType = (name, defaultVar) => ({
   control: "select",
   options: Object.keys(RADIUS_OPTIONS),
@@ -312,12 +319,12 @@ export const Form = {
   render: args => {
     const styles = [
       setToken("--sgds-form-border-radius", args.form),
-      setToken("--sgds-form-border-radius-dense", args.formDense)
+      setToken("--sgds-form-border-radius-subtle", args.formSubtle)
     ];
     return html`
       ${styles}
       ${storyWrapper(html`
-        ${TokenHeader("--sgds-form-border-radius-dense", true)}
+        ${TokenHeader("--sgds-form-border-radius-subtle", true)}
         ${ComponentSection(
           "Checkbox",
           html`
@@ -336,8 +343,13 @@ export const Form = {
               <sgds-combo-box
                 label="Search options"
                 placeholder="Search for a fruit"
-                .menuList=${["Apple", "Banana", "Cherry", "Date", "Elderberry"]}
-              ></sgds-combo-box>
+              >
+                <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+                <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+                <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+                <sgds-combo-box-option value="date">Date</sgds-combo-box-option>
+                <sgds-combo-box-option value="elderberry">Elderberry</sgds-combo-box-option>
+              </sgds-combo-box>
             </div>
           `
         )}
@@ -401,7 +413,7 @@ export const Form = {
   },
   args: {
     form: "md (8px)",
-    formDense: "md (8px)"
+    formSubtle: "md (8px)"
   },
   argTypes: {
     form: {
@@ -411,11 +423,11 @@ export const Form = {
       name: "--sgds-form-border-radius",
       table: { defaultValue: { summary: "var(--sgds-border-radius-md)" } }
     },
-    formDense: {
+    formSubtle: {
       control: "select",
-      options: Object.keys(RADIUS_OPTIONS_WITH_FULL),
-      mapping: RADIUS_OPTIONS_WITH_FULL,
-      name: "--sgds-form-border-radius-dense",
+      options: Object.keys(RADIUS_OPTIONS_SUBTLE),
+      mapping: RADIUS_OPTIONS_SUBTLE,
+      name: "--sgds-form-border-radius-subtle",
       table: { defaultValue: { summary: "var(--sgds-border-radius-md)" } }
     }
   },

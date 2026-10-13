@@ -9,7 +9,7 @@ Customise the border radius of components by overriding the semantic border radi
 | `--sgds-indicator-border-radius` | sm (4px) | Badge, Skeleton |
 | `--sgds-interactive-border-radius` | md (8px) | Button, Icon Button, Tab, Pagination, Close Button, Sidebar, Sidenav, Overflow Menu, Datepicker (calendar) |
 | `--sgds-form-border-radius` | md (8px) | Input, Select, Combo Box, Textarea, Quantity Toggle, File Upload, Datepicker (input) |
-| `--sgds-form-border-radius-dense` | md (8px) | Checkbox |
+| `--sgds-form-border-radius-subtle` | md (8px) | Checkbox |
 | `--sgds-surface-border-radius` | lg (12px) | Card, Icon Card, Image Card, Thumbnail Card, Accordion, Alert, Description List |
 | `--sgds-overlay-border-radius` | lg (12px) | Modal, Dropdown, Toast, Tooltip, Datepicker (calendar panel), Mainnav Dropdown |
 

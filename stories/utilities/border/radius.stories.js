@@ -43,9 +43,9 @@ const FORM_RADIUS_SCALE = [
   { name: "full", class: "sgds:rounded-form-full", variable: "--sgds-form-border-radius-full", value: "999px" },
   { name: "form (semantic)", class: "sgds:rounded-form", variable: "--sgds-form-border-radius", value: "md (8px)" },
   {
-    name: "form-dense (semantic)",
-    class: "sgds:rounded-form-dense",
-    variable: "--sgds-form-border-radius-dense",
+    name: "form-subtle (semantic)",
+    class: "sgds:rounded-form-subtle",
+    variable: "--sgds-form-border-radius-subtle",
     value: "md (8px)"
   }
 ];
