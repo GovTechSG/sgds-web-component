@@ -440,7 +440,7 @@
   --radius-indicator: var(--sgds-indicator-border-radius);
   --radius-interactive: var(--sgds-interactive-border-radius);
   --radius-form: var(--sgds-form-border-radius);
-  --radius-form-dense: var(--sgds-form-border-radius-dense);
+  --radius-form-subtle: var(--sgds-form-border-radius-subtle);
   --radius-surface: var(--sgds-surface-border-radius);
   --radius-overlay: var(--sgds-overlay-border-radius);
 

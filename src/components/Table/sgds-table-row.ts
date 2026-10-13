@@ -13,6 +13,7 @@ import { TableBorderContext } from "./table-context";
 export class SgdsTableRow extends SgdsElement {
   static styles = [...SgdsElement.styles, tableRowStyle];
 
+  /** @internal Automatically set by the parent `<sgds-table>` via context. */
   @consume({ context: TableBorderContext, subscribe: true })
   @property({ type: Boolean, reflect: true })
   tableBorder = false;

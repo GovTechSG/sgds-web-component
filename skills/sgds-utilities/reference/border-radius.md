@@ -75,7 +75,7 @@ Purpose-driven tokens that map a UI role to a primitive radius value. Components
 <div class="sgds:rounded-indicator">Badges, status indicators (4px)</div>
 <div class="sgds:rounded-interactive">Buttons, interactive elements (8px)</div>
 <div class="sgds:rounded-form">Form controls (8px)</div>
-<div class="sgds:rounded-form-dense">Compact form controls (8px)</div>
+<div class="sgds:rounded-form-subtle">Compact form controls (8px)</div>
 <div class="sgds:rounded-surface">Cards, panels, raised surfaces (12px)</div>
 <div class="sgds:rounded-overlay">Modals, drawers, tooltips (12px)</div>
 ```
@@ -88,7 +88,7 @@ Purpose-driven tokens that map a UI role to a primitive radius value. Components
 | `sgds:rounded-indicator` | `--sgds-indicator-border-radius` | sm (4px) |
 | `sgds:rounded-interactive` | `--sgds-interactive-border-radius` | md (8px) |
 | `sgds:rounded-form` | `--sgds-form-border-radius` | md (8px) |
-| `sgds:rounded-form-dense` | `--sgds-form-border-radius-dense` | md (8px) |
+| `sgds:rounded-form-subtle` | `--sgds-form-border-radius-subtle` | md (8px) |
 | `sgds:rounded-surface` | `--sgds-surface-border-radius` | lg (12px) |
 | `sgds:rounded-overlay` | `--sgds-overlay-border-radius` | lg (12px) |
 
