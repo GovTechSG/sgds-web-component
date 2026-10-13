@@ -179,6 +179,10 @@ export class SgdsMainnavDropdown extends SgdsElement {
     this.menuHeaderText.textContent = this.togglerNodes[0].textContent;
   }
 
+  private _handleTogglerSlotChange() {
+    // no-op: toggler slot change handled by _copyTextToMenu in mobile view
+  }
+
   private _hideDropdownMenuItems() {
     this.dropdownItems.style.display = "none";
     this.dropdownItems.setAttribute("aria-hidden", "true");
@@ -271,7 +275,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
 
   render() {
     const mobileView = html`
-      <a
+      <button
         class="${classMap({
           "nav-link": true,
           active: this.active,
@@ -279,14 +283,13 @@ export class SgdsMainnavDropdown extends SgdsElement {
         })}"
         aria-disabled=${this.disabled ? "true" : "false"}
         aria-label=${ifDefined(this.ariaLabel)}
-        tabindex=${this.disabled ? "-1" : "0"}
-        role="button"
+        ?disabled=${this.disabled}
         @click=${this._openMenu}
         @keydown=${this._handleKeyboardOpen}
       >
-        <slot name="toggler"></slot>
+        <slot name="toggler" @slotchange=${this._handleTogglerSlotChange}></slot>
         <sgds-icon name="chevron-right" size="md"></sgds-icon>
-      </a>
+      </button>
       <div class="dropdown-items">
         <a tabindex="0" role="button" @click=${this._closeMenu} @keydown=${this._handleHeaderKeyboardEvent}>
           <sgds-icon name="chevron-left" size="md"></sgds-icon>
@@ -302,7 +305,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
       }}
       ?disabled=${this.disabled}
     >
-      <a
+      <button
         class="${classMap({
           "nav-link": true,
           active: this.active,
@@ -311,13 +314,12 @@ export class SgdsMainnavDropdown extends SgdsElement {
         aria-disabled=${this.disabled ? "true" : "false"}
         aria-label=${ifDefined(this.ariaLabel)}
         id=${this.togglerId}
-        tabindex=${this.disabled ? "-1" : "0"}
-        role="button"
+        ?disabled=${this.disabled}
         slot="toggler"
       >
-        <slot name="toggler"></slot>
+        <slot name="toggler" @slotchange=${this._handleTogglerSlotChange}></slot>
         <sgds-icon name="chevron-down" size="md"></sgds-icon>
-      </a>
+      </button>
       <slot @slotchange=${this._handleDesktopSlotChange}></slot>
     </sgds-dropdown>`;
 

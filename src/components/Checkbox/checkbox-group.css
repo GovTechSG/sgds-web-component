@@ -27,7 +27,7 @@ fieldset {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-form-gap-md);
-  padding: var(--sgds-form-padding-inline-sm) 0px;
+  padding: var(--sgds-padding-2-xs) 0px;
 }
 
 .checkbox-group-validation-input {
