@@ -36,7 +36,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 **`start` slot** — icon-buttons before the brand area (e.g. sidebar toggle). Always use `variant="ghost" tone="fixed-light"`.
 
-**`brand` slot** — brand logo `<img>` or text. Set `brandHref` for the homepage link. Brand text is always white (fixed-light).
+**`brand` slot** — brand logo `<img>` or text wrapped in an `<a>` tag for the homepage link. Brand text is always white (fixed-light).
 
 **Default slot** — `<sgds-icon-button>` elements for actions (dark mode, notifications, settings, etc.). Each **must** have `ariaLabel` set — this text is used as the mobile menu item label. Always use `variant="ghost" tone="fixed-light"`.
 
@@ -75,9 +75,9 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ```html
 <!-- Basic appnav -->
-<sgds-appnav brandHref="/">
+<sgds-appnav>
   <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Open side menu"></sgds-icon-button>
-  <img slot="brand" alt="App logo" width="100" src="/logo-white.svg" />
+  <a slot="brand" href="/"><img alt="App logo" width="100" src="/logo-white.svg" /></a>
   <sgds-icon-button name="moon" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
   <sgds-icon-button name="bell" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Notifications"></sgds-icon-button>
 </sgds-appnav>
@@ -85,9 +85,9 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ```html
 <!-- Appnav with profile -->
-<sgds-appnav tone="gradient-3" brandHref="/">
+<sgds-appnav tone="gradient-3">
   <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Open side menu"></sgds-icon-button>
-  <img slot="brand" alt="App logo" width="100" src="/logo-white.svg" />
+  <a slot="brand" href="/"><img alt="App logo" width="100" src="/logo-white.svg" /></a>
   <sgds-icon-button name="moon" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
   <sgds-appnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu" close="inside">
     <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:rounded-full sgds:bg-neutral-subtle-default sgds:block"></span>
@@ -110,13 +110,15 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## API Summary
 
+> **Deprecation notice:** The `brandHref` attribute is deprecated. Instead, use a slotted `<a>` element inside the `brand` slot to provide the homepage link (e.g. `<a slot="brand" href="/"><img ... /></a>`).
+
 ### `<sgds-appnav>`
 
 | Attribute | Type | Default | Purpose |
 |---|---|---|---|
 | `tone` | `brand \| gradient-1 \| gradient-2 \| gradient-3 \| gradient-4` | `brand` | Visual theme — no "default" (white) option |
 | `expand` | `sm \| md \| lg \| xl \| xxl \| always \| never` | `lg` | Breakpoint below which the nav collapses |
-| `brandHref` | string | `""` | URL for the brand logo link |
+| `brandHref` | string | `""` | **Deprecated.** Use a slotted `<a>` in the `brand` slot instead. |
 | `hasStartSlot` | boolean | `false` | SSR hint — set to `true` when the `start` slot has content |
 
 ### `<sgds-appnav-profile>`

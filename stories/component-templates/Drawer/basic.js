@@ -11,7 +11,7 @@ export const Template = args => {
       ?contained=${args.contained}
     >
       <h4 slot="title">Title</h4>
-      <p slot="description">Description</p>
+      <span slot="description">Description</span>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dictum est vitae erat molestie blandit.
       Pellentesque at nunc at mi auctor imperdiet eu at leo. Integer aliquam, turpis vel ultricies ornare, sem massa
       commodo velit, pretium dictum quam nibh et ex. Suspendisse eu dignissim libero. Donec aliquam, lacus eu

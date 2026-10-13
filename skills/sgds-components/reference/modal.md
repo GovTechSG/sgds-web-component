@@ -81,8 +81,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 <sgds-button id="open-modal">Open Modal</sgds-button>
 <sgds-modal id="my-modal">
   <h2 slot="title">Modal Title</h2>
-  <p slot="description">Brief description of what this modal is for.</p>
-  <p>Main content goes in the default slot. Forms, text, or any body content belongs here.</p>
+  <span slot="description">Brief description of what this modal is for.</span>
+  <span>Main content goes in the default slot. Forms, text, or any body content belongs here.</span>
   <sgds-button slot="footer" variant="link" id="close-modal">Cancel</sgds-button>
   <sgds-button slot="footer" variant="primary">Confirm</sgds-button>
 </sgds-modal>
@@ -99,7 +99,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 <!-- Prevent close from overlay/keyboard — require explicit button press -->
 <sgds-modal id="confirm-modal">
   <h2 slot="title">Delete Item?</h2>
-  <p>This action cannot be undone.</p>
+  <span>This action cannot be undone.</span>
   <sgds-button slot="footer" variant="link" id="cancel-delete">Cancel</sgds-button>
   <sgds-button slot="footer" variant="danger" id="confirm-delete">Delete</sgds-button>
 </sgds-modal>
@@ -115,7 +115,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 <!-- Full screen modal -->
 <sgds-modal size="fullscreen">
   <h2 slot="title">Full Screen Modal</h2>
-  <p>Content that benefits from maximum screen real estate.</p>
+  <span>Content that benefits from maximum screen real estate.</span>
 </sgds-modal>
 ```
 
