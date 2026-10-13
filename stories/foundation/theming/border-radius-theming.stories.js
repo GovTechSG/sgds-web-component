@@ -340,10 +340,7 @@ export const Form = {
           "Combo Box",
           html`
             <div>
-              <sgds-combo-box
-                label="Search options"
-                placeholder="Search for a fruit"
-              >
+              <sgds-combo-box label="Search options" placeholder="Search for a fruit">
                 <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
                 <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
                 <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
