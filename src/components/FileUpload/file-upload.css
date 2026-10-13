@@ -62,7 +62,7 @@
     var(--sgds-form-padding-y) var(--sgds-form-padding-x);
   background-color: var(--sgds-form-surface-default);
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
-  border-radius: var(--sgds-form-border-radius-md);
+  border-radius: var(--sgds-form-border-radius);
   animation: fileUploadEnter var(--sgds-motion-duration-standard) var(--sgds-motion-easing-enter);
   position: relative;
   transition: transform var(--sgds-motion-duration-standard) var(--sgds-motion-easing-standard);
@@ -133,7 +133,7 @@ sgds-icon.invalid {
   justify-content: center;
   align-items: center;
   gap: var(--sgds-gap-md);
-  border-radius: var(--sgds-border-radius-md);
+  border-radius: var(--sgds-form-border-radius);
   border: var(--sgds-border-width-1) dashed var(--sgds-border-color-default);
   background-color: var(--sgds-surface-raised);
 }

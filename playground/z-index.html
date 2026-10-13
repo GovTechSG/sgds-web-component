@@ -293,7 +293,7 @@
     <!-- Modal with dropdown elements inside -->
     <sgds-modal id="modal-dropdowns" size="lg">
       <h2 slot="title">Dropdown Elements in Modal</h2>
-      <p slot="description">Each component below opens a floating menu. Verify menus appear above the modal panel.</p>
+      <span slot="description">Each component below opens a floating menu. Verify menus appear above the modal panel.</span>
       <div class="sgds:flex sgds:flex-col sgds:gap-component-lg sgds:pt-component-xs">
         <sgds-dropdown>
           <sgds-button slot="toggler">
@@ -332,7 +332,7 @@
     <!-- Drawer with dropdown elements inside -->
     <sgds-drawer id="drawer-dropdowns" placement="end">
       <h2 slot="title">Dropdown Elements in Drawer</h2>
-      <p slot="description">Each component below opens a floating menu. Verify menus appear above the drawer panel.</p>
+      <span slot="description">Each component below opens a floating menu. Verify menus appear above the drawer panel.</span>
       <div class="sgds:flex sgds:flex-col sgds:gap-component-lg sgds:pt-component-xs">
         <sgds-dropdown>
           <sgds-button slot="toggler">
@@ -367,7 +367,7 @@
     <!-- Modal with tooltip inside -->
     <sgds-modal id="modal-with-tooltip">
       <h2 slot="title">Modal with Tooltip</h2>
-      <p slot="description">z-index: --sgds-z-index-modal (800)</p>
+      <span slot="description">z-index: --sgds-z-index-modal (800)</span>
       <p>Hover the button below. Does the tooltip (z=400) appear above the modal panel (z=2 within modal)?</p>
       <div class="sgds:mt-component-md">
         <sgds-tooltip content="Tooltip inside modal — z-index 400" placement="top">
@@ -382,7 +382,7 @@
     <!-- Drawer with tooltip inside -->
     <sgds-drawer id="drawer-with-tooltip" placement="end">
       <h2 slot="title">Drawer with Tooltip</h2>
-      <p slot="description">z-index: --sgds-z-index-modal (800)</p>
+      <span slot="description">z-index: --sgds-z-index-modal (800)</span>
       <p>Hover the button below. Does the tooltip (z=400) appear above the drawer panel (z=2 within drawer)?</p>
       <div class="sgds:mt-component-md">
         <sgds-tooltip content="Tooltip inside drawer — z-index 400" placement="top">
@@ -416,7 +416,7 @@
     <!-- Drawer -->
     <sgds-drawer id="drawer-end" placement="end">
       <h2 slot="title">Drawer</h2>
-      <p slot="description">z-index: --sgds-z-index-modal (800)</p>
+      <span slot="description">z-index: --sgds-z-index-modal (800)</span>
       <p>This drawer covers toast, tooltip, and dropdowns. It shares z-index 800 with the modal — if both are open, DOM order decides which is on top.</p>
       <p class="sgds:mt-component-md">Try opening the modal while this drawer is open to see them at the same level.</p>
       <div slot="footer" class="sgds:flex sgds:gap-component-xs sgds:justify-end">
@@ -428,7 +428,7 @@
     <!-- Combined drawer -->
     <sgds-drawer id="drawer-combined" placement="end">
       <h2 slot="title">Drawer (Combined)</h2>
-      <p slot="description">z-index: 800</p>
+      <span slot="description">z-index: 800</span>
       <p>The toast (z=400) is now hidden behind this drawer (z=800).</p>
       <div slot="footer" class="sgds:flex sgds:gap-component-xs sgds:justify-end">
         <sgds-button variant="outline" id="btn-close-drawer-combined">Close</sgds-button>
@@ -438,7 +438,7 @@
     <!-- Modal -->
     <sgds-modal id="modal-main">
       <h2 slot="title">Modal</h2>
-      <p slot="description">z-index: --sgds-z-index-modal (800)</p>
+      <span slot="description">z-index: --sgds-z-index-modal (800)</span>
       <p>This modal shares z-index 800 with the drawer. Both cover everything at 400 and below. When both modal and drawer are open, the one that appears later in the DOM (or is opened later) is on top.</p>
       <div slot="footer">
         <sgds-button id="btn-close-modal">Close Modal</sgds-button>
@@ -448,7 +448,7 @@
     <!-- Combined modal -->
     <sgds-modal id="modal-combined">
       <h2 slot="title">Modal (Combined Scenario)</h2>
-      <p slot="description">z-index: 800</p>
+      <span slot="description">z-index: 800</span>
       <p>The toast (z=400) is hidden behind this modal (z=800). The dropdown and tooltip are also hidden. The mainnav and subnav (z=200) are also covered.</p>
       <div slot="footer">
         <sgds-button id="btn-close-modal-combined">Close Modal</sgds-button>
