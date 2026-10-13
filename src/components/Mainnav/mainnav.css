@@ -28,7 +28,8 @@ nav {
   max-width: none;
 }
 
-.navbar-brand {
+.navbar-brand,
+::slotted(.navbar-brand) {
   display: flex;
   height: var(--sgds-dimension-40);
   align-self: center;
@@ -42,7 +43,8 @@ nav {
   height: 100%;
 }
 
-.navbar-brand:focus-visible {
+.navbar-brand:focus-visible,
+::slotted(.navbar-brand:focus-visible) {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }

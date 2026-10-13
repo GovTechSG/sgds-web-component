@@ -37,7 +37,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Component Composition
 
-**`brand` slot** — a single `<img>` with `alt`, `width`, and `src`. Set `brandHref` on `<sgds-mainnav>` to the homepage URL (`"/"`). Always provide brand content.
+**`brand` slot** — wrap the brand `<img>` in an `<a>` tag with `slot="brand"` and set `href` to the homepage URL (`"/"`). Always provide brand content.
 
 **Default slot** — `<sgds-mainnav-item>` and `<sgds-mainnav-dropdown>` elements for primary navigation. Do not place other elements directly in the default slot.
 
@@ -72,7 +72,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ## Edge Cases
 
-- **No brand slot content**: the brand area renders empty — always provide an `<img>` in the `brand` slot and set `brandHref`.
+- **No brand slot content**: the brand area renders empty — always provide an `<a>` wrapping an `<img>` in the `brand` slot.
 - **No `active` item set**: no nav item is highlighted — set `active` on the item matching the current route; update it on route changes in SPAs.
 - **`expand="never"` on desktop**: the hamburger menu is always shown even on wide screens — only use `never` for contexts where a collapsed nav is always desired.
 - **Dropdown without `toggler` slot content**: the dropdown trigger renders with no label — always provide a `<span>` or button in the `toggler` slot.
@@ -88,14 +88,14 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 **Full-width container?** → Add `fluid`
 
-**Brand logo link?** → Set `brandHref` to the target URL
+**Brand logo link?** → Wrap the `<img>` in an `<a slot="brand" href="/">` tag
 
 **User profile dropdown at far right?** → Use `slot="profile"` on a `<sgds-mainnav-profile>` with `label` and `secondaryText` props (preferred).
 
 ```html
 <!-- Default mainnav example -->
-<sgds-mainnav brandHref="/">
-  <img slot="brand" alt="Site logo" width="130" src="/logo.svg" />
+<sgds-mainnav>
+  <a slot="brand" href="/"><img alt="Site logo" width="130" src="/logo.svg" /></a>
 
   <!-- Primary nav items -->
   <sgds-mainnav-item>
@@ -123,8 +123,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ```html
 <!-- Mainnav with profile component -->
-<sgds-mainnav brandHref="/" fluid>
-  <img slot="brand" alt="Site logo" width="130" src="/logo.svg" />
+<sgds-mainnav fluid>
+  <a slot="brand" href="/"><img alt="Site logo" width="130" src="/logo.svg" /></a>
   <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
   <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
   <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
@@ -151,10 +151,12 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 ### `<sgds-mainnav>`
 
+> **Deprecation notice:** `brandHref` is deprecated. Instead of setting `brandHref` on `<sgds-mainnav>`, wrap the brand `<img>` in a slotted `<a>` tag: `<a slot="brand" href="/"><img ... /></a>`.
+
 | Attribute | Type | Default | Purpose |
 |---|---|---|---|
 | `expand` | `sm \| md \| lg \| xl \| xxl \| always \| never` | `lg` | Breakpoint below which the nav collapses |
-| `brandHref` | string | `""` | URL for the brand logo link |
+| `brandHref` | string | `""` | **(Deprecated)** URL for the brand logo link — use a slotted `<a>` in the `brand` slot instead |
 | `fluid` | boolean | `false` | Uses a full-width container instead of a fixed-width one |
 | `hasNonCollapsibleSlot` | boolean | `false` | SSR hint — set to `true` when the `non-collapsible` slot has content |
 
@@ -197,7 +199,7 @@ Also inherits `<sgds-dropdown>` properties — see **[components-dropdown](dropd
 
 | Slot | Purpose |
 |---|---|
-| `brand` | Brand logo image |
+| `brand` | Brand logo link — use `<a slot="brand" href="/"><img ... /></a>` |
 | *(default)* | `<sgds-mainnav-item>` and `<sgds-mainnav-dropdown>` elements |
 | `end` | Items right-aligned in the navbar; also collapses into the hamburger menu |
 | `non-collapsible` | Items that stay visible even when the menu is collapsed |
@@ -235,7 +237,7 @@ Also inherits `<sgds-dropdown>` properties — see **[components-dropdown](dropd
 ---
 
 **For AI agents**:
-1. Always place the brand logo in the `brand` slot using an `<img>` element; set `brandHref` to `"/"` for home navigation.
+1. Always place the brand logo in the `brand` slot by wrapping an `<img>` inside an `<a slot="brand" href="/">` tag for home navigation. Do not use the deprecated `brandHref` attribute.
 2. Regular nav links use `<a>` tags inside `<sgds-mainnav-item>`.
 3. Right-aligned items (login button, contact link) go in the `end` slot.
 4. User profile/account dropdowns go in the `profile` slot — use `<sgds-mainnav-profile>` with `label` and `secondaryText` props (preferred) or `<sgds-mainnav-dropdown>`. The hamburger toggler always renders alongside the profile.
