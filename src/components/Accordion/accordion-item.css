@@ -22,7 +22,7 @@
   font-size: var(--sgds-font-size-heading-sm);
   line-height: var(--sgds-line-height-sm);
   letter-spacing: var(--sgds-letter-spacing-tight);
-  font-family: var(--sgds-font-family-heading);
+  font-family: var(--sgds-font-family-subtitle);
 }
 
 :host([density="spacious"]) .content {
