@@ -276,7 +276,7 @@ describe("sgds-mainnav", () => {
     it("renders profile slot inside .navbar-end", async () => {
       const el = await fixture<SgdsMainnav>(
         html`<sgds-mainnav>
-          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User">
             <span slot="toggler">User</span>
           </sgds-mainnav-dropdown>
         </sgds-mainnav>`
@@ -289,7 +289,7 @@ describe("sgds-mainnav", () => {
     it("profile slot propagates expand attribute to slotted items", async () => {
       const el = await fixture<SgdsMainnav>(
         html`<sgds-mainnav expand="xl">
-          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User">
             <span slot="toggler">User</span>
           </sgds-mainnav-dropdown>
         </sgds-mainnav>`
