@@ -1,7 +1,7 @@
 import { nothing } from "lit";
 import { property, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { html, literal } from "lit/static-html.js";
+import { html } from "lit";
 import { CardElement } from "../../base/card-element";
 import thumbnailCardStyle from "./thumbnail-card.css";
 
@@ -59,23 +59,22 @@ export class SgdsThumbnailCard extends CardElement {
   }
 
   render() {
-    const tag = this.stretchedLink ? literal`a` : literal`div`;
-    const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
-
     return html`
-      <${tag} 
+      <div
         class="card ${classMap({
           disabled: this.disabled
         })}"
-        tabindex=${cardTabIndex}
-      > 
+      >
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
+        ${this.stretchedLink && this._stretchedHref
+          ? html`<a class="stretched-link" href=${this._stretchedHref} aria-label=${this._stretchedLabel}></a>`
+          : nothing}
         <div class="card-media">
           <slot name="thumbnail" @slotchange=${this._handleThumbnailSlotChange}></slot>
-					${this.orientation === "vertical" ? html`<slot name="upper"></slot>` : nothing}
+          ${this.orientation === "vertical" ? html`<slot name="upper"></slot>` : nothing}
         </div>
         <div class="card-body">
-					${this.orientation === "horizontal" ? html`<slot name="upper"></slot>` : nothing}
+          ${this.orientation === "horizontal" ? html`<slot name="upper"></slot>` : nothing}
           <div class="card-header-container">
             <div class="card-header">
               <slot name="subtitle"></slot>
@@ -89,7 +88,7 @@ export class SgdsThumbnailCard extends CardElement {
             <slot name="link" @slotchange=${this._handleLinkSlotChange}></slot>
           </slot>
         </div>
-      </${tag}>
+      </div>
     `;
   }
 }
