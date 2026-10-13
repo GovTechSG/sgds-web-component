@@ -24,11 +24,12 @@ Import `themes/day.css` before your custom CSS. See **[sgds-getting-started](../
 
 | What you want to change | Token / mechanism | Reference |
 |-------------------------|-------------------|-----------|
-| Product brand colour (custom) | Override `--sgds-product-primary-{100–900}` | |
-| Product brand colour (GovTech) | Import one `themes/gt/<colour>.css` + map to `--sgds-product-primary-*` | |
+| Product brand colour (custom) | Override `--sgds-product-primary-{100–900}` | [brand-colour.md](reference/brand-colour.md) |
+| Product brand colour (GovTech) | Import one `themes/gt/<colour>.css` + map to `--sgds-product-primary-*` | [brand-colour.md](reference/brand-colour.md) |
 | Enable dark/night mode | Import `themes/night.css` + add `.sgds-night-theme` to `<html>` | See below |
 | Font typeface (all roles) | Override `--sgds-font-family-brand` | [typography.md](reference/typography.md) |
-| Font typeface (per role) | Override individual `--sgds-font-family-{display,heading,subtitle,body,label,code}` | [typography.md](reference/typography.md) || Border radius | Override semantic `--sgds-{purpose}-border-radius` tokens | [border-radius.md](reference/border-radius.md) |
+| Font typeface (per role) | Override individual `--sgds-font-family-{display,heading,subtitle,body,label,code}` | [typography.md](reference/typography.md) |
+| Border radius | Override semantic `--sgds-{purpose}-border-radius` tokens | [border-radius.md](reference/border-radius.md) |
 
 ---
 
