@@ -150,10 +150,12 @@
 
   /* Primitive - Font Family */
   --sgds-font-family-sans: "Inter", system-ui, sans-serif;
+  --sgds-font-family-serif: "Roboto Serif", serif;
   --sgds-font-family-mono: "Roboto Mono", monospace;
-  --sgds-font-family-brand: var(--sgds-font-family-sans);
+
 
   /* Semantic - Font Family */
+  --sgds-font-family-brand: var(--sgds-font-family-sans);
   --sgds-font-family-display: var(--sgds-font-family-brand);
   --sgds-font-family-heading: var(--sgds-font-family-brand);
   --sgds-font-family-subtitle: var(--sgds-font-family-brand);

@@ -20,6 +20,15 @@
   *:disabled {
     cursor: not-allowed;
   }
+  button,
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+    letter-spacing: inherit;
+    word-spacing: inherit;
+    text-transform: inherit;
+  }
   @media (prefers-reduced-motion: no-preference) {
     :root {
       scroll-behavior: smooth;

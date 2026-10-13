@@ -24,10 +24,11 @@ Import `themes/day.css` before your custom CSS. See **[sgds-getting-started](../
 
 | What you want to change | Token / mechanism | Reference |
 |-------------------------|-------------------|-----------|
-| Product brand colour (custom) | Override `--sgds-product-primary-{100–900}` | |
-| Product brand colour (GovTech) | Import one `themes/gt/<colour>.css` + map to `--sgds-product-primary-*` | |
+| Product brand colour (custom) | Override `--sgds-product-primary-{100–900}` | [brand-colour.md](reference/brand-colour.md) |
+| Product brand colour (GovTech) | Import one `themes/gt/<colour>.css` + map to `--sgds-product-primary-*` | [brand-colour.md](reference/brand-colour.md) |
 | Enable dark/night mode | Import `themes/night.css` + add `.sgds-night-theme` to `<html>` | See below |
-| Font typeface | Override `--sgds-font-family-brand` | |
+| Font typeface (all roles) | Override `--sgds-font-family-brand` | [typography.md](reference/typography.md) |
+| Font typeface (per role) | Override individual `--sgds-font-family-{display,heading,subtitle,body,label,code}` | [typography.md](reference/typography.md) |
 | Border radius | Override semantic `--sgds-{purpose}-border-radius` tokens | [border-radius.md](reference/border-radius.md) |
 
 ---
@@ -198,6 +199,6 @@ See **[border-radius.md](reference/border-radius.md)** for the full reference �
 5. Day mode is always active by default; there is no `sgds-day-theme` class to add.
 6. When overriding `--sgds-font-family-brand`, remind the user to also load the font file themselves.
 7. Custom overrides apply to both day and night mode simultaneously because they target `:root`, which both theme selectors inherit from.
-8. GovTech products must use a colour from `themes/gt/` — not custom hex values. If a user is building a GovTech product and asks about brand colours, guide them to pick one GT colour and apply the `--gt-color-*` → `--sgds-product-primary-*` mapping pattern. Never let them import more than one GT colour file.
-9. The GT colour file must be imported **after** `themes/day.css` and **before** the custom mapping CSS so that `--gt-color-*` variables are defined in time.
+8. For brand colour theming, read [brand-colour.md](reference/brand-colour.md).
+9. For typography/font theming, read [typography.md](reference/typography.md).
 10. For border radius theming, read [border-radius.md](reference/border-radius.md). Override **semantic** tokens (`--sgds-{purpose}-border-radius`), referencing primitive values via `var(--sgds-border-radius-{size})`.

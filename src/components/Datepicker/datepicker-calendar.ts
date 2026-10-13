@@ -34,7 +34,7 @@ const keyPressAction = {
   }
 };
 export class DatepickerCalendar extends SgdsElement {
-  static styles = [datepickerCalendarStyle];
+  static styles = [...SgdsElement.styles, datepickerCalendarStyle];
 
   /** @internal */
   static DAY_LABELS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
