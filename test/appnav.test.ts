@@ -36,9 +36,41 @@ describe("sgds-appnav", () => {
     expect(el.shadowRoot?.querySelector("a.navbar-brand")?.getAttribute("href")).to.equal("test");
   });
 
-  it("start slot renders before brand", async () => {
+  it("renders brand slot inside an anchor when brandHref is set", async () => {
+    const el = await fixture<SgdsAppnav>(html`<sgds-appnav brandHref="/home"></sgds-appnav>`);
+    await el.updateComplete;
+    const anchor = el.shadowRoot?.querySelector("a.navbar-brand");
+    expect(anchor).to.exist;
+    expect(anchor?.getAttribute("href")).to.equal("/home");
+    const brandSlot = anchor?.querySelector("slot[name='brand']");
+    expect(brandSlot).to.exist;
+  });
+
+  it("renders brand slot without an anchor when brandHref is not set", async () => {
+    const el = await fixture<SgdsAppnav>(html`<sgds-appnav></sgds-appnav>`);
+    await el.updateComplete;
+    const anchor = el.shadowRoot?.querySelector("a.navbar-brand");
+    expect(anchor).to.not.exist;
+    const brandSlot = el.shadowRoot?.querySelector("slot[name='brand']");
+    expect(brandSlot).to.exist;
+    expect(brandSlot?.parentElement).to.have.class("navbar");
+  });
+
+  it("slotted <a> in brand slot receives navbar-brand class", async () => {
     const el = await fixture<SgdsAppnav>(
       html`<sgds-appnav>
+        <a slot="brand" href="/"><img alt="logo" src="/logo.svg" /></a>
+      </sgds-appnav>`
+    );
+    await el.updateComplete;
+    const slottedAnchor = el.querySelector("a[slot='brand']");
+    expect(slottedAnchor).to.exist;
+    expect(slottedAnchor).to.have.class("navbar-brand");
+  });
+
+  it("start slot renders before brand", async () => {
+    const el = await fixture<SgdsAppnav>(
+      html`<sgds-appnav brandHref="/">
         <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm"></sgds-icon-button>
       </sgds-appnav>`
     );
@@ -47,6 +79,7 @@ describe("sgds-appnav", () => {
     const startSlot = navbar?.querySelector("slot[name='start']");
     const brand = navbar?.querySelector(".navbar-brand");
     expect(startSlot).to.exist;
+    expect(brand).to.exist;
     const children = Array.from(navbar?.children || []);
     const startIndex = children.indexOf(startSlot as Element);
     const brandIndex = children.indexOf(brand as Element);

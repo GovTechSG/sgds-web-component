@@ -65,9 +65,14 @@ export class SgdsMainnavDropdown extends SgdsElement {
 
   /**
    * Accessible label for the dropdown's toggle button. Forwarded to the button's aria-label attribute.
+   * When not set, the label is auto-derived from the slotted toggler text content.
    */
   @property({ type: String })
   ariaLabel: string;
+
+  /** @internal */
+  @state()
+  private _derivedAriaLabel: string;
 
   /** @internal */
   @queryAssignedElements({ slot: "toggler" }) private togglerNodes!: HTMLElement[];
@@ -179,6 +184,12 @@ export class SgdsMainnavDropdown extends SgdsElement {
     this.menuHeaderText.textContent = this.togglerNodes[0].textContent;
   }
 
+  private _handleTogglerSlotChange() {
+    if (!this.ariaLabel && this.togglerNodes.length > 0) {
+      this._derivedAriaLabel = this.togglerNodes[0].textContent?.trim();
+    }
+  }
+
   private _hideDropdownMenuItems() {
     this.dropdownItems.style.display = "none";
     this.dropdownItems.setAttribute("aria-hidden", "true");
@@ -270,6 +281,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
   }
 
   render() {
+    const effectiveAriaLabel = this.ariaLabel || this._derivedAriaLabel;
     const mobileView = html`
       <a
         class="${classMap({
@@ -278,13 +290,13 @@ export class SgdsMainnavDropdown extends SgdsElement {
           disabled: this.disabled
         })}"
         aria-disabled=${this.disabled ? "true" : "false"}
-        aria-label=${ifDefined(this.ariaLabel)}
+        aria-label=${ifDefined(effectiveAriaLabel)}
         tabindex=${this.disabled ? "-1" : "0"}
         role="button"
         @click=${this._openMenu}
         @keydown=${this._handleKeyboardOpen}
       >
-        <slot name="toggler"></slot>
+        <slot name="toggler" @slotchange=${this._handleTogglerSlotChange}></slot>
         <sgds-icon name="chevron-right" size="md"></sgds-icon>
       </a>
       <div class="dropdown-items">
@@ -309,13 +321,13 @@ export class SgdsMainnavDropdown extends SgdsElement {
           disabled: this.disabled
         })}"
         aria-disabled=${this.disabled ? "true" : "false"}
-        aria-label=${ifDefined(this.ariaLabel)}
+        aria-label=${ifDefined(effectiveAriaLabel)}
         id=${this.togglerId}
         tabindex=${this.disabled ? "-1" : "0"}
         role="button"
         slot="toggler"
       >
-        <slot name="toggler"></slot>
+        <slot name="toggler" @slotchange=${this._handleTogglerSlotChange}></slot>
         <sgds-icon name="chevron-down" size="md"></sgds-icon>
       </a>
       <slot @slotchange=${this._handleDesktopSlotChange}></slot>

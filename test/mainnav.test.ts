@@ -24,13 +24,7 @@ describe("sgds-mainnav", () => {
       el,
       `<nav aria-label="Main navigation">
         <div class="navbar navbar-expand-lg">
-          <a
-            aria-label="brand-link"
-            class="navbar-brand"
-            href=""
-          >
-            <slot name="brand"></slot>
-          </a>
+          <slot name="brand"></slot>
           <div class="navbar-end">
             <slot
               class="slot-empty"
@@ -77,6 +71,18 @@ describe("sgds-mainnav", () => {
   it("brandHref props forwards to a.navbar-brand  href attribute", async () => {
     const el = await fixture(html`<sgds-mainnav brandHref="test"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("a.navbar-brand")?.getAttribute("href")).to.equal("test");
+  });
+
+  it("slotted <a> in brand slot receives navbar-brand class", async () => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav>
+        <a slot="brand" href="/"><img alt="logo" src="/logo.svg" /></a>
+      </sgds-mainnav>`
+    );
+    await el.updateComplete;
+    const slottedAnchor = el.querySelector("a[slot='brand']");
+    expect(slottedAnchor).to.exist;
+    expect(slottedAnchor).to.have.class("navbar-brand");
   });
 
   it("when expand=always, navbar class has .navbar-expand", async () => {
@@ -389,6 +395,7 @@ describe("sgds-mainnav-dropdown", () => {
           aria-disabled="false"
           aria-expanded="false"
           aria-haspopup="menu"
+          aria-label="Dropdown"
           class="nav-link"
           role="button"
           slot="toggler"
@@ -435,6 +442,7 @@ describe("sgds-mainnav-dropdown", () => {
       <a
              class="nav-link"
              aria-disabled="false"
+             aria-label="Dropdown"
              tabindex="0"
              role="button"
            >
@@ -483,6 +491,7 @@ describe("sgds-mainnav-dropdown", () => {
       <a
              class="nav-link"
              aria-disabled="false"
+             aria-label="Dropdown"
              tabindex="0"
              role="button"
            >
@@ -555,4 +564,36 @@ describe("sgds-mainnav-dropdown", () => {
       stubHide.restore();
     }
   }).retries(2); // retries as occasionally fails with timeout (CI or local)
+
+  it("auto-derives aria-label from slotted toggler text", async () => {
+    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+    window.dispatchEvent(new Event("resize"));
+    const el = await fixture<SgdsMainnav>(html`
+      <sgds-mainnav>
+        <sgds-mainnav-dropdown>
+          <span slot="toggler">Services</span>
+        </sgds-mainnav-dropdown>
+      </sgds-mainnav>
+    `);
+    const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+    await dropdown?.updateComplete;
+    const toggler = dropdown?.shadowRoot?.querySelector("a[role='button']") as HTMLAnchorElement;
+    expect(toggler.getAttribute("aria-label")).to.equal("Services");
+  });
+
+  it("explicit ariaLabel takes precedence over slotted toggler text", async () => {
+    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+    window.dispatchEvent(new Event("resize"));
+    const el = await fixture<SgdsMainnav>(html`
+      <sgds-mainnav>
+        <sgds-mainnav-dropdown ariaLabel="Custom label">
+          <span slot="toggler">Services</span>
+        </sgds-mainnav-dropdown>
+      </sgds-mainnav>
+    `);
+    const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+    await dropdown?.updateComplete;
+    const toggler = dropdown?.shadowRoot?.querySelector("a[role='button']") as HTMLAnchorElement;
+    expect(toggler.getAttribute("aria-label")).to.equal("Custom label");
+  });
 });
