@@ -138,7 +138,7 @@ describe("<sgds-data-table>", () => {
     expect(sortedByNameAsc).to.deep.equal(["Alice", "Bob", "Charlie"]);
   });
 
-  it("sorts only currently visible rows in client mode", async () => {
+  it("sorts all rows globally in client mode", async () => {
     const el = await fixture<SgdsDataTable>(html`
       <sgds-data-table dataLength="4" itemsPerPage="2" currentPage="1" mode="client">
         <sgds-data-table-row>
@@ -177,12 +177,12 @@ describe("<sgds-data-table>", () => {
       .slice(1)
       .map(row => row.querySelectorAll("sgds-data-table-cell")[0]?.textContent?.trim());
 
-    expect(rowIdsAfterSort).to.deep.equal(["1", "2", "4", "3"]);
+    expect(rowIdsAfterSort).to.deep.equal(["1", "3", "2", "4"]);
   });
 
-  it("reverts to initial slotted row order when sort direction is none", async () => {
+  it("resets to page 1 and sorts globally when sorting from a non-first page", async () => {
     const el = await fixture<SgdsDataTable>(html`
-      <sgds-data-table dataLength="4" itemsPerPage="2" currentPage="1" mode="client">
+      <sgds-data-table dataLength="4" itemsPerPage="2" currentPage="2" mode="client">
         <sgds-data-table-row>
           <sgds-data-table-head sortKey="name" sorting>Name</sgds-data-table-head>
         </sgds-data-table-row>
@@ -215,6 +215,56 @@ describe("<sgds-data-table>", () => {
     );
     await elementUpdated(el);
 
+    expect(el.currentPage).to.equal(1);
+
+    const visibleRows = slot
+      .assignedElements({ flatten: true })
+      .slice(1)
+      .filter((row): row is HTMLElement => row instanceof HTMLElement && row.style.display !== "none");
+
+    const visibleNames = visibleRows.map(row => row.querySelectorAll("sgds-data-table-cell")[0]?.textContent?.trim());
+
+    expect(visibleNames).to.deep.equal(["Alice", "Bob"]);
+  });
+
+  it("reverts to initial slotted row order and resets to page 1 when sort direction is none", async () => {
+    const el = await fixture<SgdsDataTable>(html`
+      <sgds-data-table dataLength="4" itemsPerPage="2" currentPage="2" mode="client">
+        <sgds-data-table-row>
+          <sgds-data-table-head sortKey="name" sorting>Name</sgds-data-table-head>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>Charlie</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>Alice</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>Zed</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>Bob</sgds-data-table-cell>
+        </sgds-data-table-row>
+      </sgds-data-table>
+    `);
+    await elementUpdated(el);
+
+    const slot = el.shadowRoot?.querySelector("slot") as HTMLSlotElement;
+    const [headerRow] = slot.assignedElements({ flatten: true });
+    const headerCell = headerRow.querySelector("sgds-data-table-head") as SgdsDataTableHead;
+
+    headerCell.dispatchEvent(
+      new CustomEvent("i-sgds-sort", {
+        detail: { key: "name", direction: "ascending" },
+        bubbles: true,
+        composed: true
+      })
+    );
+    await elementUpdated(el);
+
+    el.currentPage = 2;
+    await elementUpdated(el);
+
     headerCell.dispatchEvent(
       new CustomEvent("i-sgds-sort", {
         detail: { key: "name", direction: "none" },
@@ -223,6 +273,8 @@ describe("<sgds-data-table>", () => {
       })
     );
     await elementUpdated(el);
+
+    expect(el.currentPage).to.equal(1);
 
     const rowNamesAfterReset = slot
       .assignedElements({ flatten: true })

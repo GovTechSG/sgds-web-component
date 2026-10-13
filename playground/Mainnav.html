@@ -2,6 +2,7 @@
 <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+<link href="css/override.css" rel="stylesheet" type="text/css" />
 <link href="./css/utility.css" rel="stylesheet" type="text/css" />
 <style>
   .avatar-circle {
@@ -15,12 +16,12 @@
 
 <p><b>Default sgds-mainnav with nav items</b></p>
 <sgds-mainnav>
-  <img alt="sgds logo" slot="brand" src="../.storybook/static/logo.svg" />
+  <a href="#" slot="brand"><img alt="sgds logo" src="../.storybook/static/logo.svg" /></a>
   <sgds-mainnav-item active>
     <a href="#">Home</a>
   </sgds-mainnav-item>
   <sgds-mainnav-item disabled><a href="#">About</a></sgds-mainnav-item>
-  <sgds-mainnav-dropdown ariaLabel="Dropdown menu">
+  <sgds-mainnav-dropdown ariaLabel="Dropdown menu" active>
     <span slot="toggler">Dropdown</span>
     <sgds-dropdown-item disabled><a href="https://www.google.com/">Item 1</a></sgds-dropdown-item>
     <sgds-dropdown-item><a href="https://www.google.com/">Item 2</a></sgds-dropdown-item>
@@ -40,7 +41,7 @@
 <br/>
 <p><b>fluid sgds-mainnav</b></p>
 <sgds-mainnav fluid>
-  <div slot="brand">Logo</div>
+  <div slot="brand" class="sgds:flex sgds:items-center">Logo</div>
   <sgds-mainnav-item active>
     <a href="#">Home</a>
   </sgds-mainnav-item>
@@ -51,7 +52,7 @@
 <br/>
 <p><b>sgds-mainnav with profile</b></p>
 <sgds-mainnav fluid>
-  <div slot="brand">Logo</div>
+  <div slot="brand" class="sgds:flex sgds:items-center">Logo</div>
     <sgds-mainnav-item active>
     <a href="#">Home</a>
   </sgds-mainnav-item>

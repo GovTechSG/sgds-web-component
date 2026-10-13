@@ -7,7 +7,7 @@
   width: var(--sgds-dimension-32);
   height: var(--sgds-dimension-32);
   background-color: var(--sgds-bg-transparent);
-  border-radius: var(--sgds-border-radius-sm);
+  border-radius: var(--sgds-interactive-border-radius);
   border: 0;
   padding: 0;
   position: relative;

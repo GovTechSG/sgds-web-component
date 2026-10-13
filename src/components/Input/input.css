@@ -1,5 +1,5 @@
 :host {
-  --input-border-radius: var(--sgds-form-border-radius-md);
+  --input-border-radius: var(--sgds-form-border-radius);
   --input-min-width: var(--sgds-dimension-160);
 }
 .form-control-container {
@@ -44,7 +44,7 @@ sgds-icon[role="button"] {
 }
 sgds-icon[role="button"]:focus,
 sgds-icon[role="button"]:focus-visible {
-  outline: var(--sgds-form-outline-focus);
+  outline: var(--sgds-outline-focus);
 }
 
 .form-control-row {

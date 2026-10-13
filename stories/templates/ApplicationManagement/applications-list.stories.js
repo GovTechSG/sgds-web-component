@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 const Template = () => html`
-  <div class="sgds:bg-surface-subtle">
+  <div class="sgds:bg-alternate sgds:min-h-screen sgds:flex sgds:flex-col">
     <!-- ── Application Shell ───────────────────────────────────────────── -->
     <div>
       <sgds-masthead fluid></sgds-masthead>
@@ -122,7 +122,7 @@ const Template = () => html`
             <!-- Card header: icon + title -->
             <div class="sgds:flex sgds:items-center sgds:gap-text-md">
               <div
-                class="sgds:inline-flex sgds:items-center sgds:justify-center sgds:w-10 sgds:h-10 sgds:shrink-0 sgds:p-2 sgds:rounded-md sgds:bg-accent-surface-muted"
+                class="sgds:inline-flex sgds:items-center sgds:justify-center sgds:w-10 sgds:h-10 sgds:shrink-0 sgds:p-2 sgds:rounded-md sgds:bg-accent-surface-muted sgds:text-accent-default"
               >
                 <sgds-icon name="grid-fill" size="24"></sgds-icon>
               </div>

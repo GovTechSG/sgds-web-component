@@ -28,7 +28,7 @@ button.year {
   font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs);
   background-color: transparent;
-  border-radius: var(--sgds-form-border-radius-sm);
+  border-radius: var(--sgds-interactive-border-radius);
   position: relative;
 }
 
@@ -57,14 +57,14 @@ button.year:focus:not(.active) {
 td[data-day]:focus-visible,
 button.month:focus-visible,
 button.year:focus-visible {
-  outline: var(--sgds-form-outline-focus);
-  outline-offset: var(--sgds-form-outline-offset-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 td[data-day].active:not(.selected-ends):focus,
 button.month.active:not(.selected-ends):focus,
 button.year.active:not(.selected-ends):focus {
-  border-radius: var(--sgds-form-border-radius-sm);
+  border-radius: var(--sgds-interactive-border-radius);
 }
 
 button.year.active {
@@ -73,12 +73,12 @@ button.year.active {
 }
 
 td, th {
-  width: var(--sgds-form-width-md);
-  height: var(--sgds-form-height-lg);
+  width: var(--sgds-dimension-40);
+  height: var(--sgds-dimension-40);
   padding: 0;
   font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs);
-  border-radius: var(--sgds-form-border-radius-sm);
+  border-radius: var(--sgds-interactive-border-radius);
   position: relative;
 }
 

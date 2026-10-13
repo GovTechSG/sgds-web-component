@@ -23,28 +23,34 @@ The six properties are: **font family**, **font weight**, **letter spacing**, **
 
 ## 1. Font Family
 
-Apply with `sgds:font-{family}`:
+Apply with `sgds:font-{role}`:
 
 ### Scale / Values
 
-| Token | Stack | Use for |
-|-------|-------|---------|
-| `sgds:font-sans` | Inter, system-ui, sans-serif | All prose, headings, labels (reboot default) |
-| `sgds:font-mono` | JetBrainsMono, Courier New, monospace | All code — inline and block |
+| Token | CSS Variable | Default | Use for |
+|-------|-------------|---------|---------|
+| `sgds:font-brand` | `--sgds-font-family-brand` | `var(--sgds-font-family-sans)` | Master brand font; all semantic tokens inherit from this |
+| `sgds:font-display` | `--sgds-font-family-display` | `var(--sgds-font-family-brand)` | Display headings |
+| `sgds:font-heading` | `--sgds-font-family-heading` | `var(--sgds-font-family-brand)` | Section headings |
+| `sgds:font-subtitle` | `--sgds-font-family-subtitle` | `var(--sgds-font-family-brand)` | Subtitles |
+| `sgds:font-body` | `--sgds-font-family-body` | `var(--sgds-font-family-brand)` | Body text, paragraphs, lists |
+| `sgds:font-label` | `--sgds-font-family-label` | `var(--sgds-font-family-brand)` | Labels, buttons, links, captions, overlines |
+| `sgds:font-code` | `--sgds-font-family-code` | `var(--sgds-font-family-mono)` | Code — inline and block |
 
 ### Roles & Usage
 
-- **Prose and UI text** — reboot applies `font-sans` globally; no class needed on regular content.
-- **Code** — always apply `sgds:font-mono` to `<code>`, `<pre>`, and `<kbd>` elements.
-- Never use `sgds:font-sans` on `<code>` or `<pre>` elements.
+- **Semantic HTML elements** — the reboot assigns the correct font-family to `h1`–`h6`, `p`, `a`, `label`, `code`, `ul`/`ol`. No class is needed when using semantic HTML.
+- **Non-semantic elements** — use `sgds:font-{role}` when a `<div>` or `<span>` needs a specific typographic role (e.g. `sgds:font-heading` on a `<div>` styled as a heading).
+- **Code** — always apply `sgds:font-code` to `<code>`, `<pre>`, and `<kbd>` elements.
+- Never use `sgds:font-body` on `<code>` or `<pre>` elements.
 
 ```html
 <!-- No class needed for regular text — reboot default -->
 <p>Regular body text</p>
 
-<!-- Always set mono on code -->
-<code class="sgds:font-mono sgds:text-14">const value = 42;</code>
-<pre class="sgds:font-mono sgds:text-14 sgds:leading-20">
+<!-- Always set code font on code -->
+<code class="sgds:font-code sgds:text-label-md">const value = 42;</code>
+<pre class="sgds:font-code sgds:text-label-md sgds:leading-xs">
   function hello() {
     return 'world';
   }
