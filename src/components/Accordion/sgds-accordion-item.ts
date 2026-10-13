@@ -181,7 +181,7 @@ setDefaultAnimation("accordion.show", {
     { height: "0", opacity: "0" },
     { height: "auto", opacity: "1" }
   ],
-  options: { duration: 350, easing: "ease-in-out" }
+  options: { duration: 300, easing: "ease-in-out" }
 });
 
 setDefaultAnimation("accordion.hide", {
@@ -189,7 +189,7 @@ setDefaultAnimation("accordion.hide", {
     { height: "auto", opacity: "1" },
     { height: "0", opacity: "0" }
   ],
-  options: { duration: 350, easing: "ease-in-out" }
+  options: { duration: 300, easing: "ease-in-out" }
 });
 
 export default SgdsAccordionItem;
