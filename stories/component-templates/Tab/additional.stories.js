@@ -60,13 +60,13 @@ const EventsTemplate = () => {
         <sgds-tab slot="nav" panel="advanced" ariaLabel="Advanced">Advanced</sgds-tab>
 
         <sgds-tab-panel name="general">
-          <p>General tab content. Switch tabs to see the events being triggered.</p>
+          General tab content. Switch tabs to see the events being triggered.
         </sgds-tab-panel>
         <sgds-tab-panel name="settings">
-          <p>Settings tab content. The event log above shows which tab is active.</p>
+          Settings tab content. The event log above shows which tab is active.
         </sgds-tab-panel>
         <sgds-tab-panel name="advanced">
-          <p>Advanced tab content. Use event.detail.name to track tab changes.</p>
+          Advanced tab content. Use event.detail.name to track tab changes.
         </sgds-tab-panel>
       </sgds-tab-group>
     </div>

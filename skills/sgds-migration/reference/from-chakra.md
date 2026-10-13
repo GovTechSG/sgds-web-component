@@ -128,7 +128,7 @@
 {createPortal(
   <sgds-modal open={isOpen} onsgds-close={onClose} size="md">
     <div slot="title">Title</div>
-    <p>Content</p>
+    <span>Content</span>
     <div slot="footer" className="sgds:flex sgds:gap-2">
       <sgds-button variant="outline" onClick={onClose}>Cancel</sgds-button>
       <sgds-button variant="primary" onClick={handleConfirm}>Confirm</sgds-button>
