@@ -1,4 +1,5 @@
 @import "./responsive.css";
+@import "./deprecated.css";
 
 :root {
   /* Primitive - Product Primary Color */
@@ -145,7 +146,7 @@
   --sgds-breakpoint-sbar-lg: var(--sgds-dimension-1024);
   --sgds-breakpoint-sbar-xl: var(--sgds-dimension-1280);
   --sgds-breakpoint-sbar-2-xl: var(--sgds-dimension-1440);
-  --sgds-breakpoint-sbar-3-xl: var(--sgds-dimension-1680px);
+  --sgds-breakpoint-sbar-3-xl: var(--sgds-dimension-1680);
 
   /* Primitive - Font Family */
   --sgds-font-family-sans: "Inter", system-ui, sans-serif;
@@ -167,17 +168,6 @@
   --sgds-font-weight-bold: 700;
 
   /* Primitive - Font Size */
-  /* --sgds-font-size-0 to --sgds-font-size-9 is deprecated in v3.7.0 */
-  --sgds-font-size-0: 0.75rem;
-  --sgds-font-size-1: 0.875rem;
-  --sgds-font-size-2: 1rem;
-  --sgds-font-size-3: 1.25rem;
-  --sgds-font-size-4: 1.5rem;
-  --sgds-font-size-5: 1.75rem;
-  --sgds-font-size-6: 2rem;
-  --sgds-font-size-7: 2.5rem;
-  --sgds-font-size-8: 3rem;
-  --sgds-font-size-9: 3.5rem;
   --sgds-font-size-12: 0.75rem;
   --sgds-font-size-14: 0.875rem;
   --sgds-font-size-16: 1rem;
@@ -331,7 +321,7 @@
   --sgds-dimension-1296: 1296px;
   --sgds-dimension-1312: 1312px;
   --sgds-dimension-1440: 1440px;
-  --sgds-dimension-1680px: 1680px;
+  --sgds-dimension-1680: 1680px;
 
   /* Semantic - Padding */
   --sgds-padding-none: var(--sgds-spacer-0);
@@ -348,11 +338,6 @@
   --sgds-padding-5-xl: var(--sgds-spacer-11);
   --sgds-form-padding-x: var(--sgds-padding-md);
   --sgds-form-padding-y: var(--sgds-padding-sm);
-  --sgds-form-padding-inline-xs: var(--sgds-padding-3-xs);
-  --sgds-form-padding-inline-sm: var(--sgds-padding-2-xs);
-  --sgds-form-padding-inline-md: var(--sgds-padding-xs);
-  --sgds-form-padding-inline-lg: var(--sgds-padding-sm);
-  --sgds-form-padding-inline-xl: var(--sgds-padding-md);
 
   /* NEW - MARGIN */
   --sgds-margin-none: var(--sgds-spacer-0);
@@ -387,35 +372,8 @@
   --sgds-form-gap-xl: var(--sgds-gap-md);
   --sgds-form-gap-2-xl: var(--sgds-gap-xl);
 
-  --sgds-form-height-3-xs: var(--sgds-dimension-12);
-  --sgds-form-height-2-xs: var(--sgds-dimension-16);
-  --sgds-form-height-xs: var(--sgds-dimension-20);
-  --sgds-form-height-sm: var(--sgds-dimension-24);
-  --sgds-form-height-md: var(--sgds-dimension-32);
-  --sgds-form-height-lg: var(--sgds-dimension-40);
-  --sgds-form-height-xl: var(--sgds-dimension-48);
-  --sgds-form-height-2-xl: var(--sgds-dimension-56);
-
-  --sgds-form-width-3-xs: var(--sgds-dimension-12);
-  --sgds-form-width-2-xs: var(--sgds-dimension-16);
-  --sgds-form-width-xs: var(--sgds-dimension-24);
-  --sgds-form-width-sm: var(--sgds-dimension-32);
-  --sgds-form-width-md: var(--sgds-dimension-40);
-  --sgds-form-width-lg: var(--sgds-dimension-48);
-  --sgds-form-width-xl: var(--sgds-dimension-56);
-  --sgds-form-width-2-xl: var(--sgds-dimension-64);
-  --sgds-form-width-3-xl: var(--sgds-dimension-72);
-  --sgds-form-width-4-xl: var(--sgds-dimension-80);
-
-  /* Semantic - Form Icon Size */
-  --sgds-form-icon-size-sm: var(--sgds-icon-size-sm);
-  --sgds-form-icon-size-md: var(--sgds-icon-size-md);
-  --sgds-form-icon-size-lg: var(--sgds-icon-size-lg);
-
   --sgds-outline-focus: var(--sgds-border-width-2) solid var(--sgds-blue-400);
   --sgds-outline-offset-focus: calc(-1 * var(--sgds-border-width-2));
-  --sgds-form-outline-focus: var(--sgds-outline-focus);
-  --sgds-form-outline-offset-focus: var(--sgds-outline-offset-focus);
 
   /* Semantic - Text Max Width */
   --sgds-text-max-width: var(--sgds-dimension-864);
@@ -459,6 +417,7 @@
   --sgds-z-index-floating: var(--sgds-z-index-400);
   --sgds-z-index-overlay: var(--sgds-z-index-800);
   --sgds-z-index-modal: var(--sgds-z-index-1600);
+
   /* Elevation */
   --sgds-elevation-surface-1: 0 0 2px 0 rgba(14, 14, 14, 0.16);
   --sgds-elevation-surface-2: 0 0 2px 0 rgba(14, 14, 14, 0.16), 0 2px 4px 0 rgba(14, 14, 14, 0.08);

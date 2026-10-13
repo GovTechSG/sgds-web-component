@@ -5,7 +5,7 @@ input {
 .form-check {
   display: flex;
   gap: var(--sgds-form-gap-md);
-  padding: var(--sgds-form-padding-inline-sm) 0px;
+  padding: var(--sgds-padding-2-xs) 0px;
 }
 
 .form-check-input {
@@ -16,8 +16,8 @@ input {
   background-repeat: no-repeat;
   background-size: auto;
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
-  width: var(--sgds-form-width-xs);
-  height: var(--sgds-form-height-sm);
+  width: var(--sgds-dimension-24);
+  height: var(--sgds-dimension-24);
   flex-shrink: 0;
 }
 
@@ -27,13 +27,13 @@ input {
 }
 
 .form-check-input:focus-visible {
-  outline: var(--sgds-form-outline-focus);
-  outline-offset: var(--sgds-form-outline-offset-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .form-check-input:not([disabled]):not(.is-invalid):not([aria-checked="true"]):not(:focus-visible):hover {
   outline: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
-  outline-offset: var(--sgds-form-outline-offset-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .form-check-input:not([disabled]):not(.is-invalid)[checked]:hover,
@@ -51,5 +51,5 @@ input {
 }
 .form-check-input:not([disabled]).is-invalid:focus-visible {
   outline: var(--sgds-border-width-2) solid var(--sgds-form-danger-color-default);
-  outline-offset: var(--sgds-form-outline-offset-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
