@@ -22,6 +22,80 @@
 
   <body>
     <div class="container">
+      <h3>Border Radius Toggle</h3>
+      <label for="radius-select">--sgds-structure-border-radius:</label>
+      <select id="radius-select" onchange="document.documentElement.style.setProperty('--sgds-structure-border-radius', this.value)">
+        <option value="var(--sgds-border-radius-none)">none (0px)</option>
+        <option value="var(--sgds-border-radius-xs)">xs (2px)</option>
+        <option value="var(--sgds-border-radius-sm)">sm (4px)</option>
+        <option value="var(--sgds-border-radius-md)">md (8px)</option>
+        <option value="var(--sgds-border-radius-lg)">lg (12px)</option>
+        <option value="var(--sgds-border-radius-xl)">xl (16px)</option>
+        <option value="var(--sgds-border-radius-2-xl)">2-xl (24px)</option>
+      </select>
+    </div>
+
+    <div class="container">
+      <h3>Table - Slotted method</h3>
+      <sgds-table tableBorder headerBackground>
+        <sgds-table-row>
+          <sgds-table-head>#</sgds-table-head>
+          <sgds-table-head>First name</sgds-table-head>
+          <sgds-table-head>Last name</sgds-table-head>
+          <sgds-table-head>Username</sgds-table-head>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>1</sgds-table-cell>
+          <sgds-table-cell>John</sgds-table-cell>
+          <sgds-table-cell>Doe</sgds-table-cell>
+          <sgds-table-cell>@johndoe</sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>2</sgds-table-cell>
+          <sgds-table-cell>Jane</sgds-table-cell>
+          <sgds-table-cell>Doe</sgds-table-cell>
+          <sgds-table-cell>@janedoe</sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>3</sgds-table-cell>
+          <sgds-table-cell>Bob</sgds-table-cell>
+          <sgds-table-cell>Smith</sgds-table-cell>
+          <sgds-table-cell>@bobsmith</sgds-table-cell>
+        </sgds-table-row>
+      </sgds-table>
+    </div>
+
+    <div class="container">
+      <h3>Table - Slotted method (no tableBorder)</h3>
+      <sgds-table headerBackground>
+        <sgds-table-row>
+          <sgds-table-head>#</sgds-table-head>
+          <sgds-table-head>First name</sgds-table-head>
+          <sgds-table-head>Last name</sgds-table-head>
+          <sgds-table-head>Username</sgds-table-head>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>1</sgds-table-cell>
+          <sgds-table-cell>John</sgds-table-cell>
+          <sgds-table-cell>Doe</sgds-table-cell>
+          <sgds-table-cell>@johndoe</sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>2</sgds-table-cell>
+          <sgds-table-cell>Jane</sgds-table-cell>
+          <sgds-table-cell>Doe</sgds-table-cell>
+          <sgds-table-cell>@janedoe</sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>3</sgds-table-cell>
+          <sgds-table-cell>Bob</sgds-table-cell>
+          <sgds-table-cell>Smith</sgds-table-cell>
+          <sgds-table-cell>@bobsmith</sgds-table-cell>
+        </sgds-table-row>
+      </sgds-table>
+    </div>
+
+    <div class="container">
       <h3>Table - Structured elements with horizontal header</h3>
 
       <sgds-table

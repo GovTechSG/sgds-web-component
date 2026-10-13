@@ -227,6 +227,83 @@ describe("Table", () => {
     expect(slotContent?.[3].innerHTML).to.include("Username");
     expect(slotContent?.[4].innerHTML).to.include("Action");
   });
+  describe("TableBorderContext", () => {
+    it("should propagate tableBorder to child sgds-table-row via context", async () => {
+      const el = await fixture<SgdsTable>(html`
+        <sgds-table tableBorder>
+          <sgds-table-row>
+            <sgds-table-head>Name</sgds-table-head>
+          </sgds-table-row>
+          <sgds-table-row>
+            <sgds-table-cell>John</sgds-table-cell>
+          </sgds-table-row>
+        </sgds-table>
+      `);
+
+      await el.updateComplete;
+
+      const rows = el.querySelectorAll("sgds-table-row");
+      for (const row of rows) {
+        await (row as SgdsTableRow).updateComplete;
+        expect((row as SgdsTableRow).tableBorder).to.be.true;
+        expect(row).to.have.attribute("tableborder");
+      }
+    });
+
+    it("should not set tableBorder on child rows when tableBorder is false", async () => {
+      const el = await fixture<SgdsTable>(html`
+        <sgds-table>
+          <sgds-table-row>
+            <sgds-table-head>Name</sgds-table-head>
+          </sgds-table-row>
+          <sgds-table-row>
+            <sgds-table-cell>John</sgds-table-cell>
+          </sgds-table-row>
+        </sgds-table>
+      `);
+
+      await el.updateComplete;
+
+      const rows = el.querySelectorAll("sgds-table-row");
+      for (const row of rows) {
+        await (row as SgdsTableRow).updateComplete;
+        expect((row as SgdsTableRow).tableBorder).to.be.false;
+        expect(row).not.to.have.attribute("tableborder");
+      }
+    });
+
+    it("should update child rows when tableBorder is toggled dynamically", async () => {
+      const el = await fixture<SgdsTable>(html`
+        <sgds-table>
+          <sgds-table-row>
+            <sgds-table-head>Name</sgds-table-head>
+          </sgds-table-row>
+          <sgds-table-row>
+            <sgds-table-cell>John</sgds-table-cell>
+          </sgds-table-row>
+        </sgds-table>
+      `);
+
+      await el.updateComplete;
+      const rows = el.querySelectorAll("sgds-table-row");
+
+      // Initially false
+      for (const row of rows) {
+        await (row as SgdsTableRow).updateComplete;
+        expect((row as SgdsTableRow).tableBorder).to.be.false;
+      }
+
+      // Toggle to true
+      el.tableBorder = true;
+      await el.updateComplete;
+
+      for (const row of rows) {
+        await (row as SgdsTableRow).updateComplete;
+        expect((row as SgdsTableRow).tableBorder).to.be.true;
+        expect(row).to.have.attribute("tableborder");
+      }
+    });
+  });
 });
 
 //TODO: Test cases needs to be revised :3
