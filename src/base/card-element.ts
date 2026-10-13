@@ -1,4 +1,4 @@
-import { property, query } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { SgdsLink } from "../components/Link/sgds-link";
 import { CardOrientation } from "../components/Card/types";
 import SgdsElement from "./sgds-element";
@@ -11,9 +11,6 @@ import paragraphStyles from "../styles/paragraph.css";
 
 export class CardElement extends SgdsElement {
   static styles = [...SgdsElement.styles, textStyles, bgStyles, borderStyles, headerStyles, paragraphStyles, cardStyle];
-
-  /** @internal */
-  @query("a.card") card: HTMLAnchorElement;
 
   /** Extends the link passed in either `footer` or `link`(deprecated) slot.
    */
@@ -31,6 +28,12 @@ export class CardElement extends SgdsElement {
   /** Sets the orientation of the card. Available options: `vertical`, `horizontal` */
   @property({ type: String, reflect: true }) orientation: CardOrientation = "vertical";
 
+  /** @internal The href for the stretched link anchor rendered in shadow DOM */
+  @state() protected _stretchedHref = "";
+
+  /** @internal The accessible label for the stretched link */
+  @state() protected _stretchedLabel = "";
+
   handleTitleSlotChange(e: Event) {
     const childNodes = (e.target as HTMLSlotElement).assignedNodes({ flatten: true }) as Array<HTMLElement>;
 
@@ -42,7 +45,6 @@ export class CardElement extends SgdsElement {
   }
 
   protected _forwardAnchorAttributes(anchor: HTMLAnchorElement | null) {
-    const SKIP = new Set(["class", "style", "id", "slot", "tabindex"]);
     if (
       !anchor?.href ||
       anchor.href.startsWith("javascript:") ||
@@ -52,11 +54,11 @@ export class CardElement extends SgdsElement {
       return;
     }
 
-    for (const { name, value } of Array.from(anchor.attributes)) {
-      if (!SKIP.has(name) && !name.startsWith("on")) {
-        this.card.setAttribute(name, value);
-      }
-    }
+    this._stretchedHref = anchor.getAttribute("href") || "";
+
+    // Derive accessible name from visible title text first, then anchor text
+    this._stretchedLabel =
+      this.querySelector("[slot='title']")?.textContent?.trim() || anchor.textContent?.trim() || "";
   }
 
   warnLinkSlotMisused(e: Event) {

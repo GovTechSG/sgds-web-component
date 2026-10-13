@@ -333,7 +333,9 @@ export class DatepickerCalendar extends SgdsElement {
           const isLastSelectedDate =
             range !== null && this.selectedDate.length > 1 && range.end.toISOString() === dateStr;
           const ariaLabel =
-            `${isCurrentDay && isCurrentMonth && isCurrentYear ? "Today's date, " : ""}` + formatDate(dateObj, "PPPP");
+            `${isCurrentDay && isCurrentMonth && isCurrentYear ? "Today's date, " : ""}` +
+            `${day}, ` +
+            formatDate(dateObj, "PPPP");
           week.push(
             html`<td
               key=${j}
@@ -413,7 +415,10 @@ export class DatepickerCalendar extends SgdsElement {
                   range !== null && range.start.getMonth() === idx && range.start.getFullYear() === year;
                 const isLastSelectedMonth =
                   range !== null && range.end.getMonth() === idx && range.end.getFullYear() === year;
-                const ariaLabel = isCurrentMonth ? `Current month ${m} ${year}` : `${m} ${year}`;
+                const shortMonth = m.slice(0, 3);
+                const ariaLabel = isCurrentMonth
+                  ? `${shortMonth}, Current month ${m} ${year}`
+                  : `${shortMonth}, ${m} ${year}`;
                 return html` <button
                   role="gridcell"
                   class=${classMap({
@@ -429,7 +434,7 @@ export class DatepickerCalendar extends SgdsElement {
                   aria-selected=${isActive ? "true" : "false"}
                   aria-label=${ariaLabel}
                 >
-                  ${m.slice(0, 3)}
+                  ${shortMonth}
                 </button>`;
               })}
             </div>

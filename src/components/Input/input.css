@@ -44,7 +44,7 @@ sgds-icon[role="button"] {
 }
 sgds-icon[role="button"]:focus,
 sgds-icon[role="button"]:focus-visible {
-  outline: var(--sgds-form-outline-focus);
+  outline: var(--sgds-outline-focus);
 }
 
 .form-control-row {

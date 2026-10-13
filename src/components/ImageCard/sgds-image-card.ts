@@ -1,5 +1,5 @@
 import { nothing, PropertyValueMap } from "lit";
-import { html, literal } from "lit/static-html.js";
+import { html } from "lit";
 import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
@@ -19,8 +19,7 @@ import imageCardStyle from "./image-card.css";
  * @slot description - The paragrapher text of the card
  * @slot lower - Accepts any additional content to be displayed below the card description, such as badges, metadata, or supplementary information.
  * @slot footer - Footer area of the card. Accepts links, actions, or any custom content.
- * @slot link - (@deprecated) Deprecated since 3.3.2 in favour of `footer` slot.
- *  Legacy slot for anchor elements. Use `footer` instead.
+ * @slot link - @deprecated since v3.3.2 — use `footer` slot instead.
  */
 export class SgdsImageCard extends CardElement {
   static styles = [...CardElement.styles, imageCardStyle];
@@ -80,24 +79,23 @@ export class SgdsImageCard extends CardElement {
   }
 
   render() {
-    const tag = this.stretchedLink ? literal`a` : literal`div`;
-    const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
-
     return html`
-      <${tag} 
+      <div
         class="card ${classMap({
           disabled: this.disabled
         })}"
-        tabindex=${cardTabIndex}
       >
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
+        ${this.stretchedLink && this._stretchedHref
+          ? html`<a class="stretched-link" href=${this._stretchedHref} aria-label=${this._stretchedLabel}></a>`
+          : nothing}
         <div class="card-image">
-					<slot name="image" @slotchange=${this.handleImgSlotChange}></slot>
-					<slot name="image-badge"></slot>
-					<slot name="image-action"></slot>
+          <slot name="image" @slotchange=${this.handleImgSlotChange}></slot>
+          <slot name="image-badge"></slot>
+          <slot name="image-action"></slot>
         </div>
         <div class="card-body">
-					<slot name="upper"></slot>
+          <slot name="upper"></slot>
           <div class="card-header-container">
             <div class="card-header">
               <slot name="subtitle"></slot>
@@ -111,7 +109,7 @@ export class SgdsImageCard extends CardElement {
             <slot name="link" @slotchange=${this.warnLinkSlotMisused}></slot>
           </slot>
         </div>
-      </${tag}>
+      </div>
     `;
   }
 }

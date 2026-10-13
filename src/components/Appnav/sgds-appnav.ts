@@ -157,9 +157,11 @@ export class SgdsAppnav extends NavElement {
       <nav aria-label="App navigation">
         <div class="navbar ${this._expandClass()}">
           <slot name="start" class=${classMap({ "slot-empty": !this.hasStartSlot })}></slot>
-          <a class="navbar-brand" href=${sanitizeHref(this.brandHref) ?? ""} aria-label="brand-link">
-            <slot name="brand"></slot>
-          </a>
+          ${this.brandHref
+            ? html`<a class="navbar-brand" href=${sanitizeHref(this.brandHref) ?? ""}>
+                <slot name="brand"></slot>
+              </a>`
+            : html`<slot name="brand" @slotchange=${this._handleBrandSlotChange}></slot>`}
           <div class="navbar-body navbar-collapse" id=${this.collapseId}>
             <div class="navbar-nav navbar-nav-scroll">
               <slot
