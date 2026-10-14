@@ -10,7 +10,7 @@ const Template = () => html`
   <div class="sgds:bg-default sgds:min-h-screen sgds:flex sgds:flex-col">
     <sgds-masthead></sgds-masthead>
     <sgds-mainnav>
-      <strong slot="brand">Logo</strong>
+      <strong slot="brand" class="sgds:flex sgds:items-center sgds:self-center">Logo</strong>
     </sgds-mainnav>
 
     <section class="sgds:bg-default sgds:py-layout-lg sgds:flex-1">
