@@ -1,3 +1,121 @@
+## v3.30.0 (2026-10-14)
+
+### Feat
+
+- **ComboBox**: create-option event to allow user actions for new options [skip-cd] (#837)
+- **ComboBox**: add `create` slot to customise creatable option content
+- **ComboBox**: add creatable mode for creating new options
+- **Typography**: apply new semantic typography to reboot.css, add utility tokens, docs and skills update [skip-cd] (#890)
+- **Theming**: border radius theming utilities, stories, and docs (#891) [skip-cd]
+- **Table**: apply structure border-radius with overflow clipping and context-driven border removal
+- **Accordion**: apply surface border-radius to accordion items and use motion tokens
+- **Theming**: add structure border-radius token to components and theming story
+- **Theming**: add border radius semantic utilities, theming docs, and showcase stories
+- **Theming**: use --sgds-font-family-subtitle for component title text
+- **Theming**: add font-family theming stories and typography token architecture
+- **Theming**: border radius customisation and change typography of components to label font-family [run-chromatic][skip-cd] (#840)
+- **Theming**: new semantic tokens wip
+
+### Fix
+
+- **ComboBox**: reset create-option state on menu close and fix a11y role
+- **ComboBox**: improve creatable mode value handling and suppress redundant empty state
+- **Theming**: fix broken table row and add missing reference links in theming skill
+- *****: force form controls in shadow DOM to inherit text styles (#894)
+- *****: a11y fixes on components after axe-core deps updates [skip-cd]  (#893)
+- **mainnav**: auto-derive aria-label for dropdown toggler from slotted text
+- **appnav**: accessibility improvements
+- **card**: refactor stretchedLink to host-level link semantics (#884)
+- **card**: use getAttribute for href to avoid browser URL normalization
+- **card**: replace JS click delegation with real <a> stretched-link in shadow DOM
+- **card**: refactor stretchedLink to use host-level link semantics with aria-label
+- **pagination**: replace abbreviated prev with previous  (#886)
+- **pagination**: accessibility improvements
+- **Datepicker**: include abbreviated month name in aria-label for WCAG 2.5.3 (#882)
+- **datepicker**: include abbreviated month name in aria-label for WCAG 2.5.3
+- **Alert**: restore correct close button tone for fill variants
+- **Badge**: update outlined dark mode colours [run-chromatic][skip-cd] (#843)
+- **badge**: address theme token review feedback
+- **badge**: use muted semantic surfaces in dark mode
+
+### Refactor
+
+- **ComboBox**: preserve displayValue during keyboard navigation in multiselect
+- **DataTable**: sort globally across all pages in client mode [skip-cd][run-chromatic] (#881)
+- **DataTable**: sort globally across all pages in client mode
+- **Switch**: use primitive border radius token
+- **Theming**: rename form-border-radius-dense to form-border-radius-subtle
+- **Storybook**: promote Theming to top-level section after Foundation
+- **Tokens**: move deprecated CSS tokens to deprecated.css (#892) [skip-cd]
+- **Tokens**: move deprecated CSS tokens to deprecated.css and migrate component usages
+- *****: standardise @deprecated JSDoc tags with version and migration path
+- **MainnavDropdown**: replace anchor with semantic button element
+- **Appnav, Mainnav**: deprecate brandHref in favour for slotted anchors into brand slot  (#885)
+- **mainnav, appnav**: deprecate brandHref in favour of slotted anchor
+- **Storybook**: promote Theming to top-level section after Foundation
+- **Theming**: extract typography docs from stories to separate markdown and MDX
+- **Modal**: convert modal body to section(role=region) due to aria-label [skip-cd](#874)
+- **Modal**: convert modal body to section(role=region) due to aria-label
+- **badge**: address review feedback
+- **Typography**: use semantic font-family tokens (#872)
+- **Modal**: body token not used to label
+- **Accordion**: only spacious use heading token
+- *****: use semantic font-family tokens (part 3 — subtitle)
+- *****: use semantic font-family tokens (part 2 — heading)
+- *****: use semantic font-family tokens (part 1 — label)
+- **FileUpload**: use --sgds-form-border-radius semantic token (#868)
+- **FileUpload**: use --sgds-form-border-radius semantic token
+- **Skeleton**: use --sgds-indicator-border-radius semantic token (#861)
+- **Skeleton**: use --sgds-indicator-border-radius semantic token
+- **Dropdown**: use --sgds-overlay-border-radius semantic token (#862)
+- **Dropdown**: use --sgds-overlay-border-radius semantic token
+- **Modal**: use --sgds-overlay-border-radius semantic token (#863)
+- **Modal**: use --sgds-overlay-border-radius semantic token
+- **Toast**: use --sgds-overlay-border-radius semantic token (#864)
+- **Toast**: use --sgds-overlay-border-radius semantic token
+- **FormTextControl**: use --sgds-form-border-radius semantic token (#866)
+- **FormTextControl**: use --sgds-form-border-radius semantic token
+- **Input**: use --sgds-form-border-radius semantic token (#867)
+- **Input**: use --sgds-form-border-radius semantic token
+- **Datepicker**: use --sgds-form-border-radius semantic token (#869)
+- **Datepicker**: use --sgds-form-border-radius semantic token
+- **QuantityToggle**: use --sgds-form-border-radius semantic token (#870)
+- **QuantityToggle**: use --sgds-form-border-radius semantic token
+- **Checkbox**: use --sgds-form-border-radius-dense semantic token (#871)
+- **Checkbox**: use --sgds-form-border-radius-dense semantic token
+- **Tooltip**: use --sgds-overlay-border-radius semantic token (#865)
+- **Tooltip**: use --sgds-overlay-border-radius semantic token
+- **Badge**: use --sgds-indicator-border-radius semantic token (#860)
+- **Badge**: use --sgds-indicator-border-radius semantic token
+- **Tab**: use --sgds-interactive-border-radius semantic token (#855)
+- **Tab**: use --sgds-interactive-border-radius semantic token
+- **Sidebar**: use --sgds-interactive-border-radius semantic token (#856)
+- **Sidebar**: use --sgds-interactive-border-radius semantic token
+- **Datepicker**: use semantic border-radius tokens (#859)
+- **Datepicker**: use --sgds-form-border-radius semantic token
+- **Datepicker**: use --sgds-interactive-border-radius semantic token
+- **Pagination**: use --sgds-interactive-border-radius semantic token (#854)
+- **Pagination**: use --sgds-interactive-border-radius semantic token
+- **CloseButton**: use --sgds-interactive-border-radius + rename CSS var (#852)
+- **CloseButton**: rename --sgds-close-btn-border-radius to --close-btn-border-radius
+- **CloseButton**: use --sgds-interactive-border-radius semantic token
+- **DescriptionList**: use --sgds-surface-border-radius semantic token (#850)
+- **DescriptionList**: use --sgds-surface-border-radius semantic token
+- **Sidenav**: use --sgds-interactive-border-radius semantic token (#857)
+- **Sidenav**: use --sgds-interactive-border-radius semantic token
+- **Button**: use --sgds-interactive-border-radius semantic token (#851)
+- **Button**: use --sgds-interactive-border-radius semantic token
+- **Alert**: use --sgds-surface-border-radius semantic token (#849)
+- **Alert**: use --sgds-surface-border-radius semantic token
+- **DataTable**: use --sgds-interactive-border-radius semantic token (#858)
+- **DataTable**: use --sgds-interactive-border-radius semantic token
+- **Card**: use --sgds-surface-border-radius semantic token (#847)
+- **Card**: use --sgds-surface-border-radius semantic token
+- **OverflowMenu**: use --sgds-interactive-border-radius + fix icon size (#853)
+- **OverflowMenu**: use --sgds-interactive-border-radius semantic token
+- **Accordion**: use --sgds-surface-border-radius semantic token (#848)
+- **Accordion**: use --sgds-surface-border-radius semantic token
+
 ## v3.29.0 (2026-09-25)
 
 ### Feat
