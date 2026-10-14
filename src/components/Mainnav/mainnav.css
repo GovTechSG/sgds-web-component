@@ -2,7 +2,6 @@
   display: block;
 }
 
-
 nav {
   background-color: var(--sgds-surface-default);
   box-shadow: 0px 2px 4px 0px rgba(14, 14, 14, 0.08);
@@ -260,7 +259,7 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   margin-left: auto;
 }
 
-slot[name="non-collapsible"].slot-empty {
+.navbar-end--empty {
   display: none;
 }
 
@@ -283,8 +282,11 @@ slot[name="non-collapsible"] {
   gap: var(--sgds-gap-xs);
 }
 
-
 /* there is no wildcard selector for element tag names in css */
 .slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
   align-self: center;
+}
+
+slot.slot-empty {
+  display: none;
 }
