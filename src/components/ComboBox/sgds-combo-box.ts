@@ -651,22 +651,9 @@ export class SgdsComboBox extends SelectElement {
     }
 
     if (this._showCreateOption && (e.key === "ArrowDown" || (e.key === "Tab" && !e.shiftKey))) {
-      const items = this._getActiveMenuItems();
-      if (items.length > 0) {
-        const lastItem = items[items.length - 1];
-        const lastItemFocused = lastItem.shadowRoot?.querySelector(".dropdown-item")?.matches(":focus");
-        if (lastItemFocused) {
-          e.preventDefault();
-          createDiv?.focus();
-          return;
-        }
-      }
-      // When no items exist but create option is visible (empty filter), focus it
-      if (items.length === 0) {
-        e.preventDefault();
-        createDiv?.focus();
-        return;
-      }
+      e.preventDefault();
+      createDiv?.focus();
+      return;
     }
     super._handleKeyboardMenuItemsEvent(e);
   }
