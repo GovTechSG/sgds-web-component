@@ -31,7 +31,7 @@ describe("sgds-mainnav", () => {
               name="non-collapsible"
             >
             </slot>
-            <slot name="profile">
+            <slot class="slot-empty" name="profile">
             </slot>
             <sgds-icon-button
               aria-expanded="false"
@@ -333,6 +333,59 @@ describe("sgds-mainnav", () => {
       await el.updateComplete;
       const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler");
       expect(toggler).to.exist;
+    });
+
+    it("empty profile slot has .slot-empty class", async () => {
+      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
+      await el.updateComplete;
+      const profileSlot = el.shadowRoot?.querySelector("slot[name='profile']");
+      expect(profileSlot).to.have.class("slot-empty");
+    });
+
+    it("slotted profile removes .slot-empty class", async () => {
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav>
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const profileSlot = el.shadowRoot?.querySelector("slot[name='profile']");
+      expect(profileSlot).not.to.have.class("slot-empty");
+    });
+
+    it(".navbar-end has .navbar-end--empty in desktop when both slots are empty", async () => {
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
+      await el.updateComplete;
+      const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
+      expect(navbarEnd).to.have.class("navbar-end--empty");
+    });
+
+    it(".navbar-end does not have .navbar-end--empty when profile slot is filled", async () => {
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav expand="lg">
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
+      expect(navbarEnd).not.to.have.class("navbar-end--empty");
+    });
+
+    it(".navbar-end does not have .navbar-end--empty in mobile even when slots are empty", async () => {
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
+      await el.updateComplete;
+      const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
+      expect(navbarEnd).not.to.have.class("navbar-end--empty");
     });
 
     it("profile slot stays in .navbar-end in mobile view", async () => {
