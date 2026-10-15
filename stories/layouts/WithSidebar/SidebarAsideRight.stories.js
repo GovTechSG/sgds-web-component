@@ -60,7 +60,7 @@ const Template = () => html`
     <div class="sgds:flex-none">
       <sgds-masthead fluid></sgds-masthead>
       <sgds-mainnav fluid>
-        <strong slot="brand">My App</strong>
+        <strong slot="brand" class="sgds:flex sgds:items-center sgds:self-center">Logo</strong>
         <sgds-mainnav-dropdown ariaLabel="Workspace menu">
           <span slot="toggler">Workspace</span>
           <sgds-dropdown-item ariaLabel="Dashboard"><a href="#">Dashboard</a></sgds-dropdown-item>
