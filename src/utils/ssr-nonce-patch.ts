@@ -9,6 +9,7 @@
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+// @ts-expect-error -- node:module types not in tsconfig (server-only, guarded by typeof window check)
 import { createRequire } from "node:module";
 
 if (typeof window === "undefined") {
