@@ -137,26 +137,39 @@ The CSP nonce solution required extensive exploration due to three interacting c
 | `await setCSPNonce()` with `setPatchReady()` promise | `_patchReady` is null when layout runs (SSR layer modules not loaded yet) |
 | `await import()` directly in `setCSPNonce()` | Next.js streaming SSR sends response before await resolves |
 | Patching React.createElement before `enable-lit-ssr.js` | Webpack CJS/ESM interop causes different module references — patch doesn't intercept |
-| `serverExternalPackages` alone | Doesn't work with `pnpm link`; works with published packages |
-| `registerSSRNonce()` in `instrumentation.ts` + `serverExternalPackages` | **Works with published packages** — patches at server startup, shared module instance ✓ |
+| `serverExternalPackages` alone | Doesn't work with `pnpm link`; works with published packages but disables full SSR renderer |
+| `registerSSRNonce()` in `instrumentation.ts` + `serverExternalPackages` | Patches shared instance but full SSR renderer is inactive (CLS 0.03 not 0) |
+| `new Function("return require")()` | Gets Node.js native require — patches different module instance than webpack bundle |
+| `createRequire` from `node:module` | Static import breaks webpack build (`node:module` not handled) |
+| **Raw `.js` file with bare `require()`** (bypasses Rolldown) | **Works — CLS 0, nonces injected, first cold-start request ✓** |
 
-**Upstream proposal**: Filed request for `@lit-labs/ssr` to natively support `globalThis.litNonce` in `LitElementRenderer.renderShadow()` — a 2-line change that would eliminate the need for monkey-patching, `serverExternalPackages`, and `instrumentation.ts`. See `lit-ssr-csp-nonce-upstream-proposal.md`.
+### Final solution: raw JS file with bare `require()`
 
-### Two rendering modes and the CSP/CLS trade-off
+The key insight: webpack transforms bare `require()` to `__webpack_require__()`, which resolves to the **same bundled module** that `@lit-labs/ssr-react` uses during rendering. This ensures our patch modifies the exact `LitElementRenderer` instance that produces the DSD output.
 
-Testing revealed two distinct SSR rendering modes depending on whether `@lit-labs/ssr`'s full SSR renderer is active:
+**Why Rolldown must be bypassed**: Rolldown transforms `require()` to its own `__require()` runtime helper (because it outputs ESM). Webpack doesn't recognise `__require()` as a module resolution call, so it passes through to Node.js runtime — which resolves a different module instance than the webpack bundle.
 
-| Mode | How it works | CLS | `<style>` in DSD | CSP nonce needed? |
-|------|-------------|-----|-------------------|-------------------|
-| **Full SSR renderer** (`@lit-labs/ssr` active, e.g. with `withLit()` or `pnpm link` during dev) | `LitElementRenderer.renderShadow()` produces inline `<style>` with all component CSS + SSR hydration markers (`<!--lit-part-->`) | **0** | Yes | Yes — blocked without nonce |
-| **Client renderer in SSR context** (default with published package + `serverExternalPackages`) | Lit's normal client renderer runs during webpack SSR. Styles applied via `adoptedStyleSheets` (not serialized to HTML). DSD contains shadow DOM structure but no styles. Client markers (`<!--?lit$...-->`) | **~0.03** | No | No — nothing to block |
-| **No SSR** (before our changes) | Empty custom element shells. JS loads, Lit upgrades, shadow DOM created client-side | **~0.23** | No | No |
+**Implementation**: `ssr-nonce-patch.raw.js` is a hand-written JavaScript file with bare `require()`. It is NOT processed by Rolldown. `frankBuild.js` copies it to `lib/react/utils/ssr-nonce-patch.js`, overwriting the empty Rolldown output. When webpack processes it, `require()` becomes `__webpack_require__()`, patching the bundled `LitElementRenderer` synchronously at module evaluation time.
 
-**Key finding**: The client-renderer-in-SSR mode (CLS ~0.03) is the **practical sweet spot** for government apps with strict CSP:
-- CLS 0.03 is well within Lighthouse "good" threshold (< 0.1)
-- No CSP violations — no inline `<style>` means no nonce infrastructure needed
-- Zero consumer config — just import SGDS React wrappers and they work
-- DSD shadow DOM structure is present in server HTML — provides correct dimensions from first paint
+**Consumer setup for CSP nonce (one step):**
+
+```tsx
+// app/layout.tsx (server component)
+import { setCSPNonce } from '@govtechsg/sgds-web-component/react/ssr';
+import { headers } from 'next/headers';
+
+export default async function Layout({ children }) {
+  const nonce = (await headers()).get('x-nonce');
+  if (nonce) setCSPNonce(nonce);
+  return <html><body>{children}</body></html>;
+}
+```
+
+No `serverExternalPackages`, no `instrumentation.ts`, no `next.config.js` changes. Just one `setCSPNonce()` call in the layout.
+
+**Confirmed results**: CLS 0, `<style nonce="...">` in page source, Lit SSR markers (`<!--lit-part-->`), works on first cold-start request.
+
+**Upstream proposal**: Filed request for `@lit-labs/ssr` to natively support `globalThis.litNonce` in `LitElementRenderer.renderShadow()` — a 2-line change that would eliminate the need for the raw JS file workaround. See `lit-ssr-csp-nonce-upstream-proposal.md`.
 - The tiny CLS (0.03 vs 0) comes from CSS custom property values resolving after `adoptedStyleSheets` apply on the client
 
 **Why the full SSR renderer produced CSP issues but the client renderer doesn't**: The full SSR renderer embeds all component CSS as `<style>` blocks inside the DSD `<template>`. These inline styles require a CSP nonce. The client renderer skips inline styles entirely — it uses `adoptedStyleSheets` (a JavaScript API) which CSP's `style-src` directive does not govern.
