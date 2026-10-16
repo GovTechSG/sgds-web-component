@@ -10,8 +10,7 @@
 if (typeof window === "undefined") {
   try {
     var mod = require("@lit-labs/ssr/lib/lit-element-renderer.js");
-    var LitElementRenderer =
-      mod.LitElementRenderer || (mod.default && mod.default.LitElementRenderer);
+    var LitElementRenderer = mod.LitElementRenderer || (mod.default && mod.default.LitElementRenderer);
 
     if (LitElementRenderer && !LitElementRenderer._sgdsNoncePatched) {
       LitElementRenderer._sgdsNoncePatched = true;
