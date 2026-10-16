@@ -16,10 +16,10 @@ export async function registerSSRNonce(): Promise<void> {
     const { LitElementRenderer } = await import("@lit-labs/ssr/lib/lit-element-renderer.js");
 
     // Guard against double-patching
-    if ((LitElementRenderer as Record<string, unknown>)._sgdsNoncePatched) {
+    if ((LitElementRenderer as unknown as Record<string, unknown>)._sgdsNoncePatched) {
       return;
     }
-    (LitElementRenderer as Record<string, unknown>)._sgdsNoncePatched = true;
+    (LitElementRenderer as unknown as Record<string, unknown>)._sgdsNoncePatched = true;
 
     const originalRenderShadow = LitElementRenderer.prototype.renderShadow;
 
