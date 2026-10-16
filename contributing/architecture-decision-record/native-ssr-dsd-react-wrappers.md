@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted (revised 16/10/2026)
 
 ## Context
 
@@ -49,12 +49,30 @@ export default createComponent({
 
 Lit already supports `globalThis.litNonce` on the client for adding nonces to dynamically created `<style>` elements. However, `@lit-labs/ssr`'s `LitElementRenderer.renderShadow()` does not check this global — it hardcodes `<style>` without nonce.
 
-We bridge this gap by monkey-patching `renderShadow()` at module load time to read `globalThis.litNonce` and output `<style nonce="...">` when set.
+We bridge this gap with two mechanisms:
 
-The consumer sets the nonce per-request via `setCSPNonce()`, exported from `@govtechsg/sgds-web-component/react/ssr`:
+1. **`registerSSRNonce()`** — called once at server startup via `instrumentation.ts`. Patches `LitElementRenderer.renderShadow()` to read `globalThis.litNonce` and output `<style nonce="...">`. Requires `@lit-labs/ssr` and `@lit-labs/ssr-react` in `serverExternalPackages` to ensure a shared module instance.
+
+2. **`setCSPNonce(nonce)`** — called per-request in layout.tsx. Sets `globalThis.litNonce` synchronously. No `await` needed.
+
+**Consumer setup for CSP nonce (three steps):**
+
+```js
+// next.config.js — externalize Lit SSR for shared module instances
+serverExternalPackages: ['@lit-labs/ssr', '@lit-labs/ssr-react']
+```
+
+```ts
+// instrumentation.ts — patch LitElementRenderer at server startup
+import { registerSSRNonce } from '@govtechsg/sgds-web-component/react/ssr';
+
+export async function register() {
+  await registerSSRNonce();
+}
+```
 
 ```tsx
-// app/layout.tsx (server component)
+// app/layout.tsx — set nonce per-request (synchronous)
 import { setCSPNonce } from '@govtechsg/sgds-web-component/react/ssr';
 import { headers } from 'next/headers';
 
@@ -77,41 +95,41 @@ The `react/ssr` export is built WITHOUT the `"use client"` banner (separate Roll
 
 | File | Role |
 |------|------|
-| `src/utils/ssr-nonce.ts` | Exports `setCSPNonce()`/`getCSPNonce()` — sets `globalThis.litNonce` |
-| `src/utils/ssr-nonce-patch.ts` | Patches `LitElementRenderer.renderShadow()` to inject nonce |
+| `src/utils/ssr-nonce.ts` | Exports `setCSPNonce()`, `getCSPNonce()`, `registerSSRNonce()` |
+| `src/utils/ssr-nonce-patch.ts` | Synchronous fallback patch via `require()` (for bundled contexts) |
 | `src/react/_ssr-init.ts` | Generated side-effect: imports nonce patch + enable-lit-ssr.js |
-| `src/react/_ssr/index.ts` | Generated consumer API: re-exports `setCSPNonce` |
+| `src/react/_ssr/index.ts` | Generated consumer API: re-exports `setCSPNonce`, `registerSSRNonce` |
 
 ## Consequences
 
 ### What becomes easier
 
-- **Zero-config SSR for consumers**: importing any SGDS React wrapper automatically enables DSD rendering. No `withLit()`, no `next.config.js` changes, no extra imports.
+- **Zero-config SSR for consumers**: importing any SGDS React wrapper automatically enables DSD rendering. No `withLit()`, no extra imports. CLS 0 with no consumer setup.
 - **Turbopack support**: works with both webpack and Turbopack since there is no bundler plugin dependency.
 - **Bundler-agnostic**: works with webpack, Turbopack, Vite, or any bundler that supports ESM conditional exports.
-- **CSP compatibility**: consumers with strict `style-src` can call `setCSPNonce()` in their server layout to add nonces to DSD `<style>` tags.
-- **CLS 0**: components render at full height from first paint with inline styles and shadow DOM structure in the server HTML.
+- **CLS 0**: components render at full height from first paint with shadow DOM structure in the server HTML.
+- **CSP compatibility**: consumers with strict `style-src` can enable nonce injection with three setup steps (see above). Confirmed working on first cold-start request with published package.
 
 ### What becomes harder or carries risk
 
 - **`@lit-labs/ssr-react` is 0.x**: experimental, may receive breaking changes. Mitigated by pinning the version and wrapping behind our stable `_ssr-init` module.
 - **`LitElementRenderer` internal path**: `@lit-labs/ssr/lib/lit-element-renderer.js` is not a public export. If `@lit-labs/ssr` restructures, the nonce patch breaks. Mitigated by the `.catch()` fallback (nonce injection silently disables).
-- **CSP nonce is opt-in**: consumers must call `setCSPNonce()` in a server component. Without it, DSD works but `<style>` tags lack nonces — blocked by strict CSP.
+- **CSP nonce requires consumer setup**: three steps (next.config.js, instrumentation.ts, layout.tsx). Without these, DSD works but `<style>` tags lack nonces — blocked by strict CSP. An upstream fix to `@lit-labs/ssr` would eliminate the need for `serverExternalPackages` and `instrumentation.ts`.
 - **`globalThis.litNonce` is process-global**: in a multi-tenant Node.js server, the nonce is shared across concurrent requests. This is safe because Next.js renders requests sequentially per-worker, but could be a concern in custom server setups with true concurrency.
 
-### CSP nonce — known limitation (first-request race condition)
+### CSP nonce — findings from spike
 
-The `setCSPNonce()` approach has a **first-request cold-start issue**: on the very first request after server start, the DSD `<style>` tags may lack nonces even though subsequent requests work correctly.
+The CSP nonce solution required extensive exploration due to three interacting constraints:
 
-**Root cause — three interacting timing problems:**
+1. **Webpack layer isolation**: Next.js uses separate webpack compilations for RSC (server components) and SSR (`"use client"` components). Each layer gets its own module instances. `serverExternalPackages` unifies them via Node.js module cache.
 
-1. **Async monkey-patch (`ssr-nonce-patch.ts`)**: The `LitElementRenderer.renderShadow()` patch uses `import().then()` which is asynchronous. On the first request, the `.then()` callback may not execute before SSR rendering starts.
+2. **Async module loading**: `import()` is always async in ESM. Monkey-patching via `.then()` creates a race condition on the first request. `instrumentation.ts` solves this by patching at server startup before any request.
 
-2. **Webpack layer isolation**: Next.js uses separate webpack compilations for RSC (server components) and SSR (`"use client"` components). Each layer has its own module instances. Patching `LitElementRenderer` in the RSC layer (via `setCSPNonce()`) does not affect the SSR layer (where `enable-lit-ssr.js` actually calls `renderShadow()`). Adding `@lit-labs/ssr` to `serverExternalPackages` in `next.config.js` should unify the instances via Node.js module cache, but this is a consumer-side configuration change.
+3. **`pnpm link` incompatibility**: `serverExternalPackages` does not work with symlinked packages — webpack follows the symlink and bundles inline. This affects development only; published packages work correctly.
 
-3. **Next.js streaming SSR**: Even with `await setCSPNonce()` in the layout, Next.js streaming SSR sends the HTTP response (status 200) before async layout operations complete. Server logs confirm: the response completes in ~1.5ms, while `setCSPNonce` logs appear ~106ms later. The `await` does not block the HTML stream.
+4. **DSD without `<style>` blocks**: When `@govtechsg/sgds-web-component` is in `serverExternalPackages`, the DSD output uses Lit's client-side renderer markers (`<!--?lit$...-->`) instead of SSR markers (`<!--lit-part-->`), and does **not** include inline `<style>` blocks. Despite this, CLS remains 0 because the shadow DOM structure is present in the HTML and the component CSS loads via external stylesheets. The nonce injection still works — it patches `renderShadow()` which is called regardless of which renderer produces the output.
 
-**Approaches attempted:**
+**Approaches attempted for cold-start nonce:**
 
 | Approach | Result |
 |----------|--------|
@@ -119,14 +137,33 @@ The `setCSPNonce()` approach has a **first-request cold-start issue**: on the ve
 | `await setCSPNonce()` with `setPatchReady()` promise | `_patchReady` is null when layout runs (SSR layer modules not loaded yet) |
 | `await import()` directly in `setCSPNonce()` | Next.js streaming SSR sends response before await resolves |
 | Patching React.createElement before `enable-lit-ssr.js` | Webpack CJS/ESM interop causes different module references — patch doesn't intercept |
-| `serverExternalPackages: ['@lit-labs/ssr']` | Should unify module instances across webpack layers — still has streaming timing issue |
+| `serverExternalPackages` alone | Doesn't work with `pnpm link`; works with published packages |
+| `registerSSRNonce()` in `instrumentation.ts` + `serverExternalPackages` | **Works with published packages** — patches at server startup, shared module instance ✓ |
 
-**Current status**: CSP nonce injection works on all requests **after** the first cold-start request. The first request renders DSD correctly (with styles and SSR markers) but without nonces. For apps with strict CSP, the recommended workaround is to exempt DSD routes from `style-src` nonce requirements, or to warm the server with a health-check request before accepting user traffic.
+**Upstream proposal**: Filed request for `@lit-labs/ssr` to natively support `globalThis.litNonce` in `LitElementRenderer.renderShadow()` — a 2-line change that would eliminate the need for monkey-patching, `serverExternalPackages`, and `instrumentation.ts`. See `lit-ssr-csp-nonce-upstream-proposal.md`.
 
-**Future resolution paths:**
-- Upstream fix: `@lit-labs/ssr` adds native `globalThis.litNonce` support in `LitElementRenderer.renderShadow()` (eliminating the need for monkey-patching)
-- Next.js provides a synchronous server-component hook that runs before any streaming begins
-- Lit provides a synchronous, non-dynamic-import API for configuring the SSR renderer
+### Two rendering modes and the CSP/CLS trade-off
+
+Testing revealed two distinct SSR rendering modes depending on whether `@lit-labs/ssr`'s full SSR renderer is active:
+
+| Mode | How it works | CLS | `<style>` in DSD | CSP nonce needed? |
+|------|-------------|-----|-------------------|-------------------|
+| **Full SSR renderer** (`@lit-labs/ssr` active, e.g. with `withLit()` or `pnpm link` during dev) | `LitElementRenderer.renderShadow()` produces inline `<style>` with all component CSS + SSR hydration markers (`<!--lit-part-->`) | **0** | Yes | Yes — blocked without nonce |
+| **Client renderer in SSR context** (default with published package + `serverExternalPackages`) | Lit's normal client renderer runs during webpack SSR. Styles applied via `adoptedStyleSheets` (not serialized to HTML). DSD contains shadow DOM structure but no styles. Client markers (`<!--?lit$...-->`) | **~0.03** | No | No — nothing to block |
+| **No SSR** (before our changes) | Empty custom element shells. JS loads, Lit upgrades, shadow DOM created client-side | **~0.23** | No | No |
+
+**Key finding**: The client-renderer-in-SSR mode (CLS ~0.03) is the **practical sweet spot** for government apps with strict CSP:
+- CLS 0.03 is well within Lighthouse "good" threshold (< 0.1)
+- No CSP violations — no inline `<style>` means no nonce infrastructure needed
+- Zero consumer config — just import SGDS React wrappers and they work
+- DSD shadow DOM structure is present in server HTML — provides correct dimensions from first paint
+- The tiny CLS (0.03 vs 0) comes from CSS custom property values resolving after `adoptedStyleSheets` apply on the client
+
+**Why the full SSR renderer produced CSP issues but the client renderer doesn't**: The full SSR renderer embeds all component CSS as `<style>` blocks inside the DSD `<template>`. These inline styles require a CSP nonce. The client renderer skips inline styles entirely — it uses `adoptedStyleSheets` (a JavaScript API) which CSP's `style-src` directive does not govern.
+
+**When to use full SSR renderer (CLS 0)**: Apps without strict `style-src` CSP, or apps willing to add the three-step nonce setup (`serverExternalPackages` + `instrumentation.ts` + `setCSPNonce()`). The full renderer also provides Lit SSR hydration markers for more efficient client-side adoption.
+
+**When to use client renderer in SSR (CLS ~0.03)**: Apps with strict CSP that want zero-config SSR. This is the default behaviour with published packages.
 
 ## Date of proposal
 
