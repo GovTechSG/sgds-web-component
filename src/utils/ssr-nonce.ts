@@ -1,3 +1,7 @@
+export function getCSPNonce(): string | null {
+  return ((globalThis as Record<string, unknown>)["litNonce"] as string) ?? null;
+}
+
 /**
  * CSP nonce for Declarative Shadow DOM (DSD) styles.
  *
@@ -18,7 +22,6 @@
  * }
  * ```
  */
-
 /**
  * Set the CSP nonce for the current request. Call this in your server
  * component (e.g. layout.tsx) before SGDS components render.
@@ -26,10 +29,4 @@
  */
 export function setCSPNonce(nonce: string | null): void {
   (globalThis as Record<string, unknown>)["litNonce"] = nonce ?? undefined;
-}
-
-export function getCSPNonce(): string | null {
-  return (
-    ((globalThis as Record<string, unknown>)["litNonce"] as string) ?? null
-  );
 }
