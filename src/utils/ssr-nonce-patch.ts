@@ -2,28 +2,33 @@
  * Patches @lit-labs/ssr's LitElementRenderer.renderShadow() to respect
  * globalThis.litNonce for CSP nonce injection.
  *
- * Uses module.createRequire for SYNCHRONOUS module resolution in ESM.
- * createRequire is a function call (not the bare `require` keyword),
- * so Rolldown preserves it instead of transforming to __require().
+ * Uses new Function("return require")() to get a synchronous require
+ * that is invisible to both Rolldown and webpack. Bundlers cannot
+ * statically analyze new Function(), so they leave it alone.
+ * At runtime in Node.js, it returns the real require function.
  */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// @ts-expect-error -- node:module types not in tsconfig (server-only, guarded by typeof window check)
-import { createRequire } from "node:module";
-
 if (typeof window === "undefined") {
   try {
-    const _require = createRequire(import.meta.url);
+    // new Function hides require from all bundlers — synchronous at runtime
+    const _require = new Function("return require")() as (
+      id: string
+    ) => any;
     const mod = _require("@lit-labs/ssr/lib/lit-element-renderer.js");
-    const LitElementRenderer = mod.LitElementRenderer || mod.default?.LitElementRenderer;
+    const LitElementRenderer =
+      mod.LitElementRenderer || mod.default?.LitElementRenderer;
 
     if (LitElementRenderer && !LitElementRenderer._sgdsNoncePatched) {
       LitElementRenderer._sgdsNoncePatched = true;
 
-      const originalRenderShadow = LitElementRenderer.prototype.renderShadow;
+      const originalRenderShadow =
+        LitElementRenderer.prototype.renderShadow;
 
-      LitElementRenderer.prototype.renderShadow = function (renderInfo: unknown) {
+      LitElementRenderer.prototype.renderShadow = function (
+        renderInfo: unknown
+      ) {
         const result = originalRenderShadow.call(this, renderInfo);
         if (!result) return result;
 
