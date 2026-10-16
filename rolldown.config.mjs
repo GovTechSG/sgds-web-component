@@ -153,6 +153,11 @@ const buildSgdsPackage = () => {
       ],
       platform: "browser",
       moduleTypes: sharedModuleTypes,
+      treeshake: {
+        moduleSideEffects: [
+          { test: /ssr-nonce-patch/, sideEffects: true }
+        ]
+      },
       plugins: [...reactBuildPlugins],
       external: ["@lit/react", "react", /^react\/.*/, ...external]
     }),
@@ -172,6 +177,11 @@ const buildSgdsPackage = () => {
       ],
       platform: "browser",
       moduleTypes: sharedModuleTypes,
+      treeshake: {
+        moduleSideEffects: [
+          { test: /ssr-nonce-patch/, sideEffects: true }
+        ]
+      },
       plugins: [...reactBuildPlugins],
       external: ["@lit/react", "react", /^react\/.*/, ...external]
     })
