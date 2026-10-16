@@ -20,9 +20,7 @@ export const Template = args =>
           src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80"
         />
         <span slot="title">Card</span>
-        <span slot="description"
-          >Some quick example text to build on the card title and make up the bulk of the card's content.</span
-        >
+        <span>Some quick example text to build on the card title and make up the bulk of the card's content.</span>
         <sgds-link slot="footer">
           <a href="https://google.com" aria-label="Go somewhere"
             >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
@@ -36,7 +34,7 @@ export const Template = args =>
           src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1740&amp;q=80"
         />
         <span slot="title">Card</span>
-        <span slot="description"
+        <span
           >Some quick example text to build on the card title and make up the bulk of the card's content. Some quick
           example text to build on the card title and make up the bulk of the card's content.</span
         >
@@ -50,9 +48,7 @@ export const Template = args =>
         <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Icon card</h3>
-        <span slot="description"
-          >Some quick example text to build on the card title and make up the bulk of the card's content.</span
-        >
+        <span>Some quick example text to build on the card title and make up the bulk of the card's content.</span>
         <sgds-link slot="footer">
           <a href="https://google.com" aria-label="Go somewhere"
             >Go somewhere <sgds-icon name="arrow-right"></sgds-icon
@@ -63,7 +59,7 @@ export const Template = args =>
         <sgds-icon slot="icon" name="placeholder" size="3-xl"></sgds-icon>
         <span slot="subtitle">SUBTITLE</span>
         <h3 slot="title">Icon card</h3>
-        <span slot="description">
+        <span>
           Some quick example text to build on the card title and make up the bulk of the card's content. Some quick
           example text to build on the card title and make up the bulk of the card's content.
         </span>
