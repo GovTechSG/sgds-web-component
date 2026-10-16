@@ -2,22 +2,31 @@
  * Patches @lit-labs/ssr's LitElementRenderer.renderShadow() to respect
  * globalThis.litNonce for CSP nonce injection.
  *
- * This module is imported from _ssr-init (the "use client" SSR layer).
- * When @lit-labs/ssr is in serverExternalPackages, the same module instance
- * is shared with the RSC layer, so the patch applies everywhere.
+ * Uses globalThis.require (Node.js CJS require) for SYNCHRONOUS module
+ * resolution. This ensures the patch is applied at module evaluation time —
+ * before any SSR rendering starts, including on the first request.
  */
+
 if (typeof window === "undefined") {
-  import("@lit-labs/ssr/lib/lit-element-renderer.js")
-    .then(({ LitElementRenderer }) => {
-      // Only patch once
-      if ((LitElementRenderer as Record<string, unknown>)._sgdsNoncePatched) {
-        return;
-      }
-      (LitElementRenderer as Record<string, unknown>)._sgdsNoncePatched = true;
+  try {
+    // Use Function constructor to get a raw require that bundlers won't transform.
+    // In webpack's server bundle, this resolves to the bundled module synchronously.
+    // In Node.js runtime, this resolves via the module cache.
+    const _require = typeof require !== "undefined"
+      ? require
+      : new Function("id", "return import(id)");
+
+    const mod = _require("@lit-labs/ssr/lib/lit-element-renderer.js");
+    const LitElementRenderer = mod.LitElementRenderer || mod.default?.LitElementRenderer;
+
+    if (LitElementRenderer && !LitElementRenderer._sgdsNoncePatched) {
+      LitElementRenderer._sgdsNoncePatched = true;
 
       const originalRenderShadow = LitElementRenderer.prototype.renderShadow;
 
-      LitElementRenderer.prototype.renderShadow = function (renderInfo: unknown) {
+      LitElementRenderer.prototype.renderShadow = function (
+        renderInfo: unknown
+      ) {
         const result = originalRenderShadow.call(this, renderInfo);
         if (!result) return result;
 
@@ -31,7 +40,8 @@ if (typeof window === "undefined") {
           return item;
         });
       };
-    })
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    .catch(() => {});
+    }
+  } catch {
+    // @lit-labs/ssr not available — nonce injection disabled
+  }
 }

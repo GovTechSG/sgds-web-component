@@ -1,10 +1,22 @@
 /**
  * CSP nonce for Declarative Shadow DOM (DSD) styles.
  *
- * Sets globalThis.litNonce and patches LitElementRenderer.renderShadow()
- * to inject the nonce into DSD <style> tags.
+ * Two functions:
+ * - `registerSSRNonce()` — call ONCE at server startup (instrumentation.ts).
+ *   Patches LitElementRenderer to respect globalThis.litNonce.
+ * - `setCSPNonce()` — call per-request in layout.tsx.
+ *   Sets globalThis.litNonce for the current request.
  *
  * @example
+ * ```ts
+ * // instrumentation.ts
+ * import { registerSSRNonce } from '@govtechsg/sgds-web-component/react/ssr';
+ *
+ * export async function register() {
+ *   await registerSSRNonce();
+ * }
+ * ```
+ *
  * ```tsx
  * // app/layout.tsx (server component)
  * import { setCSPNonce } from '@govtechsg/sgds-web-component/react/ssr';
@@ -12,50 +24,70 @@
  *
  * export default async function Layout({ children }) {
  *   const nonce = (await headers()).get('x-nonce');
- *   if (nonce) await setCSPNonce(nonce);
+ *   if (nonce) setCSPNonce(nonce);
  *   return <html><body>{children}</body></html>;
  * }
  * ```
  */
 
-let _patched = false;
+/**
+ * Set the CSP nonce for the current request. Call this in your server
+ * component (e.g. layout.tsx) before SGDS components render.
+ * This is synchronous — no await needed.
+ */
+export function setCSPNonce(nonce: string | null): void {
+  (globalThis as Record<string, unknown>)["litNonce"] = nonce ?? undefined;
+}
 
 export function getCSPNonce(): string | null {
-  return ((globalThis as Record<string, unknown>)["litNonce"] as string) ?? null;
+  return (
+    ((globalThis as Record<string, unknown>)["litNonce"] as string) ?? null
+  );
 }
 
 /**
- * Set the CSP nonce for the current request and ensure the
- * LitElementRenderer patch is applied. Await this in your layout
- * to guarantee nonces are injected before children render.
+ * Patch LitElementRenderer.renderShadow() to inject CSP nonces into
+ * DSD <style> tags. Call this ONCE at server startup from instrumentation.ts.
+ *
+ * This must run before any SSR request is handled. Next.js's
+ * instrumentation.ts `register()` hook guarantees this.
  */
-export async function setCSPNonce(nonce: string | null): Promise<void> {
-  (globalThis as Record<string, unknown>)["litNonce"] = nonce ?? undefined;
+export async function registerSSRNonce(): Promise<void> {
+  if (typeof window !== "undefined") return;
 
-  // Patch LitElementRenderer.renderShadow() to read globalThis.litNonce.
-  // This runs once — on the first call to setCSPNonce.
-  if (!_patched && typeof window === "undefined") {
-    _patched = true;
-    try {
-      const { LitElementRenderer } = await import("@lit-labs/ssr/lib/lit-element-renderer.js");
-      const originalRenderShadow = LitElementRenderer.prototype.renderShadow;
+  try {
+    const { LitElementRenderer } = await import(
+      "@lit-labs/ssr/lib/lit-element-renderer.js"
+    );
 
-      LitElementRenderer.prototype.renderShadow = function (renderInfo: unknown) {
-        const result = originalRenderShadow.call(this, renderInfo);
-        if (!result) return result;
-
-        const litNonce = (globalThis as Record<string, unknown>)["litNonce"];
-        if (!litNonce) return result;
-
-        return result.map((item: unknown) => {
-          if (typeof item === "string" && item === "<style>") {
-            return `<style nonce="${litNonce}">`;
-          }
-          return item;
-        });
-      };
-    } catch {
-      // @lit-labs/ssr not available — nonce injection disabled
+    // Guard against double-patching
+    if (
+      (LitElementRenderer as Record<string, unknown>)._sgdsNoncePatched
+    ) {
+      return;
     }
+    (LitElementRenderer as Record<string, unknown>)._sgdsNoncePatched =
+      true;
+
+    const originalRenderShadow = LitElementRenderer.prototype.renderShadow;
+
+    LitElementRenderer.prototype.renderShadow = function (
+      renderInfo: unknown
+    ) {
+      const result = originalRenderShadow.call(this, renderInfo);
+      if (!result) return result;
+
+      const litNonce = (globalThis as Record<string, unknown>)["litNonce"];
+      if (!litNonce) return result;
+
+      return result.map((item: unknown) => {
+        if (typeof item === "string" && item === "<style>") {
+          return `<style nonce="${litNonce}">`;
+        }
+        return item;
+      });
+    };
+  } catch {
+    // @lit-labs/ssr not available — nonce injection disabled
   }
 }

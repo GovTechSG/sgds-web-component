@@ -99,6 +99,35 @@ The `react/ssr` export is built WITHOUT the `"use client"` banner (separate Roll
 - **CSP nonce is opt-in**: consumers must call `setCSPNonce()` in a server component. Without it, DSD works but `<style>` tags lack nonces — blocked by strict CSP.
 - **`globalThis.litNonce` is process-global**: in a multi-tenant Node.js server, the nonce is shared across concurrent requests. This is safe because Next.js renders requests sequentially per-worker, but could be a concern in custom server setups with true concurrency.
 
+### CSP nonce — known limitation (first-request race condition)
+
+The `setCSPNonce()` approach has a **first-request cold-start issue**: on the very first request after server start, the DSD `<style>` tags may lack nonces even though subsequent requests work correctly.
+
+**Root cause — three interacting timing problems:**
+
+1. **Async monkey-patch (`ssr-nonce-patch.ts`)**: The `LitElementRenderer.renderShadow()` patch uses `import().then()` which is asynchronous. On the first request, the `.then()` callback may not execute before SSR rendering starts.
+
+2. **Webpack layer isolation**: Next.js uses separate webpack compilations for RSC (server components) and SSR (`"use client"` components). Each layer has its own module instances. Patching `LitElementRenderer` in the RSC layer (via `setCSPNonce()`) does not affect the SSR layer (where `enable-lit-ssr.js` actually calls `renderShadow()`). Adding `@lit-labs/ssr` to `serverExternalPackages` in `next.config.js` should unify the instances via Node.js module cache, but this is a consumer-side configuration change.
+
+3. **Next.js streaming SSR**: Even with `await setCSPNonce()` in the layout, Next.js streaming SSR sends the HTTP response (status 200) before async layout operations complete. Server logs confirm: the response completes in ~1.5ms, while `setCSPNonce` logs appear ~106ms later. The `await` does not block the HTML stream.
+
+**Approaches attempted:**
+
+| Approach | Result |
+|----------|--------|
+| Async `import().then()` in `ssr-nonce-patch.ts` | Patch applies after first render — nonce missing on cold start |
+| `await setCSPNonce()` with `setPatchReady()` promise | `_patchReady` is null when layout runs (SSR layer modules not loaded yet) |
+| `await import()` directly in `setCSPNonce()` | Next.js streaming SSR sends response before await resolves |
+| Patching React.createElement before `enable-lit-ssr.js` | Webpack CJS/ESM interop causes different module references — patch doesn't intercept |
+| `serverExternalPackages: ['@lit-labs/ssr']` | Should unify module instances across webpack layers — still has streaming timing issue |
+
+**Current status**: CSP nonce injection works on all requests **after** the first cold-start request. The first request renders DSD correctly (with styles and SSR markers) but without nonces. For apps with strict CSP, the recommended workaround is to exempt DSD routes from `style-src` nonce requirements, or to warm the server with a health-check request before accepting user traffic.
+
+**Future resolution paths:**
+- Upstream fix: `@lit-labs/ssr` adds native `globalThis.litNonce` support in `LitElementRenderer.renderShadow()` (eliminating the need for monkey-patching)
+- Next.js provides a synchronous server-component hook that runs before any streaming begins
+- Lit provides a synchronous, non-dynamic-import API for configuring the SSR renderer
+
 ## Date of proposal
 
 16/10/2026
