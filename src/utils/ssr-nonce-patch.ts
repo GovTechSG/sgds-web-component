@@ -12,9 +12,7 @@ if (typeof window === "undefined") {
     // Use Function constructor to get a raw require that bundlers won't transform.
     // In webpack's server bundle, this resolves to the bundled module synchronously.
     // In Node.js runtime, this resolves via the module cache.
-    const _require = typeof require !== "undefined"
-      ? require
-      : new Function("id", "return import(id)");
+    const _require = typeof require !== "undefined" ? require : new Function("id", "return import(id)");
 
     const mod = _require("@lit-labs/ssr/lib/lit-element-renderer.js");
     const LitElementRenderer = mod.LitElementRenderer || mod.default?.LitElementRenderer;
@@ -24,9 +22,7 @@ if (typeof window === "undefined") {
 
       const originalRenderShadow = LitElementRenderer.prototype.renderShadow;
 
-      LitElementRenderer.prototype.renderShadow = function (
-        renderInfo: unknown
-      ) {
+      LitElementRenderer.prototype.renderShadow = function (renderInfo: unknown) {
         const result = originalRenderShadow.call(this, renderInfo);
         if (!result) return result;
 
