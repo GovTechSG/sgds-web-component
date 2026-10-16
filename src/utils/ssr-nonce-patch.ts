@@ -16,18 +16,14 @@ if (typeof window === "undefined") {
   try {
     const _require = createRequire(import.meta.url);
     const mod = _require("@lit-labs/ssr/lib/lit-element-renderer.js");
-    const LitElementRenderer =
-      mod.LitElementRenderer || mod.default?.LitElementRenderer;
+    const LitElementRenderer = mod.LitElementRenderer || mod.default?.LitElementRenderer;
 
     if (LitElementRenderer && !LitElementRenderer._sgdsNoncePatched) {
       LitElementRenderer._sgdsNoncePatched = true;
 
-      const originalRenderShadow =
-        LitElementRenderer.prototype.renderShadow;
+      const originalRenderShadow = LitElementRenderer.prototype.renderShadow;
 
-      LitElementRenderer.prototype.renderShadow = function (
-        renderInfo: unknown
-      ) {
+      LitElementRenderer.prototype.renderShadow = function (renderInfo: unknown) {
         const result = originalRenderShadow.call(this, renderInfo);
         if (!result) return result;
 
