@@ -170,13 +170,36 @@ No `serverExternalPackages`, no `instrumentation.ts`, no `next.config.js` change
 **Confirmed results**: CLS 0, `<style nonce="...">` in page source, Lit SSR markers (`<!--lit-part-->`), works on first cold-start request.
 
 **Upstream proposal**: Filed request for `@lit-labs/ssr` to natively support `globalThis.litNonce` in `LitElementRenderer.renderShadow()` — a 2-line change that would eliminate the need for the raw JS file workaround. See `lit-ssr-csp-nonce-upstream-proposal.md`.
-- The tiny CLS (0.03 vs 0) comes from CSS custom property values resolving after `adoptedStyleSheets` apply on the client
 
-**Why the full SSR renderer produced CSP issues but the client renderer doesn't**: The full SSR renderer embeds all component CSS as `<style>` blocks inside the DSD `<template>`. These inline styles require a CSP nonce. The client renderer skips inline styles entirely — it uses `adoptedStyleSheets` (a JavaScript API) which CSP's `style-src` directive does not govern.
+### Future-proofing and risks
 
-**When to use full SSR renderer (CLS 0)**: Apps without strict `style-src` CSP, or apps willing to add the three-step nonce setup (`serverExternalPackages` + `instrumentation.ts` + `setCSPNonce()`). The full renderer also provides Lit SSR hydration markers for more efficient client-side adoption.
+**What's solid:**
+- `globalThis.litNonce` is Lit's official client-side nonce mechanism — unlikely to change
+- `setCSPNonce()` API is clean, under our control, and will remain the same regardless of how the patch is implemented
+- The pattern (patch `renderShadow` to read a global) is simple and correct
+- Dev mode is unaffected — when `setCSPNonce()` is not called, the patch is a no-op (`globalThis.litNonce` is undefined → `<style>` rendered without nonce → fine, no CSP in dev)
 
-**When to use client renderer in SSR (CLS ~0.03)**: Apps with strict CSP that want zero-config SSR. This is the default behaviour with published packages.
+**Known risks:**
+
+| Risk | Impact | Likelihood | Mitigation |
+|------|--------|------------|------------|
+| **Turbopack for production builds** | Turbopack may not transform bare `require()` to its module system the same way webpack's `__webpack_require__` does. The nonce patch could resolve a different module instance. | Medium — Next.js is migrating to Turbopack, timeline unclear | Monitor Turbopack production support. Test when available. If `require()` behaviour differs, may need a Turbopack-specific approach. |
+| **`@lit-labs/ssr/lib/lit-element-renderer.js` internal path** | Not a public export. If `@lit-labs/ssr` restructures its internal files on a major version bump, the `require()` path breaks. | Low | Caught silently by `try/catch` — nonce injection disables gracefully. Pin `@lit-labs/ssr` version. |
+| **Raw `.js` file bypassing Rolldown** | Maintenance risk — developers may not understand why `ssr-nonce-patch.raw.js` exists or why `frankBuild.js` copies it over the Rolldown output. | Low | Documented in this ADR, in the file's JSDoc comments, and in `frankBuild.js` copy step comment. |
+| **Monkey-patching a prototype** | Any Lit update that changes `renderShadow()` signature or return type could break the patch. | Low | The `_sgdsNoncePatched` guard prevents double-patching. Return value handling (array of strings/thunks) is stable since Lit 3.0. |
+
+**Exit strategy:**
+
+When `@lit-labs/ssr` merges native `globalThis.litNonce` support in `LitElementRenderer.renderShadow()`:
+
+1. Delete `src/utils/ssr-nonce-patch.raw.js`
+2. Delete `src/utils/ssr-nonce-patch.ts` (placeholder)
+3. Remove the `frankBuild.js` copy step
+4. Remove `ssr-nonce-patch` import from `_ssr-init.ts` (in `makeReact.mjs`)
+5. `setCSPNonce()` stays unchanged — it just sets `globalThis.litNonce`
+6. Lit's renderer reads the global natively — no patch needed
+
+The consumer API (`setCSPNonce()` in layout) remains the same before and after the upstream fix.
 
 ## Date of proposal
 
