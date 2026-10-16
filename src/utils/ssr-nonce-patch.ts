@@ -14,25 +14,18 @@ if (typeof window === "undefined") {
     // Get a require function that TypeScript won't complain about.
     // In webpack/Node.js server context, globalThis has require available.
     const _require =
-      (globalThis as any).require ||
-      (typeof __webpack_require__ !== "undefined"
-        ? __non_webpack_require__
-        : undefined);
+      (globalThis as any).require || (typeof __webpack_require__ !== "undefined" ? __non_webpack_require__ : undefined);
 
     if (_require) {
       const mod = _require("@lit-labs/ssr/lib/lit-element-renderer.js");
-      const LitElementRenderer =
-        mod.LitElementRenderer || mod.default?.LitElementRenderer;
+      const LitElementRenderer = mod.LitElementRenderer || mod.default?.LitElementRenderer;
 
       if (LitElementRenderer && !LitElementRenderer._sgdsNoncePatched) {
         LitElementRenderer._sgdsNoncePatched = true;
 
-        const originalRenderShadow =
-          LitElementRenderer.prototype.renderShadow;
+        const originalRenderShadow = LitElementRenderer.prototype.renderShadow;
 
-        LitElementRenderer.prototype.renderShadow = function (
-          renderInfo: unknown
-        ) {
+        LitElementRenderer.prototype.renderShadow = function (renderInfo: unknown) {
           const result = originalRenderShadow.call(this, renderInfo);
           if (!result) return result;
 
