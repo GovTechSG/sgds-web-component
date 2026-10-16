@@ -42,6 +42,9 @@ export class SgdsMainnav extends NavElement {
   /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
   @property({ type: Boolean }) hasNonCollapsibleSlot = false;
 
+  /** Used only for SSR to indicate the presence of the `profile` slot. */
+  @property({ type: Boolean }) hasProfileSlot = false;
+
   /** When true, removes max-width constraint to allow content to stretch full screen width */
   @property({ type: Boolean, reflect: true })
   fluid = false;
@@ -64,10 +67,11 @@ export class SgdsMainnav extends NavElement {
       | SgdsMainnavDropdown[];
   }
 
-  private readonly hasSlotController = new HasSlotController(this, "non-collapsible");
+  private readonly hasSlotController = new HasSlotController(this, "non-collapsible", "profile");
 
   updated() {
     if (!this.hasNonCollapsibleSlot) this.hasNonCollapsibleSlot = this.hasSlotController.test("non-collapsible");
+    if (!this.hasProfileSlot) this.hasProfileSlot = this.hasSlotController.test("profile");
     // Sync expanded state to context
     this._expanded = this.expanded;
   }
@@ -97,6 +101,7 @@ export class SgdsMainnav extends NavElement {
 
   private _handleProfileSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
+    this.hasProfileSlot = childElements.length > 0;
     childElements.forEach(el => {
       el.setAttribute("expand", this.expand);
     });
@@ -114,9 +119,11 @@ export class SgdsMainnav extends NavElement {
     return html`
       <nav aria-label="Main navigation">
         <div class="navbar ${this._expandClass()}">
-          <a class="navbar-brand" href=${sanitizeHref(this.brandHref) ?? ""} aria-label="brand-link">
-            <slot name="brand"></slot>
-          </a>
+          ${this.brandHref
+            ? html`<a class="navbar-brand" href=${sanitizeHref(this.brandHref) ?? ""}>
+                <slot name="brand"></slot>
+              </a>`
+            : html`<slot name="brand" @slotchange=${this._handleBrandSlotChange}></slot>`}
           <div class="navbar-body navbar-collapse" id=${this.collapseId}>
             <div class="navbar-nav navbar-nav-scroll">
               <slot @slotchange=${this._handleDefaultSlotChange}></slot>
@@ -127,9 +134,18 @@ export class SgdsMainnav extends NavElement {
               ></slot>
             </div>
           </div>
-          <div class="navbar-end">
+          <div
+            class=${classMap({
+              "navbar-end": true,
+              "navbar-end--empty": !this.hasNonCollapsibleSlot && !this.hasProfileSlot && !this.breakpointReached
+            })}
+          >
             <slot name="non-collapsible" class=${classMap({ "slot-empty": !this.hasNonCollapsibleSlot })}></slot>
-            <slot name="profile" @slotchange=${this._handleProfileSlotChange}></slot>
+            <slot
+              name="profile"
+              class=${classMap({ "slot-empty": !this.hasProfileSlot })}
+              @slotchange=${this._handleProfileSlotChange}
+            ></slot>
             ${this._renderToggler()}
           </div>
         </div>

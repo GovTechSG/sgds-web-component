@@ -127,8 +127,9 @@ export class SgdsComboBox extends SelectElement {
       this.options.forEach(o => {
         o.removeAttribute("hidden");
       });
-      // reset emptyMenu state
+      // reset emptyMenu and create-option state
       this.emptyMenuAfterFiltering = false;
+      this._showCreateOption = false;
     });
   }
 
@@ -650,22 +651,9 @@ export class SgdsComboBox extends SelectElement {
     }
 
     if (this._showCreateOption && (e.key === "ArrowDown" || (e.key === "Tab" && !e.shiftKey))) {
-      const items = this._getActiveMenuItems();
-      if (items.length > 0) {
-        const lastItem = items[items.length - 1];
-        const lastItemFocused = lastItem.shadowRoot?.querySelector(".dropdown-item")?.matches(":focus");
-        if (lastItemFocused) {
-          e.preventDefault();
-          createDiv?.focus();
-          return;
-        }
-      }
-      // When no items exist but create option is visible (empty filter), focus it
-      if (items.length === 0) {
-        e.preventDefault();
-        createDiv?.focus();
-        return;
-      }
+      e.preventDefault();
+      createDiv?.focus();
+      return;
     }
     super._handleKeyboardMenuItemsEvent(e);
   }
@@ -723,7 +711,6 @@ export class SgdsComboBox extends SelectElement {
             ? html`<div
                 class=${classMap({ "create-option": true, slotted: this._createOptionSlotContent.length > 0 })}
                 tabindex="0"
-                role="option"
                 @click=${this._handleCreateOptionClick}
                 @keydown=${this._handleCreateOptionKeydown}
               >

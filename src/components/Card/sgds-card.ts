@@ -1,7 +1,7 @@
 import { nothing, PropertyValueMap } from "lit";
 import { property, queryAssignedElements } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-import { html, literal } from "lit/static-html.js";
+import { html } from "lit";
 import { CardElement } from "../../base/card-element";
 import { HasSlotController } from "../../utils/slot";
 import { CardImageAdjustment, CardImagePosition } from "./types";
@@ -20,8 +20,7 @@ import cardStyle from "./card.css";
  * @slot description - The paragrapher text of the card
  * @slot lower - Accepts any additional content to be displayed below the card description, such as badges, metadata, or supplementary information.
  * @slot footer - Footer area of the card. Accepts links, actions, or any custom content.
- * @slot link - (@deprecated) Deprecated since 3.3.2 in favour of `footer` slot.
- *  Legacy slot for anchor elements. Use `footer` instead.
+ * @slot link - @deprecated since v3.3.2 — use `footer` slot instead.
  */
 export class SgdsCard extends CardElement {
   static styles = [...CardElement.styles, cardStyle];
@@ -103,22 +102,23 @@ export class SgdsCard extends CardElement {
   }
 
   render() {
-    const tag = this.stretchedLink ? literal`a` : literal`div`;
-    const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
-
     return html`
-      <${tag}
+      <div
         class="card ${classMap({
           disabled: this.disabled
         })}"
-        tabindex=${cardTabIndex}
       >
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
+        ${this.stretchedLink && this._stretchedHref
+          ? html`<a class="stretched-link" href=${this._stretchedHref} aria-label=${this._stretchedLabel}></a>`
+          : nothing}
         <slot name="menu"></slot>
-        <div class=${classMap({
-          "card-image": this.hasImageSlot,
-          "card-media": this.hasIconSlot || this.hasUpperSlot
-        })}>
+        <div
+          class=${classMap({
+            "card-image": this.hasImageSlot,
+            "card-media": this.hasIconSlot || this.hasUpperSlot
+          })}
+        >
           <slot name="upper">
             <slot name="image" @slotchange=${this.handleImgSlotChange}></slot>
             <slot name="icon"></slot>
@@ -139,7 +139,7 @@ export class SgdsCard extends CardElement {
             <slot name="link" @slotchange=${this.warnLinkSlotMisused}></slot>
           </slot>
         </div>
-      </${tag}>
+      </div>
     `;
   }
 }

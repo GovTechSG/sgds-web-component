@@ -15,6 +15,18 @@ fs.mkdirSync(reactDir, { recursive: true });
 // Fetch component metadata
 const metadata = JSON.parse(fs.readFileSync(path.join("./", 'custom-elements.json'), 'utf8'));
 
+// Generate SSR init module (enables DSD rendering + nonce support)
+// Order matters: ssr-nonce-patch patches React BEFORE enable-lit-ssr.js saves
+// the functions as its "originals". This way Lit calls our nonce wrapper internally.
+const ssrInitSource = `import '../utils/ssr-nonce-patch';\nimport '@lit-labs/ssr-react/enable-lit-ssr.js';\n`;
+fs.writeFileSync(path.join(reactDir, '_ssr-init.ts'), ssrInitSource, 'utf8');
+
+// Generate SSR public API (for consumers to set CSP nonce)
+const ssrDir = path.join(reactDir, '_ssr');
+fs.mkdirSync(ssrDir, { recursive: true });
+const ssrApiSource = `export { setCSPNonce, getCSPNonce, registerSSRNonce } from '../../utils/ssr-nonce';\n`;
+fs.writeFileSync(path.join(ssrDir, 'index.ts'), ssrApiSource, 'utf8');
+
 // Wrap components
 console.log('Wrapping components for React...');
 
@@ -32,6 +44,7 @@ components.map(component => {
 
   const source = prettier.format(
     `
+      import '../_ssr-init';
       import * as React from 'react';
       import { createComponent } from '@lit/react';
       import Component from '../../components/${importPath}';

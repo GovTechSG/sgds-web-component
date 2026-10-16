@@ -305,6 +305,7 @@ describe("sgds-combo-box ", () => {
       await sendKeys({ type: "test" });
       await el.updateComplete;
       expect(input?.value).to.equal("test");
+      await waitUntil(() => el.querySelectorAll("sgds-combo-box-option:not([hidden])").length === 3);
       const items = el.querySelectorAll("sgds-combo-box-option:not([hidden])");
       expect(items?.length).to.equal(3);
     });
@@ -2582,6 +2583,38 @@ describe("creatable combo-box", () => {
     await aTimeout(100);
 
     expect(el.value).to.equal("zzz");
+  });
+
+  it("does not show 'Create \"\"' after typing a non-matching value and closing the menu", async () => {
+    const el = await fixture<SgdsComboBox>(html`
+      <sgds-combo-box creatable>
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+      </sgds-combo-box>
+    `);
+    await el.updateComplete;
+
+    // Type a non-matching value to trigger the create option
+    const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
+    await simulateUserClick(input);
+    await sendKeys({ type: "zzz" });
+    await el.updateComplete;
+
+    const createOption = el.shadowRoot?.querySelector(".create-option");
+    expect(createOption).to.exist;
+    expect(createOption?.textContent?.trim()).to.equal('Create "zzz"');
+
+    // Close the menu without clicking the create option (simulates clicking away)
+    el.hideMenu();
+    await aTimeout(300);
+    await el.updateComplete;
+
+    // Reopen the menu
+    el.showMenu();
+    await el.updateComplete;
+
+    // The create option should not be visible with empty text
+    const createOptionAfter = el.shadowRoot?.querySelector(".create-option");
+    expect(createOptionAfter).to.not.exist;
   });
 
   it("discards unmatched values in non-creatable mode", async () => {

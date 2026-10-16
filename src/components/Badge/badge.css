@@ -95,7 +95,7 @@ sgds-tooltip {
   background-color: var(--sgds-primary-surface-default);
   color: var(--sgds-color-fixed-light);
   border: var(--sgds-border-width-1) solid var(--sgds-border-color-transparent);
-  border-radius: var(--sgds-border-radius-sm);
+  border-radius: var(--sgds-indicator-border-radius);
   font-size: var(--sgds-font-size-label-xs);
   line-height: var(--sgds-line-height-3-xs);
   height: var(--sgds-dimension-24, 24px);
@@ -127,8 +127,8 @@ sgds-tooltip {
   padding-right: 0;
 }
 
-.badge-dimissible sgds-close-button {
-  --sgds-close-btn-border-radius: var(--sgds-border-radius-sm);
+.badge-dismissible sgds-close-button {
+  --close-btn-border-radius: var(--sgds-indicator-border-radius);
 }
 
 slot::slotted(*) {

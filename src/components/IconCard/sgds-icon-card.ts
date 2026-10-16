@@ -1,5 +1,5 @@
 import { nothing, PropertyValueMap } from "lit";
-import { html, literal } from "lit/static-html.js";
+import { html } from "lit";
 import { property, queryAssignedElements, queryAssignedNodes } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { CardElement } from "../../base/card-element";
@@ -16,8 +16,7 @@ import IconCardStyle from "./icon-card.css";
  * @slot description - The paragrapher text of the card
  * @slot lower - Accepts any additional content to be displayed below the card description, such as badges, metadata, or supplementary information.
  * @slot footer - Footer area of the card. Accepts links, actions, or any custom content.
- * @slot link - (@deprecated) Deprecated since 3.3.2 in favour of `footer` slot.
- *  Legacy slot for anchor elements. Use `footer` instead.
+ * @slot link - @deprecated since v3.3.2 — use `footer` slot instead.
  */
 export class SgdsIconCard extends CardElement {
   static styles = [...CardElement.styles, IconCardStyle];
@@ -69,18 +68,17 @@ export class SgdsIconCard extends CardElement {
   }
 
   render() {
-    const tag = this.stretchedLink ? literal`a` : literal`div`;
-    const cardTabIndex = !this.stretchedLink || this.disabled ? -1 : 0;
-
     return html`
-      <${tag} 
+      <div
         class="${classMap({
           card: true,
           disabled: this.disabled
         })}"
-        tabindex=${cardTabIndex}
       >
         ${this.tinted && !this.noPadding ? html`<div class="card-tinted-bg"></div>` : nothing}
+        ${this.stretchedLink && this._stretchedHref
+          ? html`<a class="stretched-link" href=${this._stretchedHref} aria-label=${this._stretchedLabel}></a>`
+          : nothing}
         <div class="card-media">
           <slot name="icon"></slot>
           ${this.orientation === "vertical" ? html`<slot name="upper"></slot>` : nothing}
@@ -100,7 +98,7 @@ export class SgdsIconCard extends CardElement {
             <slot name="link" @slotchange=${this.warnLinkSlotMisused}></slot>
           </slot>
         </div>
-      </${tag}>
+      </div>
     `;
   }
 }

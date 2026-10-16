@@ -124,6 +124,7 @@ export const ButtonWithIcon = {
 const FormSubmitTemplate = () => {
   return html`
     <form
+      class="sgds:flex sgds:flex-col sgds:gap-form-md sgds:items-start"
       action=""
       method="get"
       @submit=${e => {
@@ -132,12 +133,22 @@ const FormSubmitTemplate = () => {
         document.getElementById("form-output").textContent = "Selected: " + formData.get("subject");
       }}
     >
-      <p>Choose your favourite subject:</p>
-      <sgds-button name="subject" type="submit" value="fav_HTML" ariaLabel="HTML">HTML</sgds-button>
-      <sgds-button name="subject" type="submit" value="fav_CSS" ariaLabel="CSS">CSS</sgds-button>
-      <sgds-button name="subject" type="submit" value="fav_JS" ariaLabel="JavaScript">JavaScript</sgds-button>
+      <div
+        role="group"
+        aria-labelledby="subject-label"
+        class="sgds:flex sgds:flex-col sgds:gap-form-md sgds:items-start"
+      >
+        <label id="subject-label" class="sgds:text-label-md sgds:leading-xs sgds:tracking-normal"
+          >Choose your favourite subject:</label
+        >
+        <div class="sgds:flex sgds:gap-4">
+          <sgds-button name="subject" type="submit" value="fav_HTML" ariaLabel="HTML">HTML</sgds-button>
+          <sgds-button name="subject" type="submit" value="fav_CSS" ariaLabel="CSS">CSS</sgds-button>
+          <sgds-button name="subject" type="submit" value="fav_JS" ariaLabel="JavaScript">JavaScript</sgds-button>
+        </div>
+      </div>
     </form>
-    <p id="form-output"></p>
+    <span id="form-output" class="sgds:text-label-md sgds:leading-xs sgds:tracking-normal"></span>
   `;
 };
 

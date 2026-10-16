@@ -22,6 +22,7 @@
   font-size: var(--sgds-font-size-heading-sm);
   line-height: var(--sgds-line-height-sm);
   letter-spacing: var(--sgds-letter-spacing-tight);
+  font-family: var(--sgds-font-family-subtitle);
 }
 
 :host([density="spacious"]) .content {
@@ -32,6 +33,12 @@
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
 
+:host(:first-of-type) .accordion-item {
+  border-top-left-radius: var(--sgds-surface-border-radius);
+  border-top-right-radius: var(--sgds-surface-border-radius);
+}
+
+
 .accordion-btn {
   width: 100%;
   display: flex;
@@ -41,14 +48,26 @@
   background-color: var(--sgds-bg-transparent);
   text-align: left;
   border: 0;
+  border-radius: inherit;
   color: var(--sgds-color-default);
   line-height: var(--sgds-line-height-xs);
+  font-family: var(--sgds-font-family-subtitle);
   font-size: var(--sgds-font-size-subtitle-md);
   overflow-anchor: none;
   font-weight: var(--sgds-font-weight-semibold);
 }
 
+:host(:last-of-type) .accordion-item {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: border-bottom-left-radius 0s, border-bottom-right-radius 0s;
+}
 
+:host(:last-of-type) .accordion-item > .collapsed {
+  border-bottom-left-radius: var(--sgds-surface-border-radius);
+  border-bottom-right-radius: var(--sgds-surface-border-radius);
+  transition: border-bottom-left-radius 0s var(--sgds-motion-duration-standard), border-bottom-right-radius 0s var(--sgds-motion-duration-standard);
+}
 
 .accordion-btn:not(.disabled):hover,
 .accordion-btn:not(:disabled):hover {
@@ -82,7 +101,7 @@ slot[name="badge"]::slotted(*) {
 
 slot[name="caret"]::slotted(*),
 slot[name="caret"] sgds-icon {
-  transition: transform 0.2s ease-in-out;
+  transition: transform var(--sgds-motion-duration-standard) ease-in-out;
   color: var(--sgds-color-subtle);
 }
 

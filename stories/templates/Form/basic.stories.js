@@ -5,7 +5,7 @@ const Template = () => html`
     <sgds-masthead></sgds-masthead>
 
     <sgds-mainnav>
-      <strong slot="brand">Logo</strong>
+      <strong slot="brand" class="sgds:flex sgds:items-center sgds:self-center">Logo</strong>
     </sgds-mainnav>
 
     <!-- Page header -->

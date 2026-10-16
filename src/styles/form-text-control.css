@@ -31,7 +31,7 @@
   gap: var(--sgds-form-gap-md);
   background-color: var(--sgds-form-surface-default);
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
-  border-radius: var(--input-border-radius, var(--sgds-form-border-radius-md));
+  border-radius: var(--input-border-radius, var(--sgds-form-border-radius));
   padding: 0px var(--sgds-form-padding-x);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   height: var(--sgds-dimension-48);
@@ -52,7 +52,7 @@
   min-width: 0;
   width: 100%;
   color: var(--sgds-form-color-default);
-  font-family: var(--sgds-font-family-brand);
+  font-family: var(--sgds-font-family-label);
   font-size: var(--sgds-font-size-label-md);
   line-height: var(--sgds-line-height-xs);
 }
@@ -65,12 +65,12 @@
 
 .form-control-group:not(.disabled):not(.is-invalid):not(.readonly):not(:focus-within):hover {
   outline: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
-  outline-offset: var(--sgds-form-outline-offset-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 .form-control-group:not(.disabled):not(.is-invalid):focus-within {
-  outline: var(--sgds-form-outline-focus);
-  outline-offset: var(--sgds-form-outline-offset-focus);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
 
 /* Disabled */
@@ -97,5 +97,5 @@
 }
 .form-control-group:not(.disabled).is-invalid:focus-within {
   outline: var(--sgds-border-width-2) solid var(--sgds-form-danger-color-default);
-  outline-offset: var(--sgds-form-outline-offset-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
 }
