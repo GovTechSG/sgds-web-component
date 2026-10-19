@@ -1,0 +1,25 @@
+:root {
+  /* Density Padding — Compact (shifts down 1 spacer step) */
+  --sgds-density-padding-3-xs: var(--sgds-spacer-0);
+  --sgds-density-padding-2-xs: var(--sgds-spacer-1);
+  --sgds-density-padding-xs: var(--sgds-spacer-2);
+  --sgds-density-padding-sm: var(--sgds-spacer-3);
+  --sgds-density-padding-md: var(--sgds-spacer-4);
+  --sgds-density-padding-lg: var(--sgds-spacer-5);
+  --sgds-density-padding-xl: var(--sgds-spacer-6);
+  --sgds-density-padding-2-xl: var(--sgds-spacer-7);
+  --sgds-density-padding-3-xl: var(--sgds-spacer-8);
+  --sgds-density-padding-4-xl: var(--sgds-spacer-9);
+  --sgds-density-padding-5-xl: var(--sgds-spacer-10);
+
+  /* Density Gap — Compact */
+  --sgds-density-gap-none: var(--sgds-spacer-0);
+  --sgds-density-gap-2-xs: var(--sgds-spacer-1);
+  --sgds-density-gap-xs: var(--sgds-spacer-2);
+  --sgds-density-gap-sm: var(--sgds-spacer-3);
+  --sgds-density-gap-md: var(--sgds-spacer-4);
+  --sgds-density-gap-lg: var(--sgds-spacer-5);
+  --sgds-density-gap-xl: var(--sgds-spacer-6);
+  --sgds-density-gap-2-xl: var(--sgds-spacer-7);
+  --sgds-density-gap-3-xl: var(--sgds-spacer-8);
+}
