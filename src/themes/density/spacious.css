@@ -13,7 +13,6 @@
   --sgds-density-padding-5-xl: var(--sgds-spacer-12);
 
   /* Density Gap — Spacious */
-  --sgds-density-gap-none: var(--sgds-spacer-0);
   --sgds-density-gap-2-xs: var(--sgds-spacer-3);
   --sgds-density-gap-xs: var(--sgds-spacer-4);
   --sgds-density-gap-sm: var(--sgds-spacer-5);
