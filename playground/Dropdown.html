@@ -3,8 +3,25 @@
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 <link href="css/override.css" rel="stylesheet" type="text/css" />
+<link id="density-compact" href="../src/themes/density/compact.css" rel="stylesheet" type="text/css" disabled />
+<link id="density-spacious" href="../src/themes/density/spacious.css" rel="stylesheet" type="text/css" disabled />
 <style>
 </style>
+
+<div>
+  <label for="density-select">Density:</label>
+  <select id="density-select">
+    <option value="default">Default</option>
+    <option value="compact">Compact</option>
+    <option value="spacious">Spacious</option>
+  </select>
+  <script>
+    document.getElementById('density-select').addEventListener('change', function() {
+      document.getElementById('density-compact').disabled = this.value !== 'compact';
+      document.getElementById('density-spacious').disabled = this.value !== 'spacious';
+    });
+  </script>
+</div>
 
 <div style="width: 400px; border: 1px solid red">
   hello world there are ton
@@ -41,7 +58,7 @@
   <br />
   <br />
   <br />
-  <sgds-dropdown id="dropdown-select" close="outside">
+  <sgds-dropdown id="dropdown-select" close="inside" menuIsOpen>
     <sgds-button slot="toggler" ariaLabel="Dropdown">
       Dropdown
       <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>

@@ -4,7 +4,7 @@
 
 .dropdown-item {
   background-color: var(--sgds-bg-transparent);
-  padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
+  padding: var(--sgds-density-padding-sm) var(--sgds-padding-lg);
   clear: both;
   display: flex;
   gap: var(--sgds-gap-sm);
@@ -12,7 +12,6 @@
   color: var(--sgds-color-default);
   text-align: inherit;
   cursor: pointer;
-  font-size: var(--sgds-font-size-label-sm);
 }
 
 .dropdown-item:hover {
@@ -63,8 +62,8 @@
 ::slotted(a),
 ::slotted(sgds-checkbox) {
   flex: 1;
-  margin: calc(var(--sgds-padding-sm) * -1) calc(var(--sgds-padding-lg) * -1);
-  padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
+  margin: calc(var(--sgds-density-padding-sm) * -1) calc(var(--sgds-padding-lg) * -1);
+  padding: var(--sgds-density-padding-sm) var(--sgds-padding-lg);
 }
 
 /** to style the mainnav dropdown in mobile */
