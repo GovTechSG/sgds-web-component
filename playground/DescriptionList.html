@@ -1,27 +1,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/fonts.css" rel="stylesheet" type="text/css" />
 
 <script type="module" src="../src/index.ts"></script>
 <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
 <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
 <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
 <link href="css/override.css" rel="stylesheet" type="text/css" />
+<link id="density-compact" href="../src/themes/density/compact.css" rel="stylesheet" type="text/css" disabled />
+<link id="density-spacious" href="../src/themes/density/spacious.css" rel="stylesheet" type="text/css" disabled />
 
 <style>
 </style>
 
-<div class="sgds-container">
-  <sgds-description-list-group bordered stacked>
-    <sgds-description-list>
-      <span>7:00 PM - 7:05 PM</span>
-      <span slot="data">Introduction by STACK community</span>
-    </sgds-description-list>
-    <sgds-description-list>
-      <span>7:00 PM - 7:05 PM</span>
-      <span slot="data">Data Text Description List 1</span>
-    </sgds-description-list>
-    <sgds-description-list>
-      <span>7:05 PM - 7:15 PM</span>
-      <span slot="data">Data Text Description List 2</span>
-    </sgds-description-list>
-  </sgds-description-list-group>
+<div>
+  <label for="density-select">Density:</label>
+  <select id="density-select">
+    <option value="default">Default</option>
+    <option value="compact">Compact</option>
+    <option value="spacious">Spacious</option>
+  </select>
+  <script>
+    document.getElementById('density-select').addEventListener('change', function() {
+      document.getElementById('density-compact').disabled = this.value !== 'compact';
+      document.getElementById('density-spacious').disabled = this.value !== 'spacious';
+    });
+  </script>
 </div>
+
+<h3>Title + Description + Stacked (no border)</h3>
+<sgds-description-list-group stacked>
+  <span slot="title">Group Title</span>
+  <span slot="description">This is a group description</span>
+  <sgds-description-list>
+    <span>Label 1</span>
+    <span slot="data">Value 1</span>
+  </sgds-description-list>
+  <sgds-description-list>
+    <span>Label 2</span>
+    <span slot="data">Value 2</span>
+  </sgds-description-list>
+  <sgds-description-list>
+    <span>Label 3</span>
+    <span slot="data">Value 3</span>
+  </sgds-description-list>
+</sgds-description-list-group>
+<br/>
+
+<h3>Title + Description + Stacked + Bordered</h3>
+<sgds-description-list-group stacked bordered>
+  <span slot="title">Group Title</span>
+  <span slot="description">This is a group description</span>
+  <sgds-description-list>
+    <span>Label 1</span>
+    <span slot="data">Value 1</span>
+  </sgds-description-list>
+  <sgds-description-list>
+    <span>Label 2</span>
+    <span slot="data">Value 2</span>
+  </sgds-description-list>
+  <sgds-description-list>
+    <span>Label 3</span>
+    <span slot="data">Value 3</span>
+  </sgds-description-list>
+</sgds-description-list-group>
