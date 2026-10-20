@@ -6,7 +6,7 @@ export const Template = args => html`<sgds-table-of-contents>
   ${args.contents?.map(
     item =>
       html`<li slot="contents">
-        <sgds-link><a href=${ifDefined(item.href)}>${item.label}</a></sgds-link>
+        <sgds-link size="sm"><a href=${ifDefined(item.href)}>${item.label}</a></sgds-link>
       </li>`
   )}
 </sgds-table-of-contents>`;

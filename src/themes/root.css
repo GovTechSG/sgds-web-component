@@ -340,7 +340,7 @@
   --sgds-padding-5-xl: var(--sgds-spacer-11);
   --sgds-form-padding-x: var(--sgds-padding-md);
   --sgds-form-padding-y: var(--sgds-padding-sm);
-
+  
   /* NEW - MARGIN */
   --sgds-margin-none: var(--sgds-spacer-0);
   --sgds-margin-3-xs: var(--sgds-spacer-1);
