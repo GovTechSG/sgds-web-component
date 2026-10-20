@@ -4,19 +4,19 @@
 }
 
 :host([orientation="vertical"][noPadding]) .card-body {
-  padding: var(--sgds-padding-xl) var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-none);
+  padding: var(--sgds-density-padding-xl) var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-none);
 }
 
 :host([orientation="vertical"][imagePosition="after"][noPadding]) .card-body {
-  padding: var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-xl) var(--sgds-padding-none);
+  padding: var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-density-padding-xl) var(--sgds-padding-none);
 }
 
 :host([orientation="horizontal"][noPadding]) .card-body {
-  padding: var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-xl);
+  padding: var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-padding-none) var(--sgds-density-padding-xl);
 }
 
 :host([orientation="horizontal"][imagePosition="after"][noPadding]) .card-body {
-  padding: var(--sgds-padding-none) var(--sgds-padding-xl) var(--sgds-padding-none) var(--sgds-padding-none);
+  padding: var(--sgds-padding-none) var(--sgds-density-padding-xl) var(--sgds-padding-none) var(--sgds-padding-none);
 }
 
 :host([tinted]:not([noPadding])) .card-tinted-bg {

@@ -48,7 +48,7 @@
 }
 
 :host([orientation="horizontal"]) .card-media {
-  padding: var(--sgds-padding-xl) var(--sgds-padding-none) var(--sgds-padding-xl) var(--sgds-padding-xl);
+  padding: var(--sgds-density-padding-xl) var(--sgds-padding-none) var(--sgds-density-padding-xl) var(--sgds-density-padding-xl);
 }
 
 :host([orientation="horizontal"]) .card-image {
@@ -145,17 +145,17 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: var(--sgds-padding-xl) var(--sgds-padding-xl) var(--sgds-padding-none);
+  padding: var(--sgds-density-padding-xl) var(--sgds-density-padding-xl) var(--sgds-padding-none);
   line-height: 0;
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-lg);
+  gap: var(--sgds-density-gap-lg);
   flex: 1 1 auto;
   color: var(--sgds-body-color-default);
-  padding: var(--sgds-padding-xl);
+  padding: var(--card-body-padding-top, var(--sgds-density-padding-xl)) var(--sgds-density-padding-xl) var(--sgds-density-padding-xl) var(--card-body-padding-left, var(--sgds-density-padding-xl));
   z-index: 1;
 }
 
@@ -199,6 +199,11 @@ slot[name="title"]::slotted(a) {
 
 slot[name="description"]::slotted(*) {
   color: var(--sgds-color-subtle);
+  font-family: var(--sgds-font-family-label) !important;
+  font-size: var(--sgds-font-size-label-sm) !important;
+  font-weight: var(--sgds-font-weight-regular) !important;
+  line-height: var(--sgds-line-height-2-xs) !important;
+  letter-spacing: var(--sgds-letter-spacing-normal) !important;
   margin-bottom: var(--sgds-margin-none) !important;
 }
 
