@@ -6,7 +6,7 @@
 .links {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-xs);
+  gap: var(--sgds-gap-sm);
 }
 
 slot[name="title"]::slotted(*) {
