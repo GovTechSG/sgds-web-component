@@ -175,7 +175,7 @@
 slot[name="title"]::slotted(*) {
   color: var(--sgds-color-default);
   font-family: var(--sgds-font-family-subtitle) !important;
-  font-size: var(--sgds-font-size-heading-sm) !important;
+  font-size: var(--sgds-font-size-subtitle-lg) !important;
   font-weight: var(--sgds-font-weight-semibold) !important;
   line-height: var(--sgds-line-height-sm) !important;
   letter-spacing: var(--sgds-letter-spacing-tight) !important;

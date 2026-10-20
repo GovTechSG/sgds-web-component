@@ -19,7 +19,7 @@
 
 :host([density="spacious"]) .accordion-btn {
   padding: var(--sgds-padding-xl);
-  font-size: var(--sgds-font-size-heading-sm);
+  font-size: var(--sgds-font-size-subtitle-lg);
   line-height: var(--sgds-line-height-sm);
   letter-spacing: var(--sgds-letter-spacing-tight);
   font-family: var(--sgds-font-family-subtitle);
