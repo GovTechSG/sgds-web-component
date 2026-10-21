@@ -1,6 +1,6 @@
 ---
 name: "sgds-theming"
-description: "Customising the visual theme of an SGDS application — product brand colours, day/night mode, and font. Use when users ask about changing the primary colour, theming their app, enabling dark mode, night mode, overriding CSS tokens, or customising the font. Apply this skill whenever theming, branding, or CSS token overrides are mentioned."
+description: "Customising the visual theme of an SGDS application — product brand colours, day/night mode, font, border radius, and spacing density. Use when users ask about changing the primary colour, theming their app, enabling dark mode, night mode, overriding CSS tokens, customising the font, compact/spacious density, or border radius. Apply this skill whenever theming, branding, density, or CSS token overrides are mentioned."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -10,7 +10,7 @@ metadata:
 
 # SGDS Theming Skill
 
-How to customise the product theme — brand colours, day/night mode, and font — using SGDS CSS token overrides.
+How to customise the product theme — brand colours, day/night mode, font, border radius, and spacing density — using SGDS CSS token overrides.
 
 ---
 
@@ -30,6 +30,7 @@ Import `themes/day.css` before your custom CSS. See **[sgds-getting-started](../
 | Font typeface (all roles) | Override `--sgds-font-family-brand` | [typography.md](reference/typography.md) |
 | Font typeface (per role) | Override individual `--sgds-font-family-{display,heading,subtitle,body,label,code}` | [typography.md](reference/typography.md) |
 | Border radius | Override semantic `--sgds-{purpose}-border-radius` tokens | [border-radius.md](reference/border-radius.md) |
+| Spacing density (compact/spacious) | Import `themes/density/compact.css` or `spacious.css` | [density.md](reference/density.md) |
 
 ---
 
@@ -190,6 +191,12 @@ See **[border-radius.md](reference/border-radius.md)** for the full reference �
 
 ---
 
+## Changing the Spacing Density
+
+See **[density.md](reference/density.md)** for the full reference — density modes, token tables, affected components, and import order.
+
+---
+
 ## For AI Agents
 
 1. Always tell users to import their custom CSS **after** `themes/day.css` — otherwise the override will be overwritten.
@@ -202,3 +209,4 @@ See **[border-radius.md](reference/border-radius.md)** for the full reference �
 8. For brand colour theming, read [brand-colour.md](reference/brand-colour.md).
 9. For typography/font theming, read [typography.md](reference/typography.md).
 10. For border radius theming, read [border-radius.md](reference/border-radius.md). Override **semantic** tokens (`--sgds-{purpose}-border-radius`), referencing primitive values via `var(--sgds-border-radius-{size})`.
+11. For density theming, read [density.md](reference/density.md). Import **one** density file (`compact.css` or `spacious.css`) after the colour theme. Density affects padding and gap only — not font sizes, colours, or border radii.
