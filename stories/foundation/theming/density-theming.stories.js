@@ -112,59 +112,53 @@ export const Density = {
           `
         )}
         ${ComponentSection(
-          "Cards",
+          "Card",
           html`
-            <div class="sgds-grid sgds:gap-layout-md">
-              <div class="sgds-col-3">
-                <p class="sgds:text-body-md sgds:text-body-default sgds:mb-sm">Card</p>
-                <sgds-card>
-                  <span slot="title">Card Title</span>
-                  <span slot="subtitle">Subtitle</span>
-                  <span slot="description">This is a card component using density tokens for padding and gap.</span>
-                  <sgds-button slot="card-footer" variant="outline">Action</sgds-button>
-                </sgds-card>
-              </div>
-              <div class="sgds-col-3">
-                <p class="sgds:text-body-md sgds:text-body-default sgds:mb-sm">Icon Card</p>
-                <sgds-icon-card>
-                  <sgds-icon slot="icon" name="box-seam" size="3-xl"></sgds-icon>
-                  <sgds-badge variant="primary" slot="upper">New</sgds-badge>
-                  <span slot="subtitle">EXPLORE THE FEATURES</span>
-                  <span slot="title">Innovative solutions for you</span>
-                  <span slot="description"
-                    >Discover how our platform can streamline your workflow and enhance productivity.</span
-                  >
-                </sgds-icon-card>
-              </div>
-              <div class="sgds-col-3">
-                <p class="sgds:text-body-md sgds:text-body-default sgds:mb-sm">Image Card</p>
-                <sgds-image-card>
-                  <img
-                    slot="image"
-                    alt="Photo by Jirath Ninchaikovit on Unsplash"
-                    src="https://images.unsplash.com/photo-1547982982-448b6fdad3a8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0"
-                  />
-                  <span slot="subtitle">HERITAGE</span>
-                  <span slot="title">Singapore Shophouses</span>
-                  <span slot="description"
-                    >Colourful heritage shophouses are an iconic feature of Singapore's architectural landscape.</span
-                  >
-                </sgds-image-card>
-              </div>
-              <div class="sgds-col-3">
-                <p class="sgds:text-body-md sgds:text-body-default sgds:mb-sm">Thumbnail Card</p>
-                <sgds-thumbnail-card>
-                  <img slot="thumbnail" alt="SGDS logo" width="64" height="64" src="/logo.svg" />
-                  <sgds-badge variant="primary" slot="upper">Official</sgds-badge>
-                  <span slot="subtitle">DESIGN SYSTEM</span>
-                  <span slot="title">Singapore Government Design System</span>
-                  <span slot="description"
-                    >A design system for the Singapore government to build consistent and accessible digital
-                    services.</span
-                  >
-                </sgds-thumbnail-card>
-              </div>
-            </div>
+            <sgds-card class="sgds:w-[350px]">
+              <span slot="title">Card Title</span>
+              <span slot="subtitle">Subtitle</span>
+              <span slot="description">This is a card component using density tokens for padding and gap.</span>
+              <sgds-button slot="card-footer" variant="outline">Action</sgds-button>
+            </sgds-card>
+          `
+        )}
+        ${ComponentSection(
+          "Icon Card",
+          html`
+            <sgds-icon-card class="sgds:w-[350px]">
+              <sgds-icon slot="icon" name="box-seam" size="3-xl"></sgds-icon>
+              <sgds-badge variant="primary" slot="upper">New</sgds-badge>
+              <span slot="subtitle">EXPLORE THE FEATURES</span>
+              <span slot="title">Innovative solutions for you</span>
+              <span slot="description">Discover how our platform can streamline your workflow and enhance productivity.</span>
+            </sgds-icon-card>
+          `
+        )}
+        ${ComponentSection(
+          "Image Card",
+          html`
+            <sgds-image-card class="sgds:w-[350px]">
+              <img
+                slot="image"
+                alt="Photo by Jirath Ninchaikovit on Unsplash"
+                src="https://images.unsplash.com/photo-1547982982-448b6fdad3a8?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0"
+              />
+              <span slot="subtitle">HERITAGE</span>
+              <span slot="title">Singapore Shophouses</span>
+              <span slot="description">Colourful heritage shophouses are an iconic feature of Singapore's architectural landscape.</span>
+            </sgds-image-card>
+          `
+        )}
+        ${ComponentSection(
+          "Thumbnail Card",
+          html`
+            <sgds-thumbnail-card class="sgds:w-[350px]">
+              <img slot="thumbnail" alt="SGDS logo" width="64" height="64" src="/logo.svg" />
+              <sgds-badge variant="primary" slot="upper">Official</sgds-badge>
+              <span slot="subtitle">DESIGN SYSTEM</span>
+              <span slot="title">Singapore Government Design System</span>
+              <span slot="description">A design system for the Singapore government to build consistent and accessible digital services.</span>
+            </sgds-thumbnail-card>
           `
         )}
         ${ComponentSection(
@@ -178,7 +172,7 @@ export const Density = {
                 >Are you sure you want to delete "MyGov Portal"? All associated data, API keys, and user permissions
                 will be permanently removed.</span
               >
-              <sgds-button slot="footer" variant="link">Cancel</sgds-button>
+              <sgds-button slot="footer" variant="ghost">Cancel</sgds-button>
               <sgds-button slot="footer" variant="danger">Delete</sgds-button>
             </sgds-modal>
           `
