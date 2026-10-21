@@ -1695,6 +1695,18 @@ describe("datepicker in form context", () => {
     const formData = new FormData(el);
     expect(formData.get("myDatepicker")).to.equal("23/03/2020");
   });
+  it("should sync FormData when value property is set programmatically after render", async () => {
+    const form = await fixture<HTMLFormElement>(
+      html`<form><sgds-datepicker value="23/03/2020" name="myDatepicker"></sgds-datepicker></form>`
+    );
+    const datepicker = form.querySelector<SgdsDatepicker>("sgds-datepicker")!;
+
+    datepicker.value = "15/06/2021";
+    await datepicker.updateComplete;
+
+    const formData = new FormData(form);
+    expect(formData.get("myDatepicker")).to.equal("15/06/2021");
+  });
   it("allows empty value datepicker, not required field to be submitted in form", async () => {
     const el = await fixture<HTMLFormElement>(
       html`<form><sgds-datepicker value="23/03/2020" name="myDatepicker"></sgds-datepicker></form>`
