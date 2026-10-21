@@ -104,7 +104,7 @@ export const parameters = {
         ["Introduction", "Typography", ["Introduction", "Display", "Headings", "Subtitles"], "Layout", "Grid System"],
         "Theming",
         "Form",
-        ["Validation", "Custom Validation"],
+        ["Native Validation", "Custom Validation", "Working with FormData"],
         "Utilities",
         ["Introduction", "Spacing", ["Introduction"]],
         "Components",

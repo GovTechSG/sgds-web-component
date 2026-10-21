@@ -531,4 +531,18 @@ describe("should still populate FormData when noValidate is enabled", () => {
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
   });
+  it("should sync FormData when value property is set programmatically after render", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-quantity-toggle name="qty" value="7"></sgds-quantity-toggle>
+      </form>
+    `);
+    const toggle = form.querySelector<SgdsQuantityToggle>("sgds-quantity-toggle")!;
+
+    toggle.value = 42;
+    await toggle.updateComplete;
+
+    const formData = new FormData(form);
+    expect(formData.get("qty")).to.equal("42");
+  });
 });

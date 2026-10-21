@@ -181,8 +181,12 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
 
   /** @internal */
   @watch("value", { waitUntilFirstUpdate: true })
-  _handleValueChange() {
-    this.updateComplete.then(() => this._setTextareaHeight());
+  async _handleValueChange() {
+    this._mixinSetFormValue();
+    await this.updateComplete;
+    this._setTextareaHeight();
+    if (this._mixinShouldSkipSgdsValidation()) return;
+    this._mixinValidate(this.input);
   }
 
   protected _renderHintText() {

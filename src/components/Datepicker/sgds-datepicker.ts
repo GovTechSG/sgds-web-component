@@ -265,8 +265,12 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   }
 
   @watch("value", { waitUntilFirstUpdate: true })
-  _handleValueChange() {
+  async _handleValueChange() {
+    this._mixinSetFormValue();
     this.emit("sgds-change-date");
+    await this.updateComplete;
+    if (this._mixinShouldSkipSgdsValidation()) return;
+    this._mixinValidate(this.input);
   }
 
   private async _handleCloseMenu() {
