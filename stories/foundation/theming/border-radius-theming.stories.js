@@ -62,7 +62,8 @@ const ComponentSection = (name, content) => html`
   </div>
 `;
 
-const storyWrapper = content => html` <div class="sgds-container sgds:flex sgds:flex-col sgds:gap-layout-md">${content}</div> `;
+const storyWrapper = content =>
+  html` <div class="sgds-container sgds:flex sgds:flex-col sgds:gap-layout-md">${content}</div> `;
 
 export default {
   title: "Theming/Border Radius",

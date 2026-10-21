@@ -130,7 +130,9 @@ export const Density = {
               <sgds-badge variant="primary" slot="upper">New</sgds-badge>
               <span slot="subtitle">EXPLORE THE FEATURES</span>
               <span slot="title">Innovative solutions for you</span>
-              <span slot="description">Discover how our platform can streamline your workflow and enhance productivity.</span>
+              <span slot="description"
+                >Discover how our platform can streamline your workflow and enhance productivity.</span
+              >
             </sgds-icon-card>
           `
         )}
@@ -145,7 +147,9 @@ export const Density = {
               />
               <span slot="subtitle">HERITAGE</span>
               <span slot="title">Singapore Shophouses</span>
-              <span slot="description">Colourful heritage shophouses are an iconic feature of Singapore's architectural landscape.</span>
+              <span slot="description"
+                >Colourful heritage shophouses are an iconic feature of Singapore's architectural landscape.</span
+              >
             </sgds-image-card>
           `
         )}
@@ -157,7 +161,9 @@ export const Density = {
               <sgds-badge variant="primary" slot="upper">Official</sgds-badge>
               <span slot="subtitle">DESIGN SYSTEM</span>
               <span slot="title">Singapore Government Design System</span>
-              <span slot="description">A design system for the Singapore government to build consistent and accessible digital services.</span>
+              <span slot="description"
+                >A design system for the Singapore government to build consistent and accessible digital services.</span
+              >
             </sgds-thumbnail-card>
           `
         )}
@@ -278,7 +284,7 @@ export const Density = {
           "Dropdown",
           html`
             <sgds-dropdown>
-              <sgds-button slot="toggler" variant="outline">Open Dropdown</sgds-button>
+              <sgds-button slot="toggler" variant="outline" ariaLabel="Open Dropdown">Open Dropdown</sgds-button>
               <sgds-dropdown-item>Action 1</sgds-dropdown-item>
               <sgds-dropdown-item>Action 2</sgds-dropdown-item>
               <sgds-dropdown-item>Action 3</sgds-dropdown-item>
