@@ -36,6 +36,14 @@ Try focusing and blurring on the controls without inputting any value to observe
   <Story of={ValidationStories.FormData} />
 </Canvas>
 
+## FormData on first load
+
+All form components below have pre-set values via the `value` attribute. The FormData output is read immediately on first render, without any user interaction, to verify that `FormData` captures values set on initial load.
+
+<Canvas of={ValidationStories.FormDataOnFirstLoad}>
+  <Story of={ValidationStories.FormDataOnFirstLoad} />
+</Canvas>
+
 ## Summary of component's validation behaviour
 
 | **Component**      | **Status**                                  | **Constraint Validations**                                                                   | **SGDS Validation Behaviour**                                                                                                                                                                                               | **Additional SGDS Custom Validation** |

@@ -327,3 +327,147 @@ export const FormData = {
   args: {},
   tags: ["!dev"]
 };
+
+const FormDataOnFirstLoadTemplate = args => {
+  return html`
+    <div class="sgds-container sgds:py-layout-md">
+      <div class="sgds-grid sgds:gap-layout-md">
+        <div
+          class="sgds-col-4 sgds-col-sm-8 sgds-col-md-8 sgds-col-lg-center-8 sgds-col-xl-center-8 sgds-col-2-xl-center-8"
+        >
+          <div class="sgds:flex sgds:flex-col sgds:gap-layout-lg">
+            <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+              <h5
+                class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+              >
+                FormData Captured on First Load
+              </h5>
+              <p class="sgds:text-body-md sgds:text-body-default sgds:mb-0">
+                All form components below have pre-set values. The FormData output is read immediately on first render
+                without any user interaction.
+              </p>
+            </div>
+            <form id="formdata-first-load-form">
+              <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
+                <div>
+                  <sgds-input label="First Name" name="firstName" value="Sarah" placeholder="Placeholder"> </sgds-input>
+                </div>
+                <div>
+                  <sgds-datepicker name="appointmentDate" value="23/03/2020" label="Appointment date"></sgds-datepicker>
+                </div>
+                <div>
+                  <sgds-select
+                    name="favouriteAnimal"
+                    value="3"
+                    label="Favourite animal"
+                    menuList='[
+                      { "label": "Aligator", "value": "1" },
+                      { "label": "Bear", "value": "2" },
+                      { "label": "Cat", "value": "3" },
+                      { "label": "Dog", "value": "4" },
+                      { "label": "Elephant", "value": "5" }
+                    ]'
+                  ></sgds-select>
+                </div>
+                <div>
+                  <sgds-combo-box
+                    name="countryOfBirth"
+                    value="1"
+                    label="Country of birth"
+                    menuList='[
+                      { "label": "Singapore", "value": "1" },
+                      { "label": "Thailand", "value": "2" },
+                      { "label": "Malaysia", "value": "3" }
+                    ]'
+                    placeholder="Choose a country"
+                  ></sgds-combo-box>
+                </div>
+                <div>
+                  <sgds-quantity-toggle
+                    label="Number of dependents"
+                    name="dependentCount"
+                    value="5"
+                    min="1"
+                    max="10"
+                  ></sgds-quantity-toggle>
+                </div>
+                <div>
+                  <sgds-checkbox-group label="Food preference" name="food">
+                    <sgds-checkbox value="vegetarian" checked>vegetarian</sgds-checkbox>
+                    <sgds-checkbox value="halal">halal</sgds-checkbox>
+                    <sgds-checkbox value="na">no preference</sgds-checkbox>
+                  </sgds-checkbox-group>
+                </div>
+                <div>
+                  <sgds-radio-group name="gender" value="female" label="Gender">
+                    <sgds-radio value="female">Female</sgds-radio>
+                    <sgds-radio value="male">Male</sgds-radio>
+                  </sgds-radio-group>
+                </div>
+                <div>
+                  <sgds-textarea name="comments" value="Hello world" resize="auto" label="Comments"></sgds-textarea>
+                </div>
+                <div>
+                  <sgds-file-upload label="Supporting documents" multiple name="documents">File upload</sgds-file-upload>
+                </div>
+                <div>
+                  <sgds-checkbox name="consentA" value="consentA" checked>I consent to ...</sgds-checkbox>
+                </div>
+              </div>
+            </form>
+            <div>
+              <div class="sgds:flex sgds:items-center sgds:gap-layout-sm sgds:mb-layout-sm">
+                <h6
+                  class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
+                >
+                  FormData Output
+                </h6>
+                <sgds-button id="refresh-formdata-btn" variant="outlined" size="sm">Refresh FormData</sgds-button>
+              </div>
+              <pre
+                id="formdata-output"
+                class="sgds:p-layout-sm sgds:bg-surface-overlay sgds:rounded-md sgds:text-body-sm"
+                style="white-space: pre-wrap;"
+              >Reading FormData...</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function readFormData() {
+        const form = document.querySelector("#formdata-first-load-form");
+        const output = document.querySelector("#formdata-output");
+        if (!form || !output) return;
+
+        const formData = new window.FormData(form);
+        const entries = {};
+        for (const [key, value] of formData.entries()) {
+          if (entries[key]) {
+            if (!Array.isArray(entries[key])) entries[key] = [entries[key]];
+            entries[key].push(value instanceof File ? value.name : value);
+          } else {
+            entries[key] = value instanceof File ? value.name : value;
+          }
+        }
+        output.textContent = JSON.stringify(entries, null, 2);
+      }
+
+      // Wait for all custom elements to finish their first render
+      setTimeout(() => readFormData(), 500);
+
+      const refreshBtn = document.querySelector("#refresh-formdata-btn");
+      if (refreshBtn) {
+        refreshBtn.addEventListener("click", () => readFormData());
+      }
+    </script>
+  `;
+};
+
+export const FormDataOnFirstLoad = {
+  render: FormDataOnFirstLoadTemplate.bind({}),
+  name: "FormData on first load",
+  args: {},
+  tags: ["!dev"]
+};
