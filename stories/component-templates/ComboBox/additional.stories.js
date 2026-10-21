@@ -709,7 +709,7 @@ const CreatableCustomSlotTemplate = () => {
 
 export const CreatableCustomSlot = {
   render: CreatableCustomSlotTemplate.bind({}),
-  name: "Creatable with custom create-option slot",
+  name: "Creatable with create slot",
   args: {},
   parameters: {}
 };

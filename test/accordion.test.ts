@@ -256,10 +256,10 @@ describe("<sgds-accordion-item>", () => {
     expect(getComputedStyle(button!).lineHeight).to.equal("24px");
   });
 
-  it("accordion-btn should use --sgds-font-size-heading-sm and --sgds-line-height-sm for spacious density", async () => {
+  it("accordion-btn should use --sgds-font-size-subtitle-lg and --sgds-line-height-sm for spacious density", async () => {
     const el = await fixture<SgdsAccordionItem>(html`<sgds-accordion-item density="spacious"></sgds-accordion-item>`);
     const button = el.shadowRoot?.querySelector<HTMLElement>(".accordion-btn");
-    el.style.setProperty("--sgds-font-size-heading-sm", "24px");
+    el.style.setProperty("--sgds-font-size-subtitle-lg", "24px");
     el.style.setProperty("--sgds-line-height-sm", "28px");
     await el.updateComplete;
     expect(getComputedStyle(button!).fontSize).to.equal("24px");

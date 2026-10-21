@@ -305,6 +305,7 @@ describe("sgds-combo-box ", () => {
       await sendKeys({ type: "test" });
       await el.updateComplete;
       expect(input?.value).to.equal("test");
+      await waitUntil(() => el.querySelectorAll("sgds-combo-box-option:not([hidden])").length === 3);
       const items = el.querySelectorAll("sgds-combo-box-option:not([hidden])");
       expect(items?.length).to.equal(3);
     });

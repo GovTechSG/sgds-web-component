@@ -12,6 +12,12 @@
   font-weight: var(--sgds-font-weight-semibold);
   display: flex;
   align-items: center;
-  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
-  min-height: var(--sgds-dimension-56);
+  padding: var(--sgds-density-padding-md);
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs); /* 142.857% */
+}
+
+::slotted(*) {
+  font-size: inherit !important;
+  line-height: inherit !important;
 }
