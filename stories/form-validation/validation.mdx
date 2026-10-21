@@ -36,12 +36,12 @@ Try focusing and blurring on the controls without inputting any value to observe
   <Story of={ValidationStories.FormData} />
 </Canvas>
 
-## FormData on first load
+## FormData after programmatic prefill
 
-All form components below have pre-set values via the `value` attribute. The FormData output is read immediately on first render, without any user interaction, to verify that `FormData` captures values set on initial load.
+All form components below start **empty**. After first render, values are set programmatically via `element.value = ...` — simulating an API prefill or draft restore. The table shows whether `FormData` reflects the assigned values or still holds the initial empty values.
 
-<Canvas of={ValidationStories.FormDataOnFirstLoad}>
-  <Story of={ValidationStories.FormDataOnFirstLoad} />
+<Canvas of={ValidationStories.FormDataPrefill}>
+  <Story of={ValidationStories.FormDataPrefill} />
 </Canvas>
 
 ## Summary of component's validation behaviour

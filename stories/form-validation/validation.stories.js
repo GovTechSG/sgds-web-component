@@ -328,7 +328,18 @@ export const FormData = {
   tags: ["!dev"]
 };
 
-const FormDataOnFirstLoadTemplate = args => {
+const PREFILL_VALUES = {
+  firstName: "Sarah",
+  appointmentDate: "23/03/2020",
+  favouriteAnimal: "3",
+  countryOfBirth: "1",
+  dependentCount: 5,
+  food: "vegetarian",
+  gender: "female",
+  comments: "Hello world"
+};
+
+const FormDataPrefillTemplate = args => {
   return html`
     <div class="sgds-container sgds:py-layout-md">
       <div class="sgds-grid sgds:gap-layout-md">
@@ -340,25 +351,25 @@ const FormDataOnFirstLoadTemplate = args => {
               <h5
                 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
               >
-                FormData Captured on First Load
+                FormData After Programmatic Prefill
               </h5>
               <p class="sgds:text-body-md sgds:text-body-default sgds:mb-0">
-                All form components below have pre-set values. The FormData output is read immediately on first render
-                without any user interaction.
+                All form components below start empty. After first render, values are set programmatically via
+                <code>element.value = ...</code> (simulating an API prefill or draft restore). The table shows what each
+                field displays vs what FormData actually holds.
               </p>
             </div>
-            <form id="formdata-first-load-form">
+            <form id="formdata-prefill-form">
               <div class="sgds:flex sgds:flex-col sgds:gap-layout-md">
                 <div>
-                  <sgds-input label="First Name" name="firstName" value="Sarah" placeholder="Placeholder"> </sgds-input>
+                  <sgds-input label="First Name" name="firstName" placeholder="Placeholder"></sgds-input>
                 </div>
                 <div>
-                  <sgds-datepicker name="appointmentDate" value="23/03/2020" label="Appointment date"></sgds-datepicker>
+                  <sgds-datepicker name="appointmentDate" label="Appointment date"></sgds-datepicker>
                 </div>
                 <div>
                   <sgds-select
                     name="favouriteAnimal"
-                    value="3"
                     label="Favourite animal"
                     menuList='[
                       { "label": "Aligator", "value": "1" },
@@ -372,7 +383,6 @@ const FormDataOnFirstLoadTemplate = args => {
                 <div>
                   <sgds-combo-box
                     name="countryOfBirth"
-                    value="1"
                     label="Country of birth"
                     menuList='[
                       { "label": "Singapore", "value": "1" },
@@ -386,49 +396,45 @@ const FormDataOnFirstLoadTemplate = args => {
                   <sgds-quantity-toggle
                     label="Number of dependents"
                     name="dependentCount"
-                    value="5"
                     min="1"
                     max="10"
                   ></sgds-quantity-toggle>
                 </div>
                 <div>
                   <sgds-checkbox-group label="Food preference" name="food">
-                    <sgds-checkbox value="vegetarian" checked>vegetarian</sgds-checkbox>
+                    <sgds-checkbox value="vegetarian">vegetarian</sgds-checkbox>
                     <sgds-checkbox value="halal">halal</sgds-checkbox>
                     <sgds-checkbox value="na">no preference</sgds-checkbox>
                   </sgds-checkbox-group>
                 </div>
                 <div>
-                  <sgds-radio-group name="gender" value="female" label="Gender">
+                  <sgds-radio-group name="gender" label="Gender">
                     <sgds-radio value="female">Female</sgds-radio>
                     <sgds-radio value="male">Male</sgds-radio>
                   </sgds-radio-group>
                 </div>
                 <div>
-                  <sgds-textarea name="comments" value="Hello world" resize="auto" label="Comments"></sgds-textarea>
-                </div>
-                <div>
-                  <sgds-file-upload label="Supporting documents" multiple name="documents">File upload</sgds-file-upload>
-                </div>
-                <div>
-                  <sgds-checkbox name="consentA" value="consentA" checked>I consent to ...</sgds-checkbox>
+                  <sgds-textarea name="comments" resize="auto" label="Comments"></sgds-textarea>
                 </div>
               </div>
             </form>
             <div>
-              <div class="sgds:flex sgds:items-center sgds:gap-layout-sm sgds:mb-layout-sm">
-                <h6
-                  class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-heading-default sgds:mb-0"
-                >
-                  FormData Output
-                </h6>
-                <sgds-button id="refresh-formdata-btn" variant="outlined" size="sm">Refresh FormData</sgds-button>
-              </div>
-              <pre
-                id="formdata-output"
-                class="sgds:p-layout-sm sgds:bg-surface-overlay sgds:rounded-md sgds:text-body-sm"
-                style="white-space: pre-wrap;"
-              >Reading FormData...</pre>
+              <table id="formdata-prefill-table" style="border-collapse: collapse; width: 100%; font-size: 0.875rem;">
+                <thead>
+                  <tr>
+                    <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #d8d4cd;">Component</th>
+                    <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #d8d4cd;">Assigned</th>
+                    <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #d8d4cd;">Displays</th>
+                    <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #d8d4cd;">FormData value</th>
+                    <th style="text-align: left; padding: 0.5rem; border-bottom: 2px solid #d8d4cd;">Result</th>
+                  </tr>
+                </thead>
+                <tbody id="formdata-prefill-tbody">
+                  <tr>
+                    <td colspan="5" style="padding: 0.5rem;">Waiting for prefill...</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -436,38 +442,93 @@ const FormDataOnFirstLoadTemplate = args => {
     </div>
 
     <script>
-      function readFormData() {
-        const form = document.querySelector("#formdata-first-load-form");
-        const output = document.querySelector("#formdata-output");
-        if (!form || !output) return;
+      (function () {
+        const PREFILL = {
+          firstName: "Sarah",
+          appointmentDate: "23/03/2020",
+          favouriteAnimal: "3",
+          countryOfBirth: "1",
+          dependentCount: 5,
+          food: "vegetarian",
+          gender: "female",
+          comments: "Hello world"
+        };
 
-        const formData = new window.FormData(form);
-        const entries = {};
-        for (const [key, value] of formData.entries()) {
-          if (entries[key]) {
-            if (!Array.isArray(entries[key])) entries[key] = [entries[key]];
-            entries[key].push(value instanceof File ? value.name : value);
-          } else {
-            entries[key] = value instanceof File ? value.name : value;
+        const COMPONENT_LABELS = {
+          firstName: "sgds-input",
+          appointmentDate: "sgds-datepicker",
+          favouriteAnimal: "sgds-select",
+          countryOfBirth: "sgds-combo-box",
+          dependentCount: "sgds-quantity-toggle",
+          food: "sgds-checkbox-group",
+          gender: "sgds-radio-group",
+          comments: "sgds-textarea"
+        };
+
+        // Wait for first render, then assign values programmatically
+        setTimeout(async () => {
+          const form = document.querySelector("#formdata-prefill-form");
+          if (!form) return;
+
+          // Wait for all components to finish their first update
+          const hosts = Object.keys(PREFILL).map(name => form.querySelector("[name='" + name + "']"));
+          await Promise.all(hosts.map(h => h && h.updateComplete));
+
+          // Assign values programmatically — the scenario that triggers the bug
+          for (const [name, value] of Object.entries(PREFILL)) {
+            const el = form.querySelector("[name='" + name + "']");
+            if (el) el.value = value;
           }
-        }
-        output.textContent = JSON.stringify(entries, null, 2);
-      }
 
-      // Wait for all custom elements to finish their first render
-      setTimeout(() => readFormData(), 500);
+          // Wait for all updates to settle
+          await Promise.all(hosts.map(h => h && h.updateComplete));
 
-      const refreshBtn = document.querySelector("#refresh-formdata-btn");
-      if (refreshBtn) {
-        refreshBtn.addEventListener("click", () => readFormData());
-      }
+          // Read FormData and build the results table
+          const formData = new window.FormData(form);
+          const tbody = document.querySelector("#formdata-prefill-tbody");
+          if (!tbody) return;
+          tbody.innerHTML = "";
+
+          for (const [name, assigned] of Object.entries(PREFILL)) {
+            const el = form.querySelector("[name='" + name + "']");
+            const displayed = el ? String(el.value) : "(not found)";
+            const wireValue = formData.get(name);
+            const onTheWire = wireValue === null ? "(absent)" : String(wireValue);
+            const expected = String(assigned);
+            const ok = onTheWire === expected;
+
+            const row = document.createElement("tr");
+            row.innerHTML =
+              "<td style='padding: 0.5rem; border-bottom: 1px solid #e8e6e1;'>" +
+              COMPONENT_LABELS[name] +
+              "</td>" +
+              "<td style='padding: 0.5rem; border-bottom: 1px solid #e8e6e1;'>" +
+              expected +
+              "</td>" +
+              "<td style='padding: 0.5rem; border-bottom: 1px solid #e8e6e1;'>" +
+              (displayed || "(empty)") +
+              "</td>" +
+              "<td style='padding: 0.5rem; border-bottom: 1px solid #e8e6e1; font-weight: 700; color: " +
+              (ok ? "#1f5c37" : "#b3261e") +
+              ";'>" +
+              (onTheWire || "(empty)") +
+              "</td>" +
+              "<td style='padding: 0.5rem; border-bottom: 1px solid #e8e6e1; font-weight: 700; color: " +
+              (ok ? "#1f5c37" : "#b3261e") +
+              ";'>" +
+              (ok ? "✓ matches" : "✗ MISMATCH") +
+              "</td>";
+            tbody.appendChild(row);
+          }
+        }, 150);
+      })();
     </script>
   `;
 };
 
-export const FormDataOnFirstLoad = {
-  render: FormDataOnFirstLoadTemplate.bind({}),
-  name: "FormData on first load",
+export const FormDataPrefill = {
+  render: FormDataPrefillTemplate.bind({}),
+  name: "FormData after programmatic prefill",
   args: {},
   tags: ["!dev"]
 };
