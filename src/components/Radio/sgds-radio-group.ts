@@ -50,8 +50,12 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
   @property({ type: Boolean, reflect: true }) autofocus = false;
 
   @watch("value", { waitUntilFirstUpdate: true })
-  _handleValueChange() {
+  async _handleValueChange() {
     this._updateCheckedRadio();
+    this._mixinSetFormValue();
+    await this.updateComplete;
+    if (this._mixinShouldSkipSgdsValidation()) return;
+    this._mixinValidate(this.input);
   }
   @watch("invalid", { waitUntilFirstUpdate: true })
   _handleInvalidChange() {

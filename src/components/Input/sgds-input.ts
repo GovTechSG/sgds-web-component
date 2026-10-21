@@ -203,6 +203,14 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
     this.setInvalid(false);
   }
 
+  @watch("value", { waitUntilFirstUpdate: true })
+  async _handleValueChange() {
+    this._mixinSetFormValue();
+    await this.updateComplete;
+    if (this._mixinShouldSkipSgdsValidation()) return;
+    this._mixinValidate(this.input);
+  }
+
   protected _renderInput() {
     const wantFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
     const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
