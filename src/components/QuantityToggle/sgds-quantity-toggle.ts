@@ -9,6 +9,7 @@ import svgStyles from "../../styles/svg.css";
 import { defaultValue } from "../../utils/defaultvalue";
 import { SgdsFormControl } from "../../utils/formSubmitController";
 import { SgdsFormValidatorMixin } from "../../utils/validatorMixin";
+import { watch } from "../../utils/watch";
 import SgdsIconButton from "../IconButton/sgds-icon-button";
 import SgdsInput from "../Input/sgds-input";
 import quantityToggleStyle from "./quantity-toggle.css";
@@ -95,6 +96,15 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
    */
   public get validationMessage() {
     return this._mixinGetValidationMessage();
+  }
+
+  @watch("value", { waitUntilFirstUpdate: true })
+  async _handleValuePropertyChange() {
+    this._mixinSetFormValue();
+    await this.updateComplete;
+    if (this._mixinShouldSkipSgdsValidation()) return;
+    const sgdsInput = await this._sgdsInput;
+    this._mixinValidate(sgdsInput.input);
   }
 
   private async _handleValueChange(e: Event, eventName: "sgds-change" | "sgds-input") {

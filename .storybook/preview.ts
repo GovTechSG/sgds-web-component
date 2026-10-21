@@ -105,7 +105,7 @@ export const parameters = {
         "Theming",
         ["*", "Density", ["Docs", "Density"]],
         "Form",
-        ["Validation", "Custom Validation"],
+        ["Native Validation", "Custom Validation", "Working with FormData"],
         "Utilities",
         ["Introduction", "Spacing", ["Introduction"]],
         "Components",
