@@ -15,6 +15,7 @@ export default {
     "../stories/layouts/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/utilities/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/form-validation/*.@(mdx|stories.@(js|jsx|ts|tsx))",
+    "../stories/form-formdata/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/troubleshoot/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/blocks/**/*.@(mdx|stories.@(js|jsx|ts|tsx))",
     "../stories/*.mdx"

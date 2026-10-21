@@ -110,7 +110,7 @@ export const parameters = {
           "Grid System"
         ],
         "Form",
-        ["Validation", "Custom Validation"],
+        ["Native Validation", "Custom Validation", "Working with FormData"],
         "Utilities",
         ["Introduction", "Spacing", ["Introduction"]],
         "Components",

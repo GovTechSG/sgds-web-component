@@ -1,47 +1,56 @@
 import { Meta, Markdown, Canvas, Story } from "@storybook/addon-docs/blocks";
 import * as ValidationStories from "./validation.stories.js";
 
-<Meta title="Form/Validation" />
+<Meta title="Form/Native Validation" />
 
-# Form validation
+# Native Validation
 
-SGDS form web components have HTML constraint validation and sgds's own validation behaviour built into it with the [ElementInternals API](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals)
+SGDS form web components have HTML [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) and SGDS's own validation behaviour built in via the [ElementInternals API](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals).
+
+## How validation works
+
+SGDS validation combines native HTML constraint validation with additional UX behaviour. The `hasFeedback` prop controls whether visual feedback (error styling and/or error text) is shown to the user.
+
+### Validation lifecycle
+
+1. **On blur (after touch)** — When a user focuses a field, interacts with it, then moves away, the field is validated against its constraints (`required`, `pattern`, `min`, `max`, `minlength`, `maxlength`). If invalid, the error state and message are shown.
+
+2. **On input (while typing)** — While the user is typing, the invalid state is temporarily cleared to give them a chance to correct their input. Validation re-fires on the next blur.
+
+3. **On submit** — A final validation check runs on all fields when the submit button is clicked. If any field is invalid, the form submission is blocked.
+
+4. **On reset** — Clicking the reset button clears all validation states and restores fields to their default values.
+
+5. **When disabled** — Disabled fields are excluded from validation entirely.
+
+### The `hasFeedback` prop
+
+All form components accept a `hasFeedback` prop that controls what feedback the user sees:
+
+| Value | Behaviour |
+|---|---|
+| `"both"` | Shows both the invalid style (red border) and the error message text |
+| `"style"` | Shows only the invalid style (red border), no error text |
+| `"text"` | Shows only the error message text, no style change |
+| *(not set)* | No visual feedback — validation still runs internally and blocks submission |
+
+### Constraint validation attributes
+
+These native HTML validation attributes are supported across components:
+
+| Attribute | Purpose | Components |
+|---|---|---|
+| `required` | Field must have a value | All form components |
+| `pattern` | Value must match a regex | Input |
+| `min` / `max` | Numeric or date range | Input, QuantityToggle, Datepicker |
+| `minlength` / `maxlength` | Text length range | Input, Textarea |
+
+> **Try it:** Use the sample form below to observe the validation lifecycle. Focus and blur on empty required fields to see onChange validation. Type into fields to see the invalid state clear during input. Click Submit on an empty form to see all fields validated at once. Click Reset to clear all states.
 
 ## Sample form
 
 <Canvas of={ValidationStories.ConstraintValidation}>
   <Story of={ValidationStories.ConstraintValidation} />
-</Canvas>
-
-## Constraint validation
-
-The above sample form shows the [constraint validation](https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation) built into the components.
-
-Click submit button on an empty form to observe the error message and invalid state changes.
-
-Click reset button to reset the form's validity and the control's value.
-
-## SGDS validation behaviour
-
-Sgds form components are validated onchange, after the input is blurred. If the input's value do not meet the constraint validation, it will be flagged as invalid.
-During input, validation state gets reset and re-validated again upon onchange (when the input is out of focus again).
-
-Finally, a final validation check is fired upon clicking the submit button, during onsubmit, before the form gets submitted to the server.
-
-Try focusing and blurring on the controls without inputting any value to observe SGDS onchange validation behaviour.
-
-## Obtain form value via FormData
-
-<Canvas of={ValidationStories.FormData}>
-  <Story of={ValidationStories.FormData} />
-</Canvas>
-
-## FormData after programmatic prefill
-
-All form components below start **empty**. After first render, values are set programmatically via `element.value = ...` — simulating an API prefill or draft restore. The table shows whether `FormData` reflects the assigned values or still holds the initial empty values.
-
-<Canvas of={ValidationStories.FormDataPrefill}>
-  <Story of={ValidationStories.FormDataPrefill} />
 </Canvas>
 
 ## Summary of component's validation behaviour
@@ -54,6 +63,6 @@ All form components below start **empty**. After first render, values are set pr
 | **QuantityToggle** | Implemented                                 | 1. Min <br/> 2. Max                                                                          | 1. Validation occurs on `onChange` and after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled.  |                                       |
 | **Radio**          | Implemented                                 | 1. Required                                                                                  | 1. Validation occurs after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled.                    |                                       |
 | **Textarea**       | Implemented                                 | 1. Required <br/> 2. MinLength <br/> 3. MaxLength                                            | 1. Validation shows on `onChange` and after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled.   |                                       |
-| **FileUpload**     | Partially implemented (file size limit WIP) | 1. Required                                                                                  | 1. Validation happens on submission <br/> 2. Validation resets when form resets. <br/> 3. When disabled, validation is disabled.                                                                                            | File size limit validation (WIP)      |
+| **FileUpload**     | Implemented                                 | 1. Required                                                                                  | 1. Validation happens on submission <br/> 2. Validation resets when form resets. <br/> 3. When disabled, validation is disabled.                                                                                            | File size validation is not built in. Use `sgds-change` to access the current files and validate their size with custom validation. |
 | **Combobox**       | Implemented                                 | 1. Required                                                                                  | 1. Validation occurs on `onChange` and after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled.  |                                       |
 | **Datepicker**     | Implemented                                 | 1. Required <br/> 2. Min <br/> 3. Max                                                        | 1. Validation happens on `onChange` and after input is touched. <br/> 2. Validation happens on form submit, blocks submission. <br/> 3. Validation resets when form resets. <br/> 4. When disabled, validation is disabled. |                                       |
