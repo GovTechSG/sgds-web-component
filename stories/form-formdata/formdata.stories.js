@@ -152,7 +152,9 @@ const FormDataTemplate = args => {
             id="formdata-submit-output"
             class="sgds:p-layout-sm sgds:bg-surface-overlay sgds:rounded-md sgds:text-body-sm"
             style="white-space: pre-wrap;"
-          >Submit the form to see FormData values here.</pre>
+          >
+Submit the form to see FormData values here.</pre
+          >
         </div>
       </div>
     </div>
@@ -275,7 +277,9 @@ const FormDataPrefillTemplate = args => {
             </form>
           </div>
         </div>
-        <div class="sgds-col-4 sgds-col-sm-8 sgds-col-md-10 sgds-col-lg-center-10 sgds-col-xl-center-10 sgds-col-2-xl-center-10">
+        <div
+          class="sgds-col-4 sgds-col-sm-8 sgds-col-md-10 sgds-col-lg-center-10 sgds-col-xl-center-10 sgds-col-2-xl-center-10"
+        >
           <sgds-table id="formdata-prefill-table" tableBorder headerBackground>
             <sgds-table-row>
               <sgds-table-head>Component</sgds-table-head>
