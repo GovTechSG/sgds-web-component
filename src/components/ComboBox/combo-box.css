@@ -52,6 +52,33 @@ slot[id='default'].d-none{
   display: none;
 }
 
+slot[name='create'].d-none::slotted(*),
+slot[name='create'].d-none {
+  display: none;
+}
+
+.create-option {
+  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+  color: var(--sgds-form-color-default);
+  font-size: var(--sgds-font-size-label-md);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.create-option:not(.slotted) {
+  cursor: pointer;
+}
+
+.create-option:hover {
+  background: var(--sgds-bg-translucent-subtle);
+}
+
+.create-option:focus-visible {
+  background: var(--sgds-bg-translucent-subtle);
+  outline: var(--sgds-form-outline-focus);
+  outline-offset: var(--sgds-form-outline-offset-focus);
+}
+
 .form-clearable:focus-visible {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);

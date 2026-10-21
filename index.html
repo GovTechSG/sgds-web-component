@@ -8,18 +8,21 @@
     <link href="./src/themes/day.css" rel="stylesheet" type="text/css" />
     <link href="./src/themes/night.css" rel="stylesheet" type="text/css" />
     <link href="./src/css/sgds.css" rel="stylesheet" type="text/css" />
+    <link href="./playground/css/override.css" rel="stylesheet" type="text/css" />
     <link href="./playground/css/utility.css" rel="stylesheet" type="text/css" />
 
     <style>
       * {
         box-sizing: border-box;
+        --sgds-font-family-brand: cursive;
+        --sgds-font-family-label: cursive;
       }
     </style>
   </head>
   <body class="sgds:bg-default sgds:text-default">
     <sgds-masthead fluid></sgds-masthead>
     <sgds-mainnav fluid id="main-nav">
-      <strong slot="brand">SGDS Playground</strong>
+      <div slot="brand" class="sgds:flex sgds:items-center">SGDS Playground</div>
     </sgds-mainnav>
 
     <div class="sgds-container sgds:min-h-[calc(100vh-108px)]">

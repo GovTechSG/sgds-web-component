@@ -51,7 +51,7 @@ export const WithProfile = {
         size="sm"
         ariaLabel="Open side menu"
       ></sgds-icon-button>
-      <img alt="sgds logo" width="130" src="/logo-white.svg" slot="brand" />
+      <a slot="brand" href="/"><img alt="sgds logo" width="130" src="/logo-white.svg" /></a>
       <sgds-icon-button
         name="moon"
         variant="ghost"
@@ -120,7 +120,7 @@ export const ProfileReadOnly = {
         size="sm"
         ariaLabel="Open side menu"
       ></sgds-icon-button>
-      <img alt="sgds logo" width="130" src="/logo-white.svg" slot="brand" />
+      <a slot="brand" href="/"><img alt="sgds logo" width="130" src="/logo-white.svg" /></a>
       <sgds-icon-button
         name="moon"
         variant="ghost"

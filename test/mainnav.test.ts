@@ -24,20 +24,14 @@ describe("sgds-mainnav", () => {
       el,
       `<nav aria-label="Main navigation">
         <div class="navbar navbar-expand-lg">
-          <a
-            aria-label="brand-link"
-            class="navbar-brand"
-            href=""
-          >
-            <slot name="brand"></slot>
-          </a>
+          <slot name="brand"></slot>
           <div class="navbar-end">
             <slot
               class="slot-empty"
               name="non-collapsible"
             >
             </slot>
-            <slot name="profile">
+            <slot class="slot-empty" name="profile">
             </slot>
             <sgds-icon-button
               aria-expanded="false"
@@ -77,6 +71,18 @@ describe("sgds-mainnav", () => {
   it("brandHref props forwards to a.navbar-brand  href attribute", async () => {
     const el = await fixture(html`<sgds-mainnav brandHref="test"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("a.navbar-brand")?.getAttribute("href")).to.equal("test");
+  });
+
+  it("slotted <a> in brand slot receives navbar-brand class", async () => {
+    const el = await fixture<SgdsMainnav>(
+      html`<sgds-mainnav>
+        <a slot="brand" href="/"><img alt="logo" src="/logo.svg" /></a>
+      </sgds-mainnav>`
+    );
+    await el.updateComplete;
+    const slottedAnchor = el.querySelector("a[slot='brand']");
+    expect(slottedAnchor).to.exist;
+    expect(slottedAnchor).to.have.class("navbar-brand");
   });
 
   it("when expand=always, navbar class has .navbar-expand", async () => {
@@ -270,7 +276,7 @@ describe("sgds-mainnav", () => {
     it("renders profile slot inside .navbar-end", async () => {
       const el = await fixture<SgdsMainnav>(
         html`<sgds-mainnav>
-          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User">
             <span slot="toggler">User</span>
           </sgds-mainnav-dropdown>
         </sgds-mainnav>`
@@ -283,7 +289,7 @@ describe("sgds-mainnav", () => {
     it("profile slot propagates expand attribute to slotted items", async () => {
       const el = await fixture<SgdsMainnav>(
         html`<sgds-mainnav expand="xl">
-          <sgds-mainnav-dropdown slot="profile" ariaLabel="User menu">
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User">
             <span slot="toggler">User</span>
           </sgds-mainnav-dropdown>
         </sgds-mainnav>`
@@ -327,6 +333,59 @@ describe("sgds-mainnav", () => {
       await el.updateComplete;
       const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler");
       expect(toggler).to.exist;
+    });
+
+    it("empty profile slot has .slot-empty class", async () => {
+      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav></sgds-mainnav>`);
+      await el.updateComplete;
+      const profileSlot = el.shadowRoot?.querySelector("slot[name='profile']");
+      expect(profileSlot).to.have.class("slot-empty");
+    });
+
+    it("slotted profile removes .slot-empty class", async () => {
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav>
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const profileSlot = el.shadowRoot?.querySelector("slot[name='profile']");
+      expect(profileSlot).not.to.have.class("slot-empty");
+    });
+
+    it(".navbar-end has .navbar-end--empty in desktop when both slots are empty", async () => {
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
+      await el.updateComplete;
+      const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
+      expect(navbarEnd).to.have.class("navbar-end--empty");
+    });
+
+    it(".navbar-end does not have .navbar-end--empty when profile slot is filled", async () => {
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsMainnav>(
+        html`<sgds-mainnav expand="lg">
+          <sgds-mainnav-dropdown slot="profile" ariaLabel="User">
+            <span slot="toggler">User</span>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>`
+      );
+      await el.updateComplete;
+      const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
+      expect(navbarEnd).not.to.have.class("navbar-end--empty");
+    });
+
+    it(".navbar-end does not have .navbar-end--empty in mobile even when slots are empty", async () => {
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
+      window.dispatchEvent(new Event("resize"));
+      const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
+      await el.updateComplete;
+      const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
+      expect(navbarEnd).not.to.have.class("navbar-end--empty");
     });
 
     it("profile slot stays in .navbar-end in mobile view", async () => {
@@ -385,14 +444,12 @@ describe("sgds-mainnav-dropdown", () => {
         close="default"
         drop="down"
       >
-        <a
+        <button
           aria-disabled="false"
           aria-expanded="false"
           aria-haspopup="menu"
           class="nav-link"
-          role="button"
           slot="toggler"
-          tabindex="0"
         >
           <slot name="toggler">
           </slot>
@@ -401,7 +458,7 @@ describe("sgds-mainnav-dropdown", () => {
             size="md"
           >
           </sgds-icon>
-        </a>
+        </button>
         <slot>
         </slot>
       </sgds-dropdown>
@@ -432,15 +489,13 @@ describe("sgds-mainnav-dropdown", () => {
     assert.shadowDom.equal(
       dropdown as SgdsMainnavDropdown,
       `
-      <a
+      <button
              class="nav-link"
              aria-disabled="false"
-             tabindex="0"
-             role="button"
            >
              <slot name="toggler"></slot>
              <sgds-icon name="chevron-right" size="md"></sgds-icon>
-           </a>
+           </button>
            <div class="dropdown-items" aria-hidden="true" style="display: none;">
              <a tabindex="0" role="button">
                <sgds-icon name="chevron-left" size="md"></sgds-icon>
@@ -472,23 +527,21 @@ describe("sgds-mainnav-dropdown", () => {
 
     const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
     await waitUntil(() => dropdown?.shadowRoot?.querySelector("div.dropdown-items"));
-    const togglerAnchor = dropdown?.shadowRoot?.querySelector("a.nav-link") as HTMLAnchorElement;
-    togglerAnchor.click();
+    const togglerButton = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLButtonElement;
+    togglerButton.click();
     await waitUntil(
       () => dropdown?.shadowRoot?.querySelector("div.dropdown-items")?.getAttribute("aria-hidden") === "false"
     );
     assert.shadowDom.equal(
       dropdown as SgdsMainnavDropdown,
       `
-      <a
+      <button
              class="nav-link"
              aria-disabled="false"
-             tabindex="0"
-             role="button"
            >
              <slot name="toggler"></slot>
              <sgds-icon name="chevron-right" size="md"></sgds-icon>
-           </a>
+           </button>
            <div class="dropdown-items" aria-hidden="false" style="">
              <a tabindex="0" role="button">
                <sgds-icon name="chevron-left" size="md"></sgds-icon>
@@ -509,7 +562,7 @@ describe("sgds-mainnav-dropdown", () => {
       </sgds-dropdown-item></sgds-mainnav-dropdown
     >`);
 
-    expect(el.shadowRoot?.querySelector("a[role=button]")).to.have.class("active");
+    expect(el.shadowRoot?.querySelector("button.nav-link")).to.have.class("active");
   });
 
   it("in mobile view, mainnavdropdown calls mainnav.hide() when dropdown item anchor is clicked", async () => {
@@ -555,4 +608,21 @@ describe("sgds-mainnav-dropdown", () => {
       stubHide.restore();
     }
   }).retries(2); // retries as occasionally fails with timeout (CI or local)
+
+  it("explicit ariaLabel is forwarded to the button", async () => {
+    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+    window.dispatchEvent(new Event("resize"));
+    const el = await fixture<SgdsMainnav>(html`
+      <sgds-mainnav>
+        <sgds-mainnav-dropdown ariaLabel="Custom label">
+          <span slot="toggler">Services</span>
+        </sgds-mainnav-dropdown>
+      </sgds-mainnav>
+    `);
+    const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+    await dropdown?.updateComplete;
+    await elementUpdated(dropdown as SgdsMainnavDropdown);
+    const toggler = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLButtonElement;
+    expect(toggler.getAttribute("aria-label")).to.equal("Custom label");
+  });
 });

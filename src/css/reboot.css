@@ -8,7 +8,7 @@ html {
 /* BODY */
 body {
   color: var(--sgds-body-color-default);
-  font-family: var(--sgds-font-family-brand);
+  font-family: var(--sgds-font-family-body);
   font-size: var(--sgds-font-size-body-md);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-xs);
@@ -22,11 +22,12 @@ label {
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-xs);
   letter-spacing: var(--sgds-letter-spacing-normal);
+  font-family: var(--sgds-font-family-label);
 }
 /* LIST */
 ol,
 ul {
-  font-family: var(--sgds-font-family-brand);
+  font-family: var(--sgds-font-family-body);
   font-size: var(--sgds-font-size-list-md);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-xs);
@@ -37,7 +38,7 @@ ul {
 }
 
 li {
-  font-family: var(--sgds-font-family-brand);
+  font-family: var(--sgds-font-family-body);
   font-size: var(--sgds-font-size-list-md);
   font-weight: var(--sgds-font-weight-regular);
   line-height: var(--sgds-line-height-xs);
@@ -54,7 +55,7 @@ li > ol {
 li > ul {
   list-style-type: disc;
   margin-bottom: var(--sgds-list-spacing-md);
-}   
+}
 
 /* HEADINGS */
 h1,
@@ -64,7 +65,6 @@ h4,
 h5,
 h6 {
   color: var(--sgds-heading-color-default);
-  font-family: var(--sgds-font-family-brand);
   font-style: normal;
   margin-top: var(--sgds-margin-none);
 }
@@ -89,31 +89,37 @@ h1 {
   font-size: var(--sgds-font-size-heading-xl);
   line-height: var(--sgds-line-height-xl);
   margin-bottom: var(--sgds-margin-lg);
+  font-family: var(--sgds-font-family-heading);
 }
 h2 {
   font-size: var(--sgds-font-size-heading-lg);
   line-height: var(--sgds-line-height-lg);
   margin-bottom: var(--sgds-margin-md);
+  font-family: var(--sgds-font-family-heading);
 }
 h3 {
   font-size: var(--sgds-font-size-heading-md);
   line-height: var(--sgds-line-height-md);
   margin-bottom: var(--sgds-margin-md);
+  font-family: var(--sgds-font-family-heading);
 }
 h4 {
   font-size: var(--sgds-font-size-heading-sm);
   line-height: var(--sgds-line-height-sm);
   margin-bottom: var(--sgds-margin-md);
+  font-family: var(--sgds-font-family-heading);
 }
 h5 {
   font-size: var(--sgds-font-size-subtitle-md);
   line-height: var(--sgds-line-height-xs);
   margin-bottom: var(--sgds-margin-xs);
+  font-family: var(--sgds-font-family-subtitle);
 }
 h6 {
   font-size: var(--sgds-font-size-subtitle-sm);
   line-height: var(--sgds-line-height-2-xs);
   margin-bottom: var(--sgds-margin-xs);
+  font-family: var(--sgds-font-family-subtitle);
 }
 /* CAPTION */
 caption {
@@ -123,6 +129,7 @@ caption {
   line-height: var(--sgds-line-height-2-xs);
   letter-spacing: var(--sgds-letter-spacing-normal);
   margin-bottom: var(--sgds-paragraph-spacing-md);
+  font-family: var(--sgds-font-family-body);
 }
 
 /* PARAGRAPH */
@@ -131,7 +138,7 @@ p {
   font-size: var(--sgds-font-size-body-md);
   font-weight: var(--sgds-font-weight-regular);
   margin-bottom: var(--sgds-paragraph-spacing-lg);
-  font-family: var(--sgds-font-family-brand);
+  font-family: var(--sgds-font-family-body);
   line-height: var(--sgds-line-height-xs);
   letter-spacing: var(--sgds-letter-spacing-normal);
   margin-top: var(--sgds-margin-none);
@@ -141,6 +148,12 @@ p {
 a {
   text-decoration: underline;
   color: var(--sgds-link-color-default);
+  font-family: var(--sgds-font-family-label);
+}
+
+/* CODE */
+code {
+  font-family: var(--sgds-font-family-code);
 }
 
 a:hover,

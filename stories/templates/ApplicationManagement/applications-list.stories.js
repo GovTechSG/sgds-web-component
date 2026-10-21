@@ -6,7 +6,7 @@ const Template = () => html`
     <div>
       <sgds-masthead fluid></sgds-masthead>
       <sgds-mainnav fluid>
-        <strong slot="brand">Logo</strong>
+        <strong slot="brand" class="sgds:flex sgds:items-center sgds:self-center">Logo</strong>
         <sgds-mainnav-item href="#">Home</sgds-mainnav-item>
         <sgds-mainnav-item href="#" active>Applications</sgds-mainnav-item>
         <sgds-mainnav-item href="#">Reports</sgds-mainnav-item>

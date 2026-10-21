@@ -245,7 +245,13 @@
   --border-width-form-thick: var(--sgds-form-border-width-thick);
 
   /* Font Family */
-  --font-display: var(--sgds-font-family-brand);
+  --font-brand: var(--sgds-font-family-brand);
+  --font-display: var(--sgds-font-family-display);
+  --font-heading: var(--sgds-font-family-heading);
+  --font-subtitle: var(--sgds-font-family-subtitle);
+  --font-body: var(--sgds-font-family-body);
+  --font-label: var(--sgds-font-family-label);
+  --font-code: var(--sgds-font-family-code);
 
   /* Font Weight */
   --font-weight-light: var(--sgds-font-weight-light);
@@ -428,6 +434,15 @@
   --radius-form-sm: var(--sgds-form-border-radius-sm);
   --radius-form-md: var(--sgds-form-border-radius-md);
   --radius-form-full: var(--sgds-form-border-radius-full);
+
+  /* Semantic Border Radius */
+  --radius-structure: var(--sgds-structure-border-radius);
+  --radius-indicator: var(--sgds-indicator-border-radius);
+  --radius-interactive: var(--sgds-interactive-border-radius);
+  --radius-form: var(--sgds-form-border-radius);
+  --radius-form-subtle: var(--sgds-form-border-radius-subtle);
+  --radius-surface: var(--sgds-surface-border-radius);
+  --radius-overlay: var(--sgds-overlay-border-radius);
 
   /* Paragraph Margins */
   --margin-paragraph-none: var(--sgds-paragraph-spacing-none);
