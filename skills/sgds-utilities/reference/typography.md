@@ -54,6 +54,8 @@ Default used on `<h1>`, but can be applied to any element.
 
 | Variant | Element | Classes |
 |---------|---------|---------|
+| Subtitle LG Semibold | `<h4>` | `sgds:text-subtitle-lg sgds:font-semibold sgds:leading-sm sgds:tracking-tight` |
+| Subtitle LG Light | `<h4>` | `sgds:text-subtitle-lg sgds:font-light sgds:leading-sm sgds:tracking-tight` |
 | Subtitle MD Semibold *(default)* | `<h5>` | `sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal` |
 | Subtitle MD Light | `<h5>` | `sgds:text-subtitle-md sgds:font-light sgds:leading-xs sgds:tracking-normal` |
 | Subtitle SM Semibold | `<h6>` | `sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:tracking-normal` |
