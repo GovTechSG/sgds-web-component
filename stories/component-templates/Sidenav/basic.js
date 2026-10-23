@@ -4,29 +4,25 @@ export const Template = ({ active, activeSNL, activeSNIAsLink, disabledSNL, disa
   return html`
     <sgds-sidenav ?sticky=${sticky}>
       <sgds-sidenav-item ariaLabel="SideNavItem L1 label (menu)" ?active=${active} ?disabled=${disabledSNI}>
-          <span slot="title">SideNavItem L1 label (menu) </span>
-          <sgds-sidenav-link
-            ?active=${activeSNL}
-            ?disabled=${disabledSNL}
-            ><a href="#">SidenavLink L2 label</a></sgds-sidenav-link
-          >
+        <span slot="title">SideNavItem L1 label (menu) </span>
+        <sgds-sidenav-link ?active=${activeSNL} ?disabled=${disabledSNL}
+          ><a href="#">SidenavLink L2 label</a></sgds-sidenav-link
+        >
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink L2 label</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink L2 label</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-item ariaLabel="SidenavItem L2 label" active>
+          <span slot="title"> SidenavItem L2 label </span>
           <sgds-sidenav-link>
-            <a href="#">SidenavLink L2 label</a>
+            <a href="#"> SidenavLink L3 label</a>
           </sgds-sidenav-link>
           <sgds-sidenav-link>
-            <a href="#">SidenavLink L2 label</a>
+            <a href="#">SidenavLink L3 label</a>
           </sgds-sidenav-link>
-          <sgds-sidenav-item ariaLabel="SidenavItem L2 label">
-            <span slot="title">
-            SidenavItem L2 label
-            </span>
-            <sgds-sidenav-link>
-              <a href="#"> SidenavLink L3 label</a>
-            </sgds-sidenav-link>
-            <sgds-sidenav-link>
-              <a href="#">SidenavLink L3 label</a>
-            </sgds-sidenav-link>
-          </sgds-sidenav-item>
+        </sgds-sidenav-item>
       </sgds-sidenav-item>
       <sgds-sidenav-item ariaLabel="SideNavItem L1 label (menu)">
         <span slot="title">SideNavItem L1 label (menu)</span>
