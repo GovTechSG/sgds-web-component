@@ -31,10 +31,11 @@ export const Template = ({ active, activeSNL, activeSNIAsLink, disabledSNL, disa
       <sgds-sidenav-item ariaLabel="SideNavItem L1 label (menu)">
         <span slot="title">SideNavItem L1 label (menu)</span>
         <sgds-sidenav-link>
-            <a href="#">SidenavLink L2 label</a>
-          <sgds-sidenav-link>
-            <a href="#">SidenavLink L2 label</a>
-          </sgds-sidenav-link>
+          <a href="#">SidenavLink L2 label</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink L2 label</a>
+        </sgds-sidenav-link>
       </sgds-sidenav-item>
       <sgds-sidenav-item ariaLabel="SidenavItem L1 label (link)" ?active=${activeSNIAsLink}>
         <a href="#">SidenavItem L1 label (link)</a>
