@@ -70,7 +70,7 @@ export class SgdsMainnavItem extends SgdsElement {
   }
 
   render() {
-    return html`<slot @slotchange=${this._handleSlotChange}></slot>`;
+    return html`<div class="mainnav-item"><slot @slotchange=${this._handleSlotChange}></slot></div>`;
   }
 }
 

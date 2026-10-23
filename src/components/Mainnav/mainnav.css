@@ -27,8 +27,7 @@ nav {
   max-width: none;
 }
 
-.navbar-brand,
-::slotted(.navbar-brand) {
+.navbar-brand {
   display: flex;
   height: var(--sgds-dimension-40);
   align-self: center;
@@ -43,9 +42,13 @@ nav {
 }
 
 .navbar-brand:focus-visible,
-::slotted(.navbar-brand:focus-visible) {
+.navbar-brand:focus-within {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
+}
+
+.navbar-brand ::slotted(a:focus-visible) {
+  outline: none;
 }
 
 .navbar-nav {
@@ -75,7 +78,7 @@ nav > .navbar-body .navbar-nav {
 }
 
 nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown):not(sgds-mainnav-profile)) {
-  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x) !important;
 }
 
 .navbar-collapse {

@@ -1,3 +1,4 @@
+import { html } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import dividerStyles from "./divider.css";
@@ -15,6 +16,10 @@ export class SgdsDivider extends SgdsElement {
     super.connectedCallback();
     this.setAttribute("role", "separator");
     this.setAttribute("aria-orientation", this.orientation);
+  }
+
+  render() {
+    return html`<div class="divider"></div>`;
   }
 }
 

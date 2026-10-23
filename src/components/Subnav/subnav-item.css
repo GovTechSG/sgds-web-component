@@ -1,19 +1,42 @@
-:host(:not([disabled])[active]:not([active="false"])) ::slotted(*) {
+/* ===== .subnav-item (inner shadow DOM — protected from external CSS) ===== */
+
+.subnav-item {
+  display: inline-block;
+  width: 100%;
+  font-size: var(--sgds-font-size-label-sm);
+  padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+:host(:not([disabled])[active]:not([active="false"])) .subnav-item {
   border-bottom: none;
   background-color: var(--sgds-bg-translucent-subtle);
 }
 
+:host([disabled]) .subnav-item {
+  opacity: var(--sgds-opacity-40);
+}
+
+@media screen and (min-width: 1024px) {
+  .subnav-item {
+    padding: var(--sgds-padding-lg) var(--sgds-padding-none);
+    border-bottom: var(--sgds-border-width-2) solid transparent;
+  }
+
+  :host(:not([disabled])[active]:not([active="false"])) .subnav-item {
+    border-bottom: var(--sgds-border-width-2) solid var(--sgds-primary-border-color-default);
+    background-color: inherit;
+  }
+}
+
+/* ===== ::slotted (light DOM — anchor-specific styles) ===== */
+
 ::slotted(*) {
   --sgds-link-color-default: var(--sgds-color-default);
-  display: inline-block;
-  width: 100%;
   text-decoration: none !important;
-  font-size: var(--sgds-font-size-label-sm) !important;
   color: var(--sgds-link-color-default, var(--sgds-color-default));
-  padding: var(--sgds-padding-sm) var(--sgds-padding-lg);
   cursor: pointer;
-  box-sizing: border-box;
-  white-space: nowrap;
 }
 
 ::slotted(*)::after {
@@ -46,7 +69,6 @@
 }
 
 :host([disabled]) ::slotted(*) {
-  opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
 }
 
@@ -54,12 +76,5 @@
   :host(:not([disabled])[active]:not([active="false"])) ::slotted(*) {
     --sgds-link-color-default: var(--sgds-primary-color-default);
     color: var(--sgds-link-color-default, var(--sgds-primary-color-default));
-    border-bottom: var(--sgds-border-width-2) solid var(--sgds-primary-border-color-default);
-    background-color: inherit;
-  }
-
-  ::slotted(*) {
-    padding: var(--sgds-padding-lg) var(--sgds-padding-none);
-    border-bottom: var(--sgds-border-width-2) solid transparent;
   }
 }
