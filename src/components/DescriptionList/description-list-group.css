@@ -31,6 +31,11 @@ slot[name="description"]::slotted(*) {
 }
 
 .has-header {
+  padding: 0 var(--sgds-density-padding-xl) var(--sgds-density-padding-lg);
+  border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
+}
+
+:host([bordered]) .has-header {
   padding: var(--sgds-density-padding-lg) var(--sgds-density-padding-xl);
   border-bottom: var(--sgds-border-width-1) solid var(--sgds-border-color-muted);
 }
