@@ -78,7 +78,7 @@ nav > .navbar-body .navbar-nav {
 }
 
 nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdown):not(sgds-mainnav-profile)) {
-  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x) !important;
 }
 
 .navbar-collapse {
