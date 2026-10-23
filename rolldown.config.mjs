@@ -13,6 +13,7 @@ const external = [
   "lit",
   "lit-element",
   /@open-wc\/.*/,
+  /@lit-labs\/.*/,
   "tslib",
   /lit\/.*/,
   "@floating-ui/dom"
@@ -152,8 +153,13 @@ const buildSgdsPackage = () => {
       ],
       platform: "browser",
       moduleTypes: sharedModuleTypes,
+      treeshake: {
+        moduleSideEffects: [
+          { test: /ssr-nonce-patch/, sideEffects: true }
+        ]
+      },
       plugins: [...reactBuildPlugins],
-      external: ["@lit/react", "react", ...external]
+      external: ["@lit/react", "react", /^react\/.*/, ...external]
     }),
     defineConfig({
       input: "src/react/index.ts",
@@ -171,12 +177,39 @@ const buildSgdsPackage = () => {
       ],
       platform: "browser",
       moduleTypes: sharedModuleTypes,
+      treeshake: {
+        moduleSideEffects: [
+          { test: /ssr-nonce-patch/, sideEffects: true }
+        ]
+      },
       plugins: [...reactBuildPlugins],
-      external: ["@lit/react", "react", ...external]
+      external: ["@lit/react", "react", /^react\/.*/, ...external]
     })
   ];
 
-  return [...reactPackage, ...esmModules, ...umdBundles];
+  // SSR API — no "use client" banner (used in server components)
+  const ssrPackage = [
+    defineConfig({
+      input: "src/react/_ssr/index.ts",
+      output: [
+        {
+          entryFileNames: "[name].js",
+          dir: "lib/react/_ssr",
+          format: "esm",
+          sourcemap: true,
+          exports: "named",
+          preserveModules: true,
+          preserveModulesRoot: "src/react/_ssr"
+        }
+      ],
+      platform: "neutral",
+      moduleTypes: sharedModuleTypes,
+      plugins: [...reactBuildPlugins],
+      external: ["@lit/react", "react", /^react\/.*/, ...external]
+    })
+  ];
+
+  return [...reactPackage, ...ssrPackage, ...esmModules, ...umdBundles];
 };
 
 export default buildSgdsPackage;
