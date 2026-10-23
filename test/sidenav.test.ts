@@ -76,7 +76,7 @@ describe("sgds-sidenav-item", () => {
     assert.shadowDom.equal(
       el,
       `    <div class="sidenav-item" aria-haspopup="false">
-       <slot class="no-menu-default"></slot>
+       <div class="no-menu-wrapper"><slot class="no-menu-default"></slot></div>
        </div>
        `
     );

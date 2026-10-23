@@ -258,7 +258,9 @@ export class SgdsSidenavItem extends SgdsElement {
       </div>
     `;
 
-    const noMenuTemplate = html` <slot @slotchange=${this._handleSlotChange} class="no-menu-default"></slot> `;
+    const noMenuTemplate = html`<div class="no-menu-wrapper">
+      <slot @slotchange=${this._handleSlotChange} class="no-menu-default"></slot>
+    </div>`;
     return html`
       <div class="sidenav-item" aria-haspopup="${!this.isLink}">${this.isLink ? noMenuTemplate : withMenuTemplate}</div>
     `;
