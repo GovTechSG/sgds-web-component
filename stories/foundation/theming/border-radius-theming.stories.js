@@ -54,17 +54,16 @@ const TokenHeader = (cssVar, first = false) => html`
 `;
 
 const ComponentSection = (name, content) => html`
-  <div class="sgds-grid sgds:gap-layout-md sgds:py-md">
-    <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-      <h5 class="sgds:text-subtitle-md sgds:font-light sgds:leading-xs sgds:tracking-normal sgds:text-heading-default">
-        ${name}
-      </h5>
-    </div>
-    <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8">${content}</div>
+  <div class="sgds:flex sgds:flex-col sgds:gap-sm sgds:py-md">
+    <h5 class="sgds:text-subtitle-md sgds:font-light sgds:leading-xs sgds:tracking-normal sgds:text-heading-default">
+      ${name}
+    </h5>
+    <div>${content}</div>
   </div>
 `;
 
-const storyWrapper = content => html` <div class="sgds-container sgds:flex sgds:flex-col">${content}</div> `;
+const storyWrapper = content =>
+  html` <div class="sgds-container sgds:flex sgds:flex-col sgds:gap-layout-md">${content}</div> `;
 
 export default {
   title: "Theming/Border Radius",

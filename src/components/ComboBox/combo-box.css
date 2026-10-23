@@ -58,7 +58,7 @@ slot[name='create'].d-none {
 }
 
 .create-option {
-  padding: var(--sgds-padding-sm) var(--sgds-padding-md);
+  padding: var(--sgds-density-padding-sm) var(--sgds-padding-md);
   color: var(--sgds-form-color-default);
   font-size: var(--sgds-font-size-label-md);
   white-space: normal;

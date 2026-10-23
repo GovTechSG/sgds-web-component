@@ -77,6 +77,12 @@ const RESPONSIVE_FONT_SIZES = {
       class: "sgds:text-subtitle-md",
       variable: "--sgds-font-size-subtitle-md",
       responsive: "18px / 20px / 20px"
+    },
+    {
+      name: "Subtitle LG",
+      class: "sgds:text-subtitle-lg",
+      variable: "--sgds-font-size-subtitle-lg",
+      responsive: "20px / 22px / 24px"
     }
   ],
   body: [

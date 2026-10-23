@@ -340,7 +340,7 @@
   --sgds-padding-5-xl: var(--sgds-spacer-11);
   --sgds-form-padding-x: var(--sgds-padding-md);
   --sgds-form-padding-y: var(--sgds-padding-sm);
-
+  
   /* NEW - MARGIN */
   --sgds-margin-none: var(--sgds-spacer-0);
   --sgds-margin-3-xs: var(--sgds-spacer-1);
@@ -373,6 +373,29 @@
   --sgds-form-gap-lg: var(--sgds-gap-sm);
   --sgds-form-gap-xl: var(--sgds-gap-md);
   --sgds-form-gap-2-xl: var(--sgds-gap-xl);
+
+  /* Semantic - Density Padding */
+  --sgds-density-padding-3-xs: var(--sgds-spacer-1);
+  --sgds-density-padding-2-xs: var(--sgds-spacer-2);
+  --sgds-density-padding-xs: var(--sgds-spacer-3);
+  --sgds-density-padding-sm: var(--sgds-spacer-4);
+  --sgds-density-padding-md: var(--sgds-spacer-5);
+  --sgds-density-padding-lg: var(--sgds-spacer-6);
+  --sgds-density-padding-xl: var(--sgds-spacer-7);
+  --sgds-density-padding-2-xl: var(--sgds-spacer-8);
+  --sgds-density-padding-3-xl: var(--sgds-spacer-9);
+  --sgds-density-padding-4-xl: var(--sgds-spacer-10);
+  --sgds-density-padding-5-xl: var(--sgds-spacer-11);
+
+  /* Semantic - Density Gap */
+  --sgds-density-gap-2-xs: var(--sgds-spacer-2);
+  --sgds-density-gap-xs: var(--sgds-spacer-3);
+  --sgds-density-gap-sm: var(--sgds-spacer-4);
+  --sgds-density-gap-md: var(--sgds-spacer-5);
+  --sgds-density-gap-lg: var(--sgds-spacer-6);
+  --sgds-density-gap-xl: var(--sgds-spacer-7);
+  --sgds-density-gap-2-xl: var(--sgds-spacer-8);
+  --sgds-density-gap-3-xl: var(--sgds-spacer-9);
 
   --sgds-outline-focus: var(--sgds-border-width-2) solid var(--sgds-blue-400);
   --sgds-outline-offset-focus: calc(-1 * var(--sgds-border-width-2));

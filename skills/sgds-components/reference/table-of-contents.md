@@ -52,19 +52,19 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 <sgds-table-of-contents>
   <h5>Contents</h5>
   <li slot="contents">
-    <sgds-link><a href="#overview">Overview</a></sgds-link>
+    <sgds-link size="sm"><a href="#overview">Overview</a></sgds-link>
   </li>
   <li slot="contents">
-    <sgds-link><a href="#installation">Installation</a></sgds-link>
+    <sgds-link size="sm"><a href="#installation">Installation</a></sgds-link>
   </li>
   <li slot="contents">
-    <sgds-link><a href="#usage">Usage</a></sgds-link>
+    <sgds-link size="sm"><a href="#usage">Usage</a></sgds-link>
   </li>
   <li slot="contents">
-    <sgds-link><a href="#api">API Reference</a></sgds-link>
+    <sgds-link size="sm"><a href="#api">API Reference</a></sgds-link>
   </li>
   <li slot="contents">
-    <sgds-link><a href="#changelog">Changelog</a></sgds-link>
+    <sgds-link size="sm"><a href="#changelog">Changelog</a></sgds-link>
   </li>
 </sgds-table-of-contents>
 
@@ -100,6 +100,6 @@ None.
 
 **For AI agents**:
 1. The *(default)* slot takes the heading — use a semantic heading element like `<h5>`.
-2. Each `contents` slot item is a `<li>` element containing `<sgds-link><a href="#section-id">Label</a></sgds-link>`.
+2. Each `contents` slot item is a `<li>` element containing `<sgds-link size="sm"><a href="#section-id">Label</a></sgds-link>`.
 3. Anchor `href` values should match `id` attributes on the target page sections.
 4. There are no attributes, custom events, or public methods on this component.
