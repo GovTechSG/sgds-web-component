@@ -287,7 +287,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
         @click=${this._openMenu}
         @keydown=${this._handleKeyboardOpen}
       >
-        <slot name="toggler" @slotchange=${this._handleTogglerSlotChange}></slot>
+        <span class="toggler-wrapper"><slot name="toggler" @slotchange=${this._handleTogglerSlotChange}></slot></span>
         <sgds-icon name="chevron-right" size="md"></sgds-icon>
       </button>
       <div class="dropdown-items">
@@ -317,7 +317,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
         ?disabled=${this.disabled}
         slot="toggler"
       >
-        <slot name="toggler" @slotchange=${this._handleTogglerSlotChange}></slot>
+        <span class="toggler-wrapper"><slot name="toggler" @slotchange=${this._handleTogglerSlotChange}></slot></span>
         <sgds-icon name="chevron-down" size="md"></sgds-icon>
       </button>
       <slot @slotchange=${this._handleDesktopSlotChange}></slot>

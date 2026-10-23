@@ -6,6 +6,10 @@
   font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs, 20px);
   box-sizing: border-box;
+  cursor: pointer;
+  --sgds-link-color-default: var(--sgds-color-default);
+  --sgds-link-color-emphasis: var(--sgds-color-default);
+  color: var(--sgds-color-default);
 }
 
 /* Expand variants — border-bottom active indicator + min-height */
@@ -102,6 +106,68 @@
   }
 }
 
+/* Active state — color */
+
+:host(:not([disabled])[active]) .mainnav-item {
+  --sgds-link-color-default: var(--sgds-primary-color-default);
+  --sgds-link-color-emphasis: var(--sgds-primary-color-default);
+  color: var(--sgds-primary-color-default);
+}
+
+/* Tone brand/gradient — color */
+
+:host([tone="brand"][expand="always"]) .mainnav-item,
+:host([tone^="gradient"][expand="always"]) .mainnav-item {
+  --sgds-link-color-default: var(--sgds-color-fixed-light);
+  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+  color: var(--sgds-color-fixed-light);
+}
+
+@media screen and (min-width: 512px) {
+  :host([tone="brand"][expand="sm"]) .mainnav-item,
+  :host([tone^="gradient"][expand="sm"]) .mainnav-item {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :host([tone="brand"][expand="md"]) .mainnav-item,
+  :host([tone^="gradient"][expand="md"]) .mainnav-item {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :host([tone="brand"][expand="lg"]) .mainnav-item,
+  :host([tone^="gradient"][expand="lg"]) .mainnav-item {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :host([tone="brand"][expand="xl"]) .mainnav-item,
+  :host([tone^="gradient"][expand="xl"]) .mainnav-item {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :host([tone="brand"][expand="xxl"]) .mainnav-item,
+  :host([tone^="gradient"][expand="xxl"]) .mainnav-item {
+    --sgds-link-color-default: var(--sgds-color-fixed-light);
+    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
 /* Tone brand/gradient — active border-color */
 
 :host([tone="brand"][expand="always"]:not([disabled])[active]) .mainnav-item,
@@ -144,23 +210,25 @@
   }
 }
 
-/* Disabled — opacity */
+/* Focus-within — outline on wrapper, anchor inherits color */
+
+.mainnav-item:focus-within {
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+}
+
+/* Disabled */
 
 :host([disabled]) .mainnav-item {
   opacity: var(--sgds-opacity-40);
+  cursor: not-allowed;
 }
 
-/* ===== ::slotted (light DOM — anchor-specific styles) ===== */
+/* ===== ::slotted (light DOM — minimal anchor overrides) ===== */
 
 ::slotted(*) {
-  --sgds-link-color-default: var(--sgds-color-default);
-  --sgds-link-color-emphasis: var(--sgds-color-default);
-  display: flex;
-  cursor: pointer;
-  height: auto !important;
   text-decoration: none !important;
-  align-items: center;
-  color: var(--sgds-color-default) !important;
+  color: inherit !important;
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
 }
 
@@ -200,60 +268,6 @@
   }
 }
 
-/* Tone brand/gradient — color overrides */
-
-:host([tone="brand"][expand="always"]) ::slotted(*),
-:host([tone^="gradient"][expand="always"]) ::slotted(*) {
-  --sgds-link-color-default: var(--sgds-color-fixed-light);
-  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-  color: var(--sgds-color-fixed-light) !important;
-}
-
-@media screen and (min-width: 512px) {
-  :host([tone="brand"][expand="sm"]) ::slotted(*),
-  :host([tone^="gradient"][expand="sm"]) ::slotted(*) {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light) !important;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  :host([tone="brand"][expand="md"]) ::slotted(*),
-  :host([tone^="gradient"][expand="md"]) ::slotted(*) {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light) !important;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  :host([tone="brand"][expand="lg"]) ::slotted(*),
-  :host([tone^="gradient"][expand="lg"]) ::slotted(*) {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light) !important;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  :host([tone="brand"][expand="xl"]) ::slotted(*),
-  :host([tone^="gradient"][expand="xl"]) ::slotted(*) {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light) !important;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  :host([tone="brand"][expand="xxl"]) ::slotted(*),
-  :host([tone^="gradient"][expand="xxl"]) ::slotted(*) {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light) !important;
-  }
-}
-
 /* Desktop padding override */
 
 @media screen and (min-width: 1024px) {
@@ -262,120 +276,8 @@
   }
 }
 
-/* Active state — color */
-
-:host(:not([disabled])[active]) ::slotted(*) {
-  --sgds-link-color-default: var(--sgds-primary-color-default);
-  --sgds-link-color-emphasis: var(--sgds-primary-color-default);
-  color: var(--sgds-primary-color-default) !important;
-}
-
-/* Hover states */
-
-:host(:not([disabled]):not([active])) ::slotted(a:hover) {
-  --sgds-link-color-emphasis: var(--sgds-color-default);
-  color: var(--sgds-color-default) !important;
-}
-
-:host(:not([disabled])[active]) ::slotted(a:hover) {
-  --sgds-link-color-emphasis: var(--sgds-primary-color-default);
-  color: var(--sgds-primary-color-default) !important;
-}
-
-/* Tone brand/gradient — active + hover color overrides */
-
-:host([tone="brand"][expand="always"]:not([disabled])[active]) ::slotted(*),
-:host([tone="brand"][expand="always"]:not([disabled])[active]) ::slotted(a:hover),
-:host([tone^="gradient"][expand="always"]:not([disabled])[active]) ::slotted(*),
-:host([tone^="gradient"][expand="always"]:not([disabled])[active]) ::slotted(a:hover) {
-  --sgds-link-color-default: var(--sgds-color-fixed-light);
-  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-  color: var(--sgds-color-fixed-light) !important;
-}
-
-@media screen and (min-width: 512px) {
-  :host([tone="brand"][expand="sm"]:not([disabled])[active]) ::slotted(*),
-  :host([tone="brand"][expand="sm"]:not([disabled])[active]) ::slotted(a:hover),
-  :host([tone^="gradient"][expand="sm"]:not([disabled])[active]) ::slotted(*),
-  :host([tone^="gradient"][expand="sm"]:not([disabled])[active]) ::slotted(a:hover) {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light) !important;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  :host([tone="brand"][expand="md"]:not([disabled])[active]) ::slotted(*),
-  :host([tone="brand"][expand="md"]:not([disabled])[active]) ::slotted(a:hover),
-  :host([tone^="gradient"][expand="md"]:not([disabled])[active]) ::slotted(*),
-  :host([tone^="gradient"][expand="md"]:not([disabled])[active]) ::slotted(a:hover) {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light) !important;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  :host([tone="brand"][expand="lg"]:not([disabled])[active]) ::slotted(*),
-  :host([tone="brand"][expand="lg"]:not([disabled])[active]) ::slotted(a:hover),
-  :host([tone^="gradient"][expand="lg"]:not([disabled])[active]) ::slotted(*),
-  :host([tone^="gradient"][expand="lg"]:not([disabled])[active]) ::slotted(a:hover) {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light) !important;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  :host([tone="brand"][expand="xl"]:not([disabled])[active]) ::slotted(*),
-  :host([tone="brand"][expand="xl"]:not([disabled])[active]) ::slotted(a:hover),
-  :host([tone^="gradient"][expand="xl"]:not([disabled])[active]) ::slotted(*),
-  :host([tone^="gradient"][expand="xl"]:not([disabled])[active]) ::slotted(a:hover) {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light) !important;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  :host([tone="brand"][expand="xxl"]:not([disabled])[active]) ::slotted(*),
-  :host([tone="brand"][expand="xxl"]:not([disabled])[active]) ::slotted(a:hover),
-  :host([tone^="gradient"][expand="xxl"]:not([disabled])[active]) ::slotted(*),
-  :host([tone^="gradient"][expand="xxl"]:not([disabled])[active]) ::slotted(a:hover) {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light) !important;
-  }
-}
-
-/* Disabled hover */
-
-:host([disabled]) ::slotted(a:hover) {
-  --sgds-link-color-emphasis: var(--sgds-color-default);
-  color: var(--sgds-color-default) !important;
-}
-
-/* Active press states */
-
-:host(:not([disabled]):not([active])) ::slotted(a:active) {
-  color: var(--sgds-color-default) !important;
-}
-
-:host(:not([disabled])[active]) ::slotted(a:active) {
-  color: var(--sgds-primary-color-default) !important;
-}
-
-/* Focus-visible */
+/* Focus-visible — suppress anchor outline, wrapper handles it */
 
 ::slotted(a:focus-visible) {
-  --sgds-link-color-emphasis: var(--sgds-primary-color-default);
-  color: var(--sgds-primary-color-default) !important;
-  outline: var(--sgds-outline-focus);
-  outline-offset: var(--sgds-outline-offset-focus);
-}
-
-/* Disabled — cursor */
-
-:host([disabled]) ::slotted(*) {
-  cursor: not-allowed;
+  outline: none;
 }

@@ -123,7 +123,9 @@ export class SgdsMainnav extends NavElement {
             ? html`<a class="navbar-brand" href=${sanitizeHref(this.brandHref) ?? ""}>
                 <slot name="brand"></slot>
               </a>`
-            : html`<slot name="brand" @slotchange=${this._handleBrandSlotChange}></slot>`}
+            : html`<div class="navbar-brand">
+                <slot name="brand" @slotchange=${this._handleBrandSlotChange}></slot>
+              </div>`}
           <div class="navbar-body navbar-collapse" id=${this.collapseId}>
             <div class="navbar-nav navbar-nav-scroll">
               <slot @slotchange=${this._handleDefaultSlotChange}></slot>
