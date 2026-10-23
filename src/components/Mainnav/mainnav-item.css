@@ -7,6 +7,7 @@
   line-height: var(--sgds-line-height-2-xs, 20px);
   box-sizing: border-box;
   cursor: pointer;
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   --sgds-link-color-default: var(--sgds-color-default);
   --sgds-link-color-emphasis: var(--sgds-color-default);
   color: var(--sgds-color-default);
@@ -17,12 +18,14 @@
 :host([expand="always"]) .mainnav-item {
   border-bottom: var(--sgds-border-width-4) solid transparent;
   min-height: 100%;
+  padding: 0px var(--sgds-padding-md);
 }
 
 @media screen and (min-width: 512px) {
   :host([expand="sm"]) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
+    padding: 0px var(--sgds-padding-md);
   }
 
   :host(:not([disabled])[active][expand="sm"]) .mainnav-item {
@@ -34,6 +37,7 @@
   :host([expand="md"]) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
+    padding: 0px var(--sgds-padding-md);
   }
 
   :host(:not([disabled])[active][expand="md"]) .mainnav-item {
@@ -45,6 +49,7 @@
   :host([expand="lg"]) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
+    padding: 0px var(--sgds-padding-md);
   }
 
   :host(:not([disabled])[active][expand="lg"]) .mainnav-item {
@@ -56,6 +61,7 @@
   :host([expand="xl"]) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
+    padding: 0px var(--sgds-padding-md);
   }
 
   :host(:not([disabled])[active][expand="xl"]) .mainnav-item {
@@ -67,6 +73,7 @@
   :host([expand="xxl"]) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
+    padding: 0px var(--sgds-padding-md);
   }
 
   :host(:not([disabled])[active][expand="xxl"]) .mainnav-item {
@@ -224,56 +231,19 @@
   cursor: not-allowed;
 }
 
+/* Desktop padding override */
+
+@media screen and (min-width: 1024px) {
+  .mainnav-item {
+    padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
+  }
+}
+
 /* ===== ::slotted (light DOM — minimal anchor overrides) ===== */
 
 ::slotted(*) {
   text-decoration: none !important;
   color: inherit !important;
-  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
-}
-
-/* Expand variants — padding */
-
-:host([expand="always"]) ::slotted(*) {
-  padding: 0px var(--sgds-padding-md);
-}
-
-@media screen and (min-width: 512px) {
-  :host([expand="sm"]) ::slotted(*) {
-    padding: 0px var(--sgds-padding-md);
-  }
-}
-
-@media screen and (min-width: 768px) {
-  :host([expand="md"]) ::slotted(*) {
-    padding: 0px var(--sgds-padding-md);
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  :host([expand="lg"]) ::slotted(*) {
-    padding: 0px var(--sgds-padding-md);
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  :host([expand="xl"]) ::slotted(*) {
-    padding: 0px var(--sgds-padding-md);
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  :host([expand="xxl"]) ::slotted(*) {
-    padding: 0px var(--sgds-padding-md);
-  }
-}
-
-/* Desktop padding override */
-
-@media screen and (min-width: 1024px) {
-  ::slotted(*) {
-    padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
-  }
 }
 
 /* Focus-visible — suppress anchor outline, wrapper handles it */
