@@ -70,12 +70,12 @@
 /** to style the mainnav dropdown in mobile */
 .dropdown-item.mainnav-dropdown-link {
   padding: var(--sgds-padding-none);
+  max-width: var(--sgds-mainnav-max-width, 1440px);
+  box-sizing: border-box;
 }
 .dropdown-item.mainnav-dropdown-link ::slotted(*) {
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
-  max-width: var(--sgds-mainnav-max-width, 1440px);
   margin: auto;
-  box-sizing: border-box;
 }
 
 @media screen and (min-width: 1024px) {

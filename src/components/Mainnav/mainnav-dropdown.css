@@ -165,48 +165,14 @@
   color: var(--sgds-primary-color-default);
 }
 
-:host([tone="brand"][expand="always"]) slot[name="toggler"]::slotted(*),
-:host([tone^="gradient"][expand="always"]) slot[name="toggler"]::slotted(*) {
-  color: var(--sgds-color-fixed-light);
-}
-
-@media screen and (min-width: 512px) {
-  :host([tone="brand"][expand="sm"]) slot[name="toggler"]::slotted(*),
-  :host([tone^="gradient"][expand="sm"]) slot[name="toggler"]::slotted(*) {
-    color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 768px) {
-  :host([tone="brand"][expand="md"]) slot[name="toggler"]::slotted(*),
-  :host([tone^="gradient"][expand="md"]) slot[name="toggler"]::slotted(*) {
-    color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  :host([tone="brand"][expand="lg"]) slot[name="toggler"]::slotted(*),
-  :host([tone^="gradient"][expand="lg"]) slot[name="toggler"]::slotted(*) {
-    color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  :host([tone="brand"][expand="xl"]) slot[name="toggler"]::slotted(*),
-  :host([tone^="gradient"][expand="xl"]) slot[name="toggler"]::slotted(*) {
-    color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  :host([tone="brand"][expand="xxl"]) slot[name="toggler"]::slotted(*),
-  :host([tone^="gradient"][expand="xxl"]) slot[name="toggler"]::slotted(*) {
-    color: var(--sgds-color-fixed-light);
-  }
+/* Toggler wrapper — inherits color from .nav-link which handles tone/expand */
+.toggler-wrapper {
+  flex: 1;
+  color: inherit;
 }
 
 slot[name="toggler"]::slotted(*) {
-  flex: 1;
+  color: inherit !important;
 }
 
 sgds-dropdown {

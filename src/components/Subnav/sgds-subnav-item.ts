@@ -62,7 +62,7 @@ export class SgdsSubnavItem extends SgdsElement {
   }
 
   render() {
-    return html`<slot @slotchange=${this._handleSlotChange}></slot>`;
+    return html`<div class="subnav-item"><slot @slotchange=${this._handleSlotChange}></slot></div>`;
   }
 }
 

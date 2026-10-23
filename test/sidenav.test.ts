@@ -76,7 +76,7 @@ describe("sgds-sidenav-item", () => {
     assert.shadowDom.equal(
       el,
       `    <div class="sidenav-item" aria-haspopup="false">
-       <slot class="no-menu-default"></slot>
+       <div class="no-menu-wrapper"><slot class="no-menu-default"></slot></div>
        </div>
        `
     );
@@ -207,7 +207,7 @@ describe("sgds-sidenav, -item, -link interactions", () => {
 describe("SgdsSidenavLink", () => {
   it("matches semantic shadowdom", async () => {
     const el = await fixture(html`<sgds-sidenav-link></sgds-sidenav-link>`);
-    assert.shadowDom.equal(el, ` <slot></slot>`);
+    assert.shadowDom.equal(el, `<div class="sidenav-link"><slot></slot></div>`);
   });
   it("when disabled is change to true , slot anchor has tabindex=-1", async () => {
     const el = await fixture<SgdsSidenavLink>(

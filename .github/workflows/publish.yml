@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node-version: [22.18.0]
+        node-version: [26.12.1]
     steps:
       - uses: actions/checkout@v4
       - name: Install pnpm

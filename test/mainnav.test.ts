@@ -24,7 +24,7 @@ describe("sgds-mainnav", () => {
       el,
       `<nav aria-label="Main navigation">
         <div class="navbar navbar-expand-lg">
-          <slot name="brand"></slot>
+          <div class="navbar-brand"><slot name="brand"></slot></div>
           <div class="navbar-end">
             <slot
               class="slot-empty"
@@ -451,8 +451,8 @@ describe("sgds-mainnav-dropdown", () => {
           class="nav-link"
           slot="toggler"
         >
-          <slot name="toggler">
-          </slot>
+          <span class="toggler-wrapper"><slot name="toggler">
+          </slot></span>
           <sgds-icon
             name="chevron-down"
             size="md"
@@ -493,7 +493,7 @@ describe("sgds-mainnav-dropdown", () => {
              class="nav-link"
              aria-disabled="false"
            >
-             <slot name="toggler"></slot>
+             <span class="toggler-wrapper"><slot name="toggler"></slot></span>
              <sgds-icon name="chevron-right" size="md"></sgds-icon>
            </button>
            <div class="dropdown-items" aria-hidden="true" style="display: none;">
@@ -539,7 +539,7 @@ describe("sgds-mainnav-dropdown", () => {
              class="nav-link"
              aria-disabled="false"
            >
-             <slot name="toggler"></slot>
+             <span class="toggler-wrapper"><slot name="toggler"></slot></span>
              <sgds-icon name="chevron-right" size="md"></sgds-icon>
            </button>
            <div class="dropdown-items" aria-hidden="false" style="">
