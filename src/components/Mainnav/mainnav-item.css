@@ -1,98 +1,156 @@
-:host([expand="always"]) ::slotted(*) {
-  padding: 0px var(--sgds-padding-md);
+/* ===== .mainnav-item (inner shadow DOM — protected from external CSS) ===== */
+
+.mainnav-item {
+  display: flex;
+  align-items: center;
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs, 20px);
+  box-sizing: border-box;
+}
+
+/* Expand variants — border-bottom active indicator + min-height */
+
+:host([expand="always"]) .mainnav-item {
   border-bottom: var(--sgds-border-width-4) solid transparent;
   min-height: 100%;
 }
 
 @media screen and (min-width: 512px) {
-  :host([expand="sm"]) ::slotted(*) {
-    padding: 0px var(--sgds-padding-md);
+  :host([expand="sm"]) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
   }
 
-  :host(:not([disabled])[active][expand="sm"]) ::slotted(*) {
+  :host(:not([disabled])[active][expand="sm"]) .mainnav-item {
     border-color: var(--sgds-primary-border-color-default);
   }
 }
 
 @media screen and (min-width: 768px) {
-  :host([expand="md"]) ::slotted(*) {
-    padding: 0px var(--sgds-padding-md);
+  :host([expand="md"]) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
   }
 
-  :host(:not([disabled])[active][expand="md"]) ::slotted(*) {
+  :host(:not([disabled])[active][expand="md"]) .mainnav-item {
     border-color: var(--sgds-primary-border-color-default);
   }
 }
 
 @media screen and (min-width: 1024px) {
-  :host([expand="lg"]) ::slotted(*) {
-    padding: 0px var(--sgds-padding-md);
+  :host([expand="lg"]) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
   }
 
-  :host(:not([disabled])[active][expand="lg"]) ::slotted(*) {
+  :host(:not([disabled])[active][expand="lg"]) .mainnav-item {
     border-color: var(--sgds-primary-border-color-default);
   }
 }
 
 @media screen and (min-width: 1280px) {
-  :host([expand="xl"]) ::slotted(*) {
-    padding: 0px var(--sgds-padding-md);
+  :host([expand="xl"]) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
   }
 
-  :host(:not([disabled])[active][expand="xl"]) ::slotted(*) {
+  :host(:not([disabled])[active][expand="xl"]) .mainnav-item {
     border-color: var(--sgds-primary-border-color-default);
   }
 }
 
 @media screen and (min-width: 1440px) {
-  :host([expand="xxl"]) ::slotted(*) {
-    padding: 0px var(--sgds-padding-md);
+  :host([expand="xxl"]) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
   }
 
-  :host(:not([disabled])[active][expand="xxl"]) ::slotted(*) {
+  :host(:not([disabled])[active][expand="xxl"]) .mainnav-item {
     border-color: var(--sgds-primary-border-color-default);
   }
 }
 
+/* Mobile active — background-color */
+
 @media screen and (max-width: 511px) {
-  :host(:not([disabled])[active][expand="sm"]) ::slotted(*) {
+  :host(:not([disabled])[active][expand="sm"]) .mainnav-item {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 767px) {
-  :host(:not([disabled])[active][expand="md"]) ::slotted(*) {
+  :host(:not([disabled])[active][expand="md"]) .mainnav-item {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 1023px) {
-  :host(:not([disabled])[active][expand="lg"]) ::slotted(*) {
+  :host(:not([disabled])[active][expand="lg"]) .mainnav-item {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 1279px) {
-  :host(:not([disabled])[active][expand="xl"]) ::slotted(*) {
+  :host(:not([disabled])[active][expand="xl"]) .mainnav-item {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
 
 @media screen and (max-width: 1439px) {
-  :host(:not([disabled])[active][expand="xxl"]) ::slotted(*) {
+  :host(:not([disabled])[active][expand="xxl"]) .mainnav-item {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
+
+/* Tone brand/gradient — active border-color */
+
+:host([tone="brand"][expand="always"]:not([disabled])[active]) .mainnav-item,
+:host([tone^="gradient"][expand="always"]:not([disabled])[active]) .mainnav-item {
+  border-color: var(--sgds-color-fixed-light);
+}
+
+@media screen and (min-width: 512px) {
+  :host([tone="brand"][expand="sm"]:not([disabled])[active]) .mainnav-item,
+  :host([tone^="gradient"][expand="sm"]:not([disabled])[active]) .mainnav-item {
+    border-color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :host([tone="brand"][expand="md"]:not([disabled])[active]) .mainnav-item,
+  :host([tone^="gradient"][expand="md"]:not([disabled])[active]) .mainnav-item {
+    border-color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :host([tone="brand"][expand="lg"]:not([disabled])[active]) .mainnav-item,
+  :host([tone^="gradient"][expand="lg"]:not([disabled])[active]) .mainnav-item {
+    border-color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :host([tone="brand"][expand="xl"]:not([disabled])[active]) .mainnav-item,
+  :host([tone^="gradient"][expand="xl"]:not([disabled])[active]) .mainnav-item {
+    border-color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :host([tone="brand"][expand="xxl"]:not([disabled])[active]) .mainnav-item,
+  :host([tone^="gradient"][expand="xxl"]:not([disabled])[active]) .mainnav-item {
+    border-color: var(--sgds-color-fixed-light);
+  }
+}
+
+/* Disabled — opacity */
+
+:host([disabled]) .mainnav-item {
+  opacity: var(--sgds-opacity-40);
+}
+
+/* ===== ::slotted (light DOM — anchor-specific styles) ===== */
 
 ::slotted(*) {
   --sgds-link-color-default: var(--sgds-color-default);
@@ -104,10 +162,45 @@
   align-items: center;
   color: var(--sgds-color-default) !important;
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
-  box-sizing: border-box;
-  font-size: var(--sgds-font-size-label-sm);
-  line-height: var(--sgds-line-height-2-xs, 20px);
 }
+
+/* Expand variants — padding */
+
+:host([expand="always"]) ::slotted(*) {
+  padding: 0px var(--sgds-padding-md);
+}
+
+@media screen and (min-width: 512px) {
+  :host([expand="sm"]) ::slotted(*) {
+    padding: 0px var(--sgds-padding-md);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  :host([expand="md"]) ::slotted(*) {
+    padding: 0px var(--sgds-padding-md);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  :host([expand="lg"]) ::slotted(*) {
+    padding: 0px var(--sgds-padding-md);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  :host([expand="xl"]) ::slotted(*) {
+    padding: 0px var(--sgds-padding-md);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  :host([expand="xxl"]) ::slotted(*) {
+    padding: 0px var(--sgds-padding-md);
+  }
+}
+
+/* Tone brand/gradient — color overrides */
 
 :host([tone="brand"][expand="always"]) ::slotted(*),
 :host([tone^="gradient"][expand="always"]) ::slotted(*) {
@@ -116,22 +209,12 @@
   color: var(--sgds-color-fixed-light) !important;
 }
 
-:host([tone="brand"][expand="always"]:not([disabled])[active]) ::slotted(*),
-:host([tone^="gradient"][expand="always"]:not([disabled])[active]) ::slotted(*) {
-  border-color: var(--sgds-color-fixed-light);
-}
-
 @media screen and (min-width: 512px) {
   :host([tone="brand"][expand="sm"]) ::slotted(*),
   :host([tone^="gradient"][expand="sm"]) ::slotted(*) {
     --sgds-link-color-default: var(--sgds-color-fixed-light);
     --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
     color: var(--sgds-color-fixed-light) !important;
-  }
-
-  :host([tone="brand"][expand="sm"]:not([disabled])[active]) ::slotted(*),
-  :host([tone^="gradient"][expand="sm"]:not([disabled])[active]) ::slotted(*) {
-    border-color: var(--sgds-color-fixed-light);
   }
 }
 
@@ -142,11 +225,6 @@
     --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
     color: var(--sgds-color-fixed-light) !important;
   }
-
-  :host([tone="brand"][expand="md"]:not([disabled])[active]) ::slotted(*),
-  :host([tone^="gradient"][expand="md"]:not([disabled])[active]) ::slotted(*) {
-    border-color: var(--sgds-color-fixed-light);
-  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -155,11 +233,6 @@
     --sgds-link-color-default: var(--sgds-color-fixed-light);
     --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
     color: var(--sgds-color-fixed-light) !important;
-  }
-
-  :host([tone="brand"][expand="lg"]:not([disabled])[active]) ::slotted(*),
-  :host([tone^="gradient"][expand="lg"]:not([disabled])[active]) ::slotted(*) {
-    border-color: var(--sgds-color-fixed-light);
   }
 }
 
@@ -170,11 +243,6 @@
     --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
     color: var(--sgds-color-fixed-light) !important;
   }
-
-  :host([tone="brand"][expand="xl"]:not([disabled])[active]) ::slotted(*),
-  :host([tone^="gradient"][expand="xl"]:not([disabled])[active]) ::slotted(*) {
-    border-color: var(--sgds-color-fixed-light);
-  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -184,12 +252,9 @@
     --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
     color: var(--sgds-color-fixed-light) !important;
   }
-
-  :host([tone="brand"][expand="xxl"]:not([disabled])[active]) ::slotted(*),
-  :host([tone^="gradient"][expand="xxl"]:not([disabled])[active]) ::slotted(*) {
-    border-color: var(--sgds-color-fixed-light);
-  }
 }
+
+/* Desktop padding override */
 
 @media screen and (min-width: 1024px) {
   ::slotted(*) {
@@ -197,11 +262,15 @@
   }
 }
 
+/* Active state — color */
+
 :host(:not([disabled])[active]) ::slotted(*) {
   --sgds-link-color-default: var(--sgds-primary-color-default);
   --sgds-link-color-emphasis: var(--sgds-primary-color-default);
   color: var(--sgds-primary-color-default) !important;
 }
+
+/* Hover states */
 
 :host(:not([disabled]):not([active])) ::slotted(a:hover) {
   --sgds-link-color-emphasis: var(--sgds-color-default);
@@ -212,6 +281,8 @@
   --sgds-link-color-emphasis: var(--sgds-primary-color-default);
   color: var(--sgds-primary-color-default) !important;
 }
+
+/* Tone brand/gradient — active + hover color overrides */
 
 :host([tone="brand"][expand="always"]:not([disabled])[active]) ::slotted(*),
 :host([tone="brand"][expand="always"]:not([disabled])[active]) ::slotted(a:hover),
@@ -277,10 +348,14 @@
   }
 }
 
+/* Disabled hover */
+
 :host([disabled]) ::slotted(a:hover) {
   --sgds-link-color-emphasis: var(--sgds-color-default);
   color: var(--sgds-color-default) !important;
 }
+
+/* Active press states */
 
 :host(:not([disabled]):not([active])) ::slotted(a:active) {
   color: var(--sgds-color-default) !important;
@@ -290,6 +365,8 @@
   color: var(--sgds-primary-color-default) !important;
 }
 
+/* Focus-visible */
+
 ::slotted(a:focus-visible) {
   --sgds-link-color-emphasis: var(--sgds-primary-color-default);
   color: var(--sgds-primary-color-default) !important;
@@ -297,7 +374,8 @@
   outline-offset: var(--sgds-outline-offset-focus);
 }
 
+/* Disabled — cursor */
+
 :host([disabled]) ::slotted(*) {
-  opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
 }
