@@ -106,7 +106,7 @@ importers:
         version: 10.6.0(@types/react@19.2.8)(storybook@10.6.0(@types/react@19.2.8)(prettier@2.8.8)(react@19.2.3))
       '@storybook/addon-mcp':
         specifier: ^10.6.0
-        version: 10.6.0(@storybook/addon-vitest@10.6.2(@vitest/browser-playwright@4.1.11)(@vitest/browser@4.1.11(vite@6.4.3(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0)(yaml@2.9.1))(vitest@4.1.11))(@vitest/runner@4.1.11)(react@19.2.3)(storybook@10.6.0(@types/react@19.2.8)(prettier@2.8.8)(react@19.2.3))(vitest@4.1.11))(storybook@10.6.0(@types/react@19.2.8)(prettier@2.8.8)(react@19.2.3))(typescript@5.9.3)
+        version: 10.6.2(@storybook/addon-vitest@10.6.0(@vitest/browser-playwright@4.1.11)(@vitest/browser@4.1.11(vite@6.4.3(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0)(yaml@2.9.1))(vitest@4.1.11))(@vitest/runner@4.1.11)(react@19.2.3)(storybook@10.6.0(@types/react@19.2.8)(prettier@2.8.8)(react@19.2.3))(vitest@4.1.11))(storybook@10.6.0(@types/react@19.2.8)(prettier@2.8.8)(react@19.2.3))(typescript@5.9.3)
       '@storybook/addon-themes':
         specifier: ^10.6.0
         version: 10.6.0(storybook@10.6.0(@types/react@19.2.8)(prettier@2.8.8)(react@19.2.3))
@@ -2678,11 +2678,11 @@ packages:
       '@types/react':
         optional: true
 
-  '@storybook/addon-mcp@10.6.0':
-    resolution: {integrity: sha512-aQza4iMVgB3OXPMJvcnA193xMdt0sG/0+otGCQu8il6LIuFDP60jD5BXWlQiaVog+swqHrjJCFzuUPE+azz7Kg==}
+  '@storybook/addon-mcp@10.6.2':
+    resolution: {integrity: sha512-AY18igxEq+8pEmzFreSklY6nxYe5xHZdqOqHCg10vT6Ms7pYb0XdnSG94mesJ6Zp+1E4o65WDfmsgMadEvJsfw==}
     peerDependencies:
-      '@storybook/addon-vitest': ^10.6.0
-      storybook: ^10.6.0
+      '@storybook/addon-vitest': ^10.6.2
+      storybook: ^10.6.2
     peerDependenciesMeta:
       '@storybook/addon-vitest':
         optional: true
@@ -5962,8 +5962,8 @@ packages:
   json-parse-even-better-errors@2.3.1:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
 
-  json-rpc-2.0@1.8.0:
-    resolution: {integrity: sha512-4nw+XlJbk5XokA7BtqHGu+0PEiUPfAkRzXXd1Cgjy1c3F2UI/3Gy7yr76wyJEv3X1F1SRGGF8xPAPPhelBiGmA==}
+  json-rpc-2.0@1.8.1:
+    resolution: {integrity: sha512-BmN42JKn6FI36pcMMzHCXQhpKNEfbeqgSIcUYHKnifq0/4Ey6PDinovwUOgajT7NsgUtpWdDXaCWlpI4LHXN3g==}
 
   json-schema-traverse@0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
@@ -11335,7 +11335,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react-dom'
 
-  '@storybook/addon-mcp@10.6.0(@storybook/addon-vitest@10.6.2(@vitest/browser-playwright@4.1.11)(@vitest/browser@4.1.11(vite@6.4.3(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0)(yaml@2.9.1))(vitest@4.1.11))(@vitest/runner@4.1.11)(react@19.2.3)(storybook@10.6.0(@types/react@19.2.8)(prettier@2.8.8)(react@19.2.3))(vitest@4.1.11))(storybook@10.6.0(@types/react@19.2.8)(prettier@2.8.8)(react@19.2.3))(typescript@5.9.3)':
+  '@storybook/addon-mcp@10.6.2(@storybook/addon-vitest@10.6.0(@vitest/browser-playwright@4.1.11)(@vitest/browser@4.1.11(vite@6.4.3(@types/node@25.0.8)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(tsx@4.21.0)(yaml@2.9.1))(vitest@4.1.11))(@vitest/runner@4.1.11)(react@19.2.3)(storybook@10.6.0(@types/react@19.2.8)(prettier@2.8.8)(react@19.2.3))(vitest@4.1.11))(storybook@10.6.0(@types/react@19.2.8)(prettier@2.8.8)(react@19.2.3))(typescript@5.9.3)':
     dependencies:
       '@tmcp/adapter-valibot': 0.1.6(tmcp@1.20.0(typescript@5.9.3))(valibot@1.5.0(typescript@5.9.3))
       '@tmcp/transport-http': 0.8.6(tmcp@1.20.0(typescript@5.9.3))
@@ -15220,7 +15220,7 @@ snapshots:
 
   json-parse-even-better-errors@2.3.1: {}
 
-  json-rpc-2.0@1.8.0: {}
+  json-rpc-2.0@1.8.1: {}
 
   json-schema-traverse@0.4.1: {}
 
@@ -17620,7 +17620,7 @@ snapshots:
   tmcp@1.20.0(typescript@5.9.3):
     dependencies:
       '@standard-schema/spec': 1.1.0
-      json-rpc-2.0: 1.8.0
+      json-rpc-2.0: 1.8.1
       sqids: 0.3.0
       uri-template-matcher: 1.1.2
       valibot: 1.5.0(typescript@5.9.3)
