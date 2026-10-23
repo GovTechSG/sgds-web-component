@@ -6,7 +6,6 @@
   font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs, 20px);
   box-sizing: border-box;
-  cursor: pointer;
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   --sgds-link-color-default: var(--sgds-color-default);
   --sgds-link-color-emphasis: var(--sgds-color-default);
@@ -228,6 +227,9 @@
 
 :host([disabled]) .mainnav-item {
   opacity: var(--sgds-opacity-40);
+}
+
+:host([disabled]) ::slotted(*) {
   cursor: not-allowed;
 }
 
@@ -244,6 +246,7 @@
 ::slotted(*) {
   text-decoration: none !important;
   color: inherit !important;
+  cursor: pointer;
 }
 
 /* Focus-visible — suppress anchor outline, wrapper handles it */
