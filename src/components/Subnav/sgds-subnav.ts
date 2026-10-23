@@ -252,7 +252,7 @@ export class SgdsSubnav extends SgdsElement {
           })}
         >
           <div class="header-container">
-            <slot name="header"></slot>
+            <div class="header-content"><slot name="header"></slot></div>
             <sgds-icon
               class="subnav-toggler"
               name="chevron-down"
