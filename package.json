@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "3.30.1-rc.9",
+  "version": "3.30.1-rc.10",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
