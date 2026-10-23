@@ -28,6 +28,7 @@
     letter-spacing: inherit;
     word-spacing: inherit;
     text-transform: inherit;
+    font-size: 14px;
   }
   @media (prefers-reduced-motion: no-preference) {
     :root {
