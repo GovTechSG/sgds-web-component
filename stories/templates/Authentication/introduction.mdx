@@ -1,0 +1,44 @@
+import { Meta, Canvas, Controls } from "@storybook/addon-docs/blocks";
+import * as Contained from "./contained.stories";
+
+<Meta title="Templates/Authentication/Introduction" />
+
+# Authentication
+
+Use this template to present the authentication method for your service. Choose the logo placement, image position, and image configuration with the controls below. Open the example source to copy the current layout.
+
+<Canvas of={Contained.LeftLogoWithin} />
+
+<Controls of={Contained.LeftLogoWithin} />
+
+## Content patterns
+
+Choose **Content pattern** to replace the content slot with a pattern from Patterns → Authentication. The dropdown includes all 37 variants across Confirm your identity, Email verification, Login, Password reset, Sign up, and Verification code. The selected layout and logo placement stay unchanged, and the displayed code updates to include the selected pattern.
+
+Patterns and templates share the same pattern source. Update a pattern once to update both previews. These examples show the designed states; connect actions and links to your identity service when implementing your application.
+
+## Slots
+
+The slots below are replaceable regions in the template markup. They are marked with `data-auth-slot` to help you find them in the copied code. These markers are not native web component slot attributes.
+
+| Slot    | Marker                     | What to replace                                                                                                                                                                              |
+| ------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Logo    | `data-auth-slot="logo"`    | Replace the logo image source and alternative text with your service logo. Logo placement moves this region outside or within the content.                                                   |
+| Image   | `data-auth-slot="image"`   | Replace the image source. The same region is used for left, right, and background images. It is omitted when Image is None. Keep empty alternative text for decorative images.               |
+| Content | `data-auth-slot="content"` | Replace the heading, description, login actions, and sign-up link with your authentication pattern. When the logo is within content, retain its marked element if you want to keep the logo. |
+
+Within each pattern, `data-auth-slot="heading"`, `data-auth-slot="fields"`, `data-auth-slot="actions"`, and `data-auth-slot="supporting-content"` mark the editable sections. Some states omit sections they do not need.
+
+Keep the content wrapper and its layout classes when replacing its children. This preserves the centred alignment, responsive spacing, and maximum content width of 480px.
+
+## Page layout
+
+The outer `sgds-container` provides the standard responsive page width and side gutters. A grid inside the container arranges the image and authentication content. Full-bleed and background images sit outside the container so they reach the viewport edges. The inner content slot retains its separate 480px maximum width.
+
+## Responsive behaviour
+
+Images are hidden on tablet and mobile viewports below 1024px. The logo and authentication content remain visible. Background image layouts use a card with the 12px SGDS radius token on desktop. Every variant includes the masthead and footer; update the footer links for your service.
+
+## Variants
+
+Use No image, Full bleed, Contained, or Background image in the sidebar as a starting point. Each story provides the same controls and starts with its named configuration. Image configuration is shown only when Image is Left or Right.

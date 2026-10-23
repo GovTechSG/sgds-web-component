@@ -99,9 +99,13 @@ export const parameters = {
         ["Introduction", "Spacing", ["Introduction"]],
         "Components",
         "Patterns",
+        [
+          "Authentication",
+          ["Confirm your identity", "Email verification", "Login", "Password reset", "Sign up", "Verification code"]
+        ],
         "Blocks",
         "Templates",
-        ["Introduction"],
+        ["Introduction", "Authentication", ["Introduction", "No image", "Full bleed", "Contained", "Background image"]],
         "Layouts",
         [
           "Introduction",
