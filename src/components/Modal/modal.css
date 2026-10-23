@@ -26,7 +26,7 @@
   margin: var(--sgds-margin-xl) var(--sgds-margin-lg);
 }
 
-.modal {
+ .modal {
   display: flex;
   justify-content: center;
   align-items: start;
@@ -36,6 +36,11 @@
   bottom: 0;
   left: 0;
   z-index: var(--sgds-z-index-modal);
+  padding: 0 var(--sgds-spacer-6);
+}
+
+:host([size="fullscreen"]) .modal {
+  padding: 0;
 }
 
 .modal-panel {
