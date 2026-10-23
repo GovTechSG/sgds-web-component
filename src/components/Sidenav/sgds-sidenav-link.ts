@@ -46,7 +46,7 @@ export class SgdsSidenavLink extends SgdsElement {
     }
   }
   render() {
-    return html` <slot @slotchange=${this._handleSlotChange}></slot> `;
+    return html`<div class="sidenav-link"><slot @slotchange=${this._handleSlotChange}></slot></div>`;
   }
 }
 

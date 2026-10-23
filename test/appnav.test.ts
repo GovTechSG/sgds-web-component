@@ -53,7 +53,7 @@ describe("sgds-appnav", () => {
     expect(anchor).to.not.exist;
     const brandSlot = el.shadowRoot?.querySelector("slot[name='brand']");
     expect(brandSlot).to.exist;
-    expect(brandSlot?.parentElement).to.have.class("navbar");
+    expect(brandSlot?.parentElement).to.have.class("navbar-brand");
   });
 
   it("slotted <a> in brand slot receives navbar-brand class", async () => {

@@ -390,6 +390,23 @@ describe("noValidate disables native and sgds validation behaviours", () => {
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
   });
+  it("should sync FormData when value property is set programmatically after render", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-radio-group name="radio-field" value="a">
+          <sgds-radio value="a">A</sgds-radio>
+          <sgds-radio value="b">B</sgds-radio>
+        </sgds-radio-group>
+      </form>
+    `);
+    const radioGroup = form.querySelector<SgdsRadioGroup>("sgds-radio-group")!;
+
+    radioGroup.value = "b";
+    await radioGroup.updateComplete;
+
+    const formData = new FormData(form);
+    expect(formData.get("radio-field")).to.equal("b");
+  });
 });
 
 describe("form novalidate for sgds-radio-group", () => {

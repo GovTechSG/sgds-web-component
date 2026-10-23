@@ -26,11 +26,8 @@ nav {
   padding: var(--sgds-padding-md) var(--sgds-padding-lg);
 }
 
-slot[name="header"]::slotted(*) {
-  --sgds-margin-xs: var(--sgds-margin-none);
+.header-content {
   flex: 1 1 auto;
-  margin-bottom: var(--sgds-margin-xs, --sgds-margin-none);
-  padding-top: var(--sgds-padding-none);
 }
 
 .subnav-toggler {
@@ -153,7 +150,7 @@ slot[name="actions"]::slotted(*) {
     flex: 1;
   }
 
-  slot[name="header"]::slotted(*) {
+  .header-content {
     padding-top: var(--sgds-padding-lg);
     white-space: nowrap;
   }

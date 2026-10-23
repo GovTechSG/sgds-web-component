@@ -5,6 +5,12 @@
 <link href="css/override.css" rel="stylesheet" type="text/css" />
 <link href="./css/utility.css" rel="stylesheet" type="text/css" />
 <style>
+  *, :after, :before, ::backdrop {
+    box-sizing: border-box;
+    border: 0 solid;
+    margin: 0;
+    padding: 0;
+  }
   .avatar-circle {
     width: 40px;
     height: 40px;
@@ -36,52 +42,4 @@
     <sgds-dropdown-item><a href="#">Item 3</a></sgds-dropdown-item>
   </sgds-mainnav-dropdown>
   <sgds-button slot="end" ariaLabel="Login">Login</sgds-button>
-</sgds-mainnav>
-
-<br/>
-<p><b>fluid sgds-mainnav</b></p>
-<sgds-mainnav fluid>
-  <div slot="brand" class="sgds:flex sgds:items-center">Logo</div>
-  <sgds-mainnav-item active>
-    <a href="#">Home</a>
-  </sgds-mainnav-item>
-  <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
-  <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
-</sgds-mainnav>
-
-<br/>
-<p><b>sgds-mainnav with profile</b></p>
-<sgds-mainnav fluid>
-  <div slot="brand" class="sgds:flex sgds:items-center">Logo</div>
-    <sgds-mainnav-item active>
-    <a href="#">Home</a>
-  </sgds-mainnav-item>
-  <sgds-icon-button slot="non-collapsible" name="moon" variant="ghost" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
-  <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
-    <span slot="avatar" class="avatar-circle"></span>
-    <sgds-dropdown-item readonly>
-      <div class="sgds:flex sgds:flex-col sgds:gap-4">
-        <span class="sgds:text-label-xs sgds:leading-3-xs sgds:tracking-normal sgds:text-subtle">Account</span>
-        <div class="sgds:flex sgds:items-center sgds:gap-3 sgds:py-1">
-          <span class="sgds:h-12 sgds:w-12 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
-            <span class="sgds:h-full sgds:w-full sgds:block sgds:bg-surface-raised sgds:rounded-[50%]" style="border-radius: 50%;"></span>
-          </span>
-          <div class="sgds:flex sgds:flex-col sgds:justify-center">
-            <span class="sgds:text-label-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal sgds:text-default">User Name</span>
-            <span class="sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-subtle">user@agency.gov.sg</span>
-          </div>
-        </div>
-      </div>
-    </sgds-dropdown-item>
-    <sgds-divider thickness="thin"></sgds-divider>
-    <sgds-dropdown-item arialabel="My profile">
-      <span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">My profile</span>
-    </sgds-dropdown-item>
-    <sgds-dropdown-item arialabel="Settings">
-      <span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal">Settings</span>
-    </sgds-dropdown-item>
-    <sgds-dropdown-item arialabel="Log out">
-      <span class="sgds:block sgds:w-62 sgds:text-label-sm sgds:leading-2-xs sgds:tracking-normal sgds:text-danger-default">Log out</span>
-    </sgds-dropdown-item>
-  </sgds-mainnav-profile>
 </sgds-mainnav>

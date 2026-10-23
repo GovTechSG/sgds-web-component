@@ -1,27 +1,52 @@
-:host([class^="third-level"]) ::slotted(a) {
-  padding-left: calc(var(--sgds-padding-xl) + var(--sgds-padding-3-xl));
-}
+/* ===== .sidenav-link (inner shadow DOM — protected from external CSS) ===== */
 
-::slotted(a) {
+.sidenav-link {
   display: block;
-  --sgds-link-color-default: var(--sgds-color-default);
-  color: var(--sgds-color-default, var(--sgds-link-color-default));
   padding-top: var(--sgds-padding-sm);
   padding-bottom: var(--sgds-padding-sm);
   padding-left: var(--sgds-padding-3-xl);
   padding-right: var(--sgds-padding-sm);
   border-radius: var(--sgds-interactive-border-radius);
+}
+
+:host([class^="third-level"]) .sidenav-link {
+  padding-left: calc(var(--sgds-padding-xl) + var(--sgds-padding-3-xl));
+}
+
+:host([active]) .sidenav-link {
+  background-color: var(--sgds-primary-surface-translucent);
+}
+
+:host(:not([disabled]):not([active])) .sidenav-link:hover {
+  background-color: var(--sgds-bg-translucent-subtle);
+}
+
+.sidenav-link:focus-within {
+  background-color: var(--sgds-bg-translucent-subtle);
+  outline: var(--sgds-outline-focus);
+  outline-offset: var(--sgds-outline-offset-focus);
+}
+
+:host([active]) .sidenav-link:focus-within {
+  background-color: var(--sgds-primary-bg-translucent);
+}
+
+:host([disabled]) .sidenav-link {
+  opacity: var(--sgds-opacity-40);
+  pointer-events: none;
+}
+
+/* ===== ::slotted (light DOM — anchor-specific styles) ===== */
+
+::slotted(a) {
+  --sgds-link-color-default: var(--sgds-color-default);
+  color: var(--sgds-color-default, var(--sgds-link-color-default));
   text-decoration: none !important;
 }
 
 :host([active]) ::slotted(a) {
   --sgds-link-color-default: var(--sgds-primary-color-emphasis);
   color: var(--sgds-primary-color-emphasis, var(--sgds-link-color-default));
-  background-color: var(--sgds-primary-surface-translucent);
-}
-
-:host(:not([disabled]):not([active])) ::slotted(a:hover) {
-  background-color: var(--sgds-bg-translucent-subtle);
 }
 
 ::slotted(a:hover),
@@ -38,22 +63,6 @@
   color: var(--sgds-primary-color-emphasis, var(--sgds-link-color-emphasis));
 }
 
-:host([disabled]) ::slotted(a) {
-  opacity: var(--sgds-opacity-40);
-  pointer-events: none;
-}
-:host([disabled]) ::slotted(a:focus-visible) {
-  outline: 0;
-}
-
 ::slotted(a:focus-visible) {
-  background-color: var(--sgds-bg-translucent-subtle);
-}
-::slotted(a:focus-visible) {
-  outline: var(--sgds-outline-focus);
-  outline-offset: var(--sgds-outline-offset-focus);
-}
-
-:host([active]) ::slotted(a:focus-visible) {
-  background-color: var(--sgds-primary-bg-translucent);
+  outline: none;
 }

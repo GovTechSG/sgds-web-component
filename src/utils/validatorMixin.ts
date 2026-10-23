@@ -108,9 +108,8 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
       if (this._mixinShouldSkipSgdsValidation()) return;
       this.inputValidationController.validateInput(input);
     }
-    _mixinSetFormValue() {
-      const value = this.value as string | FormData | File;
-      this._internals.setFormValue(value);
+    _mixinSetFormValue(value?: string | FormData | File | null) {
+      this._internals.setFormValue(value !== undefined ? value : (this.value as string | FormData | File));
     }
     _mixinCheckValidity(): boolean {
       if (this._mixinShouldSkipSgdsValidation()) return true;
@@ -159,7 +158,7 @@ export declare class ToBeValidatedElementInterface {
   _mixinHandleInputChange(e: Event): void;
   _mixinResetValidity(input: HTMLInputElement | SgdsInput): void;
   _mixinValidate(input: HTMLInputElement | SgdsInput): void;
-  _mixinSetFormValue(): void;
+  _mixinSetFormValue(value?: string | FormData | File | null): void;
   _mixinCheckValidity(): boolean;
   _mixinReportValidity(): boolean;
   _mixinSetValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void;

@@ -4,5 +4,5 @@
 }
 
 :host([tableBorder]:last-of-type) .table-row::slotted(*) {
-  border-bottom: 0;
+  --table-cell-border-bottom: 0;
 }
