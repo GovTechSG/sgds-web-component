@@ -693,6 +693,20 @@ describe("noValidate disables native and sgds validation behaviours", async () =
     await waitUntil(() => submitHandler.calledOnce);
     expect(submitHandler).to.have.been.calledOnce;
   });
+  it("should sync FormData when value property is set programmatically after render", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-input name="test-field" value="initial"></sgds-input>
+      </form>
+    `);
+    const input = form.querySelector<SgdsInput>("sgds-input")!;
+
+    input.value = "updated-value";
+    await input.updateComplete;
+
+    const formData = new FormData(form);
+    expect(formData.get("test-field")).to.equal("updated-value");
+  });
 });
 
 describe("reset clears invalid state when noValidate is true", () => {

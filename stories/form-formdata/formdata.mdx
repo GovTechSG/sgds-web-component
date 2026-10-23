@@ -1,0 +1,43 @@
+import { Meta, Canvas, Story } from "@storybook/addon-docs/blocks";
+import * as FormDataStories from "./formdata.stories.js";
+
+<Meta title="Form/Working with FormData" />
+
+# Working with FormData
+
+SGDS form components participate in the native `FormData` API via the [ElementInternals API](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals). This means you can read form values using `new FormData(form)` on submit, just like native HTML form controls.
+
+## Reading FormData on submit
+
+Fill in the form and click submit to see the `FormData` values captured from each component.
+
+<Canvas of={FormDataStories.FormData}>
+  <Story of={FormDataStories.FormData} />
+</Canvas>
+
+## FormData after programmatic prefill
+
+All form components below start **empty**. After first render, values are set programmatically via `element.value = ...` — simulating an API prefill or draft restore. The table shows whether `FormData` reflects the assigned values or still holds the initial empty values.
+
+### Why this matters
+
+Modern frameworks use declarative syntax that looks like HTML attributes, but under the hood they set **DOM properties**:
+
+```jsx
+// React (via SGDS React wrappers or React 19+) — sets element.value = draft.email
+<SgdsInput value={draft.email} />
+
+// Vue — v-bind sets the DOM property
+<sgds-input :value="draft.email" />
+
+// Angular — property binding
+<sgds-input [value]="draft.email"></sgds-input>
+```
+
+When the component first renders with no data, and then an API response or state update provides a value, the framework re-renders and sets `element.value = "newValue"` as a **property assignment** — exactly what this demo's `setTimeout` simulates. If the component does not sync `FormData` on that property write, a subsequent `new FormData(form)` or native form submission sends the stale initial value (empty string or `0`) instead of what the user sees on screen.
+
+> **Note:** SGDS ships [React wrappers](https://lit.dev/docs/frameworks/react/) (via `@lit/react`) that set DOM properties. React 19+ also sets properties on custom elements natively. Vue and Angular set properties by default with `:prop` and `[prop]` bindings respectively.
+
+<Canvas of={FormDataStories.FormDataPrefill}>
+  <Story of={FormDataStories.FormDataPrefill} />
+</Canvas>

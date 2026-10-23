@@ -3,35 +3,90 @@ import * as CustomValidationStories from "./customValidation.stories.js";
 
 <Meta title="Form/Custom Validation" />
 
-# Custom validation
+# Custom Validation
 
-## Disabling validation on individual components using `noValidate` prop
+## What is custom validation?
+
+Custom validation lets you disable SGDS's built-in constraint validation and write your own validation logic instead. You take full control over **when** a field is marked invalid, **what** error message is shown, and **how** validation is triggered.
+
+This is done by:
+1. Disabling built-in validation with `noValidate` (on the component) or `novalidate` (on the `<form>`)
+2. Listening to component events (`sgds-input`, `sgds-change`, etc.)
+3. Calling `setInvalid(true/false)` and setting `invalidFeedback` to control the error state
+
+## Why use custom validation?
+
+Native HTML constraint validation (`required`, `pattern`, `min`, `max`) covers simple cases, but real-world forms often need rules that go beyond what attributes can express:
+
+- **Business logic** — "Appointment date must be in the future", "Quantity must be a multiple of 5", "Selection must start with A"
+- **Cross-field validation** — "End date must be after start date", "Confirm password must match password"
+- **Async validation** — "Username must not already be taken" (requires an API call)
+- **Third-party schema libraries** — Yup, Zod, Joi, and similar libraries define validation schemas in JavaScript. They cannot run through HTML attributes — they need to call `setInvalid()` based on their own validation result.
+
+### Using with Zod, Yup, or other schema libraries
+
+When using a schema validation library, the pattern is:
+
+1. Set `noValidate` on each component (or `novalidate` on the form) to disable built-in validation
+2. Run your schema validation on the form values
+3. Map validation errors back to each component using `setInvalid()` and `invalidFeedback`
+
+```js
+// Example with Zod
+import { z } from "zod";
+
+const schema = z.object({
+  email: z.string().email("Invalid email address"),
+  age: z.number().min(18, "Must be at least 18"),
+});
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const result = schema.safeParse(Object.fromEntries(formData));
+
+  if (!result.success) {
+    for (const issue of result.error.issues) {
+      const field = form.querySelector(`[name="${issue.path[0]}"]`);
+      field.setInvalid(true);
+      field.invalidFeedback = issue.message;
+    }
+  }
+});
+```
+
+## How to disable built-in validation
+
+There are two approaches, depending on whether you want to disable validation per component or for the entire form.
+
+### Option 1: Per-component `noValidate` prop
+
+Set `noValidate` on individual components. This disables both constraint validation and SGDS validation for that component only, while other components in the same form keep their built-in validation.
 
 <Canvas of={CustomValidationStories.DisableThroughInput}>
   <Story of={CustomValidationStories.DisableThroughInput} />
 </Canvas>
 
-## Disabling validation on form level using native `novalidate` attribute
+### Option 2: Form-level `novalidate` attribute
 
-Alternatively, you can disable validation on the form level using the native `novalidate` attribute on the `<form>` element.
-
-When `novalidate` is present on the closest parent `<form>`, all child form components will have their constraint validation and SGDS validation disabled.
+Set the native `novalidate` attribute on the `<form>` element. This disables constraint validation and SGDS validation for **all** child form components at once.
 
 <Canvas of={CustomValidationStories.DisableThroughForm}>
   <Story of={CustomValidationStories.DisableThroughForm} />
 </Canvas>
 
-## Summary status of components supporting custom validation
+## API for custom validation
 
-| **Component**  | **Status**  |
-| -------------- | ----------- |
-| Input          | Implemented |
-| Textarea       | Implemented |
-| ComboBox       | Implemented |
-| Datepicker     | Implemented |
-| Checkbox       | Implemented |
-| CheckboxGroup  | Implemented |
-| QuantityToggle | Implemented |
-| RadioGroup     | Implemented |
-| FileUpload     | Implemented |
-| Select         | Implemented |
+| API | Type | Description |
+|---|---|---|
+| `noValidate` | Property (boolean) | Disables built-in constraint validation and SGDS validation on the component |
+| `setInvalid(flag)` | Method | Programmatically set or clear the invalid state. `setInvalid(true)` marks the field invalid; `setInvalid(false)` clears it |
+| `invalidFeedback` | Property (string) | The error message text shown when the field is invalid and `hasFeedback` includes `"text"` or `"both"` |
+| `hasFeedback` | Property | Controls feedback display. Must be set for custom validation feedback to be visible. **Type varies by component** — see note below |
+
+> **`hasFeedback` type varies by component:**
+> - **String (`"style" | "text" | "both"`)** — Input, Checkbox, QuantityToggle
+> - **Boolean** — Textarea, Datepicker, RadioGroup, CheckboxGroup, FileUpload, Select, ComboBox
+>
+> For string-typed components, `"both"` shows error styling and text, `"style"` shows only the red border, and `"text"` shows only the error message. For boolean-typed components, `true` enables both error styling and text. Check individual component API docs for details.
+

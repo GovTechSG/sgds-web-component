@@ -1095,6 +1095,127 @@ describe("reset does not emit sgds-change for checkbox-group", () => {
   });
 });
 
+describe("F10: checkbox FormData should respect checked state like native checkbox", () => {
+  afterEach(() => fixtureCleanup());
+
+  it("checked checkbox with no value should send 'on' in FormData (like native)", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox name="agree" checked>I agree</sgds-checkbox>
+      </form>
+    `);
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox")!;
+    await checkbox.updateComplete;
+
+    const formData = new FormData(form);
+    expect(formData.get("agree")).to.equal("on");
+  });
+
+  it("unchecked checkbox with a value should NOT appear in FormData (like native)", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox name="consent" value="yes">I consent</sgds-checkbox>
+      </form>
+    `);
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox")!;
+    await checkbox.updateComplete;
+
+    const formData = new FormData(form);
+    expect(formData.has("consent")).to.be.false;
+  });
+
+  it("checked checkbox with a value should send that value in FormData", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox name="consent" value="yes" checked>I consent</sgds-checkbox>
+      </form>
+    `);
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox")!;
+    await checkbox.updateComplete;
+
+    const formData = new FormData(form);
+    expect(formData.get("consent")).to.equal("yes");
+  });
+
+  it("after user unticks a checked checkbox, FormData should no longer contain the key", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox name="marketing" value="yes" checked>Send me emails</sgds-checkbox>
+      </form>
+    `);
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox")!;
+    await checkbox.updateComplete;
+
+    // Verify it starts in FormData
+    expect(new FormData(form).get("marketing")).to.equal("yes");
+
+    // User unticks the checkbox
+    checkbox.click();
+    await checkbox.updateComplete;
+
+    expect(checkbox.checked).to.be.false;
+    const formData = new FormData(form);
+    expect(formData.has("marketing")).to.be.false;
+  });
+
+  it("after user ticks an unchecked checkbox, FormData should contain the value", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox name="consent" value="yes">I consent</sgds-checkbox>
+      </form>
+    `);
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox")!;
+    await checkbox.updateComplete;
+
+    // Verify it starts absent from FormData
+    expect(new FormData(form).has("consent")).to.be.false;
+
+    // User ticks the checkbox
+    checkbox.click();
+    await checkbox.updateComplete;
+
+    expect(checkbox.checked).to.be.true;
+    const formData = new FormData(form);
+    expect(formData.get("consent")).to.equal("yes");
+  });
+
+  it("programmatically setting checked=true should sync FormData", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox name="agree" value="yes">I agree</sgds-checkbox>
+      </form>
+    `);
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox")!;
+    await checkbox.updateComplete;
+
+    expect(new FormData(form).has("agree")).to.be.false;
+
+    checkbox.checked = true;
+    await checkbox.updateComplete;
+
+    const formData = new FormData(form);
+    expect(formData.get("agree")).to.equal("yes");
+  });
+
+  it("programmatically setting checked=false should remove from FormData", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-checkbox name="agree" value="yes" checked>I agree</sgds-checkbox>
+      </form>
+    `);
+    const checkbox = form.querySelector<SgdsCheckbox>("sgds-checkbox")!;
+    await checkbox.updateComplete;
+
+    expect(new FormData(form).get("agree")).to.equal("yes");
+
+    checkbox.checked = false;
+    await checkbox.updateComplete;
+
+    const formData = new FormData(form);
+    expect(formData.has("agree")).to.be.false;
+  });
+});
+
 describe("ariaLabel forwarding", () => {
   afterEach(() => fixtureCleanup());
 
