@@ -103,6 +103,7 @@ export const parameters = {
         "Foundation",
         ["Introduction", "Typography", ["Introduction", "Display", "Headings", "Subtitles"], "Layout", "Grid System"],
         "Theming",
+        ["*", "Density", ["Docs", "Density"]],
         "Form",
         ["Validation", "Custom Validation"],
         "Utilities",

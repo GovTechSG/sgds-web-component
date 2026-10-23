@@ -3,7 +3,7 @@
 }
 
 :host([density="compact"]) .accordion-btn {
-  padding: var(--sgds-padding-md);
+  padding: var(--sgds-density-padding-md);
   font-size: var(--sgds-font-size-subtitle-sm);
   line-height: var(--sgds-line-height-2-xs);
 }
@@ -12,21 +12,19 @@
   font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs);
 }
-
 :host([density="compact"]) .content {
-  padding: var(--sgds-padding-xs) var(--sgds-padding-md) var(--sgds-padding-md);
+  padding: var(--sgds-density-padding-xs) var(--sgds-density-padding-md) var(--sgds-density-padding-md);
 }
 
 :host([density="spacious"]) .accordion-btn {
-  padding: var(--sgds-padding-xl);
-  font-size: var(--sgds-font-size-heading-sm);
+  padding: var(--sgds-density-padding-xl);
+  font-size: var(--sgds-font-size-subtitle-lg);
   line-height: var(--sgds-line-height-sm);
   letter-spacing: var(--sgds-letter-spacing-tight);
   font-family: var(--sgds-font-family-subtitle);
 }
-
 :host([density="spacious"]) .content {
-  padding: var(--sgds-padding-xs) var(--sgds-padding-xl) var(--sgds-padding-xl);
+  padding: var(--sgds-density-padding-xs) var(--sgds-density-padding-xl) var(--sgds-density-padding-xl);
 }
 
 .accordion-item {
@@ -44,7 +42,7 @@
   display: flex;
   align-items: center;
   gap: var(--sgds-gap-md);
-  padding: var(--sgds-padding-lg);
+  padding: var(--sgds-density-padding-lg);
   background-color: var(--sgds-bg-transparent);
   text-align: left;
   border: 0;
@@ -120,7 +118,7 @@ slot[name="caret"] sgds-icon {
 
 .content {
   display: block;
-  padding: var(--sgds-padding-xs) var(--sgds-padding-lg) var(--sgds-padding-lg);
+  padding: var(--sgds-density-padding-xs) var(--sgds-density-padding-lg) var(--sgds-density-padding-lg);
 }
 
 .hidden {

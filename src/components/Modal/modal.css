@@ -1,6 +1,6 @@
 :host(:not([size="fullscreen"])) .modal-panel {
   background-color: var(--sgds-surface-default);
-  padding: var(--sgds-padding-xl);
+  padding: var(--sgds-density-padding-xl);
   max-width: var(--sgds-dimension-640);
 }
 :host([size="sm"]) .modal-panel {
@@ -26,7 +26,7 @@
   margin: var(--sgds-margin-xl) var(--sgds-margin-lg);
 }
 
-.modal {
+ .modal {
   display: flex;
   justify-content: center;
   align-items: start;
@@ -36,6 +36,11 @@
   bottom: 0;
   left: 0;
   z-index: var(--sgds-z-index-modal);
+  padding: 0 var(--sgds-spacer-6);
+}
+
+:host([size="fullscreen"]) .modal {
+  padding: 0;
 }
 
 .modal-panel {
@@ -44,7 +49,7 @@
   z-index: 2; /* shift above overlay  */
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-2-xl);
+  gap: var(--sgds-density-gap-xl);
   margin: auto;
   max-height: calc(100% - var(--sgds-margin-xl) - var(--sgds-margin-xl));
 }
@@ -57,7 +62,7 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-2-xl);
+  gap: var(--sgds-density-gap-xl);
   min-height: 0;
   position: relative;
 }
@@ -117,22 +122,16 @@
 .modal-header__title-description {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-sm);
-}
-
-:host([size="fullscreen"]) .modal-header__title-description {
-  gap: var(--sgds-gap-md);
+  gap: var(--sgds-gap-xs);
 }
 
 slot[name="title"]::slotted(*) {
-  display: flex;
-  flex: 1 1 auto;
-  align-items: center;
-  gap: 1rem;
   margin: var(--sgds-margin-none) !important;
   font-family: var(--sgds-font-family-subtitle) !important;
-  line-height: var(--sgds-line-height-lg) !important;
-  font-size: var(--sgds-font-size-heading-sm) !important;
+  font-size: var(--sgds-font-size-subtitle-lg) !important;
+  font-weight: var(--sgds-font-weight-semibold) !important;
+  line-height: var(--sgds-line-height-sm) !important;
+  letter-spacing: var(--sgds-letter-spacing-normal) !important;
 }
 
 slot[name="description"]::slotted(*) {
@@ -164,7 +163,7 @@ slot[name="description"]::slotted(*) {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: var(--sgds-gap-md);
-  padding-top: var(--sgds-padding-md);
+  padding-top: var(--sgds-density-padding-xl);
 }
 
 .modal:not(.has-footer) .modal-footer {

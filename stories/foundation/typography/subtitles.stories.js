@@ -35,6 +35,14 @@ const SubtitleSmLightTemplate = () => html`
   <h6 class="sgds:text-subtitle-sm sgds:font-light sgds:leading-2-xs sgds:tracking-normal">Subtitle Small Light</h6>
 `;
 
+const SubtitleLgSemiboldTemplate = () => html`
+  <h4 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-sm sgds:tracking-tight">Subtitle Large Semibold</h4>
+`;
+
+const SubtitleLgLightTemplate = () => html`
+  <h4 class="sgds:text-subtitle-lg sgds:font-light sgds:leading-sm sgds:tracking-tight">Subtitle Large Light</h4>
+`;
+
 export const Default = {
   render: DefaultTemplate.bind({}),
   name: "Default"
@@ -57,4 +65,14 @@ export const SubtitleSmSemibold = {
 export const SubtitleSmLight = {
   render: SubtitleSmLightTemplate.bind({}),
   name: "Small Light"
+};
+
+export const SubtitleLgSemibold = {
+  render: SubtitleLgSemiboldTemplate.bind({}),
+  name: "Large Semibold"
+};
+
+export const SubtitleLgLight = {
+  render: SubtitleLgLightTemplate.bind({}),
+  name: "Large Light"
 };
