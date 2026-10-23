@@ -103,7 +103,7 @@ export const parameters = {
         "Foundation",
         ["Introduction", "Typography", ["Introduction", "Display", "Headings", "Subtitles"], "Layout", "Grid System"],
         "Theming",
-        ["*", "Density", ["Docs", "Density"]],
+        ["*", "Colours", ["Docs", "Product Primary", "GovTech Brand Palettes"], "Density", ["Docs", "Density"]],
         "Form",
         ["Native Validation", "Custom Validation", "Working with FormData"],
         "Utilities",

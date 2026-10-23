@@ -1,6 +1,72 @@
-import { Meta, Markdown } from "@storybook/addon-docs/blocks";
+import { Meta, Markdown, Source } from "@storybook/addon-docs/blocks";
 import Theming from "../../../docs/Theming.md?raw";
+import rootCss from "../../../src/themes/root.css?raw";
+import dayCss from "../../../src/themes/day.css?raw";
+import nightCss from "../../../src/themes/night.css?raw";
+import responsiveCss from "../../../src/themes/responsive.css?raw";
+import compactCss from "../../../src/themes/density/compact.css?raw";
+import spaciousCss from "../../../src/themes/density/spacious.css?raw";
+import gtBlueCss from "../../../src/themes/gt/blue.css?raw";
+import gtCyanCss from "../../../src/themes/gt/cyan.css?raw";
+import gtMagentaCss from "../../../src/themes/gt/magenta.css?raw";
+import gtPinkCss from "../../../src/themes/gt/pink.css?raw";
+import gtPurpleCss from "../../../src/themes/gt/purple.css?raw";
+import gtRedCss from "../../../src/themes/gt/red.css?raw";
 
 <Meta title="Theming" />
 
 <Markdown>{Theming}</Markdown>
+
+## Token Reference
+
+Primitives and semantic values are defined in `@govtechsg/sgds-web-component/themes`. Below are the full token files.
+
+### root.css
+
+<Source code={rootCss} language="css" />
+
+### day.css
+
+<Source code={dayCss} language="css" />
+
+### night.css
+
+<Source code={nightCss} language="css" />
+
+### responsive.css
+
+<Source code={responsiveCss} language="css" />
+
+### density/compact.css
+
+<Source code={compactCss} language="css" />
+
+### density/spacious.css
+
+<Source code={spaciousCss} language="css" />
+
+### Brand Themes (gt/)
+
+#### blue.css
+
+<Source code={gtBlueCss} language="css" />
+
+#### cyan.css
+
+<Source code={gtCyanCss} language="css" />
+
+#### magenta.css
+
+<Source code={gtMagentaCss} language="css" />
+
+#### pink.css
+
+<Source code={gtPinkCss} language="css" />
+
+#### purple.css
+
+<Source code={gtPurpleCss} language="css" />
+
+#### red.css
+
+<Source code={gtRedCss} language="css" />

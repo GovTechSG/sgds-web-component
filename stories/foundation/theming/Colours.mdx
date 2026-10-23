@@ -1,0 +1,42 @@
+import { Meta, Source, Canvas } from "@storybook/addon-docs/blocks";
+import * as ColourStories from "./colour-theming.stories";
+
+<Meta of={ColourStories} name="Docs" />
+
+# Colours
+
+## Interactive Preview
+
+Use the colour pickers in the controls panel below to customise the `--sgds-product-primary-*` palette and see components update live.
+
+<Canvas of={ColourStories.ProductPrimary} />
+
+## Overriding Brand Colours
+
+Override the product primary palette at the `:root` level to apply your brand colours across all components:
+
+<Source language="css" code={`/* yourCustomColours.css */
+:root {
+  --sgds-product-primary-100: #F5B6DA;
+  --sgds-product-primary-200: #F186C0;
+  --sgds-product-primary-300: #EE4FA6;
+  --sgds-product-primary-400: #EE0290;
+  --sgds-product-primary-500: #EF0078;
+  --sgds-product-primary-600: #DD0074;
+  --sgds-product-primary-700: #C6006E;
+  --sgds-product-primary-800: #B0006A;
+  --sgds-product-primary-900: #880061;
+}`} />
+
+Import your overrides **after** the theme files:
+
+<Source language="jsx" code={`import "@govtechsg/sgds-web-component/themes/root.css";
+import "@govtechsg/sgds-web-component/themes/day.css";
+// Your overrides must come after the theme imports
+import "./yourCustomColours.css";`} />
+
+## Pre-built Brand Themes
+
+SGDS ships pre-built GovTech brand palettes in `@govtechsg/sgds-web-component/themes/gt/`. Import one to replace the default product primary palette:
+
+<Source language="jsx" code={`import "@govtechsg/sgds-web-component/themes/gt/blue.css";`} />
