@@ -41,8 +41,7 @@ nav {
   font-size: var(--sgds-font-size-label-sm);
 }
 
-.navbar-brand,
-::slotted(.navbar-brand) {
+.navbar-brand {
   display: flex;
   height: var(--sgds-dimension-40);
   align-self: center;
@@ -57,9 +56,13 @@ nav {
 }
 
 .navbar-brand:focus-visible,
-::slotted(.navbar-brand:focus-visible) {
+.navbar-brand:focus-within {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
+}
+
+.navbar-brand ::slotted(a:focus-visible) {
+  outline: none;
 }
 
 .navbar-nav {
