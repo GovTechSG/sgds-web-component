@@ -94,6 +94,16 @@ Common HTML patterns combining SGDS typography utilities for real-world content 
 ## Subtitles (H5–H6)
 
 ```html
+<!-- sgds-subtitle-lg-semibold -->
+<h4 class="sgds:text-subtitle-lg sgds:font-semibold sgds:leading-sm sgds:tracking-tight">
+  Subtitle Large Semibold
+</h4>
+
+<!-- sgds-subtitle-lg-light -->
+<h4 class="sgds:text-subtitle-lg sgds:font-light sgds:leading-sm sgds:tracking-tight">
+  Subtitle Large Light
+</h4>
+
 <!-- sgds-subtitle-md-semibold (Default) -->
 <h5 class="sgds:text-subtitle-md sgds:font-semibold sgds:leading-xs sgds:tracking-normal">
   Subtitle Medium Semibold
@@ -277,6 +287,7 @@ Always use `<div>` and `sgds:uppercase`. Use for key-value labels and data table
 | Heading LG | `sgds:text-heading-lg` | `sgds:leading-lg` |
 | Heading MD | `sgds:text-heading-md` | `sgds:leading-md` |
 | Heading SM | `sgds:text-heading-sm` | `sgds:leading-sm` |
+| Subtitle LG | `sgds:text-subtitle-lg` | `sgds:leading-sm` |
 | Subtitle MD | `sgds:text-subtitle-md` | `sgds:leading-xs` |
 | Subtitle SM | `sgds:text-subtitle-sm` | `sgds:leading-2-xs` |
 | Body LG | `sgds:text-body-lg` | `sgds:leading-md` |
