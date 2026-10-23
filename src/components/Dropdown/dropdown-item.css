@@ -69,17 +69,14 @@
 
 /** to style the mainnav dropdown in mobile */
 .dropdown-item.mainnav-dropdown-link {
-  padding: var(--sgds-padding-none);
+  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   max-width: var(--sgds-mainnav-max-width, 1440px);
   box-sizing: border-box;
-}
-.dropdown-item.mainnav-dropdown-link ::slotted(*) {
-  padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   margin: auto;
 }
 
 @media screen and (min-width: 1024px) {
-  .dropdown-item.mainnav-dropdown-link ::slotted(*) {
+  .dropdown-item.mainnav-dropdown-link {
     padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
   }
 }
