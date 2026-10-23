@@ -28,8 +28,12 @@
     letter-spacing: inherit;
     word-spacing: inherit;
     text-transform: inherit;
+  }
+
+  input {
     font-size: 14px;
   }
+  
   @media (prefers-reduced-motion: no-preference) {
     :root {
       scroll-behavior: smooth;
