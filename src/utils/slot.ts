@@ -1,16 +1,18 @@
 import type { ReactiveController, ReactiveControllerHost } from "lit";
+import type SgdsElement from "../base/sgds-element";
 
 export class HasSlotController implements ReactiveController {
-  host: ReactiveControllerHost & Element;
+  host: ReactiveControllerHost & SgdsElement;
   slotNames: string[] = [];
 
-  constructor(host: ReactiveControllerHost & Element, ...slotNames: string[]) {
+  constructor(host: ReactiveControllerHost & SgdsElement, ...slotNames: string[]) {
     (this.host = host).addController(this);
     this.slotNames = slotNames;
     this.handleSlotChange = this.handleSlotChange.bind(this);
   }
 
   private hasDefaultSlot() {
+    if (this.host.ssr) return false;
     return [...this.host.childNodes].some(node => {
       if (node.nodeType === node.TEXT_NODE && node.textContent?.trim() !== "") {
         return true;
@@ -36,6 +38,7 @@ export class HasSlotController implements ReactiveController {
   }
 
   private hasNamedSlot(name: string) {
+    if (this.host.ssr) return false;
     return this.host.querySelector(`:scope > [slot="${name}"]`) !== null;
   }
 
