@@ -95,9 +95,7 @@ export default abstract class NavElement extends SgdsElement {
   }
 
   protected willUpdate(): void {
-    this.breakpointReached = this.ssr
-      ? false
-      : window.innerWidth < SIZES[this.expand];
+    this.breakpointReached = this.ssr ? false : window.innerWidth < SIZES[this.expand];
   }
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
