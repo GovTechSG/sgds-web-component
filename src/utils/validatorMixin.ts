@@ -131,7 +131,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     }
     // Only check for noValidate prop
     _mixinShouldSkipSgdsValidation() {
-      const form = this.closest("form");
+      const form = typeof this.closest === "function" ? this.closest("form") : null;
 
       return form?.noValidate || this.noValidate;
     }
