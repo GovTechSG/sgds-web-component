@@ -108,13 +108,14 @@ export class SgdsMainnav extends NavElement {
   }
 
   render() {
-    this.breakpointReached =
-      window.innerWidth <
-      (this.expand === "always"
-        ? -1
-        : this.expand === "never"
-        ? Infinity
-        : { sm: 512, md: 768, lg: 1024, xl: 1280, xxl: 1440 }[this.expand]);
+    this.breakpointReached = this.ssr
+      ? false
+      : window.innerWidth <
+        (this.expand === "always"
+          ? -1
+          : this.expand === "never"
+          ? Infinity
+          : { sm: 512, md: 768, lg: 1024, xl: 1280, xxl: 1440 }[this.expand]);
 
     return html`
       <nav aria-label="Main navigation">
