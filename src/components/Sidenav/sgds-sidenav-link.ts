@@ -36,6 +36,7 @@ export class SgdsSidenavLink extends SgdsElement {
   }
 
   _handleSlotChange() {
+    if (this.ssr) return;
     this._anchor[0].setAttribute("aria-disabled", `${this.disabled}`);
 
     /** If link is disabled, set tabindex of anchor to -1 */
