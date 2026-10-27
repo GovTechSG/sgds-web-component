@@ -1,0 +1,32 @@
+/* Component-internal geometry; the text fields reuse the shared input styles. */
+.form-control-container {
+  min-width: 0;
+}
+.otp-fields {
+  display: flex;
+  gap: var(--sgds-gap-sm);
+}
+.otp-box {
+  width: var(--sgds-dimension-48);
+  min-width: 0;
+  flex: 0 1 var(--sgds-dimension-48);
+  padding: 0;
+}
+.otp-box .form-control {
+  text-align: center;
+}
+.form-label {
+  margin: 0;
+}
+
+/* The single input follows its container width, like the text input. */
+.form-control-group:not(.otp-box) {
+  width: 100%;
+  min-width: min(100%, var(--sgds-dimension-160));
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.form-control-group:not(.otp-box) .form-control {
+  width: auto;
+  flex-grow: 1;
+}
