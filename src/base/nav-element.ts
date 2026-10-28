@@ -79,14 +79,6 @@ export default abstract class NavElement extends SgdsElement {
   @state()
   protected _hasProfileComponent = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-    if (this.ssr) return;
-    this._handleResize();
-    window.addEventListener("click", this._handleClickOutsideBound);
-    window.addEventListener("resize", this._handleResizeBound);
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener("click", this._handleClickOutsideBound);
@@ -99,11 +91,9 @@ export default abstract class NavElement extends SgdsElement {
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
-    if (this.ssr) {
-      this._handleResize();
-      window.addEventListener("click", this._handleClickOutsideBound);
-      window.addEventListener("resize", this._handleResizeBound);
-    }
+    this._handleResize();
+    window.addEventListener("click", this._handleClickOutsideBound);
+    window.addEventListener("resize", this._handleResizeBound);
     if (this.breakpointReached && this.body) {
       this.expanded = false;
       this.body.hidden = true;
