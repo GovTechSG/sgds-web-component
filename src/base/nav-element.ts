@@ -89,23 +89,27 @@ export default abstract class NavElement extends SgdsElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    if (this.ssr) return;
     window.removeEventListener("click", this._handleClickOutsideBound);
     window.removeEventListener("resize", this._handleResizeBound);
   }
 
   protected willUpdate(): void {
-    this.breakpointReached = this.ssr ? false : window.innerWidth < SIZES[this.expand];
+    this.breakpointReached = window.innerWidth < SIZES[this.expand];
   }
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
+    if (this.ssr) {
+      this._handleResize();
+      window.addEventListener("click", this._handleClickOutsideBound);
+      window.addEventListener("resize", this._handleResizeBound);
+    }
     if (this.breakpointReached && this.body) {
       this.expanded = false;
       this.body.hidden = true;
       this._handleMobileNav();
-      this._onBreakpointReached(true);
     }
+    this._onBreakpointReached(this.breakpointReached);
   }
 
   private _handleClickOutsideBound = (event: MouseEvent) => this._handleClickOutOfElement(event, this.body);
