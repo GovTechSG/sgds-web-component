@@ -25,7 +25,7 @@ describe("sgds-mainnav", () => {
       `<nav aria-label="Main navigation">
         <div class="navbar navbar-expand-lg">
           <div class="navbar-brand"><slot name="brand"></slot></div>
-          <div class="navbar-end">
+          <div class="navbar-end navbar-end--empty">
             <slot
               class="slot-empty"
               name="non-collapsible"
@@ -52,7 +52,7 @@ describe("sgds-mainnav", () => {
           <div class="navbar-nav navbar-nav-scroll">
             <slot>
             </slot>
-            <slot name="end">
+            <slot class="slot-end" name="end">
             </slot>
           </div>
         </div>
@@ -129,12 +129,13 @@ describe("sgds-mainnav", () => {
   // initial window.innerWidth = 800
   // LG_BREAKPOINT = 1024
   // since window.innerWidth < LG_BREAKPOINT --> expect non-collapsible slot to be .order-2 (see first test)
-  it("when expand=lg and window resize event occurs to above breakpoint, it inserts .navbar-body before .navbar-end, and end slot has class .slot-end", async () => {
+  it("when expand=lg and window resize event occurs to above breakpoint, it inserts .navbar-body before .navbar-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
-    expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
+    // slot-end class is always present (CSS handles responsive styling)
+    expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
     Object.defineProperty(window, "innerWidth", {
       writable: true,
       configurable: true,
@@ -148,7 +149,7 @@ describe("sgds-mainnav", () => {
   });
   //SM_BREAKPOINT = 512
   // now window.innerWidth = 1030
-  it("when expand=sm and window resize event occurs to above breakpoint, it inserts .navbar-body before .navbar-end, and end slot has class slot-end ", async () => {
+  it("when expand=sm and window resize event occurs to above breakpoint, it inserts .navbar-body before .navbar-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="sm"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
@@ -162,10 +163,11 @@ describe("sgds-mainnav", () => {
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
-    expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
+    // slot-end class is always present
+    expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
   });
   // now window.innerWidth = 511
-  it("when expand=always and window resize event occurs, it NEVER changes the position of .navbar-body, and end slot ALWAYS have slot-end ", async () => {
+  it("when expand=always and window resize event occurs, it NEVER changes the position of .navbar-body, and end slot ALWAYS has slot-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="always"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).not.to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
@@ -193,11 +195,12 @@ describe("sgds-mainnav", () => {
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
   });
-  it("when expand=never and window resize event occurs, it NEVER changes the position of .navbar-body,  and end slot NEVER has class slot-end", async () => {
+  it("when expand=never and window resize event occurs, it NEVER changes the position of .navbar-body, and end slot ALWAYS has slot-end", async () => {
     const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="never"></sgds-mainnav>`);
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
-    expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
+    // slot-end is now always present (CSS handles responsive styling)
+    expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
 
     Object.defineProperty(window, "innerWidth", {
       writable: true,
@@ -208,7 +211,7 @@ describe("sgds-mainnav", () => {
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
-    expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
+    expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
 
     Object.defineProperty(window, "innerWidth", {
       writable: true,
@@ -219,7 +222,7 @@ describe("sgds-mainnav", () => {
     await el.updateComplete;
     expect(el.shadowRoot?.querySelector("nav > .navbar-body")).to.exist;
     expect(el.shadowRoot?.querySelector("nav > .navbar .navbar-body")).not.to.exist;
-    expect(el.shadowRoot?.querySelector("slot[name='end']")).not.to.have.class("slot-end");
+    expect(el.shadowRoot?.querySelector("slot[name='end']")).to.have.class("slot-end");
   });
 
   it('adds name attribute to elements in slot="end" only', async () => {
@@ -379,13 +382,14 @@ describe("sgds-mainnav", () => {
       expect(navbarEnd).not.to.have.class("navbar-end--empty");
     });
 
-    it(".navbar-end does not have .navbar-end--empty in mobile even when slots are empty", async () => {
+    it(".navbar-end has .navbar-end--empty in mobile when slots are empty (CSS handles visibility)", async () => {
       Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
       window.dispatchEvent(new Event("resize"));
       const el = await fixture<SgdsMainnav>(html`<sgds-mainnav expand="lg"></sgds-mainnav>`);
       await el.updateComplete;
       const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
-      expect(navbarEnd).not.to.have.class("navbar-end--empty");
+      // Class is now always applied when slots are empty (CSS media queries handle mobile visibility)
+      expect(navbarEnd).to.have.class("navbar-end--empty");
     });
 
     it("profile slot stays in .navbar-end in mobile view", async () => {
@@ -417,14 +421,52 @@ describe("sgds-mainnav-item", () => {
   });
 });
 
+/**
+ * Stubs window.matchMedia to return a controllable MediaQueryList.
+ * Call `mock.setMatches(true/false)` to trigger change listeners.
+ * Call `mock.restore()` to restore the original matchMedia.
+ */
+function stubMatchMedia(initialMatches: boolean) {
+  type ChangeListener = (e: MediaQueryListEvent) => void;
+  const listeners: ChangeListener[] = [];
+  const mql = {
+    matches: initialMatches,
+    media: "",
+    addEventListener(_type: string, listener: ChangeListener) {
+      listeners.push(listener);
+    },
+    removeEventListener(_type: string, listener: ChangeListener) {
+      const idx = listeners.indexOf(listener);
+      if (idx >= 0) listeners.splice(idx, 1);
+    },
+    addListener() { /* legacy */ },
+    removeListener() { /* legacy */ },
+    onchange: null,
+    dispatchEvent() {
+      return true;
+    }
+  } as unknown as MediaQueryList;
+
+  const original = window.matchMedia;
+  window.matchMedia = () => mql;
+
+  return {
+    setMatches(value: boolean) {
+      (mql as { matches: boolean }).matches = value;
+      listeners.forEach(l => l({ matches: value } as MediaQueryListEvent));
+    },
+    restore() {
+      window.matchMedia = original;
+    }
+  };
+}
+
 describe("sgds-mainnav-dropdown", () => {
   it("is defined", () => {
     const el = document.createElement("sgds-mainnav-dropdown");
     assert.instanceOf(el, SgdsMainnavDropdown);
   });
-  it("desktop view: can be semantically compare with shadowDom trees", async () => {
-    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
-    window.dispatchEvent(new Event("resize"));
+  it("single template: renders unified template with both icons and mobile header", async () => {
     const el = await fixture<SgdsMainnav>(html`
       <sgds-mainnav>
         <sgds-mainnav-dropdown>
@@ -437,121 +479,60 @@ describe("sgds-mainnav-dropdown", () => {
     `);
     const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
     await dropdown?.updateComplete;
+    // Single template always renders both icons + mobile header + dropdown-menu
     assert.shadowDom.equal(
       dropdown as SgdsMainnavDropdown,
       `
-      <sgds-dropdown
-        close="default"
-        drop="down"
+      <button
+        class="nav-link"
+        aria-disabled="false"
+        aria-expanded="false"
       >
-        <button
-          aria-disabled="false"
-          aria-expanded="false"
-          aria-haspopup="menu"
-          class="nav-link"
-          slot="toggler"
-        >
-          <span class="toggler-wrapper"><slot name="toggler">
-          </slot></span>
-          <sgds-icon
-            name="chevron-down"
-            size="md"
-          >
-          </sgds-icon>
-        </button>
-        <slot>
-        </slot>
-      </sgds-dropdown>
+        <span class="toggler-wrapper"><slot name="toggler"></slot></span>
+        <sgds-icon class="icon-down" name="chevron-down" size="md"></sgds-icon>
+        <sgds-icon class="icon-right" name="chevron-right" size="md"></sgds-icon>
+      </button>
+      <div class="dropdown-menu" role="menu" aria-hidden="true">
+        <div class="mobile-header">
+          <a tabindex="0" role="button">
+            <sgds-icon name="chevron-left" size="md"></sgds-icon>
+            <span class="back-text">Dropdown</span>
+          </a>
+        </div>
+        <slot></slot>
+      </div>
       `,
-      { ignoreAttributes: ["id"] }
+      { ignoreAttributes: ["id", "style"] }
     );
   });
-  it("mobile view: can be semantically compare with shadowDom trees", async () => {
-    Object.defineProperty(window, "innerWidth", {
-      writable: true,
-      configurable: true,
-      value: 300 // mobile size
-    });
+  it("mobile view: clicking toggler opens mobile menu panel", async () => {
+    // Stub matchMedia so dropdown detects mobile mode
+    const mock = stubMatchMedia(true);
+    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
     window.dispatchEvent(new Event("resize"));
-    const el = await fixture<SgdsMainnav>(html`
-      <sgds-mainnav>
-        <sgds-mainnav-dropdown>
-          <span slot="toggler">Dropdown</span>
-          <sgds-dropdown-item>
-            <a href="https://www.google.com/">Item 1</a>
-          </sgds-dropdown-item>
-        </sgds-mainnav-dropdown>
-      </sgds-mainnav>
-    `);
+    try {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav>
+          <sgds-mainnav-dropdown>
+            <span slot="toggler">Dropdown</span>
+            <sgds-dropdown-item>
+              <a href="https://www.google.com/">Item 1</a>
+            </sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>
+      `);
 
-    const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
-    await waitUntil(() => dropdown?.shadowRoot?.querySelector("div.dropdown-items"));
-    assert.shadowDom.equal(
-      dropdown as SgdsMainnavDropdown,
-      `
-      <button
-             class="nav-link"
-             aria-disabled="false"
-           >
-             <span class="toggler-wrapper"><slot name="toggler"></slot></span>
-             <sgds-icon name="chevron-right" size="md"></sgds-icon>
-           </button>
-           <div class="dropdown-items" aria-hidden="true" style="display: none;">
-             <a tabindex="0" role="button">
-               <sgds-icon name="chevron-left" size="md"></sgds-icon>
-               <span>Dropdown</span>
-             </a>
-             <slot></slot>
-           </div>
-      `,
-      { ignoreAttributes: ["id"] }
-    );
-  });
-  it("mobile view second layer of navigation: can be semantically compare with shadowDom trees", async () => {
-    Object.defineProperty(window, "innerWidth", {
-      writable: true,
-      configurable: true,
-      value: 300 // mobile size
-    });
-    window.dispatchEvent(new Event("resize"));
-    const el = await fixture<SgdsMainnav>(html`
-      <sgds-mainnav>
-        <sgds-mainnav-dropdown>
-          <span slot="toggler">Dropdown</span>
-          <sgds-dropdown-item>
-            <a href="https://www.google.com/">Item 1</a>
-          </sgds-dropdown-item>
-        </sgds-mainnav-dropdown>
-      </sgds-mainnav>
-    `);
-
-    const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
-    await waitUntil(() => dropdown?.shadowRoot?.querySelector("div.dropdown-items"));
-    const togglerButton = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLButtonElement;
-    togglerButton.click();
-    await waitUntil(
-      () => dropdown?.shadowRoot?.querySelector("div.dropdown-items")?.getAttribute("aria-hidden") === "false"
-    );
-    assert.shadowDom.equal(
-      dropdown as SgdsMainnavDropdown,
-      `
-      <button
-             class="nav-link"
-             aria-disabled="false"
-           >
-             <span class="toggler-wrapper"><slot name="toggler"></slot></span>
-             <sgds-icon name="chevron-right" size="md"></sgds-icon>
-           </button>
-           <div class="dropdown-items" aria-hidden="false" style="">
-             <a tabindex="0" role="button">
-               <sgds-icon name="chevron-left" size="md"></sgds-icon>
-               <span>Dropdown</span>
-             </a>
-             <slot></slot>
-           </div>
-      `,
-      { ignoreAttributes: ["id"] }
-    );
+      const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+      await dropdown?.updateComplete;
+      const dropdownMenu = dropdown?.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+      expect(dropdownMenu.getAttribute("aria-hidden")).to.equal("true");
+      const togglerButton = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLButtonElement;
+      togglerButton.click();
+      await waitUntil(() => dropdownMenu.getAttribute("aria-hidden") === "false");
+      expect(dropdownMenu.style.display).to.equal("block");
+    } finally {
+      mock.restore();
+    }
   });
 
   it("when prop active=true, .active class is defined in the button", async () => {
@@ -566,11 +547,9 @@ describe("sgds-mainnav-dropdown", () => {
   });
 
   it("in mobile view, mainnavdropdown calls mainnav.hide() when dropdown item anchor is clicked", async () => {
-    Object.defineProperty(window, "innerWidth", {
-      writable: true,
-      configurable: true,
-      value: 300 // mobile size
-    });
+    // Stub matchMedia so dropdown detects mobile mode
+    const mock = stubMatchMedia(true);
+    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
     window.dispatchEvent(new Event("resize"));
     // Restore any leftover stub from a previous retry
     if ((SgdsMainnav.prototype.hide as any).restore) {
@@ -606,12 +585,11 @@ describe("sgds-mainnav-dropdown", () => {
       expect(stubHide.called).to.be.true;
     } finally {
       stubHide.restore();
+      mock.restore();
     }
   }).retries(2); // retries as occasionally fails with timeout (CI or local)
 
   it("explicit ariaLabel is forwarded to the button", async () => {
-    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
-    window.dispatchEvent(new Event("resize"));
     const el = await fixture<SgdsMainnav>(html`
       <sgds-mainnav>
         <sgds-mainnav-dropdown ariaLabel="Custom label">
