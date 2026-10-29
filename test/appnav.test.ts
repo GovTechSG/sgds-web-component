@@ -134,9 +134,7 @@ describe("sgds-appnav", () => {
       expect(toggler).to.have.attribute("name", "three-dots-vertical");
     });
 
-    it("does not render toggler in desktop even when default slot has items", async () => {
-      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
-      window.dispatchEvent(new Event("resize"));
+    it("toggler is always rendered when default slot has items (CSS hides on desktop)", async () => {
       const el = await fixture<SgdsAppnav>(html`<sgds-appnav expand="lg">
         <sgds-icon-button
           name="moon"
@@ -148,7 +146,7 @@ describe("sgds-appnav", () => {
       </sgds-appnav>`);
       await el.updateComplete;
       const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler");
-      expect(toggler).not.to.exist;
+      expect(toggler).to.exist;
     });
 
     it("does not render toggler when default slot is empty", async () => {
@@ -293,9 +291,7 @@ describe("sgds-appnav", () => {
       expect(navbarEnd).to.have.class("slot-empty");
     });
 
-    it("navbar-end is hidden in desktop when default slot has items but no profile", async () => {
-      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
-      window.dispatchEvent(new Event("resize"));
+    it("navbar-end is visible when default slot has items (toggler always rendered)", async () => {
       const el = await fixture<SgdsAppnav>(html`<sgds-appnav expand="lg">
         <sgds-icon-button
           name="moon"
@@ -307,7 +303,7 @@ describe("sgds-appnav", () => {
       </sgds-appnav>`);
       await el.updateComplete;
       const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
-      expect(navbarEnd).to.have.class("slot-empty");
+      expect(navbarEnd).not.to.have.class("slot-empty");
     });
 
     it("navbar-end is visible when profile is slotted", async () => {

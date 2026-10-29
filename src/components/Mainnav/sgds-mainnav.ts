@@ -1,11 +1,9 @@
-import { provide } from "@lit/context";
 import { html } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import NavElement from "../../base/nav-element";
 import { sanitizeHref } from "../../utils/safeUrl";
 import { HasSlotController } from "../../utils/slot";
-import { MainnavBreakpointContext, MainnavExpandedContext } from "./mainnav-context";
 import mainnavStyle from "./mainnav.css";
 import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
 import SgdsMainnavItem from "./sgds-mainnav-item";
@@ -30,13 +28,8 @@ export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "
 export class SgdsMainnav extends NavElement {
   static styles = [...NavElement.styles, mainnavStyle];
 
-  @provide({ context: MainnavBreakpointContext })
-  @state()
+  // _breakpointReached and _expanded kept for nav-element abstract method contract
   private _breakpointReached = false;
-
-  @provide({ context: MainnavExpandedContext })
-  @state()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _expanded = false;
 
   /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
@@ -72,8 +65,6 @@ export class SgdsMainnav extends NavElement {
   updated() {
     if (!this.hasNonCollapsibleSlot) this.hasNonCollapsibleSlot = this.hasSlotController.test("non-collapsible");
     if (!this.hasProfileSlot) this.hasProfileSlot = this.hasSlotController.test("profile");
-    // Sync expanded state to context
-    this._expanded = this.expanded;
   }
 
   protected _onBreakpointReached(reached: boolean): void {
