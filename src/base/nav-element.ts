@@ -1,4 +1,4 @@
-import { html, nothing, PropertyValueMap, TemplateResult } from "lit";
+import { html, isServer, nothing, PropertyValueMap, TemplateResult } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "./sgds-element";
@@ -86,6 +86,7 @@ export default abstract class NavElement extends SgdsElement {
   }
 
   protected willUpdate(): void {
+    if (isServer) return;
     this.breakpointReached = window.innerWidth < SIZES[this.expand];
   }
 

@@ -123,7 +123,7 @@ export class SgdsMainnav extends NavElement {
               <slot @slotchange=${this._handleDefaultSlotChange}></slot>
               <slot
                 name="end"
-                class=${classMap({ "slot-end": !this.breakpointReached })}
+                class="slot-end"
                 @slotchange=${this._handleSlotChange}
               ></slot>
             </div>
@@ -131,7 +131,7 @@ export class SgdsMainnav extends NavElement {
           <div
             class=${classMap({
               "navbar-end": true,
-              "navbar-end--empty": !this.hasNonCollapsibleSlot && !this.hasProfileSlot && !this.breakpointReached
+              "navbar-end--empty": !this.hasNonCollapsibleSlot && !this.hasProfileSlot
             })}
           >
             <slot name="non-collapsible" class=${classMap({ "slot-empty": !this.hasNonCollapsibleSlot })}></slot>

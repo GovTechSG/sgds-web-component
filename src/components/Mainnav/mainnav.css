@@ -124,6 +124,19 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   .navbar-expand-sm .navbar-toggler {
     display: none;
   }
+  .navbar-expand-sm .navbar-end--empty {
+    display: none;
+  }
+  .navbar-expand-sm .slot-end {
+    display: flex;
+    margin-left: auto;
+    align-items: stretch;
+    height: inherit;
+    gap: var(--sgds-gap-xs);
+  }
+  .navbar-expand-sm .slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
+    align-self: center;
+  }
 }
 @media (min-width: 768px) {
   .navbar-expand-md {
@@ -147,6 +160,19 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-md .navbar-toggler {
     display: none;
+  }
+  .navbar-expand-md .navbar-end--empty {
+    display: none;
+  }
+  .navbar-expand-md .slot-end {
+    display: flex;
+    margin-left: auto;
+    align-items: stretch;
+    height: inherit;
+    gap: var(--sgds-gap-xs);
+  }
+  .navbar-expand-md .slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
+    align-self: center;
   }
 }
 @media (min-width: 1024px) {
@@ -175,6 +201,19 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 
   .navbar-expand-lg .navbar-toggler {
     display: none;
+  }
+  .navbar-expand-lg .navbar-end--empty {
+    display: none;
+  }
+  .navbar-expand-lg .slot-end {
+    display: flex;
+    margin-left: auto;
+    align-items: stretch;
+    height: inherit;
+    gap: var(--sgds-gap-xs);
+  }
+  .navbar-expand-lg .slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
+    align-self: center;
   }
 }
 @media (min-width: 1280px) {
@@ -205,6 +244,19 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   .navbar-expand-xl .navbar-toggler {
     display: none;
   }
+  .navbar-expand-xl .navbar-end--empty {
+    display: none;
+  }
+  .navbar-expand-xl .slot-end {
+    display: flex;
+    margin-left: auto;
+    align-items: stretch;
+    height: inherit;
+    gap: var(--sgds-gap-xs);
+  }
+  .navbar-expand-xl .slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
+    align-self: center;
+  }
 }
 @media (min-width: 1440px) {
   .navbar-expand-xxl {
@@ -229,6 +281,19 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   .navbar-expand-xxl .navbar-toggler {
     display: none;
   }
+  .navbar-expand-xxl .navbar-end--empty {
+    display: none;
+  }
+  .navbar-expand-xxl .slot-end {
+    display: flex;
+    margin-left: auto;
+    align-items: stretch;
+    height: inherit;
+    gap: var(--sgds-gap-xs);
+  }
+  .navbar-expand-xxl .slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
+    align-self: center;
+  }
 }
 
 .navbar-expand {
@@ -252,6 +317,19 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
 .navbar-expand .navbar-toggler {
   display: none;
 }
+.navbar-expand .navbar-end--empty {
+  display: none;
+}
+.navbar-expand .slot-end {
+  display: flex;
+  margin-left: auto;
+  align-items: stretch;
+  height: inherit;
+  gap: var(--sgds-gap-xs);
+}
+.navbar-expand .slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
+  align-self: center;
+}
 
 /* slot */
 
@@ -262,9 +340,8 @@ nav > .navbar-body slot::slotted(:not(sgds-mainnav-item):not(sgds-mainnav-dropdo
   margin-left: auto;
 }
 
-.navbar-end--empty {
-  display: none;
-}
+/* navbar-end--empty hidden only at desktop breakpoints.
+   On mobile the toggler inside must remain visible. */
 
 slot[name="profile"] {
   display: flex;
@@ -277,18 +354,8 @@ slot[name="non-collapsible"] {
   align-items: center;
 }
 
-.slot-end {
-  display: flex;
-  margin-left: auto;
-  align-items: stretch;
-  height: inherit;
-  gap: var(--sgds-gap-xs);
-}
-
-/* there is no wildcard selector for element tag names in css */
-.slot-end::slotted(:not([name$="-mainnav-item"]):not([name$="-mainnav-dropdown"])) {
-  align-self: center;
-}
+/* slot-end desktop styles applied only at expand breakpoints.
+   On mobile, end-slot items stack normally in the collapsed menu. */
 
 slot.slot-empty {
   display: none;
