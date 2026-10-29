@@ -514,14 +514,7 @@ describe("sgds-appnav", () => {
       warnSpy.restore();
     });
 
-    it("does not render text menu items in desktop view", async () => {
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 1030
-      });
-      window.dispatchEvent(new Event("resize"));
-
+    it("mobile menu items are always rendered inside .mobile-menu-items (CSS hides on desktop)", async () => {
       const el = await fixture<SgdsAppnav>(html`
         <sgds-appnav expand="lg">
           <sgds-icon-button
@@ -535,18 +528,11 @@ describe("sgds-appnav", () => {
       `);
       await el.updateComplete;
 
-      const menuItems = el.shadowRoot?.querySelectorAll(".appnav-menu-item");
-      expect(menuItems?.length).to.equal(0);
+      const menuItems = el.shadowRoot?.querySelectorAll(".mobile-menu-items .appnav-menu-item");
+      expect(menuItems?.length).to.equal(1);
     });
 
-    it("slot does not have slot-desktop-only class in desktop view", async () => {
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 1030
-      });
-      window.dispatchEvent(new Event("resize"));
-
+    it("slot always has slot-desktop-only class (CSS handles responsive visibility)", async () => {
       const el = await fixture<SgdsAppnav>(html`
         <sgds-appnav expand="lg">
           <sgds-icon-button
@@ -561,7 +547,7 @@ describe("sgds-appnav", () => {
       await el.updateComplete;
 
       const slot = el.shadowRoot?.querySelector(".navbar-nav-scroll > slot:not([name])");
-      expect(slot).not.to.have.class("slot-desktop-only");
+      expect(slot).to.have.class("slot-desktop-only");
     });
   });
 

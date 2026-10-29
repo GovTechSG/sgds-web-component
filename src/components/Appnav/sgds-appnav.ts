@@ -158,30 +158,25 @@ export class SgdsAppnav extends NavElement {
               </div>`}
           <div class="navbar-body navbar-collapse" id=${this.collapseId}>
             <div class="navbar-nav navbar-nav-scroll">
-              <slot
-                class=${classMap({ "slot-desktop-only": this.breakpointReached })}
-                @slotchange=${this._handleDefaultSlotChange}
-              ></slot>
-              ${this.breakpointReached
-                ? this._defaultSlotItems.map(
-                    (item, index) => html`<a
-                      class="appnav-menu-item"
-                      role="button"
-                      tabindex="0"
-                      @click=${() => this._handleMobileItemClick(item)}
-                      @keydown=${(e: KeyboardEvent) => this._handleMenuItemKeydown(e, index)}
-                      >${item.label}</a
-                    >`
-                  )
-                : nothing}
+              <slot class="slot-desktop-only" @slotchange=${this._handleDefaultSlotChange}></slot>
+              <div class="mobile-menu-items">
+                ${this._defaultSlotItems.map(
+                  (item, index) => html`<a
+                    class="appnav-menu-item"
+                    role="button"
+                    tabindex="0"
+                    @click=${() => this._handleMobileItemClick(item)}
+                    @keydown=${(e: KeyboardEvent) => this._handleMenuItemKeydown(e, index)}
+                    >${item.label}</a
+                  >`
+                )}
+              </div>
             </div>
           </div>
           <div
-            class="navbar-end ${this._hasProfileSlotItems || (this._hasDefaultSlotItems && this.breakpointReached)
-              ? ""
-              : "slot-empty"}"
+            class="navbar-end ${this._hasProfileSlotItems || this._hasDefaultSlotItems ? "" : "slot-empty"}"
           >
-            ${this._hasDefaultSlotItems && this.breakpointReached ? this._renderAppnavToggler() : nothing}
+            ${this._hasDefaultSlotItems ? this._renderAppnavToggler() : nothing}
             <slot name="profile" @slotchange=${this._handleProfileSlotChange}></slot>
           </div>
         </div>
