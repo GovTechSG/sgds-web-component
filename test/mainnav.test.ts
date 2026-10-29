@@ -593,6 +593,73 @@ describe("sgds-mainnav-dropdown", () => {
     }
   }).retries(2); // retries as occasionally fails with timeout (CI or local)
 
+  it("matchMedia change closes desktop menu when switching to mobile", async () => {
+    const mock = stubMatchMedia(false); // start desktop
+    try {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav>
+          <sgds-mainnav-dropdown>
+            <span slot="toggler">Dropdown</span>
+            <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>
+      `);
+      const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+      await dropdown?.updateComplete;
+
+      // Open desktop menu
+      const toggler = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLButtonElement;
+      toggler.click();
+      await dropdown?.updateComplete;
+      await aTimeout(50);
+      const menu = dropdown?.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+      expect(menu).to.have.class("menu-open");
+
+      // Switch to mobile via matchMedia change
+      mock.setMatches(true);
+      await dropdown?.updateComplete;
+
+      // Desktop menu should be closed
+      expect(menu).not.to.have.class("menu-open");
+    } finally {
+      mock.restore();
+    }
+  });
+
+  it("matchMedia change resets mobile state when switching to desktop", async () => {
+    const mock = stubMatchMedia(true); // start mobile
+    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
+    window.dispatchEvent(new Event("resize"));
+    try {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav>
+          <sgds-mainnav-dropdown>
+            <span slot="toggler">Dropdown</span>
+            <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>
+      `);
+      const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+      await dropdown?.updateComplete;
+
+      // Open mobile menu
+      const toggler = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLButtonElement;
+      toggler.click();
+      await dropdown?.updateComplete;
+      const menu = dropdown?.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+      expect(menu.style.display).to.equal("block");
+
+      // Switch to desktop via matchMedia change
+      mock.setMatches(false);
+      await dropdown?.updateComplete;
+
+      // Mobile inline styles should be cleared
+      expect(menu.style.display).to.equal("");
+    } finally {
+      mock.restore();
+    }
+  });
+
   it("explicit ariaLabel is forwarded to the button", async () => {
     const el = await fixture<SgdsMainnav>(html`
       <sgds-mainnav>
