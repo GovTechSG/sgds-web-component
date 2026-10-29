@@ -119,6 +119,7 @@ export class SgdsMainnavDropdown extends SgdsElement {
   private _handleMediaChange = (e: MediaQueryListEvent) => {
     const wasMobile = this._isMobile;
     this._isMobile = e.matches;
+    if (this._isMobile === wasMobile) return;
     // Clean up state when crossing breakpoints
     if (this._isMobile && !wasMobile && this._menuOpen) {
       this._hideDesktopMenu();

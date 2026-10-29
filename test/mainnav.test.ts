@@ -439,8 +439,12 @@ function stubMatchMedia(initialMatches: boolean) {
       const idx = listeners.indexOf(listener);
       if (idx >= 0) listeners.splice(idx, 1);
     },
-    addListener() { /* legacy */ },
-    removeListener() { /* legacy */ },
+    addListener() {
+      /* legacy */
+    },
+    removeListener() {
+      /* legacy */
+    },
     onchange: null,
     dispatchEvent() {
       return true;

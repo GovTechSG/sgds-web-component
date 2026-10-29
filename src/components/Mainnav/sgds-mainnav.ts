@@ -121,11 +121,7 @@ export class SgdsMainnav extends NavElement {
           <div class="navbar-body navbar-collapse" id=${this.collapseId}>
             <div class="navbar-nav navbar-nav-scroll">
               <slot @slotchange=${this._handleDefaultSlotChange}></slot>
-              <slot
-                name="end"
-                class="slot-end"
-                @slotchange=${this._handleSlotChange}
-              ></slot>
+              <slot name="end" class="slot-end" @slotchange=${this._handleSlotChange}></slot>
             </div>
           </div>
           <div
