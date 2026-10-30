@@ -453,9 +453,16 @@ function stubMatchMedia(initialMatches: boolean) {
   } as unknown as MediaQueryList;
 
   const original = window.matchMedia;
-  window.matchMedia = () => mql;
+  let lastQuery = "";
+  window.matchMedia = (query: string) => {
+    lastQuery = query;
+    return mql;
+  };
 
   return {
+    get lastQuery() {
+      return lastQuery;
+    },
     setMatches(value: boolean) {
       (mql as { matches: boolean }).matches = value;
       listeners.forEach(l => l({ matches: value } as MediaQueryListEvent));
@@ -470,6 +477,52 @@ describe("sgds-mainnav-dropdown", () => {
   it("is defined", () => {
     const el = document.createElement("sgds-mainnav-dropdown");
     assert.instanceOf(el, SgdsMainnavDropdown);
+  });
+
+  describe("matchMedia query per expand value", () => {
+    const expandBreakpoints: [string, number][] = [
+      ["sm", 512],
+      ["md", 768],
+      ["lg", 1024],
+      ["xl", 1280],
+      ["xxl", 1440]
+    ];
+
+    expandBreakpoints.forEach(([size, breakpoint]) => {
+      it(`expand="${size}" creates matchMedia query with max-width: ${breakpoint - 1}px`, async () => {
+        const mock = stubMatchMedia(false);
+        try {
+          const el = await fixture<SgdsMainnav>(html`
+            <sgds-mainnav expand=${size}>
+              <sgds-mainnav-dropdown>
+                <span slot="toggler">Menu</span>
+              </sgds-mainnav-dropdown>
+            </sgds-mainnav>
+          `);
+          await el.updateComplete;
+          expect(mock.lastQuery).to.equal(`(max-width: ${breakpoint - 1}px)`);
+        } finally {
+          mock.restore();
+        }
+      });
+    });
+
+    it('defaults to lg (1024) when no expand attribute', async () => {
+      const mock = stubMatchMedia(false);
+      try {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav>
+            <sgds-mainnav-dropdown>
+              <span slot="toggler">Menu</span>
+            </sgds-mainnav-dropdown>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
+        expect(mock.lastQuery).to.equal("(max-width: 1023px)");
+      } finally {
+        mock.restore();
+      }
+    });
   });
   it("single template: renders unified template with both icons and mobile header", async () => {
     const el = await fixture<SgdsMainnav>(html`

@@ -124,9 +124,7 @@ export default abstract class NavProfileElement extends NavMenuElement {
           : nothing}
         <sgds-icon class="chevron" name="chevron-down" size="md"></sgds-icon>
       </button>
-      <div class="dropdown-menu ${this._menuOpen ? "menu-open" : ""}"
-        @keydown=${this._handleMenuKeydown}
-      >
+      <div class="dropdown-menu ${this._menuOpen ? "menu-open" : ""}" @keydown=${this._handleMenuKeydown}>
         <div class="menu-items">
           <slot @slotchange=${this._handleSlotChange}></slot>
         </div>

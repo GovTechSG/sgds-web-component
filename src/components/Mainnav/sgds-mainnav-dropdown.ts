@@ -325,7 +325,10 @@ export class SgdsMainnavDropdown extends NavMenuElement {
         <sgds-icon class="icon-down" name="chevron-down" size="md"></sgds-icon>
         <sgds-icon class="icon-right" name="chevron-right" size="md"></sgds-icon>
       </button>
-      <div class="dropdown-menu ${this._menuOpen ? "menu-open" : ""}" role="menu" aria-hidden="true"
+      <div
+        class="dropdown-menu ${this._menuOpen ? "menu-open" : ""}"
+        role="menu"
+        aria-hidden="true"
         @keydown=${this._handleMenuKeydown}
       >
         <div class="mobile-header">
