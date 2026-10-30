@@ -507,7 +507,7 @@ describe("sgds-mainnav-dropdown", () => {
       });
     });
 
-    it('defaults to lg (1024) when no expand attribute', async () => {
+    it("defaults to lg (1024) when no expand attribute", async () => {
       const mock = stubMatchMedia(false);
       try {
         const el = await fixture<SgdsMainnav>(html`
