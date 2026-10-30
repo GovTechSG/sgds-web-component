@@ -1,4 +1,5 @@
 import { aTimeout, assert, elementUpdated, expect, fixture, fixtureCleanup, waitUntil } from "@open-wc/testing";
+import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import Sinon from "sinon";
 import {
@@ -658,6 +659,156 @@ describe("sgds-mainnav-dropdown", () => {
     } finally {
       mock.restore();
     }
+  });
+
+  describe("desktop keyboard navigation", () => {
+    let mock: ReturnType<typeof stubMatchMedia>;
+    beforeEach(() => {
+      mock = stubMatchMedia(false); // desktop
+    });
+    afterEach(() => mock.restore());
+
+    it("ArrowDown on toggler opens menu and focuses first item", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav>
+          <sgds-mainnav-dropdown>
+            <span slot="toggler">Dropdown</span>
+            <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+            <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>
+      `);
+      const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+      await dropdown?.updateComplete;
+
+      const toggler = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      toggler.focus();
+      await sendKeys({ press: "ArrowDown" });
+      await dropdown?.updateComplete;
+      await aTimeout(50);
+
+      const menu = dropdown?.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+      expect(menu).to.have.class("menu-open");
+
+      const items = dropdown?.querySelectorAll("sgds-dropdown-item");
+      expect(items?.[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
+    }).retries(1);
+
+    it("ArrowDown cycles through items and loops last to first", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav>
+          <sgds-mainnav-dropdown>
+            <span slot="toggler">Dropdown</span>
+            <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+            <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>
+      `);
+      const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+      await dropdown?.updateComplete;
+
+      // Open menu
+      const toggler = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      toggler.click();
+      await dropdown?.updateComplete;
+      await aTimeout(50);
+
+      // Navigate: first → second → loops to first
+      const menu = dropdown?.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+      menu.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+      await aTimeout(0);
+      menu.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+      await aTimeout(0);
+      menu.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+      await aTimeout(0);
+
+      const items = dropdown?.querySelectorAll("sgds-dropdown-item");
+      expect(items?.[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
+    }).retries(1);
+
+    it("ArrowUp cycles through items and loops first to last", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav>
+          <sgds-mainnav-dropdown>
+            <span slot="toggler">Dropdown</span>
+            <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+            <sgds-dropdown-item><a href="#">Item 2</a></sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>
+      `);
+      const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+      await dropdown?.updateComplete;
+
+      // Open menu
+      const toggler = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      toggler.click();
+      await dropdown?.updateComplete;
+      await aTimeout(50);
+
+      // ArrowUp from initial → loops to last item
+      const menu = dropdown?.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+      menu.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true }));
+      await aTimeout(0);
+
+      const items = dropdown?.querySelectorAll("sgds-dropdown-item");
+      expect(items?.[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
+    }).retries(1);
+
+    it("Escape closes menu and returns focus to toggler", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav>
+          <sgds-mainnav-dropdown>
+            <span slot="toggler">Dropdown</span>
+            <sgds-dropdown-item><a href="#">Item 1</a></sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>
+      `);
+      const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+      await dropdown?.updateComplete;
+
+      // Open menu
+      const toggler = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      toggler.click();
+      await dropdown?.updateComplete;
+      await aTimeout(50);
+
+      const menu = dropdown?.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+      expect(menu).to.have.class("menu-open");
+
+      // Escape
+      menu.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+      await dropdown?.updateComplete;
+
+      expect(menu).not.to.have.class("menu-open");
+    }).retries(1);
+
+    it("skips disabled items during ArrowDown navigation", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav>
+          <sgds-mainnav-dropdown>
+            <span slot="toggler">Dropdown</span>
+            <sgds-dropdown-item disabled><a href="#">Disabled</a></sgds-dropdown-item>
+            <sgds-dropdown-item><a href="#">Active</a></sgds-dropdown-item>
+          </sgds-mainnav-dropdown>
+        </sgds-mainnav>
+      `);
+      const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
+      await dropdown?.updateComplete;
+
+      // Open menu
+      const toggler = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      toggler.click();
+      await dropdown?.updateComplete;
+      await aTimeout(50);
+
+      // ArrowDown should skip disabled and focus the active item
+      const menu = dropdown?.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+      menu.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true }));
+      await aTimeout(0);
+
+      const activeItem = dropdown?.querySelectorAll("sgds-dropdown-item")?.[1];
+      expect(activeItem?.shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
+    }).retries(1);
   });
 
   it("explicit ariaLabel is forwarded to the button", async () => {

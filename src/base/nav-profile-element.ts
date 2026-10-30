@@ -2,23 +2,11 @@ import { html, nothing } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
-import { autoUpdate, computePosition, flip, offset, shift } from "@floating-ui/dom";
-import SgdsElement from "./sgds-element";
 import SgdsIcon from "../components/Icon/sgds-icon";
 import navProfileStyle from "./nav-profile.css";
 import genId from "../utils/generateId";
-import { LG_BREAKPOINT, MD_BREAKPOINT, SM_BREAKPOINT, XL_BREAKPOINT, XXL_BREAKPOINT } from "../utils/breakpoints";
+import NavMenuElement from "./nav-menu-element";
 import type { NavExpandSize } from "./nav-element";
-
-const SIZES: Record<NavExpandSize, number> = {
-  sm: SM_BREAKPOINT,
-  md: MD_BREAKPOINT,
-  lg: LG_BREAKPOINT,
-  xl: XL_BREAKPOINT,
-  xxl: XXL_BREAKPOINT,
-  never: Infinity,
-  always: -1
-};
 
 /**
  * Base class for navigation profile components (sgds-mainnav-profile and sgds-appnav-profile).
@@ -30,16 +18,12 @@ const SIZES: Record<NavExpandSize, number> = {
  * @slot avatar - Avatar element displayed in both desktop (before label) and mobile (as toggler)
  * @slot default - Profile menu items (sgds-dropdown-item elements). When empty, the component becomes read-only.
  */
-export default abstract class NavProfileElement extends SgdsElement {
-  static styles = [...SgdsElement.styles, navProfileStyle];
+export default abstract class NavProfileElement extends NavMenuElement {
+  static styles = [...NavMenuElement.styles, navProfileStyle];
   /** @internal */
   static dependencies = {
     "sgds-icon": SgdsIcon
   };
-
-  /** @internal Whether the menu is open */
-  @state()
-  private _menuOpen = false;
 
   /** @internal Whether dropdown items are slotted */
   @state()
@@ -71,44 +55,19 @@ export default abstract class NavProfileElement extends SgdsElement {
   /** @internal */
   private togglerId: string = genId("profile", "button");
 
-  /** @internal */
-  private _isMobile = true;
-  private _mediaQuery: MediaQueryList | null = null;
-  private _autoUpdateCleanup: (() => void) | undefined;
+  // ── NavMenuElement abstract implementation ──
 
-  connectedCallback() {
-    super.connectedCallback();
-    if (typeof window !== "undefined") {
-      const expand = (this.closest("sgds-mainnav")?.getAttribute("expand") ||
-        this.closest("sgds-appnav")?.getAttribute("expand") ||
-        "lg") as NavExpandSize;
-      this._mediaQuery = window.matchMedia(`(max-width: ${SIZES[expand] - 1}px)`);
-      this._isMobile = this._mediaQuery.matches;
-      this._mediaQuery.addEventListener("change", this._handleMediaChange);
-      document.addEventListener("click", this._handleOutsideClick);
-    }
+  protected _getExpandValue(): NavExpandSize {
+    return (this.closest("sgds-mainnav")?.getAttribute("expand") ||
+      this.closest("sgds-appnav")?.getAttribute("expand") ||
+      "lg") as NavExpandSize;
   }
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this._mediaQuery?.removeEventListener("change", this._handleMediaChange);
-    document.removeEventListener("click", this._handleOutsideClick);
-    this._autoUpdateCleanup?.();
+  protected override _shouldCloseOnOutsideClick(): boolean {
+    return this.close !== "inside";
   }
 
-  private _handleMediaChange = (e: MediaQueryListEvent) => {
-    const wasMobile = this._isMobile;
-    this._isMobile = e.matches;
-    if (this._isMobile === wasMobile) return;
-    if (this._menuOpen) {
-      if (this._isMobile && !wasMobile) {
-        this._hideDesktopMenu();
-      }
-      if (!this._isMobile && wasMobile) {
-        this._menuOpen = false;
-      }
-    }
-  };
+  // ── Slot handling ──
 
   private _handleSlotChange = () => {
     this._hasDropdownItems = this._defaultSlotElements.length > 0;
@@ -121,11 +80,7 @@ export default abstract class NavProfileElement extends SgdsElement {
     if (this._isMobile) {
       this._menuOpen = !this._menuOpen;
     } else {
-      if (this._menuOpen) {
-        this._hideDesktopMenu();
-      } else {
-        this._showDesktopMenu();
-      }
+      this._toggleDesktopMenu();
     }
   };
 
@@ -134,57 +89,9 @@ export default abstract class NavProfileElement extends SgdsElement {
       e.preventDefault();
       this._handleToggle();
     }
-    if (e.key === "Escape" && this._menuOpen) {
-      if (this._isMobile) {
-        this._menuOpen = false;
-      } else {
-        this._hideDesktopMenu();
-      }
-    }
-  };
-
-  // ── Desktop floating menu ──
-
-  private async _showDesktopMenu() {
-    if (this._menuOpen) return;
-    this._menuOpen = true;
-    await this.updateComplete;
-    await this._updateFloatingPosition();
-    const toggler = this.shadowRoot?.querySelector(".nav-link") as HTMLElement;
-    const menu = this.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
-    if (toggler && menu) {
-      this._autoUpdateCleanup = autoUpdate(toggler, menu, () => this._updateFloatingPosition());
-    }
-  }
-
-  private _hideDesktopMenu() {
-    if (!this._menuOpen) return;
-    this._menuOpen = false;
-    this._autoUpdateCleanup?.();
-    this._autoUpdateCleanup = undefined;
-  }
-
-  private async _updateFloatingPosition() {
-    const toggler = this.shadowRoot?.querySelector(".nav-link") as HTMLElement;
-    const menu = this.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
-    if (!toggler || !menu) return;
-    const { x, y } = await computePosition(toggler, menu, {
-      placement: "bottom-start",
-      strategy: "fixed",
-      middleware: [offset(0), flip(), shift()]
-    });
-    Object.assign(menu.style, { left: `${x}px`, top: `${y}px` });
-  }
-
-  private _handleOutsideClick = (e: MouseEvent) => {
-    if (!this._menuOpen) return;
-    if (this.close === "inside") return;
-    if (!e.composedPath().includes(this)) {
-      if (this._isMobile) {
-        this._menuOpen = false;
-      } else {
-        this._hideDesktopMenu();
-      }
+    if (!this._isMobile) {
+      // Delegate to shared menu keyboard nav
+      this._handleMenuKeydown(e);
     }
   };
 
@@ -217,7 +124,9 @@ export default abstract class NavProfileElement extends SgdsElement {
           : nothing}
         <sgds-icon class="chevron" name="chevron-down" size="md"></sgds-icon>
       </button>
-      <div class="dropdown-menu ${this._menuOpen ? "menu-open" : ""}">
+      <div class="dropdown-menu ${this._menuOpen ? "menu-open" : ""}"
+        @keydown=${this._handleMenuKeydown}
+      >
         <div class="menu-items">
           <slot @slotchange=${this._handleSlotChange}></slot>
         </div>
