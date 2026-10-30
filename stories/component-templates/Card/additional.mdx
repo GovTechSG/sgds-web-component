@@ -1,3 +1,22 @@
+## Description and secondary text
+
+The slot names in code differ from the labels in Figma:
+
+| Figma | Code |
+| --- | --- |
+| Description | Default (unnamed) slot |
+| Secondary text | `description` slot |
+
+Place the main description in the unnamed slot by omitting the `slot` attribute. It uses `--sgds-gap-xs` below the title (8px by default). Use `slot="description"` for secondary text in the card body.
+
+```html
+<sgds-card>
+  <span slot="title">Card title</span>
+  <span>Main description</span>
+  <span slot="description">Secondary text</span>
+</sgds-card>
+```
+
 ## Stretched link
 
 By default, a link inside the card only applies to the text or element within the link slot. Enabling `stretchedLink` extends the hyperlink to cover the entire card, making the whole card clickable.
