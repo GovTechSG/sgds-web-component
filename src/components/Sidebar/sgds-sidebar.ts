@@ -185,7 +185,7 @@ export class SgdsSidebar extends SgdsElement {
    * @internal
    * @returns {void}
    */
-  @watch("collapsed")
+  @watch("collapsed", { waitUntilFirstUpdate: true })
   _handleCollapsed() {
     if (this.variant !== "persistent") {
       this._sidebarCollapsed = this.collapsed;
@@ -199,7 +199,7 @@ export class SgdsSidebar extends SgdsElement {
    * @internal
    * @returns {void}
    */
-  @watch("_sidebarActiveItem")
+  @watch("_sidebarActiveItem", { waitUntilFirstUpdate: true })
   _handleActiveItem(oldItem?: unknown) {
     if (!this._sidebarActiveItem) return;
 
@@ -247,7 +247,7 @@ export class SgdsSidebar extends SgdsElement {
    * @internal
    * @returns {void}
    */
-  @watch("active")
+  @watch("active", { waitUntilFirstUpdate: true })
   _handleActive() {
     // Return early if active is empty
     if (!this.active) {
@@ -488,16 +488,14 @@ export class SgdsSidebar extends SgdsElement {
             show: this._showDrawer
           })}
         >
-          ${this._isNarrowViewport
-            ? html`<sgds-icon-button
-                name="chevron-left"
-                variant="ghost"
-                tone="neutral"
-                size="sm"
-                @click=${() => (this._showDrawer = false)}
-                .ariaLabel=${"Close drawer"}
-              ></sgds-icon-button>`
-            : nothing}
+          <sgds-icon-button
+            name="chevron-left"
+            variant="ghost"
+            tone="neutral"
+            size="sm"
+            @click=${() => (this._showDrawer = false)}
+            .ariaLabel=${"Close drawer"}
+          ></sgds-icon-button>
           ${this._drawerItems}
         </div>
       </nav>
