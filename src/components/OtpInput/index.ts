@@ -1,6 +1,7 @@
 import { SgdsOtpInput } from "./sgds-otp-input";
+import { register } from "../../utils/ce-registry";
 
-customElements.define("sgds-otp-input", SgdsOtpInput);
+register("sgds-otp-input", SgdsOtpInput);
 
 declare global {
   interface HTMLElementTagNameMap {

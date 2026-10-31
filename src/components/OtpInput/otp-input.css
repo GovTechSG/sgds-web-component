@@ -5,11 +5,14 @@
 .otp-fields {
   display: flex;
   gap: var(--sgds-gap-sm);
+  /* Preserve fixed digit widths while keeping long codes reachable on narrow screens. */
+  overflow-x: auto;
 }
 .otp-box {
   width: var(--sgds-dimension-48);
   min-width: 0;
-  flex: 0 1 var(--sgds-dimension-48);
+  flex: 0 0 var(--sgds-dimension-48);
+  box-sizing: border-box;
   padding: 0;
 }
 .otp-box .form-control {

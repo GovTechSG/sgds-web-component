@@ -2,24 +2,22 @@ import { Controls } from "@storybook/addon-docs/blocks";
 
 ## Variants
 
-Use `variant="numbers-only"` for separate digit boxes. Use `variant="with-prefix"` for a single input with a prefix. Both variants display digits without masking or placeholder text.
+Use `variant="numbers-only"` for separate digit boxes or `variant="with-prefix"` for a single input with a prefix. Both variants display digits without masking or placeholder text.
 
 Set the number of digits from 4 to 8 using the control below. The default is 6. The prefix is displayed separately and is not included in the submitted value.
 
 <Canvas of={OtpInputStories.Variants} />
-<Controls of={OtpInputStories.Variants} include={["Number of digits"]} />
+<Controls of={OtpInputStories.Variants} include={["Number of digits", "prefix"]} />
 
 ## Label slot
 
-Use the `label` slot to display a label. Without slotted content, the input has no visible label. The internal inputs retain the accessible name “Verification code”.
+Use the `label` slot to customise the label content and styling. Both variants are shown without a visible label and with a custom label using regular text and a semibold email address. Without slotted content, the internal inputs retain the accessible name “Verification code”.
 
 <Canvas of={OtpInputStories.LabelSlot} />
 
-## Invalid
+## Validation
 
-Errors always display a border and message. Feedback appears when the form is submitted or `reportValidity()` is called. Typing and leaving the component do not display validation feedback. These examples set `invalid` explicitly to preview the error state.
-
-<Canvas of={OtpInputStories.Invalid} />
+Errors always display a border and message. Feedback appears when the form is submitted or `reportValidity()` is called. Typing and leaving the component do not display validation feedback. Use the `invalid` and `invalidFeedback` controls in Basic to preview the error state.
 
 ### Custom validation
 

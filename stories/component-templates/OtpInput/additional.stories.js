@@ -14,50 +14,39 @@ Basic.argTypes = {
   prefix: { control: "text", if: { arg: "variant", eq: "with-prefix" } }
 };
 
-const renderBothVariants = storyArgs => html`
-  <div class="sgds:flex sgds:flex-col sgds:gap-xl">
-    <div>
-      <h3>Numbers only</h3>
-      ${Template({ ...storyArgs, variant: "numbers-only", prefix: "" })}
-    </div>
-    <div>
-      <h3>With prefix</h3>
-      ${Template({ ...storyArgs, variant: "with-prefix", prefix: "KRM-" })}
-    </div>
+const renderVariants = storyArgs => html`
+  <div class="sgds:grid sgds:grid-cols-1 sgds:xl:grid-cols-2 sgds:gap-xl sgds:items-start">
+    <div class="sgds:min-w-0">${Template({ ...storyArgs, variant: "numbers-only", prefix: "" })}</div>
+    <div class="sgds:min-w-0">${Template({ ...storyArgs, variant: "with-prefix" })}</div>
   </div>
 `;
 
 const groupedArgTypes = {
   ...Basic.argTypes,
   variant: { table: { disable: true } },
-  prefix: { table: { disable: true } }
+  prefix: { control: "text" }
 };
 
 export const Variants = {
-  render: renderBothVariants,
+  render: renderVariants,
   name: "Variants",
-  parameters: { controls: { disable: false, include: ["Number of digits"] } },
   args: { ...args },
   argTypes: groupedArgTypes
 };
+
 export const LabelSlot = {
-  render: storyArgs => html`<div class="sgds:flex sgds:flex-col sgds:gap-xl">
-    <div>
-      <h3>With label</h3>
-      ${Template(storyArgs)}
+  render: storyArgs => html`
+    <div class="sgds:flex sgds:flex-col sgds:gap-xl">
+      ${renderVariants({ ...storyArgs, hideLabel: true })}
+      ${renderVariants({
+        ...storyArgs,
+        labelContent: html`<span slot="label" class="sgds:font-regular"
+          >Enter verification code sent to <span class="sgds:font-semibold">xxx@gov.sg</span></span
+        >`
+      })}
     </div>
-    <div>
-      <h3>No label</h3>
-      ${Template({ ...storyArgs, hideLabel: true })}
-    </div>
-  </div>`,
+  `,
   name: "Label slot",
   args: { ...args },
-  argTypes: Basic.argTypes
-};
-export const Invalid = {
-  render: renderBothVariants,
-  name: "Invalid",
-  args: { ...args, invalid: true, invalidFeedback: "The code is incorrect or has expired." },
   argTypes: groupedArgTypes
 };
