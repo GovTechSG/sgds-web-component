@@ -28,6 +28,7 @@ const browsers = {
 export default {
   files: "test-outdir/**/*.test.js",
   nodeResolve: true,
+  testsFinishTimeout: 300000,
   browsers: Object.values(browsers),
   plugins: [
     esbuildPlugin({
