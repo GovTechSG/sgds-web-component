@@ -9,7 +9,9 @@ export const Template = args => html`
     ?required=${args.required}
     ?invalid=${args.invalid}
     invalidFeedback=${args.invalidFeedback}
-    >${args.hideLabel ? nothing : html`<span slot="label">Verification code</span>`}</sgds-otp-input
+    >${args.hideLabel
+      ? nothing
+      : args.labelContent ?? html`<span slot="label">Verification code</span>`}</sgds-otp-input
   >
 `;
 
