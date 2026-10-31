@@ -41,6 +41,7 @@ export * from "./Mainnav/sgds-mainnav-item";
 export * from "./Mainnav/sgds-mainnav-profile";
 export * from "./Masthead/sgds-masthead";
 export * from "./Modal/sgds-modal";
+export * from "./OtpInput/sgds-otp-input";
 export * from "./OverflowMenu/sgds-overflow-menu";
 export * from "./Pagination/sgds-pagination";
 export * from "./ProgressBar/sgds-progress-bar";

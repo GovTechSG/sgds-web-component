@@ -48,4 +48,5 @@ import "./components/Sidebar";
 import "./components/Appnav";
 import "./components/DataTable";
 import "./components/Appnav";
+import "./components/OtpInput";
 // COMPONENT IMPORTS

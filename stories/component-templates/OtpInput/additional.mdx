@@ -1,0 +1,28 @@
+import { Controls } from "@storybook/addon-docs/blocks";
+
+## Variants
+
+Use `variant="numbers-only"` for separate digit boxes or `variant="with-prefix"` for a single input with a prefix. Both variants display digits without masking or placeholder text.
+
+Set the number of digits from 4 to 8 using the control below. The default is 6. The prefix is displayed separately and is not included in the submitted value.
+
+<Canvas of={OtpInputStories.Variants} />
+<Controls of={OtpInputStories.Variants} include={["Number of digits", "prefix"]} />
+
+## Label slot
+
+Use the `label` slot to customise the label content and styling. Both variants are shown without a visible label and with a custom label using regular text and a semibold email address. Without slotted content, the internal inputs retain the accessible name “Verification code”.
+
+<Canvas of={OtpInputStories.LabelSlot} />
+
+## Validation
+
+Errors always display a border and message. Feedback appears when the form is submitted or `reportValidity()` is called. Typing and leaving the component do not display validation feedback. Use the `invalid` and `invalidFeedback` controls in Basic to preview the error state.
+
+### Custom validation
+
+Like Input, `invalid` controls the error appearance and `invalidFeedback` supplies the message. For application-managed validation, set `noValidate` on the component or `novalidate` on its form, then use `setInvalid()` and `invalidFeedback`. Automatic submission handling and `reportValidity()` leave that custom feedback unchanged; resetting the form clears it.
+
+The read-only `validity` and `validationMessage` properties let application code inspect validation results. They are not configuration options.
+
+OTP uses the same event names as Input. Canceling `sgds-input` prevents automatic movement to the next box but keeps the entered value. `sgds-change` is also cancelable for consistency; OTP has no automatic validation action on change. Focus and blur events describe entering or leaving the whole component.
