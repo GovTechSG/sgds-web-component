@@ -68,7 +68,7 @@ export class SgdsBreadcrumb extends SgdsElement {
       }
     });
 
-    if (items.length >= 5) {
+    if (items.length >= 5 && !this.ssr) {
       this._replaceExcessItemsWithDropdown(items);
     }
   }

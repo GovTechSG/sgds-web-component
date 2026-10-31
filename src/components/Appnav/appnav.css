@@ -140,6 +140,15 @@ nav > .navbar-body slot::slotted(*) {
   .navbar-expand-sm .navbar-toggler {
     display: none;
   }
+  .navbar-expand-sm .slot-desktop-only {
+    display: flex;
+  }
+  .navbar-expand-sm .mobile-menu-items {
+    display: none;
+  }
+  .navbar-expand-sm .navbar-end.slot-empty {
+    display: none;
+  }
 }
 
 @media (min-width: 768px) {
@@ -164,6 +173,15 @@ nav > .navbar-body slot::slotted(*) {
   }
 
   .navbar-expand-md .navbar-toggler {
+    display: none;
+  }
+  .navbar-expand-md .slot-desktop-only {
+    display: flex;
+  }
+  .navbar-expand-md .mobile-menu-items {
+    display: none;
+  }
+  .navbar-expand-md .navbar-end.slot-empty {
     display: none;
   }
 }
@@ -196,6 +214,15 @@ nav > .navbar-body slot::slotted(*) {
   .navbar-expand-lg .navbar-toggler {
     display: none;
   }
+  .navbar-expand-lg .slot-desktop-only {
+    display: flex;
+  }
+  .navbar-expand-lg .mobile-menu-items {
+    display: none;
+  }
+  .navbar-expand-lg .navbar-end.slot-empty {
+    display: none;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -220,6 +247,15 @@ nav > .navbar-body slot::slotted(*) {
   }
 
   .navbar-expand-xl .navbar-toggler {
+    display: none;
+  }
+  .navbar-expand-xl .slot-desktop-only {
+    display: flex;
+  }
+  .navbar-expand-xl .mobile-menu-items {
+    display: none;
+  }
+  .navbar-expand-xl .navbar-end.slot-empty {
     display: none;
   }
 }
@@ -248,6 +284,15 @@ nav > .navbar-body slot::slotted(*) {
   .navbar-expand-xxl .navbar-toggler {
     display: none;
   }
+  .navbar-expand-xxl .slot-desktop-only {
+    display: flex;
+  }
+  .navbar-expand-xxl .mobile-menu-items {
+    display: none;
+  }
+  .navbar-expand-xxl .navbar-end.slot-empty {
+    display: none;
+  }
 }
 
 .navbar-expand {
@@ -271,6 +316,15 @@ nav > .navbar-body slot::slotted(*) {
 }
 
 .navbar-expand .navbar-toggler {
+  display: none;
+}
+.navbar-expand .slot-desktop-only {
+  display: flex;
+}
+.navbar-expand .mobile-menu-items {
+  display: none;
+}
+.navbar-expand .navbar-end.slot-empty {
   display: none;
 }
 
@@ -302,14 +356,15 @@ slot[name="start"]::slotted(*) {
   color: var(--sgds-color-fixed-light);
 }
 
-.navbar-end.slot-empty {
-  display: none;
-}
+/* navbar-end.slot-empty and slot-desktop-only hidden only at desktop
+   breakpoints. On mobile, the toggler and mobile menu items must be visible. */
 
-/* Hide slotted icon-buttons in mobile menu, show text items instead */
+/* Mobile (default): hide slotted icon-buttons, show text menu items */
 .slot-desktop-only {
   display: none;
 }
+
+/* Desktop: hide mobile menu items, show slotted icon-buttons */
 
 .appnav-menu-item {
   display: flex;

@@ -1,7 +1,4 @@
-import { consume } from "@lit/context";
-import { state } from "lit/decorators.js";
 import NavProfileElement from "../../base/nav-profile-element";
-import { AppnavBreakpointContext } from "./appnav-context";
 
 /**
  * @summary `SgdsAppnavProfile` is a profile component for the appnav that shows a full dropdown in desktop and handles its own mobile menu.
@@ -15,10 +12,6 @@ import { AppnavBreakpointContext } from "./appnav-context";
  * @slot avatar - Avatar element displayed in both desktop (before label) and mobile (as toggler)
  * @slot default - Profile menu items (sgds-dropdown-item elements). When empty, the component becomes read-only.
  */
-export class SgdsAppnavProfile extends NavProfileElement {
-  @consume({ context: AppnavBreakpointContext, subscribe: true })
-  @state()
-  protected override _breakpointReached = true;
-}
+export class SgdsAppnavProfile extends NavProfileElement {}
 
 export default SgdsAppnavProfile;

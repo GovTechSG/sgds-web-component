@@ -4,6 +4,50 @@ import { html } from "lit";
 import { SgdsDropdownItem, SgdsMainnav, SgdsMainnavProfile } from "../src/components";
 import "./sgds-web-component";
 
+/**
+ * Stubs window.matchMedia to return a controllable MediaQueryList.
+ * Call `mock.setMatches(true/false)` to trigger change listeners.
+ * Call `mock.restore()` to restore the original matchMedia.
+ */
+function stubMatchMedia(initialMatches: boolean) {
+  type ChangeListener = (e: MediaQueryListEvent) => void;
+  const listeners: ChangeListener[] = [];
+  const mql = {
+    matches: initialMatches,
+    media: "",
+    addEventListener(_type: string, listener: ChangeListener) {
+      listeners.push(listener);
+    },
+    removeEventListener(_type: string, listener: ChangeListener) {
+      const idx = listeners.indexOf(listener);
+      if (idx >= 0) listeners.splice(idx, 1);
+    },
+    addListener() {
+      /* legacy */
+    },
+    removeListener() {
+      /* legacy */
+    },
+    onchange: null,
+    dispatchEvent() {
+      return true;
+    }
+  } as unknown as MediaQueryList;
+
+  const original = window.matchMedia;
+  window.matchMedia = () => mql;
+
+  return {
+    setMatches(value: boolean) {
+      (mql as { matches: boolean }).matches = value;
+      listeners.forEach(l => l({ matches: value } as MediaQueryListEvent));
+    },
+    restore() {
+      window.matchMedia = original;
+    }
+  };
+}
+
 describe("sgds-mainnav-profile", () => {
   afterEach(() => fixtureCleanup());
 
@@ -12,57 +56,7 @@ describe("sgds-mainnav-profile", () => {
     expect(el).to.be.instanceOf(SgdsMainnavProfile);
   });
 
-  it("desktop view: can be semantically compare with shadowDom trees", async () => {
-    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
-    window.dispatchEvent(new Event("resize"));
-    const el = await fixture<SgdsMainnav>(html`
-      <sgds-mainnav expand="lg">
-        <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
-          <span slot="avatar" class="avatar"></span>
-          <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
-        </sgds-mainnav-profile>
-      </sgds-mainnav>
-    `);
-    await el.updateComplete;
-    const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-    await profile.updateComplete;
-    assert.shadowDom.equal(
-      profile,
-      `
-      <sgds-dropdown
-        close="default"
-        drop="down"
-      >
-        <button
-          aria-disabled="false"
-          aria-label="Profile menu"
-          class="nav-link"
-          slot="toggler"
-          tabindex="0"
-        >
-          <slot name="avatar">
-          </slot>
-          <div class="profile-text">
-            <span class="profile-label">User Name</span>
-            <span class="profile-secondary-text">Agency (admin)</span>
-          </div>
-          <sgds-icon
-            name="chevron-down"
-            size="md"
-          >
-          </sgds-icon>
-        </button>
-        <slot>
-        </slot>
-      </sgds-dropdown>
-      `,
-      { ignoreAttributes: ["id", "aria-expanded", "aria-haspopup"] }
-    );
-  });
-
-  it("mobile view: can be semantically compare with shadowDom trees", async () => {
-    Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
-    window.dispatchEvent(new Event("resize"));
+  it("single template: renders unified template with avatar, profile-text, chevron, and dropdown-menu", async () => {
     const el = await fixture<SgdsMainnav>(html`
       <sgds-mainnav expand="lg">
         <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
@@ -78,18 +72,27 @@ describe("sgds-mainnav-profile", () => {
       profile,
       `
       <button
-        class="profile-avatar-mobile"
+        aria-disabled="false"
         aria-expanded="false"
         aria-label="Profile menu"
+        class="nav-link"
+        tabindex="0"
       >
         <slot name="avatar">
         </slot>
+        <div class="profile-text">
+          <span class="profile-label">User Name</span>
+          <span class="profile-secondary-text">Agency (admin)</span>
+        </div>
+        <sgds-icon
+          class="chevron"
+          name="chevron-down"
+          size="md"
+        >
+        </sgds-icon>
       </button>
-      <div
-        class="profile-mobile-panel"
-        hidden=""
-      >
-        <div class="profile-mobile-items">
+      <div class="dropdown-menu">
+        <div class="menu-items">
           <slot>
           </slot>
         </div>
@@ -100,38 +103,15 @@ describe("sgds-mainnav-profile", () => {
   });
 
   describe("desktop mode (above breakpoint)", () => {
+    let mock: ReturnType<typeof stubMatchMedia>;
     beforeEach(() => {
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 1030
-      });
+      mock = stubMatchMedia(false); // false = desktop (not mobile)
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
       window.dispatchEvent(new Event("resize"));
     });
+    afterEach(() => mock.restore());
 
-    it("renders a dropdown in desktop mode", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile
-            slot="profile"
-            label="User Name"
-            secondaryText="Agency (admin)"
-            ariaLabel="Profile menu"
-          >
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown");
-      expect(dropdown).to.exist;
-    });
-
-    it("renders avatar slot in desktop dropdown", async () => {
+    it("renders avatar slot in nav-link", async () => {
       const el = await fixture<SgdsMainnav>(html`
         <sgds-mainnav expand="lg">
           <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
@@ -150,7 +130,7 @@ describe("sgds-mainnav-profile", () => {
       expect(avatarSlot).to.exist;
     });
 
-    it("renders label and secondaryText props in desktop", async () => {
+    it("renders label and secondaryText props", async () => {
       const el = await fixture<SgdsMainnav>(html`
         <sgds-mainnav expand="lg">
           <sgds-mainnav-profile
@@ -177,7 +157,7 @@ describe("sgds-mainnav-profile", () => {
       expect(secondary?.textContent).to.equal("Agency (admin)");
     });
 
-    it("renders chevron-down icon in desktop mode", async () => {
+    it("renders chevron-down icon", async () => {
       const el = await fixture<SgdsMainnav>(html`
         <sgds-mainnav expand="lg">
           <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
@@ -192,6 +172,29 @@ describe("sgds-mainnav-profile", () => {
 
       const icon = profile.shadowRoot?.querySelector('sgds-icon[name="chevron-down"]');
       expect(icon).to.exist;
+    });
+
+    it("clicking toggler opens the floating dropdown menu", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const toggler = profile.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      const menu = profile.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+
+      toggler.click();
+      await profile.updateComplete;
+      await aTimeout(50);
+
+      expect(menu).to.have.class("menu-open");
     });
 
     it("mainnav toggler icon-button is always rendered when profile is present", async () => {
@@ -243,39 +246,18 @@ describe("sgds-mainnav-profile", () => {
   });
 
   describe("mobile mode (below breakpoint)", () => {
+    let mock: ReturnType<typeof stubMatchMedia>;
     beforeEach(() => {
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 300
-      });
+      mock = stubMatchMedia(true); // true = mobile
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
       window.dispatchEvent(new Event("resize"));
     });
+    afterEach(() => mock.restore());
 
-    it("renders flat items (no dropdown) in mobile mode", async () => {
+    it("clicking avatar toggler opens the mobile panel", async () => {
       const el = await fixture<SgdsMainnav>(html`
         <sgds-mainnav expand="lg">
           <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown");
-      expect(dropdown).not.to.exist;
-
-      const mobileItems = profile.shadowRoot?.querySelector(".profile-mobile-items");
-      expect(mobileItems).to.exist;
-    });
-
-    it("does not render label or secondaryText in mobile mode", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency" ariaLabel="Profile menu">
             <span slot="avatar" class="avatar"></span>
             <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
           </sgds-mainnav-profile>
@@ -285,11 +267,97 @@ describe("sgds-mainnav-profile", () => {
       const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
       await profile.updateComplete;
 
-      const label = profile.shadowRoot?.querySelector(".profile-label");
-      expect(label).not.to.exist;
+      const toggler = profile.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      const menu = profile.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
 
-      const secondary = profile.shadowRoot?.querySelector(".profile-secondary-text");
-      expect(secondary).not.to.exist;
+      toggler.click();
+      await profile.updateComplete;
+
+      expect(menu).to.have.class("menu-open");
+    });
+
+    it("clicking avatar again closes the mobile panel", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const toggler = profile.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      const menu = profile.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+
+      // Open
+      toggler.click();
+      await profile.updateComplete;
+      expect(menu).to.have.class("menu-open");
+
+      // Close
+      toggler.click();
+      await profile.updateComplete;
+      expect(menu).not.to.have.class("menu-open");
+    });
+
+    it("clicking outside the profile closes the mobile panel", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const toggler = profile.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      const menu = profile.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+
+      // Open
+      toggler.click();
+      await profile.updateComplete;
+      expect(menu).to.have.class("menu-open");
+
+      // Click outside
+      await sendMouse({ type: "click", position: [0, 0] });
+      await profile.updateComplete;
+
+      expect(menu).not.to.have.class("menu-open");
+    });
+
+    it("does not close mobile panel on outside click when close='inside'", async () => {
+      const el = await fixture<SgdsMainnav>(html`
+        <sgds-mainnav expand="lg">
+          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu" close="inside">
+            <span slot="avatar" class="avatar"></span>
+            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+          </sgds-mainnav-profile>
+        </sgds-mainnav>
+      `);
+      await el.updateComplete;
+      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+      await profile.updateComplete;
+
+      const toggler = profile.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      const menu = profile.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+
+      // Open
+      toggler.click();
+      await profile.updateComplete;
+      expect(menu).to.have.class("menu-open");
+
+      // Click outside
+      await sendMouse({ type: "click", position: [0, 0] });
+      await profile.updateComplete;
+
+      // Panel should remain open
+      expect(menu).to.have.class("menu-open");
     });
 
     it("hamburger toggler is always rendered in mobile when profile is present", async () => {
@@ -306,384 +374,87 @@ describe("sgds-mainnav-profile", () => {
       const toggler = el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler");
       expect(toggler).to.exist;
     });
-
-    it("renders avatar toggler in mobile mode", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar-test"></span>
-            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const avatarToggler = profile.shadowRoot?.querySelector("button.profile-avatar-mobile");
-      expect(avatarToggler).to.exist;
-      expect(avatarToggler?.tagName.toLowerCase()).to.equal("button");
-      expect(avatarToggler).to.have.attribute("aria-label", "Profile menu");
-    });
-
-    it("clicking avatar opens the profile mobile panel", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const avatarToggler = profile.shadowRoot?.querySelector(".profile-avatar-mobile") as HTMLElement;
-      const panel = profile.shadowRoot?.querySelector(".profile-mobile-panel");
-      expect(panel).to.have.attribute("hidden");
-
-      avatarToggler.click();
-      await profile.updateComplete;
-
-      expect(panel).not.to.have.attribute("hidden");
-    });
-
-    it("clicking avatar again closes the profile mobile panel", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const avatarToggler = profile.shadowRoot?.querySelector(".profile-avatar-mobile") as HTMLElement;
-      const panel = profile.shadowRoot?.querySelector(".profile-mobile-panel");
-
-      // Open
-      avatarToggler.click();
-      await profile.updateComplete;
-      expect(panel).not.to.have.attribute("hidden");
-
-      // Close
-      avatarToggler.click();
-      await profile.updateComplete;
-      expect(panel).to.have.attribute("hidden");
-    });
-
-    it("clicking outside the profile mobile panel closes it", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const avatarToggler = profile.shadowRoot?.querySelector(".profile-avatar-mobile") as HTMLElement;
-      const panel = profile.shadowRoot?.querySelector(".profile-mobile-panel");
-
-      // Open the panel
-      avatarToggler.click();
-      await profile.updateComplete;
-      expect(panel).not.to.have.attribute("hidden");
-
-      // Click outside the component
-      await sendMouse({ type: "click", position: [0, 0] });
-      await profile.updateComplete;
-
-      expect(panel).to.have.attribute("hidden");
-    });
-
-    it("does not close mobile panel on outside click when close='inside'", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu" close="inside">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const avatarToggler = profile.shadowRoot?.querySelector(".profile-avatar-mobile") as HTMLElement;
-      const panel = profile.shadowRoot?.querySelector(".profile-mobile-panel");
-
-      // Open the panel
-      avatarToggler.click();
-      await profile.updateComplete;
-      expect(panel).not.to.have.attribute("hidden");
-
-      // Click outside the component
-      await sendMouse({ type: "click", position: [0, 0] });
-      await profile.updateComplete;
-
-      // Panel should remain open
-      expect(panel).not.to.have.attribute("hidden");
-    });
   });
 
   describe("responsive transitions", () => {
-    it("switches from mobile panel to desktop dropdown on resize", async () => {
+    it("matchMedia change triggers breakpoint switch", async () => {
       // Start in mobile
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 300
-      });
+      const mock = stubMatchMedia(true);
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
       window.dispatchEvent(new Event("resize"));
 
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar-test"></span>
-            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
+      try {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav expand="lg">
+            <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency" ariaLabel="Profile menu">
+              <span slot="avatar" class="avatar-test"></span>
+              <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+            </sgds-mainnav-profile>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
+        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
+        await profile.updateComplete;
 
-      // Mobile: avatar toggler, no dropdown
-      expect(profile.shadowRoot?.querySelector(".profile-avatar-mobile")).to.exist;
-      expect(profile.shadowRoot?.querySelector("sgds-dropdown")).not.to.exist;
+        // Open mobile panel
+        const toggler = profile.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+        toggler.click();
+        await profile.updateComplete;
+        const menu = profile.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+        expect(menu).to.have.class("menu-open");
 
-      // Resize to desktop
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 1030
-      });
-      window.dispatchEvent(new Event("resize"));
-      await el.updateComplete;
-      await profile.updateComplete;
+        // Switch to desktop via matchMedia change
+        mock.setMatches(false);
+        await profile.updateComplete;
 
-      // Desktop: dropdown with label
-      expect(profile.shadowRoot?.querySelector("sgds-dropdown")).to.exist;
-      expect(profile.shadowRoot?.querySelector(".profile-label")?.textContent).to.equal("User Name");
-      expect(profile.shadowRoot?.querySelector(".profile-secondary-text")?.textContent).to.equal("Agency");
+        // Menu should close on breakpoint switch
+        expect(menu).not.to.have.class("menu-open");
+      } finally {
+        mock.restore();
+      }
     });
 
     it("toggler icon-button is always present regardless of viewport", async () => {
-      // Start in mobile
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 300
-      });
+      const mock = stubMatchMedia(true);
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
       window.dispatchEvent(new Event("resize"));
 
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
+      try {
+        const el = await fixture<SgdsMainnav>(html`
+          <sgds-mainnav expand="lg">
+            <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
+              <span slot="avatar" class="avatar"></span>
+              <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
+            </sgds-mainnav-profile>
+          </sgds-mainnav>
+        `);
+        await el.updateComplete;
 
-      // Mobile: toggler is present
-      expect(el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler")).to.exist;
+        // Mobile: toggler is present
+        expect(el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler")).to.exist;
 
-      // Resize to desktop
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 1030
-      });
-      window.dispatchEvent(new Event("resize"));
-      await el.updateComplete;
+        // Switch to desktop
+        mock.setMatches(false);
+        Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
+        window.dispatchEvent(new Event("resize"));
+        await el.updateComplete;
 
-      // Desktop: toggler still present
-      expect(el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler")).to.exist;
+        // Desktop: toggler still present
+        expect(el.shadowRoot?.querySelector("sgds-icon-button.navbar-toggler")).to.exist;
+      } finally {
+        mock.restore();
+      }
     });
   });
 
   describe("desktop keyboard navigation", () => {
+    let mock: ReturnType<typeof stubMatchMedia>;
     beforeEach(() => {
-      Object.defineProperty(window, "innerWidth", {
-        writable: true,
-        configurable: true,
-        value: 1030
-      });
+      mock = stubMatchMedia(false); // desktop
+      Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
       window.dispatchEvent(new Event("resize"));
     });
-
-    it("ArrowDown opens the dropdown menu", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
-            <sgds-dropdown-item><span>Settings</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
-      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
-      toggler.focus();
-
-      await sendKeys({ press: "ArrowDown" });
-      await dropdown.updateComplete;
-
-      expect(dropdown.menuIsOpen).to.be.true;
-    }).retries(1);
-
-    it("ArrowDown navigates through dropdown items", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
-            <sgds-dropdown-item><span>Settings</span></sgds-dropdown-item>
-            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
-      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
-
-      // Click to open menu first
-      toggler.click();
-      await dropdown.updateComplete;
-      await aTimeout(0);
-      toggler.focus();
-
-      // Navigate to first item
-      await sendKeys({ press: "ArrowDown" });
-      await dropdown.updateComplete;
-
-      const items = profile.querySelectorAll("sgds-dropdown-item");
-      expect(items[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
-      expect(items[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "-1");
-    }).retries(1);
-
-    it("ArrowDown loops from last item to first item", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
-            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
-      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
-
-      // Click to open menu first
-      toggler.click();
-      await dropdown.updateComplete;
-      await aTimeout(0);
-      toggler.focus();
-
-      // Navigate: first → second → loops back to first
-      await sendKeys({ press: "ArrowDown" });
-      await dropdown.updateComplete;
-      await sendKeys({ press: "ArrowDown" });
-      await dropdown.updateComplete;
-      await sendKeys({ press: "ArrowDown" });
-      await dropdown.updateComplete;
-
-      const items = profile.querySelectorAll("sgds-dropdown-item");
-      expect(items[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
-    }).retries(1);
-
-    it("skips readonly items during keyboard navigation", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item readonly><span>Account info</span></sgds-dropdown-item>
-            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
-            <sgds-dropdown-item><span>Settings</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
-      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
-
-      // Click to open menu first
-      toggler.click();
-      await dropdown.updateComplete;
-      await aTimeout(0);
-      toggler.focus();
-
-      // Navigate to first active item (should skip readonly)
-      await sendKeys({ press: "ArrowDown" });
-      await dropdown.updateComplete;
-
-      const items = profile.querySelectorAll("sgds-dropdown-item");
-      // readonly item (index 0) should be skipped, first navigable item (index 1) gets focus
-      expect(items[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "-1");
-      expect(items[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
-    }).retries(1);
-
-    it("skips non-dropdown-item elements (dividers, divs) during keyboard navigation", async () => {
-      const el = await fixture<SgdsMainnav>(html`
-        <sgds-mainnav expand="lg">
-          <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile menu">
-            <span slot="avatar" class="avatar"></span>
-            <sgds-dropdown-item><span>My profile</span></sgds-dropdown-item>
-            <sgds-divider thickness="thin"></sgds-divider>
-            <sgds-dropdown-item><span>Log out</span></sgds-dropdown-item>
-          </sgds-mainnav-profile>
-        </sgds-mainnav>
-      `);
-      await el.updateComplete;
-      const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-      await profile.updateComplete;
-
-      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
-      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
-
-      // Click to open menu first
-      toggler.click();
-      await dropdown.updateComplete;
-      await aTimeout(0);
-      toggler.focus();
-
-      // Navigate to first item
-      await sendKeys({ press: "ArrowDown" });
-      await dropdown.updateComplete;
-
-      // Navigate to second item (should skip the divider)
-      await sendKeys({ press: "ArrowDown" });
-      await dropdown.updateComplete;
-
-      const items = profile.querySelectorAll("sgds-dropdown-item");
-      expect(items[0].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "-1");
-      expect(items[1].shadowRoot?.querySelector(".dropdown-item")).to.have.attribute("tabindex", "0");
-    }).retries(1);
+    afterEach(() => mock.restore());
 
     it("Escape closes the dropdown menu", async () => {
       const el = await fixture<SgdsMainnav>(html`
@@ -698,35 +469,35 @@ describe("sgds-mainnav-profile", () => {
       const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
       await profile.updateComplete;
 
-      const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown") as any;
-      const toggler = profile.shadowRoot?.querySelector("button[slot='toggler']") as HTMLElement;
-      toggler.focus();
+      const toggler = profile.shadowRoot?.querySelector("button.nav-link") as HTMLElement;
+      const menu = profile.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
 
       // Open menu
-      await sendKeys({ press: "ArrowDown" });
-      await dropdown.updateComplete;
-      expect(dropdown.menuIsOpen).to.be.true;
+      toggler.click();
+      await profile.updateComplete;
+      await aTimeout(50);
+      expect(menu).to.have.class("menu-open");
 
-      // Close menu
+      // Press Escape
+      toggler.focus();
       await sendKeys({ press: "Escape" });
-      await dropdown.updateComplete;
-      await waitUntil(() => !dropdown.menuIsOpen);
-      expect(dropdown.menuIsOpen).to.be.false;
+      await profile.updateComplete;
+
+      expect(menu).not.to.have.class("menu-open");
     }).retries(1);
   });
 
   describe("read-only mode (no dropdown items)", () => {
     describe("desktop", () => {
+      let mock: ReturnType<typeof stubMatchMedia>;
       beforeEach(() => {
-        Object.defineProperty(window, "innerWidth", {
-          writable: true,
-          configurable: true,
-          value: 1030
-        });
+        mock = stubMatchMedia(false);
+        Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 1030 });
         window.dispatchEvent(new Event("resize"));
       });
+      afterEach(() => mock.restore());
 
-      it("renders a div instead of a dropdown when no items are slotted", async () => {
+      it("has read-only class when no items are slotted", async () => {
         const el = await fixture<SgdsMainnav>(html`
           <sgds-mainnav expand="lg">
             <sgds-mainnav-profile slot="profile" label="User Name" secondaryText="Agency" ariaLabel="Profile info">
@@ -738,43 +509,8 @@ describe("sgds-mainnav-profile", () => {
         const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
         await profile.updateComplete;
 
-        const dropdown = profile.shadowRoot?.querySelector("sgds-dropdown");
-        expect(dropdown).not.to.exist;
-
         const navLink = profile.shadowRoot?.querySelector(".nav-link");
         expect(navLink).to.exist;
-        expect(navLink?.tagName.toLowerCase()).to.equal("div");
-      });
-
-      it("does not render chevron-down icon when no items are slotted", async () => {
-        const el = await fixture<SgdsMainnav>(html`
-          <sgds-mainnav expand="lg">
-            <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile info">
-              <span slot="avatar" class="avatar"></span>
-            </sgds-mainnav-profile>
-          </sgds-mainnav>
-        `);
-        await el.updateComplete;
-        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-        await profile.updateComplete;
-
-        const icon = profile.shadowRoot?.querySelector('sgds-icon[name="chevron-down"]');
-        expect(icon).not.to.exist;
-      });
-
-      it("has read-only class with pointer-events none", async () => {
-        const el = await fixture<SgdsMainnav>(html`
-          <sgds-mainnav expand="lg">
-            <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile info">
-              <span slot="avatar" class="avatar"></span>
-            </sgds-mainnav-profile>
-          </sgds-mainnav>
-        `);
-        await el.updateComplete;
-        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-        await profile.updateComplete;
-
-        const navLink = profile.shadowRoot?.querySelector(".nav-link");
         expect(navLink).to.have.class("read-only");
       });
 
@@ -804,7 +540,7 @@ describe("sgds-mainnav-profile", () => {
         expect(secondary?.textContent).to.equal("Agency (admin)");
       });
 
-      it("is not focusable via keyboard in read-only mode", async () => {
+      it("is not interactive in read-only mode (disabled, tabindex=-1)", async () => {
         const el = await fixture<SgdsMainnav>(html`
           <sgds-mainnav expand="lg">
             <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile info">
@@ -816,8 +552,10 @@ describe("sgds-mainnav-profile", () => {
         const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
         await profile.updateComplete;
 
-        const button = profile.shadowRoot?.querySelector("button");
-        expect(button).not.to.exist;
+        const button = profile.shadowRoot?.querySelector("button.nav-link") as HTMLButtonElement;
+        expect(button).to.exist;
+        expect(button.tabIndex).to.equal(-1);
+        expect(button.disabled).to.be.true;
       });
 
       it("transitions from read-only to interactive when items are dynamically added", async () => {
@@ -833,7 +571,6 @@ describe("sgds-mainnav-profile", () => {
         await profile.updateComplete;
 
         // Initially read-only
-        expect(profile.shadowRoot?.querySelector("sgds-dropdown")).not.to.exist;
         expect(profile.shadowRoot?.querySelector(".nav-link.read-only")).to.exist;
 
         // Dynamically add a dropdown item
@@ -844,23 +581,22 @@ describe("sgds-mainnav-profile", () => {
         await aTimeout(0);
         await profile.updateComplete;
 
-        // Should now render interactive dropdown
-        expect(profile.shadowRoot?.querySelector("sgds-dropdown")).to.exist;
-        expect(profile.shadowRoot?.querySelector('sgds-icon[name="chevron-down"]')).to.exist;
+        // Should now be interactive (no read-only class)
+        expect(profile.shadowRoot?.querySelector(".nav-link.read-only")).not.to.exist;
+        expect(profile.shadowRoot?.querySelector('sgds-icon.chevron[name="chevron-down"]')).to.exist;
       });
     });
 
     describe("mobile", () => {
+      let mock: ReturnType<typeof stubMatchMedia>;
       beforeEach(() => {
-        Object.defineProperty(window, "innerWidth", {
-          writable: true,
-          configurable: true,
-          value: 300
-        });
+        mock = stubMatchMedia(true);
+        Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
         window.dispatchEvent(new Event("resize"));
       });
+      afterEach(() => mock.restore());
 
-      it("renders a div instead of a button when no items are slotted", async () => {
+      it("has read-only class when no items are slotted", async () => {
         const el = await fixture<SgdsMainnav>(html`
           <sgds-mainnav expand="lg">
             <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile info">
@@ -872,28 +608,9 @@ describe("sgds-mainnav-profile", () => {
         const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
         await profile.updateComplete;
 
-        const button = profile.shadowRoot?.querySelector("button.profile-avatar-mobile");
-        expect(button).not.to.exist;
-
-        const div = profile.shadowRoot?.querySelector("div.profile-avatar-mobile");
-        expect(div).to.exist;
-        expect(div).to.have.class("read-only");
-      });
-
-      it("does not render mobile panel when no items are slotted", async () => {
-        const el = await fixture<SgdsMainnav>(html`
-          <sgds-mainnav expand="lg">
-            <sgds-mainnav-profile slot="profile" label="User Name" ariaLabel="Profile info">
-              <span slot="avatar" class="avatar"></span>
-            </sgds-mainnav-profile>
-          </sgds-mainnav>
-        `);
-        await el.updateComplete;
-        const profile = el.querySelector("sgds-mainnav-profile") as SgdsMainnavProfile;
-        await profile.updateComplete;
-
-        const panel = profile.shadowRoot?.querySelector(".profile-mobile-panel");
-        expect(panel).not.to.exist;
+        const navLink = profile.shadowRoot?.querySelector(".nav-link");
+        expect(navLink).to.exist;
+        expect(navLink).to.have.class("read-only");
       });
     });
   });

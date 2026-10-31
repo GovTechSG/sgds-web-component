@@ -147,6 +147,7 @@ export class SgdsDataTableRow extends SgdsElement {
   }
 
   private _getCells() {
+    if (this.ssr) return [];
     return Array.from(this.children).filter(
       child => child instanceof SgdsDataTableCell || child instanceof SgdsDataTableHead
     ) as Array<SgdsDataTableCell | SgdsDataTableHead>;

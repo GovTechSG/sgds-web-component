@@ -1,11 +1,9 @@
-import { provide } from "@lit/context";
 import { html } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import NavElement from "../../base/nav-element";
 import { sanitizeHref } from "../../utils/safeUrl";
 import { HasSlotController } from "../../utils/slot";
-import { MainnavBreakpointContext, MainnavExpandedContext } from "./mainnav-context";
 import mainnavStyle from "./mainnav.css";
 import SgdsMainnavDropdown from "./sgds-mainnav-dropdown";
 import SgdsMainnavItem from "./sgds-mainnav-item";
@@ -30,13 +28,8 @@ export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "
 export class SgdsMainnav extends NavElement {
   static styles = [...NavElement.styles, mainnavStyle];
 
-  @provide({ context: MainnavBreakpointContext })
-  @state()
+  // _breakpointReached and _expanded kept for nav-element abstract method contract
   private _breakpointReached = false;
-
-  @provide({ context: MainnavExpandedContext })
-  @state()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _expanded = false;
 
   /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
@@ -72,8 +65,6 @@ export class SgdsMainnav extends NavElement {
   updated() {
     if (!this.hasNonCollapsibleSlot) this.hasNonCollapsibleSlot = this.hasSlotController.test("non-collapsible");
     if (!this.hasProfileSlot) this.hasProfileSlot = this.hasSlotController.test("profile");
-    // Sync expanded state to context
-    this._expanded = this.expanded;
   }
 
   protected _onBreakpointReached(reached: boolean): void {
@@ -108,14 +99,6 @@ export class SgdsMainnav extends NavElement {
   }
 
   render() {
-    this.breakpointReached =
-      window.innerWidth <
-      (this.expand === "always"
-        ? -1
-        : this.expand === "never"
-        ? Infinity
-        : { sm: 512, md: 768, lg: 1024, xl: 1280, xxl: 1440 }[this.expand]);
-
     return html`
       <nav aria-label="Main navigation">
         <div class="navbar ${this._expandClass()}">
@@ -129,17 +112,13 @@ export class SgdsMainnav extends NavElement {
           <div class="navbar-body navbar-collapse" id=${this.collapseId}>
             <div class="navbar-nav navbar-nav-scroll">
               <slot @slotchange=${this._handleDefaultSlotChange}></slot>
-              <slot
-                name="end"
-                class=${classMap({ "slot-end": !this.breakpointReached })}
-                @slotchange=${this._handleSlotChange}
-              ></slot>
+              <slot name="end" class="slot-end" @slotchange=${this._handleSlotChange}></slot>
             </div>
           </div>
           <div
             class=${classMap({
               "navbar-end": true,
-              "navbar-end--empty": !this.hasNonCollapsibleSlot && !this.hasProfileSlot && !this.breakpointReached
+              "navbar-end--empty": !this.hasNonCollapsibleSlot && !this.hasProfileSlot
             })}
           >
             <slot name="non-collapsible" class=${classMap({ "slot-empty": !this.hasNonCollapsibleSlot })}></slot>

@@ -1,4 +1,4 @@
-import { html, nothing, PropertyValueMap, TemplateResult } from "lit";
+import { html, isServer, nothing, PropertyValueMap, TemplateResult } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "./sgds-element";
@@ -79,27 +79,28 @@ export default abstract class NavElement extends SgdsElement {
   @state()
   protected _hasProfileComponent = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this._handleResize();
-    window.addEventListener("click", this._handleClickOutsideBound);
-    window.addEventListener("resize", this._handleResizeBound);
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener("click", this._handleClickOutsideBound);
     window.removeEventListener("resize", this._handleResizeBound);
   }
 
+  protected willUpdate(): void {
+    if (isServer) return;
+    this.breakpointReached = window.innerWidth < SIZES[this.expand];
+  }
+
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
+    this._handleResize();
+    window.addEventListener("click", this._handleClickOutsideBound);
+    window.addEventListener("resize", this._handleResizeBound);
     if (this.breakpointReached && this.body) {
       this.expanded = false;
       this.body.hidden = true;
       this._handleMobileNav();
-      this._onBreakpointReached(true);
     }
+    this._onBreakpointReached(this.breakpointReached);
   }
 
   private _handleClickOutsideBound = (event: MouseEvent) => this._handleClickOutOfElement(event, this.body);

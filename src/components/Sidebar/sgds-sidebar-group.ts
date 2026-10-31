@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html, PropertyValueMap } from "lit";
 import { state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -53,7 +53,7 @@ export class SgdsSidebarGroup extends SidebarElement {
    * of this group, expand the submenu without external callers touching internal state.
    * @internal
    */
-  @watch("_sidebarActiveItem")
+  @watch("_sidebarActiveItem", { waitUntilFirstUpdate: true })
   _handleActiveItemContext() {
     if (this._childLevel > 1 && this._sidebarActiveItem && this.contains(this._sidebarActiveItem)) {
       this._showMenu = true;
@@ -95,12 +95,13 @@ export class SgdsSidebarGroup extends SidebarElement {
     });
   }
 
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
+    this._handleActiveItemContext();
+  }
+
   render() {
     const isCollapsedL1 = !this._isOverlay && this._sidebarCollapsed && this._childLevel === 1;
-
-    if (isCollapsedL1 && !this.hasIconSlot) {
-      return nothing;
-    }
 
     return html`
       <div
@@ -108,6 +109,7 @@ export class SgdsSidebarGroup extends SidebarElement {
         class=${classMap({
           "sidebar-item": true,
           "sidebar-item--collapsed": isCollapsedL1,
+          "sidebar-item--hidden": isCollapsedL1 && !this.hasIconSlot,
           active: this._selected
         })}
         @click=${() => this._handleClick()}
