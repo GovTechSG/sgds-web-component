@@ -95,11 +95,10 @@ export class SgdsSidebarGroup extends SidebarElement {
     });
   }
 
-   firstUpdated(changedProperties: PropertyValueMap<this>) {
-      super.firstUpdated(changedProperties);
-      this._handleActiveItemContext();
-   }
-   
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
+    this._handleActiveItemContext();
+  }
 
   render() {
     const isCollapsedL1 = !this._isOverlay && this._sidebarCollapsed && this._childLevel === 1;
