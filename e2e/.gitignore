@@ -9,10 +9,9 @@ apps/*/.output/
 apps/*/dist/
 apps/*/.angular/
 apps/*/pnpm-lock.yaml
-fixtures/component-list.json
-fixtures/component-html.json
-apps/*/public/component-list.json
-apps/*/public/component-html.json
+fixtures/
+apps/next-app/next-env.d.ts
+apps/*/public/component-*.json
 apps/angular-app/src/assets/component-list.json
 apps/angular-app/src/assets/component-html.json
 apps/angular-app/src/assets/component-args.json
