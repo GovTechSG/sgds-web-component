@@ -1,0 +1,19 @@
+{
+  "name": "e2e-nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 4003",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview --port 4003",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@govtechsg/sgds-web-component": "file:../../../lib",
+    "nuxt": "^3.13.0",
+    "nuxt-ssr-lit": "^1.6.30",
+    "vue": "latest",
+    "vue-router": "latest"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "sgds-e2e",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "tsx utils/generate-component-list.ts",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "tsx": "^4.19.0"
+  }
+}
