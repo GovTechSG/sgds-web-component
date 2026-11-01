@@ -47,7 +47,6 @@ import { TableOfContents } from "./components/TableOfContents";
 import { Textarea } from "./components/Textarea";
 import { Toast } from "./components/Toast";
 import { Tooltip } from "./components/Tooltip";
-
 export default function Home() {
   return (
     <main>
