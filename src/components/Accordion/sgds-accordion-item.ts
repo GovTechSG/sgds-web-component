@@ -87,11 +87,12 @@ export class SgdsAccordionItem extends SgdsElement {
         return;
       }
 
+      this.body.style.display = "block";
       await stopAnimations(this.body);
-      this.body.classList.remove("hidden");
 
       const { keyframes, options } = getAnimation(this, "accordion.show");
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
+      this.body.style.display = "";
       this.emit("sgds-after-show");
     } else {
       // Hide
@@ -101,14 +102,14 @@ export class SgdsAccordionItem extends SgdsElement {
         return;
       }
 
+      this.body.style.display = "block";
       await stopAnimations(this.body);
 
       const { keyframes, options } = getAnimation(this, "accordion.hide");
       const animationDuration = options.duration as number;
-      // Workaround to fix GSIB delay after animateTo.
-      //Setting a timeout of duration slightly less than animation's duraton to prevent case where animation runs faster than .hidden class is added
+      // Clear inline override slightly before animation ends so CSS :host(:not([open])) takes over
       setTimeout(() => {
-        this.body.classList.add("hidden");
+        this.body.style.display = "";
       }, animationDuration - 20);
 
       await animateTo(this.body, shimKeyframesHeightAuto(keyframes, this.body.scrollHeight), options);
@@ -133,9 +134,6 @@ export class SgdsAccordionItem extends SgdsElement {
     }
     this.open = false;
     return waitForEvent(this, "sgds-after-hide");
-  }
-  firstUpdated() {
-    if (!this.open) this.body.classList.add("hidden");
   }
 
   render() {

@@ -54,7 +54,7 @@ describe("<sgds-accordion-item>", () => {
     `);
     const body = el.shadowRoot?.querySelector<HTMLElement>(".accordion-body");
 
-    expect(body?.classList.contains("hidden")).to.be.true;
+    expect(getComputedStyle(body!).display).to.equal("none");
   });
 
   it("should emit sgds-show and sgds-after-show when calling show()", async () => {
@@ -102,7 +102,7 @@ describe("<sgds-accordion-item>", () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(body?.classList.contains("hidden")).to.be.true;
+    expect(getComputedStyle(body!).display).to.equal("none");
   });
 
   it("should emit sgds-show and sgds-after-show when setting open = true", async () => {
@@ -150,7 +150,7 @@ describe("<sgds-accordion-item>", () => {
 
     expect(hideHandler).to.have.been.calledOnce;
     expect(afterHideHandler).to.have.been.calledOnce;
-    expect(body?.classList.contains("hidden")).to.be.true;
+    expect(getComputedStyle(body!).display).to.equal("none");
   });
 
   it("should not open when preventing sgds-show", async () => {
@@ -233,7 +233,7 @@ describe("<sgds-accordion-item>", () => {
     await el.updateComplete;
 
     const accordionBody = el.shadowRoot?.querySelector(".accordion-body") as HTMLButtonElement;
-    expect(accordionBody?.classList.contains("hidden")).to.be.true;
+    expect(getComputedStyle(accordionBody!).display).to.equal("none");
   });
 
   it("accordion-btn should use --sgds-font-size-subtitle-sm and --sgds-line-height-2-xs for compact density", async () => {
