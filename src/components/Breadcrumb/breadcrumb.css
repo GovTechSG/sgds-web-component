@@ -7,3 +7,30 @@
 .breadcrumb slot::slotted(sgds-breadcrumb-item:first-child) {
   flex: 0 0 auto;
 }
+
+/* Overflow mode: position items via order */
+.has-overflow slot::slotted(sgds-breadcrumb-item:first-child) {
+  order: 0;
+}
+
+.has-overflow .overflow-menu {
+  order: 1;
+  display: flex;
+  gap: var(--sgds-gap-xs);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.has-overflow slot::slotted(sgds-breadcrumb-item) {
+  order: 2;
+}
+
+/* Hide middle items: all except first and last two */
+.has-overflow slot::slotted(sgds-breadcrumb-item:not(:first-child):not(:nth-last-child(-n+2))) {
+  display: none;
+}
+
+.separator {
+  color: var(--sgds-color-subtle);
+  display: flex;
+}

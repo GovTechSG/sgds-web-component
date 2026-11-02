@@ -34,7 +34,7 @@ describe("sgds-breadcrumb", () => {
         `
     );
   });
-  it("when items are more than 4 , matches shadowDOM semantically ", async () => {
+  it("when items are more than 4, renders overflow menu in shadow DOM and hides middle items via CSS", async () => {
     // Mock fetch to prevent network requests
     const fetchStub = Sinon.stub(window, "fetch").resolves(
       new Response("<svg></svg>", { status: 200, headers: { "Content-Type": "image/svg+xml" } })
@@ -47,57 +47,35 @@ describe("sgds-breadcrumb", () => {
       <sgds-breadcrumb-item><a href="https://www.google.com/">Info</a></sgds-breadcrumb-item>
       <sgds-breadcrumb-item><a href="https://www.google.com/">Last</a></sgds-breadcrumb-item>
     </sgds-breadcrumb>`);
-    assert.shadowDom.equal(
-      el,
-      ` <nav aria-label="breadcrumb">
-        <div class="breadcrumb">
-              <sgds-breadcrumb-item
-          >
-            <a href="#">
-              Home
-            </a>
-          </sgds-breadcrumb-item>
-         <sgds-breadcrumb-item class="overflow-menu">
-           <sgds-overflow-menu aria-haspopup="menu" size="sm">
-             <sgds-dropdown-item
-               aria-disabled="false"
-               role="menuitem"
-             >
-               <a href="#">
-                 About
-               </a>
-             </sgds-dropdown-item>
-             <sgds-dropdown-item
-               aria-disabled="false"
-               role="menuitem"
-             >
-               <a href="https://www.google.com/">
-                 Contacts
-               </a>
-             </sgds-dropdown-item>
-           </sgds-overflow-menu>
-         </sgds-breadcrumb-item>
-         <sgds-breadcrumb-item
-         >
-           <a href="https://www.google.com/">
-             Info
-           </a>
-         </sgds-breadcrumb-item>
-         <sgds-breadcrumb-item
-           active=""
-           aria-current="page"
-         >
-          <a
-            href="https://www.google.com/"
-            tabindex="-1"
-          >
-            Last
-           </a>
-         </sgds-breadcrumb-item>
-        </div>
-      </nav>
-        `
-    );
+
+    // Light DOM items remain untouched
+    const lightDomItems = el.querySelectorAll("sgds-breadcrumb-item");
+    expect(lightDomItems.length).to.equal(5);
+
+    // Shadow DOM contains slot + overflow menu wrapper
+    const overflowMenu = el.shadowRoot!.querySelector(".overflow-menu sgds-overflow-menu");
+    expect(overflowMenu).to.not.be.null;
+
+    // Overflow menu contains correct dropdown items
+    const dropdownItems = overflowMenu!.querySelectorAll("sgds-dropdown-item");
+    expect(dropdownItems.length).to.equal(2);
+    expect(dropdownItems[0].querySelector("a")!.textContent).to.equal("About");
+    expect(dropdownItems[1].querySelector("a")!.textContent).to.equal("Contacts");
+
+    // Middle items are hidden via CSS
+    const aboutItem = lightDomItems[1];
+    const contactsItem = lightDomItems[2];
+    expect(getComputedStyle(aboutItem).display).to.equal("none");
+    expect(getComputedStyle(contactsItem).display).to.equal("none");
+
+    // First and last two items remain visible
+    expect(getComputedStyle(lightDomItems[0]).display).to.not.equal("none");
+    expect(getComputedStyle(lightDomItems[3]).display).to.not.equal("none");
+    expect(getComputedStyle(lightDomItems[4]).display).to.not.equal("none");
+
+    // Last item is active
+    expect(lightDomItems[4].getAttribute("aria-current")).to.equal("page");
+    expect(lightDomItems[4].active).to.equal(true);
 
     // Restore the stubbed fetch method
     fetchStub.restore();
