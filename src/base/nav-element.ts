@@ -75,9 +75,6 @@ export default abstract class NavElement extends SgdsElement {
   @state()
   protected breakpointReached = false;
 
-  /** Tracks previous breakpoint state to avoid duplicate listener registration */
-  private _previousBreakpointReached = false;
-
   /** @internal Whether sgds-*-profile is slotted in the profile slot */
   @state()
   protected _hasProfileComponent = false;
@@ -103,7 +100,6 @@ export default abstract class NavElement extends SgdsElement {
       this.body.hidden = true;
       this._handleMobileNav();
     }
-    this._previousBreakpointReached = this.breakpointReached;
   }
 
   private _handleClickOutsideBound = (event: MouseEvent) => this._handleClickOutOfElement(event, this.body);
@@ -135,13 +131,9 @@ export default abstract class NavElement extends SgdsElement {
 
     if (newBreakpointReachedValue) {
       this._handleMobileNav();
-      if (!this._previousBreakpointReached) {
-        this._previousBreakpointReached = true;
-        window.addEventListener("scrollend", this._handleMobileNavBound);
-      }
+      window.addEventListener("scrollend", this._handleMobileNavBound);
     } else {
       this._handleDesktopNav();
-      this._previousBreakpointReached = false;
       window.removeEventListener("scrollend", this._handleMobileNavBound);
     }
   }
