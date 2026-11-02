@@ -166,6 +166,7 @@
 
 
 .btn:hover,
+:host([active]) .btn,
 .btn.active {
   background: var(--btn-hover-bg);
 }
@@ -185,6 +186,7 @@
   border-radius: inherit;
 }
 
+:host([disabled]) .btn,
 .btn.disabled,
 .btn:disabled {
   opacity: var(--sgds-opacity-40);
