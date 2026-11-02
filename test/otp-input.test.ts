@@ -114,7 +114,7 @@ describe("OTP editing", () => {
     el.length = 20;
     await el.updateComplete;
     expect(el.reportValidity()).to.equal(false);
-    expect(el.validationMessage).to.equal("Enter a 8-digit code.");
+    expect(el.validationMessage).to.equal("Enter a code with 8 digits.");
   });
 });
 

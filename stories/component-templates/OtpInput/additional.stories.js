@@ -109,6 +109,7 @@ export const Validation = {
     </div>
   `,
   name: "Validation",
+  tags: ["!dev"],
   parameters: { controls: { disable: true } }
 };
 
@@ -119,5 +120,6 @@ export const CustomValidation = {
     </div>
   `,
   name: "Custom validation",
+  tags: ["!dev"],
   parameters: { controls: { disable: true } }
 };

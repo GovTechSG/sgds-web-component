@@ -79,7 +79,7 @@ export class SgdsOtpInput extends SgdsElement {
     return this._formDisabled;
   }
   private get _message() {
-    return this.invalidFeedback || this._customValidity?.message || `Enter a ${this._count}-digit code.`;
+    return this.invalidFeedback || this._customValidity?.message || `Enter a code with ${this._count} digits.`;
   }
 
   protected willUpdate(changes: PropertyValues) {
