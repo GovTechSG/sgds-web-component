@@ -55,18 +55,43 @@ const clearValidationStatus = event => {
   event.currentTarget.querySelector("output").textContent = "";
 };
 
-const renderValidation = variant => html`
+const submitCustomValidation = event => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const field = form.elements.namedItem("code");
+  const message =
+    field.value.length !== 6
+      ? "Enter a 6-digit code."
+      : field.value !== "123456"
+      ? "The code is incorrect or has expired."
+      : "";
+
+  field.invalidFeedback = message;
+  field.setInvalid(Boolean(message));
+  if (message) field.focus();
+  form.querySelector("output").textContent = message ? "" : "Code verified successfully.";
+};
+
+const submitValidation = event => {
+  event.preventDefault();
+  event.currentTarget.querySelector("output").textContent = "Code submitted successfully.";
+};
+
+const renderValidation = (variant, custom = false) => html`
   <form
     class="sgds:flex sgds:flex-col sgds:gap-md sgds:min-w-0"
-    @submit=${event => {
-      event.preventDefault();
-      event.currentTarget.querySelector("output").textContent = "Code submitted successfully.";
-    }}
+    @submit=${custom ? submitCustomValidation : submitValidation}
     @reset=${clearValidationStatus}
     @sgds-input=${clearValidationStatus}
     @sgds-invalid=${clearValidationStatus}
   >
-    <sgds-otp-input name="code" variant=${variant} prefix=${variant === "with-prefix" ? "KRM-" : ""} required>
+    <sgds-otp-input
+      name="code"
+      variant=${variant}
+      prefix=${variant === "with-prefix" ? "KRM-" : ""}
+      required
+      ?noValidate=${custom}
+    >
       <span slot="label">Verification code</span>
     </sgds-otp-input>
     <div class="sgds:flex sgds:gap-sm">
@@ -79,15 +104,20 @@ const renderValidation = variant => html`
 
 export const Validation = {
   render: () => html`
-    <div class="sgds:flex sgds:flex-col sgds:gap-lg">
-      <div>
-        Submit an empty or incomplete code to see validation feedback. Enter any six digits to submit successfully.
-      </div>
-      <div class="sgds:grid sgds:grid-cols-1 sgds:xl:grid-cols-2 sgds:gap-xl sgds:items-start">
-        ${renderValidation("numbers-only")} ${renderValidation("with-prefix")}
-      </div>
+    <div class="sgds:grid sgds:grid-cols-1 sgds:xl:grid-cols-2 sgds:gap-xl sgds:items-start">
+      ${renderValidation("numbers-only")} ${renderValidation("with-prefix")}
     </div>
   `,
   name: "Validation",
+  parameters: { controls: { disable: true } }
+};
+
+export const CustomValidation = {
+  render: () => html`
+    <div class="sgds:grid sgds:grid-cols-1 sgds:xl:grid-cols-2 sgds:gap-xl sgds:items-start">
+      ${renderValidation("numbers-only", true)} ${renderValidation("with-prefix", true)}
+    </div>
+  `,
+  name: "Custom validation",
   parameters: { controls: { disable: true } }
 };

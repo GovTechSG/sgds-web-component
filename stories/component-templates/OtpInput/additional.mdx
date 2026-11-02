@@ -17,18 +17,16 @@ Use the `label` slot to customise the label content and styling. Both variants a
 
 ## Validation
 
-Errors always display a border and message. Feedback appears when the form is submitted or `reportValidity()` is called. Typing and leaving the component do not display validation feedback.
+Select **Verify** with an empty or incomplete code to show an error. Enter any six digits to submit successfully. **Reset** clears the form.
 
-Select **Verify** with an empty or incomplete code to display validation feedback. Enter any six digits and select **Verify** again to submit successfully. Select **Reset** to clear the code, error, and submission message. Each form works independently.
-
-This example checks the code format only. A production application must verify the code with its server.
+Validation runs on submit or `reportValidity()`, not while typing or leaving the field.
 
 <Canvas of={OtpInputStories.Validation} />
 
 ### Custom validation
 
-Like Input, `invalid` controls the error appearance and `invalidFeedback` supplies the message. For application-managed validation, set `noValidate` on the component or `novalidate` on its form, then use `setInvalid()` and `invalidFeedback`. Automatic submission handling and `reportValidity()` leave that custom feedback unchanged; resetting the form clears it.
+Set `noValidate` to handle validation yourself. Use `invalidFeedback` for the message and `setInvalid()` for the error state.
 
-The read-only `validity` and `validationMessage` properties let application code inspect validation results. They are not configuration options.
+Try **123456** to succeed, or another code to show an error. This example simulates verification; check codes on your server in production.
 
-OTP uses the same event names as Input. Canceling `sgds-input` prevents automatic movement to the next box but keeps the entered value. `sgds-change` is also cancelable for consistency; OTP has no automatic validation action on change. Focus and blur events describe entering or leaving the whole component.
+<Canvas of={OtpInputStories.CustomValidation} />
