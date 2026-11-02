@@ -32,9 +32,6 @@ interface DefaultSlotItem {
 export class SgdsAppnav extends NavElement {
   static styles = [...NavElement.styles, appnavStyle];
 
-  private _breakpointReached = false;
-  private _expanded = false;
-
   /** Sets the visual tone of the navigation bar */
   @property({ type: String, reflect: true })
   tone: AppnavTone = "brand";
@@ -58,14 +55,6 @@ export class SgdsAppnav extends NavElement {
 
   updated() {
     if (!this.hasStartSlot) this.hasStartSlot = this.hasSlotController.test("start");
-  }
-
-  protected _onBreakpointReached(reached: boolean): void {
-    this._breakpointReached = reached;
-  }
-
-  protected _isBreakpointReached(): boolean {
-    return this._breakpointReached;
   }
 
   private _handleTogglerKeydown(e: KeyboardEvent) {

@@ -28,10 +28,6 @@ export type MainnavExpandSize = "sm" | "md" | "lg" | "xl" | "xxl" | "always" | "
 export class SgdsMainnav extends NavElement {
   static styles = [...NavElement.styles, mainnavStyle];
 
-  // _breakpointReached and _expanded kept for nav-element abstract method contract
-  private _breakpointReached = false;
-  private _expanded = false;
-
   /** Used only for SSR to indicate the presence of the `non-collapsible` slot. */
   @property({ type: Boolean }) hasNonCollapsibleSlot = false;
 
@@ -65,14 +61,6 @@ export class SgdsMainnav extends NavElement {
   updated() {
     if (!this.hasNonCollapsibleSlot) this.hasNonCollapsibleSlot = this.hasSlotController.test("non-collapsible");
     if (!this.hasProfileSlot) this.hasProfileSlot = this.hasSlotController.test("profile");
-  }
-
-  protected _onBreakpointReached(reached: boolean): void {
-    this._breakpointReached = reached;
-  }
-
-  protected _isBreakpointReached(): boolean {
-    return this._breakpointReached;
   }
 
   private _handleDefaultSlotChange(e: Event) {

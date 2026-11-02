@@ -132,6 +132,11 @@ export default abstract class NavMenuElement extends SgdsElement {
     this._focusedItemIndex = -1;
     this._autoUpdateCleanup?.();
     this._autoUpdateCleanup = undefined;
+    const menu = this.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
+    if (menu) {
+      menu.style.removeProperty("left");
+      menu.style.removeProperty("top");
+    }
   }
 
   protected _toggleDesktopMenu() {
