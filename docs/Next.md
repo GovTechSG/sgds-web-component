@@ -1,10 +1,10 @@
 # Next.js integration
 
-SGDS web components are fully supported in Next.js with React 19+.
+SGDS web components are fully supported in Next.js with React 19+, tested with Next.js 16. The React wrappers provide **zero-config server-side rendering (SSR)** with Declarative Shadow DOM — no webpack plugins, no `next.config.js` changes required.
 
 ## Recommended: Use React wrapper components
 
-For Next.js projects, we recommend importing the **React-wrapped** SGDS components instead of using the native `<sgds-*>` custom element tags directly. The React wrappers resolve hydration timing issues that cause event listeners to fail on initial page load — you get working events declaratively without needing `useEffect` + `addEventListener` workarounds.
+Import the **React-wrapped** SGDS components for the best Next.js experience. The wrappers handle SSR, hydration, and event binding automatically.
 
 ```tsx
 'use client';
@@ -28,26 +28,78 @@ See the [React integration guide](/docs/frameworks-react--docs) for full import 
 
 Before integrating SGDS with Next.js, read the [React integration guide](/docs/frameworks-react--docs) for foundational concepts.
 
-Web components work best as client components because they rely on browser APIs (`document` and `window`).
+## Server-Side Rendering (SSR)
 
-## Common issues and solutions
+SSR is **automatically enabled** when you import any SGDS React wrapper component. There is nothing to configure.
 
-### 1. Event listeners not firing on first load
+### How it works
 
-**Problem:** Custom event listeners fail to attach due to Next.js hydration timing when using native `<sgds-*>` tags.
+1. On the server, each SGDS component renders its full shadow DOM as inline HTML using [Declarative Shadow DOM](https://developer.chrome.com/docs/css-ui/declarative-shadow-dom) (DSD). Component styles are embedded in the HTML response.
+2. The browser receives fully styled components on the first paint — no flash of unstyled content (FOUC), no layout shift.
+3. On the client, the browser adopts the shadow DOM from the HTML and Lit hydrates without re-rendering. Events attach and the component becomes interactive.
 
-**Recommended solution:** Use the React wrapper components which handle this automatically:
+### What this means for you
+
+- **No layout shift** — components render with the correct styles immediately
+- **No FOUC** — component CSS is included in the server response
+- **No webpack plugin** — unlike the previous `@lit-labs/nextjs` approach, there is no `withLit()` plugin to configure
+- **Turbopack compatible** — works with both webpack and Turbopack
+
+## CSP nonce support (optional)
+
+If your Next.js app uses a strict `Content-Security-Policy` with a `style-src` nonce directive, the inline `<style>` tags inside each component's shadow DOM need to carry the nonce. Without it, the browser blocks the styles.
+
+Call `setCSPNonce()` in your root layout **before** any SGDS components render:
 
 ```tsx
-'use client';
-import { SgdsInput } from "@govtechsg/sgds-web-component/react";
+// app/layout.tsx (server component)
+import { setCSPNonce } from "@govtechsg/sgds-web-component/react/ssr";
+import { headers } from "next/headers";
 
-export default function MyInput() {
-  return <SgdsInput label="Search" onSgdsInput={(e) => console.log(e)} />;
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+  if (nonce) setCSPNonce(nonce);
+
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
 }
 ```
 
-**Alternative solution (if using native tags):** Add event listeners in a `useEffect` hook instead of declaratively:
+`setCSPNonce()` stamps the nonce onto every `<style>` tag inside each component's Declarative Shadow DOM during server rendering. This is synchronous — no `await` needed.
+
+> `getCSPNonce()` is also exported from `@govtechsg/sgds-web-component/react/ssr` for debugging or inspecting the current nonce value.
+
+**Note:** The `react/ssr` import is a server-only module (no `"use client"` directive). Import it only in server components.
+
+## TypeScript support
+
+Add a `types.d.ts` file at the project root and import the SGDS React type definitions. This gives full IntelliSense for props and typed `CustomEvent` detail payloads on all `sgds-*` elements without manual per-component declarations:
+
+```ts
+// types.d.ts
+import "@govtechsg/sgds-web-component/types/react";
+```
+
+Ensure the file is picked up by your `tsconfig.json`:
+
+```json
+{
+  "include": ["types.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
+}
+```
+
+## Using native custom element tags
+
+If you use the native `<sgds-*>` tags directly instead of the React wrappers, you will need to handle some Next.js-specific issues manually.
+
+> These issues do not apply when using the React wrapper components.
+
+### Event listeners not firing on first load
+
+Custom event listeners may fail to attach due to Next.js hydration timing. Add event listeners in a `useEffect` hook:
 
 ```tsx
 'use client';
@@ -81,7 +133,7 @@ const SgdsInput = ({
     };
 
     input.addEventListener('sgds-input', handleInput);
-    
+
     return () => {
       input.removeEventListener('sgds-input', handleInput);
     };
@@ -104,37 +156,12 @@ const SgdsInput = ({
 export default SgdsInput;
 ```
 
-### 2. Hydration mismatch warnings
+### Hydration mismatch warnings
 
-**Problem:** Next.js detects attribute differences between server and client rendering.
-
-**Cause:** Web components add attributes during browser parsing that weren't declared in the initial markup.
-
-**Solution:** Add `suppressHydrationWarning` to web component elements:
+Web components add attributes during browser parsing that weren't in the server HTML. Add `suppressHydrationWarning` to web component elements:
 
 ```tsx
 <sgds-input suppressHydrationWarning>
   <sgds-icon slot="icon" name="search" suppressHydrationWarning />
 </sgds-input>
 ```
-
-### 3. TypeScript support
-
-Add a `types.d.ts` file at the project root and import the SGDS React type definitions. This gives full IntelliSense for props and typed `CustomEvent` detail payloads on all `sgds-*` elements without manual per-component declarations:
-
-```ts
-// types.d.ts
-import "@govtechsg/sgds-web-component/types/react";
-```
-
-Ensure the file is picked up by your `tsconfig.json`:
-
-```json
-{
-  "include": ["types.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx"]
-}
-```
-
-### 4. Flash of unstyled content 
-
-Read more about [FOUC](/docs/troubleshoot-flash-of-unstyled-content--docs)

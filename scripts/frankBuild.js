@@ -22,6 +22,7 @@ async function createPackageFile() {
       "./components": "./components/index.js",
       "./components/*": "./components/*",
       "./react": "./react/index.js",
+      "./react/ssr": "./react/_ssr/index.js",
       "./react/*": "./react/*",
       "./base/*": null,
       "./utils/*": null,
@@ -55,6 +56,12 @@ async function run() {
     await createPackageFile();
     await includeFileInBuild("./README.md");
     await includeFileInBuild("./custom-elements.json");
+    // Copy raw ssr-nonce-patch.js (bypasses Rolldown to preserve bare require)
+    await copy(
+      resolve(packagePath, "./src/utils/ssr-nonce-patch.raw.js"),
+      resolve(distPath, "./react/utils/ssr-nonce-patch.js")
+    );
+    console.log("Copied ssr-nonce-patch.raw.js → lib/react/utils/ssr-nonce-patch.js");
     // await copy(resolve(packagePath, "./src/themes"), distPath)
     await copyMastheadCdnToRoot();
     // await includeFileInBuild('../../LICENSE');
