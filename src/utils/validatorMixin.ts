@@ -108,9 +108,8 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
       if (this._mixinShouldSkipSgdsValidation()) return;
       this.inputValidationController.validateInput(input);
     }
-    _mixinSetFormValue() {
-      const value = this.value as string | FormData | File;
-      this._internals.setFormValue(value);
+    _mixinSetFormValue(value?: string | FormData | File | null) {
+      this._internals.setFormValue(value !== undefined ? value : (this.value as string | FormData | File));
     }
     _mixinCheckValidity(): boolean {
       if (this._mixinShouldSkipSgdsValidation()) return true;
@@ -132,6 +131,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     }
     // Only check for noValidate prop
     _mixinShouldSkipSgdsValidation() {
+      if (this.ssr) return true;
       const form = this.closest("form");
 
       return form?.noValidate || this.noValidate;
@@ -147,6 +147,7 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     declare defaultValue: string;
     declare defaultChecked: boolean;
     declare noValidate: boolean;
+    declare ssr: boolean;
   }
 
   return ToBeValidatedElement as Constructor<ToBeValidatedElementInterface> & T;
@@ -159,7 +160,7 @@ export declare class ToBeValidatedElementInterface {
   _mixinHandleInputChange(e: Event): void;
   _mixinResetValidity(input: HTMLInputElement | SgdsInput): void;
   _mixinValidate(input: HTMLInputElement | SgdsInput): void;
-  _mixinSetFormValue(): void;
+  _mixinSetFormValue(value?: string | FormData | File | null): void;
   _mixinCheckValidity(): boolean;
   _mixinReportValidity(): boolean;
   _mixinSetValidity(flags?: ValidityStateFlags, message?: string, anchor?: HTMLElement): void;

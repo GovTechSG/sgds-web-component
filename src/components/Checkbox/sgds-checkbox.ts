@@ -36,7 +36,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     "sgds-icon": SgdsIcon
   };
 
-  /** Value of the HTML form control. Primarily used to differentiate a list of related checkboxes that have the same name. */
+  /** Value submitted in FormData when the checkbox is checked. Defaults to `"on"` when not set, matching native checkbox behaviour. When unchecked, the key is absent from FormData. */
   @property({ type: String, reflect: true }) value: string;
 
   /** Draws the checkbox in a checked state. */
@@ -113,6 +113,23 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   private _handleInvalid(e: Event) {
     e.preventDefault();
     this.invalid = true;
+  }
+
+  /** @internal Override mixin to match native checkbox: send value only when checked, default to "on". */
+  _mixinSetFormValue() {
+    super._mixinSetFormValue(this.checked ? this.value ?? "on" : null);
+  }
+
+  /** @internal */
+  @watch("checked", { waitUntilFirstUpdate: true })
+  _handleCheckedChange() {
+    this._mixinSetFormValue();
+  }
+
+  /** @internal */
+  @watch("value", { waitUntilFirstUpdate: true })
+  _handleValueChange() {
+    this._mixinSetFormValue();
   }
 
   /** @internal */

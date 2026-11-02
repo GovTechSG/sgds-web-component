@@ -1,4 +1,4 @@
-import { html, nothing, PropertyValueMap, TemplateResult } from "lit";
+import { html, isServer, nothing, PropertyValueMap, TemplateResult } from "lit";
 import { property, query, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import SgdsElement from "./sgds-element";
@@ -79,26 +79,26 @@ export default abstract class NavElement extends SgdsElement {
   @state()
   protected _hasProfileComponent = false;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this._handleResize();
-    window.addEventListener("click", this._handleClickOutsideBound);
-    window.addEventListener("resize", this._handleResizeBound);
-  }
-
   disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener("click", this._handleClickOutsideBound);
     window.removeEventListener("resize", this._handleResizeBound);
   }
 
+  protected willUpdate(): void {
+    if (isServer) return;
+    this.breakpointReached = window.innerWidth < SIZES[this.expand];
+  }
+
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
+    this._handleResize();
+    window.addEventListener("click", this._handleClickOutsideBound);
+    window.addEventListener("resize", this._handleResizeBound);
     if (this.breakpointReached && this.body) {
       this.expanded = false;
       this.body.hidden = true;
       this._handleMobileNav();
-      this._onBreakpointReached(true);
     }
   }
 
@@ -131,22 +131,12 @@ export default abstract class NavElement extends SgdsElement {
 
     if (newBreakpointReachedValue) {
       this._handleMobileNav();
-      if (!this._isBreakpointReached()) {
-        this._onBreakpointReached(true);
-        window.addEventListener("scrollend", this._handleMobileNavBound);
-      }
+      window.addEventListener("scrollend", this._handleMobileNavBound);
     } else {
       this._handleDesktopNav();
-      this._onBreakpointReached(false);
       window.removeEventListener("scrollend", this._handleMobileNavBound);
     }
   }
-
-  /** Hook for subclasses to update context providers when breakpoint state changes */
-  protected abstract _onBreakpointReached(reached: boolean): void;
-
-  /** Hook for subclasses to check current breakpoint context state */
-  protected abstract _isBreakpointReached(): boolean;
 
   private _handleMobileNavBound = this._handleMobileNav.bind(this);
 

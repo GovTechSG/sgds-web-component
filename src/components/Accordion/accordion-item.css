@@ -121,6 +121,6 @@ slot[name="caret"] sgds-icon {
   padding: var(--sgds-density-padding-xs) var(--sgds-density-padding-lg) var(--sgds-density-padding-lg);
 }
 
-.hidden {
+:host(:not([open])) .accordion-body {
   display: none;
 }

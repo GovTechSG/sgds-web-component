@@ -107,7 +107,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
   drop: "up" | "down" = "down";
 
   /** Provides the date context for Calendar to present the appropriate view. Defaults to today's date */
-  @property({ attribute: false }) displayDate: Date;
+  @property({ attribute: false }) displayDate: Date = new Date();
 
   /**Gets or sets the default value used to reset this element. The initial value corresponds to the one originally specified in the HTML that created this element. */
   @defaultValue()
@@ -121,7 +121,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
 
   @state() private selectedDateRange: Date[] = [];
 
-  @state() private focusedDate: Date;
+  @state() private focusedDate: Date = new Date();
 
   @state() private focusedTabIndex = 3;
 

@@ -54,6 +54,8 @@ export class SgdsTabGroup extends SgdsElement {
       customElements.whenDefined("sgds-tab-panel")
     ]);
     super.connectedCallback();
+    if (this.ssr) return;
+
     this._resizeObserver = new ResizeObserver(() => {
       if (this._activeTab && this.variant === "underlined" && !this._indicatorAnimating) {
         this._animateIndicator(undefined, this._activeTab);
@@ -98,9 +100,12 @@ export class SgdsTabGroup extends SgdsElement {
   }
 
   disconnectedCallback() {
-    this._mutationObserver.disconnect();
-    this._resizeObserver.unobserve(this._nav);
-    this._tabResizeObserver.disconnect();
+    super.disconnectedCallback();
+    this._mutationObserver?.disconnect();
+    if (this._nav) {
+      this._resizeObserver?.unobserve(this._nav);
+    }
+    this._tabResizeObserver?.disconnect();
   }
 
   /** Shows the specified tab panel. */

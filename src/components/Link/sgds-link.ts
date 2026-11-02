@@ -65,6 +65,7 @@ export class SgdsLink extends SgdsElement {
   }
 
   private _handleSlotChange(e: Event) {
+    if (this.ssr) return;
     const anchor = (e.target as HTMLSlotElement)
       .assignedElements()
       .find(el => el.tagName.toLowerCase() === "a") as HTMLAnchorElement;
@@ -77,6 +78,7 @@ export class SgdsLink extends SgdsElement {
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
+    if (this.ssr) return;
 
     const anchor = this.querySelector("a");
     if (anchor) {
