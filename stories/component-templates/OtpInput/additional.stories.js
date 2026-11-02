@@ -50,3 +50,44 @@ export const LabelSlot = {
   args: { ...args },
   argTypes: groupedArgTypes
 };
+
+const clearValidationStatus = event => {
+  event.currentTarget.querySelector("output").textContent = "";
+};
+
+const renderValidation = variant => html`
+  <form
+    class="sgds:flex sgds:flex-col sgds:gap-md sgds:min-w-0"
+    @submit=${event => {
+      event.preventDefault();
+      event.currentTarget.querySelector("output").textContent = "Code submitted successfully.";
+    }}
+    @reset=${clearValidationStatus}
+    @sgds-input=${clearValidationStatus}
+    @sgds-invalid=${clearValidationStatus}
+  >
+    <sgds-otp-input name="code" variant=${variant} prefix=${variant === "with-prefix" ? "KRM-" : ""} required>
+      <span slot="label">Verification code</span>
+    </sgds-otp-input>
+    <div class="sgds:flex sgds:gap-sm">
+      <sgds-button type="submit">Verify</sgds-button>
+      <sgds-button type="reset" variant="ghost">Reset</sgds-button>
+    </div>
+    <output role="status" aria-live="polite"></output>
+  </form>
+`;
+
+export const Validation = {
+  render: () => html`
+    <div class="sgds:flex sgds:flex-col sgds:gap-lg">
+      <div>
+        Submit an empty or incomplete code to see validation feedback. Enter any six digits to submit successfully.
+      </div>
+      <div class="sgds:grid sgds:grid-cols-1 sgds:xl:grid-cols-2 sgds:gap-xl sgds:items-start">
+        ${renderValidation("numbers-only")} ${renderValidation("with-prefix")}
+      </div>
+    </div>
+  `,
+  name: "Validation",
+  parameters: { controls: { disable: true } }
+};

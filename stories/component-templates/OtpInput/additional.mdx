@@ -17,7 +17,13 @@ Use the `label` slot to customise the label content and styling. Both variants a
 
 ## Validation
 
-Errors always display a border and message. Feedback appears when the form is submitted or `reportValidity()` is called. Typing and leaving the component do not display validation feedback. Use the `invalid` and `invalidFeedback` controls in Basic to preview the error state.
+Errors always display a border and message. Feedback appears when the form is submitted or `reportValidity()` is called. Typing and leaving the component do not display validation feedback.
+
+Select **Verify** with an empty or incomplete code to display validation feedback. Enter any six digits and select **Verify** again to submit successfully. Select **Reset** to clear the code, error, and submission message. Each form works independently.
+
+This example checks the code format only. A production application must verify the code with its server.
+
+<Canvas of={OtpInputStories.Validation} />
 
 ### Custom validation
 
