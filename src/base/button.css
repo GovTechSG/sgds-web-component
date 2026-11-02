@@ -164,10 +164,9 @@
   opacity: var(--btn-opacity);
 }
 
-
-.btn:hover,
-:host([active]) .btn,
-.btn.active {
+:host(:not([disabled])) .btn:hover,
+:host(:not([disabled])[active]) .btn,
+:host(:not([disabled])) .btn.active {
   background: var(--btn-hover-bg);
 }
 
