@@ -1,6 +1,6 @@
 ---
 name: "sgds-components"
-description: "Complete reference for all SGDS web components including installation and framework integration. Use when users ask about any <sgds-*> component — accordion, alert, badge, breadcrumb, button, card, checkbox, close-button, combo-box, data-table, datepicker, description-list, divider, drawer, dropdown, file-upload, footer, icon, icon-button, icon-card, icon-list, image-card, input, link, mainnav, masthead, modal, overflow-menu, pagination, progress-bar, quantity-toggle, radio, select, sidebar, sidenav, skeleton, spinner, stepper, subnav, switch, system-banner, tab, table, table-of-contents, textarea, thumbnail-card, toast, or tooltip. Also covers React 19+, React ≤18, Vue, Angular, and Next.js integration."
+description: "Complete reference for all SGDS web components including installation. Use when users ask about any <sgds-*> component — accordion, alert, badge, breadcrumb, button, card, checkbox, close-button, combo-box, data-table, datepicker, description-list, divider, drawer, dropdown, file-upload, footer, icon, icon-button, icon-card, icon-list, image-card, input, link, mainnav, masthead, modal, overflow-menu, pagination, progress-bar, quantity-toggle, radio, select, sidebar, sidenav, skeleton, spinner, stepper, subnav, switch, system-banner, tab, table, table-of-contents, textarea, thumbnail-card, toast, or tooltip. For framework integration (React, Next.js, Vue, Angular), see sgds-getting-started."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -28,125 +28,7 @@ import "@govtechsg/sgds-web-component";
 
 ## Framework Integration
 
-### React
-
-**React version determines which import to use.**
-
-#### React 19+ (client-side, e.g. Vite)
-
-React 19 supports native custom elements directly — import once at the app entry point, then use the web component tag anywhere:
-
-```jsx
-import "@govtechsg/sgds-web-component";
-
-function App() {
-  return (
-    <sgds-button variant="primary" onsgds-blur={(e) => console.log(e)}>
-      Click Me
-    </sgds-button>
-  );
-}
-```
-
-Custom event syntax in React 19: prefix the event name with `on` in lowercase (`sgds-blur` → `onsgds-blur`).
-
-> **Using Next.js?** Next.js is SSR-based and requires a different setup — see the [Next.js section](#nextjs) below.
-
-Complex props (arrays, objects) can be passed declaratively:
-
-```jsx
-import "@govtechsg/sgds-web-component";
-
-const steps = [
-  { component: <Step1 />, stepHeader: "Personal details" },
-  { component: <Step2 />, stepHeader: "Contact details" },
-];
-
-function App() {
-  return <sgds-stepper steps={steps}></sgds-stepper>;
-}
-```
-
-#### React 18 and below
-
-React ≤18 does not support custom element events or complex props natively. Use the React wrapper components:
-
-```jsx
-import { SgdsButton } from "@govtechsg/sgds-web-component/react";
-
-function App() {
-  return (
-    <SgdsButton variant="primary" onSgdsBlur={(e) => console.log(e)}>
-      Click Me
-    </SgdsButton>
-  );
-}
-```
-
-React wrapper event naming: `sgds-blur` → `onSgdsBlur`, `sgds-change` → `onSgdsChange` (prefix `on`, camelCase applies to every hyphen-separated word).
-
-**Accessing component methods in React ≤18** (via `useRef`):
-
-```tsx
-import { useRef } from "react";
-import type { SgdsStepper as SStep } from "@govtechsg/sgds-web-component/components";
-import SgdsStepper from "@govtechsg/sgds-web-component/react/stepper/index.js";
-
-function StepperComponent() {
-  const stepperRef = useRef<SStep>(null);
-  return <SgdsStepper steps={steps} ref={stepperRef} />;
-}
-```
-
-> **Note**: For Next.js and SSR frameworks, React wrappers are the recommended approach as they resolve hydration timing issues on initial load.
-
-Official docs: https://webcomponent.designsystem.tech.gov.sg/?path=/docs/frameworks-react--docs
-
----
-
-### Next.js
-
-Next.js is an SSR framework — web components rely on browser APIs and can cause hydration issues when imported at the module level during server-side rendering.
-
-**Recommended approach: Use React wrapper components.** The React wrappers resolve hydration timing issues that cause event listeners to fail on initial page load — just import and use:
-
-```tsx
-'use client';
-import { SgdsInput, SgdsButton } from "@govtechsg/sgds-web-component/react";
-
-export default function MyForm() {
-  return (
-    <>
-      <SgdsInput label="Name" onSgdsChange={(e) => console.log(e)} />
-      <SgdsButton variant="primary">Submit</SgdsButton>
-    </>
-  );
-}
-```
-
-Event naming follows the camelCase convention: `sgds-change` → `onSgdsChange`, `sgds-after-show` → `onSgdsAfterShow`.
-
-**TypeScript support** — add a `types.d.ts` at the project root and reference the SGDS React type definitions. This gives full IntelliSense for props and typed `CustomEvent` detail payloads on all `sgds-*` elements:
-
-Use an ES import in any `.d.ts` file included by your `tsconfig`:
-
-```ts
-import "@govtechsg/sgds-web-component/types/react";
-```
-
-See the [official Next.js integration docs](https://webcomponent.designsystem.tech.gov.sg/?path=/docs/frameworks-react--docs) for more detail.
-
----
-
-### Vue
-
-Vue 3 supports web components natively — no SGDS-specific wrappers exist. Refer to the [Vue + web components documentation](https://vuejs.org/guide/extras/web-components) for configuration. The SGDS-specific filter for suppressing unknown element warnings is `tag.startsWith("sgds-")`.
-
----
-
-### Angular
-
-Angular supports web components natively via `CUSTOM_ELEMENTS_SCHEMA` — no SGDS-specific wrappers exist. Refer to the [Angular elements documentation](https://angular.io/guide/elements) for configuration.
+For React, Next.js, Vue, and Angular integration, see **[sgds-getting-started](../sgds-getting-started/SKILL.md)** Step 3.
 
 ---
 
@@ -168,11 +50,7 @@ Replace `Accordion/sgds-accordion` with the relevant component folder and file n
 
 ---
 
-**For AI agents**: The primary decision tree is React version + rendering mode:
-- **Next.js (SSR)**: Use React wrapper components (`SgdsInput`, `SgdsButton`, etc. from `@govtechsg/sgds-web-component/react`) — they resolve hydration timing issues on initial load. Event props use camelCase (`onSgdsChange`).
-- **React 19+ CSR (Vite etc.)**: Either native `<sgds-*>` tags with `onsgds-change` syntax, or React wrappers with `onSgdsChange` — both work equally well.
-- **React ≤18**: SGDS React wrapper components, camelCase event props (`onSgdsChange`)
-- **Vue / Angular**: standard web component integration; SGDS-specific detail for Vue is `tag.startsWith("sgds-")` to suppress unknown element warnings
+**For AI agents**: For framework-specific setup (React, Next.js, Vue, Angular), see the reference files in **[sgds-getting-started](../sgds-getting-started/SKILL.md)**.
 
 When a user reports unexpected component behaviour (wrong event, property not reflecting, slot not rendering), direct them to read the compiled source before trying anything else — see the **Troubleshooting Component Behaviour** section above.
 

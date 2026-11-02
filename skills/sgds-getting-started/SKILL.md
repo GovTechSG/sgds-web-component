@@ -1,6 +1,6 @@
 ---
 name: "sgds-getting-started"
-description: "Starting point for any new application built with the SGDS web component library. Apply this skill first whenever a user is bootstrapping a new SGDS project, setting up a new app, or asking where to begin with SGDS. Covers font setup, foundation CSS, utilities, components, and app layout in the correct order."
+description: "Starting point for any new application built with the SGDS web component library. Apply this skill first whenever a user is bootstrapping a new SGDS project, setting up a new app, or asking where to begin with SGDS. Covers font setup, foundation CSS, utilities, components, framework integration (React, Next.js, Vue, Angular), and app layout in the correct order."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -68,7 +68,14 @@ import "@govtechsg/sgds-web-component";
 
 This registers all `<sgds-*>` custom elements globally.
 
-> For React, Vue, Angular, and Next.js-specific integration details, see **[sgds-components](../sgds-components/SKILL.md)**.
+### Framework-specific integration
+
+| Framework | Reference |
+|-----------|-----------|
+| React 19+ / React 18 | [→ reference/react.md](reference/react.md) |
+| Next.js (SSR) | [→ reference/nextjs.md](reference/nextjs.md) |
+| Vue | [→ reference/vue.md](reference/vue.md) |
+| Angular | [→ reference/angular.md](reference/angular.md) |
 
 ---
 
