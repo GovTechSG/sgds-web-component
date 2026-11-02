@@ -163,7 +163,7 @@ export class SgdsMainnavDropdown extends NavMenuElement {
     }
   }
 
-  private _handleKeyboardOpen(event: KeyboardEvent) {
+  private async _handleKeyboardOpen(event: KeyboardEvent) {
     if (this.disabled) return;
 
     if (event.key === ENTER || event.key === SPACE) {
@@ -174,7 +174,7 @@ export class SgdsMainnavDropdown extends NavMenuElement {
       if (event.key === "ArrowDown" || event.key === "ArrowUp") {
         event.preventDefault();
         if (!this._menuOpen) {
-          this._showDesktopMenu();
+          await this._showDesktopMenu();
         }
       }
       // Delegate to shared menu keyboard nav when menu is open
