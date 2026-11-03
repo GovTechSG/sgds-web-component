@@ -1,5 +1,4 @@
 import { aTimeout, assert, elementUpdated, expect, fixture, fixtureCleanup, waitUntil } from "@open-wc/testing";
-import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import Sinon from "sinon";
 import {
