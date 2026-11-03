@@ -1,22 +1,51 @@
+<script>
+  // Paint the remembered colour mode before JS/CSS bundles load, to avoid a white flash on reload
+  try {
+    if (localStorage.getItem("sgds-sb-color-mode") === "night") {
+      var d = document.documentElement;
+      d.classList.add("sgds-night-theme");
+      d.style.colorScheme = "dark";
+      d.style.backgroundColor = "#0e0e0e";
+    }
+  } catch (e) {}
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-44RXQV5CXC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
 
-  gtag('config', 'G-44RXQV5CXC');
+  gtag("config", "G-44RXQV5CXC");
 </script>
-<script type="module" id="dev-console-gateway"
-  src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700&family=Roboto+Mono:wght@300;400;600;700&family=Roboto+Serif:wght@300;400;600;700&display=swap">
+<script
+  type="module"
+  id="dev-console-gateway"
+  src="https://assets.developer.tech.gov.sg/bundled-scripts/dev-console-gateway.bundle.js"
+></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700&family=Roboto+Mono:wght@300;400;600;700&family=Roboto+Serif:wght@300;400;600;700&display=swap"
+/>
 
 <style>
+  /* Storybook's loading skeletons hardcode light colours, which flash in night mode on navigation */
+  .sb-preparing-docs,
+  .sb-preparing-story {
+    display: none !important;
+  }
   body {
     font-family: Inter, sans-serif;
     overflow: auto !important;
     background-color: var(--sgds-bg-default);
+  }
+  @media (max-width: 1024px) {
+    .sbdocs-toc--custom {
+      display: none;
+    }
   }
 </style>
