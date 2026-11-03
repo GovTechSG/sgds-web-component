@@ -3,10 +3,10 @@ import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { html } from "lit/static-html.js";
 import SgdsElement from "../../base/sgds-element";
+import { SgdsBreadcrumbItem } from "./sgds-breadcrumb-item";
 import SgdsIcon from "../Icon/sgds-icon";
 import SgdsOverflowMenu from "../OverflowMenu/sgds-overflow-menu";
 import breadcrumbStyle from "./breadcrumb.css";
-import type SgdsBreadcrumbItem from "./sgds-breadcrumb-item";
 /**
  * @summary Breadcrumbs help users to navigate and understand where they are on the current website or service.
  *
@@ -17,7 +17,8 @@ export class SgdsBreadcrumb extends SgdsElement {
   static styles = [...SgdsElement.styles, breadcrumbStyle];
   static dependencies = {
     "sgds-overflow-menu": SgdsOverflowMenu,
-    "sgds-icon": SgdsIcon
+    "sgds-icon": SgdsIcon,
+    "sgds-breadcrumb-item": SgdsBreadcrumbItem
   };
   /** The aria-label of nav element within breadcrumb component. */
   @property({ type: String }) ariaLabel = "breadcrumb";
@@ -25,12 +26,15 @@ export class SgdsBreadcrumb extends SgdsElement {
   /** @internal Overflow item data collected from middle breadcrumb items */
   @state() private _overflowItems: Array<{ href: string; text: string }> = [];
 
+  /** @internal Trailing visible items rendered in shadow DOM for correct tab order */
+  @state() private _trailingItems: Array<{ href: string; text: string; isLast: boolean }> = [];
+
   private _handleSlotChange(e: Event) {
     const items = (e.target as HTMLSlotElement)
       .assignedElements({ flatten: true })
       .filter(
-        (item: SgdsBreadcrumbItem) => item.tagName.toLowerCase() === "sgds-breadcrumb-item"
-      ) as SgdsBreadcrumbItem[];
+        (item): item is SgdsBreadcrumbItem => item.tagName.toLowerCase() === "sgds-breadcrumb-item"
+      );
     items.forEach((item, index) => {
       if (index === items.length - 1) {
         item.setAttribute("aria-current", "page");
@@ -47,8 +51,17 @@ export class SgdsBreadcrumb extends SgdsElement {
           const anchor = item.querySelector("a");
           return { href: anchor?.href || "#", text: anchor?.textContent?.trim() || "" };
         });
+      this._trailingItems = items.slice(-2).map((item, i, arr) => {
+        const anchor = item.querySelector("a");
+        return {
+          href: anchor?.href || "#",
+          text: anchor?.textContent?.trim() || item.textContent?.trim() || "",
+          isLast: i === arr.length - 1
+        };
+      });
     } else {
       this._overflowItems = [];
+      this._trailingItems = [];
     }
   }
 
@@ -74,6 +87,16 @@ export class SgdsBreadcrumb extends SgdsElement {
                     <sgds-icon name="chevron-right" size="sm"></sgds-icon>
                   </div>
                 </div>
+                ${this._trailingItems.map(
+                  item => html`
+                    <sgds-breadcrumb-item
+                      ?active=${item.isLast}
+                      aria-current=${ifDefined(item.isLast ? "page" : undefined)}
+                    >
+                      <a href="${item.href}">${item.text}</a>
+                    </sgds-breadcrumb-item>
+                  `
+                )}
               `
             : nothing}
         </div>
