@@ -120,6 +120,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | `expand` | `sm \| md \| lg \| xl \| xxl \| always \| never` | `lg` | Breakpoint below which the nav collapses |
 | `brandHref` | string | `""` | **Deprecated.** Use a slotted `<a>` in the `brand` slot instead. |
 | `hasStartSlot` | boolean | `false` | SSR hint — set to `true` when the `start` slot has content |
+| `hasDefaultSlot` | boolean | `false` | SSR hint — set to `true` when the default slot has icon-button items |
+| `hasProfileSlot` | boolean | `false` | SSR hint — set to `true` when the `profile` slot has content |
 
 ### `<sgds-appnav-profile>`
 
@@ -171,3 +173,4 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 8. No "default" tone — the minimum is `tone="brand"`.
 9. Use `<sgds-masthead>` above `<sgds-appnav>` as required for Singapore Government sites.
 10. The `start` slot is typically used for a sidebar toggle (`name="menu"`).
+11. For SSR apps (Next.js, Nuxt), set `hasStartSlot`, `hasDefaultSlot`, and `hasProfileSlot` to `true` on `<sgds-appnav>` when those slots have content, to prevent layout shift on first paint.

@@ -161,7 +161,7 @@ describe("<sgds-tab-group>", () => {
     { name: "variant", defaultValue: "underlined", changedValue: "solid" },
     { name: "density", defaultValue: "default", changedValue: "compact" },
     { name: "orientation", defaultValue: "horizontal", changedValue: "vertical" },
-    { name: "fullWidth", defaultValue: "false", changedValue: "true" }
+    { name: "fullWidth", defaultValue: false, changedValue: true }
   ];
   propsToForwardToChild.forEach(({ name, defaultValue, changedValue }) => {
     it(`change of ${name} prop updates its sgds-tab children`, async () => {
@@ -176,10 +176,10 @@ describe("<sgds-tab-group>", () => {
         </sgds-tab-group>
       `);
       const tabs = tabGroup.querySelectorAll("sgds-tab") as NodeListOf<SgdsTab>;
-      tabs.forEach(tab => expect(tab.getAttribute(name)).to.equal(defaultValue));
+      tabs.forEach(tab => expect(tab[name]).to.equal(defaultValue));
       tabGroup[name] = changedValue;
       await tabGroup.updateComplete;
-      tabs.forEach(tab => expect(tab.getAttribute(name)).to.equal(changedValue));
+      tabs.forEach(tab => expect(tab[name]).to.equal(changedValue));
     });
   });
 });

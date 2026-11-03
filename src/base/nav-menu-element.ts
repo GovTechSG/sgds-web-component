@@ -66,13 +66,11 @@ export default abstract class NavMenuElement extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    if (typeof window !== "undefined") {
-      const expand = this._getExpandValue();
-      this._mediaQuery = window.matchMedia(`(max-width: ${SIZES[expand] - 1}px)`);
-      this._isMobile = this._mediaQuery.matches;
-      this._mediaQuery.addEventListener("change", this._handleMediaChange);
-      document.addEventListener("click", this._handleOutsideClick);
-    }
+    const expand = this._getExpandValue();
+    this._mediaQuery = window.matchMedia(`(max-width: ${SIZES[expand] - 1}px)`);
+    this._isMobile = this._mediaQuery.matches;
+    this._mediaQuery.addEventListener("change", this._handleMediaChange);
+    document.addEventListener("click", this._handleOutsideClick);
   }
 
   disconnectedCallback() {
