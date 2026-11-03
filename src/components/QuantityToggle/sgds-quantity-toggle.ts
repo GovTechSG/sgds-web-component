@@ -1,3 +1,4 @@
+import { isServer } from "lit";
 import { property, query, queryAsync } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -151,9 +152,11 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
   }
 
   private _handleInvalid() {
+    if (this._mixinShouldSkipSgdsValidation()) return;
     this.invalid = true;
   }
   private _handleValid() {
+    if (this._mixinShouldSkipSgdsValidation()) return;
     this.invalid = false;
   }
 
@@ -274,7 +277,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             @sgds-valid=${this._handleValid}
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
-            ?noValidate=${this.noValidate}
+            .noValidate=${this.noValidate || (!isServer && !!this.closest("form")?.noValidate)}
             id=${this._controlId}
             ?invalid=${this.invalid}
             hasFeedback=${ifDefined(this.hasFeedback !== "text" ? "style" : undefined)}

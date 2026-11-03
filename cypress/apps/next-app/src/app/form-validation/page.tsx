@@ -43,10 +43,11 @@ export default function FormValidationPage() {
 
       <hr />
 
-      <form ref={formRef} onSubmit={handleSubmit} onReset={handleReset}>
+      <form ref={formRef} onSubmit={handleSubmit} onReset={handleReset} noValidate>
         <section>
           <h2>Input — Text (required, pattern)</h2>
           <SgdsInput
+          
             label="First Name"
             name="firstName"
             required
@@ -75,6 +76,7 @@ export default function FormValidationPage() {
         <section>
           <h2>Textarea (required, minlength)</h2>
           <SgdsTextarea
+          
             label="Comments"
             name="comments"
             required
@@ -88,6 +90,7 @@ export default function FormValidationPage() {
         <section>
           <h2>Select (required)</h2>
           <SgdsSelect
+          
             label="Country"
             name="country"
             required
@@ -104,6 +107,7 @@ export default function FormValidationPage() {
         <section>
           <h2>Combo Box (required)</h2>
           <SgdsComboBox
+          
             label="Department"
             name="department"
             required
@@ -120,6 +124,7 @@ export default function FormValidationPage() {
         <section>
           <h2>Datepicker (required)</h2>
           <SgdsDatepicker
+          
             label="Appointment Date"
             name="appointmentDate"
             required
@@ -132,6 +137,7 @@ export default function FormValidationPage() {
         <section>
           <h2>Radio Group (required)</h2>
           <SgdsRadioGroup
+          
             label="Priority"
             name="priority"
             required
@@ -145,8 +151,16 @@ export default function FormValidationPage() {
         </section>
 
         <section>
+          <h2>Checkbox (standalone, required)</h2>
+          <SgdsCheckbox name="terms" value="agreed" required hasFeedback="both">
+            I agree to the terms and conditions
+          </SgdsCheckbox>
+        </section>
+
+        <section>
           <h2>Checkbox Group (required)</h2>
           <SgdsCheckboxGroup
+          
             label="Dietary Requirements"
             name="dietary"
             required
