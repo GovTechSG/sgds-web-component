@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, isServer, type PropertyValueMap } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import { SgdsMainnav } from "./sgds-mainnav";
 import { classMap } from "lit/directives/class-map.js";
@@ -95,7 +95,8 @@ export class SgdsMainnavDropdown extends NavMenuElement {
     this._mainnavEl?.removeEventListener("sgds-after-hide", this._handleNavHide);
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
     if (this.togglerNodes?.length && this.menuHeaderText) {
       this.menuHeaderText.textContent = this.togglerNodes[0].textContent;
     }
@@ -112,6 +113,7 @@ export class SgdsMainnavDropdown extends NavMenuElement {
   // ── Unified slot change handler ──
 
   private _handleSlotChange(e: Event) {
+    if (this.ssr && !isServer) return;
     const items = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as SgdsDropdownItem[];
     items.forEach(item => {
       item.addEventListener("keydown", this._handleKeyboardMenuItemsEvent.bind(this));
