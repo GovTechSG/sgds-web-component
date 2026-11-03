@@ -2,7 +2,6 @@ import { html, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import linkStyles from "./link.css";
-import SgdsIcon from "../Icon/sgds-icon";
 /**
  * @summary Link allows users to click and navigate their way from page to page
  *
@@ -33,38 +32,12 @@ export class SgdsLink extends SgdsElement {
       anchor.setAttribute("disabled", "true");
     }
     if (anchor.hasAttribute("disabled")) {
-      anchor.setAttribute("href", "javascript:void(0)");
-      anchor.setAttribute("tabindex", "-1");
-    } else {
-      anchor.setAttribute("tabindex", "0");
+      anchor.removeAttribute("href");
     }
   }
 
-  private _processIcon(anchor: HTMLAnchorElement) {
-    const linkToIconSizeMapping = {
-      xs: "sm",
-      sm: "md",
-      md: "lg",
-      lg: "xl"
-    };
-    const icons = anchor.querySelectorAll<SgdsIcon>("sgds-icon");
-
-    icons.forEach(icon => {
-      // icon.size = linkToIconSizeMapping[this.size]
-      icon.setAttribute("size", linkToIconSizeMapping[this.size]);
-      icon.classList.remove("icon-left", "icon-right");
-
-      if (!icon.previousElementSibling && !icon.previousSibling) {
-        icon.classList.add("icon-left");
-      }
-
-      if (!icon.nextElementSibling && !icon.nextSibling) {
-        icon.classList.add("icon-right");
-      }
-    });
-  }
-
   private _handleSlotChange(e: Event) {
+    // Let SSR apps handle anchor disabled state directly to avoid hydration mismatch
     if (this.ssr) return;
     const anchor = (e.target as HTMLSlotElement)
       .assignedElements()
@@ -72,18 +45,17 @@ export class SgdsLink extends SgdsElement {
 
     if (anchor) {
       this._processAnchor(anchor);
-      this._processIcon(anchor);
     }
   }
 
   firstUpdated(changedProperties: PropertyValueMap<this>) {
     super.firstUpdated(changedProperties);
+    // Let SSR apps handle anchor disabled state directly to avoid hydration mismatch
     if (this.ssr) return;
 
     const anchor = this.querySelector("a");
     if (anchor) {
       this._processAnchor(anchor);
-      this._processIcon(anchor);
     }
   }
 

@@ -18,6 +18,12 @@ Links are available in `size=xs`, `size=sm` `size=md` or `size=lg`
   <Story of={LinkStories.Disabled} />
 </Canvas>
 
+> **SSR apps (Next.js, Nuxt, Angular SSR, etc.):** To avoid hydration mismatches, add `disabled` directly on the `<a>` and remove `href`:
+>
+> ```html
+> <sgds-link disabled><a disabled>Disabled link</a></sgds-link>
+> ```
+
 ## Active
 
 <Canvas of={LinkStories.Active}>
