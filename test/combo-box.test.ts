@@ -2346,10 +2346,11 @@ describe("creatable combo-box", () => {
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     await simulateUserClick(input);
     await sendKeys({ type: "zzz" });
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector(".create-option"), "create-option did not appear", {
+      timeout: 2000
+    });
 
     const createOption = el.shadowRoot?.querySelector(".create-option");
-    expect(createOption).to.exist;
     expect(createOption?.textContent?.trim()).to.equal('Create "zzz"');
     expect(el.shadowRoot?.querySelector(".empty-menu")).to.not.exist;
   });
@@ -2381,13 +2382,14 @@ describe("creatable combo-box", () => {
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     await simulateUserClick(input);
     await sendKeys({ type: "Mango" });
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector(".create-option"), "create-option did not appear", {
+      timeout: 2000
+    });
 
     const handler = sinon.spy();
     el.addEventListener("sgds-create-option", handler);
 
     const createOption = el.shadowRoot?.querySelector(".create-option") as HTMLElement;
-    expect(createOption).to.exist;
     createOption.click();
     await el.updateComplete;
 
@@ -2405,13 +2407,14 @@ describe("creatable combo-box", () => {
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     await simulateUserClick(input);
     await sendKeys({ type: "Mango" });
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector(".create-option"), "create-option did not appear", {
+      timeout: 2000
+    });
 
     const handler = sinon.spy();
     el.addEventListener("sgds-create-option", handler);
 
     const createOption = el.shadowRoot?.querySelector(".create-option") as HTMLElement;
-    expect(createOption).to.exist;
     createOption.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
     await el.updateComplete;
 
@@ -2429,7 +2432,9 @@ describe("creatable combo-box", () => {
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     await simulateUserClick(input);
     await sendKeys({ type: "Mango" });
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector(".create-option"), "create-option did not appear", {
+      timeout: 2000
+    });
     expect(el.menuIsOpen).to.be.true;
 
     const createOption = el.shadowRoot?.querySelector(".create-option") as HTMLElement;
@@ -2467,10 +2472,11 @@ describe("creatable combo-box", () => {
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     await simulateUserClick(input);
     await sendKeys({ type: "zzz" });
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector(".create-option"), "create-option did not appear", {
+      timeout: 2000
+    });
 
     const createOption = el.shadowRoot?.querySelector(".create-option");
-    expect(createOption).to.exist;
     // Slot projects the light-DOM content
     const slot = createOption?.querySelector("slot[name='create']") as HTMLSlotElement;
     expect(slot).to.exist;
@@ -2488,7 +2494,9 @@ describe("creatable combo-box", () => {
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     await simulateUserClick(input);
     await sendKeys({ type: "zzz" });
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector(".create-option"), "create-option did not appear", {
+      timeout: 2000
+    });
 
     const createOption = el.shadowRoot?.querySelector(".create-option");
     expect(createOption?.textContent?.trim()).to.equal('Create "zzz"');
@@ -2505,13 +2513,14 @@ describe("creatable combo-box", () => {
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     await simulateUserClick(input);
     await sendKeys({ type: "Mango" });
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector(".create-option"), "create-option did not appear", {
+      timeout: 2000
+    });
 
     const handler = sinon.spy();
     el.addEventListener("sgds-create-option", handler);
 
     const createOption = el.shadowRoot?.querySelector(".create-option") as HTMLElement;
-    expect(createOption).to.exist;
     createOption.click();
     await el.updateComplete;
 
@@ -2530,7 +2539,9 @@ describe("creatable combo-box", () => {
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     await simulateUserClick(input);
     await sendKeys({ type: "zzz" });
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector(".create-option"), "create-option did not appear", {
+      timeout: 2000
+    });
 
     const handler = sinon.spy();
     el.addEventListener("sgds-create-option", handler);
@@ -2550,10 +2561,11 @@ describe("creatable combo-box", () => {
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     await simulateUserClick(input);
     await sendKeys({ type: "zzz" });
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector(".create-option"), "create-option did not appear", {
+      timeout: 2000
+    });
 
     const createOption = el.shadowRoot?.querySelector(".create-option");
-    expect(createOption).to.exist;
     expect(createOption?.textContent?.trim()).to.equal('Create "zzz"');
     expect(el.shadowRoot?.querySelector(".empty-menu")).to.not.exist;
   });
@@ -2597,10 +2609,11 @@ describe("creatable combo-box", () => {
     const input = el.shadowRoot?.querySelector("input") as HTMLInputElement;
     await simulateUserClick(input);
     await sendKeys({ type: "zzz" });
-    await el.updateComplete;
+    await waitUntil(() => el.shadowRoot?.querySelector(".create-option"), "create-option did not appear", {
+      timeout: 2000
+    });
 
     const createOption = el.shadowRoot?.querySelector(".create-option");
-    expect(createOption).to.exist;
     expect(createOption?.textContent?.trim()).to.equal('Create "zzz"');
 
     // Close the menu without clicking the create option (simulates clicking away)
