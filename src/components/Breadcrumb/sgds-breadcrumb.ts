@@ -32,9 +32,7 @@ export class SgdsBreadcrumb extends SgdsElement {
   private _handleSlotChange(e: Event) {
     const items = (e.target as HTMLSlotElement)
       .assignedElements({ flatten: true })
-      .filter(
-        (item): item is SgdsBreadcrumbItem => item.tagName.toLowerCase() === "sgds-breadcrumb-item"
-      );
+      .filter((item): item is SgdsBreadcrumbItem => item.tagName.toLowerCase() === "sgds-breadcrumb-item");
     items.forEach((item, index) => {
       if (index === items.length - 1) {
         item.setAttribute("aria-current", "page");

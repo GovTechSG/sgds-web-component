@@ -71,9 +71,7 @@ describe("sgds-breadcrumb", () => {
     expect(getComputedStyle(lightDomItems[0]).display).to.not.equal("none");
 
     // Trailing items are rendered in shadow DOM after overflow menu for correct tab order
-    const shadowTrailingItems = el.shadowRoot!.querySelectorAll(
-      ".breadcrumb > sgds-breadcrumb-item"
-    );
+    const shadowTrailingItems = el.shadowRoot!.querySelectorAll(".breadcrumb > sgds-breadcrumb-item");
     expect(shadowTrailingItems.length).to.equal(2);
     expect(shadowTrailingItems[0].querySelector("a")!.textContent).to.equal("Info");
     expect(shadowTrailingItems[1].querySelector("a")!.textContent).to.equal("Last");
