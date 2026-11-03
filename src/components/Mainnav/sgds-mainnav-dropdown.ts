@@ -84,10 +84,8 @@ export class SgdsMainnavDropdown extends NavMenuElement {
 
   connectedCallback() {
     super.connectedCallback();
-    if (typeof window !== "undefined") {
-      this._mainnavEl = this.closest("sgds-mainnav");
-      this._mainnavEl?.addEventListener("sgds-after-hide", this._handleNavHide);
-    }
+    this._mainnavEl = this.closest("sgds-mainnav");
+    this._mainnavEl?.addEventListener("sgds-after-hide", this._handleNavHide);
   }
 
   disconnectedCallback() {
