@@ -274,7 +274,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             @sgds-valid=${this._handleValid}
             @keydown=${this._handleKeyDown}
             ?disabled=${this.disabled}
-            ?noValidate=${this._mixinShouldSkipSgdsValidation()}
+            ?noValidate=${this.noValidate}
             id=${this._controlId}
             ?invalid=${this.invalid}
             hasFeedback=${ifDefined(this.hasFeedback !== "text" ? "style" : undefined)}

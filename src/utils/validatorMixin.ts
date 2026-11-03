@@ -131,7 +131,9 @@ export const SgdsFormValidatorMixin = <T extends Constructor<LitElement>>(superC
     }
     // Only check for noValidate prop
     _mixinShouldSkipSgdsValidation() {
-      if (this.ssr) return true;
+      // Skip validation only during SSR and before hydration completes.
+      // After firstUpdated (hasUpdated = true), validation must run normally.
+      if (this.ssr && !this.hasUpdated) return true;
       const form = this.closest("form");
 
       return form?.noValidate || this.noValidate;
