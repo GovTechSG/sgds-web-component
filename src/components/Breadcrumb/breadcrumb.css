@@ -8,26 +8,16 @@
   flex: 0 0 auto;
 }
 
-/* Overflow mode: position items via order */
-.has-overflow slot::slotted(sgds-breadcrumb-item:first-child) {
-  order: 0;
+/* Overflow mode: hide all slotted items except first; trailing items are rendered in shadow DOM for correct tab order */
+.has-overflow slot::slotted(sgds-breadcrumb-item:not(:first-child)) {
+  display: none;
 }
 
 .has-overflow .overflow-menu {
-  order: 1;
   display: flex;
   gap: var(--sgds-gap-xs);
   align-items: center;
   flex-shrink: 0;
-}
-
-.has-overflow slot::slotted(sgds-breadcrumb-item) {
-  order: 2;
-}
-
-/* Hide middle items: all except first and last two */
-.has-overflow slot::slotted(sgds-breadcrumb-item:not(:first-child):not(:nth-last-child(-n+2))) {
-  display: none;
 }
 
 .separator {

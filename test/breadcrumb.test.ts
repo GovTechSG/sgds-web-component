@@ -62,18 +62,23 @@ describe("sgds-breadcrumb", () => {
     expect(dropdownItems[0].querySelector("a")!.textContent).to.equal("About");
     expect(dropdownItems[1].querySelector("a")!.textContent).to.equal("Contacts");
 
-    // Middle items are hidden via CSS
-    const aboutItem = lightDomItems[1];
-    const contactsItem = lightDomItems[2];
-    expect(getComputedStyle(aboutItem).display).to.equal("none");
-    expect(getComputedStyle(contactsItem).display).to.equal("none");
+    // All non-first slotted items are hidden via CSS
+    for (let i = 1; i < lightDomItems.length; i++) {
+      expect(getComputedStyle(lightDomItems[i]).display).to.equal("none");
+    }
 
-    // First and last two items remain visible
+    // First slotted item remains visible
     expect(getComputedStyle(lightDomItems[0]).display).to.not.equal("none");
-    expect(getComputedStyle(lightDomItems[3]).display).to.not.equal("none");
-    expect(getComputedStyle(lightDomItems[4]).display).to.not.equal("none");
 
-    // Last item is active
+    // Trailing items are rendered in shadow DOM after overflow menu for correct tab order
+    const shadowTrailingItems = el.shadowRoot!.querySelectorAll(".breadcrumb > sgds-breadcrumb-item");
+    expect(shadowTrailingItems.length).to.equal(2);
+    expect(shadowTrailingItems[0].querySelector("a")!.textContent).to.equal("Info");
+    expect(shadowTrailingItems[1].querySelector("a")!.textContent).to.equal("Last");
+    expect(shadowTrailingItems[1].getAttribute("aria-current")).to.equal("page");
+    expect((shadowTrailingItems[1] as any).active).to.equal(true);
+
+    // Light DOM last item still has active/aria-current set
     expect(lightDomItems[4].getAttribute("aria-current")).to.equal("page");
     expect(lightDomItems[4].active).to.equal(true);
 
