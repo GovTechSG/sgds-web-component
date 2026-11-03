@@ -4,7 +4,8 @@ import { SgdsDescriptionListGroup, SgdsDescriptionList } from '@govtechsg/sgds-w
 
 export const DescriptionList = () => {
   return (
-    <SgdsDescriptionListGroup>
+    <SgdsDescriptionListGroup hasTitleSlot hasDescriptionSlot>
+      <span slot="title">Title</span>
       <span slot="description">Description</span>
       <SgdsDescriptionList>
         Label 1<span slot="data">Data Text Description List 1</span>
