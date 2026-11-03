@@ -84,10 +84,8 @@ export class SgdsMainnavDropdown extends NavMenuElement {
 
   connectedCallback() {
     super.connectedCallback();
-    if (typeof window !== "undefined") {
-      this._mainnavEl = this.closest("sgds-mainnav");
-      this._mainnavEl?.addEventListener("sgds-after-hide", this._handleNavHide);
-    }
+    this._mainnavEl = this.closest("sgds-mainnav");
+    this._mainnavEl?.addEventListener("sgds-after-hide", this._handleNavHide);
   }
 
   disconnectedCallback() {
@@ -197,9 +195,8 @@ export class SgdsMainnavDropdown extends NavMenuElement {
   // ── Mobile slide-in behavior ──
 
   private _getNavbarBody() {
-    const mainNav = document.querySelector("sgds-mainnav") as HTMLElement | null;
-    if (!mainNav?.shadowRoot) return;
-    return mainNav.shadowRoot.querySelector(".navbar-body") as HTMLElement | null;
+    if (!this._mainnavEl?.shadowRoot) return;
+    return this._mainnavEl.shadowRoot.querySelector(".navbar-body") as HTMLElement | null;
   }
 
   private _openMobileMenu() {

@@ -41,6 +41,35 @@ if (this.ssr) return fallbackValue;
 - Validation checks (e.g. should skip): `true` (skip validation during SSR)
 - Slot detection: `false` (no slots detected)
 
+### Choosing between `this.ssr` and `this.hasUpdated`
+
+`this.ssr` (and Lit's `isServer`) becomes `false` the moment the bundle loads in the browser — **before** hydration completes. `this.hasUpdated` remains `false` until the component's first `updated()` lifecycle callback fires, which is **after** Lit hydration finishes and child custom elements are upgraded.
+
+There is a gap between these two: the client-side **hydration window**. During that window `this.ssr` is already `false`, but child elements may not be upgraded yet.
+
+**Rule of thumb:**
+
+| Guard purpose | Use | Why |
+|---|---|---|
+| Browser API doesn't exist on the server (`window`, `getBoundingClientRect`, `addEventListener`, etc.) | `this.ssr` / `isServer` | The API is absent only on the server; once on the client it is available immediately. |
+| Querying child/slotted elements that must be upgraded (`this.children`, `querySelector` for custom elements, slot queries) | `this.hasUpdated` | Children are not upgraded during the hydration window, so `this.ssr` alone would let the code query un-upgraded elements. |
+
+```typescript
+// Guard for browser API — this.ssr is sufficient
+private _measure() {
+  if (this.ssr) return 0;
+  return this.getBoundingClientRect().width;
+}
+
+// Guard for querying child custom elements — use hasUpdated
+private _getCells() {
+  if (this.ssr && !this.hasUpdated) return [];
+  return Array.from(this.children).filter(
+    child => child instanceof SgdsDataTableCell
+  );
+}
+```
+
 ### For ReactiveControllers
 
 Controllers that hold a reference to the host element should access `this.host.ssr`. If the host type is `ReactiveControllerHost & Element`, narrow it to `ReactiveControllerHost & SgdsElement` for type-safe access.

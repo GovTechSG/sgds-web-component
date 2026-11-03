@@ -54,7 +54,6 @@ export class SgdsTabGroup extends SgdsElement {
       customElements.whenDefined("sgds-tab-panel")
     ]);
     super.connectedCallback();
-    if (this.ssr) return;
 
     this._resizeObserver = new ResizeObserver(() => {
       if (this._activeTab && this.variant === "underlined" && !this._indicatorAnimating) {

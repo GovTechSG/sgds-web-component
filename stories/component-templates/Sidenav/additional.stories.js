@@ -147,3 +147,25 @@ export const DisabledLink = {
   args: { ...args, active: true },
   parameters: {}
 };
+
+const SSRDisabledLinkTemplate = args =>
+  html`
+    <sgds-sidenav>
+      <sgds-sidenav-item ariaLabel="SidenavItem L1" active>
+        <span slot="title"> SidenavItem L1</span>
+        <sgds-sidenav-link disabled>
+          <a aria-disabled="true" role="link">Disabled Link (SSR)</a>
+        </sgds-sidenav-link>
+        <sgds-sidenav-link>
+          <a href="#">SidenavLink 2 L2</a>
+        </sgds-sidenav-link>
+      </sgds-sidenav-item>
+    </sgds-sidenav>
+  `;
+
+export const SSRDisabledLink = {
+  render: SSRDisabledLinkTemplate.bind({}),
+  name: "SSR disabled sidenav link",
+  args: {},
+  parameters: {}
+};
