@@ -71,3 +71,11 @@ As a link type, add `active` prop to SgdsSidenavItem to achieve the active style
 <Canvas of={SidenavStories.DisabledLink}>
   <Story of={SidenavStories.DisabledLink} />
 </Canvas>
+
+## SSR (Server-Side Rendering)
+
+`SgdsSidenavLink` manages the slotted anchor's `aria-disabled`, `tabindex`, and `href` attributes at runtime. During SSR, this is skipped to avoid hydration mismatches. For SSR apps (Next.js, Nuxt, etc.), handle the disabled anchor state directly in your markup:
+
+<Canvas of={SidenavStories.SSRDisabledLink}>
+  <Story of={SidenavStories.SSRDisabledLink} />
+</Canvas>
