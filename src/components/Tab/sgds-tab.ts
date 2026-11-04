@@ -22,6 +22,18 @@ export class SgdsTab extends SgdsElement {
   /** The name of the tab panel this tab is associated with. The panel must be located in the same tab group. */
   @property({ reflect: true }) panel = "";
 
+  /** The variant of the tab. Managed by tab-group but can be set directly for SSR. */
+  @property({ type: String, reflect: true }) variant: "underlined" | "solid" = "underlined";
+
+  /** The orientation of the tab. Managed by tab-group but can be set directly for SSR. */
+  @property({ type: String, reflect: true }) orientation: "horizontal" | "vertical" = "horizontal";
+
+  /** The density of the tab. Managed by tab-group but can be set directly for SSR. */
+  @property({ type: String, reflect: true }) density: "compact" | "default" = "default";
+
+  /** When true, tab stretches to fill container width. Managed by tab-group but can be set directly for SSR. */
+  @property({ type: Boolean, reflect: true }) fullWidth = false;
+
   /** Draws the tab in an active state. When used with tab group, this state is already managed. Use it to set the initial active tab on first load of page */
   @property({ type: Boolean, reflect: true }) active = false;
   /** When true, sets tab to disabled state */
@@ -33,9 +45,20 @@ export class SgdsTab extends SgdsElement {
   connectedCallback() {
     super.connectedCallback();
     // If the user didn't provide an ID, we'll set one so we can link tabs and tab panels with aria labels
-
     this.id = this.id.length > 0 ? this.id : this.componentId;
     this.setAttribute("role", "tab");
+
+    // Read variant/orientation/density/fullWidth from parent tab-group
+    const tabGroup = this.closest("sgds-tab-group");
+    if (tabGroup) {
+      const variant = tabGroup.getAttribute("variant");
+      const orientation = tabGroup.getAttribute("orientation");
+      const density = tabGroup.getAttribute("density");
+      if (variant) this.variant = variant as "underlined" | "solid";
+      if (orientation) this.orientation = orientation as "horizontal" | "vertical";
+      if (density) this.density = density as "compact" | "default";
+      if (tabGroup.hasAttribute("fullWidth")) this.fullWidth = true;
+    }
   }
 
   /** Sets focus to the tab. */

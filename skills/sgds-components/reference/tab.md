@@ -26,9 +26,9 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - Each `<sgds-tab panel="x">` is linked to a `<sgds-tab-panel name="x">` by matching `panel` and `name` values — mismatches result in no panel being shown.
 - The first non-disabled tab is active by default; add `active` to a specific `<sgds-tab>` to override the initial selection.
 - `disabled` on a `<sgds-tab>` prevents selection and skips the tab during keyboard navigation.
-- `variant` controls visual style: `underlined` (default) or `solid`. Set on `<sgds-tab-group>` — propagates to all child tabs.
-- `orientation` controls layout: `horizontal` (default) or `vertical`. Set on `<sgds-tab-group>`.
-- `density` controls spacing: `default` or `compact`. Set on `<sgds-tab-group>`.
+- `variant` controls visual style: `underlined` (default) or `solid`. Set on both `<sgds-tab-group>` and each `<sgds-tab>`.
+- `orientation` controls layout: `horizontal` (default) or `vertical`. Set on both `<sgds-tab-group>` and each `<sgds-tab>`.
+- `density` controls spacing: `default` or `compact`. Set on both `<sgds-tab-group>` and each `<sgds-tab>`.
 - `fullWidth` on `<sgds-tab-group>` will stretch tab group to fill the whole width of its container. Only works if `orientation` is set to `horizontal`.
 - Fires `sgds-tab-show` (with `event.detail.name`) when a tab is activated and `sgds-tab-hide` when it is deactivated.
 - No public methods on `<sgds-tab-group>`.
@@ -154,6 +154,10 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | Attribute | Type | Default | Purpose |
 |---|---|---|---|
 | `panel` | string | `""` | **Required** — must match the `name` of a `<sgds-tab-panel>` |
+| `variant` | `underlined \| solid` | `underlined` | Visual style — must match the parent `<sgds-tab-group>` value |
+| `orientation` | `horizontal \| vertical` | `horizontal` | Layout direction — must match the parent `<sgds-tab-group>` value |
+| `density` | `default \| compact` | `default` | Spacing — must match the parent `<sgds-tab-group>` value |
+| `fullWidth` | boolean | `false` | Stretches tab to fill container width — must match the parent `<sgds-tab-group>` value |
 | `active` | boolean | `false` | Sets this tab as active on initial load |
 | `disabled` | boolean | `false` | Prevents the tab from being selected |
 | `ariaLabel` | string | — | Accessible label for the tab. **Required** for accessibility — always provide this to describe the tab's purpose |
@@ -185,7 +189,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 **For AI agents**:
 1. `<sgds-tab>` must have `slot="nav"` and its `panel` must exactly match a `<sgds-tab-panel>`'s `name`.
 2. **Always add `ariaLabel`** to every `<sgds-tab>` — this is required for accessibility. The value should describe the tab's purpose (usually matches the visible label text).
-3. `variant`, `orientation`, `density`, and `fullWidth` are set on `<sgds-tab-group>` — they propagate automatically to all child `<sgds-tab>` elements.
+3. For client-rendered apps, `variant`, `orientation`, `density`, and `fullWidth` are set on `<sgds-tab-group>` and forwarded to children automatically. For SSR apps (Next.js, Nuxt), **also set these props on each `<sgds-tab>`** to match the parent values — this ensures correct styling from first paint. For example: `<sgds-tab slot="nav" panel="one" variant="underlined" orientation="horizontal">`.
 4. `sgds-tab-show` and `sgds-tab-hide` both carry `event.detail.name` which is the panel name string.
 5. To set the initially active tab, add `active` to one `<sgds-tab>` — if none are active, the first non-disabled tab is selected.
 6. There are no public methods on the tab group.

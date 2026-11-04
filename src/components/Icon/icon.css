@@ -4,10 +4,6 @@
   vertical-align: bottom;
 }
 
-:host(.icon-left) {
-  margin-right: 0.25rem;
-}
-
 :host(.icon-right) {
   margin-left: 0.25rem;
 }
@@ -43,6 +39,6 @@
 
 svg {
   display: inline-block;
-  width: var(--sgds-icon-size-lg);
-  height: var(--sgds-icon-size-lg);
+  width: var(--link-icon-size, var(--sgds-icon-size-lg));
+  height: var(--link-icon-size, var(--sgds-icon-size-lg));
 }

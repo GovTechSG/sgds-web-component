@@ -62,7 +62,7 @@ export class DatepickerCalendar extends SgdsElement {
   @property({ type: Array }) selectedDate: Date[] = [];
 
   /** @internal */
-  @property({ attribute: false }) displayDate: Date;
+  @property({ attribute: false }) displayDate: Date = new Date();
 
   /** @internal */
   @property({ type: String }) minDate?: string;
@@ -73,7 +73,7 @@ export class DatepickerCalendar extends SgdsElement {
   /** @internal */
   @property({ type: String, reflect: true }) mode: "single" | "range" = "single";
 
-  private focusedDate: Date;
+  private focusedDate: Date = new Date();
 
   /** @internal */
   @property() view: ViewEnum;

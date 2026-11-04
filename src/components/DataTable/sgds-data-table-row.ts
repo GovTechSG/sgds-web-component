@@ -73,9 +73,6 @@ export class SgdsDataTableRow extends SgdsElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this._lightDomObserver = new MutationObserver(() => this._handleLightDomChange());
-    this._lightDomObserver.observe(this, { childList: true });
-    this._handleLightDomChange();
   }
 
   disconnectedCallback() {
@@ -83,7 +80,9 @@ export class SgdsDataTableRow extends SgdsElement {
     super.disconnectedCallback();
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: Parameters<SgdsElement["firstUpdated"]>[0]) {
+    super.firstUpdated(changedProperties);
+    this._setupLightDomObserver();
     if (this._expandableBody) {
       this._expandableBody.hidden = !this.open;
     }
@@ -147,6 +146,7 @@ export class SgdsDataTableRow extends SgdsElement {
   }
 
   private _getCells() {
+    if (this.ssr && !this.hasUpdated) return [];
     return Array.from(this.children).filter(
       child => child instanceof SgdsDataTableCell || child instanceof SgdsDataTableHead
     ) as Array<SgdsDataTableCell | SgdsDataTableHead>;
@@ -161,6 +161,12 @@ export class SgdsDataTableRow extends SgdsElement {
         cell.setAttribute("slot", slotName);
       }
     });
+  }
+
+  private _setupLightDomObserver() {
+    this._lightDomObserver = new MutationObserver(() => this._handleLightDomChange());
+    this._lightDomObserver.observe(this, { childList: true });
+    this._handleLightDomChange();
   }
 
   private _handleLightDomChange() {

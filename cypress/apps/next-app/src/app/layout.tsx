@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import { setCSPNonce } from "@govtechsg/sgds-web-component/react/ssr";
 import { Inter } from "next/font/google";
-import { headers } from "next/headers";
 import "./globals.css";
 import "@govtechsg/sgds-web-component/themes/day.css";
-import SgdsLibraryLoader from "./sgds";
+import { headers } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,13 +17,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
-
+  const nonce = (await headers()).get("x-nonce");
+  if (nonce) setCSPNonce(nonce);
   return (
     <html lang="en">
-      <head>
-        <SgdsLibraryLoader nonce={nonce} />
-      </head>
       <body className={inter.className}>
         {children}
       </body>

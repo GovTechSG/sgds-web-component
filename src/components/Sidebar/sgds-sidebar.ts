@@ -1,4 +1,4 @@
-import { html, nothing } from "lit";
+import { html, nothing, PropertyValueMap } from "lit";
 import { property, queryAssignedElements, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import SgdsElement from "../../base/sgds-element";
@@ -170,9 +170,14 @@ export class SgdsSidebar extends SgdsElement {
     this.removeEventListener("i-sgds-click", this._boundHandleItemClick);
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
     document?.addEventListener("click", this._handleClickOutOfElement);
     this._updateOverlayState();
+
+    this._handleCollapsed();
+    this._handleActive();
+    this._handleActiveItem();
   }
 
   updated() {
@@ -185,7 +190,7 @@ export class SgdsSidebar extends SgdsElement {
    * @internal
    * @returns {void}
    */
-  @watch("collapsed")
+  @watch("collapsed", { waitUntilFirstUpdate: true })
   _handleCollapsed() {
     if (this.variant !== "persistent") {
       this._sidebarCollapsed = this.collapsed;
@@ -199,7 +204,7 @@ export class SgdsSidebar extends SgdsElement {
    * @internal
    * @returns {void}
    */
-  @watch("_sidebarActiveItem")
+  @watch("_sidebarActiveItem", { waitUntilFirstUpdate: true })
   _handleActiveItem(oldItem?: unknown) {
     if (!this._sidebarActiveItem) return;
 
@@ -247,7 +252,7 @@ export class SgdsSidebar extends SgdsElement {
    * @internal
    * @returns {void}
    */
-  @watch("active")
+  @watch("active", { waitUntilFirstUpdate: true })
   _handleActive() {
     // Return early if active is empty
     if (!this.active) {
@@ -488,16 +493,6 @@ export class SgdsSidebar extends SgdsElement {
             show: this._showDrawer
           })}
         >
-          ${this._isNarrowViewport
-            ? html`<sgds-icon-button
-                name="chevron-left"
-                variant="ghost"
-                tone="neutral"
-                size="sm"
-                @click=${() => (this._showDrawer = false)}
-                .ariaLabel=${"Close drawer"}
-              ></sgds-icon-button>`
-            : nothing}
           ${this._drawerItems}
         </div>
       </nav>

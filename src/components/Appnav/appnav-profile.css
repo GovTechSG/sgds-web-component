@@ -1,0 +1,62 @@
+/* Appnav always uses a dark background (brand or gradient tones),
+   so the profile nav-link text and focus-visible color must be fixed-light. */
+
+:host([expand="always"]) .nav-link {
+  color: var(--sgds-color-fixed-light);
+}
+
+:host([expand="always"]) .nav-link:not(.disabled):focus-visible {
+  color: var(--sgds-color-fixed-light);
+}
+
+@media (min-width: 512px) {
+  :host([expand="sm"]) .nav-link {
+    color: var(--sgds-color-fixed-light);
+  }
+
+  :host([expand="sm"]) .nav-link:not(.disabled):focus-visible {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media (min-width: 768px) {
+  :host([expand="md"]) .nav-link {
+    color: var(--sgds-color-fixed-light);
+  }
+
+  :host([expand="md"]) .nav-link:not(.disabled):focus-visible {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media (min-width: 1024px) {
+  :host(:not([expand])) .nav-link,
+  :host([expand="lg"]) .nav-link {
+    color: var(--sgds-color-fixed-light);
+  }
+
+  :host(:not([expand])) .nav-link:not(.disabled):focus-visible,
+  :host([expand="lg"]) .nav-link:not(.disabled):focus-visible {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media (min-width: 1280px) {
+  :host([expand="xl"]) .nav-link {
+    color: var(--sgds-color-fixed-light);
+  }
+
+  :host([expand="xl"]) .nav-link:not(.disabled):focus-visible {
+    color: var(--sgds-color-fixed-light);
+  }
+}
+
+@media (min-width: 1440px) {
+  :host([expand="xxl"]) .nav-link {
+    color: var(--sgds-color-fixed-light);
+  }
+
+  :host([expand="xxl"]) .nav-link:not(.disabled):focus-visible {
+    color: var(--sgds-color-fixed-light);
+  }
+}

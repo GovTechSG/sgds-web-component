@@ -1,11 +1,9 @@
-import { provide } from "@lit/context";
 import { html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import NavElement from "../../base/nav-element";
 import { sanitizeHref } from "../../utils/safeUrl";
 import { HasSlotController } from "../../utils/slot";
-import { AppnavBreakpointContext, AppnavExpandedContext } from "./appnav-context";
 import appnavStyle from "./appnav.css";
 
 export type AppnavTone = "brand" | "gradient-1" | "gradient-2" | "gradient-3" | "gradient-4";
@@ -34,15 +32,6 @@ interface DefaultSlotItem {
 export class SgdsAppnav extends NavElement {
   static styles = [...NavElement.styles, appnavStyle];
 
-  @provide({ context: AppnavBreakpointContext })
-  @state()
-  private _breakpointReached = false;
-
-  @provide({ context: AppnavExpandedContext })
-  @state()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private _expanded = false;
-
   /** Sets the visual tone of the navigation bar */
   @property({ type: String, reflect: true })
   tone: AppnavTone = "brand";
@@ -50,15 +39,13 @@ export class SgdsAppnav extends NavElement {
   /** Used only for SSR to indicate the presence of the `start` slot. */
   @property({ type: Boolean }) hasStartSlot = false;
 
-  private readonly hasSlotController = new HasSlotController(this, "start");
+  private readonly hasSlotController = new HasSlotController(this, "start", "profile");
 
-  /** @internal Whether the default slot has assigned elements */
-  @state()
-  private _hasDefaultSlotItems = false;
+  /** Used only for SSR to indicate the presence of default slot items (nav links). */
+  @property({ type: Boolean }) hasDefaultSlot = false;
 
-  /** @internal Whether the profile slot has assigned elements */
-  @state()
-  private _hasProfileSlotItems = false;
+  /** Used only for SSR to indicate the presence of the `profile` slot. */
+  @property({ type: Boolean }) hasProfileSlot = false;
 
   /** @internal Stored default slot items for mobile menu rendering */
   @state()
@@ -66,15 +53,7 @@ export class SgdsAppnav extends NavElement {
 
   updated() {
     if (!this.hasStartSlot) this.hasStartSlot = this.hasSlotController.test("start");
-    this._expanded = this.expanded;
-  }
-
-  protected _onBreakpointReached(reached: boolean): void {
-    this._breakpointReached = reached;
-  }
-
-  protected _isBreakpointReached(): boolean {
-    return this._breakpointReached;
+    if (!this.hasProfileSlot) this.hasProfileSlot = this.hasSlotController.test("profile");
   }
 
   private _handleTogglerKeydown(e: KeyboardEvent) {
@@ -97,11 +76,15 @@ export class SgdsAppnav extends NavElement {
 
   private _handleDefaultSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as HTMLElement[];
-    this._hasDefaultSlotItems = childElements.length > 0;
+    this.hasDefaultSlot = childElements.length > 0;
     this._defaultSlotItems = childElements
       .filter(el => typeof el.tagName !== "undefined")
       .map(el => {
-        const label = el.getAttribute("ariaLabel") || el.getAttribute("aria-label") || el.textContent?.trim() || "";
+        const label =
+          (el as HTMLElement & { ariaLabel?: string }).ariaLabel ||
+          el.getAttribute("aria-label") ||
+          el.textContent?.trim() ||
+          "";
         if (!label) {
           console.warn(
             `[sgds-appnav] Slotted element <${el.tagName.toLowerCase()}> has no ariaLabel, aria-label, or textContent. It will render as a blank item in the mobile menu. Add an ariaLabel for accessibility and mobile display.`,
@@ -137,7 +120,7 @@ export class SgdsAppnav extends NavElement {
 
   private _handleProfileSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    this._hasProfileSlotItems = childElements.length > 0;
+    this.hasProfileSlot = childElements.length > 0;
     childElements.forEach(el => {
       el.setAttribute("expand", this.expand);
       el.setAttribute("tone", this.tone);
@@ -145,14 +128,6 @@ export class SgdsAppnav extends NavElement {
   }
 
   render() {
-    this.breakpointReached =
-      window.innerWidth <
-      (this.expand === "always"
-        ? -1
-        : this.expand === "never"
-        ? Infinity
-        : { sm: 512, md: 768, lg: 1024, xl: 1280, xxl: 1440 }[this.expand]);
-
     return html`
       <nav aria-label="App navigation">
         <div class="navbar ${this._expandClass()}">
@@ -164,32 +139,25 @@ export class SgdsAppnav extends NavElement {
             : html`<div class="navbar-brand">
                 <slot name="brand" @slotchange=${this._handleBrandSlotChange}></slot>
               </div>`}
-          <div class="navbar-body navbar-collapse" id=${this.collapseId}>
+          <div class="navbar-body navbar-collapse" id=${this.collapseId} hidden>
             <div class="navbar-nav navbar-nav-scroll">
-              <slot
-                class=${classMap({ "slot-desktop-only": this.breakpointReached })}
-                @slotchange=${this._handleDefaultSlotChange}
-              ></slot>
-              ${this.breakpointReached
-                ? this._defaultSlotItems.map(
-                    (item, index) => html`<a
-                      class="appnav-menu-item"
-                      role="button"
-                      tabindex="0"
-                      @click=${() => this._handleMobileItemClick(item)}
-                      @keydown=${(e: KeyboardEvent) => this._handleMenuItemKeydown(e, index)}
-                      >${item.label}</a
-                    >`
-                  )
-                : nothing}
+              <slot class="slot-desktop-only" @slotchange=${this._handleDefaultSlotChange}></slot>
+              <div class="mobile-menu-items">
+                ${this._defaultSlotItems.map(
+                  (item, index) => html`<a
+                    class="appnav-menu-item"
+                    role="button"
+                    tabindex="0"
+                    @click=${() => this._handleMobileItemClick(item)}
+                    @keydown=${(e: KeyboardEvent) => this._handleMenuItemKeydown(e, index)}
+                    >${item.label}</a
+                  >`
+                )}
+              </div>
             </div>
           </div>
-          <div
-            class="navbar-end ${this._hasProfileSlotItems || (this._hasDefaultSlotItems && this.breakpointReached)
-              ? ""
-              : "slot-empty"}"
-          >
-            ${this._hasDefaultSlotItems && this.breakpointReached ? this._renderAppnavToggler() : nothing}
+          <div class="navbar-end ${this.hasProfileSlot || this.hasDefaultSlot ? "" : "slot-empty"}">
+            ${this.hasDefaultSlot ? this._renderAppnavToggler() : nothing}
             <slot name="profile" @slotchange=${this._handleProfileSlotChange}></slot>
           </div>
         </div>

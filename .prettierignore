@@ -16,3 +16,4 @@ cypress/apps/next-app/.next
 cypress/apps/angular-app/.angular
 coverage
 test/skills
+e2e/

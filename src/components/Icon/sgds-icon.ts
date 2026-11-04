@@ -25,9 +25,18 @@ export class SgdsIcon extends SgdsElement {
   @state() private _icon: TemplateResult | undefined;
 
   willUpdate(changedProperties: Map<string, unknown>) {
+    // Skip during first update (SSR hydration) — icon loads in firstUpdated instead.
+    // This ensures server and client both render `nothing` on first paint.
+    if (!this.hasUpdated) return;
     if (changedProperties.has("name")) {
       this._loadIcon(this.name);
     }
+  }
+
+  firstUpdated(changedProperties: Parameters<SgdsElement["firstUpdated"]>[0]) {
+    super.firstUpdated(changedProperties);
+    // Load icon after hydration completes — no mismatch risk.
+    this._loadIcon(this.name);
   }
 
   private async _loadIcon(name: string) {

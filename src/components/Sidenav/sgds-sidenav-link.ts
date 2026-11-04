@@ -36,6 +36,8 @@ export class SgdsSidenavLink extends SgdsElement {
   }
 
   _handleSlotChange() {
+    // Let SSR apps handle anchor disabled state directly to avoid hydration mismatch
+    if (this.ssr) return;
     this._anchor[0].setAttribute("aria-disabled", `${this.disabled}`);
 
     /** If link is disabled, set tabindex of anchor to -1 */
