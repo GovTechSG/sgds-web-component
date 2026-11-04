@@ -123,10 +123,6 @@ slot[name="lower"]::slotted(*) {
   left: var(--sgds-dimension-72);
 }
 
-.sidebar-nested-overlay sgds-icon-button {
-  display: none;
-}
-
 /* Scrollbar styling for better UX */
 .sidebar::-webkit-scrollbar {
   width: var(--sgds-dimension-2);
@@ -146,10 +142,6 @@ slot[name="lower"]::slotted(*) {
 }
 
 @media screen and (max-width: 767px) {
-  .sidebar-nested-overlay sgds-icon-button {
-    display: block;
-  }
-
   .sidebar {
     width: var(--sgds-dimension-256);
   }

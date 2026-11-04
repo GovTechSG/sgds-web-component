@@ -6,7 +6,6 @@
   font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs, 20px);
   box-sizing: border-box;
-  cursor: pointer;
   padding: var(--sgds-padding-sm) var(--sgds-mainnav-mobile-padding-x);
   --sgds-link-color-default: var(--sgds-color-default);
   --sgds-link-color-emphasis: var(--sgds-color-default);
@@ -46,13 +45,15 @@
 }
 
 @media screen and (min-width: 1024px) {
-  :host([expand="lg"]) .mainnav-item {
+  :host([expand="lg"]) .mainnav-item,
+  :host(:not([expand])) .mainnav-item {
     border-bottom: var(--sgds-border-width-4) solid transparent;
     min-height: 100%;
     padding: 0px var(--sgds-padding-md);
   }
 
-  :host(:not([disabled])[active][expand="lg"]) .mainnav-item {
+  :host(:not([disabled])[active][expand="lg"]) .mainnav-item,
+  :host(:not([disabled])[active]:not([expand])) .mainnav-item {
     border-color: var(--sgds-primary-border-color-default);
   }
 }
@@ -96,7 +97,8 @@
 }
 
 @media screen and (max-width: 1023px) {
-  :host(:not([disabled])[active][expand="lg"]) .mainnav-item {
+  :host(:not([disabled])[active][expand="lg"]) .mainnav-item,
+  :host(:not([disabled])[active]:not([expand])) .mainnav-item {
     background-color: var(--sgds-bg-translucent-subtle);
   }
 }
@@ -121,102 +123,6 @@
   color: var(--sgds-primary-color-default);
 }
 
-/* Tone brand/gradient — color */
-
-:host([tone="brand"][expand="always"]) .mainnav-item,
-:host([tone^="gradient"][expand="always"]) .mainnav-item {
-  --sgds-link-color-default: var(--sgds-color-fixed-light);
-  --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-  color: var(--sgds-color-fixed-light);
-}
-
-@media screen and (min-width: 512px) {
-  :host([tone="brand"][expand="sm"]) .mainnav-item,
-  :host([tone^="gradient"][expand="sm"]) .mainnav-item {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 768px) {
-  :host([tone="brand"][expand="md"]) .mainnav-item,
-  :host([tone^="gradient"][expand="md"]) .mainnav-item {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  :host([tone="brand"][expand="lg"]) .mainnav-item,
-  :host([tone^="gradient"][expand="lg"]) .mainnav-item {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  :host([tone="brand"][expand="xl"]) .mainnav-item,
-  :host([tone^="gradient"][expand="xl"]) .mainnav-item {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  :host([tone="brand"][expand="xxl"]) .mainnav-item,
-  :host([tone^="gradient"][expand="xxl"]) .mainnav-item {
-    --sgds-link-color-default: var(--sgds-color-fixed-light);
-    --sgds-link-color-emphasis: var(--sgds-color-fixed-light);
-    color: var(--sgds-color-fixed-light);
-  }
-}
-
-/* Tone brand/gradient — active border-color */
-
-:host([tone="brand"][expand="always"]:not([disabled])[active]) .mainnav-item,
-:host([tone^="gradient"][expand="always"]:not([disabled])[active]) .mainnav-item {
-  border-color: var(--sgds-color-fixed-light);
-}
-
-@media screen and (min-width: 512px) {
-  :host([tone="brand"][expand="sm"]:not([disabled])[active]) .mainnav-item,
-  :host([tone^="gradient"][expand="sm"]:not([disabled])[active]) .mainnav-item {
-    border-color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 768px) {
-  :host([tone="brand"][expand="md"]:not([disabled])[active]) .mainnav-item,
-  :host([tone^="gradient"][expand="md"]:not([disabled])[active]) .mainnav-item {
-    border-color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  :host([tone="brand"][expand="lg"]:not([disabled])[active]) .mainnav-item,
-  :host([tone^="gradient"][expand="lg"]:not([disabled])[active]) .mainnav-item {
-    border-color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  :host([tone="brand"][expand="xl"]:not([disabled])[active]) .mainnav-item,
-  :host([tone^="gradient"][expand="xl"]:not([disabled])[active]) .mainnav-item {
-    border-color: var(--sgds-color-fixed-light);
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  :host([tone="brand"][expand="xxl"]:not([disabled])[active]) .mainnav-item,
-  :host([tone^="gradient"][expand="xxl"]:not([disabled])[active]) .mainnav-item {
-    border-color: var(--sgds-color-fixed-light);
-  }
-}
-
 /* Focus-within — outline on wrapper, anchor inherits color */
 
 .mainnav-item:focus-within {
@@ -228,6 +134,9 @@
 
 :host([disabled]) .mainnav-item {
   opacity: var(--sgds-opacity-40);
+}
+
+:host([disabled]) ::slotted(*) {
   cursor: not-allowed;
 }
 
@@ -244,6 +153,7 @@
 ::slotted(*) {
   text-decoration: none !important;
   color: inherit !important;
+  cursor: pointer;
 }
 
 /* Focus-visible — suppress anchor outline, wrapper handles it */

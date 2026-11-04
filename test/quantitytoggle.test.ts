@@ -437,6 +437,53 @@ describe("form novalidate for sgds-quantity-toggle", () => {
   });
 });
 
+describe("SSR hydration for sgds-quantity-toggle", () => {
+  it("validation works after SSR hydration when no novalidate is set", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form>
+        <sgds-quantity-toggle ssr hasFeedback="both" min="3" value="1"></sgds-quantity-toggle>
+      </form>
+    `);
+    const el = form.querySelector<SgdsQuantityToggle>("sgds-quantity-toggle");
+    await el?.updateComplete;
+    const input = el?.shadowRoot?.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    input?.blur();
+    await el?.updateComplete;
+    expect(el?.invalid).to.be.true;
+  });
+
+  it("form novalidate suppresses validation after SSR hydration on touch", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-quantity-toggle ssr hasFeedback="both" min="3" value="1"></sgds-quantity-toggle>
+      </form>
+    `);
+    const el = form.querySelector<SgdsQuantityToggle>("sgds-quantity-toggle");
+    await el?.updateComplete;
+    const input = el?.shadowRoot?.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    input?.blur();
+    await el?.updateComplete;
+    expect(el?.invalid).to.be.false;
+  });
+
+  it("form novalidate suppresses inner input invalid style after SSR hydration", async () => {
+    const form = await fixture<HTMLFormElement>(html`
+      <form novalidate>
+        <sgds-quantity-toggle ssr hasFeedback="both" min="3" value="1"></sgds-quantity-toggle>
+      </form>
+    `);
+    const el = form.querySelector<SgdsQuantityToggle>("sgds-quantity-toggle");
+    await el?.updateComplete;
+    const input = el?.shadowRoot?.querySelector<SgdsInput>("sgds-input");
+    input?.focus();
+    input?.blur();
+    await input?.updateComplete;
+    expect(input?.invalid).to.be.false;
+  });
+});
+
 describe("reset clears invalid state when noValidate is true", () => {
   it("reset clears programmatic invalid state when component has noValidate", async () => {
     const form = await fixture<HTMLFormElement>(html`

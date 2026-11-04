@@ -9,7 +9,7 @@ Full Width layouts are for public-facing pages, informational sites, and general
 | < 512px | `calc(100% - 40px)` |
 | >= 512px (sm) | `calc(100% - 48px)` |
 | >= 768px (md) | `calc(100% - 56px)` |
-| >= 1024px (lg) | `888px` |
+| >= 1024px (lg) | `calc(100% - 64px)` |
 | >= 1280px (xl) | `1168px` |
 | >= 1440px (2xl) | `1312px` |
 

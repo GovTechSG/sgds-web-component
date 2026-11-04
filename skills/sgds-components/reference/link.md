@@ -24,8 +24,8 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 - Navigates users to a destination when activated.
 - Can be internal (same domain/app) or external (opens a new tab when required).
-- Supports leading or trailing icons (e.g. external-link icon); icon size is managed automatically based on the link `size`.
-- `disabled` sets `href="javascript:void(0)"` and `tabindex="-1"` on the slotted anchor automatically.
+- Supports leading or trailing icons (e.g. external-link icon); icon size and spacing are managed automatically based on the link `size`.
+- `disabled` disables the link. For SSR apps, users must handle the anchor's disabled state directly (see SSR section below).
 - `active` applies active styling to indicate the current page or selected state.
 
 ## Advanced Considerations
@@ -59,7 +59,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 
 - **Very long link text**: wraps properly without breaking readability; keep labels concise.
 - **Multiple links in one sentence**: avoid cognitive overload — restructure content if needed.
-- **Disabled links**: prefer hiding over disabling; `disabled` is supported but hidden links avoid misleading the user.
+- **Disabled links**: prefer hiding over disabling; `disabled` is supported but hidden links avoid misleading the user. For SSR apps, see the SSR section below.
 - **Same destination, different labels**: avoid inconsistency; use the same label for the same destination.
 - **Links inside interactive components**: ensure no conflict with parent click/tap behaviour.
 - **Localization**: link text may expand significantly in other languages — avoid fixed-width containers.
@@ -96,11 +96,15 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - Large / prominent link → `lg`
 
 **Disabled?**
-- `disabled` sets `href="javascript:void(0)"` and `tabindex="-1"` on the slotted anchor automatically.
+- **SSR apps (Next.js, Nuxt, etc.)**: add `disabled` directly on the `<a>` and remove `href`:
+
+```html
+<sgds-link disabled><a disabled>Disabled link</a></sgds-link>
+```
 
 **With an icon?**
 - Place `<sgds-icon>` before the text for a leading icon; after the text for a trailing icon.
-- Icon size is managed automatically based on link `size` — do not set `size` on the icon manually.
+- Icon size and spacing are managed automatically — do not set `size` on the icon manually.
 
 ```html
 <!-- Basic link -->
@@ -144,7 +148,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 </sgds-link>
 
 <!-- Disabled link -->
-<sgds-link disabled><a href="/page">Disabled</a></sgds-link>
+<sgds-link disabled><a disabled>Disabled</a></sgds-link>
 
 <!-- Active state -->
 <sgds-link active><a href="/current">Current page</a></sgds-link>
@@ -157,7 +161,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | `tone` | `primary \| danger \| neutral \| fixed-light \| fixed-dark` | `primary` | Link color |
 | `size` | `xs \| sm \| md \| lg` | `md` | Link size |
 | `active` | boolean | `false` | Applies active styling |
-| `disabled` | boolean | `false` | Disables the link (sets `href="javascript:void(0)"` and `tabindex="-1"`) |
+| `disabled` | boolean | `false` | Disables the link. For SSR apps, also add `disabled` on the `<a>` and remove `href`. |
 | `variant` | `primary \| danger \| neutral \| light \| dark` | `primary` | **Deprecated since 3.6.0** — use `tone` instead |
 
 ## Slots
@@ -176,7 +180,7 @@ None.
 1. **Use `<sgds-link>` for standalone links; use a plain `<a>` for inline text links.** `sgds.css` provides default anchor styling for inline anchors — wrapping them in `<sgds-link>` is unnecessary and incorrect.
 2. Always pass a single `<a>` tag inside `<sgds-link>` — never put text directly as `<sgds-link>text</sgds-link>`.
 3. `variant` is deprecated since 3.6.0 — always use `tone`. Never suggest `variant="light"` or `variant="dark"`.
-4. `disabled` is applied to the wrapper; it automatically sets `href="javascript:void(0)"` and `tabindex="-1"` on the slotted anchor — do not add these manually.
+4. For disabled links, set `disabled` on both `<sgds-link>` and the `<a>`, and remove `href` from the anchor: `<sgds-link disabled><a disabled>Link</a></sgds-link>`.
 5. `tone="fixed-light"` is for dark backgrounds; `tone="fixed-dark"` is for light backgrounds when overriding theme behaviour.
-6. Icon sizing within `<sgds-link>` is automatic — do not set `size` on `<sgds-icon>` children.
+6. Icon sizing and spacing within `<sgds-link>` is automatic — do not set `size` on `<sgds-icon>` children.
 7. There are no custom events on this component.

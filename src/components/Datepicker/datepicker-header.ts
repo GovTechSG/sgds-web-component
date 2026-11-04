@@ -22,10 +22,10 @@ export class DatepickerHeader extends SgdsElement {
 
   /** @internal */
   @property({ attribute: false })
-  displayDate: Date;
+  displayDate: Date = new Date();
   /** @internal */
   @property({ attribute: false })
-  focusedDate: Date;
+  focusedDate: Date = new Date();
   /** @internal */
   @property({ attribute: false })
   selectedDate: Date[] = [];

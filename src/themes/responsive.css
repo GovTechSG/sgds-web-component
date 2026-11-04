@@ -13,6 +13,7 @@
   /* Font Size - Subtitle */
   --sgds-font-size-subtitle-sm: var(--sgds-font-size-16);
   --sgds-font-size-subtitle-md: var(--sgds-font-size-18);
+  --sgds-font-size-subtitle-lg: var(--sgds-font-size-20);
 
   /* Font Size - Body */
   --sgds-font-size-body-sm: var(--sgds-font-size-14);
@@ -67,6 +68,7 @@
   --sgds-layout-gap-xs: var(--sgds-spacer-3);
   --sgds-layout-gap-sm: var(--sgds-spacer-4);
   --sgds-layout-gap-md: var(--sgds-spacer-5);
+  
   --sgds-layout-gap-lg: var(--sgds-spacer-6);
   --sgds-layout-gap-xl: var(--sgds-spacer-7);
 
@@ -111,6 +113,7 @@
     /* Font Size - Subtitle */
     --sgds-font-size-subtitle-sm: var(--sgds-font-size-16);
     --sgds-font-size-subtitle-md: var(--sgds-font-size-20);
+    --sgds-font-size-subtitle-lg: var(--sgds-font-size-22);
 
     /* Font Size - Body */
     --sgds-font-size-body-sm: var(--sgds-font-size-14);
@@ -210,6 +213,8 @@
     /* Font Size - Subtitle */
     --sgds-font-size-subtitle-sm: var(--sgds-font-size-16);
     --sgds-font-size-subtitle-md: var(--sgds-font-size-20);
+    --sgds-font-size-subtitle-lg: var(--sgds-font-size-24);
+
 
     /* Font Size - Body */
     --sgds-font-size-body-sm: var(--sgds-font-size-14);

@@ -26,12 +26,12 @@ describe("footer", () => {
               <ul>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Contact</a>
+                    <a href="#">Contact</a>
                   </sgds-link>
                 </li>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Feedback</a>
+                    <a href="#">Feedback</a>
                   </sgds-link>
                 </li>
                 <li>
@@ -39,7 +39,6 @@ describe("footer", () => {
                     <a
                       href="https://tech.gov.sg/report_vulnerability"
                       rel="noopener noreferrer"
-                      tabindex="0"
                       target="_blank"
                       >Report Vulnerability</a
                     >
@@ -47,12 +46,12 @@ describe("footer", () => {
                 </li>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Privacy Statement</a>
+                    <a href="#">Privacy Statement</a>
                   </sgds-link>
                 </li>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Terms of Use</a>
+                    <a href="#">Terms of Use</a>
                   </sgds-link>
                 </li>
               </ul>
@@ -90,12 +89,12 @@ describe("footer", () => {
               <ul>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Contact</a>
+                    <a href="#">Contact</a>
                   </sgds-link>
                 </li>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Feedback</a>
+                    <a href="#">Feedback</a>
                   </sgds-link>
                 </li>
                 <li>
@@ -103,7 +102,6 @@ describe("footer", () => {
                     <a
                       href="https://tech.gov.sg/report_vulnerability"
                       rel="noopener noreferrer"
-                      tabindex="0"
                       target="_blank"
                       >Report Vulnerability</a
                     >
@@ -111,12 +109,12 @@ describe("footer", () => {
                 </li>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Privacy Statement</a>
+                    <a href="#">Privacy Statement</a>
                   </sgds-link>
                 </li>
                 <li>
                   <sgds-link size="sm" variant="primary" tone="fixed-light">
-                    <a href="#" tabindex="0">Terms of Use</a>
+                    <a href="#">Terms of Use</a>
                   </sgds-link>
                 </li>
               </ul>

@@ -1,4 +1,4 @@
-import { elementUpdated, expect, fixture } from "@open-wc/testing";
+import { elementUpdated, expect, fixture, waitUntil } from "@open-wc/testing";
 import { html } from "lit";
 import sinon from "sinon";
 import type { SgdsSidebar, SgdsSidebarGroup, SgdsSidebarItem, SgdsSidebarSection } from "../src/components/Sidebar";
@@ -31,6 +31,7 @@ describe("sgds-sidebar", () => {
 
     it("applies collapsed CSS class when collapsed property is true", async () => {
       const el = await fixture<SgdsSidebar>(html`<sgds-sidebar collapsed></sgds-sidebar>`);
+      await waitUntil(() => el.shadowRoot?.querySelector(".sidebar")?.classList.contains("sidebar--collapsed"));
       const sidebar = el.shadowRoot?.querySelector(".sidebar");
       expect(sidebar).to.have.class("sidebar--collapsed");
     });
@@ -1636,7 +1637,7 @@ describe("sgds-sidebar", () => {
       `);
       const group = el.querySelector("sgds-sidebar-group") as SgdsSidebarGroup;
       const groupDiv = group.shadowRoot?.querySelector(".sidebar-item");
-      expect(groupDiv).to.not.exist;
+      expect(groupDiv?.className).to.include("sidebar-item--hidden");
     });
 
     it("shows sgds-sidebar-item when collapsed at level 1 with icon slot present", async () => {

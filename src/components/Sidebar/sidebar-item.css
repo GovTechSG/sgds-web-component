@@ -72,6 +72,12 @@
   margin: auto;
 }
 
+/* Hide entire group when collapsed at L1 without an icon slot */
+.sidebar-item--hidden,
+.sidebar-item--hidden + .sidebar-submenu {
+  display: none;
+}
+
 .sidebar-item--collapsed .sidebar-item-label,
 .sidebar-item--collapsed .sidebar-item-indicator {
   display: none;

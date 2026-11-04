@@ -405,7 +405,7 @@ export class SgdsDataTable extends SgdsElement {
             { length: dataColumns },
             () =>
               html`<div class="skeleton-cell">
-                <sgds-skeleton .height=${"100%"} .borderRadius=${"4px"}></sgds-skeleton>
+                <sgds-skeleton .height=${"20px"} .borderRadius=${"4px"}></sgds-skeleton>
               </div>`
           )}
         </div>`

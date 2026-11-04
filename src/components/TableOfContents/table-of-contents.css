@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-md);
+  gap: var(--sgds-density-gap-md);
 }
 
 slot:not([name])::slotted(*) {
@@ -15,7 +15,7 @@ slot:not([name])::slotted(*) {
 .contents {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-gap-md);
+  gap: var(--sgds-density-gap-sm);
   list-style: none;
   margin: var(--sgds-margin-none);
   padding: var(--sgds-padding-none);

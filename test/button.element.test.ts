@@ -54,6 +54,23 @@ describe("sgds-button", () => {
     expect(el.shadowRoot?.querySelector("button")).not.to.exist;
   });
 
+  it("should not pass href and download to the anchor tag when disabled", async () => {
+    const el = await fixture(
+      html`<sgds-button href="folder/subfolder/logo.svg" download="logo.svg" disabled></sgds-button>`
+    );
+    const anchorTag = el.shadowRoot?.querySelector("a");
+    expect(anchorTag).to.exist;
+    expect(anchorTag).not.to.have.attribute("href");
+    expect(anchorTag).not.to.have.attribute("download");
+  });
+
+  it("should pass href and download to the anchor tag when not disabled", async () => {
+    const el = await fixture(html`<sgds-button href="folder/subfolder/logo.svg" download="logo.svg"></sgds-button>`);
+    const anchorTag = el.shadowRoot?.querySelector("a");
+    expect(anchorTag).to.have.attribute("href", "folder/subfolder/logo.svg");
+    expect(anchorTag).to.have.attribute("download", "logo.svg");
+  });
+
   it("should emit a click event when calling click()", async () => {
     const el = await fixture<SgdsButton>(html` <sgds-button></sgds-button> `);
     const clickHandler = sinon.spy();

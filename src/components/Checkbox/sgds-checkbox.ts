@@ -115,8 +115,8 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     this.invalid = true;
   }
 
-  /** Override mixin to match native checkbox: send value only when checked, default to "on". */
-  private _mixinSetFormValue() {
+  /** @internal Override mixin to match native checkbox: send value only when checked, default to "on". */
+  _mixinSetFormValue() {
     super._mixinSetFormValue(this.checked ? this.value ?? "on" : null);
   }
 
