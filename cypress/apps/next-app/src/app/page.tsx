@@ -86,7 +86,7 @@ export default function Home() {
       <QuantityToggle />
       <Radio />
       <Select />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <Sidenav />
       <Skeleton />
       <Spinner />

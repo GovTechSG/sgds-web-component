@@ -8,7 +8,7 @@ export const Breadcrumb = () => {
       <SgdsBreadcrumb>
         <SgdsBreadcrumbItem><a href="/">Home</a></SgdsBreadcrumbItem>
         <SgdsBreadcrumbItem><a href="/about">About</a></SgdsBreadcrumbItem>
-        <SgdsBreadcrumbItem>Current Page</SgdsBreadcrumbItem>
+        <SgdsBreadcrumbItem><a href="/current">Current Page</a></SgdsBreadcrumbItem>
       </SgdsBreadcrumb>
     </>
   );

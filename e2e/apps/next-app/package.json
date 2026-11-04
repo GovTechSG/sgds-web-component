@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prebuild:css": "cd ../../.. && npx tailwindcss -i ./src/css/utility.css -o ./e2e/apps/next-app/src/app/sgds-utilities.css --content 'e2e/apps/next-app/src/**/*.tsx'",
-    "dev": "npm run prebuild:css && next dev --turbopack --port 4002",
-    "build": "npm run prebuild:css && next build",
+    "dev": "next dev --turbopack --port 4002",
+    "build": "next build ",
     "start": "next start --port 4002"
   },
   "dependencies": {

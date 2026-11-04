@@ -536,40 +536,73 @@ ${result.jsx}
     generated.push(dirName);
   }
 
-  // Generate page.tsx with SGDS grid and semantic spacing
-  const pageImports = generated
-    .map(name => `import { ${name} } from "./components/${name}";`)
-    .join("\n");
+  // Generate individual route pages: /[component]/page.tsx
+  const appDir = resolve(outDir, "..");
+  for (const name of generated) {
+    const slug = name.toLowerCase();
+    const routeDir = resolve(appDir, slug);
+    mkdirSync(routeDir, { recursive: true });
 
-  const pageComponents = generated
-    .map(name => `          <section className="sgds-col-4 sgds-col-sm-8 sgds-col-lg-12">
-            <h2 className="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:text-subtle sgds:mb-gap-text-sm">${name}</h2>
-            <sgds-divider></sgds-divider>
-            <div className="sgds:mt-gap-text-md">
-              <${name} />
-            </div>
-          </section>`)
-    .join("\n");
+    const routeContent = `import { ${name} } from "../components/${name}";
 
-  const pageContent = `${pageImports}
-
-export default function Home() {
+export default function ${name}Page() {
   return (
-    <main className="sgds-container-sidebar sgds:py-layout-md">
-      <h1 className="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:mb-gap-text-2-xl">
-        SGDS Next.js E2E — ${generated.length} components (React wrappers)
-      </h1>
-      <div className="sgds-grid sgds:gap-layout-md">
-${pageComponents}
+    <div className="sgds-container-sidebar sgds:py-layout-md">
+      <h1 className="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:mb-gap-text-2-xl">${name}</h1>
+      <div className="sgds:mt-gap-text-md">
+        <${name} />
       </div>
-    </main>
+    </div>
   );
 }
 `;
+    writeFileSync(resolve(routeDir, "page.tsx"), routeContent);
+  }
 
-  writeFileSync(resolve(outDir, "..", "page.tsx"), pageContent);
+  // Generate sidebar layout that wraps all routes
+  const sidebarItems = generated
+    .map(name => `          <SgdsSidebarItem name="${name.toLowerCase()}" title="${name}">
+            <a href="/${name.toLowerCase()}"></a>
+          </SgdsSidebarItem>`)
+    .join("\n");
 
-  console.log(`Generated ${generated.length} component wrappers + page.tsx for Next.js`);
+  const sidebarLayoutContent = `'use client';
+
+import { usePathname } from "next/navigation";
+import { SgdsSidebar, SgdsSidebarItem, SgdsSidebarSection } from "@govtechsg/sgds-web-component/react";
+
+export default function SidebarLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const active = pathname.replace("/", "") || "accordion";
+
+  return (
+    <div className="sgds:flex sgds:min-h-screen">
+      <SgdsSidebar active={active} variant="persistent" className="sgds:h-screen sgds:sticky sgds:top-0">
+        <div slot="upper" className="sgds:text-subtitle-sm sgds:font-semibold">Components</div>
+        <SgdsSidebarSection name="components">
+${sidebarItems}
+        </SgdsSidebarSection>
+      </SgdsSidebar>
+      <div className="sgds:flex sgds:flex-col sgds:w-full">
+        {children}
+      </div>
+    </div>
+  );
+}
+`;
+  writeFileSync(resolve(appDir, "sidebar-layout.tsx"), sidebarLayoutContent);
+
+  // Generate root layout that includes the sidebar
+  // Generate root page.tsx (landing — redirects to first component)
+  const pageContent = `import { redirect } from "next/navigation";
+
+export default function Home() {
+  redirect("/${generated[0].toLowerCase()}");
+}
+`;
+  writeFileSync(resolve(appDir, "page.tsx"), pageContent);
+
+  console.log(`Generated ${generated.length} component wrappers, ${generated.length} route pages, sidebar layout, and page.tsx for Next.js`);
 }
 
 main().catch(err => {
