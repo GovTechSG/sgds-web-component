@@ -1,0 +1,32 @@
+import { Controls } from "@storybook/addon-docs/blocks";
+
+## Variants
+
+Use `variant="numbers-only"` for separate digit boxes or `variant="with-prefix"` for a single input with a prefix. Both variants display digits without masking or placeholder text.
+
+Set the number of digits from 4 to 8 using the control below. The default is 6. The prefix is displayed separately and is not included in the submitted value.
+
+<Canvas of={OtpInputStories.Variants} />
+<Controls of={OtpInputStories.Variants} include={["Number of digits", "prefix"]} />
+
+## Label slot
+
+Use the `label` slot to customise the label content and styling. Both variants are shown without a visible label and with a custom label using regular text and a semibold email address. Without slotted content, the internal inputs retain the accessible name “Verification code”.
+
+<Canvas of={OtpInputStories.LabelSlot} />
+
+## Validation
+
+Select **Verify** with an empty or incomplete code to show an error. Enter any six digits to submit successfully. **Reset** clears the form.
+
+Validation runs on submit or `reportValidity()`, not while typing or leaving the field.
+
+<Canvas of={OtpInputStories.Validation} />
+
+### Custom validation
+
+Set `noValidate` to handle validation yourself. Use `invalidFeedback` for the message and `setInvalid()` for the error state.
+
+Try **123456** to succeed, or another code to show an error. This example simulates verification; check codes on your server in production.
+
+<Canvas of={OtpInputStories.CustomValidation} />

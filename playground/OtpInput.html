@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OTP input · SGDS Playground</title>
+    <script type="module" src="../src/index.ts"></script>
+    <link href="../src/themes/day.css" rel="stylesheet" />
+    <link href="../src/themes/night.css" rel="stylesheet" />
+    <link href="../src/css/sgds.css" rel="stylesheet" />
+    <link href="./css/utility.css" rel="stylesheet" />
+  </head>
+  <body class="sgds:p-layout-md">
+    <main class="sgds:flex sgds:flex-col sgds:gap-xl">
+      <header>
+        <a href="/">Back to components</a>
+        <h1>OTP input</h1>
+        <div>
+          Compare the input variants and states. Error examples are set explicitly for preview; normal validation
+          remains submit-triggered.
+        </div>
+      </header>
+      <div class="sgds:flex sgds:flex-wrap sgds:items-center sgds:gap-lg">
+        <div class="sgds:flex sgds:items-center sgds:gap-sm">
+          <label for="length">Number of digits</label>
+          <select id="length">
+            <option>4</option>
+            <option>5</option>
+            <option selected>6</option>
+            <option>7</option>
+            <option>8</option>
+          </select>
+        </div>
+      </div>
+      <section class="sgds:flex sgds:flex-col sgds:gap-md">
+        <h2>Default</h2>
+
+        <div class="sgds:flex sgds:flex-wrap sgds:gap-xl">
+          <div class="sgds:flex sgds:flex-col sgds:gap-md sgds:w-full sgds:max-w-[var(--sgds-dimension-400)]">
+            <h3>Numbers only</h3>
+            <sgds-otp-input><span slot="label">Verification code</span></sgds-otp-input>
+          </div>
+          <div class="sgds:flex sgds:flex-col sgds:gap-md sgds:w-full sgds:max-w-[var(--sgds-dimension-400)]">
+            <h3>With prefix</h3>
+            <sgds-otp-input variant="with-prefix" prefix="KRM-"
+              ><span slot="label">Verification code</span></sgds-otp-input
+            >
+          </div>
+        </div>
+      </section>
+      <section class="sgds:flex sgds:flex-col sgds:gap-md">
+        <h2>Filled</h2>
+
+        <div class="sgds:flex sgds:flex-wrap sgds:gap-xl">
+          <div class="sgds:flex sgds:flex-col sgds:gap-md sgds:w-full sgds:max-w-[var(--sgds-dimension-400)]">
+            <h3>Numbers only</h3>
+            <sgds-otp-input value="123456" data-filled><span slot="label">Verification code</span></sgds-otp-input>
+          </div>
+          <div class="sgds:flex sgds:flex-col sgds:gap-md sgds:w-full sgds:max-w-[var(--sgds-dimension-400)]">
+            <h3>With prefix</h3>
+            <sgds-otp-input variant="with-prefix" prefix="KRM-" value="123456" data-filled
+              ><span slot="label">Verification code</span></sgds-otp-input
+            >
+          </div>
+        </div>
+      </section>
+      <section class="sgds:flex sgds:flex-col sgds:gap-md">
+        <h2>Error: border and message</h2>
+        <div>Both the error border and message are shown.</div>
+        <div class="sgds:flex sgds:flex-wrap sgds:gap-xl">
+          <div class="sgds:flex sgds:flex-col sgds:gap-md sgds:w-full sgds:max-w-[var(--sgds-dimension-400)]">
+            <h3>Numbers only</h3>
+            <sgds-otp-input invalid invalidFeedback="The code is incorrect or has expired."
+              ><span slot="label">Verification code</span></sgds-otp-input
+            >
+          </div>
+          <div class="sgds:flex sgds:flex-col sgds:gap-md sgds:w-full sgds:max-w-[var(--sgds-dimension-400)]">
+            <h3>With prefix</h3>
+            <sgds-otp-input
+              variant="with-prefix"
+              prefix="KRM-"
+              invalid
+              invalidFeedback="The code is incorrect or has expired."
+              ><span slot="label">Verification code</span></sgds-otp-input
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module">
+      await customElements.whenDefined("sgds-otp-input");
+      const lengthControl = document.querySelector("#length");
+      function updateExamples(resetValues = false) {
+        const length = Number(lengthControl.value);
+        document.querySelectorAll("sgds-otp-input").forEach(input => {
+          input.length = length;
+          if (resetValues) input.value = input.hasAttribute("data-filled") ? "12345678".slice(0, length) : "";
+        });
+      }
+      lengthControl.addEventListener("change", () => updateExamples(true));
+      updateExamples();
+    </script>
+  </body>
+</html>
