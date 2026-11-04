@@ -32,9 +32,6 @@ interface DefaultSlotItem {
 export class SgdsAppnav extends NavElement {
   static styles = [...NavElement.styles, appnavStyle];
 
-  private _breakpointReached = false;
-  private _expanded = false;
-
   /** Sets the visual tone of the navigation bar */
   @property({ type: String, reflect: true })
   tone: AppnavTone = "brand";
@@ -42,15 +39,13 @@ export class SgdsAppnav extends NavElement {
   /** Used only for SSR to indicate the presence of the `start` slot. */
   @property({ type: Boolean }) hasStartSlot = false;
 
-  private readonly hasSlotController = new HasSlotController(this, "start");
+  private readonly hasSlotController = new HasSlotController(this, "start", "profile");
 
-  /** @internal Whether the default slot has assigned elements */
-  @state()
-  private _hasDefaultSlotItems = false;
+  /** Used only for SSR to indicate the presence of default slot items (nav links). */
+  @property({ type: Boolean }) hasDefaultSlot = false;
 
-  /** @internal Whether the profile slot has assigned elements */
-  @state()
-  private _hasProfileSlotItems = false;
+  /** Used only for SSR to indicate the presence of the `profile` slot. */
+  @property({ type: Boolean }) hasProfileSlot = false;
 
   /** @internal Stored default slot items for mobile menu rendering */
   @state()
@@ -58,14 +53,7 @@ export class SgdsAppnav extends NavElement {
 
   updated() {
     if (!this.hasStartSlot) this.hasStartSlot = this.hasSlotController.test("start");
-  }
-
-  protected _onBreakpointReached(reached: boolean): void {
-    this._breakpointReached = reached;
-  }
-
-  protected _isBreakpointReached(): boolean {
-    return this._breakpointReached;
+    if (!this.hasProfileSlot) this.hasProfileSlot = this.hasSlotController.test("profile");
   }
 
   private _handleTogglerKeydown(e: KeyboardEvent) {
@@ -88,7 +76,7 @@ export class SgdsAppnav extends NavElement {
 
   private _handleDefaultSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as HTMLElement[];
-    this._hasDefaultSlotItems = childElements.length > 0;
+    this.hasDefaultSlot = childElements.length > 0;
     this._defaultSlotItems = childElements
       .filter(el => typeof el.tagName !== "undefined")
       .map(el => {
@@ -132,7 +120,7 @@ export class SgdsAppnav extends NavElement {
 
   private _handleProfileSlotChange(e: Event) {
     const childElements = (e.target as HTMLSlotElement).assignedElements({ flatten: true });
-    this._hasProfileSlotItems = childElements.length > 0;
+    this.hasProfileSlot = childElements.length > 0;
     childElements.forEach(el => {
       el.setAttribute("expand", this.expand);
       el.setAttribute("tone", this.tone);
@@ -151,7 +139,7 @@ export class SgdsAppnav extends NavElement {
             : html`<div class="navbar-brand">
                 <slot name="brand" @slotchange=${this._handleBrandSlotChange}></slot>
               </div>`}
-          <div class="navbar-body navbar-collapse" id=${this.collapseId}>
+          <div class="navbar-body navbar-collapse" id=${this.collapseId} hidden>
             <div class="navbar-nav navbar-nav-scroll">
               <slot class="slot-desktop-only" @slotchange=${this._handleDefaultSlotChange}></slot>
               <div class="mobile-menu-items">
@@ -168,8 +156,8 @@ export class SgdsAppnav extends NavElement {
               </div>
             </div>
           </div>
-          <div class="navbar-end ${this._hasProfileSlotItems || this._hasDefaultSlotItems ? "" : "slot-empty"}">
-            ${this._hasDefaultSlotItems ? this._renderAppnavToggler() : nothing}
+          <div class="navbar-end ${this.hasProfileSlot || this.hasDefaultSlot ? "" : "slot-empty"}">
+            ${this.hasDefaultSlot ? this._renderAppnavToggler() : nothing}
             <slot name="profile" @slotchange=${this._handleProfileSlotChange}></slot>
           </div>
         </div>

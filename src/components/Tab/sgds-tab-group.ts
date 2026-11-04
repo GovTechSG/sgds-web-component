@@ -1,5 +1,5 @@
 import { html, PropertyValues } from "lit";
-import { property, query, queryAssignedElements } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import SgdsElement from "../../base/sgds-element";
 import { SgdsTab } from "./sgds-tab";
 import { SgdsTabPanel } from "./sgds-tab-panel";
@@ -54,7 +54,6 @@ export class SgdsTabGroup extends SgdsElement {
       customElements.whenDefined("sgds-tab-panel")
     ]);
     super.connectedCallback();
-    if (this.ssr) return;
 
     this._resizeObserver = new ResizeObserver(() => {
       if (this._activeTab && this.variant === "underlined" && !this._indicatorAnimating) {
@@ -294,38 +293,18 @@ export class SgdsTabGroup extends SgdsElement {
     this._tabs.forEach(tab => this._tabResizeObserver?.observe(tab));
   }
 
-  @queryAssignedElements({ slot: "nav", flatten: true })
-  private _navSlot: SgdsTab[];
-
-  private _updateTabsAttribute(name: string) {
-    if (!this._navSlot) return;
-    const tabs = this._navSlot;
-    tabs.forEach(tab => {
-      tab.setAttribute(name, this[name]);
-    });
-  }
-
   private _handleSlotChange() {
-    this._updateTabsAttribute("variant");
-    this._updateTabsAttribute("orientation");
-    this._updateTabsAttribute("density");
-    this._updateTabsAttribute("fullWidth");
     this._syncTabsAndPanels();
   }
 
   protected willUpdate(_changedProperties: PropertyValues): void {
-    // similar to @watch
-    if (_changedProperties.has("variant")) {
-      this._updateTabsAttribute("variant");
-    }
-    if (_changedProperties.has("orientation")) {
-      this._updateTabsAttribute("orientation");
-    }
-    if (_changedProperties.has("density")) {
-      this._updateTabsAttribute("density");
-    }
-    if (_changedProperties.has("fullWidth")) {
-      this._updateTabsAttribute("fullWidth");
+    const propsToForward = ["variant", "orientation", "density", "fullWidth"] as const;
+    for (const prop of propsToForward) {
+      if (_changedProperties.has(prop)) {
+        this._tabs.forEach(tab => {
+          tab[prop] = this[prop] as never;
+        });
+      }
     }
   }
 

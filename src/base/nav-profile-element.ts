@@ -69,31 +69,38 @@ export default abstract class NavProfileElement extends NavMenuElement {
 
   // ── Slot handling ──
 
-  private _handleSlotChange = () => {
+  private _handleSlotChange() {
     this._hasDropdownItems = this._defaultSlotElements.length > 0;
-  };
+  }
 
   // ── Toggle dispatcher ──
 
-  private _handleToggle = () => {
+  private _handleToggle() {
     if (!this._hasDropdownItems || this.disabled) return;
     if (this._isMobile) {
       this._menuOpen = !this._menuOpen;
     } else {
       this._toggleDesktopMenu();
     }
-  };
+  }
 
-  private _handleKeydown = (e: KeyboardEvent) => {
+  private async _handleKeydown(e: KeyboardEvent) {
+    if (this.disabled) return;
+
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       this._handleToggle();
     }
     if (!this._isMobile) {
-      // Delegate to shared menu keyboard nav
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        if (!this._menuOpen) {
+          await this._showDesktopMenu();
+        }
+      }
       this._handleMenuKeydown(e);
     }
-  };
+  }
 
   render() {
     const isReadOnly = !this._hasDropdownItems;

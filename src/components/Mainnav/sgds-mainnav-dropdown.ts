@@ -1,4 +1,4 @@
-import { html } from "lit";
+import { html, isServer, type PropertyValueMap } from "lit";
 import { property, query, queryAssignedElements } from "lit/decorators.js";
 import { SgdsMainnav } from "./sgds-mainnav";
 import { classMap } from "lit/directives/class-map.js";
@@ -78,17 +78,14 @@ export class SgdsMainnavDropdown extends NavMenuElement {
     const navbarBody = this._getNavbarBody();
     if (navbarBody) navbarBody.style.removeProperty("transform");
     this.dropdownMenu?.style.removeProperty("display");
-    this.dropdownMenu?.removeAttribute("aria-hidden");
   }
 
   // ── Lifecycle ──
 
   connectedCallback() {
     super.connectedCallback();
-    if (typeof window !== "undefined") {
-      this._mainnavEl = this.closest("sgds-mainnav");
-      this._mainnavEl?.addEventListener("sgds-after-hide", this._handleNavHide);
-    }
+    this._mainnavEl = this.closest("sgds-mainnav");
+    this._mainnavEl?.addEventListener("sgds-after-hide", this._handleNavHide);
   }
 
   disconnectedCallback() {
@@ -96,7 +93,8 @@ export class SgdsMainnavDropdown extends NavMenuElement {
     this._mainnavEl?.removeEventListener("sgds-after-hide", this._handleNavHide);
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValueMap<this>) {
+    super.firstUpdated(changedProperties);
     if (this.togglerNodes?.length && this.menuHeaderText) {
       this.menuHeaderText.textContent = this.togglerNodes[0].textContent;
     }
@@ -113,6 +111,7 @@ export class SgdsMainnavDropdown extends NavMenuElement {
   // ── Unified slot change handler ──
 
   private _handleSlotChange(e: Event) {
+    if (this.ssr && !isServer) return;
     const items = (e.target as HTMLSlotElement).assignedElements({ flatten: true }) as SgdsDropdownItem[];
     items.forEach(item => {
       item.addEventListener("keydown", this._handleKeyboardMenuItemsEvent.bind(this));
@@ -163,7 +162,7 @@ export class SgdsMainnavDropdown extends NavMenuElement {
     }
   }
 
-  private _handleKeyboardOpen(event: KeyboardEvent) {
+  private async _handleKeyboardOpen(event: KeyboardEvent) {
     if (this.disabled) return;
 
     if (event.key === ENTER || event.key === SPACE) {
@@ -174,7 +173,7 @@ export class SgdsMainnavDropdown extends NavMenuElement {
       if (event.key === "ArrowDown" || event.key === "ArrowUp") {
         event.preventDefault();
         if (!this._menuOpen) {
-          this._showDesktopMenu();
+          await this._showDesktopMenu();
         }
       }
       // Delegate to shared menu keyboard nav when menu is open
@@ -190,16 +189,14 @@ export class SgdsMainnavDropdown extends NavMenuElement {
     if (navbarBody) navbarBody.style.removeProperty("transform");
     if (this.dropdownMenu) {
       this.dropdownMenu.style.display = "none";
-      this.dropdownMenu.setAttribute("aria-hidden", "true");
     }
   };
 
   // ── Mobile slide-in behavior ──
 
   private _getNavbarBody() {
-    const mainNav = document.querySelector("sgds-mainnav") as HTMLElement | null;
-    if (!mainNav?.shadowRoot) return;
-    return mainNav.shadowRoot.querySelector(".navbar-body") as HTMLElement | null;
+    if (!this._mainnavEl?.shadowRoot) return;
+    return this._mainnavEl.shadowRoot.querySelector(".navbar-body") as HTMLElement | null;
   }
 
   private _openMobileMenu() {
@@ -207,7 +204,6 @@ export class SgdsMainnavDropdown extends NavMenuElement {
     if (!navbarBody) return;
     navbarBody.style.transform = "translateX(-100%)";
     this.dropdownMenu.style.display = "block";
-    this.dropdownMenu.setAttribute("aria-hidden", "false");
     setTimeout(() => {
       this.menuHeaderButton?.focus();
     }, 50);
@@ -215,7 +211,6 @@ export class SgdsMainnavDropdown extends NavMenuElement {
 
   private _hideMobileMenu() {
     this.dropdownMenu.style.display = "none";
-    this.dropdownMenu.setAttribute("aria-hidden", "true");
   }
 
   private _resetNavbarBody(): Promise<void> {
@@ -325,12 +320,7 @@ export class SgdsMainnavDropdown extends NavMenuElement {
         <sgds-icon class="icon-down" name="chevron-down" size="md"></sgds-icon>
         <sgds-icon class="icon-right" name="chevron-right" size="md"></sgds-icon>
       </button>
-      <div
-        class="dropdown-menu ${this._menuOpen ? "menu-open" : ""}"
-        role="menu"
-        aria-hidden="true"
-        @keydown=${this._handleMenuKeydown}
-      >
+      <div class="dropdown-menu ${this._menuOpen ? "menu-open" : ""}" role="menu" @keydown=${this._handleMenuKeydown}>
         <div class="mobile-header">
           <a tabindex="0" role="button" @click=${this._closeMobileMenu} @keydown=${this._handleHeaderKeyboardEvent}>
             <sgds-icon name="chevron-left" size="md"></sgds-icon>

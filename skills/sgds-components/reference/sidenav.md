@@ -40,6 +40,21 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 - **L3 nesting**: place a `<sgds-sidenav-item>` (menu type) inside another `<sgds-sidenav-item>`'s default slot to create a nested section; avoid nesting deeper than L3.
 - **Route integration**: in SPAs, update `active` attributes on the correct item and link when the route changes — the component does not track navigation automatically.
 
+## SSR (Server-Side Rendering)
+
+`<sgds-sidenav-link>` manages the slotted anchor's `aria-disabled`, `tabindex`, and `href` attributes at runtime via a `slotchange` handler. During SSR, this handler is skipped to avoid hydration mismatches.
+
+**For SSR apps (Next.js, Nuxt, etc.)**, handle the disabled anchor state directly in your server-rendered markup:
+
+```html
+<!-- SSR: disabled sidenav link — set attributes on the <a> yourself -->
+<sgds-sidenav-link disabled>
+  <a aria-disabled="true" role="link">Disabled Link</a>
+</sgds-sidenav-link>
+```
+
+After hydration, the component takes over attribute management normally.
+
 ## Edge Cases
 
 - **Menu type without `ariaLabel`**: the internal button has no accessible name — always provide `ariaLabel` on menu-type `<sgds-sidenav-item>` to pass WCAG accessible-label checks.
@@ -118,7 +133,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | Attribute | Type | Default | Purpose |
 |---|---|---|---|
 | `active` | boolean | `false` | Marks the link as the current active page |
-| `disabled` | boolean | `false` | Disables the link |
+| `disabled` | boolean | `false` | Disables the link. For SSR apps, also set `aria-disabled="true"` and `role="link"` on the `<a>`, and remove `href`. |
 
 ## Slots
 

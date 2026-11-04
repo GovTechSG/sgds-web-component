@@ -141,11 +141,6 @@ button.nav-link {
   border-radius: 0;
 }
 
-:host([tone="brand"][expand="always"]) .nav-link,
-:host([tone^="gradient"][expand="always"]) .nav-link {
-  color: var(--sgds-color-fixed-light);
-}
-
 :host([expand="always"]) .profile-text {
   display: flex;
   flex-direction: column;
@@ -212,11 +207,6 @@ button.nav-link {
   :host([expand="sm"]) .nav-link:not(.disabled):focus-visible ::slotted(*) {
     outline: none;
     border-radius: 0;
-  }
-
-  :host([tone="brand"][expand="sm"]) .nav-link,
-  :host([tone^="gradient"][expand="sm"]) .nav-link {
-    color: var(--sgds-color-fixed-light);
   }
 
   :host([expand="sm"]) .profile-text {
@@ -286,11 +276,6 @@ button.nav-link {
   :host([expand="md"]) .nav-link:not(.disabled):focus-visible ::slotted(*) {
     outline: none;
     border-radius: 0;
-  }
-
-  :host([tone="brand"][expand="md"]) .nav-link,
-  :host([tone^="gradient"][expand="md"]) .nav-link {
-    color: var(--sgds-color-fixed-light);
   }
 
   :host([expand="md"]) .profile-text {
@@ -363,11 +348,6 @@ button.nav-link {
   :host([expand="lg"]) .nav-link:not(.disabled):focus-visible ::slotted(*) {
     outline: none;
     border-radius: 0;
-  }
-
-  :host([tone="brand"][expand="lg"]) .nav-link,
-  :host([tone^="gradient"][expand="lg"]) .nav-link {
-    color: var(--sgds-color-fixed-light);
   }
 
   :host(:not([expand])) .profile-text,
@@ -444,11 +424,6 @@ button.nav-link {
     border-radius: 0;
   }
 
-  :host([tone="brand"][expand="xl"]) .nav-link,
-  :host([tone^="gradient"][expand="xl"]) .nav-link {
-    color: var(--sgds-color-fixed-light);
-  }
-
   :host([expand="xl"]) .profile-text {
     display: flex;
     flex-direction: column;
@@ -516,11 +491,6 @@ button.nav-link {
   :host([expand="xxl"]) .nav-link:not(.disabled):focus-visible ::slotted(*) {
     outline: none;
     border-radius: 0;
-  }
-
-  :host([tone="brand"][expand="xxl"]) .nav-link,
-  :host([tone^="gradient"][expand="xxl"]) .nav-link {
-    color: var(--sgds-color-fixed-light);
   }
 
   :host([expand="xxl"]) .profile-text {

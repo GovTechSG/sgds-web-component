@@ -33,7 +33,8 @@ export class SgdsIcon extends SgdsElement {
     }
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties: Parameters<SgdsElement["firstUpdated"]>[0]) {
+    super.firstUpdated(changedProperties);
     // Load icon after hydration completes — no mismatch risk.
     this._loadIcon(this.name);
   }

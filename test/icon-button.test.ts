@@ -101,6 +101,25 @@ describe("<sgds-icon-button>", () => {
     fetchStub.restore();
   });
 
+  it("does not pass href and download to the anchor tag when disabled", async () => {
+    // Mock fetch to prevent network requests
+    const fetchStub = Sinon.stub(window, "fetch").resolves(
+      new Response("<svg></svg>", { status: 200, headers: { "Content-Type": "image/svg+xml" } })
+    );
+
+    const el = await fixture<SgdsIconButton>(
+      html`<sgds-icon-button href="https://example.com" download="example.pdf" name="placeholder" disabled>
+      </sgds-icon-button>`
+    );
+    const anchor = el.shadowRoot?.querySelector("a");
+    expect(anchor).to.exist;
+    expect(anchor).not.to.have.attribute("href");
+    expect(anchor).not.to.have.attribute("download");
+
+    // Restore the stubbed fetch method
+    fetchStub.restore();
+  });
+
   it("applies the correct classes for size and variant", async () => {
     // Mock fetch to prevent network requests
     const fetchStub = Sinon.stub(window, "fetch").resolves(

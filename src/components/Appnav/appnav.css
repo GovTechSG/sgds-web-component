@@ -366,6 +366,10 @@ slot[name="start"]::slotted(*) {
 
 /* Desktop: hide mobile menu items, show slotted icon-buttons */
 
+.mobile-menu-items {
+  width: 100%;
+}
+
 .appnav-menu-item {
   display: flex;
   align-items: center;

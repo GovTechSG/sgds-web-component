@@ -1,4 +1,5 @@
 import NavProfileElement from "../../base/nav-profile-element";
+import appnavProfileStyle from "./appnav-profile.css";
 
 /**
  * @summary `SgdsAppnavProfile` is a profile component for the appnav that shows a full dropdown in desktop and handles its own mobile menu.
@@ -12,6 +13,8 @@ import NavProfileElement from "../../base/nav-profile-element";
  * @slot avatar - Avatar element displayed in both desktop (before label) and mobile (as toggler)
  * @slot default - Profile menu items (sgds-dropdown-item elements). When empty, the component becomes read-only.
  */
-export class SgdsAppnavProfile extends NavProfileElement {}
+export class SgdsAppnavProfile extends NavProfileElement {
+  static styles = [...NavProfileElement.styles, appnavProfileStyle];
+}
 
 export default SgdsAppnavProfile;

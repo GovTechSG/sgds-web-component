@@ -45,9 +45,9 @@ export class SgdsIconButton extends ButtonElement {
             })}"
             ?disabled=${ifDefined(isLink ? undefined : this.disabled)}
             type=${ifDefined(isLink ? undefined : "button")}
-            href=${ifDefined(isLink ? sanitizeHref(this.href) : undefined)}
+            href=${ifDefined(isLink && !this.disabled ? sanitizeHref(this.href) : undefined)}
             target=${ifDefined(isLink ? this.target : undefined)}
-            download=${ifDefined(isLink ? this.download : undefined)}
+            download=${ifDefined(isLink && !this.disabled ? this.download : undefined)}
             rel=${ifDefined(isLink && this.target === "_blank" ? "noreferrer noopener" : undefined)}
             role=${ifDefined(isLink ? "button" : undefined)}
             aria-disabled=${this.disabled || this.loading ? "true" : "false"}

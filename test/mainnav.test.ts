@@ -1,5 +1,4 @@
 import { aTimeout, assert, elementUpdated, expect, fixture, fixtureCleanup, waitUntil } from "@open-wc/testing";
-import { sendKeys } from "@web/test-runner-commands";
 import { html } from "lit";
 import Sinon from "sinon";
 import {
@@ -552,7 +551,7 @@ describe("sgds-mainnav-dropdown", () => {
         <sgds-icon class="icon-down" name="chevron-down" size="md"></sgds-icon>
         <sgds-icon class="icon-right" name="chevron-right" size="md"></sgds-icon>
       </button>
-      <div class="dropdown-menu" role="menu" aria-hidden="true">
+      <div class="dropdown-menu" role="menu">
         <div class="mobile-header">
           <a tabindex="0" role="button">
             <sgds-icon name="chevron-left" size="md"></sgds-icon>
@@ -585,10 +584,10 @@ describe("sgds-mainnav-dropdown", () => {
       const dropdown = el.querySelector<SgdsMainnavDropdown>("sgds-mainnav-dropdown");
       await dropdown?.updateComplete;
       const dropdownMenu = dropdown?.shadowRoot?.querySelector(".dropdown-menu") as HTMLElement;
-      expect(dropdownMenu.getAttribute("aria-hidden")).to.equal("true");
+      expect(dropdownMenu.style.display).not.to.equal("block");
       const togglerButton = dropdown?.shadowRoot?.querySelector("button.nav-link") as HTMLButtonElement;
       togglerButton.click();
-      await waitUntil(() => dropdownMenu.getAttribute("aria-hidden") === "false");
+      await waitUntil(() => dropdownMenu.style.display === "block");
       expect(dropdownMenu.style.display).to.equal("block");
     } finally {
       mock.restore();

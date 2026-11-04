@@ -4,7 +4,7 @@ import { SgdsAppnav, SgdsAppnavProfile, SgdsIconButton, SgdsDropdownItem, SgdsDi
 
 export const Appnav = () => {
   return (
-    <SgdsAppnav tone="gradient-3">
+    <SgdsAppnav tone="gradient-3" hasDefaultSlot hasProfileSlot hasStartSlot>
   <SgdsIconButton name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Open side menu"></SgdsIconButton>
   <a slot="brand" href="/"><img alt="sgds logo" width="130" src="/logo-white.svg"/></a>
   <SgdsIconButton name="moon" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Toggle dark mode"></SgdsIconButton>

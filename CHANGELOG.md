@@ -1,3 +1,57 @@
+## v3.31.0 (2026-10-30)
+
+### Feat
+
+- **Input,Textarea,Datepicker,RadioGroup,QuantityToggle**: sync FormData on programmatic value set (#903) [skip-cd]
+- **Theming**: density applied to components (#902) [skip-cd]
+- **Skills**: density theming ref
+- **Typography**: add new subtitle lg
+- **tokens**: add UI density semantic tokens from Figma
+
+### Fix
+
+- **Appnav, Dropdown, Divider, Mainnav, Sidenav, Subnav**: move host stylings to shadow dom to protect from css clash [run-chromatic][skip-cd] (#904)
+- **Sidenav**: expand L2 sidenav-item to show L3 links in Storybook
+- **Sidenav**: close unclosed sidenav-link tag in Storybook story
+- **MainnavItem**: move cursor styles to slotted anchor for a11y
+- **Subnav**: move header slot styles to shadow DOM wrapper
+- **DropdownItem**: move mainnav-dropdown-link padding to shadow DOM wrapper
+- **Mainnav**: move padding from ::slotted to shadow DOM wrapper
+- **Divider**: move border and margin to inner shadow DOM
+- **Appnav**: wrap brand slot and move styles to shadow DOM
+- **DropdownItem**: move max-width and box-sizing to shadow DOM wrapper
+- **Mainnav**: move slotted styles to inner shadow DOM
+- **SidenavLink**: move visual styles to inner shadow DOM wrapper
+- **subnav-item**: move visual styles to inner shadow DOM wrapper
+- **SidenavItem**: link type visual style to shadowm dom wrapper
+- **mainnav-item**: move visual styles to inner shadow DOM wrapper
+- **table**: move border-bottom and vertical-align to inner shadow DOM
+- **Checkbox**: remove private modifier from _mixinSetFormValue override
+- **Checkbox**: sync FormData with checked state like native checkbox
+- **Form**: sync FormData when value is set programmatically
+- **mainnav**: hide empty profile and non-collapsible slots to prevent unwanted flex gap [run-chromatic] (#897)
+- **mainnav**: hide empty profile and non-collapsible slots to prevent unwanted flex gap
+
+### Refactor
+
+- **DescriptionList**: remove top padding for borderless header
+- **Modal**: add padding 20px on mobile modal
+- **Table**: remove unnecessary slotted inherit font size
+- **Accordion**: apply density tokens
+- **Card,AccordionItem,Footer**: update semantic font size to subtitle lg
+- **DataTable**: apply density tokens
+- **Dropdown**: add back font-size label-sm to dropdown-item
+- **Footer**: apply density tokesn
+- **Card,IconCard,ThumbnailCard,ImageCard**: apply density padding gap tokens
+- **Modal**: apply density padding and gaps
+- **Drawer**: apply density padding
+- **ComboBoxOption**: apply density padding on menu option
+- **Dropdown**: menu font size set by host 16px label md, apply density padding
+- **DescriptionList**: replace padding with density padding
+- **SystemBanner**: container padding-y replaced with density padding
+- **TableOfContents**: change gap to density gap
+- **Table**: lower font size to label-sm and apply density padding-md to cells
+
 ## v3.30.0 (2026-10-14)
 
 ### Feat
