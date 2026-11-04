@@ -127,9 +127,9 @@ export class SgdsButton extends ButtonElement {
         type=${ifDefined(isLink ? undefined : this.type)}
         name=${ifDefined(isLink ? undefined : this.name)}
         value=${ifDefined(isLink ? undefined : this.value)}
-        href=${ifDefined(isLink ? sanitizeHref(this.href) : undefined)}
+        href=${ifDefined(isLink && !this.disabled ? sanitizeHref(this.href) : undefined)}
         target=${ifDefined(isLink ? this.target : undefined)}
-        download=${ifDefined(isLink ? this.download : undefined)}
+        download=${ifDefined(isLink && !this.disabled ? this.download : undefined)}
         rel=${ifDefined(isLink && this.target === "_blank" ? "noreferrer noopener" : undefined)}
         role=${ifDefined(isLink ? "button" : undefined)}
         aria-disabled=${this.disabled || this.loading ? "true" : "false"}
