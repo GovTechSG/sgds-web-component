@@ -156,7 +156,7 @@
   }
 
   .sgds-container {
-    max-width: var(--sgds-dimension-888);
+    max-width: calc(100% - 64px); /* outer margin of 32px on each side */
   }
 
   .sgds-col-lg-1 {
