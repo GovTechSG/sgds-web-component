@@ -2,4 +2,4 @@
 @import url("@govtechsg/sgds-web-component/css/reboot.css");
 @import url("@govtechsg/sgds-web-component/css/fouc.css");
 @import url("@govtechsg/sgds-web-component/css/sgds.css");
-@import url("@govtechsg/sgds-web-component/css/utility.css");
+@import url("./sgds-utilities.css");
