@@ -291,7 +291,7 @@ describe("sgds-appnav", () => {
       expect(navbarEnd).to.have.class("slot-empty");
     });
 
-    it("navbar-end is visible when default slot has items (toggler always rendered)", async () => {
+    it("navbar-end has slot-empty when default slot has items but no profile (CSS hides on desktop only)", async () => {
       const el = await fixture<SgdsAppnav>(html`<sgds-appnav expand="lg">
         <sgds-icon-button
           name="moon"
@@ -303,7 +303,7 @@ describe("sgds-appnav", () => {
       </sgds-appnav>`);
       await el.updateComplete;
       const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
-      expect(navbarEnd).not.to.have.class("slot-empty");
+      expect(navbarEnd).to.have.class("slot-empty");
     });
 
     it("navbar-end is visible when profile is slotted", async () => {
@@ -319,7 +319,7 @@ describe("sgds-appnav", () => {
       expect(navbarEnd).not.to.have.class("slot-empty");
     });
 
-    it("navbar-end is visible in mobile when default slot has items (toggler shown)", async () => {
+    it("navbar-end has slot-empty in mobile when default slot has items but no profile (CSS keeps toggler visible)", async () => {
       Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: 300 });
       window.dispatchEvent(new Event("resize"));
       const el = await fixture<SgdsAppnav>(html`<sgds-appnav expand="lg">
@@ -333,7 +333,7 @@ describe("sgds-appnav", () => {
       </sgds-appnav>`);
       await el.updateComplete;
       const navbarEnd = el.shadowRoot?.querySelector(".navbar-end");
-      expect(navbarEnd).not.to.have.class("slot-empty");
+      expect(navbarEnd).to.have.class("slot-empty");
     });
   });
 

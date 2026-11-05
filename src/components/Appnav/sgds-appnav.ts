@@ -156,7 +156,7 @@ export class SgdsAppnav extends NavElement {
               </div>
             </div>
           </div>
-          <div class="navbar-end ${this.hasProfileSlot || this.hasDefaultSlot ? "" : "slot-empty"}">
+          <div class="navbar-end ${this.hasProfileSlot ? "" : "slot-empty"}">
             ${this.hasDefaultSlot ? this._renderAppnavToggler() : nothing}
             <slot name="profile" @slotchange=${this._handleProfileSlotChange}></slot>
           </div>
