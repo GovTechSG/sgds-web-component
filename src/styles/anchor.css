@@ -9,7 +9,8 @@
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    width: 1em;
-    height: 1em;
-    vertical-align: top;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    padding-left: var(--sgds-padding-2-xs);
   }
