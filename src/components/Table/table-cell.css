@@ -3,10 +3,11 @@
 }
 
 .table-cell {
+  height: 100%;
   display: flex;
   align-items: center;
+  border-bottom: var(--table-cell-border-bottom, var(--sgds-border-width-1) solid var(--sgds-border-color-muted));
   padding: var(--sgds-density-padding-md);
   font-size: var(--sgds-font-size-label-sm);
   line-height: var(--sgds-line-height-2-xs); /* 142.857% */
-  border-bottom: var(--table-cell-border-bottom, var(--sgds-border-width-1) solid var(--sgds-border-color-muted));
 }

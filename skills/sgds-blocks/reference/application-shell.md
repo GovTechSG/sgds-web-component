@@ -35,7 +35,7 @@ For general-purpose applications, public-facing digital services, and pages with
 | < 512px | `calc(100% - 40px)` |
 | ≥ 512px (sm) | `calc(100% - 48px)` |
 | ≥ 768px (md) | `calc(100% - 56px)` |
-| ≥ 1024px (lg) | `888px` |
+| ≥ 1024px (lg) | `calc(100% - 64px)` |
 | ≥ 1280px (xl) | `1168px` |
 | ≥ 1440px (2xl) | `1312px` |
 
@@ -69,11 +69,13 @@ For internal tools, dashboards, admin portals, and transactional apps that need 
 
 | Breakpoint | `.sgds-container-sidebar` max-width |
 |------------|--------------------------------------|
-| < 768px | `100%` |
+| < 512px | `calc(100% - 40px)` |
+| ≥ 512px (sm) | `calc(100% - 48px)` |
 | ≥ 768px (md) | `calc(100% - 96px)` |
-| ≥ 1024px (lg) | `840px` |
-| ≥ 1280px (xl) | `888px` |
-| ≥ 1440px (2xl) | `1024px` |
+| ≥ 1024px (lg) | `calc(100% - 96px)` |
+| ≥ 1280px (xl) | `calc(100% - 96px)` |
+| ≥ 1440px (2xl) | `calc(100% - 96px)` |
+| ≥ 1680px (3xl) | `1296px` |
 
 ```html
 <!-- Sticky top bar -->

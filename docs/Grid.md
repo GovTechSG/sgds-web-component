@@ -15,10 +15,9 @@ The **SGDS Grid System** is a mobile-first, fully responsive layout system based
    - Use for layouts where a sidebar exists alongside the main content area.
    - Narrower maximum width compared to `.sgds-container` to accommodate sidebar layouts.
    - Responsive max-widths:
-     - **Medium (768px+)**: `calc(100% - 96px)` with 48px side margins
-     - **Large (1024px+)**: 840px max-width
-     - **Extra Large (1280px+)**: 888px max-width
-     - **Extra Extra Large (1440px+)**: 1024px max-width
+     - **Extra Small (default)**: `calc(100% - 40px)` with 20px side margins
+     - **Small (512px+)**: `calc(100% - 48px)` with 24px side margins
+     - **Medium (768px+) to Extra Extra Large (up to 1679px)**: `calc(100% - 96px)` with 48px side margins
      - **3-XL (1680px+)**: 1296px max-width
    - Centers content horizontally with `margin-left: auto; margin-right: auto;`
 
@@ -51,12 +50,12 @@ The **SGDS Grid System** is a mobile-first, fully responsive layout system based
 
 The gutter uses `var(--sgds-layout-gap-md)` across all breakpoints.
 
-| Breakpoint        | Screen Size      | Class Prefix       | Columns | Container Width | Gutters                    | Outer Margins |
-| ----------------- | ---------------- | ------------------ | ------- | --------------- | -------------------------- | ------------- |
+| Breakpoint        | Screen Size      | Class Prefix       | Columns | Container Width | Gutters                     | Outer Margins |
+| ----------------- | ---------------- | ------------------ | ------- | --------------- | --------------------------- | ------------- |
 | Extra Small       | 511px and below  | `.sgds-col-*`      | 4       | auto            | `var(--sgds-layout-gap-md)` | 20            |
 | Small             | 512px - 767px    | `.sgds-col-sm-*`   | 8       | auto            | `var(--sgds-layout-gap-md)` | 24            |
 | Medium            | 768px - 1023px   | `.sgds-col-md-*`   | 8       | auto            | `var(--sgds-layout-gap-md)` | 28            |
-| Large             | 1024px - 1279px  | `.sgds-col-lg-*`   | 12      | 888px           | `var(--sgds-layout-gap-md)` | auto          |
+| Large             | 1024px - 1279px  | `.sgds-col-lg-*`   | 12      | auto            | `var(--sgds-layout-gap-md)` | 32            |
 | Extra Large       | 1280px - 1439px  | `.sgds-col-xl-*`   | 12      | 1168px          | `var(--sgds-layout-gap-md)` | auto          |
 | Extra Extra Large | 1440px and above | `.sgds-col-2-xl-*` | 12      | 1312px          | `var(--sgds-layout-gap-md)` | auto          |
 
