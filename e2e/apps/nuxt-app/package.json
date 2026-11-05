@@ -15,5 +15,9 @@
     "nuxt-ssr-lit": "^1.6.30",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "tailwindcss": "^4.1.0"
   }
 }

@@ -28,7 +28,7 @@
     "lint:fix": "npm run lint -- --fix",
     "cem": "cem analyze --litelement ",
     "e2e-test": "node cypress/scripts/run_all.js & cypress open",
-    "e2e:generate": "tsx e2e/utils/generate-component-list.ts && tsx e2e/utils/generate-component-html.ts && tsx e2e/utils/generate-next-components.ts",
+    "e2e:generate": "tsx e2e/utils/generate-component-list.ts && tsx e2e/utils/generate-component-html.ts && tsx e2e/utils/generate-next-components.ts && tsx e2e/utils/generate-nuxt-components.ts && tsx e2e/utils/generate-react-components.ts && tsx e2e/utils/generate-vue-components.ts && tsx e2e/utils/generate-angular-components.ts",
     "e2e:test": "pnpm e2e:generate && cd e2e && pnpm exec playwright test",
     "e2e:test:ui": "pnpm e2e:generate && cd e2e && pnpm exec playwright test --ui",
     "storybook": "nodemon --exec \"bash -c 'npm run utility:storybook && npm run write:stories && STORYBOOK_ENV=development npx storybook dev -p 6006'\" --watch stories/component-templates stories/getting-started src/css/utility.css -e js,mdx,css",

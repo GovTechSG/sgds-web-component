@@ -1,95 +1,119 @@
-import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "@govtechsg/sgds-web-component/themes/day.css";
 import "@govtechsg/sgds-web-component/css/sgds.css";
 import "@govtechsg/sgds-web-component";
 import "./index.css";
-import * as Components from "@govtechsg/sgds-web-component/react";
-
-const nestingMap = {
-  SgdsAccordion: ["SgdsAccordionItem"],
-  SgdsBreadcrumb: ["SgdsBreadcrumbItem"],
-  SgdsCheckboxGroup: ["SgdsCheckbox"],
-  SgdsComboBox: ["SgdsComboBoxOption"],
-  SgdsDataTable: ["SgdsDataTableHead", "SgdsDataTableRow", "SgdsDataTableCell"],
-  SgdsDescriptionList: ["SgdsDescriptionListGroup"],
-  SgdsDropdown: ["SgdsDropdownItem"],
-  SgdsFooter: ["SgdsFooterItem"],
-  SgdsMainnav: ["SgdsMainnavItem", "SgdsMainnavDropdown", "SgdsMainnavProfile"],
-  SgdsRadioGroup: ["SgdsRadio"],
-  SgdsSelect: ["SgdsSelectOption"],
-  SgdsSidebar: ["SgdsSidebarItem", "SgdsSidebarGroup", "SgdsSidebarSection"],
-  SgdsSidenav: ["SgdsSidenavItem", "SgdsSidenavLink"],
-  SgdsStepper: ["SgdsStep"],
-  SgdsSubnav: ["SgdsSubnavItem"],
-  SgdsSystemBanner: ["SgdsSystemBannerItem"],
-  SgdsTabGroup: ["SgdsTab", "SgdsTabPanel"],
-  SgdsTable: ["SgdsTableHead", "SgdsTableRow", "SgdsTableCell"],
-  SgdsToastContainer: ["SgdsToast"],
-};
-
-const childNames = new Set(Object.values(nestingMap).flat());
-
-function isReactComponent(value) {
-  return typeof value === "function" || (typeof value === "object" && value !== null && "$$typeof" in value);
-}
+import SidebarLayout from "./SidebarLayout";
+import AccordionPage from "./pages/accordion";
+import AlertLinkPage from "./pages/alertlink";
+import AlertPage from "./pages/alert";
+import BadgePage from "./pages/badge";
+import AppnavPage from "./pages/appnav";
+import BreadcrumbPage from "./pages/breadcrumb";
+import ButtonPage from "./pages/button";
+import CardPage from "./pages/card";
+import CheckboxGroupPage from "./pages/checkboxgroup";
+import CloseButtonPage from "./pages/closebutton";
+import ComboBoxPage from "./pages/combobox";
+import DataTablePage from "./pages/datatable";
+import DatepickerPage from "./pages/datepicker";
+import DescriptionListPage from "./pages/descriptionlist";
+import DividerPage from "./pages/divider";
+import DrawerPage from "./pages/drawer";
+import DropdownPage from "./pages/dropdown";
+import FileUploadPage from "./pages/fileupload";
+import FooterPage from "./pages/footer";
+import IconPage from "./pages/icon";
+import IconButtonPage from "./pages/iconbutton";
+import IconCardPage from "./pages/iconcard";
+import IconListPage from "./pages/iconlist";
+import ImageCardPage from "./pages/imagecard";
+import InputPage from "./pages/input";
+import LinkPage from "./pages/link";
+import MastheadPage from "./pages/masthead";
+import MainnavPage from "./pages/mainnav";
+import OverflowMenuPage from "./pages/overflowmenu";
+import ModalPage from "./pages/modal";
+import PaginationPage from "./pages/pagination";
+import ProgressBarPage from "./pages/progressbar";
+import QuantityTogglePage from "./pages/quantitytoggle";
+import RadioGroupPage from "./pages/radiogroup";
+import SelectPage from "./pages/select";
+import SidebarPage from "./pages/sidebar";
+import SidenavPage from "./pages/sidenav";
+import SkeletonPage from "./pages/skeleton";
+import StepperPage from "./pages/stepper";
+import SpinnerPage from "./pages/spinner";
+import SwitchPage from "./pages/switch";
+import TabGroupPage from "./pages/tabgroup";
+import SystemBannerPage from "./pages/systembanner";
+import SubnavPage from "./pages/subnav";
+import TableOfContentsPage from "./pages/tableofcontents";
+import TablePage from "./pages/table";
+import TextareaPage from "./pages/textarea";
+import ThumbnailCardPage from "./pages/thumbnailcard";
+import ToastContainerPage from "./pages/toastcontainer";
+import TooltipPage from "./pages/tooltip";
 
 function App() {
-  const [argsMap, setArgsMap] = useState({});
-
-  useEffect(() => {
-    fetch("/component-args.json")
-      .then(r => r.json())
-      .then(setArgsMap)
-      .catch(() => setArgsMap({}));
-  }, []);
-
-  const allNames = Object.keys(Components).filter(
-    name => name.startsWith("Sgds") && isReactComponent(Components[name])
-  );
-
-  const rendered = [];
-
-  for (const name of allNames) {
-    if (childNames.has(name)) continue;
-
-    const Component = Components[name];
-    const dirName = name.replace(/^Sgds/, "");
-    const props = argsMap[dirName] ? { ...argsMap[dirName] } : {};
-
-    const children = [];
-    if (nestingMap[name]) {
-      for (const childName of nestingMap[name]) {
-        const ChildComponent = Components[childName];
-        if (ChildComponent) {
-          children.push(React.createElement(ChildComponent, { key: childName }));
-        }
-      }
-    }
-
-    if (children.length === 0 && !nestingMap[name]) {
-      children.push(dirName);
-    }
-
-    rendered.push(
-      <section key={name} className="sgds-col-4 sgds-col-sm-8 sgds-col-lg-12">
-        <h2 className="sgds:text-subtitle-sm sgds:font-semibold sgds:leading-2-xs sgds:text-subtle sgds:mb-gap-text-sm">{dirName}</h2>
-        <sgds-divider></sgds-divider>
-        <div className="sgds:mt-gap-text-md">
-          {React.createElement(Component, { ...props, "data-testid": name }, ...children)}
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <main className="sgds-container-sidebar sgds:py-layout-md">
-      <h1 className="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:mb-gap-text-2-xl">
-        SGDS React E2E — {rendered.length} components (React wrappers)
-      </h1>
-      <div className="sgds-grid sgds:gap-layout-md">
-        {rendered}
-      </div>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<SidebarLayout />}>
+          <Route index element={<Navigate to="/accordion" replace />} />
+          <Route path="/accordion" element={<AccordionPage />} />
+          <Route path="/alertlink" element={<AlertLinkPage />} />
+          <Route path="/alert" element={<AlertPage />} />
+          <Route path="/badge" element={<BadgePage />} />
+          <Route path="/appnav" element={<AppnavPage />} />
+          <Route path="/breadcrumb" element={<BreadcrumbPage />} />
+          <Route path="/button" element={<ButtonPage />} />
+          <Route path="/card" element={<CardPage />} />
+          <Route path="/checkboxgroup" element={<CheckboxGroupPage />} />
+          <Route path="/closebutton" element={<CloseButtonPage />} />
+          <Route path="/combobox" element={<ComboBoxPage />} />
+          <Route path="/datatable" element={<DataTablePage />} />
+          <Route path="/datepicker" element={<DatepickerPage />} />
+          <Route path="/descriptionlist" element={<DescriptionListPage />} />
+          <Route path="/divider" element={<DividerPage />} />
+          <Route path="/drawer" element={<DrawerPage />} />
+          <Route path="/dropdown" element={<DropdownPage />} />
+          <Route path="/fileupload" element={<FileUploadPage />} />
+          <Route path="/footer" element={<FooterPage />} />
+          <Route path="/icon" element={<IconPage />} />
+          <Route path="/iconbutton" element={<IconButtonPage />} />
+          <Route path="/iconcard" element={<IconCardPage />} />
+          <Route path="/iconlist" element={<IconListPage />} />
+          <Route path="/imagecard" element={<ImageCardPage />} />
+          <Route path="/input" element={<InputPage />} />
+          <Route path="/link" element={<LinkPage />} />
+          <Route path="/masthead" element={<MastheadPage />} />
+          <Route path="/mainnav" element={<MainnavPage />} />
+          <Route path="/overflowmenu" element={<OverflowMenuPage />} />
+          <Route path="/modal" element={<ModalPage />} />
+          <Route path="/pagination" element={<PaginationPage />} />
+          <Route path="/progressbar" element={<ProgressBarPage />} />
+          <Route path="/quantitytoggle" element={<QuantityTogglePage />} />
+          <Route path="/radiogroup" element={<RadioGroupPage />} />
+          <Route path="/select" element={<SelectPage />} />
+          <Route path="/sidebar" element={<SidebarPage />} />
+          <Route path="/sidenav" element={<SidenavPage />} />
+          <Route path="/skeleton" element={<SkeletonPage />} />
+          <Route path="/stepper" element={<StepperPage />} />
+          <Route path="/spinner" element={<SpinnerPage />} />
+          <Route path="/switch" element={<SwitchPage />} />
+          <Route path="/tabgroup" element={<TabGroupPage />} />
+          <Route path="/systembanner" element={<SystemBannerPage />} />
+          <Route path="/subnav" element={<SubnavPage />} />
+          <Route path="/tableofcontents" element={<TableOfContentsPage />} />
+          <Route path="/table" element={<TablePage />} />
+          <Route path="/textarea" element={<TextareaPage />} />
+          <Route path="/thumbnailcard" element={<ThumbnailCardPage />} />
+          <Route path="/toastcontainer" element={<ToastContainerPage />} />
+          <Route path="/tooltip" element={<TooltipPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -13,7 +13,8 @@
     "@tailwindcss/vite": "^4.1.0",
     "@webcomponents/scoped-custom-element-registry": "^0.0.9",
     "tailwindcss": "^4.1.0",
-    "vue": "^3.5.34"
+    "vue": "^3.5.34",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.6",
