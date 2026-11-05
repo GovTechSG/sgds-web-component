@@ -82,7 +82,7 @@ Use for every page that does **not** have a persistent sidebar.
 | XS (default) | `calc(100% - 40px)` — 20px outer margins |
 | SM (512px+) | `calc(100% - 48px)` — 24px outer margins |
 | MD (768px+) | `calc(100% - 56px)` — 28px outer margins |
-| LG (1024px+) | 888px |
+| LG (1024px+) | `calc(100% - 64px)` — 32px outer margins |
 | XL (1280px+) | 1168px |
 | 2-XL (1440px+) | 1312px |
 
