@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       Icon
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-icon name="placeholder" size="md"></sgds-icon>
+      <sgds-icon size="lg" aria-label="Icon"></sgds-icon>
     </div>
   </div>
 </template>

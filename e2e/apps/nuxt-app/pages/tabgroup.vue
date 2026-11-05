@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Tab/index.js";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       TabGroup
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-tab-group>
+      <sgds-tab-group variant="underlined" orientation="horizontal" density="default">
         <sgds-tab slot="nav" panel="tab1" aria-label="Tab 1">Tab 1</sgds-tab>
         <sgds-tab slot="nav" panel="tab2" aria-label="Tab 2">Tab 2</sgds-tab>
         <sgds-tab-panel name="tab1">Content for tab 1</sgds-tab-panel>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Alert/index.js";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       AlertLink
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-alert-link>AlertLink</sgds-alert-link>
+      <sgds-alert-link></sgds-alert-link>
     </div>
   </div>
 </template>

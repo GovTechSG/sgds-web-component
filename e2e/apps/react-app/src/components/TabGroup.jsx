@@ -3,7 +3,7 @@ import { SgdsTabGroup, SgdsTab, SgdsTabPanel } from '@govtechsg/sgds-web-compone
 export const TabGroup = () => {
   return (
     <>
-      <SgdsTabGroup>
+      <SgdsTabGroup variant="underlined" orientation="horizontal" density="default">
         <SgdsTab slot="nav" panel="tab1" ariaLabel="Tab 1">Tab 1</SgdsTab>
         <SgdsTab slot="nav" panel="tab2" ariaLabel="Tab 2">Tab 2</SgdsTab>
         <SgdsTabPanel name="tab1">Content for tab 1</SgdsTabPanel>

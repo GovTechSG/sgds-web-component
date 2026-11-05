@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Toast/index.js";
 </script>
 
 <template>
@@ -8,10 +8,10 @@ import "@govtechsg/sgds-web-component";
       ToastContainer
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-toast-container position="bottom-end">
-        <sgds-toast show title="Notification" variant="info">
-          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
-          Your changes have been saved.
+      <sgds-toast-container>
+        <sgds-toast show title="Title" delay="5000" variant="info">
+          <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+          Toast content
         </sgds-toast>
       </sgds-toast-container>
     </div>

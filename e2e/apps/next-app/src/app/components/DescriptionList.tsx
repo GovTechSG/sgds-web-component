@@ -5,10 +5,13 @@ import { SgdsDescriptionList, SgdsDescriptionListGroup } from '@govtechsg/sgds-w
 export const DescriptionList = () => {
   return (
     <>
-      <SgdsDescriptionListGroup bordered>
-        <SgdsDescriptionList>Name<span slot="data">John Doe</span></SgdsDescriptionList>
-        <SgdsDescriptionList>Email<span slot="data">john@example.com</span></SgdsDescriptionList>
-      </SgdsDescriptionListGroup>
+      <SgdsDescriptionList>
+        <SgdsDescriptionListGroup>
+          <span slot="title">DescriptionListGroup</span>
+          <span slot="description">Description of the descriptionlistgroup.</span>
+          DescriptionListGroup content
+        </SgdsDescriptionListGroup>
+      </SgdsDescriptionList>
     </>
   );
 };

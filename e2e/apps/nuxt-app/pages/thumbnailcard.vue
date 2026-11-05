@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/ThumbnailCard/index.js";
 </script>
 
 <template>
@@ -8,9 +8,11 @@ import "@govtechsg/sgds-web-component";
       ThumbnailCard
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-thumbnail-card>
-        <span slot="title">Thumbnail Card</span>
-        <span slot="description">Description of the thumbnail card.</span>
+      <sgds-thumbnail-card orientation="vertical">
+        <span slot="title">ThumbnailCard</span>
+        <span slot="description">Description of the thumbnailcard.</span>
+        <span slot="footer">Footer content</span>
+        ThumbnailCard
       </sgds-thumbnail-card>
     </div>
   </div>

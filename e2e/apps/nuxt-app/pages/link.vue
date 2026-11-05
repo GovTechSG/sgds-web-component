@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Link/index.js";
 </script>
 
 <template>
@@ -8,7 +8,9 @@ import "@govtechsg/sgds-web-component";
       Link
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-link><a href="#">This is a link</a></sgds-link>
+      <sgds-link size="md" tone="primary">
+        Link
+      </sgds-link>
     </div>
   </div>
 </template>

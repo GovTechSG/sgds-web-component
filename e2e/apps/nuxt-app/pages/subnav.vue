@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Subnav/index.js";
 </script>
 
 <template>
@@ -9,8 +9,10 @@ import "@govtechsg/sgds-web-component";
     </h1>
     <div class="sgds:mt-gap-text-md">
       <sgds-subnav>
-        <sgds-subnav-item active><a href="/">Home</a></sgds-subnav-item>
-        <sgds-subnav-item><a href="/about">About</a></sgds-subnav-item>
+        <div slot="header">Header text</div>
+        <sgds-subnav-item>
+          SubnavItem content
+        </sgds-subnav-item>
       </sgds-subnav>
     </div>
   </div>

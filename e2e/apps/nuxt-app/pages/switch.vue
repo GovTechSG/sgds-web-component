@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Switch/index.js";
 </script>
 
 <template>
@@ -8,7 +8,9 @@ import "@govtechsg/sgds-web-component";
       Switch
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-switch>Enable notifications</sgds-switch>
+      <sgds-switch size="md">
+        Switch
+      </sgds-switch>
     </div>
   </div>
 </template>

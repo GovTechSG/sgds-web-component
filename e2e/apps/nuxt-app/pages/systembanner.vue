@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/SystemBanner/index.js";
 </script>
 
 <template>
@@ -10,8 +10,8 @@ import "@govtechsg/sgds-web-component";
     <div class="sgds:mt-gap-text-md">
       <sgds-system-banner show>
         <sgds-system-banner-item>
-          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
-          System maintenance is scheduled for this weekend.
+          <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+          SystemBannerItem content
         </sgds-system-banner-item>
       </sgds-system-banner>
     </div>

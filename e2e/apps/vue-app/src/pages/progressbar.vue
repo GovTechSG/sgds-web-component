@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       ProgressBar
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-progress-bar label="Loading" value="60"></sgds-progress-bar>
+      <sgds-progress-bar variant="primary" aria-label="ProgressBar" label="ProgressBar"></sgds-progress-bar>
     </div>
   </div>
 </template>

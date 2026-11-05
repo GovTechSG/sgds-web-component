@@ -4,12 +4,11 @@
  *
  * Run from root: tsx e2e/utils/generate-angular-components.ts
  */
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  reactComponentNames, loadArgs, childOnlyComponents,
-  htmlTemplates, simpleHtmlTemplate,
+  reactComponentNames, childOnlyComponents, generateHtmlTemplate,
 } from "./component-templates.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -19,8 +18,9 @@ function toKebab(name: string): string {
   return name.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
 }
 
-async function main() {
+function main() {
   const pagesDir = resolve(appDir, "pages");
+  rmSync(pagesDir, { recursive: true, force: true });
   mkdirSync(pagesDir, { recursive: true });
 
   const generated: string[] = [];
@@ -32,10 +32,8 @@ async function main() {
     const dirName = name.replace(/^Sgds/, "");
     const slug = dirName.toLowerCase();
     const kebab = toKebab(dirName);
-    const args = await loadArgs(dirName);
-
-    const templateFn = htmlTemplates[dirName];
-    const html = templateFn ? templateFn(args) : simpleHtmlTemplate(name, args);
+    const tag = "sgds-" + kebab;
+    const html = generateHtmlTemplate(tag);
 
     const componentContent = `import { Component, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import "@govtechsg/sgds-web-component";
@@ -167,7 +165,9 @@ bootstrapApplication(AppComponent, {
   console.log(`Generated ${generated.length} component pages, sidebar layout, app.component.ts, app.routes.ts, and main.ts for Angular`);
 }
 
-main().catch(err => {
+try {
+  main();
+} catch (err) {
   console.error("Fatal error:", err);
   process.exit(1);
-});
+}

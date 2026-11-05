@@ -1,14 +1,16 @@
 'use client';
 
-import { SgdsCard, SgdsLink } from '@govtechsg/sgds-web-component/react';
+import { SgdsCard, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const Card = () => {
   return (
     <>
-      <SgdsCard>
-        <span slot="title">Card Title</span>
-        <span slot="description">This is a description of the card content.</span>
-        <SgdsLink slot="footer"><a href="#">Read more</a></SgdsLink>
+      <SgdsCard imagePosition="before" imageAdjustment="default" orientation="vertical">
+        <SgdsIcon slot="icon" name="placeholder" size="md"></SgdsIcon>
+        <span slot="title">Card</span>
+        <span slot="description">Description of the card.</span>
+        <span slot="footer">Footer content</span>
+        Card
       </SgdsCard>
     </>
   );

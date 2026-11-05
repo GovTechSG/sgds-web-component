@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Sidebar/index.js";
 </script>
 
 <template>
@@ -8,19 +8,15 @@ import "@govtechsg/sgds-web-component";
       Sidebar
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-sidebar active="dashboard">
-        <sgds-sidebar-section title="Main" name="main">
-          <sgds-sidebar-item name="dashboard" title="Dashboard">
-            <sgds-icon slot="icon" name="grid-fill" size="md"></sgds-icon>
-            <a href="#"></a>
-          </sgds-sidebar-item>
-          <sgds-sidebar-group name="reports" title="Reports">
-            <sgds-icon slot="icon" name="file-earmark-text" size="md"></sgds-icon>
-            <sgds-sidebar-item name="yearly" title="Yearly">
-              <sgds-icon slot="icon" name="calendar" size="md"></sgds-icon>
-            </sgds-sidebar-item>
-          </sgds-sidebar-group>
-        </sgds-sidebar-section>
+      <sgds-sidebar variant="collapsible" aria-label="Sidebar navigation">
+        <sgds-sidebar-group>
+          SidebarGroup content
+        </sgds-sidebar-group>
+        <sgds-sidebar-item>
+          <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+          SidebarItem content
+        </sgds-sidebar-item>
+        <sgds-sidebar-section></sgds-sidebar-section>
       </sgds-sidebar>
     </div>
   </div>

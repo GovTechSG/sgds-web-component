@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Stepper/index.js";
 </script>
 
 <template>
@@ -8,10 +8,8 @@ import "@govtechsg/sgds-web-component";
       Stepper
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-stepper active-step="0">
-        <sgds-step step-header="Personal Info"></sgds-step>
-        <sgds-step step-header="Contact Details"></sgds-step>
-        <sgds-step step-header="Review"></sgds-step>
+      <sgds-stepper active-step="0" orientation="horizontal">
+        Stepper
       </sgds-stepper>
     </div>
   </div>

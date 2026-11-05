@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       QuantityToggle
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-quantity-toggle label="Quantity" name="qty"></sgds-quantity-toggle>
+      <sgds-quantity-toggle step="1" label="QuantityToggle"></sgds-quantity-toggle>
     </div>
   </div>
 </template>

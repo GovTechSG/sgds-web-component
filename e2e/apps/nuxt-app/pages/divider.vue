@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Divider/index.js";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       Divider
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-divider></sgds-divider>
+      <sgds-divider orientation="horizontal" thickness="thin"></sgds-divider>
     </div>
   </div>
 </template>

@@ -6,10 +6,16 @@ export default defineNuxtConfig({
   modules: [["nuxt-ssr-lit", { litElementPrefix: ["sgds-"] }]],
   css: ["~/assets/css/main.css"],
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    ssr: {
+      noExternal: [/lit/, /@lit/, /parse5/, /@parse5/]
+    }
   },
   nitro: {
-    moduleSideEffects: ["@govtechsg/sgds-web-component"]
+    moduleSideEffects: ["@govtechsg/sgds-web-component"],
+    externals: {
+      inline: [/lit/, /@lit/, /parse5/, /@parse5/]
+    }
   },
   alias: {
     tslib: "tslib/tslib.es6.js"

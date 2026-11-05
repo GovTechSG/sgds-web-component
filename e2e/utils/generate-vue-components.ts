@@ -4,19 +4,19 @@
  *
  * Run from root: tsx e2e/utils/generate-vue-components.ts
  */
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  reactComponentNames, loadArgs, childOnlyComponents,
-  htmlTemplates, simpleHtmlTemplate,
+  reactComponentNames, childOnlyComponents, generateHtmlTemplate,
 } from "./component-templates.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const srcDir = resolve(__dirname, "../apps/vue-app/src");
 
-async function main() {
+function main() {
   const pagesDir = resolve(srcDir, "pages");
+  rmSync(pagesDir, { recursive: true, force: true });
   mkdirSync(pagesDir, { recursive: true });
 
   const generated: string[] = [];
@@ -27,10 +27,8 @@ async function main() {
 
     const dirName = name.replace(/^Sgds/, "");
     const slug = dirName.toLowerCase();
-    const args = await loadArgs(dirName);
-
-    const templateFn = htmlTemplates[dirName];
-    const html = templateFn ? templateFn(args) : simpleHtmlTemplate(name, args);
+    const tag = "sgds-" + dirName.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
+    const html = generateHtmlTemplate(tag);
 
     const pageContent = `<script setup lang="ts">
 import "@govtechsg/sgds-web-component";
@@ -127,7 +125,9 @@ createApp(App).use(router).mount("#app");
   console.log(`Generated ${generated.length} component pages, sidebar layout, App.vue, and main.ts for Vue`);
 }
 
-main().catch(err => {
+try {
+  main();
+} catch (err) {
   console.error("Fatal error:", err);
   process.exit(1);
-});
+}

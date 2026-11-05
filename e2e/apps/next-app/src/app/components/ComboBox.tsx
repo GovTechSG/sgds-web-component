@@ -5,10 +5,10 @@ import { SgdsComboBox, SgdsComboBoxOption } from '@govtechsg/sgds-web-component/
 export const ComboBox = () => {
   return (
     <>
-      <SgdsComboBox label="Select a country" placeholder="Search...">
-        <SgdsComboBoxOption value="sg">Singapore</SgdsComboBoxOption>
-        <SgdsComboBoxOption value="my">Malaysia</SgdsComboBoxOption>
-        <SgdsComboBoxOption value="id">Indonesia</SgdsComboBoxOption>
+      <SgdsComboBox scrollBottomOffset={0} label="ComboBox" placeholder="Enter text..." autocomplete="on">
+        <SgdsComboBoxOption>
+          ComboBoxOption content
+        </SgdsComboBoxOption>
       </SgdsComboBox>
     </>
   );

@@ -3,8 +3,13 @@ import { SgdsDrawer, SgdsButton } from '@govtechsg/sgds-web-component/react';
 export const Drawer = () => {
   return (
     <>
-      <SgdsButton variant="primary" onClick={(e) => { const d = e.currentTarget.nextElementSibling; if (d) d.open = true; }}>Open Drawer</SgdsButton>
-      <SgdsDrawer label="Drawer Title">Drawer content goes here.</SgdsDrawer>
+      <SgdsButton variant="primary" onClick={(e) => { const el = e.currentTarget.nextElementSibling; if (el) el.open = true; }}>Open Drawer</SgdsButton>
+      <SgdsDrawer size="sm" placement="end" ariaLabel="Drawer">
+        <span slot="title">Drawer</span>
+        <span slot="description">Description of the drawer.</span>
+        <span slot="footer">Footer content</span>
+        Drawer
+      </SgdsDrawer>
     </>
   );
 };

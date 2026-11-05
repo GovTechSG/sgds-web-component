@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Spinner/index.js";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       Spinner
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-spinner></sgds-spinner>
+      <sgds-spinner tone="brand" size="md" label="Spinner" orientation="vertical"></sgds-spinner>
     </div>
   </div>
 </template>

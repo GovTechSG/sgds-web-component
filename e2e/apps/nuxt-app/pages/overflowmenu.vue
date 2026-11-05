@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/OverflowMenu/index.js";
 </script>
 
 <template>
@@ -8,7 +8,9 @@ import "@govtechsg/sgds-web-component";
       OverflowMenu
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-overflow-menu aria-label="More actions"></sgds-overflow-menu>
+      <sgds-overflow-menu size="md">
+        OverflowMenu
+      </sgds-overflow-menu>
     </div>
   </div>
 </template>

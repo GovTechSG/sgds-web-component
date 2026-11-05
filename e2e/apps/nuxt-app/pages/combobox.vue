@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/ComboBox/index.js";
 </script>
 
 <template>
@@ -8,10 +8,10 @@ import "@govtechsg/sgds-web-component";
       ComboBox
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-combo-box label="Select a country" placeholder="Search...">
-        <sgds-combo-box-option value="sg">Singapore</sgds-combo-box-option>
-        <sgds-combo-box-option value="my">Malaysia</sgds-combo-box-option>
-        <sgds-combo-box-option value="id">Indonesia</sgds-combo-box-option>
+      <sgds-combo-box scroll-bottom-offset="0" label="ComboBox" placeholder="Enter text..." autocomplete="on">
+        <sgds-combo-box-option>
+          ComboBoxOption content
+        </sgds-combo-box-option>
       </sgds-combo-box>
     </div>
   </div>

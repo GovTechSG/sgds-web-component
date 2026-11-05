@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Accordion/index.js";
 </script>
 
 <template>
@@ -8,14 +8,11 @@ import "@govtechsg/sgds-web-component";
       Accordion
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-accordion>
-        <sgds-accordion-item aria-label="Accordion title #1">
-          <div slot="header">Accordion title #1</div>
-          <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-        </sgds-accordion-item>
-        <sgds-accordion-item aria-label="Accordion title #2">
-          <div slot="header">Accordion title #2</div>
-          <div slot="content">Maiores soluta eaque fugit fuga distinctio.</div>
+      <sgds-accordion variant="default" density="default">
+        <sgds-accordion-item aria-label="AccordionItem">
+          <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+          <div slot="header">Header text</div>
+          <div slot="content">Content goes here.</div>
         </sgds-accordion-item>
       </sgds-accordion>
     </div>

@@ -8,7 +8,9 @@ import "@govtechsg/sgds-web-component";
       TableOfContents
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-table-of-contents></sgds-table-of-contents>
+      <sgds-table-of-contents>
+        TableOfContents
+      </sgds-table-of-contents>
     </div>
   </div>
 </template>

@@ -8,11 +8,10 @@ import "@govtechsg/sgds-web-component";
       Dropdown
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-dropdown>
-        <sgds-button slot="toggler" aria-label="Options menu">Options</sgds-button>
-        <sgds-dropdown-item aria-label="View"><a href="#">View</a></sgds-dropdown-item>
-        <sgds-dropdown-item aria-label="Edit"><a href="#">Edit</a></sgds-dropdown-item>
-        <sgds-dropdown-item aria-label="Delete"><a href="#">Delete</a></sgds-dropdown-item>
+      <sgds-dropdown drop="down" close="default">
+        <sgds-dropdown-item aria-label="DropdownItem">
+          DropdownItem content
+        </sgds-dropdown-item>
       </sgds-dropdown>
     </div>
   </div>

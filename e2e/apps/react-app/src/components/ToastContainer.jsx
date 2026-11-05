@@ -3,10 +3,10 @@ import { SgdsToastContainer, SgdsToast, SgdsIcon } from '@govtechsg/sgds-web-com
 export const ToastContainer = () => {
   return (
     <>
-      <SgdsToastContainer position="bottom-end">
-        <SgdsToast show title="Notification" variant="info">
-          <SgdsIcon slot="icon" name="info-circle-fill" size="md"></SgdsIcon>
-          Your changes have been saved.
+      <SgdsToastContainer>
+        <SgdsToast show title="Title" delay={5000} variant="info">
+          <SgdsIcon slot="icon" name="placeholder" size="md"></SgdsIcon>
+          Toast content
         </SgdsToast>
       </SgdsToastContainer>
     </>

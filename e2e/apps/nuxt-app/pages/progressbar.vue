@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/ProgressBar/index.js";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       ProgressBar
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-progress-bar label="Loading" value="60"></sgds-progress-bar>
+      <sgds-progress-bar variant="primary" aria-label="ProgressBar" label="ProgressBar"></sgds-progress-bar>
     </div>
   </div>
 </template>

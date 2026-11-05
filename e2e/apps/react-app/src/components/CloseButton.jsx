@@ -3,7 +3,7 @@ import { SgdsCloseButton } from '@govtechsg/sgds-web-component/react';
 export const CloseButton = () => {
   return (
     <>
-      <SgdsCloseButton ariaLabel="Close"></SgdsCloseButton>
+      <SgdsCloseButton size="md" tone="default"></SgdsCloseButton>
     </>
   );
 };

@@ -9,9 +9,11 @@ import "@govtechsg/sgds-web-component";
     <div class="sgds-container-sidebar sgds:py-layout-md">
       <h1 class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:mb-gap-text-2-xl">ThumbnailCard</h1>
       <div class="sgds:mt-gap-text-md">
-        <sgds-thumbnail-card>
-        <span slot="title">Thumbnail Card</span>
-        <span slot="description">Description of the thumbnail card.</span>
+        <sgds-thumbnail-card orientation="vertical">
+        <span slot="title">ThumbnailCard</span>
+        <span slot="description">Description of the thumbnailcard.</span>
+        <span slot="footer">Footer content</span>
+        ThumbnailCard
       </sgds-thumbnail-card>
       </div>
     </div>

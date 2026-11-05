@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Select/index.js";
 </script>
 
 <template>
@@ -8,10 +8,10 @@ import "@govtechsg/sgds-web-component";
       Select
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-select label="Country" name="country" placeholder="Select a country">
-        <sgds-select-option value="sg">Singapore</sgds-select-option>
-        <sgds-select-option value="my">Malaysia</sgds-select-option>
-        <sgds-select-option value="id">Indonesia</sgds-select-option>
+      <sgds-select label="Select" placeholder="Enter text..." autocomplete="on">
+        <sgds-select-option>
+          SelectOption content
+        </sgds-select-option>
       </sgds-select>
     </div>
   </div>

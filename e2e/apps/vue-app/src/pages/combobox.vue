@@ -8,10 +8,10 @@ import "@govtechsg/sgds-web-component";
       ComboBox
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-combo-box label="Select a country" placeholder="Search...">
-        <sgds-combo-box-option value="sg">Singapore</sgds-combo-box-option>
-        <sgds-combo-box-option value="my">Malaysia</sgds-combo-box-option>
-        <sgds-combo-box-option value="id">Indonesia</sgds-combo-box-option>
+      <sgds-combo-box scroll-bottom-offset="0" label="ComboBox" placeholder="Enter text..." autocomplete="on">
+        <sgds-combo-box-option>
+          ComboBoxOption content
+        </sgds-combo-box-option>
       </sgds-combo-box>
     </div>
   </div>

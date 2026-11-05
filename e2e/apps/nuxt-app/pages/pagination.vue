@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Pagination/index.js";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       Pagination
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-pagination data-length="50" current-page="1" items-per-page="10"></sgds-pagination>
+      <sgds-pagination data-length="0" current-page="1" items-per-page="5" variant="default" navigation="icon-button" size="md"></sgds-pagination>
     </div>
   </div>
 </template>

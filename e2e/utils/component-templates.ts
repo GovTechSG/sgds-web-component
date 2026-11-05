@@ -1,14 +1,15 @@
 /**
- * Shared component templates, utilities, and constants used by all framework
- * generation scripts (Next, Nuxt, React, Vue, Angular).
+ * CEM-driven component template generation for all e2e framework apps.
+ * Reads custom-elements.json to auto-derive props, slots, parent-child
+ * relationships, and trigger buttons. No hardcoded templates needed
+ * for most components — only manual overrides for complex edge cases.
  */
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "../..");
-const templatesDir = resolve(root, "stories/component-templates");
 
 // ---------------------------------------------------------------------------
 // Parse src/react/index.ts for React component names
@@ -22,462 +23,410 @@ while ((match = reactRegex.exec(reactIndex)) !== null) {
 }
 
 // ---------------------------------------------------------------------------
-// Load Storybook args for a component directory
+// Load & parse Custom Elements Manifest
 // ---------------------------------------------------------------------------
-export async function loadArgs(dirName: string): Promise<Record<string, unknown>> {
-  const basicPath = resolve(templatesDir, dirName, "basic.js");
-  if (!existsSync(basicPath)) return {};
-  try {
-    const mod = await import(pathToFileURL(basicPath).href);
-    const args = mod.args || {};
-    const clean: Record<string, unknown> = {};
-    for (const [k, v] of Object.entries(args)) {
-      if (typeof v === "string" || typeof v === "number" || typeof v === "boolean") {
-        clean[k] = v;
+interface CemField {
+  kind: string;
+  name: string;
+  attribute?: string;
+  type?: { text: string };
+  default?: string;
+  description?: string;
+  privacy?: string;
+  static?: boolean;
+}
+interface CemSlot { name: string; description: string; }
+interface CemDecl {
+  kind: string;
+  name: string;
+  tagName?: string;
+  customElement?: boolean;
+  slots?: CemSlot[];
+  members?: CemField[];
+}
+interface CemModule { path?: string; declarations?: CemDecl[]; }
+interface Cem { modules: CemModule[]; }
+
+const cem: Cem = JSON.parse(readFileSync(resolve(root, "custom-elements.json"), "utf-8"));
+const allDecls = cem.modules.flatMap(m => m.declarations || []);
+
+// Map tagName → CEM module path (e.g., "src/components/Accordion/sgds-accordion.ts")
+const modulePathByTag = new Map<string, string>();
+for (const mod of cem.modules) {
+  for (const d of mod.declarations || []) {
+    if (d.customElement && d.tagName && mod.path) {
+      modulePathByTag.set(d.tagName, mod.path);
+    }
+  }
+}
+const componentDecls = allDecls.filter(
+  d => d.customElement && d.tagName && d.tagName.startsWith("sgds-") && d.tagName !== "sgds-element"
+    && !d.deprecated && !(d.description && d.description.includes("@deprecated"))
+);
+
+// Map tagName → declaration and className → tagName
+const declByTag = new Map<string, CemDecl>();
+const tagByClass = new Map<string, string>();
+const classByTag = new Map<string, string>();
+for (const d of componentDecls) {
+  declByTag.set(d.tagName!, d);
+  tagByClass.set(d.name, d.tagName!);
+  classByTag.set(d.tagName!, d.name);
+}
+
+/**
+ * Get the per-component import path for a tag.
+ * e.g., "sgds-accordion" → "@govtechsg/sgds-web-component/components/Accordion/index.js"
+ * Extracts the folder name from the CEM module path (src/components/Accordion/sgds-accordion.ts → Accordion)
+ */
+export function getComponentImportPath(tag: string): string {
+  const modPath = modulePathByTag.get(tag);
+  if (modPath) {
+    // Extract folder: "src/components/Accordion/sgds-accordion.ts" → "Accordion"
+    const parts = modPath.split("/");
+    const folder = parts[parts.length - 2]; // second to last segment
+    return `@govtechsg/sgds-web-component/components/${folder}/index.js`;
+  }
+  // Fallback: derive from class name
+  const cls = classByTag.get(tag);
+  if (cls) {
+    const folder = cls.replace(/^Sgds/, "");
+    return `@govtechsg/sgds-web-component/components/${folder}/index.js`;
+  }
+  return `@govtechsg/sgds-web-component`;
+}
+
+/**
+ * Collect all per-component import paths needed for a tag and its children.
+ */
+export function getComponentImportPaths(tag: string): string[] {
+  const paths = new Set<string>();
+  paths.add(getComponentImportPath(tag));
+
+  // Add children's imports
+  const children = parentChildMap.get(tag);
+  if (children) {
+    for (const child of children) {
+      paths.add(getComponentImportPath(child));
+    }
+  }
+
+  return [...paths];
+}
+
+// ---------------------------------------------------------------------------
+// Parent-child detection
+// ---------------------------------------------------------------------------
+
+// Inverted naming: child name is the shorter one, parent is the longer one
+const reverseParents: Record<string, string> = {
+  "sgds-checkbox": "sgds-checkbox-group",
+  "sgds-radio": "sgds-radio-group",
+  "sgds-tab": "sgds-tab-group",
+  "sgds-tab-panel": "sgds-tab-group",
+  "sgds-toast": "sgds-toast-container",
+};
+
+/**
+ * Build parent → children map using strict tag-name prefix matching only.
+ * A child tag must start with the parent tag + "-" (e.g., sgds-accordion-item is a child of sgds-accordion).
+ * The reverseParents map handles inverted naming (e.g., sgds-checkbox is a child of sgds-checkbox-group).
+ * Non-component relationships (e.g., sgds-icon inside sgds-input) are NOT parent-child.
+ */
+
+// Tags that share a prefix but are independent components, not parent-child
+const notChildren = new Set([
+  "sgds-icon-button", "sgds-icon-card", "sgds-icon-list",  // sgds-icon-* are standalone, NOT children of sgds-icon
+  "sgds-table-of-contents",  // unrelated to sgds-table
+]);
+
+function buildParentChildMap(): Map<string, string[]> {
+  const map = new Map<string, string[]>();
+  const allTags = [...declByTag.keys()];
+
+  // Tags whose parent-child direction is defined by reverseParents — skip prefix matching for these
+  const reverseHandled = new Set([
+    ...Object.keys(reverseParents),
+    ...Object.values(reverseParents),
+  ]);
+
+  // Strict prefix matching: child tag starts with parent tag + "-"
+  for (const childTag of allTags) {
+    if (notChildren.has(childTag)) continue;
+    if (reverseHandled.has(childTag)) continue; // handled by reverseParents
+    // Walk backwards stripping hyphen-segments to find a parent
+    const parts = childTag.split("-");
+    for (let i = parts.length - 1; i >= 2; i--) {
+      const candidateParent = parts.slice(0, i).join("-");
+      if (declByTag.has(candidateParent) && candidateParent !== childTag) {
+        const children = map.get(candidateParent) || [];
+        if (!children.includes(childTag)) children.push(childTag);
+        map.set(candidateParent, children);
+        break; // only the closest parent
       }
     }
-    return clean;
-  } catch {
-    return {};
+  }
+
+  // Add reverse-parent entries (inverted naming)
+  for (const [child, parent] of Object.entries(reverseParents)) {
+    const children = map.get(parent) || [];
+    if (!children.includes(child)) children.push(child);
+    map.set(parent, children);
+  }
+
+  return map;
+}
+
+export const parentChildMap = buildParentChildMap();
+
+/** Tags that are children rendered inside a parent — should not get standalone pages */
+export const childOnlyTags = new Set<string>();
+for (const children of parentChildMap.values()) {
+  for (const child of children) {
+    childOnlyTags.add(child);
   }
 }
 
-// ---------------------------------------------------------------------------
-// Props serializers
-// ---------------------------------------------------------------------------
-export function propsToJsx(args: Record<string, unknown>): string {
-  return Object.entries(args)
-    .map(([k, v]) => {
-      if (typeof v === "boolean") return v ? k : "";
-      if (typeof v === "string") return `${k}="${v}"`;
-      if (typeof v === "number") return `${k}={${v}}`;
-      return "";
-    })
-    .filter(Boolean)
-    .map(p => `      ${p}`)
-    .join("\n");
-}
-
-export function propsToHtml(args: Record<string, unknown>): string {
-  return Object.entries(args)
-    .map(([k, v]) => {
-      const attr = k.replace(/([A-Z])/g, "-$1").toLowerCase();
-      if (typeof v === "boolean") return v ? attr : "";
-      if (typeof v === "string") return `${attr}="${v}"`;
-      if (typeof v === "number") return `${attr}="${v}"`;
-      return "";
-    })
-    .filter(Boolean)
-    .join(" ");
+// Also export as class names for the generators that filter by React component name
+export const childOnlyComponents = new Set<string>();
+for (const tag of childOnlyTags) {
+  const cls = classByTag.get(tag);
+  if (cls) childOnlyComponents.add(cls);
 }
 
 // ---------------------------------------------------------------------------
-// Components that are children-only (rendered inside parents) — skip these
+// Prop generation helpers
 // ---------------------------------------------------------------------------
-export const childOnlyComponents = new Set([
-  "SgdsAccordionItem", "SgdsAppnavProfile", "SgdsBreadcrumbItem", "SgdsCheckbox", "SgdsComboBoxOption",
-  "SgdsDataTableHead", "SgdsDataTableRow", "SgdsDataTableCell",
-  "SgdsDescriptionListGroup", "SgdsDropdownItem", "SgdsFooterItem",
-  "SgdsMainnavItem", "SgdsMainnavDropdown", "SgdsMainnavProfile",
-  "SgdsRadio", "SgdsSelectOption",
-  "SgdsSidebarItem", "SgdsSidebarGroup", "SgdsSidebarSection",
-  "SgdsSidenavItem", "SgdsSidenavLink",
-  "SgdsStep", "SgdsSubnavItem", "SgdsSystemBannerItem",
-  "SgdsTab", "SgdsTabPanel",
-  "SgdsTableHead", "SgdsTableRow", "SgdsTableCell",
-  "SgdsToast",
+
+/** Props to always skip */
+const skipProps = new Set([
+  "open", "active", "disabled", "invalid", "expanded", "loading",
+  "noAnimation", "contained",
 ]);
 
+/** Props starting with these prefixes are SSR helpers — skip */
+const skipPrefixes = ["has"];
+
+/** Boolean props to force true for demo visibility */
+const showByDefault = new Set(["show"]);
+
+/** Props that are form internals or low-value for demos */
+const skipFormProps = new Set([
+  "name", "value", "form", "formAction", "formMethod",
+  "formNoValidate", "formTarget", "noValidate",
+  "hasFeedback", "required", "invalidFeedback",
+]);
+
+function shouldSkipProp(field: CemField): boolean {
+  if (field.static) return true;
+  if (field.deprecated || (field.description && field.description.includes("@deprecated"))) return true;
+  if (skipProps.has(field.name)) return true;
+  if (skipFormProps.has(field.name)) return true;
+  if (skipPrefixes.some(p => field.name.startsWith(p) && field.name !== "hintText")) return true;
+  if (field.description && /managed by|controlled by/i.test(field.description)) return true;
+
+  const type = field.type?.text || "";
+  const def = field.default;
+
+  // Skip booleans that default to false (unless in showByDefault)
+  if (type === "boolean" && def === "false" && !showByDefault.has(field.name)) return true;
+
+  // Skip props with no default and no obvious demo value
+  if (!def && !["label", "placeholder", "hintText", "ariaLabel"].includes(field.name)) return true;
+
+  return false;
+}
+
+function getPropValue(field: CemField, displayName: string): string | number | boolean | null {
+  if (showByDefault.has(field.name)) return true;
+
+  const type = field.type?.text || "";
+  const def = field.default;
+
+  if (type === "boolean") {
+    return def === "true" ? true : null;
+  }
+
+  if (def) {
+    // Strip surrounding quotes from string defaults
+    const stripped = def.replace(/^["']|["']$/g, "");
+    if (stripped === "" || stripped === "undefined") {
+      // Empty default — generate a value for known prop names
+      if (field.name === "label") return displayName;
+      if (field.name === "ariaLabel") return displayName;
+      return null;
+    }
+    // Skip object/array/complex defaults (contain braces, brackets, or nested quotes)
+    if (stripped.includes("{") || stripped.includes("[") || stripped.includes('"')) return null;
+    // Number default
+    if (type === "number" || /^\d+$/.test(stripped)) return Number(stripped);
+    return stripped;
+  }
+
+  // No default — generate for known names
+  if (field.name === "label") return displayName;
+  if (field.name === "ariaLabel") return displayName;
+  if (field.name === "placeholder") return "Enter text...";
+  if (field.name === "hintText") return "Hint text";
+
+  return null;
+}
+
+function getComponentProps(decl: CemDecl): { name: string; attr: string; value: string | number | boolean }[] {
+  const displayName = decl.name.replace(/^Sgds/, "");
+  const fields = (decl.members || []).filter(m => m.kind === "field" && m.attribute);
+  const result: { name: string; attr: string; value: string | number | boolean }[] = [];
+
+  for (const f of fields) {
+    if (shouldSkipProp(f)) continue;
+    const val = getPropValue(f, displayName);
+    if (val === null) continue;
+    result.push({ name: f.name, attr: f.attribute!, value: val });
+  }
+
+  return result;
+}
+
 // ---------------------------------------------------------------------------
-// JSX templates (React / Next.js)
+// Slot content generation
 // ---------------------------------------------------------------------------
-export type JsxTemplateResult = { imports: string[]; jsx: string };
 
-export const jsxTemplates: Record<string, (args: Record<string, unknown>) => JsxTemplateResult> = {
-  Accordion: () => ({
-    imports: ["SgdsAccordion", "SgdsAccordionItem"],
-    jsx: `      <SgdsAccordion>
-        <SgdsAccordionItem ariaLabel="Accordion title #1">
-          <div slot="header">Accordion title #1</div>
-          <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-        </SgdsAccordionItem>
-        <SgdsAccordionItem ariaLabel="Accordion title #2">
-          <div slot="header">Accordion title #2</div>
-          <div slot="content">Maiores soluta eaque fugit fuga distinctio.</div>
-        </SgdsAccordionItem>
-      </SgdsAccordion>`,
-  }),
+function generateSlotHtml(slot: CemSlot, tag: string, indent: string): string | null {
+  // Skip deprecated slots
+  if (slot.description && slot.description.includes("@deprecated")) return null;
 
-  Appnav: () => ({
-    imports: ["SgdsAppnav", "SgdsAppnavProfile", "SgdsIconButton", "SgdsDropdownItem", "SgdsDivider"],
-    jsx: `      <SgdsAppnav tone="gradient-3">
-        <SgdsIconButton
-          name="menu"
-          slot="start"
-          variant="ghost"
-          tone="fixed-light"
-          size="sm"
-          ariaLabel="Open side menu"
-        ></SgdsIconButton>
-        <a slot="brand" href="/"><strong style={{color: "white"}}>My App</strong></a>
-        <SgdsIconButton
-          name="moon"
-          variant="ghost"
-          tone="fixed-light"
-          size="sm"
-          ariaLabel="Toggle dark mode"
-        ></SgdsIconButton>
-        <SgdsIconButton
-          name="bell"
-          variant="ghost"
-          tone="fixed-light"
-          size="sm"
-          ariaLabel="Notifications"
-        ></SgdsIconButton>
-        <SgdsAppnavProfile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu">
-          <span slot="avatar" className="sgds:h-10 sgds:w-10 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
-            <span className="sgds:h-full sgds:w-full sgds:block sgds:bg-neutral-surface-muted sgds:rounded-full"></span>
-          </span>
-          <SgdsDropdownItem ariaLabel="My profile"><span>My profile</span></SgdsDropdownItem>
-          <SgdsDropdownItem ariaLabel="Settings"><span>Settings</span></SgdsDropdownItem>
-          <SgdsDivider thickness="thin"></SgdsDivider>
-          <SgdsDropdownItem ariaLabel="Log out"><span className="sgds:text-danger-default">Log out</span></SgdsDropdownItem>
-        </SgdsAppnavProfile>
-      </SgdsAppnav>`,
-  }),
+  const displayName = (classByTag.get(tag) || tag).replace(/^Sgds/, "");
+  const n = slot.name;
 
-  Alert: () => ({
-    imports: ["SgdsAlert"],
-    jsx: `      <SgdsAlert variant="info" show>This is an informational alert.</SgdsAlert>`,
-  }),
+  if (n === "default") return null; // handled separately (children or text)
+  if (n === "title") return `${indent}<span slot="title">${displayName}</span>`;
+  if (n === "description") return `${indent}<span slot="description">Description of the ${displayName.toLowerCase()}.</span>`;
+  if (n === "header") return `${indent}<div slot="header">Header text</div>`;
+  if (n === "content") return `${indent}<div slot="content">Content goes here.</div>`;
+  if (n === "footer") return `${indent}<span slot="footer">Footer content</span>`;
+  if (n === "icon") return `${indent}<sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>`;
+  if (n === "brand") return `${indent}<strong slot="brand">${displayName}</strong>`;
+  if (n === "nav") return null; // handled in tab-group special case
 
-  Badge: () => ({
-    imports: ["SgdsBadge"],
-    jsx: `      <SgdsBadge>Badge</SgdsBadge>`,
-  }),
+  // Skip optional/deprecated/SSR slots
+  return null;
+}
 
-  Breadcrumb: () => ({
-    imports: ["SgdsBreadcrumb", "SgdsBreadcrumbItem"],
-    jsx: `      <SgdsBreadcrumb>
-        <SgdsBreadcrumbItem><a href="/">Home</a></SgdsBreadcrumbItem>
-        <SgdsBreadcrumbItem><a href="/about">About</a></SgdsBreadcrumbItem>
-        <SgdsBreadcrumbItem><a href="/current">Current Page</a></SgdsBreadcrumbItem>
-      </SgdsBreadcrumb>`,
-  }),
+// ---------------------------------------------------------------------------
+// Override templates for complex components
+// ---------------------------------------------------------------------------
 
-  Button: () => ({
-    imports: ["SgdsButton"],
-    jsx: `      <SgdsButton variant="primary">Primary</SgdsButton>`,
-  }),
+type HtmlOverrideFn = () => string;
+type JsxOverrideFn = () => { imports: string[]; jsx: string };
 
-  Card: () => ({
-    imports: ["SgdsCard", "SgdsLink"],
-    jsx: `      <SgdsCard>
-        <span slot="title">Card Title</span>
-        <span slot="description">This is a description of the card content.</span>
-        <SgdsLink slot="footer"><a href="#">Read more</a></SgdsLink>
-      </SgdsCard>`,
-  }),
+const htmlOverrides: Record<string, HtmlOverrideFn> = {
+  "sgds-data-table": () => `<sgds-data-table data-length="3" current-page="1" items-per-page="5">
+        <sgds-data-table-row>
+          <sgds-data-table-head sorting sort-key="id">ID</sgds-data-table-head>
+          <sgds-data-table-head sorting sort-key="name">Name</sgds-data-table-head>
+          <sgds-data-table-head sort-key="role">Role</sgds-data-table-head>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>1</sgds-data-table-cell>
+          <sgds-data-table-cell>Alice</sgds-data-table-cell>
+          <sgds-data-table-cell>Engineer</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>2</sgds-data-table-cell>
+          <sgds-data-table-cell>Bob</sgds-data-table-cell>
+          <sgds-data-table-cell>Designer</sgds-data-table-cell>
+        </sgds-data-table-row>
+        <sgds-data-table-row>
+          <sgds-data-table-cell>3</sgds-data-table-cell>
+          <sgds-data-table-cell>Charlie</sgds-data-table-cell>
+          <sgds-data-table-cell>Analyst</sgds-data-table-cell>
+        </sgds-data-table-row>
+      </sgds-data-table>`,
 
-  CheckboxGroup: () => ({
-    imports: ["SgdsCheckboxGroup", "SgdsCheckbox"],
-    jsx: `      <SgdsCheckboxGroup label="Select options">
-        <SgdsCheckbox value="a">Option A</SgdsCheckbox>
-        <SgdsCheckbox value="b">Option B</SgdsCheckbox>
-      </SgdsCheckboxGroup>`,
-  }),
+  "sgds-appnav": () => `<sgds-appnav tone="gradient-3">
+        <sgds-icon-button name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" aria-label="Open side menu"></sgds-icon-button>
+        <a slot="brand" href="/"><strong style="color: white">My App</strong></a>
+        <sgds-icon-button name="bell" variant="ghost" tone="fixed-light" size="sm" aria-label="Notifications"></sgds-icon-button>
+        <sgds-appnav-profile slot="profile" label="User Name" secondary-text="Agency" aria-label="Profile menu">
+          <sgds-dropdown-item aria-label="My profile"><span>My profile</span></sgds-dropdown-item>
+          <sgds-dropdown-item aria-label="Log out"><span>Log out</span></sgds-dropdown-item>
+        </sgds-appnav-profile>
+      </sgds-appnav>`,
 
-  CloseButton: () => ({
-    imports: ["SgdsCloseButton"],
-    jsx: `      <SgdsCloseButton ariaLabel="Close"></SgdsCloseButton>`,
-  }),
+  "sgds-footer": () => `<sgds-footer
+        contact-href="https://form.gov.sg/"
+        feedback-href="https://form.gov.sg/"
+        privacy-href="/privacy"
+        terms-of-use-href="/terms"
+      ></sgds-footer>`,
 
-  ComboBox: () => ({
-    imports: ["SgdsComboBox", "SgdsComboBoxOption"],
-    jsx: `      <SgdsComboBox label="Select a country" placeholder="Search...">
-        <SgdsComboBoxOption value="sg">Singapore</SgdsComboBoxOption>
-        <SgdsComboBoxOption value="my">Malaysia</SgdsComboBoxOption>
-        <SgdsComboBoxOption value="id">Indonesia</SgdsComboBoxOption>
-      </SgdsComboBox>`,
-  }),
+  "sgds-table": () => `<sgds-table header-background table-border>
+        <sgds-table-row>
+          <sgds-table-head>Name</sgds-table-head>
+          <sgds-table-head>Role</sgds-table-head>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Alice</sgds-table-cell>
+          <sgds-table-cell>Engineer</sgds-table-cell>
+        </sgds-table-row>
+        <sgds-table-row>
+          <sgds-table-cell>Bob</sgds-table-cell>
+          <sgds-table-cell>Designer</sgds-table-cell>
+        </sgds-table-row>
+      </sgds-table>`,
+};
 
-  DataTable: () => ({
+const jsxOverrides: Record<string, JsxOverrideFn> = {
+  "sgds-data-table": () => ({
     imports: ["SgdsDataTable", "SgdsDataTableHead", "SgdsDataTableRow", "SgdsDataTableCell"],
-    jsx: `      <SgdsDataTable multiSelect dataLength={5} currentPage={1} itemsPerPage={5}>
+    jsx: `      <SgdsDataTable dataLength={3} currentPage={1} itemsPerPage={5}>
         <SgdsDataTableRow>
           <SgdsDataTableHead sorting sortKey="id">ID</SgdsDataTableHead>
           <SgdsDataTableHead sorting sortKey="name">Name</SgdsDataTableHead>
-          <SgdsDataTableHead sorting sortKey="role">Role</SgdsDataTableHead>
-          <SgdsDataTableHead textAlign="right">Amount</SgdsDataTableHead>
+          <SgdsDataTableHead sortKey="role">Role</SgdsDataTableHead>
         </SgdsDataTableRow>
         <SgdsDataTableRow>
           <SgdsDataTableCell>1</SgdsDataTableCell>
           <SgdsDataTableCell>Alice</SgdsDataTableCell>
           <SgdsDataTableCell>Engineer</SgdsDataTableCell>
-          <SgdsDataTableCell>1250.00</SgdsDataTableCell>
         </SgdsDataTableRow>
         <SgdsDataTableRow>
           <SgdsDataTableCell>2</SgdsDataTableCell>
           <SgdsDataTableCell>Bob</SgdsDataTableCell>
           <SgdsDataTableCell>Designer</SgdsDataTableCell>
-          <SgdsDataTableCell>980.00</SgdsDataTableCell>
         </SgdsDataTableRow>
         <SgdsDataTableRow>
           <SgdsDataTableCell>3</SgdsDataTableCell>
           <SgdsDataTableCell>Charlie</SgdsDataTableCell>
           <SgdsDataTableCell>Analyst</SgdsDataTableCell>
-          <SgdsDataTableCell>1100.00</SgdsDataTableCell>
-        </SgdsDataTableRow>
-        <SgdsDataTableRow>
-          <SgdsDataTableCell>4</SgdsDataTableCell>
-          <SgdsDataTableCell>Diana</SgdsDataTableCell>
-          <SgdsDataTableCell>Manager</SgdsDataTableCell>
-          <SgdsDataTableCell>1500.00</SgdsDataTableCell>
-        </SgdsDataTableRow>
-        <SgdsDataTableRow>
-          <SgdsDataTableCell>5</SgdsDataTableCell>
-          <SgdsDataTableCell>Eve</SgdsDataTableCell>
-          <SgdsDataTableCell>Engineer</SgdsDataTableCell>
-          <SgdsDataTableCell>1300.00</SgdsDataTableCell>
         </SgdsDataTableRow>
       </SgdsDataTable>`,
   }),
 
-  Datepicker: (args) => ({
-    imports: ["SgdsDatepicker"],
-    jsx: `      <SgdsDatepicker label="${args.label || "Select a date"}" name="date"></SgdsDatepicker>`,
+  "sgds-appnav": () => ({
+    imports: ["SgdsAppnav", "SgdsAppnavProfile", "SgdsIconButton", "SgdsDropdownItem"],
+    jsx: `      <SgdsAppnav tone="gradient-3">
+        <SgdsIconButton name="menu" slot="start" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Open side menu"></SgdsIconButton>
+        <a slot="brand" href="/"><strong style={{color: "white"}}>My App</strong></a>
+        <SgdsIconButton name="bell" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Notifications"></SgdsIconButton>
+        <SgdsAppnavProfile slot="profile" label="User Name" secondaryText="Agency" ariaLabel="Profile menu">
+          <SgdsDropdownItem ariaLabel="My profile"><span>My profile</span></SgdsDropdownItem>
+          <SgdsDropdownItem ariaLabel="Log out"><span>Log out</span></SgdsDropdownItem>
+        </SgdsAppnavProfile>
+      </SgdsAppnav>`,
   }),
 
-  DescriptionList: () => ({
-    imports: ["SgdsDescriptionList", "SgdsDescriptionListGroup"],
-    jsx: `      <SgdsDescriptionListGroup bordered>
-        <SgdsDescriptionList>Name<span slot="data">John Doe</span></SgdsDescriptionList>
-        <SgdsDescriptionList>Email<span slot="data">john@example.com</span></SgdsDescriptionList>
-      </SgdsDescriptionListGroup>`,
-  }),
-
-  Divider: () => ({
-    imports: ["SgdsDivider"],
-    jsx: `      <SgdsDivider></SgdsDivider>`,
-  }),
-
-  Drawer: () => ({
-    imports: ["SgdsDrawer", "SgdsButton"],
-    jsx: `      <SgdsButton variant="primary" onClick={(e) => { const d = e.currentTarget.nextElementSibling; if (d) d.open = true; }}>Open Drawer</SgdsButton>
-      <SgdsDrawer label="Drawer Title">Drawer content goes here.</SgdsDrawer>`,
-  }),
-
-  Dropdown: () => ({
-    imports: ["SgdsDropdown", "SgdsDropdownItem", "SgdsButton"],
-    jsx: `      <SgdsDropdown>
-        <SgdsButton slot="toggler" ariaLabel="Options menu">Options</SgdsButton>
-        <SgdsDropdownItem ariaLabel="View"><a href="#">View</a></SgdsDropdownItem>
-        <SgdsDropdownItem ariaLabel="Edit"><a href="#">Edit</a></SgdsDropdownItem>
-        <SgdsDropdownItem ariaLabel="Delete"><a href="#">Delete</a></SgdsDropdownItem>
-      </SgdsDropdown>`,
-  }),
-
-  FileUpload: (args) => ({
-    imports: ["SgdsFileUpload"],
-    jsx: `      <SgdsFileUpload label="${args.label || "Upload file"}" name="file"></SgdsFileUpload>`,
-  }),
-
-  Footer: (args) => ({
+  "sgds-footer": () => ({
     imports: ["SgdsFooter"],
     jsx: `      <SgdsFooter
-        contactHref="${args.contactHref || "https://form.gov.sg/"}"
-        feedbackHref="${args.feedbackHref || "https://form.gov.sg/"}"
-        privacyHref="${args.privacyHref || "/privacy"}"
-        termsOfUseHref="${args.termsOfUseHref || "/terms"}"
+        contactHref="https://form.gov.sg/"
+        feedbackHref="https://form.gov.sg/"
+        privacyHref="/privacy"
+        termsOfUseHref="/terms"
       ></SgdsFooter>`,
   }),
 
-  Icon: () => ({
-    imports: ["SgdsIcon"],
-    jsx: `      <SgdsIcon name="placeholder" size="md"></SgdsIcon>`,
-  }),
-
-  IconButton: () => ({
-    imports: ["SgdsIconButton"],
-    jsx: `      <SgdsIconButton name="gear" ariaLabel="Settings" variant="ghost"></SgdsIconButton>`,
-  }),
-
-  IconCard: () => ({
-    imports: ["SgdsIconCard"],
-    jsx: `      <SgdsIconCard>
-        <span slot="title">Icon Card Title</span>
-        <span slot="description">Description of the icon card.</span>
-      </SgdsIconCard>`,
-  }),
-
-  IconList: () => ({
-    imports: ["SgdsIconList"],
-    jsx: `      <SgdsIconList icon="check-circle-fill">This is an icon list item.</SgdsIconList>`,
-  }),
-
-  ImageCard: () => ({
-    imports: ["SgdsImageCard"],
-    jsx: `      <SgdsImageCard>
-        <span slot="title">Image Card</span>
-        <span slot="description">Description of the image card.</span>
-      </SgdsImageCard>`,
-  }),
-
-  Input: (args) => ({
-    imports: ["SgdsInput"],
-    jsx: `      <SgdsInput
-        type="${args.type || "text"}"
-        label="${args.label || "Label"}"
-        name="${args.name || "input-field"}"
-        placeholder="${args.placeholder || "Placeholder text"}"
-        hintText="${args.hintText || "Hint text"}"
-      ></SgdsInput>`,
-  }),
-
-  Link: () => ({
-    imports: ["SgdsLink"],
-    jsx: `      <SgdsLink><a href="#">This is a link</a></SgdsLink>`,
-  }),
-
-  Mainnav: () => ({
-    imports: ["SgdsMainnav", "SgdsMainnavItem"],
-    jsx: `      <SgdsMainnav>
-        <strong slot="brand">My App</strong>
-        <SgdsMainnavItem><a href="/">Home</a></SgdsMainnavItem>
-        <SgdsMainnavItem><a href="/about">About</a></SgdsMainnavItem>
-      </SgdsMainnav>`,
-  }),
-
-  Masthead: () => ({
-    imports: ["SgdsMasthead"],
-    jsx: `      <SgdsMasthead></SgdsMasthead>`,
-  }),
-
-  Modal: () => ({
-    imports: ["SgdsModal", "SgdsButton"],
-    jsx: `      <SgdsButton variant="primary" onClick={(e) => { const m = e.currentTarget.nextElementSibling; if (m) m.open = true; }}>Open Modal</SgdsButton>
-      <SgdsModal label="Modal Title">Modal content goes here.</SgdsModal>`,
-  }),
-
-  OverflowMenu: () => ({
-    imports: ["SgdsOverflowMenu"],
-    jsx: `      <SgdsOverflowMenu ariaLabel="More actions"></SgdsOverflowMenu>`,
-  }),
-
-  Pagination: () => ({
-    imports: ["SgdsPagination"],
-    jsx: `      <SgdsPagination dataLength={50} currentPage={1} itemsPerPage={10}></SgdsPagination>`,
-  }),
-
-  ProgressBar: () => ({
-    imports: ["SgdsProgressBar"],
-    jsx: `      <SgdsProgressBar label="Loading" value={60}></SgdsProgressBar>`,
-  }),
-
-  QuantityToggle: () => ({
-    imports: ["SgdsQuantityToggle"],
-    jsx: `      <SgdsQuantityToggle label="Quantity" name="qty"></SgdsQuantityToggle>`,
-  }),
-
-  RadioGroup: () => ({
-    imports: ["SgdsRadioGroup", "SgdsRadio"],
-    jsx: `      <SgdsRadioGroup name="gender" label="Gender">
-        <SgdsRadio value="male">Male</SgdsRadio>
-        <SgdsRadio value="female">Female</SgdsRadio>
-      </SgdsRadioGroup>`,
-  }),
-
-  Select: () => ({
-    imports: ["SgdsSelect", "SgdsSelectOption"],
-    jsx: `      <SgdsSelect label="Country" name="country" placeholder="Select a country">
-        <SgdsSelectOption value="sg">Singapore</SgdsSelectOption>
-        <SgdsSelectOption value="my">Malaysia</SgdsSelectOption>
-        <SgdsSelectOption value="id">Indonesia</SgdsSelectOption>
-      </SgdsSelect>`,
-  }),
-
-  Sidebar: () => ({
-    imports: ["SgdsSidebar", "SgdsSidebarSection", "SgdsSidebarItem", "SgdsSidebarGroup", "SgdsIcon"],
-    jsx: `      <SgdsSidebar active="dashboard">
-        <SgdsSidebarSection title="Main" name="main">
-          <SgdsSidebarItem name="dashboard" title="Dashboard">
-            <SgdsIcon slot="icon" name="grid-fill" size="md"></SgdsIcon>
-            <a href="#"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarGroup name="reports" title="Reports">
-            <SgdsIcon slot="icon" name="file-earmark-text" size="md"></SgdsIcon>
-            <SgdsSidebarItem name="yearly" title="Yearly">
-              <SgdsIcon slot="icon" name="calendar" size="md"></SgdsIcon>
-            </SgdsSidebarItem>
-          </SgdsSidebarGroup>
-        </SgdsSidebarSection>
-      </SgdsSidebar>`,
-  }),
-
-  Sidenav: () => ({
-    imports: ["SgdsSidenav", "SgdsSidenavItem", "SgdsSidenavLink"],
-    jsx: `      <SgdsSidenav>
-        <SgdsSidenavItem active ariaLabel="Getting Started">
-          <span slot="title">Getting Started</span>
-          <SgdsSidenavLink active><a href="/">Overview</a></SgdsSidenavLink>
-          <SgdsSidenavLink><a href="/install">Installation</a></SgdsSidenavLink>
-        </SgdsSidenavItem>
-      </SgdsSidenav>`,
-  }),
-
-  Skeleton: () => ({
-    imports: ["SgdsSkeleton"],
-    jsx: `      <SgdsSkeleton></SgdsSkeleton>`,
-  }),
-
-  Spinner: () => ({
-    imports: ["SgdsSpinner"],
-    jsx: `      <SgdsSpinner></SgdsSpinner>`,
-  }),
-
-  Stepper: () => ({
-    imports: ["SgdsStepper", "SgdsStep"],
-    jsx: `      <SgdsStepper activeStep={0}>
-        <SgdsStep stepHeader="Personal Info"></SgdsStep>
-        <SgdsStep stepHeader="Contact Details"></SgdsStep>
-        <SgdsStep stepHeader="Review"></SgdsStep>
-      </SgdsStepper>`,
-  }),
-
-  Subnav: () => ({
-    imports: ["SgdsSubnav", "SgdsSubnavItem"],
-    jsx: `      <SgdsSubnav>
-        <SgdsSubnavItem active><a href="/">Home</a></SgdsSubnavItem>
-        <SgdsSubnavItem><a href="/about">About</a></SgdsSubnavItem>
-      </SgdsSubnav>`,
-  }),
-
-  Switch: () => ({
-    imports: ["SgdsSwitch"],
-    jsx: `      <SgdsSwitch>Enable notifications</SgdsSwitch>`,
-  }),
-
-  SystemBanner: () => ({
-    imports: ["SgdsSystemBanner", "SgdsSystemBannerItem", "SgdsIcon"],
-    jsx: `      <SgdsSystemBanner show>
-        <SgdsSystemBannerItem>
-          <SgdsIcon slot="icon" name="info-circle-fill" size="md"></SgdsIcon>
-          System maintenance is scheduled for this weekend.
-        </SgdsSystemBannerItem>
-      </SgdsSystemBanner>`,
-  }),
-
-  TabGroup: () => ({
-    imports: ["SgdsTabGroup", "SgdsTab", "SgdsTabPanel"],
-    jsx: `      <SgdsTabGroup>
-        <SgdsTab slot="nav" panel="tab1" ariaLabel="Tab 1">Tab 1</SgdsTab>
-        <SgdsTab slot="nav" panel="tab2" ariaLabel="Tab 2">Tab 2</SgdsTab>
-        <SgdsTabPanel name="tab1">Content for tab 1</SgdsTabPanel>
-        <SgdsTabPanel name="tab2">Content for tab 2</SgdsTabPanel>
-      </SgdsTabGroup>`,
-  }),
-
-  Table: () => ({
+  "sgds-table": () => ({
     imports: ["SgdsTable", "SgdsTableHead", "SgdsTableRow", "SgdsTableCell"],
     jsx: `      <SgdsTable headerBackground tableBorder>
         <SgdsTableRow>
@@ -494,357 +443,272 @@ export const jsxTemplates: Record<string, (args: Record<string, unknown>) => Jsx
         </SgdsTableRow>
       </SgdsTable>`,
   }),
-
-  TableOfContents: () => ({
-    imports: ["SgdsTableOfContents"],
-    jsx: `      <SgdsTableOfContents></SgdsTableOfContents>`,
-  }),
-
-  Textarea: (args) => ({
-    imports: ["SgdsTextarea"],
-    jsx: `      <SgdsTextarea
-        label="${args.label || "Comments"}"
-        name="${args.name || "comments"}"
-        placeholder="${args.placeholder || "Enter your comments"}"
-      ></SgdsTextarea>`,
-  }),
-
-  ThumbnailCard: () => ({
-    imports: ["SgdsThumbnailCard"],
-    jsx: `      <SgdsThumbnailCard>
-        <span slot="title">Thumbnail Card</span>
-        <span slot="description">Description of the thumbnail card.</span>
-      </SgdsThumbnailCard>`,
-  }),
-
-  ToastContainer: () => ({
-    imports: ["SgdsToastContainer", "SgdsToast", "SgdsIcon"],
-    jsx: `      <SgdsToastContainer position="bottom-end">
-        <SgdsToast show title="Notification" variant="info">
-          <SgdsIcon slot="icon" name="info-circle-fill" size="md"></SgdsIcon>
-          Your changes have been saved.
-        </SgdsToast>
-      </SgdsToastContainer>`,
-  }),
-
-  Tooltip: () => ({
-    imports: ["SgdsTooltip", "SgdsButton"],
-    jsx: `      <SgdsTooltip content="This is a tooltip">
-        <SgdsButton>Hover me</SgdsButton>
-      </SgdsTooltip>`,
-  }),
 };
 
 // ---------------------------------------------------------------------------
-// HTML templates (Vue / Nuxt / Angular) — native web component markup
+// Detect if a component needs a trigger button (open + show method)
 // ---------------------------------------------------------------------------
-export const htmlTemplates: Record<string, (args: Record<string, unknown>) => string> = {
-  Accordion: () => `<sgds-accordion>
-        <sgds-accordion-item aria-label="Accordion title #1">
-          <div slot="header">Accordion title #1</div>
-          <div slot="content">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-        </sgds-accordion-item>
-        <sgds-accordion-item aria-label="Accordion title #2">
-          <div slot="header">Accordion title #2</div>
-          <div slot="content">Maiores soluta eaque fugit fuga distinctio.</div>
-        </sgds-accordion-item>
-      </sgds-accordion>`,
 
-  Appnav: () => `<sgds-appnav tone="gradient-3">
-        <sgds-icon-button
-          name="menu"
-          slot="start"
-          variant="ghost"
-          tone="fixed-light"
-          size="sm"
-          aria-label="Open side menu"
-        ></sgds-icon-button>
-        <a slot="brand" href="/"><strong style="color: white">My App</strong></a>
-        <sgds-icon-button
-          name="moon"
-          variant="ghost"
-          tone="fixed-light"
-          size="sm"
-          aria-label="Toggle dark mode"
-        ></sgds-icon-button>
-        <sgds-icon-button
-          name="bell"
-          variant="ghost"
-          tone="fixed-light"
-          size="sm"
-          aria-label="Notifications"
-        ></sgds-icon-button>
-        <sgds-appnav-profile slot="profile" label="User Name" secondary-text="Agency (admin)" aria-label="Profile menu">
-          <span slot="avatar" class="sgds:h-10 sgds:w-10 sgds:shrink-0 sgds:overflow-hidden sgds:rounded-full">
-            <span class="sgds:h-full sgds:w-full sgds:block sgds:bg-neutral-surface-muted sgds:rounded-full"></span>
-          </span>
-          <sgds-dropdown-item aria-label="My profile"><span>My profile</span></sgds-dropdown-item>
-          <sgds-dropdown-item aria-label="Settings"><span>Settings</span></sgds-dropdown-item>
-          <sgds-divider thickness="thin"></sgds-divider>
-          <sgds-dropdown-item aria-label="Log out"><span class="sgds:text-danger-default">Log out</span></sgds-dropdown-item>
-        </sgds-appnav-profile>
-      </sgds-appnav>`,
-
-  Alert: () => `<sgds-alert variant="info" show>This is an informational alert.</sgds-alert>`,
-  Badge: () => `<sgds-badge>Badge</sgds-badge>`,
-
-  Breadcrumb: () => `<sgds-breadcrumb>
-        <sgds-breadcrumb-item><a href="/">Home</a></sgds-breadcrumb-item>
-        <sgds-breadcrumb-item><a href="/about">About</a></sgds-breadcrumb-item>
-        <sgds-breadcrumb-item><a href="/current">Current Page</a></sgds-breadcrumb-item>
-      </sgds-breadcrumb>`,
-
-  Button: () => `<sgds-button variant="primary">Primary</sgds-button>`,
-
-  Card: () => `<sgds-card>
-        <span slot="title">Card Title</span>
-        <span slot="description">This is a description of the card content.</span>
-        <sgds-link slot="footer"><a href="#">Read more</a></sgds-link>
-      </sgds-card>`,
-
-  CheckboxGroup: () => `<sgds-checkbox-group label="Select options">
-        <sgds-checkbox value="a">Option A</sgds-checkbox>
-        <sgds-checkbox value="b">Option B</sgds-checkbox>
-      </sgds-checkbox-group>`,
-
-  CloseButton: () => `<sgds-close-button aria-label="Close"></sgds-close-button>`,
-
-  ComboBox: () => `<sgds-combo-box label="Select a country" placeholder="Search...">
-        <sgds-combo-box-option value="sg">Singapore</sgds-combo-box-option>
-        <sgds-combo-box-option value="my">Malaysia</sgds-combo-box-option>
-        <sgds-combo-box-option value="id">Indonesia</sgds-combo-box-option>
-      </sgds-combo-box>`,
-
-  DataTable: () => `<sgds-data-table multi-select data-length="5" current-page="1" items-per-page="5">
-        <sgds-data-table-row>
-          <sgds-data-table-head sorting sort-key="id">ID</sgds-data-table-head>
-          <sgds-data-table-head sorting sort-key="name">Name</sgds-data-table-head>
-          <sgds-data-table-head sorting sort-key="role">Role</sgds-data-table-head>
-          <sgds-data-table-head text-align="right">Amount</sgds-data-table-head>
-        </sgds-data-table-row>
-        <sgds-data-table-row>
-          <sgds-data-table-cell>1</sgds-data-table-cell>
-          <sgds-data-table-cell>Alice</sgds-data-table-cell>
-          <sgds-data-table-cell>Engineer</sgds-data-table-cell>
-          <sgds-data-table-cell>1250.00</sgds-data-table-cell>
-        </sgds-data-table-row>
-        <sgds-data-table-row>
-          <sgds-data-table-cell>2</sgds-data-table-cell>
-          <sgds-data-table-cell>Bob</sgds-data-table-cell>
-          <sgds-data-table-cell>Designer</sgds-data-table-cell>
-          <sgds-data-table-cell>980.00</sgds-data-table-cell>
-        </sgds-data-table-row>
-        <sgds-data-table-row>
-          <sgds-data-table-cell>3</sgds-data-table-cell>
-          <sgds-data-table-cell>Charlie</sgds-data-table-cell>
-          <sgds-data-table-cell>Analyst</sgds-data-table-cell>
-          <sgds-data-table-cell>1100.00</sgds-data-table-cell>
-        </sgds-data-table-row>
-        <sgds-data-table-row>
-          <sgds-data-table-cell>4</sgds-data-table-cell>
-          <sgds-data-table-cell>Diana</sgds-data-table-cell>
-          <sgds-data-table-cell>Manager</sgds-data-table-cell>
-          <sgds-data-table-cell>1500.00</sgds-data-table-cell>
-        </sgds-data-table-row>
-        <sgds-data-table-row>
-          <sgds-data-table-cell>5</sgds-data-table-cell>
-          <sgds-data-table-cell>Eve</sgds-data-table-cell>
-          <sgds-data-table-cell>Engineer</sgds-data-table-cell>
-          <sgds-data-table-cell>1300.00</sgds-data-table-cell>
-        </sgds-data-table-row>
-      </sgds-data-table>`,
-
-  Datepicker: (args) => `<sgds-datepicker label="${args.label || "Select a date"}" name="date"></sgds-datepicker>`,
-
-  DescriptionList: () => `<sgds-description-list-group bordered>
-        <sgds-description-list>Name<span slot="data">John Doe</span></sgds-description-list>
-        <sgds-description-list>Email<span slot="data">john@example.com</span></sgds-description-list>
-      </sgds-description-list-group>`,
-
-  Divider: () => `<sgds-divider></sgds-divider>`,
-  Drawer: () => `<sgds-button variant="primary" onclick="this.nextElementSibling.open = true">Open Drawer</sgds-button>
-      <sgds-drawer label="Drawer Title">Drawer content goes here.</sgds-drawer>`,
-
-  Dropdown: () => `<sgds-dropdown>
-        <sgds-button slot="toggler" aria-label="Options menu">Options</sgds-button>
-        <sgds-dropdown-item aria-label="View"><a href="#">View</a></sgds-dropdown-item>
-        <sgds-dropdown-item aria-label="Edit"><a href="#">Edit</a></sgds-dropdown-item>
-        <sgds-dropdown-item aria-label="Delete"><a href="#">Delete</a></sgds-dropdown-item>
-      </sgds-dropdown>`,
-
-  FileUpload: (args) => `<sgds-file-upload label="${args.label || "Upload file"}" name="file"></sgds-file-upload>`,
-
-  Footer: (args) => `<sgds-footer
-        contact-href="${args.contactHref || "https://form.gov.sg/"}"
-        feedback-href="${args.feedbackHref || "https://form.gov.sg/"}"
-        privacy-href="${args.privacyHref || "/privacy"}"
-        terms-of-use-href="${args.termsOfUseHref || "/terms"}"
-      ></sgds-footer>`,
-
-  Icon: () => `<sgds-icon name="placeholder" size="md"></sgds-icon>`,
-  IconButton: () => `<sgds-icon-button name="gear" aria-label="Settings" variant="ghost"></sgds-icon-button>`,
-
-  IconCard: () => `<sgds-icon-card>
-        <span slot="title">Icon Card Title</span>
-        <span slot="description">Description of the icon card.</span>
-      </sgds-icon-card>`,
-
-  IconList: () => `<sgds-icon-list icon="check-circle-fill">This is an icon list item.</sgds-icon-list>`,
-
-  ImageCard: () => `<sgds-image-card>
-        <span slot="title">Image Card</span>
-        <span slot="description">Description of the image card.</span>
-      </sgds-image-card>`,
-
-  Input: (args) => `<sgds-input
-        type="${args.type || "text"}"
-        label="${args.label || "Label"}"
-        name="${args.name || "input-field"}"
-        placeholder="${args.placeholder || "Placeholder text"}"
-        hint-text="${args.hintText || "Hint text"}"
-      ></sgds-input>`,
-
-  Link: () => `<sgds-link><a href="#">This is a link</a></sgds-link>`,
-
-  Mainnav: () => `<sgds-mainnav>
-        <strong slot="brand">My App</strong>
-        <sgds-mainnav-item><a href="/">Home</a></sgds-mainnav-item>
-        <sgds-mainnav-item><a href="/about">About</a></sgds-mainnav-item>
-      </sgds-mainnav>`,
-
-  Masthead: () => `<sgds-masthead></sgds-masthead>`,
-  Modal: () => `<sgds-button variant="primary" onclick="this.nextElementSibling.open = true">Open Modal</sgds-button>
-      <sgds-modal label="Modal Title">Modal content goes here.</sgds-modal>`,
-  OverflowMenu: () => `<sgds-overflow-menu aria-label="More actions"></sgds-overflow-menu>`,
-  Pagination: () => `<sgds-pagination data-length="50" current-page="1" items-per-page="10"></sgds-pagination>`,
-  ProgressBar: () => `<sgds-progress-bar label="Loading" value="60"></sgds-progress-bar>`,
-  QuantityToggle: () => `<sgds-quantity-toggle label="Quantity" name="qty"></sgds-quantity-toggle>`,
-
-  RadioGroup: () => `<sgds-radio-group name="gender" label="Gender">
-        <sgds-radio value="male">Male</sgds-radio>
-        <sgds-radio value="female">Female</sgds-radio>
-      </sgds-radio-group>`,
-
-  Select: () => `<sgds-select label="Country" name="country" placeholder="Select a country">
-        <sgds-select-option value="sg">Singapore</sgds-select-option>
-        <sgds-select-option value="my">Malaysia</sgds-select-option>
-        <sgds-select-option value="id">Indonesia</sgds-select-option>
-      </sgds-select>`,
-
-  Sidebar: () => `<sgds-sidebar active="dashboard">
-        <sgds-sidebar-section title="Main" name="main">
-          <sgds-sidebar-item name="dashboard" title="Dashboard">
-            <sgds-icon slot="icon" name="grid-fill" size="md"></sgds-icon>
-            <a href="#"></a>
-          </sgds-sidebar-item>
-          <sgds-sidebar-group name="reports" title="Reports">
-            <sgds-icon slot="icon" name="file-earmark-text" size="md"></sgds-icon>
-            <sgds-sidebar-item name="yearly" title="Yearly">
-              <sgds-icon slot="icon" name="calendar" size="md"></sgds-icon>
-            </sgds-sidebar-item>
-          </sgds-sidebar-group>
-        </sgds-sidebar-section>
-      </sgds-sidebar>`,
-
-  Sidenav: () => `<sgds-sidenav>
-        <sgds-sidenav-item active aria-label="Getting Started">
-          <span slot="title">Getting Started</span>
-          <sgds-sidenav-link active><a href="/">Overview</a></sgds-sidenav-link>
-          <sgds-sidenav-link><a href="/install">Installation</a></sgds-sidenav-link>
-        </sgds-sidenav-item>
-      </sgds-sidenav>`,
-
-  Skeleton: () => `<sgds-skeleton></sgds-skeleton>`,
-  Spinner: () => `<sgds-spinner></sgds-spinner>`,
-
-  Stepper: () => `<sgds-stepper active-step="0">
-        <sgds-step step-header="Personal Info"></sgds-step>
-        <sgds-step step-header="Contact Details"></sgds-step>
-        <sgds-step step-header="Review"></sgds-step>
-      </sgds-stepper>`,
-
-  Subnav: () => `<sgds-subnav>
-        <sgds-subnav-item active><a href="/">Home</a></sgds-subnav-item>
-        <sgds-subnav-item><a href="/about">About</a></sgds-subnav-item>
-      </sgds-subnav>`,
-
-  Switch: () => `<sgds-switch>Enable notifications</sgds-switch>`,
-
-  SystemBanner: () => `<sgds-system-banner show>
-        <sgds-system-banner-item>
-          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
-          System maintenance is scheduled for this weekend.
-        </sgds-system-banner-item>
-      </sgds-system-banner>`,
-
-  TabGroup: () => `<sgds-tab-group>
-        <sgds-tab slot="nav" panel="tab1" aria-label="Tab 1">Tab 1</sgds-tab>
-        <sgds-tab slot="nav" panel="tab2" aria-label="Tab 2">Tab 2</sgds-tab>
-        <sgds-tab-panel name="tab1">Content for tab 1</sgds-tab-panel>
-        <sgds-tab-panel name="tab2">Content for tab 2</sgds-tab-panel>
-      </sgds-tab-group>`,
-
-  Table: () => `<sgds-table header-background table-border>
-        <sgds-table-row>
-          <sgds-table-head>Name</sgds-table-head>
-          <sgds-table-head>Role</sgds-table-head>
-        </sgds-table-row>
-        <sgds-table-row>
-          <sgds-table-cell>Alice</sgds-table-cell>
-          <sgds-table-cell>Engineer</sgds-table-cell>
-        </sgds-table-row>
-        <sgds-table-row>
-          <sgds-table-cell>Bob</sgds-table-cell>
-          <sgds-table-cell>Designer</sgds-table-cell>
-        </sgds-table-row>
-      </sgds-table>`,
-
-  TableOfContents: () => `<sgds-table-of-contents></sgds-table-of-contents>`,
-
-  Textarea: (args) => `<sgds-textarea
-        label="${args.label || "Comments"}"
-        name="${args.name || "comments"}"
-        placeholder="${args.placeholder || "Enter your comments"}"
-      ></sgds-textarea>`,
-
-  ThumbnailCard: () => `<sgds-thumbnail-card>
-        <span slot="title">Thumbnail Card</span>
-        <span slot="description">Description of the thumbnail card.</span>
-      </sgds-thumbnail-card>`,
-
-  ToastContainer: () => `<sgds-toast-container position="bottom-end">
-        <sgds-toast show title="Notification" variant="info">
-          <sgds-icon slot="icon" name="info-circle-fill" size="md"></sgds-icon>
-          Your changes have been saved.
-        </sgds-toast>
-      </sgds-toast-container>`,
-
-  Tooltip: () => `<sgds-tooltip content="This is a tooltip">
-        <sgds-button>Hover me</sgds-button>
-      </sgds-tooltip>`,
-};
-
-// ---------------------------------------------------------------------------
-// Simple template fallbacks
-// ---------------------------------------------------------------------------
-export function simpleJsxTemplate(name: string, args: Record<string, unknown>): JsxTemplateResult {
-  const p = propsToJsx(args);
-  const dirName = name.replace(/^Sgds/, "");
-  const jsx = p
-    ? `      <${name}\n${p}\n      >${dirName}</${name}>`
-    : `      <${name}>${dirName}</${name}>`;
-  return { imports: [name], jsx };
+function needsTriggerButton(decl: CemDecl): boolean {
+  const hasOpen = (decl.members || []).some(
+    m => m.kind === "field" && m.name === "open" && m.default === "false"
+  );
+  const hasShow = (decl.members || []).some(
+    m => m.kind === "method" && m.name === "show" && m.privacy === "public"
+  );
+  return hasOpen && hasShow && !childOnlyTags.has(decl.tagName!);
 }
 
-export function toTagName(name: string): string {
-  return "sgds-" + name.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
+// ---------------------------------------------------------------------------
+// HTML template generation (Vue / Nuxt / Angular)
+// ---------------------------------------------------------------------------
+
+function generateChildHtml(parentTag: string, indent: string): string {
+  const children = parentChildMap.get(parentTag) || [];
+  const parentDecl = declByTag.get(parentTag)!;
+  const slots = parentDecl.slots || [];
+
+  // Special case: tab-group needs tabs in "nav" slot and panels in default
+  if (parentTag === "sgds-tab-group") {
+    return `${indent}<sgds-tab slot="nav" panel="tab1" aria-label="Tab 1">Tab 1</sgds-tab>
+${indent}<sgds-tab slot="nav" panel="tab2" aria-label="Tab 2">Tab 2</sgds-tab>
+${indent}<sgds-tab-panel name="tab1">Content for tab 1</sgds-tab-panel>
+${indent}<sgds-tab-panel name="tab2">Content for tab 2</sgds-tab-panel>`;
+  }
+
+  // For each child, generate a simple instance with its slots filled
+  const parts: string[] = [];
+  for (const childTag of children) {
+    const childDecl = declByTag.get(childTag);
+    if (!childDecl) continue;
+
+    const childProps = getComponentProps(childDecl);
+    const propsStr = childProps.map(p => {
+      const attr = p.name.replace(/([A-Z])/g, "-$1").toLowerCase();
+      if (typeof p.value === "boolean") return p.value ? attr : "";
+      return `${attr}="${p.value}"`;
+    }).filter(Boolean).join(" ");
+
+    const childSlots = (childDecl.slots || []);
+    const slotContent: string[] = [];
+    for (const s of childSlots) {
+      const html = generateSlotHtml(s, childTag, indent + "  ");
+      if (html) slotContent.push(html);
+    }
+
+    // Default slot content for the child
+    const defaultSlot = childSlots.find(s => s.name === "default");
+    if (defaultSlot) {
+      const displayName = childDecl.name.replace(/^Sgds/, "");
+      slotContent.push(`${indent}  ${displayName} content`);
+    }
+
+    const openTag = propsStr ? `<${childTag} ${propsStr}>` : `<${childTag}>`;
+    if (slotContent.length > 0) {
+      parts.push(`${indent}${openTag}\n${slotContent.join("\n")}\n${indent}</${childTag}>`);
+    } else {
+      parts.push(`${indent}${openTag}</${childTag}>`);
+    }
+  }
+
+  return parts.join("\n");
 }
 
-export function simpleHtmlTemplate(name: string, args: Record<string, unknown>): string {
-  const dirName = name.replace(/^Sgds/, "");
-  const tagName = toTagName(dirName);
-  const p = propsToHtml(args);
-  return p
-    ? `<${tagName} ${p}>${dirName}</${tagName}>`
-    : `<${tagName}>${dirName}</${tagName}>`;
+export function generateHtmlTemplate(tag: string): string {
+  // Check for manual override
+  if (htmlOverrides[tag]) return htmlOverrides[tag]();
+
+  const decl = declByTag.get(tag);
+  if (!decl) return `<${tag}></${tag}>`;
+
+  const displayName = decl.name.replace(/^Sgds/, "");
+  const props = getComponentProps(decl);
+  const slots = decl.slots || [];
+  const children = parentChildMap.get(tag);
+  const hasTrigger = needsTriggerButton(decl);
+
+  // Build props string
+  const propsStr = props.map(p => {
+    const attr = p.name.replace(/([A-Z])/g, "-$1").toLowerCase();
+    if (typeof p.value === "boolean") return p.value ? attr : "";
+    return `${attr}="${p.value}"`;
+  }).filter(Boolean).join(" ");
+
+  // Build slot content
+  const indent = "        ";
+  const slotParts: string[] = [];
+
+  // Named slots
+  for (const s of slots) {
+    const html = generateSlotHtml(s, tag, indent);
+    if (html) slotParts.push(html);
+  }
+
+  // Default slot: children or text
+  if (children && children.length > 0) {
+    slotParts.push(generateChildHtml(tag, indent));
+  } else {
+    const defaultSlot = slots.find(s => s.name === "default");
+    if (defaultSlot) {
+      slotParts.push(`${indent}${displayName}`);
+    }
+  }
+
+  const openTag = propsStr ? `<${tag} ${propsStr}>` : `<${tag}>`;
+  let html: string;
+  if (slotParts.length > 0) {
+    html = `${openTag}\n${slotParts.join("\n")}\n      </${tag}>`;
+  } else {
+    html = `${openTag}</${tag}>`;
+  }
+
+  // Prepend trigger button if needed
+  if (hasTrigger) {
+    html = `<sgds-button variant="primary" onclick="this.nextElementSibling.open = true">Open ${displayName}</sgds-button>\n      ${html}`;
+  }
+
+  return html;
+}
+
+// ---------------------------------------------------------------------------
+// JSX template generation (React / Next.js)
+// ---------------------------------------------------------------------------
+
+function generateChildJsx(parentTag: string, indent: string): { imports: string[]; jsx: string } {
+  const children = parentChildMap.get(parentTag) || [];
+  const imports: string[] = [];
+
+  // Special case: tab-group
+  if (parentTag === "sgds-tab-group") {
+    imports.push("SgdsTab", "SgdsTabPanel");
+    return {
+      imports,
+      jsx: `${indent}<SgdsTab slot="nav" panel="tab1" ariaLabel="Tab 1">Tab 1</SgdsTab>
+${indent}<SgdsTab slot="nav" panel="tab2" ariaLabel="Tab 2">Tab 2</SgdsTab>
+${indent}<SgdsTabPanel name="tab1">Content for tab 1</SgdsTabPanel>
+${indent}<SgdsTabPanel name="tab2">Content for tab 2</SgdsTabPanel>`,
+    };
+  }
+
+  const parts: string[] = [];
+  for (const childTag of children) {
+    const childDecl = declByTag.get(childTag);
+    if (!childDecl) continue;
+
+    const childClass = childDecl.name;
+    imports.push(childClass);
+
+    const childProps = getComponentProps(childDecl);
+    const propsStr = childProps.map(p => {
+      if (typeof p.value === "boolean") return p.value ? p.name : "";
+      if (typeof p.value === "number") return `${p.name}={${p.value}}`;
+      return `${p.name}="${p.value}"`;
+    }).filter(Boolean).join(" ");
+
+    const childSlots = (childDecl.slots || []);
+    const slotContent: string[] = [];
+    for (const s of childSlots) {
+      if (s.name === "default") continue;
+      if (s.name === "icon") {
+        imports.push("SgdsIcon");
+        slotContent.push(`${indent}  <SgdsIcon slot="icon" name="placeholder" size="md"></SgdsIcon>`);
+      } else if (s.name === "header") {
+        slotContent.push(`${indent}  <div slot="header">Header text</div>`);
+      } else if (s.name === "content") {
+        slotContent.push(`${indent}  <div slot="content">Content goes here.</div>`);
+      } else if (s.name === "title") {
+        const dn = childDecl.name.replace(/^Sgds/, "");
+        slotContent.push(`${indent}  <span slot="title">${dn}</span>`);
+      } else if (s.name === "description") {
+        const dn = childDecl.name.replace(/^Sgds/, "");
+        slotContent.push(`${indent}  <span slot="description">Description of the ${dn.toLowerCase()}.</span>`);
+      }
+    }
+
+    // Default slot content
+    const defaultSlot = childSlots.find(s => s.name === "default");
+    if (defaultSlot) {
+      const dn = childDecl.name.replace(/^Sgds/, "");
+      slotContent.push(`${indent}  ${dn} content`);
+    }
+
+    const openTag = propsStr ? `<${childClass} ${propsStr}>` : `<${childClass}>`;
+    if (slotContent.length > 0) {
+      parts.push(`${indent}${openTag}\n${slotContent.join("\n")}\n${indent}</${childClass}>`);
+    } else {
+      parts.push(`${indent}${openTag}</${childClass}>`);
+    }
+  }
+
+  return { imports, jsx: parts.join("\n") };
+}
+
+export function generateJsxTemplate(tag: string): { imports: string[]; jsx: string } {
+  // Check for manual override
+  if (jsxOverrides[tag]) return jsxOverrides[tag]();
+
+  const decl = declByTag.get(tag);
+  if (!decl) return { imports: [], jsx: `      <${tag}></${tag}>` };
+
+  const className = decl.name;
+  const displayName = className.replace(/^Sgds/, "");
+  const props = getComponentProps(decl);
+  const slots = decl.slots || [];
+  const children = parentChildMap.get(tag);
+  const hasTrigger = needsTriggerButton(decl);
+  const imports: string[] = [className];
+
+  // Build props string (camelCase for React)
+  const propsStr = props.map(p => {
+    if (typeof p.value === "boolean") return p.value ? p.name : "";
+    if (typeof p.value === "number") return `${p.name}={${p.value}}`;
+    return `${p.name}="${p.value}"`;
+  }).filter(Boolean).join(" ");
+
+  // Build slot content
+  const indent = "        ";
+  const slotParts: string[] = [];
+
+  // Named slots (JSX syntax)
+  for (const s of slots) {
+    if (s.name === "default" || s.name === "nav") continue;
+    if (s.name === "title") slotParts.push(`${indent}<span slot="title">${displayName}</span>`);
+    else if (s.name === "description") slotParts.push(`${indent}<span slot="description">Description of the ${displayName.toLowerCase()}.</span>`);
+    else if (s.name === "header") slotParts.push(`${indent}<div slot="header">Header text</div>`);
+    else if (s.name === "content") slotParts.push(`${indent}<div slot="content">Content goes here.</div>`);
+    else if (s.name === "footer") slotParts.push(`${indent}<span slot="footer">Footer content</span>`);
+    else if (s.name === "icon") {
+      imports.push("SgdsIcon");
+      slotParts.push(`${indent}<SgdsIcon slot="icon" name="placeholder" size="md"></SgdsIcon>`);
+    }
+    else if (s.name === "brand") slotParts.push(`${indent}<strong slot="brand">${displayName}</strong>`);
+  }
+
+  // Default slot: children or text
+  if (children && children.length > 0) {
+    const childResult = generateChildJsx(tag, indent);
+    imports.push(...childResult.imports);
+    slotParts.push(childResult.jsx);
+  } else {
+    const defaultSlot = slots.find(s => s.name === "default");
+    if (defaultSlot) {
+      slotParts.push(`${indent}${displayName}`);
+    }
+  }
+
+  const openTag = propsStr ? `<${className} ${propsStr}>` : `<${className}>`;
+  let jsx: string;
+  if (slotParts.length > 0) {
+    jsx = `      ${openTag}\n${slotParts.join("\n")}\n      </${className}>`;
+  } else {
+    jsx = `      ${openTag}</${className}>`;
+  }
+
+  // Prepend trigger button if needed
+  if (hasTrigger) {
+    imports.push("SgdsButton");
+    jsx = `      <SgdsButton variant="primary" onClick={(e) => { const el = e.currentTarget.nextElementSibling; if (el) el.open = true; }}>Open ${displayName}</SgdsButton>\n${jsx}`;
+  }
+
+  return { imports: [...new Set(imports)], jsx };
 }

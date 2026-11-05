@@ -8,10 +8,10 @@ import "@govtechsg/sgds-web-component";
       Breadcrumb
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-breadcrumb>
-        <sgds-breadcrumb-item><a href="/">Home</a></sgds-breadcrumb-item>
-        <sgds-breadcrumb-item><a href="/about">About</a></sgds-breadcrumb-item>
-        <sgds-breadcrumb-item><a href="/current">Current Page</a></sgds-breadcrumb-item>
+      <sgds-breadcrumb aria-label="breadcrumb">
+        <sgds-breadcrumb-item>
+          BreadcrumbItem content
+        </sgds-breadcrumb-item>
       </sgds-breadcrumb>
     </div>
   </div>

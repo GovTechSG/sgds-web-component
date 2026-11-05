@@ -15,17 +15,14 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="accordion" title="Accordion">
             <a href="/accordion"></a>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="appnav" title="Appnav">
+            <a href="/appnav"></a>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="alertlink" title="AlertLink">
             <a href="/alertlink"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="alert" title="Alert">
             <a href="/alert"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="badge" title="Badge">
-            <a href="/badge"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="appnav" title="Appnav">
-            <a href="/appnav"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
             <a href="/breadcrumb"></a>
@@ -36,11 +33,14 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="card" title="Card">
             <a href="/card"></a>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="checkboxgroup" title="CheckboxGroup">
-            <a href="/checkboxgroup"></a>
+          <SgdsSidebarItem name="badge" title="Badge">
+            <a href="/badge"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="closebutton" title="CloseButton">
             <a href="/closebutton"></a>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="checkboxgroup" title="CheckboxGroup">
+            <a href="/checkboxgroup"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="combobox" title="ComboBox">
             <a href="/combobox"></a>
@@ -54,14 +54,14 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="descriptionlist" title="DescriptionList">
             <a href="/descriptionlist"></a>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="dropdown" title="Dropdown">
+            <a href="/dropdown"></a>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="divider" title="Divider">
             <a href="/divider"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="drawer" title="Drawer">
             <a href="/drawer"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="dropdown" title="Dropdown">
-            <a href="/dropdown"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="fileupload" title="FileUpload">
             <a href="/fileupload"></a>
@@ -90,23 +90,23 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="link" title="Link">
             <a href="/link"></a>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="masthead" title="Masthead">
-            <a href="/masthead"></a>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="mainnav" title="Mainnav">
             <a href="/mainnav"></a>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="overflowmenu" title="OverflowMenu">
-            <a href="/overflowmenu"></a>
+          <SgdsSidebarItem name="masthead" title="Masthead">
+            <a href="/masthead"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="modal" title="Modal">
             <a href="/modal"></a>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="pagination" title="Pagination">
-            <a href="/pagination"></a>
+          <SgdsSidebarItem name="overflowmenu" title="OverflowMenu">
+            <a href="/overflowmenu"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="progressbar" title="ProgressBar">
             <a href="/progressbar"></a>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="pagination" title="Pagination">
+            <a href="/pagination"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="quantitytoggle" title="QuantityToggle">
             <a href="/quantitytoggle"></a>
@@ -117,38 +117,41 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="select" title="Select">
             <a href="/select"></a>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="sidebar" title="Sidebar">
-            <a href="/sidebar"></a>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="sidenav" title="Sidenav">
             <a href="/sidenav"></a>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="sidebar" title="Sidebar">
+            <a href="/sidebar"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="skeleton" title="Skeleton">
             <a href="/skeleton"></a>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="stepper" title="Stepper">
-            <a href="/stepper"></a>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="spinner" title="Spinner">
             <a href="/spinner"></a>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="switch" title="Switch">
-            <a href="/switch"></a>
+          <SgdsSidebarItem name="step" title="Step">
+            <a href="/step"></a>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="tabgroup" title="TabGroup">
-            <a href="/tabgroup"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="systembanner" title="SystemBanner">
-            <a href="/systembanner"></a>
+          <SgdsSidebarItem name="stepper" title="Stepper">
+            <a href="/stepper"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="subnav" title="Subnav">
             <a href="/subnav"></a>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="tableofcontents" title="TableOfContents">
-            <a href="/tableofcontents"></a>
+          <SgdsSidebarItem name="switch" title="Switch">
+            <a href="/switch"></a>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="systembanner" title="SystemBanner">
+            <a href="/systembanner"></a>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="tabgroup" title="TabGroup">
+            <a href="/tabgroup"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="table" title="Table">
             <a href="/table"></a>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="tableofcontents" title="TableOfContents">
+            <a href="/tableofcontents"></a>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="textarea" title="Textarea">
             <a href="/textarea"></a>
@@ -156,11 +159,11 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="thumbnailcard" title="ThumbnailCard">
             <a href="/thumbnailcard"></a>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="toastcontainer" title="ToastContainer">
-            <a href="/toastcontainer"></a>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="tooltip" title="Tooltip">
             <a href="/tooltip"></a>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="toastcontainer" title="ToastContainer">
+            <a href="/toastcontainer"></a>
           </SgdsSidebarItem>
         </SgdsSidebarSection>
       </SgdsSidebar>

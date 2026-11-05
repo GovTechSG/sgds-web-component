@@ -3,7 +3,9 @@ import { SgdsButton } from '@govtechsg/sgds-web-component/react';
 export const Button = () => {
   return (
     <>
-      <SgdsButton variant="primary">Primary</SgdsButton>
+      <SgdsButton type="button" variant="primary" tone="brand" size="md" target="_self" ariaLabel="Button">
+        Button
+      </SgdsButton>
     </>
   );
 };

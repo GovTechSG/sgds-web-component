@@ -8,7 +8,10 @@ import "@govtechsg/sgds-web-component";
       Alert
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-alert variant="info" show>This is an informational alert.</sgds-alert>
+      <sgds-alert show variant="info">
+        <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+        Alert
+      </sgds-alert>
     </div>
   </div>
 </template>

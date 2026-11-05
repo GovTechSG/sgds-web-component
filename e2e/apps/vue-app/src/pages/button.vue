@@ -8,7 +8,9 @@ import "@govtechsg/sgds-web-component";
       Button
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-button variant="primary">Primary</sgds-button>
+      <sgds-button type="button" variant="primary" tone="brand" size="md" target="_self" aria-label="Button">
+        Button
+      </sgds-button>
     </div>
   </div>
 </template>

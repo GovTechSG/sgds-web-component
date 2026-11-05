@@ -5,10 +5,10 @@ import { SgdsSelect, SgdsSelectOption } from '@govtechsg/sgds-web-component/reac
 export const Select = () => {
   return (
     <>
-      <SgdsSelect label="Country" name="country" placeholder="Select a country">
-        <SgdsSelectOption value="sg">Singapore</SgdsSelectOption>
-        <SgdsSelectOption value="my">Malaysia</SgdsSelectOption>
-        <SgdsSelectOption value="id">Indonesia</SgdsSelectOption>
+      <SgdsSelect label="Select" placeholder="Enter text..." autocomplete="on">
+        <SgdsSelectOption>
+          SelectOption content
+        </SgdsSelectOption>
       </SgdsSelect>
     </>
   );

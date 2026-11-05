@@ -8,7 +8,9 @@ import "@govtechsg/sgds-web-component";
       Switch
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-switch>Enable notifications</sgds-switch>
+      <sgds-switch size="md">
+        Switch
+      </sgds-switch>
     </div>
   </div>
 </template>

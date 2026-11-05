@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Textarea/index.js";
 </script>
 
 <template>
@@ -8,11 +8,7 @@ import "@govtechsg/sgds-web-component";
       Textarea
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-textarea
-        label="Label"
-        name="textarea"
-        placeholder="Enter your comments"
-      ></sgds-textarea>
+      <sgds-textarea rows="4" placeholder="Placeholder" resize="vertical" label="Textarea"></sgds-textarea>
     </div>
   </div>
 </template>

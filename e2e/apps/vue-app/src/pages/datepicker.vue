@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       Datepicker
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-datepicker label="Birthdate" name="date"></sgds-datepicker>
+      <sgds-datepicker mode="single" label="Datepicker" drop="down"></sgds-datepicker>
     </div>
   </div>
 </template>

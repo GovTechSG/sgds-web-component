@@ -5,8 +5,8 @@ export const SystemBanner = () => {
     <>
       <SgdsSystemBanner show>
         <SgdsSystemBannerItem>
-          <SgdsIcon slot="icon" name="info-circle-fill" size="md"></SgdsIcon>
-          System maintenance is scheduled for this weekend.
+          <SgdsIcon slot="icon" name="placeholder" size="md"></SgdsIcon>
+          SystemBannerItem content
         </SgdsSystemBannerItem>
       </SgdsSystemBanner>
     </>

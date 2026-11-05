@@ -8,7 +8,9 @@ import "@govtechsg/sgds-web-component";
       OverflowMenu
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-overflow-menu aria-label="More actions"></sgds-overflow-menu>
+      <sgds-overflow-menu size="md">
+        OverflowMenu
+      </sgds-overflow-menu>
     </div>
   </div>
 </template>

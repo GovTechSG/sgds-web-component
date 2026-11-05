@@ -8,9 +8,10 @@ import "@govtechsg/sgds-web-component";
       RadioGroup
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-radio-group name="gender" label="Gender">
-        <sgds-radio value="male">Male</sgds-radio>
-        <sgds-radio value="female">Female</sgds-radio>
+      <sgds-radio-group label="RadioGroup">
+        <sgds-radio>
+          Radio content
+        </sgds-radio>
       </sgds-radio-group>
     </div>
   </div>

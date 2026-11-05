@@ -5,18 +5,28 @@
  *
  * Run from root: tsx e2e/utils/generate-next-components.ts
  */
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, rmSync, readdirSync, existsSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  reactComponentNames, loadArgs, childOnlyComponents,
-  jsxTemplates, simpleJsxTemplate, type JsxTemplateResult,
+  reactComponentNames, childOnlyComponents, generateJsxTemplate,
 } from "./component-templates.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const outDir = resolve(__dirname, "../apps/next-app/src/app/components");
 
-async function main() {
+function main() {
+  // Clean stale files from previous runs
+  const appDir = resolve(outDir, "..");
+  rmSync(outDir, { recursive: true, force: true });
+  // Remove old route directories (lowercase dirs with page.tsx)
+  if (existsSync(appDir)) {
+    for (const entry of readdirSync(appDir, { withFileTypes: true })) {
+      if (entry.isDirectory() && entry.name === entry.name.toLowerCase() && existsSync(resolve(appDir, entry.name, "page.tsx"))) {
+        rmSync(resolve(appDir, entry.name), { recursive: true, force: true });
+      }
+    }
+  }
   mkdirSync(outDir, { recursive: true });
 
   const generated: string[] = [];
@@ -25,12 +35,10 @@ async function main() {
     if (childOnlyComponents.has(name)) continue;
 
     const dirName = name.replace(/^Sgds/, "");
-    const args = await loadArgs(dirName);
+    const tag = "sgds-" + dirName.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
+    const result = generateJsxTemplate(tag);
 
-    const templateFn = jsxTemplates[dirName];
-    const result: JsxTemplateResult = templateFn ? templateFn(args) : simpleJsxTemplate(name, args);
-
-    const importLine = `import { ${[...new Set(result.imports)].join(", ")} } from '@govtechsg/sgds-web-component/react';`;
+    const importLine = `import { ${result.imports.join(", ")} } from '@govtechsg/sgds-web-component/react';`;
 
     const fileContent = `'use client';
 
@@ -50,7 +58,6 @@ ${result.jsx}
   }
 
   // Generate individual route pages: /[component]/page.tsx
-  const appDir = resolve(outDir, "..");
   for (const name of generated) {
     const slug = name.toLowerCase();
     const routeDir = resolve(appDir, slug);
@@ -117,7 +124,9 @@ export default function Home() {
   console.log(`Generated ${generated.length} component wrappers, ${generated.length} route pages, sidebar layout, and page.tsx for Next.js`);
 }
 
-main().catch(err => {
+try {
+  main();
+} catch (err) {
   console.error("Fatal error:", err);
   process.exit(1);
-});
+}

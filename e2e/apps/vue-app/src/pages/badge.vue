@@ -8,7 +8,10 @@ import "@govtechsg/sgds-web-component";
       Badge
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-badge>Badge</sgds-badge>
+      <sgds-badge show>
+        <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+        Badge
+      </sgds-badge>
     </div>
   </div>
 </template>

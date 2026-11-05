@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/ImageCard/index.js";
 </script>
 
 <template>
@@ -8,9 +8,11 @@ import "@govtechsg/sgds-web-component";
       ImageCard
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-image-card>
-        <span slot="title">Image Card</span>
-        <span slot="description">Description of the image card.</span>
+      <sgds-image-card image-position="before" image-adjustment="default" orientation="vertical">
+        <span slot="title">ImageCard</span>
+        <span slot="description">Description of the imagecard.</span>
+        <span slot="footer">Footer content</span>
+        ImageCard
       </sgds-image-card>
     </div>
   </div>

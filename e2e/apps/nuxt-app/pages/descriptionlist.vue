@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/DescriptionList/index.js";
 </script>
 
 <template>
@@ -8,10 +8,13 @@ import "@govtechsg/sgds-web-component";
       DescriptionList
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-description-list-group bordered>
-        <sgds-description-list>Name<span slot="data">John Doe</span></sgds-description-list>
-        <sgds-description-list>Email<span slot="data">john@example.com</span></sgds-description-list>
-      </sgds-description-list-group>
+      <sgds-description-list>
+        <sgds-description-list-group>
+          <span slot="title">DescriptionListGroup</span>
+          <span slot="description">Description of the descriptionlistgroup.</span>
+          DescriptionListGroup content
+        </sgds-description-list-group>
+      </sgds-description-list>
     </div>
   </div>
 </template>

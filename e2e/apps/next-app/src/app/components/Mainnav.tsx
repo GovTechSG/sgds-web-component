@@ -1,14 +1,21 @@
 'use client';
 
-import { SgdsMainnav, SgdsMainnavItem } from '@govtechsg/sgds-web-component/react';
+import { SgdsMainnav, SgdsMainnavDropdown, SgdsMainnavItem, SgdsMainnavProfile } from '@govtechsg/sgds-web-component/react';
 
 export const Mainnav = () => {
   return (
     <>
-      <SgdsMainnav>
-        <strong slot="brand">My App</strong>
-        <SgdsMainnavItem><a href="/">Home</a></SgdsMainnavItem>
-        <SgdsMainnavItem><a href="/about">About</a></SgdsMainnavItem>
+      <SgdsMainnav expand="lg">
+        <strong slot="brand">Mainnav</strong>
+        <SgdsMainnavDropdown ariaLabel="MainnavDropdown">
+          MainnavDropdown content
+        </SgdsMainnavDropdown>
+        <SgdsMainnavItem>
+          MainnavItem content
+        </SgdsMainnavItem>
+        <SgdsMainnavProfile label="MainnavProfile" ariaLabel="MainnavProfile" close="default">
+          MainnavProfile content
+        </SgdsMainnavProfile>
       </SgdsMainnav>
     </>
   );

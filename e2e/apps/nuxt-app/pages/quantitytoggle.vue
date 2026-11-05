@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/QuantityToggle/index.js";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       QuantityToggle
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-quantity-toggle label="Quantity" name="qty"></sgds-quantity-toggle>
+      <sgds-quantity-toggle step="1" label="QuantityToggle"></sgds-quantity-toggle>
     </div>
   </div>
 </template>

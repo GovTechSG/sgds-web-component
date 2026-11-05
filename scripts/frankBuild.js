@@ -12,6 +12,7 @@ async function createPackageFile() {
   const newPackageData = {
     ...packageOthers,
     private: false,
+    sideEffects: true,
     typings: "./index.d.ts",
     main: "./index.umd.js",
     module: "./index.js",

@@ -4,20 +4,21 @@
  *
  * Run from root: tsx e2e/utils/generate-react-components.ts
  */
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  reactComponentNames, loadArgs, childOnlyComponents,
-  jsxTemplates, simpleJsxTemplate, type JsxTemplateResult,
+  reactComponentNames, childOnlyComponents, generateJsxTemplate,
 } from "./component-templates.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const srcDir = resolve(__dirname, "../apps/react-app/src");
 
-async function main() {
+function main() {
   const componentsDir = resolve(srcDir, "components");
   const pagesDir = resolve(srcDir, "pages");
+  rmSync(componentsDir, { recursive: true, force: true });
+  rmSync(pagesDir, { recursive: true, force: true });
   mkdirSync(componentsDir, { recursive: true });
   mkdirSync(pagesDir, { recursive: true });
 
@@ -28,12 +29,10 @@ async function main() {
     if (childOnlyComponents.has(name)) continue;
 
     const dirName = name.replace(/^Sgds/, "");
-    const args = await loadArgs(dirName);
+    const tag = "sgds-" + dirName.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
+    const result = generateJsxTemplate(tag);
 
-    const templateFn = jsxTemplates[dirName];
-    const result: JsxTemplateResult = templateFn ? templateFn(args) : simpleJsxTemplate(name, args);
-
-    const importLine = `import { ${[...new Set(result.imports)].join(", ")} } from '@govtechsg/sgds-web-component/react';`;
+    const importLine = `import { ${result.imports.join(", ")} } from '@govtechsg/sgds-web-component/react';`;
 
     const fileContent = `${importLine}
 
@@ -135,7 +134,9 @@ export default App;
   console.log(`Generated ${generated.length} component wrappers, ${generated.length} route pages, sidebar layout, and App.jsx for React`);
 }
 
-main().catch(err => {
+try {
+  main();
+} catch (err) {
   console.error("Fatal error:", err);
   process.exit(1);
-});
+}

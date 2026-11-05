@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Datepicker/index.js";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       Datepicker
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-datepicker label="Birthdate" name="date"></sgds-datepicker>
+      <sgds-datepicker mode="single" label="Datepicker" drop="down"></sgds-datepicker>
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/IconList/index.js";
 </script>
 
 <template>
@@ -8,7 +8,9 @@ import "@govtechsg/sgds-web-component";
       IconList
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-icon-list icon="check-circle-fill">This is an icon list item.</sgds-icon-list>
+      <sgds-icon-list role="list" size="md">
+        IconList
+      </sgds-icon-list>
     </div>
   </div>
 </template>

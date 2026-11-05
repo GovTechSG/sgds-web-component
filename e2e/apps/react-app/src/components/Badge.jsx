@@ -1,9 +1,12 @@
-import { SgdsBadge } from '@govtechsg/sgds-web-component/react';
+import { SgdsBadge, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const Badge = () => {
   return (
     <>
-      <SgdsBadge>Badge</SgdsBadge>
+      <SgdsBadge show>
+        <SgdsIcon slot="icon" name="placeholder" size="md"></SgdsIcon>
+        Badge
+      </SgdsBadge>
     </>
   );
 };

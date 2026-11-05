@@ -1,17 +1,13 @@
 'use client';
 
-import { SgdsInput } from '@govtechsg/sgds-web-component/react';
+import { SgdsInput, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const Input = () => {
   return (
     <>
-      <SgdsInput
-        type="text"
-        label="Label"
-        name="email"
-        placeholder="Placeholder text"
-        hintText="Hint text"
-      ></SgdsInput>
+      <SgdsInput type="text" placeholder="placeholder" autocomplete="on" label="Input">
+        <SgdsIcon slot="icon" name="placeholder" size="md"></SgdsIcon>
+      </SgdsInput>
     </>
   );
 };

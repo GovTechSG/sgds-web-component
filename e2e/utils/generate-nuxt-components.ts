@@ -5,20 +5,20 @@
  *
  * Run from root: tsx e2e/utils/generate-nuxt-components.ts
  */
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, rmSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
-  reactComponentNames, loadArgs, childOnlyComponents,
-  htmlTemplates, simpleHtmlTemplate,
+  reactComponentNames, childOnlyComponents, generateHtmlTemplate, getComponentImportPaths,
 } from "./component-templates.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const appDir = resolve(__dirname, "../apps/nuxt-app");
 
-async function main() {
+function main() {
   const pagesDir = resolve(appDir, "pages");
   const layoutsDir = resolve(appDir, "layouts");
+  rmSync(pagesDir, { recursive: true, force: true });
   mkdirSync(pagesDir, { recursive: true });
   mkdirSync(layoutsDir, { recursive: true });
 
@@ -29,13 +29,18 @@ async function main() {
 
     const dirName = name.replace(/^Sgds/, "");
     const slug = dirName.toLowerCase();
-    const args = await loadArgs(dirName);
-
-    const templateFn = htmlTemplates[dirName];
-    const html = templateFn ? templateFn(args) : simpleHtmlTemplate(name, args);
+    const tag = "sgds-" + dirName.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
+    const html = generateHtmlTemplate(tag);
+    const imports = getComponentImportPaths(tag);
+    // Also add Button import if template has a trigger button
+    if (html.includes("<sgds-button")) {
+      const btnPath = "@govtechsg/sgds-web-component/components/Button/index.js";
+      if (!imports.includes(btnPath)) imports.push(btnPath);
+    }
+    const importLines = imports.map(p => `import "${p}";`).join("\n");
 
     const pageContent = `<script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+${importLines}
 </script>
 
 <template>
@@ -60,7 +65,7 @@ import "@govtechsg/sgds-web-component";
     .join("\n");
 
   const layoutContent = `<script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Sidebar/index.js";
 import { useRoute } from "vue-router";
 import { computed } from "vue";
 
@@ -108,7 +113,9 @@ navigateTo("/${generated[0].toLowerCase()}", { redirectCode: 302 });
   console.log(`Generated ${generated.length} component pages, sidebar layout, app.vue, and index.vue for Nuxt`);
 }
 
-main().catch(err => {
+try {
+  main();
+} catch (err) {
   console.error("Fatal error:", err);
   process.exit(1);
-});
+}

@@ -8,7 +8,9 @@ import "@govtechsg/sgds-web-component";
       FileUpload
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-file-upload label="Upload file" name="file"></sgds-file-upload>
+      <sgds-file-upload variant="default" aria-label="Choose files" label="FileUpload">
+        FileUpload
+      </sgds-file-upload>
     </div>
   </div>
 </template>

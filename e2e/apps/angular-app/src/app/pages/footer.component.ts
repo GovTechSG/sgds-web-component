@@ -12,8 +12,8 @@ import "@govtechsg/sgds-web-component";
         <sgds-footer
         contact-href="https://form.gov.sg/"
         feedback-href="https://form.gov.sg/"
-        privacy-href="https://www.designsystem.tech.gov.sg/privacy/"
-        terms-of-use-href="https://www.designsystem.tech.gov.sg/terms-of-use/"
+        privacy-href="/privacy"
+        terms-of-use-href="/terms"
       ></sgds-footer>
       </div>
     </div>

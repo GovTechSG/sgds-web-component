@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       CloseButton
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-close-button aria-label="Close"></sgds-close-button>
+      <sgds-close-button size="md" tone="default"></sgds-close-button>
     </div>
   </div>
 </template>

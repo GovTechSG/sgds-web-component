@@ -8,8 +8,9 @@ import "@govtechsg/sgds-web-component";
       Tooltip
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-tooltip content="This is a tooltip">
-        <sgds-button>Hover me</sgds-button>
+      <sgds-button variant="primary" onclick="this.nextElementSibling.open = true">Open Tooltip</sgds-button>
+      <sgds-tooltip placement="top" trigger="hover focus">
+        Tooltip
       </sgds-tooltip>
     </div>
   </div>

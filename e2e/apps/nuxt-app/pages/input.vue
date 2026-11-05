@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Input/index.js";
 </script>
 
 <template>
@@ -8,13 +8,9 @@ import "@govtechsg/sgds-web-component";
       Input
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-input
-        type="text"
-        label="Label"
-        name="email"
-        placeholder="Placeholder text"
-        hint-text="Hint text"
-      ></sgds-input>
+      <sgds-input type="text" placeholder="placeholder" autocomplete="on" label="Input">
+        <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+      </sgds-input>
     </div>
   </div>
 </template>

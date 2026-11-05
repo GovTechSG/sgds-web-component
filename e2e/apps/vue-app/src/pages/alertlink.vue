@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       AlertLink
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-alert-link>AlertLink</sgds-alert-link>
+      <sgds-alert-link></sgds-alert-link>
     </div>
   </div>
 </template>

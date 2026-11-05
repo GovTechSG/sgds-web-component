@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Card/index.js";
 </script>
 
 <template>
@@ -8,10 +8,12 @@ import "@govtechsg/sgds-web-component";
       Card
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-card>
-        <span slot="title">Card Title</span>
-        <span slot="description">This is a description of the card content.</span>
-        <sgds-link slot="footer"><a href="#">Read more</a></sgds-link>
+      <sgds-card image-position="before" image-adjustment="default" orientation="vertical">
+        <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+        <span slot="title">Card</span>
+        <span slot="description">Description of the card.</span>
+        <span slot="footer">Footer content</span>
+        Card
       </sgds-card>
     </div>
   </div>

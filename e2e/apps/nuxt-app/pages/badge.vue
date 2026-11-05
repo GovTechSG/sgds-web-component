@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/Badge/index.js";
 </script>
 
 <template>
@@ -8,7 +8,10 @@ import "@govtechsg/sgds-web-component";
       Badge
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-badge>Badge</sgds-badge>
+      <sgds-badge show>
+        <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+        Badge
+      </sgds-badge>
     </div>
   </div>
 </template>

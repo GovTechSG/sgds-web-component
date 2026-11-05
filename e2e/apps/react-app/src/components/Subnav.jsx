@@ -4,8 +4,10 @@ export const Subnav = () => {
   return (
     <>
       <SgdsSubnav>
-        <SgdsSubnavItem active><a href="/">Home</a></SgdsSubnavItem>
-        <SgdsSubnavItem><a href="/about">About</a></SgdsSubnavItem>
+        <div slot="header">Header text</div>
+        <SgdsSubnavItem>
+          SubnavItem content
+        </SgdsSubnavItem>
       </SgdsSubnav>
     </>
   );

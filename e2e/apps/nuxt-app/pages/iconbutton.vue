@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/IconButton/index.js";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       IconButton
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-icon-button name="gear" aria-label="Settings" variant="ghost"></sgds-icon-button>
+      <sgds-icon-button variant="primary" tone="brand" size="md" target="_self" aria-label="IconButton"></sgds-icon-button>
     </div>
   </div>
 </template>

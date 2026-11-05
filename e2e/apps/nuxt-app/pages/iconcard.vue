@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import "@govtechsg/sgds-web-component";
+import "@govtechsg/sgds-web-component/components/IconCard/index.js";
 </script>
 
 <template>
@@ -8,9 +8,12 @@ import "@govtechsg/sgds-web-component";
       IconCard
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-icon-card>
-        <span slot="title">Icon Card Title</span>
-        <span slot="description">Description of the icon card.</span>
+      <sgds-icon-card orientation="vertical">
+        <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
+        <span slot="title">IconCard</span>
+        <span slot="description">Description of the iconcard.</span>
+        <span slot="footer">Footer content</span>
+        IconCard
       </sgds-icon-card>
     </div>
   </div>

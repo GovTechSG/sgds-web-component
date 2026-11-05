@@ -9,11 +9,7 @@ import "@govtechsg/sgds-web-component";
     <div class="sgds-container-sidebar sgds:py-layout-md">
       <h1 class="sgds:text-display-sm sgds:font-bold sgds:leading-xl sgds:tracking-tighter sgds:mb-gap-text-2-xl">Textarea</h1>
       <div class="sgds:mt-gap-text-md">
-        <sgds-textarea
-        label="Label"
-        name="textarea"
-        placeholder="Enter your comments"
-      ></sgds-textarea>
+        <sgds-textarea rows="4" placeholder="Placeholder" resize="vertical" label="Textarea"></sgds-textarea>
       </div>
     </div>
   `,

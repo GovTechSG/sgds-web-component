@@ -1,14 +1,17 @@
-import { SgdsSidenav, SgdsSidenavItem, SgdsSidenavLink } from '@govtechsg/sgds-web-component/react';
+import { SgdsSidenav, SgdsSidenavItem, SgdsIcon, SgdsSidenavLink } from '@govtechsg/sgds-web-component/react';
 
 export const Sidenav = () => {
   return (
     <>
       <SgdsSidenav>
-        <SgdsSidenavItem active ariaLabel="Getting Started">
-          <span slot="title">Getting Started</span>
-          <SgdsSidenavLink active><a href="/">Overview</a></SgdsSidenavLink>
-          <SgdsSidenavLink><a href="/install">Installation</a></SgdsSidenavLink>
+        <SgdsSidenavItem ariaLabel="SidenavItem">
+          <span slot="title">SidenavItem</span>
+          <SgdsIcon slot="icon" name="placeholder" size="md"></SgdsIcon>
+          SidenavItem content
         </SgdsSidenavItem>
+        <SgdsSidenavLink>
+          SidenavLink content
+        </SgdsSidenavLink>
       </SgdsSidenav>
     </>
   );
