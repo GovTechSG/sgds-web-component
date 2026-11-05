@@ -125,6 +125,7 @@ const reverseParents: Record<string, string> = {
   "sgds-tab": "sgds-tab-group",
   "sgds-tab-panel": "sgds-tab-group",
   "sgds-toast": "sgds-toast-container",
+  "sgds-description-list": "sgds-description-list-group",
 };
 
 /**
@@ -212,16 +213,18 @@ const showByDefault = new Set(["show"]);
 
 /** Props that are form internals or low-value for demos */
 const skipFormProps = new Set([
-  "name", "value", "form", "formAction", "formMethod",
+  "value", "form", "formAction", "formMethod",
   "formNoValidate", "formTarget", "noValidate",
   "hasFeedback", "required", "invalidFeedback",
 ]);
 
-function shouldSkipProp(field: CemField): boolean {
+function shouldSkipProp(field: CemField, tag?: string): boolean {
   if (field.static) return true;
   if (field.deprecated || (field.description && field.description.includes("@deprecated"))) return true;
   if (skipProps.has(field.name)) return true;
   if (skipFormProps.has(field.name)) return true;
+  // Skip form "name" prop except on icon components where it's the icon name
+  if (field.name === "name" && tag && !tag.includes("icon")) return true;
   if (skipPrefixes.some(p => field.name.startsWith(p) && field.name !== "hintText")) return true;
   if (field.description && /managed by|controlled by/i.test(field.description)) return true;
 
@@ -232,7 +235,7 @@ function shouldSkipProp(field: CemField): boolean {
   if (type === "boolean" && def === "false" && !showByDefault.has(field.name)) return true;
 
   // Skip props with no default and no obvious demo value
-  if (!def && !["label", "placeholder", "hintText", "ariaLabel"].includes(field.name)) return true;
+  if (!def && !["label", "placeholder", "hintText", "ariaLabel", "name"].includes(field.name)) return true;
 
   return false;
 }
@@ -268,6 +271,7 @@ function getPropValue(field: CemField, displayName: string): string | number | b
   if (field.name === "ariaLabel") return displayName;
   if (field.name === "placeholder") return "Enter text...";
   if (field.name === "hintText") return "Hint text";
+  if (field.name === "name") return "placeholder";
 
   return null;
 }
@@ -278,7 +282,7 @@ function getComponentProps(decl: CemDecl): { name: string; attr: string; value: 
   const result: { name: string; attr: string; value: string | number | boolean }[] = [];
 
   for (const f of fields) {
-    if (shouldSkipProp(f)) continue;
+    if (shouldSkipProp(f, decl.tagName)) continue;
     const val = getPropValue(f, displayName);
     if (val === null) continue;
     result.push({ name: f.name, attr: f.attribute!, value: val });
@@ -374,6 +378,144 @@ const htmlOverrides: Record<string, HtmlOverrideFn> = {
           <sgds-table-cell>Designer</sgds-table-cell>
         </sgds-table-row>
       </sgds-table>`,
+
+  "sgds-dropdown": () => `<sgds-dropdown>
+        <sgds-button slot="toggler" variant="primary" tone="brand" aria-label="Dropdown">Dropdown
+          <sgds-icon name="chevron-down" slot="rightIcon"></sgds-icon>
+        </sgds-button>
+        <sgds-dropdown-item aria-label="Item 1"><a href="#">Item 1</a></sgds-dropdown-item>
+        <sgds-dropdown-item aria-label="Item 2"><a href="#">Item 2</a></sgds-dropdown-item>
+        <sgds-dropdown-item aria-label="Item 3">Item 3</sgds-dropdown-item>
+      </sgds-dropdown>`,
+
+  "sgds-breadcrumb": () => `<sgds-breadcrumb aria-label="breadcrumb">
+        <sgds-breadcrumb-item><a href="#">Home</a></sgds-breadcrumb-item>
+        <sgds-breadcrumb-item><a href="#">About</a></sgds-breadcrumb-item>
+        <sgds-breadcrumb-item active><a href="#">Contacts</a></sgds-breadcrumb-item>
+      </sgds-breadcrumb>`,
+
+  "sgds-tooltip": () => `<sgds-tooltip content="This is a tooltip" placement="top" trigger="hover focus">
+        <sgds-icon name="info-circle" aria-label="Information" tabindex="0"></sgds-icon>
+      </sgds-tooltip>`,
+
+  "sgds-overflow-menu": () => `<sgds-overflow-menu size="md">
+        <sgds-dropdown-item aria-label="View">View</sgds-dropdown-item>
+        <sgds-dropdown-item aria-label="Edit">Edit</sgds-dropdown-item>
+        <sgds-dropdown-item aria-label="Delete">Delete</sgds-dropdown-item>
+      </sgds-overflow-menu>`,
+
+  "sgds-combo-box": () => `<sgds-combo-box label="Select fruit" placeholder="Choose...">
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+        <sgds-combo-box-option value="cherry">Cherry</sgds-combo-box-option>
+      </sgds-combo-box>`,
+
+  "sgds-select": () => `<sgds-select label="Select country" placeholder="Choose...">
+        <sgds-select-option value="sg">Singapore</sgds-select-option>
+        <sgds-select-option value="us">United States</sgds-select-option>
+        <sgds-select-option value="uk">United Kingdom</sgds-select-option>
+      </sgds-select>`,
+
+  "sgds-stepper": () => `<sgds-stepper active-step="0" orientation="horizontal">
+        <sgds-step step-header="Personal Details">Provide your personal information.</sgds-step>
+        <sgds-step step-header="Address">Enter your address and contact details.</sgds-step>
+        <sgds-step step-header="Review">Review all details before submitting.</sgds-step>
+      </sgds-stepper>`,
+
+  "sgds-sidebar": () => `<sgds-sidebar active="meetings" variant="collapsible" aria-label="Sidebar navigation">
+        <div slot="upper">SGDS Sidebar</div>
+        <sgds-sidebar-section title="Main" name="main">
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="icon" size="md"></sgds-icon>
+            <sgds-sidebar-item title="Meetings" name="meetings">
+              <sgds-icon name="calendar" slot="icon" size="md"></sgds-icon>
+              <a href="#"></a>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Gallery" name="gallery">
+              <sgds-icon name="camera" slot="icon" size="md"></sgds-icon>
+              <a href="#"></a>
+            </sgds-sidebar-item>
+          </sgds-sidebar-group>
+          <sgds-sidebar-item title="Settings" name="settings">
+            <sgds-icon name="gear" slot="icon" size="md"></sgds-icon>
+          </sgds-sidebar-item>
+        </sgds-sidebar-section>
+      </sgds-sidebar>`,
+
+  "sgds-sidenav": () => `<sgds-sidenav>
+        <sgds-sidenav-item aria-label="Reports">
+          <span slot="title">Reports</span>
+          <sgds-sidenav-link><a href="#">Sales Report</a></sgds-sidenav-link>
+          <sgds-sidenav-link><a href="#">Inventory Report</a></sgds-sidenav-link>
+          <sgds-sidenav-item aria-label="Custom Reports">
+            <span slot="title">Custom Reports</span>
+            <sgds-sidenav-link><a href="#">Custom 1</a></sgds-sidenav-link>
+            <sgds-sidenav-link><a href="#">Custom 2</a></sgds-sidenav-link>
+          </sgds-sidenav-item>
+        </sgds-sidenav-item>
+        <sgds-sidenav-item aria-label="Settings">
+          <a href="#">Settings</a>
+        </sgds-sidenav-item>
+      </sgds-sidenav>`,
+
+  "sgds-mainnav": () => `<sgds-mainnav expand="lg">
+        <a slot="brand" href="/"><strong>My App</strong></a>
+        <sgds-mainnav-item active><a href="#">Home</a></sgds-mainnav-item>
+        <sgds-mainnav-item><a href="#">About</a></sgds-mainnav-item>
+        <sgds-mainnav-dropdown aria-label="Dropdown menu">
+          <span slot="toggler">Dropdown</span>
+          <sgds-dropdown-item aria-label="Item 1"><a href="#">Item 1</a></sgds-dropdown-item>
+          <sgds-dropdown-item aria-label="Item 2"><a href="#">Item 2</a></sgds-dropdown-item>
+        </sgds-mainnav-dropdown>
+        <sgds-mainnav-item slot="end"><a href="#">Contact Us</a></sgds-mainnav-item>
+      </sgds-mainnav>`,
+
+  "sgds-description-list-group": () => `<sgds-description-list-group>
+        <span slot="title">Personal Information</span>
+        <sgds-description-list>
+          Name
+          <span slot="data">John Doe</span>
+        </sgds-description-list>
+        <sgds-description-list>
+          Email
+          <span slot="data">john@example.com</span>
+        </sgds-description-list>
+        <sgds-description-list>
+          Phone
+          <span slot="data">+65 1234 5678</span>
+        </sgds-description-list>
+      </sgds-description-list-group>`,
+
+  "sgds-icon-list": () => `<sgds-icon-list>
+        <div role="listitem"><sgds-icon name="placeholder"></sgds-icon>Item 1</div>
+        <div role="listitem"><sgds-icon name="placeholder"></sgds-icon>Item 2</div>
+        <div role="listitem"><sgds-icon name="placeholder"></sgds-icon>Item 3</div>
+      </sgds-icon-list>`,
+
+  "sgds-image-card": () => `<sgds-image-card orientation="vertical">
+        <img slot="image" alt="placeholder" width="80" height="80" src="https://placehold.co/400x300" />
+        <sgds-badge variant="primary" slot="upper">New</sgds-badge>
+        <span slot="subtitle">EVENTS</span>
+        <span slot="title">Innovative solutions for you</span>
+        <span slot="description">Discover how our platform can streamline your workflow.</span>
+        <sgds-link slot="footer"><a href="#" aria-label="Register now">Register now <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+      </sgds-image-card>`,
+
+  "sgds-thumbnail-card": () => `<sgds-thumbnail-card orientation="vertical">
+        <img slot="thumbnail" alt="placeholder" width="64" height="64" src="https://placehold.co/64" />
+        <sgds-badge variant="primary" slot="upper">New</sgds-badge>
+        <span slot="subtitle">FEATURES</span>
+        <span slot="title">Innovative solutions for you</span>
+        <span slot="description">Discover how our platform can streamline your workflow.</span>
+        <sgds-link slot="footer"><a href="#" aria-label="Learn more">Learn more <sgds-icon name="arrow-right"></sgds-icon></a></sgds-link>
+      </sgds-thumbnail-card>`,
+
+  "sgds-table-of-contents": () => `<sgds-table-of-contents>
+        <h5>Table of Contents</h5>
+        <li slot="contents"><sgds-link size="sm"><a href="#">Introduction</a></sgds-link></li>
+        <li slot="contents"><sgds-link size="sm"><a href="#">Usage</a></sgds-link></li>
+        <li slot="contents"><sgds-link size="sm"><a href="#">Examples</a></sgds-link></li>
+      </sgds-table-of-contents>`,
 };
 
 const jsxOverrides: Record<string, JsxOverrideFn> = {
@@ -442,6 +584,189 @@ const jsxOverrides: Record<string, JsxOverrideFn> = {
           <SgdsTableCell>Designer</SgdsTableCell>
         </SgdsTableRow>
       </SgdsTable>`,
+  }),
+
+  "sgds-dropdown": () => ({
+    imports: ["SgdsDropdown", "SgdsButton", "SgdsDropdownItem", "SgdsIcon"],
+    jsx: `      <SgdsDropdown>
+        <SgdsButton slot="toggler" variant="primary" tone="brand" ariaLabel="Dropdown">Dropdown
+          <SgdsIcon name="chevron-down" slot="rightIcon"></SgdsIcon>
+        </SgdsButton>
+        <SgdsDropdownItem ariaLabel="Item 1"><a href="#">Item 1</a></SgdsDropdownItem>
+        <SgdsDropdownItem ariaLabel="Item 2"><a href="#">Item 2</a></SgdsDropdownItem>
+        <SgdsDropdownItem ariaLabel="Item 3">Item 3</SgdsDropdownItem>
+      </SgdsDropdown>`,
+  }),
+
+  "sgds-breadcrumb": () => ({
+    imports: ["SgdsBreadcrumb", "SgdsBreadcrumbItem"],
+    jsx: `      <SgdsBreadcrumb ariaLabel="breadcrumb">
+        <SgdsBreadcrumbItem><a href="#">Home</a></SgdsBreadcrumbItem>
+        <SgdsBreadcrumbItem><a href="#">About</a></SgdsBreadcrumbItem>
+        <SgdsBreadcrumbItem active><a href="#">Contacts</a></SgdsBreadcrumbItem>
+      </SgdsBreadcrumb>`,
+  }),
+
+  "sgds-tooltip": () => ({
+    imports: ["SgdsTooltip", "SgdsIcon"],
+    jsx: `      <SgdsTooltip content="This is a tooltip" placement="top" trigger="hover focus">
+        <SgdsIcon name="info-circle" ariaLabel="Information" tabindex="0"></SgdsIcon>
+      </SgdsTooltip>`,
+  }),
+
+  "sgds-overflow-menu": () => ({
+    imports: ["SgdsOverflowMenu", "SgdsDropdownItem"],
+    jsx: `      <SgdsOverflowMenu size="md">
+        <SgdsDropdownItem ariaLabel="View">View</SgdsDropdownItem>
+        <SgdsDropdownItem ariaLabel="Edit">Edit</SgdsDropdownItem>
+        <SgdsDropdownItem ariaLabel="Delete">Delete</SgdsDropdownItem>
+      </SgdsOverflowMenu>`,
+  }),
+
+  "sgds-combo-box": () => ({
+    imports: ["SgdsComboBox", "SgdsComboBoxOption"],
+    jsx: `      <SgdsComboBox label="Select fruit" placeholder="Choose...">
+        <SgdsComboBoxOption value="apple">Apple</SgdsComboBoxOption>
+        <SgdsComboBoxOption value="banana">Banana</SgdsComboBoxOption>
+        <SgdsComboBoxOption value="cherry">Cherry</SgdsComboBoxOption>
+      </SgdsComboBox>`,
+  }),
+
+  "sgds-select": () => ({
+    imports: ["SgdsSelect", "SgdsSelectOption"],
+    jsx: `      <SgdsSelect label="Select country" placeholder="Choose...">
+        <SgdsSelectOption value="sg">Singapore</SgdsSelectOption>
+        <SgdsSelectOption value="us">United States</SgdsSelectOption>
+        <SgdsSelectOption value="uk">United Kingdom</SgdsSelectOption>
+      </SgdsSelect>`,
+  }),
+
+  "sgds-stepper": () => ({
+    imports: ["SgdsStepper", "SgdsStep"],
+    jsx: `      <SgdsStepper activeStep={0} orientation="horizontal">
+        <SgdsStep stepHeader="Personal Details">Provide your personal information.</SgdsStep>
+        <SgdsStep stepHeader="Address">Enter your address and contact details.</SgdsStep>
+        <SgdsStep stepHeader="Review">Review all details before submitting.</SgdsStep>
+      </SgdsStepper>`,
+  }),
+
+  "sgds-sidebar": () => ({
+    imports: ["SgdsSidebar", "SgdsSidebarSection", "SgdsSidebarGroup", "SgdsSidebarItem", "SgdsIcon"],
+    jsx: `      <SgdsSidebar active="meetings" variant="collapsible" ariaLabel="Sidebar navigation">
+        <div slot="upper">SGDS Sidebar</div>
+        <SgdsSidebarSection title="Main" name="main">
+          <SgdsSidebarGroup title="Dashboard" name="dashboard">
+            <SgdsIcon name="house" slot="icon" size="md"></SgdsIcon>
+            <SgdsSidebarItem title="Meetings" name="meetings">
+              <SgdsIcon name="calendar" slot="icon" size="md"></SgdsIcon>
+              <a href="#"></a>
+            </SgdsSidebarItem>
+            <SgdsSidebarItem title="Gallery" name="gallery">
+              <SgdsIcon name="camera" slot="icon" size="md"></SgdsIcon>
+              <a href="#"></a>
+            </SgdsSidebarItem>
+          </SgdsSidebarGroup>
+          <SgdsSidebarItem title="Settings" name="settings">
+            <SgdsIcon name="gear" slot="icon" size="md"></SgdsIcon>
+          </SgdsSidebarItem>
+        </SgdsSidebarSection>
+      </SgdsSidebar>`,
+  }),
+
+  "sgds-sidenav": () => ({
+    imports: ["SgdsSidenav", "SgdsSidenavItem", "SgdsSidenavLink"],
+    jsx: `      <SgdsSidenav>
+        <SgdsSidenavItem ariaLabel="Reports">
+          <span slot="title">Reports</span>
+          <SgdsSidenavLink><a href="#">Sales Report</a></SgdsSidenavLink>
+          <SgdsSidenavLink><a href="#">Inventory Report</a></SgdsSidenavLink>
+          <SgdsSidenavItem ariaLabel="Custom Reports">
+            <span slot="title">Custom Reports</span>
+            <SgdsSidenavLink><a href="#">Custom 1</a></SgdsSidenavLink>
+            <SgdsSidenavLink><a href="#">Custom 2</a></SgdsSidenavLink>
+          </SgdsSidenavItem>
+        </SgdsSidenavItem>
+        <SgdsSidenavItem ariaLabel="Settings">
+          <a href="#">Settings</a>
+        </SgdsSidenavItem>
+      </SgdsSidenav>`,
+  }),
+
+  "sgds-mainnav": () => ({
+    imports: ["SgdsMainnav", "SgdsMainnavItem", "SgdsMainnavDropdown", "SgdsDropdownItem"],
+    jsx: `      <SgdsMainnav expand="lg">
+        <a slot="brand" href="/"><strong>My App</strong></a>
+        <SgdsMainnavItem active><a href="#">Home</a></SgdsMainnavItem>
+        <SgdsMainnavItem><a href="#">About</a></SgdsMainnavItem>
+        <SgdsMainnavDropdown ariaLabel="Dropdown menu">
+          <span slot="toggler">Dropdown</span>
+          <SgdsDropdownItem ariaLabel="Item 1"><a href="#">Item 1</a></SgdsDropdownItem>
+          <SgdsDropdownItem ariaLabel="Item 2"><a href="#">Item 2</a></SgdsDropdownItem>
+        </SgdsMainnavDropdown>
+        <SgdsMainnavItem slot="end"><a href="#">Contact Us</a></SgdsMainnavItem>
+      </SgdsMainnav>`,
+  }),
+
+  "sgds-description-list-group": () => ({
+    imports: ["SgdsDescriptionListGroup", "SgdsDescriptionList"],
+    jsx: `      <SgdsDescriptionListGroup>
+        <span slot="title">Personal Information</span>
+        <SgdsDescriptionList>
+          Name
+          <span slot="data">John Doe</span>
+        </SgdsDescriptionList>
+        <SgdsDescriptionList>
+          Email
+          <span slot="data">john@example.com</span>
+        </SgdsDescriptionList>
+        <SgdsDescriptionList>
+          Phone
+          <span slot="data">+65 1234 5678</span>
+        </SgdsDescriptionList>
+      </SgdsDescriptionListGroup>`,
+  }),
+
+  "sgds-icon-list": () => ({
+    imports: ["SgdsIconList", "SgdsIcon"],
+    jsx: `      <SgdsIconList>
+        <div role="listitem"><SgdsIcon name="placeholder"></SgdsIcon>Item 1</div>
+        <div role="listitem"><SgdsIcon name="placeholder"></SgdsIcon>Item 2</div>
+        <div role="listitem"><SgdsIcon name="placeholder"></SgdsIcon>Item 3</div>
+      </SgdsIconList>`,
+  }),
+
+  "sgds-image-card": () => ({
+    imports: ["SgdsImageCard", "SgdsBadge", "SgdsLink", "SgdsIcon"],
+    jsx: `      <SgdsImageCard orientation="vertical">
+        <img slot="image" alt="placeholder" width="80" height="80" src="https://placehold.co/400x300" />
+        <SgdsBadge variant="primary" slot="upper">New</SgdsBadge>
+        <span slot="subtitle">EVENTS</span>
+        <span slot="title">Innovative solutions for you</span>
+        <span slot="description">Discover how our platform can streamline your workflow.</span>
+        <SgdsLink slot="footer"><a href="#" aria-label="Register now">Register now <SgdsIcon name="arrow-right"></SgdsIcon></a></SgdsLink>
+      </SgdsImageCard>`,
+  }),
+
+  "sgds-thumbnail-card": () => ({
+    imports: ["SgdsThumbnailCard", "SgdsBadge", "SgdsLink", "SgdsIcon"],
+    jsx: `      <SgdsThumbnailCard orientation="vertical">
+        <img slot="thumbnail" alt="placeholder" width="64" height="64" src="https://placehold.co/64" />
+        <SgdsBadge variant="primary" slot="upper">New</SgdsBadge>
+        <span slot="subtitle">FEATURES</span>
+        <span slot="title">Innovative solutions for you</span>
+        <span slot="description">Discover how our platform can streamline your workflow.</span>
+        <SgdsLink slot="footer"><a href="#" aria-label="Learn more">Learn more <SgdsIcon name="arrow-right"></SgdsIcon></a></SgdsLink>
+      </SgdsThumbnailCard>`,
+  }),
+
+  "sgds-table-of-contents": () => ({
+    imports: ["SgdsTableOfContents", "SgdsLink"],
+    jsx: `      <SgdsTableOfContents>
+        <h5>Table of Contents</h5>
+        <li slot="contents"><SgdsLink size="sm"><a href="#">Introduction</a></SgdsLink></li>
+        <li slot="contents"><SgdsLink size="sm"><a href="#">Usage</a></SgdsLink></li>
+        <li slot="contents"><SgdsLink size="sm"><a href="#">Examples</a></SgdsLink></li>
+      </SgdsTableOfContents>`,
   }),
 };
 

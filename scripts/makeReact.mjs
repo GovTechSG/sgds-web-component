@@ -19,25 +19,32 @@ const metadata = JSON.parse(fs.readFileSync(path.join("./", 'custom-elements.jso
 // Order matters: ssr-nonce-patch patches React BEFORE enable-lit-ssr.js saves
 // the functions as its "originals". This way Lit calls our nonce wrapper internally.
 const ssrInitSource = `\
-import '../utils/ssr-nonce-patch';
+// Hydration support must load synchronously (static import) so it patches
+// LitElement before any component renders. This is safe for CSR — it only
+// modifies createRenderRoot to reuse existing DSD shadow roots.
 import '@lit-labs/ssr-react/enable-lit-ssr.js';
 import { LitElement } from 'lit';
 
+// Nonce patch must be dynamic: it require()'s @lit-labs/ssr/lib/lit-element-renderer.js
+// whose module-level code overrides LitElement.prototype.createRenderRoot WITHOUT
+// adoptStyles — breaking adoptedStyleSheets in CSR Vite/Rollup builds.
+// Dynamic import keeps it out of the client bundle.
+if (typeof window === 'undefined') {
+  import('../utils/ssr-nonce-patch');
+}
+
 // Safety net for Turbopack: re-invoke hydration patches if lit-element.js
-// evaluated before the hydration support module. In Webpack this is a no-op
-// (patches already applied, or the getter throws and we skip via try-catch).
+// evaluated before the hydration support module.
 try {
   if (typeof globalThis.litElementHydrateSupport === 'function') {
     if (!(LitElement.observedAttributes ?? []).includes('defer-hydration')) {
       globalThis.litElementHydrateSupport({ LitElement });
     }
   }
-} catch {
-  // observedAttributes getter may throw in some bundler contexts (e.g. Webpack)
-  // when called on the base LitElement class. Safe to skip — patches are already applied.
-}
+} catch {}
 `;
 fs.writeFileSync(path.join(reactDir, '_ssr-init.ts'), ssrInitSource, 'utf8');
+
 
 // Generate SSR public API (for consumers to set CSP nonce)
 const ssrDir = path.join(reactDir, '_ssr');

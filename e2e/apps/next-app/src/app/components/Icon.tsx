@@ -5,7 +5,7 @@ import { SgdsIcon } from '@govtechsg/sgds-web-component/react';
 export const Icon = () => {
   return (
     <>
-      <SgdsIcon size="lg" ariaLabel="Icon"></SgdsIcon>
+      <SgdsIcon name="placeholder" size="lg" ariaLabel="Icon"></SgdsIcon>
     </>
   );
 };

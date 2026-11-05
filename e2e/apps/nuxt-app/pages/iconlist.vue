@@ -8,8 +8,10 @@ import "@govtechsg/sgds-web-component/components/IconList/index.js";
       IconList
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-icon-list role="list" size="md">
-        IconList
+      <sgds-icon-list>
+        <div role="listitem"><sgds-icon name="placeholder"></sgds-icon>Item 1</div>
+        <div role="listitem"><sgds-icon name="placeholder"></sgds-icon>Item 2</div>
+        <div role="listitem"><sgds-icon name="placeholder"></sgds-icon>Item 3</div>
       </sgds-icon-list>
     </div>
   </div>

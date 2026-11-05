@@ -54,8 +54,8 @@ const active = computed(() => {
           <sgds-sidebar-item name="datepicker" title="Datepicker">
               <router-link to="/datepicker"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="descriptionlist" title="DescriptionList">
-              <router-link to="/descriptionlist"></router-link>
+          <sgds-sidebar-item name="descriptionlistgroup" title="DescriptionListGroup">
+              <router-link to="/descriptionlistgroup"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="dropdown" title="Dropdown">
               <router-link to="/dropdown"></router-link>

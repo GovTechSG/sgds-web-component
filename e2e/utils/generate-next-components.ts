@@ -82,12 +82,13 @@ export default function ${name}Page() {
   // Generate sidebar layout that wraps all routes
   const sidebarItems = generated
     .map(name => `          <SgdsSidebarItem name="${name.toLowerCase()}" title="${name}">
-            <a href="/${name.toLowerCase()}"></a>
+            <Link href="/${name.toLowerCase()}"></Link>
           </SgdsSidebarItem>`)
     .join("\n");
 
   const sidebarLayoutContent = `'use client';
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SgdsSidebar, SgdsSidebarItem, SgdsSidebarSection } from "@govtechsg/sgds-web-component/react";
 

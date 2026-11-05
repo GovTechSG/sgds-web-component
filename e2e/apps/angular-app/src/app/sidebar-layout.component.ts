@@ -51,8 +51,8 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="datepicker" title="Datepicker">
               <a routerLink="/datepicker"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="descriptionlist" title="DescriptionList">
-              <a routerLink="/descriptionlist"></a>
+          <sgds-sidebar-item name="descriptionlistgroup" title="DescriptionListGroup">
+              <a routerLink="/descriptionlistgroup"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="dropdown" title="Dropdown">
               <a routerLink="/dropdown"></a>

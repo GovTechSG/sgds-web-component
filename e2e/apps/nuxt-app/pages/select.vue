@@ -8,10 +8,10 @@ import "@govtechsg/sgds-web-component/components/Select/index.js";
       Select
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-select label="Select" placeholder="Enter text..." autocomplete="on">
-        <sgds-select-option>
-          SelectOption content
-        </sgds-select-option>
+      <sgds-select label="Select country" placeholder="Choose...">
+        <sgds-select-option value="sg">Singapore</sgds-select-option>
+        <sgds-select-option value="us">United States</sgds-select-option>
+        <sgds-select-option value="uk">United Kingdom</sgds-select-option>
       </sgds-select>
     </div>
   </div>

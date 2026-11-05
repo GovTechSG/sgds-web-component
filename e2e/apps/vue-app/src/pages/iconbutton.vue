@@ -8,7 +8,7 @@ import "@govtechsg/sgds-web-component";
       IconButton
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-icon-button variant="primary" tone="brand" size="md" target="_self" aria-label="IconButton"></sgds-icon-button>
+      <sgds-icon-button name="placeholder" variant="primary" tone="brand" size="md" target="_self" aria-label="IconButton"></sgds-icon-button>
     </div>
   </div>
 </template>

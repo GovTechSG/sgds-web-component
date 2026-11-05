@@ -9,7 +9,9 @@ import "@govtechsg/sgds-web-component";
     </h1>
     <div class="sgds:mt-gap-text-md">
       <sgds-stepper active-step="0" orientation="horizontal">
-        Stepper
+        <sgds-step step-header="Personal Details">Provide your personal information.</sgds-step>
+        <sgds-step step-header="Address">Enter your address and contact details.</sgds-step>
+        <sgds-step step-header="Review">Review all details before submitting.</sgds-step>
       </sgds-stepper>
     </div>
   </div>

@@ -17,7 +17,7 @@ import CheckboxGroupPage from "./pages/checkboxgroup";
 import ComboBoxPage from "./pages/combobox";
 import DataTablePage from "./pages/datatable";
 import DatepickerPage from "./pages/datepicker";
-import DescriptionListPage from "./pages/descriptionlist";
+import DescriptionListGroupPage from "./pages/descriptionlistgroup";
 import DropdownPage from "./pages/dropdown";
 import DividerPage from "./pages/divider";
 import DrawerPage from "./pages/drawer";
@@ -75,7 +75,7 @@ function App() {
           <Route path="/combobox" element={<ComboBoxPage />} />
           <Route path="/datatable" element={<DataTablePage />} />
           <Route path="/datepicker" element={<DatepickerPage />} />
-          <Route path="/descriptionlist" element={<DescriptionListPage />} />
+          <Route path="/descriptionlistgroup" element={<DescriptionListGroupPage />} />
           <Route path="/dropdown" element={<DropdownPage />} />
           <Route path="/divider" element={<DividerPage />} />
           <Route path="/drawer" element={<DrawerPage />} />

@@ -1,13 +1,12 @@
 'use client';
 
-import { SgdsTooltip, SgdsButton } from '@govtechsg/sgds-web-component/react';
+import { SgdsTooltip, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const Tooltip = () => {
   return (
     <>
-      <SgdsButton variant="primary" onClick={(e) => { const el = e.currentTarget.nextElementSibling; if (el) el.open = true; }}>Open Tooltip</SgdsButton>
-      <SgdsTooltip placement="top" trigger="hover focus">
-        Tooltip
+      <SgdsTooltip content="This is a tooltip" placement="top" trigger="hover focus">
+        <SgdsIcon name="info-circle" ariaLabel="Information" tabindex="0"></SgdsIcon>
       </SgdsTooltip>
     </>
   );

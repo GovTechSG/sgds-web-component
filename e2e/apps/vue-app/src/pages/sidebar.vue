@@ -8,15 +8,24 @@ import "@govtechsg/sgds-web-component";
       Sidebar
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-sidebar variant="collapsible" aria-label="Sidebar navigation">
-        <sgds-sidebar-group>
-          SidebarGroup content
-        </sgds-sidebar-group>
-        <sgds-sidebar-item>
-          <sgds-icon slot="icon" name="placeholder" size="md"></sgds-icon>
-          SidebarItem content
-        </sgds-sidebar-item>
-        <sgds-sidebar-section></sgds-sidebar-section>
+      <sgds-sidebar active="meetings" variant="collapsible" aria-label="Sidebar navigation">
+        <div slot="upper">SGDS Sidebar</div>
+        <sgds-sidebar-section title="Main" name="main">
+          <sgds-sidebar-group title="Dashboard" name="dashboard">
+            <sgds-icon name="house" slot="icon" size="md"></sgds-icon>
+            <sgds-sidebar-item title="Meetings" name="meetings">
+              <sgds-icon name="calendar" slot="icon" size="md"></sgds-icon>
+              <a href="#"></a>
+            </sgds-sidebar-item>
+            <sgds-sidebar-item title="Gallery" name="gallery">
+              <sgds-icon name="camera" slot="icon" size="md"></sgds-icon>
+              <a href="#"></a>
+            </sgds-sidebar-item>
+          </sgds-sidebar-group>
+          <sgds-sidebar-item title="Settings" name="settings">
+            <sgds-icon name="gear" slot="icon" size="md"></sgds-icon>
+          </sgds-sidebar-item>
+        </sgds-sidebar-section>
       </sgds-sidebar>
     </div>
   </div>

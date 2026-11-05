@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: "combobox", loadComponent: () => import("./pages/combobox.component").then(m => m.ComboBoxPageComponent) },
   { path: "datatable", loadComponent: () => import("./pages/datatable.component").then(m => m.DataTablePageComponent) },
   { path: "datepicker", loadComponent: () => import("./pages/datepicker.component").then(m => m.DatepickerPageComponent) },
-  { path: "descriptionlist", loadComponent: () => import("./pages/descriptionlist.component").then(m => m.DescriptionListPageComponent) },
+  { path: "descriptionlistgroup", loadComponent: () => import("./pages/descriptionlistgroup.component").then(m => m.DescriptionListGroupPageComponent) },
   { path: "dropdown", loadComponent: () => import("./pages/dropdown.component").then(m => m.DropdownPageComponent) },
   { path: "divider", loadComponent: () => import("./pages/divider.component").then(m => m.DividerPageComponent) },
   { path: "drawer", loadComponent: () => import("./pages/drawer.component").then(m => m.DrawerPageComponent) },

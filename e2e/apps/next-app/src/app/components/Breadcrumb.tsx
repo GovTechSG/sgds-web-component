@@ -6,9 +6,9 @@ export const Breadcrumb = () => {
   return (
     <>
       <SgdsBreadcrumb ariaLabel="breadcrumb">
-        <SgdsBreadcrumbItem>
-          BreadcrumbItem content
-        </SgdsBreadcrumbItem>
+        <SgdsBreadcrumbItem><a href="#">Home</a></SgdsBreadcrumbItem>
+        <SgdsBreadcrumbItem><a href="#">About</a></SgdsBreadcrumbItem>
+        <SgdsBreadcrumbItem active><a href="#">Contacts</a></SgdsBreadcrumbItem>
       </SgdsBreadcrumb>
     </>
   );

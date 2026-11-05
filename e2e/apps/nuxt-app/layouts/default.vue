@@ -54,8 +54,8 @@ const active = computed(() => {
           <sgds-sidebar-item name="datepicker" title="Datepicker">
               <NuxtLink to="/datepicker"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="descriptionlist" title="DescriptionList">
-              <NuxtLink to="/descriptionlist"></NuxtLink>
+          <sgds-sidebar-item name="descriptionlistgroup" title="DescriptionListGroup">
+              <NuxtLink to="/descriptionlistgroup"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="dropdown" title="Dropdown">
               <NuxtLink to="/dropdown"></NuxtLink>

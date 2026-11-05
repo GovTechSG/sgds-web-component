@@ -49,8 +49,8 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="datepicker" title="Datepicker">
             <Link to="/datepicker"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="descriptionlist" title="DescriptionList">
-            <Link to="/descriptionlist"></Link>
+          <SgdsSidebarItem name="descriptionlistgroup" title="DescriptionListGroup">
+            <Link to="/descriptionlistgroup"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="dropdown" title="Dropdown">
             <Link to="/dropdown"></Link>

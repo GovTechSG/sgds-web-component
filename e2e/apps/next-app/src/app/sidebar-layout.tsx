@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SgdsSidebar, SgdsSidebarItem, SgdsSidebarSection } from "@govtechsg/sgds-web-component/react";
 
@@ -13,157 +14,157 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
         <div slot="upper" className="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E NextJS</div>
         <SgdsSidebarSection name="components" title="Components">
           <SgdsSidebarItem name="accordion" title="Accordion">
-            <a href="/accordion"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="appnav" title="Appnav">
-            <a href="/appnav"></a>
+            <Link href="/accordion"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="alertlink" title="AlertLink">
-            <a href="/alertlink"></a>
+            <Link href="/alertlink"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="alert" title="Alert">
-            <a href="/alert"></a>
+            <Link href="/alert"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="appnav" title="Appnav">
+            <Link href="/appnav"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
-            <a href="/breadcrumb"></a>
+            <Link href="/breadcrumb"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="button" title="Button">
-            <a href="/button"></a>
+            <Link href="/button"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="card" title="Card">
-            <a href="/card"></a>
+            <Link href="/card"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="badge" title="Badge">
-            <a href="/badge"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="closebutton" title="CloseButton">
-            <a href="/closebutton"></a>
+            <Link href="/badge"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="checkboxgroup" title="CheckboxGroup">
-            <a href="/checkboxgroup"></a>
+            <Link href="/checkboxgroup"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="closebutton" title="CloseButton">
+            <Link href="/closebutton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="combobox" title="ComboBox">
-            <a href="/combobox"></a>
+            <Link href="/combobox"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="datatable" title="DataTable">
-            <a href="/datatable"></a>
+            <Link href="/datatable"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="datepicker" title="Datepicker">
-            <a href="/datepicker"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="descriptionlist" title="DescriptionList">
-            <a href="/descriptionlist"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="dropdown" title="Dropdown">
-            <a href="/dropdown"></a>
+            <Link href="/datepicker"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="divider" title="Divider">
-            <a href="/divider"></a>
+            <Link href="/divider"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="drawer" title="Drawer">
-            <a href="/drawer"></a>
+            <Link href="/drawer"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="dropdown" title="Dropdown">
+            <Link href="/dropdown"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="descriptionlistgroup" title="DescriptionListGroup">
+            <Link href="/descriptionlistgroup"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="fileupload" title="FileUpload">
-            <a href="/fileupload"></a>
+            <Link href="/fileupload"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="footer" title="Footer">
-            <a href="/footer"></a>
+            <Link href="/footer"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="icon" title="Icon">
-            <a href="/icon"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="iconbutton" title="IconButton">
-            <a href="/iconbutton"></a>
+            <Link href="/icon"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="iconcard" title="IconCard">
-            <a href="/iconcard"></a>
+            <Link href="/iconcard"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="iconlist" title="IconList">
-            <a href="/iconlist"></a>
+            <Link href="/iconlist"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="iconbutton" title="IconButton">
+            <Link href="/iconbutton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="imagecard" title="ImageCard">
-            <a href="/imagecard"></a>
+            <Link href="/imagecard"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="input" title="Input">
-            <a href="/input"></a>
+            <Link href="/input"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="link" title="Link">
-            <a href="/link"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="mainnav" title="Mainnav">
-            <a href="/mainnav"></a>
+            <Link href="/link"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="masthead" title="Masthead">
-            <a href="/masthead"></a>
+            <Link href="/masthead"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="mainnav" title="Mainnav">
+            <Link href="/mainnav"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="modal" title="Modal">
-            <a href="/modal"></a>
+            <Link href="/modal"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="overflowmenu" title="OverflowMenu">
-            <a href="/overflowmenu"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="progressbar" title="ProgressBar">
-            <a href="/progressbar"></a>
+            <Link href="/overflowmenu"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="pagination" title="Pagination">
-            <a href="/pagination"></a>
+            <Link href="/pagination"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="quantitytoggle" title="QuantityToggle">
-            <a href="/quantitytoggle"></a>
+            <Link href="/quantitytoggle"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="progressbar" title="ProgressBar">
+            <Link href="/progressbar"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="radiogroup" title="RadioGroup">
-            <a href="/radiogroup"></a>
+            <Link href="/radiogroup"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="select" title="Select">
-            <a href="/select"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="sidenav" title="Sidenav">
-            <a href="/sidenav"></a>
+            <Link href="/select"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="sidebar" title="Sidebar">
-            <a href="/sidebar"></a>
+            <Link href="/sidebar"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="sidenav" title="Sidenav">
+            <Link href="/sidenav"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="skeleton" title="Skeleton">
-            <a href="/skeleton"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="spinner" title="Spinner">
-            <a href="/spinner"></a>
+            <Link href="/skeleton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="step" title="Step">
-            <a href="/step"></a>
+            <Link href="/step"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="stepper" title="Stepper">
-            <a href="/stepper"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="subnav" title="Subnav">
-            <a href="/subnav"></a>
+            <Link href="/stepper"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="switch" title="Switch">
-            <a href="/switch"></a>
+            <Link href="/switch"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="subnav" title="Subnav">
+            <Link href="/subnav"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="spinner" title="Spinner">
+            <Link href="/spinner"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="systembanner" title="SystemBanner">
-            <a href="/systembanner"></a>
+            <Link href="/systembanner"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="tabgroup" title="TabGroup">
-            <a href="/tabgroup"></a>
+            <Link href="/tabgroup"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="table" title="Table">
-            <a href="/table"></a>
+            <Link href="/table"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="tableofcontents" title="TableOfContents">
-            <a href="/tableofcontents"></a>
+            <Link href="/tableofcontents"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="textarea" title="Textarea">
-            <a href="/textarea"></a>
+            <Link href="/textarea"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="thumbnailcard" title="ThumbnailCard">
-            <a href="/thumbnailcard"></a>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="tooltip" title="Tooltip">
-            <a href="/tooltip"></a>
+            <Link href="/thumbnailcard"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="toastcontainer" title="ToastContainer">
-            <a href="/toastcontainer"></a>
+            <Link href="/toastcontainer"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="tooltip" title="Tooltip">
+            <Link href="/tooltip"></Link>
           </SgdsSidebarItem>
         </SgdsSidebarSection>
       </SgdsSidebar>

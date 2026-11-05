@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import "@govtechsg/sgds-web-component/components/Tooltip/index.js";
-import "@govtechsg/sgds-web-component/components/Button/index.js";
 </script>
 
 <template>
@@ -9,9 +8,8 @@ import "@govtechsg/sgds-web-component/components/Button/index.js";
       Tooltip
     </h1>
     <div class="sgds:mt-gap-text-md">
-      <sgds-button variant="primary" onclick="this.nextElementSibling.open = true">Open Tooltip</sgds-button>
-      <sgds-tooltip placement="top" trigger="hover focus">
-        Tooltip
+      <sgds-tooltip content="This is a tooltip" placement="top" trigger="hover focus">
+        <sgds-icon name="info-circle" aria-label="Information" tabindex="0"></sgds-icon>
       </sgds-tooltip>
     </div>
   </div>
