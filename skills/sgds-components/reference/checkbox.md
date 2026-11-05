@@ -132,6 +132,7 @@ No CSS styling modifications — custom properties and CSS parts are not exposed
 | `hasFeedback` | `style \| text \| both` | — | Validation feedback display (standalone) |
 | `invalidFeedback` | string | `""` | Error message (standalone) |
 | `ariaLabel` | string | `""` | Accessible label forwarded to the internal input's `aria-label`. Use only when no default slot (visible label) is provided. |
+| `hasDefaultSlot` | boolean | `false` | SSR hint: set to `true` when the checkbox has default slot content so the label renders correctly during server-side rendering. On the client this is managed automatically. |
 
 ## Slots
 
