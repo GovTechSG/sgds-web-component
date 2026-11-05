@@ -331,7 +331,7 @@ slot[name="toggler"]::slotted(*) {
   :host([expand="lg"]) .nav-link,
   :host(:not([expand])) .mobile-header a,
   :host([expand="lg"]) .mobile-header a {
-    padding: var(--sgds-padding-sm) var(--sgds-mainnav-padding-x);
+    padding: 0 var(--sgds-padding-md);
   }
 }
 
