@@ -5,7 +5,7 @@ import { SgdsSwitch } from '@govtechsg/sgds-web-component/react';
 export const Switch = () => {
   return (
     <>
-      <SgdsSwitch label="Enable notifications"></SgdsSwitch>
+      <SgdsSwitch hasDefaultSlot>Enable notifications</SgdsSwitch>
     </>
   );
 };

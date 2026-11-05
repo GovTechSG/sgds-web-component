@@ -171,18 +171,42 @@ const componentTemplates: Record<string, (args: Record<string, unknown>) => Temp
 
   DataTable: () => ({
     imports: ["SgdsDataTable", "SgdsDataTableHead", "SgdsDataTableRow", "SgdsDataTableCell"],
-    jsx: `      <SgdsDataTable dataLength={2} currentPage={1} itemsPerPage={5}>
+    jsx: `      <SgdsDataTable multiSelect dataLength={5} currentPage={1} itemsPerPage={5}>
         <SgdsDataTableRow>
-          <SgdsDataTableHead>ID</SgdsDataTableHead>
-          <SgdsDataTableHead>Name</SgdsDataTableHead>
+          <SgdsDataTableHead sorting sortKey="id">ID</SgdsDataTableHead>
+          <SgdsDataTableHead sorting sortKey="name">Name</SgdsDataTableHead>
+          <SgdsDataTableHead sorting sortKey="role">Role</SgdsDataTableHead>
+          <SgdsDataTableHead textAlign="right">Amount</SgdsDataTableHead>
         </SgdsDataTableRow>
         <SgdsDataTableRow>
           <SgdsDataTableCell>1</SgdsDataTableCell>
           <SgdsDataTableCell>Alice</SgdsDataTableCell>
+          <SgdsDataTableCell>Engineer</SgdsDataTableCell>
+          <SgdsDataTableCell>1250.00</SgdsDataTableCell>
         </SgdsDataTableRow>
         <SgdsDataTableRow>
           <SgdsDataTableCell>2</SgdsDataTableCell>
           <SgdsDataTableCell>Bob</SgdsDataTableCell>
+          <SgdsDataTableCell>Designer</SgdsDataTableCell>
+          <SgdsDataTableCell>980.00</SgdsDataTableCell>
+        </SgdsDataTableRow>
+        <SgdsDataTableRow>
+          <SgdsDataTableCell>3</SgdsDataTableCell>
+          <SgdsDataTableCell>Charlie</SgdsDataTableCell>
+          <SgdsDataTableCell>Analyst</SgdsDataTableCell>
+          <SgdsDataTableCell>1100.00</SgdsDataTableCell>
+        </SgdsDataTableRow>
+        <SgdsDataTableRow>
+          <SgdsDataTableCell>4</SgdsDataTableCell>
+          <SgdsDataTableCell>Diana</SgdsDataTableCell>
+          <SgdsDataTableCell>Manager</SgdsDataTableCell>
+          <SgdsDataTableCell>1500.00</SgdsDataTableCell>
+        </SgdsDataTableRow>
+        <SgdsDataTableRow>
+          <SgdsDataTableCell>5</SgdsDataTableCell>
+          <SgdsDataTableCell>Eve</SgdsDataTableCell>
+          <SgdsDataTableCell>Engineer</SgdsDataTableCell>
+          <SgdsDataTableCell>1300.00</SgdsDataTableCell>
         </SgdsDataTableRow>
       </SgdsDataTable>`,
   }),
@@ -396,7 +420,7 @@ const componentTemplates: Record<string, (args: Record<string, unknown>) => Temp
 
   Switch: () => ({
     imports: ["SgdsSwitch"],
-    jsx: `      <SgdsSwitch label="Enable notifications"></SgdsSwitch>`,
+    jsx: `      <SgdsSwitch>Enable notifications</SgdsSwitch>`,
   }),
 
   SystemBanner: () => ({
@@ -578,8 +602,8 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
   return (
     <div className="sgds:flex sgds:min-h-screen">
       <SgdsSidebar active={active} variant="persistent" className="sgds:h-screen sgds:sticky sgds:top-0">
-        <div slot="upper" className="sgds:text-subtitle-sm sgds:font-semibold">Components</div>
-        <SgdsSidebarSection name="components">
+        <div slot="upper" className="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E NextJS</div>
+        <SgdsSidebarSection name="components" title="Components">
 ${sidebarItems}
         </SgdsSidebarSection>
       </SgdsSidebar>
