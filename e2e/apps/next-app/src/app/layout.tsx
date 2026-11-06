@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-// import { setCSPNonce } from "@govtechsg/sgds-web-component/react/ssr";
+import { setCSPNonce } from "@govtechsg/sgds-web-component/react/ssr";
 import "./globals.css";
 import "@govtechsg/sgds-web-component/themes/day.css";
 import { headers } from "next/headers";
@@ -18,8 +18,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const nonce = (await headers()).get("x-nonce");
-  // if (nonce) setCSPNonce(nonce);
+  const nonce = (await headers()).get("x-nonce");
+  if (nonce) setCSPNonce(nonce);
   return (
     <html lang="en">
       <body className={inter.className}>
