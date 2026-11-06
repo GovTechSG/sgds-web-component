@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted (revised 05/11/2026)
+Accepted (revised 05/11/2026, CSR fix 05/11/2026)
 
 ## Context
 
@@ -135,10 +135,63 @@ try {
 | 5 | `connectedCallback` override in `SgdsElement` to defer on `defer-hydration` | **Failed** — chicken-and-egg: `defer-hydration` removal detection requires the hydration patches that haven't loaded |
 | 6 | **Safety net with `observedAttributes` check + try-catch in `_ssr-init.ts`** | **Works ✓** — Turbopack: applies missed patches; Webpack: no-op via catch |
 
+### CSR compatibility: dynamic import for ssr-nonce-patch (05/11/2026)
+
+The original `_ssr-init.ts` used static imports for both `ssr-nonce-patch` and `enable-lit-ssr.js`. This works in webpack (Next.js) but **breaks `adoptedStyleSheets` in Vite/Rollup CSR builds** (e.g. a React + Vite app without SSR).
+
+**Root cause:** `ssr-nonce-patch.raw.js` uses `require("@lit-labs/ssr/lib/lit-element-renderer.js")`. Webpack respects the `if (typeof window === "undefined")` guard and tree-shakes the `require()` on the client. Vite's Rollup, however, converts `require()` to an ESM import and bundles `lit-element-renderer.js` unconditionally. That module's **module-level side effect** overrides `LitElement.prototype.createRenderRoot` with a version that does NOT call `adoptStyles()` — intended for server-side rendering where styles are emitted as `<style>` tags in DSD. On the client, this results in shadow roots with HTML content but **zero adopted stylesheets**.
+
+**Symptoms in CSR Vite builds:**
+- Components render HTML structure correctly (shadow root exists, classes applied)
+- `adoptedStyleSheets` is an empty array (`[]`)
+- `constructor.elementStyles` contains valid `CSSResult` objects with correct `cssText`
+- Manually setting `shadowRoot.adoptedStyleSheets = elementStyles.map(s => s.styleSheet)` restores styles — proving the issue is in the init chain, not the components
+- Dev server works (Vite serves modules individually, no Rollup bundling)
+
+**Fix:** Split the `_ssr-init.ts` imports into static and dynamic:
+
+```ts
+// Static — synchronous hydration support. Safe for CSR: only patches
+// createRenderRoot to reuse existing DSD shadow roots (no-op without DSD).
+import '@lit-labs/ssr-react/enable-lit-ssr.js';
+import { LitElement } from 'lit';
+
+// Dynamic — server only. Prevents Vite/Rollup from bundling
+// @lit-labs/ssr/lib/lit-element-renderer.js on the client.
+if (typeof window === 'undefined') {
+  import('../utils/ssr-nonce-patch');
+}
+
+// Turbopack safety net (unchanged)
+try {
+  if (typeof globalThis.litElementHydrateSupport === 'function') {
+    if (!(LitElement.observedAttributes ?? []).includes('defer-hydration'))
+      globalThis.litElementHydrateSupport({ LitElement });
+  }
+} catch {}
+```
+
+**Why this split works:**
+
+| Module | Import type | Why |
+|--------|------------|-----|
+| `enable-lit-ssr.js` | **Static** | Must execute synchronously before any component renders. Patches `createRenderRoot` for DSD hydration. On the client without DSD, it's a no-op (checks `this.shadowRoot` — null for fresh elements). Does NOT import `lit-element-renderer.js`. |
+| `ssr-nonce-patch` | **Dynamic** | Only needed on the server for CSP nonce injection. Its `require("@lit-labs/ssr/lib/lit-element-renderer.js")` is the import that causes the destructive `createRenderRoot` override. Dynamic import inside `typeof window === 'undefined'` keeps it out of client bundles. |
+| `LitElement` | **Static** | Needed for the Turbopack safety net. Does not cause issues. |
+
+**Attempted alternatives that failed:**
+
+| # | Approach | Result |
+|---|----------|--------|
+| 1 | `package.json` conditional `imports` (`#ssr-init`) | **Failed** — Rolldown resolves `#ssr-init` at build time using `platform: "browser"`, inlining the browser no-op. SSR init is completely removed from the build output. |
+| 2 | Make ALL imports in `_ssr-init.ts` dynamic | **Failed** — hydration support loads asynchronously. Components render before patches are applied → DSD content duplicated in Next.js. |
+| 3 | Vite `resolve.dedupe` for lit packages | **Failed** — pnpm strict resolution + `file:` reference causes Rollup to resolve `lit` from workspace root, breaking deep imports like `@lit/reactive-element/decorators/custom-element.js`. |
+| 4 | Vite plugin to noop SSR imports (`resolveId` + `load`) | **Works** as a consumer-side workaround but requires every Vite consumer to configure the plugin. Not acceptable as a library-level fix. |
+
 ### Build changes
 
 - `rolldown.config.mjs`: Added `/@lit-labs\/.*/` and `/^react\/.*/` to externals. Added separate SSR build config without `"use client"` banner. Added `treeshake.moduleSideEffects` for nonce patch.
-- `scripts/makeReact.mjs`: Generates `_ssr-init.ts`, `_ssr/index.ts`, and adds `import '../_ssr-init'` to each wrapper.
+- `scripts/makeReact.mjs`: Generates `_ssr-init.ts` (with dynamic `ssr-nonce-patch` import for CSR compatibility), `_ssr/index.ts`, and adds `import '../_ssr-init'` to each wrapper.
 - `scripts/frankBuild.js`: Added `"./react/ssr"` export path. Copies `ssr-nonce-patch.raw.js` to `lib/`, overwriting Rolldown output.
 
 ### Files
@@ -278,6 +331,15 @@ Tested on `e2e/apps/next-app` with Next.js 16.3.8 (production standalone build):
 - **Webpack** (`next build --no-turbopack`): no errors, safety net is a no-op
 - **Dev mode** (`next dev`): unaffected, no issues
 - **Non-React consumers**: unaffected, safety net only in `_ssr-init.ts` (React wrappers)
+
+### CSR compatibility fix (05/11/2026)
+
+Tested on `e2e/apps/react-app` (React 19 + Vite 7, CSR-only, production build):
+
+- **Dev server**: components styled correctly, `adoptedStyleSheets` populated
+- **Production build** (`vite build` + `vite preview`): components styled correctly, `adoptedStyleSheets` populated
+- **No consumer config needed**: no Vite plugins, no resolve aliases, no noop modules
+- **Next.js SSR unaffected**: DSD hydration works, no content duplication, CLS 0
 
 ## Date of proposal
 
