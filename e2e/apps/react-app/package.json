@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 4004",
     "build": "vite build",
-    "preview": "vite preview --host 127.0.0.1 --port 4004"
+    "preview": "vite preview --host 127.0.0.1 --port 4014"
   },
   "dependencies": {
     "@govtechsg/sgds-web-component": "file:../../../lib",

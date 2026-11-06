@@ -3,8 +3,8 @@ dist/
 test-results/
 playwright-report/
 apps/*/node_modules/
-apps/*/.next/
-apps/*/.nuxt/
+apps/*/.next*/
+apps/*/.nuxt*/
 apps/*/.output/
 apps/*/dist/
 apps/*/.angular/

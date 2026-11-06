@@ -2,40 +2,46 @@ import { defineConfig } from "@playwright/test";
 
 const CI = !!process.env.CI;
 
-// Copy fixtures to each app's public/assets dir before starting
-const copyFixtures = (appDir: string, dest = "public") =>
-  `mkdir -p apps/${appDir}/${dest} && cp fixtures/component-html.json fixtures/component-list.json fixtures/component-args.json apps/${appDir}/${dest}/`;
-
 export default defineConfig({
   testDir: "./tests",
   timeout: 120_000,
   retries: CI ? 1 : 0,
   reporter: CI ? "github" : "list",
   globalSetup: "./utils/global-setup.ts",
+  workers: 1,
   use: {
     trace: "on-first-retry"
   },
   webServer: [
-    // SSR apps: build + start production server
+    // Next.js — production build + dev server
     {
-      command: `${copyFixtures("next-app")} && cd apps/next-app && pnpm install && pnpm build && pnpm start`,
+      command: "cd apps/next-app && NEXT_DIST_DIR=.next-prod pnpm build && NEXT_DIST_DIR=.next-prod pnpm start",
       port: 4002,
-      timeout: 180_000,
+      timeout: 300_000,
       reuseExistingServer: !CI,
       stdout: "pipe",
       stderr: "pipe"
     },
     {
-      command: `${copyFixtures("nuxt-app")} && cd apps/nuxt-app && pnpm install && pnpm build && pnpm preview`,
+      command: "cd apps/next-app && NEXT_DIST_DIR=.next-dev pnpm dev",
+      port: 4012,
+      timeout: 300_000,
+      reuseExistingServer: !CI,
+      stdout: "pipe",
+      stderr: "pipe"
+    },
+    // Nuxt — production build + dev server
+    {
+      command: "cd apps/nuxt-app && NUXT_BUILD_DIR=.nuxt-prod pnpm build && NUXT_BUILD_DIR=.nuxt-prod pnpm preview",
       port: 4003,
-      timeout: 180_000,
+      timeout: 300_000,
       reuseExistingServer: !CI,
       stdout: "pipe",
       stderr: "pipe"
     },
-    // CSR apps: dev server
+    // React — dev server + production build
     {
-      command: `${copyFixtures("react-app")} && cd apps/react-app && pnpm install && pnpm dev`,
+      command: "cd apps/react-app && pnpm dev",
       port: 4004,
       timeout: 120_000,
       reuseExistingServer: !CI,
@@ -43,7 +49,16 @@ export default defineConfig({
       stderr: "pipe"
     },
     {
-      command: `${copyFixtures("vue-app")} && cd apps/vue-app && pnpm install && pnpm dev`,
+      command: "cd apps/react-app && pnpm build && pnpm preview",
+      port: 4014,
+      timeout: 180_000,
+      reuseExistingServer: !CI,
+      stdout: "pipe",
+      stderr: "pipe"
+    },
+    // Vue — dev server + production build
+    {
+      command: "cd apps/vue-app && pnpm dev",
       port: 4001,
       timeout: 120_000,
       reuseExistingServer: !CI,
@@ -51,7 +66,16 @@ export default defineConfig({
       stderr: "pipe"
     },
     {
-      command: `${copyFixtures("angular-app", "src/assets")} && cd apps/angular-app && pnpm install && pnpm start`,
+      command: "cd apps/vue-app && pnpm build && pnpm preview",
+      port: 4011,
+      timeout: 180_000,
+      reuseExistingServer: !CI,
+      stdout: "pipe",
+      stderr: "pipe"
+    },
+    // Angular — dev server only
+    {
+      command: "cd apps/angular-app && pnpm start",
       port: 4200,
       timeout: 120_000,
       reuseExistingServer: !CI,
