@@ -9,6 +9,8 @@ import "./utility.css";
 import "./gt-themes.css";
 import "./global.css";
 import "./addons/react-source/docs-tabs-inject";
+import { ThemedDocsContainer } from "./DocsContainer";
+import { applyTheme, getSavedColorMode } from "./applyTheme";
 
 export const setCustomElementsManifestWithOptions = (
   customElements: any,
@@ -67,6 +69,7 @@ export const parameters = {
   },
   viewMode: "docs",
   docs: {
+    container: ThemedDocsContainer,
     toc: {
       headingSelector: "h1, h2, h3",
       title: "Table of Contents",
@@ -128,37 +131,18 @@ export const parameters = {
 };
 export const tags = ["autodocs"];
 
-const GT_CLASSES = [
-  "gt-blue-theme",
-  "gt-cyan-theme",
-  "gt-magenta-theme",
-  "gt-pink-theme",
-  "gt-purple-theme",
-  "gt-red-theme"
-];
-
 const withTheme = (StoryFn: any, context: any) => {
   const { colorMode = "day", brandTheme = "" } = context.globals;
-  const html = document.documentElement;
-
-  if (colorMode === "night") {
-    html.classList.add("sgds-night-theme");
-  } else {
-    html.classList.remove("sgds-night-theme");
-  }
-
-  html.classList.remove(...GT_CLASSES);
-  if (brandTheme) {
-    html.classList.add(brandTheme);
-  }
-
+  applyTheme(colorMode, brandTheme);
   return StoryFn();
 };
+
+// Start from the remembered mode, not "day", so the first render after a reload doesn't flash light
+export const initialGlobals = { colorMode: getSavedColorMode() };
 
 export const globalTypes = {
   colorMode: {
     name: "Color Mode",
-    defaultValue: "day",
     toolbar: {
       icon: "sun",
       items: [
