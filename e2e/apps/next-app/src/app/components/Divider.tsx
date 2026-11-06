@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsDivider } from '@govtechsg/sgds-web-component/react';
+import { SgdsDivider } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const Divider = () => {
   return (

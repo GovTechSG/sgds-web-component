@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsOverflowMenu, SgdsDropdownItem } from '@govtechsg/sgds-web-component/react';
+import { SgdsOverflowMenu, SgdsDropdownItem } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const OverflowMenu = () => {
   return (

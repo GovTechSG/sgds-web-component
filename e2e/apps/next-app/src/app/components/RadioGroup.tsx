@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsRadioGroup, SgdsRadio } from '@govtechsg/sgds-web-component/react';
+import { SgdsRadioGroup, SgdsRadio } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const RadioGroup = () => {
   return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsStepper, SgdsStep } from '@govtechsg/sgds-web-component/react';
+import { SgdsStepper, SgdsStep } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const Stepper = () => {
   return (

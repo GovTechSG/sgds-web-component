@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsSidenav, SgdsSidenavItem, SgdsSidenavLink } from '@govtechsg/sgds-web-component/react';
+import { SgdsSidenav, SgdsSidenavItem, SgdsSidenavLink } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const Sidenav = () => {
   return (

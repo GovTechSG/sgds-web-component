@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsThumbnailCard, SgdsBadge, SgdsLink, SgdsIcon } from '@govtechsg/sgds-web-component/react';
+import { SgdsThumbnailCard, SgdsBadge, SgdsLink, SgdsIcon } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const ThumbnailCard = () => {
   return (

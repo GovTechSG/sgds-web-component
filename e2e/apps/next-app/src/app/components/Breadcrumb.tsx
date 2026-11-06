@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsBreadcrumb, SgdsBreadcrumbItem } from '@govtechsg/sgds-web-component/react';
+import { SgdsBreadcrumb, SgdsBreadcrumbItem } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const Breadcrumb = () => {
   return (
