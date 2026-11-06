@@ -15,20 +15,20 @@ const active = computed(() => {
     <sgds-sidebar :active="active" variant="persistent" class="sgds:h-screen sgds:sticky sgds:top-0">
       <div slot="upper" class="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E Vue</div>
       <sgds-sidebar-section name="components" title="Components">
-          <sgds-sidebar-item name="accordion" title="Accordion">
-              <router-link to="/accordion"></router-link>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="alertlink" title="AlertLink">
               <router-link to="/alertlink"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="alert" title="Alert">
               <router-link to="/alert"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="appnav" title="Appnav">
-              <router-link to="/appnav"></router-link>
+          <sgds-sidebar-item name="accordion" title="Accordion">
+              <router-link to="/accordion"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="badge" title="Badge">
               <router-link to="/badge"></router-link>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="appnav" title="Appnav">
+              <router-link to="/appnav"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
               <router-link to="/breadcrumb"></router-link>
@@ -57,11 +57,11 @@ const active = computed(() => {
           <sgds-sidebar-item name="descriptionlistgroup" title="DescriptionListGroup">
               <router-link to="/descriptionlistgroup"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="drawer" title="Drawer">
-              <router-link to="/drawer"></router-link>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="divider" title="Divider">
               <router-link to="/divider"></router-link>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="drawer" title="Drawer">
+              <router-link to="/drawer"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="dropdown" title="Dropdown">
               <router-link to="/dropdown"></router-link>
@@ -78,17 +78,17 @@ const active = computed(() => {
           <sgds-sidebar-item name="iconbutton" title="IconButton">
               <router-link to="/iconbutton"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="iconlist" title="IconList">
-              <router-link to="/iconlist"></router-link>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="iconcard" title="IconCard">
               <router-link to="/iconcard"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="input" title="Input">
-              <router-link to="/input"></router-link>
+          <sgds-sidebar-item name="iconlist" title="IconList">
+              <router-link to="/iconlist"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="imagecard" title="ImageCard">
               <router-link to="/imagecard"></router-link>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="input" title="Input">
+              <router-link to="/input"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="link" title="Link">
               <router-link to="/link"></router-link>
@@ -120,11 +120,11 @@ const active = computed(() => {
           <sgds-sidebar-item name="select" title="Select">
               <router-link to="/select"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="sidenav" title="Sidenav">
-              <router-link to="/sidenav"></router-link>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="sidebar" title="Sidebar">
               <router-link to="/sidebar"></router-link>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="sidenav" title="Sidenav">
+              <router-link to="/sidenav"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="skeleton" title="Skeleton">
               <router-link to="/skeleton"></router-link>

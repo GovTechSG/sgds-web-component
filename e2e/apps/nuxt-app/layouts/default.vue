@@ -15,20 +15,20 @@ const active = computed(() => {
     <sgds-sidebar :active="active" variant="persistent" class="sgds:h-screen sgds:sticky sgds:top-0">
       <div slot="upper" class="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E Nuxt</div>
       <sgds-sidebar-section name="components" title="Components">
-          <sgds-sidebar-item name="accordion" title="Accordion">
-              <NuxtLink to="/accordion"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="alertlink" title="AlertLink">
               <NuxtLink to="/alertlink"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="alert" title="Alert">
               <NuxtLink to="/alert"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="appnav" title="Appnav">
-              <NuxtLink to="/appnav"></NuxtLink>
+          <sgds-sidebar-item name="accordion" title="Accordion">
+              <NuxtLink to="/accordion"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="badge" title="Badge">
               <NuxtLink to="/badge"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="appnav" title="Appnav">
+              <NuxtLink to="/appnav"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
               <NuxtLink to="/breadcrumb"></NuxtLink>
@@ -57,11 +57,11 @@ const active = computed(() => {
           <sgds-sidebar-item name="descriptionlistgroup" title="DescriptionListGroup">
               <NuxtLink to="/descriptionlistgroup"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="drawer" title="Drawer">
-              <NuxtLink to="/drawer"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="divider" title="Divider">
               <NuxtLink to="/divider"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="drawer" title="Drawer">
+              <NuxtLink to="/drawer"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="dropdown" title="Dropdown">
               <NuxtLink to="/dropdown"></NuxtLink>
@@ -78,17 +78,17 @@ const active = computed(() => {
           <sgds-sidebar-item name="iconbutton" title="IconButton">
               <NuxtLink to="/iconbutton"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="iconlist" title="IconList">
-              <NuxtLink to="/iconlist"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="iconcard" title="IconCard">
               <NuxtLink to="/iconcard"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="input" title="Input">
-              <NuxtLink to="/input"></NuxtLink>
+          <sgds-sidebar-item name="iconlist" title="IconList">
+              <NuxtLink to="/iconlist"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="imagecard" title="ImageCard">
               <NuxtLink to="/imagecard"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="input" title="Input">
+              <NuxtLink to="/input"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="link" title="Link">
               <NuxtLink to="/link"></NuxtLink>
@@ -120,11 +120,11 @@ const active = computed(() => {
           <sgds-sidebar-item name="select" title="Select">
               <NuxtLink to="/select"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="sidenav" title="Sidenav">
-              <NuxtLink to="/sidenav"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="sidebar" title="Sidebar">
               <NuxtLink to="/sidebar"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="sidenav" title="Sidenav">
+              <NuxtLink to="/sidenav"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="skeleton" title="Skeleton">
               <NuxtLink to="/skeleton"></NuxtLink>

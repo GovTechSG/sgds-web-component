@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync } from "node:fs";
+import { copyFileSync, mkdirSync, rmSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
@@ -19,7 +19,21 @@ const targetDirs = [
 
 const appDirs = ["next-app", "nuxt-app", "react-app", "vue-app", "angular-app"];
 
+const buildCacheDirs = [
+  resolve(appsDir, "next-app/.next"),
+  resolve(appsDir, "next-app/.next-prod"),
+  resolve(appsDir, "next-app/.next-dev"),
+  resolve(appsDir, "nuxt-app/.nuxt-prod"),
+  resolve(appsDir, "nuxt-app/.output"),
+];
+
 export default function globalSetup() {
+  // Clean build caches so tests always run against a fresh build
+  for (const dir of buildCacheDirs) {
+    rmSync(dir, { recursive: true, force: true });
+  }
+  console.log("Cleared build caches.");
+
   // Copy fixture files to each app's public directory
   let copied = 0;
   for (const dir of targetDirs) {
@@ -36,7 +50,7 @@ export default function globalSetup() {
   for (const app of appDirs) {
     const cwd = resolve(appsDir, app);
     console.log(`Installing dependencies for ${app}...`);
-    execSync("pnpm install", { cwd, stdio: "inherit" });
+    execSync("pnpm install --no-frozen-lockfile", { cwd, stdio: "inherit" });
   }
   console.log("All app dependencies installed.");
 }
