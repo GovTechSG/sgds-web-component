@@ -1,12 +1,12 @@
 import { Routes } from "@angular/router";
 
 export const routes: Routes = [
-  { path: "", redirectTo: "accordion", pathMatch: "full" },
-  { path: "accordion", loadComponent: () => import("./pages/accordion.component").then(m => m.AccordionPageComponent) },
+  { path: "", redirectTo: "alertlink", pathMatch: "full" },
   { path: "alertlink", loadComponent: () => import("./pages/alertlink.component").then(m => m.AlertLinkPageComponent) },
   { path: "alert", loadComponent: () => import("./pages/alert.component").then(m => m.AlertPageComponent) },
-  { path: "appnav", loadComponent: () => import("./pages/appnav.component").then(m => m.AppnavPageComponent) },
+  { path: "accordion", loadComponent: () => import("./pages/accordion.component").then(m => m.AccordionPageComponent) },
   { path: "badge", loadComponent: () => import("./pages/badge.component").then(m => m.BadgePageComponent) },
+  { path: "appnav", loadComponent: () => import("./pages/appnav.component").then(m => m.AppnavPageComponent) },
   { path: "breadcrumb", loadComponent: () => import("./pages/breadcrumb.component").then(m => m.BreadcrumbPageComponent) },
   { path: "button", loadComponent: () => import("./pages/button.component").then(m => m.ButtonPageComponent) },
   { path: "card", loadComponent: () => import("./pages/card.component").then(m => m.CardPageComponent) },

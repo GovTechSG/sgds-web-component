@@ -78,13 +78,13 @@
     "sgds-tooltip"
   ],
   "react": {
-    "SgdsAccordionItem": "sgds-accordion-item",
-    "SgdsAccordion": "sgds-accordion",
     "SgdsAlertLink": "sgds-alert-link",
     "SgdsAlert": "sgds-alert",
+    "SgdsAccordionItem": "sgds-accordion-item",
+    "SgdsAccordion": "sgds-accordion",
+    "SgdsBadge": "sgds-badge",
     "SgdsAppnavProfile": "sgds-appnav-profile",
     "SgdsAppnav": "sgds-appnav",
-    "SgdsBadge": "sgds-badge",
     "SgdsBreadcrumbItem": "sgds-breadcrumb-item",
     "SgdsBreadcrumb": "sgds-breadcrumb",
     "SgdsButton": "sgds-button",

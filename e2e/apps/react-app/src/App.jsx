@@ -4,11 +4,11 @@ import "@govtechsg/sgds-web-component/css/sgds.css";
 import "@govtechsg/sgds-web-component";
 import "./index.css";
 import SidebarLayout from "./SidebarLayout";
-import AccordionPage from "./pages/accordion";
 import AlertLinkPage from "./pages/alertlink";
 import AlertPage from "./pages/alert";
-import AppnavPage from "./pages/appnav";
+import AccordionPage from "./pages/accordion";
 import BadgePage from "./pages/badge";
+import AppnavPage from "./pages/appnav";
 import BreadcrumbPage from "./pages/breadcrumb";
 import ButtonPage from "./pages/button";
 import CardPage from "./pages/card";
@@ -61,12 +61,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<SidebarLayout />}>
-          <Route index element={<Navigate to="/accordion" replace />} />
-          <Route path="/accordion" element={<AccordionPage />} />
+          <Route index element={<Navigate to="/alertlink" replace />} />
           <Route path="/alertlink" element={<AlertLinkPage />} />
           <Route path="/alert" element={<AlertPage />} />
-          <Route path="/appnav" element={<AppnavPage />} />
+          <Route path="/accordion" element={<AccordionPage />} />
           <Route path="/badge" element={<BadgePage />} />
+          <Route path="/appnav" element={<AppnavPage />} />
           <Route path="/breadcrumb" element={<BreadcrumbPage />} />
           <Route path="/button" element={<ButtonPage />} />
           <Route path="/card" element={<CardPage />} />

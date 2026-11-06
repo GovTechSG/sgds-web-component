@@ -15,20 +15,20 @@ const active = computed(() => {
     <sgds-sidebar :active="active" variant="persistent" class="sgds:h-screen sgds:sticky sgds:top-0">
       <div slot="upper" class="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E Nuxt</div>
       <sgds-sidebar-section name="components" title="Components">
-          <sgds-sidebar-item name="accordion" title="Accordion">
-              <NuxtLink to="/accordion"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="alertlink" title="AlertLink">
               <NuxtLink to="/alertlink"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="alert" title="Alert">
               <NuxtLink to="/alert"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="appnav" title="Appnav">
-              <NuxtLink to="/appnav"></NuxtLink>
+          <sgds-sidebar-item name="accordion" title="Accordion">
+              <NuxtLink to="/accordion"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="badge" title="Badge">
               <NuxtLink to="/badge"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="appnav" title="Appnav">
+              <NuxtLink to="/appnav"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
               <NuxtLink to="/breadcrumb"></NuxtLink>

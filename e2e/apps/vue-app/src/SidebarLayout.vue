@@ -15,20 +15,20 @@ const active = computed(() => {
     <sgds-sidebar :active="active" variant="persistent" class="sgds:h-screen sgds:sticky sgds:top-0">
       <div slot="upper" class="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E Vue</div>
       <sgds-sidebar-section name="components" title="Components">
-          <sgds-sidebar-item name="accordion" title="Accordion">
-              <router-link to="/accordion"></router-link>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="alertlink" title="AlertLink">
               <router-link to="/alertlink"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="alert" title="Alert">
               <router-link to="/alert"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="appnav" title="Appnav">
-              <router-link to="/appnav"></router-link>
+          <sgds-sidebar-item name="accordion" title="Accordion">
+              <router-link to="/accordion"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="badge" title="Badge">
               <router-link to="/badge"></router-link>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="appnav" title="Appnav">
+              <router-link to="/appnav"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
               <router-link to="/breadcrumb"></router-link>

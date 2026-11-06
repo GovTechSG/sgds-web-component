@@ -13,20 +13,20 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
       <SgdsSidebar active={active} variant="persistent" className="sgds:h-screen sgds:sticky sgds:top-0">
         <div slot="upper" className="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E NextJS</div>
         <SgdsSidebarSection name="components" title="Components">
-          <SgdsSidebarItem name="accordion" title="Accordion">
-            <Link href="/accordion"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="alertlink" title="AlertLink">
             <Link href="/alertlink"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="alert" title="Alert">
             <Link href="/alert"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="appnav" title="Appnav">
-            <Link href="/appnav"></Link>
+          <SgdsSidebarItem name="accordion" title="Accordion">
+            <Link href="/accordion"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="badge" title="Badge">
             <Link href="/badge"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="appnav" title="Appnav">
+            <Link href="/appnav"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
             <Link href="/breadcrumb"></Link>

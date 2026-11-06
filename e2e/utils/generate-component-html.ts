@@ -4,10 +4,10 @@
  *
  * Run from root: tsx e2e/utils/generate-component-html.ts
  */
-import { readdirSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
-import { resolve, dirname, basename } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
 import { render } from "@lit-labs/ssr";
+import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "../..");

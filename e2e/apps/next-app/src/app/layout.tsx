@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { setCSPNonce } from "@govtechsg/sgds-web-component/react/ssr";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
+// import { setCSPNonce } from "@govtechsg/sgds-web-component/react/ssr";
 import "./globals.css";
 import "@govtechsg/sgds-web-component/themes/day.css";
 import { headers } from "next/headers";
 import SidebarLayout from "./sidebar-layout";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = localFont({ src: "./fonts/Inter.woff2" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,8 +18,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const nonce = (await headers()).get("x-nonce");
-  if (nonce) setCSPNonce(nonce);
+  // const nonce = (await headers()).get("x-nonce");
+  // if (nonce) setCSPNonce(nonce);
   return (
     <html lang="en">
       <body className={inter.className}>
