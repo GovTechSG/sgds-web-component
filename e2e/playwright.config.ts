@@ -13,18 +13,10 @@ export default defineConfig({
     trace: "on-first-retry"
   },
   webServer: [
-    // Next.js — production build + dev server
+    // Next.js — production start (build done in globalSetup)
     {
-      command: "cd apps/next-app && NEXT_DIST_DIR=.next-prod pnpm build && NEXT_DIST_DIR=.next-prod pnpm start",
+      command: "cd apps/next-app && pnpm start",
       port: 4002,
-      timeout: 300_000,
-      reuseExistingServer: !CI,
-      stdout: "pipe",
-      stderr: "pipe"
-    },
-    {
-      command: "cd apps/next-app && NEXT_DIST_DIR=.next-dev pnpm dev",
-      port: 4012,
       timeout: 300_000,
       reuseExistingServer: !CI,
       stdout: "pipe",

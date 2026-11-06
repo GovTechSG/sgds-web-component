@@ -7,12 +7,12 @@ import "./index.css";
 import App from "./App.vue";
 
 const routes = [
-  { path: "/", redirect: "/alertlink" },
+  { path: "/", redirect: "/accordion" },
+  { path: "/accordion", component: () => import("./pages/accordion.vue") },
   { path: "/alertlink", component: () => import("./pages/alertlink.vue") },
   { path: "/alert", component: () => import("./pages/alert.vue") },
-  { path: "/accordion", component: () => import("./pages/accordion.vue") },
-  { path: "/badge", component: () => import("./pages/badge.vue") },
   { path: "/appnav", component: () => import("./pages/appnav.vue") },
+  { path: "/badge", component: () => import("./pages/badge.vue") },
   { path: "/breadcrumb", component: () => import("./pages/breadcrumb.vue") },
   { path: "/button", component: () => import("./pages/button.vue") },
   { path: "/card", component: () => import("./pages/card.vue") },

@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: process.env.NEXT_DIST_DIR || ".next",
+  distDir: ".next",
   reactStrictMode: true,
   allowedDevOrigins: ["127.0.0.1"],
   typescript: {

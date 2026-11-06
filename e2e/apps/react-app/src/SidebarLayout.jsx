@@ -10,20 +10,20 @@ export default function SidebarLayout() {
       <SgdsSidebar active={active} variant="persistent" className="sgds:h-screen sgds:sticky sgds:top-0">
         <div slot="upper" className="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E React</div>
         <SgdsSidebarSection name="components" title="Components">
+          <SgdsSidebarItem name="accordion" title="Accordion">
+            <Link to="/accordion"></Link>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="alertlink" title="AlertLink">
             <Link to="/alertlink"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="alert" title="Alert">
             <Link to="/alert"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="accordion" title="Accordion">
-            <Link to="/accordion"></Link>
+          <SgdsSidebarItem name="appnav" title="Appnav">
+            <Link to="/appnav"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="badge" title="Badge">
             <Link to="/badge"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="appnav" title="Appnav">
-            <Link to="/appnav"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
             <Link to="/breadcrumb"></Link>

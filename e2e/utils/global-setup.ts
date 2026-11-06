@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, rmSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, rmSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
@@ -20,9 +20,6 @@ const targetDirs = [
 const appDirs = ["next-app", "nuxt-app", "react-app", "vue-app", "angular-app"];
 
 const buildCacheDirs = [
-  resolve(appsDir, "next-app/.next"),
-  resolve(appsDir, "next-app/.next-prod"),
-  resolve(appsDir, "next-app/.next-dev"),
   resolve(appsDir, "nuxt-app/.nuxt-prod"),
   resolve(appsDir, "nuxt-app/.output"),
 ];
@@ -53,4 +50,21 @@ export default function globalSetup() {
     execSync("pnpm install --no-frozen-lockfile", { cwd, stdio: "inherit" });
   }
   console.log("All app dependencies installed.");
+
+  // Pre-build Next.js so the webServer only needs to run `next start`.
+  // The build is skipped if .next already exists — run `pnpm build` manually
+  // in e2e/apps/next-app if you need a fresh build.
+  const nextBuildDir = resolve(appsDir, "next-app/.next");
+  try {
+    const hasBuild = existsSync(resolve(nextBuildDir, "BUILD_ID"));
+    if (!hasBuild) {
+      console.log("Building Next.js app...");
+      execSync("pnpm build", { cwd: resolve(appsDir, "next-app"), stdio: "inherit" });
+      console.log("Next.js build complete.");
+    } else {
+      console.log("Next.js build already exists, skipping.");
+    }
+  } catch (err) {
+    console.warn("Next.js build failed — run 'pnpm build' manually in e2e/apps/next-app/");
+  }
 }
