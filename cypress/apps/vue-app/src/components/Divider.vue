@@ -1,5 +1,0 @@
-<template>
-  <sgds-divider></sgds-divider>
-  <sgds-divider thickness="thick"></sgds-divider>
-  <sgds-divider thickness="thicker"></sgds-divider>
-</template>

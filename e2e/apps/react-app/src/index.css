@@ -1,0 +1,6 @@
+@import "@govtechsg/sgds-web-component/themes/day.css";
+@import "@govtechsg/sgds-web-component/css/sgds.css";
+@import "@govtechsg/sgds-web-component/css/utility.css";
+
+/* Ensure Tailwind scans generated component/page files for sgds: class usage */
+@source "../src/**/*.jsx";

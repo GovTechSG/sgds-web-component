@@ -1,0 +1,127 @@
+{
+  "Alert": {
+    "href": "#",
+    "show": true,
+    "variant": "info",
+    "title": "Title",
+    "dismissible": true
+  },
+  "Checkbox": {
+    "name": "checkboxExample1",
+    "value": "check-me",
+    "hintText": "Check at least one option",
+    "label": "CheckboxGroup Label"
+  },
+  "ComboBox": {
+    "label": "Items",
+    "placeholder": "ComboBox",
+    "id": "combobox-example"
+  },
+  "DataTable": {
+    "dataLength": 15,
+    "itemsPerPage": 5,
+    "currentPage": 1,
+    "multiSelect": false,
+    "mode": "client",
+    "serverSort": false,
+    "loading": false,
+    "paginationVariant": "default",
+    "paginationSummary": ""
+  },
+  "Datepicker": {
+    "value": "19/02/1990",
+    "minDate": "1920-01-01T16:00:00.000Z",
+    "maxDate": "2030-12-02T12:00:00.000Z",
+    "label": "Birthdate",
+    "hintText": "Born after 1920"
+  },
+  "Dropdown": {
+    "href": "#"
+  },
+  "Footer": {
+    "contactHref": "https://form.gov.sg/",
+    "feedbackHref": "https://form.gov.sg/",
+    "faqHref": "https://form.gov.sg/",
+    "privacyHref": "https://www.designsystem.tech.gov.sg/privacy/",
+    "termsOfUseHref": "https://www.designsystem.tech.gov.sg/terms-of-use/"
+  },
+  "IconButton": {
+    "name": "plus",
+    "ariaLabel": "Add"
+  },
+  "IconCard": {
+    "orientation": "vertical"
+  },
+  "ImageCard": {
+    "orientation": "vertical",
+    "imagePosition": "before",
+    "imageAdjustment": "default"
+  },
+  "Input": {
+    "type": "text",
+    "hintText": "Hint text",
+    "placeholder": "Placeholder text",
+    "name": "email",
+    "label": "Label"
+  },
+  "OverflowMenu": {
+    "size": "md"
+  },
+  "Pagination": {
+    "dataLength": "50"
+  },
+  "ProgressBar": {
+    "label": "40%",
+    "value": 40,
+    "arialabel": "Loading in progress",
+    "ariamin": 0,
+    "ariamax": 100
+  },
+  "Radio": {
+    "hintText": "hint",
+    "label": "Label"
+  },
+  "Select": {
+    "hintText": "Select an option",
+    "placeholder": "Select an option",
+    "label": "Select label"
+  },
+  "Sidebar": {
+    "active": "meetings",
+    "collapsed": false,
+    "scrim": true
+  },
+  "Skeleton": {
+    "width": "128px",
+    "height": "64px",
+    "borderRadius": "4px"
+  },
+  "SystemBanner": {
+    "show": true
+  },
+  "Table": {
+    "headerPosition": "horizontal",
+    "headerBackground": false,
+    "tableBorder": true,
+    "layout": "auto"
+  },
+  "TableOfContents": {
+    "title": "Table of Contents"
+  },
+  "Textarea": {
+    "name": "textarea",
+    "label": "Label",
+    "maxlength": 100
+  },
+  "ThumbnailCard": {
+    "orientation": "vertical"
+  },
+  "Toast": {
+    "show": true,
+    "position": "bottom-end"
+  },
+  "Tooltip": {
+    "content": "This is a tooltip",
+    "placement": "bottom"
+  }
+}

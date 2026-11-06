@@ -31,6 +31,9 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
 
   private readonly hasSlotController = new HasSlotController(this, "[default]");
 
+  /** Used only for SSR to indicate the presence of the `default` slot. */
+  @property({ type: Boolean }) hasDefaultSlot = false;
+
   /**@internal */
   static dependencies = {
     "sgds-icon": SgdsIcon
@@ -184,6 +187,10 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
     this.checked && this.emit("sgds-check", { detail: { value: this.value } });
   }
 
+  updated() {
+    if (!this.hasDefaultSlot) this.hasDefaultSlot = this.hasSlotController.test("[default]");
+  }
+
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListener("click", this._handleHostClick);
@@ -206,8 +213,6 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
   render() {
     const displayFeedbackStyle = this.hasFeedback === "both" || this.hasFeedback === "style";
     const displayFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
-    const hasDefaultSlot = this.hasSlotController.test("[default]");
-
     return html`
       <div class="form-check">
         <input
@@ -233,7 +238,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
           @blur=${this._handleBlur}
           @focus=${this._handleFocus}
         />
-        ${hasDefaultSlot
+        ${this.hasDefaultSlot
           ? html`<label for="${this._controlId}" class="form-check-label" id="${this._labelId}"><slot></slot></label>`
           : nothing}
       </div>
