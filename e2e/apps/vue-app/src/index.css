@@ -1,0 +1,4 @@
+@import "@govtechsg/sgds-web-component/css/utility.css";
+
+/* Ensure Tailwind scans generated page/layout files for sgds: class usage */
+@source "../src/**/*.vue";

@@ -12,6 +12,7 @@ async function createPackageFile() {
   const newPackageData = {
     ...packageOthers,
     private: false,
+    sideEffects: true,
     typings: "./index.d.ts",
     main: "./index.umd.js",
     module: "./index.js",
@@ -22,7 +23,7 @@ async function createPackageFile() {
       "./components": "./components/index.js",
       "./components/*": "./components/*",
       "./react": "./react/index.js",
-      "./react/ssr": "./react/_ssr/index.js",
+      "./react/ssr": "./react/ssr/index.js",
       "./react/*": "./react/*",
       "./base/*": null,
       "./utils/*": null,

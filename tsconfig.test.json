@@ -5,5 +5,5 @@
     "rootDir": "."
   },
   "include": ["test/**/*.ts", "./mocks/*.ts", "typings"],
-  "exclude": ["node_modules", "lib", "src", "cypress", "cypress.config.ts"]
+  "exclude": ["node_modules", "lib", "src"]
 }
