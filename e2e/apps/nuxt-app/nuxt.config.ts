@@ -7,15 +7,22 @@ export default defineNuxtConfig({
   modules: [["nuxt-ssr-lit", { litElementPrefix: ["sgds-"] }]],
   css: ["~/assets/css/main.css"],
   vite: {
-    plugins: [tailwindcss()],
-    ssr: {
-      noExternal: [/lit/, /@lit/, /parse5/, /@parse5/]
-    }
+    plugins: [tailwindcss()]
   },
   nitro: {
     moduleSideEffects: ["@govtechsg/sgds-web-component"],
     externals: {
-      inline: [/lit/, /@lit/, /parse5/, /@parse5/]
+      inline: [
+        "@lit-labs/ssr",
+        "@lit-labs/ssr-client",
+        "@lit-labs/ssr-dom-shim",
+        "lit",
+        "lit-element",
+        "lit-html",
+        "@lit/reactive-element",
+        "parse5",
+        "entities"
+      ]
     }
   },
   alias: {
