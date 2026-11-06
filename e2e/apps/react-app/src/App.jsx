@@ -18,17 +18,17 @@ import ComboBoxPage from "./pages/combobox";
 import DataTablePage from "./pages/datatable";
 import DatepickerPage from "./pages/datepicker";
 import DescriptionListGroupPage from "./pages/descriptionlistgroup";
-import DividerPage from "./pages/divider";
 import DrawerPage from "./pages/drawer";
+import DividerPage from "./pages/divider";
 import DropdownPage from "./pages/dropdown";
 import FileUploadPage from "./pages/fileupload";
 import FooterPage from "./pages/footer";
 import IconPage from "./pages/icon";
 import IconButtonPage from "./pages/iconbutton";
-import IconCardPage from "./pages/iconcard";
 import IconListPage from "./pages/iconlist";
-import ImageCardPage from "./pages/imagecard";
+import IconCardPage from "./pages/iconcard";
 import InputPage from "./pages/input";
+import ImageCardPage from "./pages/imagecard";
 import LinkPage from "./pages/link";
 import MainnavPage from "./pages/mainnav";
 import MastheadPage from "./pages/masthead";
@@ -39,8 +39,8 @@ import ProgressBarPage from "./pages/progressbar";
 import QuantityTogglePage from "./pages/quantitytoggle";
 import RadioGroupPage from "./pages/radiogroup";
 import SelectPage from "./pages/select";
-import SidebarPage from "./pages/sidebar";
 import SidenavPage from "./pages/sidenav";
+import SidebarPage from "./pages/sidebar";
 import SkeletonPage from "./pages/skeleton";
 import SpinnerPage from "./pages/spinner";
 import StepPage from "./pages/step";
@@ -76,17 +76,17 @@ function App() {
           <Route path="/datatable" element={<DataTablePage />} />
           <Route path="/datepicker" element={<DatepickerPage />} />
           <Route path="/descriptionlistgroup" element={<DescriptionListGroupPage />} />
-          <Route path="/divider" element={<DividerPage />} />
           <Route path="/drawer" element={<DrawerPage />} />
+          <Route path="/divider" element={<DividerPage />} />
           <Route path="/dropdown" element={<DropdownPage />} />
           <Route path="/fileupload" element={<FileUploadPage />} />
           <Route path="/footer" element={<FooterPage />} />
           <Route path="/icon" element={<IconPage />} />
           <Route path="/iconbutton" element={<IconButtonPage />} />
-          <Route path="/iconcard" element={<IconCardPage />} />
           <Route path="/iconlist" element={<IconListPage />} />
-          <Route path="/imagecard" element={<ImageCardPage />} />
+          <Route path="/iconcard" element={<IconCardPage />} />
           <Route path="/input" element={<InputPage />} />
+          <Route path="/imagecard" element={<ImageCardPage />} />
           <Route path="/link" element={<LinkPage />} />
           <Route path="/mainnav" element={<MainnavPage />} />
           <Route path="/masthead" element={<MastheadPage />} />
@@ -97,8 +97,8 @@ function App() {
           <Route path="/quantitytoggle" element={<QuantityTogglePage />} />
           <Route path="/radiogroup" element={<RadioGroupPage />} />
           <Route path="/select" element={<SelectPage />} />
-          <Route path="/sidebar" element={<SidebarPage />} />
           <Route path="/sidenav" element={<SidenavPage />} />
+          <Route path="/sidebar" element={<SidebarPage />} />
           <Route path="/skeleton" element={<SkeletonPage />} />
           <Route path="/spinner" element={<SpinnerPage />} />
           <Route path="/step" element={<StepPage />} />

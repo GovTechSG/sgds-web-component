@@ -54,11 +54,11 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="descriptionlistgroup" title="DescriptionListGroup">
               <a routerLink="/descriptionlistgroup"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="divider" title="Divider">
-              <a routerLink="/divider"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="drawer" title="Drawer">
               <a routerLink="/drawer"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="divider" title="Divider">
+              <a routerLink="/divider"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="dropdown" title="Dropdown">
               <a routerLink="/dropdown"></a>
@@ -75,17 +75,17 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="iconbutton" title="IconButton">
               <a routerLink="/iconbutton"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="iconcard" title="IconCard">
-              <a routerLink="/iconcard"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="iconlist" title="IconList">
               <a routerLink="/iconlist"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="imagecard" title="ImageCard">
-              <a routerLink="/imagecard"></a>
+          <sgds-sidebar-item name="iconcard" title="IconCard">
+              <a routerLink="/iconcard"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="input" title="Input">
               <a routerLink="/input"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="imagecard" title="ImageCard">
+              <a routerLink="/imagecard"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="link" title="Link">
               <a routerLink="/link"></a>
@@ -117,11 +117,11 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="select" title="Select">
               <a routerLink="/select"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="sidebar" title="Sidebar">
-              <a routerLink="/sidebar"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="sidenav" title="Sidenav">
               <a routerLink="/sidenav"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="sidebar" title="Sidebar">
+              <a routerLink="/sidebar"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="skeleton" title="Skeleton">
               <a routerLink="/skeleton"></a>
