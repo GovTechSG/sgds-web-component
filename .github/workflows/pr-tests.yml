@@ -59,5 +59,10 @@ jobs:
         run: pnpm run e2e:generate
       - name: Install Playwright browsers
         run: cd e2e && pnpm install && pnpm exec playwright install --with-deps chromium
+      - name: Install E2E app dependencies
+        run: |
+          for app in next-app nuxt-app react-app vue-app angular-app; do
+            (cd e2e/apps/$app && pnpm install --no-frozen-lockfile)
+          done
       - name: Run E2E tests
         run: pnpm run e2e:test

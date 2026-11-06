@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsFooter } from '@govtechsg/sgds-web-component/react';
+import { SgdsFooter } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const Footer = () => {
   return (

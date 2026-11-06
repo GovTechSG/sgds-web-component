@@ -46,11 +46,22 @@ try {
 fs.writeFileSync(path.join(reactDir, '_ssr-init.ts'), ssrInitSource, 'utf8');
 
 
-// Generate SSR public API (for consumers to set CSP nonce)
-const ssrDir = path.join(reactDir, '_ssr');
+// Generate SSR entry point (init + component re-exports + nonce API)
+const ssrDir = path.join(reactDir, 'ssr');
 fs.mkdirSync(ssrDir, { recursive: true });
-const ssrApiSource = `export { setCSPNonce, getCSPNonce } from '../../utils/ssr-nonce';\n`;
-fs.writeFileSync(path.join(ssrDir, 'index.ts'), ssrApiSource, 'utf8');
+const ssrEntrySource = `\
+import '../_ssr-init';
+export * from '../index';
+
+export function getCSPNonce(): string | null {
+  return ((globalThis as Record<string, unknown>)["litNonce"] as string) ?? null;
+}
+
+export function setCSPNonce(nonce: string | null): void {
+  (globalThis as Record<string, unknown>)["litNonce"] = nonce ?? undefined;
+}
+`;
+fs.writeFileSync(path.join(ssrDir, 'index.ts'), ssrEntrySource, 'utf8');
 
 // Wrap components
 console.log('Wrapping components for React...');
@@ -69,7 +80,6 @@ components.map(component => {
 
   const source = prettier.format(
     `
-      import '../_ssr-init';
       import * as React from 'react';
       import { createComponent } from '@lit/react';
       import Component from '../../components/${importPath}';

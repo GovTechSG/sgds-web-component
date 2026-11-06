@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsAccordion, SgdsAccordionItem, SgdsIcon } from '@govtechsg/sgds-web-component/react';
+import { SgdsAccordion, SgdsAccordionItem, SgdsIcon } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const Accordion = () => {
   return (

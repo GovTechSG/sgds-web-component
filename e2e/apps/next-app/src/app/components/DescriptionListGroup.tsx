@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsDescriptionListGroup, SgdsDescriptionList } from '@govtechsg/sgds-web-component/react';
+import { SgdsDescriptionListGroup, SgdsDescriptionList } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const DescriptionListGroup = () => {
   return (

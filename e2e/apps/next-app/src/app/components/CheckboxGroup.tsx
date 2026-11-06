@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsCheckboxGroup, SgdsCheckbox } from '@govtechsg/sgds-web-component/react';
+import { SgdsCheckboxGroup, SgdsCheckbox } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const CheckboxGroup = () => {
   return (

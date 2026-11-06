@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsQuantityToggle } from '@govtechsg/sgds-web-component/react';
+import { SgdsQuantityToggle } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const QuantityToggle = () => {
   return (

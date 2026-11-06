@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsFileUpload } from '@govtechsg/sgds-web-component/react';
+import { SgdsFileUpload } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const FileUpload = () => {
   return (

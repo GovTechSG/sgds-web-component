@@ -4,11 +4,18 @@ SGDS web components are fully supported in Next.js with React 19+, tested with N
 
 ## Recommended: Use React wrapper components
 
-Import the **React-wrapped** SGDS components for the best Next.js experience. The wrappers handle SSR, hydration, and event binding automatically.
+Two import paths are available:
+
+| Import | Use when |
+|--------|----------|
+| `@govtechsg/sgds-web-component/react/ssr` | You want SSR with Declarative Shadow DOM (no FOUC, CLS 0, CSP nonce support) |
+| `@govtechsg/sgds-web-component/react` | You are fine with client-side rendering only |
+
+`/react/ssr` re-exports every component from `/react` and adds SSR hydration init + `setCSPNonce`/`getCSPNonce`. Both paths expose the same React wrapper components.
 
 ```tsx
 'use client';
-import { SgdsInput, SgdsButton } from "@govtechsg/sgds-web-component/react";
+import { SgdsInput, SgdsButton } from "@govtechsg/sgds-web-component/react/ssr";
 
 export default function MyForm() {
   return (
@@ -30,7 +37,7 @@ Before integrating SGDS with Next.js, read the [React integration guide](/docs/f
 
 ## Server-Side Rendering (SSR)
 
-SSR is **automatically enabled** when you import any SGDS React wrapper component. There is nothing to configure.
+SSR is **automatically enabled** when you import components from `@govtechsg/sgds-web-component/react/ssr`. There is nothing else to configure.
 
 ### How it works
 

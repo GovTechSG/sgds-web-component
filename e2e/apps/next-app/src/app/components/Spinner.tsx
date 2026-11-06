@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsSpinner } from '@govtechsg/sgds-web-component/react';
+import { SgdsSpinner } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const Spinner = () => {
   return (

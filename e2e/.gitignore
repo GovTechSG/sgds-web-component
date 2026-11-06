@@ -8,6 +8,5 @@ apps/*/.nuxt*/
 apps/*/.output/
 apps/*/dist/
 apps/*/.angular/
-apps/*/pnpm-lock.yaml
 fixtures/
 

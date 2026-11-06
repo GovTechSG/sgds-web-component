@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsComboBox, SgdsComboBoxOption } from '@govtechsg/sgds-web-component/react';
+import { SgdsComboBox, SgdsComboBoxOption } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const ComboBox = () => {
   return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsProgressBar } from '@govtechsg/sgds-web-component/react';
+import { SgdsProgressBar } from '@govtechsg/sgds-web-component/react/ssr';
 
 export const ProgressBar = () => {
   return (
