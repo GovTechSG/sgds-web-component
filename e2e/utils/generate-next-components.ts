@@ -38,7 +38,7 @@ function main() {
     const tag = "sgds-" + dirName.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
     const result = generateJsxTemplate(tag);
 
-    const importLine = `import { ${result.imports.join(", ")} } from '@govtechsg/sgds-web-component/react';`;
+    const importLine = `import { ${result.imports.join(", ")} } from '@govtechsg/sgds-web-component/react/ssr';`;
 
     const fileContent = `'use client';
 
@@ -90,7 +90,7 @@ export default function ${name}Page() {
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { SgdsSidebar, SgdsSidebarItem, SgdsSidebarSection } from "@govtechsg/sgds-web-component/react";
+import { SgdsSidebar, SgdsSidebarItem, SgdsSidebarSection } from "@govtechsg/sgds-web-component/react/ssr";
 
 export default function SidebarLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
