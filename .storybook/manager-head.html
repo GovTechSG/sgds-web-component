@@ -1,3 +1,14 @@
+<script>
+  // Paint the remembered colour mode before JS/CSS bundles load, to avoid a white flash on reload
+  try {
+    if (localStorage.getItem("sgds-sb-color-mode") === "night") {
+      var d = document.documentElement;
+      
+      d.style.colorScheme = "dark";
+      d.style.backgroundColor = "#0c111d";
+    }
+  } catch (e) {}
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-44RXQV5CXC"></script>
 <script>
