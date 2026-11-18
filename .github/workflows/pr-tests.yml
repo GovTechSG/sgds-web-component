@@ -24,6 +24,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
+      - name: Ensure lib directory exists
+        run: mkdir -p lib
       - name: Install dependencies
         run: pnpm install
       - name: Install Playwright browsers
@@ -51,6 +53,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
+      - name: Ensure lib directory exists
+        run: mkdir -p lib
       - name: Install dependencies
         run: pnpm install
       - name: Build library
