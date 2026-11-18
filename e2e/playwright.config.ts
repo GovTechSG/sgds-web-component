@@ -22,9 +22,9 @@ export default defineConfig({
       stdout: "pipe",
       stderr: "pipe"
     },
-    // Nuxt — production build + dev server
+    // Nuxt — production preview (build done in globalSetup)
     {
-      command: "cd apps/nuxt-app && NUXT_BUILD_DIR=.nuxt-prod pnpm build && NUXT_BUILD_DIR=.nuxt-prod pnpm preview",
+      command: "cd apps/nuxt-app && pnpm preview",
       port: 4003,
       timeout: 300_000,
       reuseExistingServer: !CI,

@@ -20,7 +20,6 @@ const targetDirs = [
 const appDirs = ["next-app", "nuxt-app", "react-app", "vue-app", "angular-app"];
 
 const buildCacheDirs = [
-  resolve(appsDir, "nuxt-app/.nuxt-prod"),
   resolve(appsDir, "nuxt-app/.output"),
 ];
 
@@ -66,5 +65,21 @@ export default function globalSetup() {
     }
   } catch (err) {
     console.warn("Next.js build failed — run 'pnpm build' manually in e2e/apps/next-app/");
+  }
+
+  // Pre-build Nuxt so the webServer only needs to run `nuxt preview`.
+  // Always rebuilds because .output was cleaned above.
+  const nuxtOutputDir = resolve(appsDir, "nuxt-app/.output");
+  try {
+    const hasBuild = existsSync(resolve(nuxtOutputDir, "server/index.mjs"));
+    if (!hasBuild) {
+      console.log("Building Nuxt app...");
+      execSync("pnpm build", { cwd: resolve(appsDir, "nuxt-app"), stdio: "inherit" });
+      console.log("Nuxt build complete.");
+    } else {
+      console.log("Nuxt build already exists, skipping.");
+    }
+  } catch (err) {
+    console.warn("Nuxt build failed — run 'pnpm build' manually in e2e/apps/nuxt-app/");
   }
 }
