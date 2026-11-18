@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsDropdown, SgdsButton, SgdsDropdownItem, SgdsIcon } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsDropdown, SgdsButton, SgdsDropdownItem, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const Dropdown = () => {
   return (

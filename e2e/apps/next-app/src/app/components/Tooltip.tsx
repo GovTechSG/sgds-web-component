@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsTooltip, SgdsIcon } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsTooltip, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const Tooltip = () => {
   return (
