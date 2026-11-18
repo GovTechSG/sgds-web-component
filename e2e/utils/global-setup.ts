@@ -17,8 +17,6 @@ const targetDirs = [
   resolve(appsDir, "react-app/public"),
 ];
 
-const appDirs = ["next-app", "nuxt-app", "react-app", "vue-app", "angular-app"];
-
 const buildCacheDirs = [
   resolve(appsDir, "nuxt-app/.output"),
 ];
@@ -41,45 +39,28 @@ export default function globalSetup() {
   }
   console.log(`Copied ${filesToCopy.length} fixtures to ${targetDirs.length} apps (${copied} total)`);
 
-  // Install dependencies for all apps sequentially to avoid concurrent install conflicts
-  // (e.g. Nuxt's postinstall "nuxt prepare" breaks when two installs run in the same dir)
-  for (const app of appDirs) {
-    const cwd = resolve(appsDir, app);
-    console.log(`Installing dependencies for ${app}...`);
-    execSync("pnpm install --no-frozen-lockfile", { cwd, stdio: "inherit" });
-  }
-  console.log("All app dependencies installed.");
-
   // Pre-build Next.js so the webServer only needs to run `next start`.
   // The build is skipped if .next already exists — run `pnpm build` manually
   // in e2e/apps/next-app if you need a fresh build.
   const nextBuildDir = resolve(appsDir, "next-app/.next");
-  try {
-    const hasBuild = existsSync(resolve(nextBuildDir, "BUILD_ID"));
-    if (!hasBuild) {
-      console.log("Building Next.js app...");
-      execSync("pnpm build", { cwd: resolve(appsDir, "next-app"), stdio: "inherit" });
-      console.log("Next.js build complete.");
-    } else {
-      console.log("Next.js build already exists, skipping.");
-    }
-  } catch (err) {
-    console.warn("Next.js build failed — run 'pnpm build' manually in e2e/apps/next-app/");
+  const hasNextBuild = existsSync(resolve(nextBuildDir, "BUILD_ID"));
+  if (!hasNextBuild) {
+    console.log("Building Next.js app...");
+    execSync("pnpm build", { cwd: resolve(appsDir, "next-app"), stdio: "inherit" });
+    console.log("Next.js build complete.");
+  } else {
+    console.log("Next.js build already exists, skipping.");
   }
 
   // Pre-build Nuxt so the webServer only needs to run `nuxt preview`.
   // Always rebuilds because .output was cleaned above.
   const nuxtOutputDir = resolve(appsDir, "nuxt-app/.output");
-  try {
-    const hasBuild = existsSync(resolve(nuxtOutputDir, "server/index.mjs"));
-    if (!hasBuild) {
-      console.log("Building Nuxt app...");
-      execSync("pnpm build", { cwd: resolve(appsDir, "nuxt-app"), stdio: "inherit" });
-      console.log("Nuxt build complete.");
-    } else {
-      console.log("Nuxt build already exists, skipping.");
-    }
-  } catch (err) {
-    console.warn("Nuxt build failed — run 'pnpm build' manually in e2e/apps/nuxt-app/");
+  const hasNuxtBuild = existsSync(resolve(nuxtOutputDir, "server/index.mjs"));
+  if (!hasNuxtBuild) {
+    console.log("Building Nuxt app...");
+    execSync("pnpm build", { cwd: resolve(appsDir, "nuxt-app"), stdio: "inherit" });
+    console.log("Nuxt build complete.");
+  } else {
+    console.log("Nuxt build already exists, skipping.");
   }
 }
