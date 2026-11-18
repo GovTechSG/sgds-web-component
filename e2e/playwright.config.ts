@@ -13,18 +13,18 @@ export default defineConfig({
     trace: "on-first-retry"
   },
   webServer: [
-    // Next.js — production start (build done in globalSetup)
+    // Next.js — production build + start
     {
-      command: "cd apps/next-app && pnpm start",
+      command: "cd apps/next-app && pnpm build && pnpm start",
       port: 4002,
       timeout: 300_000,
       reuseExistingServer: !CI,
       stdout: "pipe",
       stderr: "pipe"
     },
-    // Nuxt — production preview (build done in globalSetup)
+    // Nuxt — production build + preview
     {
-      command: "cd apps/nuxt-app && pnpm preview",
+      command: "cd apps/nuxt-app && pnpm build && pnpm preview",
       port: 4003,
       timeout: 300_000,
       reuseExistingServer: !CI,

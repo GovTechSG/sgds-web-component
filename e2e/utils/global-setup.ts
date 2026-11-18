@@ -1,7 +1,6 @@
-import { copyFileSync, existsSync, mkdirSync, rmSync } from "node:fs";
+import { copyFileSync, mkdirSync, rmSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { execSync } from "node:child_process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixturesDir = resolve(__dirname, "../fixtures");
@@ -38,29 +37,4 @@ export default function globalSetup() {
     }
   }
   console.log(`Copied ${filesToCopy.length} fixtures to ${targetDirs.length} apps (${copied} total)`);
-
-  // Pre-build Next.js so the webServer only needs to run `next start`.
-  // The build is skipped if .next already exists — run `pnpm build` manually
-  // in e2e/apps/next-app if you need a fresh build.
-  const nextBuildDir = resolve(appsDir, "next-app/.next");
-  const hasNextBuild = existsSync(resolve(nextBuildDir, "BUILD_ID"));
-  if (!hasNextBuild) {
-    console.log("Building Next.js app...");
-    execSync("pnpm build", { cwd: resolve(appsDir, "next-app"), stdio: "inherit" });
-    console.log("Next.js build complete.");
-  } else {
-    console.log("Next.js build already exists, skipping.");
-  }
-
-  // Pre-build Nuxt so the webServer only needs to run `nuxt preview`.
-  // Always rebuilds because .output was cleaned above.
-  const nuxtOutputDir = resolve(appsDir, "nuxt-app/.output");
-  const hasNuxtBuild = existsSync(resolve(nuxtOutputDir, "server/index.mjs"));
-  if (!hasNuxtBuild) {
-    console.log("Building Nuxt app...");
-    execSync("pnpm build", { cwd: resolve(appsDir, "nuxt-app"), stdio: "inherit" });
-    console.log("Nuxt build complete.");
-  } else {
-    console.log("Nuxt build already exists, skipping.");
-  }
 }
