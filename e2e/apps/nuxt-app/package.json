@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@govtechsg/sgds-web-component": "file:../../../lib",
+    "@govtechsg/sgds-web-component": "link:../../../lib",
     "nuxt": "^4.6.4",
     "nuxt-ssr-lit": "^1.6.34",
     "vue": "latest",

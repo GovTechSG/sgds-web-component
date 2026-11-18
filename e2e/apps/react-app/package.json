@@ -9,7 +9,7 @@
     "preview": "vite preview --host 127.0.0.1 --port 4014"
   },
   "dependencies": {
-    "@govtechsg/sgds-web-component": "file:../../../lib",
+    "@govtechsg/sgds-web-component": "link:../../../lib",
     "@tailwindcss/vite": "^4.1.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
