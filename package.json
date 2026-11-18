@@ -10,6 +10,7 @@
     "url": "git+https://github.com/GovTechSG/sgds-web-component.git"
   },
   "scripts": {
+    "preinstall": "mkdir -p lib",
     "dev": "VITE_ENV=development vite --open",
     "preview": "VITE_ENV=production vite --open",
     "build": "npm run cem && npm run build:react && rm -rf lib && rolldown --config rolldown.config.mjs && (tsc --emitDeclarationOnly --project tsconfig.json || true) && node ./scripts/generateSgdsTypes.mjs && node ./scripts/frankBuild.js && npm run generate:icons && npm run build:fouc",
