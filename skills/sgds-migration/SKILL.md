@@ -173,12 +173,11 @@ Common mistakes to avoid:
 
 ### React: Always Use PascalCase React Wrappers
 
-In React applications, **always import and use the PascalCase React wrappers** from `@govtechsg/sgds-web-component/react/*`. Do NOT mix lowercase web component tags (`<sgds-modal>`) with React wrapper components (`<SgdsButton>`).
+In React applications, **always import and use the PascalCase React wrappers** from `@govtechsg/sgds-web-component/react`. Do NOT mix lowercase web component tags (`<sgds-modal>`) with React wrapper components (`<SgdsButton>`).
 
 ```tsx
 // ✅ Correct — consistent PascalCase React wrappers
-import SgdsModal from "@govtechsg/sgds-web-component/react/modal";
-import SgdsButton from "@govtechsg/sgds-web-component/react/button";
+import { SgdsModal, SgdsButton } from "@govtechsg/sgds-web-component/react";
 
 <SgdsModal open={open} onSgdsClose={() => setOpen(false)}>
   <SgdsButton variant="primary">Submit</SgdsButton>

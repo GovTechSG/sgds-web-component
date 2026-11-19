@@ -27,10 +27,7 @@ Import components from `@govtechsg/sgds-web-component/react`. Both barrel and in
 
 ```tsx
 'use client';
-// Barrel import
 import { SgdsInput, SgdsButton } from "@govtechsg/sgds-web-component/react";
-// Or individual import
-import SgdsButton from "@govtechsg/sgds-web-component/react/button";
 
 export default function MyForm() {
   return (

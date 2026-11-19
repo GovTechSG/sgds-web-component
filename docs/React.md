@@ -96,12 +96,7 @@ Follow instructions in `Installation` documentation section.
 Our components are exported via named exports. Import the components like so
 
 ```js
-
 import { SgdsButton, SgdsTooltip } from "@govtechsg/sgds-web-component/react";
-// or default exports when importing from the subfolders
-import SgdsButton  from "@govtechsg/sgds-web-component/react/button/index.js";
-import SgdsTooltip  from "@govtechsg/sgds-web-component/react/tooltip/index.js";
-
 ```
 
 The components follow React naming convention, using pascal case as the component name. See the example table below for the web components tagname and its corresponding React name.
@@ -162,7 +157,7 @@ For example, SgdsStepper exposes public methods like `getComponent()`
 ```tsx
 import { useRef } from 'react';
 import type { SgdsStepper as SStep } from '@govtechsg/sgds-web-component/components';
-import SgdsStepper  from "@govtechsg/sgds-web-component/react/stepper/index.js";
+import { SgdsStepper } from "@govtechsg/sgds-web-component/react";
 
 function StepperComponent() {
   ...

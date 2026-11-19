@@ -406,7 +406,7 @@ Renders as an `<a>` element — use for navigation, not form actions.
 
 For React import paths and event syntax, see **[sgds-components](../SKILL.md)**.
 
-The key decision: React 19+ uses the native `<sgds-button>` tag directly; React 18 and below uses the `SgdsButton` wrapper from `@govtechsg/sgds-web-component/react/button`.
+The key decision: React 19+ uses the native `<sgds-button>` tag directly; React 18 and below uses the `SgdsButton` wrapper from `@govtechsg/sgds-web-component/react`.
 
 ## Icon-Only Buttons
 
