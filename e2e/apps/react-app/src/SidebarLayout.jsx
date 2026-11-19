@@ -19,20 +19,20 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="alert" title="Alert">
             <Link to="/alert"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="appnav" title="Appnav">
-            <Link to="/appnav"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="badge" title="Badge">
             <Link to="/badge"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="button" title="Button">
-            <Link to="/button"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
             <Link to="/breadcrumb"></Link>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="button" title="Button">
+            <Link to="/button"></Link>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="card" title="Card">
             <Link to="/card"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="combobox" title="ComboBox">
+            <Link to="/combobox"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="checkboxgroup" title="CheckboxGroup">
             <Link to="/checkboxgroup"></Link>
@@ -40,17 +40,11 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="closebutton" title="CloseButton">
             <Link to="/closebutton"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="combobox" title="ComboBox">
-            <Link to="/combobox"></Link>
+          <SgdsSidebarItem name="appnav" title="Appnav">
+            <Link to="/appnav"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="datatable" title="DataTable">
             <Link to="/datatable"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="datepicker" title="Datepicker">
-            <Link to="/datepicker"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="descriptionlistgroup" title="DescriptionListGroup">
-            <Link to="/descriptionlistgroup"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="divider" title="Divider">
             <Link to="/divider"></Link>
@@ -58,20 +52,23 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="drawer" title="Drawer">
             <Link to="/drawer"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="dropdown" title="Dropdown">
-            <Link to="/dropdown"></Link>
+          <SgdsSidebarItem name="descriptionlistgroup" title="DescriptionListGroup">
+            <Link to="/descriptionlistgroup"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="datepicker" title="Datepicker">
+            <Link to="/datepicker"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="fileupload" title="FileUpload">
             <Link to="/fileupload"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="footer" title="Footer">
-            <Link to="/footer"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="icon" title="Icon">
             <Link to="/icon"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="iconcard" title="IconCard">
-            <Link to="/iconcard"></Link>
+          <SgdsSidebarItem name="dropdown" title="Dropdown">
+            <Link to="/dropdown"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="footer" title="Footer">
+            <Link to="/footer"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="iconbutton" title="IconButton">
             <Link to="/iconbutton"></Link>
@@ -79,20 +76,23 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="iconlist" title="IconList">
             <Link to="/iconlist"></Link>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="iconcard" title="IconCard">
+            <Link to="/iconcard"></Link>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="imagecard" title="ImageCard">
             <Link to="/imagecard"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="input" title="Input">
             <Link to="/input"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="link" title="Link">
-            <Link to="/link"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="mainnav" title="Mainnav">
             <Link to="/mainnav"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="masthead" title="Masthead">
             <Link to="/masthead"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="link" title="Link">
+            <Link to="/link"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="modal" title="Modal">
             <Link to="/modal"></Link>
@@ -109,23 +109,23 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="quantitytoggle" title="QuantityToggle">
             <Link to="/quantitytoggle"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="radiogroup" title="RadioGroup">
-            <Link to="/radiogroup"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="select" title="Select">
             <Link to="/select"></Link>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="radiogroup" title="RadioGroup">
+            <Link to="/radiogroup"></Link>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="sidebar" title="Sidebar">
             <Link to="/sidebar"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="skeleton" title="Skeleton">
-            <Link to="/skeleton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="sidenav" title="Sidenav">
             <Link to="/sidenav"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="spinner" title="Spinner">
             <Link to="/spinner"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="skeleton" title="Skeleton">
+            <Link to="/skeleton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="step" title="Step">
             <Link to="/step"></Link>
@@ -145,9 +145,6 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="tabgroup" title="TabGroup">
             <Link to="/tabgroup"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="table" title="Table">
-            <Link to="/table"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="tableofcontents" title="TableOfContents">
             <Link to="/tableofcontents"></Link>
           </SgdsSidebarItem>
@@ -157,11 +154,14 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="thumbnailcard" title="ThumbnailCard">
             <Link to="/thumbnailcard"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="toastcontainer" title="ToastContainer">
-            <Link to="/toastcontainer"></Link>
+          <SgdsSidebarItem name="table" title="Table">
+            <Link to="/table"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="tooltip" title="Tooltip">
             <Link to="/tooltip"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="toastcontainer" title="ToastContainer">
+            <Link to="/toastcontainer"></Link>
           </SgdsSidebarItem>
         </SgdsSidebarSection>
       </SgdsSidebar>

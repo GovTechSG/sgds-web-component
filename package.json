@@ -80,8 +80,12 @@
     "@lit-labs/ssr-react": "^0.3.4"
   },
   "peerDependenciesMeta": {
-    "@lit-labs/ssr": { "optional": true },
-    "@lit-labs/ssr-react": { "optional": true }
+    "@lit-labs/ssr": {
+      "optional": true
+    },
+    "@lit-labs/ssr-react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@lit-labs/ssr": "^4.1.0",
