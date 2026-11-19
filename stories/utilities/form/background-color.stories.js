@@ -1,5 +1,5 @@
 import { html } from "lit";
-import "../../mocks/color-item.ts";
+import "../../../mocks/color-item.ts";
 
 export default {
   title: "Utilities/Form/Background Color",
@@ -12,11 +12,12 @@ const ColorItem = (token, variable, bgClass, textClass = "") => {
   `;
 };
 
-const ColorGrid = (...items) => html`
-  <div class="sgds:grid sgds:gap-2-xl sgds:p-2-xl" style="grid-template-columns: repeat(3, 1fr);">${items}</div>
-`;
+const ColorGrid = (...items) =>
+  html`<div class="sgds:grid sgds:gap-2-xl sgds:p-2-xl" style="grid-template-columns: repeat(3, 1fr);">
+    ${items}
+  </div>`;
 
-export const Form = () =>
+export const BackgroundColor = () =>
   ColorGrid(
     ColorItem("sgds:bg-form-surface-default", "--sgds-form-surface-default", "sgds:bg-form-surface-default"),
     ColorItem("sgds:bg-form-surface-raised", "--sgds-form-surface-raised", "sgds:bg-form-surface-raised"),

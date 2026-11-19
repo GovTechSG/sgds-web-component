@@ -17,6 +17,12 @@ const FORM_RADIUS_SCALE = [
     class: "sgds:rounded-form-subtle",
     variable: "--sgds-form-border-radius-subtle",
     value: "md (8px)"
+  },
+  {
+    name: "form-menu",
+    class: "sgds:rounded-form-menu",
+    variable: "--sgds-form-menu-border-radius",
+    value: "lg (12px)"
   }
 ];
 
@@ -59,7 +65,7 @@ const RadiusTableRow = item => {
   `;
 };
 
-export const FormRadius = () => html`
+export const BorderRadius = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>

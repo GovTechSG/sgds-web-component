@@ -14,7 +14,7 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-export const Form = () => html`
+export const SimplifiedSemantic = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>

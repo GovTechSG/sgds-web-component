@@ -50,7 +50,7 @@ const WidthTableRow = item => {
   `;
 };
 
-export const FormWidth = () => html`
+export const BorderWidth = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>

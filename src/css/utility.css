@@ -383,12 +383,17 @@
   --spacing-form-label: var(--sgds-form-label-padding-y);
   --spacing-form-control: var(--sgds-form-control-padding-y);
 
-  /* Form Control Size */
+  /* Form Control Size (height for inputs, both h+w for checkbox/radio) */
   --height-form-control-2-xs: var(--sgds-form-control-size-2-xs);
   --height-form-control-xs: var(--sgds-form-control-size-xs);
   --height-form-control-sm: var(--sgds-form-control-size-sm);
   --height-form-control-md: var(--sgds-form-control-size-md);
   --height-form-control-lg: var(--sgds-form-control-size-lg);
+  --width-form-control-2-xs: var(--sgds-form-control-size-2-xs);
+  --width-form-control-xs: var(--sgds-form-control-size-xs);
+  --width-form-control-sm: var(--sgds-form-control-size-sm);
+  --width-form-control-md: var(--sgds-form-control-size-md);
+  --width-form-control-lg: var(--sgds-form-control-size-lg);
 
   /* Form Menu */
   --spacing-form-menu-y: var(--sgds-form-menu-padding-y);

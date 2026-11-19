@@ -63,10 +63,16 @@ const TOKENS = [
     variable: "--sgds-form-control-group-gap",
     value: "0.25rem (4px)",
     description: "Gap between items in a group"
+  },
+  {
+    token: "sgds:gap-form-option",
+    variable: "--sgds-form-option-gap",
+    value: "0.25rem (4px)",
+    description: "Gap between elements in a form option"
   }
 ];
 
-export const Semantic = () => html`
+export const GranularSemantic = () => html`
   <p class="sgds:text-body-md sgds:mb-lg">
     Semantic gap tokens for form label, feedback, fieldset, and control group spacing. These tokens define the vertical
     rhythm within and between form elements.

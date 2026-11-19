@@ -33,7 +33,7 @@ const renderTokenCell = token => html`
   </sgds-table-cell>
 `;
 
-const TOKENS = [
+const SIMPLIFIED_TOKENS = [
   {
     token: "sgds:px-form-md",
     variable: "--sgds-form-padding-x-md",
@@ -57,7 +57,10 @@ const TOKENS = [
     variable: "--sgds-form-padding-y-lg",
     value: "0.75rem (12px)",
     description: "Vertical padding for lg form controls (textarea)"
-  },
+  }
+];
+
+const GRANULAR_TOKENS = [
   {
     token: "sgds:py-form-label",
     variable: "--sgds-form-label-padding-y",
@@ -69,14 +72,40 @@ const TOKENS = [
     variable: "--sgds-form-control-padding-y",
     value: "0.25rem (4px)",
     description: "Vertical padding for checkbox/radio controls"
+  },
+  {
+    token: "sgds:px-form-option-md",
+    variable: "--sgds-form-option-padding-x-md",
+    value: "0.75rem (12px)",
+    description: "Horizontal padding for md form option"
+  },
+  {
+    token: "sgds:px-form-option-lg",
+    variable: "--sgds-form-option-padding-x-lg",
+    value: "1rem (16px)",
+    description: "Horizontal padding for lg form option"
+  },
+  {
+    token: "sgds:py-form-option-md",
+    variable: "--sgds-form-option-padding-y-md",
+    value: "0.5rem (8px)",
+    description: "Vertical padding for md form option"
+  },
+  {
+    token: "sgds:py-form-option-lg",
+    variable: "--sgds-form-option-padding-y-lg",
+    value: "0.75rem (12px)",
+    description: "Vertical padding for lg form option"
+  },
+  {
+    token: "sgds:py-form-menu",
+    variable: "--sgds-form-menu-padding-y",
+    value: "0.5rem (8px)",
+    description: "Vertical padding for form menu container"
   }
 ];
 
-export const Form = () => html`
-  <p class="sgds:text-body-md sgds:mb-lg">
-    Padding tokens for form controls, sized for lg and md variants. These control the internal spacing within form input
-    elements.
-  </p>
+const renderTable = tokens => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
@@ -85,7 +114,7 @@ export const Form = () => html`
       <sgds-table-head>Description</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
-    ${TOKENS.map(
+    ${tokens.map(
       ({ token, variable, value, description }) => html`
         <sgds-table-row>
           ${renderTokenCell(token)}
@@ -103,4 +132,18 @@ export const Form = () => html`
       `
     )}
   </sgds-table>
+`;
+
+export const SimplifiedSemantic = () => html`
+  <p class="sgds:text-body-md sgds:mb-lg">
+    Simplified semantic padding tokens for form controls, sized for lg and md variants.
+  </p>
+  ${renderTable(SIMPLIFIED_TOKENS)}
+`;
+
+export const GranularSemantic = () => html`
+  <p class="sgds:text-body-md sgds:mb-lg">
+    Granular semantic padding tokens that encode purpose: label, control, option, and menu padding.
+  </p>
+  ${renderTable(GRANULAR_TOKENS)}
 `;
