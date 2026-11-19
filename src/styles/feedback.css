@@ -16,3 +16,8 @@
 .valid-icon{
   color: var(--sgds-form-success-color-default);
 }
+
+:host([size="md"]) .invalid-feedback {
+  font-size: var(--sgds-font-size-label-xs);
+  line-height: var(--sgds-line-height-16);
+}
