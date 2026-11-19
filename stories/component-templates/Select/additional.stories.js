@@ -293,3 +293,23 @@ export const NoValidate = {
   args: {},
   parameters: {}
 };
+
+const SizeTemplate = () => {
+  return html`
+    <sgds-select label="Large (default)" size="lg" placeholder="Select an option">
+      <sgds-select-option value="1">Option 1</sgds-select-option>
+      <sgds-select-option value="2">Option 2</sgds-select-option>
+    </sgds-select>
+    <sgds-select label="Medium" size="md" placeholder="Select an option">
+      <sgds-select-option value="1">Option 1</sgds-select-option>
+      <sgds-select-option value="2">Option 2</sgds-select-option>
+    </sgds-select>
+  `;
+};
+
+export const Sizes = {
+  render: SizeTemplate.bind({}),
+  name: "Sizes",
+  args: {},
+  parameters: {}
+};
