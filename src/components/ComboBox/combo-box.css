@@ -28,7 +28,7 @@
 }
 
 .combobox .form-control-group {
-  min-height: var(--sgds-dimension-48);
+  min-height: var(--sgds-form-control-size-lg);
   height: unset;
 }
 
@@ -82,4 +82,17 @@ slot[name='create'].d-none {
 .form-clearable:focus-visible {
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
+}
+
+:host([size="md"]) .combobox .form-control-group {
+  min-height: var(--sgds-form-control-size-md);
+}
+
+:host([size="md"]) .combobox-input-container {
+  width: calc(100% - var(--sgds-icon-size-md, 1.25rem));
+}
+
+:host([size="md"]) .create-option {
+  padding: var(--sgds-form-option-padding-y-md) var(--sgds-form-option-padding-x-md);
+  font-size: var(--sgds-font-size-label-sm);
 }
