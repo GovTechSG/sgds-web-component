@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@govtechsg/sgds-web-component':
         specifier: file:../../../lib
-        version: file:../../../lib(@types/react@19.3.0)(react@19.3.1)
+        version: file:../../../lib(@lit-labs/ssr-react@0.3.4(@types/react@19.3.0)(react@19.3.1))(@lit-labs/ssr@4.1.0)(@types/react@19.3.0)
       '@tailwindcss/vite':
         specifier: ^4.1.0
         version: 4.3.3(vite@7.3.7(jiti@2.7.0)(lightningcss@1.32.0))
@@ -292,6 +292,14 @@ packages:
 
   '@govtechsg/sgds-web-component@file:../../../lib':
     resolution: {directory: ../../../lib, type: directory}
+    peerDependencies:
+      '@lit-labs/ssr': '>=3.0.0'
+      '@lit-labs/ssr-react': ^0.3.4
+    peerDependenciesMeta:
+      '@lit-labs/ssr':
+        optional: true
+      '@lit-labs/ssr-react':
+        optional: true
 
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
@@ -864,8 +872,8 @@ packages:
   scheduler@0.28.0:
     resolution: {integrity: sha512-juorfCmIkIw8tT+p5BXSm6PJjQF/ycEYmKyzURCIt/RaZIhL+PulbQ9Yu2z1HdOJDdqDTlxA1+xKBmHXJsczAw==}
 
-  semver@6.3.1:
-    resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
+  semver@6.3.2:
+    resolution: {integrity: sha512-GYrCADwpu6yV5OAvchkQ27Z5wwMxWAEMg5NNWjyHh/5DboFFqbdbvYNIvZouQpxXyeMPoTOh0vdPYKlf0ZswdQ==}
     hasBin: true
 
   set-cookie-parser@2.7.3:
@@ -968,7 +976,7 @@ snapshots:
       debug: 4.4.3
       gensync: 1.0.0-beta.2
       json5: 2.2.3
-      semver: 6.3.1
+      semver: 6.3.2
     transitivePeerDependencies:
       - supports-color
 
@@ -986,7 +994,7 @@ snapshots:
       '@babel/helper-validator-option': 7.29.7
       browserslist: 4.29.5
       lru-cache: 5.1.1
-      semver: 6.3.1
+      semver: 6.3.2
 
   '@babel/helper-globals@7.29.7': {}
 
@@ -1145,18 +1153,18 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@govtechsg/sgds-web-component@file:../../../lib(@types/react@19.3.0)(react@19.3.1)':
+  '@govtechsg/sgds-web-component@file:../../../lib(@lit-labs/ssr-react@0.3.4(@types/react@19.3.0)(react@19.3.1))(@lit-labs/ssr@4.1.0)(@types/react@19.3.0)':
     dependencies:
       '@floating-ui/dom': 1.8.0
-      '@lit-labs/ssr-react': 0.3.4(@types/react@19.3.0)(react@19.3.1)
       '@lit/context': 1.1.6
       '@lit/react': 1.0.8(@types/react@19.3.0)
       lit: 3.3.3
       tslib: 2.8.1
+    optionalDependencies:
+      '@lit-labs/ssr': 4.1.0
+      '@lit-labs/ssr-react': 0.3.4(@types/react@19.3.0)(react@19.3.1)
     transitivePeerDependencies:
-      - '@types/node'
       - '@types/react'
-      - react
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
@@ -1182,6 +1190,7 @@ snapshots:
       '@lit/reactive-element': 2.1.2
       lit: 3.3.3
       lit-html: 3.3.3
+    optional: true
 
   '@lit-labs/ssr-dom-shim@1.6.0': {}
 
@@ -1193,6 +1202,7 @@ snapshots:
       react: 19.3.1
     transitivePeerDependencies:
       - '@types/node'
+    optional: true
 
   '@lit-labs/ssr@4.1.0':
     dependencies:
@@ -1206,6 +1216,7 @@ snapshots:
       lit-html: 3.3.3
       node-fetch: 3.3.2
       parse5: 7.3.0
+    optional: true
 
   '@lit/context@1.1.6':
     dependencies:
@@ -1225,6 +1236,7 @@ snapshots:
   '@parse5/tools@0.3.0':
     dependencies:
       parse5: 7.3.0
+    optional: true
 
   '@rolldown/pluginutils@1.0.0-rc.3': {}
 
@@ -1434,7 +1446,8 @@ snapshots:
 
   csstype@3.2.3: {}
 
-  data-uri-to-buffer@4.0.1: {}
+  data-uri-to-buffer@4.0.1:
+    optional: true
 
   debug@4.4.3:
     dependencies:
@@ -1449,7 +1462,8 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.3.3
 
-  entities@6.0.1: {}
+  entities@6.0.1:
+    optional: true
 
   esbuild@0.28.2:
     optionalDependencies:
@@ -1490,10 +1504,12 @@ snapshots:
     dependencies:
       node-domexception: 1.0.0
       web-streams-polyfill: 3.3.3
+    optional: true
 
   formdata-polyfill@4.0.10:
     dependencies:
       fetch-blob: 3.2.0
+    optional: true
 
   fsevents@2.3.3:
     optional: true
@@ -1587,19 +1603,22 @@ snapshots:
 
   nanoid@3.3.20: {}
 
-  node-domexception@1.0.0: {}
+  node-domexception@1.0.0:
+    optional: true
 
   node-fetch@3.3.2:
     dependencies:
       data-uri-to-buffer: 4.0.1
       fetch-blob: 3.2.0
       formdata-polyfill: 4.0.10
+    optional: true
 
   node-releases@2.0.62: {}
 
   parse5@7.3.0:
     dependencies:
       entities: 6.0.1
+    optional: true
 
   picocolors@1.1.1: {}
 
@@ -1668,7 +1687,7 @@ snapshots:
 
   scheduler@0.28.0: {}
 
-  semver@6.3.1: {}
+  semver@6.3.2: {}
 
   set-cookie-parser@2.7.3: {}
 
@@ -1704,6 +1723,7 @@ snapshots:
       jiti: 2.7.0
       lightningcss: 1.32.0
 
-  web-streams-polyfill@3.3.3: {}
+  web-streams-polyfill@3.3.3:
+    optional: true
 
   yallist@3.1.1: {}

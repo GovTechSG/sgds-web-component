@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@govtechsg/sgds-web-component':
         specifier: file:../../../lib
-        version: file:../../../lib(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)
+        version: file:../../../lib(@lit-labs/ssr-react@0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3))(@lit-labs/ssr@4.1.0(@types/node@20.19.43))(@types/react@19.1.13)
       '@tailwindcss/postcss':
         specifier: ^4.1.0
         version: 4.3.3
@@ -63,6 +63,14 @@ packages:
 
   '@govtechsg/sgds-web-component@file:../../../lib':
     resolution: {directory: ../../../lib, type: directory}
+    peerDependencies:
+      '@lit-labs/ssr': '>=3.0.0'
+      '@lit-labs/ssr-react': ^0.3.4
+    peerDependenciesMeta:
+      '@lit-labs/ssr':
+        optional: true
+      '@lit-labs/ssr-react':
+        optional: true
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -681,18 +689,18 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@govtechsg/sgds-web-component@file:../../../lib(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)':
+  '@govtechsg/sgds-web-component@file:../../../lib(@lit-labs/ssr-react@0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3))(@lit-labs/ssr@4.1.0(@types/node@20.19.43))(@types/react@19.1.13)':
     dependencies:
       '@floating-ui/dom': 1.8.0
-      '@lit-labs/ssr-react': 0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)
       '@lit/context': 1.1.6
       '@lit/react': 1.0.8(@types/react@19.1.13)
       lit: 3.3.3
       tslib: 2.9.1
+    optionalDependencies:
+      '@lit-labs/ssr': 4.1.0(@types/node@20.19.43)
+      '@lit-labs/ssr-react': 0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)
     transitivePeerDependencies:
-      - '@types/node'
       - '@types/react'
-      - react
 
   '@img/colour@1.1.0':
     optional: true
@@ -825,6 +833,7 @@ snapshots:
       '@lit/reactive-element': 2.1.2
       lit: 3.3.3
       lit-html: 3.3.3
+    optional: true
 
   '@lit-labs/ssr-dom-shim@1.6.0': {}
 
@@ -836,6 +845,7 @@ snapshots:
       react: 19.2.3
     transitivePeerDependencies:
       - '@types/node'
+    optional: true
 
   '@lit-labs/ssr@4.1.0(@types/node@20.19.43)':
     dependencies:
@@ -851,6 +861,7 @@ snapshots:
       parse5: 7.3.0
     optionalDependencies:
       '@types/node': 20.19.43
+    optional: true
 
   '@lit/context@1.1.6':
     dependencies:
@@ -893,6 +904,7 @@ snapshots:
   '@parse5/tools@0.3.0':
     dependencies:
       parse5: 7.3.0
+    optional: true
 
   '@swc/helpers@0.5.23':
     dependencies:
@@ -991,7 +1003,8 @@ snapshots:
 
   csstype@3.2.3: {}
 
-  data-uri-to-buffer@4.0.1: {}
+  data-uri-to-buffer@4.0.1:
+    optional: true
 
   detect-libc@2.1.2: {}
 
@@ -1000,16 +1013,19 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.3.3
 
-  entities@6.0.1: {}
+  entities@6.0.1:
+    optional: true
 
   fetch-blob@3.2.0:
     dependencies:
       node-domexception: 1.0.0
       web-streams-polyfill: 3.3.3
+    optional: true
 
   formdata-polyfill@4.0.10:
     dependencies:
       fetch-blob: 3.2.0
+    optional: true
 
   graceful-fs@4.2.11: {}
 
@@ -1111,17 +1127,20 @@ snapshots:
       - '@types/node'
       - babel-plugin-macros
 
-  node-domexception@1.0.0: {}
+  node-domexception@1.0.0:
+    optional: true
 
   node-fetch@3.3.2:
     dependencies:
       data-uri-to-buffer: 4.0.1
       fetch-blob: 3.2.0
       formdata-polyfill: 4.0.10
+    optional: true
 
   parse5@7.3.0:
     dependencies:
       entities: 6.0.1
+    optional: true
 
   picocolors@1.1.1: {}
 
@@ -1200,4 +1219,5 @@ snapshots:
 
   undici-types@6.21.0: {}
 
-  web-streams-polyfill@3.3.3: {}
+  web-streams-polyfill@3.3.3:
+    optional: true

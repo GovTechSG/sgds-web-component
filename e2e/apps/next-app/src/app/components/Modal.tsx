@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsModal, SgdsButton } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsModal, SgdsButton } from '@govtechsg/sgds-web-component/react';
 
 export const Modal = () => {
   return (

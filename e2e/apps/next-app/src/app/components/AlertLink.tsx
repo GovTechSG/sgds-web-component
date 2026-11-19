@@ -1,6 +1,6 @@
 'use client';
 
-import {  } from '@govtechsg/sgds-web-component/react/ssr';
+import {  } from '@govtechsg/sgds-web-component/react';
 
 export const AlertLink = () => {
   return (

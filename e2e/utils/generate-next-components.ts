@@ -38,7 +38,7 @@ function main() {
     const tag = "sgds-" + dirName.replace(/([A-Z])/g, "-$1").toLowerCase().replace(/^-/, "");
     const result = generateJsxTemplate(tag);
 
-    const importLine = `import { ${result.imports.join(", ")} } from '@govtechsg/sgds-web-component/react/ssr';`;
+    const importLine = `import { ${result.imports.join(", ")} } from '@govtechsg/sgds-web-component/react';`;
 
     const fileContent = `'use client';
 

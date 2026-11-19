@@ -1,5 +1,5 @@
 <script setup lang="ts">
-navigateTo("/accordion", { redirectCode: 302 });
+navigateTo("/badge", { redirectCode: 302 });
 </script>
 
 <template>
