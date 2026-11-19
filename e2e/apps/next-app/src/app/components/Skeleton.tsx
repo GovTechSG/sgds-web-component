@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsSkeleton } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsSkeleton } from '@govtechsg/sgds-web-component/react';
 
 export const Skeleton = () => {
   return (

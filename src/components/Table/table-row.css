@@ -3,6 +3,12 @@
   width: 100%;
 }
 
+.table-row::slotted(*) {
+  height: 0;
+  vertical-align: middle;
+
+}
+
 :host([tableBorder]:last-of-type) .table-row::slotted(*) {
   --table-cell-border-bottom: 0;
 }

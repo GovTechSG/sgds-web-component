@@ -4,18 +4,11 @@ SGDS web components are fully supported in Next.js with React 19+, tested with N
 
 ## Recommended: Use React wrapper components
 
-Two import paths are available:
-
-| Import | Use when |
-|--------|----------|
-| `@govtechsg/sgds-web-component/react/ssr` | You want SSR with Declarative Shadow DOM (no FOUC, CLS 0, CSP nonce support) |
-| `@govtechsg/sgds-web-component/react` | You are fine with client-side rendering only |
-
-`/react/ssr` re-exports every component from `/react` and adds SSR hydration init + `setCSPNonce`/`getCSPNonce`. Both paths expose the same React wrapper components.
+Import components from `@govtechsg/sgds-web-component/react`. SSR with Declarative Shadow DOM is automatically enabled — no additional configuration required.
 
 ```tsx
 'use client';
-import { SgdsInput, SgdsButton } from "@govtechsg/sgds-web-component/react/ssr";
+import { SgdsInput, SgdsButton } from "@govtechsg/sgds-web-component/react";
 
 export default function MyForm() {
   return (
@@ -37,7 +30,7 @@ Before integrating SGDS with Next.js, read the [React integration guide](/docs/f
 
 ## Server-Side Rendering (SSR)
 
-SSR is **automatically enabled** when you import components from `@govtechsg/sgds-web-component/react/ssr`. There is nothing else to configure.
+SSR is **automatically enabled** when you import components from `@govtechsg/sgds-web-component/react`. There is nothing else to configure.
 
 ### How it works
 
@@ -79,7 +72,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 > `getCSPNonce()` is also exported from `@govtechsg/sgds-web-component/react/ssr` for debugging or inspecting the current nonce value.
 
-**Note:** The `react/ssr` import is a server-only module (no `"use client"` directive). Import it only in server components.
+**Note:** The `react/ssr` import has no `"use client"` directive so it can be used in server components like `layout.tsx`.
 
 ## TypeScript support
 

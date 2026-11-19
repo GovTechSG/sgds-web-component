@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsSubnav, SgdsSubnavItem } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsSubnav, SgdsSubnavItem } from '@govtechsg/sgds-web-component/react';
 
 export const Subnav = () => {
   return (

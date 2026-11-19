@@ -4,18 +4,11 @@ SGDS React wrappers provide **zero-config SSR** in Next.js (tested with Next.js 
 
 ## Use React wrapper components
 
-Two import paths are available:
-
-| Import | Use when |
-|--------|----------|
-| `@govtechsg/sgds-web-component/react/ssr` | You want SSR with Declarative Shadow DOM (no FOUC, CLS 0, CSP nonce support) |
-| `@govtechsg/sgds-web-component/react` | You are fine with client-side rendering only |
-
-`/react/ssr` re-exports every component from `/react` and adds SSR hydration init + `setCSPNonce`/`getCSPNonce`. Both paths expose the same React wrapper components.
+Import components from `@govtechsg/sgds-web-component/react`. SSR with Declarative Shadow DOM is automatically enabled — no additional configuration required.
 
 ```tsx
 'use client';
-import { SgdsInput, SgdsButton } from "@govtechsg/sgds-web-component/react/ssr";
+import { SgdsInput, SgdsButton } from "@govtechsg/sgds-web-component/react";
 
 export default function MyForm() {
   return (
@@ -31,7 +24,7 @@ Event naming follows the camelCase convention: `sgds-change` → `onSgdsChange`,
 
 ## SSR — how it works
 
-SSR is **automatically enabled** when you import components from `@govtechsg/sgds-web-component/react/ssr`. There is nothing else to configure.
+SSR is **automatically enabled** when you import components from `@govtechsg/sgds-web-component/react`. There is nothing else to configure.
 
 1. On the server, each SGDS component renders its full shadow DOM as inline HTML using Declarative Shadow DOM (DSD). Component styles are embedded in the HTML response.
 2. The browser receives fully styled components on the first paint — no flash of unstyled content (FOUC), no layout shift.
@@ -57,7 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
 > `getCSPNonce()` is also exported from `@govtechsg/sgds-web-component/react/ssr` for debugging or inspecting the current nonce value.
 
-The `react/ssr` entry has no `"use client"` directive. `setCSPNonce`/`getCSPNonce` should be called in server components (e.g. `layout.tsx`). Component imports from `/react/ssr` work in `'use client'` files because they re-export from the `'use client'`-marked `/react` entry.
+The `react/ssr` entry has no `"use client"` directive so it can be used in server components like `layout.tsx`. Components are imported from `@govtechsg/sgds-web-component/react` (not `react/ssr`).
 
 ## TypeScript support
 

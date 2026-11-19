@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsTableOfContents, SgdsLink } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsTableOfContents, SgdsLink } from '@govtechsg/sgds-web-component/react';
 
 export const TableOfContents = () => {
   return (

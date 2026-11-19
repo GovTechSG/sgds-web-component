@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsBadge, SgdsIcon } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsBadge, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const Badge = () => {
   return (

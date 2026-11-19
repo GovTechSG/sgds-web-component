@@ -12,20 +12,20 @@ import "@govtechsg/sgds-web-component";
       <sgds-sidebar [attr.active]="active" variant="persistent" class="sgds:h-screen sgds:sticky sgds:top-0">
         <div slot="upper" class="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E Angular</div>
         <sgds-sidebar-section name="components" title="Components">
+          <sgds-sidebar-item name="accordion" title="Accordion">
+              <a routerLink="/accordion"></a>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="alertlink" title="AlertLink">
               <a routerLink="/alertlink"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="alert" title="Alert">
               <a routerLink="/alert"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="accordion" title="Accordion">
-              <a routerLink="/accordion"></a>
+          <sgds-sidebar-item name="appnav" title="Appnav">
+              <a routerLink="/appnav"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="badge" title="Badge">
               <a routerLink="/badge"></a>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="appnav" title="Appnav">
-              <a routerLink="/appnav"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
               <a routerLink="/breadcrumb"></a>
@@ -105,20 +105,20 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="pagination" title="Pagination">
               <a routerLink="/pagination"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="progressbar" title="ProgressBar">
-              <a routerLink="/progressbar"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="quantitytoggle" title="QuantityToggle">
               <a routerLink="/quantitytoggle"></a>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="radiogroup" title="RadioGroup">
-              <a routerLink="/radiogroup"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="select" title="Select">
               <a routerLink="/select"></a>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="radiogroup" title="RadioGroup">
+              <a routerLink="/radiogroup"></a>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="sidebar" title="Sidebar">
               <a routerLink="/sidebar"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="progressbar" title="ProgressBar">
+              <a routerLink="/progressbar"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="sidenav" title="Sidenav">
               <a routerLink="/sidenav"></a>

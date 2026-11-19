@@ -4,11 +4,11 @@ import "@govtechsg/sgds-web-component/css/sgds.css";
 import "@govtechsg/sgds-web-component";
 import "./index.css";
 import SidebarLayout from "./SidebarLayout";
+import AccordionPage from "./pages/accordion";
 import AlertLinkPage from "./pages/alertlink";
 import AlertPage from "./pages/alert";
-import AccordionPage from "./pages/accordion";
-import BadgePage from "./pages/badge";
 import AppnavPage from "./pages/appnav";
+import BadgePage from "./pages/badge";
 import BreadcrumbPage from "./pages/breadcrumb";
 import ButtonPage from "./pages/button";
 import CardPage from "./pages/card";
@@ -35,11 +35,11 @@ import MastheadPage from "./pages/masthead";
 import ModalPage from "./pages/modal";
 import OverflowMenuPage from "./pages/overflowmenu";
 import PaginationPage from "./pages/pagination";
-import ProgressBarPage from "./pages/progressbar";
 import QuantityTogglePage from "./pages/quantitytoggle";
-import RadioGroupPage from "./pages/radiogroup";
 import SelectPage from "./pages/select";
+import RadioGroupPage from "./pages/radiogroup";
 import SidebarPage from "./pages/sidebar";
+import ProgressBarPage from "./pages/progressbar";
 import SidenavPage from "./pages/sidenav";
 import SkeletonPage from "./pages/skeleton";
 import SpinnerPage from "./pages/spinner";
@@ -61,12 +61,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<SidebarLayout />}>
-          <Route index element={<Navigate to="/alertlink" replace />} />
+          <Route index element={<Navigate to="/accordion" replace />} />
+          <Route path="/accordion" element={<AccordionPage />} />
           <Route path="/alertlink" element={<AlertLinkPage />} />
           <Route path="/alert" element={<AlertPage />} />
-          <Route path="/accordion" element={<AccordionPage />} />
-          <Route path="/badge" element={<BadgePage />} />
           <Route path="/appnav" element={<AppnavPage />} />
+          <Route path="/badge" element={<BadgePage />} />
           <Route path="/breadcrumb" element={<BreadcrumbPage />} />
           <Route path="/button" element={<ButtonPage />} />
           <Route path="/card" element={<CardPage />} />
@@ -93,11 +93,11 @@ function App() {
           <Route path="/modal" element={<ModalPage />} />
           <Route path="/overflowmenu" element={<OverflowMenuPage />} />
           <Route path="/pagination" element={<PaginationPage />} />
-          <Route path="/progressbar" element={<ProgressBarPage />} />
           <Route path="/quantitytoggle" element={<QuantityTogglePage />} />
-          <Route path="/radiogroup" element={<RadioGroupPage />} />
           <Route path="/select" element={<SelectPage />} />
+          <Route path="/radiogroup" element={<RadioGroupPage />} />
           <Route path="/sidebar" element={<SidebarPage />} />
+          <Route path="/progressbar" element={<ProgressBarPage />} />
           <Route path="/sidenav" element={<SidenavPage />} />
           <Route path="/skeleton" element={<SkeletonPage />} />
           <Route path="/spinner" element={<SpinnerPage />} />

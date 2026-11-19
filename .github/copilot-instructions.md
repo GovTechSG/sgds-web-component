@@ -15,6 +15,9 @@ description: 'AI agent guide for contributing to and navigating the sgds-web-com
 - **Cypress**: `cypress/` (E2E tests and app integration examples)
 - **Contributing**: `contributing/` (architecture decisions, contribution guides)
 
+## Repo Setup
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for first-time setup instructions (pnpm, `mkdir -p lib`, install).
+
 ## Key Developer Workflows
 - **Build**: `pnpm build` (outputs to `lib/`)
 - **Test**: `pnpm test` (runs unit tests)

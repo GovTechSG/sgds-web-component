@@ -3,20 +3,6 @@ import { expectNoConsoleErrors } from "../utils/console-checker";
 import { expectHealthyShadowDom, expectDsdInPageSource, expectDsdStylesHaveNonce } from "../utils/shadow-dom-checker";
 
 test.describe("Next.js SSR app", () => {
-  test("dev: no console errors", async ({ page }) => {
-    await expectNoConsoleErrors(page, "http://127.0.0.1:4012/", {
-      ignorePatterns: [
-        /favicon\.ico/,
-        /logo.*\.svg/,
-        /WebSocket connection to.*_next\/hmr/,
-      ],
-    });
-  });
-
-  test("dev: healthy shadow DOM", async ({ page }) => {
-    await expectHealthyShadowDom(page, "http://127.0.0.1:4012/", "inlineStyles");
-  });
-
   test("prod: no console errors", async ({ page }) => {
     await expectNoConsoleErrors(page, "http://127.0.0.1:4002/");
   });

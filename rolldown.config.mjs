@@ -138,7 +138,7 @@ const buildSgdsPackage = () => {
 
   const reactPackage = [
     defineConfig({
-      input: ["src/react/index.ts", "src/react/_ssr-init.ts"],
+      input: "src/react/index.ts",
       output: [
         {
           entryFileNames: "[name].js",
@@ -155,11 +155,12 @@ const buildSgdsPackage = () => {
       moduleTypes: sharedModuleTypes,
       treeshake: {
         moduleSideEffects: [
-          { test: /ssr-nonce-patch/, sideEffects: true }
+          { test: /ssr-nonce-patch/, sideEffects: true },
+          { test: /ssr-init/, sideEffects: true }
         ]
       },
       plugins: [...reactBuildPlugins],
-      external: ["@lit/react", "react", /^react\/.*/, ...external]
+      external: ["@lit/react", "react", /^react\/.*/, "@govtechsg/sgds-web-component/react/ssr-init", ...external]
     }),
     defineConfig({
       input: "src/react/index.ts",
@@ -179,32 +180,34 @@ const buildSgdsPackage = () => {
       moduleTypes: sharedModuleTypes,
       treeshake: {
         moduleSideEffects: [
-          { test: /ssr-nonce-patch/, sideEffects: true }
+          { test: /ssr-nonce-patch/, sideEffects: true },
+          { test: /ssr-init/, sideEffects: true }
         ]
       },
       plugins: [...reactBuildPlugins],
-      external: ["@lit/react", "react", /^react\/.*/, ...external]
+      external: ["@lit/react", "react", /^react\/.*/, "@govtechsg/sgds-web-component/react/ssr-init", ...external]
     })
   ];
 
-  // SSR entry — thin re-export, no "use client" banner (used in server components)
-  // Mark all relative imports external so the output is a single re-export file
-  // that references the already-built react/ and utils/ siblings.
+  // SSR API — no "use client" banner (used in server components)
   const ssrPackage = [
     defineConfig({
-      input: "src/react/ssr/index.ts",
+      input: "src/react/_ssr/index.ts",
       output: [
         {
-          file: "lib/react/ssr/index.js",
+          entryFileNames: "[name].js",
+          dir: "lib/react/_ssr",
           format: "esm",
           sourcemap: true,
-          exports: "named"
+          exports: "named",
+          preserveModules: true,
+          preserveModulesRoot: "src/react/_ssr"
         }
       ],
       platform: "neutral",
       moduleTypes: sharedModuleTypes,
       plugins: [...reactBuildPlugins],
-      external: [/^\.\.\//, /^\.\.\.\//, "@lit/react", "react", /^react\/.*/, ...external]
+      external: ["@lit/react", "react", /^react\/.*/, "@govtechsg/sgds-web-component/react/ssr-init", ...external]
     })
   ];
 
