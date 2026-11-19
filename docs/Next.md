@@ -1,10 +1,10 @@
 # Next.js integration
 
-SGDS web components are fully supported in Next.js with React 19+, tested with Next.js 16. The React wrappers provide **zero-config server-side rendering (SSR)** with Declarative Shadow DOM — no webpack plugins, no `next.config.js` changes required.
+SGDS web components are fully supported in Next.js with React 19+, tested with Next.js 16. The React wrappers provide **opt-in server-side rendering (SSR)** with Declarative Shadow DOM via a single `withSgdsNextSSR()` config wrapper.
 
 ## Recommended: Use React wrapper components
 
-Import components from `@govtechsg/sgds-web-component/react`. SSR with Declarative Shadow DOM is automatically enabled — no additional configuration required.
+Import components from `@govtechsg/sgds-web-component/react`. Components work in CSR mode by default.
 
 ```tsx
 'use client';
@@ -30,7 +30,22 @@ Before integrating SGDS with Next.js, read the [React integration guide](/docs/f
 
 ## Server-Side Rendering (SSR)
 
-SSR is **automatically enabled** when you import components from `@govtechsg/sgds-web-component/react`. There is nothing else to configure.
+SSR is **opt-in**. Wrap your Next.js config with `withSgdsNextSSR()` to enable Declarative Shadow DOM rendering:
+
+```js
+// next.config.mjs
+import { withSgdsNextSSR } from "@govtechsg/sgds-web-component/react/ssr";
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  turbopack: {},
+};
+
+export default withSgdsNextSSR(nextConfig);
+```
+
+Without `withSgdsNextSSR()`, components render in CSR mode (client-side only).
 
 ### How it works
 
@@ -42,8 +57,8 @@ SSR is **automatically enabled** when you import components from `@govtechsg/sgd
 
 - **No layout shift** — components render with the correct styles immediately
 - **No FOUC** — component CSS is included in the server response
-- **No webpack plugin** — unlike the previous `@lit-labs/nextjs` approach, there is no `withLit()` plugin to configure
 - **Turbopack compatible** — works with both webpack and Turbopack
+- **Barrel and individual imports** — both `import { SgdsButton } from '.../react'` and `import SgdsButton from '.../react/button'` are supported
 
 ## CSP nonce support (optional)
 

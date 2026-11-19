@@ -153,7 +153,7 @@ import { Form } from '@govtechsg/sgds-react/Form';
 ### AFTER (SGDS web component with Controller)
 
 ```tsx
-import SgdsInput from '@govtechsg/sgds-web-component/react/input/index.js';
+import { SgdsInput } from '@govtechsg/sgds-web-component/react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const { control } = useFormContext();

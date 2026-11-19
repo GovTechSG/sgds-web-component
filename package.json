@@ -29,7 +29,7 @@
     "lint:fix": "npm run lint -- --fix",
     "cem": "cem analyze --litelement ",
     "e2e:generate": "tsx e2e/utils/generate-component-list.ts && tsx e2e/utils/generate-component-html.ts && tsx e2e/utils/generate-next-components.ts && tsx e2e/utils/generate-nuxt-components.ts && tsx e2e/utils/generate-react-components.ts && tsx e2e/utils/generate-vue-components.ts && tsx e2e/utils/generate-angular-components.ts",
-    "e2e:prebuild": "cd e2e/apps/nuxt-app && pnpm build && cd ../next-app && pnpm build",
+    "e2e:prebuild": "cd e2e/apps/nuxt-app && pnpm build && cd ../next-app && pnpm build && pnpm build:turbopack",
     "e2e:test": "pnpm e2e:generate && pnpm e2e:prebuild && cd e2e && pnpm exec playwright test",
     "e2e:test:ui": "pnpm e2e:generate && pnpm e2e:prebuild && cd e2e && pnpm exec playwright test --ui",
     "storybook": "nodemon --exec \"bash -c 'npm run utility:storybook && npm run write:stories && STORYBOOK_ENV=development npx storybook dev -p 6006'\" --watch stories/component-templates stories/getting-started src/css/utility.css -e js,mdx,css",
@@ -78,6 +78,14 @@
   "peerDependencies": {
     "@lit-labs/ssr": ">=3.0.0",
     "@lit-labs/ssr-react": "^0.3.4"
+  },
+  "peerDependenciesMeta": {
+    "@lit-labs/ssr": {
+      "optional": true
+    },
+    "@lit-labs/ssr-react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@lit-labs/ssr": "^4.1.0",
@@ -203,7 +211,7 @@
       "colord": ">=2.9.4",
       "uuid": ">=11.1.1",
       "ip-address": ">=10.3.1",
-      "esbuild": ">=0.25.0",
+      "esbuild": ">=0.24.0 <0.25.0",
       "adm-zip": ">=0.6.0",
       "@babel/plugin-transform-modules-systemjs": ">=7.29.4 <8.0.0",
       "minimatch": ">=3.1.4",

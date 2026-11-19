@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted (revised 05/11/2026, CSR fix 05/11/2026, `/react/ssr` split 07/11/2026, collapsed back 18/11/2026)
+Accepted (revised 05/11/2026, CSR fix 05/11/2026, `/react/ssr` split 07/11/2026, collapsed back 18/11/2026, opt-in plugin 19/11/2026)
 
 ## Context
 
@@ -17,38 +17,52 @@ We needed SSR/DSD support that works automatically when consumers import SGDS Re
 
 ## Decision
 
-### SSR baked into `/react`, nonce API at `/react/ssr` (18/11/2026)
+### Opt-in SSR via `withSgdsNextSSR()` plugin (19/11/2026)
 
-Originally, the `_ssr-init` side-effect was split into a separate `/react/ssr` entry to protect CSR apps from bundler issues. The dynamic import fix for `ssr-nonce-patch` (see [CSR compatibility](#csr-compatibility-dynamic-import-for-ssr-nonce-patch-05112026)) resolved the root cause — Vite/Rollup no longer bundles `lit-element-renderer.js` on the client. Testing confirmed that `_ssr-init` is safe for both CSR (Vite, CRA) and SSR (Next.js) consumers.
+The previous "SSR baked into `/react`" approach (18/11/2026) used conditional exports (`node` → `react-ssr/`, `default` → `react/`) in `lib/package.json` to automatically route Node.js consumers to SSR-aware wrappers. This forced ALL Node.js consumers to opt into SSR — including those running Next.js in CSR-only mode, CI scripts, or test runners. SSR should be an intentional consumer choice, not an implicit side-effect of the runtime environment.
 
-**Current architecture:** Every React component wrapper imports `_ssr-init` directly. Consumers use a single import path for components:
+**Current architecture:** SSR is opt-in via a `withSgdsNextSSR()` Next.js config plugin exported from `/react/ssr`. Without the plugin, `./react` always resolves to CSR-only wrappers.
 
 | Entry | Purpose |
 |-------|---------|
-| `@govtechsg/sgds-web-component/react` | All components (SSR enabled automatically) |
-| `@govtechsg/sgds-web-component/react/ssr` | `setCSPNonce()` / `getCSPNonce()` only (for server components) |
+| `@govtechsg/sgds-web-component/react` | All components (CSR only, no SSR) |
+| `@govtechsg/sgds-web-component/react/ssr` | `withSgdsNextSSR()`, `setCSPNonce()`, `getCSPNonce()` (for Next.js SSR opt-in and server components) |
 
-The `/react/ssr` entry is a thin re-export of `setCSPNonce`/`getCSPNonce` from `src/utils/ssr-nonce.ts`. It has no `'use client'` banner so it can be imported in Next.js server components (e.g. `layout.tsx`).
+**How the plugin works:** `withSgdsNextSSR(nextConfig)` wraps the user's Next.js config and adds resolve aliases that redirect `@govtechsg/sgds-web-component/react` → `@govtechsg/sgds-web-component/react-ssr` at build time. The `react-ssr/` wrappers import `_ssr-init` which enables DSD rendering. Component wrappers in `react/` do NOT import `_ssr-init` — SSR is only activated when the plugin redirects to `react-ssr/`.
+
+- **Webpack**: Uses `resolve.alias` with `$` suffix for exact barrel matching (`react$` → `react-ssr`). The `$` suffix is critical — without it, webpack's prefix matching catches `react/ssr` and mangles it to `react-ssr/ssr` (which doesn't exist).
+- **Turbopack**: Uses `turbopack.resolveAlias` for barrel matching (`react` → `react-ssr`). Turbopack performs exact matching by default.
+
+Both bundlers only alias the barrel import. The barrel's `_ssr-init` patches React globally, so all components get SSR regardless of their import path. Consumers should use barrel imports (`@govtechsg/sgds-web-component/react`) as documented.
+
+**Consumer setup:**
+
+```js
+// next.config.mjs
+import { withSgdsNextSSR } from '@govtechsg/sgds-web-component/react/ssr';
+export default withSgdsNextSSR({ reactStrictMode: true, turbopack: {} });
+```
 
 **Build details:**
-- `scripts/makeReact.mjs`: Each component wrapper includes `import '../_ssr-init';`. Generates `src/react/_ssr/index.ts` (nonce API only).
-- `rolldown.config.mjs`: React ESM build has a single input (`src/react/index.ts`) — `_ssr-init` is pulled in via component imports. SSR package builds `src/react/_ssr/index.ts` with `platform: "neutral"` and no `'use client'` banner.
-- `scripts/frankBuild.js`: Export map — `"./react/ssr"` points to `"./react/_ssr/index.js"`.
+- `scripts/makeReact.mjs`: Component wrappers do NOT import `_ssr-init` (SSR is opt-in via the plugin, not baked into wrappers). Still generates `_ssr-init.ts` and `src/react/_ssr/index.ts` (nonce API + plugin).
+- `rolldown.config.mjs`: `_ssr-init.ts` is built as a separate Rolldown entry (`ssrInitPackage`) with no `'use client'` banner and `platform: "neutral"`, since component wrappers no longer pull it in.
+- `scripts/frankBuild.js`: Export map uses flat paths — `"./react"` → `"./react/index.js"` (no conditional `node`/`default`). `"./react-ssr"` and `"./react-ssr/*"` are explicit exports for the plugin to alias into. `generateReactSsrWrappers()` generates thin wrappers that import `_ssr-init` then re-export from `react/`.
+- `src/utils/with-sgds-next-ssr.ts`: Plugin function that sets webpack `resolve.alias` (`$` exact match) and Turbopack `resolveAlias`.
+- `@lit-labs/ssr` and `@lit-labs/ssr-react` are optional peer dependencies (only needed when using `withSgdsNextSSR()`).
 
 ### SSR enablement via `_ssr-init` side-effect
 
-The `_ssr-init` module (imported by every React component wrapper):
+The `_ssr-init` module (loaded only via `react-ssr/` wrappers when `withSgdsNextSSR()` is active):
 
-1. Imports `ssr-nonce-patch` — patches `LitElementRenderer.renderShadow()` to support CSP nonces
-2. Imports `@lit-labs/ssr-react/enable-lit-ssr.js` — a side-effect module with conditional exports (`node` → patches React's `jsx()`/`createElement()` for DSD rendering; browser → loads `@lit-labs/ssr-client/lit-element-hydrate-support.js` for DSD adoption)
+1. Imports `@lit-labs/ssr-react/enable-lit-ssr.js` — a side-effect module with conditional exports (`node` → patches React's `jsx()`/`createElement()` for DSD rendering; browser → loads `@lit-labs/ssr-client/lit-element-hydrate-support.js` for DSD adoption)
+2. Dynamically imports `ssr-nonce-patch` on the server — patches `LitElementRenderer.renderShadow()` to support CSP nonces
 3. Imports `LitElement` from `lit` and applies a **Turbopack hydration safety net** — re-invokes `globalThis.litElementHydrateSupport()` if the patches were missed due to module evaluation order (see [Turbopack DSD hydration fix](#turbopack-dsd-hydration-fix) below)
 
-The `_ssr-init` module and wrapper code are generated by `scripts/makeReact.mjs`. The `@lit-labs/ssr-react` package is added as a production dependency in `lib/package.json`.
+The `_ssr-init` module is generated by `scripts/makeReact.mjs` but is NOT imported by `react/` component wrappers — it is only imported by `react-ssr/` wrappers. It is built as a separate Rolldown entry (`ssrInitPackage`) since nothing in the main React build depends on it.
 
-**Wrapper structure (generated — imports `_ssr-init`):**
+**Wrapper structure (generated — no `_ssr-init` import):**
 
 ```ts
-import '../_ssr-init';
 import * as React from 'react';
 import { createComponent } from '@lit/react';
 import Component from '../../components/Button/sgds-button';
@@ -90,7 +104,7 @@ export default async function Layout({ children }) {
 }
 ```
 
-No `serverExternalPackages`, no `instrumentation.ts`, no `next.config.js` changes.
+No `serverExternalPackages`, no `instrumentation.ts`. The only `next.config.js` change is wrapping with `withSgdsNextSSR()`.
 
 The `react/ssr` export is built WITHOUT the `"use client"` banner (separate Rolldown config with `platform: "neutral"`) so it can be imported in server components.
 
@@ -214,9 +228,9 @@ try {
 
 ### Build changes
 
-- `rolldown.config.mjs`: Added `/@lit-labs\/.*/` and `/^react\/.*/` to externals. React ESM build uses single input (`src/react/index.ts`) — `_ssr-init` pulled in via component wrapper imports. SSR nonce API built separately with `platform: "neutral"` and no `'use client'` banner. Added `treeshake.moduleSideEffects` for nonce patch.
-- `scripts/makeReact.mjs`: Generates `_ssr-init.ts` (with dynamic `ssr-nonce-patch` import for CSR compatibility) and `_ssr/index.ts` (nonce API re-export). Each component wrapper imports `_ssr-init`.
-- `scripts/frankBuild.js`: `"./react/ssr"` maps to `"./react/_ssr/index.js"`. Copies `ssr-nonce-patch.raw.js` to `lib/`, overwriting Rolldown output.
+- `rolldown.config.mjs`: Added `/@lit-labs\/.*/` and `/^react\/.*/` to externals. React ESM build uses single input (`src/react/index.ts`). `_ssr-init.ts` is built as a separate entry (`ssrInitPackage`) with `platform: "neutral"` and no `'use client'` banner. SSR nonce API built separately. Added `treeshake.moduleSideEffects` for nonce patch.
+- `scripts/makeReact.mjs`: Generates `_ssr-init.ts` (with dynamic `ssr-nonce-patch` import for CSR compatibility) and `_ssr/index.ts` (SSR API: `withSgdsNextSSR`, `setCSPNonce`, `getCSPNonce`). Component wrappers do NOT import `_ssr-init` — SSR is opt-in via the plugin.
+- `scripts/frankBuild.js`: `"./react/ssr"` maps to `"./react/_ssr/index.js"`. `"./react-ssr"` and `"./react-ssr/*"` are explicit exports. `generateReactSsrWrappers()` creates thin wrappers importing `_ssr-init` + re-exporting from `react/`. Copies `ssr-nonce-patch.raw.js` to `lib/`, overwriting Rolldown output.
 
 ### Files
 
@@ -226,16 +240,16 @@ try {
 | `src/utils/ssr-nonce-patch.raw.js` | Raw JS with bare `require()` — patches `LitElementRenderer.renderShadow()`. NOT processed by Rolldown. |
 | `src/utils/ssr-nonce-patch.ts` | Placeholder with export — prevents Rolldown tree-shaking. Overwritten by raw file during build. |
 | `src/react/_ssr-init.ts` | Generated side-effect: imports nonce patch + enable-lit-ssr.js + Turbopack hydration safety net |
-| `src/react/_ssr/index.ts` | Generated nonce API: re-exports `setCSPNonce`/`getCSPNonce` from `src/utils/ssr-nonce` |
+| `src/utils/with-sgds-next-ssr.ts` | `withSgdsNextSSR()` Next.js config plugin — webpack `resolve.alias` (`$` exact match) + Turbopack `resolveAlias` |
+| `src/react/_ssr/index.ts` | Generated SSR API: re-exports `withSgdsNextSSR`, `setCSPNonce`, `getCSPNonce` |
 
 ## Consequences
 
 ### What becomes easier
 
-- **Zero-config SSR**: importing any SGDS React wrapper from `@govtechsg/sgds-web-component/react` automatically enables DSD rendering. CLS 0 with no consumer setup. Single import path for both CSR and SSR consumers.
-- **One-line CSP nonce**: consumers with strict `style-src` add `setCSPNonce(nonce)` in their layout. No `next.config.js`, no `instrumentation.ts`.
-- **Turbopack support**: works with both webpack and Turbopack since there is no bundler plugin dependency.
-- **Bundler-agnostic**: works with webpack, Turbopack, Vite, or any bundler that supports ESM conditional exports.
+- **Opt-in SSR**: consumers who want DSD rendering add `withSgdsNextSSR()` in `next.config.js`. CSR consumers are unaffected — no SSR overhead, no `@lit-labs/ssr` peer dependency required.
+- **One-line CSP nonce**: consumers with strict `style-src` add `setCSPNonce(nonce)` in their layout.
+- **Turbopack support**: works with both webpack and Turbopack via resolve aliases (no bundler plugin or loader dependency).
 - **First cold-start**: nonces are injected on the very first request after server start. No warm-up needed.
 
 ### What becomes harder or carries risk
@@ -367,4 +381,4 @@ Tested on `e2e/apps/react-app` (React 19 + Vite 7, CSR-only, production build):
 
 ## Date of proposal
 
-16/10/2026 (revised 05/11/2026, `/react/ssr` split 07/11/2026)
+16/10/2026 (revised 05/11/2026, `/react/ssr` split 07/11/2026, opt-in plugin 19/11/2026)
