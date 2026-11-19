@@ -340,7 +340,43 @@
   --sgds-padding-5-xl: var(--sgds-spacer-11);
   --sgds-form-padding-x: var(--sgds-padding-md);
   --sgds-form-padding-y: var(--sgds-padding-sm);
-  
+
+  /* Semantic - Form Control Size */
+  --sgds-form-control-size-2-xs: var(--sgds-dimension-20);
+  --sgds-form-control-size-xs: var(--sgds-dimension-24);
+  --sgds-form-control-size-sm: var(--sgds-dimension-32);
+  --sgds-form-control-size-md: var(--sgds-dimension-40);
+  --sgds-form-control-size-lg: var(--sgds-dimension-48);
+
+  /* Semantic - Form Padding (per size) */
+  --sgds-form-padding-x-md: var(--sgds-spacer-4);
+  --sgds-form-padding-x-lg: var(--sgds-spacer-5);
+  --sgds-form-padding-y-md: var(--sgds-spacer-3);
+  --sgds-form-padding-y-lg: var(--sgds-spacer-4);
+
+  /* Semantic - Form Label & Feedback */
+  --sgds-form-label-padding-y: var(--sgds-spacer-1);
+  --sgds-form-label-gap: var(--sgds-spacer-2);
+  --sgds-form-feedback-gap: var(--sgds-spacer-2);
+  --sgds-form-fieldset-gap: var(--sgds-spacer-8);
+
+  /* Semantic - Form Control (checkbox/radio) */
+  --sgds-form-control-padding-y: var(--sgds-spacer-2);
+  --sgds-form-control-gap: var(--sgds-spacer-3);
+  --sgds-form-control-group-gap: var(--sgds-spacer-2);
+
+  /* Semantic - Form Menu (select/combobox popup) */
+  --sgds-form-menu-padding-y: var(--sgds-spacer-3);
+  --sgds-form-menu-max-height: var(--sgds-dimension-320);
+  --sgds-form-menu-border-radius: var(--sgds-overlay-border-radius);
+
+  /* Semantic - Form Option (menu items, per size) */
+  --sgds-form-option-padding-x-md: var(--sgds-spacer-4);
+  --sgds-form-option-padding-x-lg: var(--sgds-spacer-5);
+  --sgds-form-option-padding-y-md: var(--sgds-density-padding-xs);
+  --sgds-form-option-padding-y-lg: var(--sgds-density-padding-sm);
+  --sgds-form-option-gap: var(--sgds-spacer-2);
+
   /* NEW - MARGIN */
   --sgds-margin-none: var(--sgds-spacer-0);
   --sgds-margin-3-xs: var(--sgds-spacer-1);
@@ -368,9 +404,9 @@
   --sgds-gap-xl: var(--sgds-spacer-7);
   --sgds-gap-2-xl: var(--sgds-spacer-8);
   --sgds-gap-3-xl: var(--sgds-spacer-9);
+  --sgds-form-gap-md: var(--sgds-spacer-2);
+  --sgds-form-gap-lg: var(--sgds-spacer-3);
   --sgds-form-gap-sm: var(--sgds-gap-2-xs);
-  --sgds-form-gap-md: var(--sgds-gap-xs);
-  --sgds-form-gap-lg: var(--sgds-gap-sm);
   --sgds-form-gap-xl: var(--sgds-gap-md);
   --sgds-form-gap-2-xl: var(--sgds-gap-xl);
 

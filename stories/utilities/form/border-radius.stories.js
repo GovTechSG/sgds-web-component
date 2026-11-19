@@ -1,23 +1,29 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Spacing/Padding/Static",
+  title: "Utilities/Form/Border Radius",
   tags: ["!autodocs"]
 };
 
-const PADDING_SCALE = [
-  { name: "none", class: "sgds:p-none", variable: "--sgds-padding-none", value: "0px" },
-  { name: "3-xs", class: "sgds:p-3-xs", variable: "--sgds-padding-3-xs", value: "2px" },
-  { name: "2-xs", class: "sgds:p-2-xs", variable: "--sgds-padding-2-xs", value: "4px" },
-  { name: "xs", class: "sgds:p-xs", variable: "--sgds-padding-xs", value: "8px" },
-  { name: "sm", class: "sgds:p-sm", variable: "--sgds-padding-sm", value: "12px" },
-  { name: "md", class: "sgds:p-md", variable: "--sgds-padding-md", value: "16px" },
-  { name: "lg", class: "sgds:p-lg", variable: "--sgds-padding-lg", value: "20px" },
-  { name: "xl", class: "sgds:p-xl", variable: "--sgds-padding-xl", value: "24px" },
-  { name: "2-xl", class: "sgds:p-2-xl", variable: "--sgds-padding-2-xl", value: "32px" },
-  { name: "3-xl", class: "sgds:p-3-xl", variable: "--sgds-padding-3-xl", value: "48px" },
-  { name: "4-xl", class: "sgds:p-4-xl", variable: "--sgds-padding-4-xl", value: "64px" },
-  { name: "5-xl", class: "sgds:p-5-xl", variable: "--sgds-padding-5-xl", value: "96px" }
+const FORM_RADIUS_SCALE = [
+  { name: "none", class: "sgds:rounded-form-none", variable: "--sgds-form-border-radius-none", value: "0px" },
+  { name: "xs", class: "sgds:rounded-form-xs", variable: "--sgds-form-border-radius-xs", value: "2px" },
+  { name: "sm", class: "sgds:rounded-form-sm", variable: "--sgds-form-border-radius-sm", value: "4px" },
+  { name: "md", class: "sgds:rounded-form-md", variable: "--sgds-form-border-radius-md", value: "8px" },
+  { name: "full", class: "sgds:rounded-form-full", variable: "--sgds-form-border-radius-full", value: "999px" },
+  { name: "form (semantic)", class: "sgds:rounded-form", variable: "--sgds-form-border-radius", value: "md (8px)" },
+  {
+    name: "form-subtle (semantic)",
+    class: "sgds:rounded-form-subtle",
+    variable: "--sgds-form-border-radius-subtle",
+    value: "md (8px)"
+  },
+  {
+    name: "form-menu",
+    class: "sgds:rounded-form-menu",
+    variable: "--sgds-form-menu-border-radius",
+    value: "lg (12px)"
+  }
 ];
 
 const copyToClipboard = (token, buttonEl) => {
@@ -29,7 +35,7 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-const PaddingTableRow = item => {
+const RadiusTableRow = item => {
   return html`
     <sgds-table-row>
       <sgds-table-cell>
@@ -51,15 +57,15 @@ const PaddingTableRow = item => {
         <code class="sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm">${item.value}</code>
       </sgds-table-cell>
       <sgds-table-cell>
-        <div class="${item.class} sgds:bg-primary-default">
-          <div class="sgds:bg-surface-raised sgds:p-xs sgds:text-center">Content</div>
-        </div>
+        <div
+          class="sgds:flex sgds:items-center sgds:justify-center sgds:w-20 sgds:h-20 sgds:bg-primary-default ${item.class}"
+        ></div>
       </sgds-table-cell>
     </sgds-table-row>
   `;
 };
 
-export const Static = () => html`
+export const BorderRadius = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
@@ -67,6 +73,6 @@ export const Static = () => html`
       <sgds-table-head>Value</sgds-table-head>
       <sgds-table-head>Preview</sgds-table-head>
     </sgds-table-row>
-    ${PADDING_SCALE.map(item => PaddingTableRow(item))}
+    ${FORM_RADIUS_SCALE.map(item => RadiusTableRow(item))}
   </sgds-table>
 `;

@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Typography/Text Color",
+  title: "Utilities/Color/Text",
   tags: ["!autodocs"]
 };
 

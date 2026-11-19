@@ -369,6 +369,43 @@
   --gap-form-lg: var(--sgds-form-gap-lg);
   --gap-form-xl: var(--sgds-form-gap-xl);
   --gap-form-2-xl: var(--sgds-form-gap-2-xl);
+  --gap-form-label: var(--sgds-form-label-gap);
+  --gap-form-feedback: var(--sgds-form-feedback-gap);
+  --gap-form-fieldset: var(--sgds-form-fieldset-gap);
+  --gap-form-control: var(--sgds-form-control-gap);
+  --gap-form-control-group: var(--sgds-form-control-group-gap);
+
+  /* Form Padding (per size) */
+  --spacing-form-md: var(--sgds-form-padding-x-md);
+  --spacing-form-lg: var(--sgds-form-padding-x-lg);
+  --spacing-form-y-md: var(--sgds-form-padding-y-md);
+  --spacing-form-y-lg: var(--sgds-form-padding-y-lg);
+  --spacing-form-label: var(--sgds-form-label-padding-y);
+  --spacing-form-control: var(--sgds-form-control-padding-y);
+
+  /* Form Control Size (height for inputs, both h+w for checkbox/radio) */
+  --height-form-control-2-xs: var(--sgds-form-control-size-2-xs);
+  --height-form-control-xs: var(--sgds-form-control-size-xs);
+  --height-form-control-sm: var(--sgds-form-control-size-sm);
+  --height-form-control-md: var(--sgds-form-control-size-md);
+  --height-form-control-lg: var(--sgds-form-control-size-lg);
+  --width-form-control-2-xs: var(--sgds-form-control-size-2-xs);
+  --width-form-control-xs: var(--sgds-form-control-size-xs);
+  --width-form-control-sm: var(--sgds-form-control-size-sm);
+  --width-form-control-md: var(--sgds-form-control-size-md);
+  --width-form-control-lg: var(--sgds-form-control-size-lg);
+
+  /* Form Menu */
+  --spacing-form-menu-y: var(--sgds-form-menu-padding-y);
+  --max-height-form-menu: var(--sgds-form-menu-max-height);
+  --radius-form-menu: var(--sgds-form-menu-border-radius);
+
+  /* Form Option (per size) */
+  --spacing-form-option-md: var(--sgds-form-option-padding-x-md);
+  --spacing-form-option-lg: var(--sgds-form-option-padding-x-lg);
+  --spacing-form-option-y-md: var(--sgds-form-option-padding-y-md);
+  --spacing-form-option-y-lg: var(--sgds-form-option-padding-y-lg);
+  --gap-form-option: var(--sgds-form-option-gap);
 
   /* Text Gap */
   --gap-text-2-xs: var(--sgds-text-gap-2-xs);

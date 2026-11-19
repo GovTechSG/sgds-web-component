@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Text Max Width",
+  title: "Utilities/Dimension/Text Max Width",
   tags: ["!autodocs"]
 };
 

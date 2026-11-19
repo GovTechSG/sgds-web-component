@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Spacing/Gap/Form",
+  title: "Utilities/Form/Gap",
   tags: ["!autodocs"]
 };
 
@@ -14,7 +14,7 @@ const copyToClipboard = (token, buttonEl) => {
   }, 3000);
 };
 
-export const Form = () => html`
+export const SimplifiedSemantic = () => html`
   <sgds-table>
     <sgds-table-row>
       <sgds-table-head>SGDS Tailwind Token</sgds-table-head>
