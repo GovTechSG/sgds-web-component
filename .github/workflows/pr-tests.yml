@@ -53,6 +53,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
+      - name: Ensure lib directory exists
+        run: mkdir -p lib
       - name: Install root dependencies
         run: pnpm install --filter '.' --no-frozen-lockfile
       - name: Build library
