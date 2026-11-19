@@ -24,3 +24,7 @@ slot[id='default'].is-loading::slotted(*),
 slot[id='default'].is-loading{
   display: none;
 }
+
+:host([size="md"]) .form-control-group sgds-icon {
+  --icon-size: var(--sgds-icon-size-md);
+}
