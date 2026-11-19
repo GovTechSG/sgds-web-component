@@ -32,6 +32,9 @@ export class SgdsRadio extends SgdsElement {
   /** Marks the radio input as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** The size of the radio. `lg` is the default size. Typically set by the parent RadioGroup. */
+  @property({ reflect: true }) size: "lg" | "md" = "lg";
+
   /** Automatically focuses the radio input when it becomes checked. */
   @property({ type: Boolean, reflect: false }) autofocus = false;
 

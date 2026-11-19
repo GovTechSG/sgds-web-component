@@ -27,3 +27,11 @@ fieldset {
   opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
 }
+
+:host([size="md"]) fieldset {
+  gap: var(--sgds-form-gap-md);
+}
+
+:host([size="md"]) .radio-container {
+  gap: var(--sgds-form-gap-md);
+}

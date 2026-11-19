@@ -7,7 +7,7 @@
 .form-control-container {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-form-gap-md);
+  gap: var(--sgds-form-gap-lg);
 }
 
 .m-width-160 {
@@ -32,9 +32,9 @@
   background-color: var(--sgds-form-surface-default);
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
   border-radius: var(--input-border-radius, var(--sgds-form-border-radius));
-  padding: 0px var(--sgds-form-padding-x);
+  padding: 0px var(--sgds-form-padding-x-lg);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  height: var(--sgds-dimension-48);
+  height: var(--sgds-form-control-size-lg);
   width: -webkit-fill-available;
   width: -moz-available;
   overflow: hidden;
@@ -98,4 +98,25 @@
 .form-control-group:not(.disabled).is-invalid:focus-within {
   outline: var(--sgds-border-width-2) solid var(--sgds-form-danger-color-default);
   outline-offset: var(--sgds-outline-offset-focus);
+}
+
+/* Size md */
+
+:host([size="md"]) .form-control-container {
+  gap: var(--sgds-form-gap-md);
+}
+
+:host([size="md"]) .form-label {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-20);
+}
+
+:host([size="md"]) .form-control-group {
+  height: var(--sgds-form-control-size-md);
+  padding: 0px var(--sgds-form-padding-x-md);
+}
+
+:host([size="md"]) .form-control {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-20);
 }
