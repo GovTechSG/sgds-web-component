@@ -112,3 +112,23 @@ export const NoValidate = {
   args: {},
   parameters: {}
 };
+
+const SizeTemplate = () => {
+  return html`
+    <sgds-radio-group label="Large (default)" size="lg">
+      <sgds-radio value="1">Option 1</sgds-radio>
+      <sgds-radio value="2">Option 2</sgds-radio>
+    </sgds-radio-group>
+    <sgds-radio-group label="Medium" size="md">
+      <sgds-radio value="1">Option 1</sgds-radio>
+      <sgds-radio value="2">Option 2</sgds-radio>
+    </sgds-radio-group>
+  `;
+};
+
+export const Sizes = {
+  render: SizeTemplate.bind({}),
+  name: "Sizes",
+  args: {},
+  parameters: {}
+};

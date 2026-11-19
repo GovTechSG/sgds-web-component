@@ -62,6 +62,11 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
     this._radios.forEach(r => (r.invalid = this.invalid));
   }
 
+  @watch("size", { waitUntilFirstUpdate: true })
+  _handleSizeChange() {
+    this._radios.forEach(radio => (radio.size = this.size));
+  }
+
   @state() private _isTouched = false;
   /**
    * radio requries a custom _mixinResetFormControl as the update of input value
@@ -171,6 +176,7 @@ export class SgdsRadioGroup extends SgdsFormValidatorMixin(FormControlElement) {
     const radios = this._radios;
 
     radios.forEach(radio => {
+      radio.size = this.size;
       radio.autofocus = this.autofocus;
       radio.checked = radio.value === this.value;
 
