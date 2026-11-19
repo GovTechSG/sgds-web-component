@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Spacing/Gap/Form Semantic",
+  title: "Utilities/Form/Gap",
   tags: ["!autodocs"]
 };
 
@@ -34,17 +34,42 @@ const renderTokenCell = token => html`
 `;
 
 const TOKENS = [
-  { token: "sgds:gap-form-label", variable: "--sgds-form-label-gap", value: "0.25rem (4px)", description: "Gap between label and hint text" },
-  { token: "sgds:gap-form-feedback", variable: "--sgds-form-feedback-gap", value: "0.25rem (4px)", description: "Gap for validation feedback" },
-  { token: "sgds:gap-form-fieldset", variable: "--sgds-form-fieldset-gap", value: "2rem (32px)", description: "Gap between fieldset groups" },
-  { token: "sgds:gap-form-control", variable: "--sgds-form-control-gap", value: "0.5rem (8px)", description: "Gap between checkbox/radio input and label" },
-  { token: "sgds:gap-form-control-group", variable: "--sgds-form-control-group-gap", value: "0.25rem (4px)", description: "Gap between items in a group" }
+  {
+    token: "sgds:gap-form-label",
+    variable: "--sgds-form-label-gap",
+    value: "0.25rem (4px)",
+    description: "Gap between label and hint text"
+  },
+  {
+    token: "sgds:gap-form-feedback",
+    variable: "--sgds-form-feedback-gap",
+    value: "0.25rem (4px)",
+    description: "Gap for validation feedback"
+  },
+  {
+    token: "sgds:gap-form-fieldset",
+    variable: "--sgds-form-fieldset-gap",
+    value: "2rem (32px)",
+    description: "Gap between fieldset groups"
+  },
+  {
+    token: "sgds:gap-form-control",
+    variable: "--sgds-form-control-gap",
+    value: "0.5rem (8px)",
+    description: "Gap between checkbox/radio input and label"
+  },
+  {
+    token: "sgds:gap-form-control-group",
+    variable: "--sgds-form-control-group-gap",
+    value: "0.25rem (4px)",
+    description: "Gap between items in a group"
+  }
 ];
 
 export const Semantic = () => html`
   <p class="sgds:text-body-md sgds:mb-lg">
-    Semantic gap tokens for form label, feedback, fieldset, and control group spacing.
-    These tokens define the vertical rhythm within and between form elements.
+    Semantic gap tokens for form label, feedback, fieldset, and control group spacing. These tokens define the vertical
+    rhythm within and between form elements.
   </p>
   <sgds-table>
     <sgds-table-row>

@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Spacing/Gap/Form",
+  title: "Utilities/Form/Gap",
   tags: ["!autodocs"]
 };
 

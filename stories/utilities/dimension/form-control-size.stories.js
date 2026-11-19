@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Dimension/Form Control Size",
+  title: "Utilities/Form/Control Size",
   tags: ["!autodocs"]
 };
 
@@ -43,8 +43,8 @@ const TOKENS = [
 
 export const ControlSize = () => html`
   <p class="sgds:text-body-md sgds:mb-lg">
-    Height tokens for form control elements. These define the standard heights for
-    form inputs, icon buttons, and checkbox/radio inputs across lg and md sizes.
+    Height tokens for form control elements. These define the standard heights for form inputs, icon buttons, and
+    checkbox/radio inputs across lg and md sizes.
   </p>
   <sgds-table>
     <sgds-table-row>
@@ -62,9 +62,7 @@ export const ControlSize = () => html`
           <sgds-table-cell><code class="${CODE_CLASSES}">${value}</code></sgds-table-cell>
           <sgds-table-cell>${description}</sgds-table-cell>
           <sgds-table-cell>
-            <div
-              class="sgds:bg-primary-default sgds:w-20 sgds:rounded-form sgds:h-form-control-${suffix}"
-            ></div>
+            <div class="sgds:bg-primary-default sgds:w-20 sgds:rounded-form sgds:h-form-control-${suffix}"></div>
           </sgds-table-cell>
         </sgds-table-row>
       `

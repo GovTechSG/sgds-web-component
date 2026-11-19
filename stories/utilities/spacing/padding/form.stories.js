@@ -1,7 +1,7 @@
 import { html } from "lit";
 
 export default {
-  title: "Utilities/Spacing/Padding/Form",
+  title: "Utilities/Form/Padding",
   tags: ["!autodocs"]
 };
 
@@ -34,18 +34,48 @@ const renderTokenCell = token => html`
 `;
 
 const TOKENS = [
-  { token: "sgds:px-form-md", variable: "--sgds-form-padding-x-md", value: "0.75rem (12px)", description: "Horizontal padding for md form controls" },
-  { token: "sgds:px-form-lg", variable: "--sgds-form-padding-x-lg", value: "1rem (16px)", description: "Horizontal padding for lg form controls" },
-  { token: "sgds:py-form-md", variable: "--sgds-form-padding-y-md", value: "0.5rem (8px)", description: "Vertical padding for md form controls (textarea)" },
-  { token: "sgds:py-form-lg", variable: "--sgds-form-padding-y-lg", value: "0.75rem (12px)", description: "Vertical padding for lg form controls (textarea)" },
-  { token: "sgds:py-form-label", variable: "--sgds-form-label-padding-y", value: "0.125rem (2px)", description: "Vertical padding for form labels" },
-  { token: "sgds:py-form-control", variable: "--sgds-form-control-padding-y", value: "0.25rem (4px)", description: "Vertical padding for checkbox/radio controls" }
+  {
+    token: "sgds:px-form-md",
+    variable: "--sgds-form-padding-x-md",
+    value: "0.75rem (12px)",
+    description: "Horizontal padding for md form controls"
+  },
+  {
+    token: "sgds:px-form-lg",
+    variable: "--sgds-form-padding-x-lg",
+    value: "1rem (16px)",
+    description: "Horizontal padding for lg form controls"
+  },
+  {
+    token: "sgds:py-form-md",
+    variable: "--sgds-form-padding-y-md",
+    value: "0.5rem (8px)",
+    description: "Vertical padding for md form controls (textarea)"
+  },
+  {
+    token: "sgds:py-form-lg",
+    variable: "--sgds-form-padding-y-lg",
+    value: "0.75rem (12px)",
+    description: "Vertical padding for lg form controls (textarea)"
+  },
+  {
+    token: "sgds:py-form-label",
+    variable: "--sgds-form-label-padding-y",
+    value: "0.125rem (2px)",
+    description: "Vertical padding for form labels"
+  },
+  {
+    token: "sgds:py-form-control",
+    variable: "--sgds-form-control-padding-y",
+    value: "0.25rem (4px)",
+    description: "Vertical padding for checkbox/radio controls"
+  }
 ];
 
 export const Form = () => html`
   <p class="sgds:text-body-md sgds:mb-lg">
-    Padding tokens for form controls, sized for lg and md variants.
-    These control the internal spacing within form input elements.
+    Padding tokens for form controls, sized for lg and md variants. These control the internal spacing within form input
+    elements.
   </p>
   <sgds-table>
     <sgds-table-row>
@@ -64,7 +94,9 @@ export const Form = () => html`
           <sgds-table-cell>${description}</sgds-table-cell>
           <sgds-table-cell>
             <div class="sgds:bg-primary-default sgds:rounded-form ${token}">
-              <span class="sgds:bg-surface-default sgds:text-default sgds:px-xs sgds:py-3-xs sgds:rounded-sm">Content</span>
+              <span class="sgds:bg-surface-default sgds:text-default sgds:px-xs sgds:py-3-xs sgds:rounded-sm"
+                >Content</span
+              >
             </div>
           </sgds-table-cell>
         </sgds-table-row>
