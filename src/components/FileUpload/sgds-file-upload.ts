@@ -325,6 +325,16 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       this.setInvalid(!this._mixinCheckValidity());
     }
   }
+  private _getButtonSize(): "xs" | "sm" | "md" | "lg" {
+    return this.size === "md" ? "xs" : "sm";
+  }
+  private _getCloseButtonSize(): "sm" | "md" {
+    return this.size === "md" ? "sm" : "md";
+  }
+  private _getSpinnerSize(): "xs" | "sm" | "md" | "lg" {
+    return this.size === "md" ? "xs" : "sm";
+  }
+
   protected _renderLabel() {
     const labelTemplate = html` <label id=${this._labelId} class="form-label"> ${this.label} </label> `;
     return this.label && labelTemplate;
@@ -411,7 +421,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
           <sgds-icon name="upload" size="lg"></sgds-icon>
           <div class="drag-drop-text">Drag and drop files here</div>
           <sgds-button
-            size="sm"
+            size=${this._getButtonSize()}
             variant="outline"
             tone="brand"
             ?disabled=${this.disabled}
@@ -452,10 +462,11 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         return html`
           <li class="file-upload-list-item-container ${this.exitingFile === file ? "file-upload-exit" : ""}">
             <div class="file-upload-list-item ${metadata?.error ? "file-upload-error" : ""}">
-              ${metadata?.uploading ? html`<sgds-spinner size="sm"></sgds-spinner>` : getCheckedIcon(metadata)}
+              ${metadata?.uploading ? html`<sgds-spinner size=${this._getSpinnerSize()}></sgds-spinner>` : getCheckedIcon(metadata)}
               <span class="filename">${file.name}</span>
               <span class="filesize">${formatFileSize(file.size)}</span>
               <sgds-close-button
+                size=${this._getCloseButtonSize()}
                 aria-label="remove the file"
                 ?disabled=${metadata?.uploading}
                 @click=${() => this._removeFileHandler(index)}
