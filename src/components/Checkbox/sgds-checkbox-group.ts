@@ -116,6 +116,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   private _sanitizeSlot() {
     const checkboxes = this._checkboxes;
     checkboxes.forEach(checkbox => {
+      checkbox.size = this.size;
       checkbox.checked = checkbox.defaultChecked = this.value.includes(checkbox.value);
 
       checkbox.hasFeedback = this.hasFeedback ? "style" : null;
@@ -156,6 +157,11 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   _updateInvalid() {
     const checkboxes = this._checkboxes;
     checkboxes.forEach(ch => (ch.invalid = this.invalid));
+  }
+
+  @watch("size", { waitUntilFirstUpdate: true })
+  _handleSizeChange() {
+    this._checkboxes.forEach(checkbox => (checkbox.size = this.size));
   }
 
   /**
