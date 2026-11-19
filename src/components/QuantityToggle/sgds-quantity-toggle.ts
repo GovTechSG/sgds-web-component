@@ -225,6 +225,10 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
       : html`${this._renderHintText()}`;
   }
 
+  private _getIconButtonSize(): "xs" | "sm" | "md" | "lg" {
+    return this.size === "md" ? "sm" : "md";
+  }
+
   protected _renderLabel() {
     const labelTemplate = html`
       <label
@@ -254,7 +258,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             class="minus-btn"
             variant="outline"
             tone="neutral"
-            size="md"
+            size=${this._getIconButtonSize()}
             ariaLabel=${`decrease by ${this.step}`}
             ?disabled=${this.disabled ||
             (this.min !== undefined ? this.value <= this.min : this.value < 1) ||
@@ -266,6 +270,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
           <sgds-input
             type="number"
             class="quantity-toggle"
+            .size=${this.size}
             name=${ifDefined(this.name)}
             step=${ifDefined(this.step)}
             min=${ifDefined(this.min)}
@@ -286,7 +291,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             class="plus-btn"
             variant="outline"
             tone="neutral"
-            size="md"
+            size=${this._getIconButtonSize()}
             ariaLabel=${`increase by ${this.step}`}
             @click=${this._onPlus}
             ?disabled=${this.disabled ||
