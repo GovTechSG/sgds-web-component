@@ -1,6 +1,6 @@
 {
   "name": "@govtechsg/sgds-web-component",
-  "version": "3.32.0-rc.3",
+  "version": "3.32.0-rc.4",
   "description": "",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -80,8 +80,12 @@
     "@lit-labs/ssr-react": "^0.3.4"
   },
   "peerDependenciesMeta": {
-    "@lit-labs/ssr": { "optional": true },
-    "@lit-labs/ssr-react": { "optional": true }
+    "@lit-labs/ssr": {
+      "optional": true
+    },
+    "@lit-labs/ssr-react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@lit-labs/ssr": "^4.1.0",
