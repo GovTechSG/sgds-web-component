@@ -413,6 +413,43 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  e2e/apps/next-app-individual-import:
+    dependencies:
+      '@govtechsg/sgds-web-component':
+        specifier: file:../../../lib
+        version: file:lib(@lit-labs/ssr-react@0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3))(@lit-labs/ssr@4.1.0(@types/node@20.19.43))(@types/react@19.1.13)
+      '@tailwindcss/postcss':
+        specifier: ^4.1.0
+        version: 4.3.5
+      '@webcomponents/scoped-custom-element-registry':
+        specifier: ^0.0.10
+        version: 0.0.10
+      next:
+        specifier: 16.3.8
+        version: 16.3.8(@babel/core@7.29.13)(@opentelemetry/api@1.9.1)(@playwright/test@1.62.1)(@types/node@20.19.43)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3)
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      tailwindcss:
+        specifier: ^4.1.0
+        version: 4.3.5
+    devDependencies:
+      '@types/node':
+        specifier: ^20
+        version: 20.19.43
+      '@types/react':
+        specifier: 19.1.13
+        version: 19.1.13
+      '@types/react-dom':
+        specifier: 19.1.9
+        version: 19.1.9(@types/react@19.1.13)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   e2e/apps/nuxt-app:
     dependencies:
       '@govtechsg/sgds-web-component':
@@ -2028,6 +2065,11 @@ packages:
     peerDependencies:
       '@lit-labs/ssr': '>=3.0.0'
       '@lit-labs/ssr-react': ^0.3.4
+    peerDependenciesMeta:
+      '@lit-labs/ssr':
+        optional: true
+      '@lit-labs/ssr-react':
+        optional: true
 
   '@gulpjs/messages@1.1.0':
     resolution: {integrity: sha512-Ys9sazDatyTgZVb4xPlDufLweJ/Os2uHWOv+Caxvy2O85JcnT4M3vc73bi8pdLWlv3fdWQz3pdI9tVwo8rQQSg==}
@@ -15216,12 +15258,13 @@ snapshots:
   '@govtechsg/sgds-web-component@file:lib(@lit-labs/ssr-react@0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3))(@lit-labs/ssr@4.1.0(@types/node@20.19.43))(@types/react@19.1.13)':
     dependencies:
       '@floating-ui/dom': 1.8.0
-      '@lit-labs/ssr': 4.1.0(@types/node@20.19.43)
-      '@lit-labs/ssr-react': 0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)
       '@lit/context': 1.1.6
       '@lit/react': 1.0.8(@types/react@19.1.13)
       lit: 3.3.3
       tslib: 2.9.1
+    optionalDependencies:
+      '@lit-labs/ssr': 4.1.0(@types/node@20.19.43)
+      '@lit-labs/ssr-react': 0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)
     transitivePeerDependencies:
       - '@types/react'
 

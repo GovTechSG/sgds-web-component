@@ -17,9 +17,7 @@ export function withSgdsNextSSR(nextConfig: Record<string, any> = {}): Record<st
   // Regex matches all react/ imports EXCEPT react/ssr and react/_ssr and react-ssr
   // e.g. matches: /react, /react/accordion, /react/button/index.js
   // skips: /react/ssr, /react/_ssr, /react-ssr
-  const aliasPattern = new RegExp(
-    `${PKG.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\/react(?![\\/_-]ssr)(?:\\/|$)`
-  );
+  const aliasPattern = new RegExp(`${PKG.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\/react(?![\\/_-]ssr)(?:\\/|$)`);
 
   return {
     ...nextConfig,
@@ -33,8 +31,8 @@ export function withSgdsNextSSR(nextConfig: Record<string, any> = {}): Record<st
       ...(nextConfig.turbopack ?? {}),
       resolveAlias: {
         ...(nextConfig.turbopack?.resolveAlias ?? {}),
-        [`${PKG}/react`]: `${PKG}/react-ssr`,
-      },
+        [`${PKG}/react`]: `${PKG}/react-ssr`
+      }
     },
 
     // Webpack: NormalModuleReplacementPlugin with negative lookahead
@@ -51,6 +49,6 @@ export function withSgdsNextSSR(nextConfig: Record<string, any> = {}): Record<st
         return nextConfig.webpack(config, options);
       }
       return config;
-    },
+    }
   };
 }

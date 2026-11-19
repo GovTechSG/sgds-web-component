@@ -13,10 +13,37 @@ export default defineConfig({
     trace: "on-first-retry"
   },
   webServer: [
-    // Next.js — production start (pre-built by e2e:prebuild)
+    // Next.js — webpack production (pre-built by e2e:prebuild)
     {
       command: "cd apps/next-app && pnpm start",
       port: 4002,
+      timeout: 300_000,
+      reuseExistingServer: !CI,
+      stdout: "pipe",
+      stderr: "pipe"
+    },
+    // Next.js — turbopack production (pre-built by e2e:prebuild)
+    {
+      command: "cd apps/next-app && pnpm start:turbopack",
+      port: 4016,
+      timeout: 300_000,
+      reuseExistingServer: !CI,
+      stdout: "pipe",
+      stderr: "pipe"
+    },
+    // Next.js individual imports — webpack production (pre-built by e2e:prebuild)
+    {
+      command: "cd apps/next-app-individual-import && pnpm start",
+      port: 4015,
+      timeout: 300_000,
+      reuseExistingServer: !CI,
+      stdout: "pipe",
+      stderr: "pipe"
+    },
+    // Next.js individual imports — turbopack production (pre-built by e2e:prebuild)
+    {
+      command: "cd apps/next-app-individual-import && pnpm start:turbopack",
+      port: 4017,
       timeout: 300_000,
       reuseExistingServer: !CI,
       stdout: "pipe",
