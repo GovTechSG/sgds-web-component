@@ -30,11 +30,11 @@ const active = computed(() => {
           <sgds-sidebar-item name="badge" title="Badge">
               <NuxtLink to="/badge"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
-              <NuxtLink to="/breadcrumb"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="button" title="Button">
               <NuxtLink to="/button"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
+              <NuxtLink to="/breadcrumb"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="card" title="Card">
               <NuxtLink to="/card"></NuxtLink>
@@ -75,11 +75,11 @@ const active = computed(() => {
           <sgds-sidebar-item name="icon" title="Icon">
               <NuxtLink to="/icon"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="iconbutton" title="IconButton">
-              <NuxtLink to="/iconbutton"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="iconcard" title="IconCard">
               <NuxtLink to="/iconcard"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="iconbutton" title="IconButton">
+              <NuxtLink to="/iconbutton"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="iconlist" title="IconList">
               <NuxtLink to="/iconlist"></NuxtLink>
@@ -108,26 +108,26 @@ const active = computed(() => {
           <sgds-sidebar-item name="pagination" title="Pagination">
               <NuxtLink to="/pagination"></NuxtLink>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="progressbar" title="ProgressBar">
+              <NuxtLink to="/progressbar"></NuxtLink>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="quantitytoggle" title="QuantityToggle">
               <NuxtLink to="/quantitytoggle"></NuxtLink>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="select" title="Select">
-              <NuxtLink to="/select"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="radiogroup" title="RadioGroup">
               <NuxtLink to="/radiogroup"></NuxtLink>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="select" title="Select">
+              <NuxtLink to="/select"></NuxtLink>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="sidebar" title="Sidebar">
               <NuxtLink to="/sidebar"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="progressbar" title="ProgressBar">
-              <NuxtLink to="/progressbar"></NuxtLink>
+          <sgds-sidebar-item name="skeleton" title="Skeleton">
+              <NuxtLink to="/skeleton"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="sidenav" title="Sidenav">
               <NuxtLink to="/sidenav"></NuxtLink>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="skeleton" title="Skeleton">
-              <NuxtLink to="/skeleton"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="spinner" title="Spinner">
               <NuxtLink to="/spinner"></NuxtLink>

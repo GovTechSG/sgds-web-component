@@ -30,11 +30,11 @@ const active = computed(() => {
           <sgds-sidebar-item name="badge" title="Badge">
               <router-link to="/badge"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
-              <router-link to="/breadcrumb"></router-link>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="button" title="Button">
               <router-link to="/button"></router-link>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
+              <router-link to="/breadcrumb"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="card" title="Card">
               <router-link to="/card"></router-link>
@@ -75,11 +75,11 @@ const active = computed(() => {
           <sgds-sidebar-item name="icon" title="Icon">
               <router-link to="/icon"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="iconbutton" title="IconButton">
-              <router-link to="/iconbutton"></router-link>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="iconcard" title="IconCard">
               <router-link to="/iconcard"></router-link>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="iconbutton" title="IconButton">
+              <router-link to="/iconbutton"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="iconlist" title="IconList">
               <router-link to="/iconlist"></router-link>
@@ -108,26 +108,26 @@ const active = computed(() => {
           <sgds-sidebar-item name="pagination" title="Pagination">
               <router-link to="/pagination"></router-link>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="progressbar" title="ProgressBar">
+              <router-link to="/progressbar"></router-link>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="quantitytoggle" title="QuantityToggle">
               <router-link to="/quantitytoggle"></router-link>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="select" title="Select">
-              <router-link to="/select"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="radiogroup" title="RadioGroup">
               <router-link to="/radiogroup"></router-link>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="select" title="Select">
+              <router-link to="/select"></router-link>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="sidebar" title="Sidebar">
               <router-link to="/sidebar"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="progressbar" title="ProgressBar">
-              <router-link to="/progressbar"></router-link>
+          <sgds-sidebar-item name="skeleton" title="Skeleton">
+              <router-link to="/skeleton"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="sidenav" title="Sidenav">
               <router-link to="/sidenav"></router-link>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="skeleton" title="Skeleton">
-              <router-link to="/skeleton"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="spinner" title="Spinner">
               <router-link to="/spinner"></router-link>

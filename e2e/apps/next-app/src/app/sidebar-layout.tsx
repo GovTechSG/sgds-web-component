@@ -28,11 +28,11 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="badge" title="Badge">
             <Link href="/badge"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
-            <Link href="/breadcrumb"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="button" title="Button">
             <Link href="/button"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
+            <Link href="/breadcrumb"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="card" title="Card">
             <Link href="/card"></Link>
@@ -73,11 +73,11 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="icon" title="Icon">
             <Link href="/icon"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="iconbutton" title="IconButton">
-            <Link href="/iconbutton"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="iconcard" title="IconCard">
             <Link href="/iconcard"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="iconbutton" title="IconButton">
+            <Link href="/iconbutton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="iconlist" title="IconList">
             <Link href="/iconlist"></Link>
@@ -106,26 +106,26 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="pagination" title="Pagination">
             <Link href="/pagination"></Link>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="progressbar" title="ProgressBar">
+            <Link href="/progressbar"></Link>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="quantitytoggle" title="QuantityToggle">
             <Link href="/quantitytoggle"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="select" title="Select">
-            <Link href="/select"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="radiogroup" title="RadioGroup">
             <Link href="/radiogroup"></Link>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="select" title="Select">
+            <Link href="/select"></Link>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="sidebar" title="Sidebar">
             <Link href="/sidebar"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="progressbar" title="ProgressBar">
-            <Link href="/progressbar"></Link>
+          <SgdsSidebarItem name="skeleton" title="Skeleton">
+            <Link href="/skeleton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="sidenav" title="Sidenav">
             <Link href="/sidenav"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="skeleton" title="Skeleton">
-            <Link href="/skeleton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="spinner" title="Spinner">
             <Link href="/spinner"></Link>
