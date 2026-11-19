@@ -51,6 +51,9 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
     };
   }
 
+  /** The size of the datepicker. `lg` is the default size. */
+  @property({ reflect: true }) size: "lg" | "md" = "lg";
+
   /** When true, adds required attribute to input element */
   @property({ type: Boolean, reflect: true }) required = false;
   /**The datepicker input's name attribute */
@@ -461,6 +464,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
       <div class="datepicker-container m-width-160">
         <sgds-datepicker-input
           .value=${live(this.value)}
+          .size=${this.size}
           ?required=${this.required}
           ?disabled=${this.disabled}
           placeholder=${this.mode === "single" ? "DD/MM/YYYY" : "DD/MM/YYYY - DD/MM/YYYY"}
@@ -480,6 +484,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
           <sgds-icon-button
             slot="calendar-btn"
             ${ref(this.myDropdown)}
+            size=${this.size === "md" ? "sm" : "md"}
             tone="neutral"
             class=${classMap({
               "calendar-btn": true,

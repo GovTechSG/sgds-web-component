@@ -16,3 +16,13 @@
   /* opacity: var(--sgds-disabled-opacity); */
   cursor: not-allowed;
 }
+
+:host([size="md"]) .form-label {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-20);
+}
+
+:host([size="md"]) .form-check-label {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-20);
+}
