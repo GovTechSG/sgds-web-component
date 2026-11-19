@@ -22,15 +22,11 @@ async function createPackageFile() {
       "./css/*": "./css/*",
       "./components": "./components/index.js",
       "./components/*": "./components/*",
-      "./react": {
-        node: "./react-ssr/index.js",
-        default: "./react/index.js"
-      },
+      "./react": "./react/index.js",
       "./react/ssr": "./react/_ssr/index.js",
-      "./react/*": {
-        node: "./react-ssr/*",
-        default: "./react/*"
-      },
+      "./react/*": "./react/*",
+      "./react-ssr": "./react-ssr/index.js",
+      "./react-ssr/*": "./react-ssr/*",
       "./base/*": null,
       "./utils/*": null,
       "./types/react": "./types/react.d.ts"

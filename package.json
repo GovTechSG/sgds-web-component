@@ -79,6 +79,14 @@
     "@lit-labs/ssr": ">=3.0.0",
     "@lit-labs/ssr-react": "^0.3.4"
   },
+  "peerDependenciesMeta": {
+    "@lit-labs/ssr": {
+      "optional": true
+    },
+    "@lit-labs/ssr-react": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@lit-labs/ssr": "^4.1.0",
     "@lit-labs/ssr-client": "^1.1.8",
