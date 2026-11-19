@@ -31,24 +31,6 @@ export default defineConfig({
       stdout: "pipe",
       stderr: "pipe"
     },
-    // Next.js individual imports — webpack production (pre-built by e2e:prebuild)
-    {
-      command: "cd apps/next-app-individual-import && pnpm start",
-      port: 4015,
-      timeout: 300_000,
-      reuseExistingServer: !CI,
-      stdout: "pipe",
-      stderr: "pipe"
-    },
-    // Next.js individual imports — turbopack production (pre-built by e2e:prebuild)
-    {
-      command: "cd apps/next-app-individual-import && pnpm start:turbopack",
-      port: 4017,
-      timeout: 300_000,
-      reuseExistingServer: !CI,
-      stdout: "pipe",
-      stderr: "pipe"
-    },
     // Nuxt — production preview (pre-built by e2e:prebuild)
     {
       command: "cd apps/nuxt-app && pnpm preview",
