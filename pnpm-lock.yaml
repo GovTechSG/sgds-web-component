@@ -379,8 +379,14 @@ importers:
   e2e/apps/next-app:
     dependencies:
       '@govtechsg/sgds-web-component':
-        specifier: file:../../../lib
-        version: file:lib(@lit-labs/ssr-react@0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3))(@lit-labs/ssr@4.1.0(@types/node@20.19.43))(@types/react@19.1.13)
+        specifier: link:../../../lib
+        version: link:../../../lib
+      '@lit-labs/ssr':
+        specifier: ^4.1.0
+        version: 4.1.0(@types/node@20.19.43)
+      '@lit-labs/ssr-react':
+        specifier: ^0.3.4
+        version: 0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)
       '@tailwindcss/postcss':
         specifier: ^4.1.0
         version: 4.1.18
@@ -16222,19 +16228,6 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@govtechsg/sgds-web-component@file:lib(@lit-labs/ssr-react@0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3))(@lit-labs/ssr@4.1.0(@types/node@20.19.43))(@types/react@19.1.13)':
-    dependencies:
-      '@floating-ui/dom': 1.7.4
-      '@lit/context': 1.1.6
-      '@lit/react': 1.0.8(@types/react@19.1.13)
-      lit: 3.3.2
-      tslib: 2.8.1
-    optionalDependencies:
-      '@lit-labs/ssr': 4.1.0(@types/node@20.19.43)
-      '@lit-labs/ssr-react': 0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)
-    transitivePeerDependencies:
-      - '@types/react'
-
   '@govtechsg/sgds-web-component@file:lib(@lit-labs/ssr-react@0.3.4(@types/node@25.0.8)(@types/react@19.1.13)(react@19.2.3))(@lit-labs/ssr@4.1.0(@types/node@25.0.8))(@types/react@19.1.13)':
     dependencies:
       '@floating-ui/dom': 1.7.4
@@ -16725,7 +16718,6 @@ snapshots:
       react: 19.2.3
     transitivePeerDependencies:
       - '@types/node'
-    optional: true
 
   '@lit-labs/ssr-react@0.3.4(@types/node@25.0.8)(@types/react@19.1.13)(react@19.2.3)':
     dependencies:
@@ -16774,7 +16766,6 @@ snapshots:
       parse5: 7.3.0
     optionalDependencies:
       '@types/node': 20.19.43
-    optional: true
 
   '@lit-labs/ssr@4.1.0(@types/node@25.0.8)':
     dependencies:
