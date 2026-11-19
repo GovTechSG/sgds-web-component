@@ -15,14 +15,14 @@ const active = computed(() => {
     <sgds-sidebar :active="active" variant="persistent" class="sgds:h-screen sgds:sticky sgds:top-0">
       <div slot="upper" class="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E Vue</div>
       <sgds-sidebar-section name="components" title="Components">
-          <sgds-sidebar-item name="accordion" title="Accordion">
-              <router-link to="/accordion"></router-link>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="alertlink" title="AlertLink">
               <router-link to="/alertlink"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="alert" title="Alert">
               <router-link to="/alert"></router-link>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="accordion" title="Accordion">
+              <router-link to="/accordion"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="appnav" title="Appnav">
               <router-link to="/appnav"></router-link>
@@ -57,6 +57,9 @@ const active = computed(() => {
           <sgds-sidebar-item name="descriptionlistgroup" title="DescriptionListGroup">
               <router-link to="/descriptionlistgroup"></router-link>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="divider" title="Divider">
+              <router-link to="/divider"></router-link>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="drawer" title="Drawer">
               <router-link to="/drawer"></router-link>
             </sgds-sidebar-item>
@@ -66,23 +69,23 @@ const active = computed(() => {
           <sgds-sidebar-item name="fileupload" title="FileUpload">
               <router-link to="/fileupload"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="icon" title="Icon">
-              <router-link to="/icon"></router-link>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="footer" title="Footer">
               <router-link to="/footer"></router-link>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="icon" title="Icon">
+              <router-link to="/icon"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="iconbutton" title="IconButton">
               <router-link to="/iconbutton"></router-link>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="iconcard" title="IconCard">
+              <router-link to="/iconcard"></router-link>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="iconlist" title="IconList">
               <router-link to="/iconlist"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="divider" title="Divider">
-              <router-link to="/divider"></router-link>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="iconcard" title="IconCard">
-              <router-link to="/iconcard"></router-link>
+          <sgds-sidebar-item name="imagecard" title="ImageCard">
+              <router-link to="/imagecard"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="input" title="Input">
               <router-link to="/input"></router-link>
@@ -93,8 +96,8 @@ const active = computed(() => {
           <sgds-sidebar-item name="mainnav" title="Mainnav">
               <router-link to="/mainnav"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="imagecard" title="ImageCard">
-              <router-link to="/imagecard"></router-link>
+          <sgds-sidebar-item name="masthead" title="Masthead">
+              <router-link to="/masthead"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="modal" title="Modal">
               <router-link to="/modal"></router-link>
@@ -102,14 +105,11 @@ const active = computed(() => {
           <sgds-sidebar-item name="overflowmenu" title="OverflowMenu">
               <router-link to="/overflowmenu"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="masthead" title="Masthead">
-              <router-link to="/masthead"></router-link>
+          <sgds-sidebar-item name="pagination" title="Pagination">
+              <router-link to="/pagination"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="progressbar" title="ProgressBar">
               <router-link to="/progressbar"></router-link>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="pagination" title="Pagination">
-              <router-link to="/pagination"></router-link>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="quantitytoggle" title="QuantityToggle">
               <router-link to="/quantitytoggle"></router-link>
@@ -162,11 +162,11 @@ const active = computed(() => {
           <sgds-sidebar-item name="thumbnailcard" title="ThumbnailCard">
               <router-link to="/thumbnailcard"></router-link>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="tooltip" title="Tooltip">
-              <router-link to="/tooltip"></router-link>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="toastcontainer" title="ToastContainer">
               <router-link to="/toastcontainer"></router-link>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="tooltip" title="Tooltip">
+              <router-link to="/tooltip"></router-link>
             </sgds-sidebar-item>
       </sgds-sidebar-section>
     </sgds-sidebar>
