@@ -549,3 +549,31 @@ export const CustomValidation = {
   parameters: { layout: "padded" },
   tags: []
 };
+
+const SizeTemplate = () => {
+  return html`
+    <sgds-file-upload label="Large (default)" size="lg">Choose file</sgds-file-upload>
+    <sgds-file-upload label="Medium" size="md">Choose file</sgds-file-upload>
+  `;
+};
+
+export const Sizes = {
+  render: SizeTemplate.bind({}),
+  name: "Sizes",
+  args: {},
+  parameters: {}
+};
+
+const SizesDragDropTemplate = () => {
+  return html`
+    <sgds-file-upload label="Large (default)" size="lg" variant="drag-and-drop" multiple>Choose files</sgds-file-upload>
+    <sgds-file-upload label="Medium" size="md" variant="drag-and-drop" multiple>Choose files</sgds-file-upload>
+  `;
+};
+
+export const SizesDragDrop = {
+  render: SizesDragDropTemplate.bind({}),
+  name: "Sizes - Drag and Drop",
+  args: {},
+  parameters: {}
+};

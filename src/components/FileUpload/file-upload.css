@@ -58,8 +58,8 @@
   display: flex;
   align-items: center;
   gap: var(--sgds-form-gap-lg);
-  padding: var(--sgds-form-padding-y) calc(var(--sgds-form-padding-x) + var(--sgds-padding-2-xl))
-    var(--sgds-form-padding-y) var(--sgds-form-padding-x);
+  padding: var(--sgds-form-padding-y-lg) calc(var(--sgds-form-padding-x-lg) + var(--sgds-padding-2-xl))
+    var(--sgds-form-padding-y-lg) var(--sgds-form-padding-x-lg);
   background-color: var(--sgds-form-surface-default);
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
   border-radius: var(--sgds-form-border-radius);
@@ -176,4 +176,27 @@ sgds-icon.invalid {
 :host(:not([disabled]):not([invalid])) .drag-drop-zone:hover {
   outline: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
   outline-offset: var(--sgds-outline-offset-focus);
+}
+
+:host([size="md"]) .file-upload-list-item {
+  padding: var(--sgds-form-padding-y-md) var(--sgds-form-padding-x-md);
+}
+
+:host([size="md"]) .file-upload-list-item span {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-20);
+}
+
+:host([size="md"]) sgds-close-button {
+  top: 4px;
+  right: 4px;
+}
+
+:host([size="md"]) .drag-drop-zone {
+  padding: var(--sgds-padding-xl);
+}
+
+:host([size="md"]) .drag-drop-text {
+  font-size: var(--sgds-font-size-label-xs);
+  line-height: var(--sgds-line-height-16);
 }
