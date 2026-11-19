@@ -342,8 +342,8 @@ importers:
         specifier: ^21.0.0
         version: 21.2.26(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(@angular/platform-browser@21.2.26(@angular/animations@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(@angular/common@21.2.26(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3))(rxjs@7.8.2))(@angular/core@21.2.26(@angular/compiler@21.2.26)(rxjs@7.8.2)(zone.js@0.16.3)))(rxjs@7.8.2)
       '@govtechsg/sgds-web-component':
-        specifier: link:../../../lib
-        version: link:../../../lib
+        specifier: file:../../../lib
+        version: file:lib(@types/node@25.0.8)(@types/react@19.2.8)(react@19.2.3)
       '@webcomponents/scoped-custom-element-registry':
         specifier: ^0.0.9
         version: 0.0.9
@@ -379,8 +379,8 @@ importers:
   e2e/apps/next-app:
     dependencies:
       '@govtechsg/sgds-web-component':
-        specifier: link:../../../lib
-        version: link:../../../lib
+        specifier: file:../../../lib
+        version: file:lib(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)
       '@tailwindcss/postcss':
         specifier: ^4.1.0
         version: 4.1.18
@@ -416,8 +416,8 @@ importers:
   e2e/apps/nuxt-app:
     dependencies:
       '@govtechsg/sgds-web-component':
-        specifier: link:../../../lib
-        version: link:../../../lib
+        specifier: file:../../../lib
+        version: file:lib(@types/node@25.0.8)(@types/react@19.2.8)(react@19.2.3)
       nuxt:
         specifier: ^4.6.4
         version: 4.6.4(@babel/plugin-syntax-jsx@7.29.7(@babel/core@7.29.6))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.6))(@oxc-project/types@0.156.0)(@parcel/watcher@2.5.6)(@types/node@25.0.8)(@vue/compiler-sfc@3.5.45)(acorn@8.19.0)(bare-buffer@3.7.3)(confbox@0.3.2)(db0@0.3.4)(dotenv@17.4.2)(esbuild@0.28.2)(eslint@8.57.1)(giget@3.3.1)(ioredis@5.11.1)(less@4.9.0)(lightningcss@1.33.0)(mlly@1.8.2)(optionator@0.9.4)(rolldown@1.2.19)(rollup-plugin-visualizer@7.1.3(rolldown@1.2.19)(rollup@4.68.6))(rollup@4.68.6)(sass@1.97.3)(srvx@1.0.8)(terser@5.51.2)(tsx@4.21.0)(typescript@5.9.3)(vite@8.3.8(@types/node@25.0.8)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.0)(sass@1.97.3)(terser@5.51.2)(tsx@4.21.0)(yaml@2.9.1))(webpack@5.112.0(esbuild@0.28.2)(lightningcss@1.33.0)(postcss@8.5.28))(xml2js@0.6.2)(yaml@2.9.1)
@@ -441,8 +441,8 @@ importers:
   e2e/apps/react-app:
     dependencies:
       '@govtechsg/sgds-web-component':
-        specifier: link:../../../lib
-        version: link:../../../lib
+        specifier: file:../../../lib
+        version: file:lib(@types/node@25.0.8)(@types/react@19.1.13)(react@19.2.3)
       '@tailwindcss/vite':
         specifier: ^4.1.0
         version: 4.1.18(vite@7.3.8(@types/node@25.0.8)(jiti@2.7.0)(less@4.9.0)(lightningcss@1.33.0)(sass@1.97.3)(terser@5.51.2)(tsx@4.21.0)(yaml@2.9.1))
@@ -475,8 +475,8 @@ importers:
   e2e/apps/vue-app:
     dependencies:
       '@govtechsg/sgds-web-component':
-        specifier: link:../../../lib
-        version: link:../../../lib
+        specifier: file:../../../lib
+        version: file:lib(@types/node@25.0.8)(@types/react@19.2.8)(react@19.2.3)
       '@tailwindcss/vite':
         specifier: ^4.1.0
         version: 4.1.18(vite@8.3.8(@types/node@25.0.8)(esbuild@0.28.2)(jiti@2.7.0)(less@4.9.0)(sass@1.97.3)(terser@5.51.2)(tsx@4.21.0)(yaml@2.9.1))
@@ -2316,6 +2316,9 @@ packages:
   '@govtechsg/oobee@0.11.18':
     resolution: {integrity: sha512-vQOvClN0cPe1P4333bPm/0LeK855RCi+ckHx93nN+9azEjYtV+RU9DtuFTuJYZpxMLlMea4VoHgDYO4kJdTQjA==}
     hasBin: true
+
+  '@govtechsg/sgds-web-component@file:lib':
+    resolution: {directory: lib, type: directory}
 
   '@gulpjs/messages@1.1.0':
     resolution: {integrity: sha512-Ys9sazDatyTgZVb4xPlDufLweJ/Os2uHWOv+Caxvy2O85JcnT4M3vc73bi8pdLWlv3fdWQz3pdI9tVwo8rQQSg==}
@@ -16211,6 +16214,45 @@ snapshots:
       - supports-color
       - utf-8-validate
 
+  '@govtechsg/sgds-web-component@file:lib(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)':
+    dependencies:
+      '@floating-ui/dom': 1.7.4
+      '@lit-labs/ssr-react': 0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)
+      '@lit/context': 1.1.6
+      '@lit/react': 1.0.8(@types/react@19.1.13)
+      lit: 3.3.2
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - '@types/node'
+      - '@types/react'
+      - react
+
+  '@govtechsg/sgds-web-component@file:lib(@types/node@25.0.8)(@types/react@19.1.13)(react@19.2.3)':
+    dependencies:
+      '@floating-ui/dom': 1.7.4
+      '@lit-labs/ssr-react': 0.3.4(@types/node@25.0.8)(@types/react@19.1.13)(react@19.2.3)
+      '@lit/context': 1.1.6
+      '@lit/react': 1.0.8(@types/react@19.1.13)
+      lit: 3.3.2
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - '@types/node'
+      - '@types/react'
+      - react
+
+  '@govtechsg/sgds-web-component@file:lib(@types/node@25.0.8)(@types/react@19.2.8)(react@19.2.3)':
+    dependencies:
+      '@floating-ui/dom': 1.7.4
+      '@lit-labs/ssr-react': 0.3.4(@types/node@25.0.8)(@types/react@19.2.8)(react@19.2.3)
+      '@lit/context': 1.1.6
+      '@lit/react': 1.0.8(@types/react@19.2.8)
+      lit: 3.3.2
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - '@types/node'
+      - '@types/react'
+      - react
+
   '@gulpjs/messages@1.1.0': {}
 
   '@gulpjs/to-absolute-glob@4.0.0':
@@ -16667,6 +16709,24 @@ snapshots:
 
   '@lit-labs/ssr-dom-shim@1.6.0': {}
 
+  '@lit-labs/ssr-react@0.3.4(@types/node@20.19.43)(@types/react@19.1.13)(react@19.2.3)':
+    dependencies:
+      '@lit-labs/ssr': 4.1.0(@types/node@20.19.43)
+      '@lit-labs/ssr-client': 1.1.8
+      '@types/react': 19.1.13
+      react: 19.2.3
+    transitivePeerDependencies:
+      - '@types/node'
+
+  '@lit-labs/ssr-react@0.3.4(@types/node@25.0.8)(@types/react@19.1.13)(react@19.2.3)':
+    dependencies:
+      '@lit-labs/ssr': 4.1.0(@types/node@25.0.8)
+      '@lit-labs/ssr-client': 1.1.8
+      '@types/react': 19.1.13
+      react: 19.2.3
+    transitivePeerDependencies:
+      - '@types/node'
+
   '@lit-labs/ssr-react@0.3.4(@types/node@25.0.8)(@types/react@19.2.8)(react@19.2.3)':
     dependencies:
       '@lit-labs/ssr': 4.1.0(@types/node@25.0.8)
@@ -16690,6 +16750,21 @@ snapshots:
       node-fetch: 3.3.2
       parse5: 7.3.0
 
+  '@lit-labs/ssr@4.1.0(@types/node@20.19.43)':
+    dependencies:
+      '@lit-labs/ssr-client': 1.1.8
+      '@lit-labs/ssr-dom-shim': 1.6.0
+      '@lit/reactive-element': 2.1.2
+      '@parse5/tools': 0.3.0
+      enhanced-resolve: 5.18.4
+      lit: 3.3.2
+      lit-element: 4.2.2
+      lit-html: 3.3.2
+      node-fetch: 3.3.2
+      parse5: 7.3.0
+    optionalDependencies:
+      '@types/node': 20.19.43
+
   '@lit-labs/ssr@4.1.0(@types/node@25.0.8)':
     dependencies:
       '@lit-labs/ssr-client': 1.1.8
@@ -16708,6 +16783,10 @@ snapshots:
   '@lit/context@1.1.6':
     dependencies:
       '@lit/reactive-element': 2.1.2
+
+  '@lit/react@1.0.8(@types/react@19.1.13)':
+    dependencies:
+      '@types/react': 19.1.13
 
   '@lit/react@1.0.8(@types/react@19.2.8)':
     dependencies:

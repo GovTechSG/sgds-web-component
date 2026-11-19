@@ -53,12 +53,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
-      - name: Ensure lib directory exists
-        run: mkdir -p lib
-      - name: Install dependencies
-        run: pnpm install
+      - name: Install root dependencies
+        run: pnpm install --filter '.' --no-frozen-lockfile
       - name: Build library
         run: pnpm run build
+      - name: Install e2e app dependencies
+        run: pnpm install --filter './e2e/apps/*' --no-frozen-lockfile
       - name: Generate component list
         run: pnpm run e2e:generate
       - name: Install Playwright browsers
