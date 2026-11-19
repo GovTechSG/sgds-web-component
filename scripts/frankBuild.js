@@ -23,6 +23,10 @@ async function createPackageFile() {
       "./components": "./components/index.js",
       "./components/*": "./components/*",
       "./react": "./react/index.js",
+      "./react/ssr-init": {
+        "node": "./react/_ssr-init.js",
+        "default": "./react/_ssr-init.noop.js"
+      },
       "./react/ssr": "./react/_ssr/index.js",
       "./react/*": "./react/*",
       "./base/*": null,
@@ -63,6 +67,12 @@ async function run() {
       resolve(distPath, "./react/utils/ssr-nonce-patch.js")
     );
     console.log("Copied ssr-nonce-patch.raw.js → lib/react/utils/ssr-nonce-patch.js");
+    // Copy SSR-init noop for browser/CSR export condition
+    await copy(
+      resolve(packagePath, "./src/utils/_ssr-init.noop.js"),
+      resolve(distPath, "./react/_ssr-init.noop.js")
+    );
+    console.log("Copied _ssr-init.noop.js → lib/react/_ssr-init.noop.js");
     // await copy(resolve(packagePath, "./src/themes"), distPath)
     await copyMastheadCdnToRoot();
     // await includeFileInBuild('../../LICENSE');

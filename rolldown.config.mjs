@@ -155,11 +155,12 @@ const buildSgdsPackage = () => {
       moduleTypes: sharedModuleTypes,
       treeshake: {
         moduleSideEffects: [
-          { test: /ssr-nonce-patch/, sideEffects: true }
+          { test: /ssr-nonce-patch/, sideEffects: true },
+          { test: /ssr-init/, sideEffects: true }
         ]
       },
       plugins: [...reactBuildPlugins],
-      external: ["@lit/react", "react", /^react\/.*/, ...external]
+      external: ["@lit/react", "react", /^react\/.*/, "@govtechsg/sgds-web-component/react/ssr-init", ...external]
     }),
     defineConfig({
       input: "src/react/index.ts",
@@ -179,11 +180,12 @@ const buildSgdsPackage = () => {
       moduleTypes: sharedModuleTypes,
       treeshake: {
         moduleSideEffects: [
-          { test: /ssr-nonce-patch/, sideEffects: true }
+          { test: /ssr-nonce-patch/, sideEffects: true },
+          { test: /ssr-init/, sideEffects: true }
         ]
       },
       plugins: [...reactBuildPlugins],
-      external: ["@lit/react", "react", /^react\/.*/, ...external]
+      external: ["@lit/react", "react", /^react\/.*/, "@govtechsg/sgds-web-component/react/ssr-init", ...external]
     })
   ];
 
@@ -205,7 +207,7 @@ const buildSgdsPackage = () => {
       platform: "neutral",
       moduleTypes: sharedModuleTypes,
       plugins: [...reactBuildPlugins],
-      external: ["@lit/react", "react", /^react\/.*/, ...external]
+      external: ["@lit/react", "react", /^react\/.*/, "@govtechsg/sgds-web-component/react/ssr-init", ...external]
     })
   ];
 

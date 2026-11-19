@@ -68,7 +68,7 @@ components.map(component => {
 
   const source = prettier.format(
     `
-      import '../_ssr-init';
+      import '@govtechsg/sgds-web-component/react/ssr-init';
       import * as React from 'react';
       import { createComponent } from '@lit/react';
       import Component from '../../components/${importPath}';
