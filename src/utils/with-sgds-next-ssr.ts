@@ -14,33 +14,38 @@ const PKG = "@govtechsg/sgds-web-component";
  * ```
  */
 export function withSgdsNextSSR(nextConfig: Record<string, any> = {}): Record<string, any> {
-  const aliasEntries: Record<string, string> = {
-    [`${PKG}/react`]: `${PKG}/react-ssr`,
-  };
+  // Regex matches all react/ imports EXCEPT react/ssr and react/_ssr and react-ssr
+  // e.g. matches: /react, /react/accordion, /react/button/index.js
+  // skips: /react/ssr, /react/_ssr, /react-ssr
+  const aliasPattern = new RegExp(
+    `${PKG.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\/react(?![\\/_-]ssr)(?:\\/|$)`
+  );
 
   return {
     ...nextConfig,
 
-    // Turbopack: resolveAlias redirects react/ → react-ssr/
+    // Turbopack: resolveAlias for barrel import only.
+    // Wildcard patterns (react/*) break Turbopack's React Client Manifest,
+    // so only the barrel is aliased. Individual subpath imports are not
+    // redirected — the barrel's _ssr-init patches React globally, covering
+    // all components regardless of import path.
     turbopack: {
       ...(nextConfig.turbopack ?? {}),
       resolveAlias: {
         ...(nextConfig.turbopack?.resolveAlias ?? {}),
-        ...aliasEntries,
+        [`${PKG}/react`]: `${PKG}/react-ssr`,
       },
     },
 
-    // Webpack: resolve.alias with $ suffix for exact matching.
-    // Without $, webpack does prefix matching and "react/ssr" would be
-    // caught by the "react" rule, resolving to "react-ssr/ssr" (broken).
-    // The $ suffix ensures only the exact barrel import is aliased.
-    // The react-ssr barrel imports _ssr-init (which patches React globally),
-    // so all component imports get SSR regardless of their import path.
+    // Webpack: NormalModuleReplacementPlugin with negative lookahead
+    // to alias all react/ subpaths except react/ssr and react/_ssr.
     webpack(config: any, options: any) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        [`${PKG}/react$`]: `${PKG}/react-ssr`,
-      };
+      const webpack = options.webpack;
+      config.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(aliasPattern, (resource: any) => {
+          resource.request = resource.request.replace("/react", "/react-ssr");
+        })
+      );
 
       if (typeof nextConfig.webpack === "function") {
         return nextConfig.webpack(config, options);
