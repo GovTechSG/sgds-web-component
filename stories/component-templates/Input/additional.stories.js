@@ -172,3 +172,17 @@ export const Autocomplete = {
   args: {},
   parameters: {}
 };
+
+const SizeTemplate = () => {
+  return html`
+    <sgds-input label="Large (default)" size="lg" hintText="Large input"></sgds-input>
+    <sgds-input label="Medium" size="md" hintText="Medium input"></sgds-input>
+  `;
+};
+
+export const Sizes = {
+  render: SizeTemplate.bind({}),
+  name: "Sizes",
+  args: {},
+  parameters: {}
+};

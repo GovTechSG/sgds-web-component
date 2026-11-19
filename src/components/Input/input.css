@@ -52,3 +52,13 @@ sgds-icon[role="button"]:focus-visible {
   align-items: center;
   gap: var(--sgds-gap-sm);
 }
+
+:host([size="md"]) .form-control-prefix,
+:host([size="md"]) .form-control-suffix {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-20);
+}
+
+:host([size="md"]) .form-control-group sgds-icon {
+  --icon-size: var(--sgds-icon-size-md);
+}

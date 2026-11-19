@@ -79,6 +79,9 @@ export class SelectElement
   /** Marks the component as invalid. Replace the pseudo :invalid selector. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** The size of the form control. `lg` is the default size. */
+  @property({ reflect: true }) size: "lg" | "md" = "lg";
+
   /** Controlling of autocomplete behaviour */
   @property({ type: String, reflect: true }) autocomplete = "on";
 
