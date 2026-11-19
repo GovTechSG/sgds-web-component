@@ -27,11 +27,11 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="badge" title="Badge">
               <a routerLink="/badge"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
-              <a routerLink="/breadcrumb"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="button" title="Button">
               <a routerLink="/button"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
+              <a routerLink="/breadcrumb"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="card" title="Card">
               <a routerLink="/card"></a>
@@ -72,11 +72,11 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="icon" title="Icon">
               <a routerLink="/icon"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="iconbutton" title="IconButton">
-              <a routerLink="/iconbutton"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="iconcard" title="IconCard">
               <a routerLink="/iconcard"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="iconbutton" title="IconButton">
+              <a routerLink="/iconbutton"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="iconlist" title="IconList">
               <a routerLink="/iconlist"></a>
@@ -105,26 +105,26 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="pagination" title="Pagination">
               <a routerLink="/pagination"></a>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="progressbar" title="ProgressBar">
+              <a routerLink="/progressbar"></a>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="quantitytoggle" title="QuantityToggle">
               <a routerLink="/quantitytoggle"></a>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="select" title="Select">
-              <a routerLink="/select"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="radiogroup" title="RadioGroup">
               <a routerLink="/radiogroup"></a>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="select" title="Select">
+              <a routerLink="/select"></a>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="sidebar" title="Sidebar">
               <a routerLink="/sidebar"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="progressbar" title="ProgressBar">
-              <a routerLink="/progressbar"></a>
+          <sgds-sidebar-item name="skeleton" title="Skeleton">
+              <a routerLink="/skeleton"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="sidenav" title="Sidenav">
               <a routerLink="/sidenav"></a>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="skeleton" title="Skeleton">
-              <a routerLink="/skeleton"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="spinner" title="Spinner">
               <a routerLink="/spinner"></a>

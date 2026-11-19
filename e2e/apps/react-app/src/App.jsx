@@ -9,8 +9,8 @@ import AlertLinkPage from "./pages/alertlink";
 import AlertPage from "./pages/alert";
 import AppnavPage from "./pages/appnav";
 import BadgePage from "./pages/badge";
-import BreadcrumbPage from "./pages/breadcrumb";
 import ButtonPage from "./pages/button";
+import BreadcrumbPage from "./pages/breadcrumb";
 import CardPage from "./pages/card";
 import CheckboxGroupPage from "./pages/checkboxgroup";
 import CloseButtonPage from "./pages/closebutton";
@@ -24,8 +24,8 @@ import DropdownPage from "./pages/dropdown";
 import FileUploadPage from "./pages/fileupload";
 import FooterPage from "./pages/footer";
 import IconPage from "./pages/icon";
-import IconButtonPage from "./pages/iconbutton";
 import IconCardPage from "./pages/iconcard";
+import IconButtonPage from "./pages/iconbutton";
 import IconListPage from "./pages/iconlist";
 import ImageCardPage from "./pages/imagecard";
 import InputPage from "./pages/input";
@@ -35,13 +35,13 @@ import MastheadPage from "./pages/masthead";
 import ModalPage from "./pages/modal";
 import OverflowMenuPage from "./pages/overflowmenu";
 import PaginationPage from "./pages/pagination";
-import QuantityTogglePage from "./pages/quantitytoggle";
-import SelectPage from "./pages/select";
-import RadioGroupPage from "./pages/radiogroup";
-import SidebarPage from "./pages/sidebar";
 import ProgressBarPage from "./pages/progressbar";
-import SidenavPage from "./pages/sidenav";
+import QuantityTogglePage from "./pages/quantitytoggle";
+import RadioGroupPage from "./pages/radiogroup";
+import SelectPage from "./pages/select";
+import SidebarPage from "./pages/sidebar";
 import SkeletonPage from "./pages/skeleton";
+import SidenavPage from "./pages/sidenav";
 import SpinnerPage from "./pages/spinner";
 import StepPage from "./pages/step";
 import StepperPage from "./pages/stepper";
@@ -67,8 +67,8 @@ function App() {
           <Route path="/alert" element={<AlertPage />} />
           <Route path="/appnav" element={<AppnavPage />} />
           <Route path="/badge" element={<BadgePage />} />
-          <Route path="/breadcrumb" element={<BreadcrumbPage />} />
           <Route path="/button" element={<ButtonPage />} />
+          <Route path="/breadcrumb" element={<BreadcrumbPage />} />
           <Route path="/card" element={<CardPage />} />
           <Route path="/checkboxgroup" element={<CheckboxGroupPage />} />
           <Route path="/closebutton" element={<CloseButtonPage />} />
@@ -82,8 +82,8 @@ function App() {
           <Route path="/fileupload" element={<FileUploadPage />} />
           <Route path="/footer" element={<FooterPage />} />
           <Route path="/icon" element={<IconPage />} />
-          <Route path="/iconbutton" element={<IconButtonPage />} />
           <Route path="/iconcard" element={<IconCardPage />} />
+          <Route path="/iconbutton" element={<IconButtonPage />} />
           <Route path="/iconlist" element={<IconListPage />} />
           <Route path="/imagecard" element={<ImageCardPage />} />
           <Route path="/input" element={<InputPage />} />
@@ -93,13 +93,13 @@ function App() {
           <Route path="/modal" element={<ModalPage />} />
           <Route path="/overflowmenu" element={<OverflowMenuPage />} />
           <Route path="/pagination" element={<PaginationPage />} />
-          <Route path="/quantitytoggle" element={<QuantityTogglePage />} />
-          <Route path="/select" element={<SelectPage />} />
-          <Route path="/radiogroup" element={<RadioGroupPage />} />
-          <Route path="/sidebar" element={<SidebarPage />} />
           <Route path="/progressbar" element={<ProgressBarPage />} />
-          <Route path="/sidenav" element={<SidenavPage />} />
+          <Route path="/quantitytoggle" element={<QuantityTogglePage />} />
+          <Route path="/radiogroup" element={<RadioGroupPage />} />
+          <Route path="/select" element={<SelectPage />} />
+          <Route path="/sidebar" element={<SidebarPage />} />
           <Route path="/skeleton" element={<SkeletonPage />} />
+          <Route path="/sidenav" element={<SidenavPage />} />
           <Route path="/spinner" element={<SpinnerPage />} />
           <Route path="/step" element={<StepPage />} />
           <Route path="/stepper" element={<StepperPage />} />

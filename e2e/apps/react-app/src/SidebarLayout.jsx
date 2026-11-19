@@ -25,11 +25,11 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="badge" title="Badge">
             <Link to="/badge"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
-            <Link to="/breadcrumb"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="button" title="Button">
             <Link to="/button"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
+            <Link to="/breadcrumb"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="card" title="Card">
             <Link to="/card"></Link>
@@ -70,11 +70,11 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="icon" title="Icon">
             <Link to="/icon"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="iconbutton" title="IconButton">
-            <Link to="/iconbutton"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="iconcard" title="IconCard">
             <Link to="/iconcard"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="iconbutton" title="IconButton">
+            <Link to="/iconbutton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="iconlist" title="IconList">
             <Link to="/iconlist"></Link>
@@ -103,26 +103,26 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="pagination" title="Pagination">
             <Link to="/pagination"></Link>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="progressbar" title="ProgressBar">
+            <Link to="/progressbar"></Link>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="quantitytoggle" title="QuantityToggle">
             <Link to="/quantitytoggle"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="select" title="Select">
-            <Link to="/select"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="radiogroup" title="RadioGroup">
             <Link to="/radiogroup"></Link>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="select" title="Select">
+            <Link to="/select"></Link>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="sidebar" title="Sidebar">
             <Link to="/sidebar"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="progressbar" title="ProgressBar">
-            <Link to="/progressbar"></Link>
+          <SgdsSidebarItem name="skeleton" title="Skeleton">
+            <Link to="/skeleton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="sidenav" title="Sidenav">
             <Link to="/sidenav"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="skeleton" title="Skeleton">
-            <Link to="/skeleton"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="spinner" title="Spinner">
             <Link to="/spinner"></Link>
