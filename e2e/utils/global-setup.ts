@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, rmSync } from "node:fs";
+import { copyFileSync, mkdirSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -16,17 +16,7 @@ const targetDirs = [
   resolve(appsDir, "react-app/public"),
 ];
 
-const buildCacheDirs = [
-  resolve(appsDir, "nuxt-app/.output"),
-];
-
 export default function globalSetup() {
-  // Clean build caches so tests always run against a fresh build
-  for (const dir of buildCacheDirs) {
-    rmSync(dir, { recursive: true, force: true });
-  }
-  console.log("Cleared build caches.");
-
   // Copy fixture files to each app's public directory
   let copied = 0;
   for (const dir of targetDirs) {
