@@ -111,3 +111,23 @@ export const OverrideInvalidFeedback = {
   args: { invalidFeedback: "Custom error message" },
   parameters: {}
 };
+
+const SizeTemplate = () => {
+  return html`
+    <sgds-checkbox-group label="Large (default)" size="lg">
+      <sgds-checkbox value="a">Option A</sgds-checkbox>
+      <sgds-checkbox value="b">Option B</sgds-checkbox>
+    </sgds-checkbox-group>
+    <sgds-checkbox-group label="Medium" size="md">
+      <sgds-checkbox value="a">Option A</sgds-checkbox>
+      <sgds-checkbox value="b">Option B</sgds-checkbox>
+    </sgds-checkbox-group>
+  `;
+};
+
+export const Sizes = {
+  render: SizeTemplate.bind({}),
+  name: "Sizes",
+  args: {},
+  parameters: {}
+};
