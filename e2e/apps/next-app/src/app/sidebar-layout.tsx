@@ -13,8 +13,8 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
       <SgdsSidebar active={active} variant="persistent" className="sgds:h-screen sgds:sticky sgds:top-0">
         <div slot="upper" className="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E NextJS</div>
         <SgdsSidebarSection name="components" title="Components">
-          <SgdsSidebarItem name="badge" title="Badge">
-            <Link href="/badge"></Link>
+          <SgdsSidebarItem name="accordion" title="Accordion">
+            <Link href="/accordion"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="alertlink" title="AlertLink">
             <Link href="/alertlink"></Link>
@@ -22,23 +22,23 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="alert" title="Alert">
             <Link href="/alert"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="accordion" title="Accordion">
-            <Link href="/accordion"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="appnav" title="Appnav">
             <Link href="/appnav"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="badge" title="Badge">
+            <Link href="/badge"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
+            <Link href="/breadcrumb"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="button" title="Button">
             <Link href="/button"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="checkboxgroup" title="CheckboxGroup">
-            <Link href="/checkboxgroup"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="card" title="Card">
             <Link href="/card"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
-            <Link href="/breadcrumb"></Link>
+          <SgdsSidebarItem name="checkboxgroup" title="CheckboxGroup">
+            <Link href="/checkboxgroup"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="closebutton" title="CloseButton">
             <Link href="/closebutton"></Link>
@@ -106,29 +106,29 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="pagination" title="Pagination">
             <Link href="/pagination"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="progressbar" title="ProgressBar">
-            <Link href="/progressbar"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="quantitytoggle" title="QuantityToggle">
             <Link href="/quantitytoggle"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="radiogroup" title="RadioGroup">
-            <Link href="/radiogroup"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="select" title="Select">
             <Link href="/select"></Link>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="radiogroup" title="RadioGroup">
+            <Link href="/radiogroup"></Link>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="sidebar" title="Sidebar">
             <Link href="/sidebar"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="progressbar" title="ProgressBar">
+            <Link href="/progressbar"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="sidenav" title="Sidenav">
             <Link href="/sidenav"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="spinner" title="Spinner">
-            <Link href="/spinner"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="skeleton" title="Skeleton">
             <Link href="/skeleton"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="spinner" title="Spinner">
+            <Link href="/spinner"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="step" title="Step">
             <Link href="/step"></Link>
@@ -151,20 +151,20 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
           <SgdsSidebarItem name="table" title="Table">
             <Link href="/table"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="textarea" title="Textarea">
-            <Link href="/textarea"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="tableofcontents" title="TableOfContents">
             <Link href="/tableofcontents"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="textarea" title="Textarea">
+            <Link href="/textarea"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="thumbnailcard" title="ThumbnailCard">
             <Link href="/thumbnailcard"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="tooltip" title="Tooltip">
-            <Link href="/tooltip"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="toastcontainer" title="ToastContainer">
             <Link href="/toastcontainer"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="tooltip" title="Tooltip">
+            <Link href="/tooltip"></Link>
           </SgdsSidebarItem>
         </SgdsSidebarSection>
       </SgdsSidebar>

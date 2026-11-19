@@ -15,8 +15,8 @@ const active = computed(() => {
     <sgds-sidebar :active="active" variant="persistent" class="sgds:h-screen sgds:sticky sgds:top-0">
       <div slot="upper" class="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E Nuxt</div>
       <sgds-sidebar-section name="components" title="Components">
-          <sgds-sidebar-item name="badge" title="Badge">
-              <NuxtLink to="/badge"></NuxtLink>
+          <sgds-sidebar-item name="accordion" title="Accordion">
+              <NuxtLink to="/accordion"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="alertlink" title="AlertLink">
               <NuxtLink to="/alertlink"></NuxtLink>
@@ -24,23 +24,23 @@ const active = computed(() => {
           <sgds-sidebar-item name="alert" title="Alert">
               <NuxtLink to="/alert"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="accordion" title="Accordion">
-              <NuxtLink to="/accordion"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="appnav" title="Appnav">
               <NuxtLink to="/appnav"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="badge" title="Badge">
+              <NuxtLink to="/badge"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
+              <NuxtLink to="/breadcrumb"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="button" title="Button">
               <NuxtLink to="/button"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="checkboxgroup" title="CheckboxGroup">
-              <NuxtLink to="/checkboxgroup"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="card" title="Card">
               <NuxtLink to="/card"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
-              <NuxtLink to="/breadcrumb"></NuxtLink>
+          <sgds-sidebar-item name="checkboxgroup" title="CheckboxGroup">
+              <NuxtLink to="/checkboxgroup"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="closebutton" title="CloseButton">
               <NuxtLink to="/closebutton"></NuxtLink>
@@ -108,29 +108,29 @@ const active = computed(() => {
           <sgds-sidebar-item name="pagination" title="Pagination">
               <NuxtLink to="/pagination"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="progressbar" title="ProgressBar">
-              <NuxtLink to="/progressbar"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="quantitytoggle" title="QuantityToggle">
               <NuxtLink to="/quantitytoggle"></NuxtLink>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="radiogroup" title="RadioGroup">
-              <NuxtLink to="/radiogroup"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="select" title="Select">
               <NuxtLink to="/select"></NuxtLink>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="radiogroup" title="RadioGroup">
+              <NuxtLink to="/radiogroup"></NuxtLink>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="sidebar" title="Sidebar">
               <NuxtLink to="/sidebar"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="progressbar" title="ProgressBar">
+              <NuxtLink to="/progressbar"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="sidenav" title="Sidenav">
               <NuxtLink to="/sidenav"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="spinner" title="Spinner">
-              <NuxtLink to="/spinner"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="skeleton" title="Skeleton">
               <NuxtLink to="/skeleton"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="spinner" title="Spinner">
+              <NuxtLink to="/spinner"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="step" title="Step">
               <NuxtLink to="/step"></NuxtLink>
@@ -153,20 +153,20 @@ const active = computed(() => {
           <sgds-sidebar-item name="table" title="Table">
               <NuxtLink to="/table"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="textarea" title="Textarea">
-              <NuxtLink to="/textarea"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="tableofcontents" title="TableOfContents">
               <NuxtLink to="/tableofcontents"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="textarea" title="Textarea">
+              <NuxtLink to="/textarea"></NuxtLink>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="thumbnailcard" title="ThumbnailCard">
               <NuxtLink to="/thumbnailcard"></NuxtLink>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="tooltip" title="Tooltip">
-              <NuxtLink to="/tooltip"></NuxtLink>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="toastcontainer" title="ToastContainer">
               <NuxtLink to="/toastcontainer"></NuxtLink>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="tooltip" title="Tooltip">
+              <NuxtLink to="/tooltip"></NuxtLink>
             </sgds-sidebar-item>
       </sgds-sidebar-section>
     </sgds-sidebar>

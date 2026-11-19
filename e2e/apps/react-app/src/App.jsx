@@ -4,15 +4,15 @@ import "@govtechsg/sgds-web-component/css/sgds.css";
 import "@govtechsg/sgds-web-component";
 import "./index.css";
 import SidebarLayout from "./SidebarLayout";
-import BadgePage from "./pages/badge";
+import AccordionPage from "./pages/accordion";
 import AlertLinkPage from "./pages/alertlink";
 import AlertPage from "./pages/alert";
-import AccordionPage from "./pages/accordion";
 import AppnavPage from "./pages/appnav";
-import ButtonPage from "./pages/button";
-import CheckboxGroupPage from "./pages/checkboxgroup";
-import CardPage from "./pages/card";
+import BadgePage from "./pages/badge";
 import BreadcrumbPage from "./pages/breadcrumb";
+import ButtonPage from "./pages/button";
+import CardPage from "./pages/card";
+import CheckboxGroupPage from "./pages/checkboxgroup";
 import CloseButtonPage from "./pages/closebutton";
 import ComboBoxPage from "./pages/combobox";
 import DataTablePage from "./pages/datatable";
@@ -35,14 +35,14 @@ import MastheadPage from "./pages/masthead";
 import ModalPage from "./pages/modal";
 import OverflowMenuPage from "./pages/overflowmenu";
 import PaginationPage from "./pages/pagination";
-import ProgressBarPage from "./pages/progressbar";
 import QuantityTogglePage from "./pages/quantitytoggle";
-import RadioGroupPage from "./pages/radiogroup";
 import SelectPage from "./pages/select";
+import RadioGroupPage from "./pages/radiogroup";
 import SidebarPage from "./pages/sidebar";
+import ProgressBarPage from "./pages/progressbar";
 import SidenavPage from "./pages/sidenav";
-import SpinnerPage from "./pages/spinner";
 import SkeletonPage from "./pages/skeleton";
+import SpinnerPage from "./pages/spinner";
 import StepPage from "./pages/step";
 import StepperPage from "./pages/stepper";
 import SubnavPage from "./pages/subnav";
@@ -50,27 +50,27 @@ import SwitchPage from "./pages/switch";
 import SystemBannerPage from "./pages/systembanner";
 import TabGroupPage from "./pages/tabgroup";
 import TablePage from "./pages/table";
-import TextareaPage from "./pages/textarea";
 import TableOfContentsPage from "./pages/tableofcontents";
+import TextareaPage from "./pages/textarea";
 import ThumbnailCardPage from "./pages/thumbnailcard";
-import TooltipPage from "./pages/tooltip";
 import ToastContainerPage from "./pages/toastcontainer";
+import TooltipPage from "./pages/tooltip";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<SidebarLayout />}>
-          <Route index element={<Navigate to="/badge" replace />} />
-          <Route path="/badge" element={<BadgePage />} />
+          <Route index element={<Navigate to="/accordion" replace />} />
+          <Route path="/accordion" element={<AccordionPage />} />
           <Route path="/alertlink" element={<AlertLinkPage />} />
           <Route path="/alert" element={<AlertPage />} />
-          <Route path="/accordion" element={<AccordionPage />} />
           <Route path="/appnav" element={<AppnavPage />} />
-          <Route path="/button" element={<ButtonPage />} />
-          <Route path="/checkboxgroup" element={<CheckboxGroupPage />} />
-          <Route path="/card" element={<CardPage />} />
+          <Route path="/badge" element={<BadgePage />} />
           <Route path="/breadcrumb" element={<BreadcrumbPage />} />
+          <Route path="/button" element={<ButtonPage />} />
+          <Route path="/card" element={<CardPage />} />
+          <Route path="/checkboxgroup" element={<CheckboxGroupPage />} />
           <Route path="/closebutton" element={<CloseButtonPage />} />
           <Route path="/combobox" element={<ComboBoxPage />} />
           <Route path="/datatable" element={<DataTablePage />} />
@@ -93,14 +93,14 @@ function App() {
           <Route path="/modal" element={<ModalPage />} />
           <Route path="/overflowmenu" element={<OverflowMenuPage />} />
           <Route path="/pagination" element={<PaginationPage />} />
-          <Route path="/progressbar" element={<ProgressBarPage />} />
           <Route path="/quantitytoggle" element={<QuantityTogglePage />} />
-          <Route path="/radiogroup" element={<RadioGroupPage />} />
           <Route path="/select" element={<SelectPage />} />
+          <Route path="/radiogroup" element={<RadioGroupPage />} />
           <Route path="/sidebar" element={<SidebarPage />} />
+          <Route path="/progressbar" element={<ProgressBarPage />} />
           <Route path="/sidenav" element={<SidenavPage />} />
-          <Route path="/spinner" element={<SpinnerPage />} />
           <Route path="/skeleton" element={<SkeletonPage />} />
+          <Route path="/spinner" element={<SpinnerPage />} />
           <Route path="/step" element={<StepPage />} />
           <Route path="/stepper" element={<StepperPage />} />
           <Route path="/subnav" element={<SubnavPage />} />
@@ -108,11 +108,11 @@ function App() {
           <Route path="/systembanner" element={<SystemBannerPage />} />
           <Route path="/tabgroup" element={<TabGroupPage />} />
           <Route path="/table" element={<TablePage />} />
-          <Route path="/textarea" element={<TextareaPage />} />
           <Route path="/tableofcontents" element={<TableOfContentsPage />} />
+          <Route path="/textarea" element={<TextareaPage />} />
           <Route path="/thumbnailcard" element={<ThumbnailCardPage />} />
-          <Route path="/tooltip" element={<TooltipPage />} />
           <Route path="/toastcontainer" element={<ToastContainerPage />} />
+          <Route path="/tooltip" element={<TooltipPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -10,8 +10,8 @@ export default function SidebarLayout() {
       <SgdsSidebar active={active} variant="persistent" className="sgds:h-screen sgds:sticky sgds:top-0">
         <div slot="upper" className="sgds:text-subtitle-sm sgds:font-semibold">SGDS E2E React</div>
         <SgdsSidebarSection name="components" title="Components">
-          <SgdsSidebarItem name="badge" title="Badge">
-            <Link to="/badge"></Link>
+          <SgdsSidebarItem name="accordion" title="Accordion">
+            <Link to="/accordion"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="alertlink" title="AlertLink">
             <Link to="/alertlink"></Link>
@@ -19,23 +19,23 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="alert" title="Alert">
             <Link to="/alert"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="accordion" title="Accordion">
-            <Link to="/accordion"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="appnav" title="Appnav">
             <Link to="/appnav"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="badge" title="Badge">
+            <Link to="/badge"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
+            <Link to="/breadcrumb"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="button" title="Button">
             <Link to="/button"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="checkboxgroup" title="CheckboxGroup">
-            <Link to="/checkboxgroup"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="card" title="Card">
             <Link to="/card"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="breadcrumb" title="Breadcrumb">
-            <Link to="/breadcrumb"></Link>
+          <SgdsSidebarItem name="checkboxgroup" title="CheckboxGroup">
+            <Link to="/checkboxgroup"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="closebutton" title="CloseButton">
             <Link to="/closebutton"></Link>
@@ -103,29 +103,29 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="pagination" title="Pagination">
             <Link to="/pagination"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="progressbar" title="ProgressBar">
-            <Link to="/progressbar"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="quantitytoggle" title="QuantityToggle">
             <Link to="/quantitytoggle"></Link>
-          </SgdsSidebarItem>
-          <SgdsSidebarItem name="radiogroup" title="RadioGroup">
-            <Link to="/radiogroup"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="select" title="Select">
             <Link to="/select"></Link>
           </SgdsSidebarItem>
+          <SgdsSidebarItem name="radiogroup" title="RadioGroup">
+            <Link to="/radiogroup"></Link>
+          </SgdsSidebarItem>
           <SgdsSidebarItem name="sidebar" title="Sidebar">
             <Link to="/sidebar"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="progressbar" title="ProgressBar">
+            <Link to="/progressbar"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="sidenav" title="Sidenav">
             <Link to="/sidenav"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="spinner" title="Spinner">
-            <Link to="/spinner"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="skeleton" title="Skeleton">
             <Link to="/skeleton"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="spinner" title="Spinner">
+            <Link to="/spinner"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="step" title="Step">
             <Link to="/step"></Link>
@@ -148,20 +148,20 @@ export default function SidebarLayout() {
           <SgdsSidebarItem name="table" title="Table">
             <Link to="/table"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="textarea" title="Textarea">
-            <Link to="/textarea"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="tableofcontents" title="TableOfContents">
             <Link to="/tableofcontents"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="textarea" title="Textarea">
+            <Link to="/textarea"></Link>
           </SgdsSidebarItem>
           <SgdsSidebarItem name="thumbnailcard" title="ThumbnailCard">
             <Link to="/thumbnailcard"></Link>
           </SgdsSidebarItem>
-          <SgdsSidebarItem name="tooltip" title="Tooltip">
-            <Link to="/tooltip"></Link>
-          </SgdsSidebarItem>
           <SgdsSidebarItem name="toastcontainer" title="ToastContainer">
             <Link to="/toastcontainer"></Link>
+          </SgdsSidebarItem>
+          <SgdsSidebarItem name="tooltip" title="Tooltip">
+            <Link to="/tooltip"></Link>
           </SgdsSidebarItem>
         </SgdsSidebarSection>
       </SgdsSidebar>
