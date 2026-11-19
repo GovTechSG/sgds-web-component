@@ -138,3 +138,17 @@ export const EventEmission = {
   args: {},
   parameters: {}
 };
+
+const SizeTemplate = () => {
+  return html`
+    <sgds-quantity-toggle label="Large (default)" size="lg"></sgds-quantity-toggle>
+    <sgds-quantity-toggle label="Medium" size="md"></sgds-quantity-toggle>
+  `;
+};
+
+export const Sizes = {
+  render: SizeTemplate.bind({}),
+  name: "Sizes",
+  args: {},
+  parameters: {}
+};
