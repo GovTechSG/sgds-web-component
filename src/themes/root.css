@@ -349,10 +349,10 @@
   --sgds-form-control-size-lg: var(--sgds-dimension-48);
 
   /* Semantic - Form Padding (per size) */
-  --sgds-form-padding-x-lg: var(--sgds-spacer-5);
   --sgds-form-padding-x-md: var(--sgds-spacer-4);
-  --sgds-form-padding-y-lg: var(--sgds-spacer-4);
+  --sgds-form-padding-x-lg: var(--sgds-spacer-5);
   --sgds-form-padding-y-md: var(--sgds-spacer-3);
+  --sgds-form-padding-y-lg: var(--sgds-spacer-4);
 
   /* Semantic - Form Label & Feedback */
   --sgds-form-label-padding-y: var(--sgds-spacer-1);
@@ -371,10 +371,10 @@
   --sgds-form-menu-border-radius: var(--sgds-overlay-border-radius);
 
   /* Semantic - Form Option (menu items, per size) */
-  --sgds-form-option-padding-x-lg: var(--sgds-spacer-5);
   --sgds-form-option-padding-x-md: var(--sgds-spacer-4);
-  --sgds-form-option-padding-y-lg: var(--sgds-density-padding-sm);
+  --sgds-form-option-padding-x-lg: var(--sgds-spacer-5);
   --sgds-form-option-padding-y-md: var(--sgds-density-padding-xs);
+  --sgds-form-option-padding-y-lg: var(--sgds-density-padding-sm);
   --sgds-form-option-gap: var(--sgds-spacer-2);
 
   /* NEW - MARGIN */
