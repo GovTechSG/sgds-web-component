@@ -53,3 +53,12 @@ input {
   outline: var(--sgds-border-width-2) solid var(--sgds-form-danger-color-default);
   outline-offset: var(--sgds-outline-offset-focus);
 }
+
+:host([size="md"]) .form-check {
+  padding: var(--sgds-padding-2-xs) 0px;
+}
+
+:host([size="md"]) .form-check-input {
+  width: var(--sgds-form-control-size-2-xs);
+  height: var(--sgds-form-control-size-2-xs);
+}

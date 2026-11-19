@@ -24,6 +24,9 @@ export default class FormControlElement extends SgdsElement {
   /** Marks the component as invalid. Replace the pseudo :invalid selector for absent in custom elements */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** The size of the form control. `lg` is the default size. */
+  @property({ reflect: true }) size: "lg" | "md" = "lg";
+
   protected _controlId = generateId("input");
   protected _labelId = generateId("label");
 
