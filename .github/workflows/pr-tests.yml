@@ -64,6 +64,6 @@ jobs:
       - name: Generate component list
         run: pnpm run e2e:generate
       - name: Install Playwright browsers
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm --filter sgds-e2e exec playwright install --with-deps chromium
       - name: Run E2E tests
         run: pnpm run e2e:test
