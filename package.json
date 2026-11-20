@@ -10,6 +10,7 @@
     "url": "git+https://github.com/GovTechSG/sgds-web-component.git"
   },
   "scripts": {
+    "preinstall": "mkdir -p lib",
     "dev": "VITE_ENV=development vite --open",
     "preview": "VITE_ENV=production vite --open",
     "build": "npm run cem && npm run build:react && rm -rf lib && rolldown --config rolldown.config.mjs && (tsc --emitDeclarationOnly --project tsconfig.json || true) && node ./scripts/generateSgdsTypes.mjs && node ./scripts/frankBuild.js && npm run generate:icons && npm run build:fouc",
@@ -28,8 +29,9 @@
     "lint:fix": "npm run lint -- --fix",
     "cem": "cem analyze --litelement ",
     "e2e:generate": "tsx e2e/utils/generate-component-list.ts && tsx e2e/utils/generate-component-html.ts && tsx e2e/utils/generate-next-components.ts && tsx e2e/utils/generate-nuxt-components.ts && tsx e2e/utils/generate-react-components.ts && tsx e2e/utils/generate-vue-components.ts && tsx e2e/utils/generate-angular-components.ts",
-    "e2e:test": "pnpm e2e:generate && cd e2e && pnpm exec playwright test",
-    "e2e:test:ui": "pnpm e2e:generate && cd e2e && pnpm exec playwright test --ui",
+    "e2e:prebuild": "cd e2e/apps/nuxt-app && pnpm build && cd ../next-app && pnpm build && pnpm build:turbopack",
+    "e2e:test": "pnpm e2e:generate && pnpm e2e:prebuild && pnpm --filter sgds-e2e test",
+    "e2e:test:ui": "pnpm e2e:generate && pnpm e2e:prebuild && pnpm --filter sgds-e2e test:ui",
     "storybook": "nodemon --exec \"bash -c 'npm run utility:storybook && npm run write:stories && STORYBOOK_ENV=development npx storybook dev -p 6006'\" --watch stories/component-templates stories/getting-started src/css/utility.css -e js,mdx,css",
     "build-storybook": "npm run utility:storybook && npm run build && npm run write:stories && STORYBOOK_ENV=production storybook build --loglevel debug",
     "convert:icons": "node scripts/convertIcons.js && pnpm run generate:icons",
@@ -71,8 +73,19 @@
     "@lit/context": "^1.1.3",
     "@lit/react": "^1.0.6",
     "lit": "^3.1.4",
-    "@lit-labs/ssr-react": "^0.3.4",
     "tslib": "^2.6.2"
+  },
+  "peerDependencies": {
+    "@lit-labs/ssr": ">=3.0.0",
+    "@lit-labs/ssr-react": "^0.3.4"
+  },
+  "peerDependenciesMeta": {
+    "@lit-labs/ssr": {
+      "optional": true
+    },
+    "@lit-labs/ssr-react": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@lit-labs/ssr": "^4.1.0",
@@ -139,6 +152,7 @@
     "lodash": "^4.17.21",
     "nodemon": "^3.1.14",
     "pascal-case": "^4.0.0",
+    "@playwright/test": "^1.62.1",
     "playwright": "^1.62.1",
     "plop": "^4.0.5",
     "postcss": "^8.2.13",

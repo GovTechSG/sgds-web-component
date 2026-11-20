@@ -60,7 +60,7 @@ React wrapper event naming: `sgds-blur` → `onSgdsBlur`, `sgds-change` → `onS
 ```tsx
 import { useRef } from "react";
 import type { SgdsStepper as SStep } from "@govtechsg/sgds-web-component/components";
-import SgdsStepper from "@govtechsg/sgds-web-component/react/stepper/index.js";
+import { SgdsStepper } from "@govtechsg/sgds-web-component/react";
 
 function StepperComponent() {
   const stepperRef = useRef<SStep>(null);

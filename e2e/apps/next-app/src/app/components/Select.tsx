@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsSelect, SgdsSelectOption } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsSelect, SgdsSelectOption } from '@govtechsg/sgds-web-component/react';
 
 export const Select = () => {
   return (

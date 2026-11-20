@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsAlert, SgdsIcon } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsAlert, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const Alert = () => {
   return (
