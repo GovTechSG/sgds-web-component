@@ -4,6 +4,12 @@ SGDS React wrappers provide **opt-in SSR** in Next.js (tested with Next.js 16). 
 
 ## Enable SSR
 
+Install the required peer dependencies:
+
+```bash
+npm install @lit-labs/ssr @lit-labs/ssr-react
+```
+
 Wrap your Next.js config with `withSgdsNextSSR()`:
 
 ```js
@@ -23,7 +29,7 @@ Without `withSgdsNextSSR()`, components render in CSR mode (client-side only).
 
 ## Use React wrapper components
 
-Import components from `@govtechsg/sgds-web-component/react`. Both barrel and individual imports are supported:
+Import components from `@govtechsg/sgds-web-component/react` using barrel imports:
 
 ```tsx
 'use client';

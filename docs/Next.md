@@ -30,7 +30,13 @@ Before integrating SGDS with Next.js, read the [React integration guide](/docs/f
 
 ## Server-Side Rendering (SSR)
 
-SSR is **opt-in**. Wrap your Next.js config with `withSgdsNextSSR()` to enable Declarative Shadow DOM rendering:
+SSR is **opt-in**. First, install the required peer dependencies:
+
+```bash
+npm install @lit-labs/ssr @lit-labs/ssr-react
+```
+
+Then wrap your Next.js config with `withSgdsNextSSR()` to enable Declarative Shadow DOM rendering:
 
 ```js
 // next.config.mjs
@@ -58,7 +64,7 @@ Without `withSgdsNextSSR()`, components render in CSR mode (client-side only).
 - **No layout shift** — components render with the correct styles immediately
 - **No FOUC** — component CSS is included in the server response
 - **Turbopack compatible** — works with both webpack and Turbopack
-- **Barrel and individual imports** — both `import { SgdsButton } from '.../react'` and `import SgdsButton from '.../react/button'` are supported
+- **Barrel imports** — import components from `@govtechsg/sgds-web-component/react`
 
 ## CSP nonce support (optional)
 
