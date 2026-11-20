@@ -187,6 +187,35 @@ const buildSgdsPackage = () => {
     })
   ];
 
+  // _ssr-init — no "use client" banner (must run on server for DSD rendering).
+  // Built as a separate entry because component wrappers no longer import it;
+  // instead, it is loaded via the react-ssr/ wrappers when withSgdsNextSSR() is active.
+  const ssrInitPackage = [
+    defineConfig({
+      input: "src/react/_ssr-init.ts",
+      output: [
+        {
+          entryFileNames: "[name].js",
+          dir: "lib/react",
+          format: "esm",
+          sourcemap: true,
+          exports: "named",
+          preserveModules: true,
+          preserveModulesRoot: "src/react"
+        }
+      ],
+      platform: "neutral",
+      moduleTypes: sharedModuleTypes,
+      treeshake: {
+        moduleSideEffects: [
+          { test: /ssr-nonce-patch/, sideEffects: true }
+        ]
+      },
+      plugins: [...reactBuildPlugins],
+      external: ["@lit/react", "react", /^react\/.*/, ...external]
+    })
+  ];
+
   // SSR API — no "use client" banner (used in server components)
   const ssrPackage = [
     defineConfig({
@@ -209,7 +238,7 @@ const buildSgdsPackage = () => {
     })
   ];
 
-  return [...reactPackage, ...ssrPackage, ...esmModules, ...umdBundles];
+  return [...reactPackage, ...ssrInitPackage, ...ssrPackage, ...esmModules, ...umdBundles];
 };
 
 export default buildSgdsPackage;

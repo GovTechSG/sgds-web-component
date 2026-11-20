@@ -17,3 +17,6 @@ cypress/apps/angular-app/.angular
 coverage
 test/skills
 e2e/
+results/
+.pnpm-store/
+stories/components

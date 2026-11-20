@@ -5,7 +5,7 @@ import { property } from "lit/decorators.js";
 export default class SgdsElement extends LitElement {
   static styles: CSSResult[] = [style];
   /**@internal Set to true in SSR environment, continues to be true in the client to signify that component came from ssr origins */
-  @property({ type: Boolean, reflect: true }) ssr = isServer || Boolean(this.shadowRoot);
+  @property({ type: Boolean }) ssr = isServer || Boolean(this.shadowRoot);
 
   /** Emits a custom event with more convenient defaults. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

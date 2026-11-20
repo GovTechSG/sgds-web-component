@@ -1,6 +1,8 @@
-name: PR Tests
+name: Tests
 
 on:
+  push:
+    branches: [master]
   pull_request:
     types: [opened, reopened, synchronize]
 
@@ -22,6 +24,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
+      - name: Ensure lib directory exists
+        run: mkdir -p lib
       - name: Install dependencies
         run: pnpm install
       - name: Install Playwright browsers
@@ -34,3 +38,32 @@ jobs:
         run: pnpm run utility:storybook && pnpm run build && pnpm run write:stories
       - name: Run Storybook tests
         run: pnpm run test-storybook
+
+  e2e:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [26.12.1]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+      - name: Ensure lib directory exists
+        run: mkdir -p lib
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build library
+        run: pnpm run build
+      - name: Refresh e2e deps with built lib
+        run: pnpm install --filter './e2e/apps/*' --no-frozen-lockfile
+      - name: Generate component list
+        run: pnpm run e2e:generate
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run E2E tests
+        run: pnpm run e2e:test

@@ -75,6 +75,7 @@ This registers all `<sgds-*>` custom elements globally.
 | React 19+ / React 18 | [→ reference/react.md](reference/react.md) |
 | Next.js (SSR) | [→ reference/nextjs.md](reference/nextjs.md) |
 | Vue | [→ reference/vue.md](reference/vue.md) |
+| Nuxt (SSR) | [→ reference/nuxt.md](reference/nuxt.md) |
 | Angular | [→ reference/angular.md](reference/angular.md) |
 
 ---
