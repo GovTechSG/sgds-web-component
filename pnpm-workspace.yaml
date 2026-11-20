@@ -1,4 +1,0 @@
-# pnpm-workspace.yaml
-packages:
-  - 'e2e'
-  - 'e2e/apps/*'
