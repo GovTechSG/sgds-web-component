@@ -12,7 +12,7 @@ description: 'AI agent guide for contributing to and navigating the sgds-web-com
 - **Docs**: `docs/` (Markdown documentation for usage, migration, and framework integration)
 - **Playground**: `playground/` (HTML demos for each component)
 - **Tests**: `test/` (unit tests, mostly using web-test-runner and @open-wc/testing)
-- **Cypress**: `cypress/` (E2E tests and app integration examples)
+- **E2E**: `e2e/` (Playwright E2E tests and framework integration apps)
 - **Contributing**: `contributing/` (architecture decisions, contribution guides)
 
 ## Repo Setup
@@ -21,7 +21,7 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) for first-time setup instructions (pnp
 ## Key Developer Workflows
 - **Build**: `pnpm build` (outputs to `lib/`)
 - **Test**: `pnpm test` (runs unit tests)
-- **E2E**: `pnpm cypress` (runs Cypress tests)
+- **E2E**: `pnpm e2e:test` (runs Playwright E2E tests)
 - **Storybook**: `pnpm storybook` (component explorer)
 - **Docs**: Edit Markdown in `docs/` and run `pnpm docs:dev` if available
 
