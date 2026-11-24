@@ -135,15 +135,16 @@ It supports client-side pagination, server-driven pagination, sorting headers, r
       table.dataLength = total;
 
       const headerRow = table.querySelector("sgds-data-table-row");
-      table.innerHTML = `${headerRow.outerHTML}${rows
-        .map(
-          row => `
-          <sgds-data-table-row>
-            <sgds-data-table-cell>${row.id}</sgds-data-table-cell>
-            <sgds-data-table-cell>${row.name}</sgds-data-table-cell>
-          </sgds-data-table-row>`
-        )
-        .join("")}`;
+      const bodyRows = rows.map(row => {
+        const tr = document.createElement("sgds-data-table-row");
+        for (const value of [row.id, row.name]) {
+          const td = document.createElement("sgds-data-table-cell");
+          td.textContent = value;
+          tr.append(td);
+        }
+        return tr;
+      });
+      table.replaceChildren(headerRow, ...bodyRows);
     } finally {
       table.loading = false;
     }

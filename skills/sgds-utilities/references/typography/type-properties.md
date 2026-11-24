@@ -17,7 +17,7 @@ The six properties are: **font family**, **font weight**, **letter spacing**, **
 - **Use the scale, not arbitrary values.** Every property has a defined SGDS scale. Apply scale tokens rather than inline styles or custom values.
 - **Defaults require no class.** The reboot sets body-safe defaults (sans-serif, regular weight, 16px, 1.5 line height). Only add a class when deviating from the default.
 - **Combine properties intentionally.** Letter spacing, weight, and transform work together. Large text needs tighter tracking; small uppercase text needs wider tracking and a small size.
-- **Monospace for code, always.** Apply `sgds:font-mono` on every `<code>` and `<pre>` element without exception.
+- **Monospace for code, always.** Apply `sgds:font-code` on every `<code>` and `<pre>` element without exception.
 
 ---
 
@@ -81,7 +81,7 @@ Apply with `sgds:font-{weight}`:
 
 ```html
 <p>Body text — no weight class needed</p>
-<label class="sgds:font-semibold sgds:text-14">Form label</label>
+<label class="sgds:font-semibold sgds:text-label-md">Form label</label>
 <h3 class="sgds:font-semibold sgds:text-24">Subtitle</h3>
 <h1 class="sgds:font-bold sgds:text-48">Page heading</h1>
 ```
@@ -179,7 +179,7 @@ Apply with the decoration class directly:
 <a href="#" class="sgds:text-link-default sgds:underline">Standard link</a>
 
 <p>
-  Original price: <span class="sgds:line-through sgds:text-14">$99</span>
+  Original price: <span class="sgds:line-through sgds:text-label-md">$99</span>
   Sale price: <strong class="sgds:font-bold">$59</strong>
 </p>
 
@@ -217,7 +217,7 @@ Apply with the transform class directly:
 </span>
 
 <!-- Section marker -->
-<p class="sgds:text-14 sgds:font-semibold sgds:uppercase sgds:tracking-wider sgds:text-body-subtle">
+<p class="sgds:text-label-md sgds:font-semibold sgds:uppercase sgds:tracking-wider sgds:text-body-subtle">
   Overview
 </p>
 
@@ -245,7 +245,7 @@ Apply with the transform class directly:
 - ❌ Do not use `sgds:uppercase` on long paragraphs — all-caps body text is hard to read
 
 **Monospace**
-- ✅ Always use `sgds:font-mono` on `<code>` and `<pre>`
+- ✅ Always use `sgds:font-code` on `<code>` and `<pre>`
 - ❌ Never use `sgds:font-sans` on code elements
 
 ---
@@ -288,7 +288,7 @@ Apply with the transform class directly:
   Beta
 </span>
 
-<label class="sgds:text-14 sgds:font-semibold sgds:block sgds:mb-paragraph-sm">
+<label class="sgds:text-label-md sgds:font-semibold sgds:block sgds:mb-paragraph-sm">
   Email address
 </label>
 ```
@@ -296,7 +296,7 @@ Apply with the transform class directly:
 ### Code block
 
 ```html
-<pre class="sgds:font-mono sgds:text-14 sgds:leading-20 sgds:bg-surface-raised sgds:p-md sgds:rounded">
+<pre class="sgds:font-code sgds:text-label-md sgds:leading-xs sgds:bg-surface-raised sgds:p-md sgds:rounded">
   const greeting = 'hello';
   console.log(greeting);
 </pre>
@@ -316,12 +316,12 @@ Apply with the transform class directly:
 
 When generating typography markup with SGDS utilities:
 
-- **Font family**: No class needed for prose; always add `sgds:font-mono` to `<code>` and `<pre>`.
+- **Font family**: No class needed for prose; always add `sgds:font-code` to `<code>` and `<pre>`.
 - **Font weight**: `sgds:font-semibold` for subtitles and labels; `sgds:font-bold` for H1–H2; `sgds:font-regular` for body (default, no class needed).
 - **Letter spacing**: `sgds:tracking-tight` for 48px+ headings; `sgds:tracking-wider` for small uppercase labels; no class for body.
 - **Paragraph spacing**: `sgds:mb-paragraph-md` for standard content; `sgds:mb-paragraph-lg` for long-form reading.
 - **Text decoration**: `sgds:underline` on links; `sgds:line-through` for deleted/struck content; `sgds:no-underline` when colour conveys link state.
-- **Text transform**: Always pair `sgds:uppercase` with `sgds:tracking-wider` and a size of `sgds:text-12` or `sgds:text-14`.
+- **Text transform**: Always pair `sgds:uppercase` with `sgds:tracking-wider` and a size of `sgds:text-12` or `sgds:text-label-md`.
 
 ## See Also
 
