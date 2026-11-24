@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsSwitch } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsSwitch } from '@govtechsg/sgds-web-component/react';
 
 export const Switch = () => {
   return (

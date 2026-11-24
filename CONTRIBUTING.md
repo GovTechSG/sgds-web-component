@@ -18,10 +18,11 @@ To contribute, please start off at the Issue section of our github repository.
 
 ## Development
 
-1. Setup pnpm using corepack in your machine following instructions [here](https://pnpm.io/installation#using-corepack) 
-2. `pnpm install`
-3. `pnpm run dev` uses Vite to serve the HTML files. Use it for development for a faster dev experience
-4. `/playground` is setup for easier dev preview when developing on a single component rather than the component dump in index.html.
+1. Setup pnpm using corepack in your machine following instructions [here](https://pnpm.io/installation#using-corepack)
+2. `mkdir -p lib` (required before first install — e2e apps reference this directory)
+3. `pnpm install`
+4. `pnpm run dev` uses Vite to serve the HTML files. Use it for development for a faster dev experience
+5. `/playground` is setup for easier dev preview when developing on a single component rather than the component dump in index.html.
    For example, to preview masthead, navigate to http://localhost:5173/playground/Masthead.html 
 
 ### Recommended : Auto-generate boilerplate code

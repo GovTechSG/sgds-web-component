@@ -1,6 +1,6 @@
 ---
 name: "sgds-forms"
-description: "Use this skill when users ask about form validation in SGDS, hasFeedback prop, constraint validation, custom validation, noValidate, setInvalid, form submission, or reading FormData from SGDS form components."
+description: "Use when users ask about form validation in SGDS, hasFeedback prop, constraint validation, custom validation, noValidate, setInvalid, form submission, or reading FormData from SGDS form components."
 metadata:
   author: singapore-design-system
   version: "0.0.0"

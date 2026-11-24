@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsMainnav, SgdsMainnavItem, SgdsMainnavDropdown, SgdsDropdownItem } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsMainnav, SgdsMainnavItem, SgdsMainnavDropdown, SgdsDropdownItem } from '@govtechsg/sgds-web-component/react';
 
 export const Mainnav = () => {
   return (

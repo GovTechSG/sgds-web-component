@@ -11,9 +11,9 @@ stats.html
 .env
 tokens/**/*.json
 scripts/**/*.json
-cypress/apps/nuxt-app/.nuxt
-cypress/apps/next-app/.next
-cypress/apps/angular-app/.angular
+e2e/apps/nuxt-app/.nuxt
+e2e/apps/next-app/.next
+e2e/apps/angular-app/.angular
 coverage
 test/skills
 e2e/
