@@ -19,7 +19,6 @@ const FORM_WIDTH_SCALE = [
   { name: "thick", class: "sgds:border-form-thick", variable: "--sgds-form-border-width-thick", value: "2px" }
 ];
 
-
 const WidthTableRow = item => {
   return html`
     <sgds-table-row>

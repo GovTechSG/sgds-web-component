@@ -196,7 +196,6 @@ const RESPONSIVE_FONT_SIZES = {
   ]
 };
 
-
 const FontSizeTableRow = item => {
   return html`
     <sgds-table-row>

@@ -51,7 +51,6 @@ const FORM_RADIUS_SCALE = [
   }
 ];
 
-
 const RadiusTableRow = item => {
   return html`
     <sgds-table-row>
