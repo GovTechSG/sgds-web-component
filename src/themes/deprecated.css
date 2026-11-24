@@ -44,6 +44,11 @@
   --sgds-form-icon-size-md: var(--sgds-icon-size-md);
   --sgds-form-icon-size-lg: var(--sgds-icon-size-lg);
 
+  /* Deprecated since v3.20.0 - Form Gap (sm, xl, 2-xl) */
+  --sgds-form-gap-sm: var(--sgds-gap-2-xs);
+  --sgds-form-gap-xl: var(--sgds-gap-md);
+  --sgds-form-gap-2-xl: var(--sgds-gap-xl);
+
   /* Deprecated since v3.20.0 - Form Outline Focus */
   --sgds-form-outline-focus: var(--sgds-outline-focus);
   --sgds-form-outline-offset-focus: var(--sgds-outline-offset-focus);
