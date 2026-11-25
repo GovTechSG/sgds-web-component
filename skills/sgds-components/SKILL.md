@@ -1,6 +1,6 @@
 ---
 name: "sgds-components"
-description: "Complete reference for all SGDS web components including installation. Use when users ask about any <sgds-*> component — accordion, alert, badge, breadcrumb, button, card, checkbox, close-button, combo-box, data-table, datepicker, description-list, divider, drawer, dropdown, file-upload, footer, icon, icon-button, icon-card, icon-list, image-card, input, link, mainnav, masthead, modal, overflow-menu, pagination, progress-bar, quantity-toggle, radio, select, sidebar, sidenav, skeleton, spinner, stepper, subnav, switch, system-banner, tab, table, table-of-contents, textarea, thumbnail-card, toast, or tooltip. For framework integration (React, Next.js, Vue, Angular), see sgds-getting-started."
+description: "Use when users ask about any SGDS web component (<sgds-*>) — accordion, alert, badge, breadcrumb, button, card, checkbox, close-button, combo-box, data-table, datepicker, description-list, divider, drawer, dropdown, file-upload, footer, icon, icon-button, icon-card, icon-list, image-card, input, link, mainnav, masthead, modal, overflow-menu, pagination, progress-bar, quantity-toggle, radio, select, sidebar, sidenav, skeleton, spinner, stepper, subnav, switch, system-banner, tab, table, table-of-contents, textarea, thumbnail-card, toast, or tooltip. Complete reference including installation. For framework integration (React, Next.js, Vue, Angular), see sgds-getting-started."
 metadata:
   author: singapore-design-system
   version: "0.0.0"
@@ -62,48 +62,48 @@ When a user reports unexpected component behaviour (wrong event, property not re
 
 | Category | Component | Reference |
 |---|---|---|
-| **Actions** | Button | [→ reference/button.md](reference/button.md) |
-| **Actions** | Icon Button | [→ reference/icon-button.md](reference/icon-button.md) |
-| **Actions** | Close Button | [→ reference/close-button.md](reference/close-button.md) |
-| **Actions** | Link | [→ reference/link.md](reference/link.md) |
-| **Actions** | Dropdown | [→ reference/dropdown.md](reference/dropdown.md) |
-| **Actions** | Overflow Menu | [→ reference/overflow-menu.md](reference/overflow-menu.md) |
-| **Navigation** | Masthead | [→ reference/masthead.md](reference/masthead.md) |
-| **Navigation** | Main Nav | [→ reference/mainnav.md](reference/mainnav.md) |
-| **Navigation** | Footer | [→ reference/footer.md](reference/footer.md) |
-| **Navigation** | Breadcrumb | [→ reference/breadcrumb.md](reference/breadcrumb.md) |
-| **Navigation** | Pagination | [→ reference/pagination.md](reference/pagination.md) |
-| **Navigation** | Sidenav | [→ reference/sidenav.md](reference/sidenav.md) |
-| **Navigation** | Sidebar | [→ reference/sidebar.md](reference/sidebar.md) |
-| **Navigation** | Subnav | [→ reference/subnav.md](reference/subnav.md) |
-| **Navigation** | Tab | [→ reference/tab.md](reference/tab.md) |
-| **Navigation** | Table of Contents | [→ reference/table-of-contents.md](reference/table-of-contents.md) |
-| **Layout** | Accordion | [→ reference/accordion.md](reference/accordion.md) |
-| **Layout** | Divider | [→ reference/divider.md](reference/divider.md) |
-| **Layout** | Drawer | [→ reference/drawer.md](reference/drawer.md) |
-| **Layout** | Modal | [→ reference/modal.md](reference/modal.md) |
-| **Content** | Badge | [→ reference/badge.md](reference/badge.md) |
-| **Content** | Card | [→ reference/card.md](reference/card.md) |
-| **Content** | Icon Card | [→ reference/icon-card.md](reference/icon-card.md) |
-| **Content** | Image Card | [→ reference/image-card.md](reference/image-card.md) |
-| **Content** | Thumbnail Card | [→ reference/thumbnail-card.md](reference/thumbnail-card.md) |
-| **Content** | Description List | [→ reference/description-list.md](reference/description-list.md) |
-| **Content** | Data Table | [→ reference/data-table.md](reference/data-table.md) |
-| **Content** | Icon | [→ reference/icon.md](reference/icon.md) |
-| **Content** | Icon List | [→ reference/icon-list.md](reference/icon-list.md) |
-| **Content** | Table | [→ reference/table.md](reference/table.md) |
-| **Content** | Tooltip | [→ reference/tooltip.md](reference/tooltip.md) |
-| **Forms** | Input | [→ reference/input.md](reference/input.md) |
-| **Forms** | Textarea | [→ reference/textarea.md](reference/textarea.md) |
-| **Forms** | Select | [→ reference/select.md](reference/select.md) |
-| **Forms** | Checkbox | [→ reference/checkbox.md](reference/checkbox.md) |
-| **Forms** | Radio | [→ reference/radio.md](reference/radio.md) |
-| **Forms** | Combo Box | [→ reference/combo-box.md](reference/combo-box.md) |
-| **Forms** | Datepicker | [→ reference/datepicker.md](reference/datepicker.md) |
-| **Forms** | File Upload | [→ reference/file-upload.md](reference/file-upload.md) |
-| **Forms** | Quantity Toggle | [→ reference/quantity-toggle.md](reference/quantity-toggle.md) |
-| **Feedback** | Switch | [→ reference/switch.md](reference/switch.md) |
-| **Workflow** | Stepper | [→ reference/stepper.md](reference/stepper.md) |
+| **Actions** | Button | [→ references/button.md](references/button.md) |
+| **Actions** | Icon Button | [→ references/icon-button.md](references/icon-button.md) |
+| **Actions** | Close Button | [→ references/close-button.md](references/close-button.md) |
+| **Actions** | Link | [→ references/link.md](references/link.md) |
+| **Actions** | Dropdown | [→ references/dropdown.md](references/dropdown.md) |
+| **Actions** | Overflow Menu | [→ references/overflow-menu.md](references/overflow-menu.md) |
+| **Navigation** | Masthead | [→ references/masthead.md](references/masthead.md) |
+| **Navigation** | Main Nav | [→ references/mainnav.md](references/mainnav.md) |
+| **Navigation** | Footer | [→ references/footer.md](references/footer.md) |
+| **Navigation** | Breadcrumb | [→ references/breadcrumb.md](references/breadcrumb.md) |
+| **Navigation** | Pagination | [→ references/pagination.md](references/pagination.md) |
+| **Navigation** | Sidenav | [→ references/sidenav.md](references/sidenav.md) |
+| **Navigation** | Sidebar | [→ references/sidebar.md](references/sidebar.md) |
+| **Navigation** | Subnav | [→ references/subnav.md](references/subnav.md) |
+| **Navigation** | Tab | [→ references/tab.md](references/tab.md) |
+| **Navigation** | Table of Contents | [→ references/table-of-contents.md](references/table-of-contents.md) |
+| **Layout** | Accordion | [→ references/accordion.md](references/accordion.md) |
+| **Layout** | Divider | [→ references/divider.md](references/divider.md) |
+| **Layout** | Drawer | [→ references/drawer.md](references/drawer.md) |
+| **Layout** | Modal | [→ references/modal.md](references/modal.md) |
+| **Content** | Badge | [→ references/badge.md](references/badge.md) |
+| **Content** | Card | [→ references/card.md](references/card.md) |
+| **Content** | Icon Card | [→ references/icon-card.md](references/icon-card.md) |
+| **Content** | Image Card | [→ references/image-card.md](references/image-card.md) |
+| **Content** | Thumbnail Card | [→ references/thumbnail-card.md](references/thumbnail-card.md) |
+| **Content** | Description List | [→ references/description-list.md](references/description-list.md) |
+| **Content** | Data Table | [→ references/data-table.md](references/data-table.md) |
+| **Content** | Icon | [→ references/icon.md](references/icon.md) |
+| **Content** | Icon List | [→ references/icon-list.md](references/icon-list.md) |
+| **Content** | Table | [→ references/table.md](references/table.md) |
+| **Content** | Tooltip | [→ references/tooltip.md](references/tooltip.md) |
+| **Forms** | Input | [→ references/input.md](references/input.md) |
+| **Forms** | Textarea | [→ references/textarea.md](references/textarea.md) |
+| **Forms** | Select | [→ references/select.md](references/select.md) |
+| **Forms** | Checkbox | [→ references/checkbox.md](references/checkbox.md) |
+| **Forms** | Radio | [→ references/radio.md](references/radio.md) |
+| **Forms** | Combo Box | [→ references/combo-box.md](references/combo-box.md) |
+| **Forms** | Datepicker | [→ references/datepicker.md](references/datepicker.md) |
+| **Forms** | File Upload | [→ references/file-upload.md](references/file-upload.md) |
+| **Forms** | Quantity Toggle | [→ references/quantity-toggle.md](references/quantity-toggle.md) |
+| **Feedback** | Switch | [→ references/switch.md](references/switch.md) |
+| **Workflow** | Stepper | [→ references/stepper.md](references/stepper.md) |
 
 ---
 
@@ -124,10 +124,10 @@ When building forms, use these 9 form input components to capture user data:
 - `<sgds-switch>` — This is a **feedback component** (displays toggle state), not a form input. Use `<sgds-checkbox>` or `<sgds-radio-group>` to collect user choice instead.
 - Other non-input components (Alert, Badge, Button, Card, etc.) — These are layout/feedback, not form controls.
 
-For form layout patterns (field pairing, spacing, width constraints, multi-step forms with `<sgds-stepper>`, header hierarchy), see the [sgds-blocks form layout skill](../sgds-blocks/reference/form-layout.md).
-| **Feedback** | Alert | [→ reference/alert.md](reference/alert.md) |
-| **Feedback** | Spinner | [→ reference/spinner.md](reference/spinner.md) |
-| **Feedback** | Skeleton | [→ reference/skeleton.md](reference/skeleton.md) |
-| **Feedback** | Progress Bar | [→ reference/progress-bar.md](reference/progress-bar.md) |
-| **Feedback** | Toast | [→ reference/toast.md](reference/toast.md) |
-| **Feedback** | System Banner | [→ reference/system-banner.md](reference/system-banner.md) |
+For form layout patterns (field pairing, spacing, width constraints, multi-step forms with `<sgds-stepper>`, header hierarchy), see the [sgds-blocks form layout skill](../sgds-blocks/references/form-layout.md).
+| **Feedback** | Alert | [→ references/alert.md](references/alert.md) |
+| **Feedback** | Spinner | [→ references/spinner.md](references/spinner.md) |
+| **Feedback** | Skeleton | [→ references/skeleton.md](references/skeleton.md) |
+| **Feedback** | Progress Bar | [→ references/progress-bar.md](references/progress-bar.md) |
+| **Feedback** | Toast | [→ references/toast.md](references/toast.md) |
+| **Feedback** | System Banner | [→ references/system-banner.md](references/system-banner.md) |

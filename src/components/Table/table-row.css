@@ -6,7 +6,7 @@
 .table-row::slotted(*) {
   height: 0;
   vertical-align: middle;
-
+  border-bottom: var(--table-cell-border-bottom, var(--sgds-border-width-1) solid var(--sgds-border-color-muted));
 }
 
 :host([tableBorder]:last-of-type) .table-row::slotted(*) {

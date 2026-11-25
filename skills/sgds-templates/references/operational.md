@@ -1,6 +1,6 @@
 # Operational App Shell Template
 
-Application shell for internal/operational apps using `<sgds-appnav>` with an overlay sidebar triggered by a menu icon-button. Designed for dashboards, admin portals, and internal tools that don't need the public-facing masthead.
+Application shell for internal/operational apps using `<sgds-appnav>` with an overlay sidebar triggered by a menu icon-button. Designed for dashboards, admin portals, and internal tools.
 
 ---
 
@@ -15,6 +15,8 @@ Application shell for internal/operational apps using `<sgds-appnav>` with an ov
 
 ```
 ┌─────────────────────────────────────────────────────┐
+│  sgds-masthead                                       │
+├─────────────────────────────────────────────────────┤
 │  sgds-appnav (menu toggler + brand + icons + profile)│
 ├─────────────────────────────────────────────────────┤
 │  ┌───────────┐                                      │
@@ -27,7 +29,7 @@ Application shell for internal/operational apps using `<sgds-appnav>` with an ov
 └─────────────────────────────────────────────────────┘
 ```
 
-- **No `<sgds-masthead>`** — operational apps skip the government identity bar
+- **`<sgds-masthead>`** — required on all Singapore Government digital services; appears above the appnav
 - **Overlay sidebar** — opens/closes via the menu icon-button; does not push content
 - **Menu icon toggles** between "menu" (closed) and "cross" (open)
 - **Profile dropdown** — `<sgds-appnav-profile>` with avatar, account info, and actions
@@ -82,6 +84,9 @@ To get the full HTML template, fetch and extract from the raw GitHub link below.
 </script>
 
 <div class="sgds:h-screen sgds:flex sgds:flex-col sgds:overflow-hidden">
+  <!-- Masthead — required on all Singapore Government digital services -->
+  <sgds-masthead></sgds-masthead>
+
   <!-- Appnav top bar -->
   <div class="sgds:flex-none">
     <sgds-appnav tone="brand">
@@ -95,7 +100,7 @@ To get the full HTML template, fetch and extract from the raw GitHub link below.
         data-sidebar-toggler="true"
         onclick="handleSidebarToggle()"
       ></sgds-icon-button>
-      <img alt="App logo" width="130" src="/logo-white.svg" slot="brand" />
+      <a slot="brand" href="/"><img alt="App logo" width="130" src="/logo-white.svg" /></a>
       <sgds-icon-button name="moon" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Toggle dark mode"></sgds-icon-button>
       <sgds-icon-button name="bell" variant="ghost" tone="fixed-light" size="sm" ariaLabel="Notifications"></sgds-icon-button>
       <sgds-appnav-profile slot="profile" label="User Name" secondaryText="Agency (admin)" ariaLabel="Profile menu" close="outside">

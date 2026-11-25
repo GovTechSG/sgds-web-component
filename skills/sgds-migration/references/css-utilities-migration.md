@@ -160,7 +160,7 @@ className="sgds:gap-component-md"   // gap: 12px
 | Sub-heading (H3) | `sgds:text-heading-md sgds:font-bold` |
 | Body text | `sgds:text-body-md` (default) |
 | Small text | `sgds:text-body-sm` |
-| Caption/label | `sgds:text-14` |
+| Caption/label | `sgds:text-label-md` |
 
 ### Text Colors
 

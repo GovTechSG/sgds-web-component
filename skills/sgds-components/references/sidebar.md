@@ -347,10 +347,9 @@ Floating sidebar panel for responsive layouts (mobile-first). Ideal for dashboar
 
 ```html
 <html>
-<head>
-</head>
+<head></head>
 <body>
-  <div class="app-header" style="padding: 12px 16px; border-bottom: 1px solid {{color-border}};">
+  <div class="app-header" style="padding: 12px 16px; border-bottom: 1px solid var(--sgds-color-border);">
     <button onclick="toggleSidebar()" style="background: none; border: none; cursor: pointer;">
       <sgds-icon name="three-dots" size="24"></sgds-icon>
     </button>
@@ -372,35 +371,19 @@ Floating sidebar panel for responsive layouts (mobile-first). Ideal for dashboar
       </sgds-sidebar>
     </div>
 
-    <div style="display: flex; height: 100vh;">
-      <!-- Overlay sidebar: floats over content -->
-      <div>
-        <sgds-sidebar id="app-sidebar" variant="overlay" scrim collapsed>
-          <div slot="upper">My Application</div>
-          <sgds-sidebar-section name="nav">
-            <sgds-sidebar-item name="dashboard" title="Dashboard">
-              <sgds-icon name="house" slot="icon"></sgds-icon>
-            </sgds-sidebar-item>
-            <sgds-sidebar-item name="settings" title="Settings">
-              <sgds-icon name="gear" slot="icon"></sgds-icon>
-            </sgds-sidebar-item>
-          </sgds-sidebar-section>
-        </sgds-sidebar>
-      </div>
-
-      <!-- Main content -->
-      <div style="flex: 1; padding: 24px; overflow-y: auto;">
-        <h1>Dashboard</h1>
-      </div>
+    <!-- Main content -->
+    <div style="flex: 1; padding: 24px; overflow-y: auto;">
+      <h1>Dashboard</h1>
     </div>
+  </div>
 
-    <script>
-      function toggleSidebar() {
-        const sidebar = document.getElementById("app-sidebar");
-        sidebar.toggleCollapsed();
-      }
-    </script>
-  </body>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("app-sidebar");
+      sidebar.toggleCollapsed();
+    }
+  </script>
+</body>
 </html>
 ```
 
