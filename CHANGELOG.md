@@ -1,3 +1,11 @@
+## v3.32.1 (2026-11-25)
+
+### Fix
+
+- **Table**: table cells not adhereing to height in firefox cell [run-chromatic][skip-chromatic] (#953)
+- **skills**: resolve contradictions and stale guidance flagged by Prelude[skip-cd] (#952)
+- **Skills**: update based on prelude commands on contradicting guidelines
+
 ## v3.32.0 (2026-11-20)
 
 ### Feat
