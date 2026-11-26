@@ -51,10 +51,10 @@ textarea.form-control-group {
 :host([size="md"]) .form-control-group textarea {
   padding: var(--sgds-form-padding-y-md) var(--sgds-form-padding-x-md);
   font-size: var(--sgds-font-size-label-sm);
-  line-height: var(--sgds-line-height-20);
+  line-height: var(--sgds-line-height-2-xs);
 }
 
 :host([size="md"]) .word-count {
   font-size: var(--sgds-font-size-label-xs);
-  line-height: var(--sgds-line-height-16);
+  line-height: var(--sgds-line-height-3-xs);
 }
