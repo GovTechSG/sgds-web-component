@@ -175,8 +175,10 @@ export const Autocomplete = {
 
 const SizeTemplate = () => {
   return html`
-    <sgds-input label="Large (default)" size="lg" hintText="Large input"></sgds-input>
-    <sgds-input label="Medium" size="md" hintText="Medium input"></sgds-input>
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-input label="Large (default)" size="lg" hintText="Large input"></sgds-input>
+      <sgds-input label="Medium" size="md" hintText="Medium input"></sgds-input>
+    </div>
   `;
 };
 
