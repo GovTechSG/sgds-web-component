@@ -188,7 +188,8 @@ sgds-icon.invalid {
 }
 
 :host([size="md"]) sgds-close-button {
-  top: 4px;
+  position: absolute;
+  top: 6px;
   right: 4px;
 }
 
