@@ -61,8 +61,10 @@ export const Disabled = {
 
 const SizeTemplate = () => {
   return html`
-    <sgds-textarea label="Large (default)" size="lg" hintText="Large textarea"></sgds-textarea>
-    <sgds-textarea label="Medium" size="md" hintText="Medium textarea"></sgds-textarea>
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-textarea label="Large (default)" size="lg" hintText="Large textarea"></sgds-textarea>
+      <sgds-textarea label="Medium" size="md" hintText="Medium textarea"></sgds-textarea>
+    </div>
   `;
 };
 
