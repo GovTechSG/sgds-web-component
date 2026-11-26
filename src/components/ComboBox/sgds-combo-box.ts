@@ -182,6 +182,11 @@ export class SgdsComboBox extends SelectElement {
       });
     });
 
+    // Propagate size to options
+    assignedElements.forEach(option => {
+      if ("size" in option) (option as SgdsComboBoxOption).size = this.size;
+    });
+
     /** this will trigger _updateValueAndDisplayValue */
     await this.updateComplete;
     const realOptions = assignedElements;
