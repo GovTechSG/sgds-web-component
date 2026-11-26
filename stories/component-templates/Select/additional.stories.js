@@ -296,14 +296,16 @@ export const NoValidate = {
 
 const SizeTemplate = () => {
   return html`
-    <sgds-select label="Large (default)" size="lg" placeholder="Select an option">
-      <sgds-select-option value="1">Option 1</sgds-select-option>
-      <sgds-select-option value="2">Option 2</sgds-select-option>
-    </sgds-select>
-    <sgds-select label="Medium" size="md" placeholder="Select an option">
-      <sgds-select-option value="1">Option 1</sgds-select-option>
-      <sgds-select-option value="2">Option 2</sgds-select-option>
-    </sgds-select>
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-select label="Large (default)" size="lg" placeholder="Select an option">
+        <sgds-select-option value="1">Option 1</sgds-select-option>
+        <sgds-select-option value="2">Option 2</sgds-select-option>
+      </sgds-select>
+      <sgds-select label="Medium" size="md" placeholder="Select an option">
+        <sgds-select-option value="1">Option 1</sgds-select-option>
+        <sgds-select-option value="2">Option 2</sgds-select-option>
+      </sgds-select>
+    </div>
   `;
 };
 
