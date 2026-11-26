@@ -141,8 +141,10 @@ export const EventEmission = {
 
 const SizeTemplate = () => {
   return html`
-    <sgds-quantity-toggle label="Large (default)" size="lg"></sgds-quantity-toggle>
-    <sgds-quantity-toggle label="Medium" size="md"></sgds-quantity-toggle>
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-quantity-toggle label="Large (default)" size="lg"></sgds-quantity-toggle>
+      <sgds-quantity-toggle label="Medium" size="md"></sgds-quantity-toggle>
+    </div>
   `;
 };
 
