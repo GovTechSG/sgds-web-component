@@ -115,14 +115,16 @@ export const NoValidate = {
 
 const SizeTemplate = () => {
   return html`
-    <sgds-radio-group label="Large (default)" size="lg">
-      <sgds-radio value="1">Option 1</sgds-radio>
-      <sgds-radio value="2">Option 2</sgds-radio>
-    </sgds-radio-group>
-    <sgds-radio-group label="Medium" size="md">
-      <sgds-radio value="1">Option 1</sgds-radio>
-      <sgds-radio value="2">Option 2</sgds-radio>
-    </sgds-radio-group>
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-radio-group label="Large (default)" size="lg">
+        <sgds-radio value="1">Option 1</sgds-radio>
+        <sgds-radio value="2">Option 2</sgds-radio>
+      </sgds-radio-group>
+      <sgds-radio-group label="Medium" size="md">
+        <sgds-radio value="1">Option 1</sgds-radio>
+        <sgds-radio value="2">Option 2</sgds-radio>
+      </sgds-radio-group>
+    </div>
   `;
 };
 
