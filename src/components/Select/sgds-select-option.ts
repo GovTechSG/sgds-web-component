@@ -1,4 +1,5 @@
 import { html, nothing } from "lit";
+import { property } from "lit/decorators.js";
 import { OptionElement } from "../../base/option-element";
 import SgdsIcon from "../Icon/sgds-icon";
 
@@ -13,10 +14,14 @@ export class SgdsSelectOption extends OptionElement {
     "sgds-icon": SgdsIcon
   };
 
+  /** @internal Propagated from parent select */
+  @property({ type: String, reflect: true }) size: "lg" | "md" = "lg";
+
   protected _renderItemContent = () => {
+    const iconSize = this.size === "md" ? "md" : undefined;
     return html`<div class="normal-item-content" role="presentation">
       <slot></slot>
-      ${this.active ? html` <sgds-icon name="check"></sgds-icon> ` : nothing}
+      ${this.active ? html` <sgds-icon name="check" size=${iconSize}></sgds-icon> ` : nothing}
     </div>`;
   };
 }

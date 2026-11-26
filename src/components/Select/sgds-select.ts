@@ -71,6 +71,10 @@ export class SgdsSelect extends SelectElement {
         }
       })
     );
+    // Propagate size to options
+    assignedElements.forEach(el => {
+      if ("size" in el) (el as SgdsSelectOption).size = this.size;
+    });
     this.menuList = await this._getMenuListFromOptions(assignedElements);
     // If value was set before options slotted (e.g. React sets value prop
     // before children mount), sync the display now that options are available.
