@@ -348,7 +348,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   protected _renderFeedback() {
     return html`
       <div class="invalid-feedback-container">
-        <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+        <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
         <div id="${this._controlId}-invalid" class="invalid-feedback">
           ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
         </div>
@@ -475,7 +475,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
             ${metadata?.error
               ? html`
                   <div class="invalid-feedback-container">
-                    <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+                    <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
                     <div class="invalid-feedback">${metadata.error}</div>
                   </div>
                 `
