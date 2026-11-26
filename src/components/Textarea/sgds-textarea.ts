@@ -249,7 +249,7 @@ export class SgdsTextarea extends SgdsFormValidatorMixin(FormControlElement) imp
           ${this.invalid && this.hasFeedback
             ? html`
                 <div class="invalid-feedback-container">
-                  <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+                  <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
                   <div id="${this._controlId}-invalid" class="invalid-feedback">
                     ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
                   </div>
