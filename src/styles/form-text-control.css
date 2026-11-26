@@ -22,6 +22,7 @@
   color: var(--sgds-form-color-default);
   font-size: var(--sgds-font-size-label-md);
   font-weight: var(--sgds-font-weight-semibold);
+  line-height: var(--sgds-line-height-xs);
 }
 
 .form-control-group {
