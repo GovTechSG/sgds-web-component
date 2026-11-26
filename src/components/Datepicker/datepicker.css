@@ -44,7 +44,7 @@ sgds-icon-button {
 :host([size="md"][menuisopen]) .dropdown-menu {
   padding: var(--sgds-date-picker-menu-padding-y, 12px) var(--sgds-date-picker-menu-padding-x, 20px);
   gap: var(--sgds-date-picker-menu-gap, 4px);
-  width: var(--sgds-dimension-296, 296px);
+  width: auto;
   --calendar-cell-size: var(--sgds-dimension-32, 32px);
   --calendar-font-size: var(--sgds-font-size-label-xs);
   --calendar-line-height: var(--sgds-line-height-3-xs);
