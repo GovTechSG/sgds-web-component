@@ -207,8 +207,10 @@ export const InvalidDateClear = {
 
 const SizeTemplate = () => {
   return html`
-    <sgds-datepicker label="Large (default)" size="lg"></sgds-datepicker>
-    <sgds-datepicker label="Medium" size="md"></sgds-datepicker>
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-datepicker label="Large (default)" size="lg"></sgds-datepicker>
+      <sgds-datepicker label="Medium" size="md"></sgds-datepicker>
+    </div>
   `;
 };
 
