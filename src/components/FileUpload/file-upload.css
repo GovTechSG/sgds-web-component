@@ -132,7 +132,7 @@ sgds-icon.invalid {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: var(--sgds-gap-md);
+  gap: var(--sgds-form-gap-lg);
   border-radius: var(--sgds-form-border-radius);
   border: var(--sgds-border-width-1) dashed var(--sgds-border-color-default);
   background-color: var(--sgds-surface-raised);
