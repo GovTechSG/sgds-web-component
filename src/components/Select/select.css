@@ -28,3 +28,14 @@ slot[id='default'].is-loading{
 :host([size="md"]) .form-control-group sgds-icon {
   --icon-size: var(--sgds-icon-size-md);
 }
+
+:host([size="md"]) .dropdown-menu {
+  --icon-size: var(--sgds-icon-size-sm);
+}
+
+:host([size="md"]) ::slotted(sgds-select-option) {
+  --option-padding-y: var(--sgds-form-option-padding-y-md);
+  --option-padding-x: var(--sgds-form-option-padding-x-md);
+  --option-font-size: var(--sgds-font-size-label-sm);
+  --option-line-height: var(--sgds-line-height-2-xs);
+}

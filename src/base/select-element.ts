@@ -230,7 +230,9 @@ export class SelectElement
     return html` <div class="empty-menu">No options</div> `;
   }
   protected _renderLoadingMenu() {
-    return html`<div class="loading-menu"><sgds-spinner size="xs" tone="brand"></sgds-spinner>Loading...</div>`;
+    return html`<div class="loading-menu">
+      <sgds-spinner size=${this.size === "md" ? "xs" : "sm"} tone="brand"></sgds-spinner>Loading...
+    </div>`;
   }
   protected declare options: OptionElement[];
   declare static childName: string;
