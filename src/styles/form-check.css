@@ -4,7 +4,7 @@ input {
 
 .form-check {
   display: flex;
-  gap: var(--sgds-form-gap-md);
+  gap: var(--sgds-form-control-gap);
   padding: var(--sgds-padding-2-xs) 0px;
 }
 
