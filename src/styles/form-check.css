@@ -5,7 +5,7 @@ input {
 .form-check {
   display: flex;
   gap: var(--sgds-form-control-gap);
-  padding: var(--sgds-padding-2-xs) 0px;
+  padding: var(--form-check-padding-y, var(--sgds-padding-2-xs)) 0px;
 }
 
 .form-check-input {
@@ -55,7 +55,7 @@ input {
 }
 
 :host([size="md"]) .form-check {
-  padding: var(--sgds-form-control-padding-y) 0px;
+  padding: var(--form-check-padding-y, var(--sgds-form-control-padding-y)) 0px;
 }
 
 :host([size="md"]) .form-check-input {
