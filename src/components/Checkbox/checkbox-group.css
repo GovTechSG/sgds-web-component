@@ -26,7 +26,7 @@ fieldset {
 .checkbox-container {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-form-gap-md);
+  gap: var(--sgds-form-control-gap);
   padding: var(--sgds-form-control-padding-y) 0px;
 }
 
