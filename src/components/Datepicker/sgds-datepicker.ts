@@ -517,6 +517,7 @@ export class SgdsDatepicker extends SgdsFormValidatorMixin(DropdownElement) impl
             .focusedDate=${this.focusedDate}
             .selectedDate=${this.selectedDateRange}
             .focusedTabIndex=${this.focusedTabIndex}
+            .size=${this.size}
           ></sgds-datepicker-header>
           <sgds-datepicker-calendar
             .show=${this.menuIsOpen}
