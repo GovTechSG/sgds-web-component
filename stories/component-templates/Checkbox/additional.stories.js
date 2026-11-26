@@ -114,14 +114,16 @@ export const OverrideInvalidFeedback = {
 
 const SizeTemplate = () => {
   return html`
-    <sgds-checkbox-group label="Large (default)" size="lg">
-      <sgds-checkbox value="a">Option A</sgds-checkbox>
-      <sgds-checkbox value="b">Option B</sgds-checkbox>
-    </sgds-checkbox-group>
-    <sgds-checkbox-group label="Medium" size="md">
-      <sgds-checkbox value="a">Option A</sgds-checkbox>
-      <sgds-checkbox value="b">Option B</sgds-checkbox>
-    </sgds-checkbox-group>
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-checkbox-group label="Large (default)" size="lg">
+        <sgds-checkbox value="a">Option A</sgds-checkbox>
+        <sgds-checkbox value="b">Option B</sgds-checkbox>
+      </sgds-checkbox-group>
+      <sgds-checkbox-group label="Medium" size="md">
+        <sgds-checkbox value="a">Option A</sgds-checkbox>
+        <sgds-checkbox value="b">Option B</sgds-checkbox>
+      </sgds-checkbox-group>
+    </div>
   `;
 };
 
