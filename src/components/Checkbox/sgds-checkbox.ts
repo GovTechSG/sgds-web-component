@@ -246,7 +246,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
         ? html`
             <div class="invalid-feedback-container">
               <slot name="invalidIcon">
-                <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+                <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
               </slot>
               <div id="checkbox-feedback" tabindex="0" class="invalid-feedback">
                 ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
