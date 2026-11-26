@@ -21,7 +21,7 @@ fieldset {
 .radio-container {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-form-gap-md)
+  gap: var(--sgds-form-control-gap)
 }
 :host([disabled]) .label-hint-container {
   opacity: var(--sgds-opacity-40);
@@ -33,7 +33,7 @@ fieldset {
 }
 
 :host([size="md"]) .radio-container {
-  gap: var(--sgds-form-gap-md);
+  gap: var(--sgds-form-control-gap);
 }
 
 :host([size="md"]) .label-hint-container .form-label {
