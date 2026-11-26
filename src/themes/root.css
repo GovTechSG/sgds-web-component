@@ -106,7 +106,7 @@
   --sgds-border-width-3: 3px;
   --sgds-border-width-4: 4px;
   --sgds-form-border-width-default: var(--sgds-border-width-1);
-  --sgds-form-border-width-thick: var(--sgds-border-width-2);
+  --sgds-form-border-width-emphasis: var(--sgds-border-width-2);
 
   /* Primitive - Border Radius */
   --sgds-border-radius-none: 0px;

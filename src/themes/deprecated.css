@@ -49,6 +49,9 @@
   --sgds-form-gap-xl: var(--sgds-gap-md);
   --sgds-form-gap-2-xl: var(--sgds-gap-xl);
 
+  /* Deprecated since v3.32.0 - Form Border Width */
+  --sgds-form-border-width-thick: var(--sgds-form-border-width-emphasis);
+
   /* Deprecated since v3.20.0 - Form Outline Focus */
   --sgds-form-outline-focus: var(--sgds-outline-focus);
   --sgds-form-outline-offset-focus: var(--sgds-outline-offset-focus);

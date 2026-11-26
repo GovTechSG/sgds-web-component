@@ -8,7 +8,7 @@ export default {
 
 const FORM_WIDTH_SCALE = [
   { name: "default", class: "sgds:border-form-default", variable: "--sgds-form-border-width-default", value: "1px" },
-  { name: "thick", class: "sgds:border-form-thick", variable: "--sgds-form-border-width-thick", value: "2px" }
+  { name: "emphasis", class: "sgds:border-form-emphasis", variable: "--sgds-form-border-width-emphasis", value: "2px" }
 ];
 
 const WidthTableRow = item => {
