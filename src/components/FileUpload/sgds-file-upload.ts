@@ -437,6 +437,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     return html`
       <sgds-button
         variant="outline"
+        size=${this._getButtonSize()}
         ?disabled=${this.disabled}
         @click=${this._handleClick}
         @sgds-blur=${this._handleBlur}
