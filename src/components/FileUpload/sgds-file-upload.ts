@@ -418,7 +418,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
           @drop=${this._handleDrop}
           @blur=${this._handleBlur}
         >
-          <sgds-icon name="upload" size="lg"></sgds-icon>
+          <sgds-icon name="upload" size=${this.size === "md" ? "md" : "lg"}></sgds-icon>
           <div class="drag-drop-text">Drag and drop files here</div>
           <sgds-button
             size=${this._getButtonSize()}
@@ -463,7 +463,9 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         return html`
           <li class="file-upload-list-item-container ${this.exitingFile === file ? "file-upload-exit" : ""}">
             <div class="file-upload-list-item ${metadata?.error ? "file-upload-error" : ""}">
-              ${metadata?.uploading ? html`<sgds-spinner size=${this._getSpinnerSize()}></sgds-spinner>` : getCheckedIcon(metadata)}
+              ${metadata?.uploading
+                ? html`<sgds-spinner size=${this._getSpinnerSize()}></sgds-spinner>`
+                : getCheckedIcon(metadata)}
               <span class="filename">${file.name}</span>
               <span class="filesize">${formatFileSize(file.size)}</span>
               <sgds-close-button
