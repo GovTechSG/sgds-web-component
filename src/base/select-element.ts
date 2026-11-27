@@ -79,6 +79,9 @@ export class SelectElement
   /** Marks the component as invalid. Replace the pseudo :invalid selector. */
   @property({ type: Boolean, reflect: true }) invalid = false;
 
+  /** The size of the form control. `lg` is the default size. */
+  @property({ reflect: true }) size: "lg" | "md" = "lg";
+
   /** Controlling of autocomplete behaviour */
   @property({ type: String, reflect: true }) autocomplete = "on";
 
@@ -172,7 +175,7 @@ export class SelectElement
     return this.invalid && this.hasFeedback
       ? html` <div class="invalid-feedback-container">
           <slot name="invalidIcon">
-            <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+            <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
           </slot>
           <div id="${this._controlId}-invalid" class="invalid-feedback">
             ${this.invalidFeedback ? this.invalidFeedback : this.validationMessage}
