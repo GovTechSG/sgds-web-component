@@ -1843,7 +1843,9 @@ describe("sgds-combo-box-option (checkbox)", () => {
     expect(checkbox?.checked).to.be.true;
   });
   it("when size is md and checkbox, sgds-checkbox has size=md", async () => {
-    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox size="md"></sgds-combo-box-option>`);
+    const el = await fixture<SgdsComboBoxOption>(
+      html`<sgds-combo-box-option checkbox size="md"></sgds-combo-box-option>`
+    );
     assert.shadowDom.equal(
       el,
       `
@@ -1857,7 +1859,9 @@ describe("sgds-combo-box-option (checkbox)", () => {
     );
   });
   it("when size is md and active, check icon has size=sm", async () => {
-    const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option active size="md"></sgds-combo-box-option>`);
+    const el = await fixture<SgdsComboBoxOption>(
+      html`<sgds-combo-box-option active size="md"></sgds-combo-box-option>`
+    );
     assert.shadowDom.equal(
       el,
       `

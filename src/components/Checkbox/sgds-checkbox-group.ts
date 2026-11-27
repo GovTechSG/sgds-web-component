@@ -159,11 +159,6 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
     checkboxes.forEach(ch => (ch.invalid = this.invalid));
   }
 
-  @watch("size", { waitUntilFirstUpdate: true })
-  _handleSizeChange() {
-    this._checkboxes.forEach(checkbox => (checkbox.size = this.size));
-  }
-
   /**
    * Checks for validity. Under the hood, HTMLFormElement's reportValidity method calls this method to check for component's validity state
    * Note that the native error popup is prevented for SGDS form components by default. Instead the validation message shows up in the feedback container of SgdsInput

@@ -569,7 +569,9 @@ export const Sizes = {
 const SizesDragDropTemplate = () => {
   return html`
     <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
-      <sgds-file-upload label="Large (default)" size="lg" variant="drag-and-drop" multiple>Choose files</sgds-file-upload>
+      <sgds-file-upload label="Large (default)" size="lg" variant="drag-and-drop" multiple
+        >Choose files</sgds-file-upload
+      >
       <sgds-file-upload label="Medium" size="md" variant="drag-and-drop" multiple>Choose files</sgds-file-upload>
     </div>
   `;

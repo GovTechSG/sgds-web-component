@@ -47,11 +47,7 @@ export class SgdsComboBoxOption extends OptionElement {
     const checkboxSize = this.size === "md" ? "md" : undefined;
     return this.checkbox
       ? html`
-          <sgds-checkbox
-            .checked=${this.active}
-            .disabled=${this.disabled}
-            size=${ifDefined(checkboxSize)}
-          >
+          <sgds-checkbox .checked=${this.active} .disabled=${this.disabled} size=${ifDefined(checkboxSize)}>
             <slot></slot>
           </sgds-checkbox>
         `

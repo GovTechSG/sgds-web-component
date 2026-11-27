@@ -16,7 +16,9 @@ const Template = ({ size }) => html`
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">
+              <h3
+                class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default"
+              >
                 Basic Info
               </h3>
               <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
@@ -42,6 +44,7 @@ const Template = ({ size }) => html`
                   type="email"
                   required
                   hasFeedback="both"
+                  loading
                   size=${size}
                 ></sgds-input>
               </div>
@@ -158,7 +161,9 @@ const Template = ({ size }) => html`
         <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
           <div class="sgds-grid sgds:gap-layout-md">
             <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
-              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">
+              <h3
+                class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default"
+              >
                 Preferences
               </h3>
               <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
@@ -222,8 +227,8 @@ const Template = ({ size }) => html`
         <div
           class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-end sgds:gap-component-sm sgds:mb-layout-lg"
         >
-          <sgds-button variant="outline" type="button">Cancel</sgds-button>
-          <sgds-button variant="primary" type="submit">Save changes</sgds-button>
+          <sgds-button variant="outline" type="button" size=${size === "md" ? "sm" : "md"}>Cancel</sgds-button>
+          <sgds-button variant="primary" type="submit" size=${size === "md" ? "sm" : "md"}>Save changes</sgds-button>
         </div>
       </form>
     </div>

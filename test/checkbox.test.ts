@@ -59,7 +59,9 @@ describe("<sgds-checkbox>", () => {
   });
   it("can be semantically compare with shadowDom trees with error message (size md)", async () => {
     const el = await fixture<SgdsCheckbox>(
-      html`<sgds-checkbox size="md" invalid hasFeedback="both" invalidFeedback="test" value="testvalue">label</sgds-checkbox>`
+      html`<sgds-checkbox size="md" invalid hasFeedback="both" invalidFeedback="test" value="testvalue"
+        >label</sgds-checkbox
+      >`
     );
     assert.shadowDom.equal(
       el,
