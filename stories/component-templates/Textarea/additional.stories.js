@@ -58,3 +58,19 @@ export const Disabled = {
   args: { ...args, disabled: true },
   parameters: {}
 };
+
+const SizeTemplate = () => {
+  return html`
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-textarea label="Large (default)" size="lg" hintText="Large textarea"></sgds-textarea>
+      <sgds-textarea label="Medium" size="md" hintText="Medium textarea"></sgds-textarea>
+    </div>
+  `;
+};
+
+export const Sizes = {
+  render: SizeTemplate.bind({}),
+  name: "Sizes",
+  args: {},
+  parameters: {}
+};
