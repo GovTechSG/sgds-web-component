@@ -12,7 +12,7 @@
     "test:ui": "playwright test --ui"
   },
   "devDependencies": {
-    "@playwright/test": "^1.49.0",
+    "@playwright/test": "1.62.1",
     "tsx": "^4.19.0"
   }
 }

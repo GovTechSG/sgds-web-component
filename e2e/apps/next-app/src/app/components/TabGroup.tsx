@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsTabGroup, SgdsTab, SgdsTabPanel } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsTabGroup, SgdsTab, SgdsTabPanel } from '@govtechsg/sgds-web-component/react';
 
 export const TabGroup = () => {
   return (
