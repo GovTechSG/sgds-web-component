@@ -27,6 +27,7 @@ export const Template = args =>
       ?loading=${args.loading}
       prefix=${ifDefined(args.prefix)}
       suffix=${ifDefined(args.suffix)}
+      size=${ifDefined(args.size)}
     >
     </sgds-input>
   `;
