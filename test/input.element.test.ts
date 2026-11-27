@@ -93,6 +93,115 @@ describe("sgds-input", () => {
     );
   });
 
+  // size="md" shadow DOM tests
+  it("renders with default values at size md", async () => {
+    const el = await fixture(html`<sgds-input size="md" inputId="test-id" label="label" hintText="hello"></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+          <label class="form-label" for="test-id">label</label>
+           <div class="form-control-row">
+          <div class="form-control-group">
+            <slot name="icon"></slot>
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
+            <slot name="trailing-icon"></slot>
+          </div>
+          <slot name="action"></slot>
+          </div>
+          <div class="form-text" id="test-idHelp">hello</div>
+        </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-describedby"] }
+    );
+  });
+  it("renders with suffix defined at size md", async () => {
+    const el = await fixture(html`<sgds-input size="md" inputId="test-id" suffix="test"></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+        <div class="form-control-row">
+          <div class="form-control-group">
+            <slot name="icon"></slot>
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
+            <span class="form-control-suffix">test</span>
+            <slot name="trailing-icon"></slot>
+          </div>
+            <slot name="action"></slot>
+        </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-describedby"] }
+    );
+  });
+  it("renders with prefix defined at size md", async () => {
+    const el = await fixture(html`<sgds-input size="md" inputId="test-id" prefix="test"></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+        <div class="form-control-row">
+          <div class="form-control-group">
+            <slot name="icon"></slot>
+            <span class="form-control-prefix">
+              test
+            </span>
+            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
+            <slot name="trailing-icon"></slot>
+          </div>
+            <slot name="action"></slot>
+          </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-describedby"] }
+    );
+  });
+  it("renders with spinner when loading=true at size md", async () => {
+    const el = await fixture(html`<sgds-input size="md" inputId="test-id" loading></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+          <div class="form-control-row">
+            <div class="form-control-group">
+              <slot name="icon"></slot>
+              <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
+              <slot name="trailing-icon">
+              <sgds-spinner
+                size="xs"
+                variant="primary"
+                tone="brand"
+                orientation="vertical"
+                >
+              </sgds-spinner>
+            </slot>
+            </div>
+              <slot name="action"></slot>
+        </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-describedby"] }
+    );
+  });
+  it("renders password toggle at size md with smaller icon", async () => {
+    const el = await fixture(html`<sgds-input size="md" inputId="test-id" type="password"></sgds-input>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-control-container">
+          <div class="form-control-row">
+            <div class="form-control-group">
+              <slot name="icon"></slot>
+              <input type="password" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
+              <sgds-icon tabindex="0" role="button" aria-label="Show password" name="eye-fill" size="sm"></sgds-icon>
+              <slot name="trailing-icon"></slot>
+            </div>
+            <slot name="action"></slot>
+          </div>
+        </div>
+    `,
+      { ignoreAttributes: ["id", "for", "aria-describedby"] }
+    );
+  });
+
   it("input's id attribute should equal to label's for attribute and contain in hint text id attribute", async () => {
     const el = await fixture(html`<sgds-input label="label" hintText="hello"></sgds-input>`);
     const input = el.shadowRoot?.querySelector("input");
