@@ -55,13 +55,13 @@ sgds-icon[role="button"]:focus-visible {
 
 :host([size="md"]) .form-control-prefix {
   font-size: var(--sgds-font-size-label-sm);
-  line-height: var(--sgds-line-height-20);
+  line-height: var(--sgds-line-height-2-xs);
   padding-right: var(--sgds-form-padding-x-md);
 }
 
 :host([size="md"]) .form-control-suffix {
   font-size: var(--sgds-font-size-label-sm);
-  line-height: var(--sgds-line-height-20);
+  line-height: var(--sgds-line-height-2-xs);
   padding-left: var(--sgds-form-padding-x-md);
 }
 
