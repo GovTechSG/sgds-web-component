@@ -69,16 +69,12 @@ for (const [key, value] of Object.entries(groupedComponents)) {
     .join("\n\n");
   const args = allMembers.filter(member => member.kind === "field");
   const mdxFilePath = path.join(storiesDir, `${key}.mdx`);
-  const reactComponentPaths = value
-    .map(v => {
-      const folderName = v.tagName.replace("sgds-", "");
-      return `
+  const reactComponentNames = value.map(v => v.name).join(", ");
+  const reactComponentPaths = `
     \`\`\` jsx
-    import ${v.name}  from "@govtechsg/sgds-web-component/react/${folderName}/index.js";
+    import { ${reactComponentNames} } from "@govtechsg/sgds-web-component/react";
     \`\`\`
     `;
-    })
-    .join("");
 
   // Only add in the ArgType table when there is at least one attribute
   // Sort by @storyOrder tag, falling back to tagName length for untagged components

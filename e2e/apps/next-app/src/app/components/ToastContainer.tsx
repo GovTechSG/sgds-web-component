@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsToastContainer, SgdsToast, SgdsIcon } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsToastContainer, SgdsToast, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const ToastContainer = () => {
   return (

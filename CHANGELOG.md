@@ -1,3 +1,94 @@
+## v3.32.0 (2026-11-20)
+
+### Feat
+
+- **ssr**: use NormalModuleReplacementPlugin for webpack subpath aliasing
+- **ssr**: add opt-in withSgdsNextSSR() Next.js plugin
+- **grid**: update container width for lg breakpoint
+- **react/ssr**: add registerSSRNonce and document CSP nonce limitations
+- **react**: add native SSR with Declarative Shadow DOM support
+- **react/ssr**: add registerSSRNonce and document CSP nonce limitations
+- **react**: add native SSR with Declarative Shadow DOM support
+
+### Fix
+- **Checkbox, HasSlotController**: fix slot detection on SSR-hydrated clients
+- **ssr**: resolve DSD hydration duplication in Turbopack production builds
+- **Table**: misalignment when large contents pass in [skip-cd] (#923)
+- **Table**: misalignment when large contents pass in
+- **nav**: fix extra gap when optional slots are unused (#922)
+- **appnav**: remove extra gap when profile slot is unused
+- **grid**: update container width for lg breakpoint[run-chromatic][skip-cd] (#919)
+- **Button**: remove href when disabled button as a link  [skip-cd] (#914)
+- **button**: remove hover state on disabled button
+- **button**: hide href and download when the button is disabled
+- **accordion**: exclude border radius from default accordion [skip-cd] (#918)
+- **accordion**: exclude border radius from default accordion
+- *****: add ssr guard on component lifecycle for ssr-first development [skip-cd]  (#908)
+- **mainnav,appnav**: prevent CLS on first paint for SSR hydration
+- **quantity-toggle**: ssr hydration validation and form novalidate
+- **forms**: enable constraint validation after SSR hydration
+- **mainnav-dropdown**: call super.firstUpdated and guard slotchange for SSR
+- **icon**: call super.firstUpdated for SSR slotchange workaround
+- **DataTable**: defer light DOM observer to prevent SSR hydration mismatch
+- **table**: restore border-bottom on table-cell and table-head inner shadow DOM
+- **Breadcrumb**: render order for proper tab sequence
+- **breadcrumb**: correct tab order for overflow state
+- **appnav**: ensure mobile menu items stretch to full width for focus outline
+- **keyboard**: arrowDown/arrowUp opens dropdown in profile components
+- **tests**: remove responsive transition tests that cause hang
+- **Icon**: skip icon load during SSR hydration
+- **css**: missing colon
+- **Sidebar, SidebarGroup**: remove unused icon button in second lvl drawer and fix test hang
+- **tests**: fix keyboard nav tests and test runner timeout
+- **Sidebar**: fix SSR hydration mismatch
+- **Appnav, AppnavProfile**: ssr-safe single-template with CSS media queries
+- **MainnavProfile**: ssr-safe single-template with CSS media queries
+- **nextjs**: add sgds utility.css import for tailwind classes
+- **MainnavDropdown**: ssr-safe single-template with CSS media queries
+- **NavElement**: fix SSR hydration for breakpoint and event listeners
+- **Breadcrumb, Link, SidenavLink**: guard slotchange handlers for SSR hydration
+- **TabGroup**: guard SSR for ResizeObserver and MutationObserver
+- **Appnav, Mainnav**: guard SSR for breakpointReached and browser APIs
+- **react/ssr**: prevent Rolldown from tree-shaking nonce patch import
+- **react/ssr**: use raw JS file for synchronous nonce patching
+- **react/ssr**: use new Function to hide require from bundlers
+- **react/ssr**: suppress node:module TS error
+- **react/ssr**: use createRequire for synchronous nonce patching
+- **DataTable**: guard ssr for getCells that call children slots
+- **Mainnav**: guard ssr for breakpointReached
+- **ssr**: guard HasSlotController and validatorMixin for SSR
+- **validatorMixin**: guard this.closest for SSR compatibility
+- **Datepicker**: initalise displayDate at prop definition
+- **button**: style disabled and active from host attributes for SSR [skip-cd] (#913)
+- **button**: style disabled and active from host attributes for SSR
+- **NextJS**: declarative shadow DOM rendered via SGDS react components for CLS 0 [skip-cd] (#901)
+- **react/ssr**: prevent Rolldown from tree-shaking nonce patch import
+- **react/ssr**: use raw JS file for synchronous nonce patching
+- **react/ssr**: use new Function to hide require from bundlers
+- **react/ssr**: suppress node:module TS error
+- **react/ssr**: use createRequire for synchronous nonce patching
+
+### Refactor
+
+- **ssr**: simplify to barrel-only aliasing, remove individual-import app
+- **tab**: add variant/orientation/density/fullWidth props to sgds-tab
+- **mainnav-dropdown**: use cached _mainnavEl instead of document.querySelector
+- remove unnecessary SSR guards from connectedCallback
+- **link**: css-only icon handling and remove redundant tabindex for SSR hydration
+- **description-list**: css-only cascade to prevent CLS during SSR hydration
+- **accordion**: css-only open/close to prevent CLS during SSR hydration
+- **breadcrumb**: css-only overflow to prevent React hydration mismatch
+- **nav-element**: remove unnecessary _previousBreakpointReached guard
+- **nav**: remove dead breakpoint abstract methods and fix stale Floating UI styles
+- **NavMenuElement**: extract shared floating menu base class with keyboard nav
+- **Mainnav, Appnav**: remove unused context providers and context files
+- **NavElement**: move listener setup from connectedCallback to firstUpdated
+- **react/ssr**: clean up ssr-nonce.ts after registerSSRNonce removal
+- **react/ssr**: remove obsolete registerSSRNonce
+- **skills**: move framework integration to sgds-getting-started references
+- **react/ssr**: clean up ssr-nonce.ts after registerSSRNonce removal
+- **react/ssr**: remove obsolete registerSSRNonce
+
 ## v3.31.0 (2026-10-30)
 
 ### Feat

@@ -10,7 +10,7 @@ textarea {
 }
 
 textarea.form-control-group {
-  padding: var(--sgds-form-padding-y) var(--sgds-form-padding-x);
+  padding: var(--sgds-form-padding-y-lg) var(--sgds-form-padding-x-lg);
   min-height: var(--sgds-dimension-136);
   overflow: auto;
   height: auto;
@@ -37,4 +37,25 @@ textarea.form-control-group {
 
 .word-count {
   margin-left: auto;
+}
+
+:host([size="md"]) textarea.form-control-group {
+  padding: var(--sgds-form-padding-y-md) var(--sgds-form-padding-x-md);
+  height: unset;
+}
+
+:host([size="md"]) textarea {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs);
+}
+
+:host([size="md"]) .form-control-group textarea {
+  padding: var(--sgds-form-padding-y-md) var(--sgds-form-padding-x-md);
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs);
+}
+
+:host([size="md"]) .word-count {
+  font-size: var(--sgds-font-size-label-xs);
+  line-height: var(--sgds-line-height-3-xs);
 }

@@ -24,7 +24,6 @@ const ssrInitSource = `\
 // modifies createRenderRoot to reuse existing DSD shadow roots.
 import '@lit-labs/ssr-react/enable-lit-ssr.js';
 import { LitElement } from 'lit';
-
 // Nonce patch must be dynamic: it require()'s @lit-labs/ssr/lib/lit-element-renderer.js
 // whose module-level code overrides LitElement.prototype.createRenderRoot WITHOUT
 // adoptStyles — breaking adoptedStyleSheets in CSR Vite/Rollup builds.
@@ -46,22 +45,11 @@ try {
 fs.writeFileSync(path.join(reactDir, '_ssr-init.ts'), ssrInitSource, 'utf8');
 
 
-// Generate SSR entry point (init + component re-exports + nonce API)
-const ssrDir = path.join(reactDir, 'ssr');
+// Generate SSR public API (for consumers to set CSP nonce)
+const ssrDir = path.join(reactDir, '_ssr');
 fs.mkdirSync(ssrDir, { recursive: true });
-const ssrEntrySource = `\
-import '../_ssr-init';
-export * from '../index';
-
-export function getCSPNonce(): string | null {
-  return ((globalThis as Record<string, unknown>)["litNonce"] as string) ?? null;
-}
-
-export function setCSPNonce(nonce: string | null): void {
-  (globalThis as Record<string, unknown>)["litNonce"] = nonce ?? undefined;
-}
-`;
-fs.writeFileSync(path.join(ssrDir, 'index.ts'), ssrEntrySource, 'utf8');
+const ssrApiSource = `export { setCSPNonce, getCSPNonce } from '../../utils/ssr-nonce';\nexport { withSgdsNextSSR } from '../../utils/with-sgds-next-ssr';\n`;
+fs.writeFileSync(path.join(ssrDir, 'index.ts'), ssrApiSource, 'utf8');
 
 // Wrap components
 console.log('Wrapping components for React...');
