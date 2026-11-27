@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsLink } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsLink } from '@govtechsg/sgds-web-component/react';
 
 export const Link = () => {
   return (

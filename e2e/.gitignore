@@ -9,4 +9,9 @@ apps/*/.output/
 apps/*/dist/
 apps/*/.angular/
 fixtures/
-
+apps/*/public/component-list.json
+apps/*/public/component-html.json
+apps/*/public/component-args.json
+apps/*/src/assets/component-list.json
+apps/*/src/assets/component-html.json
+apps/*/src/assets/component-args.json

@@ -12,8 +12,8 @@ table {
 .monthpicker,
 .yearpicker {
   display: grid;
-  grid-template-columns: repeat(3, 6rem);
-  grid-template-rows: repeat(4, 2.5rem);
+  grid-template-columns: repeat(3, var(--calendar-picker-col-width, 6rem));
+  grid-template-rows: repeat(4, var(--calendar-picker-row-height, 2.5rem));
 }
 
 .monthpicker [role="row"],
@@ -25,8 +25,8 @@ button.month,
 button.year {
   padding: 0;
   border: 0;
-  font-size: var(--sgds-font-size-label-sm);
-  line-height: var(--sgds-line-height-2-xs);
+  font-size: var(--calendar-font-size, var(--sgds-font-size-label-sm));
+  line-height: var(--calendar-line-height, var(--sgds-line-height-2-xs));
   background-color: transparent;
   border-radius: var(--sgds-interactive-border-radius);
   position: relative;
@@ -73,11 +73,11 @@ button.year.active {
 }
 
 td, th {
-  width: var(--sgds-dimension-40);
-  height: var(--sgds-dimension-40);
+  width: var(--calendar-cell-size, var(--sgds-dimension-40));
+  height: var(--calendar-cell-size, var(--sgds-dimension-40));
   padding: 0;
-  font-size: var(--sgds-font-size-label-sm);
-  line-height: var(--sgds-line-height-2-xs);
+  font-size: var(--calendar-font-size, var(--sgds-font-size-label-sm));
+  line-height: var(--calendar-line-height, var(--sgds-line-height-2-xs));
   border-radius: var(--sgds-interactive-border-radius);
   position: relative;
 }

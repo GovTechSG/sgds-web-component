@@ -1,7 +1,9 @@
 .form-label {
   margin-bottom: 0;
   color: var(--sgds-form-color-default);
+  font-size: var(--sgds-font-size-label-md);
   font-weight: var(--sgds-font-weight-semibold);
+  line-height: var(--sgds-line-height-xs);
 }
 
 .form-label.disabled {
@@ -10,6 +12,8 @@
 
 .form-check-label {
   color: var(--sgds-form-color-default);
+  font-size: var(--sgds-font-size-label-md);
+  line-height: var(--sgds-line-height-xs);
 }
 .form-check-input:disabled ~ .form-check-label,
 .form-check-input[disabled] ~ .form-check-label {
@@ -19,10 +23,10 @@
 
 :host([size="md"]) .form-label {
   font-size: var(--sgds-font-size-label-sm);
-  line-height: var(--sgds-line-height-20);
+  line-height: var(--sgds-line-height-2-xs);
 }
 
 :host([size="md"]) .form-check-label {
   font-size: var(--sgds-font-size-label-sm);
-  line-height: var(--sgds-line-height-20);
+  line-height: var(--sgds-line-height-2-xs);
 }

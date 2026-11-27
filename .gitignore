@@ -29,6 +29,11 @@ __pycache__/
 
 test/skills/*
 
+# Skill scan artifacts
+*.sarif
+*-report-static.md
+.venv/
+
 # Oobee a11y scan results
 results/
 a11y-failures.log

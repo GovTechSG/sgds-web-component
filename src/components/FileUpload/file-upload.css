@@ -174,7 +174,7 @@ sgds-icon.invalid {
 }
 
 :host(:not([disabled]):not([invalid])) .drag-drop-zone:hover {
-  outline: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
+  outline: var(--sgds-form-border-width-emphasis) solid var(--sgds-border-color-emphasis);
   outline-offset: var(--sgds-outline-offset-focus);
 }
 

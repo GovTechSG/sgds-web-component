@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form - All Components at size="lg"</title>
+  <script type="module" src="../src/index.ts"></script>
+  <link href="../src/themes/day.css" rel="stylesheet" type="text/css" />
+  <link href="../src/themes/night.css" rel="stylesheet" type="text/css" />
+  <link href="../src/css/sgds.css" rel="stylesheet" type="text/css" />
+  <link href="css/utility.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="sgds:bg-default sgds:p-0 sgds:m-0">
+  <sgds-masthead></sgds-masthead>
+
+  <sgds-mainnav>
+    <sgds-mainnav-item slot="start">
+      <a href="/">Form Size Demo</a>
+    </sgds-mainnav-item>
+  </sgds-mainnav>
+
+  <!-- Page header -->
+  <section class="sgds:bg-default sgds:py-layout-lg">
+    <div class="sgds-container">
+      <div class="sgds:flex sgds:flex-col sgds:items-start sgds:text-left" style="max-width: var(--sgds-text-max-width);">
+        <div class="sgds:text-overline-md sgds:font-semibold sgds:leading-2-xs sgds:tracking-wide sgds:uppercase sgds:text-label-default sgds:mb-xs">
+          Form Size
+        </div>
+        <h1 class="sgds:text-heading-xl sgds:font-bold sgds:leading-xl sgds:tracking-tight sgds:text-heading-default">
+          All components at size="lg" (default)
+        </h1>
+        <p class="sgds:text-body-lg sgds:leading-md sgds:tracking-normal sgds:text-body-subtle">
+          Demonstrates every form component with the large (default) size variant.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sgds:bg-surface-default sgds:min-h-screen">
+    <div class="sgds-container">
+      <form id="size-lg-form" method="post">
+
+        <!-- Section 1: Text inputs -->
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Basic Info</h3>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Text inputs, selects, and date fields at large size.
+              </p>
+            </div>
+
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-component-sm">
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6"
+                  label="Name" name="name" type="text" required hasFeedback="both"
+                ></sgds-input>
+                <sgds-input
+                  class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6"
+                  label="Email" name="email" type="email" required hasFeedback="both"
+                ></sgds-input>
+              </div>
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-select
+                  class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6"
+                  label="Country" name="country" placeholder="Select country" required hasFeedback
+                >
+                  <sgds-select-option value="sg">Singapore</sgds-select-option>
+                  <sgds-select-option value="my">Malaysia</sgds-select-option>
+                </sgds-select>
+                <sgds-datepicker
+                  class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6"
+                  label="Date of birth" name="dob" required hasFeedback
+                ></sgds-datepicker>
+              </div>
+              <div class="sgds-grid sgds:gap-component-sm">
+                <sgds-quantity-toggle
+                  class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6"
+                  label="Tickets" name="tickets" value="1" min="3" max="10" required hasFeedback="both"
+                ></sgds-quantity-toggle>
+                <sgds-combo-box
+                  class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6"
+                  placeholder="Search or select..." label="Event" name="event" required hasFeedback
+                >
+                  <sgds-combo-box-option value="event-1">Event 1</sgds-combo-box-option>
+                  <sgds-combo-box-option value="event-2">Event 2</sgds-combo-box-option>
+                </sgds-combo-box>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Choices & long text -->
+        <div class="sgds:border-t sgds:border-muted sgds:py-layout-md">
+          <div class="sgds-grid sgds:gap-layout-md">
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-4">
+              <h3 class="sgds:text-heading-md sgds:font-semibold sgds:leading-md sgds:tracking-tight sgds:text-heading-default">Preferences</h3>
+              <p class="sgds:text-body-md sgds:leading-xs sgds:tracking-normal sgds:text-body-subtle">
+                Textarea, radio, checkbox, multi-select, and file upload at large size.
+              </p>
+            </div>
+
+            <div class="sgds-col-4 sgds-col-sm-8 sgds-col-lg-8 sgds:flex sgds:flex-col sgds:gap-component-sm">
+              <sgds-textarea label="Special requests" name="requests" placeholder="Any special requests?..." required hasFeedback></sgds-textarea>
+              <sgds-radio-group label="Delivery method" name="delivery" required hasFeedback>
+                <sgds-radio value="pickup">Pickup</sgds-radio>
+                <sgds-radio value="delivery">Delivery</sgds-radio>
+                <sgds-radio value="courier">Courier</sgds-radio>
+              </sgds-radio-group>
+              <sgds-checkbox-group label="Services" name="services" required hasFeedback>
+                <sgds-checkbox value="service-1">Service 1</sgds-checkbox>
+                <sgds-checkbox value="service-2">Service 2</sgds-checkbox>
+                <sgds-checkbox value="service-3">Service 3</sgds-checkbox>
+              </sgds-checkbox-group>
+              <sgds-combo-box placeholder="Select interests..." label="Interests" name="interests" multiSelect required hasFeedback>
+                <sgds-combo-box-option value="tech">Technology</sgds-combo-box-option>
+                <sgds-combo-box-option value="design">Design</sgds-combo-box-option>
+                <sgds-combo-box-option value="business">Business</sgds-combo-box-option>
+              </sgds-combo-box>
+              <sgds-file-upload label="Attachment" name="attachment" required hasFeedback>Choose files</sgds-file-upload>
+              <sgds-file-upload label="Drag and drop attachment" name="attachment-dnd" variant="drag-and-drop" multiple required hasFeedback>Choose files</sgds-file-upload>
+              <sgds-checkbox name="terms" value="agree" required hasFeedback="both">I agree to the terms and conditions</sgds-checkbox>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form footer -->
+        <div class="sgds:border-t sgds:border-muted sgds:pt-layout-sm sgds:flex sgds:justify-end sgds:gap-component-sm sgds:mb-layout-lg">
+          <sgds-button variant="outline" type="button">Cancel</sgds-button>
+          <sgds-button variant="primary" type="submit">Save changes</sgds-button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <sgds-footer></sgds-footer>
+</body>
+</html>
