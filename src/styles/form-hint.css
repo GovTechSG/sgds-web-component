@@ -10,5 +10,5 @@
 
 :host([size="md"]) .form-text {
   font-size: var(--sgds-font-size-label-xs);
-  line-height: var(--sgds-line-height-16);
+  line-height: var(--sgds-line-height-3-xs);
 }

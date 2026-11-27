@@ -24,14 +24,11 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="appnav" title="Appnav">
               <a routerLink="/appnav"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="badge" title="Badge">
-              <a routerLink="/badge"></a>
+          <sgds-sidebar-item name="button" title="Button">
+              <a routerLink="/button"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="breadcrumb" title="Breadcrumb">
               <a routerLink="/breadcrumb"></a>
-            </sgds-sidebar-item>
-          <sgds-sidebar-item name="button" title="Button">
-              <a routerLink="/button"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="card" title="Card">
               <a routerLink="/card"></a>
@@ -42,6 +39,9 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="closebutton" title="CloseButton">
               <a routerLink="/closebutton"></a>
             </sgds-sidebar-item>
+          <sgds-sidebar-item name="badge" title="Badge">
+              <a routerLink="/badge"></a>
+            </sgds-sidebar-item>
           <sgds-sidebar-item name="combobox" title="ComboBox">
               <a routerLink="/combobox"></a>
             </sgds-sidebar-item>
@@ -51,17 +51,14 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="datepicker" title="Datepicker">
               <a routerLink="/datepicker"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="descriptionlistgroup" title="DescriptionListGroup">
-              <a routerLink="/descriptionlistgroup"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="divider" title="Divider">
               <a routerLink="/divider"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="drawer" title="Drawer">
               <a routerLink="/drawer"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="dropdown" title="Dropdown">
-              <a routerLink="/dropdown"></a>
+          <sgds-sidebar-item name="descriptionlistgroup" title="DescriptionListGroup">
+              <a routerLink="/descriptionlistgroup"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="fileupload" title="FileUpload">
               <a routerLink="/fileupload"></a>
@@ -80,6 +77,9 @@ import "@govtechsg/sgds-web-component";
             </sgds-sidebar-item>
           <sgds-sidebar-item name="iconlist" title="IconList">
               <a routerLink="/iconlist"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="dropdown" title="Dropdown">
+              <a routerLink="/dropdown"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="imagecard" title="ImageCard">
               <a routerLink="/imagecard"></a>
@@ -105,29 +105,29 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="pagination" title="Pagination">
               <a routerLink="/pagination"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="progressbar" title="ProgressBar">
-              <a routerLink="/progressbar"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="quantitytoggle" title="QuantityToggle">
               <a routerLink="/quantitytoggle"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="progressbar" title="ProgressBar">
+              <a routerLink="/progressbar"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="radiogroup" title="RadioGroup">
               <a routerLink="/radiogroup"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="select" title="Select">
-              <a routerLink="/select"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="sidebar" title="Sidebar">
               <a routerLink="/sidebar"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="sidenav" title="Sidenav">
-              <a routerLink="/sidenav"></a>
+          <sgds-sidebar-item name="spinner" title="Spinner">
+              <a routerLink="/spinner"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="skeleton" title="Skeleton">
               <a routerLink="/skeleton"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="spinner" title="Spinner">
-              <a routerLink="/spinner"></a>
+          <sgds-sidebar-item name="select" title="Select">
+              <a routerLink="/select"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="sidenav" title="Sidenav">
+              <a routerLink="/sidenav"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="step" title="Step">
               <a routerLink="/step"></a>
@@ -138,14 +138,14 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="subnav" title="Subnav">
               <a routerLink="/subnav"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="switch" title="Switch">
-              <a routerLink="/switch"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="systembanner" title="SystemBanner">
               <a routerLink="/systembanner"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="tabgroup" title="TabGroup">
               <a routerLink="/tabgroup"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="switch" title="Switch">
+              <a routerLink="/switch"></a>
             </sgds-sidebar-item>
           <sgds-sidebar-item name="table" title="Table">
               <a routerLink="/table"></a>
@@ -159,11 +159,11 @@ import "@govtechsg/sgds-web-component";
           <sgds-sidebar-item name="thumbnailcard" title="ThumbnailCard">
               <a routerLink="/thumbnailcard"></a>
             </sgds-sidebar-item>
-          <sgds-sidebar-item name="toastcontainer" title="ToastContainer">
-              <a routerLink="/toastcontainer"></a>
-            </sgds-sidebar-item>
           <sgds-sidebar-item name="tooltip" title="Tooltip">
               <a routerLink="/tooltip"></a>
+            </sgds-sidebar-item>
+          <sgds-sidebar-item name="toastcontainer" title="ToastContainer">
+              <a routerLink="/toastcontainer"></a>
             </sgds-sidebar-item>
         </sgds-sidebar-section>
       </sgds-sidebar>

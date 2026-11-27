@@ -27,12 +27,12 @@
 }
 
 .form-control-prefix{
-  border-right: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
+  border-right: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
   padding-right:var(--sgds-form-padding-x); 
 }
 
 .form-control-suffix {
-  border-left: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
+  border-left: var(--sgds-form-border-width-default) solid var(--sgds-border-color-default);
   padding-left:var(--sgds-form-padding-x); 
 }
 
@@ -51,4 +51,20 @@ sgds-icon[role="button"]:focus-visible {
   display: flex;
   align-items: center;
   gap: var(--sgds-gap-sm);
+}
+
+:host([size="md"]) .form-control-prefix {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs);
+  padding-right: var(--sgds-form-padding-x-md);
+}
+
+:host([size="md"]) .form-control-suffix {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs);
+  padding-left: var(--sgds-form-padding-x-md);
+}
+
+:host([size="md"]) .form-control-group sgds-icon {
+  --icon-size: var(--sgds-icon-size-md);
 }

@@ -27,7 +27,7 @@ describe("FileUpload a11y", () => {
 
   it("custom ariaLabel should be accessible", async () => {
     const el = await fixture(
-      html` <sgds-file-upload label="Upload photo" ariaLabel="Upload photo"></sgds-file-upload> `
+      html` <sgds-file-upload label="Upload photo" ariaLabel="Choose files to upload"></sgds-file-upload> `
     );
     await expect(el).to.be.accessible();
   });

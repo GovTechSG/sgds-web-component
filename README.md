@@ -331,9 +331,6 @@ Our components are exported via named exports. Import the components like so
 
 ```js
 import { SgdsButton, SgdsTooltip } from "@govtechsg/sgds-web-component/react";
-// or
-import { SgdsButton } from "@govtechsg/sgds-web-component/react/button";
-import { SgdsTooltip } from "@govtechsg/sgds-web-component/react/tooltip";
 ```
 
 The components follow React naming convention, using pascal case as the component name. See the example table below for the web components tagname and its corresponding React name.

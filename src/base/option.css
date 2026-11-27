@@ -8,7 +8,7 @@
   clear: both;
   color: var(--sgds-form-color-default);
   font-size: var(--option-font-size, var(--sgds-font-size-label-md));
-  line-height: var(--option-line-height, var(--sgds-line-height-xs));
+  line-height: var(--option-line-height);
   text-align: inherit;
   cursor: pointer;
   height: 100%;

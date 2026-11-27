@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack --port 4012",
-    "build": "next build ",
-    "start": "next start --port 4002"
+    "build": "next build --webpack",
+    "build:turbopack": "SGDS_TURBOPACK=1 next build --turbopack",
+    "start": "next start --port 4002",
+    "start:turbopack": "SGDS_TURBOPACK=1 next start --port 4016"
   },
   "dependencies": {
     "@govtechsg/sgds-web-component": "file:../../../lib",

@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsTable, SgdsTableHead, SgdsTableRow, SgdsTableCell } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsTable, SgdsTableHead, SgdsTableRow, SgdsTableCell } from '@govtechsg/sgds-web-component/react';
 
 export const Table = () => {
   return (
