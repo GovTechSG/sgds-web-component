@@ -3,16 +3,6 @@ import { html } from "lit";
 export default {
   title: "Form/Form Sizes",
   tags: ["!autodocs"],
-  argTypes: {
-    size: {
-      control: "select",
-      options: ["lg", "md"],
-      description: "The size of all form components"
-    }
-  },
-  args: {
-    size: "lg"
-  },
   parameters: {
     layout: "fullscreen"
   }
@@ -240,8 +230,14 @@ const Template = ({ size }) => html`
   </section>
 `;
 
-export const FormSizes = {
+export const Large = {
   render: Template.bind({}),
-  name: "Form Sizes",
+  name: "Large (default)",
   args: { size: "lg" }
+};
+
+export const Medium = {
+  render: Template.bind({}),
+  name: "Medium",
+  args: { size: "md" }
 };
