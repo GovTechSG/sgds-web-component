@@ -18,6 +18,12 @@ See **[sgds-components](../sgds-components/SKILL.md)** for installation and fram
 
 All form components must be placed inside a `<form>` element and given a `name` attribute to participate in form submission.
 
+## Form Sizes
+
+All form components support a `size` prop to control their visual density. The default is `"lg"`. Use `size="md"` for a more compact form layout. The `size` prop is available on: `<sgds-input>`, `<sgds-textarea>`, `<sgds-select>`, `<sgds-combo-box>`, `<sgds-datepicker>`, `<sgds-quantity-toggle>`, `<sgds-radio-group>`, `<sgds-checkbox-group>`, `<sgds-checkbox>` (standalone), and `<sgds-file-upload>`.
+
+When using slotted icons (leading/trailing icons, action buttons) inside `<sgds-input>`, scale them one size down to match: use `size="sm"` icons and icon-buttons when the input is `size="md"`, and `size="md"` when the input is `size="lg"` (default).
+
 ## Quick Decision Guide
 
 **Show native HTML validation messages?** → Add `hasFeedback` to each form component
