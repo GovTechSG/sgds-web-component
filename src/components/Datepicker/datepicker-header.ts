@@ -37,6 +37,9 @@ export class DatepickerHeader extends SgdsElement {
   @property()
   focusedTabIndex: number;
 
+  /** @internal */
+  @property({ type: String }) size: "lg" | "md" = "lg";
+
   @watch("focusedTabIndex", { waitUntilFirstUpdate: true })
   _handleFocusedTabIndexChange() {
     let buttonToFocus: SgdsButton | SgdsIconButton;
@@ -178,11 +181,12 @@ export class DatepickerHeader extends SgdsElement {
     return `${this.renderHeader()}. ${message[this.view]}`;
   }
   render() {
+    const btnSize = this.size === "md" ? "xs" : "sm";
     return html`
       <div class="datepicker-header dropdown-header">
         <sgds-icon-button
           name="arrow-left"
-          size="sm"
+          size=${btnSize}
           variant="ghost"
           @click="${this.handleClickPrevious}"
           class=${classMap({ invisible: this._removeCaret() })}
@@ -192,7 +196,7 @@ export class DatepickerHeader extends SgdsElement {
         <sgds-button
           fullWidth
           variant="ghost"
-          size="sm"
+          size=${btnSize}
           @click=${this._changeView}
           class=${classMap({ disabled: this.view === "years" })}
           .ariaLabel=${this._ariaLabelForHeaderBtn()}
@@ -203,7 +207,7 @@ export class DatepickerHeader extends SgdsElement {
         </sgds-button>
         <sgds-icon-button
           name="arrow-right"
-          size="sm"
+          size=${btnSize}
           variant="ghost"
           @click="${this._handleClickNext}"
           .ariaLabel=${this._ariaLabelForNextBtn()}
