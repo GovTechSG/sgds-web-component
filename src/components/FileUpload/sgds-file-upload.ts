@@ -444,7 +444,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         ariaLabel=${this.ariaLabel}
       >
         <slot>Choose files</slot>
-        <sgds-icon slot="rightIcon" name="upload"></sgds-icon>
+        <sgds-icon slot="rightIcon" name="upload" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
       </sgds-button>
     `;
   }
