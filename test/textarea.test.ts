@@ -21,6 +21,22 @@ describe("sgds-textarea", () => {
       { ignoreAttributes: ["id", "for"] }
     );
   });
+  it("renders with size md values", async () => {
+    const el = await fixture<SgdsTextarea>(html`<sgds-textarea size="md" maxlength="10" required></sgds-textarea>`);
+    assert.shadowDom.equal(
+      el,
+      `
+      <div class="form-control-container m-width-256">
+        <label class="form-label"></label>
+        <textarea class=" form-control-group textarea-resize-vertical "  rows="4" placeholder="Placeholder" maxlength="10" aria-invalid="false" spellcheck="false" required=""></textarea>
+        <div class="textarea-info-container">
+          <div class="form-text word-count">0/10</div>
+        </div>
+      </div>
+    `,
+      { ignoreAttributes: ["id", "for"] }
+    );
+  });
   it("label for attr should equal to textarea id attribute", async () => {
     const el = await fixture<SgdsTextarea>(html` <sgds-textarea></sgds-textarea> `);
     const label = el.shadowRoot?.querySelector("label");
