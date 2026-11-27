@@ -111,3 +111,25 @@ export const OverrideInvalidFeedback = {
   args: { invalidFeedback: "Custom error message" },
   parameters: {}
 };
+
+const SizeTemplate = () => {
+  return html`
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-checkbox-group label="Large (default)" size="lg">
+        <sgds-checkbox value="a">Option A</sgds-checkbox>
+        <sgds-checkbox value="b">Option B</sgds-checkbox>
+      </sgds-checkbox-group>
+      <sgds-checkbox-group label="Medium" size="md">
+        <sgds-checkbox value="a">Option A</sgds-checkbox>
+        <sgds-checkbox value="b">Option B</sgds-checkbox>
+      </sgds-checkbox-group>
+    </div>
+  `;
+};
+
+export const Sizes = {
+  render: SizeTemplate.bind({}),
+  name: "Sizes",
+  args: {},
+  parameters: {}
+};

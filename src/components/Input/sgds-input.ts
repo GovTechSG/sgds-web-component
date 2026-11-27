@@ -261,8 +261,14 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
         ${this.type === "password" ? this._renderPasswordToggle() : nothing}
         ${this.suffix ? html`<span class="form-control-suffix">${this.suffix}</span>` : nothing}
         <slot name="trailing-icon">
-          ${this.loading ? html`<sgds-spinner size="sm"></sgds-spinner>` : nothing}
-          ${this.valid ? html`<sgds-icon name="check-circle-fill" class="valid-icon"></sgds-icon>` : nothing}
+          ${this.loading ? html`<sgds-spinner size=${this.size === "md" ? "xs" : "sm"}></sgds-spinner>` : nothing}
+          ${this.valid
+            ? html`<sgds-icon
+                name="check-circle-fill"
+                class="valid-icon"
+                size=${this.size === "md" ? "sm" : "md"}
+              ></sgds-icon>`
+            : nothing}
         </slot>
       </div>
     `;
@@ -273,6 +279,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
       role="button"
       aria-label=${this._showPassword ? "Hide password" : "Show password"}
       name=${this._showPassword ? "eye-slash-fill" : "eye-fill"}
+      size=${this.size === "md" ? "sm" : "md"}
       @click=${() => (this._showPassword = !this._showPassword)}
     ></sgds-icon>`;
   }
@@ -287,7 +294,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
 
     return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
-          <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+          <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
           <div id="${this._controlId}-invalid" class="invalid-feedback">
             ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
           </div>

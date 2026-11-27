@@ -27,7 +27,11 @@ fieldset {
   display: flex;
   flex-direction: column;
   gap: var(--sgds-form-gap-md);
-  padding: var(--sgds-padding-2-xs) 0px;
+  padding: var(--sgds-form-control-padding-y) 0px;
+}
+
+::slotted(sgds-checkbox) {
+  --checkbox-margin-y: 0px;
 }
 
 .checkbox-group-validation-input {
@@ -37,4 +41,13 @@ fieldset {
 :host([disabled]) .label-hint-container {
   opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
+}
+
+:host([size="md"]) fieldset {
+  gap: var(--sgds-form-gap-md);
+}
+
+:host([size="md"]) .label-hint-container .form-label {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs);
 }

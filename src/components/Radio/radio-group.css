@@ -27,3 +27,16 @@ fieldset {
   opacity: var(--sgds-opacity-40);
   cursor: not-allowed;
 }
+
+:host([size="md"]) fieldset {
+  gap: var(--sgds-form-gap-md);
+}
+
+:host([size="md"]) .radio-container {
+  gap: var(--sgds-form-gap-md);
+}
+
+:host([size="md"]) .label-hint-container .form-label {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs);
+}
