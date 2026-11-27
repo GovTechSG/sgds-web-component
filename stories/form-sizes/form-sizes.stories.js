@@ -240,5 +240,8 @@ const Template = ({ size }) => html`
   </section>
 `;
 
-export const FormSizes = Template.bind({});
-FormSizes.args = { size: "lg" };
+export const FormSizes = {
+  render: Template.bind({}),
+  name: "Form Sizes",
+  args: { size: "lg" }
+};
