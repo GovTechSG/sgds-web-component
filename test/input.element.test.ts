@@ -93,68 +93,7 @@ describe("sgds-input", () => {
     );
   });
 
-  // size="md" shadow DOM tests
-  it("renders with default values at size md", async () => {
-    const el = await fixture(html`<sgds-input size="md" inputId="test-id" label="label" hintText="hello"></sgds-input>`);
-    assert.shadowDom.equal(
-      el,
-      `
-        <div class="form-control-container">
-          <label class="form-label" for="test-id">label</label>
-           <div class="form-control-row">
-          <div class="form-control-group">
-            <slot name="icon"></slot>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
-            <slot name="trailing-icon"></slot>
-          </div>
-          <slot name="action"></slot>
-          </div>
-          <div class="form-text" id="test-idHelp">hello</div>
-        </div>
-    `,
-      { ignoreAttributes: ["id", "for", "aria-describedby"] }
-    );
-  });
-  it("renders with suffix defined at size md", async () => {
-    const el = await fixture(html`<sgds-input size="md" inputId="test-id" suffix="test"></sgds-input>`);
-    assert.shadowDom.equal(
-      el,
-      `
-        <div class="form-control-container">
-        <div class="form-control-row">
-          <div class="form-control-group">
-            <slot name="icon"></slot>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
-            <span class="form-control-suffix">test</span>
-            <slot name="trailing-icon"></slot>
-          </div>
-            <slot name="action"></slot>
-        </div>
-    `,
-      { ignoreAttributes: ["id", "for", "aria-describedby"] }
-    );
-  });
-  it("renders with prefix defined at size md", async () => {
-    const el = await fixture(html`<sgds-input size="md" inputId="test-id" prefix="test"></sgds-input>`);
-    assert.shadowDom.equal(
-      el,
-      `
-        <div class="form-control-container">
-        <div class="form-control-row">
-          <div class="form-control-group">
-            <slot name="icon"></slot>
-            <span class="form-control-prefix">
-              test
-            </span>
-            <input type="text" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
-            <slot name="trailing-icon"></slot>
-          </div>
-            <slot name="action"></slot>
-          </div>
-    `,
-      { ignoreAttributes: ["id", "for", "aria-describedby"] }
-    );
-  });
+  // size="md" shadow DOM tests — only cases where DOM differs from lg
   it("renders with spinner when loading=true at size md", async () => {
     const el = await fixture(html`<sgds-input size="md" inputId="test-id" loading></sgds-input>`);
     assert.shadowDom.equal(
