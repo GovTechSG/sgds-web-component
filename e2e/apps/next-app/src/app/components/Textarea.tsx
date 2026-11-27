@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsTextarea } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsTextarea } from '@govtechsg/sgds-web-component/react';
 
 export const Textarea = () => {
   return (

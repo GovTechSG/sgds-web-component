@@ -1,21 +1,9 @@
 import { html } from "lit";
+import { copyToClipboard, CODE_CLASSES, COPY_BTN_CLASSES } from "../shared.js";
 
 export default {
   title: "Utilities/Spacing/Margin",
   tags: ["!autodocs"]
-};
-
-const CODE_CLASSES = "sgds:bg-surface-raised sgds:px-xs sgds:py-3-xs sgds:rounded-sm";
-const COPY_BTN_CLASSES =
-  "sgds:flex sgds:items-center sgds:justify-center sgds:w-8 sgds:h-8 sgds:cursor-pointer sgds:opacity-60 sgds:bg-transparent sgds:border-none sgds:p-0";
-
-const copyToClipboard = (token, buttonEl) => {
-  navigator.clipboard.writeText(token);
-  const icon = buttonEl.querySelector("sgds-icon");
-  icon.setAttribute("name", "check");
-  setTimeout(() => {
-    icon.setAttribute("name", "files");
-  }, 3000);
 };
 
 const renderTokenCell = token => html`
