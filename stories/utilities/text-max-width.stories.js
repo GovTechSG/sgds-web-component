@@ -1,17 +1,9 @@
 import { html } from "lit";
+import { copyToClipboard } from "./shared.js";
 
 export default {
   title: "Utilities/Dimension/Text Max Width",
   tags: ["!autodocs"]
-};
-
-const copyToClipboard = (token, buttonEl) => {
-  navigator.clipboard.writeText(token);
-  const icon = buttonEl.querySelector("sgds-icon");
-  icon.setAttribute("name", "check");
-  setTimeout(() => {
-    icon.setAttribute("name", "files");
-  }, 3000);
 };
 
 export const TextMaxWidth = () => html`

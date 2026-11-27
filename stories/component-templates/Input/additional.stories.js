@@ -172,3 +172,27 @@ export const Autocomplete = {
   args: {},
   parameters: {}
 };
+
+const SizeTemplate = () => {
+  return html`
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-input label="Large (default)" size="lg" hintText="Large input">
+        <sgds-icon slot="icon" name="telephone" size="md"></sgds-icon>
+        <sgds-icon slot="trailing-icon" name="telephone" size="md"></sgds-icon>
+        <sgds-icon-button slot="action" name="trash" ariaLabel="Clear"></sgds-icon-button>
+      </sgds-input>
+      <sgds-input label="Medium" size="md" hintText="Medium input">
+        <sgds-icon slot="icon" name="telephone" size="sm"></sgds-icon>
+        <sgds-icon slot="trailing-icon" name="telephone" size="sm"></sgds-icon>
+        <sgds-icon-button slot="action" name="trash" size="sm" ariaLabel="Clear"></sgds-icon-button>
+      </sgds-input>
+    </div>
+  `;
+};
+
+export const Sizes = {
+  render: SizeTemplate.bind({}),
+  name: "Sizes",
+  args: {},
+  parameters: {}
+};

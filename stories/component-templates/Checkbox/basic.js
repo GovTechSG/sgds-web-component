@@ -13,6 +13,7 @@ export const Template = args => {
         ?disabled=${args.disabled}
         name=${ifDefined(args.name)}
         ?invalid=${args.invalid}
+        size=${ifDefined(args.size)}
       >
         <sgds-checkbox value="watermelon">Watermelon</sgds-checkbox>
         <sgds-checkbox value="apple">Apple</sgds-checkbox>

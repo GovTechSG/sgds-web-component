@@ -1,6 +1,8 @@
+import { withSgdsNextSSR } from "@govtechsg/sgds-web-component/react/ssr";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: ".next",
+  distDir: process.env.SGDS_TURBOPACK ? ".next-turbopack" : ".next",
   reactStrictMode: true,
   allowedDevOrigins: ["127.0.0.1"],
   typescript: {
@@ -9,4 +11,4 @@ const nextConfig = {
   turbopack: {},
 };
 
-export default nextConfig;
+export default withSgdsNextSSR(nextConfig);

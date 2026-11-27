@@ -13,9 +13,7 @@ const ColorItem = (token, variable, bgClass, textClass = "") => {
 };
 
 const ColorGrid = (...items) =>
-  html`<div class="sgds:grid sgds:gap-2-xl sgds:p-2-xl" style="grid-template-columns: repeat(3, 1fr);">
-    ${items}
-  </div>`;
+  html`<div class="sgds:grid sgds:gap-2-xl sgds:p-2-xl" style="grid-template-columns: repeat(3, 1fr);">${items}</div>`;
 
 export const BackgroundColor = () =>
   ColorGrid(

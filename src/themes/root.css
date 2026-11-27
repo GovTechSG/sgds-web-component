@@ -106,7 +106,7 @@
   --sgds-border-width-3: 3px;
   --sgds-border-width-4: 4px;
   --sgds-form-border-width-default: var(--sgds-border-width-1);
-  --sgds-form-border-width-thick: var(--sgds-border-width-2);
+  --sgds-form-border-width-emphasis: var(--sgds-border-width-2);
 
   /* Primitive - Border Radius */
   --sgds-border-radius-none: 0px;
@@ -406,9 +406,6 @@
   --sgds-gap-3-xl: var(--sgds-spacer-9);
   --sgds-form-gap-md: var(--sgds-spacer-2);
   --sgds-form-gap-lg: var(--sgds-spacer-3);
-  --sgds-form-gap-sm: var(--sgds-gap-2-xs);
-  --sgds-form-gap-xl: var(--sgds-gap-md);
-  --sgds-form-gap-2-xl: var(--sgds-gap-xl);
 
   /* Semantic - Density Padding */
   --sgds-density-padding-3-xs: var(--sgds-spacer-1);
