@@ -242,7 +242,7 @@
 
   /* Form Border Width */
   --border-width-form-default: var(--sgds-form-border-width-default);
-  --border-width-form-thick: var(--sgds-form-border-width-thick);
+  --border-width-form-emphasis: var(--sgds-form-border-width-emphasis);
 
   /* Font Family */
   --font-brand: var(--sgds-font-family-brand);

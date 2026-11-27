@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsSidebar, SgdsSidebarSection, SgdsSidebarGroup, SgdsSidebarItem, SgdsIcon } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsSidebar, SgdsSidebarSection, SgdsSidebarGroup, SgdsSidebarItem, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const Sidebar = () => {
   return (

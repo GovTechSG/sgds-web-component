@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsCard, SgdsIcon } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsCard, SgdsIcon } from '@govtechsg/sgds-web-component/react';
 
 export const Card = () => {
   return (
