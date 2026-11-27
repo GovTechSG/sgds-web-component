@@ -54,7 +54,8 @@
               <div class="sgds-grid sgds:gap-component-sm">
                 <sgds-input
                   class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6"
-                  label="Name" name="name" type="text" required hasFeedback="both"
+                  label="Name" name="name" required hasFeedback="both"
+                  type="password"
                 ></sgds-input>
                 <sgds-input
                   class="sgds-col-4 sgds-col-sm-4 sgds-col-lg-6"
@@ -118,7 +119,7 @@
                 <sgds-combo-box-option value="design">Design</sgds-combo-box-option>
                 <sgds-combo-box-option value="business">Business</sgds-combo-box-option>
               </sgds-combo-box>
-              <sgds-file-upload label="Attachment" name="attachment" required hasFeedback>Choose files</sgds-file-upload>
+              <sgds-file-upload label="Attachment" name="attachment" required hasFeedback  hinttext="test">Choose files</sgds-file-upload>
               <sgds-file-upload label="Drag and drop attachment" name="attachment-dnd" variant="drag-and-drop" multiple required hasFeedback>Choose files</sgds-file-upload>
               <sgds-checkbox name="terms" value="agree" required hasFeedback="both">I agree to the terms and conditions</sgds-checkbox>
             </div>

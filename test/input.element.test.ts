@@ -130,7 +130,7 @@ describe("sgds-input", () => {
             <div class="form-control-group">
               <slot name="icon"></slot>
               <input type="password" class="form-control" id="test-id" aria-invalid="false" autocomplete="on" placeholder="placeholder">
-              <sgds-icon tabindex="0" role="button" aria-label="Show password" name="eye-fill" size="sm"></sgds-icon>
+              <sgds-icon tabindex="0" role="button" aria-label="Show password" name="eye-fill" size="md"></sgds-icon>
               <slot name="trailing-icon"></slot>
             </div>
             <slot name="action"></slot>

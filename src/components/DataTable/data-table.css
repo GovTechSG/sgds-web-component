@@ -63,6 +63,7 @@ th {
 
 sgds-checkbox {
   --checkbox-margin-y: 0;
+  --form-check-padding-y: 0;
 }
 
 th[data-sorting] {

@@ -57,7 +57,7 @@ input {
   cursor: not-allowed;
 }
 
-:host([size="sm"]) .form-check {
+:host([size="sm"]) .form-check-label {
   font-size: var(--sgds-font-size-label-sm);
 }
 
@@ -67,7 +67,7 @@ input {
   background-size: var(--sgds-dimension-16) var(--sgds-dimension-16);
 }
 
-:host([size="lg"]) .form-check {
+:host([size="lg"]) .form-check-label {
   font-size: var(--sgds-font-size-label-lg);
 }
 

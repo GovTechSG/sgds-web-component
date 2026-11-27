@@ -266,7 +266,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
             ? html`<sgds-icon
                 name="check-circle-fill"
                 class="valid-icon"
-                size=${this.size === "md" ? "sm" : "md"}
+                size=${this.size === "md" ? "md" : "lg"}
               ></sgds-icon>`
             : nothing}
         </slot>
@@ -279,7 +279,7 @@ export class SgdsInput extends SgdsFormValidatorMixin(FormControlElement) implem
       role="button"
       aria-label=${this._showPassword ? "Hide password" : "Show password"}
       name=${this._showPassword ? "eye-slash-fill" : "eye-fill"}
-      size=${this.size === "md" ? "sm" : "md"}
+      size=${this.size === "md" ? "md" : "lg"}
       @click=${() => (this._showPassword = !this._showPassword)}
     ></sgds-icon>`;
   }
