@@ -116,6 +116,17 @@ Also read the Architecture Decision Records in `contributing/architecture-decisi
 | `reduce-host-styling.md` | When styling the host element |
 | `custom-validation.md` | Form components with validation |
 | `automated-icon-conversion.md` | Adding or modifying icons |
+| `ssr-single-template-responsive-components.md` | Components with responsive mobile/desktop layouts |
+| `ssr-client-api-guards.md` | Any `render()` path that touches browser APIs |
+
+### SSR-first component design
+
+All SGDS components must be SSR-safe. Read the [SSR-first principles reference](references/ssr-first-principles.md) for detailed patterns and examples. The four rules to follow:
+
+1. **Single-template rendering** — `render()` must return the same DOM structure regardless of viewport. Never use JS breakpoint detection to choose between templates.
+2. **CSS-first visibility** — Always render the full DOM; use CSS media queries to show/hide elements per viewport. JS breakpoint detection is only for behavioral differences (click handlers, Floating UI), never for template selection.
+3. **Deferred slot detection** — Use SSR indicator properties (e.g. `hasProfileSlot`) instead of `HasSlotController` during SSR. Defer real slot checks to `updated()` after hydration.
+4. **Client API guards** — Restrict `window`, `document`, and DOM traversal to client-only hooks (`connectedCallback()`, `firstUpdated()`, event handlers). Guard any browser API in `render()` paths with `this.ssr` or `this.hasUpdated`.
 
 ---
 
