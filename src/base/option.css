@@ -38,3 +38,9 @@
   outline: var(--sgds-outline-focus);
   outline-offset: var(--sgds-outline-offset-focus);
 }
+
+/* Zero out checkbox margin/padding when used as menu option */
+.dropdown-item sgds-checkbox {
+  --checkbox-margin-y: 0px;
+  --form-check-padding-y: 0px;
+}
