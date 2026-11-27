@@ -495,10 +495,12 @@ export class SgdsComboBox extends SelectElement {
   }
 
   /** Template for the suffix icon */
-  protected suffixIconTemplate: TemplateResult = html`<sgds-icon
-    name=${this.menuIsOpen ? "chevron-up" : "chevron-down"}
-    size="md"
-  ></sgds-icon>`;
+  protected get suffixIconTemplate(): TemplateResult {
+    return html`<sgds-icon
+      name=${this.menuIsOpen ? "chevron-up" : "chevron-down"}
+      size=${this.size === "md" ? "sm" : "md"}
+    ></sgds-icon>`;
+  }
 
   protected prefixIconTemplate: TemplateResult = html`${nothing}`;
   /**
