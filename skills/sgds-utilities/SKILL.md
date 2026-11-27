@@ -159,7 +159,6 @@ Not listed? See the full list at https://tailwindcss.com/docs/installation/frame
 | **Visual**     | Opacity (`sgds:opacity-*`)                                                       | No                   | [→ references/opacity.md](references/opacity.md)                     |
 | **Visual**     | Elevation / box shadows (`sgds:shadow-*`, `sgds:shadow-edge-*`)                  | No                   | [→ references/elevation.md](references/elevation.md)                 |
 | **Responsive** | Breakpoint prefixes (`sgds:xs:`, `sgds:sm:`, `sgds:md:`, `sgds:lg:`, `sgds:xl:`, `sgds:2-xl:`) | No                   | [→ references/breakpoint.md](references/breakpoint.md)               |
-| **Patterns**   | Cross-category component patterns (card, alert, form, modal)                     | —                    | [→ references/overview-patterns.md](references/overview-patterns.md) |
 
 ---
 

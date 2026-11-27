@@ -1,6 +1,6 @@
 ---
 name: "sgds-layouts"
-description: "Use when users ask about page layouts, content arrangement, aside panels, split views, sidebar layouts, breadcrumb layouts, or viewport-height layouts — even if they just say 'how should I lay out my page' or 'I need a two-column layout'. Complete catalog of page layout patterns for SGDS applications. Covers Full Width layouts (public-facing pages with sgds-container) and With Sidebar layouts (dashboards/internal tools with sgds-container-sidebar)."
+description: "Use when users ask about page layouts, content arrangement, aside panels, split views, sidebar layouts, breadcrumb layouts, or viewport-height layouts — even phrased as 'lay out the page' or 'two-column layout'. Complete catalog of page layout patterns for SGDS applications. Covers Full Width layouts (public-facing pages with sgds-container) and With Sidebar layouts (dashboards/internal tools with sgds-container-sidebar)."
 metadata:
   author: singapore-design-system
   version: "0.0.0"

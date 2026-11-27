@@ -27,6 +27,10 @@ CONSTRAINT_DIRECTIVE_RE = re.compile(r"\b(MUST|ALWAYS|NEVER)\b")
 FILE_REF_RE = re.compile(
     r"(?:references|scripts|assets)/[a-zA-Z0-9._-]{2,}\.[a-zA-Z0-9]+"
 )
+# Matches cross-skill references like ../sgds-blocks/references/file.md
+CROSS_SKILL_REF_RE = re.compile(
+    r"\.\./[a-zA-Z0-9._-]+/(?:references|scripts|assets)/[a-zA-Z0-9._-]{2,}\.[a-zA-Z0-9]+"
+)
 
 
 # --- Frontmatter parsing ---
@@ -152,8 +156,17 @@ def check_anti_patterns(skill_dir, content):
         )
 
     prose = _strip_code_blocks(content)
+    # Collect cross-skill refs (../other-skill/references/file.md) to exclude
+    cross_skill_basenames = set()
+    for xref in CROSS_SKILL_REF_RE.findall(prose):
+        # Extract the references/file.md portion
+        match = FILE_REF_RE.search(xref)
+        if match:
+            cross_skill_basenames.add(match.group())
     refs_in_text = set(FILE_REF_RE.findall(prose))
     for ref in sorted(refs_in_text):
+        if ref in cross_skill_basenames:
+            continue  # Skip cross-skill references — they live in another skill
         ref_path = os.path.join(skill_dir, ref)
         if not os.path.exists(ref_path):
             warnings.append(f"[anti-pattern] ORPHAN_REFERENCE: {ref} not found on disk")
