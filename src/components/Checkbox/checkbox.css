@@ -1,5 +1,6 @@
 .form-check-input[type="checkbox"] {
   border-radius: var(--sgds-form-border-radius-subtle);
+  background-size: var(--sgds-dimension-16) var(--sgds-dimension-16);
 }
 
 .form-check-input[checked] {
@@ -33,5 +34,8 @@
 
 .form-check {
   margin: var(--checkbox-margin-y, var(--sgds-margin-2-xs)) 0px;
-  padding: 0;
+}
+
+:host([size="md"]) .form-check-input[type="checkbox"] {
+  background-size: var(--sgds-dimension-12, 12px) var(--sgds-dimension-12, 12px);
 }

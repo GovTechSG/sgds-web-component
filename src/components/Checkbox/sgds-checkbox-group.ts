@@ -116,6 +116,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   private _sanitizeSlot() {
     const checkboxes = this._checkboxes;
     checkboxes.forEach(checkbox => {
+      checkbox.size = this.size;
       checkbox.checked = checkbox.defaultChecked = this.value.includes(checkbox.value);
 
       checkbox.hasFeedback = this.hasFeedback ? "style" : null;
@@ -156,6 +157,11 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
   _updateInvalid() {
     const checkboxes = this._checkboxes;
     checkboxes.forEach(ch => (ch.invalid = this.invalid));
+  }
+
+  @watch("size", { waitUntilFirstUpdate: true })
+  _handleSizeChange() {
+    this._checkboxes.forEach(checkbox => (checkbox.size = this.size));
   }
 
   /**
@@ -227,7 +233,7 @@ export class SgdsCheckboxGroup extends SgdsFormValidatorMixin(FormControlElement
           ? html`
               <div class="invalid-feedback-container">
                 <slot name="invalidIcon">
-                  <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+                  <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
                 </slot>
                 <div id="checkbox-group-feedback" class="invalid-feedback">
                   ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
