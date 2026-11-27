@@ -1,5 +1,6 @@
 import { html, nothing, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { OptionElement } from "../../base/option-element";
 import SgdsCheckbox from "../Checkbox/sgds-checkbox";
 import SgdsIcon from "../Icon/sgds-icon";
@@ -49,7 +50,7 @@ export class SgdsComboBoxOption extends OptionElement {
           <sgds-checkbox
             .checked=${this.active}
             .disabled=${this.disabled}
-            size=${checkboxSize}
+            size=${ifDefined(checkboxSize)}
           >
             <slot></slot>
           </sgds-checkbox>
