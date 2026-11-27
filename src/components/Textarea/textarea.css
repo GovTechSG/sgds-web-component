@@ -39,7 +39,8 @@ textarea.form-control-group {
   margin-left: auto;
 }
 
-:host([size="md"]) .form-control-group {
+:host([size="md"]) textarea.form-control-group {
+  padding: var(--sgds-form-padding-y-md) var(--sgds-form-padding-x-md);
   height: unset;
 }
 
