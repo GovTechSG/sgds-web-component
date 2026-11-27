@@ -175,7 +175,7 @@ export class SelectElement
     return this.invalid && this.hasFeedback
       ? html` <div class="invalid-feedback-container">
           <slot name="invalidIcon">
-            <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+            <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
           </slot>
           <div id="${this._controlId}-invalid" class="invalid-feedback">
             ${this.invalidFeedback ? this.invalidFeedback : this.validationMessage}
@@ -230,7 +230,9 @@ export class SelectElement
     return html` <div class="empty-menu">No options</div> `;
   }
   protected _renderLoadingMenu() {
-    return html`<div class="loading-menu"><sgds-spinner size="xs" tone="brand"></sgds-spinner>Loading...</div>`;
+    return html`<div class="loading-menu">
+      <sgds-spinner size=${this.size === "md" ? "xs" : "sm"} tone="brand"></sgds-spinner>Loading...
+    </div>`;
   }
   protected declare options: OptionElement[];
   declare static childName: string;

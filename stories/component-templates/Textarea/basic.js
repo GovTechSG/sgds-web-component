@@ -24,6 +24,7 @@ export const Template = args =>
       ?hasFeedback=${args.hasFeedback}
       defaultValue=${ifDefined(args.defaultValue)}
       inputmode=${ifDefined(args.inputmode)}
+      size=${ifDefined(args.size)}
     >
     </sgds-textarea>
   `;

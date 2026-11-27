@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsAppnav, SgdsAppnavProfile, SgdsIconButton, SgdsDropdownItem } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsAppnav, SgdsAppnavProfile, SgdsIconButton, SgdsDropdownItem } from '@govtechsg/sgds-web-component/react';
 
 export const Appnav = () => {
   return (

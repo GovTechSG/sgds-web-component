@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsButton } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsButton } from '@govtechsg/sgds-web-component/react';
 
 export const Button = () => {
   return (

@@ -1,6 +1,6 @@
 'use client';
 
-import { SgdsPagination } from '@govtechsg/sgds-web-component/react/ssr';
+import { SgdsPagination } from '@govtechsg/sgds-web-component/react';
 
 export const Pagination = () => {
   return (

@@ -1,4 +1,5 @@
 import { html } from "lit";
+import { copyToClipboard } from "../shared.js";
 
 export default {
   title: "Utilities/Form/Border Radius",
@@ -25,15 +26,6 @@ const FORM_RADIUS_SCALE = [
     value: "lg (12px)"
   }
 ];
-
-const copyToClipboard = (token, buttonEl) => {
-  navigator.clipboard.writeText(token);
-  const icon = buttonEl.querySelector("sgds-icon");
-  icon.setAttribute("name", "check");
-  setTimeout(() => {
-    icon.setAttribute("name", "files");
-  }, 3000);
-};
 
 const RadiusTableRow = item => {
   return html`
