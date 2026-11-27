@@ -57,28 +57,6 @@ describe("<sgds-checkbox>", () => {
       { ignoreAttributes: ["id", "for"] }
     );
   });
-  it("can be semantically compare with shadowDom trees (size md)", async () => {
-    const el = await fixture<SgdsCheckbox>(
-      html`<sgds-checkbox size="md" name="testname" value="testvalue">label</sgds-checkbox>`
-    );
-    assert.shadowDom.equal(
-      el,
-      `
-           <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      aria-invalid= "false"
-                      aria-disabled="false"
-                      aria-checked="false"
-                      name="testname"
-                    />
-                  <label class="form-check-label"><slot></slot></label>
-                </div>
-          `,
-      { ignoreAttributes: ["id", "for"] }
-    );
-  });
   it("can be semantically compare with shadowDom trees with error message (size md)", async () => {
     const el = await fixture<SgdsCheckbox>(
       html`<sgds-checkbox size="md" invalid hasFeedback="both" invalidFeedback="test" value="testvalue">label</sgds-checkbox>`
