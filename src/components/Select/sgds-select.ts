@@ -218,7 +218,7 @@ export class SgdsSelect extends SelectElement {
             : ""}"
           @keydown=${this._blockInputKeydown}
         />
-        <sgds-icon name="chevron-down" size="md"></sgds-icon>
+        <sgds-icon name="chevron-down" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
       </div>
     `;
   }
