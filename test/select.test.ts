@@ -108,6 +108,7 @@ describe("<sgds-select>", () => {
               aria-disabled="false"
               aria-label="Option 1"
               role="menuitem"
+              size="lg"
               value="option1"
             >
               Option 1
@@ -116,6 +117,7 @@ describe("<sgds-select>", () => {
               aria-disabled="false"
               aria-label="Option 2"
               role="menuitem"
+              size="lg"
               value="option2"
             >
               Option 2
@@ -758,6 +760,20 @@ describe("sgds-select-option (default)", () => {
           <div class="normal-item-content" role="presentation">
             <slot></slot>
             <sgds-icon name="check" size="lg"></sgds-icon>
+          </div>
+          </div>
+      `
+    );
+  });
+  it("when active is true and size is md, tick sgds-icon has size=md", async () => {
+    const el = await fixture<SgdsSelectOption>(html`<sgds-select-option active size="md"></sgds-select-option>`);
+    assert.shadowDom.equal(
+      el,
+      `
+          <div class="dropdown-item active" tabindex="0">
+          <div class="normal-item-content" role="presentation">
+            <slot></slot>
+            <sgds-icon name="check" size="md"></sgds-icon>
           </div>
           </div>
       `

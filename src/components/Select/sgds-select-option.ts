@@ -18,7 +18,7 @@ export class SgdsSelectOption extends OptionElement {
   @property({ type: String, reflect: true }) size: "lg" | "md" = "lg";
 
   protected _renderItemContent = () => {
-    const iconSize = this.size === "md" ? "md" : undefined;
+    const iconSize = this.size === "md" ? "md" : "lg";
     return html`<div class="normal-item-content" role="presentation">
       <slot></slot>
       ${this.active ? html` <sgds-icon name="check" size=${iconSize}></sgds-icon> ` : nothing}
