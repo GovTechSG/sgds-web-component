@@ -34,7 +34,6 @@
 
 .form-check {
   margin: var(--checkbox-margin-y, var(--sgds-margin-2-xs)) 0px;
-  padding: 0;
 }
 
 :host([size="md"]) .form-check-input[type="checkbox"] {
