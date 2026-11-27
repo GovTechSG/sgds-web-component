@@ -41,7 +41,7 @@ sgds-icon-button {
 
 /* Size md */
 
-:host([size="md"][menuisopen]) .dropdown-menu {
+:host([size="md"][menuisopen]:not([disabled]):not([readonly])) .dropdown-menu {
   padding: var(--sgds-date-picker-menu-padding-y, 12px) var(--sgds-date-picker-menu-padding-x, 20px);
   gap: var(--sgds-date-picker-menu-gap, 4px);
   width: auto;
