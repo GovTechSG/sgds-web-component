@@ -57,6 +57,57 @@ describe("<sgds-checkbox>", () => {
       { ignoreAttributes: ["id", "for"] }
     );
   });
+  it("can be semantically compare with shadowDom trees (size md)", async () => {
+    const el = await fixture<SgdsCheckbox>(
+      html`<sgds-checkbox size="md" name="testname" value="testvalue">label</sgds-checkbox>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+           <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      aria-invalid= "false"
+                      aria-disabled="false"
+                      aria-checked="false"
+                      name="testname"
+                    />
+                  <label class="form-check-label"><slot></slot></label>
+                </div>
+          `,
+      { ignoreAttributes: ["id", "for"] }
+    );
+  });
+  it("can be semantically compare with shadowDom trees with error message (size md)", async () => {
+    const el = await fixture<SgdsCheckbox>(
+      html`<sgds-checkbox size="md" invalid hasFeedback="both" invalidFeedback="test" value="testvalue">label</sgds-checkbox>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+           <div class="form-check">
+                    <input
+                      class="form-check-input is-invalid"
+                      type="checkbox"
+                      aria-invalid= "true"
+                      aria-disabled="false"
+                      aria-checked="false"
+                    />
+                  <label class="form-check-label"><slot></slot></label>
+                </div>
+                      <div class="invalid-feedback-container">
+                        <slot name="invalidIcon">
+                          <sgds-icon name="exclamation-circle-fill" size="sm"></sgds-icon>
+                        </slot>
+                        <div id="checkbox-feedback" tabindex="0" class="invalid-feedback">
+                          test
+                        </div>
+                      </div>
+          `,
+      { ignoreAttributes: ["id", "for"] }
+    );
+  });
   it("value remains the same when clicked", async () => {
     const el = await fixture<SgdsCheckbox>(html`<sgds-checkbox value="testvalue">Test</sgds-checkbox>`);
     expect(el.checked).to.be.false;
