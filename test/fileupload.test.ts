@@ -15,6 +15,21 @@ describe("sgds-file-upload", () => {
     expect(slotContent).to.equal("Hello");
   });
 
+  it("at size md, upload icon in button is size sm", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload size="md">Upload</sgds-file-upload>`);
+    const icon = el.shadowRoot?.querySelector("sgds-icon[name='upload']") as HTMLElement;
+    expect(icon).to.exist;
+    expect(icon.getAttribute("size")).to.equal("sm");
+  });
+
+  it("at size md, close button in file list is size xs", async () => {
+    const el = await fixture<SgdsFileUpload>(html`<sgds-file-upload size="md">Upload</sgds-file-upload>`);
+    const closeBtn = el.shadowRoot?.querySelector("sgds-close-button") as HTMLElement;
+    if (closeBtn) {
+      expect(closeBtn.getAttribute("size")).to.equal("xs");
+    }
+  });
+
   it("Should output a child input element", async () => {
     const el = await fixture(html`<sgds-file-upload></sgds-file-upload>`);
     expect(el.shadowRoot?.querySelector("input")).to.exist;
