@@ -37,6 +37,64 @@ describe("<sgds-radio>", () => {
     const radio = el.shadowRoot?.querySelector("input");
     expect(radio).to.have.attribute("value", "3");
   });
+
+  it("can be semantically compare with shadowDom trees (size md)", async () => {
+    const el = await fixture<SgdsRadio>(html`<sgds-radio size="md" value="testvalue">label</sgds-radio>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            aria-disabled="false"
+            aria-checked="false"
+          />
+          <label class="form-check-label"><slot></slot></label>
+        </div>
+      `,
+      { ignoreAttributes: ["id", "for"] }
+    );
+  });
+
+  it("can be semantically compare with shadowDom trees when checked (size md)", async () => {
+    const el = await fixture<SgdsRadio>(html`<sgds-radio size="md" value="testvalue" checked>label</sgds-radio>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            aria-disabled="false"
+            aria-checked="true"
+            checked=""
+          />
+          <label class="form-check-label"><slot></slot></label>
+        </div>
+      `,
+      { ignoreAttributes: ["id", "for"] }
+    );
+  });
+
+  it("can be semantically compare with shadowDom trees when invalid (size md)", async () => {
+    const el = await fixture<SgdsRadio>(html`<sgds-radio size="md" value="testvalue" invalid>label</sgds-radio>`);
+    assert.shadowDom.equal(
+      el,
+      `
+        <div class="form-check">
+          <input
+            class="form-check-input is-invalid"
+            type="radio"
+            aria-disabled="false"
+            aria-checked="false"
+          />
+          <label class="form-check-label"><slot></slot></label>
+        </div>
+      `,
+      { ignoreAttributes: ["id", "for"] }
+    );
+  });
 });
 
 describe("<sgds-radio-group>", () => {
@@ -305,6 +363,34 @@ describe("<sgds-radio-group>", () => {
     await el.updateComplete;
     const radios = el.querySelectorAll("sgds-radio");
     radios.forEach(r => expect(r.disabled).to.be.true);
+  });
+
+  it("size md propagates to child radios", async () => {
+    const el = await fixture<SgdsRadioGroup>(html`
+      <sgds-radio-group size="md">
+        <sgds-radio value="a">A</sgds-radio>
+        <sgds-radio value="b">B</sgds-radio>
+      </sgds-radio-group>
+    `);
+    const radios = el.querySelectorAll("sgds-radio");
+    radios.forEach(r => expect(r.size).to.equal("md"));
+  });
+
+  it("can be semantically compare with shadowDom trees for invalid feedback (size md)", async () => {
+    const el = await fixture<SgdsRadioGroup>(
+      html`
+        <sgds-radio-group size="md" hasFeedback invalid invalidFeedback="test error">
+          <sgds-radio value="a">A</sgds-radio>
+        </sgds-radio-group>
+      `
+    );
+    const invalidFeedback = el.shadowRoot?.querySelector("div.invalid-feedback");
+    expect(invalidFeedback).to.exist;
+    expect(invalidFeedback?.textContent).to.contain("test error");
+    const feedbackContainer = el.shadowRoot?.querySelector("div.invalid-feedback-container");
+    expect(feedbackContainer).to.exist;
+    const svg = feedbackContainer?.querySelector("svg");
+    expect(svg).to.exist;
   });
 });
 
