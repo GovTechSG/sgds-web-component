@@ -114,7 +114,7 @@
 
 :host([size="md"]) .form-control-group {
   height: var(--sgds-form-control-size-md);
-  padding: var(--sgds-form-padding-y-md) var(--sgds-form-padding-x-md);
+  padding: 0px var(--sgds-form-padding-x-md);
 }
 
 :host([size="md"]) .form-control {
