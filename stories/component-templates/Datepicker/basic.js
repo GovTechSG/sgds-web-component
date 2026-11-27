@@ -20,11 +20,13 @@ export const Template = ({
   value,
   readOnly,
   menuIsOpen,
-  noValidate
+  noValidate,
+  size
 }) =>
   html`
     <sgds-datepicker
       ?noFlip=${noFlip}
+      size=${ifDefined(size)}
       .initialValue=${initialValue}
       value=${ifDefined(value)}
       ?required=${required}

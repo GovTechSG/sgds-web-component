@@ -7,3 +7,8 @@
 .form-text.disabled {
   opacity: var(--sgds-opacity-40);
 }
+
+:host([size="md"]) .form-text {
+  font-size: var(--sgds-font-size-label-xs);
+  line-height: var(--sgds-line-height-3-xs);
+}

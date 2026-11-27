@@ -713,3 +713,25 @@ export const CreatableCustomSlot = {
   args: {},
   parameters: {}
 };
+
+const SizeTemplate = () => {
+  return html`
+    <div class="sgds:flex sgds:flex-col sgds:gap-layout-xs">
+      <sgds-combo-box label="Large (default)" size="lg" placeholder="Select an option">
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      </sgds-combo-box>
+      <sgds-combo-box label="Medium" size="md" placeholder="Select an option">
+        <sgds-combo-box-option value="apple">Apple</sgds-combo-box-option>
+        <sgds-combo-box-option value="banana">Banana</sgds-combo-box-option>
+      </sgds-combo-box>
+    </div>
+  `;
+};
+
+export const Sizes = {
+  render: SizeTemplate.bind({}),
+  name: "Sizes",
+  args: {},
+  parameters: {}
+};

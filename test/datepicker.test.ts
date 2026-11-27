@@ -20,6 +20,20 @@ describe("sgds-datepicker", () => {
     expect(el).to.be.an.instanceOf(SgdsDatepicker);
   });
 
+  it("at size md, icon-button has size sm", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker size="md"></sgds-datepicker>`);
+    const iconBtn = el.shadowRoot?.querySelector("sgds-icon-button") as HTMLElement;
+    expect(iconBtn).to.exist;
+    expect(iconBtn.getAttribute("size")).to.equal("sm");
+  });
+
+  it("at default size, icon-button has size md", async () => {
+    const el = await fixture<SgdsDatepicker>(html`<sgds-datepicker></sgds-datepicker>`);
+    const iconBtn = el.shadowRoot?.querySelector("sgds-icon-button") as HTMLElement;
+    expect(iconBtn).to.exist;
+    expect(iconBtn.getAttribute("size")).to.equal("md");
+  });
+
   it("opens the datepicker menu when sgds-icon-button is clicked", async () => {
     const el = await fixture<SgdsDatepicker>(html` <sgds-datepicker></sgds-datepicker> `);
 

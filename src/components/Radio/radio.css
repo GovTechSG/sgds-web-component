@@ -4,6 +4,7 @@
 
 .form-check-input[type="radio"] {
   border-radius: 50%;
+  background-size: 8px 8px;
 }
 
 .form-check-input[checked] {
@@ -12,4 +13,8 @@
 
 .form-check-input[checked].is-invalid {
   background-color: var(--sgds-form-danger-surface-default);
+}
+
+:host([size="md"]) .form-check-input[type="radio"] {
+  background-size: 6px 6px;
 }
