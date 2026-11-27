@@ -210,19 +210,16 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
     const wantFeedbackText = this.hasFeedback === "both" || this.hasFeedback === "text";
     return this.invalid && wantFeedbackText
       ? html` <div class="invalid-feedback-container">
-          <slot name="invalidIcon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path
-                d="M17.5 10C17.5 14.1421 14.1421 17.5 10 17.5C5.85786 17.5 2.5 14.1421 2.5 10C2.5 5.85786 5.85786 2.5 10 2.5C14.1421 2.5 17.5 5.85786 17.5 10ZM10 6.25C9.49805 6.25 9.10584 6.68339 9.15578 7.18285L9.48461 10.4711C9.51109 10.7359 9.7339 10.9375 10 10.9375C10.2661 10.9375 10.4889 10.7359 10.5154 10.4711L10.8442 7.18285C10.8942 6.68339 10.5019 6.25 10 6.25ZM10.0014 11.875C9.48368 11.875 9.06394 12.2947 9.06394 12.8125C9.06394 13.3303 9.48368 13.75 10.0014 13.75C10.5192 13.75 10.9389 13.3303 10.9389 12.8125C10.9389 12.2947 10.5192 11.875 10.0014 11.875Z"
-                fill="currentColor"
-              />
-            </svg>
-          </slot>
+          <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
           <div id="${this._controlId}-invalid" class="invalid-feedback">
             ${this.invalidFeedback ? this.invalidFeedback : this.validationMessage}
           </div>
         </div>`
       : html`${this._renderHintText()}`;
+  }
+
+  private _getIconButtonSize(): "xs" | "sm" | "md" | "lg" {
+    return this.size === "md" ? "sm" : "md";
   }
 
   protected _renderLabel() {
@@ -254,7 +251,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             class="minus-btn"
             variant="outline"
             tone="neutral"
-            size="md"
+            size=${this._getIconButtonSize()}
             ariaLabel=${`decrease by ${this.step}`}
             ?disabled=${this.disabled ||
             (this.min !== undefined ? this.value <= this.min : this.value < 1) ||
@@ -266,6 +263,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
           <sgds-input
             type="number"
             class="quantity-toggle"
+            .size=${this.size}
             name=${ifDefined(this.name)}
             step=${ifDefined(this.step)}
             min=${ifDefined(this.min)}
@@ -286,7 +284,7 @@ export class SgdsQuantityToggle extends SgdsFormValidatorMixin(FormControlElemen
             class="plus-btn"
             variant="outline"
             tone="neutral"
-            size="md"
+            size=${this._getIconButtonSize()}
             ariaLabel=${`increase by ${this.step}`}
             @click=${this._onPlus}
             ?disabled=${this.disabled ||
