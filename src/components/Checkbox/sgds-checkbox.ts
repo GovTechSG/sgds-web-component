@@ -12,6 +12,7 @@ import { watch } from "../../utils/watch";
 import { HasSlotController } from "../../utils/slot";
 import checkboxStyle from "./checkbox.css";
 import formCheckStyles from "../../styles/form-check.css";
+import formLabelStyles from "../../styles/form-label.css";
 
 /**
  * @summary Checkbox component is used when you require users to select multiple items from a list.
@@ -27,7 +28,7 @@ import formCheckStyles from "../../styles/form-check.css";
  * @event sgds-valid - Emitted when the checkbox's invalid state is set to false.
  */
 export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) implements SgdsFormControl {
-  static styles = [...FormControlElement.styles, formCheckStyles, checkboxStyle];
+  static styles = [...FormControlElement.styles, formCheckStyles, formLabelStyles, checkboxStyle];
 
   private readonly hasSlotController = new HasSlotController(this, "[default]");
 
@@ -246,7 +247,7 @@ export class SgdsCheckbox extends SgdsFormValidatorMixin(FormControlElement) imp
         ? html`
             <div class="invalid-feedback-container">
               <slot name="invalidIcon">
-                <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+                <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
               </slot>
               <div id="checkbox-feedback" tabindex="0" class="invalid-feedback">
                 ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}

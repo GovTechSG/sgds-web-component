@@ -1,8 +1,9 @@
 .invalid-feedback-container {
   display: flex;
+  align-items: center;
   gap: var(--sgds-form-gap-sm);
   color: var(--sgds-form-danger-color-default);
-  line-height: var(--sgds-line-height-20);
+  line-height: var(--sgds-line-height-2-xs);
 
 }
 
@@ -10,9 +11,14 @@
   color: var(--sgds-form-danger-color-default);
   font-size: var(--sgds-font-size-label-sm);
   font-weight: var(--sgds-font-weight-regular);
-  line-height: var(--sgds-line-height-20);
+  line-height: var(--sgds-line-height-2-xs);
 }
 
 .valid-icon{
   color: var(--sgds-form-success-color-default);
+}
+
+:host([size="md"]) .invalid-feedback {
+  font-size: var(--sgds-font-size-label-xs);
+  line-height: var(--sgds-line-height-3-xs);
 }

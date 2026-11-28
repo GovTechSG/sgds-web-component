@@ -182,6 +182,11 @@ export class SgdsComboBox extends SelectElement {
       });
     });
 
+    // Propagate size to options
+    assignedElements.forEach(option => {
+      if ("size" in option) (option as SgdsComboBoxOption).size = this.size;
+    });
+
     /** this will trigger _updateValueAndDisplayValue */
     await this.updateComplete;
     const realOptions = assignedElements;
@@ -490,10 +495,12 @@ export class SgdsComboBox extends SelectElement {
   }
 
   /** Template for the suffix icon */
-  protected suffixIconTemplate: TemplateResult = html`<sgds-icon
-    name=${this.menuIsOpen ? "chevron-up" : "chevron-down"}
-    size="md"
-  ></sgds-icon>`;
+  protected get suffixIconTemplate(): TemplateResult {
+    return html`<sgds-icon
+      name=${this.menuIsOpen ? "chevron-up" : "chevron-down"}
+      size=${this.size === "md" ? "sm" : "md"}
+    ></sgds-icon>`;
+  }
 
   protected prefixIconTemplate: TemplateResult = html`${nothing}`;
   /**

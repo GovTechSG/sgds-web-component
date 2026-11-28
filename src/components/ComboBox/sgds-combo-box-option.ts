@@ -1,5 +1,6 @@
 import { html, nothing, PropertyValueMap } from "lit";
 import { property } from "lit/decorators.js";
+import { ifDefined } from "lit/directives/if-defined.js";
 import { OptionElement } from "../../base/option-element";
 import SgdsCheckbox from "../Checkbox/sgds-checkbox";
 import SgdsIcon from "../Icon/sgds-icon";
@@ -23,6 +24,9 @@ export class SgdsComboBoxOption extends OptionElement {
    */
   @property({ type: Boolean, reflect: true }) checkbox = false;
 
+  /** @internal Propagated from parent combo box */
+  @property({ type: String, reflect: true }) size: "lg" | "md" = "lg";
+
   connectedCallback(): void {
     super.connectedCallback();
   }
@@ -33,19 +37,24 @@ export class SgdsComboBoxOption extends OptionElement {
     if (parent?.multiSelect) {
       this.checkbox = true;
     }
+    if (parent?.size) {
+      this.size = parent.size;
+    }
   }
 
   protected _renderItemContent = () => {
+    const iconSize = this.size === "md" ? "sm" : "md";
+    const checkboxSize = this.size === "md" ? "md" : undefined;
     return this.checkbox
       ? html`
-          <sgds-checkbox .checked=${this.active} .disabled=${this.disabled}>
+          <sgds-checkbox .checked=${this.active} .disabled=${this.disabled} size=${ifDefined(checkboxSize)}>
             <slot></slot>
           </sgds-checkbox>
         `
       : html`
           <div class="normal-item-content" role="presentation">
             <slot></slot>
-            ${this.active ? html` <sgds-icon name="check"></sgds-icon> ` : nothing}
+            ${this.active ? html` <sgds-icon name="check" size=${iconSize}></sgds-icon> ` : nothing}
           </div>
         `;
   };

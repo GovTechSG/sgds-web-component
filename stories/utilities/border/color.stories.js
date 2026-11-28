@@ -2,7 +2,7 @@ import { html } from "lit";
 import "../../../mocks/color-item.ts";
 
 export default {
-  title: "Utilities/Border/Color",
+  title: "Utilities/Color/Border",
   tags: ["!autodocs"]
 };
 

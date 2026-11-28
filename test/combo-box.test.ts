@@ -1801,7 +1801,7 @@ describe("sgds-combo-box-option (default)", () => {
           <div class="dropdown-item active" tabindex="0">
           <div class="normal-item-content" role="presentation">
             <slot></slot>
-            <sgds-icon name="check" size="lg"></sgds-icon>
+            <sgds-icon name="check" size="md"></sgds-icon>
           </div>
           </div>
       `
@@ -1829,7 +1829,7 @@ describe("sgds-combo-box-option (checkbox)", () => {
       el,
       `
       <div class="dropdown-item" tabindex="0">
-          <sgds-checkbox>
+          <sgds-checkbox size="lg">
             <slot></slot>
           </sgds-checkbox>
         </div>
@@ -1841,6 +1841,38 @@ describe("sgds-combo-box-option (checkbox)", () => {
     const el = await fixture<SgdsComboBoxOption>(html`<sgds-combo-box-option checkbox active></sgds-combo-box-option>`);
     const checkbox = el.shadowRoot?.querySelector<SgdsCheckbox>("sgds-checkbox");
     expect(checkbox?.checked).to.be.true;
+  });
+  it("when size is md and checkbox, sgds-checkbox has size=md", async () => {
+    const el = await fixture<SgdsComboBoxOption>(
+      html`<sgds-combo-box-option checkbox size="md"></sgds-combo-box-option>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+      <div class="dropdown-item" tabindex="0">
+          <sgds-checkbox size="md">
+            <slot></slot>
+          </sgds-checkbox>
+        </div>
+      `,
+      { ignoreAttributes: ["hinttext", "invalidfeedback", "label"] }
+    );
+  });
+  it("when size is md and active, check icon has size=sm", async () => {
+    const el = await fixture<SgdsComboBoxOption>(
+      html`<sgds-combo-box-option active size="md"></sgds-combo-box-option>`
+    );
+    assert.shadowDom.equal(
+      el,
+      `
+          <div class="dropdown-item active" tabindex="0">
+          <div class="normal-item-content" role="presentation">
+            <slot></slot>
+            <sgds-icon name="check" size="sm"></sgds-icon>
+          </div>
+          </div>
+      `
+    );
   });
 });
 

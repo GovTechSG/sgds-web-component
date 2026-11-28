@@ -1,7 +1,7 @@
 .file-upload-container {
   display: flex;
   flex-direction: column;
-  gap: var(--sgds-form-gap-md);
+  gap: var(--sgds-form-gap-lg);
 }
 
 .file-upload-list {
@@ -58,8 +58,8 @@
   display: flex;
   align-items: center;
   gap: var(--sgds-form-gap-lg);
-  padding: var(--sgds-form-padding-y) calc(var(--sgds-form-padding-x) + var(--sgds-padding-2-xl))
-    var(--sgds-form-padding-y) var(--sgds-form-padding-x);
+  padding: var(--sgds-form-padding-y-lg) calc(var(--sgds-form-padding-x-lg) + var(--sgds-padding-2-xl))
+    var(--sgds-form-padding-y-lg) var(--sgds-form-padding-x-lg);
   background-color: var(--sgds-form-surface-default);
   border: var(--sgds-form-border-width-default) solid var(--sgds-border-color-muted);
   border-radius: var(--sgds-form-border-radius);
@@ -132,7 +132,7 @@ sgds-icon.invalid {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: var(--sgds-gap-md);
+  gap: var(--sgds-form-gap-lg);
   border-radius: var(--sgds-form-border-radius);
   border: var(--sgds-border-width-1) dashed var(--sgds-border-color-default);
   background-color: var(--sgds-surface-raised);
@@ -174,6 +174,33 @@ sgds-icon.invalid {
 }
 
 :host(:not([disabled]):not([invalid])) .drag-drop-zone:hover {
-  outline: var(--sgds-form-border-width-thick) solid var(--sgds-border-color-emphasis);
+  outline: var(--sgds-form-border-width-emphasis) solid var(--sgds-border-color-emphasis);
   outline-offset: var(--sgds-outline-offset-focus);
+}
+
+:host([size="md"]) .file-upload-list-item {
+  padding: var(--sgds-form-padding-y-md) var(--sgds-form-padding-x-md);
+}
+:host([size="md"]) .file-upload-container {
+  gap: var(--sgds-form-gap-md);
+}
+
+:host([size="md"]) .file-upload-list-item span {
+  font-size: var(--sgds-font-size-label-sm);
+  line-height: var(--sgds-line-height-2-xs);
+}
+
+:host([size="md"]) sgds-close-button {
+  position: absolute;
+  top: 6px;
+  right: 4px;
+}
+
+:host([size="md"]) .drag-drop-zone {
+  padding: var(--sgds-padding-xl);
+}
+
+:host([size="md"]) .drag-drop-text {
+  font-size: var(--sgds-font-size-label-xs);
+  line-height: var(--sgds-line-height-3-xs);
 }

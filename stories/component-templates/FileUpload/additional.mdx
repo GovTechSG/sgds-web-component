@@ -175,3 +175,17 @@ Disable validation for all form components at once:
 ```
 
 > **Note:** When `noValidate` is true, native HTML5 validation is disabled. Only your custom validation runs. Use the `sgds-add-files` and `sgds-remove-file` events to implement your validation rules.
+
+## Sizes
+
+The default file upload size is large. Set `size="md"` for medium.
+
+<Canvas of={FileUploadStories.Sizes}>
+  <Story of={FileUploadStories.Sizes} />
+</Canvas>
+
+### Drag and drop sizes
+
+<Canvas of={FileUploadStories.SizesDragDrop}>
+  <Story of={FileUploadStories.SizesDragDrop} />
+</Canvas>

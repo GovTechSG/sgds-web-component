@@ -306,6 +306,34 @@ describe("<sgds-radio-group>", () => {
     const radios = el.querySelectorAll("sgds-radio");
     radios.forEach(r => expect(r.disabled).to.be.true);
   });
+
+  it("size md propagates to child radios", async () => {
+    const el = await fixture<SgdsRadioGroup>(html`
+      <sgds-radio-group size="md">
+        <sgds-radio value="a">A</sgds-radio>
+        <sgds-radio value="b">B</sgds-radio>
+      </sgds-radio-group>
+    `);
+    const radios = el.querySelectorAll("sgds-radio");
+    radios.forEach(r => expect(r.size).to.equal("md"));
+  });
+
+  it("can be semantically compare with shadowDom trees for invalid feedback (size md)", async () => {
+    const el = await fixture<SgdsRadioGroup>(
+      html`
+        <sgds-radio-group size="md" hasFeedback invalid invalidFeedback="test error">
+          <sgds-radio value="a">A</sgds-radio>
+        </sgds-radio-group>
+      `
+    );
+    const invalidFeedback = el.shadowRoot?.querySelector("div.invalid-feedback");
+    expect(invalidFeedback).to.exist;
+    expect(invalidFeedback?.textContent).to.contain("test error");
+    const feedbackContainer = el.shadowRoot?.querySelector("div.invalid-feedback-container");
+    expect(feedbackContainer).to.exist;
+    const svg = feedbackContainer?.querySelector("svg");
+    expect(svg).to.exist;
+  });
 });
 
 describe("noValidate disables native and sgds validation behaviours", () => {

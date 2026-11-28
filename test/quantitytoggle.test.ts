@@ -27,6 +27,28 @@ describe("visual appearance", () => {
   });
 });
 
+describe("visual appearance at size md", () => {
+  it("minus button has size=sm when quantity-toggle is size=md", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle size="md"></sgds-quantity-toggle>`);
+    const minusBtn = el.shadowRoot?.querySelector("sgds-icon-button.minus-btn") as HTMLElement;
+
+    expect(minusBtn).to.exist;
+    expect(minusBtn.getAttribute("variant")).to.equal("outline");
+    expect(minusBtn.getAttribute("tone")).to.equal("neutral");
+    expect(minusBtn.getAttribute("size")).to.equal("sm");
+  });
+
+  it("plus button has size=sm when quantity-toggle is size=md", async () => {
+    const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle size="md"></sgds-quantity-toggle>`);
+    const plusBtn = el.shadowRoot?.querySelector("sgds-icon-button.plus-btn") as HTMLElement;
+
+    expect(plusBtn).to.exist;
+    expect(plusBtn.getAttribute("variant")).to.equal("outline");
+    expect(plusBtn.getAttribute("tone")).to.equal("neutral");
+    expect(plusBtn.getAttribute("size")).to.equal("sm");
+  });
+});
+
 describe("when minusBtn or plusBtn is clicked", () => {
   it("should decrease and increase the value by 1 respectively", async () => {
     const el = await fixture<SgdsQuantityToggle>(html`<sgds-quantity-toggle value="10"></sgds-quantity-toggle>`);

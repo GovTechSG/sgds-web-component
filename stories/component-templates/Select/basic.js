@@ -14,6 +14,7 @@ export const Template = args =>
       placeholder=${ifDefined(args.placeholder)}
       ?loading=${args.loading}
       ?menuIsOpen=${args.menuIsOpen}
+      size=${ifDefined(args.size)}
     >
       ${args.menuList.map(
         (m, i) => html`<sgds-select-option value=${m.value} ?disabled=${args.thirdOptionDisabled && i === 2}

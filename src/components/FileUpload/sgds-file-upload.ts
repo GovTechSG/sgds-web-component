@@ -325,6 +325,16 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
       this.setInvalid(!this._mixinCheckValidity());
     }
   }
+  private _getButtonSize(): "xs" | "sm" | "md" | "lg" {
+    return this.size === "md" ? "xs" : "sm";
+  }
+  private _getCloseButtonSize(): "sm" | "md" {
+    return this.size === "md" ? "sm" : "md";
+  }
+  private _getSpinnerSize(): "xs" | "sm" | "md" | "lg" {
+    return this.size === "md" ? "xs" : "sm";
+  }
+
   protected _renderLabel() {
     const labelTemplate = html` <label id=${this._labelId} class="form-label"> ${this.label} </label> `;
     return this.label && labelTemplate;
@@ -338,7 +348,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   protected _renderFeedback() {
     return html`
       <div class="invalid-feedback-container">
-        <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+        <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
         <div id="${this._controlId}-invalid" class="invalid-feedback">
           ${this.invalidFeedback ? this.invalidFeedback : this.input.validationMessage}
         </div>
@@ -408,10 +418,10 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
           @drop=${this._handleDrop}
           @blur=${this._handleBlur}
         >
-          <sgds-icon name="upload" size="lg"></sgds-icon>
+          <sgds-icon name="upload" size=${this.size === "md" ? "md" : "lg"}></sgds-icon>
           <div class="drag-drop-text">Drag and drop files here</div>
           <sgds-button
-            size="sm"
+            size=${this._getButtonSize()}
             variant="outline"
             tone="brand"
             ?disabled=${this.disabled}
@@ -427,13 +437,14 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
     return html`
       <sgds-button
         variant="outline"
+        size=${this._getButtonSize()}
         ?disabled=${this.disabled}
         @click=${this._handleClick}
         @sgds-blur=${this._handleBlur}
         ariaLabel=${this.ariaLabel}
       >
         <slot>Choose files</slot>
-        <sgds-icon slot="rightIcon" name="upload"></sgds-icon>
+        <sgds-icon slot="rightIcon" name="upload" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
       </sgds-button>
     `;
   }
@@ -441,7 +452,11 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
   render() {
     const getCheckedIcon = (metadata?: { uploading: boolean; error?: string }) => {
       const iconClass = this.invalid || metadata?.error ? "invalid" : "valid";
-      return html`<sgds-icon name="check-circle-fill" class="${iconClass}"></sgds-icon>`;
+      return html`<sgds-icon
+        name="check-circle-fill"
+        class="${iconClass}"
+        size=${this.size === "md" ? "sm" : "md"}
+      ></sgds-icon>`;
     };
 
     const listItems = repeat(
@@ -452,10 +467,13 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
         return html`
           <li class="file-upload-list-item-container ${this.exitingFile === file ? "file-upload-exit" : ""}">
             <div class="file-upload-list-item ${metadata?.error ? "file-upload-error" : ""}">
-              ${metadata?.uploading ? html`<sgds-spinner size="sm"></sgds-spinner>` : getCheckedIcon(metadata)}
+              ${metadata?.uploading
+                ? html`<sgds-spinner size=${this._getSpinnerSize()}></sgds-spinner>`
+                : getCheckedIcon(metadata)}
               <span class="filename">${file.name}</span>
               <span class="filesize">${formatFileSize(file.size)}</span>
               <sgds-close-button
+                size=${this._getCloseButtonSize()}
                 aria-label="remove the file"
                 ?disabled=${metadata?.uploading}
                 @click=${() => this._removeFileHandler(index)}
@@ -464,7 +482,7 @@ export class SgdsFileUpload extends SgdsFormValidatorMixin(FormControlElement) {
             ${metadata?.error
               ? html`
                   <div class="invalid-feedback-container">
-                    <sgds-icon name="exclamation-circle-fill" size="md"></sgds-icon>
+                    <sgds-icon name="exclamation-circle-fill" size=${this.size === "md" ? "sm" : "md"}></sgds-icon>
                     <div class="invalid-feedback">${metadata.error}</div>
                   </div>
                 `

@@ -6,7 +6,6 @@ import { defaultValue } from "../../utils/defaultvalue";
 import genId from "../../utils/generateId";
 import { watch } from "../../utils/watch";
 import { HasSlotController } from "../../utils/slot";
-import formLabelStyles from "../../styles/form-label.css";
 import switchStyle from "./switch.css";
 import type { ISgdsSwitchChangeEventDetail } from "./types";
 export type { ISgdsSwitchChangeEventDetail };
@@ -22,7 +21,7 @@ export type { ISgdsSwitchChangeEventDetail };
  *
  */
 export class SgdsSwitch extends SgdsElement {
-  static styles = [...SgdsElement.styles, formLabelStyles, switchStyle];
+  static styles = [...SgdsElement.styles, switchStyle];
 
   /** The size of the switch. By default, it is small size */
   @property({ reflect: true, type: String }) size: "sm" | "md" | "lg" = "md";
@@ -101,7 +100,7 @@ export class SgdsSwitch extends SgdsElement {
         <label
           for="${this._inputId}"
           class=${classMap({
-            "form-check-label": true,
+            "right-label": true,
             "left-label": true,
             "d-none": this.hasDefaultSlot || noLabel
           })}
@@ -110,7 +109,7 @@ export class SgdsSwitch extends SgdsElement {
         </label>
         <input
           class=${classMap({
-            "form-check-input": true
+            switch: true
           })}
           type="checkbox"
           id=${this._inputId}
@@ -124,7 +123,7 @@ export class SgdsSwitch extends SgdsElement {
         <label
           for="${this._inputId}"
           class=${classMap({
-            "form-check-label": true,
+            "right-label": true,
             "d-none": this.hasLeftLabelSlot || noLabel
           })}
         >
