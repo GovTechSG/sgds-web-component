@@ -35,7 +35,7 @@
 
       <div>
         <h2>Left Label</h2>
-        <sgds-switch labelPosition="left">Left label</sgds-switch>
+        <sgds-switch><span slot="leftLabel">Left label</span></sgds-switch>
       </div>
 
       <div>
@@ -48,6 +48,13 @@
       <div>
         <h2>Small</h2>
         <sgds-switch size="sm">Small switch</sgds-switch>
+      </div>
+
+      <div>
+        <h2>Large</h2>
+        <sgds-switch size="lg">Large right label</sgds-switch>
+        <br />
+        <sgds-switch size="lg"><span slot="leftLabel">Large left label</span></sgds-switch>
       </div>
     </div>
   </body>

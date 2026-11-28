@@ -9,19 +9,20 @@ describe("<sgds-switch>", () => {
       el,
       `
         <div class="form-check">
-          <label class="form-check-label left-label d-none">
+          <label class="right-label left-label d-none">
             <slot name="leftLabel"></slot>
           </label>
           <input
-            class="form-check-input"
+            class="switch"
             type="checkbox"
             aria-disabled="false"
             aria-checked="false"
           />
-          <label class="form-check-label d-none">
+          <label class="right-label d-none">
             <slot></slot>
           </label>
         </div>
+
       `,
       { ignoreAttributes: ["id", "for"] }
     );
@@ -106,7 +107,7 @@ describe("<sgds-switch>", () => {
       </sgds-switch>
     `);
 
-    const rightLabel = el.shadowRoot?.querySelectorAll(".form-check-label")[1];
+    const rightLabel = el.shadowRoot?.querySelectorAll(".right-label")[1];
     expect(rightLabel?.classList.contains("d-none")).to.be.true;
   });
 
