@@ -109,7 +109,7 @@ export class SgdsSwitch extends SgdsElement {
         </label>
         <input
           class=${classMap({
-            "switch": true
+            switch: true
           })}
           type="checkbox"
           id=${this._inputId}
